@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "AwsQueryCompatible",
+        "description": "Make AwsQueryCompatible translation only if trait is found"
+    },
+    {
+        "type": "feature",
+        "category": "DevOpsGuru",
+        "description": "This release adds information about the resources DevOps Guru is analyzing."
+    },
+    {
+        "type": "feature",
+        "category": "GlobalAccelerator",
+        "description": "Global Accelerator now supports AddEndpoints and RemoveEndpoints operations for standard endpoint groups."
+    },
+    {
+        "type": "feature",
+        "category": "RUM",
+        "description": "CloudWatch RUM now supports Extended CloudWatch Metrics with Additional Dimensions"
+    },
+    {
+        "type": "feature",
+        "category": "Resiliencehub",
+        "description": "In this release, we are introducing support for regional optimization for AWS Resilience Hub applications. It also includes a few documentation updates to improve clarity."
+    }
+]

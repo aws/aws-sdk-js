@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Adding View related fields to responses of read-only Table APIs."
+    },
+    {
+        "type": "feature",
+        "category": "RolesAnywhere",
+        "description": "This release increases the limit on the roleArns request parameter for the *Profile APIs that support it. This parameter can now take up to 250 role ARNs."
+    }
+]

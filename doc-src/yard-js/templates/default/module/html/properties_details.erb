@@ -1,0 +1,8 @@
+<% if property_listing.size > 0 %>
+  <div id="prop_details" class="method_details">
+    <h2>Property Details</h2>
+    <% property_listing.each_with_index do |prop, i| %>
+      <%= yieldall :object => prop, :owner => object, :index => i %>
+    <% end %>
+  </div>
+<% end %>

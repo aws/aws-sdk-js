@@ -5,11 +5,17 @@
     "endpointPrefix": "directconnect",
     "jsonVersion": "1.1",
     "protocol": "json",
+    "protocols": [
+      "json"
+    ],
     "serviceFullName": "AWS Direct Connect",
     "serviceId": "Direct Connect",
     "signatureVersion": "v4",
     "targetPrefix": "OvertureService",
-    "uid": "directconnect-2012-10-25"
+    "uid": "directconnect-2012-10-25",
+    "auth": [
+      "aws.auth#sigv4"
+    ]
   },
   "operations": {
     "AcceptDirectConnectGatewayAssociationProposal": {
@@ -54,7 +60,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Deprecated. Use <a>AllocateHostedConnection</a> instead.</p> <p>Creates a hosted connection on an interconnect.</p> <p>Allocates a VLAN number and a specified amount of bandwidth for use by a hosted connection on the specified interconnect.</p> <note> <p>Intended for use by AWS Direct Connect Partners only.</p> </note>",
+      "documentation": "<note> <p>Deprecated. Use <a>AllocateHostedConnection</a> instead.</p> </note> <p>Creates a hosted connection on an interconnect.</p> <p>Allocates a VLAN number and a specified amount of bandwidth for use by a hosted connection on the specified interconnect.</p> <note> <p>Intended for use by Direct Connect Partners only.</p> </note>",
       "deprecated": true
     },
     "AllocateHostedConnection": {
@@ -83,7 +89,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Creates a hosted connection on the specified interconnect or a link aggregation group (LAG) of interconnects.</p> <p>Allocates a VLAN number and a specified amount of capacity (bandwidth) for use by a hosted connection on the specified interconnect or LAG of interconnects. AWS polices the hosted connection for the specified capacity and the AWS Direct Connect Partner must also police the hosted connection for the specified capacity.</p> <note> <p>Intended for use by AWS Direct Connect Partners only.</p> </note>"
+      "documentation": "<p>Creates a hosted connection on the specified interconnect or a link aggregation group (LAG) of interconnects.</p> <p>Allocates a VLAN number and a specified amount of capacity (bandwidth) for use by a hosted connection on the specified interconnect or LAG of interconnects. Amazon Web Services polices the hosted connection for the specified capacity and the Direct Connect Partner must also police the hosted connection for the specified capacity.</p> <note> <p>Intended for use by Direct Connect Partners only.</p> </note>"
     },
     "AllocatePrivateVirtualInterface": {
       "name": "AllocatePrivateVirtualInterface",
@@ -111,7 +117,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Provisions a private virtual interface to be owned by the specified AWS account.</p> <p>Virtual interfaces created using this action must be confirmed by the owner using <a>ConfirmPrivateVirtualInterface</a>. Until then, the virtual interface is in the <code>Confirming</code> state and is not available to handle traffic.</p>"
+      "documentation": "<p>Provisions a private virtual interface to be owned by the specified Amazon Web Services account.</p> <p>Virtual interfaces created using this action must be confirmed by the owner using <a>ConfirmPrivateVirtualInterface</a>. Until then, the virtual interface is in the <code>Confirming</code> state and is not available to handle traffic.</p>"
     },
     "AllocatePublicVirtualInterface": {
       "name": "AllocatePublicVirtualInterface",
@@ -139,7 +145,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Provisions a public virtual interface to be owned by the specified AWS account.</p> <p>The owner of a connection calls this function to provision a public virtual interface to be owned by the specified AWS account.</p> <p>Virtual interfaces created using this function must be confirmed by the owner using <a>ConfirmPublicVirtualInterface</a>. Until this step has been completed, the virtual interface is in the <code>confirming</code> state and is not available to handle traffic.</p> <p>When creating an IPv6 public virtual interface, omit the Amazon address and customer address. IPv6 addresses are automatically assigned from the Amazon pool of IPv6 addresses; you cannot specify custom IPv6 addresses.</p>"
+      "documentation": "<p>Provisions a public virtual interface to be owned by the specified Amazon Web Services account.</p> <p>The owner of a connection calls this function to provision a public virtual interface to be owned by the specified Amazon Web Services account.</p> <p>Virtual interfaces created using this function must be confirmed by the owner using <a>ConfirmPublicVirtualInterface</a>. Until this step has been completed, the virtual interface is in the <code>confirming</code> state and is not available to handle traffic.</p> <p>When creating an IPv6 public virtual interface, omit the Amazon address and customer address. IPv6 addresses are automatically assigned from the Amazon pool of IPv6 addresses; you cannot specify custom IPv6 addresses.</p>"
     },
     "AllocateTransitVirtualInterface": {
       "name": "AllocateTransitVirtualInterface",
@@ -167,7 +173,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Provisions a transit virtual interface to be owned by the specified AWS account. Use this type of interface to connect a transit gateway to your Direct Connect gateway.</p> <p>The owner of a connection provisions a transit virtual interface to be owned by the specified AWS account.</p> <p>After you create a transit virtual interface, it must be confirmed by the owner using <a>ConfirmTransitVirtualInterface</a>. Until this step has been completed, the transit virtual interface is in the <code>requested</code> state and is not available to handle traffic.</p>"
+      "documentation": "<p>Provisions a transit virtual interface to be owned by the specified Amazon Web Services account. Use this type of interface to connect a transit gateway to your Direct Connect gateway.</p> <p>The owner of a connection provisions a transit virtual interface to be owned by the specified Amazon Web Services account.</p> <p>After you create a transit virtual interface, it must be confirmed by the owner using <a>ConfirmTransitVirtualInterface</a>. Until this step has been completed, the transit virtual interface is in the <code>requested</code> state and is not available to handle traffic.</p>"
     },
     "AssociateConnectionWithLag": {
       "name": "AssociateConnectionWithLag",
@@ -189,7 +195,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Associates an existing connection with a link aggregation group (LAG). The connection is interrupted and re-established as a member of the LAG (connectivity to AWS is interrupted). The connection must be hosted on the same AWS Direct Connect endpoint as the LAG, and its bandwidth must match the bandwidth for the LAG. You can re-associate a connection that's currently associated with a different LAG; however, if removing the connection would cause the original LAG to fall below its setting for minimum number of operational connections, the request fails.</p> <p>Any virtual interfaces that are directly associated with the connection are automatically re-associated with the LAG. If the connection was originally associated with a different LAG, the virtual interfaces remain associated with the original LAG.</p> <p>For interconnects, any hosted connections are automatically re-associated with the LAG. If the interconnect was originally associated with a different LAG, the hosted connections remain associated with the original LAG.</p>"
+      "documentation": "<p>Associates an existing connection with a link aggregation group (LAG). The connection is interrupted and re-established as a member of the LAG (connectivity to Amazon Web Services is interrupted). The connection must be hosted on the same Direct Connect endpoint as the LAG, and its bandwidth must match the bandwidth for the LAG. You can re-associate a connection that's currently associated with a different LAG; however, if removing the connection would cause the original LAG to fall below its setting for minimum number of operational connections, the request fails.</p> <p>Any virtual interfaces that are directly associated with the connection are automatically re-associated with the LAG. If the connection was originally associated with a different LAG, the virtual interfaces remain associated with the original LAG.</p> <p>For interconnects, any hosted connections are automatically re-associated with the LAG. If the interconnect was originally associated with a different LAG, the hosted connections remain associated with the original LAG.</p>"
     },
     "AssociateHostedConnection": {
       "name": "AssociateHostedConnection",
@@ -211,7 +217,29 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Associates a hosted connection and its virtual interfaces with a link aggregation group (LAG) or interconnect. If the target interconnect or LAG has an existing hosted connection with a conflicting VLAN number or IP address, the operation fails. This action temporarily interrupts the hosted connection's connectivity to AWS as it is being migrated.</p> <note> <p>Intended for use by AWS Direct Connect Partners only.</p> </note>"
+      "documentation": "<p>Associates a hosted connection and its virtual interfaces with a link aggregation group (LAG) or interconnect. If the target interconnect or LAG has an existing hosted connection with a conflicting VLAN number or IP address, the operation fails. This action temporarily interrupts the hosted connection's connectivity to Amazon Web Services as it is being migrated.</p> <note> <p>Intended for use by Direct Connect Partners only.</p> </note>"
+    },
+    "AssociateMacSecKey": {
+      "name": "AssociateMacSecKey",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AssociateMacSecKeyRequest"
+      },
+      "output": {
+        "shape": "AssociateMacSecKeyResponse"
+      },
+      "errors": [
+        {
+          "shape": "DirectConnectServerException"
+        },
+        {
+          "shape": "DirectConnectClientException"
+        }
+      ],
+      "documentation": "<p>Associates a MAC Security (MACsec) Connection Key Name (CKN)/ Connectivity Association Key (CAK) pair with an Direct Connect dedicated connection.</p> <p>You must supply either the <code>secretARN,</code> or the CKN/CAK (<code>ckn</code> and <code>cak</code>) pair in the request.</p> <p>For information about MAC Security (MACsec) key considerations, see <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-key-consideration\">MACsec pre-shared CKN/CAK key considerations </a> in the <i>Direct Connect User Guide</i>.</p>"
     },
     "AssociateVirtualInterface": {
       "name": "AssociateVirtualInterface",
@@ -233,7 +261,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Associates a virtual interface with a specified link aggregation group (LAG) or connection. Connectivity to AWS is temporarily interrupted as the virtual interface is being migrated. If the target connection or LAG has an associated virtual interface with a conflicting VLAN number or a conflicting IP address, the operation fails.</p> <p>Virtual interfaces associated with a hosted connection cannot be associated with a LAG; hosted connections must be migrated along with their virtual interfaces using <a>AssociateHostedConnection</a>.</p> <p>To reassociate a virtual interface to a new connection or LAG, the requester must own either the virtual interface itself or the connection to which the virtual interface is currently associated. Additionally, the requester must own the connection or LAG for the association.</p>"
+      "documentation": "<p>Associates a virtual interface with a specified link aggregation group (LAG) or connection. Connectivity to Amazon Web Services is temporarily interrupted as the virtual interface is being migrated. If the target connection or LAG has an associated virtual interface with a conflicting VLAN number or a conflicting IP address, the operation fails.</p> <p>Virtual interfaces associated with a hosted connection cannot be associated with a LAG; hosted connections must be migrated along with their virtual interfaces using <a>AssociateHostedConnection</a>.</p> <p>To reassociate a virtual interface to a new connection or LAG, the requester must own either the virtual interface itself or the connection to which the virtual interface is currently associated. Additionally, the requester must own the connection or LAG for the association.</p>"
     },
     "ConfirmConnection": {
       "name": "ConfirmConnection",
@@ -257,6 +285,28 @@
       ],
       "documentation": "<p>Confirms the creation of the specified hosted connection on an interconnect.</p> <p>Upon creation, the hosted connection is initially in the <code>Ordering</code> state, and remains in this state until the owner confirms creation of the hosted connection.</p>"
     },
+    "ConfirmCustomerAgreement": {
+      "name": "ConfirmCustomerAgreement",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ConfirmCustomerAgreementRequest"
+      },
+      "output": {
+        "shape": "ConfirmCustomerAgreementResponse"
+      },
+      "errors": [
+        {
+          "shape": "DirectConnectServerException"
+        },
+        {
+          "shape": "DirectConnectClientException"
+        }
+      ],
+      "documentation": "<p> The confirmation of the terms of agreement when creating the connection/link aggregation group (LAG). </p>"
+    },
     "ConfirmPrivateVirtualInterface": {
       "name": "ConfirmPrivateVirtualInterface",
       "http": {
@@ -277,7 +327,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Accepts ownership of a private virtual interface created by another AWS account.</p> <p>After the virtual interface owner makes this call, the virtual interface is created and attached to the specified virtual private gateway or Direct Connect gateway, and is made available to handle traffic.</p>"
+      "documentation": "<p>Accepts ownership of a private virtual interface created by another Amazon Web Services account.</p> <p>After the virtual interface owner makes this call, the virtual interface is created and attached to the specified virtual private gateway or Direct Connect gateway, and is made available to handle traffic.</p>"
     },
     "ConfirmPublicVirtualInterface": {
       "name": "ConfirmPublicVirtualInterface",
@@ -299,7 +349,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Accepts ownership of a public virtual interface created by another AWS account.</p> <p>After the virtual interface owner makes this call, the specified virtual interface is created and made available to handle traffic.</p>"
+      "documentation": "<p>Accepts ownership of a public virtual interface created by another Amazon Web Services account.</p> <p>After the virtual interface owner makes this call, the specified virtual interface is created and made available to handle traffic.</p>"
     },
     "ConfirmTransitVirtualInterface": {
       "name": "ConfirmTransitVirtualInterface",
@@ -321,7 +371,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Accepts ownership of a transit virtual interface created by another AWS account.</p> <p> After the owner of the transit virtual interface makes this call, the specified transit virtual interface is created and made available to handle traffic.</p>"
+      "documentation": "<p>Accepts ownership of a transit virtual interface created by another Amazon Web Services account.</p> <p> After the owner of the transit virtual interface makes this call, the specified transit virtual interface is created and made available to handle traffic.</p>"
     },
     "CreateBGPPeer": {
       "name": "CreateBGPPeer",
@@ -343,7 +393,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Creates a BGP peer on the specified virtual interface.</p> <p>You must create a BGP peer for the corresponding address family (IPv4/IPv6) in order to access AWS resources that also use that address family.</p> <p>If logical redundancy is not supported by the connection, interconnect, or LAG, the BGP peer cannot be in the same address family as an existing BGP peer on the virtual interface.</p> <p>When creating a IPv6 BGP peer, omit the Amazon address and customer address. IPv6 addresses are automatically assigned from the Amazon pool of IPv6 addresses; you cannot specify custom IPv6 addresses.</p> <p>For a public virtual interface, the Autonomous System Number (ASN) must be private or already whitelisted for the virtual interface.</p>"
+      "documentation": "<p>Creates a BGP peer on the specified virtual interface.</p> <p>You must create a BGP peer for the corresponding address family (IPv4/IPv6) in order to access Amazon Web Services resources that also use that address family.</p> <p>If logical redundancy is not supported by the connection, interconnect, or LAG, the BGP peer cannot be in the same address family as an existing BGP peer on the virtual interface.</p> <p>When creating a IPv6 BGP peer, omit the Amazon address and customer address. IPv6 addresses are automatically assigned from the Amazon pool of IPv6 addresses; you cannot specify custom IPv6 addresses.</p> <important> <p>If you let Amazon Web Services auto-assign IPv4 addresses, a /30 CIDR will be allocated from 169.254.0.0/16. Amazon Web Services does not recommend this option if you intend to use the customer router peer IP address as the source and destination for traffic. Instead you should use RFC 1918 or other addressing, and specify the address yourself. For more information about RFC 1918 see <a href=\"https://datatracker.ietf.org/doc/html/rfc1918\"> Address Allocation for Private Internets</a>.</p> </important> <p>For a public virtual interface, the Autonomous System Number (ASN) must be private or already on the allow list for the virtual interface.</p>"
     },
     "CreateConnection": {
       "name": "CreateConnection",
@@ -371,7 +421,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Creates a connection between a customer network and a specific AWS Direct Connect location.</p> <p>A connection links your internal network to an AWS Direct Connect location over a standard Ethernet fiber-optic cable. One end of the cable is connected to your router, the other to an AWS Direct Connect router.</p> <p>To find the locations for your Region, use <a>DescribeLocations</a>.</p> <p>You can automatically add the new connection to a link aggregation group (LAG) by specifying a LAG ID in the request. This ensures that the new connection is allocated on the same AWS Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint, the request fails and no connection is created.</p>"
+      "documentation": "<p>Creates a connection between a customer network and a specific Direct Connect location.</p> <p>A connection links your internal network to an Direct Connect location over a standard Ethernet fiber-optic cable. One end of the cable is connected to your router, the other to an Direct Connect router.</p> <p>To find the locations for your Region, use <a>DescribeLocations</a>.</p> <p>You can automatically add the new connection to a link aggregation group (LAG) by specifying a LAG ID in the request. This ensures that the new connection is allocated on the same Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint, the request fails and no connection is created.</p>"
     },
     "CreateDirectConnectGateway": {
       "name": "CreateDirectConnectGateway",
@@ -393,7 +443,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Creates a Direct Connect gateway, which is an intermediate object that enables you to connect a set of virtual interfaces and virtual private gateways. A Direct Connect gateway is global and visible in any AWS Region after it is created. The virtual interfaces and virtual private gateways that are connected through a Direct Connect gateway can be in different AWS Regions. This enables you to connect to a VPC in any Region, regardless of the Region in which the virtual interfaces are located, and pass traffic between them.</p>"
+      "documentation": "<p>Creates a Direct Connect gateway, which is an intermediate object that enables you to connect a set of virtual interfaces and virtual private gateways. A Direct Connect gateway is global and visible in any Amazon Web Services Region after it is created. The virtual interfaces and virtual private gateways that are connected through a Direct Connect gateway can be in different Amazon Web Services Regions. This enables you to connect to a VPC in any Region, regardless of the Region in which the virtual interfaces are located, and pass traffic between them.</p>"
     },
     "CreateDirectConnectGatewayAssociation": {
       "name": "CreateDirectConnectGatewayAssociation",
@@ -437,7 +487,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Creates a proposal to associate the specified virtual private gateway or transit gateway with the specified Direct Connect gateway.</p> <p>You can associate a Direct Connect gateway and virtual private gateway or transit gateway that is owned by any AWS account. </p>"
+      "documentation": "<p>Creates a proposal to associate the specified virtual private gateway or transit gateway with the specified Direct Connect gateway.</p> <p>You can associate a Direct Connect gateway and virtual private gateway or transit gateway that is owned by any Amazon Web Services account. </p>"
     },
     "CreateInterconnect": {
       "name": "CreateInterconnect",
@@ -465,7 +515,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Creates an interconnect between an AWS Direct Connect Partner's network and a specific AWS Direct Connect location.</p> <p>An interconnect is a connection that is capable of hosting other connections. The AWS Direct Connect partner can use an interconnect to provide AWS Direct Connect hosted connections to customers through their own network services. Like a standard connection, an interconnect links the partner's network to an AWS Direct Connect location over a standard Ethernet fiber-optic cable. One end is connected to the partner's router, the other to an AWS Direct Connect router.</p> <p>You can automatically add the new interconnect to a link aggregation group (LAG) by specifying a LAG ID in the request. This ensures that the new interconnect is allocated on the same AWS Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint, the request fails and no interconnect is created.</p> <p>For each end customer, the AWS Direct Connect Partner provisions a connection on their interconnect by calling <a>AllocateHostedConnection</a>. The end customer can then connect to AWS resources by creating a virtual interface on their connection, using the VLAN assigned to them by the AWS Direct Connect Partner.</p> <note> <p>Intended for use by AWS Direct Connect Partners only.</p> </note>"
+      "documentation": "<p>Creates an interconnect between an Direct Connect Partner's network and a specific Direct Connect location.</p> <p>An interconnect is a connection that is capable of hosting other connections. The Direct Connect Partner can use an interconnect to provide Direct Connect hosted connections to customers through their own network services. Like a standard connection, an interconnect links the partner's network to an Direct Connect location over a standard Ethernet fiber-optic cable. One end is connected to the partner's router, the other to an Direct Connect router.</p> <p>You can automatically add the new interconnect to a link aggregation group (LAG) by specifying a LAG ID in the request. This ensures that the new interconnect is allocated on the same Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint, the request fails and no interconnect is created.</p> <p>For each end customer, the Direct Connect Partner provisions a connection on their interconnect by calling <a>AllocateHostedConnection</a>. The end customer can then connect to Amazon Web Services resources by creating a virtual interface on their connection, using the VLAN assigned to them by the Direct Connect Partner.</p> <note> <p>Intended for use by Direct Connect Partners only.</p> </note>"
     },
     "CreateLag": {
       "name": "CreateLag",
@@ -493,7 +543,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Creates a link aggregation group (LAG) with the specified number of bundled physical dedicated connections between the customer network and a specific AWS Direct Connect location. A LAG is a logical interface that uses the Link Aggregation Control Protocol (LACP) to aggregate multiple interfaces, enabling you to treat them as a single interface.</p> <p>All connections in a LAG must use the same bandwidth (either 1Gbps or 10Gbps) and must terminate at the same AWS Direct Connect endpoint.</p> <p>You can have up to 10 dedicated connections per LAG. Regardless of this limit, if you request more connections for the LAG than AWS Direct Connect can allocate on a single endpoint, no LAG is created.</p> <p>You can specify an existing physical dedicated connection or interconnect to include in the LAG (which counts towards the total number of connections). Doing so interrupts the current physical dedicated connection, and re-establishes them as a member of the LAG. The LAG will be created on the same AWS Direct Connect endpoint to which the dedicated connection terminates. Any virtual interfaces associated with the dedicated connection are automatically disassociated and re-associated with the LAG. The connection ID does not change.</p> <p>If the AWS account used to create a LAG is a registered AWS Direct Connect Partner, the LAG is automatically enabled to host sub-connections. For a LAG owned by a partner, any associated virtual interfaces cannot be directly configured.</p>"
+      "documentation": "<p>Creates a link aggregation group (LAG) with the specified number of bundled physical dedicated connections between the customer network and a specific Direct Connect location. A LAG is a logical interface that uses the Link Aggregation Control Protocol (LACP) to aggregate multiple interfaces, enabling you to treat them as a single interface.</p> <p>All connections in a LAG must use the same bandwidth (either 1Gbps, 10Gbps, 100Gbps, or 400Gbps) and must terminate at the same Direct Connect endpoint.</p> <p>You can have up to 10 dedicated connections per location. Regardless of this limit, if you request more connections for the LAG than Direct Connect can allocate on a single endpoint, no LAG is created..</p> <p>You can specify an existing physical dedicated connection or interconnect to include in the LAG (which counts towards the total number of connections). Doing so interrupts the current physical dedicated connection, and re-establishes them as a member of the LAG. The LAG will be created on the same Direct Connect endpoint to which the dedicated connection terminates. Any virtual interfaces associated with the dedicated connection are automatically disassociated and re-associated with the LAG. The connection ID does not change.</p> <p>If the Amazon Web Services account used to create a LAG is a registered Direct Connect Partner, the LAG is automatically enabled to host sub-connections. For a LAG owned by a partner, any associated virtual interfaces cannot be directly configured.</p>"
     },
     "CreatePrivateVirtualInterface": {
       "name": "CreatePrivateVirtualInterface",
@@ -521,7 +571,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Creates a private virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A private virtual interface can be connected to either a Direct Connect gateway or a Virtual Private Gateway (VGW). Connecting the private virtual interface to a Direct Connect gateway enables the possibility for connecting to multiple VPCs, including VPCs in different AWS Regions. Connecting the private virtual interface to a VGW only provides access to a single VPC within the same Region.</p> <p>Setting the MTU of a virtual interface to 9001 (jumbo frames) can cause an update to the underlying physical connection if it wasn't updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call <a>DescribeConnections</a>. To check whether your virtual interface supports jumbo frames, call <a>DescribeVirtualInterfaces</a>.</p>"
+      "documentation": "<p>Creates a private virtual interface. A virtual interface is the VLAN that transports Direct Connect traffic. A private virtual interface can be connected to either a Direct Connect gateway or a Virtual Private Gateway (VGW). Connecting the private virtual interface to a Direct Connect gateway enables the possibility for connecting to multiple VPCs, including VPCs in different Amazon Web Services Regions. Connecting the private virtual interface to a VGW only provides access to a single VPC within the same Region.</p> <p>Setting the MTU of a virtual interface to 8500 (jumbo frames) can cause an update to the underlying physical connection if it wasn't updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call <a>DescribeConnections</a>. To check whether your virtual interface supports jumbo frames, call <a>DescribeVirtualInterfaces</a>.</p>"
     },
     "CreatePublicVirtualInterface": {
       "name": "CreatePublicVirtualInterface",
@@ -549,7 +599,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Creates a public virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A public virtual interface supports sending traffic to public services of AWS such as Amazon S3.</p> <p>When creating an IPv6 public virtual interface (<code>addressFamily</code> is <code>ipv6</code>), leave the <code>customer</code> and <code>amazon</code> address fields blank to use auto-assigned IPv6 space. Custom IPv6 addresses are not supported.</p>"
+      "documentation": "<p>Creates a public virtual interface. A virtual interface is the VLAN that transports Direct Connect traffic. A public virtual interface supports sending traffic to public services of Amazon Web Services such as Amazon S3.</p> <p>When creating an IPv6 public virtual interface (<code>addressFamily</code> is <code>ipv6</code>), leave the <code>customer</code> and <code>amazon</code> address fields blank to use auto-assigned IPv6 space. Custom IPv6 addresses are not supported.</p>"
     },
     "CreateTransitVirtualInterface": {
       "name": "CreateTransitVirtualInterface",
@@ -577,7 +627,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Creates a transit virtual interface. A transit virtual interface should be used to access one or more transit gateways associated with Direct Connect gateways. A transit virtual interface enables the connection of multiple VPCs attached to a transit gateway to a Direct Connect gateway.</p> <important> <p>If you associate your transit gateway with one or more Direct Connect gateways, the Autonomous System Number (ASN) used by the transit gateway and the Direct Connect gateway must be different. For example, if you use the default ASN 64512 for both your the transit gateway and Direct Connect gateway, the association request fails.</p> </important> <p>Setting the MTU of a virtual interface to 8500 (jumbo frames) can cause an update to the underlying physical connection if it wasn't updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call <a>DescribeConnections</a>. To check whether your virtual interface supports jumbo frames, call <a>DescribeVirtualInterfaces</a>.</p>"
+      "documentation": "<p>Creates a transit virtual interface. A transit virtual interface should be used to access one or more transit gateways associated with Direct Connect gateways. A transit virtual interface enables the connection of multiple VPCs attached to a transit gateway to a Direct Connect gateway.</p> <important> <p>If you associate your transit gateway with one or more Direct Connect gateways, the Autonomous System Number (ASN) used by the transit gateway and the Direct Connect gateway must be different. For example, if you use the default ASN 64512 for both your the transit gateway and Direct Connect gateway, the association request fails.</p> </important> <p>A jumbo MTU value must be either 1500 or 8500. No other values will be accepted. Setting the MTU of a virtual interface to 8500 (jumbo frames) can cause an update to the underlying physical connection if it wasn't updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call <a>DescribeConnections</a>. To check whether your virtual interface supports jumbo frames, call <a>DescribeVirtualInterfaces</a>.</p>"
     },
     "DeleteBGPPeer": {
       "name": "DeleteBGPPeer",
@@ -621,7 +671,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Deletes the specified connection.</p> <p>Deleting a connection only stops the AWS Direct Connect port hour and data transfer charges. If you are partnering with any third parties to connect with the AWS Direct Connect location, you must cancel your service with them separately.</p>"
+      "documentation": "<p>Deletes the specified connection.</p> <p>Deleting a connection only stops the Direct Connect port hour and data transfer charges. If you are partnering with any third parties to connect with the Direct Connect location, you must cancel your service with them separately.</p>"
     },
     "DeleteDirectConnectGateway": {
       "name": "DeleteDirectConnectGateway",
@@ -709,7 +759,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Deletes the specified interconnect.</p> <note> <p>Intended for use by AWS Direct Connect Partners only.</p> </note>"
+      "documentation": "<p>Deletes the specified interconnect.</p> <note> <p>Intended for use by Direct Connect Partners only.</p> </note>"
     },
     "DeleteLag": {
       "name": "DeleteLag",
@@ -775,7 +825,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Deprecated. Use <a>DescribeLoa</a> instead.</p> <p>Gets the LOA-CFA for a connection.</p> <p>The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is a document that your APN partner or service provider uses when establishing your cross connect to AWS at the colocation facility. For more information, see <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html\">Requesting Cross Connects at AWS Direct Connect Locations</a> in the <i>AWS Direct Connect User Guide</i>.</p>",
+      "documentation": "<note> <p>Deprecated. Use <a>DescribeLoa</a> instead.</p> </note> <p>Gets the LOA-CFA for a connection.</p> <p>The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is a document that your APN partner or service provider uses when establishing your cross connect to Amazon Web Services at the colocation facility. For more information, see <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html\">Requesting Cross Connects at Direct Connect Locations</a> in the <i>Direct Connect User Guide</i>.</p>",
       "deprecated": true
     },
     "DescribeConnections": {
@@ -820,8 +870,27 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Deprecated. Use <a>DescribeHostedConnections</a> instead.</p> <p>Lists the connections that have been provisioned on the specified interconnect.</p> <note> <p>Intended for use by AWS Direct Connect Partners only.</p> </note>",
+      "documentation": "<note> <p>Deprecated. Use <a>DescribeHostedConnections</a> instead.</p> </note> <p>Lists the connections that have been provisioned on the specified interconnect.</p> <note> <p>Intended for use by Direct Connect Partners only.</p> </note>",
       "deprecated": true
+    },
+    "DescribeCustomerMetadata": {
+      "name": "DescribeCustomerMetadata",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "output": {
+        "shape": "DescribeCustomerMetadataResponse"
+      },
+      "errors": [
+        {
+          "shape": "DirectConnectServerException"
+        },
+        {
+          "shape": "DirectConnectClientException"
+        }
+      ],
+      "documentation": "<p>Get and view a list of customer agreements, along with their signed status and whether the customer is an NNIPartner, NNIPartnerV2, or a nonPartner. </p>"
     },
     "DescribeDirectConnectGatewayAssociationProposals": {
       "name": "DescribeDirectConnectGatewayAssociationProposals",
@@ -865,7 +934,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Lists the associations between your Direct Connect gateways and virtual private gateways. You must specify a Direct Connect gateway, a virtual private gateway, or both. If you specify a Direct Connect gateway, the response contains all virtual private gateways associated with the Direct Connect gateway. If you specify a virtual private gateway, the response contains all Direct Connect gateways associated with the virtual private gateway. If you specify both, the response contains the association between the Direct Connect gateway and the virtual private gateway.</p>"
+      "documentation": "<p>Lists the associations between your Direct Connect gateways and virtual private gateways and transit gateways. You must specify one of the following:</p> <ul> <li> <p>A Direct Connect gateway</p> <p>The response contains all virtual private gateways and transit gateways associated with the Direct Connect gateway.</p> </li> <li> <p>A virtual private gateway</p> <p>The response contains the Direct Connect gateway.</p> </li> <li> <p>A transit gateway</p> <p>The response contains the Direct Connect gateway.</p> </li> <li> <p>A Direct Connect gateway and a virtual private gateway</p> <p>The response contains the association between the Direct Connect gateway and virtual private gateway.</p> </li> <li> <p>A Direct Connect gateway and a transit gateway</p> <p>The response contains the association between the Direct Connect gateway and transit gateway.</p> </li> </ul>"
     },
     "DescribeDirectConnectGatewayAttachments": {
       "name": "DescribeDirectConnectGatewayAttachments",
@@ -931,7 +1000,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Lists the hosted connections that have been provisioned on the specified interconnect or link aggregation group (LAG).</p> <note> <p>Intended for use by AWS Direct Connect Partners only.</p> </note>"
+      "documentation": "<p>Lists the hosted connections that have been provisioned on the specified interconnect or link aggregation group (LAG).</p> <note> <p>Intended for use by Direct Connect Partners only.</p> </note>"
     },
     "DescribeInterconnectLoa": {
       "name": "DescribeInterconnectLoa",
@@ -953,7 +1022,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Deprecated. Use <a>DescribeLoa</a> instead.</p> <p>Gets the LOA-CFA for the specified interconnect.</p> <p>The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is a document that is used when establishing your cross connect to AWS at the colocation facility. For more information, see <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html\">Requesting Cross Connects at AWS Direct Connect Locations</a> in the <i>AWS Direct Connect User Guide</i>.</p>",
+      "documentation": "<note> <p>Deprecated. Use <a>DescribeLoa</a> instead.</p> </note> <p>Gets the LOA-CFA for the specified interconnect.</p> <p>The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is a document that is used when establishing your cross connect to Amazon Web Services at the colocation facility. For more information, see <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html\">Requesting Cross Connects at Direct Connect Locations</a> in the <i>Direct Connect User Guide</i>.</p>",
       "deprecated": true
     },
     "DescribeInterconnects": {
@@ -976,7 +1045,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Lists the interconnects owned by the AWS account or only the specified interconnect.</p>"
+      "documentation": "<p>Lists the interconnects owned by the Amazon Web Services account or only the specified interconnect.</p>"
     },
     "DescribeLags": {
       "name": "DescribeLags",
@@ -1020,7 +1089,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Gets the LOA-CFA for a connection, interconnect, or link aggregation group (LAG).</p> <p>The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is a document that is used when establishing your cross connect to AWS at the colocation facility. For more information, see <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html\">Requesting Cross Connects at AWS Direct Connect Locations</a> in the <i>AWS Direct Connect User Guide</i>.</p>"
+      "documentation": "<p>Gets the LOA-CFA for a connection, interconnect, or link aggregation group (LAG).</p> <p>The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is a document that is used when establishing your cross connect to Amazon Web Services at the colocation facility. For more information, see <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html\">Requesting Cross Connects at Direct Connect Locations</a> in the <i>Direct Connect User Guide</i>.</p>"
     },
     "DescribeLocations": {
       "name": "DescribeLocations",
@@ -1039,7 +1108,29 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Lists the AWS Direct Connect locations in the current AWS Region. These are the locations that can be selected when calling <a>CreateConnection</a> or <a>CreateInterconnect</a>.</p>"
+      "documentation": "<p>Lists the Direct Connect locations in the current Amazon Web Services Region. These are the locations that can be selected when calling <a>CreateConnection</a> or <a>CreateInterconnect</a>.</p>"
+    },
+    "DescribeRouterConfiguration": {
+      "name": "DescribeRouterConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeRouterConfigurationRequest"
+      },
+      "output": {
+        "shape": "DescribeRouterConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "DirectConnectServerException"
+        },
+        {
+          "shape": "DirectConnectClientException"
+        }
+      ],
+      "documentation": "<p> Details about the router. </p>"
     },
     "DescribeTags": {
       "name": "DescribeTags",
@@ -1061,7 +1152,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Describes the tags associated with the specified AWS Direct Connect resources.</p>"
+      "documentation": "<p>Describes the tags associated with the specified Direct Connect resources.</p>"
     },
     "DescribeVirtualGateways": {
       "name": "DescribeVirtualGateways",
@@ -1080,7 +1171,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Lists the virtual private gateways owned by the AWS account.</p> <p>You can create one or more AWS Direct Connect private virtual interfaces linked to a virtual private gateway.</p>"
+      "documentation": "<note> <p>Deprecated. Use <code>DescribeVpnGateways</code> instead. See <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpnGateways.html\">DescribeVPNGateways</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p> </note> <p>Lists the virtual private gateways owned by the Amazon Web Services account.</p> <p>You can create one or more Direct Connect private virtual interfaces linked to a virtual private gateway.</p>"
     },
     "DescribeVirtualInterfaces": {
       "name": "DescribeVirtualInterfaces",
@@ -1102,7 +1193,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Displays all virtual interfaces for an AWS account. Virtual interfaces deleted fewer than 15 minutes before you make the request are also returned. If you specify a connection ID, only the virtual interfaces associated with the connection are returned. If you specify a virtual interface ID, then only a single virtual interface is returned.</p> <p>A virtual interface (VLAN) transmits the traffic between the AWS Direct Connect location and the customer network.</p>"
+      "documentation": "<p>Displays all virtual interfaces for an Amazon Web Services account. Virtual interfaces deleted fewer than 15 minutes before you make the request are also returned. If you specify a connection ID, only the virtual interfaces associated with the connection are returned. If you specify a virtual interface ID, then only a single virtual interface is returned.</p> <p>A virtual interface (VLAN) transmits the traffic between the Direct Connect location and the customer network.</p>"
     },
     "DisassociateConnectionFromLag": {
       "name": "DisassociateConnectionFromLag",
@@ -1124,7 +1215,29 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Disassociates a connection from a link aggregation group (LAG). The connection is interrupted and re-established as a standalone connection (the connection is not deleted; to delete the connection, use the <a>DeleteConnection</a> request). If the LAG has associated virtual interfaces or hosted connections, they remain associated with the LAG. A disassociated connection owned by an AWS Direct Connect Partner is automatically converted to an interconnect.</p> <p>If disassociating the connection would cause the LAG to fall below its setting for minimum number of operational connections, the request fails, except when it's the last member of the LAG. If all connections are disassociated, the LAG continues to exist as an empty LAG with no physical connections. </p>"
+      "documentation": "<p>Disassociates a connection from a link aggregation group (LAG). The connection is interrupted and re-established as a standalone connection (the connection is not deleted; to delete the connection, use the <a>DeleteConnection</a> request). If the LAG has associated virtual interfaces or hosted connections, they remain associated with the LAG. A disassociated connection owned by an Direct Connect Partner is automatically converted to an interconnect.</p> <p>If disassociating the connection would cause the LAG to fall below its setting for minimum number of operational connections, the request fails, except when it's the last member of the LAG. If all connections are disassociated, the LAG continues to exist as an empty LAG with no physical connections. </p>"
+    },
+    "DisassociateMacSecKey": {
+      "name": "DisassociateMacSecKey",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DisassociateMacSecKeyRequest"
+      },
+      "output": {
+        "shape": "DisassociateMacSecKeyResponse"
+      },
+      "errors": [
+        {
+          "shape": "DirectConnectServerException"
+        },
+        {
+          "shape": "DirectConnectClientException"
+        }
+      ],
+      "documentation": "<p>Removes the association between a MAC Security (MACsec) security key and an Direct Connect dedicated connection.</p>"
     },
     "ListVirtualInterfaceTestHistory": {
       "name": "ListVirtualInterfaceTestHistory",
@@ -1218,7 +1331,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Adds the specified tags to the specified AWS Direct Connect resource. Each resource can have a maximum of 50 tags.</p> <p>Each tag consists of a key and an optional value. If a tag with the same key is already associated with the resource, this action updates its value.</p>"
+      "documentation": "<p>Adds the specified tags to the specified Direct Connect resource. Each resource can have a maximum of 50 tags.</p> <p>Each tag consists of a key and an optional value. If a tag with the same key is already associated with the resource, this action updates its value.</p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -1240,7 +1353,51 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Removes one or more tags from the specified AWS Direct Connect resource.</p>"
+      "documentation": "<p>Removes one or more tags from the specified Direct Connect resource.</p>"
+    },
+    "UpdateConnection": {
+      "name": "UpdateConnection",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateConnectionRequest"
+      },
+      "output": {
+        "shape": "Connection"
+      },
+      "errors": [
+        {
+          "shape": "DirectConnectServerException"
+        },
+        {
+          "shape": "DirectConnectClientException"
+        }
+      ],
+      "documentation": "<p>Updates the Direct Connect dedicated connection configuration.</p> <p>You can update the following parameters for a connection:</p> <ul> <li> <p>The connection name</p> </li> <li> <p>The connection's MAC Security (MACsec) encryption mode.</p> </li> </ul>"
+    },
+    "UpdateDirectConnectGateway": {
+      "name": "UpdateDirectConnectGateway",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateDirectConnectGatewayRequest"
+      },
+      "output": {
+        "shape": "UpdateDirectConnectGatewayResponse"
+      },
+      "errors": [
+        {
+          "shape": "DirectConnectServerException"
+        },
+        {
+          "shape": "DirectConnectClientException"
+        }
+      ],
+      "documentation": "<p>Updates the name of a current Direct Connect gateway.</p>"
     },
     "UpdateDirectConnectGatewayAssociation": {
       "name": "UpdateDirectConnectGatewayAssociation",
@@ -1284,7 +1441,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Updates the attributes of the specified link aggregation group (LAG).</p> <p>You can update the following attributes:</p> <ul> <li> <p>The name of the LAG.</p> </li> <li> <p>The value for the minimum number of connections that must be operational for the LAG itself to be operational. </p> </li> </ul> <p>When you create a LAG, the default value for the minimum number of operational connections is zero (0). If you update this value and the number of operational connections falls below the specified value, the LAG automatically goes down to avoid over-utilization of the remaining connections. Adjust this value with care, as it could force the LAG down if it is set higher than the current number of operational connections.</p>"
+      "documentation": "<p>Updates the attributes of the specified link aggregation group (LAG).</p> <p>You can update the following LAG attributes:</p> <ul> <li> <p>The name of the LAG.</p> </li> <li> <p>The value for the minimum number of connections that must be operational for the LAG itself to be operational. </p> </li> <li> <p>The LAG's MACsec encryption mode.</p> <p>Amazon Web Services assigns this value to each connection which is part of the LAG.</p> </li> <li> <p>The tags</p> </li> </ul> <note> <p>If you adjust the threshold value for the minimum number of operational connections, ensure that the new value does not cause the LAG to fall below the threshold and become non-operational.</p> </note>"
     },
     "UpdateVirtualInterfaceAttributes": {
       "name": "UpdateVirtualInterfaceAttributes",
@@ -1306,7 +1463,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Updates the specified attributes of the specified virtual private interface.</p> <p>Setting the MTU of a virtual interface to 9001 (jumbo frames) can cause an update to the underlying physical connection if it wasn't updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call <a>DescribeConnections</a>. To check whether your virtual q interface supports jumbo frames, call <a>DescribeVirtualInterfaces</a>.</p>"
+      "documentation": "<p>Updates the specified attributes of the specified virtual private interface.</p> <p>Setting the MTU of a virtual interface to 8500 (jumbo frames) can cause an update to the underlying physical connection if it wasn't updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call <a>DescribeConnections</a>. To check whether your virtual interface supports jumbo frames, call <a>DescribeVirtualInterfaces</a>.</p>"
     }
   },
   "shapes": {
@@ -1331,11 +1488,11 @@
         },
         "associatedGatewayOwnerAccount": {
           "shape": "OwnerAccount",
-          "documentation": "<p>The ID of the AWS account that owns the virtual private gateway or transit gateway.</p>"
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the virtual private gateway or transit gateway.</p>"
         },
         "overrideAllowedPrefixesToDirectConnectGateway": {
           "shape": "RouteFilterPrefixList",
-          "documentation": "<p>Overrides the Amazon VPC prefixes advertised to the Direct Connect gateway.</p> <p>For information about how to set the prefixes, see <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes\">Allowed Prefixes</a> in the <i>AWS Direct Connect User Guide</i>.</p>"
+          "documentation": "<p>Overrides the Amazon VPC prefixes advertised to the Direct Connect gateway.</p> <p>For information about how to set the prefixes, see <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes\">Allowed Prefixes</a> in the <i>Direct Connect User Guide</i>.</p>"
         }
       }
     },
@@ -1343,7 +1500,8 @@
       "type": "structure",
       "members": {
         "directConnectGatewayAssociation": {
-          "shape": "DirectConnectGatewayAssociation"
+          "shape": "DirectConnectGatewayAssociation",
+          "documentation": "<p>Information about an association between a Direct Connect gateway and a virtual gateway or transit gateway.</p>"
         }
       }
     },
@@ -1353,6 +1511,16 @@
         "ipv4",
         "ipv6"
       ]
+    },
+    "AgreementList": {
+      "type": "list",
+      "member": {
+        "shape": "CustomerAgreement"
+      }
+    },
+    "AgreementName": {
+      "type": "string",
+      "max": 100
     },
     "AllocateConnectionOnInterconnectRequest": {
       "type": "structure",
@@ -1366,7 +1534,7 @@
       "members": {
         "bandwidth": {
           "shape": "Bandwidth",
-          "documentation": "<p>The bandwidth of the connection. The possible values are 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps. Note that only those AWS Direct Connect Partners who have met specific requirements are allowed to create a 1Gbps, 2Gbps, 5Gbps or 10Gbps hosted connection.</p>"
+          "documentation": "<p>The bandwidth of the connection. The possible values are 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps. Note that only those Direct Connect Partners who have met specific requirements are allowed to create a 1Gbps, 2Gbps, 5Gbps or 10Gbps hosted connection.</p>"
         },
         "connectionName": {
           "shape": "ConnectionName",
@@ -1374,7 +1542,7 @@
         },
         "ownerAccount": {
           "shape": "OwnerAccount",
-          "documentation": "<p>The ID of the AWS account of the customer for whom the connection will be provisioned.</p>"
+          "documentation": "<p>The ID of the Amazon Web Services account of the customer for whom the connection will be provisioned.</p>"
         },
         "interconnectId": {
           "shape": "InterconnectId",
@@ -1402,11 +1570,11 @@
         },
         "ownerAccount": {
           "shape": "OwnerAccount",
-          "documentation": "<p>The ID of the AWS account ID of the customer for the connection.</p>"
+          "documentation": "<p>The ID of the Amazon Web Services account ID of the customer for the connection.</p>"
         },
         "bandwidth": {
           "shape": "Bandwidth",
-          "documentation": "<p>The bandwidth of the connection. The possible values are 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps. Note that only those AWS Direct Connect Partners who have met specific requirements are allowed to create a 1Gbps, 2Gbps, 5Gbps or 10Gbps hosted connection. </p>"
+          "documentation": "<p>The bandwidth of the connection. The possible values are 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, 10Gbps, and 25Gbps. Note that only those Direct Connect Partners who have met specific requirements are allowed to create a 1Gbps, 2Gbps, 5Gbps, 10Gbps, or 25Gbps hosted connection. </p>"
         },
         "connectionName": {
           "shape": "ConnectionName",
@@ -1436,7 +1604,7 @@
         },
         "ownerAccount": {
           "shape": "OwnerAccount",
-          "documentation": "<p>The ID of the AWS account that owns the virtual private interface.</p>"
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the virtual private interface.</p>"
         },
         "newPrivateVirtualInterfaceAllocation": {
           "shape": "NewPrivateVirtualInterfaceAllocation",
@@ -1458,7 +1626,7 @@
         },
         "ownerAccount": {
           "shape": "OwnerAccount",
-          "documentation": "<p>The ID of the AWS account that owns the public virtual interface.</p>"
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the public virtual interface.</p>"
         },
         "newPublicVirtualInterfaceAllocation": {
           "shape": "NewPublicVirtualInterfaceAllocation",
@@ -1480,7 +1648,7 @@
         },
         "ownerAccount": {
           "shape": "OwnerAccount",
-          "documentation": "<p>The ID of the AWS account that owns the transit virtual interface.</p>"
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the transit virtual interface.</p>"
         },
         "newTransitVirtualInterfaceAllocation": {
           "shape": "NewTransitVirtualInterfaceAllocation",
@@ -1492,7 +1660,8 @@
       "type": "structure",
       "members": {
         "virtualInterface": {
-          "shape": "VirtualInterface"
+          "shape": "VirtualInterface",
+          "documentation": "<p>Information about the transit virtual interface.</p>"
         }
       }
     },
@@ -1533,6 +1702,43 @@
         }
       }
     },
+    "AssociateMacSecKeyRequest": {
+      "type": "structure",
+      "required": [
+        "connectionId"
+      ],
+      "members": {
+        "connectionId": {
+          "shape": "ConnectionId",
+          "documentation": "<p>The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG (dxlag-xxxx).</p> <p>You can use <a>DescribeConnections</a> or <a>DescribeLags</a> to retrieve connection ID.</p>"
+        },
+        "secretARN": {
+          "shape": "SecretARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key to associate with the dedicated connection.</p> <p>You can use <a>DescribeConnections</a> or <a>DescribeLags</a> to retrieve the MAC Security (MACsec) secret key.</p> <p>If you use this request parameter, you do not use the <code>ckn</code> and <code>cak</code> request parameters.</p>"
+        },
+        "ckn": {
+          "shape": "Ckn",
+          "documentation": "<p>The MAC Security (MACsec) CKN to associate with the dedicated connection.</p> <p>You can create the CKN/CAK pair using an industry standard tool.</p> <p> The valid values are 64 hexadecimal characters (0-9, A-E).</p> <p>If you use this request parameter, you must use the <code>cak</code> request parameter and not use the <code>secretARN</code> request parameter.</p>"
+        },
+        "cak": {
+          "shape": "Cak",
+          "documentation": "<p>The MAC Security (MACsec) CAK to associate with the dedicated connection.</p> <p>You can create the CKN/CAK pair using an industry standard tool.</p> <p> The valid values are 64 hexadecimal characters (0-9, A-E).</p> <p>If you use this request parameter, you must use the <code>ckn</code> request parameter and not use the <code>secretARN</code> request parameter.</p>"
+        }
+      }
+    },
+    "AssociateMacSecKeyResponse": {
+      "type": "structure",
+      "members": {
+        "connectionId": {
+          "shape": "ConnectionId",
+          "documentation": "<p>The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG (dxlag-xxxx).</p>"
+        },
+        "macSecKeys": {
+          "shape": "MacSecKeyList",
+          "documentation": "<p>The MAC Security (MACsec) security keys associated with the dedicated connection.</p>"
+        }
+      }
+    },
     "AssociateVirtualInterfaceRequest": {
       "type": "structure",
       "required": [
@@ -1563,7 +1769,7 @@
         },
         "ownerAccount": {
           "shape": "OwnerAccount",
-          "documentation": "<p>The ID of the AWS account that owns the associated virtual private gateway or transit gateway.</p>"
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the associated virtual private gateway or transit gateway.</p>"
         },
         "region": {
           "shape": "Region",
@@ -1574,6 +1780,12 @@
     },
     "AssociatedGatewayId": {
       "type": "string"
+    },
+    "AvailableMacSecPortSpeeds": {
+      "type": "list",
+      "member": {
+        "shape": "PortSpeed"
+      }
     },
     "AvailablePortSpeeds": {
       "type": "list",
@@ -1586,6 +1798,9 @@
       "deprecated": true
     },
     "AwsDeviceV2": {
+      "type": "string"
+    },
+    "AwsLogicalDeviceId": {
       "type": "string"
     },
     "BGPAuthKey": {
@@ -1628,7 +1843,11 @@
         },
         "awsDeviceV2": {
           "shape": "AwsDeviceV2",
-          "documentation": "<p>The Direct Connect endpoint on which the BGP peer terminates.</p>"
+          "documentation": "<p>The Direct Connect endpoint that terminates the BGP peer.</p>"
+        },
+        "awsLogicalDeviceId": {
+          "shape": "AwsLogicalDeviceId",
+          "documentation": "<p>The Direct Connect endpoint that terminates the logical connection. This device might be different than the device that terminates the physical connection.</p>"
         }
       },
       "documentation": "<p>Information about a BGP peer.</p>"
@@ -1675,6 +1894,12 @@
     "CIDR": {
       "type": "string"
     },
+    "Cak": {
+      "type": "string"
+    },
+    "Ckn": {
+      "type": "string"
+    },
     "ConfirmConnectionRequest": {
       "type": "structure",
       "required": [
@@ -1693,6 +1918,24 @@
         "connectionState": {
           "shape": "ConnectionState",
           "documentation": "<p>The state of the connection. The following are the possible values:</p> <ul> <li> <p> <code>ordering</code>: The initial state of a hosted connection provisioned on an interconnect. The connection stays in the ordering state until the owner of the hosted connection confirms or declines the connection order.</p> </li> <li> <p> <code>requested</code>: The initial state of a standard connection. The connection stays in the requested state until the Letter of Authorization (LOA) is sent to the customer.</p> </li> <li> <p> <code>pending</code>: The connection has been approved and is being initialized.</p> </li> <li> <p> <code>available</code>: The network link is up and the connection is ready for use.</p> </li> <li> <p> <code>down</code>: The network link is down.</p> </li> <li> <p> <code>deleting</code>: The connection is being deleted.</p> </li> <li> <p> <code>deleted</code>: The connection has been deleted.</p> </li> <li> <p> <code>rejected</code>: A hosted connection in the <code>ordering</code> state enters the <code>rejected</code> state if it is deleted by the customer.</p> </li> <li> <p> <code>unknown</code>: The state of the connection is not available.</p> </li> </ul>"
+        }
+      }
+    },
+    "ConfirmCustomerAgreementRequest": {
+      "type": "structure",
+      "members": {
+        "agreementName": {
+          "shape": "AgreementName",
+          "documentation": "<p> The name of the customer agreement. </p>"
+        }
+      }
+    },
+    "ConfirmCustomerAgreementResponse": {
+      "type": "structure",
+      "members": {
+        "status": {
+          "shape": "Status",
+          "documentation": "<p> The status of the customer agreement when the connection was created. This will be either <code>signed</code> or <code>unsigned</code>. </p>"
         }
       }
     },
@@ -1777,7 +2020,7 @@
       "members": {
         "ownerAccount": {
           "shape": "OwnerAccount",
-          "documentation": "<p>The ID of the AWS account that owns the connection.</p>"
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the connection.</p>"
         },
         "connectionId": {
           "shape": "ConnectionId",
@@ -1793,7 +2036,7 @@
         },
         "region": {
           "shape": "Region",
-          "documentation": "<p>The AWS Region where the connection is located.</p>"
+          "documentation": "<p>The Amazon Web Services Region where the connection is located.</p>"
         },
         "location": {
           "shape": "LocationCode",
@@ -1809,7 +2052,7 @@
         },
         "partnerName": {
           "shape": "PartnerName",
-          "documentation": "<p>The name of the AWS Direct Connect service provider associated with the connection.</p>"
+          "documentation": "<p>The name of the Direct Connect service provider associated with the connection.</p>"
         },
         "loaIssueTime": {
           "shape": "LoaIssueTime",
@@ -1825,11 +2068,15 @@
         },
         "jumboFrameCapable": {
           "shape": "JumboFrameCapable",
-          "documentation": "<p>Indicates whether jumbo frames (9001 MTU) are supported.</p>"
+          "documentation": "<p>Indicates whether jumbo frames are supported.</p>"
         },
         "awsDeviceV2": {
           "shape": "AwsDeviceV2",
-          "documentation": "<p>The Direct Connect endpoint on which the physical connection terminates.</p>"
+          "documentation": "<p>The Direct Connect endpoint that terminates the physical connection.</p>"
+        },
+        "awsLogicalDeviceId": {
+          "shape": "AwsLogicalDeviceId",
+          "documentation": "<p>The Direct Connect endpoint that terminates the logical connection. This device might be different than the device that terminates the physical connection.</p>"
         },
         "hasLogicalRedundancy": {
           "shape": "HasLogicalRedundancy",
@@ -1842,9 +2089,25 @@
         "providerName": {
           "shape": "ProviderName",
           "documentation": "<p>The name of the service provider associated with the connection.</p>"
+        },
+        "macSecCapable": {
+          "shape": "MacSecCapable",
+          "documentation": "<p>Indicates whether the connection supports MAC Security (MACsec).</p>"
+        },
+        "portEncryptionStatus": {
+          "shape": "PortEncryptionStatus",
+          "documentation": "<p>The MAC Security (MACsec) port link status of the connection.</p> <p>The valid values are <code>Encryption Up</code>, which means that there is an active Connection Key Name, or <code>Encryption Down</code>.</p>"
+        },
+        "encryptionMode": {
+          "shape": "EncryptionMode",
+          "documentation": "<p>The MAC Security (MACsec) connection encryption mode.</p> <p>The valid values are <code>no_encrypt</code>, <code>should_encrypt</code>, and <code>must_encrypt</code>.</p>"
+        },
+        "macSecKeys": {
+          "shape": "MacSecKeyList",
+          "documentation": "<p>The MAC Security (MACsec) security keys associated with the connection.</p>"
         }
       },
-      "documentation": "<p>Information about an AWS Direct Connect connection.</p>"
+      "documentation": "<p>Information about an Direct Connect connection.</p>"
     },
     "ConnectionId": {
       "type": "string"
@@ -1937,6 +2200,10 @@
         "providerName": {
           "shape": "ProviderName",
           "documentation": "<p>The name of the service provider associated with the requested connection.</p>"
+        },
+        "requestMACSec": {
+          "shape": "RequestMACSec",
+          "documentation": "<p>Indicates whether you want the connection to support MAC Security (MACsec).</p> <p>MAC Security (MACsec) is only available on dedicated connections. For information about MAC Security (MACsec) prerequisties, see <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites\">MACsec prerequisties</a> in the <i>Direct Connect User Guide</i>.</p>"
         }
       }
     },
@@ -1954,7 +2221,7 @@
         },
         "directConnectGatewayOwnerAccount": {
           "shape": "OwnerAccount",
-          "documentation": "<p>The ID of the AWS account that owns the Direct Connect gateway.</p>"
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the Direct Connect gateway.</p>"
         },
         "gatewayId": {
           "shape": "GatewayIdToAssociate",
@@ -1995,7 +2262,7 @@
         },
         "addAllowedPrefixesToDirectConnectGateway": {
           "shape": "RouteFilterPrefixList",
-          "documentation": "<p>The Amazon VPC prefixes to advertise to the Direct Connect gateway</p> <p>This parameter is required when you create an association to a transit gateway.</p> <p>For information about how to set the prefixes, see <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes\">Allowed Prefixes</a> in the <i>AWS Direct Connect User Guide</i>.</p>"
+          "documentation": "<p>The Amazon VPC prefixes to advertise to the Direct Connect gateway</p> <p>This parameter is required when you create an association to a transit gateway.</p> <p>For information about how to set the prefixes, see <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes\">Allowed Prefixes</a> in the <i>Direct Connect User Guide</i>.</p>"
         },
         "virtualGatewayId": {
           "shape": "VirtualGatewayId",
@@ -2051,7 +2318,7 @@
         },
         "bandwidth": {
           "shape": "Bandwidth",
-          "documentation": "<p>The port bandwidth, in Gbps. The possible values are 1 and 10.</p>"
+          "documentation": "<p>The port bandwidth, in Gbps. The possible values are 1, 10, and 100.</p>"
         },
         "location": {
           "shape": "LocationCode",
@@ -2082,7 +2349,7 @@
       "members": {
         "numberOfConnections": {
           "shape": "Count",
-          "documentation": "<p>The number of physical dedicated connections initially provisioned and bundled by the LAG.</p>"
+          "documentation": "<p>The number of physical dedicated connections initially provisioned and bundled by the LAG. You can have a maximum of four connections when the port speed is 1Gbps or 10Gbps, or two when the port speed is 100Gbps or 400Gbps.</p>"
         },
         "location": {
           "shape": "LocationCode",
@@ -2090,7 +2357,7 @@
         },
         "connectionsBandwidth": {
           "shape": "Bandwidth",
-          "documentation": "<p>The bandwidth of the individual physical dedicated connections bundled by the LAG. The possible values are 1Gbps and 10Gbps. </p>"
+          "documentation": "<p>The bandwidth of the individual physical dedicated connections bundled by the LAG. The possible values are 1Gbps,10Gbps, 100Gbps, and 400Gbps. </p>"
         },
         "lagName": {
           "shape": "LagName",
@@ -2111,6 +2378,10 @@
         "providerName": {
           "shape": "ProviderName",
           "documentation": "<p>The name of the service provider associated with the LAG.</p>"
+        },
+        "requestMACSec": {
+          "shape": "RequestMACSec",
+          "documentation": "<p>Indicates whether the connection will support MAC Security (MACsec).</p> <note> <p>All connections in the LAG must be capable of supporting MAC Security (MACsec). For information about MAC Security (MACsec) prerequisties, see <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites\">MACsec prerequisties</a> in the <i>Direct Connect User Guide</i>.</p> </note>"
         }
       }
     },
@@ -2169,12 +2440,27 @@
       "type": "structure",
       "members": {
         "virtualInterface": {
-          "shape": "VirtualInterface"
+          "shape": "VirtualInterface",
+          "documentation": "<p>Information about a virtual interface.</p>"
         }
       }
     },
     "CustomerAddress": {
       "type": "string"
+    },
+    "CustomerAgreement": {
+      "type": "structure",
+      "members": {
+        "agreementName": {
+          "shape": "AgreementName",
+          "documentation": "<p>The name of the agreement.</p>"
+        },
+        "status": {
+          "shape": "Status",
+          "documentation": "<p>The status of the customer agreement. This will be either <code>signed</code> or <code>unsigned</code> </p>"
+        }
+      },
+      "documentation": "<p>The name and status of a customer agreement. </p>"
     },
     "DeleteBGPPeerRequest": {
       "type": "structure",
@@ -2390,6 +2676,19 @@
         }
       }
     },
+    "DescribeCustomerMetadataResponse": {
+      "type": "structure",
+      "members": {
+        "agreements": {
+          "shape": "AgreementList",
+          "documentation": "<p>The list of customer agreements.</p>"
+        },
+        "nniPartnerType": {
+          "shape": "NniPartnerType",
+          "documentation": "<p>The type of network-to-network interface (NNI) partner. The partner type will be one of the following:</p> <ul> <li> <p>V1: This partner can only allocate 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, or 500Mbps subgigabit connections.</p> </li> <li> <p>V2: This partner can only allocate 1GB, 2GB, 5GB, or 10GB hosted connections.</p> </li> <li> <p>nonPartner: The customer is not a partner.</p> </li> </ul>"
+        }
+      }
+    },
     "DescribeDirectConnectGatewayAssociationProposalsRequest": {
       "type": "structure",
       "members": {
@@ -2453,7 +2752,7 @@
         },
         "virtualGatewayId": {
           "shape": "VirtualGatewayId",
-          "documentation": "<p>The ID of the virtual private gateway.</p>"
+          "documentation": "<p>The ID of the virtual private gateway or transit gateway.</p>"
         }
       }
     },
@@ -2613,6 +2912,44 @@
         }
       }
     },
+    "DescribeRouterConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "virtualInterfaceId"
+      ],
+      "members": {
+        "virtualInterfaceId": {
+          "shape": "VirtualInterfaceId",
+          "documentation": "<p>The ID of the virtual interface.</p>"
+        },
+        "routerTypeIdentifier": {
+          "shape": "RouterTypeIdentifier",
+          "documentation": "<p>Identifies the router by a combination of vendor, platform, and software version. For example, <code>CiscoSystemsInc-2900SeriesRouters-IOS124</code>.</p>"
+        }
+      },
+      "documentation": "<p>Provides the details about a virtual interface's router.</p>"
+    },
+    "DescribeRouterConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "customerRouterConfig": {
+          "shape": "RouterConfig",
+          "documentation": "<p>The customer router configuration.</p>"
+        },
+        "router": {
+          "shape": "RouterType",
+          "documentation": "<p>The details about the router.</p>"
+        },
+        "virtualInterfaceId": {
+          "shape": "VirtualInterfaceId",
+          "documentation": "<p>The ID assigned to the virtual interface.</p>"
+        },
+        "virtualInterfaceName": {
+          "shape": "VirtualInterfaceName",
+          "documentation": "<p>Provides the details about a virtual interface's router.</p>"
+        }
+      }
+    },
     "DescribeTagsRequest": {
       "type": "structure",
       "required": [
@@ -2664,7 +3001,7 @@
         },
         "ownerAccount": {
           "shape": "OwnerAccount",
-          "documentation": "<p>The ID of the AWS account that owns the Direct Connect gateway.</p>"
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the Direct Connect gateway.</p>"
         },
         "directConnectGatewayState": {
           "shape": "DirectConnectGatewayState",
@@ -2686,11 +3023,11 @@
         },
         "directConnectGatewayOwnerAccount": {
           "shape": "OwnerAccount",
-          "documentation": "<p>The ID of the AWS account that owns the associated gateway.</p>"
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the associated gateway.</p>"
         },
         "associationState": {
           "shape": "DirectConnectGatewayAssociationState",
-          "documentation": "<p>The state of the association. The following are the possible values:</p> <ul> <li> <p> <code>associating</code>: The initial state after calling <a>CreateDirectConnectGatewayAssociation</a>.</p> </li> <li> <p> <code>associated</code>: The Direct Connect gateway and virtual private gateway or transit gateway are successfully associated and ready to pass traffic.</p> </li> <li> <p> <code>disassociating</code>: The initial state after calling <a>DeleteDirectConnectGatewayAssociation</a>.</p> </li> <li> <p> <code>disassociated</code>: The virtual private gateway or transit gateway is disassociated from the Direct Connect gateway. Traffic flow between the Direct Connect gateway and virtual private gateway or transit gateway is stopped.</p> </li> </ul>"
+          "documentation": "<p>The state of the association. The following are the possible values:</p> <ul> <li> <p> <code>associating</code>: The initial state after calling <a>CreateDirectConnectGatewayAssociation</a>.</p> </li> <li> <p> <code>associated</code>: The Direct Connect gateway and virtual private gateway or transit gateway are successfully associated and ready to pass traffic.</p> </li> <li> <p> <code>disassociating</code>: The initial state after calling <a>DeleteDirectConnectGatewayAssociation</a>.</p> </li> <li> <p> <code>disassociated</code>: The virtual private gateway or transit gateway is disassociated from the Direct Connect gateway. Traffic flow between the Direct Connect gateway and virtual private gateway or transit gateway is stopped.</p> </li> <li> <p> <code>updating</code>: The CIDR blocks for the virtual private gateway or transit gateway are currently being updated. This could be new CIDR blocks added or current CIDR blocks removed.</p> </li> </ul>"
         },
         "stateChangeError": {
           "shape": "StateChangeError",
@@ -2714,11 +3051,11 @@
         },
         "virtualGatewayRegion": {
           "shape": "VirtualGatewayRegion",
-          "documentation": "<p>The AWS Region where the virtual private gateway is located.</p>"
+          "documentation": "<p>The Amazon Web Services Region where the virtual private gateway is located.</p>"
         },
         "virtualGatewayOwnerAccount": {
           "shape": "OwnerAccount",
-          "documentation": "<p>The ID of the AWS account that owns the virtual private gateway.</p>"
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the virtual private gateway.</p>"
         }
       },
       "documentation": "<p>Information about an association between a Direct Connect gateway and a virtual private gateway or transit gateway.</p>"
@@ -2745,7 +3082,7 @@
         },
         "directConnectGatewayOwnerAccount": {
           "shape": "OwnerAccount",
-          "documentation": "<p>The ID of the AWS account that owns the Direct Connect gateway.</p>"
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the Direct Connect gateway.</p>"
         },
         "proposalState": {
           "shape": "DirectConnectGatewayAssociationProposalState",
@@ -2806,11 +3143,11 @@
         },
         "virtualInterfaceRegion": {
           "shape": "VirtualInterfaceRegion",
-          "documentation": "<p>The AWS Region where the virtual interface is located.</p>"
+          "documentation": "<p>The Amazon Web Services Region where the virtual interface is located.</p>"
         },
         "virtualInterfaceOwnerAccount": {
           "shape": "OwnerAccount",
-          "documentation": "<p>The ID of the AWS account that owns the virtual interface.</p>"
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the virtual interface.</p>"
         },
         "attachmentState": {
           "shape": "DirectConnectGatewayAttachmentState",
@@ -2887,6 +3224,42 @@
         }
       }
     },
+    "DisassociateMacSecKeyRequest": {
+      "type": "structure",
+      "required": [
+        "connectionId",
+        "secretARN"
+      ],
+      "members": {
+        "connectionId": {
+          "shape": "ConnectionId",
+          "documentation": "<p>The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG (dxlag-xxxx).</p> <p>You can use <a>DescribeConnections</a> or <a>DescribeLags</a> to retrieve connection ID.</p>"
+        },
+        "secretARN": {
+          "shape": "SecretARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key.</p> <p>You can use <a>DescribeConnections</a> to retrieve the ARN of the MAC Security (MACsec) secret key.</p>"
+        }
+      }
+    },
+    "DisassociateMacSecKeyResponse": {
+      "type": "structure",
+      "members": {
+        "connectionId": {
+          "shape": "ConnectionId",
+          "documentation": "<p>The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG (dxlag-xxxx).</p>"
+        },
+        "macSecKeys": {
+          "shape": "MacSecKeyList",
+          "documentation": "<p>The MAC Security (MACsec) security keys no longer associated with the dedicated connection.</p>"
+        }
+      }
+    },
+    "EnableSiteLink": {
+      "type": "boolean"
+    },
+    "EncryptionMode": {
+      "type": "string"
+    },
     "EndTime": {
       "type": "timestamp"
     },
@@ -2931,7 +3304,7 @@
         },
         "region": {
           "shape": "Region",
-          "documentation": "<p>The AWS Region where the connection is located.</p>"
+          "documentation": "<p>The Amazon Web Services Region where the connection is located.</p>"
         },
         "location": {
           "shape": "LocationCode",
@@ -2955,11 +3328,15 @@
         },
         "jumboFrameCapable": {
           "shape": "JumboFrameCapable",
-          "documentation": "<p>Indicates whether jumbo frames (9001 MTU) are supported.</p>"
+          "documentation": "<p>Indicates whether jumbo frames are supported.</p>"
         },
         "awsDeviceV2": {
           "shape": "AwsDeviceV2",
-          "documentation": "<p>The Direct Connect endpoint on which the physical connection terminates.</p>"
+          "documentation": "<p>The Direct Connect endpoint that terminates the physical connection.</p>"
+        },
+        "awsLogicalDeviceId": {
+          "shape": "AwsLogicalDeviceId",
+          "documentation": "<p>The Direct Connect endpoint that terminates the logical connection. This device might be different than the device that terminates the physical connection.</p>"
         },
         "hasLogicalRedundancy": {
           "shape": "HasLogicalRedundancy",
@@ -3017,11 +3394,11 @@
       "members": {
         "connectionsBandwidth": {
           "shape": "Bandwidth",
-          "documentation": "<p>The individual bandwidth of the physical connections bundled by the LAG. The possible values are 1Gbps and 10Gbps. </p>"
+          "documentation": "<p>The individual bandwidth of the physical connections bundled by the LAG. The possible values are 1Gbps, 10Gbps, 100Gbps, or 400 Gbps.. </p>"
         },
         "numberOfConnections": {
           "shape": "Count",
-          "documentation": "<p>The number of physical dedicated connections bundled by the LAG, up to a maximum of 10.</p>"
+          "documentation": "<p>The number of physical dedicated connections initially provisioned and bundled by the LAG. You can have a maximum of four connections when the port speed is 1 Gbps or 10 Gbps, or two when the port speed is 100 Gbps or 400 Gbps.</p>"
         },
         "lagId": {
           "shape": "LagId",
@@ -3029,7 +3406,7 @@
         },
         "ownerAccount": {
           "shape": "OwnerAccount",
-          "documentation": "<p>The ID of the AWS account that owns the LAG.</p>"
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the LAG.</p>"
         },
         "lagName": {
           "shape": "LagName",
@@ -3045,7 +3422,7 @@
         },
         "region": {
           "shape": "Region",
-          "documentation": "<p>The AWS Region where the connection is located.</p>"
+          "documentation": "<p>The Amazon Web Services Region where the connection is located.</p>"
         },
         "minimumLinks": {
           "shape": "Count",
@@ -3053,11 +3430,15 @@
         },
         "awsDevice": {
           "shape": "AwsDevice",
-          "documentation": "<p>The AWS Direct Connect endpoint that hosts the LAG.</p>"
+          "documentation": "<p>The Direct Connect endpoint that hosts the LAG.</p>"
         },
         "awsDeviceV2": {
           "shape": "AwsDeviceV2",
-          "documentation": "<p>The AWS Direct Connect endpoint that hosts the LAG.</p>"
+          "documentation": "<p>The Direct Connect endpoint that hosts the LAG.</p>"
+        },
+        "awsLogicalDeviceId": {
+          "shape": "AwsLogicalDeviceId",
+          "documentation": "<p>The Direct Connect endpoint that terminates the logical connection. This device might be different than the device that terminates the physical connection.</p>"
         },
         "connections": {
           "shape": "ConnectionList",
@@ -3069,7 +3450,7 @@
         },
         "jumboFrameCapable": {
           "shape": "JumboFrameCapable",
-          "documentation": "<p>Indicates whether jumbo frames (9001 MTU) are supported.</p>"
+          "documentation": "<p>Indicates whether jumbo frames are supported.</p>"
         },
         "hasLogicalRedundancy": {
           "shape": "HasLogicalRedundancy",
@@ -3082,6 +3463,18 @@
         "providerName": {
           "shape": "ProviderName",
           "documentation": "<p>The name of the service provider associated with the LAG.</p>"
+        },
+        "macSecCapable": {
+          "shape": "MacSecCapable",
+          "documentation": "<p>Indicates whether the LAG supports MAC Security (MACsec).</p>"
+        },
+        "encryptionMode": {
+          "shape": "EncryptionMode",
+          "documentation": "<p>The LAG MAC Security (MACsec) encryption mode.</p> <p>The valid values are <code>no_encrypt</code>, <code>should_encrypt</code>, and <code>must_encrypt</code>.</p>"
+        },
+        "macSecKeys": {
+          "shape": "MacSecKeyList",
+          "documentation": "<p>The MAC Security (MACsec) security keys associated with the LAG.</p>"
         }
       },
       "documentation": "<p>Information about a link aggregation group (LAG).</p>"
@@ -3200,7 +3593,7 @@
         },
         "region": {
           "shape": "Region",
-          "documentation": "<p>The AWS Region for the location.</p>"
+          "documentation": "<p>The Amazon Web Services Region for the location.</p>"
         },
         "availablePortSpeeds": {
           "shape": "AvailablePortSpeeds",
@@ -3209,9 +3602,13 @@
         "availableProviders": {
           "shape": "ProviderList",
           "documentation": "<p>The name of the service provider for the location.</p>"
+        },
+        "availableMacSecPortSpeeds": {
+          "shape": "AvailableMacSecPortSpeeds",
+          "documentation": "<p>The available MAC Security (MACsec) port speeds for the location.</p>"
         }
       },
-      "documentation": "<p>Information about an AWS Direct Connect location.</p>"
+      "documentation": "<p>Information about an Direct Connect location.</p>"
     },
     "LocationCode": {
       "type": "string"
@@ -3239,6 +3636,37 @@
     },
     "MTU": {
       "type": "integer"
+    },
+    "MacSecCapable": {
+      "type": "boolean"
+    },
+    "MacSecKey": {
+      "type": "structure",
+      "members": {
+        "secretARN": {
+          "shape": "SecretARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key.</p>"
+        },
+        "ckn": {
+          "shape": "Ckn",
+          "documentation": "<p>The Connection Key Name (CKN) for the MAC Security secret key.</p>"
+        },
+        "state": {
+          "shape": "State",
+          "documentation": "<p>The state of the MAC Security (MACsec) secret key.</p> <p>The possible values are:</p> <ul> <li> <p> <code>associating</code>: The MAC Security (MACsec) secret key is being validated and not yet associated with the connection or LAG.</p> </li> <li> <p> <code>associated</code>: The MAC Security (MACsec) secret key is validated and associated with the connection or LAG.</p> </li> <li> <p> <code>disassociating</code>: The MAC Security (MACsec) secret key is being disassociated from the connection or LAG</p> </li> <li> <p> <code>disassociated</code>: The MAC Security (MACsec) secret key is no longer associated with the connection or LAG.</p> </li> </ul>"
+        },
+        "startOn": {
+          "shape": "StartOnDate",
+          "documentation": "<p>The date that the MAC Security (MACsec) secret key takes effect. The value is displayed in UTC format.</p>"
+        }
+      },
+      "documentation": "<p>Information about the MAC Security (MACsec) secret key.</p>"
+    },
+    "MacSecKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "MacSecKey"
+      }
     },
     "MaxResultSetSize": {
       "type": "integer",
@@ -3292,7 +3720,7 @@
         },
         "mtu": {
           "shape": "MTU",
-          "documentation": "<p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.</p>"
+          "documentation": "<p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 8500. The default value is 1500.</p>"
         },
         "authKey": {
           "shape": "BGPAuthKey",
@@ -3321,6 +3749,10 @@
         "tags": {
           "shape": "TagList",
           "documentation": "<p>The tags associated with the private virtual interface.</p>"
+        },
+        "enableSiteLink": {
+          "shape": "EnableSiteLink",
+          "documentation": "<p>Indicates whether to enable or disable SiteLink.</p>"
         }
       },
       "documentation": "<p>Information about a private virtual interface.</p>"
@@ -3347,7 +3779,7 @@
         },
         "mtu": {
           "shape": "MTU",
-          "documentation": "<p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.</p>"
+          "documentation": "<p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 8500. The default value is 1500.</p>"
         },
         "authKey": {
           "shape": "BGPAuthKey",
@@ -3410,7 +3842,7 @@
         },
         "routeFilterPrefixes": {
           "shape": "RouteFilterPrefixList",
-          "documentation": "<p>The routes to be advertised to the AWS network in this Region. Applies to public virtual interfaces.</p>"
+          "documentation": "<p>The routes to be advertised to the Amazon Web Services network in this Region. Applies to public virtual interfaces.</p>"
         },
         "tags": {
           "shape": "TagList",
@@ -3457,7 +3889,7 @@
         },
         "routeFilterPrefixes": {
           "shape": "RouteFilterPrefixList",
-          "documentation": "<p>The routes to be advertised to the AWS network in this Region. Applies to public virtual interfaces.</p>"
+          "documentation": "<p>The routes to be advertised to the Amazon Web Services network in this Region. Applies to public virtual interfaces.</p>"
         },
         "tags": {
           "shape": "TagList",
@@ -3483,7 +3915,7 @@
         },
         "mtu": {
           "shape": "MTU",
-          "documentation": "<p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.</p>"
+          "documentation": "<p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 8500. The default value is 1500.</p>"
         },
         "authKey": {
           "shape": "BGPAuthKey",
@@ -3508,6 +3940,10 @@
         "tags": {
           "shape": "TagList",
           "documentation": "<p>The tags associated with the transitive virtual interface.</p>"
+        },
+        "enableSiteLink": {
+          "shape": "EnableSiteLink",
+          "documentation": "<p>Indicates whether to enable or disable SiteLink.</p>"
         }
       },
       "documentation": "<p>Information about a transit virtual interface.</p>"
@@ -3529,7 +3965,7 @@
         },
         "mtu": {
           "shape": "MTU",
-          "documentation": "<p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500. </p>"
+          "documentation": "<p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 8500. The default value is 1500 </p>"
         },
         "authKey": {
           "shape": "BGPAuthKey",
@@ -3554,6 +3990,14 @@
       },
       "documentation": "<p>Information about a transit virtual interface to be provisioned on a connection.</p>"
     },
+    "NniPartnerType": {
+      "type": "string",
+      "enum": [
+        "v1",
+        "v2",
+        "nonPartner"
+      ]
+    },
     "OwnerAccount": {
       "type": "string"
     },
@@ -3561,6 +4005,12 @@
       "type": "string"
     },
     "PartnerName": {
+      "type": "string"
+    },
+    "Platform": {
+      "type": "string"
+    },
+    "PortEncryptionStatus": {
       "type": "string"
     },
     "PortSpeed": {
@@ -3577,6 +4027,9 @@
     },
     "Region": {
       "type": "string"
+    },
+    "RequestMACSec": {
+      "type": "boolean"
     },
     "ResourceArn": {
       "type": "string"
@@ -3599,7 +4052,7 @@
           "documentation": "<p>The tags.</p>"
         }
       },
-      "documentation": "<p>Information about a tag associated with an AWS Direct Connect resource.</p>"
+      "documentation": "<p>Information about a tag associated with an Direct Connect resource.</p>"
     },
     "ResourceTagList": {
       "type": "list",
@@ -3626,6 +4079,48 @@
     "RouterConfig": {
       "type": "string"
     },
+    "RouterType": {
+      "type": "structure",
+      "members": {
+        "vendor": {
+          "shape": "Vendor",
+          "documentation": "<p>The vendor for the virtual interface's router.</p>"
+        },
+        "platform": {
+          "shape": "Platform",
+          "documentation": "<p>The virtual interface router platform.</p>"
+        },
+        "software": {
+          "shape": "Software",
+          "documentation": "<p>The router software. </p>"
+        },
+        "xsltTemplateName": {
+          "shape": "XsltTemplateName",
+          "documentation": "<p>The template for the virtual interface's router.</p>"
+        },
+        "xsltTemplateNameForMacSec": {
+          "shape": "XsltTemplateNameForMacSec",
+          "documentation": "<p>The MAC Security (MACsec) template for the virtual interface's router.</p>"
+        },
+        "routerTypeIdentifier": {
+          "shape": "RouterTypeIdentifier",
+          "documentation": "<p>Identifies the router by a combination of vendor, platform, and software version. For example, <code>CiscoSystemsInc-2900SeriesRouters-IOS124</code>.</p>"
+        }
+      },
+      "documentation": "<p>Information about the virtual router.</p>"
+    },
+    "RouterTypeIdentifier": {
+      "type": "string"
+    },
+    "SecretARN": {
+      "type": "string"
+    },
+    "SiteLinkEnabled": {
+      "type": "boolean"
+    },
+    "Software": {
+      "type": "string"
+    },
     "StartBgpFailoverTestRequest": {
       "type": "structure",
       "required": [
@@ -3642,7 +4137,7 @@
         },
         "testDurationInMinutes": {
           "shape": "TestDuration",
-          "documentation": "<p>The time in minutes that the virtual interface failover test will last.</p> <p>Maximum value: 180 minutes (3 hours).</p> <p>Default: 180 minutes (3 hours).</p>"
+          "documentation": "<p>The time in minutes that the virtual interface failover test will last.</p> <p>Maximum value: 4,320 minutes (72 hours).</p> <p>Default: 180 minutes (3 hours).</p>"
         }
       }
     },
@@ -3655,11 +4150,21 @@
         }
       }
     },
+    "StartOnDate": {
+      "type": "string"
+    },
     "StartTime": {
       "type": "timestamp"
     },
+    "State": {
+      "type": "string"
+    },
     "StateChangeError": {
       "type": "string"
+    },
+    "Status": {
+      "type": "string",
+      "max": 30
     },
     "StopBgpFailoverTestRequest": {
       "type": "structure",
@@ -3773,6 +4278,26 @@
       "type": "structure",
       "members": {}
     },
+    "UpdateConnectionRequest": {
+      "type": "structure",
+      "required": [
+        "connectionId"
+      ],
+      "members": {
+        "connectionId": {
+          "shape": "ConnectionId",
+          "documentation": "<p>The ID of the dedicated connection.</p> <p>You can use <a>DescribeConnections</a> to retrieve the connection ID.</p>"
+        },
+        "connectionName": {
+          "shape": "ConnectionName",
+          "documentation": "<p>The name of the connection.</p>"
+        },
+        "encryptionMode": {
+          "shape": "EncryptionMode",
+          "documentation": "<p>The connection MAC Security (MACsec) encryption mode.</p> <p>The valid values are <code>no_encrypt</code>, <code>should_encrypt</code>, and <code>must_encrypt</code>.</p>"
+        }
+      }
+    },
     "UpdateDirectConnectGatewayAssociationRequest": {
       "type": "structure",
       "members": {
@@ -3794,7 +4319,34 @@
       "type": "structure",
       "members": {
         "directConnectGatewayAssociation": {
-          "shape": "DirectConnectGatewayAssociation"
+          "shape": "DirectConnectGatewayAssociation",
+          "documentation": "<p>Information about an association between a Direct Connect gateway and a virtual private gateway or transit gateway.</p>"
+        }
+      }
+    },
+    "UpdateDirectConnectGatewayRequest": {
+      "type": "structure",
+      "required": [
+        "directConnectGatewayId",
+        "newDirectConnectGatewayName"
+      ],
+      "members": {
+        "directConnectGatewayId": {
+          "shape": "DirectConnectGatewayId",
+          "documentation": "<p>The ID of the Direct Connect gateway to update.</p>"
+        },
+        "newDirectConnectGatewayName": {
+          "shape": "DirectConnectGatewayName",
+          "documentation": "<p>The new name for the Direct Connect gateway.</p>"
+        }
+      }
+    },
+    "UpdateDirectConnectGatewayResponse": {
+      "type": "structure",
+      "members": {
+        "directConnectGateway": {
+          "shape": "DirectConnectGateway",
+          "documentation": "<p>Informaiton about a Direct Connect gateway, which enables you to connect virtual interfaces and virtual private gateways or transit gateways.</p>"
         }
       }
     },
@@ -3815,6 +4367,10 @@
         "minimumLinks": {
           "shape": "Count",
           "documentation": "<p>The minimum number of physical connections that must be operational for the LAG itself to be operational.</p>"
+        },
+        "encryptionMode": {
+          "shape": "EncryptionMode",
+          "documentation": "<p>The LAG MAC Security (MACsec) encryption mode.</p> <p>Amazon Web Services applies the value to all connections which are part of the LAG.</p>"
         }
       }
     },
@@ -3830,12 +4386,23 @@
         },
         "mtu": {
           "shape": "MTU",
-          "documentation": "<p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.</p>"
+          "documentation": "<p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 8500. The default value is 1500.</p>"
+        },
+        "enableSiteLink": {
+          "shape": "EnableSiteLink",
+          "documentation": "<p>Indicates whether to enable or disable SiteLink.</p>"
+        },
+        "virtualInterfaceName": {
+          "shape": "VirtualInterfaceName",
+          "documentation": "<p>The name of the virtual private interface.</p>"
         }
       }
     },
     "VLAN": {
       "type": "integer"
+    },
+    "Vendor": {
+      "type": "string"
     },
     "VirtualGateway": {
       "type": "structure",
@@ -3881,7 +4448,7 @@
       "members": {
         "ownerAccount": {
           "shape": "OwnerAccount",
-          "documentation": "<p>The ID of the AWS account that owns the virtual interface.</p>"
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the virtual interface.</p>"
         },
         "virtualInterfaceId": {
           "shape": "VirtualInterfaceId",
@@ -3897,7 +4464,7 @@
         },
         "virtualInterfaceType": {
           "shape": "VirtualInterfaceType",
-          "documentation": "<p>The type of virtual interface. The possible values are <code>private</code> and <code>public</code>.</p>"
+          "documentation": "<p>The type of virtual interface. The possible values are <code>private</code>, <code>public</code> and <code>transit</code>.</p>"
         },
         "virtualInterfaceName": {
           "shape": "VirtualInterfaceName",
@@ -3941,11 +4508,11 @@
         },
         "mtu": {
           "shape": "MTU",
-          "documentation": "<p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.</p>"
+          "documentation": "<p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 8500. The default value is 1500</p>"
         },
         "jumboFrameCapable": {
           "shape": "JumboFrameCapable",
-          "documentation": "<p>Indicates whether jumbo frames (9001 MTU) are supported.</p>"
+          "documentation": "<p>Indicates whether jumbo frames are supported.</p>"
         },
         "virtualGatewayId": {
           "shape": "VirtualGatewayId",
@@ -3957,7 +4524,7 @@
         },
         "routeFilterPrefixes": {
           "shape": "RouteFilterPrefixList",
-          "documentation": "<p>The routes to be advertised to the AWS network in this Region. Applies to public virtual interfaces.</p>"
+          "documentation": "<p>The routes to be advertised to the Amazon Web Services network in this Region. Applies to public virtual interfaces.</p>"
         },
         "bgpPeers": {
           "shape": "BGPPeerList",
@@ -3965,15 +4532,23 @@
         },
         "region": {
           "shape": "Region",
-          "documentation": "<p>The AWS Region where the virtual interface is located.</p>"
+          "documentation": "<p>The Amazon Web Services Region where the virtual interface is located.</p>"
         },
         "awsDeviceV2": {
           "shape": "AwsDeviceV2",
-          "documentation": "<p>The Direct Connect endpoint on which the virtual interface terminates.</p>"
+          "documentation": "<p>The Direct Connect endpoint that terminates the physical connection.</p>"
+        },
+        "awsLogicalDeviceId": {
+          "shape": "AwsLogicalDeviceId",
+          "documentation": "<p>The Direct Connect endpoint that terminates the logical connection. This device might be different than the device that terminates the physical connection.</p>"
         },
         "tags": {
           "shape": "TagList",
           "documentation": "<p>The tags associated with the virtual interface.</p>"
+        },
+        "siteLinkEnabled": {
+          "shape": "SiteLinkEnabled",
+          "documentation": "<p>Indicates whether SiteLink is enabled.</p>"
         }
       },
       "documentation": "<p>Information about a virtual interface.</p>"
@@ -4062,7 +4637,13 @@
           "documentation": "<p>The virtual interfaces</p>"
         }
       }
+    },
+    "XsltTemplateName": {
+      "type": "string"
+    },
+    "XsltTemplateNameForMacSec": {
+      "type": "string"
     }
   },
-  "documentation": "<p>AWS Direct Connect links your internal network to an AWS Direct Connect location over a standard Ethernet fiber-optic cable. One end of the cable is connected to your router, the other to an AWS Direct Connect router. With this connection in place, you can create virtual interfaces directly to the AWS cloud (for example, to Amazon EC2 and Amazon S3) and to Amazon VPC, bypassing Internet service providers in your network path. A connection provides access to all AWS Regions except the China (Beijing) and (China) Ningxia Regions. AWS resources in the China Regions can only be accessed through locations associated with those Regions.</p>"
+  "documentation": "<p>Direct Connect links your internal network to an Direct Connect location over a standard Ethernet fiber-optic cable. One end of the cable is connected to your router, the other to an Direct Connect router. With this connection in place, you can create virtual interfaces directly to the Amazon Web Services Cloud (for example, to Amazon EC2 and Amazon S3) and to Amazon VPC, bypassing Internet service providers in your network path. A connection provides access to all Amazon Web Services Regions except the China (Beijing) and (China) Ningxia Regions. Amazon Web Services resources in the China Regions can only be accessed through locations associated with those Regions.</p>"
 }

@@ -8,9 +8,146 @@
     "protocol": "rest-json",
     "jsonVersion": "1.1",
     "uid": "mediaconnect-2018-11-14",
-    "signatureVersion": "v4"
+    "signatureVersion": "v4",
+    "auth": [
+      "aws.auth#sigv4"
+    ]
   },
   "operations": {
+    "AddBridgeOutputs": {
+      "name": "AddBridgeOutputs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/bridges/{bridgeArn}/outputs",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "AddBridgeOutputsRequest"
+      },
+      "output": {
+        "shape": "AddBridgeOutputsResponse",
+        "documentation": "AWS Elemental MediaConnect added the bridge outputs successfully."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The request could not be completed due to a conflict with the current state of the target resource."
+        }
+      ],
+      "documentation": "Adds outputs to an existing bridge."
+    },
+    "AddBridgeSources": {
+      "name": "AddBridgeSources",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/bridges/{bridgeArn}/sources",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "AddBridgeSourcesRequest"
+      },
+      "output": {
+        "shape": "AddBridgeSourcesResponse",
+        "documentation": "AWS Elemental MediaConnect added the bridge sources successfully."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The request could not be completed due to a conflict with the current state of the target resource."
+        }
+      ],
+      "documentation": "Adds sources to an existing bridge."
+    },
+    "AddFlowMediaStreams": {
+      "name": "AddFlowMediaStreams",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/flows/{flowArn}/mediaStreams",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "AddFlowMediaStreamsRequest"
+      },
+      "output": {
+        "shape": "AddFlowMediaStreamsResponse",
+        "documentation": "MediaConnect created the new resource successfully."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        }
+      ],
+      "documentation": "Adds media streams to an existing flow. After you add a media stream to a flow, you can associate it with a source and/or an output that uses the ST 2110 JPEG XS or CDI protocol."
+    },
     "AddFlowOutputs": {
       "name": "AddFlowOutputs",
       "http": {
@@ -141,6 +278,52 @@
       ],
       "documentation": "Adds VPC interfaces to flow"
     },
+    "CreateBridge": {
+      "name": "CreateBridge",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/bridges",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateBridgeRequest"
+      },
+      "output": {
+        "shape": "CreateBridgeResponse",
+        "documentation": "AWS Elemental MediaConnect created the new bridge successfully."
+      },
+      "errors": [
+        {
+          "shape": "CreateBridge420Exception",
+          "documentation": "Your account already contains the maximum number of bridges per account, per Region. For more information, contact AWS Customer Support."
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The request could not be completed due to a conflict with the current state of the target resource."
+        }
+      ],
+      "documentation": "Creates a new bridge. The request must include one source."
+    },
     "CreateFlow": {
       "name": "CreateFlow",
       "http": {
@@ -182,6 +365,98 @@
         }
       ],
       "documentation": "Creates a new flow. The request must include one source. The request optionally can include outputs (up to 50) and entitlements (up to 50)."
+    },
+    "CreateGateway": {
+      "name": "CreateGateway",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/gateways",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateGatewayRequest"
+      },
+      "output": {
+        "shape": "CreateGatewayResponse",
+        "documentation": "AWS Elemental MediaConnect created the new gateway successfully."
+      },
+      "errors": [
+        {
+          "shape": "CreateGateway420Exception",
+          "documentation": "Your account already contains the maximum number of gateways per account, per Region. For more information, contact AWS Customer Support."
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The request could not be completed due to a conflict with the current state of the target resource."
+        }
+      ],
+      "documentation": "Creates a new gateway. The request must include at least one network (up to 4)."
+    },
+    "DeleteBridge": {
+      "name": "DeleteBridge",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/bridges/{bridgeArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DeleteBridgeRequest"
+      },
+      "output": {
+        "shape": "DeleteBridgeResponse",
+        "documentation": "AWS Elemental MediaConnect deleted the bridge."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The request could not be completed due to a conflict with the current state of the target resource."
+        }
+      ],
+      "documentation": "Deletes a bridge. Before you can delete a bridge, you must stop the bridge."
     },
     "DeleteFlow": {
       "name": "DeleteFlow",
@@ -225,6 +500,144 @@
       ],
       "documentation": "Deletes a flow. Before you can delete a flow, you must stop the flow."
     },
+    "DeleteGateway": {
+      "name": "DeleteGateway",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/gateways/{gatewayArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DeleteGatewayRequest"
+      },
+      "output": {
+        "shape": "DeleteGatewayResponse",
+        "documentation": "AWS Elemental MediaConnect deleted the gateway."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The request could not be completed due to a conflict with the current state of the target resource."
+        }
+      ],
+      "documentation": "Deletes a gateway. Before you can delete a gateway, you must deregister its instances and delete its bridges."
+    },
+    "DeregisterGatewayInstance": {
+      "name": "DeregisterGatewayInstance",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/gateway-instances/{gatewayInstanceArn}",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "DeregisterGatewayInstanceRequest"
+      },
+      "output": {
+        "shape": "DeregisterGatewayInstanceResponse",
+        "documentation": "AWS Elemental MediaConnect is deleting the instance."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The request could not be completed due to a conflict with the current state of the target resource."
+        }
+      ],
+      "documentation": "Deregisters an instance. Before you deregister an instance, all bridges running on the instance must be stopped. If you want to deregister an instance without stopping the bridges, you must use the --force option."
+    },
+    "DescribeBridge": {
+      "name": "DescribeBridge",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/bridges/{bridgeArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeBridgeRequest"
+      },
+      "output": {
+        "shape": "DescribeBridgeResponse",
+        "documentation": "AWS Elemental MediaConnect returned the bridge details successfully."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The request could not be completed due to a conflict with the current state of the target resource."
+        }
+      ],
+      "documentation": "Displays the details of a bridge."
+    },
     "DescribeFlow": {
       "name": "DescribeFlow",
       "http": {
@@ -266,6 +679,182 @@
         }
       ],
       "documentation": "Displays the details of a flow. The response includes the flow ARN, name, and Availability Zone, as well as details about the source, outputs, and entitlements."
+    },
+    "DescribeFlowSourceMetadata": {
+      "name": "DescribeFlowSourceMetadata",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/flows/{flowArn}/source-metadata",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeFlowSourceMetadataRequest"
+      },
+      "output": {
+        "shape": "DescribeFlowSourceMetadataResponse",
+        "documentation": "Flow source metadata successfully described."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        }
+      ],
+      "documentation": "Displays details of the flow's source stream. The response contains information about the contents of the stream and its programs."
+    },
+    "DescribeFlowSourceThumbnail": {
+      "name": "DescribeFlowSourceThumbnail",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/flows/{flowArn}/source-thumbnail",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeFlowSourceThumbnailRequest"
+      },
+      "output": {
+        "shape": "DescribeFlowSourceThumbnailResponse",
+        "documentation": "Flow source thumbnail successfully described."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        }
+      ],
+      "documentation": "Displays the thumbnail details of a flow's source stream."
+    },
+    "DescribeGateway": {
+      "name": "DescribeGateway",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/gateways/{gatewayArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeGatewayRequest"
+      },
+      "output": {
+        "shape": "DescribeGatewayResponse",
+        "documentation": "AWS Elemental MediaConnect returned the gateway details successfully."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The request could not be completed due to a conflict with the current state of the target resource."
+        }
+      ],
+      "documentation": "Displays the details of a gateway. The response includes the gateway ARN, name, and CIDR blocks, as well as details about the networks."
+    },
+    "DescribeGatewayInstance": {
+      "name": "DescribeGatewayInstance",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/gateway-instances/{gatewayInstanceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeGatewayInstanceRequest"
+      },
+      "output": {
+        "shape": "DescribeGatewayInstanceResponse",
+        "documentation": "AWS Elemental MediaConnect returned the instance details successfully."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The request could not be completed due to a conflict with the current state of the target resource."
+        }
+      ],
+      "documentation": "Displays the details of an instance."
     },
     "DescribeOffering": {
       "name": "DescribeOffering",
@@ -389,6 +978,44 @@
       ],
       "documentation": "Grants entitlements to an existing flow."
     },
+    "ListBridges": {
+      "name": "ListBridges",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/bridges",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListBridgesRequest"
+      },
+      "output": {
+        "shape": "ListBridgesResponse",
+        "documentation": "AWS Elemental MediaConnect returned the list of bridges successfully."
+      },
+      "errors": [
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The request could not be completed due to a conflict with the current state of the target resource."
+        }
+      ],
+      "documentation": "Displays a list of bridges that are associated with this account and an optionally specified Arn. This request returns a paginated result."
+    },
     "ListEntitlements": {
       "name": "ListEntitlements",
       "http": {
@@ -456,6 +1083,82 @@
         }
       ],
       "documentation": "Displays a list of flows that are associated with this account. This request returns a paginated result."
+    },
+    "ListGatewayInstances": {
+      "name": "ListGatewayInstances",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/gateway-instances",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListGatewayInstancesRequest"
+      },
+      "output": {
+        "shape": "ListGatewayInstancesResponse",
+        "documentation": "AWS Elemental MediaConnect returned the list of instances in the gateway successfully."
+      },
+      "errors": [
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The request could not be completed due to a conflict with the current state of the target resource."
+        }
+      ],
+      "documentation": "Displays a list of instances associated with the AWS account. This request returns a paginated result. You can use the filterArn property to display only the instances associated with the selected Gateway Amazon Resource Name (ARN)."
+    },
+    "ListGateways": {
+      "name": "ListGateways",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/gateways",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListGatewaysRequest"
+      },
+      "output": {
+        "shape": "ListGatewaysResponse",
+        "documentation": "AWS Elemental MediaConnect returned the list of gateways successfully."
+      },
+      "errors": [
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The request could not be completed due to a conflict with the current state of the target resource."
+        }
+      ],
+      "documentation": "Displays a list of gateways that are associated with this account. This request returns a paginated result."
     },
     "ListOfferings": {
       "name": "ListOfferings",
@@ -596,6 +1299,140 @@
         }
       ],
       "documentation": "Submits a request to purchase an offering. If you already have an active reservation, you can't purchase another offering."
+    },
+    "RemoveBridgeOutput": {
+      "name": "RemoveBridgeOutput",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/bridges/{bridgeArn}/outputs/{outputName}",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "RemoveBridgeOutputRequest"
+      },
+      "output": {
+        "shape": "RemoveBridgeOutputResponse",
+        "documentation": "The output was successfully removed from the bridge."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The request could not be completed due to a conflict with the current state of the target resource."
+        }
+      ],
+      "documentation": "Removes an output from a bridge."
+    },
+    "RemoveBridgeSource": {
+      "name": "RemoveBridgeSource",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/bridges/{bridgeArn}/sources/{sourceName}",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "RemoveBridgeSourceRequest"
+      },
+      "output": {
+        "shape": "RemoveBridgeSourceResponse",
+        "documentation": "The bridge source was successfully removed from the flow."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The request could not be completed due to a conflict with the current state of the target resource."
+        }
+      ],
+      "documentation": "Removes a source from a bridge."
+    },
+    "RemoveFlowMediaStream": {
+      "name": "RemoveFlowMediaStream",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/flows/{flowArn}/mediaStreams/{mediaStreamName}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "RemoveFlowMediaStreamRequest"
+      },
+      "output": {
+        "shape": "RemoveFlowMediaStreamResponse",
+        "documentation": "The media stream was successfully removed from the flow."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        }
+      ],
+      "documentation": "Removes a media stream from a flow. This action is only available if the media stream is not associated with a source or output."
     },
     "RemoveFlowOutput": {
       "name": "RemoveFlowOutput",
@@ -901,6 +1738,190 @@
       ],
       "documentation": "Deletes specified tags from a resource."
     },
+    "UpdateBridge": {
+      "name": "UpdateBridge",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/bridges/{bridgeArn}",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "UpdateBridgeRequest"
+      },
+      "output": {
+        "shape": "UpdateBridgeResponse",
+        "documentation": "AWS Elemental MediaConnect updated the bridge successfully."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The request could not be completed due to a conflict with the current state of the target resource."
+        }
+      ],
+      "documentation": "Updates the bridge"
+    },
+    "UpdateBridgeOutput": {
+      "name": "UpdateBridgeOutput",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/bridges/{bridgeArn}/outputs/{outputName}",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "UpdateBridgeOutputRequest"
+      },
+      "output": {
+        "shape": "UpdateBridgeOutputResponse",
+        "documentation": "MediaConnect is updating the bridge output."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The request could not be completed due to a conflict with the current state of the target resource."
+        }
+      ],
+      "documentation": "Updates an existing bridge output."
+    },
+    "UpdateBridgeSource": {
+      "name": "UpdateBridgeSource",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/bridges/{bridgeArn}/sources/{sourceName}",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "UpdateBridgeSourceRequest"
+      },
+      "output": {
+        "shape": "UpdateBridgeSourceResponse",
+        "documentation": "MediaConnect is updating the bridge source."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The request could not be completed due to a conflict with the current state of the target resource."
+        }
+      ],
+      "documentation": "Updates an existing bridge source."
+    },
+    "UpdateBridgeState": {
+      "name": "UpdateBridgeState",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/bridges/{bridgeArn}/state",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "UpdateBridgeStateRequest"
+      },
+      "output": {
+        "shape": "UpdateBridgeStateResponse",
+        "documentation": "AWS Elemental MediaConnect updated the bridge successfully."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The request could not be completed due to a conflict with the current state of the target resource."
+        }
+      ],
+      "documentation": "Updates the bridge state"
+    },
     "UpdateFlow": {
       "name": "UpdateFlow",
       "http": {
@@ -985,6 +2006,48 @@
       ],
       "documentation": "You can change an entitlement's description, subscribers, and encryption. If you change the subscribers, the service will remove the outputs that are are used by the subscribers that are removed."
     },
+    "UpdateFlowMediaStream": {
+      "name": "UpdateFlowMediaStream",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/flows/{flowArn}/mediaStreams/{mediaStreamName}",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "UpdateFlowMediaStreamRequest"
+      },
+      "output": {
+        "shape": "UpdateFlowMediaStreamResponse",
+        "documentation": "MediaConnect is updating the media stream."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        }
+      ],
+      "documentation": "Updates an existing media stream."
+    },
     "UpdateFlowOutput": {
       "name": "UpdateFlowOutput",
       "http": {
@@ -1068,14 +2131,317 @@
         }
       ],
       "documentation": "Updates the source of a flow."
+    },
+    "UpdateGatewayInstance": {
+      "name": "UpdateGatewayInstance",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/gateway-instances/{gatewayInstanceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateGatewayInstanceRequest"
+      },
+      "output": {
+        "shape": "UpdateGatewayInstanceResponse",
+        "documentation": "AWS Elemental MediaConnect is applying the instance state."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The request could not be completed due to a conflict with the current state of the target resource."
+        }
+      ],
+      "documentation": "Updates the configuration of an existing Gateway Instance."
     }
   },
   "shapes": {
+    "AddBridgeFlowSourceRequest": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
+          "locationName": "flowArn",
+          "documentation": "The Amazon Resource Number (ARN) of the cloud flow to use as a source of this bridge."
+        },
+        "FlowVpcInterfaceAttachment": {
+          "shape": "VpcInterfaceAttachment",
+          "locationName": "flowVpcInterfaceAttachment",
+          "documentation": "The name of the VPC interface attachment to use for this source."
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "The name of the flow source. This name is used to reference the source and must be unique among sources in this bridge."
+        }
+      },
+      "documentation": "Add a flow source to an existing bridge.",
+      "required": [
+        "FlowArn",
+        "Name"
+      ]
+    },
+    "AddBridgeNetworkOutputRequest": {
+      "type": "structure",
+      "members": {
+        "IpAddress": {
+          "shape": "__string",
+          "locationName": "ipAddress",
+          "documentation": "The network output IP Address."
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "The network output name. This name is used to reference the output and must be unique among outputs in this bridge."
+        },
+        "NetworkName": {
+          "shape": "__string",
+          "locationName": "networkName",
+          "documentation": "The network output's gateway network name."
+        },
+        "Port": {
+          "shape": "__integer",
+          "locationName": "port",
+          "documentation": "The network output port."
+        },
+        "Protocol": {
+          "shape": "Protocol",
+          "locationName": "protocol",
+          "documentation": "The network output protocol."
+        },
+        "Ttl": {
+          "shape": "__integer",
+          "locationName": "ttl",
+          "documentation": "The network output TTL."
+        }
+      },
+      "documentation": "Add a network output to an existing bridge.",
+      "required": [
+        "NetworkName",
+        "Port",
+        "IpAddress",
+        "Protocol",
+        "Ttl",
+        "Name"
+      ]
+    },
+    "AddBridgeNetworkSourceRequest": {
+      "type": "structure",
+      "members": {
+        "MulticastIp": {
+          "shape": "__string",
+          "locationName": "multicastIp",
+          "documentation": "The network source multicast IP."
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "The name of the network source. This name is used to reference the source and must be unique among sources in this bridge."
+        },
+        "NetworkName": {
+          "shape": "__string",
+          "locationName": "networkName",
+          "documentation": "The network source's gateway network name."
+        },
+        "Port": {
+          "shape": "__integer",
+          "locationName": "port",
+          "documentation": "The network source port."
+        },
+        "Protocol": {
+          "shape": "Protocol",
+          "locationName": "protocol",
+          "documentation": "The network source protocol."
+        }
+      },
+      "documentation": "Add a network source to an existing bridge.",
+      "required": [
+        "NetworkName",
+        "MulticastIp",
+        "Port",
+        "Protocol",
+        "Name"
+      ]
+    },
+    "AddBridgeOutputRequest": {
+      "type": "structure",
+      "members": {
+        "NetworkOutput": {
+          "shape": "AddBridgeNetworkOutputRequest",
+          "locationName": "networkOutput"
+        }
+      },
+      "documentation": "Add an output to a bridge."
+    },
+    "AddBridgeOutputsRequest": {
+      "type": "structure",
+      "members": {
+        "BridgeArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:bridge:.+$",
+          "location": "uri",
+          "locationName": "bridgeArn",
+          "documentation": "The ARN of the bridge that you want to update."
+        },
+        "Outputs": {
+          "shape": "__listOfAddBridgeOutputRequest",
+          "locationName": "outputs",
+          "documentation": "The outputs that you want to add to this bridge."
+        }
+      },
+      "documentation": "A request to add outputs to the specified bridge.",
+      "required": [
+        "BridgeArn",
+        "Outputs"
+      ]
+    },
+    "AddBridgeOutputsResponse": {
+      "type": "structure",
+      "members": {
+        "BridgeArn": {
+          "shape": "__string",
+          "locationName": "bridgeArn",
+          "documentation": "The Amazon Resource Number (ARN) of the bridge."
+        },
+        "Outputs": {
+          "shape": "__listOfBridgeOutput",
+          "locationName": "outputs",
+          "documentation": "The outputs that you added to this bridge."
+        }
+      }
+    },
+    "AddBridgeSourceRequest": {
+      "type": "structure",
+      "members": {
+        "FlowSource": {
+          "shape": "AddBridgeFlowSourceRequest",
+          "locationName": "flowSource"
+        },
+        "NetworkSource": {
+          "shape": "AddBridgeNetworkSourceRequest",
+          "locationName": "networkSource"
+        }
+      },
+      "documentation": "Add a source to an existing bridge."
+    },
+    "AddBridgeSourcesRequest": {
+      "type": "structure",
+      "members": {
+        "BridgeArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:bridge:.+$",
+          "location": "uri",
+          "locationName": "bridgeArn",
+          "documentation": "The ARN of the bridge that you want to update."
+        },
+        "Sources": {
+          "shape": "__listOfAddBridgeSourceRequest",
+          "locationName": "sources",
+          "documentation": "The sources that you want to add to this bridge."
+        }
+      },
+      "documentation": "A request to add sources to the specified bridge.",
+      "required": [
+        "BridgeArn",
+        "Sources"
+      ]
+    },
+    "AddBridgeSourcesResponse": {
+      "type": "structure",
+      "members": {
+        "BridgeArn": {
+          "shape": "__string",
+          "locationName": "bridgeArn",
+          "documentation": "The Amazon Resource Number (ARN) of the bridge."
+        },
+        "Sources": {
+          "shape": "__listOfBridgeSource",
+          "locationName": "sources",
+          "documentation": "The sources that you added to this bridge."
+        }
+      }
+    },
+    "AddEgressGatewayBridgeRequest": {
+      "type": "structure",
+      "members": {
+        "MaxBitrate": {
+          "shape": "__integer",
+          "locationName": "maxBitrate",
+          "documentation": "The maximum expected bitrate (in bps)."
+        }
+      },
+      "required": [
+        "MaxBitrate"
+      ]
+    },
+    "AddFlowMediaStreamsRequest": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
+          "location": "uri",
+          "locationName": "flowArn",
+          "documentation": "The Amazon Resource Name (ARN) of the flow."
+        },
+        "MediaStreams": {
+          "shape": "__listOfAddMediaStreamRequest",
+          "locationName": "mediaStreams",
+          "documentation": "The media streams that you want to add to the flow."
+        }
+      },
+      "documentation": "A request to add media streams to the flow.",
+      "required": [
+        "FlowArn",
+        "MediaStreams"
+      ]
+    },
+    "AddFlowMediaStreamsResponse": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "locationName": "flowArn",
+          "documentation": "The ARN of the flow that you added media streams to."
+        },
+        "MediaStreams": {
+          "shape": "__listOfMediaStream",
+          "locationName": "mediaStreams",
+          "documentation": "The media streams that you added to the flow."
+        }
+      }
+    },
     "AddFlowOutputsRequest": {
       "type": "structure",
       "members": {
         "FlowArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
           "location": "uri",
           "locationName": "flowArn",
           "documentation": "The flow that you want to add outputs to."
@@ -1112,6 +2478,7 @@
       "members": {
         "FlowArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
           "location": "uri",
           "locationName": "flowArn",
           "documentation": "The flow that you want to mutate."
@@ -1148,6 +2515,7 @@
       "members": {
         "FlowArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
           "location": "uri",
           "locationName": "flowArn",
           "documentation": "The flow that you want to mutate."
@@ -1179,6 +2547,91 @@
         }
       }
     },
+    "AddIngressGatewayBridgeRequest": {
+      "type": "structure",
+      "members": {
+        "MaxBitrate": {
+          "shape": "__integer",
+          "locationName": "maxBitrate",
+          "documentation": "The maximum expected bitrate (in bps)."
+        },
+        "MaxOutputs": {
+          "shape": "__integer",
+          "locationName": "maxOutputs",
+          "documentation": "The maximum number of expected outputs."
+        }
+      },
+      "required": [
+        "MaxOutputs",
+        "MaxBitrate"
+      ]
+    },
+    "AddMaintenance": {
+      "type": "structure",
+      "members": {
+        "MaintenanceDay": {
+          "shape": "MaintenanceDay",
+          "locationName": "maintenanceDay",
+          "documentation": "A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday."
+        },
+        "MaintenanceStartHour": {
+          "shape": "__string",
+          "locationName": "maintenanceStartHour",
+          "documentation": "UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00."
+        }
+      },
+      "documentation": "Create maintenance setting for a flow",
+      "required": [
+        "MaintenanceDay",
+        "MaintenanceStartHour"
+      ]
+    },
+    "AddMediaStreamRequest": {
+      "type": "structure",
+      "members": {
+        "Attributes": {
+          "shape": "MediaStreamAttributesRequest",
+          "locationName": "attributes",
+          "documentation": "The attributes that you want to assign to the new media stream."
+        },
+        "ClockRate": {
+          "shape": "__integer",
+          "locationName": "clockRate",
+          "documentation": "The sample rate (in Hz) for the stream. If the media stream type is video or ancillary data, set this value to 90000. If the media stream type is audio, set this value to either 48000 or 96000."
+        },
+        "Description": {
+          "shape": "__string",
+          "locationName": "description",
+          "documentation": "A description that can help you quickly identify what your media stream is used for."
+        },
+        "MediaStreamId": {
+          "shape": "__integer",
+          "locationName": "mediaStreamId",
+          "documentation": "A unique identifier for the media stream."
+        },
+        "MediaStreamName": {
+          "shape": "__string",
+          "locationName": "mediaStreamName",
+          "documentation": "A name that helps you distinguish one media stream from another."
+        },
+        "MediaStreamType": {
+          "shape": "MediaStreamType",
+          "locationName": "mediaStreamType",
+          "documentation": "The type of media stream."
+        },
+        "VideoFormat": {
+          "shape": "__string",
+          "locationName": "videoFormat",
+          "documentation": "The resolution of the video."
+        }
+      },
+      "documentation": "The media stream that you want to add to the flow.",
+      "required": [
+        "MediaStreamType",
+        "MediaStreamId",
+        "MediaStreamName"
+      ]
+    },
     "AddOutputRequest": {
       "type": "structure",
       "members": {
@@ -1200,12 +2653,22 @@
         "Encryption": {
           "shape": "Encryption",
           "locationName": "encryption",
-          "documentation": "The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key)."
+          "documentation": "The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key). Allowable encryption types: static-key."
         },
         "MaxLatency": {
           "shape": "__integer",
           "locationName": "maxLatency",
-          "documentation": "The maximum latency in milliseconds for Zixi-based streams."
+          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams."
+        },
+        "MediaStreamOutputConfigurations": {
+          "shape": "__listOfMediaStreamOutputConfigurationRequest",
+          "locationName": "mediaStreamOutputConfigurations",
+          "documentation": "The media streams that are associated with the output, and the parameters for those associations."
+        },
+        "MinLatency": {
+          "shape": "__integer",
+          "locationName": "minLatency",
+          "documentation": "The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency."
         },
         "Name": {
           "shape": "__string",
@@ -1227,6 +2690,11 @@
           "locationName": "remoteId",
           "documentation": "The remote ID for the Zixi-pull output stream."
         },
+        "SenderControlPort": {
+          "shape": "__integer",
+          "locationName": "senderControlPort",
+          "documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender."
+        },
         "SmoothingLatency": {
           "shape": "__integer",
           "locationName": "smoothingLatency",
@@ -1235,12 +2703,17 @@
         "StreamId": {
           "shape": "__string",
           "locationName": "streamId",
-          "documentation": "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams."
+          "documentation": "The stream ID that you want to use for this transport. This parameter applies only to Zixi and SRT caller-based streams."
         },
         "VpcInterfaceAttachment": {
           "shape": "VpcInterfaceAttachment",
           "locationName": "vpcInterfaceAttachment",
           "documentation": "The name of the VPC interface attachment to use for this output."
+        },
+        "OutputStatus": {
+          "shape": "OutputStatus",
+          "locationName": "outputStatus",
+          "documentation": "An indication of whether the new output should be enabled or disabled as soon as it is created. If you don't specify the outputStatus field in your request, MediaConnect sets it to ENABLED."
         }
       },
       "documentation": "The output that you want to add to this flow.",
@@ -1256,6 +2729,327 @@
         "aes256"
       ]
     },
+    "Bridge": {
+      "type": "structure",
+      "members": {
+        "BridgeArn": {
+          "shape": "__string",
+          "locationName": "bridgeArn",
+          "documentation": "The Amazon Resource Number (ARN) of the bridge."
+        },
+        "BridgeMessages": {
+          "shape": "__listOfMessageDetail",
+          "locationName": "bridgeMessages"
+        },
+        "BridgeState": {
+          "shape": "BridgeState",
+          "locationName": "bridgeState"
+        },
+        "EgressGatewayBridge": {
+          "shape": "EgressGatewayBridge",
+          "locationName": "egressGatewayBridge"
+        },
+        "IngressGatewayBridge": {
+          "shape": "IngressGatewayBridge",
+          "locationName": "ingressGatewayBridge"
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "The name of the bridge."
+        },
+        "Outputs": {
+          "shape": "__listOfBridgeOutput",
+          "locationName": "outputs",
+          "documentation": "The outputs on this bridge."
+        },
+        "PlacementArn": {
+          "shape": "__string",
+          "locationName": "placementArn",
+          "documentation": "The placement Amazon Resource Number (ARN) of the bridge."
+        },
+        "SourceFailoverConfig": {
+          "shape": "FailoverConfig",
+          "locationName": "sourceFailoverConfig"
+        },
+        "Sources": {
+          "shape": "__listOfBridgeSource",
+          "locationName": "sources",
+          "documentation": "The sources on this bridge."
+        }
+      },
+      "documentation": "A Bridge is the connection between your datacenter's Instances and the AWS cloud. A bridge can be used to send video from the AWS cloud to your datacenter or from your datacenter to the AWS cloud.",
+      "required": [
+        "BridgeArn",
+        "BridgeState",
+        "PlacementArn",
+        "Name"
+      ]
+    },
+    "BridgeFlowOutput": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "locationName": "flowArn",
+          "documentation": "The Amazon Resource Number (ARN) of the cloud flow."
+        },
+        "FlowSourceArn": {
+          "shape": "__string",
+          "locationName": "flowSourceArn",
+          "documentation": "The Amazon Resource Number (ARN) of the flow source."
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "The name of the bridge's output."
+        }
+      },
+      "documentation": "The output of the bridge. A flow output is delivered to the AWS cloud.",
+      "required": [
+        "FlowSourceArn",
+        "FlowArn",
+        "Name"
+      ]
+    },
+    "BridgeFlowSource": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "locationName": "flowArn",
+          "documentation": "The ARN of the cloud flow used as a source of this bridge."
+        },
+        "FlowVpcInterfaceAttachment": {
+          "shape": "VpcInterfaceAttachment",
+          "locationName": "flowVpcInterfaceAttachment",
+          "documentation": "The name of the VPC interface attachment to use for this source."
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "The name of the flow source."
+        },
+        "OutputArn": {
+          "shape": "__string",
+          "locationName": "outputArn",
+          "documentation": "The Amazon Resource Number (ARN) of the output."
+        }
+      },
+      "documentation": "The source of the bridge. A flow source originates in MediaConnect as an existing cloud flow.",
+      "required": [
+        "FlowArn",
+        "Name"
+      ]
+    },
+    "BridgeNetworkOutput": {
+      "type": "structure",
+      "members": {
+        "IpAddress": {
+          "shape": "__string",
+          "locationName": "ipAddress",
+          "documentation": "The network output IP Address."
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "The network output name."
+        },
+        "NetworkName": {
+          "shape": "__string",
+          "locationName": "networkName",
+          "documentation": "The network output's gateway network name."
+        },
+        "Port": {
+          "shape": "__integer",
+          "locationName": "port",
+          "documentation": "The network output port."
+        },
+        "Protocol": {
+          "shape": "Protocol",
+          "locationName": "protocol",
+          "documentation": "The network output protocol."
+        },
+        "Ttl": {
+          "shape": "__integer",
+          "locationName": "ttl",
+          "documentation": "The network output TTL."
+        }
+      },
+      "documentation": "The output of the bridge. A network output is delivered to your premises.",
+      "required": [
+        "NetworkName",
+        "Port",
+        "IpAddress",
+        "Protocol",
+        "Ttl",
+        "Name"
+      ]
+    },
+    "BridgeNetworkSource": {
+      "type": "structure",
+      "members": {
+        "MulticastIp": {
+          "shape": "__string",
+          "locationName": "multicastIp",
+          "documentation": "The network source multicast IP."
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "The name of the network source."
+        },
+        "NetworkName": {
+          "shape": "__string",
+          "locationName": "networkName",
+          "documentation": "The network source's gateway network name."
+        },
+        "Port": {
+          "shape": "__integer",
+          "locationName": "port",
+          "documentation": "The network source port."
+        },
+        "Protocol": {
+          "shape": "Protocol",
+          "locationName": "protocol",
+          "documentation": "The network source protocol."
+        }
+      },
+      "documentation": "The source of the bridge. A network source originates at your premises.",
+      "required": [
+        "NetworkName",
+        "MulticastIp",
+        "Port",
+        "Protocol",
+        "Name"
+      ]
+    },
+    "BridgeOutput": {
+      "type": "structure",
+      "members": {
+        "FlowOutput": {
+          "shape": "BridgeFlowOutput",
+          "locationName": "flowOutput"
+        },
+        "NetworkOutput": {
+          "shape": "BridgeNetworkOutput",
+          "locationName": "networkOutput"
+        }
+      },
+      "documentation": "The output of the bridge."
+    },
+    "BridgePlacement": {
+      "type": "string",
+      "enum": [
+        "AVAILABLE",
+        "LOCKED"
+      ]
+    },
+    "BridgeSource": {
+      "type": "structure",
+      "members": {
+        "FlowSource": {
+          "shape": "BridgeFlowSource",
+          "locationName": "flowSource"
+        },
+        "NetworkSource": {
+          "shape": "BridgeNetworkSource",
+          "locationName": "networkSource"
+        }
+      },
+      "documentation": "The bridge's source."
+    },
+    "BridgeState": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "STANDBY",
+        "STARTING",
+        "DEPLOYING",
+        "ACTIVE",
+        "STOPPING",
+        "DELETING",
+        "DELETED",
+        "START_FAILED",
+        "START_PENDING",
+        "STOP_FAILED",
+        "UPDATING"
+      ]
+    },
+    "Colorimetry": {
+      "type": "string",
+      "enum": [
+        "BT601",
+        "BT709",
+        "BT2020",
+        "BT2100",
+        "ST2065-1",
+        "ST2065-3",
+        "XYZ"
+      ]
+    },
+    "ConnectionStatus": {
+      "type": "string",
+      "enum": [
+        "CONNECTED",
+        "DISCONNECTED"
+      ]
+    },
+    "CreateBridgeRequest": {
+      "type": "structure",
+      "members": {
+        "EgressGatewayBridge": {
+          "shape": "AddEgressGatewayBridgeRequest",
+          "locationName": "egressGatewayBridge",
+          "documentation": "Create a bridge with the egress bridge type. An egress bridge is a cloud-to-ground bridge. The content comes from an existing MediaConnect flow and is delivered to your premises."
+        },
+        "IngressGatewayBridge": {
+          "shape": "AddIngressGatewayBridgeRequest",
+          "locationName": "ingressGatewayBridge",
+          "documentation": "Create a bridge with the ingress bridge type. An ingress bridge is a ground-to-cloud bridge. The content originates at your premises and is delivered to the cloud."
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "The name of the bridge. This name can not be modified after the bridge is created."
+        },
+        "Outputs": {
+          "shape": "__listOfAddBridgeOutputRequest",
+          "locationName": "outputs",
+          "documentation": "The outputs that you want to add to this bridge."
+        },
+        "PlacementArn": {
+          "shape": "__string",
+          "locationName": "placementArn",
+          "documentation": "The bridge placement Amazon Resource Number (ARN)."
+        },
+        "SourceFailoverConfig": {
+          "shape": "FailoverConfig",
+          "locationName": "sourceFailoverConfig",
+          "documentation": "The settings for source failover."
+        },
+        "Sources": {
+          "shape": "__listOfAddBridgeSourceRequest",
+          "locationName": "sources",
+          "documentation": "The sources that you want to add to this bridge."
+        }
+      },
+      "documentation": "Creates a new bridge. The request must include one source.",
+      "required": [
+        "Sources",
+        "PlacementArn",
+        "Name"
+      ]
+    },
+    "CreateBridgeResponse": {
+      "type": "structure",
+      "members": {
+        "Bridge": {
+          "shape": "Bridge",
+          "locationName": "bridge"
+        }
+      }
+    },
     "CreateFlowRequest": {
       "type": "structure",
       "members": {
@@ -1268,6 +3062,11 @@
           "shape": "__listOfGrantEntitlementRequest",
           "locationName": "entitlements",
           "documentation": "The entitlements that you want to grant on a flow."
+        },
+        "MediaStreams": {
+          "shape": "__listOfAddMediaStreamRequest",
+          "locationName": "mediaStreams",
+          "documentation": "The media streams that you want to add to the flow. You can associate these media streams with sources and outputs on the flow."
         },
         "Name": {
           "shape": "__string",
@@ -1295,6 +3094,14 @@
           "shape": "__listOfVpcInterfaceRequest",
           "locationName": "vpcInterfaces",
           "documentation": "The VPC interfaces you want on the flow."
+        },
+        "Maintenance": {
+          "shape": "AddMaintenance",
+          "locationName": "maintenance"
+        },
+        "SourceMonitoringConfig": {
+          "shape": "MonitoringConfig",
+          "locationName": "sourceMonitoringConfig"
         }
       },
       "documentation": "Creates a new flow. The request must include one source. The request optionally can include outputs (up to 50) and entitlements (up to 50).",
@@ -1311,11 +3118,72 @@
         }
       }
     },
+    "CreateGatewayRequest": {
+      "type": "structure",
+      "members": {
+        "EgressCidrBlocks": {
+          "shape": "__listOf__string",
+          "locationName": "egressCidrBlocks",
+          "documentation": "The range of IP addresses that are allowed to contribute content or initiate output requests for flows communicating with this gateway. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16."
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "The name of the gateway. This name can not be modified after the gateway is created."
+        },
+        "Networks": {
+          "shape": "__listOfGatewayNetwork",
+          "locationName": "networks",
+          "documentation": "The list of networks that you want to add."
+        }
+      },
+      "documentation": "Creates a new gateway. The request must include at least one network (up to 4).",
+      "required": [
+        "Networks",
+        "EgressCidrBlocks",
+        "Name"
+      ]
+    },
+    "CreateGatewayResponse": {
+      "type": "structure",
+      "members": {
+        "Gateway": {
+          "shape": "Gateway",
+          "locationName": "gateway"
+        }
+      }
+    },
+    "DeleteBridgeRequest": {
+      "type": "structure",
+      "members": {
+        "BridgeArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:bridge:.+$",
+          "location": "uri",
+          "locationName": "bridgeArn",
+          "documentation": "The ARN of the bridge that you want to delete."
+        }
+      },
+      "required": [
+        "BridgeArn"
+      ]
+    },
+    "DeleteBridgeResponse": {
+      "type": "structure",
+      "members": {
+        "BridgeArn": {
+          "shape": "__string",
+          "locationName": "bridgeArn",
+          "documentation": "The Amazon Resource Number (ARN) of the deleted bridge."
+        }
+      }
+    },
     "DeleteFlowRequest": {
       "type": "structure",
       "members": {
         "FlowArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
           "location": "uri",
           "locationName": "flowArn",
           "documentation": "The ARN of the flow that you want to delete."
@@ -1340,11 +3208,97 @@
         }
       }
     },
+    "DeleteGatewayRequest": {
+      "type": "structure",
+      "members": {
+        "GatewayArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:gateway:.+$",
+          "location": "uri",
+          "locationName": "gatewayArn",
+          "documentation": "The ARN of the gateway that you want to delete."
+        }
+      },
+      "required": [
+        "GatewayArn"
+      ]
+    },
+    "DeleteGatewayResponse": {
+      "type": "structure",
+      "members": {
+        "GatewayArn": {
+          "shape": "__string",
+          "locationName": "gatewayArn",
+          "documentation": "The Amazon Resource Name (ARN) of the gateway that was deleted."
+        }
+      }
+    },
+    "DeregisterGatewayInstanceRequest": {
+      "type": "structure",
+      "members": {
+        "Force": {
+          "shape": "__boolean",
+          "location": "querystring",
+          "locationName": "force",
+          "documentation": "Force the deregistration of an instance. Force will deregister an instance, even if there are bridges running on it."
+        },
+        "GatewayInstanceArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:gateway:.+:instance:.+$",
+          "location": "uri",
+          "locationName": "gatewayInstanceArn",
+          "documentation": "The Amazon Resource Name (ARN) of the gateway that contains the instance that you want to deregister."
+        }
+      },
+      "required": [
+        "GatewayInstanceArn"
+      ]
+    },
+    "DeregisterGatewayInstanceResponse": {
+      "type": "structure",
+      "members": {
+        "GatewayInstanceArn": {
+          "shape": "__string",
+          "locationName": "gatewayInstanceArn",
+          "documentation": "The Amazon Resource Name (ARN) of the instance."
+        },
+        "InstanceState": {
+          "shape": "InstanceState",
+          "locationName": "instanceState",
+          "documentation": "The status of the instance."
+        }
+      }
+    },
+    "DescribeBridgeRequest": {
+      "type": "structure",
+      "members": {
+        "BridgeArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:bridge:.+$",
+          "location": "uri",
+          "locationName": "bridgeArn",
+          "documentation": "The ARN of the bridge that you want to describe."
+        }
+      },
+      "required": [
+        "BridgeArn"
+      ]
+    },
+    "DescribeBridgeResponse": {
+      "type": "structure",
+      "members": {
+        "Bridge": {
+          "shape": "Bridge",
+          "locationName": "bridge"
+        }
+      }
+    },
     "DescribeFlowRequest": {
       "type": "structure",
       "members": {
         "FlowArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
           "location": "uri",
           "locationName": "flowArn",
           "documentation": "The ARN of the flow that you want to describe."
@@ -1364,6 +3318,115 @@
         "Messages": {
           "shape": "Messages",
           "locationName": "messages"
+        }
+      }
+    },
+    "DescribeFlowSourceMetadataRequest": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "flowArn",
+          "documentation": "The Amazon Resource Name (ARN) of the flow."
+        }
+      },
+      "required": [
+        "FlowArn"
+      ]
+    },
+    "DescribeFlowSourceMetadataResponse": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "locationName": "flowArn",
+          "documentation": "The ARN of the flow that DescribeFlowSourceMetadata was performed on."
+        },
+        "Messages": {
+          "shape": "__listOfMessageDetail",
+          "locationName": "messages",
+          "documentation": "Provides a status code and message regarding issues found with the flow source metadata."
+        },
+        "Timestamp": {
+          "shape": "__timestampIso8601",
+          "locationName": "timestamp",
+          "documentation": "The timestamp of the most recent change in metadata for this flow’s source."
+        },
+        "TransportMediaInfo": {
+          "shape": "TransportMediaInfo",
+          "locationName": "transportMediaInfo"
+        }
+      }
+    },
+    "DescribeFlowSourceThumbnailRequest": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "flowArn",
+          "documentation": "The Amazon Resource Name (ARN) of the flow."
+        }
+      },
+      "required": [
+        "FlowArn"
+      ]
+    },
+    "DescribeFlowSourceThumbnailResponse": {
+      "type": "structure",
+      "members": {
+        "ThumbnailDetails": {
+          "shape": "ThumbnailDetails",
+          "locationName": "thumbnailDetails"
+        }
+      }
+    },
+    "DescribeGatewayInstanceRequest": {
+      "type": "structure",
+      "members": {
+        "GatewayInstanceArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:gateway:.+:instance:.+$",
+          "location": "uri",
+          "locationName": "gatewayInstanceArn",
+          "documentation": "The Amazon Resource Name (ARN) of the gateway instance that you want to describe."
+        }
+      },
+      "required": [
+        "GatewayInstanceArn"
+      ]
+    },
+    "DescribeGatewayInstanceResponse": {
+      "type": "structure",
+      "members": {
+        "GatewayInstance": {
+          "shape": "GatewayInstance",
+          "locationName": "gatewayInstance"
+        }
+      }
+    },
+    "DescribeGatewayRequest": {
+      "type": "structure",
+      "members": {
+        "GatewayArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:gateway:.+$",
+          "location": "uri",
+          "locationName": "gatewayArn",
+          "documentation": "The Amazon Resource Name (ARN) of the gateway that you want to describe."
+        }
+      },
+      "required": [
+        "GatewayArn"
+      ]
+    },
+    "DescribeGatewayResponse": {
+      "type": "structure",
+      "members": {
+        "Gateway": {
+          "shape": "Gateway",
+          "locationName": "gateway"
         }
       }
     },
@@ -1413,10 +3476,150 @@
         }
       }
     },
+    "DesiredState": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "STANDBY",
+        "DELETED"
+      ]
+    },
+    "DestinationConfiguration": {
+      "type": "structure",
+      "members": {
+        "DestinationIp": {
+          "shape": "__string",
+          "locationName": "destinationIp",
+          "documentation": "The IP address where contents of the media stream will be sent."
+        },
+        "DestinationPort": {
+          "shape": "__integer",
+          "locationName": "destinationPort",
+          "documentation": "The port to use when the content of the media stream is distributed to the output."
+        },
+        "Interface": {
+          "shape": "Interface",
+          "locationName": "interface",
+          "documentation": "The VPC interface that is used for the media stream associated with the output."
+        },
+        "OutboundIp": {
+          "shape": "__string",
+          "locationName": "outboundIp",
+          "documentation": "The IP address that the receiver requires in order to establish a connection with the flow. This value is represented by the elastic network interface IP address of the VPC. This field applies only to outputs that use the CDI or ST 2110 JPEG XS protocol."
+        }
+      },
+      "documentation": "The transport parameters that are associated with an outbound media stream.",
+      "required": [
+        "DestinationIp",
+        "DestinationPort",
+        "Interface",
+        "OutboundIp"
+      ]
+    },
+    "DestinationConfigurationRequest": {
+      "type": "structure",
+      "members": {
+        "DestinationIp": {
+          "shape": "__string",
+          "locationName": "destinationIp",
+          "documentation": "The IP address where you want MediaConnect to send contents of the media stream."
+        },
+        "DestinationPort": {
+          "shape": "__integer",
+          "locationName": "destinationPort",
+          "documentation": "The port that you want MediaConnect to use when it distributes the media stream to the output."
+        },
+        "Interface": {
+          "shape": "InterfaceRequest",
+          "locationName": "interface",
+          "documentation": "The VPC interface that you want to use for the media stream associated with the output."
+        }
+      },
+      "documentation": "The transport parameters that you want to associate with an outbound media stream.",
+      "required": [
+        "DestinationIp",
+        "DestinationPort",
+        "Interface"
+      ]
+    },
     "DurationUnits": {
       "type": "string",
       "enum": [
         "MONTHS"
+      ]
+    },
+    "EgressGatewayBridge": {
+      "type": "structure",
+      "members": {
+        "InstanceId": {
+          "shape": "__string",
+          "locationName": "instanceId",
+          "documentation": "The ID of the instance running this bridge."
+        },
+        "MaxBitrate": {
+          "shape": "__integer",
+          "locationName": "maxBitrate",
+          "documentation": "The maximum expected bitrate (in bps) of the egress bridge."
+        }
+      },
+      "required": [
+        "MaxBitrate"
+      ]
+    },
+    "EncoderProfile": {
+      "type": "string",
+      "enum": [
+        "main",
+        "high"
+      ]
+    },
+    "EncodingName": {
+      "type": "string",
+      "enum": [
+        "jxsv",
+        "raw",
+        "smpte291",
+        "pcm"
+      ]
+    },
+    "EncodingParameters": {
+      "type": "structure",
+      "members": {
+        "CompressionFactor": {
+          "shape": "__double",
+          "locationName": "compressionFactor",
+          "documentation": "A value that is used to calculate compression for an output. The bitrate of the output is calculated as follows: Output bitrate = (1 / compressionFactor) * (source bitrate) This property only applies to outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol. Valid values are floating point numbers in the range of 3.0 to 10.0, inclusive."
+        },
+        "EncoderProfile": {
+          "shape": "EncoderProfile",
+          "locationName": "encoderProfile",
+          "documentation": "A setting on the encoder that drives compression settings. This property only applies to video media streams associated with outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol."
+        }
+      },
+      "documentation": "A collection of parameters that determine how MediaConnect will convert the content. These fields only apply to outputs on flows that have a CDI source.",
+      "required": [
+        "EncoderProfile",
+        "CompressionFactor"
+      ]
+    },
+    "EncodingParametersRequest": {
+      "type": "structure",
+      "members": {
+        "CompressionFactor": {
+          "shape": "__double",
+          "locationName": "compressionFactor",
+          "documentation": "A value that is used to calculate compression for an output. The bitrate of the output is calculated as follows: Output bitrate = (1 / compressionFactor) * (source bitrate) This property only applies to outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol. Valid values are floating point numbers in the range of 3.0 to 10.0, inclusive."
+        },
+        "EncoderProfile": {
+          "shape": "EncoderProfile",
+          "locationName": "encoderProfile",
+          "documentation": "A setting on the encoder that drives compression settings. This property only applies to video media streams associated with outputs that use the ST 2110 JPEG XS protocol, if at least one source on the flow uses the CDI protocol."
+        }
+      },
+      "documentation": "A collection of parameters that determine how MediaConnect will convert the content. These fields only apply to outputs on flows that have a CDI source.",
+      "required": [
+        "EncoderProfile",
+        "CompressionFactor"
       ]
     },
     "Encryption": {
@@ -1470,7 +3673,6 @@
       },
       "documentation": "Information about the encryption of the flow.",
       "required": [
-        "Algorithm",
         "RoleArn"
       ]
     },
@@ -1530,17 +3732,34 @@
     "FailoverConfig": {
       "type": "structure",
       "members": {
+        "FailoverMode": {
+          "shape": "FailoverMode",
+          "locationName": "failoverMode",
+          "documentation": "The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams."
+        },
         "RecoveryWindow": {
           "shape": "__integer",
           "locationName": "recoveryWindow",
           "documentation": "Search window time to look for dash-7 packets"
+        },
+        "SourcePriority": {
+          "shape": "SourcePriority",
+          "locationName": "sourcePriority",
+          "documentation": "The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams."
         },
         "State": {
           "shape": "State",
           "locationName": "state"
         }
       },
-      "documentation": "The settings for source failover"
+      "documentation": "The settings for source failover."
+    },
+    "FailoverMode": {
+      "type": "string",
+      "enum": [
+        "MERGE",
+        "FAILOVER"
+      ]
     },
     "Flow": {
       "type": "structure",
@@ -1568,7 +3787,12 @@
         "FlowArn": {
           "shape": "__string",
           "locationName": "flowArn",
-          "documentation": "The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow."
+          "documentation": "The Amazon Resource Name (ARN) of the flow."
+        },
+        "MediaStreams": {
+          "shape": "__listOfMediaStream",
+          "locationName": "mediaStreams",
+          "documentation": "The media streams that are associated with the flow. After you associate a media stream with a source, you can also associate it with outputs on the flow."
         },
         "Name": {
           "shape": "__string",
@@ -1601,17 +3825,272 @@
           "shape": "__listOfVpcInterface",
           "locationName": "vpcInterfaces",
           "documentation": "The VPC Interfaces for this flow."
+        },
+        "Maintenance": {
+          "shape": "Maintenance",
+          "locationName": "maintenance"
+        },
+        "SourceMonitoringConfig": {
+          "shape": "MonitoringConfig",
+          "locationName": "sourceMonitoringConfig"
         }
       },
       "documentation": "The settings for a flow, including its source, outputs, and entitlements.",
       "required": [
         "Status",
+        "AvailabilityZone",
+        "Source",
+        "Name",
         "Entitlements",
         "Outputs",
-        "AvailabilityZone",
-        "FlowArn",
-        "Source",
+        "FlowArn"
+      ]
+    },
+    "Fmtp": {
+      "type": "structure",
+      "members": {
+        "ChannelOrder": {
+          "shape": "__string",
+          "locationName": "channelOrder",
+          "documentation": "The format of the audio channel."
+        },
+        "Colorimetry": {
+          "shape": "Colorimetry",
+          "locationName": "colorimetry",
+          "documentation": "The format that is used for the representation of color."
+        },
+        "ExactFramerate": {
+          "shape": "__string",
+          "locationName": "exactFramerate",
+          "documentation": "The frame rate for the video stream, in frames/second. For example: 60000/1001. If you specify a whole number, MediaConnect uses a ratio of N/1. For example, if you specify 60, MediaConnect uses 60/1 as the exactFramerate."
+        },
+        "Par": {
+          "shape": "__string",
+          "locationName": "par",
+          "documentation": "The pixel aspect ratio (PAR) of the video."
+        },
+        "Range": {
+          "shape": "Range",
+          "locationName": "range",
+          "documentation": "The encoding range of the video."
+        },
+        "ScanMode": {
+          "shape": "ScanMode",
+          "locationName": "scanMode",
+          "documentation": "The type of compression that was used to smooth the video’s appearance"
+        },
+        "Tcs": {
+          "shape": "Tcs",
+          "locationName": "tcs",
+          "documentation": "The transfer characteristic system (TCS) that is used in the video."
+        }
+      },
+      "documentation": "FMTP"
+    },
+    "FmtpRequest": {
+      "type": "structure",
+      "members": {
+        "ChannelOrder": {
+          "shape": "__string",
+          "locationName": "channelOrder",
+          "documentation": "The format of the audio channel."
+        },
+        "Colorimetry": {
+          "shape": "Colorimetry",
+          "locationName": "colorimetry",
+          "documentation": "The format that is used for the representation of color."
+        },
+        "ExactFramerate": {
+          "shape": "__string",
+          "locationName": "exactFramerate",
+          "documentation": "The frame rate for the video stream, in frames/second. For example: 60000/1001. If you specify a whole number, MediaConnect uses a ratio of N/1. For example, if you specify 60, MediaConnect uses 60/1 as the exactFramerate."
+        },
+        "Par": {
+          "shape": "__string",
+          "locationName": "par",
+          "documentation": "The pixel aspect ratio (PAR) of the video."
+        },
+        "Range": {
+          "shape": "Range",
+          "locationName": "range",
+          "documentation": "The encoding range of the video."
+        },
+        "ScanMode": {
+          "shape": "ScanMode",
+          "locationName": "scanMode",
+          "documentation": "The type of compression that was used to smooth the video’s appearance."
+        },
+        "Tcs": {
+          "shape": "Tcs",
+          "locationName": "tcs",
+          "documentation": "The transfer characteristic system (TCS) that is used in the video."
+        }
+      },
+      "documentation": "The settings that you want to use to define the media stream."
+    },
+    "FrameResolution": {
+      "type": "structure",
+      "members": {
+        "FrameHeight": {
+          "shape": "__integer",
+          "locationName": "frameHeight",
+          "documentation": "The number of pixels in the height of the video frame."
+        },
+        "FrameWidth": {
+          "shape": "__integer",
+          "locationName": "frameWidth",
+          "documentation": "The number of pixels in the width of the video frame."
+        }
+      },
+      "documentation": "The frame resolution used by the video stream.",
+      "required": [
+        "FrameWidth",
+        "FrameHeight"
+      ]
+    },
+    "Gateway": {
+      "type": "structure",
+      "members": {
+        "EgressCidrBlocks": {
+          "shape": "__listOf__string",
+          "locationName": "egressCidrBlocks",
+          "documentation": "The range of IP addresses that contribute content or initiate output requests for flows communicating with this gateway. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16."
+        },
+        "GatewayArn": {
+          "shape": "__string",
+          "locationName": "gatewayArn",
+          "documentation": "The Amazon Resource Name (ARN) of the gateway."
+        },
+        "GatewayMessages": {
+          "shape": "__listOfMessageDetail",
+          "locationName": "gatewayMessages"
+        },
+        "GatewayState": {
+          "shape": "GatewayState",
+          "locationName": "gatewayState",
+          "documentation": "The current status of the gateway."
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "The name of the gateway. This name can not be modified after the gateway is created."
+        },
+        "Networks": {
+          "shape": "__listOfGatewayNetwork",
+          "locationName": "networks",
+          "documentation": "The list of networks in the gateway."
+        }
+      },
+      "documentation": "The settings for a gateway, including its networks.",
+      "required": [
+        "GatewayArn",
+        "Networks",
+        "EgressCidrBlocks",
         "Name"
+      ]
+    },
+    "GatewayBridgeSource": {
+      "type": "structure",
+      "members": {
+        "BridgeArn": {
+          "shape": "__string",
+          "locationName": "bridgeArn",
+          "documentation": "The ARN of the bridge feeding this flow."
+        },
+        "VpcInterfaceAttachment": {
+          "shape": "VpcInterfaceAttachment",
+          "locationName": "vpcInterfaceAttachment",
+          "documentation": "The name of the VPC interface attachment to use for this bridge source."
+        }
+      },
+      "documentation": "The source configuration for cloud flows receiving a stream from a bridge.",
+      "required": [
+        "BridgeArn"
+      ]
+    },
+    "GatewayInstance": {
+      "type": "structure",
+      "members": {
+        "BridgePlacement": {
+          "shape": "BridgePlacement",
+          "locationName": "bridgePlacement",
+          "documentation": "The availability of the instance to host new bridges. The bridgePlacement property can be LOCKED or AVAILABLE. If it is LOCKED, no new bridges can be deployed to this instance. If it is AVAILABLE, new bridges can be added to this instance."
+        },
+        "ConnectionStatus": {
+          "shape": "ConnectionStatus",
+          "locationName": "connectionStatus",
+          "documentation": "The connection state of the instance."
+        },
+        "GatewayArn": {
+          "shape": "__string",
+          "locationName": "gatewayArn",
+          "documentation": "The Amazon Resource Name (ARN) of the instance."
+        },
+        "GatewayInstanceArn": {
+          "shape": "__string",
+          "locationName": "gatewayInstanceArn",
+          "documentation": "The Amazon Resource Name (ARN) of the gateway."
+        },
+        "InstanceId": {
+          "shape": "__string",
+          "locationName": "instanceId",
+          "documentation": "The managed instance ID generated by the SSM install. This will begin with \"mi-\"."
+        },
+        "InstanceMessages": {
+          "shape": "__listOfMessageDetail",
+          "locationName": "instanceMessages"
+        },
+        "InstanceState": {
+          "shape": "InstanceState",
+          "locationName": "instanceState",
+          "documentation": "The status of the instance."
+        },
+        "RunningBridgeCount": {
+          "shape": "__integer",
+          "locationName": "runningBridgeCount",
+          "documentation": "The running bridge count."
+        }
+      },
+      "documentation": "The settings for an instance in a gateway.",
+      "required": [
+        "GatewayArn",
+        "InstanceState",
+        "GatewayInstanceArn",
+        "InstanceId",
+        "RunningBridgeCount",
+        "BridgePlacement",
+        "ConnectionStatus"
+      ]
+    },
+    "GatewayNetwork": {
+      "type": "structure",
+      "members": {
+        "CidrBlock": {
+          "shape": "__string",
+          "locationName": "cidrBlock",
+          "documentation": "A unique IP address range to use for this network. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16."
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "The name of the network. This name is used to reference the network and must be unique among networks in this gateway."
+        }
+      },
+      "documentation": "The network settings for a gateway.",
+      "required": [
+        "CidrBlock",
+        "Name"
+      ]
+    },
+    "GatewayState": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "ACTIVE",
+        "UPDATING",
+        "ERROR",
+        "DELETING",
+        "DELETED"
       ]
     },
     "GrantEntitlementRequest": {
@@ -1630,7 +4109,7 @@
         "Encryption": {
           "shape": "Encryption",
           "locationName": "encryption",
-          "documentation": "The type of encryption that will be used on the output that is associated with this entitlement."
+          "documentation": "The type of encryption that will be used on the output that is associated with this entitlement. Allowable encryption types: static-key, speke."
         },
         "EntitlementStatus": {
           "shape": "EntitlementStatus",
@@ -1663,6 +4142,7 @@
         },
         "FlowArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
           "location": "uri",
           "locationName": "flowArn",
           "documentation": "The flow that you want to grant entitlements on."
@@ -1689,12 +4169,160 @@
         }
       }
     },
+    "IngressGatewayBridge": {
+      "type": "structure",
+      "members": {
+        "InstanceId": {
+          "shape": "__string",
+          "locationName": "instanceId",
+          "documentation": "The ID of the instance running this bridge."
+        },
+        "MaxBitrate": {
+          "shape": "__integer",
+          "locationName": "maxBitrate",
+          "documentation": "The maximum expected bitrate (in bps) of the ingress bridge."
+        },
+        "MaxOutputs": {
+          "shape": "__integer",
+          "locationName": "maxOutputs",
+          "documentation": "The maximum number of outputs on the ingress bridge."
+        }
+      },
+      "required": [
+        "MaxOutputs",
+        "MaxBitrate"
+      ]
+    },
+    "InputConfiguration": {
+      "type": "structure",
+      "members": {
+        "InputIp": {
+          "shape": "__string",
+          "locationName": "inputIp",
+          "documentation": "The IP address that the flow listens on for incoming content for a media stream."
+        },
+        "InputPort": {
+          "shape": "__integer",
+          "locationName": "inputPort",
+          "documentation": "The port that the flow listens on for an incoming media stream."
+        },
+        "Interface": {
+          "shape": "Interface",
+          "locationName": "interface",
+          "documentation": "The VPC interface where the media stream comes in from."
+        }
+      },
+      "documentation": "The transport parameters that are associated with an incoming media stream.",
+      "required": [
+        "InputPort",
+        "InputIp",
+        "Interface"
+      ]
+    },
+    "InputConfigurationRequest": {
+      "type": "structure",
+      "members": {
+        "InputPort": {
+          "shape": "__integer",
+          "locationName": "inputPort",
+          "documentation": "The port that you want the flow to listen on for an incoming media stream."
+        },
+        "Interface": {
+          "shape": "InterfaceRequest",
+          "locationName": "interface",
+          "documentation": "The VPC interface that you want to use for the incoming media stream."
+        }
+      },
+      "documentation": "The transport parameters that you want to associate with an incoming media stream.",
+      "required": [
+        "InputPort",
+        "Interface"
+      ]
+    },
+    "InstanceState": {
+      "type": "string",
+      "enum": [
+        "REGISTERING",
+        "ACTIVE",
+        "DEREGISTERING",
+        "DEREGISTERED",
+        "REGISTRATION_ERROR",
+        "DEREGISTRATION_ERROR"
+      ]
+    },
+    "Interface": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "The name of the VPC interface."
+        }
+      },
+      "documentation": "The VPC interface that is used for the media stream associated with the source or output.",
+      "required": [
+        "Name"
+      ]
+    },
+    "InterfaceRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "The name of the VPC interface."
+        }
+      },
+      "documentation": "The VPC interface that you want to designate where the media stream is coming from or going to.",
+      "required": [
+        "Name"
+      ]
+    },
     "KeyType": {
       "type": "string",
       "enum": [
         "speke",
-        "static-key"
+        "static-key",
+        "srt-password"
       ]
+    },
+    "ListBridgesRequest": {
+      "type": "structure",
+      "members": {
+        "FilterArn": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "filterArn",
+          "documentation": "Filter the list results to display only the bridges associated with the selected Amazon Resource Name (ARN)."
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "location": "querystring",
+          "locationName": "maxResults",
+          "documentation": "The maximum number of results to return per API request. For example, you submit a ListBridges request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page."
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "nextToken",
+          "documentation": "The token that identifies which batch of results that you want to see. For example, you submit a ListBridges request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListBridges request a second time and specify the NextToken value."
+        }
+      }
+    },
+    "ListBridgesResponse": {
+      "type": "structure",
+      "members": {
+        "Bridges": {
+          "shape": "__listOfListedBridge",
+          "locationName": "bridges",
+          "documentation": "A list of bridge summaries."
+        },
+        "NextToken": {
+          "shape": "__string",
+          "locationName": "nextToken",
+          "documentation": "The token that identifies which batch of results that you want to see. For example, you submit a ListBridges request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListBridges request a second time and specify the NextToken value."
+        }
+      }
     },
     "ListEntitlementsRequest": {
       "type": "structure",
@@ -1757,6 +4385,76 @@
           "shape": "__string",
           "locationName": "nextToken",
           "documentation": "The token that identifies which batch of results that you want to see. For example, you submit a ListFlows request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListFlows request a second time and specify the NextToken value."
+        }
+      }
+    },
+    "ListGatewayInstancesRequest": {
+      "type": "structure",
+      "members": {
+        "FilterArn": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "filterArn",
+          "documentation": "Filter the list results to display only the instances associated with the selected Gateway Amazon Resource Name (ARN)."
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "location": "querystring",
+          "locationName": "maxResults",
+          "documentation": "The maximum number of results to return per API request. For example, you submit a ListInstances request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page."
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "nextToken",
+          "documentation": "The token that identifies which batch of results that you want to see. For example, you submit a ListInstances request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListInstances request a second time and specify the NextToken value."
+        }
+      }
+    },
+    "ListGatewayInstancesResponse": {
+      "type": "structure",
+      "members": {
+        "Instances": {
+          "shape": "__listOfListedGatewayInstance",
+          "locationName": "instances",
+          "documentation": "A list of instance summaries."
+        },
+        "NextToken": {
+          "shape": "__string",
+          "locationName": "nextToken",
+          "documentation": "The token that identifies which batch of results that you want to see. For example, you submit a ListInstances request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListInstances request a second time and specify the NextToken value."
+        }
+      }
+    },
+    "ListGatewaysRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "shape": "MaxResults",
+          "location": "querystring",
+          "locationName": "maxResults",
+          "documentation": "The maximum number of results to return per API request. For example, you submit a ListGateways request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page."
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "nextToken",
+          "documentation": "The token that identifies which batch of results that you want to see. For example, you submit a ListGateways request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListGateways request a second time and specify the NextToken value."
+        }
+      }
+    },
+    "ListGatewaysResponse": {
+      "type": "structure",
+      "members": {
+        "Gateways": {
+          "shape": "__listOfListedGateway",
+          "locationName": "gateways",
+          "documentation": "A list of gateway summaries."
+        },
+        "NextToken": {
+          "shape": "__string",
+          "locationName": "nextToken",
+          "documentation": "The token that identifies which batch of results that you want to see. For example, you submit a ListGateways request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListGateways request a second time and specify the NextToken value."
         }
       }
     },
@@ -1848,6 +4546,43 @@
         }
       }
     },
+    "ListedBridge": {
+      "type": "structure",
+      "members": {
+        "BridgeArn": {
+          "shape": "__string",
+          "locationName": "bridgeArn",
+          "documentation": "The ARN of the bridge."
+        },
+        "BridgeState": {
+          "shape": "BridgeState",
+          "locationName": "bridgeState"
+        },
+        "BridgeType": {
+          "shape": "__string",
+          "locationName": "bridgeType",
+          "documentation": "The type of the bridge."
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "The name of the bridge."
+        },
+        "PlacementArn": {
+          "shape": "__string",
+          "locationName": "placementArn",
+          "documentation": "The ARN of the gateway associated with the bridge."
+        }
+      },
+      "documentation": "Displays details of the selected bridge.",
+      "required": [
+        "BridgeArn",
+        "BridgeState",
+        "PlacementArn",
+        "BridgeType",
+        "Name"
+      ]
+    },
     "ListedEntitlement": {
       "type": "structure",
       "members": {
@@ -1905,6 +4640,10 @@
           "shape": "Status",
           "locationName": "status",
           "documentation": "The current status of the flow."
+        },
+        "Maintenance": {
+          "shape": "Maintenance",
+          "locationName": "maintenance"
         }
       },
       "documentation": "Provides a summary of a flow, including its ARN, Availability Zone, and source type.",
@@ -1917,10 +4656,333 @@
         "Name"
       ]
     },
+    "ListedGateway": {
+      "type": "structure",
+      "members": {
+        "GatewayArn": {
+          "shape": "__string",
+          "locationName": "gatewayArn",
+          "documentation": "The Amazon Resource Name (ARN) of the gateway."
+        },
+        "GatewayState": {
+          "shape": "GatewayState",
+          "locationName": "gatewayState"
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "The name of the gateway."
+        }
+      },
+      "documentation": "Provides a summary of a gateway, including its name, ARN, and status.",
+      "required": [
+        "GatewayArn",
+        "GatewayState",
+        "Name"
+      ]
+    },
+    "ListedGatewayInstance": {
+      "type": "structure",
+      "members": {
+        "GatewayArn": {
+          "shape": "__string",
+          "locationName": "gatewayArn",
+          "documentation": "The Amazon Resource Name (ARN) of the gateway."
+        },
+        "GatewayInstanceArn": {
+          "shape": "__string",
+          "locationName": "gatewayInstanceArn",
+          "documentation": "The Amazon Resource Name (ARN) of the instance."
+        },
+        "InstanceId": {
+          "shape": "__string",
+          "locationName": "instanceId",
+          "documentation": "The managed instance ID generated by the SSM install. This will begin with \"mi-\"."
+        },
+        "InstanceState": {
+          "shape": "InstanceState",
+          "locationName": "instanceState",
+          "documentation": "The status of the instance."
+        }
+      },
+      "documentation": "Provides a summary of an instance.",
+      "required": [
+        "GatewayArn",
+        "GatewayInstanceArn",
+        "InstanceId"
+      ]
+    },
+    "Maintenance": {
+      "type": "structure",
+      "members": {
+        "MaintenanceDay": {
+          "shape": "MaintenanceDay",
+          "locationName": "maintenanceDay",
+          "documentation": "A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday."
+        },
+        "MaintenanceDeadline": {
+          "shape": "__string",
+          "locationName": "maintenanceDeadline",
+          "documentation": "The Maintenance has to be performed before this deadline in ISO UTC format. Example: 2021-01-30T08:30:00Z."
+        },
+        "MaintenanceScheduledDate": {
+          "shape": "__string",
+          "locationName": "maintenanceScheduledDate",
+          "documentation": "A scheduled date in ISO UTC format when the maintenance will happen. Use YYYY-MM-DD format. Example: 2021-01-30."
+        },
+        "MaintenanceStartHour": {
+          "shape": "__string",
+          "locationName": "maintenanceStartHour",
+          "documentation": "UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00."
+        }
+      },
+      "documentation": "The maintenance setting of a flow"
+    },
+    "MaintenanceDay": {
+      "type": "string",
+      "enum": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ]
+    },
     "MaxResults": {
       "type": "integer",
       "min": 1,
       "max": 1000
+    },
+    "MediaStream": {
+      "type": "structure",
+      "members": {
+        "Attributes": {
+          "shape": "MediaStreamAttributes",
+          "locationName": "attributes",
+          "documentation": "Attributes that are related to the media stream."
+        },
+        "ClockRate": {
+          "shape": "__integer",
+          "locationName": "clockRate",
+          "documentation": "The sample rate for the stream. This value is measured in Hz."
+        },
+        "Description": {
+          "shape": "__string",
+          "locationName": "description",
+          "documentation": "A description that can help you quickly identify what your media stream is used for."
+        },
+        "Fmt": {
+          "shape": "__integer",
+          "locationName": "fmt",
+          "documentation": "The format type number (sometimes referred to as RTP payload type) of the media stream. MediaConnect assigns this value to the media stream. For ST 2110 JPEG XS outputs, you need to provide this value to the receiver."
+        },
+        "MediaStreamId": {
+          "shape": "__integer",
+          "locationName": "mediaStreamId",
+          "documentation": "A unique identifier for the media stream."
+        },
+        "MediaStreamName": {
+          "shape": "__string",
+          "locationName": "mediaStreamName",
+          "documentation": "A name that helps you distinguish one media stream from another."
+        },
+        "MediaStreamType": {
+          "shape": "MediaStreamType",
+          "locationName": "mediaStreamType",
+          "documentation": "The type of media stream."
+        },
+        "VideoFormat": {
+          "shape": "__string",
+          "locationName": "videoFormat",
+          "documentation": "The resolution of the video."
+        }
+      },
+      "documentation": "A single track or stream of media that contains video, audio, or ancillary data. After you add a media stream to a flow, you can associate it with sources and outputs on that flow, as long as they use the CDI protocol or the ST 2110 JPEG XS protocol. Each source or output can consist of one or many media streams.",
+      "required": [
+        "MediaStreamType",
+        "MediaStreamId",
+        "MediaStreamName",
+        "Fmt"
+      ]
+    },
+    "MediaStreamAttributes": {
+      "type": "structure",
+      "members": {
+        "Fmtp": {
+          "shape": "Fmtp",
+          "locationName": "fmtp",
+          "documentation": "A set of parameters that define the media stream."
+        },
+        "Lang": {
+          "shape": "__string",
+          "locationName": "lang",
+          "documentation": "The audio language, in a format that is recognized by the receiver."
+        }
+      },
+      "documentation": "Attributes that are related to the media stream.",
+      "required": [
+        "Fmtp"
+      ]
+    },
+    "MediaStreamAttributesRequest": {
+      "type": "structure",
+      "members": {
+        "Fmtp": {
+          "shape": "FmtpRequest",
+          "locationName": "fmtp",
+          "documentation": "The settings that you want to use to define the media stream."
+        },
+        "Lang": {
+          "shape": "__string",
+          "locationName": "lang",
+          "documentation": "The audio language, in a format that is recognized by the receiver."
+        }
+      },
+      "documentation": "Attributes that are related to the media stream."
+    },
+    "MediaStreamOutputConfiguration": {
+      "type": "structure",
+      "members": {
+        "DestinationConfigurations": {
+          "shape": "__listOfDestinationConfiguration",
+          "locationName": "destinationConfigurations",
+          "documentation": "The transport parameters that are associated with each outbound media stream."
+        },
+        "EncodingName": {
+          "shape": "EncodingName",
+          "locationName": "encodingName",
+          "documentation": "The format that was used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv."
+        },
+        "EncodingParameters": {
+          "shape": "EncodingParameters",
+          "locationName": "encodingParameters",
+          "documentation": "Encoding parameters"
+        },
+        "MediaStreamName": {
+          "shape": "__string",
+          "locationName": "mediaStreamName",
+          "documentation": "The name of the media stream."
+        }
+      },
+      "documentation": "The media stream that is associated with the output, and the parameters for that association.",
+      "required": [
+        "MediaStreamName",
+        "EncodingName"
+      ]
+    },
+    "MediaStreamOutputConfigurationRequest": {
+      "type": "structure",
+      "members": {
+        "DestinationConfigurations": {
+          "shape": "__listOfDestinationConfigurationRequest",
+          "locationName": "destinationConfigurations",
+          "documentation": "The transport parameters that you want to associate with the media stream."
+        },
+        "EncodingName": {
+          "shape": "EncodingName",
+          "locationName": "encodingName",
+          "documentation": "The format that will be used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv."
+        },
+        "EncodingParameters": {
+          "shape": "EncodingParametersRequest",
+          "locationName": "encodingParameters",
+          "documentation": "A collection of parameters that determine how MediaConnect will convert the content. These fields only apply to outputs on flows that have a CDI source."
+        },
+        "MediaStreamName": {
+          "shape": "__string",
+          "locationName": "mediaStreamName",
+          "documentation": "The name of the media stream that is associated with the output."
+        }
+      },
+      "documentation": "The media stream that you want to associate with the output, and the parameters for that association.",
+      "required": [
+        "MediaStreamName",
+        "EncodingName"
+      ]
+    },
+    "MediaStreamSourceConfiguration": {
+      "type": "structure",
+      "members": {
+        "EncodingName": {
+          "shape": "EncodingName",
+          "locationName": "encodingName",
+          "documentation": "The format that was used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv."
+        },
+        "InputConfigurations": {
+          "shape": "__listOfInputConfiguration",
+          "locationName": "inputConfigurations",
+          "documentation": "The transport parameters that are associated with an incoming media stream."
+        },
+        "MediaStreamName": {
+          "shape": "__string",
+          "locationName": "mediaStreamName",
+          "documentation": "The name of the media stream."
+        }
+      },
+      "documentation": "The media stream that is associated with the source, and the parameters for that association.",
+      "required": [
+        "MediaStreamName",
+        "EncodingName"
+      ]
+    },
+    "MediaStreamSourceConfigurationRequest": {
+      "type": "structure",
+      "members": {
+        "EncodingName": {
+          "shape": "EncodingName",
+          "locationName": "encodingName",
+          "documentation": "The format you want to use to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv."
+        },
+        "InputConfigurations": {
+          "shape": "__listOfInputConfigurationRequest",
+          "locationName": "inputConfigurations",
+          "documentation": "The transport parameters that you want to associate with the media stream."
+        },
+        "MediaStreamName": {
+          "shape": "__string",
+          "locationName": "mediaStreamName",
+          "documentation": "The name of the media stream."
+        }
+      },
+      "documentation": "The definition of a media stream that you want to associate with the source.",
+      "required": [
+        "MediaStreamName",
+        "EncodingName"
+      ]
+    },
+    "MediaStreamType": {
+      "type": "string",
+      "enum": [
+        "video",
+        "audio",
+        "ancillary-data"
+      ]
+    },
+    "MessageDetail": {
+      "type": "structure",
+      "members": {
+        "Code": {
+          "shape": "__string",
+          "locationName": "code",
+          "documentation": "The error code."
+        },
+        "Message": {
+          "shape": "__string",
+          "locationName": "message",
+          "documentation": "The specific error message that MediaConnect returns to help you understand the reason that the request did not succeed."
+        },
+        "ResourceName": {
+          "shape": "__string",
+          "locationName": "resourceName",
+          "documentation": "The name of the resource."
+        }
+      },
+      "required": [
+        "Message",
+        "Code"
+      ]
     },
     "Messages": {
       "type": "structure",
@@ -1934,6 +4996,24 @@
       "documentation": "Messages that provide the state of the flow.",
       "required": [
         "Errors"
+      ]
+    },
+    "MonitoringConfig": {
+      "type": "structure",
+      "members": {
+        "ThumbnailState": {
+          "shape": "ThumbnailState",
+          "locationName": "thumbnailState",
+          "documentation": "The state of thumbnail monitoring."
+        }
+      },
+      "documentation": "The settings for source monitoring."
+    },
+    "NetworkInterfaceType": {
+      "type": "string",
+      "enum": [
+        "ena",
+        "efa"
       ]
     },
     "Offering": {
@@ -2020,10 +5100,20 @@
           "locationName": "entitlementArn",
           "documentation": "The ARN of the entitlement on the originator''s flow. This value is relevant only on entitled flows."
         },
+        "ListenerAddress": {
+          "shape": "__string",
+          "locationName": "listenerAddress",
+          "documentation": "The IP address that the receiver requires in order to establish a connection with the flow. For public networking, the ListenerAddress is represented by the elastic IP address of the flow. For private networking, the ListenerAddress is represented by the elastic network interface IP address of the VPC. This field applies only to outputs that use the Zixi pull or SRT listener protocol."
+        },
         "MediaLiveInputArn": {
           "shape": "__string",
           "locationName": "mediaLiveInputArn",
           "documentation": "The input ARN of the AWS Elemental MediaLive channel. This parameter is relevant only for outputs that were added by creating a MediaLive input."
+        },
+        "MediaStreamOutputConfigurations": {
+          "shape": "__listOfMediaStreamOutputConfiguration",
+          "locationName": "mediaStreamOutputConfigurations",
+          "documentation": "The configuration for each media stream that is associated with the output."
         },
         "Name": {
           "shape": "__string",
@@ -2049,12 +5139,34 @@
           "shape": "VpcInterfaceAttachment",
           "locationName": "vpcInterfaceAttachment",
           "documentation": "The name of the VPC interface attachment to use for this output."
+        },
+        "BridgeArn": {
+          "shape": "__string",
+          "locationName": "bridgeArn",
+          "documentation": "The ARN of the bridge that added this output."
+        },
+        "BridgePorts": {
+          "shape": "__listOf__integer",
+          "locationName": "bridgePorts",
+          "documentation": "The bridge output ports currently in use."
+        },
+        "OutputStatus": {
+          "shape": "OutputStatus",
+          "locationName": "outputStatus",
+          "documentation": "An indication of whether the output is transmitting data or not."
         }
       },
       "documentation": "The settings for an output.",
       "required": [
         "OutputArn",
         "Name"
+      ]
+    },
+    "OutputStatus": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
       ]
     },
     "PriceUnits": {
@@ -2070,7 +5182,13 @@
         "rtp-fec",
         "rtp",
         "zixi-pull",
-        "rist"
+        "rist",
+        "st2110-jpegxs",
+        "cdi",
+        "srt-listener",
+        "srt-caller",
+        "fujitsu-qos",
+        "udp"
       ]
     },
     "PurchaseOfferingRequest": {
@@ -2109,17 +5227,134 @@
         }
       }
     },
+    "Range": {
+      "type": "string",
+      "enum": [
+        "NARROW",
+        "FULL",
+        "FULLPROTECT"
+      ]
+    },
+    "RemoveBridgeOutputRequest": {
+      "type": "structure",
+      "members": {
+        "BridgeArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:bridge:.+$",
+          "location": "uri",
+          "locationName": "bridgeArn",
+          "documentation": "The ARN of the bridge that you want to update."
+        },
+        "OutputName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "outputName",
+          "documentation": "The name of the bridge output that you want to remove."
+        }
+      },
+      "required": [
+        "OutputName",
+        "BridgeArn"
+      ]
+    },
+    "RemoveBridgeOutputResponse": {
+      "type": "structure",
+      "members": {
+        "BridgeArn": {
+          "shape": "__string",
+          "locationName": "bridgeArn"
+        },
+        "OutputName": {
+          "shape": "__string",
+          "locationName": "outputName"
+        }
+      }
+    },
+    "RemoveBridgeSourceRequest": {
+      "type": "structure",
+      "members": {
+        "BridgeArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:bridge:.+$",
+          "location": "uri",
+          "locationName": "bridgeArn",
+          "documentation": "The ARN of the bridge that you want to update."
+        },
+        "SourceName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "sourceName",
+          "documentation": "The name of the bridge source that you want to remove."
+        }
+      },
+      "required": [
+        "BridgeArn",
+        "SourceName"
+      ]
+    },
+    "RemoveBridgeSourceResponse": {
+      "type": "structure",
+      "members": {
+        "BridgeArn": {
+          "shape": "__string",
+          "locationName": "bridgeArn"
+        },
+        "SourceName": {
+          "shape": "__string",
+          "locationName": "sourceName"
+        }
+      }
+    },
+    "RemoveFlowMediaStreamRequest": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
+          "location": "uri",
+          "locationName": "flowArn",
+          "documentation": "The Amazon Resource Name (ARN) of the flow."
+        },
+        "MediaStreamName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "mediaStreamName",
+          "documentation": "The name of the media stream that you want to remove."
+        }
+      },
+      "required": [
+        "FlowArn",
+        "MediaStreamName"
+      ]
+    },
+    "RemoveFlowMediaStreamResponse": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "locationName": "flowArn",
+          "documentation": "The Amazon Resource Name (ARN) of the flow."
+        },
+        "MediaStreamName": {
+          "shape": "__string",
+          "locationName": "mediaStreamName",
+          "documentation": "The name of the media stream that was removed."
+        }
+      }
+    },
     "RemoveFlowOutputRequest": {
       "type": "structure",
       "members": {
         "FlowArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
           "location": "uri",
           "locationName": "flowArn",
           "documentation": "The flow that you want to remove an output from."
         },
         "OutputArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:output:.+$",
           "location": "uri",
           "locationName": "outputArn",
           "documentation": "The ARN of the output that you want to remove."
@@ -2150,12 +5385,14 @@
       "members": {
         "FlowArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
           "location": "uri",
           "locationName": "flowArn",
           "documentation": "The flow that you want to remove a source from."
         },
         "SourceArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:source:.+$",
           "location": "uri",
           "locationName": "sourceArn",
           "documentation": "The ARN of the source that you want to remove."
@@ -2186,6 +5423,7 @@
       "members": {
         "FlowArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
           "location": "uri",
           "locationName": "flowArn",
           "documentation": "The flow that you want to remove a VPC interface from."
@@ -2347,12 +5585,14 @@
       "members": {
         "EntitlementArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:entitlement:.+$",
           "location": "uri",
           "locationName": "entitlementArn",
           "documentation": "The ARN of the entitlement that you want to revoke."
         },
         "FlowArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
           "location": "uri",
           "locationName": "flowArn",
           "documentation": "The flow that you want to revoke an entitlement from."
@@ -2378,13 +5618,41 @@
         }
       }
     },
+    "ScanMode": {
+      "type": "string",
+      "enum": [
+        "progressive",
+        "interlace",
+        "progressive-segmented-frame"
+      ]
+    },
+    "SetGatewayBridgeSourceRequest": {
+      "type": "structure",
+      "members": {
+        "BridgeArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:bridge:.+$",
+          "locationName": "bridgeArn",
+          "documentation": "The ARN of the bridge feeding this flow."
+        },
+        "VpcInterfaceAttachment": {
+          "shape": "VpcInterfaceAttachment",
+          "locationName": "vpcInterfaceAttachment",
+          "documentation": "The name of the VPC interface attachment to use for this bridge source."
+        }
+      },
+      "documentation": "The source configuration for cloud flows receiving a stream from a bridge.",
+      "required": [
+        "BridgeArn"
+      ]
+    },
     "SetSourceRequest": {
       "type": "structure",
       "members": {
         "Decryption": {
           "shape": "Encryption",
           "locationName": "decryption",
-          "documentation": "The type of encryption that is used on the content ingested from this source."
+          "documentation": "The type of encryption that is used on the content ingested from this source. Allowable encryption types: static-key."
         },
         "Description": {
           "shape": "__string",
@@ -2393,6 +5661,7 @@
         },
         "EntitlementArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:entitlement:.+$",
           "locationName": "entitlementArn",
           "documentation": "The ARN of the entitlement that allows you to subscribe to this flow. The entitlement is set by the flow originator, and the ARN is generated as part of the originator's flow."
         },
@@ -2404,12 +5673,27 @@
         "MaxBitrate": {
           "shape": "__integer",
           "locationName": "maxBitrate",
-          "documentation": "The smoothing max bitrate for RIST, RTP, and RTP-FEC streams."
+          "documentation": "The smoothing max bitrate (in bps) for RIST, RTP, and RTP-FEC streams."
         },
         "MaxLatency": {
           "shape": "__integer",
           "locationName": "maxLatency",
-          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams."
+          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams."
+        },
+        "MaxSyncBuffer": {
+          "shape": "__integer",
+          "locationName": "maxSyncBuffer",
+          "documentation": "The size of the buffer (in milliseconds) to use to sync incoming source data."
+        },
+        "MediaStreamSourceConfigurations": {
+          "shape": "__listOfMediaStreamSourceConfigurationRequest",
+          "locationName": "mediaStreamSourceConfigurations",
+          "documentation": "The media streams that are associated with the source, and the parameters for those associations."
+        },
+        "MinLatency": {
+          "shape": "__integer",
+          "locationName": "minLatency",
+          "documentation": "The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency."
         },
         "Name": {
           "shape": "__string",
@@ -2421,10 +5705,30 @@
           "locationName": "protocol",
           "documentation": "The protocol that is used by the source."
         },
+        "SenderControlPort": {
+          "shape": "__integer",
+          "locationName": "senderControlPort",
+          "documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender."
+        },
+        "SenderIpAddress": {
+          "shape": "__string",
+          "locationName": "senderIpAddress",
+          "documentation": "The IP address that the flow communicates with to initiate connection with the sender."
+        },
+        "SourceListenerAddress": {
+          "shape": "__string",
+          "locationName": "sourceListenerAddress",
+          "documentation": "Source IP or domain name for SRT-caller protocol."
+        },
+        "SourceListenerPort": {
+          "shape": "__integer",
+          "locationName": "sourceListenerPort",
+          "documentation": "Source port for SRT-caller protocol."
+        },
         "StreamId": {
           "shape": "__string",
           "locationName": "streamId",
-          "documentation": "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams."
+          "documentation": "The stream ID that you want to use for this transport. This parameter applies only to Zixi and SRT caller-based streams."
         },
         "VpcInterfaceName": {
           "shape": "__string",
@@ -2435,6 +5739,11 @@
           "shape": "__string",
           "locationName": "whitelistCidr",
           "documentation": "The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16."
+        },
+        "GatewayBridgeSource": {
+          "shape": "SetGatewayBridgeSourceRequest",
+          "locationName": "gatewayBridgeSource",
+          "documentation": "The source configuration for cloud flows receiving a stream from a bridge."
         }
       },
       "documentation": "The settings for the source of the flow."
@@ -2472,10 +5781,25 @@
           "locationName": "ingestPort",
           "documentation": "The port that the flow will be listening on for incoming content."
         },
+        "MediaStreamSourceConfigurations": {
+          "shape": "__listOfMediaStreamSourceConfiguration",
+          "locationName": "mediaStreamSourceConfigurations",
+          "documentation": "The media streams that are associated with the source, and the parameters for those associations."
+        },
         "Name": {
           "shape": "__string",
           "locationName": "name",
           "documentation": "The name of the source."
+        },
+        "SenderControlPort": {
+          "shape": "__integer",
+          "locationName": "senderControlPort",
+          "documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender."
+        },
+        "SenderIpAddress": {
+          "shape": "__string",
+          "locationName": "senderIpAddress",
+          "documentation": "The IP address that the flow communicates with to initiate connection with the sender."
         },
         "SourceArn": {
           "shape": "__string",
@@ -2490,19 +5814,35 @@
         "VpcInterfaceName": {
           "shape": "__string",
           "locationName": "vpcInterfaceName",
-          "documentation": "The name of the VPC Interface this Source is configured with."
+          "documentation": "The name of the VPC interface that is used for this source."
         },
         "WhitelistCidr": {
           "shape": "__string",
           "locationName": "whitelistCidr",
           "documentation": "The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16."
+        },
+        "GatewayBridgeSource": {
+          "shape": "GatewayBridgeSource",
+          "locationName": "gatewayBridgeSource",
+          "documentation": "The source configuration for cloud flows receiving a stream from a bridge."
         }
       },
       "documentation": "The settings for the source of the flow.",
       "required": [
-        "SourceArn",
-        "Name"
+        "Name",
+        "SourceArn"
       ]
+    },
+    "SourcePriority": {
+      "type": "structure",
+      "members": {
+        "PrimarySource": {
+          "shape": "__string",
+          "locationName": "primarySource",
+          "documentation": "The name of the source you choose as the primary source for this flow."
+        }
+      },
+      "documentation": "The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams."
     },
     "SourceType": {
       "type": "string",
@@ -2516,6 +5856,7 @@
       "members": {
         "FlowArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
           "location": "uri",
           "locationName": "flowArn",
           "documentation": "The ARN of the flow that you want to start."
@@ -2564,6 +5905,7 @@
       "members": {
         "FlowArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
           "location": "uri",
           "locationName": "flowArn",
           "documentation": "The ARN of the flow that you want to stop."
@@ -2609,6 +5951,62 @@
         "Tags"
       ]
     },
+    "Tcs": {
+      "type": "string",
+      "enum": [
+        "SDR",
+        "PQ",
+        "HLG",
+        "LINEAR",
+        "BT2100LINPQ",
+        "BT2100LINHLG",
+        "ST2065-1",
+        "ST428-1",
+        "DENSITY"
+      ]
+    },
+    "ThumbnailDetails": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "locationName": "flowArn",
+          "documentation": "The ARN of the flow that DescribeFlowSourceThumbnail was performed on."
+        },
+        "Thumbnail": {
+          "shape": "__string",
+          "locationName": "thumbnail",
+          "documentation": "Thumbnail Base64 string."
+        },
+        "ThumbnailMessages": {
+          "shape": "__listOfMessageDetail",
+          "locationName": "thumbnailMessages",
+          "documentation": "Status code and messages about the flow source thumbnail."
+        },
+        "Timecode": {
+          "shape": "__string",
+          "locationName": "timecode",
+          "documentation": "Timecode of thumbnail."
+        },
+        "Timestamp": {
+          "shape": "__timestampIso8601",
+          "locationName": "timestamp",
+          "documentation": "The timestamp of when thumbnail was generated."
+        }
+      },
+      "documentation": "The details of the thumbnail, including thumbnail base64 string, timecode and the time when thumbnail was generated.",
+      "required": [
+        "ThumbnailMessages",
+        "FlowArn"
+      ]
+    },
+    "ThumbnailState": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
     "Transport": {
       "type": "structure",
       "members": {
@@ -2620,12 +6018,22 @@
         "MaxBitrate": {
           "shape": "__integer",
           "locationName": "maxBitrate",
-          "documentation": "The smoothing max bitrate for RIST, RTP, and RTP-FEC streams."
+          "documentation": "The smoothing max bitrate (in bps) for RIST, RTP, and RTP-FEC streams."
         },
         "MaxLatency": {
           "shape": "__integer",
           "locationName": "maxLatency",
-          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams."
+          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams."
+        },
+        "MaxSyncBuffer": {
+          "shape": "__integer",
+          "locationName": "maxSyncBuffer",
+          "documentation": "The size of the buffer (in milliseconds) to use to sync incoming source data."
+        },
+        "MinLatency": {
+          "shape": "__integer",
+          "locationName": "minLatency",
+          "documentation": "The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency."
         },
         "Protocol": {
           "shape": "Protocol",
@@ -2637,20 +6045,140 @@
           "locationName": "remoteId",
           "documentation": "The remote ID for the Zixi-pull stream."
         },
+        "SenderControlPort": {
+          "shape": "__integer",
+          "locationName": "senderControlPort",
+          "documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender."
+        },
+        "SenderIpAddress": {
+          "shape": "__string",
+          "locationName": "senderIpAddress",
+          "documentation": "The IP address that the flow communicates with to initiate connection with the sender."
+        },
         "SmoothingLatency": {
           "shape": "__integer",
           "locationName": "smoothingLatency",
           "documentation": "The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams."
         },
+        "SourceListenerAddress": {
+          "shape": "__string",
+          "locationName": "sourceListenerAddress",
+          "documentation": "Source IP or domain name for SRT-caller protocol."
+        },
+        "SourceListenerPort": {
+          "shape": "__integer",
+          "locationName": "sourceListenerPort",
+          "documentation": "Source port for SRT-caller protocol."
+        },
         "StreamId": {
           "shape": "__string",
           "locationName": "streamId",
-          "documentation": "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams."
+          "documentation": "The stream ID that you want to use for this transport. This parameter applies only to Zixi and SRT caller-based streams."
         }
       },
       "documentation": "Attributes related to the transport stream that are used in a source or output.",
       "required": [
         "Protocol"
+      ]
+    },
+    "TransportMediaInfo": {
+      "type": "structure",
+      "members": {
+        "Programs": {
+          "shape": "__listOfTransportStreamProgram",
+          "locationName": "programs",
+          "documentation": "The list of transport stream programs in the current flow's source."
+        }
+      },
+      "documentation": "The metadata of the transport stream in the current flow's source.",
+      "required": [
+        "Programs"
+      ]
+    },
+    "TransportStream": {
+      "type": "structure",
+      "members": {
+        "Channels": {
+          "shape": "__integer",
+          "locationName": "channels",
+          "documentation": "The number of channels in the audio stream."
+        },
+        "Codec": {
+          "shape": "__string",
+          "locationName": "codec",
+          "documentation": "The codec used by the stream."
+        },
+        "FrameRate": {
+          "shape": "__string",
+          "locationName": "frameRate",
+          "documentation": "The frame rate used by the video stream."
+        },
+        "FrameResolution": {
+          "shape": "FrameResolution",
+          "locationName": "frameResolution"
+        },
+        "Pid": {
+          "shape": "__integer",
+          "locationName": "pid",
+          "documentation": "The Packet ID (PID) as it is reported in the Program Map Table."
+        },
+        "SampleRate": {
+          "shape": "__integer",
+          "locationName": "sampleRate",
+          "documentation": "The sample rate used by the audio stream."
+        },
+        "SampleSize": {
+          "shape": "__integer",
+          "locationName": "sampleSize",
+          "documentation": "The sample bit size used by the audio stream."
+        },
+        "StreamType": {
+          "shape": "__string",
+          "locationName": "streamType",
+          "documentation": "The Stream Type as it is reported in the Program Map Table."
+        }
+      },
+      "documentation": "The metadata of an elementary transport stream.",
+      "required": [
+        "StreamType",
+        "Pid"
+      ]
+    },
+    "TransportStreamProgram": {
+      "type": "structure",
+      "members": {
+        "PcrPid": {
+          "shape": "__integer",
+          "locationName": "pcrPid",
+          "documentation": "The Program Clock Reference (PCR) Packet ID (PID) as it is reported in the Program Association Table."
+        },
+        "ProgramName": {
+          "shape": "__string",
+          "locationName": "programName",
+          "documentation": "The program name as it is reported in the Program Association Table."
+        },
+        "ProgramNumber": {
+          "shape": "__integer",
+          "locationName": "programNumber",
+          "documentation": "The program number as it is reported in the Program Association Table."
+        },
+        "ProgramPid": {
+          "shape": "__integer",
+          "locationName": "programPid",
+          "documentation": "The program Packet ID (PID) as it is reported in the Program Association Table."
+        },
+        "Streams": {
+          "shape": "__listOfTransportStream",
+          "locationName": "streams",
+          "documentation": "The list of elementary transport streams in the program. The list includes video, audio, and data streams."
+        }
+      },
+      "documentation": "The metadata of a single transport stream program.",
+      "required": [
+        "ProgramPid",
+        "PcrPid",
+        "ProgramNumber",
+        "Streams"
       ]
     },
     "UntagResourceRequest": {
@@ -2673,6 +6201,250 @@
         "TagKeys",
         "ResourceArn"
       ]
+    },
+    "UpdateBridgeFlowSourceRequest": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
+          "locationName": "flowArn",
+          "documentation": "The ARN of the cloud flow to use as a source of this bridge."
+        },
+        "FlowVpcInterfaceAttachment": {
+          "shape": "VpcInterfaceAttachment",
+          "locationName": "flowVpcInterfaceAttachment",
+          "documentation": "The name of the VPC interface attachment to use for this source."
+        }
+      },
+      "documentation": "Update the flow source of the bridge."
+    },
+    "UpdateBridgeNetworkOutputRequest": {
+      "type": "structure",
+      "members": {
+        "IpAddress": {
+          "shape": "__string",
+          "locationName": "ipAddress",
+          "documentation": "The network output IP Address."
+        },
+        "NetworkName": {
+          "shape": "__string",
+          "locationName": "networkName",
+          "documentation": "The network output's gateway network name."
+        },
+        "Port": {
+          "shape": "__integer",
+          "locationName": "port",
+          "documentation": "The network output port."
+        },
+        "Protocol": {
+          "shape": "Protocol",
+          "locationName": "protocol",
+          "documentation": "The network output protocol."
+        },
+        "Ttl": {
+          "shape": "__integer",
+          "locationName": "ttl",
+          "documentation": "The network output TTL."
+        }
+      },
+      "documentation": "Update an existing network output."
+    },
+    "UpdateBridgeNetworkSourceRequest": {
+      "type": "structure",
+      "members": {
+        "MulticastIp": {
+          "shape": "__string",
+          "locationName": "multicastIp",
+          "documentation": "The network source multicast IP."
+        },
+        "NetworkName": {
+          "shape": "__string",
+          "locationName": "networkName",
+          "documentation": "The network source's gateway network name."
+        },
+        "Port": {
+          "shape": "__integer",
+          "locationName": "port",
+          "documentation": "The network source port."
+        },
+        "Protocol": {
+          "shape": "Protocol",
+          "locationName": "protocol",
+          "documentation": "The network source protocol."
+        }
+      },
+      "documentation": "Update the network source of the bridge."
+    },
+    "UpdateBridgeOutputRequest": {
+      "type": "structure",
+      "members": {
+        "BridgeArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:bridge:.+$",
+          "location": "uri",
+          "locationName": "bridgeArn",
+          "documentation": "The ARN of the bridge that you want to update."
+        },
+        "NetworkOutput": {
+          "shape": "UpdateBridgeNetworkOutputRequest",
+          "locationName": "networkOutput"
+        },
+        "OutputName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "outputName",
+          "documentation": "The name of the bridge output that you want to update."
+        }
+      },
+      "documentation": "The fields that you want to update in the bridge output.",
+      "required": [
+        "OutputName",
+        "BridgeArn"
+      ]
+    },
+    "UpdateBridgeOutputResponse": {
+      "type": "structure",
+      "members": {
+        "BridgeArn": {
+          "shape": "__string",
+          "locationName": "bridgeArn",
+          "documentation": "The Amazon Resource Number (ARN) of the bridge."
+        },
+        "Output": {
+          "shape": "BridgeOutput",
+          "locationName": "output",
+          "documentation": "The output that you updated."
+        }
+      }
+    },
+    "UpdateBridgeRequest": {
+      "type": "structure",
+      "members": {
+        "BridgeArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:bridge:.+$",
+          "location": "uri",
+          "locationName": "bridgeArn",
+          "documentation": "The Amazon Resource Number (ARN) of the bridge that you want to update."
+        },
+        "EgressGatewayBridge": {
+          "shape": "UpdateEgressGatewayBridgeRequest",
+          "locationName": "egressGatewayBridge"
+        },
+        "IngressGatewayBridge": {
+          "shape": "UpdateIngressGatewayBridgeRequest",
+          "locationName": "ingressGatewayBridge"
+        },
+        "SourceFailoverConfig": {
+          "shape": "UpdateFailoverConfig",
+          "locationName": "sourceFailoverConfig"
+        }
+      },
+      "documentation": "A request to update the bridge.",
+      "required": [
+        "BridgeArn"
+      ]
+    },
+    "UpdateBridgeResponse": {
+      "type": "structure",
+      "members": {
+        "Bridge": {
+          "shape": "Bridge",
+          "locationName": "bridge"
+        }
+      }
+    },
+    "UpdateBridgeSourceRequest": {
+      "type": "structure",
+      "members": {
+        "BridgeArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:bridge:.+$",
+          "location": "uri",
+          "locationName": "bridgeArn",
+          "documentation": "The ARN of the bridge that you want to update."
+        },
+        "FlowSource": {
+          "shape": "UpdateBridgeFlowSourceRequest",
+          "locationName": "flowSource"
+        },
+        "NetworkSource": {
+          "shape": "UpdateBridgeNetworkSourceRequest",
+          "locationName": "networkSource"
+        },
+        "SourceName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "sourceName",
+          "documentation": "The name of the source that you want to update."
+        }
+      },
+      "documentation": "The fields that you want to update in the bridge source.",
+      "required": [
+        "BridgeArn",
+        "SourceName"
+      ]
+    },
+    "UpdateBridgeSourceResponse": {
+      "type": "structure",
+      "members": {
+        "BridgeArn": {
+          "shape": "__string",
+          "locationName": "bridgeArn",
+          "documentation": "The Amazon Resource Number (ARN) of the bridge."
+        },
+        "Source": {
+          "shape": "BridgeSource",
+          "locationName": "source"
+        }
+      }
+    },
+    "UpdateBridgeStateRequest": {
+      "type": "structure",
+      "members": {
+        "BridgeArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:bridge:.+$",
+          "location": "uri",
+          "locationName": "bridgeArn",
+          "documentation": "The ARN of the bridge that you want to update."
+        },
+        "DesiredState": {
+          "shape": "DesiredState",
+          "locationName": "desiredState"
+        }
+      },
+      "documentation": "A request to update the bridge state.",
+      "required": [
+        "BridgeArn",
+        "DesiredState"
+      ]
+    },
+    "UpdateBridgeStateResponse": {
+      "type": "structure",
+      "members": {
+        "BridgeArn": {
+          "shape": "__string",
+          "locationName": "bridgeArn",
+          "documentation": "The Amazon Resource Number (ARN) of the bridge."
+        },
+        "DesiredState": {
+          "shape": "DesiredState",
+          "locationName": "desiredState",
+          "documentation": "The state of the bridge. ACTIVE or STANDBY."
+        }
+      }
+    },
+    "UpdateEgressGatewayBridgeRequest": {
+      "type": "structure",
+      "members": {
+        "MaxBitrate": {
+          "shape": "__integer",
+          "locationName": "maxBitrate",
+          "documentation": "Update an existing egress-type bridge."
+        }
+      }
     },
     "UpdateEncryption": {
       "type": "structure",
@@ -2728,17 +6500,27 @@
     "UpdateFailoverConfig": {
       "type": "structure",
       "members": {
+        "FailoverMode": {
+          "shape": "FailoverMode",
+          "locationName": "failoverMode",
+          "documentation": "The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams."
+        },
         "RecoveryWindow": {
           "shape": "__integer",
           "locationName": "recoveryWindow",
           "documentation": "Recovery window time to look for dash-7 packets"
+        },
+        "SourcePriority": {
+          "shape": "SourcePriority",
+          "locationName": "sourcePriority",
+          "documentation": "The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams."
         },
         "State": {
           "shape": "State",
           "locationName": "state"
         }
       },
-      "documentation": "The settings for source failover"
+      "documentation": "The settings for source failover."
     },
     "UpdateFlowEntitlementRequest": {
       "type": "structure",
@@ -2751,10 +6533,11 @@
         "Encryption": {
           "shape": "UpdateEncryption",
           "locationName": "encryption",
-          "documentation": "The type of encryption that will be used on the output associated with this entitlement."
+          "documentation": "The type of encryption that will be used on the output associated with this entitlement. Allowable encryption types: static-key, speke."
         },
         "EntitlementArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:entitlement:.+$",
           "location": "uri",
           "locationName": "entitlementArn",
           "documentation": "The ARN of the entitlement that you want to update."
@@ -2766,6 +6549,7 @@
         },
         "FlowArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
           "location": "uri",
           "locationName": "flowArn",
           "documentation": "The flow that is associated with the entitlement that you want to update."
@@ -2797,6 +6581,69 @@
         }
       }
     },
+    "UpdateFlowMediaStreamRequest": {
+      "type": "structure",
+      "members": {
+        "Attributes": {
+          "shape": "MediaStreamAttributesRequest",
+          "locationName": "attributes",
+          "documentation": "The attributes that you want to assign to the media stream."
+        },
+        "ClockRate": {
+          "shape": "__integer",
+          "locationName": "clockRate",
+          "documentation": "The sample rate (in Hz) for the stream. If the media stream type is video or ancillary data, set this value to 90000. If the media stream type is audio, set this value to either 48000 or 96000."
+        },
+        "Description": {
+          "shape": "__string",
+          "locationName": "description",
+          "documentation": "Description"
+        },
+        "FlowArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
+          "location": "uri",
+          "locationName": "flowArn",
+          "documentation": "The Amazon Resource Name (ARN) of the flow."
+        },
+        "MediaStreamName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "mediaStreamName",
+          "documentation": "The name of the media stream that you want to update."
+        },
+        "MediaStreamType": {
+          "shape": "MediaStreamType",
+          "locationName": "mediaStreamType",
+          "documentation": "The type of media stream."
+        },
+        "VideoFormat": {
+          "shape": "__string",
+          "locationName": "videoFormat",
+          "documentation": "The resolution of the video."
+        }
+      },
+      "documentation": "The fields that you want to update in the media stream.",
+      "required": [
+        "FlowArn",
+        "MediaStreamName"
+      ]
+    },
+    "UpdateFlowMediaStreamResponse": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "locationName": "flowArn",
+          "documentation": "The ARN of the flow that is associated with the media stream that you updated."
+        },
+        "MediaStream": {
+          "shape": "MediaStream",
+          "locationName": "mediaStream",
+          "documentation": "The media stream that you updated."
+        }
+      }
+    },
     "UpdateFlowOutputRequest": {
       "type": "structure",
       "members": {
@@ -2818,10 +6665,11 @@
         "Encryption": {
           "shape": "UpdateEncryption",
           "locationName": "encryption",
-          "documentation": "The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key)."
+          "documentation": "The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key). Allowable encryption types: static-key."
         },
         "FlowArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
           "location": "uri",
           "locationName": "flowArn",
           "documentation": "The flow that is associated with the output that you want to update."
@@ -2829,10 +6677,21 @@
         "MaxLatency": {
           "shape": "__integer",
           "locationName": "maxLatency",
-          "documentation": "The maximum latency in milliseconds for Zixi-based streams."
+          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams."
+        },
+        "MediaStreamOutputConfigurations": {
+          "shape": "__listOfMediaStreamOutputConfigurationRequest",
+          "locationName": "mediaStreamOutputConfigurations",
+          "documentation": "The media streams that are associated with the output, and the parameters for those associations."
+        },
+        "MinLatency": {
+          "shape": "__integer",
+          "locationName": "minLatency",
+          "documentation": "The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency."
         },
         "OutputArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:output:.+$",
           "location": "uri",
           "locationName": "outputArn",
           "documentation": "The ARN of the output that you want to update."
@@ -2852,6 +6711,16 @@
           "locationName": "remoteId",
           "documentation": "The remote ID for the Zixi-pull stream."
         },
+        "SenderControlPort": {
+          "shape": "__integer",
+          "locationName": "senderControlPort",
+          "documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender."
+        },
+        "SenderIpAddress": {
+          "shape": "__string",
+          "locationName": "senderIpAddress",
+          "documentation": "The IP address that the flow communicates with to initiate connection with the sender."
+        },
         "SmoothingLatency": {
           "shape": "__integer",
           "locationName": "smoothingLatency",
@@ -2860,12 +6729,17 @@
         "StreamId": {
           "shape": "__string",
           "locationName": "streamId",
-          "documentation": "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams."
+          "documentation": "The stream ID that you want to use for this transport. This parameter applies only to Zixi and SRT caller-based streams."
         },
         "VpcInterfaceAttachment": {
           "shape": "VpcInterfaceAttachment",
           "locationName": "vpcInterfaceAttachment",
           "documentation": "The name of the VPC interface attachment to use for this output."
+        },
+        "OutputStatus": {
+          "shape": "OutputStatus",
+          "locationName": "outputStatus",
+          "documentation": "An indication of whether the output should transmit data or not. If you don't specify the outputStatus field in your request, MediaConnect leaves the value unchanged."
         }
       },
       "documentation": "The fields that you want to update in the output.",
@@ -2894,6 +6768,7 @@
       "members": {
         "FlowArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
           "location": "uri",
           "locationName": "flowArn",
           "documentation": "The flow that you want to update."
@@ -2901,6 +6776,14 @@
         "SourceFailoverConfig": {
           "shape": "UpdateFailoverConfig",
           "locationName": "sourceFailoverConfig"
+        },
+        "Maintenance": {
+          "shape": "UpdateMaintenance",
+          "locationName": "maintenance"
+        },
+        "SourceMonitoringConfig": {
+          "shape": "MonitoringConfig",
+          "locationName": "sourceMonitoringConfig"
         }
       },
       "documentation": "A request to update flow.",
@@ -2923,7 +6806,7 @@
         "Decryption": {
           "shape": "UpdateEncryption",
           "locationName": "decryption",
-          "documentation": "The type of encryption used on the content ingested from this source."
+          "documentation": "The type of encryption used on the content ingested from this source. Allowable encryption types: static-key."
         },
         "Description": {
           "shape": "__string",
@@ -2932,11 +6815,13 @@
         },
         "EntitlementArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:entitlement:.+$",
           "locationName": "entitlementArn",
           "documentation": "The ARN of the entitlement that allows you to subscribe to this flow. The entitlement is set by the flow originator, and the ARN is generated as part of the originator's flow."
         },
         "FlowArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
           "location": "uri",
           "locationName": "flowArn",
           "documentation": "The flow that is associated with the source that you want to update."
@@ -2949,38 +6834,79 @@
         "MaxBitrate": {
           "shape": "__integer",
           "locationName": "maxBitrate",
-          "documentation": "The smoothing max bitrate for RIST, RTP, and RTP-FEC streams."
+          "documentation": "The smoothing max bitrate (in bps) for RIST, RTP, and RTP-FEC streams."
         },
         "MaxLatency": {
           "shape": "__integer",
           "locationName": "maxLatency",
-          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams."
+          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams."
+        },
+        "MaxSyncBuffer": {
+          "shape": "__integer",
+          "locationName": "maxSyncBuffer",
+          "documentation": "The size of the buffer (in milliseconds) to use to sync incoming source data."
+        },
+        "MediaStreamSourceConfigurations": {
+          "shape": "__listOfMediaStreamSourceConfigurationRequest",
+          "locationName": "mediaStreamSourceConfigurations",
+          "documentation": "The media streams that are associated with the source, and the parameters for those associations."
+        },
+        "MinLatency": {
+          "shape": "__integer",
+          "locationName": "minLatency",
+          "documentation": "The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency."
         },
         "Protocol": {
           "shape": "Protocol",
           "locationName": "protocol",
           "documentation": "The protocol that is used by the source."
         },
+        "SenderControlPort": {
+          "shape": "__integer",
+          "locationName": "senderControlPort",
+          "documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender."
+        },
+        "SenderIpAddress": {
+          "shape": "__string",
+          "locationName": "senderIpAddress",
+          "documentation": "The IP address that the flow communicates with to initiate connection with the sender."
+        },
         "SourceArn": {
           "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:source:.+$",
           "location": "uri",
           "locationName": "sourceArn",
           "documentation": "The ARN of the source that you want to update."
         },
+        "SourceListenerAddress": {
+          "shape": "__string",
+          "locationName": "sourceListenerAddress",
+          "documentation": "Source IP or domain name for SRT-caller protocol."
+        },
+        "SourceListenerPort": {
+          "shape": "__integer",
+          "locationName": "sourceListenerPort",
+          "documentation": "Source port for SRT-caller protocol."
+        },
         "StreamId": {
           "shape": "__string",
           "locationName": "streamId",
-          "documentation": "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams."
+          "documentation": "The stream ID that you want to use for this transport. This parameter applies only to Zixi and SRT caller-based streams."
         },
         "VpcInterfaceName": {
           "shape": "__string",
           "locationName": "vpcInterfaceName",
-          "documentation": "The name of the VPC Interface to configure this Source with."
+          "documentation": "The name of the VPC interface to use for this source."
         },
         "WhitelistCidr": {
           "shape": "__string",
           "locationName": "whitelistCidr",
           "documentation": "The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16."
+        },
+        "GatewayBridgeSource": {
+          "shape": "UpdateGatewayBridgeSourceRequest",
+          "locationName": "gatewayBridgeSource",
+          "documentation": "The source configuration for cloud flows receiving a stream from a bridge."
         }
       },
       "documentation": "A request to update the source of a flow.",
@@ -3004,18 +6930,112 @@
         }
       }
     },
+    "UpdateGatewayBridgeSourceRequest": {
+      "type": "structure",
+      "members": {
+        "BridgeArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:bridge:.+$",
+          "locationName": "bridgeArn",
+          "documentation": "The ARN of the bridge feeding this flow."
+        },
+        "VpcInterfaceAttachment": {
+          "shape": "VpcInterfaceAttachment",
+          "locationName": "vpcInterfaceAttachment",
+          "documentation": "The name of the VPC interface attachment to use for this bridge source."
+        }
+      },
+      "documentation": "The source configuration for cloud flows receiving a stream from a bridge."
+    },
+    "UpdateGatewayInstanceRequest": {
+      "type": "structure",
+      "members": {
+        "BridgePlacement": {
+          "shape": "BridgePlacement",
+          "locationName": "bridgePlacement",
+          "documentation": "The availability of the instance to host new bridges. The bridgePlacement property can be LOCKED or AVAILABLE. If it is LOCKED, no new bridges can be deployed to this instance. If it is AVAILABLE, new bridges can be added to this instance."
+        },
+        "GatewayInstanceArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:gateway:.+:instance:.+$",
+          "location": "uri",
+          "locationName": "gatewayInstanceArn",
+          "documentation": "The Amazon Resource Name (ARN) of the instance that you want to update."
+        }
+      },
+      "documentation": "A request to update gateway instance state.",
+      "required": [
+        "GatewayInstanceArn"
+      ]
+    },
+    "UpdateGatewayInstanceResponse": {
+      "type": "structure",
+      "members": {
+        "BridgePlacement": {
+          "shape": "BridgePlacement",
+          "locationName": "bridgePlacement",
+          "documentation": "The availability of the instance to host new bridges. The bridgePlacement property can be LOCKED or AVAILABLE. If it is LOCKED, no new bridges can be deployed to this instance. If it is AVAILABLE, new bridges can be added to this instance."
+        },
+        "GatewayInstanceArn": {
+          "shape": "__string",
+          "locationName": "gatewayInstanceArn",
+          "documentation": "The Amazon Resource Name (ARN) of the instance."
+        }
+      }
+    },
+    "UpdateIngressGatewayBridgeRequest": {
+      "type": "structure",
+      "members": {
+        "MaxBitrate": {
+          "shape": "__integer",
+          "locationName": "maxBitrate",
+          "documentation": "The maximum expected bitrate (in bps)."
+        },
+        "MaxOutputs": {
+          "shape": "__integer",
+          "locationName": "maxOutputs",
+          "documentation": "The maximum number of expected outputs."
+        }
+      }
+    },
+    "UpdateMaintenance": {
+      "type": "structure",
+      "members": {
+        "MaintenanceDay": {
+          "shape": "MaintenanceDay",
+          "locationName": "maintenanceDay",
+          "documentation": "A day of a week when the maintenance will happen. use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday."
+        },
+        "MaintenanceScheduledDate": {
+          "shape": "__string",
+          "locationName": "maintenanceScheduledDate",
+          "documentation": "A scheduled date in ISO UTC format when the maintenance will happen. Use YYYY-MM-DD format. Example: 2021-01-30."
+        },
+        "MaintenanceStartHour": {
+          "shape": "__string",
+          "locationName": "maintenanceStartHour",
+          "documentation": "UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00."
+        }
+      },
+      "documentation": "Update maintenance setting for a flow"
+    },
     "VpcInterface": {
       "type": "structure",
       "members": {
         "Name": {
           "shape": "__string",
           "locationName": "name",
-          "documentation": "Immutable and has to be a unique against other VpcInterfaces in this Flow"
+          "documentation": "Immutable and has to be a unique against other VpcInterfaces in this Flow."
         },
         "NetworkInterfaceIds": {
           "shape": "__listOf__string",
           "locationName": "networkInterfaceIds",
           "documentation": "IDs of the network interfaces created in customer's account by MediaConnect."
+        },
+        "NetworkInterfaceType": {
+          "shape": "NetworkInterfaceType",
+          "locationName": "networkInterfaceType",
+          "documentation": "The type of network interface."
         },
         "RoleArn": {
           "shape": "__string",
@@ -3035,6 +7055,7 @@
       },
       "documentation": "The settings for a VPC Source.",
       "required": [
+        "NetworkInterfaceType",
         "NetworkInterfaceIds",
         "SubnetId",
         "SecurityGroupIds",
@@ -3048,10 +7069,10 @@
         "VpcInterfaceName": {
           "shape": "__string",
           "locationName": "vpcInterfaceName",
-          "documentation": "The name of the VPC interface to use for this output."
+          "documentation": "The name of the VPC interface to use for this resource."
         }
       },
-      "documentation": "The settings for attaching a VPC interface to an output."
+      "documentation": "The settings for attaching a VPC interface to an resource."
     },
     "VpcInterfaceRequest": {
       "type": "structure",
@@ -3060,6 +7081,11 @@
           "shape": "__string",
           "locationName": "name",
           "documentation": "The name of the VPC Interface. This value must be unique within the current flow."
+        },
+        "NetworkInterfaceType": {
+          "shape": "NetworkInterfaceType",
+          "locationName": "networkInterfaceType",
+          "documentation": "The type of network interface. If this value is not included in the request, MediaConnect uses ENA as the networkInterfaceType."
         },
         "RoleArn": {
           "shape": "__string",
@@ -3085,13 +7111,61 @@
         "Name"
       ]
     },
+    "__boolean": {
+      "type": "boolean"
+    },
+    "__double": {
+      "type": "double"
+    },
     "__integer": {
       "type": "integer"
+    },
+    "__listOfAddBridgeOutputRequest": {
+      "type": "list",
+      "member": {
+        "shape": "AddBridgeOutputRequest"
+      }
+    },
+    "__listOfAddBridgeSourceRequest": {
+      "type": "list",
+      "member": {
+        "shape": "AddBridgeSourceRequest"
+      }
+    },
+    "__listOfAddMediaStreamRequest": {
+      "type": "list",
+      "member": {
+        "shape": "AddMediaStreamRequest"
+      }
     },
     "__listOfAddOutputRequest": {
       "type": "list",
       "member": {
         "shape": "AddOutputRequest"
+      }
+    },
+    "__listOfBridgeOutput": {
+      "type": "list",
+      "member": {
+        "shape": "BridgeOutput"
+      }
+    },
+    "__listOfBridgeSource": {
+      "type": "list",
+      "member": {
+        "shape": "BridgeSource"
+      }
+    },
+    "__listOfDestinationConfiguration": {
+      "type": "list",
+      "member": {
+        "shape": "DestinationConfiguration"
+      }
+    },
+    "__listOfDestinationConfigurationRequest": {
+      "type": "list",
+      "member": {
+        "shape": "DestinationConfigurationRequest"
       }
     },
     "__listOfEntitlement": {
@@ -3100,10 +7174,34 @@
         "shape": "Entitlement"
       }
     },
+    "__listOfGatewayNetwork": {
+      "type": "list",
+      "member": {
+        "shape": "GatewayNetwork"
+      }
+    },
     "__listOfGrantEntitlementRequest": {
       "type": "list",
       "member": {
         "shape": "GrantEntitlementRequest"
+      }
+    },
+    "__listOfInputConfiguration": {
+      "type": "list",
+      "member": {
+        "shape": "InputConfiguration"
+      }
+    },
+    "__listOfInputConfigurationRequest": {
+      "type": "list",
+      "member": {
+        "shape": "InputConfigurationRequest"
+      }
+    },
+    "__listOfListedBridge": {
+      "type": "list",
+      "member": {
+        "shape": "ListedBridge"
       }
     },
     "__listOfListedEntitlement": {
@@ -3116,6 +7214,54 @@
       "type": "list",
       "member": {
         "shape": "ListedFlow"
+      }
+    },
+    "__listOfListedGateway": {
+      "type": "list",
+      "member": {
+        "shape": "ListedGateway"
+      }
+    },
+    "__listOfListedGatewayInstance": {
+      "type": "list",
+      "member": {
+        "shape": "ListedGatewayInstance"
+      }
+    },
+    "__listOfMediaStream": {
+      "type": "list",
+      "member": {
+        "shape": "MediaStream"
+      }
+    },
+    "__listOfMediaStreamOutputConfiguration": {
+      "type": "list",
+      "member": {
+        "shape": "MediaStreamOutputConfiguration"
+      }
+    },
+    "__listOfMediaStreamOutputConfigurationRequest": {
+      "type": "list",
+      "member": {
+        "shape": "MediaStreamOutputConfigurationRequest"
+      }
+    },
+    "__listOfMediaStreamSourceConfiguration": {
+      "type": "list",
+      "member": {
+        "shape": "MediaStreamSourceConfiguration"
+      }
+    },
+    "__listOfMediaStreamSourceConfigurationRequest": {
+      "type": "list",
+      "member": {
+        "shape": "MediaStreamSourceConfigurationRequest"
+      }
+    },
+    "__listOfMessageDetail": {
+      "type": "list",
+      "member": {
+        "shape": "MessageDetail"
       }
     },
     "__listOfOffering": {
@@ -3148,6 +7294,18 @@
         "shape": "Source"
       }
     },
+    "__listOfTransportStream": {
+      "type": "list",
+      "member": {
+        "shape": "TransportStream"
+      }
+    },
+    "__listOfTransportStreamProgram": {
+      "type": "list",
+      "member": {
+        "shape": "TransportStreamProgram"
+      }
+    },
     "__listOfVpcInterface": {
       "type": "list",
       "member": {
@@ -3158,6 +7316,12 @@
       "type": "list",
       "member": {
         "shape": "VpcInterfaceRequest"
+      }
+    },
+    "__listOf__integer": {
+      "type": "list",
+      "member": {
+        "shape": "__integer"
       }
     },
     "__listOf__string": {
@@ -3177,6 +7341,10 @@
     },
     "__string": {
       "type": "string"
+    },
+    "__timestampIso8601": {
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
     }
   },
   "documentation": "API for AWS Elemental MediaConnect"

@@ -20,13 +20,21 @@ declare class Pricing extends Service {
    */
   describeServices(callback?: (err: AWSError, data: Pricing.Types.DescribeServicesResponse) => void): Request<Pricing.Types.DescribeServicesResponse, AWSError>;
   /**
-   * Returns a list of attribute values. Attibutes are similar to the details in a Price List API offer file. For a list of available attributes, see Offer File Definitions in the AWS Billing and Cost Management User Guide.
+   * Returns a list of attribute values. Attributes are similar to the details in a Price List API offer file. For a list of available attributes, see Offer File Definitions in the Billing and Cost Management User Guide.
    */
   getAttributeValues(params: Pricing.Types.GetAttributeValuesRequest, callback?: (err: AWSError, data: Pricing.Types.GetAttributeValuesResponse) => void): Request<Pricing.Types.GetAttributeValuesResponse, AWSError>;
   /**
-   * Returns a list of attribute values. Attibutes are similar to the details in a Price List API offer file. For a list of available attributes, see Offer File Definitions in the AWS Billing and Cost Management User Guide.
+   * Returns a list of attribute values. Attributes are similar to the details in a Price List API offer file. For a list of available attributes, see Offer File Definitions in the Billing and Cost Management User Guide.
    */
   getAttributeValues(callback?: (err: AWSError, data: Pricing.Types.GetAttributeValuesResponse) => void): Request<Pricing.Types.GetAttributeValuesResponse, AWSError>;
+  /**
+   *   This feature is in preview release and is subject to change. Your use of Amazon Web Services Price List API is subject to the Beta Service Participation terms of the Amazon Web Services Service Terms (Section 1.10).   This returns the URL that you can retrieve your Price List file from. This URL is based on the PriceListArn and FileFormat that you retrieve from the ListPriceLists response. 
+   */
+  getPriceListFileUrl(params: Pricing.Types.GetPriceListFileUrlRequest, callback?: (err: AWSError, data: Pricing.Types.GetPriceListFileUrlResponse) => void): Request<Pricing.Types.GetPriceListFileUrlResponse, AWSError>;
+  /**
+   *   This feature is in preview release and is subject to change. Your use of Amazon Web Services Price List API is subject to the Beta Service Participation terms of the Amazon Web Services Service Terms (Section 1.10).   This returns the URL that you can retrieve your Price List file from. This URL is based on the PriceListArn and FileFormat that you retrieve from the ListPriceLists response. 
+   */
+  getPriceListFileUrl(callback?: (err: AWSError, data: Pricing.Types.GetPriceListFileUrlResponse) => void): Request<Pricing.Types.GetPriceListFileUrlResponse, AWSError>;
   /**
    * Returns a list of all products that match the filter criteria.
    */
@@ -35,6 +43,14 @@ declare class Pricing extends Service {
    * Returns a list of all products that match the filter criteria.
    */
   getProducts(callback?: (err: AWSError, data: Pricing.Types.GetProductsResponse) => void): Request<Pricing.Types.GetProductsResponse, AWSError>;
+  /**
+   *   This feature is in preview release and is subject to change. Your use of Amazon Web Services Price List API is subject to the Beta Service Participation terms of the Amazon Web Services Service Terms (Section 1.10).   This returns a list of Price List references that the requester if authorized to view, given a ServiceCode, CurrencyCode, and an EffectiveDate. Use without a RegionCode filter to list Price List references from all available Amazon Web Services Regions. Use with a RegionCode filter to get the Price List reference that's specific to a specific Amazon Web Services Region. You can use the PriceListArn from the response to get your preferred Price List files through the GetPriceListFileUrl API.
+   */
+  listPriceLists(params: Pricing.Types.ListPriceListsRequest, callback?: (err: AWSError, data: Pricing.Types.ListPriceListsResponse) => void): Request<Pricing.Types.ListPriceListsResponse, AWSError>;
+  /**
+   *   This feature is in preview release and is subject to change. Your use of Amazon Web Services Price List API is subject to the Beta Service Participation terms of the Amazon Web Services Service Terms (Section 1.10).   This returns a list of Price List references that the requester if authorized to view, given a ServiceCode, CurrencyCode, and an EffectiveDate. Use without a RegionCode filter to list Price List references from all available Amazon Web Services Regions. Use with a RegionCode filter to get the Price List reference that's specific to a specific Amazon Web Services Region. You can use the PriceListArn from the response to get your preferred Price List files through the GetPriceListFileUrl API.
+   */
+  listPriceLists(callback?: (err: AWSError, data: Pricing.Types.ListPriceListsResponse) => void): Request<Pricing.Types.ListPriceListsResponse, AWSError>;
 }
 declare namespace Pricing {
   export type AttributeNameList = String[];
@@ -46,6 +62,7 @@ declare namespace Pricing {
   }
   export type AttributeValueList = AttributeValue[];
   export type BoxedInteger = number;
+  export type CurrencyCode = string;
   export interface DescribeServicesRequest {
     /**
      * The code for the service whose information you want to retrieve, such as AmazonEC2. You can use the ServiceCode to filter the results in a GetProducts call. To retrieve a list of all services, leave this blank.
@@ -74,10 +91,13 @@ declare namespace Pricing {
      */
     FormatVersion?: String;
     /**
-     * The pagination token for the next set of retreivable results.
+     * The pagination token for the next set of retrievable results.
      */
     NextToken?: String;
   }
+  export type EffectiveDate = Date;
+  export type FileFormat = string;
+  export type FileFormats = FileFormat[];
   export interface Filter {
     /**
      * The type of filter that you want to use. Valid values are: TERM_MATCH. TERM_MATCH returns only products that match both the given filter field and the given value.
@@ -88,7 +108,7 @@ declare namespace Pricing {
      */
     Field: String;
     /**
-     * The service code or attribute value that you want to filter by. If you are filtering by service code this is the actual service code, such as AmazonEC2. If you are filtering by attribute name, this is the attribute value that you want the returned products to match, such as a Provisioned IOPS volume.
+     * The service code or attribute value that you want to filter by. If you're filtering by service code this is the actual service code, such as AmazonEC2. If you're filtering by attribute name, this is the attribute value that you want the returned products to match, such as a Provisioned IOPS volume.
      */
     Value: String;
   }
@@ -122,11 +142,27 @@ declare namespace Pricing {
      */
     NextToken?: String;
   }
+  export interface GetPriceListFileUrlRequest {
+    /**
+     * The unique identifier that maps to where your Price List files are located. PriceListArn can be obtained from the ListPriceLists response. 
+     */
+    PriceListArn: PriceListArn;
+    /**
+     * The format that you want to retrieve your Price List files in. The FileFormat can be obtained from the ListPriceLists response. 
+     */
+    FileFormat: FileFormat;
+  }
+  export interface GetPriceListFileUrlResponse {
+    /**
+     * The URL to download your Price List file from. 
+     */
+    Url?: String;
+  }
   export interface GetProductsRequest {
     /**
      * The code for the service whose products you want to retrieve. 
      */
-    ServiceCode?: String;
+    ServiceCode: String;
     /**
      * The list of filters that limit the returned products. only products that match all filters are returned.
      */
@@ -152,26 +188,85 @@ declare namespace Pricing {
     /**
      * The list of products that match your filters. The list contains both the product metadata and the price information.
      */
-    PriceList?: PriceList;
+    PriceList?: PriceListJsonItems;
     /**
      * The pagination token that indicates the next set of results to retrieve.
      */
     NextToken?: String;
   }
-  export type PriceList = PriceListItemJSON[];
-  export type PriceListItemJSON = string;
+  export interface ListPriceListsRequest {
+    /**
+     * The service code or the Savings Plan service code for the attributes that you want to retrieve. For example, to get the list of applicable Amazon EC2 price lists, use AmazonEC2. For a full list of service codes containing On-Demand and Reserved Instance (RI) pricing, use the DescribeServices API. To retrieve the Reserved Instance and Compute Savings Plan price lists, use ComputeSavingsPlans.  To retrieve Machine Learning Savings Plans price lists, use MachineLearningSavingsPlans. 
+     */
+    ServiceCode: ServiceCode;
+    /**
+     * The date that the Price List file prices are effective from. 
+     */
+    EffectiveDate: EffectiveDate;
+    /**
+     * This is used to filter the Price List by Amazon Web Services Region. For example, to get the price list only for the US East (N. Virginia) Region, use us-east-1. If nothing is specified, you retrieve price lists for all applicable Regions. The available RegionCode list can be retrieved from GetAttributeValues API.
+     */
+    RegionCode?: RegionCode;
+    /**
+     * The three alphabetical character ISO-4217 currency code that the Price List files are denominated in. 
+     */
+    CurrencyCode: CurrencyCode;
+    /**
+     * The pagination token that indicates the next set of results that you want to retrieve. 
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in the response. 
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListPriceListsResponse {
+    /**
+     * The type of price list references that match your request. 
+     */
+    PriceLists?: PriceLists;
+    /**
+     * The pagination token that indicates the next set of results to retrieve. 
+     */
+    NextToken?: String;
+  }
+  export type MaxResults = number;
+  export interface PriceList {
+    /**
+     * The unique identifier that maps to where your Price List files are located. PriceListArn can be obtained from the  ListPriceList  response. 
+     */
+    PriceListArn?: PriceListArn;
+    /**
+     * This is used to filter the Price List by Amazon Web Services Region. For example, to get the price list only for the US East (N. Virginia) Region, use us-east-1. If nothing is specified, you retrieve price lists for all applicable Regions. The available RegionCode list can be retrieved from  GetAttributeValues  API. 
+     */
+    RegionCode?: RegionCode;
+    /**
+     * The three alphabetical character ISO-4217 currency code the Price List files are denominated in. 
+     */
+    CurrencyCode?: CurrencyCode;
+    /**
+     * The format you want to retrieve your Price List files. The FileFormat can be obtained from the  ListPriceList  response. 
+     */
+    FileFormats?: FileFormats;
+  }
+  export type PriceListArn = string;
+  export type PriceListJsonItems = SynthesizedJsonPriceListJsonItem[];
+  export type PriceLists = PriceList[];
+  export type RegionCode = string;
   export interface Service {
     /**
-     * The code for the AWS service.
+     * The code for the Amazon Web Services service.
      */
-    ServiceCode?: String;
+    ServiceCode: String;
     /**
      * The attributes that are available for this service.
      */
     AttributeNames?: AttributeNameList;
   }
+  export type ServiceCode = string;
   export type ServiceList = Service[];
   export type String = string;
+  export type SynthesizedJsonPriceListJsonItem = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

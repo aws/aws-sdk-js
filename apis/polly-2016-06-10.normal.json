@@ -4,10 +4,16 @@
     "apiVersion": "2016-06-10",
     "endpointPrefix": "polly",
     "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
     "serviceFullName": "Amazon Polly",
     "serviceId": "Polly",
     "signatureVersion": "v4",
-    "uid": "polly-2016-06-10"
+    "uid": "polly-2016-06-10",
+    "auth": [
+      "aws.auth#sigv4"
+    ]
   },
   "operations": {
     "DeleteLexicon": {
@@ -31,7 +37,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Deletes the specified pronunciation lexicon stored in an AWS Region. A lexicon which has been deleted is not available for speech synthesis, nor is it possible to retrieve it using either the <code>GetLexicon</code> or <code>ListLexicon</code> APIs.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html\">Managing Lexicons</a>.</p>"
+      "documentation": "<p>Deletes the specified pronunciation lexicon stored in an Amazon Web Services Region. A lexicon which has been deleted is not available for speech synthesis, nor is it possible to retrieve it using either the <code>GetLexicon</code> or <code>ListLexicon</code> APIs.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html\">Managing Lexicons</a>.</p>"
     },
     "DescribeVoices": {
       "name": "DescribeVoices",
@@ -77,7 +83,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Returns the content of the specified pronunciation lexicon stored in an AWS Region. For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html\">Managing Lexicons</a>.</p>"
+      "documentation": "<p>Returns the content of the specified pronunciation lexicon stored in an Amazon Web Services Region. For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html\">Managing Lexicons</a>.</p>"
     },
     "GetSpeechSynthesisTask": {
       "name": "GetSpeechSynthesisTask",
@@ -126,7 +132,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Returns a list of pronunciation lexicons stored in an AWS Region. For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html\">Managing Lexicons</a>.</p>"
+      "documentation": "<p>Returns a list of pronunciation lexicons stored in an Amazon Web Services Region. For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html\">Managing Lexicons</a>.</p>"
     },
     "ListSpeechSynthesisTasks": {
       "name": "ListSpeechSynthesisTasks",
@@ -187,7 +193,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Stores a pronunciation lexicon in an AWS Region. If a lexicon with the same name already exists in the region, it is overwritten by the new lexicon. Lexicon operations have eventual consistency, therefore, it might take some time before the lexicon is available to the SynthesizeSpeech operation.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html\">Managing Lexicons</a>.</p>"
+      "documentation": "<p>Stores a pronunciation lexicon in an Amazon Web Services Region. If a lexicon with the same name already exists in the region, it is overwritten by the new lexicon. Lexicon operations have eventual consistency, therefore, it might take some time before the lexicon is available to the SynthesizeSpeech operation.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html\">Managing Lexicons</a>.</p>"
     },
     "StartSpeechSynthesisTask": {
       "name": "StartSpeechSynthesisTask",
@@ -240,7 +246,7 @@
           "shape": "LanguageNotSupportedException"
         }
       ],
-      "documentation": "<p>Allows the creation of an asynchronous synthesis task, by starting a new <code>SpeechSynthesisTask</code>. This operation requires all the standard information needed for speech synthesis, plus the name of an Amazon S3 bucket for the service to store the output of the synthesis task and two optional parameters (OutputS3KeyPrefix and SnsTopicArn). Once the synthesis task is created, this operation will return a SpeechSynthesisTask object, which will include an identifier of this task as well as the current status.</p>"
+      "documentation": "<p>Allows the creation of an asynchronous synthesis task, by starting a new <code>SpeechSynthesisTask</code>. This operation requires all the standard information needed for speech synthesis, plus the name of an Amazon S3 bucket for the service to store the output of the synthesis task and two optional parameters (<code>OutputS3KeyPrefix</code> and <code>SnsTopicArn</code>). Once the synthesis task is created, this operation will return a <code>SpeechSynthesisTask</code> object, which will include an identifier of this task as well as the current status. The <code>SpeechSynthesisTask</code> object is available for 72 hours after starting the asynchronous synthesis task.</p>"
     },
     "SynthesizeSpeech": {
       "name": "SynthesizeSpeech",
@@ -324,7 +330,7 @@
       "members": {
         "Engine": {
           "shape": "Engine",
-          "documentation": "<p>Specifies the engine (<code>standard</code> or <code>neural</code>) used by Amazon Polly when processing input text for speech synthesis. </p>",
+          "documentation": "<p>Specifies the engine (<code>standard</code>, <code>neural</code>, <code>long-form</code> or <code>generative</code>) used by Amazon Polly when processing input text for speech synthesis. </p>",
           "location": "querystring",
           "locationName": "Engine"
         },
@@ -365,7 +371,9 @@
       "type": "string",
       "enum": [
         "standard",
-        "neural"
+        "neural",
+        "long-form",
+        "generative"
       ]
     },
     "EngineList": {
@@ -465,7 +473,19 @@
         "ro-RO",
         "ru-RU",
         "sv-SE",
-        "tr-TR"
+        "tr-TR",
+        "en-NZ",
+        "en-ZA",
+        "ca-ES",
+        "de-AT",
+        "yue-CN",
+        "ar-AE",
+        "fi-FI",
+        "en-IE",
+        "nl-BE",
+        "fr-BE",
+        "cs-CZ",
+        "de-CH"
       ]
     },
     "LanguageCodeList": {
@@ -689,7 +709,7 @@
     },
     "SnsTopicArn": {
       "type": "string",
-      "pattern": "^arn:aws(-(cn|iso(-b)?|us-gov))?:sns:[a-z0-9_-]{1,50}:\\d{12}:[a-zA-Z0-9_-]{1,256}$"
+      "pattern": "^arn:aws(-(cn|iso(-b)?|us-gov))?:sns:[a-z0-9_-]{1,50}:\\d{12}:[a-zA-Z0-9_-]{1,251}([a-zA-Z0-9_-]{0,5}|\\.fifo)$"
     },
     "SpeechMarkType": {
       "type": "string",
@@ -718,11 +738,11 @@
       "members": {
         "Engine": {
           "shape": "Engine",
-          "documentation": "<p>Specifies the engine (<code>standard</code> or <code>neural</code>) for Amazon Polly to use when processing input text for speech synthesis. Using a voice that is not supported for the engine selected will result in an error.</p>"
+          "documentation": "<p>Specifies the engine (<code>standard</code>, <code>neural</code>, <code>long-form</code> or <code>generative</code>) for Amazon Polly to use when processing input text for speech synthesis. Using a voice that is not supported for the engine selected will result in an error.</p>"
         },
         "LanguageCode": {
           "shape": "LanguageCode",
-          "documentation": "<p>Optional language code for the Speech Synthesis request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN). </p> <p>If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html\">DescribeVoices</a> operation for the <code>LanguageCode</code> parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.</p>"
+          "documentation": "<p>Optional language code for the Speech Synthesis request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN). </p> <p>If a bilingual voice is used and no language code is specified, Amazon Polly uses the default language of the bilingual voice. The default language for any voice is the one returned by the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html\">DescribeVoices</a> operation for the <code>LanguageCode</code> parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.</p>"
         },
         "LexiconNames": {
           "shape": "LexiconNameList",
@@ -742,7 +762,7 @@
         },
         "SampleRate": {
           "shape": "SampleRate",
-          "documentation": "<p>The audio frequency specified in Hz.</p> <p>The valid values for mp3 and ogg_vorbis are \"8000\", \"16000\", \"22050\", and \"24000\". The default value for standard voices is \"22050\". The default value for neural voices is \"24000\".</p> <p>Valid values for pcm are \"8000\" and \"16000\" The default value is \"16000\". </p>"
+          "documentation": "<p>The audio frequency specified in Hz.</p> <p>The valid values for mp3 and ogg_vorbis are \"8000\", \"16000\", \"22050\", and \"24000\". The default value for standard voices is \"22050\". The default value for neural voices is \"24000\". The default value for long-form voices is \"24000\". The default value for generative voices is \"24000\".</p> <p>Valid values for pcm are \"8000\" and \"16000\" The default value is \"16000\". </p>"
         },
         "SnsTopicArn": {
           "shape": "SnsTopicArn",
@@ -780,7 +800,7 @@
       "members": {
         "Engine": {
           "shape": "Engine",
-          "documentation": "<p>Specifies the engine (<code>standard</code> or <code>neural</code>) for Amazon Polly to use when processing input text for speech synthesis. Using a voice that is not supported for the engine selected will result in an error.</p>"
+          "documentation": "<p>Specifies the engine (<code>standard</code>, <code>neural</code>, <code>long-form</code> or <code>generative</code>) for Amazon Polly to use when processing input text for speech synthesis. Using a voice that is not supported for the engine selected will result in an error.</p>"
         },
         "TaskId": {
           "shape": "TaskId",
@@ -820,7 +840,7 @@
         },
         "SampleRate": {
           "shape": "SampleRate",
-          "documentation": "<p>The audio frequency specified in Hz.</p> <p>The valid values for mp3 and ogg_vorbis are \"8000\", \"16000\", \"22050\", and \"24000\". The default value for standard voices is \"22050\". The default value for neural voices is \"24000\".</p> <p>Valid values for pcm are \"8000\" and \"16000\" The default value is \"16000\". </p>"
+          "documentation": "<p>The audio frequency specified in Hz.</p> <p>The valid values for mp3 and ogg_vorbis are \"8000\", \"16000\", \"22050\", and \"24000\". The default value for standard voices is \"22050\". The default value for neural voices is \"24000\". The default value for long-form voices is \"24000\". The default value for generative voices is \"24000\".</p> <p>Valid values for pcm are \"8000\" and \"16000\" The default value is \"16000\". </p>"
         },
         "SpeechMarkTypes": {
           "shape": "SpeechMarkTypeList",
@@ -836,7 +856,7 @@
         },
         "LanguageCode": {
           "shape": "LanguageCode",
-          "documentation": "<p>Optional language code for a synthesis task. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN). </p> <p>If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html\">DescribeVoices</a> operation for the <code>LanguageCode</code> parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.</p>"
+          "documentation": "<p>Optional language code for a synthesis task. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN). </p> <p>If a bilingual voice is used and no language code is specified, Amazon Polly uses the default language of the bilingual voice. The default language for any voice is the one returned by the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html\">DescribeVoices</a> operation for the <code>LanguageCode</code> parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.</p>"
         }
       },
       "documentation": "<p>SynthesisTask object that provides information about a speech synthesis task.</p>"
@@ -857,11 +877,11 @@
       "members": {
         "Engine": {
           "shape": "Engine",
-          "documentation": "<p>Specifies the engine (<code>standard</code> or <code>neural</code>) for Amazon Polly to use when processing input text for speech synthesis. For information on Amazon Polly voices and which voices are available in standard-only, NTTS-only, and both standard and NTTS formats, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/voicelist.html\">Available Voices</a>.</p> <p> <b>NTTS-only voices</b> </p> <p>When using NTTS-only voices such as Kevin (en-US), this parameter is required and must be set to <code>neural</code>. If the engine is not specified, or is set to <code>standard</code>, this will result in an error. </p> <p>Type: String</p> <p>Valid Values: <code>standard</code> | <code>neural</code> </p> <p>Required: Yes</p> <p> <b>Standard voices</b> </p> <p>For standard voices, this is not required; the engine parameter defaults to <code>standard</code>. If the engine is not specified, or is set to <code>standard</code> and an NTTS-only voice is selected, this will result in an error. </p>"
+          "documentation": "<p>Specifies the engine (<code>standard</code>, <code>neural</code>, <code>long-form</code>, or <code>generative</code>) for Amazon Polly to use when processing input text for speech synthesis. Provide an engine that is supported by the voice you select. If you don't provide an engine, the standard engine is selected by default. If a chosen voice isn't supported by the standard engine, this will result in an error. For information on Amazon Polly voices and which voices are available for each engine, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/voicelist.html\">Available Voices</a>.</p> <p>Type: String</p> <p>Valid Values: <code>standard</code> | <code>neural</code> | <code>long-form</code> | <code>generative</code> </p> <p>Required: Yes</p>"
         },
         "LanguageCode": {
           "shape": "LanguageCode",
-          "documentation": "<p>Optional language code for the Synthesize Speech request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN). </p> <p>If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html\">DescribeVoices</a> operation for the <code>LanguageCode</code> parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.</p>"
+          "documentation": "<p>Optional language code for the Synthesize Speech request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN). </p> <p>If a bilingual voice is used and no language code is specified, Amazon Polly uses the default language of the bilingual voice. The default language for any voice is the one returned by the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html\">DescribeVoices</a> operation for the <code>LanguageCode</code> parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.</p>"
         },
         "LexiconNames": {
           "shape": "LexiconNameList",
@@ -873,7 +893,7 @@
         },
         "SampleRate": {
           "shape": "SampleRate",
-          "documentation": "<p>The audio frequency specified in Hz.</p> <p>The valid values for mp3 and ogg_vorbis are \"8000\", \"16000\", \"22050\", and \"24000\". The default value for standard voices is \"22050\". The default value for neural voices is \"24000\".</p> <p>Valid values for pcm are \"8000\" and \"16000\" The default value is \"16000\". </p>"
+          "documentation": "<p>The audio frequency specified in Hz.</p> <p>The valid values for mp3 and ogg_vorbis are \"8000\", \"16000\", \"22050\", and \"24000\". The default value for standard voices is \"22050\". The default value for neural voices is \"24000\". The default value for long-form voices is \"24000\". The default value for generative voices is \"24000\".</p> <p>Valid values for pcm are \"8000\" and \"16000\" The default value is \"16000\". </p>"
         },
         "SpeechMarkTypes": {
           "shape": "SpeechMarkTypeList",
@@ -902,7 +922,7 @@
         },
         "ContentType": {
           "shape": "ContentType",
-          "documentation": "<p> Specifies the type audio stream. This should reflect the <code>OutputFormat</code> parameter in your request. </p> <ul> <li> <p> If you request <code>mp3</code> as the <code>OutputFormat</code>, the <code>ContentType</code> returned is audio/mpeg. </p> </li> <li> <p> If you request <code>ogg_vorbis</code> as the <code>OutputFormat</code>, the <code>ContentType</code> returned is audio/ogg. </p> </li> <li> <p> If you request <code>pcm</code> as the <code>OutputFormat</code>, the <code>ContentType</code> returned is audio/pcm in a signed 16-bit, 1 channel (mono), little-endian format. </p> </li> <li> <p>If you request <code>json</code> as the <code>OutputFormat</code>, the <code>ContentType</code> returned is audio/json.</p> </li> </ul> <p> </p>",
+          "documentation": "<p> Specifies the type audio stream. This should reflect the <code>OutputFormat</code> parameter in your request. </p> <ul> <li> <p> If you request <code>mp3</code> as the <code>OutputFormat</code>, the <code>ContentType</code> returned is audio/mpeg. </p> </li> <li> <p> If you request <code>ogg_vorbis</code> as the <code>OutputFormat</code>, the <code>ContentType</code> returned is audio/ogg. </p> </li> <li> <p> If you request <code>pcm</code> as the <code>OutputFormat</code>, the <code>ContentType</code> returned is audio/pcm in a signed 16-bit, 1 channel (mono), little-endian format. </p> </li> <li> <p>If you request <code>json</code> as the <code>OutputFormat</code>, the <code>ContentType</code> returned is application/x-json-stream.</p> </li> </ul> <p> </p>",
           "location": "header",
           "locationName": "Content-Type"
         },
@@ -970,7 +990,7 @@
         },
         "SupportedEngines": {
           "shape": "EngineList",
-          "documentation": "<p>Specifies which engines (<code>standard</code> or <code>neural</code>) that are supported by a given voice.</p>"
+          "documentation": "<p>Specifies which engines (<code>standard</code>, <code>neural</code>, <code>long-form</code> or <code>generative</code>) are supported by a given voice.</p>"
         }
       },
       "documentation": "<p>Description of the voice.</p>"
@@ -995,6 +1015,7 @@
         "Enrique",
         "Ewa",
         "Filiz",
+        "Gabrielle",
         "Geraint",
         "Giorgio",
         "Gwyneth",
@@ -1039,7 +1060,42 @@
         "Vicki",
         "Vitoria",
         "Zeina",
-        "Zhiyu"
+        "Zhiyu",
+        "Aria",
+        "Ayanda",
+        "Arlet",
+        "Hannah",
+        "Arthur",
+        "Daniel",
+        "Liam",
+        "Pedro",
+        "Kajal",
+        "Hiujin",
+        "Laura",
+        "Elin",
+        "Ida",
+        "Suvi",
+        "Ola",
+        "Hala",
+        "Andres",
+        "Sergio",
+        "Remi",
+        "Adriano",
+        "Thiago",
+        "Ruth",
+        "Stephen",
+        "Kazuha",
+        "Tomoko",
+        "Niamh",
+        "Sofie",
+        "Lisa",
+        "Isabelle",
+        "Zayd",
+        "Danielle",
+        "Gregory",
+        "Burcu",
+        "Jitka",
+        "Sabrina"
       ]
     },
     "VoiceList": {

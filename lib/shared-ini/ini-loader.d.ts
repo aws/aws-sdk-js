@@ -24,18 +24,30 @@ export class IniLoader{
  * Load configurations from config/credentials files and cache them 
  * for later use. If no file is specified it will try to load default
  * files.
- * @returns {object} object of all profile information in the file
+ * @returns {Record<string, string>} object of all profile information in the file
  */
   loadFrom(options: LoadFileOptions): IniFileContent;
-}
 
-/**
- * Read specified file and return parsed config object. This method will always
- * read from disk and won't update cache. This is a lower level function of 
- * loadFrom().
- * @param filename [string] valid readable file path containing aws credentials
- * or aws configs
- * @param isConfig [boolean] true if specified file is an aws config file; false
- * if the file is an aws credentials file
+  /**
+ * Load sso sessions from config/credentials files and cache them 
+ * for later use. If no file is specified it will try to load default
+ * files.
+ * @returns {Record<string, string>} object of all sso sessions information in the file
  */
-export function parseFile(filename: string, isConfig: boolean): IniFileContent;
+  loadSsoSessionsFrom(options: LoadFileOptions): IniFileContent;
+
+  /**
+   * Get default file path for config/credentials files.
+   * 
+   * @param isConfig whether the file is a config file or a credentials file
+   * @returns {string} default file path
+   */
+  getDefaultFilePath(isConfig: boolean): string;
+
+  /**
+   * Get Home directory of the current user.
+   * 
+   * @returns {string} home directory path
+   * */
+   getHomeDir(): string;
+}

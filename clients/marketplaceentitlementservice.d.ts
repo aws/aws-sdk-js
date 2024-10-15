@@ -84,7 +84,7 @@ declare namespace MarketplaceEntitlementService {
     /**
      * The maximum number of items to retrieve from the GetEntitlements operation. For pagination, use the NextToken field in subsequent calls to GetEntitlements.
      */
-    MaxResults?: Integer;
+    MaxResults?: PageSizeInteger;
   }
   export interface GetEntitlementsResult {
     /**
@@ -98,6 +98,7 @@ declare namespace MarketplaceEntitlementService {
   }
   export type Integer = number;
   export type NonEmptyString = string;
+  export type PageSizeInteger = number;
   export type ProductCode = string;
   export type String = string;
   export type Timestamp = Date;

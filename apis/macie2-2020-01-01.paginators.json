@@ -12,11 +12,22 @@
       "limit_key": "maxResults",
       "result_key": "records"
     },
+    "ListAutomatedDiscoveryAccounts": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults",
+      "result_key": "items"
+    },
     "ListClassificationJobs": {
       "input_token": "nextToken",
       "output_token": "nextToken",
       "limit_key": "maxResults",
       "result_key": "items"
+    },
+    "ListClassificationScopes": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "result_key": "classificationScopes"
     },
     "ListCustomDataIdentifiers": {
       "input_token": "nextToken",
@@ -53,6 +64,40 @@
       "output_token": "nextToken",
       "limit_key": "maxResults",
       "result_key": "adminAccounts"
+    },
+    "SearchResources": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults",
+      "result_key": "matchingResources"
+    },
+    "ListAllowLists": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults",
+      "result_key": "allowLists"
+    },
+    "ListManagedDataIdentifiers": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "result_key": "items"
+    },
+    "ListResourceProfileDetections": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults",
+      "result_key": "detections"
+    },
+    "ListSensitivityInspectionTemplates": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults",
+      "result_key": "sensitivityInspectionTemplates"
+    },
+    "ListResourceProfileArtifacts": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "result_key": "artifacts"
     }
   }
 }

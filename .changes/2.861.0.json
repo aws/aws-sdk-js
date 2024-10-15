@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "AccessAnalyzer",
+        "description": "This release adds support to preview IAM Access Analyzer findings for a resource before deploying resource permission changes."
+    },
+    {
+        "type": "feature",
+        "category": "Backup",
+        "description": "Added support for enabling continuous backups."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "Adding ID element to the CORSRule schema"
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "Systems Manager support for tagging OpsMetadata."
+    }
+]

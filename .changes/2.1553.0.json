@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "DataSync",
+        "description": "AWS DataSync now supports manifests for specifying files or objects to transfer."
+    },
+    {
+        "type": "feature",
+        "category": "LexModelsV2",
+        "description": "This release introduces a new bot replication feature as part of Lex Global Resiliency offering. This feature leverages a new set of APIs that allow customers to create bot replicas and replicate changes to bots across regions."
+    },
+    {
+        "type": "feature",
+        "category": "Redshift",
+        "description": "LisRecommendations API to fetch Amazon Redshift Advisor recommendations."
+    }
+]

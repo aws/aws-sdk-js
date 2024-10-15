@@ -1,0 +1,52 @@
+[
+    {
+        "type": "feature",
+        "category": "Athena",
+        "description": "Adds support for using Query Result Reuse"
+    },
+    {
+        "type": "feature",
+        "category": "AutoScaling",
+        "description": "This release adds support for two new attributes for attribute-based instance type selection - NetworkBandwidthGbps and AllowedInstanceTypes."
+    },
+    {
+        "type": "feature",
+        "category": "CloudTrail",
+        "description": "This release includes support for configuring a delegated administrator to manage an AWS Organizations organization CloudTrail trails and event data stores, and AWS Key Management Service encryption of CloudTrail Lake event data stores."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds support for two new attributes for attribute-based instance type selection - NetworkBandwidthGbps and AllowedInstanceTypes."
+    },
+    {
+        "type": "feature",
+        "category": "ElastiCache",
+        "description": "Added support for IPv6 and dual stack for Memcached and Redis clusters. Customers can now launch new Redis and Memcached clusters with IPv6 and dual stack networking support."
+    },
+    {
+        "type": "feature",
+        "category": "LexModelsV2",
+        "description": "Amazon Lex now supports new APIs for viewing and editing Custom Vocabulary in bots."
+    },
+    {
+        "type": "feature",
+        "category": "MediaConvert",
+        "description": "The AWS Elemental MediaConvert SDK has added support for setting the SDR reference white point for HDR conversions and conversion of HDR10 to DolbyVision without mastering metadata."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "This release includes support for applying a CloudWatch alarm to multi account multi region Systems Manager Automation"
+    },
+    {
+        "type": "feature",
+        "category": "WellArchitected",
+        "description": "This release adds support for integrations with AWS Trusted Advisor and AWS Service Catalog AppRegistry to improve workload discovery and speed up your workload reviews."
+    },
+    {
+        "type": "feature",
+        "category": "WorkSpaces",
+        "description": "This release adds protocols attribute to workspaces properties data type. This enables customers to migrate workspaces from PC over IP (PCoIP) to WorkSpaces Streaming Protocol (WSP) using create and modify workspaces public APIs."
+    }
+]

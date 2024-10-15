@@ -8,7 +8,8 @@ export class Response<D, E> {
 		/**
 		 * Creates a new request for the next page of response data, calling the callback with the page data if a callback is provided.
 		 */
-		nextPage(callback?: (err: E, data: D) => void): Request<D, E>|void;
+		nextPage(): Request<D, E> | null;
+		nextPage(callback: (err: E, data: D) => void): void;
 		/**
 		 * The de-serialized response data from the service.
 		 * Can be null if an error occurred.

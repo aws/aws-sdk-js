@@ -1,0 +1,38 @@
+<li class="<%= @item.visibility %> <%= @item.has_tag?(:deprecated) ? 'deprecated' : '' %>">
+  <span class="summary_signature">
+    <% if @item.tags(:overload).size == 1 %>
+      <%= signature(@item.tag(:overload), true, @item.respond_to?(:attr_info) && !@item.attr_info) %>
+    <% else %>
+      <%= signature(@item, true, false, @item.respond_to?(:attr_info) && !@item.attr_info) %>
+    <% end %>
+
+    <% if @item.aliases.size > 0 %>
+      (also: <%= @item.aliases.map {|o| h(o.name(true)) }.join(", ") %>)
+    <% end %>
+  </span>
+  <% if @item.has_tag?(:static) %>
+    <span class="note title constructor">static</span>
+  <% end %>
+  <% if @item.respond_to?(:constructor?) && @item.constructor? %>
+    <span class="note title constructor">constructor</span>
+  <% end %>
+  <% if !@item.tag(:readonly) && !@item.tag(:writeonly) && ![:function, :event].include?(@item.property_type) %>
+    <span class="note title readonly">readwrite</span>
+  <% end %>
+  <% if @item.has_tag?(:readonly) %>
+    <span class="note title readonly">readonly</span>
+  <% end %>
+  <% if @item.has_tag?(:writeonly) %>
+    <span class="note title writeonly">writeonly</span>
+  <% end %>
+  <% if @item.visibility != :public %><span class="note title <%= @item.visibility %>"><%= @item.visibility %></span><% end %>
+  <% if @item.has_tag?(:abstract) %><span class="abstract note title">abstract</span><% end %>
+  <% if @item.has_tag?(:deprecated) %><span class="deprecated note title">deprecated</span><% end %>
+  <% if @item.has_tag?(:api) && @item.tag(:api).text == 'private' %><span class="private note title">private</span><% end %>
+
+  <% if @item.has_tag?(:deprecated) %>
+    <span class="summary_desc"><strong>Deprecated.</strong> <%= htmlify_line @item.tag(:deprecated).text %></span>
+  <% else %>
+    <span class="summary_desc"><%= htmlify_line docstring_summary(@item) %></span>
+  <% end %>
+</li>

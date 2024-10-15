@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "BedrockAgent",
+        "description": "Adding Claude 2.1 support to Bedrock Agents"
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "This release adds additional configurations for Query Session Context on the following APIs: GetUnfilteredTableMetadata, GetUnfilteredPartitionMetadata, GetUnfilteredPartitionsMetadata."
+    },
+    {
+        "type": "feature",
+        "category": "LakeFormation",
+        "description": "This release adds additional configurations on GetTemporaryGlueTableCredentials for Query Session Context."
+    },
+    {
+        "type": "feature",
+        "category": "MediaConnect",
+        "description": "This release adds the DescribeSourceMetadata API. This API can be used to view the stream information of the flow's source."
+    },
+    {
+        "type": "feature",
+        "category": "NetworkMonitor",
+        "description": "CloudWatch Network Monitor is a new service within CloudWatch that will help network administrators and operators continuously monitor network performance metrics such as round-trip-time and packet loss between their AWS-hosted applications and their on-premises locations."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "Added additional examples for some operations."
+    },
+    {
+        "type": "feature",
+        "category": "SecretsManager",
+        "description": "Update endpoint rules and examples."
+    }
+]

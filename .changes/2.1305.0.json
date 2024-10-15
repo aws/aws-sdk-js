@@ -1,0 +1,47 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudDirectory",
+        "description": "Enabled FIPS endpoints for GovCloud (US) regions in SDK."
+    },
+    {
+        "type": "feature",
+        "category": "CloudFormation",
+        "description": "This feature provides a method of obtaining which regions a stackset has stack instances deployed in."
+    },
+    {
+        "type": "feature",
+        "category": "DLM",
+        "description": "Enabled FIPS endpoints for GovCloud (US) regions in SDK."
+    },
+    {
+        "type": "feature",
+        "category": "Discovery",
+        "description": "Update ImportName validation to 255 from the current length of 100"
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "We add Prefix Lists as a new route destination option for LocalGatewayRoutes. This will allow customers to create routes to Prefix Lists. Prefix List routes will allow customers to group individual CIDR routes with the same target into a single route."
+    },
+    {
+        "type": "feature",
+        "category": "Imagebuilder",
+        "description": "Enabled FIPS endpoints for GovCloud (US) regions in SDK."
+    },
+    {
+        "type": "feature",
+        "category": "Kafka",
+        "description": "Enabled FIPS endpoints for GovCloud (US) regions in SDK."
+    },
+    {
+        "type": "feature",
+        "category": "MediaConvert",
+        "description": "Enabled FIPS endpoints for GovCloud (US) regions in SDK."
+    },
+    {
+        "type": "feature",
+        "category": "SWF",
+        "description": "Enabled FIPS endpoints for GovCloud (US) regions in SDK."
+    }
+]

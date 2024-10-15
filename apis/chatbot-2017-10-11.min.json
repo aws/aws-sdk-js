@@ -1,0 +1,944 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2017-10-11",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "chatbot",
+    "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
+    "serviceFullName": "AWS Chatbot",
+    "serviceId": "chatbot",
+    "signatureVersion": "v4",
+    "signingName": "chatbot",
+    "uid": "chatbot-2017-10-11"
+  },
+  "operations": {
+    "CreateChimeWebhookConfiguration": {
+      "http": {
+        "requestUri": "/create-chime-webhook-configuration",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "WebhookDescription",
+          "WebhookUrl",
+          "SnsTopicArns",
+          "IamRoleArn",
+          "ConfigurationName"
+        ],
+        "members": {
+          "WebhookDescription": {
+            "shape": "S2"
+          },
+          "WebhookUrl": {
+            "shape": "S3"
+          },
+          "SnsTopicArns": {
+            "shape": "S4"
+          },
+          "IamRoleArn": {},
+          "ConfigurationName": {},
+          "LoggingLevel": {},
+          "Tags": {
+            "shape": "S8"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "WebhookConfiguration": {
+            "shape": "Sd"
+          }
+        }
+      }
+    },
+    "CreateMicrosoftTeamsChannelConfiguration": {
+      "http": {
+        "requestUri": "/create-ms-teams-channel-configuration",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ChannelId",
+          "TeamId",
+          "TenantId",
+          "IamRoleArn",
+          "ConfigurationName"
+        ],
+        "members": {
+          "ChannelId": {},
+          "ChannelName": {
+            "shape": "Sh"
+          },
+          "TeamId": {},
+          "TeamName": {
+            "shape": "Sj"
+          },
+          "TenantId": {},
+          "SnsTopicArns": {
+            "shape": "S4"
+          },
+          "IamRoleArn": {},
+          "ConfigurationName": {},
+          "LoggingLevel": {},
+          "GuardrailPolicyArns": {
+            "shape": "Sk"
+          },
+          "UserAuthorizationRequired": {
+            "type": "boolean"
+          },
+          "Tags": {
+            "shape": "S8"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ChannelConfiguration": {
+            "shape": "So"
+          }
+        }
+      }
+    },
+    "CreateSlackChannelConfiguration": {
+      "http": {
+        "requestUri": "/create-slack-channel-configuration",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "SlackTeamId",
+          "SlackChannelId",
+          "IamRoleArn",
+          "ConfigurationName"
+        ],
+        "members": {
+          "SlackTeamId": {},
+          "SlackChannelId": {},
+          "SlackChannelName": {
+            "shape": "Ss"
+          },
+          "SnsTopicArns": {
+            "shape": "S4"
+          },
+          "IamRoleArn": {},
+          "ConfigurationName": {},
+          "LoggingLevel": {},
+          "GuardrailPolicyArns": {
+            "shape": "Sk"
+          },
+          "UserAuthorizationRequired": {
+            "type": "boolean"
+          },
+          "Tags": {
+            "shape": "S8"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ChannelConfiguration": {
+            "shape": "Su"
+          }
+        }
+      }
+    },
+    "DeleteChimeWebhookConfiguration": {
+      "http": {
+        "requestUri": "/delete-chime-webhook-configuration",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ChatConfigurationArn"
+        ],
+        "members": {
+          "ChatConfigurationArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DeleteMicrosoftTeamsChannelConfiguration": {
+      "http": {
+        "requestUri": "/delete-ms-teams-channel-configuration",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ChatConfigurationArn"
+        ],
+        "members": {
+          "ChatConfigurationArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DeleteMicrosoftTeamsConfiguredTeam": {
+      "http": {
+        "requestUri": "/delete-ms-teams-configured-teams",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "TeamId"
+        ],
+        "members": {
+          "TeamId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DeleteMicrosoftTeamsUserIdentity": {
+      "http": {
+        "requestUri": "/delete-ms-teams-user-identity",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ChatConfigurationArn",
+          "UserId"
+        ],
+        "members": {
+          "ChatConfigurationArn": {},
+          "UserId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DeleteSlackChannelConfiguration": {
+      "http": {
+        "requestUri": "/delete-slack-channel-configuration",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ChatConfigurationArn"
+        ],
+        "members": {
+          "ChatConfigurationArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DeleteSlackUserIdentity": {
+      "http": {
+        "requestUri": "/delete-slack-user-identity",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ChatConfigurationArn",
+          "SlackTeamId",
+          "SlackUserId"
+        ],
+        "members": {
+          "ChatConfigurationArn": {},
+          "SlackTeamId": {},
+          "SlackUserId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DeleteSlackWorkspaceAuthorization": {
+      "http": {
+        "requestUri": "/delete-slack-workspace-authorization",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "SlackTeamId"
+        ],
+        "members": {
+          "SlackTeamId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DescribeChimeWebhookConfigurations": {
+      "http": {
+        "requestUri": "/describe-chime-webhook-configurations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "MaxResults": {
+            "type": "integer"
+          },
+          "NextToken": {},
+          "ChatConfigurationArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NextToken": {},
+          "WebhookConfigurations": {
+            "type": "list",
+            "member": {
+              "shape": "Sd"
+            }
+          }
+        }
+      }
+    },
+    "DescribeSlackChannelConfigurations": {
+      "http": {
+        "requestUri": "/describe-slack-channel-configurations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "MaxResults": {
+            "type": "integer"
+          },
+          "NextToken": {},
+          "ChatConfigurationArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NextToken": {},
+          "SlackChannelConfigurations": {
+            "type": "list",
+            "member": {
+              "shape": "Su"
+            }
+          }
+        }
+      }
+    },
+    "DescribeSlackUserIdentities": {
+      "http": {
+        "requestUri": "/describe-slack-user-identities",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "ChatConfigurationArn": {},
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "SlackUserIdentities": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "IamRoleArn",
+                "ChatConfigurationArn",
+                "SlackTeamId",
+                "SlackUserId"
+              ],
+              "members": {
+                "IamRoleArn": {},
+                "ChatConfigurationArn": {},
+                "SlackTeamId": {},
+                "SlackUserId": {},
+                "AwsUserIdentity": {}
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "DescribeSlackWorkspaces": {
+      "http": {
+        "requestUri": "/describe-slack-workspaces",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "MaxResults": {
+            "type": "integer"
+          },
+          "NextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "SlackWorkspaces": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "SlackTeamId",
+                "SlackTeamName"
+              ],
+              "members": {
+                "SlackTeamId": {},
+                "SlackTeamName": {}
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "GetAccountPreferences": {
+      "http": {
+        "requestUri": "/get-account-preferences",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {}
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "AccountPreferences": {
+            "shape": "S1u"
+          }
+        }
+      }
+    },
+    "GetMicrosoftTeamsChannelConfiguration": {
+      "http": {
+        "requestUri": "/get-ms-teams-channel-configuration",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ChatConfigurationArn"
+        ],
+        "members": {
+          "ChatConfigurationArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ChannelConfiguration": {
+            "shape": "So"
+          }
+        }
+      }
+    },
+    "ListMicrosoftTeamsChannelConfigurations": {
+      "http": {
+        "requestUri": "/list-ms-teams-channel-configurations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "MaxResults": {
+            "type": "integer"
+          },
+          "NextToken": {},
+          "TeamId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NextToken": {},
+          "TeamChannelConfigurations": {
+            "type": "list",
+            "member": {
+              "shape": "So"
+            }
+          }
+        }
+      }
+    },
+    "ListMicrosoftTeamsConfiguredTeams": {
+      "http": {
+        "requestUri": "/list-ms-teams-configured-teams",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "MaxResults": {
+            "type": "integer"
+          },
+          "NextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ConfiguredTeams": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "TenantId",
+                "TeamId"
+              ],
+              "members": {
+                "TenantId": {},
+                "TeamId": {},
+                "TeamName": {}
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListMicrosoftTeamsUserIdentities": {
+      "http": {
+        "requestUri": "/list-ms-teams-user-identities",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "ChatConfigurationArn": {},
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "TeamsUserIdentities": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "IamRoleArn",
+                "ChatConfigurationArn",
+                "TeamId"
+              ],
+              "members": {
+                "IamRoleArn": {},
+                "ChatConfigurationArn": {},
+                "TeamId": {},
+                "UserId": {},
+                "AwsUserIdentity": {},
+                "TeamsChannelId": {},
+                "TeamsTenantId": {}
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListTagsForResource": {
+      "http": {
+        "requestUri": "/list-tags-for-resource",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceARN"
+        ],
+        "members": {
+          "ResourceARN": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Tags": {
+            "shape": "S2b"
+          }
+        }
+      }
+    },
+    "TagResource": {
+      "http": {
+        "requestUri": "/tag-resource",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceARN",
+          "Tags"
+        ],
+        "members": {
+          "ResourceARN": {},
+          "Tags": {
+            "shape": "S2b"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UntagResource": {
+      "http": {
+        "requestUri": "/untag-resource",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceARN",
+          "TagKeys"
+        ],
+        "members": {
+          "ResourceARN": {},
+          "TagKeys": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UpdateAccountPreferences": {
+      "http": {
+        "requestUri": "/update-account-preferences",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "UserAuthorizationRequired": {
+            "type": "boolean"
+          },
+          "TrainingDataCollectionEnabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "AccountPreferences": {
+            "shape": "S1u"
+          }
+        }
+      }
+    },
+    "UpdateChimeWebhookConfiguration": {
+      "http": {
+        "requestUri": "/update-chime-webhook-configuration",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ChatConfigurationArn"
+        ],
+        "members": {
+          "ChatConfigurationArn": {},
+          "WebhookDescription": {
+            "shape": "S2"
+          },
+          "WebhookUrl": {
+            "shape": "S3"
+          },
+          "SnsTopicArns": {
+            "shape": "S4"
+          },
+          "IamRoleArn": {},
+          "LoggingLevel": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "WebhookConfiguration": {
+            "shape": "Sd"
+          }
+        }
+      }
+    },
+    "UpdateMicrosoftTeamsChannelConfiguration": {
+      "http": {
+        "requestUri": "/update-ms-teams-channel-configuration",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ChatConfigurationArn",
+          "ChannelId"
+        ],
+        "members": {
+          "ChatConfigurationArn": {},
+          "ChannelId": {},
+          "ChannelName": {
+            "shape": "Sh"
+          },
+          "SnsTopicArns": {
+            "shape": "S4"
+          },
+          "IamRoleArn": {},
+          "LoggingLevel": {},
+          "GuardrailPolicyArns": {
+            "shape": "Sk"
+          },
+          "UserAuthorizationRequired": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ChannelConfiguration": {
+            "shape": "So"
+          }
+        }
+      }
+    },
+    "UpdateSlackChannelConfiguration": {
+      "http": {
+        "requestUri": "/update-slack-channel-configuration",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ChatConfigurationArn",
+          "SlackChannelId"
+        ],
+        "members": {
+          "ChatConfigurationArn": {},
+          "SlackChannelId": {},
+          "SlackChannelName": {
+            "shape": "Ss"
+          },
+          "SnsTopicArns": {
+            "shape": "S4"
+          },
+          "IamRoleArn": {},
+          "LoggingLevel": {},
+          "GuardrailPolicyArns": {
+            "shape": "Sk"
+          },
+          "UserAuthorizationRequired": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ChannelConfiguration": {
+            "shape": "Su"
+          }
+        }
+      }
+    }
+  },
+  "shapes": {
+    "S2": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S3": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S4": {
+      "type": "list",
+      "member": {}
+    },
+    "S8": {
+      "type": "list",
+      "member": {
+        "shape": "S9"
+      }
+    },
+    "S9": {
+      "type": "structure",
+      "required": [
+        "TagKey",
+        "TagValue"
+      ],
+      "members": {
+        "TagKey": {},
+        "TagValue": {}
+      }
+    },
+    "Sd": {
+      "type": "structure",
+      "required": [
+        "WebhookDescription",
+        "ChatConfigurationArn",
+        "IamRoleArn",
+        "SnsTopicArns"
+      ],
+      "members": {
+        "WebhookDescription": {
+          "shape": "S2"
+        },
+        "ChatConfigurationArn": {},
+        "IamRoleArn": {},
+        "SnsTopicArns": {
+          "shape": "S4"
+        },
+        "ConfigurationName": {},
+        "LoggingLevel": {},
+        "Tags": {
+          "shape": "S8"
+        }
+      }
+    },
+    "Sh": {
+      "type": "string",
+      "sensitive": true
+    },
+    "Sj": {
+      "type": "string",
+      "sensitive": true
+    },
+    "Sk": {
+      "type": "list",
+      "member": {}
+    },
+    "So": {
+      "type": "structure",
+      "required": [
+        "ChannelId",
+        "TeamId",
+        "TenantId",
+        "ChatConfigurationArn",
+        "IamRoleArn",
+        "SnsTopicArns"
+      ],
+      "members": {
+        "ChannelId": {},
+        "ChannelName": {
+          "shape": "Sh"
+        },
+        "TeamId": {},
+        "TeamName": {
+          "shape": "Sj"
+        },
+        "TenantId": {},
+        "ChatConfigurationArn": {},
+        "IamRoleArn": {},
+        "SnsTopicArns": {
+          "shape": "S4"
+        },
+        "ConfigurationName": {},
+        "LoggingLevel": {},
+        "GuardrailPolicyArns": {
+          "shape": "Sk"
+        },
+        "UserAuthorizationRequired": {
+          "type": "boolean"
+        },
+        "Tags": {
+          "shape": "S8"
+        }
+      }
+    },
+    "Ss": {
+      "type": "string",
+      "sensitive": true
+    },
+    "Su": {
+      "type": "structure",
+      "required": [
+        "SlackTeamName",
+        "SlackTeamId",
+        "SlackChannelId",
+        "SlackChannelName",
+        "ChatConfigurationArn",
+        "IamRoleArn",
+        "SnsTopicArns"
+      ],
+      "members": {
+        "SlackTeamName": {},
+        "SlackTeamId": {},
+        "SlackChannelId": {},
+        "SlackChannelName": {
+          "shape": "Ss"
+        },
+        "ChatConfigurationArn": {},
+        "IamRoleArn": {},
+        "SnsTopicArns": {
+          "shape": "S4"
+        },
+        "ConfigurationName": {},
+        "LoggingLevel": {},
+        "GuardrailPolicyArns": {
+          "shape": "Sk"
+        },
+        "UserAuthorizationRequired": {
+          "type": "boolean"
+        },
+        "Tags": {
+          "shape": "S8"
+        }
+      }
+    },
+    "S1u": {
+      "type": "structure",
+      "members": {
+        "UserAuthorizationRequired": {
+          "type": "boolean"
+        },
+        "TrainingDataCollectionEnabled": {
+          "type": "boolean"
+        }
+      }
+    },
+    "S2b": {
+      "type": "list",
+      "member": {
+        "shape": "S9"
+      }
+    }
+  }
+}

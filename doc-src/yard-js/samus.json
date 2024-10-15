@@ -1,0 +1,44 @@
+{
+  "actions": [
+    {
+      "action": "fs-sedfiles",
+      "files": ["lib/*/version.rb"],
+      "arguments": {
+        "search": "VERSION = ['\"](.+?)['\"]",
+        "replace": "VERSION = '$version'"
+      }
+    },
+    {
+      "action": "git-commit",
+      "files": ["lib/*/version.rb"]
+    },
+    {
+      "action": "git-merge",
+      "arguments": {
+        "branch": "master"
+      }
+    },
+    {
+      "action": "archive-git-full",
+      "files": ["git.tgz"],
+      "publish": [{
+        "action": "git-push",
+        "arguments": {
+          "remotes": "origin",
+          "refs": "master v$version"
+        }
+      }]
+    },
+    {
+      "action": "gem-build",
+      "files": ["*.gemspec"],
+      "publish": [
+        {
+          "action": "gem-push",
+          "files": ["*.gem"],
+          "credentials": "lsegal.rubygems"
+        }
+      ]
+    }
+  ]
+}

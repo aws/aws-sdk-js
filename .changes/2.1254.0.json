@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "CustomerProfiles",
+        "description": "This release enhances the SearchProfiles API by providing functionality to search for profiles using multiple keys and logical operators."
+    },
+    {
+        "type": "feature",
+        "category": "LakeFormation",
+        "description": "This release adds a new parameter \"Parameters\" in the DataLakeSettings."
+    },
+    {
+        "type": "feature",
+        "category": "Proton",
+        "description": "Add support for CodeBuild Provisioning"
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This release adds support for restoring an RDS Multi-AZ DB cluster snapshot to a Single-AZ deployment or a Multi-AZ DB instance deployment."
+    },
+    {
+        "type": "feature",
+        "category": "WorkDocs",
+        "description": "Added 2 new document related operations, DeleteDocumentVersion and RestoreDocumentVersions."
+    },
+    {
+        "type": "feature",
+        "category": "XRay",
+        "description": "This release enhances GetServiceGraph API to support new type of edge to represent links between SQS and Lambda in event-driven applications."
+    }
+]

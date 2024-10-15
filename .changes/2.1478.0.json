@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "AppConfig",
+        "description": "Update KmsKeyIdentifier constraints to support AWS KMS multi-Region keys."
+    },
+    {
+        "type": "feature",
+        "category": "AppIntegrations",
+        "description": "Updated ScheduleConfig to be an optional input to CreateDataIntegration to support event driven downloading of files from sources such as Amazon s3 using Amazon Connect AppIntegrations."
+    },
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "This release adds support for updating phone number metadata, such as phone number description."
+    },
+    {
+        "type": "feature",
+        "category": "Discovery",
+        "description": "This release introduces three new APIs: StartBatchDeleteConfigurationTask, DescribeBatchDeleteConfigurationTask, and BatchDeleteAgents."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "This release introduces a new API: DeleteOpsItem. This allows deletion of an OpsItem."
+    }
+]

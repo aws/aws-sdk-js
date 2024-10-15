@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "ControlTower",
+        "description": "Added ListLandingZoneOperations API."
+    },
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Added support for disabling unmanaged addons during cluster creation."
+    },
+    {
+        "type": "feature",
+        "category": "IVSRealTime",
+        "description": "IVS Real-Time now offers customers the ability to upload public keys for customer vended participant tokens."
+    },
+    {
+        "type": "feature",
+        "category": "KinesisAnalyticsV2",
+        "description": "This release adds support for new ListApplicationOperations and DescribeApplicationOperation APIs. It adds a new configuration to enable system rollbacks, adds field ApplicationVersionCreateTimestamp for clarity and improves support for pagination for APIs."
+    },
+    {
+        "type": "feature",
+        "category": "OpenSearch",
+        "description": "This release adds support for enabling or disabling Natural Language Query Processing feature for Amazon OpenSearch Service domains, and provides visibility into the current state of the setup or tear-down."
+    }
+]

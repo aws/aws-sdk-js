@@ -11,20 +11,8 @@ namespace :docs do
     args = ENV['ARGS'] ? ENV['ARGS'] : []
     sh "bundle exec yard #{args.join(' ')}"
   end
-
-  desc "Build guide documentation"
-  task :guide => :directory do
-    ENV['SITEMAP_BASEURL'] = 'http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/'
-
-    rm_rf "doc/guide"
-    args = %w(-q --yardopts .yardopts_guide)
-    args += ENV['ARGS'].split(/\s+/) if ENV['ARGS']
-    sh "bundle exec yard #{args.join(' ')}"
-  end
-
-  desc "Builds API and guide documentation"
-  task :all => [:api, :guide]
 end
 
-desc "Builds all documentation"
-task :docs => ['docs:all']
+# TODO: move code for docs:api under docs once it's updated in internal release code
+desc "Builds API documentation"
+task :docs => ['docs:api']

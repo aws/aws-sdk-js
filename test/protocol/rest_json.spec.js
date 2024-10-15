@@ -296,7 +296,7 @@
       });
 
       describe('body', function() {
-        ['HEAD', 'DELETE'].forEach(function(method) {
+        ['GET', 'HEAD', 'DELETE'].forEach(function(method) {
           it('does not populate a body on a ' + method + ' request', function() {
             request.params = {
               Data: 'abc'
@@ -315,39 +315,6 @@
               }
             });
             expect(build().httpRequest.body).to.equal('');
-          });
-        });
-
-        it('does not send empty for GET methods', function() {
-          request.params = {};
-          defop({
-            http: {
-              method: 'GET'
-            },
-            input: {
-              members: {
-                Data: {
-                  type: 'string'
-                }
-              }
-            }
-          });
-          expect(build().httpRequest.body).to.eql('');
-
-          ['POST', 'PUT'].forEach(function(method) {
-            defop({
-              http: {
-                method: method
-              },
-              input: {
-                members: {
-                  Data: {
-                    type: 'string'
-                  }
-                }
-              }
-            });
-            expect(build().httpRequest.body).to.eql('{}');
           });
         });
 

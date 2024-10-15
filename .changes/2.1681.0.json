@@ -1,0 +1,32 @@
+[
+    {
+        "type": "bugfix",
+        "category": "CodeStar",
+        "description": "deprecate CodeStar"
+    },
+    {
+        "type": "feature",
+        "category": "Bedrock",
+        "description": "Amazon Bedrock Evaluation BatchDeleteEvaluationJob API allows customers to delete evaluation jobs under terminated evaluation job statuses - Stopped, Failed, or Completed. Customers can submit a batch of 25 evaluation jobs to be deleted at once."
+    },
+    {
+        "type": "feature",
+        "category": "EMRcontainers",
+        "description": "Correct endpoint for FIPS is configured for US Gov Regions."
+    },
+    {
+        "type": "feature",
+        "category": "Inspector2",
+        "description": "Add enums for Agentless scan statuses and EC2 enablement error states"
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "Explicit query for authors and dashboard viewing sharing for embedded users"
+    },
+    {
+        "type": "feature",
+        "category": "Route53",
+        "description": "Amazon Route 53 now supports the Asia Pacific (Malaysia) Region (ap-southeast-5) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region."
+    }
+]

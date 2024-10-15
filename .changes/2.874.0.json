@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudWatchEvents",
+        "description": "Add support for SageMaker Model Builder Pipelines Targets to EventBridge"
+    },
+    {
+        "type": "feature",
+        "category": "CustomerProfiles",
+        "description": "This release adds an optional parameter named FlowDefinition in PutIntegrationRequest."
+    },
+    {
+        "type": "feature",
+        "category": "EventBridge",
+        "description": "Add support for SageMaker Model Builder Pipelines Targets to EventBridge"
+    },
+    {
+        "type": "feature",
+        "category": "IoTWireless",
+        "description": "Support tag-on-create for WirelessDevice."
+    },
+    {
+        "type": "feature",
+        "category": "TranscribeService",
+        "description": "Amazon Transcribe now supports tagging words that match your vocabulary filter for batch transcription."
+    }
+]

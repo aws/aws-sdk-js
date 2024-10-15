@@ -28,11 +28,11 @@ declare class CodePipeline extends Service {
    */
   acknowledgeThirdPartyJob(callback?: (err: AWSError, data: CodePipeline.Types.AcknowledgeThirdPartyJobOutput) => void): Request<CodePipeline.Types.AcknowledgeThirdPartyJobOutput, AWSError>;
   /**
-   * Creates a new custom action that can be used in all pipelines associated with the AWS account. Only used for custom actions.
+   * Creates a new custom action that can be used in all pipelines associated with the Amazon Web Services account. Only used for custom actions.
    */
   createCustomActionType(params: CodePipeline.Types.CreateCustomActionTypeInput, callback?: (err: AWSError, data: CodePipeline.Types.CreateCustomActionTypeOutput) => void): Request<CodePipeline.Types.CreateCustomActionTypeOutput, AWSError>;
   /**
-   * Creates a new custom action that can be used in all pipelines associated with the AWS account. Only used for custom actions.
+   * Creates a new custom action that can be used in all pipelines associated with the Amazon Web Services account. Only used for custom actions.
    */
   createCustomActionType(callback?: (err: AWSError, data: CodePipeline.Types.CreateCustomActionTypeOutput) => void): Request<CodePipeline.Types.CreateCustomActionTypeOutput, AWSError>;
   /**
@@ -60,11 +60,11 @@ declare class CodePipeline extends Service {
    */
   deletePipeline(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a previously created webhook by name. Deleting the webhook stops AWS CodePipeline from starting a pipeline every time an external event occurs. The API returns successfully when trying to delete a webhook that is already deleted. If a deleted webhook is re-created by calling PutWebhook with the same name, it will have a different URL.
+   * Deletes a previously created webhook by name. Deleting the webhook stops CodePipeline from starting a pipeline every time an external event occurs. The API returns successfully when trying to delete a webhook that is already deleted. If a deleted webhook is re-created by calling PutWebhook with the same name, it will have a different URL.
    */
   deleteWebhook(params: CodePipeline.Types.DeleteWebhookInput, callback?: (err: AWSError, data: CodePipeline.Types.DeleteWebhookOutput) => void): Request<CodePipeline.Types.DeleteWebhookOutput, AWSError>;
   /**
-   * Deletes a previously created webhook by name. Deleting the webhook stops AWS CodePipeline from starting a pipeline every time an external event occurs. The API returns successfully when trying to delete a webhook that is already deleted. If a deleted webhook is re-created by calling PutWebhook with the same name, it will have a different URL.
+   * Deletes a previously created webhook by name. Deleting the webhook stops CodePipeline from starting a pipeline every time an external event occurs. The API returns successfully when trying to delete a webhook that is already deleted. If a deleted webhook is re-created by calling PutWebhook with the same name, it will have a different URL.
    */
   deleteWebhook(callback?: (err: AWSError, data: CodePipeline.Types.DeleteWebhookOutput) => void): Request<CodePipeline.Types.DeleteWebhookOutput, AWSError>;
   /**
@@ -92,11 +92,19 @@ declare class CodePipeline extends Service {
    */
   enableStageTransition(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Returns information about a job. Used for custom actions only.  When this API is called, AWS CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
+   * Returns information about an action type created for an external provider, where the action is to be used by customers of the external provider. The action can be created with any supported integration model.
+   */
+  getActionType(params: CodePipeline.Types.GetActionTypeInput, callback?: (err: AWSError, data: CodePipeline.Types.GetActionTypeOutput) => void): Request<CodePipeline.Types.GetActionTypeOutput, AWSError>;
+  /**
+   * Returns information about an action type created for an external provider, where the action is to be used by customers of the external provider. The action can be created with any supported integration model.
+   */
+  getActionType(callback?: (err: AWSError, data: CodePipeline.Types.GetActionTypeOutput) => void): Request<CodePipeline.Types.GetActionTypeOutput, AWSError>;
+  /**
+   * Returns information about a job. Used for custom actions only.  When this API is called, CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
    */
   getJobDetails(params: CodePipeline.Types.GetJobDetailsInput, callback?: (err: AWSError, data: CodePipeline.Types.GetJobDetailsOutput) => void): Request<CodePipeline.Types.GetJobDetailsOutput, AWSError>;
   /**
-   * Returns information about a job. Used for custom actions only.  When this API is called, AWS CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
+   * Returns information about a job. Used for custom actions only.  When this API is called, CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
    */
   getJobDetails(callback?: (err: AWSError, data: CodePipeline.Types.GetJobDetailsOutput) => void): Request<CodePipeline.Types.GetJobDetailsOutput, AWSError>;
   /**
@@ -124,11 +132,11 @@ declare class CodePipeline extends Service {
    */
   getPipelineState(callback?: (err: AWSError, data: CodePipeline.Types.GetPipelineStateOutput) => void): Request<CodePipeline.Types.GetPipelineStateOutput, AWSError>;
   /**
-   * Requests the details of a job for a third party action. Used for partner actions only.  When this API is called, AWS CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
+   * Requests the details of a job for a third party action. Used for partner actions only.  When this API is called, CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
    */
   getThirdPartyJobDetails(params: CodePipeline.Types.GetThirdPartyJobDetailsInput, callback?: (err: AWSError, data: CodePipeline.Types.GetThirdPartyJobDetailsOutput) => void): Request<CodePipeline.Types.GetThirdPartyJobDetailsOutput, AWSError>;
   /**
-   * Requests the details of a job for a third party action. Used for partner actions only.  When this API is called, AWS CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
+   * Requests the details of a job for a third party action. Used for partner actions only.  When this API is called, CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
    */
   getThirdPartyJobDetails(callback?: (err: AWSError, data: CodePipeline.Types.GetThirdPartyJobDetailsOutput) => void): Request<CodePipeline.Types.GetThirdPartyJobDetailsOutput, AWSError>;
   /**
@@ -140,19 +148,19 @@ declare class CodePipeline extends Service {
    */
   listActionExecutions(callback?: (err: AWSError, data: CodePipeline.Types.ListActionExecutionsOutput) => void): Request<CodePipeline.Types.ListActionExecutionsOutput, AWSError>;
   /**
-   * Gets a summary of all AWS CodePipeline action types associated with your account.
+   * Gets a summary of all CodePipeline action types associated with your account.
    */
   listActionTypes(params: CodePipeline.Types.ListActionTypesInput, callback?: (err: AWSError, data: CodePipeline.Types.ListActionTypesOutput) => void): Request<CodePipeline.Types.ListActionTypesOutput, AWSError>;
   /**
-   * Gets a summary of all AWS CodePipeline action types associated with your account.
+   * Gets a summary of all CodePipeline action types associated with your account.
    */
   listActionTypes(callback?: (err: AWSError, data: CodePipeline.Types.ListActionTypesOutput) => void): Request<CodePipeline.Types.ListActionTypesOutput, AWSError>;
   /**
-   * Gets a summary of the most recent executions for a pipeline.
+   * Gets a summary of the most recent executions for a pipeline.  When applying the filter for pipeline executions that have succeeded in the stage, the operation returns all executions in the current pipeline version beginning on February 1, 2024. 
    */
   listPipelineExecutions(params: CodePipeline.Types.ListPipelineExecutionsInput, callback?: (err: AWSError, data: CodePipeline.Types.ListPipelineExecutionsOutput) => void): Request<CodePipeline.Types.ListPipelineExecutionsOutput, AWSError>;
   /**
-   * Gets a summary of the most recent executions for a pipeline.
+   * Gets a summary of the most recent executions for a pipeline.  When applying the filter for pipeline executions that have succeeded in the stage, the operation returns all executions in the current pipeline version beginning on February 1, 2024. 
    */
   listPipelineExecutions(callback?: (err: AWSError, data: CodePipeline.Types.ListPipelineExecutionsOutput) => void): Request<CodePipeline.Types.ListPipelineExecutionsOutput, AWSError>;
   /**
@@ -164,6 +172,22 @@ declare class CodePipeline extends Service {
    */
   listPipelines(callback?: (err: AWSError, data: CodePipeline.Types.ListPipelinesOutput) => void): Request<CodePipeline.Types.ListPipelinesOutput, AWSError>;
   /**
+   * Lists the rule executions that have occurred in a pipeline configured for conditions with rules.
+   */
+  listRuleExecutions(params: CodePipeline.Types.ListRuleExecutionsInput, callback?: (err: AWSError, data: CodePipeline.Types.ListRuleExecutionsOutput) => void): Request<CodePipeline.Types.ListRuleExecutionsOutput, AWSError>;
+  /**
+   * Lists the rule executions that have occurred in a pipeline configured for conditions with rules.
+   */
+  listRuleExecutions(callback?: (err: AWSError, data: CodePipeline.Types.ListRuleExecutionsOutput) => void): Request<CodePipeline.Types.ListRuleExecutionsOutput, AWSError>;
+  /**
+   * Lists the rules for the condition.
+   */
+  listRuleTypes(params: CodePipeline.Types.ListRuleTypesInput, callback?: (err: AWSError, data: CodePipeline.Types.ListRuleTypesOutput) => void): Request<CodePipeline.Types.ListRuleTypesOutput, AWSError>;
+  /**
+   * Lists the rules for the condition.
+   */
+  listRuleTypes(callback?: (err: AWSError, data: CodePipeline.Types.ListRuleTypesOutput) => void): Request<CodePipeline.Types.ListRuleTypesOutput, AWSError>;
+  /**
    * Gets the set of key-value pairs (metadata) that are used to manage the resource.
    */
   listTagsForResource(params: CodePipeline.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: CodePipeline.Types.ListTagsForResourceOutput) => void): Request<CodePipeline.Types.ListTagsForResourceOutput, AWSError>;
@@ -172,43 +196,51 @@ declare class CodePipeline extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: CodePipeline.Types.ListTagsForResourceOutput) => void): Request<CodePipeline.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   * Gets a listing of all the webhooks in this AWS Region for this account. The output lists all webhooks and includes the webhook URL and ARN and the configuration for each webhook.
+   * Gets a listing of all the webhooks in this Amazon Web Services Region for this account. The output lists all webhooks and includes the webhook URL and ARN and the configuration for each webhook.  If a secret token was provided, it will be redacted in the response. 
    */
   listWebhooks(params: CodePipeline.Types.ListWebhooksInput, callback?: (err: AWSError, data: CodePipeline.Types.ListWebhooksOutput) => void): Request<CodePipeline.Types.ListWebhooksOutput, AWSError>;
   /**
-   * Gets a listing of all the webhooks in this AWS Region for this account. The output lists all webhooks and includes the webhook URL and ARN and the configuration for each webhook.
+   * Gets a listing of all the webhooks in this Amazon Web Services Region for this account. The output lists all webhooks and includes the webhook URL and ARN and the configuration for each webhook.  If a secret token was provided, it will be redacted in the response. 
    */
   listWebhooks(callback?: (err: AWSError, data: CodePipeline.Types.ListWebhooksOutput) => void): Request<CodePipeline.Types.ListWebhooksOutput, AWSError>;
   /**
-   * Returns information about any jobs for AWS CodePipeline to act on. PollForJobs is valid only for action types with "Custom" in the owner field. If the action type contains "AWS" or "ThirdParty" in the owner field, the PollForJobs action returns an error.  When this API is called, AWS CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
+   * Used to override a stage condition.
+   */
+  overrideStageCondition(params: CodePipeline.Types.OverrideStageConditionInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Used to override a stage condition.
+   */
+  overrideStageCondition(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Returns information about any jobs for CodePipeline to act on. PollForJobs is valid only for action types with "Custom" in the owner field. If the action type contains AWS or ThirdParty in the owner field, the PollForJobs action returns an error.  When this API is called, CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
    */
   pollForJobs(params: CodePipeline.Types.PollForJobsInput, callback?: (err: AWSError, data: CodePipeline.Types.PollForJobsOutput) => void): Request<CodePipeline.Types.PollForJobsOutput, AWSError>;
   /**
-   * Returns information about any jobs for AWS CodePipeline to act on. PollForJobs is valid only for action types with "Custom" in the owner field. If the action type contains "AWS" or "ThirdParty" in the owner field, the PollForJobs action returns an error.  When this API is called, AWS CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
+   * Returns information about any jobs for CodePipeline to act on. PollForJobs is valid only for action types with "Custom" in the owner field. If the action type contains AWS or ThirdParty in the owner field, the PollForJobs action returns an error.  When this API is called, CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
    */
   pollForJobs(callback?: (err: AWSError, data: CodePipeline.Types.PollForJobsOutput) => void): Request<CodePipeline.Types.PollForJobsOutput, AWSError>;
   /**
-   * Determines whether there are any third party jobs for a job worker to act on. Used for partner actions only.  When this API is called, AWS CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. 
+   * Determines whether there are any third party jobs for a job worker to act on. Used for partner actions only.  When this API is called, CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. 
    */
   pollForThirdPartyJobs(params: CodePipeline.Types.PollForThirdPartyJobsInput, callback?: (err: AWSError, data: CodePipeline.Types.PollForThirdPartyJobsOutput) => void): Request<CodePipeline.Types.PollForThirdPartyJobsOutput, AWSError>;
   /**
-   * Determines whether there are any third party jobs for a job worker to act on. Used for partner actions only.  When this API is called, AWS CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. 
+   * Determines whether there are any third party jobs for a job worker to act on. Used for partner actions only.  When this API is called, CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. 
    */
   pollForThirdPartyJobs(callback?: (err: AWSError, data: CodePipeline.Types.PollForThirdPartyJobsOutput) => void): Request<CodePipeline.Types.PollForThirdPartyJobsOutput, AWSError>;
   /**
-   * Provides information to AWS CodePipeline about new revisions to a source.
+   * Provides information to CodePipeline about new revisions to a source.
    */
   putActionRevision(params: CodePipeline.Types.PutActionRevisionInput, callback?: (err: AWSError, data: CodePipeline.Types.PutActionRevisionOutput) => void): Request<CodePipeline.Types.PutActionRevisionOutput, AWSError>;
   /**
-   * Provides information to AWS CodePipeline about new revisions to a source.
+   * Provides information to CodePipeline about new revisions to a source.
    */
   putActionRevision(callback?: (err: AWSError, data: CodePipeline.Types.PutActionRevisionOutput) => void): Request<CodePipeline.Types.PutActionRevisionOutput, AWSError>;
   /**
-   * Provides the response to a manual approval request to AWS CodePipeline. Valid responses include Approved and Rejected.
+   * Provides the response to a manual approval request to CodePipeline. Valid responses include Approved and Rejected.
    */
   putApprovalResult(params: CodePipeline.Types.PutApprovalResultInput, callback?: (err: AWSError, data: CodePipeline.Types.PutApprovalResultOutput) => void): Request<CodePipeline.Types.PutApprovalResultOutput, AWSError>;
   /**
-   * Provides the response to a manual approval request to AWS CodePipeline. Valid responses include Approved and Rejected.
+   * Provides the response to a manual approval request to CodePipeline. Valid responses include Approved and Rejected.
    */
   putApprovalResult(callback?: (err: AWSError, data: CodePipeline.Types.PutApprovalResultOutput) => void): Request<CodePipeline.Types.PutApprovalResultOutput, AWSError>;
   /**
@@ -244,11 +276,11 @@ declare class CodePipeline extends Service {
    */
   putThirdPartyJobSuccessResult(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Defines a webhook and returns a unique webhook URL generated by CodePipeline. This URL can be supplied to third party source hosting providers to call every time there's a code change. When CodePipeline receives a POST request on this URL, the pipeline defined in the webhook is started as long as the POST request satisfied the authentication and filtering requirements supplied when defining the webhook. RegisterWebhookWithThirdParty and DeregisterWebhookWithThirdParty APIs can be used to automatically configure supported third parties to call the generated webhook URL.
+   * Defines a webhook and returns a unique webhook URL generated by CodePipeline. This URL can be supplied to third party source hosting providers to call every time there's a code change. When CodePipeline receives a POST request on this URL, the pipeline defined in the webhook is started as long as the POST request satisfied the authentication and filtering requirements supplied when defining the webhook. RegisterWebhookWithThirdParty and DeregisterWebhookWithThirdParty APIs can be used to automatically configure supported third parties to call the generated webhook URL.  When creating CodePipeline webhooks, do not use your own credentials or reuse the same secret token across multiple webhooks. For optimal security, generate a unique secret token for each webhook you create. The secret token is an arbitrary string that you provide, which GitHub uses to compute and sign the webhook payloads sent to CodePipeline, for protecting the integrity and authenticity of the webhook payloads. Using your own credentials or reusing the same token across multiple webhooks can lead to security vulnerabilities.   If a secret token was provided, it will be redacted in the response. 
    */
   putWebhook(params: CodePipeline.Types.PutWebhookInput, callback?: (err: AWSError, data: CodePipeline.Types.PutWebhookOutput) => void): Request<CodePipeline.Types.PutWebhookOutput, AWSError>;
   /**
-   * Defines a webhook and returns a unique webhook URL generated by CodePipeline. This URL can be supplied to third party source hosting providers to call every time there's a code change. When CodePipeline receives a POST request on this URL, the pipeline defined in the webhook is started as long as the POST request satisfied the authentication and filtering requirements supplied when defining the webhook. RegisterWebhookWithThirdParty and DeregisterWebhookWithThirdParty APIs can be used to automatically configure supported third parties to call the generated webhook URL.
+   * Defines a webhook and returns a unique webhook URL generated by CodePipeline. This URL can be supplied to third party source hosting providers to call every time there's a code change. When CodePipeline receives a POST request on this URL, the pipeline defined in the webhook is started as long as the POST request satisfied the authentication and filtering requirements supplied when defining the webhook. RegisterWebhookWithThirdParty and DeregisterWebhookWithThirdParty APIs can be used to automatically configure supported third parties to call the generated webhook URL.  When creating CodePipeline webhooks, do not use your own credentials or reuse the same secret token across multiple webhooks. For optimal security, generate a unique secret token for each webhook you create. The secret token is an arbitrary string that you provide, which GitHub uses to compute and sign the webhook payloads sent to CodePipeline, for protecting the integrity and authenticity of the webhook payloads. Using your own credentials or reusing the same token across multiple webhooks can lead to security vulnerabilities.   If a secret token was provided, it will be redacted in the response. 
    */
   putWebhook(callback?: (err: AWSError, data: CodePipeline.Types.PutWebhookOutput) => void): Request<CodePipeline.Types.PutWebhookOutput, AWSError>;
   /**
@@ -260,13 +292,21 @@ declare class CodePipeline extends Service {
    */
   registerWebhookWithThirdParty(callback?: (err: AWSError, data: CodePipeline.Types.RegisterWebhookWithThirdPartyOutput) => void): Request<CodePipeline.Types.RegisterWebhookWithThirdPartyOutput, AWSError>;
   /**
-   * Resumes the pipeline execution by retrying the last failed actions in a stage. You can retry a stage immediately if any of the actions in the stage fail. When you retry, all actions that are still in progress continue working, and failed actions are triggered again.
+   * You can retry a stage that has failed without having to run a pipeline again from the beginning. You do this by either retrying the failed actions in a stage or by retrying all actions in the stage starting from the first action in the stage. When you retry the failed actions in a stage, all actions that are still in progress continue working, and failed actions are triggered again. When you retry a failed stage from the first action in the stage, the stage cannot have any actions in progress. Before a stage can be retried, it must either have all actions failed or some actions failed and some succeeded.
    */
   retryStageExecution(params: CodePipeline.Types.RetryStageExecutionInput, callback?: (err: AWSError, data: CodePipeline.Types.RetryStageExecutionOutput) => void): Request<CodePipeline.Types.RetryStageExecutionOutput, AWSError>;
   /**
-   * Resumes the pipeline execution by retrying the last failed actions in a stage. You can retry a stage immediately if any of the actions in the stage fail. When you retry, all actions that are still in progress continue working, and failed actions are triggered again.
+   * You can retry a stage that has failed without having to run a pipeline again from the beginning. You do this by either retrying the failed actions in a stage or by retrying all actions in the stage starting from the first action in the stage. When you retry the failed actions in a stage, all actions that are still in progress continue working, and failed actions are triggered again. When you retry a failed stage from the first action in the stage, the stage cannot have any actions in progress. Before a stage can be retried, it must either have all actions failed or some actions failed and some succeeded.
    */
   retryStageExecution(callback?: (err: AWSError, data: CodePipeline.Types.RetryStageExecutionOutput) => void): Request<CodePipeline.Types.RetryStageExecutionOutput, AWSError>;
+  /**
+   * Rolls back a stage execution.
+   */
+  rollbackStage(params: CodePipeline.Types.RollbackStageInput, callback?: (err: AWSError, data: CodePipeline.Types.RollbackStageOutput) => void): Request<CodePipeline.Types.RollbackStageOutput, AWSError>;
+  /**
+   * Rolls back a stage execution.
+   */
+  rollbackStage(callback?: (err: AWSError, data: CodePipeline.Types.RollbackStageOutput) => void): Request<CodePipeline.Types.RollbackStageOutput, AWSError>;
   /**
    * Starts the specified pipeline. Specifically, it begins processing the latest commit to the source location specified as part of the pipeline.
    */
@@ -292,13 +332,21 @@ declare class CodePipeline extends Service {
    */
   tagResource(callback?: (err: AWSError, data: CodePipeline.Types.TagResourceOutput) => void): Request<CodePipeline.Types.TagResourceOutput, AWSError>;
   /**
-   * Removes tags from an AWS resource.
+   * Removes tags from an Amazon Web Services resource.
    */
   untagResource(params: CodePipeline.Types.UntagResourceInput, callback?: (err: AWSError, data: CodePipeline.Types.UntagResourceOutput) => void): Request<CodePipeline.Types.UntagResourceOutput, AWSError>;
   /**
-   * Removes tags from an AWS resource.
+   * Removes tags from an Amazon Web Services resource.
    */
   untagResource(callback?: (err: AWSError, data: CodePipeline.Types.UntagResourceOutput) => void): Request<CodePipeline.Types.UntagResourceOutput, AWSError>;
+  /**
+   * Updates an action type that was created with any supported integration model, where the action type is to be used by customers of the action type provider. Use a JSON file with the action definition and UpdateActionType to provide the full structure.
+   */
+  updateActionType(params: CodePipeline.Types.UpdateActionTypeInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates an action type that was created with any supported integration model, where the action type is to be used by customers of the action type provider. Use a JSON file with the action definition and UpdateActionType to provide the full structure.
+   */
+  updateActionType(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates a specified pipeline with edits or changes to its structure. Use a JSON file with the pipeline structure and UpdatePipeline to provide the full structure of the pipeline. Updating the pipeline increases the version number of the pipeline by 1.
    */
@@ -332,7 +380,7 @@ declare namespace CodePipeline {
      */
     jobId: JobId;
     /**
-     * A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Get this number from the response of the PollForJobs request that returned this job.
+     * A system-generated random number that CodePipeline uses to ensure that the job is being worked on by only one job worker. Get this number from the response of the PollForJobs request that returned this job.
      */
     nonce: Nonce;
   }
@@ -348,7 +396,7 @@ declare namespace CodePipeline {
      */
     jobId: ThirdPartyJobId;
     /**
-     * A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Get this number from the response to a GetThirdPartyJobDetails request.
+     * A system-generated random number that CodePipeline uses to ensure that the job is being worked on by only one job worker. Get this number from the response to a GetThirdPartyJobDetails request.
      */
     nonce: Nonce;
     /**
@@ -429,7 +477,7 @@ declare namespace CodePipeline {
      */
     runOrder?: ActionRunOrder;
     /**
-     * The action's configuration. These are key-value pairs that specify input values for an action. For more information, see Action Structure Requirements in CodePipeline. For the list of configuration properties for the AWS CloudFormation action type in CodePipeline, see Configuration Properties Reference in the AWS CloudFormation User Guide. For template snippets with examples, see Using Parameter Override Functions with CodePipeline Pipelines in the AWS CloudFormation User Guide. The values can be represented in either JSON or YAML format. For example, the JSON configuration item format is as follows:   JSON:   "Configuration" : { Key : Value }, 
+     * The action's configuration. These are key-value pairs that specify input values for an action. For more information, see Action Structure Requirements in CodePipeline. For the list of configuration properties for the CloudFormation action type in CodePipeline, see Configuration Properties Reference in the CloudFormation User Guide. For template snippets with examples, see Using Parameter Override Functions with CodePipeline Pipelines in the CloudFormation User Guide. The values can be represented in either JSON or YAML format. For example, the JSON configuration item format is as follows:   JSON:   "Configuration" : { Key : Value }, 
      */
     configuration?: ActionConfigurationMap;
     /**
@@ -445,13 +493,17 @@ declare namespace CodePipeline {
      */
     roleArn?: RoleArn;
     /**
-     * The action declaration's AWS Region, such as us-east-1.
+     * The action declaration's Amazon Web Services Region, such as us-east-1.
      */
     region?: AWSRegionName;
     /**
      * The variable namespace associated with the action. All variables produced as output by this action fall under this namespace.
      */
     namespace?: ActionNamespace;
+    /**
+     * A timeout duration in minutes that can be applied against the ActionType’s default timeout value specified in Quotas for CodePipeline . This attribute is available only to the manual approval ActionType.
+     */
+    timeoutInMinutes?: ActionTimeout;
   }
   export interface ActionExecution {
     /**
@@ -483,7 +535,7 @@ declare namespace CodePipeline {
      */
     externalExecutionId?: ExecutionId;
     /**
-     * The URL of a resource external to AWS that is used when running the action (for example, an external repository URL).
+     * The URL of a resource external to Amazon Web Services that is used when running the action (for example, an external repository URL).
      */
     externalExecutionUrl?: Url;
     /**
@@ -491,7 +543,7 @@ declare namespace CodePipeline {
      */
     percentComplete?: Percentage;
     /**
-     * The details of an error returned by a URL external to AWS.
+     * The details of an error returned by a URL external to Amazon Web Services.
      */
     errorDetails?: ErrorDetails;
   }
@@ -525,6 +577,10 @@ declare namespace CodePipeline {
      */
     lastUpdateTime?: Timestamp;
     /**
+     * The ARN of the user who changed the pipeline execution details.
+     */
+    updatedBy?: LastUpdatedBy;
+    /**
      *  The status of the action execution. Status categories are InProgress, Succeeded, and Failed.
      */
     status?: ActionExecutionStatus;
@@ -543,6 +599,10 @@ declare namespace CodePipeline {
      * The pipeline execution ID used to filter action execution history.
      */
     pipelineExecutionId?: PipelineExecutionId;
+    /**
+     * The latest execution in the pipeline.  Filtering on the latest execution is available for executions run on or after February 08, 2024. 
+     */
+    latestInPipelineExecution?: LatestInPipelineExecutionFilter;
   }
   export type ActionExecutionId = string;
   export interface ActionExecutionInput {
@@ -560,7 +620,7 @@ declare namespace CodePipeline {
      */
     roleArn?: RoleArn;
     /**
-     * The AWS Region for the action, such as us-east-1.
+     * The Amazon Web Services Region for the action, such as us-east-1.
      */
     region?: AWSRegionName;
     /**
@@ -599,6 +659,7 @@ declare namespace CodePipeline {
      * The deepest external link to the external resource (for example, a repository URL or deployment endpoint) that is used when running the action.
      */
     externalExecutionUrl?: Url;
+    errorDetails?: ErrorDetails;
   }
   export type ActionExecutionStatus = "InProgress"|"Abandoned"|"Succeeded"|"Failed"|string;
   export type ActionExecutionToken = string;
@@ -644,6 +705,7 @@ declare namespace CodePipeline {
     revisionUrl?: Url;
   }
   export type ActionStateList = ActionState[];
+  export type ActionTimeout = number;
   export interface ActionType {
     /**
      * Represents information about an action type.
@@ -666,6 +728,69 @@ declare namespace CodePipeline {
      */
     outputArtifactDetails: ArtifactDetails;
   }
+  export interface ActionTypeArtifactDetails {
+    /**
+     * The minimum number of artifacts that can be used with the action type. For example, you should specify a minimum and maximum of zero input artifacts for an action type with a category of source.
+     */
+    minimumCount: MinimumActionTypeArtifactCount;
+    /**
+     * The maximum number of artifacts that can be used with the actiontype. For example, you should specify a minimum and maximum of zero input artifacts for an action type with a category of source.
+     */
+    maximumCount: MaximumActionTypeArtifactCount;
+  }
+  export interface ActionTypeDeclaration {
+    /**
+     * The description for the action type to be updated.
+     */
+    description?: ActionTypeDescription;
+    /**
+     * Information about the executor for an action type that was created with any supported integration model.
+     */
+    executor: ActionTypeExecutor;
+    /**
+     * The action category, owner, provider, and version of the action type to be updated.
+     */
+    id: ActionTypeIdentifier;
+    /**
+     * Details for the artifacts, such as application files, to be worked on by the action. For example, the minimum and maximum number of input artifacts allowed.
+     */
+    inputArtifactDetails: ActionTypeArtifactDetails;
+    /**
+     * Details for the output artifacts, such as a built application, that are the result of the action. For example, the minimum and maximum number of output artifacts allowed.
+     */
+    outputArtifactDetails: ActionTypeArtifactDetails;
+    /**
+     * Details identifying the accounts with permissions to use the action type.
+     */
+    permissions?: ActionTypePermissions;
+    /**
+     * The properties of the action type to be updated.
+     */
+    properties?: ActionTypeProperties;
+    /**
+     * The links associated with the action type to be updated.
+     */
+    urls?: ActionTypeUrls;
+  }
+  export type ActionTypeDescription = string;
+  export interface ActionTypeExecutor {
+    /**
+     * The action configuration properties for the action type. These properties are specified in the action definition when the action type is created.
+     */
+    configuration: ExecutorConfiguration;
+    /**
+     * The integration model used to create and update the action type, Lambda or JobWorker. 
+     */
+    type: ExecutorType;
+    /**
+     * The policy statement that specifies the permissions in the CodePipeline customer account that are needed to successfully run an action. To grant permission to another account, specify the account ID as the Principal, a domain-style identifier defined by the service, for example codepipeline.amazonaws.com.  The size of the passed JSON policy document cannot exceed 2048 characters. 
+     */
+    policyStatementsTemplate?: PolicyStatementsTemplate;
+    /**
+     * The timeout in seconds for the job. An action execution can have multiple jobs. This is the timeout for a single job, not the entire action execution.
+     */
+    jobTimeout?: JobTimeout;
+  }
   export interface ActionTypeId {
     /**
      * A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the following values.    Source   Build   Test   Deploy   Invoke   Approval  
@@ -676,7 +801,7 @@ declare namespace CodePipeline {
      */
     owner: ActionOwner;
     /**
-     * The provider of the service being called by the action. Valid providers are determined by the action category. For example, an action in the Deploy category type might have a provider of AWS CodeDeploy, which would be specified as CodeDeploy. For more information, see Valid Action Types and Providers in CodePipeline.
+     * The provider of the service being called by the action. Valid providers are determined by the action category. For example, an action in the Deploy category type might have a provider of CodeDeploy, which would be specified as CodeDeploy. For more information, see Valid Action Types and Providers in CodePipeline.
      */
     provider: ActionProvider;
     /**
@@ -684,25 +809,97 @@ declare namespace CodePipeline {
      */
     version: Version;
   }
+  export interface ActionTypeIdentifier {
+    /**
+     * Defines what kind of action can be taken in the stage, one of the following:    Source     Build     Test     Deploy     Approval     Invoke   
+     */
+    category: ActionCategory;
+    /**
+     * The creator of the action type being called: AWS or ThirdParty.
+     */
+    owner: ActionTypeOwner;
+    /**
+     * The provider of the action type being called. The provider name is supplied when the action type is created.
+     */
+    provider: ActionProvider;
+    /**
+     * A string that describes the action type version.
+     */
+    version: Version;
+  }
   export type ActionTypeList = ActionType[];
+  export type ActionTypeOwner = string;
+  export interface ActionTypePermissions {
+    /**
+     * A list of Amazon Web Services account IDs with access to use the action type in their pipelines.
+     */
+    allowedAccounts: AllowedAccounts;
+  }
+  export type ActionTypeProperties = ActionTypeProperty[];
+  export interface ActionTypeProperty {
+    /**
+     * The property name that is displayed to users.
+     */
+    name: ActionConfigurationKey;
+    /**
+     * Whether the configuration property is an optional value.
+     */
+    optional: Boolean;
+    /**
+     * Whether the configuration property is a key.
+     */
+    key: Boolean;
+    /**
+     * Whether to omit the field value entered by the customer in the log. If true, the value is not saved in CloudTrail logs for the action execution.
+     */
+    noEcho: Boolean;
+    /**
+     * Indicates that the property is used with polling. An action type can have up to one queryable property. If it has one, that property must be both required and not secret.
+     */
+    queryable?: Boolean;
+    /**
+     * The description of the property that is displayed to users.
+     */
+    description?: PropertyDescription;
+  }
   export interface ActionTypeSettings {
     /**
      * The URL of a sign-up page where users can sign up for an external service and perform initial configuration of the action provided by that service.
      */
     thirdPartyConfigurationUrl?: Url;
     /**
-     * The URL returned to the AWS CodePipeline console that provides a deep link to the resources of the external system, such as the configuration page for an AWS CodeDeploy deployment group. This link is provided as part of the action display in the pipeline.
+     * The URL returned to the CodePipeline console that provides a deep link to the resources of the external system, such as the configuration page for a CodeDeploy deployment group. This link is provided as part of the action display in the pipeline.
      */
     entityUrlTemplate?: UrlTemplate;
     /**
-     * The URL returned to the AWS CodePipeline console that contains a link to the top-level landing page for the external system, such as the console page for AWS CodeDeploy. This link is shown on the pipeline view page in the AWS CodePipeline console and provides a link to the execution entity of the external action.
+     * The URL returned to the CodePipeline console that contains a link to the top-level landing page for the external system, such as the console page for CodeDeploy. This link is shown on the pipeline view page in the CodePipeline console and provides a link to the execution entity of the external action.
      */
     executionUrlTemplate?: UrlTemplate;
     /**
-     * The URL returned to the AWS CodePipeline console that contains a link to the page where customers can update or change the configuration of the external action.
+     * The URL returned to the CodePipeline console that contains a link to the page where customers can update or change the configuration of the external action.
      */
     revisionUrlTemplate?: UrlTemplate;
   }
+  export interface ActionTypeUrls {
+    /**
+     * The URL returned to the CodePipeline console that contains a link to the page where customers can configure the external action.
+     */
+    configurationUrl?: Url;
+    /**
+     * The URL returned to the CodePipeline console that provides a deep link to the resources of the external system, such as a status page. This link is provided as part of the action display in the pipeline.
+     */
+    entityUrlTemplate?: UrlTemplate;
+    /**
+     * The link to an execution page for the action type in progress. For example, for a CodeDeploy action, this link is shown on the pipeline view page in the CodePipeline console, and it links to a CodeDeploy status page.
+     */
+    executionUrlTemplate?: UrlTemplate;
+    /**
+     * The URL returned to the CodePipeline console that contains a link to the page where customers can update or change the configuration of the external action.
+     */
+    revisionUrlTemplate?: UrlTemplate;
+  }
+  export type AllowedAccount = string;
+  export type AllowedAccounts = AllowedAccount[];
   export interface ApprovalResult {
     /**
      * The summary of the current status of the approval request.
@@ -778,7 +975,7 @@ declare namespace CodePipeline {
      */
     revisionChangeIdentifier?: RevisionChangeIdentifier;
     /**
-     * Summary information about the most recent revision of the artifact. For GitHub and AWS CodeCommit repositories, the commit message. For Amazon S3 buckets or actions, the user-provided content of a codepipeline-artifact-revision-summary key specified in the object metadata.
+     * Summary information about the most recent revision of the artifact. For GitHub and CodeCommit repositories, the commit message. For Amazon S3 buckets or actions, the user-provided content of a codepipeline-artifact-revision-summary key specified in the object metadata.
      */
     revisionSummary?: RevisionSummary;
     /**
@@ -786,7 +983,7 @@ declare namespace CodePipeline {
      */
     created?: Timestamp;
     /**
-     * The commit ID for the artifact revision. For artifacts stored in GitHub or AWS CodeCommit repositories, the commit ID is linked to a commit details page.
+     * The commit ID for the artifact revision. For artifacts stored in GitHub or CodeCommit repositories, the commit ID is linked to a commit details page.
      */
     revisionUrl?: Url;
   }
@@ -797,17 +994,23 @@ declare namespace CodePipeline {
      */
     type: ArtifactStoreType;
     /**
-     * The S3 bucket used for storing the artifacts for a pipeline. You can specify the name of an S3 bucket but not a folder in the bucket. A folder to contain the pipeline artifacts is created for you based on the name of the pipeline. You can use any S3 bucket in the same AWS Region as the pipeline to store your pipeline artifacts.
+     * The S3 bucket used for storing the artifacts for a pipeline. You can specify the name of an S3 bucket but not a folder in the bucket. A folder to contain the pipeline artifacts is created for you based on the name of the pipeline. You can use any S3 bucket in the same Amazon Web Services Region as the pipeline to store your pipeline artifacts.
      */
     location: ArtifactStoreLocation;
     /**
-     * The encryption key used to encrypt the data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. If this is undefined, the default key for Amazon S3 is used.
+     * The encryption key used to encrypt the data in the artifact store, such as an Amazon Web Services Key Management Service key. If this is undefined, the default key for Amazon S3 is used.
      */
     encryptionKey?: EncryptionKey;
   }
   export type ArtifactStoreLocation = string;
   export type ArtifactStoreMap = {[key: string]: ArtifactStore};
   export type ArtifactStoreType = "S3"|string;
+  export interface BeforeEntryConditions {
+    /**
+     * The conditions that are configured as entry conditions.
+     */
+    conditions: ConditionList;
+  }
   export interface BlockerDeclaration {
     /**
      * Reserved for future use.
@@ -825,6 +1028,44 @@ declare namespace CodePipeline {
   export type ClientRequestToken = string;
   export type ClientToken = string;
   export type Code = string;
+  export interface Condition {
+    /**
+     * The action to be done when the condition is met. For example, rolling back an execution for a failure condition.
+     */
+    result?: Result;
+    /**
+     * The rules that make up the condition.
+     */
+    rules?: RuleDeclarationList;
+  }
+  export interface ConditionExecution {
+    /**
+     * The status of the run for a condition.
+     */
+    status?: ConditionExecutionStatus;
+    /**
+     * The summary of information about a run for a condition.
+     */
+    summary?: ExecutionSummary;
+    /**
+     * The last status change of the condition.
+     */
+    lastStatusChange?: Timestamp;
+  }
+  export type ConditionExecutionStatus = "InProgress"|"Failed"|"Errored"|"Succeeded"|"Cancelled"|"Abandoned"|"Overridden"|string;
+  export type ConditionList = Condition[];
+  export interface ConditionState {
+    /**
+     * The state of the latest run of the rule.
+     */
+    latestExecution?: ConditionExecution;
+    /**
+     * The state of the rules for the condition.
+     */
+    ruleStates?: RuleStateList;
+  }
+  export type ConditionStateList = ConditionState[];
+  export type ConditionType = "BEFORE_ENTRY"|"ON_SUCCESS"|string;
   export type ContinuationToken = string;
   export interface CreateCustomActionTypeInput {
     /**
@@ -832,7 +1073,7 @@ declare namespace CodePipeline {
      */
     category: ActionCategory;
     /**
-     * The provider of the service used in the custom action, such as AWS CodeDeploy.
+     * The provider of the service used in the custom action, such as CodeDeploy.
      */
     provider: ActionProvider;
     /**
@@ -914,7 +1155,7 @@ declare namespace CodePipeline {
      */
     category: ActionCategory;
     /**
-     * The provider of the service used in the custom action, such as AWS CodeDeploy.
+     * The provider of the service used in the custom action, such as CodeDeploy.
      */
     provider: ActionProvider;
     /**
@@ -981,11 +1222,11 @@ declare namespace CodePipeline {
   export type Enabled = boolean;
   export interface EncryptionKey {
     /**
-     * The ID used to identify the key. For an AWS KMS key, you can use the key ID, the key ARN, or the alias ARN.  Aliases are recognized only in the account that created the customer master key (CMK). For cross-account actions, you can only use the key ID or key ARN to identify the key. 
+     * The ID used to identify the key. For an Amazon Web Services KMS key, you can use the key ID, the key ARN, or the alias ARN.  Aliases are recognized only in the account that created the KMS key. For cross-account actions, you can only use the key ID or key ARN to identify the key. Cross-account actions involve using the role from the other account (AccountB), so specifying the key ID will use the key from the other account (AccountB). 
      */
     id: EncryptionKeyId;
     /**
-     * The type of encryption key, such as an AWS Key Management Service (AWS KMS) key. When creating or updating a pipeline, the value must be set to 'KMS'.
+     * The type of encryption key, such as an Amazon Web Services KMS key. When creating or updating a pipeline, the value must be set to 'KMS'.
      */
     type: EncryptionKeyType;
   }
@@ -1007,7 +1248,7 @@ declare namespace CodePipeline {
      */
     summary?: ExecutionSummary;
     /**
-     * The system-generated unique ID of this action used to identify this job worker in any external systems, such as AWS CodeDeploy.
+     * The system-generated unique ID of this action used to identify this job worker in any external systems, such as CodeDeploy.
      */
     externalExecutionId?: ExecutionId;
     /**
@@ -1016,6 +1257,7 @@ declare namespace CodePipeline {
     percentComplete?: Percentage;
   }
   export type ExecutionId = string;
+  export type ExecutionMode = "QUEUED"|"SUPERSEDED"|"PARALLEL"|string;
   export type ExecutionSummary = string;
   export interface ExecutionTrigger {
     /**
@@ -1027,8 +1269,30 @@ declare namespace CodePipeline {
      */
     triggerDetail?: TriggerDetail;
   }
+  export type ExecutionType = "STANDARD"|"ROLLBACK"|string;
+  export interface ExecutorConfiguration {
+    /**
+     * Details about the Lambda executor of the action type.
+     */
+    lambdaExecutorConfiguration?: LambdaExecutorConfiguration;
+    /**
+     * Details about the JobWorker executor of the action type.
+     */
+    jobWorkerExecutorConfiguration?: JobWorkerExecutorConfiguration;
+  }
+  export type ExecutorType = "JobWorker"|"Lambda"|string;
   export type ExternalExecutionId = string;
   export type ExternalExecutionSummary = string;
+  export interface FailureConditions {
+    /**
+     * The specified result for when the failure conditions are met, such as rolling back the stage.
+     */
+    result?: Result;
+    /**
+     * The conditions that are configured as failure conditions.
+     */
+    conditions?: ConditionList;
+  }
   export interface FailureDetails {
     /**
      * The type of the failure.
@@ -1044,6 +1308,30 @@ declare namespace CodePipeline {
     externalExecutionId?: ExecutionId;
   }
   export type FailureType = "JobFailed"|"ConfigurationError"|"PermissionError"|"RevisionOutOfSync"|"RevisionUnavailable"|"SystemUnavailable"|string;
+  export interface GetActionTypeInput {
+    /**
+     * Defines what kind of action can be taken in the stage. The following are the valid values:    Source     Build     Test     Deploy     Approval     Invoke   
+     */
+    category: ActionCategory;
+    /**
+     * The creator of an action type that was created with any supported integration model. There are two valid values: AWS and ThirdParty.
+     */
+    owner: ActionTypeOwner;
+    /**
+     * The provider of the action type being called. The provider name is specified when the action type is created.
+     */
+    provider: ActionProvider;
+    /**
+     * A string that describes the action type version.
+     */
+    version: Version;
+  }
+  export interface GetActionTypeOutput {
+    /**
+     * The action type information for the requested action type, such as the action type ID.
+     */
+    actionType?: ActionTypeDeclaration;
+  }
   export interface GetJobDetailsInput {
     /**
      * The unique system-generated ID for the job.
@@ -1074,7 +1362,7 @@ declare namespace CodePipeline {
   }
   export interface GetPipelineInput {
     /**
-     * The name of the pipeline for which you want to get information. Pipeline names must be unique under an AWS user account.
+     * The name of the pipeline for which you want to get information. Pipeline names must be unique in an Amazon Web Services account.
      */
     name: PipelineName;
     /**
@@ -1136,9 +1424,91 @@ declare namespace CodePipeline {
      */
     jobDetails?: ThirdPartyJobDetails;
   }
+  export interface GitBranchFilterCriteria {
+    /**
+     * The list of patterns of Git branches that, when a commit is pushed, are to be included as criteria that starts the pipeline.
+     */
+    includes?: GitBranchPatternList;
+    /**
+     * The list of patterns of Git branches that, when a commit is pushed, are to be excluded from starting the pipeline.
+     */
+    excludes?: GitBranchPatternList;
+  }
+  export type GitBranchNamePattern = string;
+  export type GitBranchPatternList = GitBranchNamePattern[];
+  export interface GitConfiguration {
+    /**
+     * The name of the pipeline source action where the trigger configuration, such as Git tags, is specified. The trigger configuration will start the pipeline upon the specified change only.  You can only specify one trigger configuration per source action. 
+     */
+    sourceActionName: ActionName;
+    /**
+     * The field where the repository event that will start the pipeline, such as pushing Git tags, is specified with details.
+     */
+    push?: GitPushFilterList;
+    /**
+     * The field where the repository event that will start the pipeline is specified as pull requests.
+     */
+    pullRequest?: GitPullRequestFilterList;
+  }
+  export interface GitFilePathFilterCriteria {
+    /**
+     * The list of patterns of Git repository file paths that, when a commit is pushed, are to be included as criteria that starts the pipeline.
+     */
+    includes?: GitFilePathPatternList;
+    /**
+     * The list of patterns of Git repository file paths that, when a commit is pushed, are to be excluded from starting the pipeline.
+     */
+    excludes?: GitFilePathPatternList;
+  }
+  export type GitFilePathPattern = string;
+  export type GitFilePathPatternList = GitFilePathPattern[];
+  export type GitPullRequestEventType = "OPEN"|"UPDATED"|"CLOSED"|string;
+  export type GitPullRequestEventTypeList = GitPullRequestEventType[];
+  export interface GitPullRequestFilter {
+    /**
+     * The field that specifies which pull request events to filter on (opened, updated, closed) for the trigger configuration.
+     */
+    events?: GitPullRequestEventTypeList;
+    /**
+     * The field that specifies to filter on branches for the pull request trigger configuration.
+     */
+    branches?: GitBranchFilterCriteria;
+    /**
+     * The field that specifies to filter on file paths for the pull request trigger configuration.
+     */
+    filePaths?: GitFilePathFilterCriteria;
+  }
+  export type GitPullRequestFilterList = GitPullRequestFilter[];
+  export interface GitPushFilter {
+    /**
+     * The field that contains the details for the Git tags trigger configuration.
+     */
+    tags?: GitTagFilterCriteria;
+    /**
+     * The field that specifies to filter on branches for the push trigger configuration.
+     */
+    branches?: GitBranchFilterCriteria;
+    /**
+     * The field that specifies to filter on file paths for the push trigger configuration.
+     */
+    filePaths?: GitFilePathFilterCriteria;
+  }
+  export type GitPushFilterList = GitPushFilter[];
+  export interface GitTagFilterCriteria {
+    /**
+     * The list of patterns of Git tags that, when pushed, are to be included as criteria that starts the pipeline.
+     */
+    includes?: GitTagPatternList;
+    /**
+     * The list of patterns of Git tags that, when pushed, are to be excluded from starting the pipeline.
+     */
+    excludes?: GitTagPatternList;
+  }
+  export type GitTagNamePattern = string;
+  export type GitTagPatternList = GitTagNamePattern[];
   export interface InputArtifact {
     /**
-     * The name of the artifact to be worked on (for example, "My App"). The input artifact of an action must exactly match the output artifact declared in a preceding action, but the input artifact does not have to be the next action in strict sequence from the action that provided the output artifact. Actions in parallel can declare different output artifacts, which are in turn consumed by different following actions.
+     * The name of the artifact to be worked on (for example, "My App"). Artifacts are the files that are worked on by actions in the pipeline. See the action configuration for each action for details about artifact parameters. For example, the S3 source action input artifact is a file name (or file path), and the files are generally provided as a ZIP file. Example artifact name: SampleApp_Windows.zip The input artifact of an action must exactly match the output artifact declared in a preceding action, but the input artifact does not have to be the next action in strict sequence from the action that provided the output artifact. Actions in parallel can declare different output artifacts, which are in turn consumed by different following actions.
      */
     name: ArtifactName;
   }
@@ -1153,11 +1523,11 @@ declare namespace CodePipeline {
      */
     data?: JobData;
     /**
-     * A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Use this number in an AcknowledgeJob request.
+     * A system-generated random number that CodePipeline uses to ensure that the job is being worked on by only one job worker. Use this number in an AcknowledgeJob request.
      */
     nonce?: Nonce;
     /**
-     * The ID of the AWS account to use when performing the job.
+     * The ID of the Amazon Web Services account to use when performing the job.
      */
     accountId?: AccountId;
   }
@@ -1183,15 +1553,15 @@ declare namespace CodePipeline {
      */
     outputArtifacts?: ArtifactList;
     /**
-     * Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the S3 bucket used to store artifacts for the pipeline in AWS CodePipeline.
+     * Represents an Amazon Web Services session credentials object. These credentials are temporary credentials that are issued by Amazon Web Services Secure Token Service (STS). They can be used to access input and output artifacts in the S3 bucket used to store artifacts for the pipeline in CodePipeline.
      */
     artifactCredentials?: AWSSessionCredentials;
     /**
-     * A system-generated token, such as a AWS CodeDeploy deployment ID, required by a job to continue the job asynchronously.
+     * A system-generated token, such as a deployment ID, required by a job to continue the job asynchronously.
      */
     continuationToken?: ContinuationToken;
     /**
-     * Represents information about the key used to encrypt data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. 
+     * Represents information about the key used to encrypt data in the artifact store, such as an KMS key. 
      */
     encryptionKey?: EncryptionKey;
   }
@@ -1205,17 +1575,45 @@ declare namespace CodePipeline {
      */
     data?: JobData;
     /**
-     * The AWS account ID associated with the job.
+     * The Amazon Web Services account ID associated with the job.
      */
     accountId?: AccountId;
   }
   export type JobId = string;
   export type JobList = Job[];
   export type JobStatus = "Created"|"Queued"|"Dispatched"|"InProgress"|"TimedOut"|"Succeeded"|"Failed"|string;
+  export type JobTimeout = number;
+  export interface JobWorkerExecutorConfiguration {
+    /**
+     * The accounts in which the job worker is configured and might poll for jobs as part of the action execution.
+     */
+    pollingAccounts?: PollingAccountList;
+    /**
+     * The service Principals in which the job worker is configured and might poll for jobs as part of the action execution.
+     */
+    pollingServicePrincipals?: PollingServicePrincipalList;
+  }
   export type JsonPath = string;
+  export interface LambdaExecutorConfiguration {
+    /**
+     * The ARN of the Lambda function used by the action engine.
+     */
+    lambdaFunctionArn: LambdaFunctionArn;
+  }
+  export type LambdaFunctionArn = string;
   export type LastChangedAt = Date;
   export type LastChangedBy = string;
   export type LastUpdatedBy = string;
+  export interface LatestInPipelineExecutionFilter {
+    /**
+     * The execution ID for the latest execution in the pipeline.
+     */
+    pipelineExecutionId: PipelineExecutionId;
+    /**
+     * The start time to filter on for the latest execution in the pipeline. Valid options:   All   Latest  
+     */
+    startTimeRange: StartTimeRange;
+  }
   export interface ListActionExecutionsInput {
     /**
      *  The name of the pipeline for which you want to list action execution history.
@@ -1226,7 +1624,7 @@ declare namespace CodePipeline {
      */
     filter?: ActionExecutionFilter;
     /**
-     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value. Action execution history is retained for up to 12 months, based on action execution start times. Default value is 100.   Detailed execution history is available for executions run on or after February 21, 2019. 
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value. Action execution history is retained for up to 12 months, based on action execution start times. Default value is 100. 
      */
     maxResults?: MaxResults;
     /**
@@ -1253,6 +1651,10 @@ declare namespace CodePipeline {
      * An identifier that was returned from the previous list action types call, which can be used to return the next set of action types in the list.
      */
     nextToken?: NextToken;
+    /**
+     * The Region to filter on for the list of action types.
+     */
+    regionFilter?: AWSRegionName;
   }
   export interface ListActionTypesOutput {
     /**
@@ -1274,6 +1676,10 @@ declare namespace CodePipeline {
      */
     maxResults?: MaxResults;
     /**
+     * The pipeline execution to filter on.
+     */
+    filter?: PipelineExecutionFilter;
+    /**
      * The token that was returned from the previous ListPipelineExecutions call, which can be used to return the next set of pipeline executions in the list.
      */
     nextToken?: NextToken;
@@ -1293,6 +1699,10 @@ declare namespace CodePipeline {
      * An identifier that was returned from the previous list pipelines call. It can be used to return the next set of pipelines in the list.
      */
     nextToken?: NextToken;
+    /**
+     * The maximum number of pipelines to return in a single call. To retrieve the remaining pipelines, make another call with the returned nextToken value. The minimum value you can specify is 1. The maximum accepted value is 1000.
+     */
+    maxResults?: MaxPipelines;
   }
   export interface ListPipelinesOutput {
     /**
@@ -1303,6 +1713,50 @@ declare namespace CodePipeline {
      * If the amount of returned information is significantly large, an identifier is also returned. It can be used in a subsequent list pipelines call to return the next set of pipelines in the list.
      */
     nextToken?: NextToken;
+  }
+  export interface ListRuleExecutionsInput {
+    /**
+     * The name of the pipeline for which you want to get execution summary information.
+     */
+    pipelineName: PipelineName;
+    /**
+     * Input information used to filter rule execution history.
+     */
+    filter?: RuleExecutionFilter;
+    /**
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value. Pipeline history is limited to the most recent 12 months, based on pipeline execution start times. Default value is 100.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The token that was returned from the previous ListRuleExecutions call, which can be used to return the next set of rule executions in the list.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListRuleExecutionsOutput {
+    /**
+     * Details about the output for listing rule executions.
+     */
+    ruleExecutionDetails?: RuleExecutionDetailList;
+    /**
+     * A token that can be used in the next ListRuleExecutions call. To view all items in the list, continue to call this operation with each subsequent token until no more nextToken values are returned.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListRuleTypesInput {
+    /**
+     * The rule owner to filter on.
+     */
+    ruleOwnerFilter?: RuleOwner;
+    /**
+     * The rule Region to filter on.
+     */
+    regionFilter?: AWSRegionName;
+  }
+  export interface ListRuleTypesOutput {
+    /**
+     * Lists the rules that are configured for the condition.
+     */
+    ruleTypes: RuleTypeList;
   }
   export interface ListTagsForResourceInput {
     /**
@@ -1380,9 +1834,12 @@ declare namespace CodePipeline {
   }
   export type MatchEquals = string;
   export type MaxBatchSize = number;
+  export type MaxPipelines = number;
   export type MaxResults = number;
+  export type MaximumActionTypeArtifactCount = number;
   export type MaximumArtifactCount = number;
   export type Message = string;
+  export type MinimumActionTypeArtifactCount = number;
   export type MinimumArtifactCount = number;
   export type NextToken = string;
   export type Nonce = string;
@@ -1396,6 +1853,24 @@ declare namespace CodePipeline {
   export type OutputVariablesKey = string;
   export type OutputVariablesMap = {[key: string]: OutputVariablesValue};
   export type OutputVariablesValue = string;
+  export interface OverrideStageConditionInput {
+    /**
+     * The name of the pipeline with the stage that will override the condition.
+     */
+    pipelineName: PipelineName;
+    /**
+     * The name of the stage for the override.
+     */
+    stageName: StageName;
+    /**
+     * The ID of the pipeline execution for the override.
+     */
+    pipelineExecutionId: PipelineExecutionId;
+    /**
+     * The type of condition to override for the stage, such as entry conditions, failure conditions, or success conditions.
+     */
+    conditionType: ConditionType;
+  }
   export type Percentage = number;
   export type PipelineArn = string;
   export interface PipelineContext {
@@ -1426,7 +1901,7 @@ declare namespace CodePipeline {
      */
     name: PipelineName;
     /**
-     * The Amazon Resource Name (ARN) for AWS CodePipeline to use to either perform actions with no actionRoleArn, or to use to assume roles for actions with an actionRoleArn.
+     * The Amazon Resource Name (ARN) for CodePipeline to use to either perform actions with no actionRoleArn, or to use to assume roles for actions with an actionRoleArn.
      */
     roleArn: RoleArn;
     /**
@@ -1434,7 +1909,7 @@ declare namespace CodePipeline {
      */
     artifactStore?: ArtifactStore;
     /**
-     * A mapping of artifactStore objects and their corresponding AWS Regions. There must be an artifact store for the pipeline Region and for each cross-region action in the pipeline.  You must include either artifactStore or artifactStores in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use artifactStores. 
+     * A mapping of artifactStore objects and their corresponding Amazon Web Services Regions. There must be an artifact store for the pipeline Region and for each cross-region action in the pipeline.  You must include either artifactStore or artifactStores in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use artifactStores. 
      */
     artifactStores?: ArtifactStoreMap;
     /**
@@ -1445,6 +1920,22 @@ declare namespace CodePipeline {
      * The version number of the pipeline. A new pipeline always has a version number of 1. This number is incremented when a pipeline is updated.
      */
     version?: PipelineVersion;
+    /**
+     * The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED.
+     */
+    executionMode?: ExecutionMode;
+    /**
+     * CodePipeline provides the following pipeline types, which differ in characteristics and price, so that you can tailor your pipeline features and cost to the needs of your applications.   V1 type pipelines have a JSON structure that contains standard pipeline, stage, and action-level parameters.   V2 type pipelines have the same structure as a V1 type, along with additional parameters for release safety and trigger configuration.    Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when creating or updating a pipeline will result in the pipeline having the V2 type of pipeline and the associated costs.  For information about pricing for CodePipeline, see Pricing.  For information about which type of pipeline to choose, see What type of pipeline is right for me?.
+     */
+    pipelineType?: PipelineType;
+    /**
+     * A list that defines the pipeline variables for a pipeline resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9@\-_]+.
+     */
+    variables?: PipelineVariableDeclarationList;
+    /**
+     * The trigger configuration specifying a type of event, such as Git tags, that starts the pipeline.  When a trigger configuration is specified, default change detection for repository and branch commits is disabled. 
+     */
+    triggers?: PipelineTriggerDeclarationList;
   }
   export interface PipelineExecution {
     /**
@@ -1471,6 +1962,29 @@ declare namespace CodePipeline {
      * A list of ArtifactRevision objects included in a pipeline execution.
      */
     artifactRevisions?: ArtifactRevisionList;
+    /**
+     * A list of pipeline variables used for the pipeline execution.
+     */
+    variables?: ResolvedPipelineVariableList;
+    trigger?: ExecutionTrigger;
+    /**
+     * The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED.
+     */
+    executionMode?: ExecutionMode;
+    /**
+     * The type of the pipeline execution.
+     */
+    executionType?: ExecutionType;
+    /**
+     * The metadata about the execution pertaining to stage rollback.
+     */
+    rollbackMetadata?: PipelineRollbackMetadata;
+  }
+  export interface PipelineExecutionFilter {
+    /**
+     * Filter for pipeline executions where the stage was successful in the current pipeline version.
+     */
+    succeededInStage?: SucceededInStageFilter;
   }
   export type PipelineExecutionId = string;
   export type PipelineExecutionStatus = "Cancelled"|"InProgress"|"Stopped"|"Stopping"|"Succeeded"|"Superseded"|"Failed"|string;
@@ -1484,6 +1998,10 @@ declare namespace CodePipeline {
      * The status of the pipeline execution.   InProgress: The pipeline execution is currently running.   Stopped: The pipeline execution was manually stopped. For more information, see Stopped Executions.   Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop mode, the execution is either completing or abandoning in-progress actions. For more information, see Stopped Executions.   Succeeded: The pipeline execution was completed successfully.    Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead. For more information, see Superseded Executions.   Failed: The pipeline execution was not completed successfully.  
      */
     status?: PipelineExecutionStatus;
+    /**
+     * Status summary for the pipeline.
+     */
+    statusSummary?: PipelineExecutionStatusSummary;
     /**
      * The date and time when the pipeline execution began, in timestamp format.
      */
@@ -1504,6 +2022,18 @@ declare namespace CodePipeline {
      * The interaction that stopped a pipeline execution.
      */
     stopTrigger?: StopExecutionTrigger;
+    /**
+     * The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED.
+     */
+    executionMode?: ExecutionMode;
+    /**
+     * Type of the pipeline execution.
+     */
+    executionType?: ExecutionType;
+    /**
+     * The metadata for the stage execution to be rolled back.
+     */
+    rollbackMetadata?: PipelineRollbackMetadata;
   }
   export type PipelineExecutionSummaryList = PipelineExecutionSummary[];
   export type PipelineList = PipelineSummary[];
@@ -1520,8 +2050,18 @@ declare namespace CodePipeline {
      * The date and time the pipeline was last updated, in timestamp format.
      */
     updated?: Timestamp;
+    /**
+     * The date and time that polling for source changes (periodic checks) was stopped for the pipeline, in timestamp format. You can migrate (update) a polling pipeline to use event-based change detection. For example, for a pipeline with a CodeCommit source, we recommend you migrate (update) your pipeline to use CloudWatch Events. To learn more, see Migrate polling pipelines to use event-based change detection in the CodePipeline User Guide.
+     */
+    pollingDisabledAt?: Timestamp;
   }
   export type PipelineName = string;
+  export interface PipelineRollbackMetadata {
+    /**
+     * The pipeline execution ID to which the stage will be rolled back.
+     */
+    rollbackTargetPipelineExecutionId?: PipelineExecutionId;
+  }
   export type PipelineStageDeclarationList = StageDeclaration[];
   export interface PipelineSummary {
     /**
@@ -1533,6 +2073,14 @@ declare namespace CodePipeline {
      */
     version?: PipelineVersion;
     /**
+     * CodePipeline provides the following pipeline types, which differ in characteristics and price, so that you can tailor your pipeline features and cost to the needs of your applications.   V1 type pipelines have a JSON structure that contains standard pipeline, stage, and action-level parameters.   V2 type pipelines have the same structure as a V1 type, along with additional parameters for release safety and trigger configuration.    Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when creating or updating a pipeline will result in the pipeline having the V2 type of pipeline and the associated costs.  For information about pricing for CodePipeline, see Pricing.  For information about which type of pipeline to choose, see What type of pipeline is right for me?.
+     */
+    pipelineType?: PipelineType;
+    /**
+     * The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED.
+     */
+    executionMode?: ExecutionMode;
+    /**
      * The date and time the pipeline was created, in timestamp format.
      */
     created?: Timestamp;
@@ -1541,7 +2089,50 @@ declare namespace CodePipeline {
      */
     updated?: Timestamp;
   }
+  export interface PipelineTriggerDeclaration {
+    /**
+     * The source provider for the event, such as connections configured for a repository with Git tags, for the specified trigger configuration.
+     */
+    providerType: PipelineTriggerProviderType;
+    /**
+     * Provides the filter criteria and the source stage for the repository event that starts the pipeline, such as Git tags.
+     */
+    gitConfiguration: GitConfiguration;
+  }
+  export type PipelineTriggerDeclarationList = PipelineTriggerDeclaration[];
+  export type PipelineTriggerProviderType = "CodeStarSourceConnection"|string;
+  export type PipelineType = "V1"|"V2"|string;
+  export interface PipelineVariable {
+    /**
+     * The name of a pipeline-level variable.
+     */
+    name: PipelineVariableName;
+    /**
+     * The value of a pipeline-level variable.
+     */
+    value: PipelineVariableValue;
+  }
+  export interface PipelineVariableDeclaration {
+    /**
+     * The name of a pipeline-level variable.
+     */
+    name: PipelineVariableName;
+    /**
+     * The value of a pipeline-level variable.
+     */
+    defaultValue?: PipelineVariableValue;
+    /**
+     * The description of a pipeline-level variable. It's used to add additional context about the variable, and not being used at time when pipeline executes.
+     */
+    description?: PipelineVariableDescription;
+  }
+  export type PipelineVariableDeclarationList = PipelineVariableDeclaration[];
+  export type PipelineVariableDescription = string;
+  export type PipelineVariableList = PipelineVariable[];
+  export type PipelineVariableName = string;
+  export type PipelineVariableValue = string;
   export type PipelineVersion = number;
+  export type PolicyStatementsTemplate = string;
   export interface PollForJobsInput {
     /**
      * Represents information about an action type.
@@ -1578,6 +2169,9 @@ declare namespace CodePipeline {
      */
     jobs?: ThirdPartyJobList;
   }
+  export type PollingAccountList = AccountId[];
+  export type PollingServicePrincipalList = ServicePrincipal[];
+  export type PropertyDescription = string;
   export interface PutActionRevisionInput {
     /**
      * The name of the pipeline that starts processing the revision to the source.
@@ -1654,7 +2248,7 @@ declare namespace CodePipeline {
      */
     currentRevision?: CurrentRevision;
     /**
-     * A token generated by a job worker, such as an AWS CodeDeploy deployment ID, that a successful job provides to identify a custom action in progress. Future jobs use this token to identify the running instance of the action. It can be reused to return more information about the progress of the custom action. When the action is complete, no continuation token should be supplied.
+     * A token generated by a job worker, such as a CodeDeploy deployment ID, that a successful job provides to identify a custom action in progress. Future jobs use this token to identify the running instance of the action. It can be reused to return more information about the progress of the custom action. When the action is complete, no continuation token should be supplied.
      */
     continuationToken?: ContinuationToken;
     /**
@@ -1694,7 +2288,7 @@ declare namespace CodePipeline {
      */
     currentRevision?: CurrentRevision;
     /**
-     * A token generated by a job worker, such as an AWS CodeDeploy deployment ID, that a successful job provides to identify a partner action in progress. Future jobs use this token to identify the running instance of the action. It can be reused to return more information about the progress of the partner action. When the action is complete, no continuation token should be supplied.
+     * A token generated by a job worker, such as a CodeDeploy deployment ID, that a successful job provides to identify a partner action in progress. Future jobs use this token to identify the running instance of the action. It can be reused to return more information about the progress of the partner action. When the action is complete, no continuation token should be supplied.
      */
     continuationToken?: ContinuationToken;
     /**
@@ -1728,7 +2322,20 @@ declare namespace CodePipeline {
   export interface RegisterWebhookWithThirdPartyOutput {
   }
   export type ResolvedActionConfigurationMap = {[key: string]: String};
+  export interface ResolvedPipelineVariable {
+    /**
+     * The name of a pipeline-level variable.
+     */
+    name?: String;
+    /**
+     * The resolved value of a pipeline-level variable.
+     */
+    resolvedValue?: String;
+  }
+  export type ResolvedPipelineVariableList = ResolvedPipelineVariable[];
+  export type ResolvedRuleConfigurationMap = {[key: string]: String};
   export type ResourceArn = string;
+  export type Result = "ROLLBACK"|"FAIL"|string;
   export interface RetryStageExecutionInput {
     /**
      * The name of the pipeline that contains the failed stage.
@@ -1743,7 +2350,7 @@ declare namespace CodePipeline {
      */
     pipelineExecutionId: PipelineExecutionId;
     /**
-     * The scope of the retry attempt. Currently, the only supported value is FAILED_ACTIONS.
+     * The scope of the retry attempt.
      */
     retryMode: StageRetryMode;
   }
@@ -1757,6 +2364,325 @@ declare namespace CodePipeline {
   export type RevisionChangeIdentifier = string;
   export type RevisionSummary = string;
   export type RoleArn = string;
+  export interface RollbackStageInput {
+    /**
+     * The name of the pipeline for which the stage will be rolled back. 
+     */
+    pipelineName: PipelineName;
+    /**
+     * The name of the stage in the pipeline to be rolled back. 
+     */
+    stageName: StageName;
+    /**
+     * The pipeline execution ID for the stage to be rolled back to. 
+     */
+    targetPipelineExecutionId: PipelineExecutionId;
+  }
+  export interface RollbackStageOutput {
+    /**
+     * The execution ID of the pipeline execution for the stage that has been rolled back.
+     */
+    pipelineExecutionId: PipelineExecutionId;
+  }
+  export type RuleCategory = "Rule"|string;
+  export type RuleConfigurationKey = string;
+  export type RuleConfigurationMap = {[key: string]: RuleConfigurationValue};
+  export interface RuleConfigurationProperty {
+    /**
+     * The name of the rule configuration property.
+     */
+    name: RuleConfigurationKey;
+    /**
+     * Whether the configuration property is a required value.
+     */
+    required: Boolean;
+    /**
+     * Whether the configuration property is a key.
+     */
+    key: Boolean;
+    /**
+     * Whether the configuration property is secret. When updating a pipeline, passing * * * * * without changing any other values of the action preserves the previous value of the secret.
+     */
+    secret: Boolean;
+    /**
+     * Indicates whether the property can be queried. If you create a pipeline with a condition and rule, and that rule contains a queryable property, the value for that configuration property is subject to other restrictions. The value must be less than or equal to twenty (20) characters. The value can contain only alphanumeric characters, underscores, and hyphens.
+     */
+    queryable?: Boolean;
+    /**
+     * The description of the action configuration property that is displayed to users.
+     */
+    description?: Description;
+    /**
+     * The type of the configuration property.
+     */
+    type?: RuleConfigurationPropertyType;
+  }
+  export type RuleConfigurationPropertyList = RuleConfigurationProperty[];
+  export type RuleConfigurationPropertyType = "String"|"Number"|"Boolean"|string;
+  export type RuleConfigurationValue = string;
+  export interface RuleDeclaration {
+    /**
+     * The name of the rule that is created for the condition, such as CheckAllResults.
+     */
+    name: RuleName;
+    /**
+     * The ID for the rule type, which is made up of the combined values for category, owner, provider, and version.
+     */
+    ruleTypeId: RuleTypeId;
+    /**
+     * The action configuration fields for the rule.
+     */
+    configuration?: RuleConfigurationMap;
+    /**
+     * The input artifacts fields for the rule, such as specifying an input file for the rule.
+     */
+    inputArtifacts?: InputArtifactList;
+    /**
+     * The pipeline role ARN associated with the rule.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The Region for the condition associated with the rule.
+     */
+    region?: AWSRegionName;
+    /**
+     * The action timeout for the rule.
+     */
+    timeoutInMinutes?: RuleTimeout;
+  }
+  export type RuleDeclarationList = RuleDeclaration[];
+  export interface RuleExecution {
+    /**
+     * The execution ID for the run of the rule.
+     */
+    ruleExecutionId?: RuleExecutionId;
+    /**
+     * The status of the run of the rule, such as FAILED.
+     */
+    status?: RuleExecutionStatus;
+    /**
+     * A summary of the run of the rule.
+     */
+    summary?: ExecutionSummary;
+    /**
+     * The last status change of the rule.
+     */
+    lastStatusChange?: Timestamp;
+    /**
+     * The system-generated token used to identify a unique request.
+     */
+    token?: RuleExecutionToken;
+    /**
+     * The ARN of the user who last changed the rule.
+     */
+    lastUpdatedBy?: LastUpdatedBy;
+    /**
+     * The external ID of the run of the rule.
+     */
+    externalExecutionId?: ExecutionId;
+    /**
+     * The URL of a resource external to Amazon Web Services that is used when running the rule (for example, an external repository URL).
+     */
+    externalExecutionUrl?: Url;
+    errorDetails?: ErrorDetails;
+  }
+  export interface RuleExecutionDetail {
+    /**
+     * The ID of the pipeline execution in the stage where the rule was run. Use the GetPipelineState action to retrieve the current pipelineExecutionId of the stage.
+     */
+    pipelineExecutionId?: PipelineExecutionId;
+    /**
+     * The ID of the run for the rule.
+     */
+    ruleExecutionId?: RuleExecutionId;
+    /**
+     * The version number of the pipeline with the stage where the rule was run.
+     */
+    pipelineVersion?: PipelineVersion;
+    /**
+     * The name of the stage where the rule was run.
+     */
+    stageName?: StageName;
+    /**
+     * The name of the rule that was run in the stage.
+     */
+    ruleName?: RuleName;
+    /**
+     * The start time of the rule execution.
+     */
+    startTime?: Timestamp;
+    /**
+     * The date and time of the last change to the rule execution, in timestamp format.
+     */
+    lastUpdateTime?: Timestamp;
+    /**
+     * The ARN of the user who changed the rule execution details.
+     */
+    updatedBy?: LastUpdatedBy;
+    /**
+     * The status of the rule execution. Status categories are InProgress, Succeeded, and Failed. 
+     */
+    status?: RuleExecutionStatus;
+    /**
+     * Input details for the rule execution, such as role ARN, Region, and input artifacts.
+     */
+    input?: RuleExecutionInput;
+    /**
+     * Output details for the rule execution, such as the rule execution result.
+     */
+    output?: RuleExecutionOutput;
+  }
+  export type RuleExecutionDetailList = RuleExecutionDetail[];
+  export interface RuleExecutionFilter {
+    /**
+     * The pipeline execution ID used to filter rule execution history.
+     */
+    pipelineExecutionId?: PipelineExecutionId;
+    latestInPipelineExecution?: LatestInPipelineExecutionFilter;
+  }
+  export type RuleExecutionId = string;
+  export interface RuleExecutionInput {
+    /**
+     * The ID for the rule type, which is made up of the combined values for category, owner, provider, and version.
+     */
+    ruleTypeId?: RuleTypeId;
+    /**
+     * Configuration data for a rule execution, such as the resolved values for that run.
+     */
+    configuration?: RuleConfigurationMap;
+    /**
+     * Configuration data for a rule execution with all variable references replaced with their real values for the execution.
+     */
+    resolvedConfiguration?: ResolvedRuleConfigurationMap;
+    /**
+     * The ARN of the IAM service role that performs the declared rule. This is assumed through the roleArn for the pipeline.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The Amazon Web Services Region for the rule, such as us-east-1.
+     */
+    region?: AWSRegionName;
+    /**
+     * Details of input artifacts of the rule that correspond to the rule execution.
+     */
+    inputArtifacts?: ArtifactDetailList;
+  }
+  export interface RuleExecutionOutput {
+    /**
+     * Execution result information listed in the output details for a rule execution.
+     */
+    executionResult?: RuleExecutionResult;
+  }
+  export interface RuleExecutionResult {
+    /**
+     * The external ID for the rule execution.
+     */
+    externalExecutionId?: ExternalExecutionId;
+    /**
+     * The external provider summary for the rule execution.
+     */
+    externalExecutionSummary?: ExternalExecutionSummary;
+    /**
+     * The deepest external link to the external resource (for example, a repository URL or deployment endpoint) that is used when running the rule.
+     */
+    externalExecutionUrl?: Url;
+    errorDetails?: ErrorDetails;
+  }
+  export type RuleExecutionStatus = "InProgress"|"Abandoned"|"Succeeded"|"Failed"|string;
+  export type RuleExecutionToken = string;
+  export type RuleName = string;
+  export type RuleOwner = "AWS"|string;
+  export type RuleProvider = string;
+  export interface RuleRevision {
+    /**
+     * The system-generated unique ID that identifies the revision number of the rule.
+     */
+    revisionId: Revision;
+    /**
+     * The unique identifier of the change that set the state to this revision (for example, a deployment ID or timestamp).
+     */
+    revisionChangeId: RevisionChangeIdentifier;
+    /**
+     * The date and time when the most recent version of the rule was created, in timestamp format.
+     */
+    created: Timestamp;
+  }
+  export interface RuleState {
+    /**
+     * The name of the rule.
+     */
+    ruleName?: RuleName;
+    /**
+     * The ID of the current revision of the artifact successfully worked on by the job.
+     */
+    currentRevision?: RuleRevision;
+    /**
+     * Represents information about the latest run of an rule.
+     */
+    latestExecution?: RuleExecution;
+    /**
+     * A URL link for more information about the state of the action, such as a details page.
+     */
+    entityUrl?: Url;
+    /**
+     * A URL link for more information about the revision, such as a commit details page.
+     */
+    revisionUrl?: Url;
+  }
+  export type RuleStateList = RuleState[];
+  export type RuleTimeout = number;
+  export interface RuleType {
+    /**
+     * Represents information about a rule type.
+     */
+    id: RuleTypeId;
+    /**
+     * Returns information about the settings for a rule type.
+     */
+    settings?: RuleTypeSettings;
+    /**
+     * The configuration properties for the rule type.
+     */
+    ruleConfigurationProperties?: RuleConfigurationPropertyList;
+    inputArtifactDetails: ArtifactDetails;
+  }
+  export interface RuleTypeId {
+    /**
+     * A category defines what kind of rule can be run in the stage, and constrains the provider type for the rule. The valid category is Rule. 
+     */
+    category: RuleCategory;
+    /**
+     * The creator of the rule being called. The valid value for the Owner field in the rule category is AWS. 
+     */
+    owner?: RuleOwner;
+    /**
+     * The rule provider, such as the DeploymentWindow rule.
+     */
+    provider: RuleProvider;
+    /**
+     * A string that describes the rule version.
+     */
+    version?: Version;
+  }
+  export type RuleTypeList = RuleType[];
+  export interface RuleTypeSettings {
+    /**
+     * The URL of a sign-up page where users can sign up for an external service and perform initial configuration of the action provided by that service.
+     */
+    thirdPartyConfigurationUrl?: Url;
+    /**
+     * The URL returned to the CodePipeline console that provides a deep link to the resources of the external system, such as the configuration page for a CodeDeploy deployment group. This link is provided as part of the action display in the pipeline.
+     */
+    entityUrlTemplate?: UrlTemplate;
+    /**
+     * The URL returned to the CodePipeline console that contains a link to the top-level landing page for the external system, such as the console page for CodeDeploy. This link is shown on the pipeline view page in the CodePipeline console and provides a link to the execution entity of the external action.
+     */
+    executionUrlTemplate?: UrlTemplate;
+    /**
+     * The URL returned to the CodePipeline console that contains a link to the page where customers can update or change the configuration of the external action.
+     */
+    revisionUrlTemplate?: UrlTemplate;
+  }
   export interface S3ArtifactLocation {
     /**
      * The name of the S3 bucket.
@@ -1782,6 +2708,7 @@ declare namespace CodePipeline {
   }
   export type S3ObjectKey = string;
   export type SecretAccessKey = string;
+  export type ServicePrincipal = string;
   export type SessionToken = string;
   export interface SourceRevision {
     /**
@@ -1793,17 +2720,53 @@ declare namespace CodePipeline {
      */
     revisionId?: Revision;
     /**
-     * Summary information about the most recent revision of the artifact. For GitHub and AWS CodeCommit repositories, the commit message. For Amazon S3 buckets or actions, the user-provided content of a codepipeline-artifact-revision-summary key specified in the object metadata.
+     * Summary information about the most recent revision of the artifact. For GitHub and CodeCommit repositories, the commit message. For Amazon S3 buckets or actions, the user-provided content of a codepipeline-artifact-revision-summary key specified in the object metadata.
      */
     revisionSummary?: RevisionSummary;
     /**
-     * The commit ID for the artifact revision. For artifacts stored in GitHub or AWS CodeCommit repositories, the commit ID is linked to a commit details page.
+     * The commit ID for the artifact revision. For artifacts stored in GitHub or CodeCommit repositories, the commit ID is linked to a commit details page.
      */
     revisionUrl?: Url;
   }
   export type SourceRevisionList = SourceRevision[];
+  export interface SourceRevisionOverride {
+    /**
+     * The name of the action where the override will be applied.
+     */
+    actionName: ActionName;
+    /**
+     * The type of source revision, based on the source provider. For example, the revision type for the CodeCommit action provider is the commit ID.
+     */
+    revisionType: SourceRevisionType;
+    /**
+     * The source revision, or version of your source artifact, with the changes that you want to run in the pipeline execution.
+     */
+    revisionValue: Revision;
+  }
+  export type SourceRevisionOverrideList = SourceRevisionOverride[];
+  export type SourceRevisionType = "COMMIT_ID"|"IMAGE_DIGEST"|"S3_OBJECT_VERSION_ID"|"S3_OBJECT_KEY"|string;
   export type StageActionDeclarationList = ActionDeclaration[];
   export type StageBlockerDeclarationList = BlockerDeclaration[];
+  export interface StageConditionState {
+    /**
+     * Represents information about the latest run of a condition for a stage.
+     */
+    latestExecution?: StageConditionsExecution;
+    /**
+     * The states of the conditions for a run of a condition for a stage.
+     */
+    conditionStates?: ConditionStateList;
+  }
+  export interface StageConditionsExecution {
+    /**
+     * The status of a run of a condition for a stage.
+     */
+    status?: ConditionExecutionStatus;
+    /**
+     * A summary of the run of the condition for a stage.
+     */
+    summary?: ExecutionSummary;
+  }
   export interface StageContext {
     /**
      * The name of the stage.
@@ -1823,6 +2786,18 @@ declare namespace CodePipeline {
      * The actions included in a stage.
      */
     actions: StageActionDeclarationList;
+    /**
+     * The method to use when a stage has not completed successfully. For example, configuring this field for rollback will roll back a failed stage automatically to the last successful pipeline execution in the stage.
+     */
+    onFailure?: FailureConditions;
+    /**
+     * The method to use when a stage has succeeded. For example, configuring this field for conditions will allow the stage to succeed when the conditions are met.
+     */
+    onSuccess?: SuccessConditions;
+    /**
+     * The method to use when a stage allows entry. For example, configuring this field for conditions will allow entry to the stage when the conditions are met.
+     */
+    beforeEntry?: BeforeEntryConditions;
   }
   export interface StageExecution {
     /**
@@ -1833,16 +2808,25 @@ declare namespace CodePipeline {
      * The status of the stage, or for a completed stage, the last status of the stage.  A status of cancelled means that the pipeline’s definition was updated before the stage execution could be completed. 
      */
     status: StageExecutionStatus;
+    /**
+     * The type of pipeline execution for the stage, such as a rollback pipeline execution.
+     */
+    type?: ExecutionType;
   }
+  export type StageExecutionList = StageExecution[];
   export type StageExecutionStatus = "Cancelled"|"InProgress"|"Failed"|"Stopped"|"Stopping"|"Succeeded"|string;
   export type StageName = string;
-  export type StageRetryMode = "FAILED_ACTIONS"|string;
+  export type StageRetryMode = "FAILED_ACTIONS"|"ALL_ACTIONS"|string;
   export interface StageState {
     /**
      * The name of the stage.
      */
     stageName?: StageName;
     inboundExecution?: StageExecution;
+    /**
+     * The inbound executions for a stage.
+     */
+    inboundExecutions?: StageExecutionList;
     /**
      * The state of the inbound transition, which is either enabled or disabled.
      */
@@ -1855,6 +2839,18 @@ declare namespace CodePipeline {
      * Information about the latest execution in the stage, including its ID and status.
      */
     latestExecution?: StageExecution;
+    /**
+     * The state of the entry conditions for a stage.
+     */
+    beforeEntryConditionState?: StageConditionState;
+    /**
+     * The state of the success conditions for a stage.
+     */
+    onSuccessConditionState?: StageConditionState;
+    /**
+     * The state of the failure conditions for a stage.
+     */
+    onFailureConditionState?: StageConditionState;
   }
   export type StageStateList = StageState[];
   export type StageTransitionType = "Inbound"|"Outbound"|string;
@@ -1864,9 +2860,17 @@ declare namespace CodePipeline {
      */
     name: PipelineName;
     /**
+     * A list that overrides pipeline variables for a pipeline execution that's being started. Variable names must match [A-Za-z0-9@\-_]+, and the values can be anything except an empty string.
+     */
+    variables?: PipelineVariableList;
+    /**
      * The system-generated unique ID used to identify a unique execution request.
      */
     clientRequestToken?: ClientRequestToken;
+    /**
+     * A list that allows you to specify, or override, the source revision for a pipeline execution that's being started. A source revision is the version with all the changes to your application code, or source artifact, for the pipeline execution.
+     */
+    sourceRevisions?: SourceRevisionOverrideList;
   }
   export interface StartPipelineExecutionOutput {
     /**
@@ -1874,6 +2878,7 @@ declare namespace CodePipeline {
      */
     pipelineExecutionId?: PipelineExecutionId;
   }
+  export type StartTimeRange = "Latest"|"All"|string;
   export interface StopExecutionTrigger {
     /**
      * The user-specified reason the pipeline was stopped.
@@ -1906,6 +2911,18 @@ declare namespace CodePipeline {
   }
   export type StopPipelineExecutionReason = string;
   export type String = string;
+  export interface SucceededInStageFilter {
+    /**
+     * The name of the stage for filtering for pipeline executions where the stage was successful in the current pipeline version.
+     */
+    stageName?: StageName;
+  }
+  export interface SuccessConditions {
+    /**
+     * The conditions that are success conditions.
+     */
+    conditions: ConditionList;
+  }
   export interface Tag {
     /**
      * The tag's key.
@@ -1938,7 +2955,7 @@ declare namespace CodePipeline {
      */
     clientId?: ClientId;
     /**
-     * The identifier used to identify the job in AWS CodePipeline.
+     * The identifier used to identify the job in CodePipeline.
      */
     jobId?: JobId;
   }
@@ -1964,21 +2981,21 @@ declare namespace CodePipeline {
      */
     outputArtifacts?: ArtifactList;
     /**
-     * Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the S3 bucket used to store artifact for the pipeline in AWS CodePipeline. 
+     * Represents an Amazon Web Services session credentials object. These credentials are temporary credentials that are issued by Amazon Web Services Secure Token Service (STS). They can be used to access input and output artifacts in the S3 bucket used to store artifact for the pipeline in CodePipeline. 
      */
     artifactCredentials?: AWSSessionCredentials;
     /**
-     * A system-generated token, such as a AWS CodeDeploy deployment ID, that a job requires to continue the job asynchronously.
+     * A system-generated token, such as a CodeDeploy deployment ID, that a job requires to continue the job asynchronously.
      */
     continuationToken?: ContinuationToken;
     /**
-     * The encryption key used to encrypt and decrypt data in the artifact store for the pipeline, such as an AWS Key Management Service (AWS KMS) key. This is optional and might not be present.
+     * The encryption key used to encrypt and decrypt data in the artifact store for the pipeline, such as an Amazon Web Services Key Management Service (Amazon Web Services KMS) key. This is optional and might not be present.
      */
     encryptionKey?: EncryptionKey;
   }
   export interface ThirdPartyJobDetails {
     /**
-     * The identifier used to identify the job details in AWS CodePipeline.
+     * The identifier used to identify the job details in CodePipeline.
      */
     id?: ThirdPartyJobId;
     /**
@@ -1986,7 +3003,7 @@ declare namespace CodePipeline {
      */
     data?: ThirdPartyJobData;
     /**
-     * A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Use this number in an AcknowledgeThirdPartyJob request.
+     * A system-generated random number that CodePipeline uses to ensure that the job is being worked on by only one job worker. Use this number in an AcknowledgeThirdPartyJob request.
      */
     nonce?: Nonce;
   }
@@ -2013,7 +3030,7 @@ declare namespace CodePipeline {
     disabledReason?: DisabledReason;
   }
   export type TriggerDetail = string;
-  export type TriggerType = "CreatePipeline"|"StartPipelineExecution"|"PollForSourceChanges"|"Webhook"|"CloudWatchEvent"|"PutActionRevision"|string;
+  export type TriggerType = "CreatePipeline"|"StartPipelineExecution"|"PollForSourceChanges"|"Webhook"|"CloudWatchEvent"|"PutActionRevision"|"WebhookV2"|"ManualRollback"|"AutomatedRollback"|string;
   export interface UntagResourceInput {
     /**
      *  The Amazon Resource Name (ARN) of the resource to remove tags from.
@@ -2025,6 +3042,12 @@ declare namespace CodePipeline {
     tagKeys: TagKeyList;
   }
   export interface UntagResourceOutput {
+  }
+  export interface UpdateActionTypeInput {
+    /**
+     * The action type definition for the action type to be updated.
+     */
+    actionType: ActionTypeDeclaration;
   }
   export interface UpdatePipelineInput {
     /**
@@ -2048,7 +3071,7 @@ declare namespace CodePipeline {
      */
     AllowedIPRange?: WebhookAuthConfigurationAllowedIPRange;
     /**
-     * The property used to configure GitHub authentication. For GITHUB_HMAC, only the SecretToken property must be set.
+     * The property used to configure GitHub authentication. For GITHUB_HMAC, only the SecretToken property must be set.  When creating CodePipeline webhooks, do not use your own credentials or reuse the same secret token across multiple webhooks. For optimal security, generate a unique secret token for each webhook you create. The secret token is an arbitrary string that you provide, which GitHub uses to compute and sign the webhook payloads sent to CodePipeline, for protecting the integrity and authenticity of the webhook payloads. Using your own credentials or reusing the same token across multiple webhooks can lead to security vulnerabilities.   If a secret token was provided, it will be redacted in the response. 
      */
     SecretToken?: WebhookAuthConfigurationSecretToken;
   }
@@ -2073,7 +3096,7 @@ declare namespace CodePipeline {
      */
     filters: WebhookFilters;
     /**
-     * Supported options are GITHUB_HMAC, IP, and UNAUTHENTICATED.   For information about the authentication scheme implemented by GITHUB_HMAC, see Securing your webhooks on the GitHub Developer website.    IP rejects webhooks trigger requests unless they originate from an IP address in the IP range whitelisted in the authentication configuration.    UNAUTHENTICATED accepts all webhook trigger requests regardless of origin.  
+     * Supported options are GITHUB_HMAC, IP, and UNAUTHENTICATED.  When creating CodePipeline webhooks, do not use your own credentials or reuse the same secret token across multiple webhooks. For optimal security, generate a unique secret token for each webhook you create. The secret token is an arbitrary string that you provide, which GitHub uses to compute and sign the webhook payloads sent to CodePipeline, for protecting the integrity and authenticity of the webhook payloads. Using your own credentials or reusing the same token across multiple webhooks can lead to security vulnerabilities.   If a secret token was provided, it will be redacted in the response.    For information about the authentication scheme implemented by GITHUB_HMAC, see Securing your webhooks on the GitHub Developer website.    IP rejects webhooks trigger requests unless they originate from an IP address in the IP range whitelisted in the authentication configuration.    UNAUTHENTICATED accepts all webhook trigger requests regardless of origin.  
      */
     authentication: WebhookAuthenticationType;
     /**
@@ -2089,7 +3112,7 @@ declare namespace CodePipeline {
      */
     jsonPath: JsonPath;
     /**
-     * The value selected by the JsonPath expression must match what is supplied in the MatchEquals field. Otherwise, the request is ignored. Properties from the target action configuration can be included as placeholders in this value by surrounding the action configuration key with curly brackets. For example, if the value supplied here is "refs/heads/{Branch}" and the target action has an action configuration property called "Branch" with a value of "master", the MatchEquals value is evaluated as "refs/heads/master". For a list of action configuration properties for built-in action types, see Pipeline Structure Reference Action Requirements.
+     * The value selected by the JsonPath expression must match what is supplied in the MatchEquals field. Otherwise, the request is ignored. Properties from the target action configuration can be included as placeholders in this value by surrounding the action configuration key with curly brackets. For example, if the value supplied here is "refs/heads/{Branch}" and the target action has an action configuration property called "Branch" with a value of "main", the MatchEquals value is evaluated as "refs/heads/main". For a list of action configuration properties for built-in action types, see Pipeline Structure Reference Action Requirements.
      */
     matchEquals?: MatchEquals;
   }

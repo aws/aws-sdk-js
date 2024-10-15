@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeDeploy",
+        "description": "This release allows you to override the alarm configurations when creating a deployment."
+    },
+    {
+        "type": "feature",
+        "category": "DLM",
+        "description": "This release adds support for archival of single-volume snapshots created by Amazon Data Lifecycle Manager policies"
+    },
+    {
+        "type": "feature",
+        "category": "DevOpsGuru",
+        "description": "This release adds filter feature on AddNotificationChannel API, enable customer to configure the SNS notification messages by Severity or MessageTypes"
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "A new parameter called ExplainerConfig is added to CreateEndpointConfig API to enable SageMaker Clarify online explainability feature."
+    },
+    {
+        "type": "feature",
+        "category": "SageMakerRuntime",
+        "description": "A new parameter called EnableExplanations is added to InvokeEndpoint API to enable on-demand SageMaker Clarify online explainability requests."
+    }
+]

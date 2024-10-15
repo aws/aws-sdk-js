@@ -20,13 +20,29 @@ declare class EMRcontainers extends Service {
    */
   cancelJobRun(callback?: (err: AWSError, data: EMRcontainers.Types.CancelJobRunResponse) => void): Request<EMRcontainers.Types.CancelJobRunResponse, AWSError>;
   /**
-   * Creates a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+   * Creates a job template. Job template stores values of StartJobRun API request in a template and can be used to start a job run. Job template allows two use cases: avoid repeating recurring StartJobRun API request values, enforcing certain values in StartJobRun API request.
+   */
+  createJobTemplate(params: EMRcontainers.Types.CreateJobTemplateRequest, callback?: (err: AWSError, data: EMRcontainers.Types.CreateJobTemplateResponse) => void): Request<EMRcontainers.Types.CreateJobTemplateResponse, AWSError>;
+  /**
+   * Creates a job template. Job template stores values of StartJobRun API request in a template and can be used to start a job run. Job template allows two use cases: avoid repeating recurring StartJobRun API request values, enforcing certain values in StartJobRun API request.
+   */
+  createJobTemplate(callback?: (err: AWSError, data: EMRcontainers.Types.CreateJobTemplateResponse) => void): Request<EMRcontainers.Types.CreateJobTemplateResponse, AWSError>;
+  /**
+   * Creates a managed endpoint. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.
    */
   createManagedEndpoint(params: EMRcontainers.Types.CreateManagedEndpointRequest, callback?: (err: AWSError, data: EMRcontainers.Types.CreateManagedEndpointResponse) => void): Request<EMRcontainers.Types.CreateManagedEndpointResponse, AWSError>;
   /**
-   * Creates a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+   * Creates a managed endpoint. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.
    */
   createManagedEndpoint(callback?: (err: AWSError, data: EMRcontainers.Types.CreateManagedEndpointResponse) => void): Request<EMRcontainers.Types.CreateManagedEndpointResponse, AWSError>;
+  /**
+   * Creates a security configuration. Security configurations in Amazon EMR on EKS are templates for different security setups. You can use security configurations to configure the Lake Formation integration setup. You can also create a security configuration to re-use a security setup each time you create a virtual cluster.
+   */
+  createSecurityConfiguration(params: EMRcontainers.Types.CreateSecurityConfigurationRequest, callback?: (err: AWSError, data: EMRcontainers.Types.CreateSecurityConfigurationResponse) => void): Request<EMRcontainers.Types.CreateSecurityConfigurationResponse, AWSError>;
+  /**
+   * Creates a security configuration. Security configurations in Amazon EMR on EKS are templates for different security setups. You can use security configurations to configure the Lake Formation integration setup. You can also create a security configuration to re-use a security setup each time you create a virtual cluster.
+   */
+  createSecurityConfiguration(callback?: (err: AWSError, data: EMRcontainers.Types.CreateSecurityConfigurationResponse) => void): Request<EMRcontainers.Types.CreateSecurityConfigurationResponse, AWSError>;
   /**
    * Creates a virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any additional resource in your system. A single virtual cluster maps to a single Kubernetes namespace. Given this relationship, you can model virtual clusters the same way you model Kubernetes namespaces to meet your requirements.
    */
@@ -36,11 +52,19 @@ declare class EMRcontainers extends Service {
    */
   createVirtualCluster(callback?: (err: AWSError, data: EMRcontainers.Types.CreateVirtualClusterResponse) => void): Request<EMRcontainers.Types.CreateVirtualClusterResponse, AWSError>;
   /**
-   * Deletes a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+   * Deletes a job template. Job template stores values of StartJobRun API request in a template and can be used to start a job run. Job template allows two use cases: avoid repeating recurring StartJobRun API request values, enforcing certain values in StartJobRun API request.
+   */
+  deleteJobTemplate(params: EMRcontainers.Types.DeleteJobTemplateRequest, callback?: (err: AWSError, data: EMRcontainers.Types.DeleteJobTemplateResponse) => void): Request<EMRcontainers.Types.DeleteJobTemplateResponse, AWSError>;
+  /**
+   * Deletes a job template. Job template stores values of StartJobRun API request in a template and can be used to start a job run. Job template allows two use cases: avoid repeating recurring StartJobRun API request values, enforcing certain values in StartJobRun API request.
+   */
+  deleteJobTemplate(callback?: (err: AWSError, data: EMRcontainers.Types.DeleteJobTemplateResponse) => void): Request<EMRcontainers.Types.DeleteJobTemplateResponse, AWSError>;
+  /**
+   * Deletes a managed endpoint. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.
    */
   deleteManagedEndpoint(params: EMRcontainers.Types.DeleteManagedEndpointRequest, callback?: (err: AWSError, data: EMRcontainers.Types.DeleteManagedEndpointResponse) => void): Request<EMRcontainers.Types.DeleteManagedEndpointResponse, AWSError>;
   /**
-   * Deletes a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+   * Deletes a managed endpoint. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.
    */
   deleteManagedEndpoint(callback?: (err: AWSError, data: EMRcontainers.Types.DeleteManagedEndpointResponse) => void): Request<EMRcontainers.Types.DeleteManagedEndpointResponse, AWSError>;
   /**
@@ -60,13 +84,29 @@ declare class EMRcontainers extends Service {
    */
   describeJobRun(callback?: (err: AWSError, data: EMRcontainers.Types.DescribeJobRunResponse) => void): Request<EMRcontainers.Types.DescribeJobRunResponse, AWSError>;
   /**
-   * Displays detailed information about a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+   * Displays detailed information about a specified job template. Job template stores values of StartJobRun API request in a template and can be used to start a job run. Job template allows two use cases: avoid repeating recurring StartJobRun API request values, enforcing certain values in StartJobRun API request.
+   */
+  describeJobTemplate(params: EMRcontainers.Types.DescribeJobTemplateRequest, callback?: (err: AWSError, data: EMRcontainers.Types.DescribeJobTemplateResponse) => void): Request<EMRcontainers.Types.DescribeJobTemplateResponse, AWSError>;
+  /**
+   * Displays detailed information about a specified job template. Job template stores values of StartJobRun API request in a template and can be used to start a job run. Job template allows two use cases: avoid repeating recurring StartJobRun API request values, enforcing certain values in StartJobRun API request.
+   */
+  describeJobTemplate(callback?: (err: AWSError, data: EMRcontainers.Types.DescribeJobTemplateResponse) => void): Request<EMRcontainers.Types.DescribeJobTemplateResponse, AWSError>;
+  /**
+   * Displays detailed information about a managed endpoint. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.
    */
   describeManagedEndpoint(params: EMRcontainers.Types.DescribeManagedEndpointRequest, callback?: (err: AWSError, data: EMRcontainers.Types.DescribeManagedEndpointResponse) => void): Request<EMRcontainers.Types.DescribeManagedEndpointResponse, AWSError>;
   /**
-   * Displays detailed information about a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+   * Displays detailed information about a managed endpoint. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.
    */
   describeManagedEndpoint(callback?: (err: AWSError, data: EMRcontainers.Types.DescribeManagedEndpointResponse) => void): Request<EMRcontainers.Types.DescribeManagedEndpointResponse, AWSError>;
+  /**
+   * Displays detailed information about a specified security configuration. Security configurations in Amazon EMR on EKS are templates for different security setups. You can use security configurations to configure the Lake Formation integration setup. You can also create a security configuration to re-use a security setup each time you create a virtual cluster.
+   */
+  describeSecurityConfiguration(params: EMRcontainers.Types.DescribeSecurityConfigurationRequest, callback?: (err: AWSError, data: EMRcontainers.Types.DescribeSecurityConfigurationResponse) => void): Request<EMRcontainers.Types.DescribeSecurityConfigurationResponse, AWSError>;
+  /**
+   * Displays detailed information about a specified security configuration. Security configurations in Amazon EMR on EKS are templates for different security setups. You can use security configurations to configure the Lake Formation integration setup. You can also create a security configuration to re-use a security setup each time you create a virtual cluster.
+   */
+  describeSecurityConfiguration(callback?: (err: AWSError, data: EMRcontainers.Types.DescribeSecurityConfigurationResponse) => void): Request<EMRcontainers.Types.DescribeSecurityConfigurationResponse, AWSError>;
   /**
    * Displays detailed information about a specified virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any additional resource in your system. A single virtual cluster maps to a single Kubernetes namespace. Given this relationship, you can model virtual clusters the same way you model Kubernetes namespaces to meet your requirements.
    */
@@ -76,6 +116,14 @@ declare class EMRcontainers extends Service {
    */
   describeVirtualCluster(callback?: (err: AWSError, data: EMRcontainers.Types.DescribeVirtualClusterResponse) => void): Request<EMRcontainers.Types.DescribeVirtualClusterResponse, AWSError>;
   /**
+   * Generate a session token to connect to a managed endpoint. 
+   */
+  getManagedEndpointSessionCredentials(params: EMRcontainers.Types.GetManagedEndpointSessionCredentialsRequest, callback?: (err: AWSError, data: EMRcontainers.Types.GetManagedEndpointSessionCredentialsResponse) => void): Request<EMRcontainers.Types.GetManagedEndpointSessionCredentialsResponse, AWSError>;
+  /**
+   * Generate a session token to connect to a managed endpoint. 
+   */
+  getManagedEndpointSessionCredentials(callback?: (err: AWSError, data: EMRcontainers.Types.GetManagedEndpointSessionCredentialsResponse) => void): Request<EMRcontainers.Types.GetManagedEndpointSessionCredentialsResponse, AWSError>;
+  /**
    * Lists job runs based on a set of parameters. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS.
    */
   listJobRuns(params: EMRcontainers.Types.ListJobRunsRequest, callback?: (err: AWSError, data: EMRcontainers.Types.ListJobRunsResponse) => void): Request<EMRcontainers.Types.ListJobRunsResponse, AWSError>;
@@ -84,13 +132,29 @@ declare class EMRcontainers extends Service {
    */
   listJobRuns(callback?: (err: AWSError, data: EMRcontainers.Types.ListJobRunsResponse) => void): Request<EMRcontainers.Types.ListJobRunsResponse, AWSError>;
   /**
-   * Lists managed endpoints based on a set of parameters. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+   * Lists job templates based on a set of parameters. Job template stores values of StartJobRun API request in a template and can be used to start a job run. Job template allows two use cases: avoid repeating recurring StartJobRun API request values, enforcing certain values in StartJobRun API request.
+   */
+  listJobTemplates(params: EMRcontainers.Types.ListJobTemplatesRequest, callback?: (err: AWSError, data: EMRcontainers.Types.ListJobTemplatesResponse) => void): Request<EMRcontainers.Types.ListJobTemplatesResponse, AWSError>;
+  /**
+   * Lists job templates based on a set of parameters. Job template stores values of StartJobRun API request in a template and can be used to start a job run. Job template allows two use cases: avoid repeating recurring StartJobRun API request values, enforcing certain values in StartJobRun API request.
+   */
+  listJobTemplates(callback?: (err: AWSError, data: EMRcontainers.Types.ListJobTemplatesResponse) => void): Request<EMRcontainers.Types.ListJobTemplatesResponse, AWSError>;
+  /**
+   * Lists managed endpoints based on a set of parameters. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.
    */
   listManagedEndpoints(params: EMRcontainers.Types.ListManagedEndpointsRequest, callback?: (err: AWSError, data: EMRcontainers.Types.ListManagedEndpointsResponse) => void): Request<EMRcontainers.Types.ListManagedEndpointsResponse, AWSError>;
   /**
-   * Lists managed endpoints based on a set of parameters. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+   * Lists managed endpoints based on a set of parameters. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.
    */
   listManagedEndpoints(callback?: (err: AWSError, data: EMRcontainers.Types.ListManagedEndpointsResponse) => void): Request<EMRcontainers.Types.ListManagedEndpointsResponse, AWSError>;
+  /**
+   * Lists security configurations based on a set of parameters. Security configurations in Amazon EMR on EKS are templates for different security setups. You can use security configurations to configure the Lake Formation integration setup. You can also create a security configuration to re-use a security setup each time you create a virtual cluster.
+   */
+  listSecurityConfigurations(params: EMRcontainers.Types.ListSecurityConfigurationsRequest, callback?: (err: AWSError, data: EMRcontainers.Types.ListSecurityConfigurationsResponse) => void): Request<EMRcontainers.Types.ListSecurityConfigurationsResponse, AWSError>;
+  /**
+   * Lists security configurations based on a set of parameters. Security configurations in Amazon EMR on EKS are templates for different security setups. You can use security configurations to configure the Lake Formation integration setup. You can also create a security configuration to re-use a security setup each time you create a virtual cluster.
+   */
+  listSecurityConfigurations(callback?: (err: AWSError, data: EMRcontainers.Types.ListSecurityConfigurationsResponse) => void): Request<EMRcontainers.Types.ListSecurityConfigurationsResponse, AWSError>;
   /**
    * Lists the tags assigned to the resources.
    */
@@ -116,11 +180,11 @@ declare class EMRcontainers extends Service {
    */
   startJobRun(callback?: (err: AWSError, data: EMRcontainers.Types.StartJobRunResponse) => void): Request<EMRcontainers.Types.StartJobRunResponse, AWSError>;
   /**
-   * Assigns tags to resources. A tag is a label that you assign to an AWS resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your AWS resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you've assigned to it. For example, you can define a set of tags for your Amazon EMR on EKS clusters to help you track each cluster's owner and stack level. We recommend that you devise a consistent set of tag keys for each resource type. You can then search and filter the resources based on the tags that you add.
+   * Assigns tags to resources. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your Amazon Web Services resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you've assigned to it. For example, you can define a set of tags for your Amazon EMR on EKS clusters to help you track each cluster's owner and stack level. We recommend that you devise a consistent set of tag keys for each resource type. You can then search and filter the resources based on the tags that you add.
    */
   tagResource(params: EMRcontainers.Types.TagResourceRequest, callback?: (err: AWSError, data: EMRcontainers.Types.TagResourceResponse) => void): Request<EMRcontainers.Types.TagResourceResponse, AWSError>;
   /**
-   * Assigns tags to resources. A tag is a label that you assign to an AWS resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your AWS resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you've assigned to it. For example, you can define a set of tags for your Amazon EMR on EKS clusters to help you track each cluster's owner and stack level. We recommend that you devise a consistent set of tag keys for each resource type. You can then search and filter the resources based on the tags that you add.
+   * Assigns tags to resources. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your Amazon Web Services resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you've assigned to it. For example, you can define a set of tags for your Amazon EMR on EKS clusters to help you track each cluster's owner and stack level. We recommend that you devise a consistent set of tag keys for each resource type. You can then search and filter the resources based on the tags that you add.
    */
   tagResource(callback?: (err: AWSError, data: EMRcontainers.Types.TagResourceResponse) => void): Request<EMRcontainers.Types.TagResourceResponse, AWSError>;
   /**
@@ -134,6 +198,18 @@ declare class EMRcontainers extends Service {
 }
 declare namespace EMRcontainers {
   export type ACMCertArn = string;
+  export interface AuthorizationConfiguration {
+    /**
+     * Lake Formation related configuration inputs for the security configuration.
+     */
+    lakeFormationConfiguration?: LakeFormationConfiguration;
+    /**
+     * Encryption-related configuration input for the security configuration.
+     */
+    encryptionConfiguration?: EncryptionConfiguration;
+  }
+  export type Base64Encoded = string;
+  export type Boolean = boolean;
   export interface CancelJobRunRequest {
     /**
      * The ID of the job run to cancel.
@@ -154,6 +230,17 @@ declare namespace EMRcontainers {
      */
     virtualClusterId?: ResourceIdString;
   }
+  export interface Certificate {
+    /**
+     * The ARN of the certificate generated for managed endpoint.
+     */
+    certificateArn?: ACMCertArn;
+    /**
+     * The base64 encoded PEM certificate data generated for managed endpoint.
+     */
+    certificateData?: Base64Encoded;
+  }
+  export type CertificateProviderType = "PEM"|string;
   export type ClientToken = string;
   export interface CloudWatchMonitoringConfiguration {
     /**
@@ -165,6 +252,7 @@ declare namespace EMRcontainers {
      */
     logStreamNamePrefix?: String256;
   }
+  export type ClusterId = string;
   export interface Configuration {
     /**
      * The classification within a configuration.
@@ -192,25 +280,75 @@ declare namespace EMRcontainers {
   }
   export interface ContainerInfo {
     /**
-     * The information about the EKS cluster.
+     * The information about the Amazon EKS cluster.
      */
     eksInfo?: EksInfo;
   }
+  export interface ContainerLogRotationConfiguration {
+    /**
+     * The file size at which to rotate logs. Minimum of 2KB, Maximum of 2GB.
+     */
+    rotationSize: RotationSize;
+    /**
+     * The number of files to keep in container after rotation.
+     */
+    maxFilesToKeep: MaxFilesToKeep;
+  }
   export interface ContainerProvider {
     /**
-     * The type of the container provider. EKS is the only supported type as of now.
+     * The type of the container provider. Amazon EKS is the only supported type as of now.
      */
     type: ContainerProviderType;
     /**
      * The ID of the container cluster.
      */
-    id: String256;
+    id: ClusterId;
     /**
      * The information about the container cluster.
      */
     info?: ContainerInfo;
   }
   export type ContainerProviderType = "EKS"|string;
+  export interface CreateJobTemplateRequest {
+    /**
+     * The specified name of the job template.
+     */
+    name: ResourceNameString;
+    /**
+     * The client token of the job template.
+     */
+    clientToken: ClientToken;
+    /**
+     * The job template data which holds values of StartJobRun API request.
+     */
+    jobTemplateData: JobTemplateData;
+    /**
+     * The tags that are associated with the job template.
+     */
+    tags?: TagMap;
+    /**
+     * The KMS key ARN used to encrypt the job template.
+     */
+    kmsKeyArn?: KmsKeyArn;
+  }
+  export interface CreateJobTemplateResponse {
+    /**
+     * This output display the created job template ID.
+     */
+    id?: ResourceIdString;
+    /**
+     * This output displays the name of the created job template.
+     */
+    name?: ResourceNameString;
+    /**
+     * This output display the ARN of the created job template.
+     */
+    arn?: JobTemplateArn;
+    /**
+     * This output displays the date and time when the job template was created.
+     */
+    createdAt?: _Date;
+  }
   export interface CreateManagedEndpointRequest {
     /**
      * The name of the managed endpoint.
@@ -233,9 +371,9 @@ declare namespace EMRcontainers {
      */
     executionRoleArn: IAMRoleArn;
     /**
-     * The certificate ARN of the managed endpoint.
+     * The certificate ARN provided by users for the managed endpoint. This field is under deprecation and will be removed in future releases.
      */
-    certificateArn: ACMCertArn;
+    certificateArn?: ACMCertArn;
     /**
      * The configuration settings that will be used to override existing configurations.
      */
@@ -267,6 +405,38 @@ declare namespace EMRcontainers {
      */
     virtualClusterId?: ResourceIdString;
   }
+  export interface CreateSecurityConfigurationRequest {
+    /**
+     * The client idempotency token to use when creating the security configuration.
+     */
+    clientToken: ClientToken;
+    /**
+     * The name of the security configuration.
+     */
+    name: ResourceNameString;
+    /**
+     * Security configuration input for the request.
+     */
+    securityConfigurationData: SecurityConfigurationData;
+    /**
+     * The tags to add to the security configuration.
+     */
+    tags?: TagMap;
+  }
+  export interface CreateSecurityConfigurationResponse {
+    /**
+     * The ID of the security configuration.
+     */
+    id?: ResourceIdString;
+    /**
+     * The name of the security configuration.
+     */
+    name?: ResourceNameString;
+    /**
+     * The ARN (Amazon Resource Name) of the security configuration.
+     */
+    arn?: SecurityConfigurationArn;
+  }
   export interface CreateVirtualClusterRequest {
     /**
      * The specified name of the virtual cluster.
@@ -284,6 +454,10 @@ declare namespace EMRcontainers {
      * The tags assigned to the virtual cluster.
      */
     tags?: TagMap;
+    /**
+     * The ID of the security configuration.
+     */
+    securityConfigurationId?: ResourceIdString;
   }
   export interface CreateVirtualClusterResponse {
     /**
@@ -299,7 +473,26 @@ declare namespace EMRcontainers {
      */
     arn?: VirtualClusterArn;
   }
+  export type CredentialType = string;
+  export interface Credentials {
+    /**
+     * The actual session token being returned.
+     */
+    token?: Token;
+  }
   export type _Date = Date;
+  export interface DeleteJobTemplateRequest {
+    /**
+     * The ID of the job template that will be deleted.
+     */
+    id: ResourceIdString;
+  }
+  export interface DeleteJobTemplateResponse {
+    /**
+     * This output contains the ID of the job template that was deleted.
+     */
+    id?: ResourceIdString;
+  }
   export interface DeleteManagedEndpointRequest {
     /**
      * The ID of the managed endpoint.
@@ -348,6 +541,18 @@ declare namespace EMRcontainers {
      */
     jobRun?: JobRun;
   }
+  export interface DescribeJobTemplateRequest {
+    /**
+     * The ID of the job template that will be described.
+     */
+    id: ResourceIdString;
+  }
+  export interface DescribeJobTemplateResponse {
+    /**
+     * This output displays information about the specified job template.
+     */
+    jobTemplate?: JobTemplate;
+  }
   export interface DescribeManagedEndpointRequest {
     /**
      * This output displays ID of the managed endpoint.
@@ -364,6 +569,18 @@ declare namespace EMRcontainers {
      */
     endpoint?: Endpoint;
   }
+  export interface DescribeSecurityConfigurationRequest {
+    /**
+     * The ID of the security configuration.
+     */
+    id: ResourceIdString;
+  }
+  export interface DescribeSecurityConfigurationResponse {
+    /**
+     * Details of the security configuration.
+     */
+    securityConfiguration?: SecurityConfiguration;
+  }
   export interface DescribeVirtualClusterRequest {
     /**
      * The ID of the virtual cluster that will be described.
@@ -378,9 +595,15 @@ declare namespace EMRcontainers {
   }
   export interface EksInfo {
     /**
-     * The namespaces of the EKS cluster.
+     * The namespaces of the Amazon EKS cluster.
      */
-    namespace?: String256;
+    namespace?: KubernetesNamespace;
+  }
+  export interface EncryptionConfiguration {
+    /**
+     * In-transit encryption-related input for the security configuration.
+     */
+    inTransitEncryptionConfiguration?: InTransitEncryptionConfiguration;
   }
   export interface Endpoint {
     /**
@@ -416,9 +639,13 @@ declare namespace EMRcontainers {
      */
     executionRoleArn?: IAMRoleArn;
     /**
-     * The certificate ARN of the endpoint.
+     * The certificate ARN of the endpoint. This field is under deprecation and will be removed in future.
      */
     certificateArn?: ACMCertArn;
+    /**
+     * The certificate generated by emr control plane on customer behalf to secure the managed endpoint.
+     */
+    certificateAuthority?: Certificate;
     /**
      * The configuration settings that are used to override existing configurations for endpoints.
      */
@@ -440,6 +667,14 @@ declare namespace EMRcontainers {
      */
     subnetIds?: SubnetIds;
     /**
+     *  Additional details of the endpoint state. 
+     */
+    stateDetails?: String256;
+    /**
+     *  The reasons why the endpoint has failed. 
+     */
+    failureReason?: FailureReason;
+    /**
      * The tags of the endpoint. 
      */
     tags?: TagMap;
@@ -454,7 +689,57 @@ declare namespace EMRcontainers {
   export type EntryPointArguments = EntryPointArgument[];
   export type EntryPointPath = string;
   export type FailureReason = "INTERNAL_ERROR"|"USER_ERROR"|"VALIDATION_ERROR"|"CLUSTER_UNAVAILABLE"|string;
+  export interface GetManagedEndpointSessionCredentialsRequest {
+    /**
+     * The ARN of the managed endpoint for which the request is submitted. 
+     */
+    endpointIdentifier: String2048;
+    /**
+     * The ARN of the Virtual Cluster which the Managed Endpoint belongs to. 
+     */
+    virtualClusterIdentifier: String2048;
+    /**
+     * The IAM Execution Role ARN that will be used by the job run. 
+     */
+    executionRoleArn: IAMRoleArn;
+    /**
+     * Type of the token requested. Currently supported and default value of this field is “TOKEN.”
+     */
+    credentialType: CredentialType;
+    /**
+     * Duration in seconds for which the session token is valid. The default duration is 15 minutes and the maximum is 12 hours.
+     */
+    durationInSeconds?: JavaInteger;
+    /**
+     * String identifier used to separate sections of the execution logs uploaded to S3.
+     */
+    logContext?: LogContext;
+    /**
+     * The client idempotency token of the job run request.
+     */
+    clientToken?: ClientToken;
+  }
+  export interface GetManagedEndpointSessionCredentialsResponse {
+    /**
+     * The identifier of the session token returned.
+     */
+    id?: ResourceIdString;
+    /**
+     * The structure containing the session credentials.
+     */
+    credentials?: Credentials;
+    /**
+     * The date and time when the session token will expire.
+     */
+    expiresAt?: _Date;
+  }
   export type IAMRoleArn = string;
+  export interface InTransitEncryptionConfiguration {
+    /**
+     * TLS certificate-related configuration input for the security configuration.
+     */
+    tlsCertificateConfiguration?: TLSCertificateConfiguration;
+  }
   export type JavaInteger = number;
   export type JobArn = string;
   export interface JobDriver {
@@ -462,6 +747,10 @@ declare namespace EMRcontainers {
      * The job driver parameters specified for spark submit.
      */
     sparkSubmitJobDriver?: SparkSubmitJobDriver;
+    /**
+     * The job driver for job type.
+     */
+    sparkSqlJobDriver?: SparkSqlJobDriver;
   }
   export interface JobRun {
     /**
@@ -528,10 +817,97 @@ declare namespace EMRcontainers {
      * The assigned tags of the job run.
      */
     tags?: TagMap;
+    /**
+     * The configuration of the retry policy that the job runs on.
+     */
+    retryPolicyConfiguration?: RetryPolicyConfiguration;
+    /**
+     * The current status of the retry policy executed on the job.
+     */
+    retryPolicyExecution?: RetryPolicyExecution;
   }
   export type JobRunState = "PENDING"|"SUBMITTED"|"RUNNING"|"FAILED"|"CANCELLED"|"CANCEL_PENDING"|"COMPLETED"|string;
   export type JobRunStates = JobRunState[];
   export type JobRuns = JobRun[];
+  export interface JobTemplate {
+    /**
+     * The name of the job template.
+     */
+    name?: ResourceNameString;
+    /**
+     * The ID of the job template.
+     */
+    id?: ResourceIdString;
+    /**
+     * The ARN of the job template.
+     */
+    arn?: JobTemplateArn;
+    /**
+     *  The date and time when the job template was created.
+     */
+    createdAt?: _Date;
+    /**
+     *  The user who created the job template.
+     */
+    createdBy?: RequestIdentityUserArn;
+    /**
+     * The tags assigned to the job template.
+     */
+    tags?: TagMap;
+    /**
+     * The job template data which holds values of StartJobRun API request.
+     */
+    jobTemplateData: JobTemplateData;
+    /**
+     *  The KMS key ARN used to encrypt the job template.
+     */
+    kmsKeyArn?: KmsKeyArn;
+    /**
+     * The error message in case the decryption of job template fails.
+     */
+    decryptionError?: String2048;
+  }
+  export type JobTemplateArn = string;
+  export interface JobTemplateData {
+    /**
+     * The execution role ARN of the job run.
+     */
+    executionRoleArn: ParametricIAMRoleArn;
+    /**
+     *  The release version of Amazon EMR.
+     */
+    releaseLabel: ParametricReleaseLabel;
+    /**
+     *  The configuration settings that are used to override defaults configuration.
+     */
+    configurationOverrides?: ParametricConfigurationOverrides;
+    jobDriver: JobDriver;
+    /**
+     * The configuration of parameters existing in the job template.
+     */
+    parameterConfiguration?: TemplateParameterConfigurationMap;
+    /**
+     * The tags assigned to jobs started using the job template.
+     */
+    jobTags?: TagMap;
+  }
+  export type JobTemplates = JobTemplate[];
+  export type KmsKeyArn = string;
+  export type KubernetesNamespace = string;
+  export interface LakeFormationConfiguration {
+    /**
+     * The session tag to authorize Amazon EMR on EKS for API calls to Lake Formation.
+     */
+    authorizedSessionTagValue?: SessionTagValue;
+    /**
+     * The namespace input of the system job.
+     */
+    secureNamespaceInfo?: SecureNamespaceInfo;
+    /**
+     * The query engine IAM role ARN that is tied to the secure Spark job. The QueryEngine role assumes the JobExecutionRole to execute all the Lake Formation calls.
+     */
+    queryEngineRoleArn?: IAMRoleArn;
+  }
   export interface ListJobRunsRequest {
     /**
      * The ID of the virtual cluster for which to list the job run. 
@@ -569,6 +945,34 @@ declare namespace EMRcontainers {
     jobRuns?: JobRuns;
     /**
      * This output displays the token for the next set of job runs.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListJobTemplatesRequest {
+    /**
+     * The date and time after which the job templates were created.
+     */
+    createdAfter?: _Date;
+    /**
+     *  The date and time before which the job templates were created.
+     */
+    createdBefore?: _Date;
+    /**
+     *  The maximum number of job templates that can be listed.
+     */
+    maxResults?: JavaInteger;
+    /**
+     *  The token for the next set of job templates to return.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListJobTemplatesResponse {
+    /**
+     * This output lists information about the specified job templates.
+     */
+    templates?: JobTemplates;
+    /**
+     *  This output displays the token for the next set of job templates.
      */
     nextToken?: NextToken;
   }
@@ -612,6 +1016,34 @@ declare namespace EMRcontainers {
      */
     nextToken?: NextToken;
   }
+  export interface ListSecurityConfigurationsRequest {
+    /**
+     * The date and time after which the security configuration was created.
+     */
+    createdAfter?: _Date;
+    /**
+     * The date and time before which the security configuration was created.
+     */
+    createdBefore?: _Date;
+    /**
+     * The maximum number of security configurations the operation can list.
+     */
+    maxResults?: JavaInteger;
+    /**
+     * The token for the next set of security configurations to return.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListSecurityConfigurationsResponse {
+    /**
+     * The list of returned security configurations.
+     */
+    securityConfigurations?: SecurityConfigurations;
+    /**
+     * The token for the next set of security configurations to return.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The ARN of tagged resources.
@@ -630,7 +1062,7 @@ declare namespace EMRcontainers {
      */
     containerProviderId?: String1024;
     /**
-     * The container provider type of the virtual cluster. EKS is the only supported type as of now.
+     * The container provider type of the virtual cluster. Amazon EKS is the only supported type as of now.
      */
     containerProviderType?: ContainerProviderType;
     /**
@@ -653,6 +1085,10 @@ declare namespace EMRcontainers {
      * The token for the next set of virtual clusters to return. 
      */
     nextToken?: NextToken;
+    /**
+     * Optional Boolean that specifies whether the operation should return the virtual clusters that have the access entry integration enabled or disabled. If not specified, the operation returns all applicable virtual clusters.
+     */
+    eksAccessEntryIntegrated?: Boolean;
   }
   export interface ListVirtualClustersResponse {
     /**
@@ -664,7 +1100,9 @@ declare namespace EMRcontainers {
      */
     nextToken?: NextToken;
   }
+  export type LogContext = string;
   export type LogGroupName = string;
+  export type MaxFilesToKeep = number;
   export interface MonitoringConfiguration {
     /**
      * Monitoring configurations for the persistent application UI. 
@@ -678,13 +1116,72 @@ declare namespace EMRcontainers {
      * Amazon S3 configuration for monitoring log publishing.
      */
     s3MonitoringConfiguration?: S3MonitoringConfiguration;
+    /**
+     * Enable or disable container log rotation.
+     */
+    containerLogRotationConfiguration?: ContainerLogRotationConfiguration;
   }
   export type NextToken = string;
+  export interface ParametricCloudWatchMonitoringConfiguration {
+    /**
+     *  The name of the log group for log publishing.
+     */
+    logGroupName?: TemplateParameter;
+    /**
+     *  The specified name prefix for log streams.
+     */
+    logStreamNamePrefix?: String256;
+  }
+  export interface ParametricConfigurationOverrides {
+    /**
+     *  The configurations for the application running by the job run.
+     */
+    applicationConfiguration?: ConfigurationList;
+    /**
+     *  The configurations for monitoring. 
+     */
+    monitoringConfiguration?: ParametricMonitoringConfiguration;
+  }
+  export type ParametricIAMRoleArn = string;
+  export interface ParametricMonitoringConfiguration {
+    /**
+     *  Monitoring configurations for the persistent application UI.
+     */
+    persistentAppUI?: TemplateParameter;
+    /**
+     *  Monitoring configurations for CloudWatch.
+     */
+    cloudWatchMonitoringConfiguration?: ParametricCloudWatchMonitoringConfiguration;
+    /**
+     *  Amazon S3 configuration for monitoring log publishing.
+     */
+    s3MonitoringConfiguration?: ParametricS3MonitoringConfiguration;
+  }
+  export type ParametricReleaseLabel = string;
+  export interface ParametricS3MonitoringConfiguration {
+    /**
+     * Amazon S3 destination URI for log publishing.
+     */
+    logUri?: UriString;
+  }
   export type PersistentAppUI = "ENABLED"|"DISABLED"|string;
   export type ReleaseLabel = string;
   export type RequestIdentityUserArn = string;
   export type ResourceIdString = string;
   export type ResourceNameString = string;
+  export interface RetryPolicyConfiguration {
+    /**
+     * The maximum number of attempts on the job's driver.
+     */
+    maxAttempts: JavaInteger;
+  }
+  export interface RetryPolicyExecution {
+    /**
+     * The current number of attempts made on the driver of the job.
+     */
+    currentAttemptCount: JavaInteger;
+  }
+  export type RotationSize = string;
   export type RsiArn = string;
   export interface S3MonitoringConfiguration {
     /**
@@ -692,7 +1189,68 @@ declare namespace EMRcontainers {
      */
     logUri: UriString;
   }
+  export type SecretsManagerArn = string;
+  export interface SecureNamespaceInfo {
+    /**
+     * The ID of the Amazon EKS cluster where Amazon EMR on EKS jobs run.
+     */
+    clusterId?: ClusterId;
+    /**
+     * The namespace of the Amazon EKS cluster where the system jobs run.
+     */
+    namespace?: KubernetesNamespace;
+  }
+  export interface SecurityConfiguration {
+    /**
+     * The ID of the security configuration.
+     */
+    id?: ResourceIdString;
+    /**
+     * The name of the security configuration.
+     */
+    name?: ResourceNameString;
+    /**
+     * The ARN (Amazon Resource Name) of the security configuration.
+     */
+    arn?: SecurityConfigurationArn;
+    /**
+     * The date and time that the job run was created.
+     */
+    createdAt?: _Date;
+    /**
+     * The user who created the job run.
+     */
+    createdBy?: RequestIdentityUserArn;
+    /**
+     * Security configuration inputs for the request.
+     */
+    securityConfigurationData?: SecurityConfigurationData;
+    /**
+     * The tags to assign to the security configuration.
+     */
+    tags?: TagMap;
+  }
+  export type SecurityConfigurationArn = string;
+  export interface SecurityConfigurationData {
+    /**
+     * Authorization-related configuration input for the security configuration.
+     */
+    authorizationConfiguration?: AuthorizationConfiguration;
+  }
+  export type SecurityConfigurations = SecurityConfiguration[];
   export type SensitivePropertiesMap = {[key: string]: String1024};
+  export type SessionTagValue = string;
+  export interface SparkSqlJobDriver {
+    /**
+     * The SQL file to be executed.
+     */
+    entryPoint?: EntryPointPath;
+    /**
+     * The Spark parameters to be included in the Spark SQL command.
+     */
+    sparkSqlParameters?: SparkSqlParameters;
+  }
+  export type SparkSqlParameters = string;
   export interface SparkSubmitJobDriver {
     /**
      * The entry point of job application.
@@ -724,15 +1282,15 @@ declare namespace EMRcontainers {
     /**
      * The execution role ARN for the job run.
      */
-    executionRoleArn: IAMRoleArn;
+    executionRoleArn?: IAMRoleArn;
     /**
      * The Amazon EMR release version to use for the job run.
      */
-    releaseLabel: ReleaseLabel;
+    releaseLabel?: ReleaseLabel;
     /**
      * The job driver for the job run.
      */
-    jobDriver: JobDriver;
+    jobDriver?: JobDriver;
     /**
      * The configuration overrides for the job run.
      */
@@ -741,6 +1299,18 @@ declare namespace EMRcontainers {
      * The tags assigned to job runs.
      */
     tags?: TagMap;
+    /**
+     * The job template ID to be used to start the job run.
+     */
+    jobTemplateId?: ResourceIdString;
+    /**
+     * The values of job template parameters to start a job run.
+     */
+    jobTemplateParameters?: TemplateParameterInputMap;
+    /**
+     * The retry policy configuration for the job run.
+     */
+    retryPolicyConfiguration?: RetryPolicyConfiguration;
   }
   export interface StartJobRunResponse {
     /**
@@ -762,9 +1332,24 @@ declare namespace EMRcontainers {
   }
   export type String1024 = string;
   export type String128 = string;
+  export type String2048 = string;
   export type String256 = string;
   export type StringEmpty256 = string;
   export type SubnetIds = String256[];
+  export interface TLSCertificateConfiguration {
+    /**
+     * The TLS certificate type. Acceptable values: PEM or Custom.
+     */
+    certificateProviderType?: CertificateProviderType;
+    /**
+     * Secrets Manager ARN that contains the public TLS certificate contents, used for communication between the user job and the system job.
+     */
+    publicCertificateSecretArn?: SecretsManagerArn;
+    /**
+     * Secrets Manager ARN that contains the private TLS certificate contents, used for communication between the user job and the system job.
+     */
+    privateCertificateSecretArn?: SecretsManagerArn;
+  }
   export type TagKeyList = String128[];
   export type TagMap = {[key: string]: StringEmpty256};
   export interface TagResourceRequest {
@@ -779,6 +1364,22 @@ declare namespace EMRcontainers {
   }
   export interface TagResourceResponse {
   }
+  export type TemplateParameter = string;
+  export interface TemplateParameterConfiguration {
+    /**
+     * The type of the job template parameter. Allowed values are: ‘STRING’, ‘NUMBER’.
+     */
+    type?: TemplateParameterDataType;
+    /**
+     * The default value for the job template parameter.
+     */
+    defaultValue?: String1024;
+  }
+  export type TemplateParameterConfigurationMap = {[key: string]: TemplateParameterConfiguration};
+  export type TemplateParameterDataType = "NUMBER"|"STRING"|string;
+  export type TemplateParameterInputMap = {[key: string]: String1024};
+  export type TemplateParameterName = string;
+  export type Token = string;
   export interface UntagResourceRequest {
     /**
      * The ARN of resources.
@@ -821,6 +1422,10 @@ declare namespace EMRcontainers {
      * The assigned tags of the virtual cluster.
      */
     tags?: TagMap;
+    /**
+     * The ID of the security configuration.
+     */
+    securityConfigurationId?: ResourceIdString;
   }
   export type VirtualClusterArn = string;
   export type VirtualClusterState = "RUNNING"|"TERMINATING"|"TERMINATED"|"ARRESTED"|string;

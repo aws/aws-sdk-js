@@ -4,12 +4,18 @@
     "apiVersion": "2010-08-01",
     "endpointPrefix": "monitoring",
     "protocol": "query",
+    "protocols": [
+      "query"
+    ],
     "serviceAbbreviation": "CloudWatch",
     "serviceFullName": "Amazon CloudWatch",
     "serviceId": "CloudWatch",
     "signatureVersion": "v4",
     "uid": "monitoring-2010-08-01",
-    "xmlNamespace": "http://monitoring.amazonaws.com/doc/2010-08-01/"
+    "xmlNamespace": "http://monitoring.amazonaws.com/doc/2010-08-01/",
+    "auth": [
+      "aws.auth#sigv4"
+    ]
   },
   "operations": {
     "DeleteAlarms": {
@@ -26,7 +32,7 @@
           "shape": "ResourceNotFound"
         }
       ],
-      "documentation": "<p>Deletes the specified alarms. You can delete up to 100 alarms in one operation. However, this total can include no more than one composite alarm. For example, you could delete 99 metric alarms and one composite alarms with one operation, but you can't delete two composite alarms with one operation.</p> <p> In the event of an error, no alarms are deleted.</p> <note> <p>It is possible to create a loop or cycle of composite alarms, where composite alarm A depends on composite alarm B, and composite alarm B also depends on composite alarm A. In this scenario, you can't delete any composite alarm that is part of the cycle because there is always still a composite alarm that depends on that alarm that you want to delete.</p> <p>To get out of such a situation, you must break the cycle by changing the rule of one of the composite alarms in the cycle to remove a dependency that creates the cycle. The simplest change to make to break a cycle is to change the <code>AlarmRule</code> of one of the alarms to <code>False</code>. </p> <p>Additionally, the evaluation of composite alarms stops if CloudWatch detects a cycle in the evaluation path. </p> </note>"
+      "documentation": "<p>Deletes the specified alarms. You can delete up to 100 alarms in one operation. However, this total can include no more than one composite alarm. For example, you could delete 99 metric alarms and one composite alarms with one operation, but you can't delete two composite alarms with one operation.</p> <p> If you specify an incorrect alarm name or make any other error in the operation, no alarms are deleted. To confirm that alarms were deleted successfully, you can use the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarms.html\">DescribeAlarms</a> operation after using <code>DeleteAlarms</code>.</p> <note> <p>It is possible to create a loop or cycle of composite alarms, where composite alarm A depends on composite alarm B, and composite alarm B also depends on composite alarm A. In this scenario, you can't delete any composite alarm that is part of the cycle because there is always still a composite alarm that depends on that alarm that you want to delete.</p> <p>To get out of such a situation, you must break the cycle by changing the rule of one of the composite alarms in the cycle to remove a dependency that creates the cycle. The simplest change to make to break a cycle is to change the <code>AlarmRule</code> of one of the alarms to <code>false</code>. </p> <p>Additionally, the evaluation of composite alarms stops if CloudWatch detects a cycle in the evaluation path. </p> </note>"
     },
     "DeleteAnomalyDetector": {
       "name": "DeleteAnomalyDetector",
@@ -53,9 +59,12 @@
         },
         {
           "shape": "MissingRequiredParameterException"
+        },
+        {
+          "shape": "InvalidParameterCombinationException"
         }
       ],
-      "documentation": "<p>Deletes the specified anomaly detection model from your account.</p>"
+      "documentation": "<p> Deletes the specified anomaly detection model from your account. For more information about how to delete an anomaly detection model, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Anomaly_Detection_Alarm.html#Delete_Anomaly_Detection_Model\">Deleting an anomaly detection model</a> in the <i>CloudWatch User Guide</i>. </p>"
     },
     "DeleteDashboards": {
       "name": "DeleteDashboards",
@@ -106,6 +115,32 @@
       ],
       "documentation": "<p>Permanently deletes the specified Contributor Insights rules.</p> <p>If you create a rule, delete it, and then re-create it with the same name, historical data from the first time the rule was created might not be available.</p>"
     },
+    "DeleteMetricStream": {
+      "name": "DeleteMetricStream",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteMetricStreamInput"
+      },
+      "output": {
+        "shape": "DeleteMetricStreamOutput",
+        "resultWrapper": "DeleteMetricStreamResult"
+      },
+      "errors": [
+        {
+          "shape": "InternalServiceFault"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "MissingRequiredParameterException"
+        }
+      ],
+      "documentation": "<p>Permanently deletes the metric stream that you specify.</p>"
+    },
     "DescribeAlarmHistory": {
       "name": "DescribeAlarmHistory",
       "http": {
@@ -124,7 +159,7 @@
           "shape": "InvalidNextToken"
         }
       ],
-      "documentation": "<p>Retrieves the history for the specified alarm. You can filter the results by date range or item type. If an alarm name is not specified, the histories for either all metric alarms or all composite alarms are returned.</p> <p>CloudWatch retains the history of an alarm even if you delete the alarm.</p>"
+      "documentation": "<p>Retrieves the history for the specified alarm. You can filter the results by date range or item type. If an alarm name is not specified, the histories for either all metric alarms or all composite alarms are returned.</p> <p>CloudWatch retains the history of an alarm even if you delete the alarm.</p> <p>To use this operation and return information about a composite alarm, you must be signed on with the <code>cloudwatch:DescribeAlarmHistory</code> permission that is scoped to <code>*</code>. You can't return information about composite alarms if your <code>cloudwatch:DescribeAlarmHistory</code> permission has a narrower scope.</p>"
     },
     "DescribeAlarms": {
       "name": "DescribeAlarms",
@@ -144,7 +179,7 @@
           "shape": "InvalidNextToken"
         }
       ],
-      "documentation": "<p>Retrieves the specified alarms. You can filter the results by specifying a prefix for the alarm name, the alarm state, or a prefix for any action.</p>"
+      "documentation": "<p>Retrieves the specified alarms. You can filter the results by specifying a prefix for the alarm name, the alarm state, or a prefix for any action.</p> <p>To use this operation and return information about composite alarms, you must be signed on with the <code>cloudwatch:DescribeAlarms</code> permission that is scoped to <code>*</code>. You can't return information about composite alarms if your <code>cloudwatch:DescribeAlarms</code> permission has a narrower scope.</p>"
     },
     "DescribeAlarmsForMetric": {
       "name": "DescribeAlarmsForMetric",
@@ -183,9 +218,12 @@
         },
         {
           "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "InvalidParameterCombinationException"
         }
       ],
-      "documentation": "<p>Lists the anomaly detection models that you have created in your account. You can list all models in your account or filter the results to only the models that are related to a certain namespace, metric name, or metric dimension.</p>"
+      "documentation": "<p>Lists the anomaly detection models that you have created in your account. For single metric anomaly detectors, you can list all of the models in your account or filter the results to only the models that are related to a certain namespace, metric name, or metric dimension. For metric math anomaly detectors, you can list them by adding <code>METRIC_MATH</code> to the <code>AnomalyDetectorTypes</code> array. This will return all metric math anomaly detectors in your account.</p>"
     },
     "DescribeInsightRules": {
       "name": "DescribeInsightRules",
@@ -348,7 +386,7 @@
           "shape": "InvalidNextToken"
         }
       ],
-      "documentation": "<p>You can use the <code>GetMetricData</code> API to retrieve as many as 500 different metrics in a single request, with a total of as many as 100,800 data points. You can also optionally perform math expressions on the values of the returned statistics, to create new time series that represent new insights into your data. For example, using Lambda metrics, you could divide the Errors metric by the Invocations metric to get an error rate time series. For more information about metric math expressions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax\">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Calls to the <code>GetMetricData</code> API have a different pricing structure than calls to <code>GetMetricStatistics</code>. For more information about pricing, see <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p> <p>Amazon CloudWatch retains metric data as follows:</p> <ul> <li> <p>Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a <code>StorageResolution</code> of 1.</p> </li> <li> <p>Data points with a period of 60 seconds (1-minute) are available for 15 days.</p> </li> <li> <p>Data points with a period of 300 seconds (5-minute) are available for 63 days.</p> </li> <li> <p>Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).</p> </li> </ul> <p>Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour.</p> <p>If you omit <code>Unit</code> in your request, all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.</p>"
+      "documentation": "<p>You can use the <code>GetMetricData</code> API to retrieve CloudWatch metric values. The operation can also include a CloudWatch Metrics Insights query, and one or more metric math functions.</p> <p>A <code>GetMetricData</code> operation that does not include a query can retrieve as many as 500 different metrics in a single request, with a total of as many as 100,800 data points. You can also optionally perform metric math expressions on the values of the returned statistics, to create new time series that represent new insights into your data. For example, using Lambda metrics, you could divide the Errors metric by the Invocations metric to get an error rate time series. For more information about metric math expressions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax\">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>If you include a Metrics Insights query, each <code>GetMetricData</code> operation can include only one query. But the same <code>GetMetricData</code> operation can also retrieve other metrics. Metrics Insights queries can query only the most recent three hours of metric data. For more information about Metrics Insights, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/query_with_cloudwatch-metrics-insights.html\">Query your metrics with CloudWatch Metrics Insights</a>.</p> <p>Calls to the <code>GetMetricData</code> API have a different pricing structure than calls to <code>GetMetricStatistics</code>. For more information about pricing, see <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p> <p>Amazon CloudWatch retains metric data as follows:</p> <ul> <li> <p>Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a <code>StorageResolution</code> of 1.</p> </li> <li> <p>Data points with a period of 60 seconds (1-minute) are available for 15 days.</p> </li> <li> <p>Data points with a period of 300 seconds (5-minute) are available for 63 days.</p> </li> <li> <p>Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).</p> </li> </ul> <p>Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour.</p> <p>If you omit <code>Unit</code> in your request, all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.</p> <p> <b>Using Metrics Insights queries with metric math</b> </p> <p>You can't mix a Metric Insights query and metric math syntax in the same expression, but you can reference results from a Metrics Insights query within other Metric math expressions. A Metrics Insights query without a <b>GROUP BY</b> clause returns a single time-series (TS), and can be used as input for a metric math expression that expects a single time series. A Metrics Insights query with a <b>GROUP BY</b> clause returns an array of time-series (TS[]), and can be used as input for a metric math expression that expects an array of time series. </p>"
     },
     "GetMetricStatistics": {
       "name": "GetMetricStatistics",
@@ -377,7 +415,39 @@
           "shape": "InternalServiceFault"
         }
       ],
-      "documentation": "<p>Gets statistics for the specified metric.</p> <p>The maximum number of data points returned from a single call is 1,440. If you request more than 1,440 data points, CloudWatch returns an error. To reduce the number of data points, you can narrow the specified time range and make multiple requests across adjacent time ranges, or you can increase the specified period. Data points are not returned in chronological order.</p> <p>CloudWatch aggregates data points based on the length of the period that you specify. For example, if you request statistics with a one-hour period, CloudWatch aggregates all data points with time stamps that fall within each one-hour period. Therefore, the number of values aggregated by CloudWatch is larger than the number of data points returned.</p> <p>CloudWatch needs raw data points to calculate percentile statistics. If you publish data using a statistic set instead, you can only retrieve percentile statistics for this data if one of the following conditions is true:</p> <ul> <li> <p>The SampleCount value of the statistic set is 1.</p> </li> <li> <p>The Min and the Max values of the statistic set are equal.</p> </li> </ul> <p>Percentile statistics are not available for metrics when any of the metric values are negative numbers.</p> <p>Amazon CloudWatch retains metric data as follows:</p> <ul> <li> <p>Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a <code>StorageResolution</code> of 1.</p> </li> <li> <p>Data points with a period of 60 seconds (1-minute) are available for 15 days.</p> </li> <li> <p>Data points with a period of 300 seconds (5-minute) are available for 63 days.</p> </li> <li> <p>Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).</p> </li> </ul> <p>Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour.</p> <p>CloudWatch started retaining 5-minute and 1-hour metric data as of July 9, 2016.</p> <p>For information about metrics and dimensions supported by AWS services, see the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CW_Support_For_AWS.html\">Amazon CloudWatch Metrics and Dimensions Reference</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
+      "documentation": "<p>Gets statistics for the specified metric.</p> <p>The maximum number of data points returned from a single call is 1,440. If you request more than 1,440 data points, CloudWatch returns an error. To reduce the number of data points, you can narrow the specified time range and make multiple requests across adjacent time ranges, or you can increase the specified period. Data points are not returned in chronological order.</p> <p>CloudWatch aggregates data points based on the length of the period that you specify. For example, if you request statistics with a one-hour period, CloudWatch aggregates all data points with time stamps that fall within each one-hour period. Therefore, the number of values aggregated by CloudWatch is larger than the number of data points returned.</p> <p>CloudWatch needs raw data points to calculate percentile statistics. If you publish data using a statistic set instead, you can only retrieve percentile statistics for this data if one of the following conditions is true:</p> <ul> <li> <p>The SampleCount value of the statistic set is 1.</p> </li> <li> <p>The Min and the Max values of the statistic set are equal.</p> </li> </ul> <p>Percentile statistics are not available for metrics when any of the metric values are negative numbers.</p> <p>Amazon CloudWatch retains metric data as follows:</p> <ul> <li> <p>Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a <code>StorageResolution</code> of 1.</p> </li> <li> <p>Data points with a period of 60 seconds (1-minute) are available for 15 days.</p> </li> <li> <p>Data points with a period of 300 seconds (5-minute) are available for 63 days.</p> </li> <li> <p>Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).</p> </li> </ul> <p>Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour.</p> <p>CloudWatch started retaining 5-minute and 1-hour metric data as of July 9, 2016.</p> <p>For information about metrics and dimensions supported by Amazon Web Services services, see the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CW_Support_For_AWS.html\">Amazon CloudWatch Metrics and Dimensions Reference</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
+    },
+    "GetMetricStream": {
+      "name": "GetMetricStream",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetMetricStreamInput"
+      },
+      "output": {
+        "shape": "GetMetricStreamOutput",
+        "resultWrapper": "GetMetricStreamResult"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServiceFault"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "MissingRequiredParameterException"
+        },
+        {
+          "shape": "InvalidParameterCombinationException"
+        }
+      ],
+      "documentation": "<p>Returns information about the metric stream that you specify.</p>"
     },
     "GetMetricWidgetImage": {
       "name": "GetMetricWidgetImage",
@@ -417,6 +487,61 @@
       ],
       "documentation": "<p>Returns a list of the dashboards for your account. If you include <code>DashboardNamePrefix</code>, only those dashboards with names starting with the prefix are listed. Otherwise, all dashboards in your account are listed. </p> <p> <code>ListDashboards</code> returns up to 1000 results on one page. If there are more than 1000 dashboards, you can call <code>ListDashboards</code> again and include the value you received for <code>NextToken</code> in the first call, to receive the next 1000 results.</p>"
     },
+    "ListManagedInsightRules": {
+      "name": "ListManagedInsightRules",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListManagedInsightRulesInput"
+      },
+      "output": {
+        "shape": "ListManagedInsightRulesOutput",
+        "resultWrapper": "ListManagedInsightRulesResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "MissingRequiredParameterException"
+        },
+        {
+          "shape": "InvalidNextToken"
+        }
+      ],
+      "documentation": "<p> Returns a list that contains the number of managed Contributor Insights rules in your account. </p>"
+    },
+    "ListMetricStreams": {
+      "name": "ListMetricStreams",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListMetricStreamsInput"
+      },
+      "output": {
+        "shape": "ListMetricStreamsOutput",
+        "resultWrapper": "ListMetricStreamsResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidNextToken"
+        },
+        {
+          "shape": "InternalServiceFault"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "MissingRequiredParameterException"
+        }
+      ],
+      "documentation": "<p>Returns a list of metric streams in this account.</p>"
+    },
     "ListMetrics": {
       "name": "ListMetrics",
       "http": {
@@ -438,7 +563,7 @@
           "shape": "InvalidParameterValueException"
         }
       ],
-      "documentation": "<p>List the specified metrics. You can use the returned metrics with <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html\">GetMetricData</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html\">GetMetricStatistics</a> to obtain statistical data.</p> <p>Up to 500 results are returned for any one call. To retrieve additional results, use the returned token with subsequent calls.</p> <p>After you create a metric, allow up to 15 minutes before the metric appears. You can see statistics about the metric sooner by using <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html\">GetMetricData</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html\">GetMetricStatistics</a>.</p> <p> <code>ListMetrics</code> doesn't return information about metrics if those metrics haven't reported data in the past two weeks. To retrieve those metrics, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html\">GetMetricData</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html\">GetMetricStatistics</a>.</p>"
+      "documentation": "<p>List the specified metrics. You can use the returned metrics with <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html\">GetMetricData</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html\">GetMetricStatistics</a> to get statistical data.</p> <p>Up to 500 results are returned for any one call. To retrieve additional results, use the returned token with subsequent calls.</p> <p>After you create a metric, allow up to 15 minutes for the metric to appear. To see metric statistics sooner, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html\">GetMetricData</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html\">GetMetricStatistics</a>.</p> <p>If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account and view metrics from the linked source accounts. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch cross-account observability</a>.</p> <p> <code>ListMetrics</code> doesn't return information about metrics if those metrics haven't reported data in the past two weeks. To retrieve those metrics, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html\">GetMetricData</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html\">GetMetricStatistics</a>.</p>"
     },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
@@ -491,9 +616,12 @@
         },
         {
           "shape": "MissingRequiredParameterException"
+        },
+        {
+          "shape": "InvalidParameterCombinationException"
         }
       ],
-      "documentation": "<p>Creates an anomaly detection model for a CloudWatch metric. You can use the model to display a band of expected normal values when the metric is graphed.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Anomaly_Detection.html\">CloudWatch Anomaly Detection</a>.</p>"
+      "documentation": "<p>Creates an anomaly detection model for a CloudWatch metric. You can use the model to display a band of expected normal values when the metric is graphed.</p> <p>If you have enabled unified cross-account observability, and this account is a monitoring account, the metric can be in the same account or a source account. You can specify the account ID in the object you specify in the <code>SingleMetricAnomalyDetector</code> parameter.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Anomaly_Detection.html\">CloudWatch Anomaly Detection</a>.</p>"
     },
     "PutCompositeAlarm": {
       "name": "PutCompositeAlarm",
@@ -509,7 +637,7 @@
           "shape": "LimitExceededFault"
         }
       ],
-      "documentation": "<p>Creates or updates a <i>composite alarm</i>. When you create a composite alarm, you specify a rule expression for the alarm that takes into account the alarm states of other alarms that you have created. The composite alarm goes into ALARM state only if all conditions of the rule are met.</p> <p>The alarms specified in a composite alarm's rule expression can include metric alarms and other composite alarms.</p> <p>Using composite alarms can reduce alarm noise. You can create multiple metric alarms, and also create a composite alarm and set up alerts only for the composite alarm. For example, you could create a composite alarm that goes into ALARM state only when more than one of the underlying metric alarms are in ALARM state.</p> <p>Currently, the only alarm actions that can be taken by composite alarms are notifying SNS topics.</p> <note> <p>It is possible to create a loop or cycle of composite alarms, where composite alarm A depends on composite alarm B, and composite alarm B also depends on composite alarm A. In this scenario, you can't delete any composite alarm that is part of the cycle because there is always still a composite alarm that depends on that alarm that you want to delete.</p> <p>To get out of such a situation, you must break the cycle by changing the rule of one of the composite alarms in the cycle to remove a dependency that creates the cycle. The simplest change to make to break a cycle is to change the <code>AlarmRule</code> of one of the alarms to <code>False</code>. </p> <p>Additionally, the evaluation of composite alarms stops if CloudWatch detects a cycle in the evaluation path. </p> </note> <p>When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. For a composite alarm, this initial time after creation is the only time that the alarm can be in <code>INSUFFICIENT_DATA</code> state.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.</p> <p>If you are an IAM user, you must have <code>iam:CreateServiceLinkedRole</code> to create a composite alarm that has Systems Manager OpsItem actions.</p>"
+      "documentation": "<p>Creates or updates a <i>composite alarm</i>. When you create a composite alarm, you specify a rule expression for the alarm that takes into account the alarm states of other alarms that you have created. The composite alarm goes into ALARM state only if all conditions of the rule are met.</p> <p>The alarms specified in a composite alarm's rule expression can include metric alarms and other composite alarms. The rule expression of a composite alarm can include as many as 100 underlying alarms. Any single alarm can be included in the rule expressions of as many as 150 composite alarms.</p> <p>Using composite alarms can reduce alarm noise. You can create multiple metric alarms, and also create a composite alarm and set up alerts only for the composite alarm. For example, you could create a composite alarm that goes into ALARM state only when more than one of the underlying metric alarms are in ALARM state.</p> <p>Composite alarms can take the following actions:</p> <ul> <li> <p>Notify Amazon SNS topics.</p> </li> <li> <p>Invoke Lambda functions.</p> </li> <li> <p>Create OpsItems in Systems Manager Ops Center.</p> </li> <li> <p>Create incidents in Systems Manager Incident Manager.</p> </li> </ul> <note> <p>It is possible to create a loop or cycle of composite alarms, where composite alarm A depends on composite alarm B, and composite alarm B also depends on composite alarm A. In this scenario, you can't delete any composite alarm that is part of the cycle because there is always still a composite alarm that depends on that alarm that you want to delete.</p> <p>To get out of such a situation, you must break the cycle by changing the rule of one of the composite alarms in the cycle to remove a dependency that creates the cycle. The simplest change to make to break a cycle is to change the <code>AlarmRule</code> of one of the alarms to <code>false</code>. </p> <p>Additionally, the evaluation of composite alarms stops if CloudWatch detects a cycle in the evaluation path. </p> </note> <p>When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. For a composite alarm, this initial time after creation is the only time that the alarm can be in <code>INSUFFICIENT_DATA</code> state.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.</p> <p>To use this operation, you must be signed on with the <code>cloudwatch:PutCompositeAlarm</code> permission that is scoped to <code>*</code>. You can't create a composite alarms if your <code>cloudwatch:PutCompositeAlarm</code> permission has a narrower scope.</p> <p>If you are an IAM user, you must have <code>iam:CreateServiceLinkedRole</code> to create a composite alarm that has Systems Manager OpsItem actions.</p>"
     },
     "PutDashboard": {
       "name": "PutDashboard",
@@ -560,6 +688,29 @@
       ],
       "documentation": "<p>Creates a Contributor Insights rule. Rules evaluate log events in a CloudWatch Logs log group, enabling you to find contributor data for the log events in that log group. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights.html\">Using Contributor Insights to Analyze High-Cardinality Data</a>.</p> <p>If you create a rule, delete it, and then re-create it with the same name, historical data from the first time the rule was created might not be available.</p>"
     },
+    "PutManagedInsightRules": {
+      "name": "PutManagedInsightRules",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutManagedInsightRulesInput"
+      },
+      "output": {
+        "shape": "PutManagedInsightRulesOutput",
+        "resultWrapper": "PutManagedInsightRulesResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "MissingRequiredParameterException"
+        }
+      ],
+      "documentation": "<p> Creates a managed Contributor Insights rule for a specified Amazon Web Services resource. When you enable a managed rule, you create a Contributor Insights rule that collects data from Amazon Web Services services. You cannot edit these rules with <code>PutInsightRule</code>. The rules can be enabled, disabled, and deleted using <code>EnableInsightRules</code>, <code>DisableInsightRules</code>, and <code>DeleteInsightRules</code>. If a previously created managed rule is currently disabled, a subsequent call to this API will re-enable it. Use <code>ListManagedInsightRules</code> to describe all available rules. </p>"
+    },
     "PutMetricAlarm": {
       "name": "PutMetricAlarm",
       "http": {
@@ -574,7 +725,7 @@
           "shape": "LimitExceededFault"
         }
       ],
-      "documentation": "<p>Creates or updates an alarm and associates it with the specified metric, metric math expression, or anomaly detection model.</p> <p>Alarms based on anomaly detection models cannot have Auto Scaling actions.</p> <p>When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.</p> <p>If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:</p> <ul> <li> <p>The <code>iam:CreateServiceLinkedRole</code> for all alarms with EC2 actions</p> </li> <li> <p>The <code>iam:CreateServiceLinkedRole</code> to create an alarm with Systems Manager OpsItem actions.</p> </li> </ul> <p>The first time you create an alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked rolea for you. The service-linked roles are called <code>AWSServiceRoleForCloudWatchEvents</code> and <code>AWSServiceRoleForCloudWatchAlarms_ActionSSM</code>. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role\">AWS service-linked role</a>.</p>"
+      "documentation": "<p>Creates or updates an alarm and associates it with the specified metric, metric math expression, anomaly detection model, or Metrics Insights query. For more information about using a Metrics Insights query for an alarm, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Metrics_Insights_Alarm.html\">Create alarms on Metrics Insights queries</a>.</p> <p>Alarms based on anomaly detection models cannot have Auto Scaling actions.</p> <p>When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.</p> <p>If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:</p> <ul> <li> <p>The <code>iam:CreateServiceLinkedRole</code> permission for all alarms with EC2 actions</p> </li> <li> <p>The <code>iam:CreateServiceLinkedRole</code> permissions to create an alarm with Systems Manager OpsItem or response plan actions.</p> </li> </ul> <p>The first time you create an alarm in the Amazon Web Services Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked roles are called <code>AWSServiceRoleForCloudWatchEvents</code> and <code>AWSServiceRoleForCloudWatchAlarms_ActionSSM</code>. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role\">Amazon Web Services service-linked role</a>.</p> <p>Each <code>PutMetricAlarm</code> action has a maximum uncompressed payload of 120 KB.</p> <p> <b>Cross-account alarms</b> </p> <p>You can set an alarm on metrics in the current account, or in another account. To create a cross-account alarm that watches a metric in a different account, you must have completed the following pre-requisites:</p> <ul> <li> <p>The account where the metrics are located (the <i>sharing account</i>) must already have a sharing role named <b>CloudWatch-CrossAccountSharingRole</b>. If it does not already have this role, you must create it using the instructions in <b>Set up a sharing account</b> in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region\"> Cross-account cross-Region CloudWatch console</a>. The policy for that role must grant access to the ID of the account where you are creating the alarm. </p> </li> <li> <p>The account where you are creating the alarm (the <i>monitoring account</i>) must already have a service-linked role named <b>AWSServiceRoleForCloudWatchCrossAccount</b> to allow CloudWatch to assume the sharing role in the sharing account. If it does not, you must create it following the directions in <b>Set up a monitoring account</b> in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region\"> Cross-account cross-Region CloudWatch console</a>.</p> </li> </ul>"
     },
     "PutMetricData": {
       "name": "PutMetricData",
@@ -599,7 +750,44 @@
           "shape": "InternalServiceFault"
         }
       ],
-      "documentation": "<p>Publishes metric data points to Amazon CloudWatch. CloudWatch associates the data points with the specified metric. If the specified metric does not exist, CloudWatch creates the metric. When CloudWatch creates a metric, it can take up to fifteen minutes for the metric to appear in calls to <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html\">ListMetrics</a>.</p> <p>You can publish either individual data points in the <code>Value</code> field, or arrays of values and the number of times each value occurred during the period by using the <code>Values</code> and <code>Counts</code> fields in the <code>MetricDatum</code> structure. Using the <code>Values</code> and <code>Counts</code> method enables you to publish up to 150 values per metric with one <code>PutMetricData</code> request, and supports retrieving percentile statistics on this data.</p> <p>Each <code>PutMetricData</code> request is limited to 40 KB in size for HTTP POST requests. You can send a payload compressed by gzip. Each request is also limited to no more than 20 different metrics.</p> <p>Although the <code>Value</code> parameter accepts numbers of type <code>Double</code>, CloudWatch rejects values that are either too small or too large. Values must be in the range of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported.</p> <p>You can use up to 10 dimensions per metric to further clarify what data the metric collects. Each dimension consists of a Name and Value pair. For more information about specifying dimensions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html\">Publishing Metrics</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>You specify the time stamp to be associated with each data point. You can specify time stamps that are as much as two weeks before the current date, and as much as 2 hours after the current day and time.</p> <p>Data points with time stamps from 24 hours ago or longer can take at least 48 hours to become available for <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html\">GetMetricData</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html\">GetMetricStatistics</a> from the time they are submitted. Data points with time stamps between 3 and 24 hours ago can take as much as 2 hours to become available for for <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html\">GetMetricData</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html\">GetMetricStatistics</a>.</p> <p>CloudWatch needs raw data points to calculate percentile statistics. If you publish data using a statistic set instead, you can only retrieve percentile statistics for this data if one of the following conditions is true:</p> <ul> <li> <p>The <code>SampleCount</code> value of the statistic set is 1 and <code>Min</code>, <code>Max</code>, and <code>Sum</code> are all equal.</p> </li> <li> <p>The <code>Min</code> and <code>Max</code> are equal, and <code>Sum</code> is equal to <code>Min</code> multiplied by <code>SampleCount</code>.</p> </li> </ul>"
+      "documentation": "<p>Publishes metric data points to Amazon CloudWatch. CloudWatch associates the data points with the specified metric. If the specified metric does not exist, CloudWatch creates the metric. When CloudWatch creates a metric, it can take up to fifteen minutes for the metric to appear in calls to <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html\">ListMetrics</a>.</p> <p>You can publish either individual data points in the <code>Value</code> field, or arrays of values and the number of times each value occurred during the period by using the <code>Values</code> and <code>Counts</code> fields in the <code>MetricData</code> structure. Using the <code>Values</code> and <code>Counts</code> method enables you to publish up to 150 values per metric with one <code>PutMetricData</code> request, and supports retrieving percentile statistics on this data.</p> <p>Each <code>PutMetricData</code> request is limited to 1 MB in size for HTTP POST requests. You can send a payload compressed by gzip. Each request is also limited to no more than 1000 different metrics.</p> <p>Although the <code>Value</code> parameter accepts numbers of type <code>Double</code>, CloudWatch rejects values that are either too small or too large. Values must be in the range of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported.</p> <p>You can use up to 30 dimensions per metric to further clarify what data the metric collects. Each dimension consists of a Name and Value pair. For more information about specifying dimensions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html\">Publishing Metrics</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>You specify the time stamp to be associated with each data point. You can specify time stamps that are as much as two weeks before the current date, and as much as 2 hours after the current day and time.</p> <p>Data points with time stamps from 24 hours ago or longer can take at least 48 hours to become available for <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html\">GetMetricData</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html\">GetMetricStatistics</a> from the time they are submitted. Data points with time stamps between 3 and 24 hours ago can take as much as 2 hours to become available for for <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html\">GetMetricData</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html\">GetMetricStatistics</a>.</p> <p>CloudWatch needs raw data points to calculate percentile statistics. If you publish data using a statistic set instead, you can only retrieve percentile statistics for this data if one of the following conditions is true:</p> <ul> <li> <p>The <code>SampleCount</code> value of the statistic set is 1 and <code>Min</code>, <code>Max</code>, and <code>Sum</code> are all equal.</p> </li> <li> <p>The <code>Min</code> and <code>Max</code> are equal, and <code>Sum</code> is equal to <code>Min</code> multiplied by <code>SampleCount</code>.</p> </li> </ul>",
+      "requestcompression": {
+        "encodings": [
+          "gzip"
+        ]
+      }
+    },
+    "PutMetricStream": {
+      "name": "PutMetricStream",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutMetricStreamInput"
+      },
+      "output": {
+        "shape": "PutMetricStreamOutput",
+        "resultWrapper": "PutMetricStreamResult"
+      },
+      "errors": [
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "InternalServiceFault"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "MissingRequiredParameterException"
+        },
+        {
+          "shape": "InvalidParameterCombinationException"
+        }
+      ],
+      "documentation": "<p>Creates or updates a metric stream. Metric streams can automatically stream CloudWatch metrics to Amazon Web Services destinations, including Amazon S3, and to many third-party solutions.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html\"> Using Metric Streams</a>.</p> <p>To create a metric stream, you must be signed in to an account that has the <code>iam:PassRole</code> permission and either the <code>CloudWatchFullAccess</code> policy or the <code>cloudwatch:PutMetricStream</code> permission.</p> <p>When you create or update a metric stream, you choose one of the following:</p> <ul> <li> <p>Stream metrics from all metric namespaces in the account.</p> </li> <li> <p>Stream metrics from all metric namespaces in the account, except for the namespaces that you list in <code>ExcludeFilters</code>.</p> </li> <li> <p>Stream metrics from only the metric namespaces that you list in <code>IncludeFilters</code>.</p> </li> </ul> <p>By default, a metric stream always sends the <code>MAX</code>, <code>MIN</code>, <code>SUM</code>, and <code>SAMPLECOUNT</code> statistics for each metric that is streamed. You can use the <code>StatisticsConfigurations</code> parameter to have the metric stream send additional statistics in the stream. Streaming additional statistics incurs additional costs. For more information, see <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>. </p> <p>When you use <code>PutMetricStream</code> to create a new metric stream, the stream is created in the <code>running</code> state. If you use it to update an existing stream, the state of the stream is not changed.</p> <p>If you are using CloudWatch cross-account observability and you create a metric stream in a monitoring account, you can choose whether to include metrics from source accounts in the stream. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch cross-account observability</a>.</p>"
     },
     "SetAlarmState": {
       "name": "SetAlarmState",
@@ -619,6 +807,58 @@
         }
       ],
       "documentation": "<p>Temporarily sets the state of an alarm for testing purposes. When the updated state differs from the previous value, the action configured for the appropriate state is invoked. For example, if your alarm is configured to send an Amazon SNS message when an alarm is triggered, temporarily changing the alarm state to <code>ALARM</code> sends an SNS message.</p> <p>Metric alarms returns to their actual state quickly, often within seconds. Because the metric alarm state change happens quickly, it is typically only visible in the alarm's <b>History</b> tab in the Amazon CloudWatch console or through <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarmHistory.html\">DescribeAlarmHistory</a>.</p> <p>If you use <code>SetAlarmState</code> on a composite alarm, the composite alarm is not guaranteed to return to its actual state. It returns to its actual state only once any of its children alarms change state. It is also reevaluated if you update its configuration.</p> <p>If an alarm triggers EC2 Auto Scaling policies or application Auto Scaling policies, you must include information in the <code>StateReasonData</code> parameter to enable the policy to take the correct action.</p>"
+    },
+    "StartMetricStreams": {
+      "name": "StartMetricStreams",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartMetricStreamsInput"
+      },
+      "output": {
+        "shape": "StartMetricStreamsOutput",
+        "resultWrapper": "StartMetricStreamsResult"
+      },
+      "errors": [
+        {
+          "shape": "InternalServiceFault"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "MissingRequiredParameterException"
+        }
+      ],
+      "documentation": "<p>Starts the streaming of metrics for one or more of your metric streams.</p>"
+    },
+    "StopMetricStreams": {
+      "name": "StopMetricStreams",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StopMetricStreamsInput"
+      },
+      "output": {
+        "shape": "StopMetricStreamsOutput",
+        "resultWrapper": "StopMetricStreamsResult"
+      },
+      "errors": [
+        {
+          "shape": "InternalServiceFault"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "MissingRequiredParameterException"
+        }
+      ],
+      "documentation": "<p>Stops the streaming of metrics for one or more of your metric streams.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -647,7 +887,7 @@
           "shape": "InternalServiceFault"
         }
       ],
-      "documentation": "<p>Assigns one or more tags (key-value pairs) to the specified CloudWatch resource. Currently, the only CloudWatch resources that can be tagged are alarms and Contributor Insights rules.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters.</p> <p>You can use the <code>TagResource</code> action with an alarm that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a CloudWatch resource.</p>"
+      "documentation": "<p>Assigns one or more tags (key-value pairs) to the specified CloudWatch resource. Currently, the only CloudWatch resources that can be tagged are alarms and Contributor Insights rules.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p> <p>You can use the <code>TagResource</code> action with an alarm that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a CloudWatch resource.</p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -680,6 +920,11 @@
     }
   },
   "shapes": {
+    "AccountId": {
+      "type": "string",
+      "max": 255,
+      "min": 1
+    },
     "ActionPrefix": {
       "type": "string",
       "max": 1024,
@@ -687,6 +932,19 @@
     },
     "ActionsEnabled": {
       "type": "boolean"
+    },
+    "ActionsSuppressedBy": {
+      "type": "string",
+      "enum": [
+        "WaitPeriod",
+        "ExtensionPeriod",
+        "Alarm"
+      ]
+    },
+    "ActionsSuppressedReason": {
+      "type": "string",
+      "max": 1024,
+      "min": 0
     },
     "AlarmArn": {
       "type": "string",
@@ -779,19 +1037,27 @@
       "members": {
         "Namespace": {
           "shape": "Namespace",
-          "documentation": "<p>The namespace of the metric associated with the anomaly detection model.</p>"
+          "documentation": "<p>The namespace of the metric associated with the anomaly detection model.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector.Namespace property."
         },
         "MetricName": {
           "shape": "MetricName",
-          "documentation": "<p>The name of the metric associated with the anomaly detection model.</p>"
+          "documentation": "<p>The name of the metric associated with the anomaly detection model.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector.MetricName property."
         },
         "Dimensions": {
           "shape": "Dimensions",
-          "documentation": "<p>The metric dimensions associated with the anomaly detection model.</p>"
+          "documentation": "<p>The metric dimensions associated with the anomaly detection model.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector.Dimensions property."
         },
         "Stat": {
           "shape": "AnomalyDetectorMetricStat",
-          "documentation": "<p>The statistic associated with the anomaly detection model.</p>"
+          "documentation": "<p>The statistic associated with the anomaly detection model.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector.Stat property."
         },
         "Configuration": {
           "shape": "AnomalyDetectorConfiguration",
@@ -799,10 +1065,22 @@
         },
         "StateValue": {
           "shape": "AnomalyDetectorStateValue",
-          "documentation": "<p>The current status of the anomaly detector's training. The possible values are <code>TRAINED | PENDING_TRAINING | TRAINED_INSUFFICIENT_DATA</code> </p>"
+          "documentation": "<p>The current status of the anomaly detector's training.</p>"
+        },
+        "MetricCharacteristics": {
+          "shape": "MetricCharacteristics",
+          "documentation": "<p>This object includes parameters that you can use to provide information about your metric to CloudWatch to help it build more accurate anomaly detection models. Currently, it includes the <code>PeriodicSpikes</code> parameter.</p>"
+        },
+        "SingleMetricAnomalyDetector": {
+          "shape": "SingleMetricAnomalyDetector",
+          "documentation": "<p>The CloudWatch metric and statistic for this anomaly detector.</p>"
+        },
+        "MetricMathAnomalyDetector": {
+          "shape": "MetricMathAnomalyDetector",
+          "documentation": "<p>The CloudWatch metric math expression for this anomaly detector.</p>"
         }
       },
-      "documentation": "<p>An anomaly detection model associated with a particular CloudWatch metric and statistic. You can use the model to display a band of expected normal values when the metric is graphed.</p>"
+      "documentation": "<p>An anomaly detection model associated with a particular CloudWatch metric, statistic, or metric math expression. You can use the model to display a band of expected, normal values when the metric is graphed.</p> <p>If you have enabled unified cross-account observability, and this account is a monitoring account, the metric can be in the same account or a source account.</p>"
     },
     "AnomalyDetectorConfiguration": {
       "type": "structure",
@@ -826,7 +1104,8 @@
     },
     "AnomalyDetectorMetricStat": {
       "type": "string",
-      "pattern": "(SampleCount|Average|Sum|Minimum|Maximum|p(\\d{1,2}|100)(\\.\\d{0,2})?|[ou]\\d+(\\.\\d*)?)(_E|_L|_H)?"
+      "max": 50,
+      "pattern": "(SampleCount|Average|Sum|Minimum|Maximum|IQM|(p|tc|tm|ts|wm)(\\d{1,2}(\\.\\d{0,10})?|100)|[ou]\\d+(\\.\\d*)?)(_E|_L|_H)?|(TM|TC|TS|WM)\\(((((\\d{1,2})(\\.\\d{0,10})?|100(\\.0{0,10})?)%)?:((\\d{1,2})(\\.\\d{0,10})?|100(\\.0{0,10})?)%|((\\d{1,2})(\\.\\d{0,10})?|100(\\.0{0,10})?)%:(((\\d{1,2})(\\.\\d{0,10})?|100(\\.0{0,10})?)%)?)\\)|(TM|TC|TS|WM|PR)\\(((\\d+(\\.\\d{0,10})?|(\\d+(\\.\\d{0,10})?[Ee][+-]?\\d+)):((\\d+(\\.\\d{0,10})?|(\\d+(\\.\\d{0,10})?[Ee][+-]?\\d+)))?|((\\d+(\\.\\d{0,10})?|(\\d+(\\.\\d{0,10})?[Ee][+-]?\\d+)))?:(\\d+(\\.\\d{0,10})?|(\\d+(\\.\\d{0,10})?[Ee][+-]?\\d+)))\\)"
     },
     "AnomalyDetectorMetricTimezone": {
       "type": "string",
@@ -840,6 +1119,20 @@
         "TRAINED_INSUFFICIENT_DATA",
         "TRAINED"
       ]
+    },
+    "AnomalyDetectorType": {
+      "type": "string",
+      "enum": [
+        "SINGLE_METRIC",
+        "METRIC_MATH"
+      ]
+    },
+    "AnomalyDetectorTypes": {
+      "type": "list",
+      "member": {
+        "shape": "AnomalyDetectorType"
+      },
+      "max": 2
     },
     "AnomalyDetectors": {
       "type": "list",
@@ -914,11 +1207,35 @@
         },
         "StateUpdatedTimestamp": {
           "shape": "Timestamp",
-          "documentation": "<p>The time stamp of the last update to the alarm state.</p>"
+          "documentation": "<p>Tracks the timestamp of any state update, even if <code>StateValue</code> doesn't change.</p>"
         },
         "StateValue": {
           "shape": "StateValue",
           "documentation": "<p>The state value for the alarm.</p>"
+        },
+        "StateTransitionedTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p> The timestamp of the last change to the alarm's <code>StateValue</code>. </p>"
+        },
+        "ActionsSuppressedBy": {
+          "shape": "ActionsSuppressedBy",
+          "documentation": "<p> When the value is <code>ALARM</code>, it means that the actions are suppressed because the suppressor alarm is in <code>ALARM</code> When the value is <code>WaitPeriod</code>, it means that the actions are suppressed because the composite alarm is waiting for the suppressor alarm to go into into the <code>ALARM</code> state. The maximum waiting time is as specified in <code>ActionsSuppressorWaitPeriod</code>. After this time, the composite alarm performs its actions. When the value is <code>ExtensionPeriod</code>, it means that the actions are suppressed because the composite alarm is waiting after the suppressor alarm went out of the <code>ALARM</code> state. The maximum waiting time is as specified in <code>ActionsSuppressorExtensionPeriod</code>. After this time, the composite alarm performs its actions. </p>"
+        },
+        "ActionsSuppressedReason": {
+          "shape": "ActionsSuppressedReason",
+          "documentation": "<p> Captures the reason for action suppression. </p>"
+        },
+        "ActionsSuppressor": {
+          "shape": "AlarmArn",
+          "documentation": "<p> Actions will be suppressed if the suppressor alarm is in the <code>ALARM</code> state. <code>ActionsSuppressor</code> can be an AlarmName or an Amazon Resource Name (ARN) from an existing alarm. </p>"
+        },
+        "ActionsSuppressorWaitPeriod": {
+          "shape": "SuppressorPeriod",
+          "documentation": "<p> The maximum time in seconds that the composite alarm waits for the suppressor alarm to go into the <code>ALARM</code> state. After this time, the composite alarm performs its actions. </p> <important> <p> <code>WaitPeriod</code> is required only when <code>ActionsSuppressor</code> is specified. </p> </important>"
+        },
+        "ActionsSuppressorExtensionPeriod": {
+          "shape": "SuppressorPeriod",
+          "documentation": "<p> The maximum time in seconds that the composite alarm waits after suppressor alarm goes out of the <code>ALARM</code> state. After this time, the composite alarm performs its actions. </p> <important> <p> <code>ExtensionPeriod</code> is required only when <code>ActionsSuppressor</code> is specified. </p> </important>"
         }
       },
       "documentation": "<p>The details about a composite alarm.</p>",
@@ -935,7 +1252,13 @@
         "StateReason",
         "StateReasonData",
         "StateUpdatedTimestamp",
-        "StateValue"
+        "StateValue",
+        "StateTransitionedTimestamp",
+        "ActionsSuppressedBy",
+        "ActionsSuppressedReason",
+        "ActionsSuppressor",
+        "ActionsSuppressorWaitPeriod",
+        "ActionsSuppressorExtensionPeriod"
       ]
     },
     "CompositeAlarms": {
@@ -1103,33 +1426,44 @@
       "members": {
         "AlarmNames": {
           "shape": "AlarmNames",
-          "documentation": "<p>The alarms to be deleted.</p>"
+          "documentation": "<p>The alarms to be deleted. Do not enclose the alarm names in quote marks.</p>"
         }
       }
     },
     "DeleteAnomalyDetectorInput": {
       "type": "structure",
-      "required": [
-        "Namespace",
-        "MetricName",
-        "Stat"
-      ],
       "members": {
         "Namespace": {
           "shape": "Namespace",
-          "documentation": "<p>The namespace associated with the anomaly detection model to delete.</p>"
+          "documentation": "<p>The namespace associated with the anomaly detection model to delete.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector."
         },
         "MetricName": {
           "shape": "MetricName",
-          "documentation": "<p>The metric name associated with the anomaly detection model to delete.</p>"
+          "documentation": "<p>The metric name associated with the anomaly detection model to delete.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector."
         },
         "Dimensions": {
           "shape": "Dimensions",
-          "documentation": "<p>The metric dimensions associated with the anomaly detection model to delete.</p>"
+          "documentation": "<p>The metric dimensions associated with the anomaly detection model to delete.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector."
         },
         "Stat": {
           "shape": "AnomalyDetectorMetricStat",
-          "documentation": "<p>The statistic associated with the anomaly detection model to delete.</p>"
+          "documentation": "<p>The statistic associated with the anomaly detection model to delete.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector."
+        },
+        "SingleMetricAnomalyDetector": {
+          "shape": "SingleMetricAnomalyDetector",
+          "documentation": "<p>A single metric anomaly detector to be deleted.</p> <p>When using <code>SingleMetricAnomalyDetector</code>, you cannot include the following parameters in the same operation:</p> <ul> <li> <p> <code>Dimensions</code>,</p> </li> <li> <p> <code>MetricName</code> </p> </li> <li> <p> <code>Namespace</code> </p> </li> <li> <p> <code>Stat</code> </p> </li> <li> <p>the <code>MetricMathAnomalyDetector</code> parameters of <code>DeleteAnomalyDetectorInput</code> </p> </li> </ul> <p>Instead, specify the single metric anomaly detector attributes as part of the <code>SingleMetricAnomalyDetector</code> property.</p>"
+        },
+        "MetricMathAnomalyDetector": {
+          "shape": "MetricMathAnomalyDetector",
+          "documentation": "<p>The metric math anomaly detector to be deleted.</p> <p>When using <code>MetricMathAnomalyDetector</code>, you cannot include following parameters in the same operation:</p> <ul> <li> <p> <code>Dimensions</code>,</p> </li> <li> <p> <code>MetricName</code> </p> </li> <li> <p> <code>Namespace</code> </p> </li> <li> <p> <code>Stat</code> </p> </li> <li> <p>the <code>SingleMetricAnomalyDetector</code> parameters of <code>DeleteAnomalyDetectorInput</code> </p> </li> </ul> <p>Instead, specify the metric math anomaly detector attributes as part of the <code>MetricMathAnomalyDetector</code> property.</p>"
         }
       }
     },
@@ -1173,6 +1507,22 @@
           "documentation": "<p>An array listing the rules that could not be deleted. You cannot delete built-in rules.</p>"
         }
       }
+    },
+    "DeleteMetricStreamInput": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "MetricStreamName",
+          "documentation": "<p>The name of the metric stream to delete.</p>"
+        }
+      }
+    },
+    "DeleteMetricStreamOutput": {
+      "type": "structure",
+      "members": {}
     },
     "DescribeAlarmHistoryInput": {
       "type": "structure",
@@ -1283,7 +1633,7 @@
         },
         "AlarmTypes": {
           "shape": "AlarmTypes",
-          "documentation": "<p>Use this parameter to specify whether you want the operation to return metric alarms or composite alarms. If you omit this parameter, only metric alarms are returned.</p>"
+          "documentation": "<p>Use this parameter to specify whether you want the operation to return metric alarms or composite alarms. If you omit this parameter, only metric alarms are returned, even if composite alarms exist in the account.</p> <p>For example, if you omit this parameter or specify <code>MetricAlarms</code>, the operation returns only a list of metric alarms. It does not return any composite alarms, even if composite alarms exist in the account.</p> <p>If you specify <code>CompositeAlarms</code>, the operation returns only a list of composite alarms, and does not return any metric alarms.</p>"
         },
         "ChildrenOfAlarmName": {
           "shape": "AlarmName",
@@ -1350,6 +1700,10 @@
         "Dimensions": {
           "shape": "Dimensions",
           "documentation": "<p>Limits the results to only the anomaly detection models that are associated with the specified metric dimensions. If there are multiple metrics that have these dimensions and have anomaly detection models associated, they're all returned.</p>"
+        },
+        "AnomalyDetectorTypes": {
+          "shape": "AnomalyDetectorTypes",
+          "documentation": "<p>The anomaly detector types to request when using <code>DescribeAnomalyDetectorsInput</code>. If empty, defaults to <code>SINGLE_METRIC</code>.</p>"
         }
       }
     },
@@ -1401,14 +1755,14 @@
       "members": {
         "Name": {
           "shape": "DimensionName",
-          "documentation": "<p>The name of the dimension. Dimension names cannot contain blank spaces or non-ASCII characters.</p>"
+          "documentation": "<p>The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (<code>:</code>). ASCII control characters are not supported as part of dimension names.</p>"
         },
         "Value": {
           "shape": "DimensionValue",
-          "documentation": "<p>The value of the dimension. Dimension values cannot contain blank spaces or non-ASCII characters.</p>"
+          "documentation": "<p>The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values.</p>"
         }
       },
-      "documentation": "<p>A dimension is a name/value pair that is part of the identity of a metric. You can assign up to 10 dimensions to a metric. Because dimensions are part of the unique identifier for a metric, whenever you add a unique name/value pair to one of your metrics, you are creating a new variation of that metric. </p>",
+      "documentation": "<p>A dimension is a name/value pair that is part of the identity of a metric. Because dimensions are part of the unique identifier for a metric, whenever you add a unique name/value pair to one of your metrics, you are creating a new variation of that metric. For example, many Amazon EC2 metrics publish <code>InstanceId</code> as a dimension name, and the actual instance ID as the value for that dimension.</p> <p>You can assign up to 30 dimensions to a metric.</p>",
       "xmlOrder": [
         "Name",
         "Value"
@@ -1445,7 +1799,7 @@
     },
     "DimensionValue": {
       "type": "string",
-      "max": 255,
+      "max": 1024,
       "min": 1
     },
     "Dimensions": {
@@ -1453,7 +1807,7 @@
       "member": {
         "shape": "Dimension"
       },
-      "max": 10
+      "max": 30
     },
     "DisableAlarmActionsInput": {
       "type": "structure",
@@ -1530,12 +1884,17 @@
       "type": "integer",
       "min": 1
     },
+    "EvaluationState": {
+      "type": "string",
+      "enum": [
+        "PARTIAL_DATA"
+      ]
+    },
     "ExceptionType": {
       "type": "string"
     },
     "ExtendedStatistic": {
-      "type": "string",
-      "pattern": "p(\\d{1,2}(\\.\\d{0,2})?|100)"
+      "type": "string"
     },
     "ExtendedStatistics": {
       "type": "list",
@@ -1618,7 +1977,7 @@
         },
         "OrderBy": {
           "shape": "InsightRuleOrderBy",
-          "documentation": "<p>Determines what statistic to use to rank the contributors. Valid values are SUM and MAXIMUM.</p>"
+          "documentation": "<p>Determines what statistic to use to rank the contributors. Valid values are <code>Sum</code> and <code>Maximum</code>.</p>"
         }
       }
     },
@@ -1661,7 +2020,7 @@
       "members": {
         "MetricDataQueries": {
           "shape": "MetricDataQueries",
-          "documentation": "<p>The metric queries to be returned. A single <code>GetMetricData</code> call can include as many as 500 <code>MetricDataQuery</code> structures. Each of these structures can specify either a metric to retrieve, or a math expression to perform on retrieved data. </p>"
+          "documentation": "<p>The metric queries to be returned. A single <code>GetMetricData</code> call can include as many as 500 <code>MetricDataQuery</code> structures. Each of these structures can specify either a metric to retrieve, a Metrics Insights query, or a math expression to perform on retrieved data. </p>"
         },
         "StartTime": {
           "shape": "Timestamp",
@@ -1677,13 +2036,20 @@
         },
         "ScanBy": {
           "shape": "ScanBy",
-          "documentation": "<p>The order in which data points should be returned. <code>TimestampDescending</code> returns the newest data first and paginates when the <code>MaxDatapoints</code> limit is reached. <code>TimestampAscending</code> returns the oldest data first and paginates when the <code>MaxDatapoints</code> limit is reached.</p>"
+          "documentation": "<p>The order in which data points should be returned. <code>TimestampDescending</code> returns the newest data first and paginates when the <code>MaxDatapoints</code> limit is reached. <code>TimestampAscending</code> returns the oldest data first and paginates when the <code>MaxDatapoints</code> limit is reached.</p> <p>If you omit this parameter, the default of <code>TimestampDescending</code> is used.</p>"
         },
         "MaxDatapoints": {
           "shape": "GetMetricDataMaxDatapoints",
           "documentation": "<p>The maximum number of data points the request should return before paginating. If you omit this, the default of 100,800 is used.</p>"
+        },
+        "LabelOptions": {
+          "shape": "LabelOptions",
+          "documentation": "<p>This structure includes the <code>Timezone</code> parameter, which you can use to specify your time zone so that the labels of returned data display the correct time for your time zone. </p>"
         }
       }
+    },
+    "GetMetricDataLabelTimezone": {
+      "type": "string"
     },
     "GetMetricDataMaxDatapoints": {
       "type": "integer"
@@ -1766,6 +2132,71 @@
         }
       }
     },
+    "GetMetricStreamInput": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "MetricStreamName",
+          "documentation": "<p>The name of the metric stream to retrieve information about.</p>"
+        }
+      }
+    },
+    "GetMetricStreamOutput": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The ARN of the metric stream.</p>"
+        },
+        "Name": {
+          "shape": "MetricStreamName",
+          "documentation": "<p>The name of the metric stream.</p>"
+        },
+        "IncludeFilters": {
+          "shape": "MetricStreamFilters",
+          "documentation": "<p>If this array of metric namespaces is present, then these namespaces are the only metric namespaces that are streamed by this metric stream.</p>"
+        },
+        "ExcludeFilters": {
+          "shape": "MetricStreamFilters",
+          "documentation": "<p>If this array of metric namespaces is present, then these namespaces are the only metric namespaces that are not streamed by this metric stream. In this case, all other metric namespaces in the account are streamed by this metric stream.</p>"
+        },
+        "FirehoseArn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The ARN of the Amazon Kinesis Data Firehose delivery stream that is used by this metric stream.</p>"
+        },
+        "RoleArn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The ARN of the IAM role that is used by this metric stream.</p>"
+        },
+        "State": {
+          "shape": "MetricStreamState",
+          "documentation": "<p>The state of the metric stream. The possible values are <code>running</code> and <code>stopped</code>.</p>"
+        },
+        "CreationDate": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date that the metric stream was created.</p>"
+        },
+        "LastUpdateDate": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date of the most recent update to the metric stream's configuration.</p>"
+        },
+        "OutputFormat": {
+          "shape": "MetricStreamOutputFormat",
+          "documentation": "<p>The output format for the stream. Valid values are <code>json</code>, <code>opentelemetry1.0</code>, and <code>opentelemetry0.7</code>. For more information about metric stream output formats, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html\">Metric streams output formats</a>.</p>"
+        },
+        "StatisticsConfigurations": {
+          "shape": "MetricStreamStatisticsConfigurations",
+          "documentation": "<p>Each entry in this array displays information about one or more metrics that include additional statistics in the metric stream. For more information about the additional statistics, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html\"> CloudWatch statistics definitions</a>. </p>"
+        },
+        "IncludeLinkedAccountsMetrics": {
+          "shape": "IncludeLinkedAccountsMetrics",
+          "documentation": "<p>If this is <code>true</code> and this metric stream is in a monitoring account, then the stream includes metrics from source accounts that the monitoring account is linked to.</p>"
+        }
+      }
+    },
     "GetMetricWidgetImageInput": {
       "type": "structure",
       "required": [
@@ -1778,7 +2209,7 @@
         },
         "OutputFormat": {
           "shape": "OutputFormat",
-          "documentation": "<p>The format of the resulting image. Only PNG images are supported.</p> <p>The default is <code>png</code>. If you specify <code>png</code>, the API returns an HTTP response with the content-type set to <code>text/xml</code>. The image data is in a <code>MetricWidgetImage</code> field. For example:</p> <p> <code> &lt;GetMetricWidgetImageResponse xmlns=&lt;URLstring&gt;&gt;</code> </p> <p> <code> &lt;GetMetricWidgetImageResult&gt;</code> </p> <p> <code> &lt;MetricWidgetImage&gt;</code> </p> <p> <code> iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQEAYAAAAip...</code> </p> <p> <code> &lt;/MetricWidgetImage&gt;</code> </p> <p> <code> &lt;/GetMetricWidgetImageResult&gt;</code> </p> <p> <code> &lt;ResponseMetadata&gt;</code> </p> <p> <code> &lt;RequestId&gt;6f0d4192-4d42-11e8-82c1-f539a07e0e3b&lt;/RequestId&gt;</code> </p> <p> <code> &lt;/ResponseMetadata&gt;</code> </p> <p> <code>&lt;/GetMetricWidgetImageResponse&gt;</code> </p> <p>The <code>image/png</code> setting is intended only for custom HTTP requests. For most use cases, and all actions using an AWS SDK, you should use <code>png</code>. If you specify <code>image/png</code>, the HTTP response has a content-type set to <code>image/png</code>, and the body of the response is a PNG image. </p>"
+          "documentation": "<p>The format of the resulting image. Only PNG images are supported.</p> <p>The default is <code>png</code>. If you specify <code>png</code>, the API returns an HTTP response with the content-type set to <code>text/xml</code>. The image data is in a <code>MetricWidgetImage</code> field. For example:</p> <p> <code> &lt;GetMetricWidgetImageResponse xmlns=&lt;URLstring&gt;&gt;</code> </p> <p> <code> &lt;GetMetricWidgetImageResult&gt;</code> </p> <p> <code> &lt;MetricWidgetImage&gt;</code> </p> <p> <code> iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQEAYAAAAip...</code> </p> <p> <code> &lt;/MetricWidgetImage&gt;</code> </p> <p> <code> &lt;/GetMetricWidgetImageResult&gt;</code> </p> <p> <code> &lt;ResponseMetadata&gt;</code> </p> <p> <code> &lt;RequestId&gt;6f0d4192-4d42-11e8-82c1-f539a07e0e3b&lt;/RequestId&gt;</code> </p> <p> <code> &lt;/ResponseMetadata&gt;</code> </p> <p> <code>&lt;/GetMetricWidgetImageResponse&gt;</code> </p> <p>The <code>image/png</code> setting is intended only for custom HTTP requests. For most use cases, and all actions using an Amazon Web Services SDK, you should use <code>png</code>. If you specify <code>image/png</code>, the HTTP response has a content-type set to <code>image/png</code>, and the body of the response is a PNG image. </p>"
         }
       }
     },
@@ -1809,6 +2240,12 @@
       "max": 255,
       "min": 1
     },
+    "IncludeLinkedAccounts": {
+      "type": "boolean"
+    },
+    "IncludeLinkedAccountsMetrics": {
+      "type": "boolean"
+    },
     "InsightRule": {
       "type": "structure",
       "required": [
@@ -1828,14 +2265,18 @@
         },
         "Schema": {
           "shape": "InsightRuleSchema",
-          "documentation": "<p>For rules that you create, this is always <code>{\"Name\": \"CloudWatchLogRule\", \"Version\": 1}</code>. For built-in rules, this is <code>{\"Name\": \"ServiceLogRule\", \"Version\": 1}</code> </p>"
+          "documentation": "<p>For rules that you create, this is always <code>{\"Name\": \"CloudWatchLogRule\", \"Version\": 1}</code>. For managed rules, this is <code>{\"Name\": \"ServiceLogRule\", \"Version\": 1}</code> </p>"
         },
         "Definition": {
           "shape": "InsightRuleDefinition",
           "documentation": "<p>The definition of the rule, as a JSON object. The definition contains the keywords used to define contributors, the value to aggregate on if this rule returns a sum instead of a count, and the filters. For details on the valid syntax, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html\">Contributor Insights Rule Syntax</a>.</p>"
+        },
+        "ManagedRule": {
+          "shape": "InsightRuleIsManaged",
+          "documentation": "<p> An optional built-in rule that Amazon Web Services manages. </p>"
         }
       },
-      "documentation": "<p>This structure contains the definition for a Contributor Insights rule.</p>"
+      "documentation": "<p>This structure contains the definition for a Contributor Insights rule. For more information about this rule, see<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights.html\"> Using Constributor Insights to analyze high-cardinality data</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
     },
     "InsightRuleAggregationStatistic": {
       "type": "string"
@@ -1916,6 +2357,9 @@
       "max": 8192,
       "min": 1,
       "pattern": "[\\x00-\\x7F]+"
+    },
+    "InsightRuleIsManaged": {
+      "type": "boolean"
     },
     "InsightRuleMaxResults": {
       "type": "integer",
@@ -2023,6 +2467,16 @@
         "shape": "InsightRule"
       }
     },
+    "LabelOptions": {
+      "type": "structure",
+      "members": {
+        "Timezone": {
+          "shape": "GetMetricDataLabelTimezone",
+          "documentation": "<p>The time zone to use for metric data return in this operation. The format is <code>+</code> or <code>-</code> followed by four digits. The first two digits indicate the number of hours ahead or behind of UTC, and the final two digits are the number of minutes. For example, +0130 indicates a time zone that is 1 hour and 30 minutes ahead of UTC. The default is +0000. </p>"
+        }
+      },
+      "documentation": "<p>This structure includes the <code>Timezone</code> parameter, which you can use to specify your time zone so that the labels that are associated with returned metrics display the correct time for your time zone. </p> <p>The <code>Timezone</code> value affects a label only if you have a time-based dynamic expression in the label. For more information about dynamic expressions in labels, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/graph-dynamic-labels.html\">Using Dynamic Labels</a>.</p>"
+    },
     "LastModified": {
       "type": "timestamp"
     },
@@ -2052,6 +2506,70 @@
         }
       }
     },
+    "ListManagedInsightRulesInput": {
+      "type": "structure",
+      "required": [
+        "ResourceARN"
+      ],
+      "members": {
+        "ResourceARN": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p> The ARN of an Amazon Web Services resource that has managed Contributor Insights rules. </p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p> Include this value to get the next set of rules if the value was returned by the previous operation. </p>"
+        },
+        "MaxResults": {
+          "shape": "InsightRuleMaxResults",
+          "documentation": "<p> The maximum number of results to return in one operation. If you omit this parameter, the default number is used. The default number is <code>100</code>. </p>"
+        }
+      }
+    },
+    "ListManagedInsightRulesOutput": {
+      "type": "structure",
+      "members": {
+        "ManagedRules": {
+          "shape": "ManagedRuleDescriptions",
+          "documentation": "<p> The managed rules that are available for the specified Amazon Web Services resource. </p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p> Include this value to get the next set of rules if the value was returned by the previous operation. </p>"
+        }
+      }
+    },
+    "ListMetricStreamsInput": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Include this value, if it was returned by the previous call, to get the next set of metric streams.</p>"
+        },
+        "MaxResults": {
+          "shape": "ListMetricStreamsMaxResults",
+          "documentation": "<p>The maximum number of results to return in one operation.</p>"
+        }
+      }
+    },
+    "ListMetricStreamsMaxResults": {
+      "type": "integer",
+      "max": 500,
+      "min": 1
+    },
+    "ListMetricStreamsOutput": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token that marks the start of the next batch of returned results. You can use this token in a subsequent operation to get the next batch of results.</p>"
+        },
+        "Entries": {
+          "shape": "MetricStreamEntries",
+          "documentation": "<p>The array of metric stream information.</p>"
+        }
+      }
+    },
     "ListMetricsInput": {
       "type": "structure",
       "members": {
@@ -2074,6 +2592,14 @@
         "RecentlyActive": {
           "shape": "RecentlyActive",
           "documentation": "<p>To filter the results to show only metrics that have had data points published in the past three hours, specify this parameter with a value of <code>PT3H</code>. This is the only valid value for this parameter.</p> <p>The results that are returned are an approximation of the value you specify. There is a low probability that the returned results include metrics with last published data as much as 40 minutes more than the specified time interval.</p>"
+        },
+        "IncludeLinkedAccounts": {
+          "shape": "IncludeLinkedAccounts",
+          "documentation": "<p>If you are using this operation in a monitoring account, specify <code>true</code> to include metrics from source accounts in the returned data.</p> <p>The default is <code>false</code>.</p>"
+        },
+        "OwningAccount": {
+          "shape": "AccountId",
+          "documentation": "<p>When you use this operation in a monitoring account, use this field to return metrics only from one source account. To do so, specify that source account ID in this field, and also specify <code>true</code> for <code>IncludeLinkedAccounts</code>.</p>"
         }
       }
     },
@@ -2087,11 +2613,16 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>The token that marks the start of the next batch of returned results. </p>"
+        },
+        "OwningAccounts": {
+          "shape": "OwningAccounts",
+          "documentation": "<p>If you are using this operation in a monitoring account, this array contains the account IDs of the source accounts where the metrics in the returned data are from.</p> <p>This field is a 1:1 mapping between each metric that is returned and the ID of the owning account.</p>"
         }
       },
       "xmlOrder": [
         "Metrics",
-        "NextToken"
+        "NextToken",
+        "OwningAccounts"
       ]
     },
     "ListTagsForResourceInput": {
@@ -2102,7 +2633,7 @@
       "members": {
         "ResourceARN": {
           "shape": "AmazonResourceName",
-          "documentation": "<p>The ARN of the CloudWatch resource that you want to view tags for.</p> <p>The ARN format of an alarm is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i> </code> </p> <p>The ARN format of a Contributor Insights rule is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule:<i>insight-rule-name</i> </code> </p> <p>For more information about ARN format, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies\"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the CloudWatch resource that you want to view tags for.</p> <p>The ARN format of an alarm is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i> </code> </p> <p>The ARN format of a Contributor Insights rule is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule/<i>insight-rule-name</i> </code> </p> <p>For more information about ARN format, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies\"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General Reference</i>.</p>"
         }
       }
     },
@@ -2113,6 +2644,76 @@
           "shape": "TagList",
           "documentation": "<p>The list of tag keys and values associated with the resource you specified.</p>"
         }
+      }
+    },
+    "ManagedRule": {
+      "type": "structure",
+      "required": [
+        "TemplateName",
+        "ResourceARN"
+      ],
+      "members": {
+        "TemplateName": {
+          "shape": "TemplateName",
+          "documentation": "<p> The template name for the managed Contributor Insights rule, as returned by <code>ListManagedInsightRules</code>. </p>"
+        },
+        "ResourceARN": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p> The ARN of an Amazon Web Services resource that has managed Contributor Insights rules. </p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p> A list of key-value pairs that you can associate with a managed Contributor Insights rule. You can associate as many as 50 tags with a rule. Tags can help you organize and categorize your resources. You also can use them to scope user permissions by granting a user permission to access or change only the resources that have certain tag values. To associate tags with a rule, you must have the <code>cloudwatch:TagResource</code> permission in addition to the <code>cloudwatch:PutInsightRule</code> permission. If you are using this operation to update an existing Contributor Insights rule, any tags that you specify in this parameter are ignored. To change the tags of an existing rule, use <code>TagResource</code>. </p>"
+        }
+      },
+      "documentation": "<p> Contains the information that's required to enable a managed Contributor Insights rule for an Amazon Web Services resource. </p>"
+    },
+    "ManagedRuleDescription": {
+      "type": "structure",
+      "members": {
+        "TemplateName": {
+          "shape": "TemplateName",
+          "documentation": "<p> The template name for the managed rule. Used to enable managed rules using <code>PutManagedInsightRules</code>. </p>"
+        },
+        "ResourceARN": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p> If a managed rule is enabled, this is the ARN for the related Amazon Web Services resource. </p>"
+        },
+        "RuleState": {
+          "shape": "ManagedRuleState",
+          "documentation": "<p> Describes the state of a managed rule. If present, it contains information about the Contributor Insights rule that contains information about the related Amazon Web Services resource. </p>"
+        }
+      },
+      "documentation": "<p> Contains information about managed Contributor Insights rules, as returned by <code>ListManagedInsightRules</code>. </p>"
+    },
+    "ManagedRuleDescriptions": {
+      "type": "list",
+      "member": {
+        "shape": "ManagedRuleDescription"
+      }
+    },
+    "ManagedRuleState": {
+      "type": "structure",
+      "required": [
+        "RuleName",
+        "State"
+      ],
+      "members": {
+        "RuleName": {
+          "shape": "InsightRuleName",
+          "documentation": "<p> The name of the Contributor Insights rule that contains data for the specified Amazon Web Services resource. </p>"
+        },
+        "State": {
+          "shape": "InsightRuleState",
+          "documentation": "<p> Indicates whether the rule is enabled or disabled. </p>"
+        }
+      },
+      "documentation": "<p> The status of a managed Contributor Insights rule. </p>"
+    },
+    "ManagedRules": {
+      "type": "list",
+      "member": {
+        "shape": "ManagedRule"
       }
     },
     "MaxRecords": {
@@ -2139,7 +2740,7 @@
           "documentation": "<p>The message text.</p>"
         }
       },
-      "documentation": "<p>A message returned by the <code>GetMetricData</code>API, including a code and a description.</p>"
+      "documentation": "<p>A message returned by the <code>GetMetricData</code>API, including a code and a description.</p> <p>If a cross-Region <code>GetMetricData</code> operation fails with a code of <code>Forbidden</code> and a value of <code>Authentication too complex to retrieve cross region data</code>, you can correct the problem by running the <code>GetMetricData</code> operation in the same Region where the metric data is.</p>"
     },
     "MessageDataCode": {
       "type": "string"
@@ -2219,7 +2820,7 @@
         },
         "StateUpdatedTimestamp": {
           "shape": "Timestamp",
-          "documentation": "<p>The time stamp of the last update to the alarm state.</p>"
+          "documentation": "<p>The time stamp of the last update to the value of either the <code>StateValue</code> or <code>EvaluationState</code> parameters.</p>"
         },
         "MetricName": {
           "shape": "MetricName",
@@ -2267,7 +2868,7 @@
         },
         "TreatMissingData": {
           "shape": "TreatMissingData",
-          "documentation": "<p>Sets how this alarm is to handle missing data points. If this parameter is omitted, the default behavior of <code>missing</code> is used.</p>"
+          "documentation": "<p>Sets how this alarm is to handle missing data points. The valid values are <code>breaching</code>, <code>notBreaching</code>, <code>ignore</code>, and <code>missing</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data\">Configuring how CloudWatch alarms treat missing data</a>.</p> <p>If this parameter is omitted, the default behavior of <code>missing</code> is used.</p>"
         },
         "EvaluateLowSampleCountPercentile": {
           "shape": "EvaluateLowSampleCountPercentile",
@@ -2280,6 +2881,14 @@
         "ThresholdMetricId": {
           "shape": "MetricId",
           "documentation": "<p>In an alarm based on an anomaly detection model, this is the ID of the <code>ANOMALY_DETECTION_BAND</code> function used as the threshold for the alarm.</p>"
+        },
+        "EvaluationState": {
+          "shape": "EvaluationState",
+          "documentation": "<p>If the value of this field is <code>PARTIAL_DATA</code>, the alarm is being evaluated based on only partial data. This happens if the query used for the alarm returns more than 10,000 metrics. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Metrics_Insights_Alarm.html\">Create alarms on Metrics Insights queries</a>.</p>"
+        },
+        "StateTransitionedTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the alarm's <code>StateValue</code> most recently changed.</p>"
         }
       },
       "documentation": "<p>The details about a metric alarm.</p>",
@@ -2310,7 +2919,9 @@
         "EvaluateLowSampleCountPercentile",
         "DatapointsToAlarm",
         "Metrics",
-        "ThresholdMetricId"
+        "ThresholdMetricId",
+        "EvaluationState",
+        "StateTransitionedTimestamp"
       ]
     },
     "MetricAlarms": {
@@ -2318,6 +2929,16 @@
       "member": {
         "shape": "MetricAlarm"
       }
+    },
+    "MetricCharacteristics": {
+      "type": "structure",
+      "members": {
+        "PeriodicSpikes": {
+          "shape": "PeriodicSpikes",
+          "documentation": "<p>Set this parameter to <code>true</code> if values for this metric consistently include spikes that should not be considered to be anomalies. With this set to <code>true</code>, CloudWatch will expect to see spikes that occurred consistently during the model training period, and won't flag future similar spikes as anomalies.</p>"
+        }
+      },
+      "documentation": "<p>This object includes parameters that you can use to provide information to CloudWatch to help it build more accurate anomaly detection models.</p>"
     },
     "MetricData": {
       "type": "list",
@@ -2347,22 +2968,26 @@
         },
         "Expression": {
           "shape": "MetricExpression",
-          "documentation": "<p>The math expression to be performed on the returned data, if this object is performing a math expression. This expression can use the <code>Id</code> of the other metrics to refer to those metrics, and can also use the <code>Id</code> of other expressions to use the result of those expressions. For more information about metric math expressions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax\">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Within each MetricDataQuery object, you must specify either <code>Expression</code> or <code>MetricStat</code> but not both.</p>"
+          "documentation": "<p>This field can contain either a Metrics Insights query, or a metric math expression to be performed on the returned data. For more information about Metrics Insights queries, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch-metrics-insights-querylanguage\">Metrics Insights query components and syntax</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>A math expression can use the <code>Id</code> of the other metrics or queries to refer to those metrics, and can also use the <code>Id</code> of other expressions to use the result of those expressions. For more information about metric math expressions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax\">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Within each MetricDataQuery object, you must specify either <code>Expression</code> or <code>MetricStat</code> but not both.</p>"
         },
         "Label": {
           "shape": "MetricLabel",
-          "documentation": "<p>A human-readable label for this metric or expression. This is especially useful if this is an expression, so that you know what the value represents. If the metric or expression is shown in a CloudWatch dashboard widget, the label is shown. If Label is omitted, CloudWatch generates a default.</p>"
+          "documentation": "<p>A human-readable label for this metric or expression. This is especially useful if this is an expression, so that you know what the value represents. If the metric or expression is shown in a CloudWatch dashboard widget, the label is shown. If Label is omitted, CloudWatch generates a default.</p> <p>You can put dynamic expressions into a label, so that it is more descriptive. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/graph-dynamic-labels.html\">Using Dynamic Labels</a>.</p>"
         },
         "ReturnData": {
           "shape": "ReturnData",
-          "documentation": "<p>When used in <code>GetMetricData</code>, this option indicates whether to return the timestamps and raw data values of this metric. If you are performing this call just to do math expressions and do not also need the raw data returned, you can specify <code>False</code>. If you omit this, the default of <code>True</code> is used.</p> <p>When used in <code>PutMetricAlarm</code>, specify <code>True</code> for the one expression result to use as the alarm. For all other metrics and expressions in the same <code>PutMetricAlarm</code> operation, specify <code>ReturnData</code> as False.</p>"
+          "documentation": "<p>When used in <code>GetMetricData</code>, this option indicates whether to return the timestamps and raw data values of this metric. If you are performing this call just to do math expressions and do not also need the raw data returned, you can specify <code>false</code>. If you omit this, the default of <code>true</code> is used.</p> <p>When used in <code>PutMetricAlarm</code>, specify <code>true</code> for the one expression result to use as the alarm. For all other metrics and expressions in the same <code>PutMetricAlarm</code> operation, specify <code>ReturnData</code> as False.</p>"
         },
         "Period": {
           "shape": "Period",
           "documentation": "<p>The granularity, in seconds, of the returned data points. For metrics with regular resolution, a period can be as short as one minute (60 seconds) and must be a multiple of 60. For high-resolution metrics that are collected at intervals of less than one minute, the period can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution metrics are those metrics stored by a <code>PutMetricData</code> operation that includes a <code>StorageResolution of 1 second</code>.</p>"
+        },
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The ID of the account where the metrics are located.</p> <p>If you are performing a <code>GetMetricData</code> operation in a monitoring account, use this to specify which account to retrieve this metric from.</p> <p>If you are performing a <code>PutMetricAlarm</code> operation, use this to specify which account contains the metric that the alarm is watching.</p>"
         }
       },
-      "documentation": "<p>This structure is used in both <code>GetMetricData</code> and <code>PutMetricAlarm</code>. The supported use of this structure is different for those two operations.</p> <p>When used in <code>GetMetricData</code>, it indicates the metric data to return, and whether this call is just retrieving a batch set of data for one metric, or is performing a math expression on metric data. A single <code>GetMetricData</code> call can include up to 500 <code>MetricDataQuery</code> structures.</p> <p>When used in <code>PutMetricAlarm</code>, it enables you to create an alarm based on a metric math expression. Each <code>MetricDataQuery</code> in the array specifies either a metric to retrieve, or a math expression to be performed on retrieved metrics. A single <code>PutMetricAlarm</code> call can include up to 20 <code>MetricDataQuery</code> structures in the array. The 20 structures can include as many as 10 structures that contain a <code>MetricStat</code> parameter to retrieve a metric, and as many as 10 structures that contain the <code>Expression</code> parameter to perform a math expression. Of those <code>Expression</code> structures, one must have <code>True</code> as the value for <code>ReturnData</code>. The result of this expression is the value the alarm watches.</p> <p>Any expression used in a <code>PutMetricAlarm</code> operation must return a single time series. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax\">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Some of the parameters of this structure also have different uses whether you are using this structure in a <code>GetMetricData</code> operation or a <code>PutMetricAlarm</code> operation. These differences are explained in the following parameter list.</p>"
+      "documentation": "<p>This structure is used in both <code>GetMetricData</code> and <code>PutMetricAlarm</code>. The supported use of this structure is different for those two operations.</p> <p>When used in <code>GetMetricData</code>, it indicates the metric data to return, and whether this call is just retrieving a batch set of data for one metric, or is performing a Metrics Insights query or a math expression. A single <code>GetMetricData</code> call can include up to 500 <code>MetricDataQuery</code> structures.</p> <p>When used in <code>PutMetricAlarm</code>, it enables you to create an alarm based on a metric math expression. Each <code>MetricDataQuery</code> in the array specifies either a metric to retrieve, or a math expression to be performed on retrieved metrics. A single <code>PutMetricAlarm</code> call can include up to 20 <code>MetricDataQuery</code> structures in the array. The 20 structures can include as many as 10 structures that contain a <code>MetricStat</code> parameter to retrieve a metric, and as many as 10 structures that contain the <code>Expression</code> parameter to perform a math expression. Of those <code>Expression</code> structures, one must have <code>true</code> as the value for <code>ReturnData</code>. The result of this expression is the value the alarm watches.</p> <p>Any expression used in a <code>PutMetricAlarm</code> operation must return a single time series. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax\">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Some of the parameters of this structure also have different uses whether you are using this structure in a <code>GetMetricData</code> operation or a <code>PutMetricAlarm</code> operation. These differences are explained in the following parameter list.</p>"
     },
     "MetricDataResult": {
       "type": "structure",
@@ -2418,7 +3043,7 @@
         },
         "Dimensions": {
           "shape": "Dimensions",
-          "documentation": "<p>The dimensions associated with the metric.</p>"
+          "documentation": "<p>The dimensions associated with the metric. </p>"
         },
         "Timestamp": {
           "shape": "Timestamp",
@@ -2453,7 +3078,7 @@
     },
     "MetricExpression": {
       "type": "string",
-      "max": 1024,
+      "max": 2048,
       "min": 1
     },
     "MetricId": {
@@ -2463,6 +3088,16 @@
     },
     "MetricLabel": {
       "type": "string"
+    },
+    "MetricMathAnomalyDetector": {
+      "type": "structure",
+      "members": {
+        "MetricDataQueries": {
+          "shape": "MetricDataQueries",
+          "documentation": "<p>An array of metric data query structures that enables you to create an anomaly detector based on the result of a metric math expression. Each item in <code>MetricDataQueries</code> gets a metric or performs a math expression. One item in <code>MetricDataQueries</code> is the expression that provides the time series that the anomaly detector uses as input. Designate the expression by setting <code>ReturnData</code> to <code>true</code> for this object in the array. For all other expressions and metrics, set <code>ReturnData</code> to <code>false</code>. The designated expression must return a single time series.</p>"
+        }
+      },
+      "documentation": "<p>Indicates the CloudWatch math expression that provides the time series the anomaly detector uses as input. The designated math expression must return a single time series.</p>"
     },
     "MetricName": {
       "type": "string",
@@ -2496,6 +3131,153 @@
       },
       "documentation": "<p>This structure defines the metric to be returned, along with the statistics, period, and units.</p>"
     },
+    "MetricStreamEntries": {
+      "type": "list",
+      "member": {
+        "shape": "MetricStreamEntry"
+      }
+    },
+    "MetricStreamEntry": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The ARN of the metric stream.</p>"
+        },
+        "CreationDate": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date that the metric stream was originally created.</p>"
+        },
+        "LastUpdateDate": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date that the configuration of this metric stream was most recently updated.</p>"
+        },
+        "Name": {
+          "shape": "MetricStreamName",
+          "documentation": "<p>The name of the metric stream.</p>"
+        },
+        "FirehoseArn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The ARN of the Kinesis Firehose devlivery stream that is used for this metric stream.</p>"
+        },
+        "State": {
+          "shape": "MetricStreamState",
+          "documentation": "<p>The current state of this stream. Valid values are <code>running</code> and <code>stopped</code>.</p>"
+        },
+        "OutputFormat": {
+          "shape": "MetricStreamOutputFormat",
+          "documentation": "<p>The output format of this metric stream. Valid values are <code>json</code>, <code>opentelemetry1.0</code>, and <code>opentelemetry0.7</code>.</p>"
+        }
+      },
+      "documentation": "<p>This structure contains the configuration information about one metric stream.</p>"
+    },
+    "MetricStreamFilter": {
+      "type": "structure",
+      "members": {
+        "Namespace": {
+          "shape": "Namespace",
+          "documentation": "<p>The name of the metric namespace for this filter.</p> <p>The namespace can contain only ASCII printable characters (ASCII range 32 through 126). It must contain at least one non-whitespace character.</p>"
+        },
+        "MetricNames": {
+          "shape": "MetricStreamFilterMetricNames",
+          "documentation": "<p>The names of the metrics to either include or exclude from the metric stream. </p> <p>If you omit this parameter, all metrics in the namespace are included or excluded, depending on whether this filter is specified as an exclude filter or an include filter.</p> <p>Each metric name can contain only ASCII printable characters (ASCII range 32 through 126). Each metric name must contain at least one non-whitespace character.</p>"
+        }
+      },
+      "documentation": "<p>This structure contains a metric namespace and optionally, a list of metric names, to either include in a metric stream or exclude from a metric stream.</p> <p>A metric stream's filters can include up to 1000 total names. This limit applies to the sum of namespace names and metric names in the filters. For example, this could include 10 metric namespace filters with 99 metrics each, or 20 namespace filters with 49 metrics specified in each filter.</p>"
+    },
+    "MetricStreamFilterMetricNames": {
+      "type": "list",
+      "member": {
+        "shape": "MetricName"
+      }
+    },
+    "MetricStreamFilters": {
+      "type": "list",
+      "member": {
+        "shape": "MetricStreamFilter"
+      }
+    },
+    "MetricStreamName": {
+      "type": "string",
+      "max": 255,
+      "min": 1
+    },
+    "MetricStreamNames": {
+      "type": "list",
+      "member": {
+        "shape": "MetricStreamName"
+      }
+    },
+    "MetricStreamOutputFormat": {
+      "type": "string",
+      "enum": [
+        "json",
+        "opentelemetry0.7",
+        "opentelemetry1.0"
+      ],
+      "max": 255,
+      "min": 1
+    },
+    "MetricStreamState": {
+      "type": "string"
+    },
+    "MetricStreamStatistic": {
+      "type": "string"
+    },
+    "MetricStreamStatisticsAdditionalStatistics": {
+      "type": "list",
+      "member": {
+        "shape": "MetricStreamStatistic"
+      }
+    },
+    "MetricStreamStatisticsConfiguration": {
+      "type": "structure",
+      "required": [
+        "IncludeMetrics",
+        "AdditionalStatistics"
+      ],
+      "members": {
+        "IncludeMetrics": {
+          "shape": "MetricStreamStatisticsIncludeMetrics",
+          "documentation": "<p>An array of metric name and namespace pairs that stream the additional statistics listed in the value of the <code>AdditionalStatistics</code> parameter. There can be as many as 100 pairs in the array.</p> <p>All metrics that match the combination of metric name and namespace will be streamed with the additional statistics, no matter their dimensions.</p>"
+        },
+        "AdditionalStatistics": {
+          "shape": "MetricStreamStatisticsAdditionalStatistics",
+          "documentation": "<p>The list of additional statistics that are to be streamed for the metrics listed in the <code>IncludeMetrics</code> array in this structure. This list can include as many as 20 statistics.</p> <p>If the <code>OutputFormat</code> for the stream is <code>opentelemetry1.0</code> or <code>opentelemetry0.7</code>, the only valid values are <code>p<i>??</i> </code> percentile statistics such as <code>p90</code>, <code>p99</code> and so on.</p> <p>If the <code>OutputFormat</code> for the stream is <code>json</code>, the valid values include the abbreviations for all of the statistics listed in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html\"> CloudWatch statistics definitions</a>. For example, this includes <code>tm98, </code> <code>wm90</code>, <code>PR(:300)</code>, and so on.</p>"
+        }
+      },
+      "documentation": "<p>By default, a metric stream always sends the <code>MAX</code>, <code>MIN</code>, <code>SUM</code>, and <code>SAMPLECOUNT</code> statistics for each metric that is streamed. This structure contains information for one metric that includes additional statistics in the stream. For more information about statistics, see CloudWatch, listed in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html\"> CloudWatch statistics definitions</a>.</p>"
+    },
+    "MetricStreamStatisticsConfigurations": {
+      "type": "list",
+      "member": {
+        "shape": "MetricStreamStatisticsConfiguration"
+      }
+    },
+    "MetricStreamStatisticsIncludeMetrics": {
+      "type": "list",
+      "member": {
+        "shape": "MetricStreamStatisticsMetric"
+      }
+    },
+    "MetricStreamStatisticsMetric": {
+      "type": "structure",
+      "required": [
+        "Namespace",
+        "MetricName"
+      ],
+      "members": {
+        "Namespace": {
+          "shape": "Namespace",
+          "documentation": "<p>The namespace of the metric.</p>"
+        },
+        "MetricName": {
+          "shape": "MetricName",
+          "documentation": "<p>The name of the metric.</p>"
+        }
+      },
+      "documentation": "<p>This object contains the information for one metric that is to be streamed with additional statistics.</p>"
+    },
     "MetricWidget": {
       "type": "string"
     },
@@ -2519,6 +3301,12 @@
     },
     "OutputFormat": {
       "type": "string"
+    },
+    "OwningAccounts": {
+      "type": "list",
+      "member": {
+        "shape": "AccountId"
+      }
     },
     "PartialFailure": {
       "type": "structure",
@@ -2546,33 +3334,51 @@
       "type": "integer",
       "min": 1
     },
+    "PeriodicSpikes": {
+      "type": "boolean"
+    },
     "PutAnomalyDetectorInput": {
       "type": "structure",
-      "required": [
-        "Namespace",
-        "MetricName",
-        "Stat"
-      ],
       "members": {
         "Namespace": {
           "shape": "Namespace",
-          "documentation": "<p>The namespace of the metric to create the anomaly detection model for.</p>"
+          "documentation": "<p>The namespace of the metric to create the anomaly detection model for.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector."
         },
         "MetricName": {
           "shape": "MetricName",
-          "documentation": "<p>The name of the metric to create the anomaly detection model for.</p>"
+          "documentation": "<p>The name of the metric to create the anomaly detection model for.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector."
         },
         "Dimensions": {
           "shape": "Dimensions",
-          "documentation": "<p>The metric dimensions to create the anomaly detection model for.</p>"
+          "documentation": "<p>The metric dimensions to create the anomaly detection model for.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector."
         },
         "Stat": {
           "shape": "AnomalyDetectorMetricStat",
-          "documentation": "<p>The statistic to use for the metric and the anomaly detection model.</p>"
+          "documentation": "<p>The statistic to use for the metric and the anomaly detection model.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector."
         },
         "Configuration": {
           "shape": "AnomalyDetectorConfiguration",
           "documentation": "<p>The configuration specifies details about how the anomaly detection model is to be trained, including time ranges to exclude when training and updating the model. You can specify as many as 10 time ranges.</p> <p>The configuration can also include the time zone to use for the metric.</p>"
+        },
+        "MetricCharacteristics": {
+          "shape": "MetricCharacteristics",
+          "documentation": "<p>Use this object to include parameters to provide information about your metric to CloudWatch to help it build more accurate anomaly detection models. Currently, it includes the <code>PeriodicSpikes</code> parameter.</p>"
+        },
+        "SingleMetricAnomalyDetector": {
+          "shape": "SingleMetricAnomalyDetector",
+          "documentation": "<p>A single metric anomaly detector to be created.</p> <p>When using <code>SingleMetricAnomalyDetector</code>, you cannot include the following parameters in the same operation:</p> <ul> <li> <p> <code>Dimensions</code> </p> </li> <li> <p> <code>MetricName</code> </p> </li> <li> <p> <code>Namespace</code> </p> </li> <li> <p> <code>Stat</code> </p> </li> <li> <p>the <code>MetricMathAnomalyDetector</code> parameters of <code>PutAnomalyDetectorInput</code> </p> </li> </ul> <p>Instead, specify the single metric anomaly detector attributes as part of the property <code>SingleMetricAnomalyDetector</code>.</p>"
+        },
+        "MetricMathAnomalyDetector": {
+          "shape": "MetricMathAnomalyDetector",
+          "documentation": "<p>The metric math anomaly detector to be created.</p> <p>When using <code>MetricMathAnomalyDetector</code>, you cannot include the following parameters in the same operation:</p> <ul> <li> <p> <code>Dimensions</code> </p> </li> <li> <p> <code>MetricName</code> </p> </li> <li> <p> <code>Namespace</code> </p> </li> <li> <p> <code>Stat</code> </p> </li> <li> <p>the <code>SingleMetricAnomalyDetector</code> parameters of <code>PutAnomalyDetectorInput</code> </p> </li> </ul> <p>Instead, specify the metric math anomaly detector attributes as part of the property <code>MetricMathAnomalyDetector</code>.</p>"
         }
       }
     },
@@ -2593,7 +3399,7 @@
         },
         "AlarmActions": {
           "shape": "ResourceList",
-          "documentation": "<p>The actions to execute when this alarm transitions to the <code>ALARM</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> | <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:opsitem:<i>severity</i> </code> </p>"
+          "documentation": "<p>The actions to execute when this alarm transitions to the <code>ALARM</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: ]</p> <p> <b>Amazon SNS actions:</b> </p> <p> <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> </p> <p> <b>Lambda actions:</b> </p> <ul> <li> <p>Invoke the latest version of a Lambda function: <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i> </code> </p> </li> <li> <p>Invoke a specific version of a Lambda function: <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i> </code> </p> </li> <li> <p>Invoke a function by using an alias Lambda function: <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i> </code> </p> </li> </ul> <p> <b>Systems Manager actions:</b> </p> <p> <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:opsitem:<i>severity</i> </code> </p>"
         },
         "AlarmDescription": {
           "shape": "AlarmDescription",
@@ -2609,15 +3415,27 @@
         },
         "InsufficientDataActions": {
           "shape": "ResourceList",
-          "documentation": "<p>The actions to execute when this alarm transitions to the <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> </p>"
+          "documentation": "<p>The actions to execute when this alarm transitions to the <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: ]</p> <p> <b>Amazon SNS actions:</b> </p> <p> <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> </p> <p> <b>Lambda actions:</b> </p> <ul> <li> <p>Invoke the latest version of a Lambda function: <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i> </code> </p> </li> <li> <p>Invoke a specific version of a Lambda function: <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i> </code> </p> </li> <li> <p>Invoke a function by using an alias Lambda function: <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i> </code> </p> </li> </ul>"
         },
         "OKActions": {
           "shape": "ResourceList",
-          "documentation": "<p>The actions to execute when this alarm transitions to an <code>OK</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> </p>"
+          "documentation": "<p>The actions to execute when this alarm transitions to an <code>OK</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: ]</p> <p> <b>Amazon SNS actions:</b> </p> <p> <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> </p> <p> <b>Lambda actions:</b> </p> <ul> <li> <p>Invoke the latest version of a Lambda function: <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i> </code> </p> </li> <li> <p>Invoke a specific version of a Lambda function: <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i> </code> </p> </li> <li> <p>Invoke a function by using an alias Lambda function: <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i> </code> </p> </li> </ul>"
         },
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p>A list of key-value pairs to associate with the composite alarm. You can associate as many as 50 tags with an alarm.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.</p>"
+          "documentation": "<p>A list of key-value pairs to associate with the alarm. You can associate as many as 50 tags with an alarm. To be able to associate tags with the alarm when you create the alarm, you must have the <code>cloudwatch:TagResource</code> permission.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.</p> <p>If you are using this operation to update an existing alarm, any tags you specify in this parameter are ignored. To change the tags of an existing alarm, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html\">TagResource</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html\">UntagResource</a>.</p>"
+        },
+        "ActionsSuppressor": {
+          "shape": "AlarmArn",
+          "documentation": "<p> Actions will be suppressed if the suppressor alarm is in the <code>ALARM</code> state. <code>ActionsSuppressor</code> can be an AlarmName or an Amazon Resource Name (ARN) from an existing alarm. </p>"
+        },
+        "ActionsSuppressorWaitPeriod": {
+          "shape": "SuppressorPeriod",
+          "documentation": "<p> The maximum time in seconds that the composite alarm waits for the suppressor alarm to go into the <code>ALARM</code> state. After this time, the composite alarm performs its actions. </p> <important> <p> <code>WaitPeriod</code> is required only when <code>ActionsSuppressor</code> is specified. </p> </important>"
+        },
+        "ActionsSuppressorExtensionPeriod": {
+          "shape": "SuppressorPeriod",
+          "documentation": "<p> The maximum time in seconds that the composite alarm waits after suppressor alarm goes out of the <code>ALARM</code> state. After this time, the composite alarm performs its actions. </p> <important> <p> <code>ExtensionPeriod</code> is required only when <code>ActionsSuppressor</code> is specified. </p> </important>"
         }
       }
     },
@@ -2676,6 +3494,27 @@
       "type": "structure",
       "members": {}
     },
+    "PutManagedInsightRulesInput": {
+      "type": "structure",
+      "required": [
+        "ManagedRules"
+      ],
+      "members": {
+        "ManagedRules": {
+          "shape": "ManagedRules",
+          "documentation": "<p> A list of <code>ManagedRules</code> to enable. </p>"
+        }
+      }
+    },
+    "PutManagedInsightRulesOutput": {
+      "type": "structure",
+      "members": {
+        "Failures": {
+          "shape": "BatchFailures",
+          "documentation": "<p> An array that lists the rules that could not be enabled. </p>"
+        }
+      }
+    },
     "PutMetricAlarmInput": {
       "type": "structure",
       "required": [
@@ -2686,7 +3525,7 @@
       "members": {
         "AlarmName": {
           "shape": "AlarmName",
-          "documentation": "<p>The name for the alarm. This name must be unique within the Region.</p>"
+          "documentation": "<p>The name for the alarm. This name must be unique within the Region.</p> <p>The name must contain only UTF-8 characters, and can't contain ASCII control characters</p>"
         },
         "AlarmDescription": {
           "shape": "AlarmDescription",
@@ -2698,19 +3537,19 @@
         },
         "OKActions": {
           "shape": "ResourceList",
-          "documentation": "<p>The actions to execute when this alarm transitions to an <code>OK</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: <code>arn:aws:automate:<i>region</i>:ec2:stop</code> | <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> | <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> | <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code> </p> <p>Valid Values (for use with IAM roles): <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code> </p>"
+          "documentation": "<p>The actions to execute when this alarm transitions to an <code>OK</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN). Valid values:</p> <p> <b>EC2 actions:</b> </p> <ul> <li> <p> <code>arn:aws:automate:<i>region</i>:ec2:stop</code> </p> </li> <li> <p> <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> </p> </li> <li> <p> <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> </p> </li> <li> <p> <code>arn:aws:automate:<i>region</i>:ec2:recover</code> </p> </li> <li> <p> <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code> </p> </li> <li> <p> <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code> </p> </li> <li> <p> <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code> </p> </li> <li> <p> <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Recover/1.0</code> </p> </li> </ul> <p> <b>Autoscaling action:</b> </p> <ul> <li> <p> <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code> </p> </li> </ul> <p> <b>Lambda actions:</b> </p> <ul> <li> <p>Invoke the latest version of a Lambda function: <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i> </code> </p> </li> <li> <p>Invoke a specific version of a Lambda function: <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i> </code> </p> </li> <li> <p>Invoke a function by using an alias Lambda function: <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i> </code> </p> </li> </ul> <p> <b>SNS notification action:</b> </p> <ul> <li> <p> <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> </p> </li> </ul> <p> <b>SSM integration actions:</b> </p> <ul> <li> <p> <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:opsitem:<i>severity</i>#CATEGORY=<i>category-name</i> </code> </p> </li> <li> <p> <code>arn:aws:ssm-incidents::<i>account-id</i>:responseplan/<i>response-plan-name</i> </code> </p> </li> </ul>"
         },
         "AlarmActions": {
           "shape": "ResourceList",
-          "documentation": "<p>The actions to execute when this alarm transitions to the <code>ALARM</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: <code>arn:aws:automate:<i>region</i>:ec2:stop</code> | <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> | <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> | <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code> | <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:opsitem:<i>severity</i> </code> </p> <p>Valid Values (for use with IAM roles): <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code> </p>"
+          "documentation": "<p>The actions to execute when this alarm transitions to the <code>ALARM</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN). Valid values:</p> <p> <b>EC2 actions:</b> </p> <ul> <li> <p> <code>arn:aws:automate:<i>region</i>:ec2:stop</code> </p> </li> <li> <p> <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> </p> </li> <li> <p> <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> </p> </li> <li> <p> <code>arn:aws:automate:<i>region</i>:ec2:recover</code> </p> </li> <li> <p> <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code> </p> </li> <li> <p> <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code> </p> </li> <li> <p> <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code> </p> </li> <li> <p> <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Recover/1.0</code> </p> </li> </ul> <p> <b>Autoscaling action:</b> </p> <ul> <li> <p> <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code> </p> </li> </ul> <p> <b>Lambda actions:</b> </p> <ul> <li> <p>Invoke the latest version of a Lambda function: <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i> </code> </p> </li> <li> <p>Invoke a specific version of a Lambda function: <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i> </code> </p> </li> <li> <p>Invoke a function by using an alias Lambda function: <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i> </code> </p> </li> </ul> <p> <b>SNS notification action:</b> </p> <ul> <li> <p> <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> </p> </li> </ul> <p> <b>SSM integration actions:</b> </p> <ul> <li> <p> <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:opsitem:<i>severity</i>#CATEGORY=<i>category-name</i> </code> </p> </li> <li> <p> <code>arn:aws:ssm-incidents::<i>account-id</i>:responseplan/<i>response-plan-name</i> </code> </p> </li> </ul>"
         },
         "InsufficientDataActions": {
           "shape": "ResourceList",
-          "documentation": "<p>The actions to execute when this alarm transitions to the <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: <code>arn:aws:automate:<i>region</i>:ec2:stop</code> | <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> | <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> | <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code> </p> <p>Valid Values (for use with IAM roles): <code>&gt;arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code> </p>"
+          "documentation": "<p>The actions to execute when this alarm transitions to the <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN). Valid values:</p> <p> <b>EC2 actions:</b> </p> <ul> <li> <p> <code>arn:aws:automate:<i>region</i>:ec2:stop</code> </p> </li> <li> <p> <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> </p> </li> <li> <p> <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> </p> </li> <li> <p> <code>arn:aws:automate:<i>region</i>:ec2:recover</code> </p> </li> <li> <p> <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code> </p> </li> <li> <p> <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code> </p> </li> <li> <p> <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code> </p> </li> <li> <p> <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Recover/1.0</code> </p> </li> </ul> <p> <b>Autoscaling action:</b> </p> <ul> <li> <p> <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code> </p> </li> </ul> <p> <b>Lambda actions:</b> </p> <ul> <li> <p>Invoke the latest version of a Lambda function: <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i> </code> </p> </li> <li> <p>Invoke a specific version of a Lambda function: <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i> </code> </p> </li> <li> <p>Invoke a function by using an alias Lambda function: <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i> </code> </p> </li> </ul> <p> <b>SNS notification action:</b> </p> <ul> <li> <p> <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> </p> </li> </ul> <p> <b>SSM integration actions:</b> </p> <ul> <li> <p> <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:opsitem:<i>severity</i>#CATEGORY=<i>category-name</i> </code> </p> </li> <li> <p> <code>arn:aws:ssm-incidents::<i>account-id</i>:responseplan/<i>response-plan-name</i> </code> </p> </li> </ul>"
         },
         "MetricName": {
           "shape": "MetricName",
-          "documentation": "<p>The name for the metric associated with the alarm. For each <code>PutMetricAlarm</code> operation, you must specify either <code>MetricName</code> or a <code>Metrics</code> array.</p> <p>If you are creating an alarm based on a math expression, you cannot specify this parameter, or any of the <code>Dimensions</code>, <code>Period</code>, <code>Namespace</code>, <code>Statistic</code>, or <code>ExtendedStatistic</code> parameters. Instead, you specify all this information in the <code>Metrics</code> array.</p>"
+          "documentation": "<p>The name for the metric associated with the alarm. For each <code>PutMetricAlarm</code> operation, you must specify either <code>MetricName</code> or a <code>Metrics</code> array.</p> <p>If you are creating an alarm based on a math expression, you cannot specify this parameter, or any of the <code>Namespace</code>, <code>Dimensions</code>, <code>Period</code>, <code>Unit</code>, <code>Statistic</code>, or <code>ExtendedStatistic</code> parameters. Instead, you specify all this information in the <code>Metrics</code> array.</p>"
         },
         "Namespace": {
           "shape": "Namespace",
@@ -2722,7 +3561,7 @@
         },
         "ExtendedStatistic": {
           "shape": "ExtendedStatistic",
-          "documentation": "<p>The percentile statistic for the metric specified in <code>MetricName</code>. Specify a value between p0.0 and p100. When you call <code>PutMetricAlarm</code> and specify a <code>MetricName</code>, you must specify either <code>Statistic</code> or <code>ExtendedStatistic,</code> but not both.</p>"
+          "documentation": "<p>The extended statistic for the metric specified in <code>MetricName</code>. When you call <code>PutMetricAlarm</code> and specify a <code>MetricName</code>, you must specify either <code>Statistic</code> or <code>ExtendedStatistic</code> but not both.</p> <p>If you specify <code>ExtendedStatistic</code>, the following are valid values:</p> <ul> <li> <p> <code>p90</code> </p> </li> <li> <p> <code>tm90</code> </p> </li> <li> <p> <code>tc90</code> </p> </li> <li> <p> <code>ts90</code> </p> </li> <li> <p> <code>wm90</code> </p> </li> <li> <p> <code>IQM</code> </p> </li> <li> <p> <code>PR(<i>n</i>:<i>m</i>)</code> where n and m are values of the metric</p> </li> <li> <p> <code>TC(<i>X</i>%:<i>X</i>%)</code> where X is between 10 and 90 inclusive.</p> </li> <li> <p> <code>TM(<i>X</i>%:<i>X</i>%)</code> where X is between 10 and 90 inclusive.</p> </li> <li> <p> <code>TS(<i>X</i>%:<i>X</i>%)</code> where X is between 10 and 90 inclusive.</p> </li> <li> <p> <code>WM(<i>X</i>%:<i>X</i>%)</code> where X is between 10 and 90 inclusive.</p> </li> </ul> <p>For more information about these extended statistics, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html\">CloudWatch statistics definitions</a>.</p>"
         },
         "Dimensions": {
           "shape": "Dimensions",
@@ -2734,7 +3573,7 @@
         },
         "Unit": {
           "shape": "StandardUnit",
-          "documentation": "<p>The unit of measure for the statistic. For example, the units for the Amazon EC2 NetworkIn metric are Bytes because NetworkIn tracks the number of bytes that an instance receives on all network interfaces. You can also specify a unit when you create a custom metric. Units help provide conceptual meaning to your data. Metric data points that specify a unit of measure, such as Percent, are aggregated separately.</p> <p>If you don't specify <code>Unit</code>, CloudWatch retrieves all unit types that have been published for the metric and attempts to evaluate the alarm. Usually, metrics are published with only one unit, so the alarm works as intended.</p> <p>However, if the metric is published with multiple types of units and you don't specify a unit, the alarm's behavior is not defined and it behaves predictably.</p> <p>We recommend omitting <code>Unit</code> so that you don't inadvertently specify an incorrect unit that is not published for this metric. Doing so causes the alarm to be stuck in the <code>INSUFFICIENT DATA</code> state.</p>"
+          "documentation": "<p>The unit of measure for the statistic. For example, the units for the Amazon EC2 NetworkIn metric are Bytes because NetworkIn tracks the number of bytes that an instance receives on all network interfaces. You can also specify a unit when you create a custom metric. Units help provide conceptual meaning to your data. Metric data points that specify a unit of measure, such as Percent, are aggregated separately. If you are creating an alarm based on a metric math expression, you can specify the unit for each metric (if needed) within the objects in the <code>Metrics</code> array.</p> <p>If you don't specify <code>Unit</code>, CloudWatch retrieves all unit types that have been published for the metric and attempts to evaluate the alarm. Usually, metrics are published with only one unit, so the alarm works as intended.</p> <p>However, if the metric is published with multiple types of units and you don't specify a unit, the alarm's behavior is not defined and it behaves unpredictably.</p> <p>We recommend omitting <code>Unit</code> so that you don't inadvertently specify an incorrect unit that is not published for this metric. Doing so causes the alarm to be stuck in the <code>INSUFFICIENT DATA</code> state.</p>"
         },
         "EvaluationPeriods": {
           "shape": "EvaluationPeriods",
@@ -2754,7 +3593,7 @@
         },
         "TreatMissingData": {
           "shape": "TreatMissingData",
-          "documentation": "<p> Sets how this alarm is to handle missing data points. If <code>TreatMissingData</code> is omitted, the default behavior of <code>missing</code> is used. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data\">Configuring How CloudWatch Alarms Treats Missing Data</a>.</p> <p>Valid Values: <code>breaching | notBreaching | ignore | missing</code> </p>"
+          "documentation": "<p> Sets how this alarm is to handle missing data points. If <code>TreatMissingData</code> is omitted, the default behavior of <code>missing</code> is used. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data\">Configuring How CloudWatch Alarms Treats Missing Data</a>.</p> <p>Valid Values: <code>breaching | notBreaching | ignore | missing</code> </p> <note> <p>Alarms that evaluate metrics in the <code>AWS/DynamoDB</code> namespace always <code>ignore</code> missing data even if you choose a different option for <code>TreatMissingData</code>. When an <code>AWS/DynamoDB</code> metric has missing data, alarms that evaluate that metric remain in their current state.</p> </note>"
         },
         "EvaluateLowSampleCountPercentile": {
           "shape": "EvaluateLowSampleCountPercentile",
@@ -2762,11 +3601,11 @@
         },
         "Metrics": {
           "shape": "MetricDataQueries",
-          "documentation": "<p>An array of <code>MetricDataQuery</code> structures that enable you to create an alarm based on the result of a metric math expression. For each <code>PutMetricAlarm</code> operation, you must specify either <code>MetricName</code> or a <code>Metrics</code> array.</p> <p>Each item in the <code>Metrics</code> array either retrieves a metric or performs a math expression.</p> <p>One item in the <code>Metrics</code> array is the expression that the alarm watches. You designate this expression by setting <code>ReturnData</code> to true for this object in the array. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html\">MetricDataQuery</a>.</p> <p>If you use the <code>Metrics</code> parameter, you cannot include the <code>MetricName</code>, <code>Dimensions</code>, <code>Period</code>, <code>Namespace</code>, <code>Statistic</code>, or <code>ExtendedStatistic</code> parameters of <code>PutMetricAlarm</code> in the same operation. Instead, you retrieve the metrics you are using in your math expression as part of the <code>Metrics</code> array.</p>"
+          "documentation": "<p>An array of <code>MetricDataQuery</code> structures that enable you to create an alarm based on the result of a metric math expression. For each <code>PutMetricAlarm</code> operation, you must specify either <code>MetricName</code> or a <code>Metrics</code> array.</p> <p>Each item in the <code>Metrics</code> array either retrieves a metric or performs a math expression.</p> <p>One item in the <code>Metrics</code> array is the expression that the alarm watches. You designate this expression by setting <code>ReturnData</code> to true for this object in the array. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html\">MetricDataQuery</a>.</p> <p>If you use the <code>Metrics</code> parameter, you cannot include the <code>Namespace</code>, <code>MetricName</code>, <code>Dimensions</code>, <code>Period</code>, <code>Unit</code>, <code>Statistic</code>, or <code>ExtendedStatistic</code> parameters of <code>PutMetricAlarm</code> in the same operation. Instead, you retrieve the metrics you are using in your math expression as part of the <code>Metrics</code> array.</p>"
         },
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p>A list of key-value pairs to associate with the alarm. You can associate as many as 50 tags with an alarm.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.</p> <p>If you are using this operation to update an existing alarm, any tags you specify in this parameter are ignored. To change the tags of an existing alarm, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html\">TagResource</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html\">UntagResource</a>.</p>"
+          "documentation": "<p>A list of key-value pairs to associate with the alarm. You can associate as many as 50 tags with an alarm. To be able to associate tags with the alarm when you create the alarm, you must have the <code>cloudwatch:TagResource</code> permission.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.</p> <p>If you are using this operation to update an existing alarm, any tags you specify in this parameter are ignored. To change the tags of an existing alarm, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html\">TagResource</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html\">UntagResource</a>.</p>"
         },
         "ThresholdMetricId": {
           "shape": "MetricId",
@@ -2783,11 +3622,67 @@
       "members": {
         "Namespace": {
           "shape": "Namespace",
-          "documentation": "<p>The namespace for the metric data.</p> <p>To avoid conflicts with AWS service namespaces, you should not specify a namespace that begins with <code>AWS/</code> </p>"
+          "documentation": "<p>The namespace for the metric data. You can use ASCII characters for the namespace, except for control characters which are not supported.</p> <p>To avoid conflicts with Amazon Web Services service namespaces, you should not specify a namespace that begins with <code>AWS/</code> </p>"
         },
         "MetricData": {
           "shape": "MetricData",
-          "documentation": "<p>The data for the metric. The array can include no more than 20 metrics per call.</p>"
+          "documentation": "<p>The data for the metric. The array can include no more than 1000 metrics per call.</p>"
+        }
+      }
+    },
+    "PutMetricStreamInput": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "FirehoseArn",
+        "RoleArn",
+        "OutputFormat"
+      ],
+      "members": {
+        "Name": {
+          "shape": "MetricStreamName",
+          "documentation": "<p>If you are creating a new metric stream, this is the name for the new stream. The name must be different than the names of other metric streams in this account and Region.</p> <p>If you are updating a metric stream, specify the name of that stream here.</p> <p>Valid characters are A-Z, a-z, 0-9, \"-\" and \"_\".</p>"
+        },
+        "IncludeFilters": {
+          "shape": "MetricStreamFilters",
+          "documentation": "<p>If you specify this parameter, the stream sends only the metrics from the metric namespaces that you specify here.</p> <p>You cannot include <code>IncludeFilters</code> and <code>ExcludeFilters</code> in the same operation.</p>"
+        },
+        "ExcludeFilters": {
+          "shape": "MetricStreamFilters",
+          "documentation": "<p>If you specify this parameter, the stream sends metrics from all metric namespaces except for the namespaces that you specify here.</p> <p>You cannot include <code>ExcludeFilters</code> and <code>IncludeFilters</code> in the same operation.</p>"
+        },
+        "FirehoseArn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The ARN of the Amazon Kinesis Data Firehose delivery stream to use for this metric stream. This Amazon Kinesis Data Firehose delivery stream must already exist and must be in the same account as the metric stream.</p>"
+        },
+        "RoleArn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The ARN of an IAM role that this metric stream will use to access Amazon Kinesis Data Firehose resources. This IAM role must already exist and must be in the same account as the metric stream. This IAM role must include the following permissions:</p> <ul> <li> <p>firehose:PutRecord</p> </li> <li> <p>firehose:PutRecordBatch</p> </li> </ul>"
+        },
+        "OutputFormat": {
+          "shape": "MetricStreamOutputFormat",
+          "documentation": "<p>The output format for the stream. Valid values are <code>json</code>, <code>opentelemetry1.0</code>, and <code>opentelemetry0.7</code>. For more information about metric stream output formats, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html\"> Metric streams output formats</a>.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of key-value pairs to associate with the metric stream. You can associate as many as 50 tags with a metric stream.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.</p> <p>You can use this parameter only when you are creating a new metric stream. If you are using this operation to update an existing metric stream, any tags you specify in this parameter are ignored. To change the tags of an existing metric stream, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html\">TagResource</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html\">UntagResource</a>.</p>"
+        },
+        "StatisticsConfigurations": {
+          "shape": "MetricStreamStatisticsConfigurations",
+          "documentation": "<p>By default, a metric stream always sends the <code>MAX</code>, <code>MIN</code>, <code>SUM</code>, and <code>SAMPLECOUNT</code> statistics for each metric that is streamed. You can use this parameter to have the metric stream also send additional statistics in the stream. This array can have up to 100 members.</p> <p>For each entry in this array, you specify one or more metrics and the list of additional statistics to stream for those metrics. The additional statistics that you can stream depend on the stream's <code>OutputFormat</code>. If the <code>OutputFormat</code> is <code>json</code>, you can stream any additional statistic that is supported by CloudWatch, listed in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html\"> CloudWatch statistics definitions</a>. If the <code>OutputFormat</code> is <code>opentelemetry1.0</code> or <code>opentelemetry0.7</code>, you can stream percentile statistics such as p95, p99.9, and so on.</p>"
+        },
+        "IncludeLinkedAccountsMetrics": {
+          "shape": "IncludeLinkedAccountsMetrics",
+          "documentation": "<p>If you are creating a metric stream in a monitoring account, specify <code>true</code> to include metrics from source accounts in the metric stream.</p>"
+        }
+      }
+    },
+    "PutMetricStreamOutput": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The ARN of the metric stream.</p>"
         }
       }
     },
@@ -2867,6 +3762,32 @@
         }
       }
     },
+    "SingleMetricAnomalyDetector": {
+      "type": "structure",
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>If the CloudWatch metric that provides the time series that the anomaly detector uses as input is in another account, specify that account ID here. If you omit this parameter, the current account is used.</p>"
+        },
+        "Namespace": {
+          "shape": "Namespace",
+          "documentation": "<p>The namespace of the metric to create the anomaly detection model for.</p>"
+        },
+        "MetricName": {
+          "shape": "MetricName",
+          "documentation": "<p>The name of the metric to create the anomaly detection model for.</p>"
+        },
+        "Dimensions": {
+          "shape": "Dimensions",
+          "documentation": "<p>The metric dimensions to create the anomaly detection model for.</p>"
+        },
+        "Stat": {
+          "shape": "AnomalyDetectorMetricStat",
+          "documentation": "<p>The statistic to use for the metric and anomaly detection model.</p>"
+        }
+      },
+      "documentation": "<p>Designates the CloudWatch metric and statistic that provides the time series the anomaly detector uses as input. If you have enabled unified cross-account observability, and this account is a monitoring account, the metric can be in the same account or a source account.</p>"
+    },
     "Size": {
       "type": "long"
     },
@@ -2901,6 +3822,22 @@
         "Count/Second",
         "None"
       ]
+    },
+    "StartMetricStreamsInput": {
+      "type": "structure",
+      "required": [
+        "Names"
+      ],
+      "members": {
+        "Names": {
+          "shape": "MetricStreamNames",
+          "documentation": "<p>The array of the names of metric streams to start streaming.</p> <p>This is an \"all or nothing\" operation. If you do not have permission to access all of the metric streams that you list here, then none of the streams that you list in the operation will start streaming.</p>"
+        }
+      }
+    },
+    "StartMetricStreamsOutput": {
+      "type": "structure",
+      "members": {}
     },
     "Stat": {
       "type": "string"
@@ -2974,12 +3911,32 @@
       "enum": [
         "Complete",
         "InternalError",
-        "PartialData"
+        "PartialData",
+        "Forbidden"
       ]
+    },
+    "StopMetricStreamsInput": {
+      "type": "structure",
+      "required": [
+        "Names"
+      ],
+      "members": {
+        "Names": {
+          "shape": "MetricStreamNames",
+          "documentation": "<p>The array of the names of metric streams to stop streaming.</p> <p>This is an \"all or nothing\" operation. If you do not have permission to access all of the metric streams that you list here, then none of the streams that you list in the operation will stop streaming.</p>"
+        }
+      }
+    },
+    "StopMetricStreamsOutput": {
+      "type": "structure",
+      "members": {}
     },
     "StorageResolution": {
       "type": "integer",
       "min": 1
+    },
+    "SuppressorPeriod": {
+      "type": "integer"
     },
     "Tag": {
       "type": "structure",
@@ -3025,7 +3982,7 @@
       "members": {
         "ResourceARN": {
           "shape": "AmazonResourceName",
-          "documentation": "<p>The ARN of the CloudWatch resource that you're adding tags to.</p> <p>The ARN format of an alarm is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i> </code> </p> <p>The ARN format of a Contributor Insights rule is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule:<i>insight-rule-name</i> </code> </p> <p>For more information about ARN format, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies\"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the CloudWatch resource that you're adding tags to.</p> <p>The ARN format of an alarm is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i> </code> </p> <p>The ARN format of a Contributor Insights rule is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule/<i>insight-rule-name</i> </code> </p> <p>For more information about ARN format, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies\"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General Reference</i>.</p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -3041,6 +3998,12 @@
       "type": "string",
       "max": 256,
       "min": 0
+    },
+    "TemplateName": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "[0-9A-Za-z][\\-\\.\\_0-9A-Za-z]{0,126}[0-9A-Za-z]"
     },
     "Threshold": {
       "type": "double"
@@ -3068,7 +4031,7 @@
       "members": {
         "ResourceARN": {
           "shape": "AmazonResourceName",
-          "documentation": "<p>The ARN of the CloudWatch resource that you're removing tags from.</p> <p>The ARN format of an alarm is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i> </code> </p> <p>The ARN format of a Contributor Insights rule is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule:<i>insight-rule-name</i> </code> </p> <p>For more information about ARN format, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies\"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the CloudWatch resource that you're removing tags from.</p> <p>The ARN format of an alarm is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i> </code> </p> <p>The ARN format of a Contributor Insights rule is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule/<i>insight-rule-name</i> </code> </p> <p>For more information about ARN format, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies\"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General Reference</i>.</p>"
         },
         "TagKeys": {
           "shape": "TagKeyList",
@@ -3087,5 +4050,5 @@
       }
     }
   },
-  "documentation": "<p>Amazon CloudWatch monitors your Amazon Web Services (AWS) resources and the applications you run on AWS in real time. You can use CloudWatch to collect and track metrics, which are the variables you want to measure for your resources and applications.</p> <p>CloudWatch alarms send notifications or automatically change the resources you are monitoring based on rules that you define. For example, you can monitor the CPU usage and disk reads and writes of your Amazon EC2 instances. Then, use this data to determine whether you should launch additional instances to handle increased load. You can also use this data to stop under-used instances to save money.</p> <p>In addition to monitoring the built-in metrics that come with AWS, you can monitor your own custom metrics. With CloudWatch, you gain system-wide visibility into resource utilization, application performance, and operational health.</p>"
+  "documentation": "<p>Amazon CloudWatch monitors your Amazon Web Services (Amazon Web Services) resources and the applications you run on Amazon Web Services in real time. You can use CloudWatch to collect and track metrics, which are the variables you want to measure for your resources and applications.</p> <p>CloudWatch alarms send notifications or automatically change the resources you are monitoring based on rules that you define. For example, you can monitor the CPU usage and disk reads and writes of your Amazon EC2 instances. Then, use this data to determine whether you should launch additional instances to handle increased load. You can also use this data to stop under-used instances to save money.</p> <p>In addition to monitoring the built-in metrics that come with Amazon Web Services, you can monitor your own custom metrics. With CloudWatch, you gain system-wide visibility into resource utilization, application performance, and operational health.</p>"
 }

@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "Kendra",
+        "description": "Documentation update, March 2024. Corrects some docs for Amazon Kendra."
+    },
+    {
+        "type": "feature",
+        "category": "Pricing",
+        "description": "Add ResourceNotFoundException to ListPriceLists and GetPriceListFileUrl APIs"
+    },
+    {
+        "type": "feature",
+        "category": "RolesAnywhere",
+        "description": "This release relaxes constraints on the durationSeconds request parameter for the *Profile APIs that support it. This parameter can now take on values that go up to 43200."
+    },
+    {
+        "type": "feature",
+        "category": "SecurityHub",
+        "description": "Added new resource detail object to ASFF, including resource for LastKnownExploitAt"
+    }
+]

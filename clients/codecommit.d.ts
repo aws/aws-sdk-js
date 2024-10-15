@@ -60,11 +60,11 @@ declare class CodeCommit extends Service {
    */
   batchGetRepositories(callback?: (err: AWSError, data: CodeCommit.Types.BatchGetRepositoriesOutput) => void): Request<CodeCommit.Types.BatchGetRepositoriesOutput, AWSError>;
   /**
-   * Creates a template for approval rules that can then be associated with one or more repositories in your AWS account. When you associate a template with a repository, AWS CodeCommit creates an approval rule that matches the conditions of the template for all pull requests that meet the conditions of the template. For more information, see AssociateApprovalRuleTemplateWithRepository.
+   * Creates a template for approval rules that can then be associated with one or more repositories in your Amazon Web Services account. When you associate a template with a repository, CodeCommit creates an approval rule that matches the conditions of the template for all pull requests that meet the conditions of the template. For more information, see AssociateApprovalRuleTemplateWithRepository.
    */
   createApprovalRuleTemplate(params: CodeCommit.Types.CreateApprovalRuleTemplateInput, callback?: (err: AWSError, data: CodeCommit.Types.CreateApprovalRuleTemplateOutput) => void): Request<CodeCommit.Types.CreateApprovalRuleTemplateOutput, AWSError>;
   /**
-   * Creates a template for approval rules that can then be associated with one or more repositories in your AWS account. When you associate a template with a repository, AWS CodeCommit creates an approval rule that matches the conditions of the template for all pull requests that meet the conditions of the template. For more information, see AssociateApprovalRuleTemplateWithRepository.
+   * Creates a template for approval rules that can then be associated with one or more repositories in your Amazon Web Services account. When you associate a template with a repository, CodeCommit creates an approval rule that matches the conditions of the template for all pull requests that meet the conditions of the template. For more information, see AssociateApprovalRuleTemplateWithRepository.
    */
   createApprovalRuleTemplate(callback?: (err: AWSError, data: CodeCommit.Types.CreateApprovalRuleTemplateOutput) => void): Request<CodeCommit.Types.CreateApprovalRuleTemplateOutput, AWSError>;
   /**
@@ -348,11 +348,11 @@ declare class CodeCommit extends Service {
    */
   getRepositoryTriggers(callback?: (err: AWSError, data: CodeCommit.Types.GetRepositoryTriggersOutput) => void): Request<CodeCommit.Types.GetRepositoryTriggersOutput, AWSError>;
   /**
-   * Lists all approval rule templates in the specified AWS Region in your AWS account. If an AWS Region is not specified, the AWS Region where you are signed in is used.
+   * Lists all approval rule templates in the specified Amazon Web Services Region in your Amazon Web Services account. If an Amazon Web Services Region is not specified, the Amazon Web Services Region where you are signed in is used.
    */
   listApprovalRuleTemplates(params: CodeCommit.Types.ListApprovalRuleTemplatesInput, callback?: (err: AWSError, data: CodeCommit.Types.ListApprovalRuleTemplatesOutput) => void): Request<CodeCommit.Types.ListApprovalRuleTemplatesOutput, AWSError>;
   /**
-   * Lists all approval rule templates in the specified AWS Region in your AWS account. If an AWS Region is not specified, the AWS Region where you are signed in is used.
+   * Lists all approval rule templates in the specified Amazon Web Services Region in your Amazon Web Services account. If an Amazon Web Services Region is not specified, the Amazon Web Services Region where you are signed in is used.
    */
   listApprovalRuleTemplates(callback?: (err: AWSError, data: CodeCommit.Types.ListApprovalRuleTemplatesOutput) => void): Request<CodeCommit.Types.ListApprovalRuleTemplatesOutput, AWSError>;
   /**
@@ -371,6 +371,14 @@ declare class CodeCommit extends Service {
    * Gets information about one or more branches in a repository.
    */
   listBranches(callback?: (err: AWSError, data: CodeCommit.Types.ListBranchesOutput) => void): Request<CodeCommit.Types.ListBranchesOutput, AWSError>;
+  /**
+   * Retrieves a list of commits and changes to a specified file.
+   */
+  listFileCommitHistory(params: CodeCommit.Types.ListFileCommitHistoryRequest, callback?: (err: AWSError, data: CodeCommit.Types.ListFileCommitHistoryResponse) => void): Request<CodeCommit.Types.ListFileCommitHistoryResponse, AWSError>;
+  /**
+   * Retrieves a list of commits and changes to a specified file.
+   */
+  listFileCommitHistory(callback?: (err: AWSError, data: CodeCommit.Types.ListFileCommitHistoryResponse) => void): Request<CodeCommit.Types.ListFileCommitHistoryResponse, AWSError>;
   /**
    * Returns a list of pull requests for a specified repository. The return list can be refined by pull request status or pull request author ARN.
    */
@@ -396,11 +404,11 @@ declare class CodeCommit extends Service {
    */
   listRepositoriesForApprovalRuleTemplate(callback?: (err: AWSError, data: CodeCommit.Types.ListRepositoriesForApprovalRuleTemplateOutput) => void): Request<CodeCommit.Types.ListRepositoriesForApprovalRuleTemplateOutput, AWSError>;
   /**
-   * Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see CodeCommit Resources and Operations in the AWS CodeCommit User Guide.
+   * Gets information about Amazon Web Servicestags for a specified Amazon Resource Name (ARN) in CodeCommit. For a list of valid resources in CodeCommit, see CodeCommit Resources and Operations in the CodeCommit User Guide.
    */
   listTagsForResource(params: CodeCommit.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: CodeCommit.Types.ListTagsForResourceOutput) => void): Request<CodeCommit.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   * Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see CodeCommit Resources and Operations in the AWS CodeCommit User Guide.
+   * Gets information about Amazon Web Servicestags for a specified Amazon Resource Name (ARN) in CodeCommit. For a list of valid resources in CodeCommit, see CodeCommit Resources and Operations in the CodeCommit User Guide.
    */
   listTagsForResource(callback?: (err: AWSError, data: CodeCommit.Types.ListTagsForResourceOutput) => void): Request<CodeCommit.Types.ListTagsForResourceOutput, AWSError>;
   /**
@@ -492,11 +500,11 @@ declare class CodeCommit extends Service {
    */
   putCommentReaction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds or updates a file in a branch in an AWS CodeCommit repository, and generates a commit for the addition in the specified branch.
+   * Adds or updates a file in a branch in an CodeCommit repository, and generates a commit for the addition in the specified branch.
    */
   putFile(params: CodeCommit.Types.PutFileInput, callback?: (err: AWSError, data: CodeCommit.Types.PutFileOutput) => void): Request<CodeCommit.Types.PutFileOutput, AWSError>;
   /**
-   * Adds or updates a file in a branch in an AWS CodeCommit repository, and generates a commit for the addition in the specified branch.
+   * Adds or updates a file in a branch in an CodeCommit repository, and generates a commit for the addition in the specified branch.
    */
   putFile(callback?: (err: AWSError, data: CodeCommit.Types.PutFileOutput) => void): Request<CodeCommit.Types.PutFileOutput, AWSError>;
   /**
@@ -508,11 +516,11 @@ declare class CodeCommit extends Service {
    */
   putRepositoryTriggers(callback?: (err: AWSError, data: CodeCommit.Types.PutRepositoryTriggersOutput) => void): Request<CodeCommit.Types.PutRepositoryTriggersOutput, AWSError>;
   /**
-   * Adds or updates tags for a resource in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see CodeCommit Resources and Operations in the AWS CodeCommit User Guide.
+   * Adds or updates tags for a resource in CodeCommit. For a list of valid resources in CodeCommit, see CodeCommit Resources and Operations in the CodeCommit User Guide.
    */
   tagResource(params: CodeCommit.Types.TagResourceInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds or updates tags for a resource in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see CodeCommit Resources and Operations in the AWS CodeCommit User Guide.
+   * Adds or updates tags for a resource in CodeCommit. For a list of valid resources in CodeCommit, see CodeCommit Resources and Operations in the CodeCommit User Guide.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -524,11 +532,11 @@ declare class CodeCommit extends Service {
    */
   testRepositoryTriggers(callback?: (err: AWSError, data: CodeCommit.Types.TestRepositoryTriggersOutput) => void): Request<CodeCommit.Types.TestRepositoryTriggersOutput, AWSError>;
   /**
-   * Removes tags for a resource in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see CodeCommit Resources and Operations in the AWS CodeCommit User Guide.
+   * Removes tags for a resource in CodeCommit. For a list of valid resources in CodeCommit, see CodeCommit Resources and Operations in the CodeCommit User Guide.
    */
   untagResource(params: CodeCommit.Types.UntagResourceInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes tags for a resource in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see CodeCommit Resources and Operations in the AWS CodeCommit User Guide.
+   * Removes tags for a resource in CodeCommit. For a list of valid resources in CodeCommit, see CodeCommit Resources and Operations in the CodeCommit User Guide.
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -620,11 +628,19 @@ declare class CodeCommit extends Service {
    */
   updateRepositoryDescription(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Renames a repository. The repository name must be unique across the calling AWS account. Repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. The suffix .git is prohibited. For more information about the limits on repository names, see Limits in the AWS CodeCommit User Guide.
+   * Updates the Key Management Service encryption key used to encrypt and decrypt a CodeCommit repository.
+   */
+  updateRepositoryEncryptionKey(params: CodeCommit.Types.UpdateRepositoryEncryptionKeyInput, callback?: (err: AWSError, data: CodeCommit.Types.UpdateRepositoryEncryptionKeyOutput) => void): Request<CodeCommit.Types.UpdateRepositoryEncryptionKeyOutput, AWSError>;
+  /**
+   * Updates the Key Management Service encryption key used to encrypt and decrypt a CodeCommit repository.
+   */
+  updateRepositoryEncryptionKey(callback?: (err: AWSError, data: CodeCommit.Types.UpdateRepositoryEncryptionKeyOutput) => void): Request<CodeCommit.Types.UpdateRepositoryEncryptionKeyOutput, AWSError>;
+  /**
+   * Renames a repository. The repository name must be unique across the calling Amazon Web Services account. Repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. The suffix .git is prohibited. For more information about the limits on repository names, see Quotas in the CodeCommit User Guide.
    */
   updateRepositoryName(params: CodeCommit.Types.UpdateRepositoryNameInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Renames a repository. The repository name must be unique across the calling AWS account. Repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. The suffix .git is prohibited. For more information about the limits on repository names, see Limits in the AWS CodeCommit User Guide.
+   * Renames a repository. The repository name must be unique across the calling Amazon Web Services account. Repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. The suffix .git is prohibited. For more information about the limits on repository names, see Quotas in the CodeCommit User Guide.
    */
   updateRepositoryName(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
@@ -956,6 +972,26 @@ declare namespace CodeCommit {
      */
     errors?: BatchGetCommitsErrorsList;
   }
+  export interface BatchGetRepositoriesError {
+    /**
+     * The ID of a repository that either could not be found or was not in a valid state.
+     */
+    repositoryId?: RepositoryId;
+    /**
+     * The name of a repository that either could not be found or was not in a valid state.
+     */
+    repositoryName?: RepositoryName;
+    /**
+     * An error code that specifies the type of failure.
+     */
+    errorCode?: BatchGetRepositoriesErrorCodeEnum;
+    /**
+     * An error message that provides detail about why the repository either was not found or was not in a valid state.
+     */
+    errorMessage?: ErrorMessage;
+  }
+  export type BatchGetRepositoriesErrorCodeEnum = "EncryptionIntegrityChecksFailedException"|"EncryptionKeyAccessDeniedException"|"EncryptionKeyDisabledException"|"EncryptionKeyNotFoundException"|"EncryptionKeyUnavailableException"|"RepositoryDoesNotExistException"|string;
+  export type BatchGetRepositoriesErrorsList = BatchGetRepositoriesError[];
   export interface BatchGetRepositoriesInput {
     /**
      * The names of the repositories to get information about.  The length constraint limit is for each string in the array. The array itself can be empty. 
@@ -971,6 +1007,10 @@ declare namespace CodeCommit {
      * Returns a list of repository names for which information could not be found.
      */
     repositoriesNotFound?: RepositoryNotFoundList;
+    /**
+     * Returns information about any errors returned when attempting to retrieve information about the repositories.
+     */
+    errors?: BatchGetRepositoriesErrorsList;
   }
   export interface BlobMetadata {
     /**
@@ -1226,7 +1266,7 @@ declare namespace CodeCommit {
      */
     approvalRuleTemplateName: ApprovalRuleTemplateName;
     /**
-     * The content of the approval rule that is created on pull requests in associated repositories. If you specify one or more destination references (branches), approval rules are created in an associated repository only if their destination references (branches) match those specified in the template.  When you create the content of the approval rule template, you can specify approvers in an approval pool in one of two ways:    CodeCommitApprovers: This option only requires an AWS account and a resource. It can be used for both IAM users and federated access users whose name matches the provided resource name. This is a very powerful option that offers a great deal of flexibility. For example, if you specify the AWS account 123456789012 and Mary_Major, all of the following are counted as approvals coming from that user:   An IAM user in the account (arn:aws:iam::123456789012:user/Mary_Major)   A federated user identified in IAM as Mary_Major (arn:aws:sts::123456789012:federated-user/Mary_Major)   This option does not recognize an active session of someone assuming the role of CodeCommitReview with a role session name of Mary_Major (arn:aws:sts::123456789012:assumed-role/CodeCommitReview/Mary_Major) unless you include a wildcard (*Mary_Major).    Fully qualified ARN: This option allows you to specify the fully qualified Amazon Resource Name (ARN) of the IAM user or role.    For more information about IAM ARNs, wildcards, and formats, see IAM Identifiers in the IAM User Guide. 
+     * The content of the approval rule that is created on pull requests in associated repositories. If you specify one or more destination references (branches), approval rules are created in an associated repository only if their destination references (branches) match those specified in the template.  When you create the content of the approval rule template, you can specify approvers in an approval pool in one of two ways:    CodeCommitApprovers: This option only requires an Amazon Web Services account and a resource. It can be used for both IAM users and federated access users whose name matches the provided resource name. This is a very powerful option that offers a great deal of flexibility. For example, if you specify the Amazon Web Services account 123456789012 and Mary_Major, all of the following are counted as approvals coming from that user:   An IAM user in the account (arn:aws:iam::123456789012:user/Mary_Major)   A federated user identified in IAM as Mary_Major (arn:aws:sts::123456789012:federated-user/Mary_Major)   This option does not recognize an active session of someone assuming the role of CodeCommitReview with a role session name of Mary_Major (arn:aws:sts::123456789012:assumed-role/CodeCommitReview/Mary_Major) unless you include a wildcard (*Mary_Major).    Fully qualified ARN: This option allows you to specify the fully qualified Amazon Resource Name (ARN) of the IAM user or role.    For more information about IAM ARNs, wildcards, and formats, see IAM Identifiers in the IAM User Guide. 
      */
     approvalRuleTemplateContent: ApprovalRuleTemplateContent;
     /**
@@ -1328,7 +1368,7 @@ declare namespace CodeCommit {
      */
     approvalRuleName: ApprovalRuleName;
     /**
-     * The content of the approval rule, including the number of approvals needed and the structure of an approval pool defined for approvals, if any. For more information about approval pools, see the AWS CodeCommit User Guide.  When you create the content of the approval rule, you can specify approvers in an approval pool in one of two ways:    CodeCommitApprovers: This option only requires an AWS account and a resource. It can be used for both IAM users and federated access users whose name matches the provided resource name. This is a very powerful option that offers a great deal of flexibility. For example, if you specify the AWS account 123456789012 and Mary_Major, all of the following would be counted as approvals coming from that user:   An IAM user in the account (arn:aws:iam::123456789012:user/Mary_Major)   A federated user identified in IAM as Mary_Major (arn:aws:sts::123456789012:federated-user/Mary_Major)   This option does not recognize an active session of someone assuming the role of CodeCommitReview with a role session name of Mary_Major (arn:aws:sts::123456789012:assumed-role/CodeCommitReview/Mary_Major) unless you include a wildcard (*Mary_Major).    Fully qualified ARN: This option allows you to specify the fully qualified Amazon Resource Name (ARN) of the IAM user or role.    For more information about IAM ARNs, wildcards, and formats, see IAM Identifiers in the IAM User Guide. 
+     * The content of the approval rule, including the number of approvals needed and the structure of an approval pool defined for approvals, if any. For more information about approval pools, see the CodeCommit User Guide.  When you create the content of the approval rule, you can specify approvers in an approval pool in one of two ways:    CodeCommitApprovers: This option only requires an Amazon Web Services account and a resource. It can be used for both IAM users and federated access users whose name matches the provided resource name. This is a very powerful option that offers a great deal of flexibility. For example, if you specify the Amazon Web Services account 123456789012 and Mary_Major, all of the following would be counted as approvals coming from that user:   An IAM user in the account (arn:aws:iam::123456789012:user/Mary_Major)   A federated user identified in IAM as Mary_Major (arn:aws:sts::123456789012:federated-user/Mary_Major)   This option does not recognize an active session of someone assuming the role of CodeCommitReview with a role session name of Mary_Major (arn:aws:sts::123456789012:assumed-role/CodeCommitReview/Mary_Major) unless you include a wildcard (*Mary_Major).    Fully qualified ARN: This option allows you to specify the fully qualified Amazon Resource Name (ARN) of the IAM user or role.    For more information about IAM ARNs, wildcards, and formats, see IAM Identifiers in the IAM User Guide. 
      */
     approvalRuleContent: ApprovalRuleContent;
   }
@@ -1352,7 +1392,7 @@ declare namespace CodeCommit {
      */
     targets: TargetList;
     /**
-     * A unique, client-generated idempotency token that, when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request returns information about the initial request that used that token.  The AWS SDKs prepopulate client request tokens. If you are using an AWS SDK, an idempotency token is created for you. 
+     * A unique, client-generated idempotency token that, when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request returns information about the initial request that used that token.  The Amazon Web ServicesSDKs prepopulate client request tokens. If you are using an Amazon Web ServicesSDK, an idempotency token is created for you. 
      */
     clientRequestToken?: ClientRequestToken;
   }
@@ -1364,7 +1404,7 @@ declare namespace CodeCommit {
   }
   export interface CreateRepositoryInput {
     /**
-     * The name of the new repository to be created.  The repository name must be unique across the calling AWS account. Repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. For more information about the limits on repository names, see Limits in the AWS CodeCommit User Guide. The suffix .git is prohibited. 
+     * The name of the new repository to be created.  The repository name must be unique across the calling Amazon Web Services account. Repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. For more information about the limits on repository names, see Quotas in the CodeCommit User Guide. The suffix .git is prohibited. 
      */
     repositoryName: RepositoryName;
     /**
@@ -1375,6 +1415,10 @@ declare namespace CodeCommit {
      * One or more tag key-value pairs to use when tagging this repository.
      */
     tags?: TagsMap;
+    /**
+     * The ID of the encryption key. You can view the ID of an encryption key in the KMS console, or use the KMS APIs to programmatically retrieve a key ID. For more information about acceptable values for kmsKeyID, see KeyId in the Decrypt API description in the Key Management Service API Reference. If no key is specified, the default aws/codecommit Amazon Web Services managed key is used.
+     */
+    kmsKeyId?: KmsKeyId;
   }
   export interface CreateRepositoryOutput {
     /**
@@ -1793,6 +1837,21 @@ declare namespace CodeCommit {
      */
     base?: FileSize;
   }
+  export interface FileVersion {
+    commit?: Commit;
+    /**
+     * The blob ID of the object that represents the content of the file in this version.
+     */
+    blobId?: ObjectId;
+    /**
+     * The name and path of the file at which this blob is indexed which contains the data for this version of the file. This value will vary between file versions if a file is renamed or if its path changes.
+     */
+    path?: Path;
+    /**
+     * An array of commit IDs that contain more recent versions of this file. If there are no additional versions of the file, this array will be empty.
+     */
+    revisionChildren?: RevisionChildren;
+  }
   export type FilesMetadata = FileMetadata[];
   export interface Folder {
     /**
@@ -1931,15 +1990,15 @@ declare namespace CodeCommit {
      */
     pullRequestId: PullRequestId;
     /**
-     * The name of the repository that contains the pull request.
+     * The name of the repository that contains the pull request. Requirement is conditional: repositoryName must be specified when beforeCommitId and afterCommitId are included.
      */
     repositoryName?: RepositoryName;
     /**
-     * The full commit ID of the commit in the destination branch that was the tip of the branch at the time the pull request was created.
+     * The full commit ID of the commit in the destination branch that was the tip of the branch at the time the pull request was created. Requirement is conditional: beforeCommitId must be specified when repositoryName is included.
      */
     beforeCommitId?: CommitId;
     /**
-     * The full commit ID of the commit in the source branch that was the tip of the branch at the time the comment was made.
+     * The full commit ID of the commit in the source branch that was the tip of the branch at the time the comment was made. Requirement is conditional: afterCommitId must be specified when repositoryName is included.
      */
     afterCommitId?: CommitId;
     /**
@@ -2023,7 +2082,7 @@ declare namespace CodeCommit {
      */
     repositoryName: RepositoryName;
     /**
-     * The fully quaified reference that identifies the commit that contains the file. For example, you can specify a full commit ID, a tag, a branch name, or a reference such as refs/heads/master. If none is provided, the head commit is used.
+     * The fully quaified reference that identifies the commit that contains the file. For example, you can specify a full commit ID, a tag, a branch name, or a reference such as refs/heads/main. If none is provided, the head commit is used.
      */
     commitSpecifier?: CommitName;
     /**
@@ -2341,6 +2400,7 @@ declare namespace CodeCommit {
   export type IsMove = boolean;
   export type IsObjectTypeConflict = boolean;
   export type KeepEmptyFolders = boolean;
+  export type KmsKeyId = string;
   export type LastModifiedDate = Date;
   export type Limit = number;
   export type LineNumber = number;
@@ -2356,7 +2416,7 @@ declare namespace CodeCommit {
   }
   export interface ListApprovalRuleTemplatesOutput {
     /**
-     * The names of all the approval rule templates found in the AWS Region for your AWS account.
+     * The names of all the approval rule templates found in the Amazon Web Services Region for your Amazon Web Services account.
      */
     approvalRuleTemplateNames?: ApprovalRuleTemplateNameList;
     /**
@@ -2405,6 +2465,38 @@ declare namespace CodeCommit {
     branches?: BranchNameList;
     /**
      * An enumeration token that returns the batch of the results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListFileCommitHistoryRequest {
+    /**
+     * The name of the repository that contains the file.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The fully quaified reference that identifies the commit that contains the file. For example, you can specify a full commit ID, a tag, a branch name, or a reference such as refs/heads/main. If none is provided, the head commit is used.
+     */
+    commitSpecifier?: CommitName;
+    /**
+     * The full path of the file whose history you want to retrieve, including the name of the file.
+     */
+    filePath: Path;
+    /**
+     * A non-zero, non-negative integer used to limit the number of returned results.
+     */
+    maxResults?: Limit;
+    /**
+     * An enumeration token that allows the operation to batch the results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListFileCommitHistoryResponse {
+    /**
+     * An array of FileVersion objects that form a directed acyclic graph (DAG) of the changes to the file made by the commits that changed the file.
+     */
+    revisionDag: RevisionDag;
+    /**
+     * An enumeration token that can be used to return the next batch of results.
      */
     nextToken?: NextToken;
   }
@@ -2466,7 +2558,7 @@ declare namespace CodeCommit {
   }
   export interface ListRepositoriesInput {
     /**
-     * An enumeration token that allows the operation to batch the results of the operation. Batch sizes are 1,000 for list repository operations. When the client sends the token back to AWS CodeCommit, another page of 1,000 records is retrieved.
+     * An enumeration token that allows the operation to batch the results of the operation. Batch sizes are 1,000 for list repository operations. When the client sends the token back to CodeCommit, another page of 1,000 records is retrieved.
      */
     nextToken?: NextToken;
     /**
@@ -2484,7 +2576,7 @@ declare namespace CodeCommit {
      */
     repositories?: RepositoryNameIdPairList;
     /**
-     * An enumeration token that allows the operation to batch the results of the operation. Batch sizes are 1,000 for list repository operations. When the client sends the token back to AWS CodeCommit, another page of 1,000 records is retrieved.
+     * An enumeration token that allows the operation to batch the results of the operation. Batch sizes are 1,000 for list repository operations. When the client sends the token back to CodeCommit, another page of 1,000 records is retrieved.
      */
     nextToken?: NextToken;
   }
@@ -3218,7 +3310,7 @@ declare namespace CodeCommit {
      */
     commentId: CommentId;
     /**
-     * The emoji reaction you want to add or update. To remove a reaction, provide a value of blank or null. You can also provide the value of none. For information about emoji reaction values supported in AWS CodeCommit, see the AWS CodeCommit User Guide.
+     * The emoji reaction you want to add or update. To remove a reaction, provide a value of blank or null. You can also provide the value of none. For information about emoji reaction values supported in CodeCommit, see the CodeCommit User Guide.
      */
     reactionValue: ReactionValue;
   }
@@ -3370,7 +3462,7 @@ declare namespace CodeCommit {
   export type RepositoryId = string;
   export interface RepositoryMetadata {
     /**
-     * The ID of the AWS account associated with the repository.
+     * The ID of the Amazon Web Services account associated with the repository.
      */
     accountId?: AccountId;
     /**
@@ -3409,6 +3501,10 @@ declare namespace CodeCommit {
      * The Amazon Resource Name (ARN) of the repository.
      */
     Arn?: Arn;
+    /**
+     * The ID of the Key Management Service encryption key used to encrypt and decrypt the repository.
+     */
+    kmsKeyId?: KmsKeyId;
   }
   export type RepositoryMetadataList = RepositoryMetadata[];
   export type RepositoryName = string;
@@ -3467,6 +3563,8 @@ declare namespace CodeCommit {
   export type RepositoryTriggersConfigurationId = string;
   export type RepositoryTriggersList = RepositoryTrigger[];
   export type ResourceArn = string;
+  export type RevisionChildren = RevisionId[];
+  export type RevisionDag = FileVersion[];
   export type RevisionId = string;
   export type RuleContentSha256 = string;
   export type SetFileModeEntries = SetFileModeEntry[];
@@ -3652,11 +3750,11 @@ declare namespace CodeCommit {
   }
   export interface UpdateDefaultBranchInput {
     /**
-     * The name of the repository to set or change the default branch for.
+     * The name of the repository for which you want to set or change the default branch.
      */
     repositoryName: RepositoryName;
     /**
-     * The name of the branch to set as the default.
+     * The name of the branch to set as the default branch.
      */
     defaultBranchName: BranchName;
   }
@@ -3674,7 +3772,7 @@ declare namespace CodeCommit {
      */
     existingRuleContentSha256?: RuleContentSha256;
     /**
-     * The updated content for the approval rule.  When you update the content of the approval rule, you can specify approvers in an approval pool in one of two ways:    CodeCommitApprovers: This option only requires an AWS account and a resource. It can be used for both IAM users and federated access users whose name matches the provided resource name. This is a very powerful option that offers a great deal of flexibility. For example, if you specify the AWS account 123456789012 and Mary_Major, all of the following are counted as approvals coming from that user:   An IAM user in the account (arn:aws:iam::123456789012:user/Mary_Major)   A federated user identified in IAM as Mary_Major (arn:aws:sts::123456789012:federated-user/Mary_Major)   This option does not recognize an active session of someone assuming the role of CodeCommitReview with a role session name of Mary_Major (arn:aws:sts::123456789012:assumed-role/CodeCommitReview/Mary_Major) unless you include a wildcard (*Mary_Major).    Fully qualified ARN: This option allows you to specify the fully qualified Amazon Resource Name (ARN) of the IAM user or role.    For more information about IAM ARNs, wildcards, and formats, see IAM Identifiers in the IAM User Guide. 
+     * The updated content for the approval rule.  When you update the content of the approval rule, you can specify approvers in an approval pool in one of two ways:    CodeCommitApprovers: This option only requires an Amazon Web Services account and a resource. It can be used for both IAM users and federated access users whose name matches the provided resource name. This is a very powerful option that offers a great deal of flexibility. For example, if you specify the Amazon Web Services account 123456789012 and Mary_Major, all of the following are counted as approvals coming from that user:   An IAM user in the account (arn:aws:iam::123456789012:user/Mary_Major)   A federated user identified in IAM as Mary_Major (arn:aws:sts::123456789012:federated-user/Mary_Major)   This option does not recognize an active session of someone assuming the role of CodeCommitReview with a role session name of Mary_Major (arn:aws:sts::123456789012:assumed-role/CodeCommitReview/Mary_Major) unless you include a wildcard (*Mary_Major).    Fully qualified ARN: This option allows you to specify the fully qualified Amazon Resource Name (ARN) of the IAM user or role.    For more information about IAM ARNs, wildcards, and formats, see IAM Identifiers in the IAM User Guide. 
      */
     newRuleContent: ApprovalRuleContent;
   }
@@ -3755,6 +3853,30 @@ declare namespace CodeCommit {
      * The new comment or description for the specified repository. Repository descriptions are limited to 1,000 characters.
      */
     repositoryDescription?: RepositoryDescription;
+  }
+  export interface UpdateRepositoryEncryptionKeyInput {
+    /**
+     * The name of the repository for which you want to update the KMS encryption key used to encrypt and decrypt the repository.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The ID of the encryption key. You can view the ID of an encryption key in the KMS console, or use the KMS APIs to programmatically retrieve a key ID. For more information about acceptable values for keyID, see KeyId in the Decrypt API description in the Key Management Service API Reference.
+     */
+    kmsKeyId: KmsKeyId;
+  }
+  export interface UpdateRepositoryEncryptionKeyOutput {
+    /**
+     * The ID of the repository.
+     */
+    repositoryId?: RepositoryId;
+    /**
+     * The ID of the encryption key.
+     */
+    kmsKeyId?: KmsKeyId;
+    /**
+     * The ID of the encryption key formerly used to encrypt and decrypt the repository.
+     */
+    originalKmsKeyId?: KmsKeyId;
   }
   export interface UpdateRepositoryNameInput {
     /**

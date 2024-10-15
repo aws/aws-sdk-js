@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "BedrockAgentRuntime",
+        "description": "Lifting the maximum length on Bedrock KnowledgeBase RetrievalFilter array"
+    },
+    {
+        "type": "feature",
+        "category": "BedrockRuntime",
+        "description": "Add support for imported-model in invokeModel and InvokeModelWithResponseStream."
+    },
+    {
+        "type": "feature",
+        "category": "Personalize",
+        "description": "This releases ability to update automatic training scheduler for customer solutions"
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "Increased Character Limit for Dataset Calculation Field expressions"
+    },
+    {
+        "type": "feature",
+        "category": "StepFunctions",
+        "description": "This release adds support for static analysis to ValidateStateMachineDefinition API, which can now return optional WARNING diagnostics for semantic errors on the definition of an Amazon States Language (ASL) state machine."
+    },
+    {
+        "type": "feature",
+        "category": "WAFV2",
+        "description": "The minimum request rate for a rate-based rule is now 10. Before this, it was 100."
+    }
+]

@@ -1,9 +1,22 @@
 {
   "pagination": {
+    "ForecastGeofenceEvents": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "ForecastedEvents"
+    },
     "GetDevicePositionHistory": {
       "input_token": "NextToken",
       "output_token": "NextToken",
+      "limit_key": "MaxResults",
       "result_key": "DevicePositions"
+    },
+    "ListDevicePositions": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "Entries"
     },
     "ListGeofenceCollections": {
       "input_token": "NextToken",
@@ -14,6 +27,13 @@
     "ListGeofences": {
       "input_token": "NextToken",
       "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "Entries"
+    },
+    "ListKeys": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
       "result_key": "Entries"
     },
     "ListMaps": {
@@ -23,6 +43,12 @@
       "result_key": "Entries"
     },
     "ListPlaceIndexes": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "Entries"
+    },
+    "ListRouteCalculators": {
       "input_token": "NextToken",
       "output_token": "NextToken",
       "limit_key": "MaxResults",

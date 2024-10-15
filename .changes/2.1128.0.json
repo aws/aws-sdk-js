@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Backup",
+        "description": "Adds support to 2 new filters about job complete time for 3 list jobs APIs in AWS Backup"
+    },
+    {
+        "type": "feature",
+        "category": "IoTSecureTunneling",
+        "description": "This release introduces a new API RotateTunnelAccessToken that allow revoking the existing tokens and generate new tokens"
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "This release adds the TargetMaps parameter in SSM State Manager API."
+    }
+]

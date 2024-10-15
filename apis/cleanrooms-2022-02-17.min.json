@@ -1,0 +1,5050 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2022-02-17",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "cleanrooms",
+    "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
+    "serviceFullName": "AWS Clean Rooms Service",
+    "serviceId": "CleanRooms",
+    "signatureVersion": "v4",
+    "signingName": "cleanrooms",
+    "uid": "cleanrooms-2022-02-17"
+  },
+  "operations": {
+    "BatchGetCollaborationAnalysisTemplate": {
+      "http": {
+        "requestUri": "/collaborations/{collaborationIdentifier}/batch-analysistemplates",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "collaborationIdentifier",
+          "analysisTemplateArns"
+        ],
+        "members": {
+          "collaborationIdentifier": {
+            "location": "uri",
+            "locationName": "collaborationIdentifier"
+          },
+          "analysisTemplateArns": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "collaborationAnalysisTemplates",
+          "errors"
+        ],
+        "members": {
+          "collaborationAnalysisTemplates": {
+            "type": "list",
+            "member": {
+              "shape": "S7"
+            }
+          },
+          "errors": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "arn",
+                "code",
+                "message"
+              ],
+              "members": {
+                "arn": {},
+                "code": {},
+                "message": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "BatchGetSchema": {
+      "http": {
+        "requestUri": "/collaborations/{collaborationIdentifier}/batch-schema",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "collaborationIdentifier",
+          "names"
+        ],
+        "members": {
+          "collaborationIdentifier": {
+            "location": "uri",
+            "locationName": "collaborationIdentifier"
+          },
+          "names": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "schemas",
+          "errors"
+        ],
+        "members": {
+          "schemas": {
+            "type": "list",
+            "member": {
+              "shape": "S13"
+            }
+          },
+          "errors": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "name",
+                "code",
+                "message"
+              ],
+              "members": {
+                "name": {},
+                "code": {},
+                "message": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "BatchGetSchemaAnalysisRule": {
+      "http": {
+        "requestUri": "/collaborations/{collaborationIdentifier}/batch-schema-analysis-rule",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "collaborationIdentifier",
+          "schemaAnalysisRuleRequests"
+        ],
+        "members": {
+          "collaborationIdentifier": {
+            "location": "uri",
+            "locationName": "collaborationIdentifier"
+          },
+          "schemaAnalysisRuleRequests": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "name",
+                "type"
+              ],
+              "members": {
+                "name": {},
+                "type": {}
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "analysisRules",
+          "errors"
+        ],
+        "members": {
+          "analysisRules": {
+            "type": "list",
+            "member": {
+              "shape": "S1y"
+            }
+          },
+          "errors": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "name",
+                "type",
+                "code",
+                "message"
+              ],
+              "members": {
+                "name": {},
+                "type": {},
+                "code": {},
+                "message": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "CreateAnalysisTemplate": {
+      "http": {
+        "requestUri": "/memberships/{membershipIdentifier}/analysistemplates",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier",
+          "name",
+          "format",
+          "source"
+        ],
+        "members": {
+          "description": {},
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "name": {},
+          "format": {},
+          "source": {
+            "shape": "Sj"
+          },
+          "tags": {
+            "shape": "S30"
+          },
+          "analysisParameters": {
+            "shape": "Sl"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "analysisTemplate"
+        ],
+        "members": {
+          "analysisTemplate": {
+            "shape": "S34"
+          }
+        }
+      }
+    },
+    "CreateCollaboration": {
+      "http": {
+        "requestUri": "/collaborations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "members",
+          "name",
+          "description",
+          "creatorMemberAbilities",
+          "creatorDisplayName",
+          "queryLogStatus"
+        ],
+        "members": {
+          "members": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "accountId",
+                "memberAbilities",
+                "displayName"
+              ],
+              "members": {
+                "accountId": {},
+                "memberAbilities": {
+                  "shape": "S39"
+                },
+                "displayName": {},
+                "paymentConfiguration": {
+                  "shape": "S3c"
+                }
+              }
+            }
+          },
+          "name": {},
+          "description": {},
+          "creatorMemberAbilities": {
+            "shape": "S39"
+          },
+          "creatorDisplayName": {},
+          "dataEncryptionMetadata": {
+            "shape": "S3h"
+          },
+          "queryLogStatus": {},
+          "tags": {
+            "shape": "S30"
+          },
+          "creatorPaymentConfiguration": {
+            "shape": "S3c"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "collaboration"
+        ],
+        "members": {
+          "collaboration": {
+            "shape": "S3k"
+          }
+        }
+      }
+    },
+    "CreateConfiguredAudienceModelAssociation": {
+      "http": {
+        "requestUri": "/memberships/{membershipIdentifier}/configuredaudiencemodelassociations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier",
+          "configuredAudienceModelArn",
+          "configuredAudienceModelAssociationName",
+          "manageResourcePolicies"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "configuredAudienceModelArn": {},
+          "configuredAudienceModelAssociationName": {},
+          "manageResourcePolicies": {
+            "type": "boolean"
+          },
+          "tags": {
+            "shape": "S30"
+          },
+          "description": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "configuredAudienceModelAssociation"
+        ],
+        "members": {
+          "configuredAudienceModelAssociation": {
+            "shape": "S3q"
+          }
+        }
+      }
+    },
+    "CreateConfiguredTable": {
+      "http": {
+        "requestUri": "/configuredTables",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name",
+          "tableReference",
+          "allowedColumns",
+          "analysisMethod"
+        ],
+        "members": {
+          "name": {},
+          "description": {},
+          "tableReference": {
+            "shape": "S3u"
+          },
+          "allowedColumns": {
+            "shape": "S3y"
+          },
+          "analysisMethod": {},
+          "tags": {
+            "shape": "S30"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "configuredTable"
+        ],
+        "members": {
+          "configuredTable": {
+            "shape": "S40"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "CreateConfiguredTableAnalysisRule": {
+      "http": {
+        "requestUri": "/configuredTables/{configuredTableIdentifier}/analysisRule",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "configuredTableIdentifier",
+          "analysisRuleType",
+          "analysisRulePolicy"
+        ],
+        "members": {
+          "configuredTableIdentifier": {
+            "location": "uri",
+            "locationName": "configuredTableIdentifier"
+          },
+          "analysisRuleType": {},
+          "analysisRulePolicy": {
+            "shape": "S46"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "analysisRule"
+        ],
+        "members": {
+          "analysisRule": {
+            "shape": "S49"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "CreateConfiguredTableAssociation": {
+      "http": {
+        "requestUri": "/memberships/{membershipIdentifier}/configuredTableAssociations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name",
+          "membershipIdentifier",
+          "configuredTableIdentifier",
+          "roleArn"
+        ],
+        "members": {
+          "name": {},
+          "description": {},
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "configuredTableIdentifier": {},
+          "roleArn": {},
+          "tags": {
+            "shape": "S30"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "configuredTableAssociation"
+        ],
+        "members": {
+          "configuredTableAssociation": {
+            "shape": "S4d"
+          }
+        }
+      }
+    },
+    "CreateConfiguredTableAssociationAnalysisRule": {
+      "http": {
+        "requestUri": "/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}/analysisRule",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier",
+          "configuredTableAssociationIdentifier",
+          "analysisRuleType",
+          "analysisRulePolicy"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "configuredTableAssociationIdentifier": {
+            "location": "uri",
+            "locationName": "configuredTableAssociationIdentifier"
+          },
+          "analysisRuleType": {},
+          "analysisRulePolicy": {
+            "shape": "S4j"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "analysisRule"
+        ],
+        "members": {
+          "analysisRule": {
+            "shape": "S4s"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "CreateIdMappingTable": {
+      "http": {
+        "requestUri": "/memberships/{membershipIdentifier}/idmappingtables",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier",
+          "name",
+          "inputReferenceConfig"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "name": {},
+          "description": {},
+          "inputReferenceConfig": {
+            "shape": "S4u"
+          },
+          "tags": {
+            "shape": "S30"
+          },
+          "kmsKeyArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "idMappingTable"
+        ],
+        "members": {
+          "idMappingTable": {
+            "shape": "S4y"
+          }
+        }
+      }
+    },
+    "CreateIdNamespaceAssociation": {
+      "http": {
+        "requestUri": "/memberships/{membershipIdentifier}/idnamespaceassociations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier",
+          "inputReferenceConfig",
+          "name"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "inputReferenceConfig": {
+            "shape": "S52"
+          },
+          "tags": {
+            "shape": "S30"
+          },
+          "name": {},
+          "description": {},
+          "idMappingConfig": {
+            "shape": "S55"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "idNamespaceAssociation"
+        ],
+        "members": {
+          "idNamespaceAssociation": {
+            "shape": "S57"
+          }
+        }
+      }
+    },
+    "CreateMembership": {
+      "http": {
+        "requestUri": "/memberships",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "collaborationIdentifier",
+          "queryLogStatus"
+        ],
+        "members": {
+          "collaborationIdentifier": {},
+          "queryLogStatus": {},
+          "tags": {
+            "shape": "S30"
+          },
+          "defaultResultConfiguration": {
+            "shape": "S5f"
+          },
+          "paymentConfiguration": {
+            "shape": "S5l"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "membership"
+        ],
+        "members": {
+          "membership": {
+            "shape": "S5o"
+          }
+        }
+      }
+    },
+    "CreatePrivacyBudgetTemplate": {
+      "http": {
+        "requestUri": "/memberships/{membershipIdentifier}/privacybudgettemplates",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier",
+          "autoRefresh",
+          "privacyBudgetType",
+          "parameters"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "autoRefresh": {},
+          "privacyBudgetType": {},
+          "parameters": {
+            "type": "structure",
+            "members": {
+              "differentialPrivacy": {
+                "type": "structure",
+                "required": [
+                  "epsilon",
+                  "usersNoisePerQuery"
+                ],
+                "members": {
+                  "epsilon": {
+                    "type": "integer"
+                  },
+                  "usersNoisePerQuery": {
+                    "type": "integer"
+                  }
+                }
+              }
+            },
+            "union": true
+          },
+          "tags": {
+            "shape": "S30"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "privacyBudgetTemplate"
+        ],
+        "members": {
+          "privacyBudgetTemplate": {
+            "shape": "S5y"
+          }
+        }
+      }
+    },
+    "DeleteAnalysisTemplate": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/memberships/{membershipIdentifier}/analysistemplates/{analysisTemplateIdentifier}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier",
+          "analysisTemplateIdentifier"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "analysisTemplateIdentifier": {
+            "location": "uri",
+            "locationName": "analysisTemplateIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DeleteCollaboration": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/collaborations/{collaborationIdentifier}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "collaborationIdentifier"
+        ],
+        "members": {
+          "collaborationIdentifier": {
+            "location": "uri",
+            "locationName": "collaborationIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DeleteConfiguredAudienceModelAssociation": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/memberships/{membershipIdentifier}/configuredaudiencemodelassociations/{configuredAudienceModelAssociationIdentifier}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "configuredAudienceModelAssociationIdentifier",
+          "membershipIdentifier"
+        ],
+        "members": {
+          "configuredAudienceModelAssociationIdentifier": {
+            "location": "uri",
+            "locationName": "configuredAudienceModelAssociationIdentifier"
+          },
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DeleteConfiguredTable": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/configuredTables/{configuredTableIdentifier}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "configuredTableIdentifier"
+        ],
+        "members": {
+          "configuredTableIdentifier": {
+            "location": "uri",
+            "locationName": "configuredTableIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DeleteConfiguredTableAnalysisRule": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/configuredTables/{configuredTableIdentifier}/analysisRule/{analysisRuleType}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "configuredTableIdentifier",
+          "analysisRuleType"
+        ],
+        "members": {
+          "configuredTableIdentifier": {
+            "location": "uri",
+            "locationName": "configuredTableIdentifier"
+          },
+          "analysisRuleType": {
+            "location": "uri",
+            "locationName": "analysisRuleType"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DeleteConfiguredTableAssociation": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "configuredTableAssociationIdentifier",
+          "membershipIdentifier"
+        ],
+        "members": {
+          "configuredTableAssociationIdentifier": {
+            "location": "uri",
+            "locationName": "configuredTableAssociationIdentifier"
+          },
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DeleteConfiguredTableAssociationAnalysisRule": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}/analysisRule/{analysisRuleType}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier",
+          "configuredTableAssociationIdentifier",
+          "analysisRuleType"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "configuredTableAssociationIdentifier": {
+            "location": "uri",
+            "locationName": "configuredTableAssociationIdentifier"
+          },
+          "analysisRuleType": {
+            "location": "uri",
+            "locationName": "analysisRuleType"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DeleteIdMappingTable": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/memberships/{membershipIdentifier}/idmappingtables/{idMappingTableIdentifier}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "idMappingTableIdentifier",
+          "membershipIdentifier"
+        ],
+        "members": {
+          "idMappingTableIdentifier": {
+            "location": "uri",
+            "locationName": "idMappingTableIdentifier"
+          },
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DeleteIdNamespaceAssociation": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/memberships/{membershipIdentifier}/idnamespaceassociations/{idNamespaceAssociationIdentifier}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "idNamespaceAssociationIdentifier",
+          "membershipIdentifier"
+        ],
+        "members": {
+          "idNamespaceAssociationIdentifier": {
+            "location": "uri",
+            "locationName": "idNamespaceAssociationIdentifier"
+          },
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DeleteMember": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/collaborations/{collaborationIdentifier}/member/{accountId}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "collaborationIdentifier",
+          "accountId"
+        ],
+        "members": {
+          "collaborationIdentifier": {
+            "location": "uri",
+            "locationName": "collaborationIdentifier"
+          },
+          "accountId": {
+            "location": "uri",
+            "locationName": "accountId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DeleteMembership": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/memberships/{membershipIdentifier}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DeletePrivacyBudgetTemplate": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/memberships/{membershipIdentifier}/privacybudgettemplates/{privacyBudgetTemplateIdentifier}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier",
+          "privacyBudgetTemplateIdentifier"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "privacyBudgetTemplateIdentifier": {
+            "location": "uri",
+            "locationName": "privacyBudgetTemplateIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "GetAnalysisTemplate": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/memberships/{membershipIdentifier}/analysistemplates/{analysisTemplateIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier",
+          "analysisTemplateIdentifier"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "analysisTemplateIdentifier": {
+            "location": "uri",
+            "locationName": "analysisTemplateIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "analysisTemplate"
+        ],
+        "members": {
+          "analysisTemplate": {
+            "shape": "S34"
+          }
+        }
+      }
+    },
+    "GetCollaboration": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/collaborations/{collaborationIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "collaborationIdentifier"
+        ],
+        "members": {
+          "collaborationIdentifier": {
+            "location": "uri",
+            "locationName": "collaborationIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "collaboration"
+        ],
+        "members": {
+          "collaboration": {
+            "shape": "S3k"
+          }
+        }
+      }
+    },
+    "GetCollaborationAnalysisTemplate": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/collaborations/{collaborationIdentifier}/analysistemplates/{analysisTemplateArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "collaborationIdentifier",
+          "analysisTemplateArn"
+        ],
+        "members": {
+          "collaborationIdentifier": {
+            "location": "uri",
+            "locationName": "collaborationIdentifier"
+          },
+          "analysisTemplateArn": {
+            "location": "uri",
+            "locationName": "analysisTemplateArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "collaborationAnalysisTemplate"
+        ],
+        "members": {
+          "collaborationAnalysisTemplate": {
+            "shape": "S7"
+          }
+        }
+      }
+    },
+    "GetCollaborationConfiguredAudienceModelAssociation": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/collaborations/{collaborationIdentifier}/configuredaudiencemodelassociations/{configuredAudienceModelAssociationIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "collaborationIdentifier",
+          "configuredAudienceModelAssociationIdentifier"
+        ],
+        "members": {
+          "collaborationIdentifier": {
+            "location": "uri",
+            "locationName": "collaborationIdentifier"
+          },
+          "configuredAudienceModelAssociationIdentifier": {
+            "location": "uri",
+            "locationName": "configuredAudienceModelAssociationIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "collaborationConfiguredAudienceModelAssociation"
+        ],
+        "members": {
+          "collaborationConfiguredAudienceModelAssociation": {
+            "type": "structure",
+            "required": [
+              "id",
+              "arn",
+              "collaborationId",
+              "collaborationArn",
+              "configuredAudienceModelArn",
+              "name",
+              "creatorAccountId",
+              "createTime",
+              "updateTime"
+            ],
+            "members": {
+              "id": {},
+              "arn": {},
+              "collaborationId": {},
+              "collaborationArn": {},
+              "configuredAudienceModelArn": {},
+              "name": {},
+              "description": {},
+              "creatorAccountId": {},
+              "createTime": {
+                "type": "timestamp"
+              },
+              "updateTime": {
+                "type": "timestamp"
+              }
+            }
+          }
+        }
+      }
+    },
+    "GetCollaborationIdNamespaceAssociation": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/collaborations/{collaborationIdentifier}/idnamespaceassociations/{idNamespaceAssociationIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "collaborationIdentifier",
+          "idNamespaceAssociationIdentifier"
+        ],
+        "members": {
+          "collaborationIdentifier": {
+            "location": "uri",
+            "locationName": "collaborationIdentifier"
+          },
+          "idNamespaceAssociationIdentifier": {
+            "location": "uri",
+            "locationName": "idNamespaceAssociationIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "collaborationIdNamespaceAssociation"
+        ],
+        "members": {
+          "collaborationIdNamespaceAssociation": {
+            "type": "structure",
+            "required": [
+              "id",
+              "arn",
+              "collaborationId",
+              "collaborationArn",
+              "name",
+              "creatorAccountId",
+              "createTime",
+              "updateTime",
+              "inputReferenceConfig",
+              "inputReferenceProperties"
+            ],
+            "members": {
+              "id": {},
+              "arn": {},
+              "collaborationId": {},
+              "collaborationArn": {},
+              "name": {},
+              "description": {},
+              "creatorAccountId": {},
+              "createTime": {
+                "type": "timestamp"
+              },
+              "updateTime": {
+                "type": "timestamp"
+              },
+              "inputReferenceConfig": {
+                "shape": "S52"
+              },
+              "inputReferenceProperties": {
+                "shape": "S5a"
+              },
+              "idMappingConfig": {
+                "shape": "S55"
+              }
+            }
+          }
+        }
+      }
+    },
+    "GetCollaborationPrivacyBudgetTemplate": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/collaborations/{collaborationIdentifier}/privacybudgettemplates/{privacyBudgetTemplateIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "collaborationIdentifier",
+          "privacyBudgetTemplateIdentifier"
+        ],
+        "members": {
+          "collaborationIdentifier": {
+            "location": "uri",
+            "locationName": "collaborationIdentifier"
+          },
+          "privacyBudgetTemplateIdentifier": {
+            "location": "uri",
+            "locationName": "privacyBudgetTemplateIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "collaborationPrivacyBudgetTemplate"
+        ],
+        "members": {
+          "collaborationPrivacyBudgetTemplate": {
+            "type": "structure",
+            "required": [
+              "id",
+              "arn",
+              "collaborationId",
+              "collaborationArn",
+              "creatorAccountId",
+              "createTime",
+              "updateTime",
+              "privacyBudgetType",
+              "autoRefresh",
+              "parameters"
+            ],
+            "members": {
+              "id": {},
+              "arn": {},
+              "collaborationId": {},
+              "collaborationArn": {},
+              "creatorAccountId": {},
+              "createTime": {
+                "type": "timestamp"
+              },
+              "updateTime": {
+                "type": "timestamp"
+              },
+              "privacyBudgetType": {},
+              "autoRefresh": {},
+              "parameters": {
+                "shape": "S61"
+              }
+            }
+          }
+        }
+      }
+    },
+    "GetConfiguredAudienceModelAssociation": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/memberships/{membershipIdentifier}/configuredaudiencemodelassociations/{configuredAudienceModelAssociationIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "configuredAudienceModelAssociationIdentifier",
+          "membershipIdentifier"
+        ],
+        "members": {
+          "configuredAudienceModelAssociationIdentifier": {
+            "location": "uri",
+            "locationName": "configuredAudienceModelAssociationIdentifier"
+          },
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "configuredAudienceModelAssociation"
+        ],
+        "members": {
+          "configuredAudienceModelAssociation": {
+            "shape": "S3q"
+          }
+        }
+      }
+    },
+    "GetConfiguredTable": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/configuredTables/{configuredTableIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "configuredTableIdentifier"
+        ],
+        "members": {
+          "configuredTableIdentifier": {
+            "location": "uri",
+            "locationName": "configuredTableIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "configuredTable"
+        ],
+        "members": {
+          "configuredTable": {
+            "shape": "S40"
+          }
+        }
+      }
+    },
+    "GetConfiguredTableAnalysisRule": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/configuredTables/{configuredTableIdentifier}/analysisRule/{analysisRuleType}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "configuredTableIdentifier",
+          "analysisRuleType"
+        ],
+        "members": {
+          "configuredTableIdentifier": {
+            "location": "uri",
+            "locationName": "configuredTableIdentifier"
+          },
+          "analysisRuleType": {
+            "location": "uri",
+            "locationName": "analysisRuleType"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "analysisRule"
+        ],
+        "members": {
+          "analysisRule": {
+            "shape": "S49"
+          }
+        }
+      }
+    },
+    "GetConfiguredTableAssociation": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "configuredTableAssociationIdentifier",
+          "membershipIdentifier"
+        ],
+        "members": {
+          "configuredTableAssociationIdentifier": {
+            "location": "uri",
+            "locationName": "configuredTableAssociationIdentifier"
+          },
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "configuredTableAssociation"
+        ],
+        "members": {
+          "configuredTableAssociation": {
+            "shape": "S4d"
+          }
+        }
+      }
+    },
+    "GetConfiguredTableAssociationAnalysisRule": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}/analysisRule/{analysisRuleType}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier",
+          "configuredTableAssociationIdentifier",
+          "analysisRuleType"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "configuredTableAssociationIdentifier": {
+            "location": "uri",
+            "locationName": "configuredTableAssociationIdentifier"
+          },
+          "analysisRuleType": {
+            "location": "uri",
+            "locationName": "analysisRuleType"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "analysisRule"
+        ],
+        "members": {
+          "analysisRule": {
+            "shape": "S4s"
+          }
+        }
+      }
+    },
+    "GetIdMappingTable": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/memberships/{membershipIdentifier}/idmappingtables/{idMappingTableIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "idMappingTableIdentifier",
+          "membershipIdentifier"
+        ],
+        "members": {
+          "idMappingTableIdentifier": {
+            "location": "uri",
+            "locationName": "idMappingTableIdentifier"
+          },
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "idMappingTable"
+        ],
+        "members": {
+          "idMappingTable": {
+            "shape": "S4y"
+          }
+        }
+      }
+    },
+    "GetIdNamespaceAssociation": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/memberships/{membershipIdentifier}/idnamespaceassociations/{idNamespaceAssociationIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "idNamespaceAssociationIdentifier",
+          "membershipIdentifier"
+        ],
+        "members": {
+          "idNamespaceAssociationIdentifier": {
+            "location": "uri",
+            "locationName": "idNamespaceAssociationIdentifier"
+          },
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "idNamespaceAssociation"
+        ],
+        "members": {
+          "idNamespaceAssociation": {
+            "shape": "S57"
+          }
+        }
+      }
+    },
+    "GetMembership": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/memberships/{membershipIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "membership"
+        ],
+        "members": {
+          "membership": {
+            "shape": "S5o"
+          }
+        }
+      }
+    },
+    "GetPrivacyBudgetTemplate": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/memberships/{membershipIdentifier}/privacybudgettemplates/{privacyBudgetTemplateIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier",
+          "privacyBudgetTemplateIdentifier"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "privacyBudgetTemplateIdentifier": {
+            "location": "uri",
+            "locationName": "privacyBudgetTemplateIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "privacyBudgetTemplate"
+        ],
+        "members": {
+          "privacyBudgetTemplate": {
+            "shape": "S5y"
+          }
+        }
+      }
+    },
+    "GetProtectedQuery": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/memberships/{membershipIdentifier}/protectedQueries/{protectedQueryIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier",
+          "protectedQueryIdentifier"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "protectedQueryIdentifier": {
+            "location": "uri",
+            "locationName": "protectedQueryIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "protectedQuery"
+        ],
+        "members": {
+          "protectedQuery": {
+            "shape": "S7r"
+          }
+        }
+      }
+    },
+    "GetSchema": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/collaborations/{collaborationIdentifier}/schemas/{name}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "collaborationIdentifier",
+          "name"
+        ],
+        "members": {
+          "collaborationIdentifier": {
+            "location": "uri",
+            "locationName": "collaborationIdentifier"
+          },
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "schema"
+        ],
+        "members": {
+          "schema": {
+            "shape": "S13"
+          }
+        }
+      }
+    },
+    "GetSchemaAnalysisRule": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/collaborations/{collaborationIdentifier}/schemas/{name}/analysisRule/{type}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "collaborationIdentifier",
+          "name",
+          "type"
+        ],
+        "members": {
+          "collaborationIdentifier": {
+            "location": "uri",
+            "locationName": "collaborationIdentifier"
+          },
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          },
+          "type": {
+            "location": "uri",
+            "locationName": "type"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "analysisRule"
+        ],
+        "members": {
+          "analysisRule": {
+            "shape": "S1y"
+          }
+        }
+      }
+    },
+    "ListAnalysisTemplates": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/memberships/{membershipIdentifier}/analysistemplates",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "analysisTemplateSummaries"
+        ],
+        "members": {
+          "nextToken": {},
+          "analysisTemplateSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "arn",
+                "createTime",
+                "id",
+                "name",
+                "updateTime",
+                "membershipArn",
+                "membershipId",
+                "collaborationArn",
+                "collaborationId"
+              ],
+              "members": {
+                "arn": {},
+                "createTime": {
+                  "type": "timestamp"
+                },
+                "id": {},
+                "name": {},
+                "updateTime": {
+                  "type": "timestamp"
+                },
+                "membershipArn": {},
+                "membershipId": {},
+                "collaborationArn": {},
+                "collaborationId": {},
+                "description": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListCollaborationAnalysisTemplates": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/collaborations/{collaborationIdentifier}/analysistemplates",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "collaborationIdentifier"
+        ],
+        "members": {
+          "collaborationIdentifier": {
+            "location": "uri",
+            "locationName": "collaborationIdentifier"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "collaborationAnalysisTemplateSummaries"
+        ],
+        "members": {
+          "nextToken": {},
+          "collaborationAnalysisTemplateSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "arn",
+                "createTime",
+                "id",
+                "name",
+                "updateTime",
+                "collaborationArn",
+                "collaborationId",
+                "creatorAccountId"
+              ],
+              "members": {
+                "arn": {},
+                "createTime": {
+                  "type": "timestamp"
+                },
+                "id": {},
+                "name": {},
+                "updateTime": {
+                  "type": "timestamp"
+                },
+                "collaborationArn": {},
+                "collaborationId": {},
+                "creatorAccountId": {},
+                "description": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListCollaborationConfiguredAudienceModelAssociations": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/collaborations/{collaborationIdentifier}/configuredaudiencemodelassociations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "collaborationIdentifier"
+        ],
+        "members": {
+          "collaborationIdentifier": {
+            "location": "uri",
+            "locationName": "collaborationIdentifier"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "collaborationConfiguredAudienceModelAssociationSummaries"
+        ],
+        "members": {
+          "collaborationConfiguredAudienceModelAssociationSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "arn",
+                "createTime",
+                "id",
+                "name",
+                "updateTime",
+                "collaborationArn",
+                "collaborationId",
+                "creatorAccountId"
+              ],
+              "members": {
+                "arn": {},
+                "createTime": {
+                  "type": "timestamp"
+                },
+                "id": {},
+                "name": {},
+                "updateTime": {
+                  "type": "timestamp"
+                },
+                "collaborationArn": {},
+                "collaborationId": {},
+                "creatorAccountId": {},
+                "description": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListCollaborationIdNamespaceAssociations": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/collaborations/{collaborationIdentifier}/idnamespaceassociations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "collaborationIdentifier"
+        ],
+        "members": {
+          "collaborationIdentifier": {
+            "location": "uri",
+            "locationName": "collaborationIdentifier"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "collaborationIdNamespaceAssociationSummaries"
+        ],
+        "members": {
+          "nextToken": {},
+          "collaborationIdNamespaceAssociationSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "arn",
+                "createTime",
+                "id",
+                "updateTime",
+                "collaborationArn",
+                "collaborationId",
+                "creatorAccountId",
+                "inputReferenceConfig",
+                "name",
+                "inputReferenceProperties"
+              ],
+              "members": {
+                "arn": {},
+                "createTime": {
+                  "type": "timestamp"
+                },
+                "id": {},
+                "updateTime": {
+                  "type": "timestamp"
+                },
+                "collaborationArn": {},
+                "collaborationId": {},
+                "creatorAccountId": {},
+                "inputReferenceConfig": {
+                  "shape": "S52"
+                },
+                "name": {},
+                "description": {},
+                "inputReferenceProperties": {
+                  "shape": "S90"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListCollaborationPrivacyBudgetTemplates": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/collaborations/{collaborationIdentifier}/privacybudgettemplates",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "collaborationIdentifier"
+        ],
+        "members": {
+          "collaborationIdentifier": {
+            "location": "uri",
+            "locationName": "collaborationIdentifier"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "collaborationPrivacyBudgetTemplateSummaries"
+        ],
+        "members": {
+          "nextToken": {},
+          "collaborationPrivacyBudgetTemplateSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "id",
+                "arn",
+                "collaborationId",
+                "collaborationArn",
+                "creatorAccountId",
+                "privacyBudgetType",
+                "createTime",
+                "updateTime"
+              ],
+              "members": {
+                "id": {},
+                "arn": {},
+                "collaborationId": {},
+                "collaborationArn": {},
+                "creatorAccountId": {},
+                "privacyBudgetType": {},
+                "createTime": {
+                  "type": "timestamp"
+                },
+                "updateTime": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListCollaborationPrivacyBudgets": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/collaborations/{collaborationIdentifier}/privacybudgets",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "collaborationIdentifier",
+          "privacyBudgetType"
+        ],
+        "members": {
+          "collaborationIdentifier": {
+            "location": "uri",
+            "locationName": "collaborationIdentifier"
+          },
+          "privacyBudgetType": {
+            "location": "querystring",
+            "locationName": "privacyBudgetType"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "collaborationPrivacyBudgetSummaries"
+        ],
+        "members": {
+          "collaborationPrivacyBudgetSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "id",
+                "privacyBudgetTemplateId",
+                "privacyBudgetTemplateArn",
+                "collaborationId",
+                "collaborationArn",
+                "creatorAccountId",
+                "type",
+                "createTime",
+                "updateTime",
+                "budget"
+              ],
+              "members": {
+                "id": {},
+                "privacyBudgetTemplateId": {},
+                "privacyBudgetTemplateArn": {},
+                "collaborationId": {},
+                "collaborationArn": {},
+                "creatorAccountId": {},
+                "type": {},
+                "createTime": {
+                  "type": "timestamp"
+                },
+                "updateTime": {
+                  "type": "timestamp"
+                },
+                "budget": {
+                  "shape": "S99"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListCollaborations": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/collaborations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "memberStatus": {
+            "location": "querystring",
+            "locationName": "memberStatus"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "collaborationList"
+        ],
+        "members": {
+          "nextToken": {},
+          "collaborationList": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "id",
+                "arn",
+                "name",
+                "creatorAccountId",
+                "creatorDisplayName",
+                "createTime",
+                "updateTime",
+                "memberStatus"
+              ],
+              "members": {
+                "id": {},
+                "arn": {},
+                "name": {},
+                "creatorAccountId": {},
+                "creatorDisplayName": {},
+                "createTime": {
+                  "type": "timestamp"
+                },
+                "updateTime": {
+                  "type": "timestamp"
+                },
+                "memberStatus": {},
+                "membershipId": {},
+                "membershipArn": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListConfiguredAudienceModelAssociations": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/memberships/{membershipIdentifier}/configuredaudiencemodelassociations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "configuredAudienceModelAssociationSummaries"
+        ],
+        "members": {
+          "configuredAudienceModelAssociationSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "membershipId",
+                "membershipArn",
+                "collaborationArn",
+                "collaborationId",
+                "createTime",
+                "updateTime",
+                "id",
+                "arn",
+                "name",
+                "configuredAudienceModelArn"
+              ],
+              "members": {
+                "membershipId": {},
+                "membershipArn": {},
+                "collaborationArn": {},
+                "collaborationId": {},
+                "createTime": {
+                  "type": "timestamp"
+                },
+                "updateTime": {
+                  "type": "timestamp"
+                },
+                "id": {},
+                "arn": {},
+                "name": {},
+                "configuredAudienceModelArn": {},
+                "description": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListConfiguredTableAssociations": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/memberships/{membershipIdentifier}/configuredTableAssociations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "configuredTableAssociationSummaries"
+        ],
+        "members": {
+          "configuredTableAssociationSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "configuredTableId",
+                "membershipId",
+                "membershipArn",
+                "name",
+                "createTime",
+                "updateTime",
+                "id",
+                "arn"
+              ],
+              "members": {
+                "configuredTableId": {},
+                "membershipId": {},
+                "membershipArn": {},
+                "name": {},
+                "createTime": {
+                  "type": "timestamp"
+                },
+                "updateTime": {
+                  "type": "timestamp"
+                },
+                "id": {},
+                "arn": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListConfiguredTables": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/configuredTables",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "configuredTableSummaries"
+        ],
+        "members": {
+          "configuredTableSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "id",
+                "arn",
+                "name",
+                "createTime",
+                "updateTime",
+                "analysisRuleTypes",
+                "analysisMethod"
+              ],
+              "members": {
+                "id": {},
+                "arn": {},
+                "name": {},
+                "createTime": {
+                  "type": "timestamp"
+                },
+                "updateTime": {
+                  "type": "timestamp"
+                },
+                "analysisRuleTypes": {
+                  "shape": "S42"
+                },
+                "analysisMethod": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListIdMappingTables": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/memberships/{membershipIdentifier}/idmappingtables",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "idMappingTableSummaries"
+        ],
+        "members": {
+          "idMappingTableSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "collaborationArn",
+                "collaborationId",
+                "membershipId",
+                "membershipArn",
+                "createTime",
+                "updateTime",
+                "id",
+                "arn",
+                "inputReferenceConfig",
+                "name"
+              ],
+              "members": {
+                "collaborationArn": {},
+                "collaborationId": {},
+                "membershipId": {},
+                "membershipArn": {},
+                "createTime": {
+                  "type": "timestamp"
+                },
+                "updateTime": {
+                  "type": "timestamp"
+                },
+                "id": {},
+                "arn": {},
+                "description": {},
+                "inputReferenceConfig": {
+                  "shape": "S4u"
+                },
+                "name": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListIdNamespaceAssociations": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/memberships/{membershipIdentifier}/idnamespaceassociations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "idNamespaceAssociationSummaries"
+        ],
+        "members": {
+          "nextToken": {},
+          "idNamespaceAssociationSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "membershipId",
+                "membershipArn",
+                "collaborationArn",
+                "collaborationId",
+                "createTime",
+                "updateTime",
+                "id",
+                "arn",
+                "inputReferenceConfig",
+                "name",
+                "inputReferenceProperties"
+              ],
+              "members": {
+                "membershipId": {},
+                "membershipArn": {},
+                "collaborationArn": {},
+                "collaborationId": {},
+                "createTime": {
+                  "type": "timestamp"
+                },
+                "updateTime": {
+                  "type": "timestamp"
+                },
+                "id": {},
+                "arn": {},
+                "inputReferenceConfig": {
+                  "shape": "S52"
+                },
+                "name": {},
+                "description": {},
+                "inputReferenceProperties": {
+                  "shape": "S90"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListMembers": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/collaborations/{collaborationIdentifier}/members",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "collaborationIdentifier"
+        ],
+        "members": {
+          "collaborationIdentifier": {
+            "location": "uri",
+            "locationName": "collaborationIdentifier"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "memberSummaries"
+        ],
+        "members": {
+          "nextToken": {},
+          "memberSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "accountId",
+                "status",
+                "displayName",
+                "abilities",
+                "createTime",
+                "updateTime",
+                "paymentConfiguration"
+              ],
+              "members": {
+                "accountId": {},
+                "status": {},
+                "displayName": {},
+                "abilities": {
+                  "shape": "S39"
+                },
+                "createTime": {
+                  "type": "timestamp"
+                },
+                "updateTime": {
+                  "type": "timestamp"
+                },
+                "membershipId": {},
+                "membershipArn": {},
+                "paymentConfiguration": {
+                  "shape": "S3c"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListMemberships": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/memberships",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "status": {
+            "location": "querystring",
+            "locationName": "status"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "membershipSummaries"
+        ],
+        "members": {
+          "nextToken": {},
+          "membershipSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "id",
+                "arn",
+                "collaborationArn",
+                "collaborationId",
+                "collaborationCreatorAccountId",
+                "collaborationCreatorDisplayName",
+                "collaborationName",
+                "createTime",
+                "updateTime",
+                "status",
+                "memberAbilities",
+                "paymentConfiguration"
+              ],
+              "members": {
+                "id": {},
+                "arn": {},
+                "collaborationArn": {},
+                "collaborationId": {},
+                "collaborationCreatorAccountId": {},
+                "collaborationCreatorDisplayName": {},
+                "collaborationName": {},
+                "createTime": {
+                  "type": "timestamp"
+                },
+                "updateTime": {
+                  "type": "timestamp"
+                },
+                "status": {},
+                "memberAbilities": {
+                  "shape": "S39"
+                },
+                "paymentConfiguration": {
+                  "shape": "S5l"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListPrivacyBudgetTemplates": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/memberships/{membershipIdentifier}/privacybudgettemplates",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "privacyBudgetTemplateSummaries"
+        ],
+        "members": {
+          "nextToken": {},
+          "privacyBudgetTemplateSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "id",
+                "arn",
+                "membershipId",
+                "membershipArn",
+                "collaborationId",
+                "collaborationArn",
+                "privacyBudgetType",
+                "createTime",
+                "updateTime"
+              ],
+              "members": {
+                "id": {},
+                "arn": {},
+                "membershipId": {},
+                "membershipArn": {},
+                "collaborationId": {},
+                "collaborationArn": {},
+                "privacyBudgetType": {},
+                "createTime": {
+                  "type": "timestamp"
+                },
+                "updateTime": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListPrivacyBudgets": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/memberships/{membershipIdentifier}/privacybudgets",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier",
+          "privacyBudgetType"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "privacyBudgetType": {
+            "location": "querystring",
+            "locationName": "privacyBudgetType"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "privacyBudgetSummaries"
+        ],
+        "members": {
+          "privacyBudgetSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "id",
+                "privacyBudgetTemplateId",
+                "privacyBudgetTemplateArn",
+                "membershipId",
+                "membershipArn",
+                "collaborationId",
+                "collaborationArn",
+                "type",
+                "createTime",
+                "updateTime",
+                "budget"
+              ],
+              "members": {
+                "id": {},
+                "privacyBudgetTemplateId": {},
+                "privacyBudgetTemplateArn": {},
+                "membershipId": {},
+                "membershipArn": {},
+                "collaborationId": {},
+                "collaborationArn": {},
+                "type": {},
+                "createTime": {
+                  "type": "timestamp"
+                },
+                "updateTime": {
+                  "type": "timestamp"
+                },
+                "budget": {
+                  "shape": "S99"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListProtectedQueries": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/memberships/{membershipIdentifier}/protectedQueries",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "status": {
+            "location": "querystring",
+            "locationName": "status"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "protectedQueries"
+        ],
+        "members": {
+          "nextToken": {},
+          "protectedQueries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "id",
+                "membershipId",
+                "membershipArn",
+                "createTime",
+                "status",
+                "receiverConfigurations"
+              ],
+              "members": {
+                "id": {},
+                "membershipId": {},
+                "membershipArn": {},
+                "createTime": {
+                  "type": "timestamp"
+                },
+                "status": {},
+                "receiverConfigurations": {
+                  "type": "list",
+                  "member": {
+                    "type": "structure",
+                    "required": [
+                      "analysisType"
+                    ],
+                    "members": {
+                      "analysisType": {},
+                      "configurationDetails": {
+                        "type": "structure",
+                        "members": {
+                          "directAnalysisConfigurationDetails": {
+                            "type": "structure",
+                            "members": {
+                              "receiverAccountIds": {
+                                "type": "list",
+                                "member": {}
+                              }
+                            }
+                          }
+                        },
+                        "union": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListSchemas": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/collaborations/{collaborationIdentifier}/schemas",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "collaborationIdentifier"
+        ],
+        "members": {
+          "collaborationIdentifier": {
+            "location": "uri",
+            "locationName": "collaborationIdentifier"
+          },
+          "schemaType": {
+            "location": "querystring",
+            "locationName": "schemaType"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "schemaSummaries"
+        ],
+        "members": {
+          "schemaSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "name",
+                "type",
+                "creatorAccountId",
+                "createTime",
+                "updateTime",
+                "collaborationId",
+                "collaborationArn",
+                "analysisRuleTypes"
+              ],
+              "members": {
+                "name": {},
+                "type": {},
+                "creatorAccountId": {},
+                "createTime": {
+                  "type": "timestamp"
+                },
+                "updateTime": {
+                  "type": "timestamp"
+                },
+                "collaborationId": {},
+                "collaborationArn": {},
+                "analysisRuleTypes": {
+                  "shape": "S18"
+                },
+                "analysisMethod": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListTagsForResource": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "tags"
+        ],
+        "members": {
+          "tags": {
+            "shape": "S30"
+          }
+        }
+      }
+    },
+    "PopulateIdMappingTable": {
+      "http": {
+        "requestUri": "/memberships/{membershipIdentifier}/idmappingtables/{idMappingTableIdentifier}/populate",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "idMappingTableIdentifier",
+          "membershipIdentifier"
+        ],
+        "members": {
+          "idMappingTableIdentifier": {
+            "location": "uri",
+            "locationName": "idMappingTableIdentifier"
+          },
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "idMappingJobId"
+        ],
+        "members": {
+          "idMappingJobId": {}
+        }
+      }
+    },
+    "PreviewPrivacyImpact": {
+      "http": {
+        "requestUri": "/memberships/{membershipIdentifier}/previewprivacyimpact",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier",
+          "parameters"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "parameters": {
+            "type": "structure",
+            "members": {
+              "differentialPrivacy": {
+                "type": "structure",
+                "required": [
+                  "epsilon",
+                  "usersNoisePerQuery"
+                ],
+                "members": {
+                  "epsilon": {
+                    "type": "integer"
+                  },
+                  "usersNoisePerQuery": {
+                    "type": "integer"
+                  }
+                }
+              }
+            },
+            "union": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "privacyImpact"
+        ],
+        "members": {
+          "privacyImpact": {
+            "type": "structure",
+            "members": {
+              "differentialPrivacy": {
+                "type": "structure",
+                "required": [
+                  "aggregations"
+                ],
+                "members": {
+                  "aggregations": {
+                    "type": "list",
+                    "member": {
+                      "type": "structure",
+                      "required": [
+                        "type",
+                        "maxCount"
+                      ],
+                      "members": {
+                        "type": {},
+                        "maxCount": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "union": true
+          }
+        }
+      }
+    },
+    "StartProtectedQuery": {
+      "http": {
+        "requestUri": "/memberships/{membershipIdentifier}/protectedQueries",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "type",
+          "membershipIdentifier",
+          "sqlParameters"
+        ],
+        "members": {
+          "type": {},
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "sqlParameters": {
+            "shape": "S7s"
+          },
+          "resultConfiguration": {
+            "shape": "S7w"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "protectedQuery"
+        ],
+        "members": {
+          "protectedQuery": {
+            "shape": "S7r"
+          }
+        }
+      }
+    },
+    "TagResource": {
+      "http": {
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tags"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          },
+          "tags": {
+            "shape": "S30"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UntagResource": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tagKeys"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          },
+          "tagKeys": {
+            "location": "querystring",
+            "locationName": "tagKeys",
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UpdateAnalysisTemplate": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/memberships/{membershipIdentifier}/analysistemplates/{analysisTemplateIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier",
+          "analysisTemplateIdentifier"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "analysisTemplateIdentifier": {
+            "location": "uri",
+            "locationName": "analysisTemplateIdentifier"
+          },
+          "description": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "analysisTemplate"
+        ],
+        "members": {
+          "analysisTemplate": {
+            "shape": "S34"
+          }
+        }
+      }
+    },
+    "UpdateCollaboration": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/collaborations/{collaborationIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "collaborationIdentifier"
+        ],
+        "members": {
+          "collaborationIdentifier": {
+            "location": "uri",
+            "locationName": "collaborationIdentifier"
+          },
+          "name": {},
+          "description": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "collaboration"
+        ],
+        "members": {
+          "collaboration": {
+            "shape": "S3k"
+          }
+        }
+      }
+    },
+    "UpdateConfiguredAudienceModelAssociation": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/memberships/{membershipIdentifier}/configuredaudiencemodelassociations/{configuredAudienceModelAssociationIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "configuredAudienceModelAssociationIdentifier",
+          "membershipIdentifier"
+        ],
+        "members": {
+          "configuredAudienceModelAssociationIdentifier": {
+            "location": "uri",
+            "locationName": "configuredAudienceModelAssociationIdentifier"
+          },
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "description": {},
+          "name": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "configuredAudienceModelAssociation"
+        ],
+        "members": {
+          "configuredAudienceModelAssociation": {
+            "shape": "S3q"
+          }
+        }
+      }
+    },
+    "UpdateConfiguredTable": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/configuredTables/{configuredTableIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "configuredTableIdentifier"
+        ],
+        "members": {
+          "configuredTableIdentifier": {
+            "location": "uri",
+            "locationName": "configuredTableIdentifier"
+          },
+          "name": {},
+          "description": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "configuredTable"
+        ],
+        "members": {
+          "configuredTable": {
+            "shape": "S40"
+          }
+        }
+      }
+    },
+    "UpdateConfiguredTableAnalysisRule": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/configuredTables/{configuredTableIdentifier}/analysisRule/{analysisRuleType}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "configuredTableIdentifier",
+          "analysisRuleType",
+          "analysisRulePolicy"
+        ],
+        "members": {
+          "configuredTableIdentifier": {
+            "location": "uri",
+            "locationName": "configuredTableIdentifier"
+          },
+          "analysisRuleType": {
+            "location": "uri",
+            "locationName": "analysisRuleType"
+          },
+          "analysisRulePolicy": {
+            "shape": "S46"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "analysisRule"
+        ],
+        "members": {
+          "analysisRule": {
+            "shape": "S49"
+          }
+        }
+      }
+    },
+    "UpdateConfiguredTableAssociation": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "configuredTableAssociationIdentifier",
+          "membershipIdentifier"
+        ],
+        "members": {
+          "configuredTableAssociationIdentifier": {
+            "location": "uri",
+            "locationName": "configuredTableAssociationIdentifier"
+          },
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "description": {},
+          "roleArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "configuredTableAssociation"
+        ],
+        "members": {
+          "configuredTableAssociation": {
+            "shape": "S4d"
+          }
+        }
+      }
+    },
+    "UpdateConfiguredTableAssociationAnalysisRule": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}/analysisRule/{analysisRuleType}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier",
+          "configuredTableAssociationIdentifier",
+          "analysisRuleType",
+          "analysisRulePolicy"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "configuredTableAssociationIdentifier": {
+            "location": "uri",
+            "locationName": "configuredTableAssociationIdentifier"
+          },
+          "analysisRuleType": {
+            "location": "uri",
+            "locationName": "analysisRuleType"
+          },
+          "analysisRulePolicy": {
+            "shape": "S4j"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "analysisRule"
+        ],
+        "members": {
+          "analysisRule": {
+            "shape": "S4s"
+          }
+        }
+      }
+    },
+    "UpdateIdMappingTable": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/memberships/{membershipIdentifier}/idmappingtables/{idMappingTableIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "idMappingTableIdentifier",
+          "membershipIdentifier"
+        ],
+        "members": {
+          "idMappingTableIdentifier": {
+            "location": "uri",
+            "locationName": "idMappingTableIdentifier"
+          },
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "description": {},
+          "kmsKeyArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "idMappingTable"
+        ],
+        "members": {
+          "idMappingTable": {
+            "shape": "S4y"
+          }
+        }
+      }
+    },
+    "UpdateIdNamespaceAssociation": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/memberships/{membershipIdentifier}/idnamespaceassociations/{idNamespaceAssociationIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "idNamespaceAssociationIdentifier",
+          "membershipIdentifier"
+        ],
+        "members": {
+          "idNamespaceAssociationIdentifier": {
+            "location": "uri",
+            "locationName": "idNamespaceAssociationIdentifier"
+          },
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "name": {},
+          "description": {},
+          "idMappingConfig": {
+            "shape": "S55"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "idNamespaceAssociation"
+        ],
+        "members": {
+          "idNamespaceAssociation": {
+            "shape": "S57"
+          }
+        }
+      }
+    },
+    "UpdateMembership": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/memberships/{membershipIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "queryLogStatus": {},
+          "defaultResultConfiguration": {
+            "shape": "S5f"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "membership"
+        ],
+        "members": {
+          "membership": {
+            "shape": "S5o"
+          }
+        }
+      }
+    },
+    "UpdatePrivacyBudgetTemplate": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/memberships/{membershipIdentifier}/privacybudgettemplates/{privacyBudgetTemplateIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier",
+          "privacyBudgetTemplateIdentifier",
+          "privacyBudgetType"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "privacyBudgetTemplateIdentifier": {
+            "location": "uri",
+            "locationName": "privacyBudgetTemplateIdentifier"
+          },
+          "privacyBudgetType": {},
+          "parameters": {
+            "type": "structure",
+            "members": {
+              "differentialPrivacy": {
+                "type": "structure",
+                "members": {
+                  "epsilon": {
+                    "type": "integer"
+                  },
+                  "usersNoisePerQuery": {
+                    "type": "integer"
+                  }
+                }
+              }
+            },
+            "union": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "privacyBudgetTemplate"
+        ],
+        "members": {
+          "privacyBudgetTemplate": {
+            "shape": "S5y"
+          }
+        }
+      }
+    },
+    "UpdateProtectedQuery": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/memberships/{membershipIdentifier}/protectedQueries/{protectedQueryIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "membershipIdentifier",
+          "protectedQueryIdentifier",
+          "targetStatus"
+        ],
+        "members": {
+          "membershipIdentifier": {
+            "location": "uri",
+            "locationName": "membershipIdentifier"
+          },
+          "protectedQueryIdentifier": {
+            "location": "uri",
+            "locationName": "protectedQueryIdentifier"
+          },
+          "targetStatus": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "protectedQuery"
+        ],
+        "members": {
+          "protectedQuery": {
+            "shape": "S7r"
+          }
+        }
+      },
+      "idempotent": true
+    }
+  },
+  "shapes": {
+    "S7": {
+      "type": "structure",
+      "required": [
+        "id",
+        "arn",
+        "collaborationId",
+        "collaborationArn",
+        "creatorAccountId",
+        "name",
+        "createTime",
+        "updateTime",
+        "schema",
+        "format",
+        "source"
+      ],
+      "members": {
+        "id": {},
+        "arn": {},
+        "collaborationId": {},
+        "collaborationArn": {},
+        "description": {},
+        "creatorAccountId": {},
+        "name": {},
+        "createTime": {
+          "type": "timestamp"
+        },
+        "updateTime": {
+          "type": "timestamp"
+        },
+        "schema": {
+          "shape": "Sf"
+        },
+        "format": {},
+        "source": {
+          "shape": "Sj"
+        },
+        "analysisParameters": {
+          "shape": "Sl"
+        },
+        "validations": {
+          "shape": "Sq"
+        }
+      }
+    },
+    "Sf": {
+      "type": "structure",
+      "members": {
+        "referencedTables": {
+          "type": "list",
+          "member": {}
+        }
+      }
+    },
+    "Sj": {
+      "type": "structure",
+      "members": {
+        "text": {}
+      },
+      "sensitive": true,
+      "union": true
+    },
+    "Sl": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "name",
+          "type"
+        ],
+        "members": {
+          "name": {},
+          "type": {},
+          "defaultValue": {}
+        },
+        "sensitive": true
+      }
+    },
+    "Sq": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "type",
+          "status"
+        ],
+        "members": {
+          "type": {},
+          "status": {},
+          "reasons": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "message"
+              ],
+              "members": {
+                "message": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "S13": {
+      "type": "structure",
+      "required": [
+        "columns",
+        "partitionKeys",
+        "analysisRuleTypes",
+        "creatorAccountId",
+        "name",
+        "collaborationId",
+        "collaborationArn",
+        "description",
+        "createTime",
+        "updateTime",
+        "type",
+        "schemaStatusDetails"
+      ],
+      "members": {
+        "columns": {
+          "shape": "S14"
+        },
+        "partitionKeys": {
+          "shape": "S14"
+        },
+        "analysisRuleTypes": {
+          "shape": "S18"
+        },
+        "analysisMethod": {},
+        "creatorAccountId": {},
+        "name": {},
+        "collaborationId": {},
+        "collaborationArn": {},
+        "description": {},
+        "createTime": {
+          "type": "timestamp"
+        },
+        "updateTime": {
+          "type": "timestamp"
+        },
+        "type": {},
+        "schemaStatusDetails": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "required": [
+              "status",
+              "analysisType"
+            ],
+            "members": {
+              "status": {},
+              "reasons": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "required": [
+                    "code",
+                    "message"
+                  ],
+                  "members": {
+                    "code": {},
+                    "message": {}
+                  }
+                }
+              },
+              "analysisRuleType": {},
+              "configurations": {
+                "type": "list",
+                "member": {}
+              },
+              "analysisType": {}
+            }
+          }
+        },
+        "schemaTypeProperties": {
+          "type": "structure",
+          "members": {
+            "idMappingTable": {
+              "type": "structure",
+              "required": [
+                "idMappingTableInputSource"
+              ],
+              "members": {
+                "idMappingTableInputSource": {
+                  "shape": "S1o"
+                }
+              }
+            }
+          },
+          "union": true
+        }
+      }
+    },
+    "S14": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "name",
+          "type"
+        ],
+        "members": {
+          "name": {},
+          "type": {}
+        }
+      }
+    },
+    "S18": {
+      "type": "list",
+      "member": {}
+    },
+    "S1o": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "idNamespaceAssociationId",
+          "type"
+        ],
+        "members": {
+          "idNamespaceAssociationId": {},
+          "type": {}
+        }
+      }
+    },
+    "S1y": {
+      "type": "structure",
+      "required": [
+        "collaborationId",
+        "type",
+        "name",
+        "createTime",
+        "updateTime",
+        "policy"
+      ],
+      "members": {
+        "collaborationId": {},
+        "type": {},
+        "name": {},
+        "createTime": {
+          "type": "timestamp"
+        },
+        "updateTime": {
+          "type": "timestamp"
+        },
+        "policy": {
+          "type": "structure",
+          "members": {
+            "v1": {
+              "type": "structure",
+              "members": {
+                "list": {
+                  "shape": "S21"
+                },
+                "aggregation": {
+                  "shape": "S28"
+                },
+                "custom": {
+                  "shape": "S2k"
+                },
+                "idMappingTable": {
+                  "type": "structure",
+                  "required": [
+                    "joinColumns",
+                    "queryConstraints"
+                  ],
+                  "members": {
+                    "joinColumns": {
+                      "type": "list",
+                      "member": {}
+                    },
+                    "queryConstraints": {
+                      "type": "list",
+                      "member": {
+                        "type": "structure",
+                        "members": {
+                          "requireOverlap": {
+                            "type": "structure",
+                            "members": {
+                              "columns": {
+                                "shape": "S26"
+                              }
+                            }
+                          }
+                        },
+                        "union": true
+                      }
+                    },
+                    "dimensionColumns": {
+                      "shape": "S26"
+                    }
+                  }
+                }
+              },
+              "union": true
+            }
+          },
+          "union": true
+        }
+      }
+    },
+    "S21": {
+      "type": "structure",
+      "required": [
+        "joinColumns",
+        "listColumns"
+      ],
+      "members": {
+        "joinColumns": {
+          "type": "list",
+          "member": {}
+        },
+        "allowedJoinOperators": {
+          "shape": "S24"
+        },
+        "listColumns": {
+          "shape": "S26"
+        },
+        "additionalAnalyses": {}
+      }
+    },
+    "S24": {
+      "type": "list",
+      "member": {}
+    },
+    "S26": {
+      "type": "list",
+      "member": {}
+    },
+    "S28": {
+      "type": "structure",
+      "required": [
+        "aggregateColumns",
+        "joinColumns",
+        "dimensionColumns",
+        "scalarFunctions",
+        "outputConstraints"
+      ],
+      "members": {
+        "aggregateColumns": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "required": [
+              "columnNames",
+              "function"
+            ],
+            "members": {
+              "columnNames": {
+                "type": "list",
+                "member": {}
+              },
+              "function": {}
+            }
+          }
+        },
+        "joinColumns": {
+          "shape": "S26"
+        },
+        "joinRequired": {},
+        "allowedJoinOperators": {
+          "shape": "S24"
+        },
+        "dimensionColumns": {
+          "shape": "S26"
+        },
+        "scalarFunctions": {
+          "type": "list",
+          "member": {}
+        },
+        "outputConstraints": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "required": [
+              "columnName",
+              "minimum",
+              "type"
+            ],
+            "members": {
+              "columnName": {},
+              "minimum": {
+                "type": "integer"
+              },
+              "type": {}
+            }
+          }
+        },
+        "additionalAnalyses": {}
+      }
+    },
+    "S2k": {
+      "type": "structure",
+      "required": [
+        "allowedAnalyses"
+      ],
+      "members": {
+        "allowedAnalyses": {
+          "type": "list",
+          "member": {}
+        },
+        "allowedAnalysisProviders": {
+          "type": "list",
+          "member": {}
+        },
+        "additionalAnalyses": {},
+        "disallowedOutputColumns": {
+          "shape": "S26"
+        },
+        "differentialPrivacy": {
+          "type": "structure",
+          "required": [
+            "columns"
+          ],
+          "members": {
+            "columns": {
+              "type": "list",
+              "member": {
+                "type": "structure",
+                "required": [
+                  "name"
+                ],
+                "members": {
+                  "name": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "S30": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "S34": {
+      "type": "structure",
+      "required": [
+        "id",
+        "arn",
+        "collaborationId",
+        "collaborationArn",
+        "membershipId",
+        "membershipArn",
+        "name",
+        "createTime",
+        "updateTime",
+        "schema",
+        "format",
+        "source"
+      ],
+      "members": {
+        "id": {},
+        "arn": {},
+        "collaborationId": {},
+        "collaborationArn": {},
+        "membershipId": {},
+        "membershipArn": {},
+        "description": {},
+        "name": {},
+        "createTime": {
+          "type": "timestamp"
+        },
+        "updateTime": {
+          "type": "timestamp"
+        },
+        "schema": {
+          "shape": "Sf"
+        },
+        "format": {},
+        "source": {
+          "shape": "Sj"
+        },
+        "analysisParameters": {
+          "shape": "Sl"
+        },
+        "validations": {
+          "shape": "Sq"
+        }
+      }
+    },
+    "S39": {
+      "type": "list",
+      "member": {}
+    },
+    "S3c": {
+      "type": "structure",
+      "required": [
+        "queryCompute"
+      ],
+      "members": {
+        "queryCompute": {
+          "type": "structure",
+          "required": [
+            "isResponsible"
+          ],
+          "members": {
+            "isResponsible": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "S3h": {
+      "type": "structure",
+      "required": [
+        "allowCleartext",
+        "allowDuplicates",
+        "allowJoinsOnColumnsWithDifferentNames",
+        "preserveNulls"
+      ],
+      "members": {
+        "allowCleartext": {
+          "type": "boolean"
+        },
+        "allowDuplicates": {
+          "type": "boolean"
+        },
+        "allowJoinsOnColumnsWithDifferentNames": {
+          "type": "boolean"
+        },
+        "preserveNulls": {
+          "type": "boolean"
+        }
+      }
+    },
+    "S3k": {
+      "type": "structure",
+      "required": [
+        "id",
+        "arn",
+        "name",
+        "creatorAccountId",
+        "creatorDisplayName",
+        "createTime",
+        "updateTime",
+        "memberStatus",
+        "queryLogStatus"
+      ],
+      "members": {
+        "id": {},
+        "arn": {},
+        "name": {},
+        "description": {},
+        "creatorAccountId": {},
+        "creatorDisplayName": {},
+        "createTime": {
+          "type": "timestamp"
+        },
+        "updateTime": {
+          "type": "timestamp"
+        },
+        "memberStatus": {},
+        "membershipId": {},
+        "membershipArn": {},
+        "dataEncryptionMetadata": {
+          "shape": "S3h"
+        },
+        "queryLogStatus": {}
+      }
+    },
+    "S3q": {
+      "type": "structure",
+      "required": [
+        "id",
+        "arn",
+        "configuredAudienceModelArn",
+        "membershipId",
+        "membershipArn",
+        "collaborationId",
+        "collaborationArn",
+        "name",
+        "manageResourcePolicies",
+        "createTime",
+        "updateTime"
+      ],
+      "members": {
+        "id": {},
+        "arn": {},
+        "configuredAudienceModelArn": {},
+        "membershipId": {},
+        "membershipArn": {},
+        "collaborationId": {},
+        "collaborationArn": {},
+        "name": {},
+        "manageResourcePolicies": {
+          "type": "boolean"
+        },
+        "description": {},
+        "createTime": {
+          "type": "timestamp"
+        },
+        "updateTime": {
+          "type": "timestamp"
+        }
+      }
+    },
+    "S3u": {
+      "type": "structure",
+      "members": {
+        "glue": {
+          "type": "structure",
+          "required": [
+            "tableName",
+            "databaseName"
+          ],
+          "members": {
+            "tableName": {},
+            "databaseName": {}
+          }
+        }
+      },
+      "union": true
+    },
+    "S3y": {
+      "type": "list",
+      "member": {}
+    },
+    "S40": {
+      "type": "structure",
+      "required": [
+        "id",
+        "arn",
+        "name",
+        "tableReference",
+        "createTime",
+        "updateTime",
+        "analysisRuleTypes",
+        "analysisMethod",
+        "allowedColumns"
+      ],
+      "members": {
+        "id": {},
+        "arn": {},
+        "name": {},
+        "description": {},
+        "tableReference": {
+          "shape": "S3u"
+        },
+        "createTime": {
+          "type": "timestamp"
+        },
+        "updateTime": {
+          "type": "timestamp"
+        },
+        "analysisRuleTypes": {
+          "shape": "S42"
+        },
+        "analysisMethod": {},
+        "allowedColumns": {
+          "shape": "S3y"
+        }
+      }
+    },
+    "S42": {
+      "type": "list",
+      "member": {}
+    },
+    "S46": {
+      "type": "structure",
+      "members": {
+        "v1": {
+          "type": "structure",
+          "members": {
+            "list": {
+              "shape": "S21"
+            },
+            "aggregation": {
+              "shape": "S28"
+            },
+            "custom": {
+              "shape": "S2k"
+            }
+          },
+          "union": true
+        }
+      },
+      "union": true
+    },
+    "S49": {
+      "type": "structure",
+      "required": [
+        "configuredTableId",
+        "configuredTableArn",
+        "policy",
+        "type",
+        "createTime",
+        "updateTime"
+      ],
+      "members": {
+        "configuredTableId": {},
+        "configuredTableArn": {},
+        "policy": {
+          "shape": "S46"
+        },
+        "type": {},
+        "createTime": {
+          "type": "timestamp"
+        },
+        "updateTime": {
+          "type": "timestamp"
+        }
+      }
+    },
+    "S4d": {
+      "type": "structure",
+      "required": [
+        "arn",
+        "id",
+        "configuredTableId",
+        "configuredTableArn",
+        "membershipId",
+        "membershipArn",
+        "roleArn",
+        "name",
+        "createTime",
+        "updateTime"
+      ],
+      "members": {
+        "arn": {},
+        "id": {},
+        "configuredTableId": {},
+        "configuredTableArn": {},
+        "membershipId": {},
+        "membershipArn": {},
+        "roleArn": {},
+        "name": {},
+        "description": {},
+        "analysisRuleTypes": {
+          "type": "list",
+          "member": {}
+        },
+        "createTime": {
+          "type": "timestamp"
+        },
+        "updateTime": {
+          "type": "timestamp"
+        }
+      }
+    },
+    "S4j": {
+      "type": "structure",
+      "members": {
+        "v1": {
+          "type": "structure",
+          "members": {
+            "list": {
+              "type": "structure",
+              "members": {
+                "allowedResultReceivers": {
+                  "shape": "S4m"
+                },
+                "allowedAdditionalAnalyses": {
+                  "shape": "S4n"
+                }
+              }
+            },
+            "aggregation": {
+              "type": "structure",
+              "members": {
+                "allowedResultReceivers": {
+                  "shape": "S4m"
+                },
+                "allowedAdditionalAnalyses": {
+                  "shape": "S4n"
+                }
+              }
+            },
+            "custom": {
+              "type": "structure",
+              "members": {
+                "allowedResultReceivers": {
+                  "shape": "S4m"
+                },
+                "allowedAdditionalAnalyses": {
+                  "shape": "S4n"
+                }
+              }
+            }
+          },
+          "union": true
+        }
+      },
+      "union": true
+    },
+    "S4m": {
+      "type": "list",
+      "member": {}
+    },
+    "S4n": {
+      "type": "list",
+      "member": {}
+    },
+    "S4s": {
+      "type": "structure",
+      "required": [
+        "membershipIdentifier",
+        "configuredTableAssociationId",
+        "configuredTableAssociationArn",
+        "policy",
+        "type",
+        "createTime",
+        "updateTime"
+      ],
+      "members": {
+        "membershipIdentifier": {},
+        "configuredTableAssociationId": {},
+        "configuredTableAssociationArn": {},
+        "policy": {
+          "shape": "S4j"
+        },
+        "type": {},
+        "createTime": {
+          "type": "timestamp"
+        },
+        "updateTime": {
+          "type": "timestamp"
+        }
+      }
+    },
+    "S4u": {
+      "type": "structure",
+      "required": [
+        "inputReferenceArn",
+        "manageResourcePolicies"
+      ],
+      "members": {
+        "inputReferenceArn": {},
+        "manageResourcePolicies": {
+          "type": "boolean"
+        }
+      }
+    },
+    "S4y": {
+      "type": "structure",
+      "required": [
+        "id",
+        "arn",
+        "inputReferenceConfig",
+        "membershipId",
+        "membershipArn",
+        "collaborationId",
+        "collaborationArn",
+        "name",
+        "createTime",
+        "updateTime",
+        "inputReferenceProperties"
+      ],
+      "members": {
+        "id": {},
+        "arn": {},
+        "inputReferenceConfig": {
+          "shape": "S4u"
+        },
+        "membershipId": {},
+        "membershipArn": {},
+        "collaborationId": {},
+        "collaborationArn": {},
+        "description": {},
+        "name": {},
+        "createTime": {
+          "type": "timestamp"
+        },
+        "updateTime": {
+          "type": "timestamp"
+        },
+        "inputReferenceProperties": {
+          "type": "structure",
+          "required": [
+            "idMappingTableInputSource"
+          ],
+          "members": {
+            "idMappingTableInputSource": {
+              "shape": "S1o"
+            }
+          }
+        },
+        "kmsKeyArn": {}
+      }
+    },
+    "S52": {
+      "type": "structure",
+      "required": [
+        "inputReferenceArn",
+        "manageResourcePolicies"
+      ],
+      "members": {
+        "inputReferenceArn": {},
+        "manageResourcePolicies": {
+          "type": "boolean"
+        }
+      }
+    },
+    "S55": {
+      "type": "structure",
+      "required": [
+        "allowUseAsDimensionColumn"
+      ],
+      "members": {
+        "allowUseAsDimensionColumn": {
+          "type": "boolean"
+        }
+      }
+    },
+    "S57": {
+      "type": "structure",
+      "required": [
+        "id",
+        "arn",
+        "membershipId",
+        "membershipArn",
+        "collaborationId",
+        "collaborationArn",
+        "name",
+        "createTime",
+        "updateTime",
+        "inputReferenceConfig",
+        "inputReferenceProperties"
+      ],
+      "members": {
+        "id": {},
+        "arn": {},
+        "membershipId": {},
+        "membershipArn": {},
+        "collaborationId": {},
+        "collaborationArn": {},
+        "name": {},
+        "description": {},
+        "createTime": {
+          "type": "timestamp"
+        },
+        "updateTime": {
+          "type": "timestamp"
+        },
+        "inputReferenceConfig": {
+          "shape": "S52"
+        },
+        "inputReferenceProperties": {
+          "shape": "S5a"
+        },
+        "idMappingConfig": {
+          "shape": "S55"
+        }
+      }
+    },
+    "S5a": {
+      "type": "structure",
+      "required": [
+        "idNamespaceType",
+        "idMappingWorkflowsSupported"
+      ],
+      "members": {
+        "idNamespaceType": {},
+        "idMappingWorkflowsSupported": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {},
+            "document": true
+          }
+        }
+      }
+    },
+    "S5f": {
+      "type": "structure",
+      "required": [
+        "outputConfiguration"
+      ],
+      "members": {
+        "outputConfiguration": {
+          "type": "structure",
+          "members": {
+            "s3": {
+              "shape": "S5h"
+            }
+          },
+          "union": true
+        },
+        "roleArn": {}
+      }
+    },
+    "S5h": {
+      "type": "structure",
+      "required": [
+        "resultFormat",
+        "bucket"
+      ],
+      "members": {
+        "resultFormat": {},
+        "bucket": {},
+        "keyPrefix": {}
+      }
+    },
+    "S5l": {
+      "type": "structure",
+      "required": [
+        "queryCompute"
+      ],
+      "members": {
+        "queryCompute": {
+          "type": "structure",
+          "required": [
+            "isResponsible"
+          ],
+          "members": {
+            "isResponsible": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "S5o": {
+      "type": "structure",
+      "required": [
+        "id",
+        "arn",
+        "collaborationArn",
+        "collaborationId",
+        "collaborationCreatorAccountId",
+        "collaborationCreatorDisplayName",
+        "collaborationName",
+        "createTime",
+        "updateTime",
+        "status",
+        "memberAbilities",
+        "queryLogStatus",
+        "paymentConfiguration"
+      ],
+      "members": {
+        "id": {},
+        "arn": {},
+        "collaborationArn": {},
+        "collaborationId": {},
+        "collaborationCreatorAccountId": {},
+        "collaborationCreatorDisplayName": {},
+        "collaborationName": {},
+        "createTime": {
+          "type": "timestamp"
+        },
+        "updateTime": {
+          "type": "timestamp"
+        },
+        "status": {},
+        "memberAbilities": {
+          "shape": "S39"
+        },
+        "queryLogStatus": {},
+        "defaultResultConfiguration": {
+          "shape": "S5f"
+        },
+        "paymentConfiguration": {
+          "shape": "S5l"
+        }
+      }
+    },
+    "S5y": {
+      "type": "structure",
+      "required": [
+        "id",
+        "arn",
+        "membershipId",
+        "membershipArn",
+        "collaborationId",
+        "collaborationArn",
+        "createTime",
+        "updateTime",
+        "privacyBudgetType",
+        "autoRefresh",
+        "parameters"
+      ],
+      "members": {
+        "id": {},
+        "arn": {},
+        "membershipId": {},
+        "membershipArn": {},
+        "collaborationId": {},
+        "collaborationArn": {},
+        "createTime": {
+          "type": "timestamp"
+        },
+        "updateTime": {
+          "type": "timestamp"
+        },
+        "privacyBudgetType": {},
+        "autoRefresh": {},
+        "parameters": {
+          "shape": "S61"
+        }
+      }
+    },
+    "S61": {
+      "type": "structure",
+      "members": {
+        "differentialPrivacy": {
+          "type": "structure",
+          "required": [
+            "epsilon",
+            "usersNoisePerQuery"
+          ],
+          "members": {
+            "epsilon": {
+              "type": "integer"
+            },
+            "usersNoisePerQuery": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "union": true
+    },
+    "S7r": {
+      "type": "structure",
+      "required": [
+        "id",
+        "membershipId",
+        "membershipArn",
+        "createTime",
+        "status"
+      ],
+      "members": {
+        "id": {},
+        "membershipId": {},
+        "membershipArn": {},
+        "createTime": {
+          "type": "timestamp"
+        },
+        "sqlParameters": {
+          "shape": "S7s"
+        },
+        "status": {},
+        "resultConfiguration": {
+          "shape": "S7w"
+        },
+        "statistics": {
+          "type": "structure",
+          "members": {
+            "totalDurationInMillis": {
+              "type": "long"
+            }
+          }
+        },
+        "result": {
+          "type": "structure",
+          "required": [
+            "output"
+          ],
+          "members": {
+            "output": {
+              "type": "structure",
+              "members": {
+                "s3": {
+                  "type": "structure",
+                  "required": [
+                    "location"
+                  ],
+                  "members": {
+                    "location": {}
+                  }
+                },
+                "memberList": {
+                  "type": "list",
+                  "member": {
+                    "type": "structure",
+                    "required": [
+                      "accountId"
+                    ],
+                    "members": {
+                      "accountId": {}
+                    }
+                  }
+                }
+              },
+              "union": true
+            }
+          }
+        },
+        "error": {
+          "type": "structure",
+          "required": [
+            "message",
+            "code"
+          ],
+          "members": {
+            "message": {},
+            "code": {}
+          }
+        },
+        "differentialPrivacy": {
+          "type": "structure",
+          "required": [
+            "sensitivityParameters"
+          ],
+          "members": {
+            "sensitivityParameters": {
+              "type": "list",
+              "member": {
+                "type": "structure",
+                "required": [
+                  "aggregationType",
+                  "aggregationExpression",
+                  "userContributionLimit"
+                ],
+                "members": {
+                  "aggregationType": {},
+                  "aggregationExpression": {},
+                  "userContributionLimit": {
+                    "type": "integer"
+                  },
+                  "minColumnValue": {
+                    "type": "float"
+                  },
+                  "maxColumnValue": {
+                    "type": "float"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "S7s": {
+      "type": "structure",
+      "members": {
+        "queryString": {},
+        "analysisTemplateArn": {},
+        "parameters": {
+          "type": "map",
+          "key": {},
+          "value": {}
+        }
+      },
+      "sensitive": true
+    },
+    "S7w": {
+      "type": "structure",
+      "required": [
+        "outputConfiguration"
+      ],
+      "members": {
+        "outputConfiguration": {
+          "type": "structure",
+          "members": {
+            "s3": {
+              "shape": "S5h"
+            },
+            "member": {
+              "type": "structure",
+              "required": [
+                "accountId"
+              ],
+              "members": {
+                "accountId": {}
+              }
+            }
+          },
+          "union": true
+        }
+      }
+    },
+    "S90": {
+      "type": "structure",
+      "required": [
+        "idNamespaceType"
+      ],
+      "members": {
+        "idNamespaceType": {}
+      }
+    },
+    "S99": {
+      "type": "structure",
+      "members": {
+        "differentialPrivacy": {
+          "type": "structure",
+          "required": [
+            "aggregations",
+            "epsilon"
+          ],
+          "members": {
+            "aggregations": {
+              "type": "list",
+              "member": {
+                "type": "structure",
+                "required": [
+                  "type",
+                  "maxCount",
+                  "remainingCount"
+                ],
+                "members": {
+                  "type": {},
+                  "maxCount": {
+                    "type": "integer"
+                  },
+                  "remainingCount": {
+                    "type": "integer"
+                  }
+                }
+              }
+            },
+            "epsilon": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "union": true
+    }
+  }
+}

@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "This release provides per-project limits for the number of concurrent builds"
+    },
+    {
+        "type": "feature",
+        "category": "DevOpsGuru",
+        "description": "Amazon DevOps Guru is GA ready. This API update added a describeFeedback Api allows users to view submitted insight feedback. The release date is 02/16/2021"
+    },
+    {
+        "type": "feature",
+        "category": "LexRuntimeV2",
+        "description": "Enable CORS"
+    }
+]

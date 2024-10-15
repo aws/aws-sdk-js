@@ -21,19 +21,27 @@ declare class ELBv2 extends Service {
    */
   addListenerCertificates(callback?: (err: AWSError, data: ELBv2.Types.AddListenerCertificatesOutput) => void): Request<ELBv2.Types.AddListenerCertificatesOutput, AWSError>;
   /**
-   * Adds the specified tags to the specified Elastic Load Balancing resource. You can tag your Application Load Balancers, Network Load Balancers, Gateway Load Balancers, target groups, listeners, and rules. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, AddTags updates its value.
+   * Adds the specified tags to the specified Elastic Load Balancing resource. You can tag your Application Load Balancers, Network Load Balancers, Gateway Load Balancers, target groups, trust stores, listeners, and rules. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, AddTags updates its value.
    */
   addTags(params: ELBv2.Types.AddTagsInput, callback?: (err: AWSError, data: ELBv2.Types.AddTagsOutput) => void): Request<ELBv2.Types.AddTagsOutput, AWSError>;
   /**
-   * Adds the specified tags to the specified Elastic Load Balancing resource. You can tag your Application Load Balancers, Network Load Balancers, Gateway Load Balancers, target groups, listeners, and rules. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, AddTags updates its value.
+   * Adds the specified tags to the specified Elastic Load Balancing resource. You can tag your Application Load Balancers, Network Load Balancers, Gateway Load Balancers, target groups, trust stores, listeners, and rules. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, AddTags updates its value.
    */
   addTags(callback?: (err: AWSError, data: ELBv2.Types.AddTagsOutput) => void): Request<ELBv2.Types.AddTagsOutput, AWSError>;
   /**
-   * Creates a listener for the specified Application Load Balancer, Network Load Balancer. or Gateway Load Balancer. For more information, see the following:    Listeners for your Application Load Balancers     Listeners for your Network Load Balancers     Listeners for your Gateway Load Balancers    This operation is idempotent, which means that it completes at most one time. If you attempt to create multiple listeners with the same settings, each call succeeds.
+   * Adds the specified revocation file to the specified trust store.
+   */
+  addTrustStoreRevocations(params: ELBv2.Types.AddTrustStoreRevocationsInput, callback?: (err: AWSError, data: ELBv2.Types.AddTrustStoreRevocationsOutput) => void): Request<ELBv2.Types.AddTrustStoreRevocationsOutput, AWSError>;
+  /**
+   * Adds the specified revocation file to the specified trust store.
+   */
+  addTrustStoreRevocations(callback?: (err: AWSError, data: ELBv2.Types.AddTrustStoreRevocationsOutput) => void): Request<ELBv2.Types.AddTrustStoreRevocationsOutput, AWSError>;
+  /**
+   * Creates a listener for the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer. For more information, see the following:    Listeners for your Application Load Balancers     Listeners for your Network Load Balancers     Listeners for your Gateway Load Balancers    This operation is idempotent, which means that it completes at most one time. If you attempt to create multiple listeners with the same settings, each call succeeds.
    */
   createListener(params: ELBv2.Types.CreateListenerInput, callback?: (err: AWSError, data: ELBv2.Types.CreateListenerOutput) => void): Request<ELBv2.Types.CreateListenerOutput, AWSError>;
   /**
-   * Creates a listener for the specified Application Load Balancer, Network Load Balancer. or Gateway Load Balancer. For more information, see the following:    Listeners for your Application Load Balancers     Listeners for your Network Load Balancers     Listeners for your Gateway Load Balancers    This operation is idempotent, which means that it completes at most one time. If you attempt to create multiple listeners with the same settings, each call succeeds.
+   * Creates a listener for the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer. For more information, see the following:    Listeners for your Application Load Balancers     Listeners for your Network Load Balancers     Listeners for your Gateway Load Balancers    This operation is idempotent, which means that it completes at most one time. If you attempt to create multiple listeners with the same settings, each call succeeds.
    */
   createListener(callback?: (err: AWSError, data: ELBv2.Types.CreateListenerOutput) => void): Request<ELBv2.Types.CreateListenerOutput, AWSError>;
   /**
@@ -61,6 +69,14 @@ declare class ELBv2 extends Service {
    */
   createTargetGroup(callback?: (err: AWSError, data: ELBv2.Types.CreateTargetGroupOutput) => void): Request<ELBv2.Types.CreateTargetGroupOutput, AWSError>;
   /**
+   * Creates a trust store.
+   */
+  createTrustStore(params: ELBv2.Types.CreateTrustStoreInput, callback?: (err: AWSError, data: ELBv2.Types.CreateTrustStoreOutput) => void): Request<ELBv2.Types.CreateTrustStoreOutput, AWSError>;
+  /**
+   * Creates a trust store.
+   */
+  createTrustStore(callback?: (err: AWSError, data: ELBv2.Types.CreateTrustStoreOutput) => void): Request<ELBv2.Types.CreateTrustStoreOutput, AWSError>;
+  /**
    * Deletes the specified listener. Alternatively, your listener is deleted when you delete the load balancer to which it is attached.
    */
   deleteListener(params: ELBv2.Types.DeleteListenerInput, callback?: (err: AWSError, data: ELBv2.Types.DeleteListenerOutput) => void): Request<ELBv2.Types.DeleteListenerOutput, AWSError>;
@@ -85,6 +101,14 @@ declare class ELBv2 extends Service {
    */
   deleteRule(callback?: (err: AWSError, data: ELBv2.Types.DeleteRuleOutput) => void): Request<ELBv2.Types.DeleteRuleOutput, AWSError>;
   /**
+   * Deletes a shared trust store association.
+   */
+  deleteSharedTrustStoreAssociation(params: ELBv2.Types.DeleteSharedTrustStoreAssociationInput, callback?: (err: AWSError, data: ELBv2.Types.DeleteSharedTrustStoreAssociationOutput) => void): Request<ELBv2.Types.DeleteSharedTrustStoreAssociationOutput, AWSError>;
+  /**
+   * Deletes a shared trust store association.
+   */
+  deleteSharedTrustStoreAssociation(callback?: (err: AWSError, data: ELBv2.Types.DeleteSharedTrustStoreAssociationOutput) => void): Request<ELBv2.Types.DeleteSharedTrustStoreAssociationOutput, AWSError>;
+  /**
    * Deletes the specified target group. You can delete a target group if it is not referenced by any actions. Deleting a target group also deletes any associated health checks. Deleting a target group does not affect its registered targets. For example, any EC2 instances continue to run until you stop or terminate them.
    */
   deleteTargetGroup(params: ELBv2.Types.DeleteTargetGroupInput, callback?: (err: AWSError, data: ELBv2.Types.DeleteTargetGroupOutput) => void): Request<ELBv2.Types.DeleteTargetGroupOutput, AWSError>;
@@ -93,21 +117,37 @@ declare class ELBv2 extends Service {
    */
   deleteTargetGroup(callback?: (err: AWSError, data: ELBv2.Types.DeleteTargetGroupOutput) => void): Request<ELBv2.Types.DeleteTargetGroupOutput, AWSError>;
   /**
-   * Deregisters the specified targets from the specified target group. After the targets are deregistered, they no longer receive traffic from the load balancer.
+   * Deletes a trust store.
+   */
+  deleteTrustStore(params: ELBv2.Types.DeleteTrustStoreInput, callback?: (err: AWSError, data: ELBv2.Types.DeleteTrustStoreOutput) => void): Request<ELBv2.Types.DeleteTrustStoreOutput, AWSError>;
+  /**
+   * Deletes a trust store.
+   */
+  deleteTrustStore(callback?: (err: AWSError, data: ELBv2.Types.DeleteTrustStoreOutput) => void): Request<ELBv2.Types.DeleteTrustStoreOutput, AWSError>;
+  /**
+   * Deregisters the specified targets from the specified target group. After the targets are deregistered, they no longer receive traffic from the load balancer. The load balancer stops sending requests to targets that are deregistering, but uses connection draining to ensure that in-flight traffic completes on the existing connections. This deregistration delay is configured by default but can be updated for each target group. For more information, see the following:     Deregistration delay in the Application Load Balancers User Guide      Deregistration delay in the Network Load Balancers User Guide      Deregistration delay in the Gateway Load Balancers User Guide    Note: If the specified target does not exist, the action returns successfully.
    */
   deregisterTargets(params: ELBv2.Types.DeregisterTargetsInput, callback?: (err: AWSError, data: ELBv2.Types.DeregisterTargetsOutput) => void): Request<ELBv2.Types.DeregisterTargetsOutput, AWSError>;
   /**
-   * Deregisters the specified targets from the specified target group. After the targets are deregistered, they no longer receive traffic from the load balancer.
+   * Deregisters the specified targets from the specified target group. After the targets are deregistered, they no longer receive traffic from the load balancer. The load balancer stops sending requests to targets that are deregistering, but uses connection draining to ensure that in-flight traffic completes on the existing connections. This deregistration delay is configured by default but can be updated for each target group. For more information, see the following:     Deregistration delay in the Application Load Balancers User Guide      Deregistration delay in the Network Load Balancers User Guide      Deregistration delay in the Gateway Load Balancers User Guide    Note: If the specified target does not exist, the action returns successfully.
    */
   deregisterTargets(callback?: (err: AWSError, data: ELBv2.Types.DeregisterTargetsOutput) => void): Request<ELBv2.Types.DeregisterTargetsOutput, AWSError>;
   /**
-   * Describes the current Elastic Load Balancing resource limits for your AWS account. For more information, see the following:    Quotas for your Application Load Balancers     Quotas for your Network Load Balancers     Quotas for your Gateway Load Balancers   
+   * Describes the current Elastic Load Balancing resource limits for your Amazon Web Services account. For more information, see the following:    Quotas for your Application Load Balancers     Quotas for your Network Load Balancers     Quotas for your Gateway Load Balancers   
    */
   describeAccountLimits(params: ELBv2.Types.DescribeAccountLimitsInput, callback?: (err: AWSError, data: ELBv2.Types.DescribeAccountLimitsOutput) => void): Request<ELBv2.Types.DescribeAccountLimitsOutput, AWSError>;
   /**
-   * Describes the current Elastic Load Balancing resource limits for your AWS account. For more information, see the following:    Quotas for your Application Load Balancers     Quotas for your Network Load Balancers     Quotas for your Gateway Load Balancers   
+   * Describes the current Elastic Load Balancing resource limits for your Amazon Web Services account. For more information, see the following:    Quotas for your Application Load Balancers     Quotas for your Network Load Balancers     Quotas for your Gateway Load Balancers   
    */
   describeAccountLimits(callback?: (err: AWSError, data: ELBv2.Types.DescribeAccountLimitsOutput) => void): Request<ELBv2.Types.DescribeAccountLimitsOutput, AWSError>;
+  /**
+   * Describes the attributes for the specified listener.
+   */
+  describeListenerAttributes(params: ELBv2.Types.DescribeListenerAttributesInput, callback?: (err: AWSError, data: ELBv2.Types.DescribeListenerAttributesOutput) => void): Request<ELBv2.Types.DescribeListenerAttributesOutput, AWSError>;
+  /**
+   * Describes the attributes for the specified listener.
+   */
+  describeListenerAttributes(callback?: (err: AWSError, data: ELBv2.Types.DescribeListenerAttributesOutput) => void): Request<ELBv2.Types.DescribeListenerAttributesOutput, AWSError>;
   /**
    * Describes the default certificate and the certificate list for the specified HTTPS or TLS listener. If the default certificate is also in the certificate list, it appears twice in the results (once with IsDefault set to true and once with IsDefault set to false). For more information, see SSL certificates in the Application Load Balancers Guide or Server certificates in the Network Load Balancers Guide.
    */
@@ -189,6 +229,54 @@ declare class ELBv2 extends Service {
    */
   describeTargetHealth(callback?: (err: AWSError, data: ELBv2.Types.DescribeTargetHealthOutput) => void): Request<ELBv2.Types.DescribeTargetHealthOutput, AWSError>;
   /**
+   * Describes all resources associated with the specified trust store.
+   */
+  describeTrustStoreAssociations(params: ELBv2.Types.DescribeTrustStoreAssociationsInput, callback?: (err: AWSError, data: ELBv2.Types.DescribeTrustStoreAssociationsOutput) => void): Request<ELBv2.Types.DescribeTrustStoreAssociationsOutput, AWSError>;
+  /**
+   * Describes all resources associated with the specified trust store.
+   */
+  describeTrustStoreAssociations(callback?: (err: AWSError, data: ELBv2.Types.DescribeTrustStoreAssociationsOutput) => void): Request<ELBv2.Types.DescribeTrustStoreAssociationsOutput, AWSError>;
+  /**
+   * Describes the revocation files in use by the specified trust store or revocation files.
+   */
+  describeTrustStoreRevocations(params: ELBv2.Types.DescribeTrustStoreRevocationsInput, callback?: (err: AWSError, data: ELBv2.Types.DescribeTrustStoreRevocationsOutput) => void): Request<ELBv2.Types.DescribeTrustStoreRevocationsOutput, AWSError>;
+  /**
+   * Describes the revocation files in use by the specified trust store or revocation files.
+   */
+  describeTrustStoreRevocations(callback?: (err: AWSError, data: ELBv2.Types.DescribeTrustStoreRevocationsOutput) => void): Request<ELBv2.Types.DescribeTrustStoreRevocationsOutput, AWSError>;
+  /**
+   * Describes all trust stores for the specified account.
+   */
+  describeTrustStores(params: ELBv2.Types.DescribeTrustStoresInput, callback?: (err: AWSError, data: ELBv2.Types.DescribeTrustStoresOutput) => void): Request<ELBv2.Types.DescribeTrustStoresOutput, AWSError>;
+  /**
+   * Describes all trust stores for the specified account.
+   */
+  describeTrustStores(callback?: (err: AWSError, data: ELBv2.Types.DescribeTrustStoresOutput) => void): Request<ELBv2.Types.DescribeTrustStoresOutput, AWSError>;
+  /**
+   * Retrieves the resource policy for a specified resource.
+   */
+  getResourcePolicy(params: ELBv2.Types.GetResourcePolicyInput, callback?: (err: AWSError, data: ELBv2.Types.GetResourcePolicyOutput) => void): Request<ELBv2.Types.GetResourcePolicyOutput, AWSError>;
+  /**
+   * Retrieves the resource policy for a specified resource.
+   */
+  getResourcePolicy(callback?: (err: AWSError, data: ELBv2.Types.GetResourcePolicyOutput) => void): Request<ELBv2.Types.GetResourcePolicyOutput, AWSError>;
+  /**
+   * Retrieves the ca certificate bundle. This action returns a pre-signed S3 URI which is active for ten minutes.
+   */
+  getTrustStoreCaCertificatesBundle(params: ELBv2.Types.GetTrustStoreCaCertificatesBundleInput, callback?: (err: AWSError, data: ELBv2.Types.GetTrustStoreCaCertificatesBundleOutput) => void): Request<ELBv2.Types.GetTrustStoreCaCertificatesBundleOutput, AWSError>;
+  /**
+   * Retrieves the ca certificate bundle. This action returns a pre-signed S3 URI which is active for ten minutes.
+   */
+  getTrustStoreCaCertificatesBundle(callback?: (err: AWSError, data: ELBv2.Types.GetTrustStoreCaCertificatesBundleOutput) => void): Request<ELBv2.Types.GetTrustStoreCaCertificatesBundleOutput, AWSError>;
+  /**
+   * Retrieves the specified revocation file. This action returns a pre-signed S3 URI which is active for ten minutes.
+   */
+  getTrustStoreRevocationContent(params: ELBv2.Types.GetTrustStoreRevocationContentInput, callback?: (err: AWSError, data: ELBv2.Types.GetTrustStoreRevocationContentOutput) => void): Request<ELBv2.Types.GetTrustStoreRevocationContentOutput, AWSError>;
+  /**
+   * Retrieves the specified revocation file. This action returns a pre-signed S3 URI which is active for ten minutes.
+   */
+  getTrustStoreRevocationContent(callback?: (err: AWSError, data: ELBv2.Types.GetTrustStoreRevocationContentOutput) => void): Request<ELBv2.Types.GetTrustStoreRevocationContentOutput, AWSError>;
+  /**
    * Replaces the specified properties of the specified listener. Any properties that you do not specify remain unchanged. Changing the protocol from HTTPS to HTTP, or from TLS to TCP, removes the security policy and default certificate properties. If you change the protocol from HTTP to HTTPS, or from TCP to TLS, you must add the security policy and default certificate properties. To add an item to a list, remove an item from a list, or update an item in a list, you must provide the entire list. For example, to add an action, specify a list with the current actions plus the new action.
    */
   modifyListener(params: ELBv2.Types.ModifyListenerInput, callback?: (err: AWSError, data: ELBv2.Types.ModifyListenerOutput) => void): Request<ELBv2.Types.ModifyListenerOutput, AWSError>;
@@ -196,6 +284,14 @@ declare class ELBv2 extends Service {
    * Replaces the specified properties of the specified listener. Any properties that you do not specify remain unchanged. Changing the protocol from HTTPS to HTTP, or from TLS to TCP, removes the security policy and default certificate properties. If you change the protocol from HTTP to HTTPS, or from TCP to TLS, you must add the security policy and default certificate properties. To add an item to a list, remove an item from a list, or update an item in a list, you must provide the entire list. For example, to add an action, specify a list with the current actions plus the new action.
    */
   modifyListener(callback?: (err: AWSError, data: ELBv2.Types.ModifyListenerOutput) => void): Request<ELBv2.Types.ModifyListenerOutput, AWSError>;
+  /**
+   * Modifies the specified attributes of the specified listener.
+   */
+  modifyListenerAttributes(params: ELBv2.Types.ModifyListenerAttributesInput, callback?: (err: AWSError, data: ELBv2.Types.ModifyListenerAttributesOutput) => void): Request<ELBv2.Types.ModifyListenerAttributesOutput, AWSError>;
+  /**
+   * Modifies the specified attributes of the specified listener.
+   */
+  modifyListenerAttributes(callback?: (err: AWSError, data: ELBv2.Types.ModifyListenerAttributesOutput) => void): Request<ELBv2.Types.ModifyListenerAttributesOutput, AWSError>;
   /**
    * Modifies the specified attributes of the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer. If any of the specified attributes can't be modified as requested, the call fails. Any existing attributes that you do not modify retain their current values.
    */
@@ -229,6 +325,14 @@ declare class ELBv2 extends Service {
    */
   modifyTargetGroupAttributes(callback?: (err: AWSError, data: ELBv2.Types.ModifyTargetGroupAttributesOutput) => void): Request<ELBv2.Types.ModifyTargetGroupAttributesOutput, AWSError>;
   /**
+   * Update the ca certificate bundle for the specified trust store.
+   */
+  modifyTrustStore(params: ELBv2.Types.ModifyTrustStoreInput, callback?: (err: AWSError, data: ELBv2.Types.ModifyTrustStoreOutput) => void): Request<ELBv2.Types.ModifyTrustStoreOutput, AWSError>;
+  /**
+   * Update the ca certificate bundle for the specified trust store.
+   */
+  modifyTrustStore(callback?: (err: AWSError, data: ELBv2.Types.ModifyTrustStoreOutput) => void): Request<ELBv2.Types.ModifyTrustStoreOutput, AWSError>;
+  /**
    * Registers the specified targets with the specified target group. If the target is an EC2 instance, it must be in the running state when you register it. By default, the load balancer routes requests to registered targets using the protocol and port for the target group. Alternatively, you can override the port for a target when you register it. You can register each EC2 instance or IP address with the same target group multiple times using different ports. With a Network Load Balancer, you cannot register instances by instance ID if they have the following instance types: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1. You can register instances of these types by IP address.
    */
   registerTargets(params: ELBv2.Types.RegisterTargetsInput, callback?: (err: AWSError, data: ELBv2.Types.RegisterTargetsOutput) => void): Request<ELBv2.Types.RegisterTargetsOutput, AWSError>;
@@ -253,11 +357,19 @@ declare class ELBv2 extends Service {
    */
   removeTags(callback?: (err: AWSError, data: ELBv2.Types.RemoveTagsOutput) => void): Request<ELBv2.Types.RemoveTagsOutput, AWSError>;
   /**
-   * Sets the type of IP addresses used by the subnets of the specified Application Load Balancer or Network Load Balancer.
+   * Removes the specified revocation file from the specified trust store.
+   */
+  removeTrustStoreRevocations(params: ELBv2.Types.RemoveTrustStoreRevocationsInput, callback?: (err: AWSError, data: ELBv2.Types.RemoveTrustStoreRevocationsOutput) => void): Request<ELBv2.Types.RemoveTrustStoreRevocationsOutput, AWSError>;
+  /**
+   * Removes the specified revocation file from the specified trust store.
+   */
+  removeTrustStoreRevocations(callback?: (err: AWSError, data: ELBv2.Types.RemoveTrustStoreRevocationsOutput) => void): Request<ELBv2.Types.RemoveTrustStoreRevocationsOutput, AWSError>;
+  /**
+   * Sets the type of IP addresses used by the subnets of the specified load balancer.
    */
   setIpAddressType(params: ELBv2.Types.SetIpAddressTypeInput, callback?: (err: AWSError, data: ELBv2.Types.SetIpAddressTypeOutput) => void): Request<ELBv2.Types.SetIpAddressTypeOutput, AWSError>;
   /**
-   * Sets the type of IP addresses used by the subnets of the specified Application Load Balancer or Network Load Balancer.
+   * Sets the type of IP addresses used by the subnets of the specified load balancer.
    */
   setIpAddressType(callback?: (err: AWSError, data: ELBv2.Types.SetIpAddressTypeOutput) => void): Request<ELBv2.Types.SetIpAddressTypeOutput, AWSError>;
   /**
@@ -269,19 +381,19 @@ declare class ELBv2 extends Service {
    */
   setRulePriorities(callback?: (err: AWSError, data: ELBv2.Types.SetRulePrioritiesOutput) => void): Request<ELBv2.Types.SetRulePrioritiesOutput, AWSError>;
   /**
-   * Associates the specified security groups with the specified Application Load Balancer. The specified security groups override the previously associated security groups. You can't specify a security group for a Network Load Balancer or Gateway Load Balancer.
+   * Associates the specified security groups with the specified Application Load Balancer or Network Load Balancer. The specified security groups override the previously associated security groups. You can't perform this operation on a Network Load Balancer unless you specified a security group for the load balancer when you created it. You can't associate a security group with a Gateway Load Balancer.
    */
   setSecurityGroups(params: ELBv2.Types.SetSecurityGroupsInput, callback?: (err: AWSError, data: ELBv2.Types.SetSecurityGroupsOutput) => void): Request<ELBv2.Types.SetSecurityGroupsOutput, AWSError>;
   /**
-   * Associates the specified security groups with the specified Application Load Balancer. The specified security groups override the previously associated security groups. You can't specify a security group for a Network Load Balancer or Gateway Load Balancer.
+   * Associates the specified security groups with the specified Application Load Balancer or Network Load Balancer. The specified security groups override the previously associated security groups. You can't perform this operation on a Network Load Balancer unless you specified a security group for the load balancer when you created it. You can't associate a security group with a Gateway Load Balancer.
    */
   setSecurityGroups(callback?: (err: AWSError, data: ELBv2.Types.SetSecurityGroupsOutput) => void): Request<ELBv2.Types.SetSecurityGroupsOutput, AWSError>;
   /**
-   * Enables the Availability Zones for the specified public subnets for the specified Application Load Balancer or Network Load Balancer. The specified subnets replace the previously enabled subnets. When you specify subnets for a Network Load Balancer, you must include all subnets that were enabled previously, with their existing configurations, plus any additional subnets.
+   * Enables the Availability Zones for the specified public subnets for the specified Application Load Balancer, Network Load Balancer or Gateway Load Balancer. The specified subnets replace the previously enabled subnets. When you specify subnets for a Network Load Balancer, or Gateway Load Balancer you must include all subnets that were enabled previously, with their existing configurations, plus any additional subnets.
    */
   setSubnets(params: ELBv2.Types.SetSubnetsInput, callback?: (err: AWSError, data: ELBv2.Types.SetSubnetsOutput) => void): Request<ELBv2.Types.SetSubnetsOutput, AWSError>;
   /**
-   * Enables the Availability Zones for the specified public subnets for the specified Application Load Balancer or Network Load Balancer. The specified subnets replace the previously enabled subnets. When you specify subnets for a Network Load Balancer, you must include all subnets that were enabled previously, with their existing configurations, plus any additional subnets.
+   * Enables the Availability Zones for the specified public subnets for the specified Application Load Balancer, Network Load Balancer or Gateway Load Balancer. The specified subnets replace the previously enabled subnets. When you specify subnets for a Network Load Balancer, or Gateway Load Balancer you must include all subnets that were enabled previously, with their existing configurations, plus any additional subnets.
    */
   setSubnets(callback?: (err: AWSError, data: ELBv2.Types.SetSubnetsOutput) => void): Request<ELBv2.Types.SetSubnetsOutput, AWSError>;
   /**
@@ -391,9 +503,36 @@ declare namespace ELBv2 {
   }
   export interface AddTagsOutput {
   }
+  export interface AddTrustStoreRevocationsInput {
+    /**
+     * The Amazon Resource Name (ARN) of the trust store.
+     */
+    TrustStoreArn: TrustStoreArn;
+    /**
+     * The revocation file to add.
+     */
+    RevocationContents?: RevocationContents;
+  }
+  export interface AddTrustStoreRevocationsOutput {
+    /**
+     * Information about the revocation file added to the trust store.
+     */
+    TrustStoreRevocations?: TrustStoreRevocations;
+  }
   export type AllocationId = string;
   export type AlpnPolicyName = AlpnPolicyValue[];
   export type AlpnPolicyValue = string;
+  export interface AnomalyDetection {
+    /**
+     * The latest anomaly detection result.
+     */
+    Result?: AnomalyResultEnum;
+    /**
+     * Indicates whether anomaly mitigation is in progress.
+     */
+    MitigationInEffect?: MitigationInEffectEnum;
+  }
+  export type AnomalyResultEnum = "anomalous"|"normal"|string;
   export type AuthenticateCognitoActionAuthenticationRequestExtraParams = {[key: string]: AuthenticateCognitoActionAuthenticationRequestParamValue};
   export type AuthenticateCognitoActionAuthenticationRequestParamName = string;
   export type AuthenticateCognitoActionAuthenticationRequestParamValue = string;
@@ -581,6 +720,10 @@ declare namespace ELBv2 {
      * The tags to assign to the listener.
      */
     Tags?: TagList;
+    /**
+     * The mutual authentication configuration information.
+     */
+    MutualAuthentication?: MutualAuthenticationAttributes;
   }
   export interface CreateListenerOutput {
     /**
@@ -594,15 +737,15 @@ declare namespace ELBv2 {
      */
     Name: LoadBalancerName;
     /**
-     * The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings. [Application Load Balancers] You must specify subnets from at least two Availability Zones. [Application Load Balancers on Outposts] You must specify one Outpost subnet. [Application Load Balancers on Local Zones] You can specify subnets from one or more Local Zones. [Network Load Balancers] You can specify subnets from one or more Availability Zones. [Gateway Load Balancers] You can specify subnets from one or more Availability Zones.
+     * The IDs of the subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings, but not both. To specify an Elastic IP address, specify subnet mappings instead of subnets. [Application Load Balancers] You must specify subnets from at least two Availability Zones. [Application Load Balancers on Outposts] You must specify one Outpost subnet. [Application Load Balancers on Local Zones] You can specify subnets from one or more Local Zones. [Network Load Balancers] You can specify subnets from one or more Availability Zones. [Gateway Load Balancers] You can specify subnets from one or more Availability Zones.
      */
     Subnets?: Subnets;
     /**
-     * The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings. [Application Load Balancers] You must specify subnets from at least two Availability Zones. You cannot specify Elastic IP addresses for your subnets. [Application Load Balancers on Outposts] You must specify one Outpost subnet. [Application Load Balancers on Local Zones] You can specify subnets from one or more Local Zones. [Network Load Balancers] You can specify subnets from one or more Availability Zones. You can specify one Elastic IP address per subnet if you need static IP addresses for your internet-facing load balancer. For internal load balancers, you can specify one private IP address per subnet from the IPv4 range of the subnet. For internet-facing load balancer, you can specify one IPv6 address per subnet. [Gateway Load Balancers] You can specify subnets from one or more Availability Zones. You cannot specify Elastic IP addresses for your subnets.
+     * The IDs of the subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings, but not both. [Application Load Balancers] You must specify subnets from at least two Availability Zones. You cannot specify Elastic IP addresses for your subnets. [Application Load Balancers on Outposts] You must specify one Outpost subnet. [Application Load Balancers on Local Zones] You can specify subnets from one or more Local Zones. [Network Load Balancers] You can specify subnets from one or more Availability Zones. You can specify one Elastic IP address per subnet if you need static IP addresses for your internet-facing load balancer. For internal load balancers, you can specify one private IP address per subnet from the IPv4 range of the subnet. For internet-facing load balancer, you can specify one IPv6 address per subnet. [Gateway Load Balancers] You can specify subnets from one or more Availability Zones. You cannot specify Elastic IP addresses for your subnets.
      */
     SubnetMappings?: SubnetMappings;
     /**
-     * [Application Load Balancers] The IDs of the security groups for the load balancer.
+     * [Application Load Balancers and Network Load Balancers] The IDs of the security groups for the load balancer.
      */
     SecurityGroups?: SecurityGroups;
     /**
@@ -618,7 +761,7 @@ declare namespace ELBv2 {
      */
     Type?: LoadBalancerTypeEnum;
     /**
-     * The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses). Internal load balancers must use ipv4.
+     * Note: Internal load balancers must use the ipv4 IP address type. [Application Load Balancers] The IP address type. The possible values are ipv4 (for only IPv4 addresses), dualstack (for IPv4 and IPv6 addresses), and dualstack-without-public-ipv4 (for IPv6 only public addresses, with private IPv4 and IPv6 addresses). [Network Load Balancers] The IP address type. The possible values are ipv4 (for only IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses). You can’t specify dualstack for a load balancer with a UDP or TCP_UDP listener. [Gateway Load Balancers] The IP address type. The possible values are ipv4 (for only IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses).
      */
     IpAddressType?: IpAddressType;
     /**
@@ -690,47 +833,79 @@ declare namespace ELBv2 {
      */
     HealthCheckPort?: HealthCheckPort;
     /**
-     * Indicates whether health checks are enabled. If the target type is lambda, health checks are disabled by default but can be enabled. If the target type is instance or ip, health checks are always enabled and cannot be disabled.
+     * Indicates whether health checks are enabled. If the target type is lambda, health checks are disabled by default but can be enabled. If the target type is instance, ip, or alb, health checks are always enabled and cannot be disabled.
      */
     HealthCheckEnabled?: HealthCheckEnabled;
     /**
-     * [HTTP/HTTPS health checks] The destination for health checks on the targets. [HTTP1 or HTTP2 protocol version] The ping path. The default is /. [GRPC protocol version] The path of a custom health check method with the format /package.service/method. The default is /AWS.ALB/healthcheck.
+     * [HTTP/HTTPS health checks] The destination for health checks on the targets. [HTTP1 or HTTP2 protocol version] The ping path. The default is /. [GRPC protocol version] The path of a custom health check method with the format /package.service/method. The default is /Amazon Web Services.ALB/healthcheck.
      */
     HealthCheckPath?: Path;
     /**
-     * The approximate amount of time, in seconds, between health checks of an individual target. For TCP health checks, the supported values are 10 and 30 seconds. If the target type is instance or ip, the default is 30 seconds. If the target group protocol is GENEVE, the default is 10 seconds. If the target type is lambda, the default is 35 seconds.
+     * The approximate amount of time, in seconds, between health checks of an individual target. The range is 5-300. If the target group protocol is TCP, TLS, UDP, TCP_UDP, HTTP or HTTPS, the default is 30 seconds. If the target group protocol is GENEVE, the default is 10 seconds. If the target type is lambda, the default is 35 seconds.
      */
     HealthCheckIntervalSeconds?: HealthCheckIntervalSeconds;
     /**
-     * The amount of time, in seconds, during which no response from a target means a failed health check. For target groups with a protocol of HTTP, HTTPS, or GENEVE, the default is 5 seconds. For target groups with a protocol of TCP or TLS, this value must be 6 seconds for HTTP health checks and 10 seconds for TCP and HTTPS health checks. If the target type is lambda, the default is 30 seconds.
+     * The amount of time, in seconds, during which no response from a target means a failed health check. The range is 2–120 seconds. For target groups with a protocol of HTTP, the default is 6 seconds. For target groups with a protocol of TCP, TLS or HTTPS, the default is 10 seconds. For target groups with a protocol of GENEVE, the default is 5 seconds. If the target type is lambda, the default is 30 seconds.
      */
     HealthCheckTimeoutSeconds?: HealthCheckTimeoutSeconds;
     /**
-     * The number of consecutive health checks successes required before considering an unhealthy target healthy. For target groups with a protocol of HTTP or HTTPS, the default is 5. For target groups with a protocol of TCP, TLS, or GENEVE, the default is 3. If the target type is lambda, the default is 5.
+     * The number of consecutive health check successes required before considering a target healthy. The range is 2-10. If the target group protocol is TCP, TCP_UDP, UDP, TLS, HTTP or HTTPS, the default is 5. For target groups with a protocol of GENEVE, the default is 5. If the target type is lambda, the default is 5.
      */
     HealthyThresholdCount?: HealthCheckThresholdCount;
     /**
-     * The number of consecutive health check failures required before considering a target unhealthy. If the target group protocol is HTTP or HTTPS, the default is 2. If the target group protocol is TCP or TLS, this value must be the same as the healthy threshold count. If the target group protocol is GENEVE, the default is 3. If the target type is lambda, the default is 2.
+     * The number of consecutive health check failures required before considering a target unhealthy. The range is 2-10. If the target group protocol is TCP, TCP_UDP, UDP, TLS, HTTP or HTTPS, the default is 2. For target groups with a protocol of GENEVE, the default is 2. If the target type is lambda, the default is 5.
      */
     UnhealthyThresholdCount?: HealthCheckThresholdCount;
     /**
-     * [HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful response from a target.
+     * [HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful response from a target. For target groups with a protocol of TCP, TCP_UDP, UDP or TLS the range is 200-599. For target groups with a protocol of HTTP or HTTPS, the range is 200-499. For target groups with a protocol of GENEVE, the range is 200-399.
      */
     Matcher?: Matcher;
     /**
-     * The type of target that you must specify when registering targets with this target group. You can't specify targets for a target group using more than one target type.    instance - Register targets by instance ID. This is the default value.    ip - Register targets by IP address. You can specify IP addresses from the subnets of the virtual private cloud (VPC) for the target group, the RFC 1918 range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10). You can't specify publicly routable IP addresses.    lambda - Register a single Lambda function as a target.  
+     * The type of target that you must specify when registering targets with this target group. You can't specify targets for a target group using more than one target type.    instance - Register targets by instance ID. This is the default value.    ip - Register targets by IP address. You can specify IP addresses from the subnets of the virtual private cloud (VPC) for the target group, the RFC 1918 range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10). You can't specify publicly routable IP addresses.    lambda - Register a single Lambda function as a target.    alb - Register a single Application Load Balancer as a target.  
      */
     TargetType?: TargetTypeEnum;
     /**
      * The tags to assign to the target group.
      */
     Tags?: TagList;
+    /**
+     * The type of IP address used for this target group. The possible values are ipv4 and ipv6. This is an optional parameter. If not specified, the IP address type defaults to ipv4.
+     */
+    IpAddressType?: TargetGroupIpAddressTypeEnum;
   }
   export interface CreateTargetGroupOutput {
     /**
      * Information about the target group.
      */
     TargetGroups?: TargetGroups;
+  }
+  export interface CreateTrustStoreInput {
+    /**
+     * The name of the trust store. This name must be unique per region and cannot be changed after creation.
+     */
+    Name: TrustStoreName;
+    /**
+     * The Amazon S3 bucket for the ca certificates bundle.
+     */
+    CaCertificatesBundleS3Bucket: S3Bucket;
+    /**
+     * The Amazon S3 path for the ca certificates bundle.
+     */
+    CaCertificatesBundleS3Key: S3Key;
+    /**
+     * The Amazon S3 object version for the ca certificates bundle. If undefined the current version is used.
+     */
+    CaCertificatesBundleS3ObjectVersion?: S3ObjectVersion;
+    /**
+     * The tags to assign to the trust store.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateTrustStoreOutput {
+    /**
+     * Information about the trust store created.
+     */
+    TrustStores?: TrustStores;
   }
   export type CreatedTime = Date;
   export type CustomerOwnedIpv4Pool = string;
@@ -760,6 +935,18 @@ declare namespace ELBv2 {
   }
   export interface DeleteRuleOutput {
   }
+  export interface DeleteSharedTrustStoreAssociationInput {
+    /**
+     * The Amazon Resource Name (ARN) of the trust store.
+     */
+    TrustStoreArn: TrustStoreArn;
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: ResourceArn;
+  }
+  export interface DeleteSharedTrustStoreAssociationOutput {
+  }
   export interface DeleteTargetGroupInput {
     /**
      * The Amazon Resource Name (ARN) of the target group.
@@ -767,6 +954,14 @@ declare namespace ELBv2 {
     TargetGroupArn: TargetGroupArn;
   }
   export interface DeleteTargetGroupOutput {
+  }
+  export interface DeleteTrustStoreInput {
+    /**
+     * The Amazon Resource Name (ARN) of the trust store.
+     */
+    TrustStoreArn: TrustStoreArn;
+  }
+  export interface DeleteTrustStoreOutput {
   }
   export interface DeregisterTargetsInput {
     /**
@@ -799,6 +994,18 @@ declare namespace ELBv2 {
      * If there are additional results, this is the marker for the next set of results. Otherwise, this is null.
      */
     NextMarker?: Marker;
+  }
+  export interface DescribeListenerAttributesInput {
+    /**
+     * The Amazon Resource Name (ARN) of the listener.
+     */
+    ListenerArn: ListenerArn;
+  }
+  export interface DescribeListenerAttributesOutput {
+    /**
+     * Information about the listener attributes.
+     */
+    Attributes?: ListenerAttributes;
   }
   export interface DescribeListenerCertificatesInput {
     /**
@@ -933,6 +1140,10 @@ declare namespace ELBv2 {
      * The maximum number of results to return with this call.
      */
     PageSize?: PageSize;
+    /**
+     *  The type of load balancer. The default lists the SSL policies for all load balancers.
+     */
+    LoadBalancerType?: LoadBalancerTypeEnum;
   }
   export interface DescribeSSLPoliciesOutput {
     /**
@@ -1009,14 +1220,120 @@ declare namespace ELBv2 {
      * The targets.
      */
     Targets?: TargetDescriptions;
+    /**
+     * Used to include anomaly detection information.
+     */
+    Include?: ListOfDescribeTargetHealthIncludeOptions;
   }
+  export type DescribeTargetHealthInputIncludeEnum = "AnomalyDetection"|"All"|string;
   export interface DescribeTargetHealthOutput {
     /**
      * Information about the health of the targets.
      */
     TargetHealthDescriptions?: TargetHealthDescriptions;
   }
+  export interface DescribeTrustStoreAssociationsInput {
+    /**
+     * The Amazon Resource Name (ARN) of the trust store.
+     */
+    TrustStoreArn: TrustStoreArn;
+    /**
+     * The marker for the next set of results. (You received this marker from a previous call.)
+     */
+    Marker?: Marker;
+    /**
+     * The maximum number of results to return with this call.
+     */
+    PageSize?: PageSize;
+  }
+  export interface DescribeTrustStoreAssociationsOutput {
+    /**
+     * Information about the resources the trust store is associated to.
+     */
+    TrustStoreAssociations?: TrustStoreAssociations;
+    /**
+     * If there are additional results, this is the marker for the next set of results. Otherwise, this is null.
+     */
+    NextMarker?: Marker;
+  }
+  export interface DescribeTrustStoreRevocation {
+    /**
+     * The Amazon Resource Name (ARN) of the trust store.
+     */
+    TrustStoreArn?: TrustStoreArn;
+    /**
+     * The revocation ID of a revocation file in use.
+     */
+    RevocationId?: RevocationId;
+    /**
+     * The type of revocation file.
+     */
+    RevocationType?: RevocationType;
+    /**
+     * The number of revoked certificates.
+     */
+    NumberOfRevokedEntries?: NumberOfRevokedEntries;
+  }
+  export type DescribeTrustStoreRevocationResponse = DescribeTrustStoreRevocation[];
+  export interface DescribeTrustStoreRevocationsInput {
+    /**
+     * The Amazon Resource Name (ARN) of the trust store.
+     */
+    TrustStoreArn: TrustStoreArn;
+    /**
+     * The revocation IDs of the revocation files you want to describe.
+     */
+    RevocationIds?: RevocationIds;
+    /**
+     * The marker for the next set of results. (You received this marker from a previous call.)
+     */
+    Marker?: Marker;
+    /**
+     * The maximum number of results to return with this call.
+     */
+    PageSize?: PageSize;
+  }
+  export interface DescribeTrustStoreRevocationsOutput {
+    /**
+     * Information about the revocation file in the trust store.
+     */
+    TrustStoreRevocations?: DescribeTrustStoreRevocationResponse;
+    /**
+     * If there are additional results, this is the marker for the next set of results. Otherwise, this is null.
+     */
+    NextMarker?: Marker;
+  }
+  export interface DescribeTrustStoresInput {
+    /**
+     * The Amazon Resource Name (ARN) of the trust store.
+     */
+    TrustStoreArns?: TrustStoreArns;
+    /**
+     * The names of the trust stores.
+     */
+    Names?: TrustStoreNames;
+    /**
+     * The marker for the next set of results. (You received this marker from a previous call.)
+     */
+    Marker?: Marker;
+    /**
+     * The maximum number of results to return with this call.
+     */
+    PageSize?: PageSize;
+  }
+  export interface DescribeTrustStoresOutput {
+    /**
+     * Information about the trust stores.
+     */
+    TrustStores?: TrustStores;
+    /**
+     * If there are additional results, this is the marker for the next set of results. Otherwise, this is null.
+     */
+    NextMarker?: Marker;
+  }
   export type Description = string;
+  export type EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic = string;
+  export type EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum = "on"|"off"|string;
   export interface FixedResponseActionConfig {
     /**
      * The message.
@@ -1036,13 +1353,53 @@ declare namespace ELBv2 {
   export type FixedResponseActionStatusCode = string;
   export interface ForwardActionConfig {
     /**
-     * One or more target groups. For Network Load Balancers, you can specify a single target group.
+     * The target groups. For Network Load Balancers, you can specify a single target group.
      */
     TargetGroups?: TargetGroupList;
     /**
      * The target group stickiness for the rule.
      */
     TargetGroupStickinessConfig?: TargetGroupStickinessConfig;
+  }
+  export interface GetResourcePolicyInput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: ResourceArn;
+  }
+  export interface GetResourcePolicyOutput {
+    /**
+     * The content of the resource policy.
+     */
+    Policy?: Policy;
+  }
+  export interface GetTrustStoreCaCertificatesBundleInput {
+    /**
+     * The Amazon Resource Name (ARN) of the trust store.
+     */
+    TrustStoreArn: TrustStoreArn;
+  }
+  export interface GetTrustStoreCaCertificatesBundleOutput {
+    /**
+     * The ca certificate bundles Amazon S3 URI.
+     */
+    Location?: Location;
+  }
+  export interface GetTrustStoreRevocationContentInput {
+    /**
+     * The Amazon Resource Name (ARN) of the trust store.
+     */
+    TrustStoreArn: TrustStoreArn;
+    /**
+     * The revocation ID of the revocation file.
+     */
+    RevocationId: RevocationId;
+  }
+  export interface GetTrustStoreRevocationContentOutput {
+    /**
+     * The revocation files Amazon S3 URI.
+     */
+    Location?: Location;
   }
   export type GrpcCode = string;
   export type HealthCheckEnabled = boolean;
@@ -1052,7 +1409,7 @@ declare namespace ELBv2 {
   export type HealthCheckTimeoutSeconds = number;
   export interface HostHeaderConditionConfig {
     /**
-     * One or more host names. The maximum size of each name is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). If you specify multiple strings, the condition is satisfied if one of the strings matches the host name.
+     * The host names. The maximum size of each name is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). If you specify multiple strings, the condition is satisfied if one of the strings matches the host name.
      */
     Values?: ListOfString;
   }
@@ -1063,7 +1420,7 @@ declare namespace ELBv2 {
      */
     HttpHeaderName?: HttpHeaderConditionName;
     /**
-     * One or more strings to compare against the value of the HTTP header. The maximum size of each string is 128 characters. The comparison strings are case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). If the same header appears multiple times in the request, we search them in order until a match is found. If you specify multiple strings, the condition is satisfied if one of the strings matches the value of the HTTP header. To require that all of the strings are a match, create one condition per string.
+     * The strings to compare against the value of the HTTP header. The maximum size of each string is 128 characters. The comparison strings are case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). If the same header appears multiple times in the request, we search them in order until a match is found. If you specify multiple strings, the condition is satisfied if one of the strings matches the value of the HTTP header. To require that all of the strings are a match, create one condition per string.
      */
     Values?: ListOfString;
   }
@@ -1075,8 +1432,9 @@ declare namespace ELBv2 {
     Values?: ListOfString;
   }
   export type IPv6Address = string;
+  export type IgnoreClientCertificateExpiry = boolean;
   export type IpAddress = string;
-  export type IpAddressType = "ipv4"|"dualstack"|string;
+  export type IpAddressType = "ipv4"|"dualstack"|"dualstack-without-public-ipv4"|string;
   export type IsDefault = boolean;
   export interface Limit {
     /**
@@ -1089,6 +1447,7 @@ declare namespace ELBv2 {
     Max?: Max;
   }
   export type Limits = Limit[];
+  export type ListOfDescribeTargetHealthIncludeOptions = DescribeTargetHealthInputIncludeEnum[];
   export type ListOfString = StringValue[];
   export interface Listener {
     /**
@@ -1123,9 +1482,26 @@ declare namespace ELBv2 {
      * [TLS listener] The name of the Application-Layer Protocol Negotiation (ALPN) policy.
      */
     AlpnPolicy?: AlpnPolicyName;
+    /**
+     * The mutual authentication configuration information.
+     */
+    MutualAuthentication?: MutualAuthenticationAttributes;
   }
   export type ListenerArn = string;
   export type ListenerArns = ListenerArn[];
+  export interface ListenerAttribute {
+    /**
+     * The name of the attribute. The following attribute is supported by Network Load Balancers, and Gateway Load Balancers.    tcp.idle_timeout.seconds - The tcp idle timeout value, in seconds. The valid range is 60-6000 seconds. The default is 350 seconds.  
+     */
+    Key?: ListenerAttributeKey;
+    /**
+     * The value of the attribute.
+     */
+    Value?: ListenerAttributeValue;
+  }
+  export type ListenerAttributeKey = string;
+  export type ListenerAttributeValue = string;
+  export type ListenerAttributes = ListenerAttribute[];
   export type Listeners = Listener[];
   export interface LoadBalancer {
     /**
@@ -1173,13 +1549,17 @@ declare namespace ELBv2 {
      */
     SecurityGroups?: SecurityGroups;
     /**
-     * The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses).
+     * [Application Load Balancers] The type of IP addresses used for public or private connections by the subnets attached to your load balancer. The possible values are ipv4 (for only IPv4 addresses), dualstack (for IPv4 and IPv6 addresses), and dualstack-without-public-ipv4 (for IPv6 only public addresses, with private IPv4 and IPv6 addresses). [Network Load Balancers and Gateway Load Balancers] The type of IP addresses used for public or private connections by the subnets attached to your load balancer. The possible values are ipv4 (for only IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses).
      */
     IpAddressType?: IpAddressType;
     /**
      * [Application Load Balancers on Outposts] The ID of the customer-owned address pool.
      */
     CustomerOwnedIpv4Pool?: CustomerOwnedIpv4Pool;
+    /**
+     * Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through Amazon Web Services PrivateLink.
+     */
+    EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic?: EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic;
   }
   export interface LoadBalancerAddress {
     /**
@@ -1204,7 +1584,7 @@ declare namespace ELBv2 {
   export type LoadBalancerArns = LoadBalancerArn[];
   export interface LoadBalancerAttribute {
     /**
-     * The name of the attribute. The following attribute is supported by all load balancers:    deletion_protection.enabled - Indicates whether deletion protection is enabled. The value is true or false. The default is false.   The following attributes are supported by both Application Load Balancers and Network Load Balancers:    access_logs.s3.enabled - Indicates whether access logs are enabled. The value is true or false. The default is false.    access_logs.s3.bucket - The name of the S3 bucket for the access logs. This attribute is required if access logs are enabled. The bucket must exist in the same region as the load balancer and have a bucket policy that grants Elastic Load Balancing permissions to write to the bucket.    access_logs.s3.prefix - The prefix for the location in the S3 bucket for the access logs.   The following attributes are supported by only Application Load Balancers:    idle_timeout.timeout_seconds - The idle timeout value, in seconds. The valid range is 1-4000 seconds. The default is 60 seconds.    routing.http.desync_mitigation_mode - Determines how the load balancer handles requests that might pose a security risk to your application. The possible values are monitor, defensive, and strictest. The default is defensive.    routing.http.drop_invalid_header_fields.enabled - Indicates whether HTTP headers with invalid header fields are removed by the load balancer (true) or routed to targets (false). The default is false.    routing.http2.enabled - Indicates whether HTTP/2 is enabled. The value is true or false. The default is true. Elastic Load Balancing requires that message header names contain only alphanumeric characters and hyphens.    waf.fail_open.enabled - Indicates whether to allow a WAF-enabled load balancer to route requests to targets if it is unable to forward the request to AWS WAF. The value is true or false. The default is false.   The following attribute is supported by Network Load Balancers and Gateway Load Balancers:    load_balancing.cross_zone.enabled - Indicates whether cross-zone load balancing is enabled. The value is true or false. The default is false.  
+     * The name of the attribute. The following attributes are supported by all load balancers:    deletion_protection.enabled - Indicates whether deletion protection is enabled. The value is true or false. The default is false.    load_balancing.cross_zone.enabled - Indicates whether cross-zone load balancing is enabled. The possible values are true and false. The default for Network Load Balancers and Gateway Load Balancers is false. The default for Application Load Balancers is true, and cannot be changed.   The following attributes are supported by both Application Load Balancers and Network Load Balancers:    access_logs.s3.enabled - Indicates whether access logs are enabled. The value is true or false. The default is false.    access_logs.s3.bucket - The name of the S3 bucket for the access logs. This attribute is required if access logs are enabled. The bucket must exist in the same region as the load balancer and have a bucket policy that grants Elastic Load Balancing permissions to write to the bucket.    access_logs.s3.prefix - The prefix for the location in the S3 bucket for the access logs.    ipv6.deny_all_igw_traffic - Blocks internet gateway (IGW) access to the load balancer. It is set to false for internet-facing load balancers and true for internal load balancers, preventing unintended access to your internal load balancer through an internet gateway.   The following attributes are supported by only Application Load Balancers:    idle_timeout.timeout_seconds - The idle timeout value, in seconds. The valid range is 1-4000 seconds. The default is 60 seconds.    client_keep_alive.seconds - The client keep alive value, in seconds. The valid range is 60-604800 seconds. The default is 3600 seconds.    connection_logs.s3.enabled - Indicates whether connection logs are enabled. The value is true or false. The default is false.    connection_logs.s3.bucket - The name of the S3 bucket for the connection logs. This attribute is required if connection logs are enabled. The bucket must exist in the same region as the load balancer and have a bucket policy that grants Elastic Load Balancing permissions to write to the bucket.    connection_logs.s3.prefix - The prefix for the location in the S3 bucket for the connection logs.    routing.http.desync_mitigation_mode - Determines how the load balancer handles requests that might pose a security risk to your application. The possible values are monitor, defensive, and strictest. The default is defensive.    routing.http.drop_invalid_header_fields.enabled - Indicates whether HTTP headers with invalid header fields are removed by the load balancer (true) or routed to targets (false). The default is false.    routing.http.preserve_host_header.enabled - Indicates whether the Application Load Balancer should preserve the Host header in the HTTP request and send it to the target without any change. The possible values are true and false. The default is false.    routing.http.x_amzn_tls_version_and_cipher_suite.enabled - Indicates whether the two headers (x-amzn-tls-version and x-amzn-tls-cipher-suite), which contain information about the negotiated TLS version and cipher suite, are added to the client request before sending it to the target. The x-amzn-tls-version header has information about the TLS protocol version negotiated with the client, and the x-amzn-tls-cipher-suite header has information about the cipher suite negotiated with the client. Both headers are in OpenSSL format. The possible values for the attribute are true and false. The default is false.    routing.http.xff_client_port.enabled - Indicates whether the X-Forwarded-For header should preserve the source port that the client used to connect to the load balancer. The possible values are true and false. The default is false.    routing.http.xff_header_processing.mode - Enables you to modify, preserve, or remove the X-Forwarded-For header in the HTTP request before the Application Load Balancer sends the request to the target. The possible values are append, preserve, and remove. The default is append.   If the value is append, the Application Load Balancer adds the client IP address (of the last hop) to the X-Forwarded-For header in the HTTP request before it sends it to targets.   If the value is preserve the Application Load Balancer preserves the X-Forwarded-For header in the HTTP request, and sends it to targets without any change.   If the value is remove, the Application Load Balancer removes the X-Forwarded-For header in the HTTP request before it sends it to targets.      routing.http2.enabled - Indicates whether HTTP/2 is enabled. The possible values are true and false. The default is true. Elastic Load Balancing requires that message header names contain only alphanumeric characters and hyphens.    waf.fail_open.enabled - Indicates whether to allow a WAF-enabled load balancer to route requests to targets if it is unable to forward the request to Amazon Web Services WAF. The possible values are true and false. The default is false.   The following attributes are supported by only Network Load Balancers:    dns_record.client_routing_policy - Indicates how traffic is distributed among the load balancer Availability Zones. The possible values are availability_zone_affinity with 100 percent zonal affinity, partial_availability_zone_affinity with 85 percent zonal affinity, and any_availability_zone with 0 percent zonal affinity.  
      */
     Key?: LoadBalancerAttributeKey;
     /**
@@ -1220,7 +1600,7 @@ declare namespace ELBv2 {
   export type LoadBalancerSchemeEnum = "internet-facing"|"internal"|string;
   export interface LoadBalancerState {
     /**
-     * The state code. The initial state of the load balancer is provisioning. After the load balancer is fully set up and ready to route traffic, its state is active. If the load balancer could not be set up, its state is failed.
+     * The state code. The initial state of the load balancer is provisioning. After the load balancer is fully set up and ready to route traffic, its state is active. If load balancer is routing traffic but does not have the resources it needs to scale, its state isactive_impaired. If the load balancer could not be set up, its state is failed.
      */
     Code?: LoadBalancerStateEnum;
     /**
@@ -1231,10 +1611,11 @@ declare namespace ELBv2 {
   export type LoadBalancerStateEnum = "active"|"provisioning"|"active_impaired"|"failed"|string;
   export type LoadBalancerTypeEnum = "application"|"network"|"gateway"|string;
   export type LoadBalancers = LoadBalancer[];
+  export type Location = string;
   export type Marker = string;
   export interface Matcher {
     /**
-     * For Application Load Balancers, you can specify values between 200 and 499, and the default value is 200. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299"). For Network Load Balancers and Gateway Load Balancers, this must be "200–399".
+     * For Application Load Balancers, you can specify values between 200 and 499, with the default value being 200. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299"). For Network Load Balancers, you can specify values between 200 and 599, with the default value being 200-399. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299"). For Gateway Load Balancers, this must be "200–399". Note that when using shorthand syntax, some values such as commas need to be escaped.
      */
     HttpCode?: HttpCode;
     /**
@@ -1243,6 +1624,24 @@ declare namespace ELBv2 {
     GrpcCode?: GrpcCode;
   }
   export type Max = string;
+  export type MitigationInEffectEnum = "yes"|"no"|string;
+  export type Mode = string;
+  export interface ModifyListenerAttributesInput {
+    /**
+     * The Amazon Resource Name (ARN) of the listener.
+     */
+    ListenerArn: ListenerArn;
+    /**
+     * The listener attributes.
+     */
+    Attributes: ListenerAttributes;
+  }
+  export interface ModifyListenerAttributesOutput {
+    /**
+     * Information about the listener attributes.
+     */
+    Attributes?: ListenerAttributes;
+  }
   export interface ModifyListenerInput {
     /**
      * The Amazon Resource Name (ARN) of the listener.
@@ -1272,6 +1671,10 @@ declare namespace ELBv2 {
      * [TLS listeners] The name of the Application-Layer Protocol Negotiation (ALPN) policy. You can specify one policy name. The following are the possible values:    HTTP1Only     HTTP2Only     HTTP2Optional     HTTP2Preferred     None    For more information, see ALPN policies in the Network Load Balancers Guide.
      */
     AlpnPolicy?: AlpnPolicyName;
+    /**
+     * The mutual authentication configuration information.
+     */
+    MutualAuthentication?: MutualAuthenticationAttributes;
   }
   export interface ModifyListenerOutput {
     /**
@@ -1321,13 +1724,13 @@ declare namespace ELBv2 {
      */
     TargetGroupArn: TargetGroupArn;
     /**
-     * The attributes.
+     * The target group attributes.
      */
     Attributes: TargetGroupAttributes;
   }
   export interface ModifyTargetGroupAttributesOutput {
     /**
-     * Information about the attributes.
+     * Information about the target group attributes.
      */
     Attributes?: TargetGroupAttributes;
   }
@@ -1337,7 +1740,7 @@ declare namespace ELBv2 {
      */
     TargetGroupArn: TargetGroupArn;
     /**
-     * The protocol the load balancer uses when performing health checks on targets. The TCP protocol is supported for health checks only if the protocol of the target group is TCP, TLS, UDP, or TCP_UDP. The GENEVE, TLS, UDP, and TCP_UDP protocols are not supported for health checks. With Network Load Balancers, you can't modify this setting.
+     * The protocol the load balancer uses when performing health checks on targets. For Application Load Balancers, the default is HTTP. For Network Load Balancers and Gateway Load Balancers, the default is TCP. The TCP protocol is not supported for health checks if the protocol of the target group is HTTP or HTTPS. It is supported for health checks only if the protocol of the target group is TCP, TLS, UDP, or TCP_UDP. The GENEVE, TLS, UDP, and TCP_UDP protocols are not supported for health checks.
      */
     HealthCheckProtocol?: ProtocolEnum;
     /**
@@ -1345,7 +1748,7 @@ declare namespace ELBv2 {
      */
     HealthCheckPort?: HealthCheckPort;
     /**
-     * [HTTP/HTTPS health checks] The destination for health checks on the targets. [HTTP1 or HTTP2 protocol version] The ping path. The default is /. [GRPC protocol version] The path of a custom health check method with the format /package.service/method. The default is /AWS.ALB/healthcheck.
+     * [HTTP/HTTPS health checks] The destination for health checks on the targets. [HTTP1 or HTTP2 protocol version] The ping path. The default is /. [GRPC protocol version] The path of a custom health check method with the format /package.service/method. The default is /Amazon Web Services.ALB/healthcheck.
      */
     HealthCheckPath?: Path;
     /**
@@ -1353,11 +1756,11 @@ declare namespace ELBv2 {
      */
     HealthCheckEnabled?: HealthCheckEnabled;
     /**
-     * The approximate amount of time, in seconds, between health checks of an individual target. For TCP health checks, the supported values are 10 or 30 seconds. With Network Load Balancers, you can't modify this setting.
+     * The approximate amount of time, in seconds, between health checks of an individual target.
      */
     HealthCheckIntervalSeconds?: HealthCheckIntervalSeconds;
     /**
-     * [HTTP/HTTPS health checks] The amount of time, in seconds, during which no response means a failed health check. With Network Load Balancers, you can't modify this setting.
+     * [HTTP/HTTPS health checks] The amount of time, in seconds, during which no response means a failed health check.
      */
     HealthCheckTimeoutSeconds?: HealthCheckTimeoutSeconds;
     /**
@@ -1365,11 +1768,11 @@ declare namespace ELBv2 {
      */
     HealthyThresholdCount?: HealthCheckThresholdCount;
     /**
-     * The number of consecutive health check failures required before considering the target unhealthy. For target groups with a protocol of TCP or TLS, this value must be the same as the healthy threshold count.
+     * The number of consecutive health check failures required before considering the target unhealthy.
      */
     UnhealthyThresholdCount?: HealthCheckThresholdCount;
     /**
-     * [HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful response from a target. With Network Load Balancers, you can't modify this setting.
+     * [HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful response from a target. For target groups with a protocol of TCP, TCP_UDP, UDP or TLS the range is 200-599. For target groups with a protocol of HTTP or HTTPS, the range is 200-499. For target groups with a protocol of GENEVE, the range is 200-399.
      */
     Matcher?: Matcher;
   }
@@ -1379,23 +1782,68 @@ declare namespace ELBv2 {
      */
     TargetGroups?: TargetGroups;
   }
+  export interface ModifyTrustStoreInput {
+    /**
+     * The Amazon Resource Name (ARN) of the trust store.
+     */
+    TrustStoreArn: TrustStoreArn;
+    /**
+     * The Amazon S3 bucket for the ca certificates bundle.
+     */
+    CaCertificatesBundleS3Bucket: S3Bucket;
+    /**
+     * The Amazon S3 path for the ca certificates bundle.
+     */
+    CaCertificatesBundleS3Key: S3Key;
+    /**
+     * The Amazon S3 object version for the ca certificates bundle. If undefined the current version is used.
+     */
+    CaCertificatesBundleS3ObjectVersion?: S3ObjectVersion;
+  }
+  export interface ModifyTrustStoreOutput {
+    /**
+     * Information about the modified trust store.
+     */
+    TrustStores?: TrustStores;
+  }
+  export interface MutualAuthenticationAttributes {
+    /**
+     * The client certificate handling method. Options are off, passthrough or verify. The default value is off.
+     */
+    Mode?: Mode;
+    /**
+     * The Amazon Resource Name (ARN) of the trust store.
+     */
+    TrustStoreArn?: TrustStoreArn;
+    /**
+     * Indicates whether expired client certificates are ignored.
+     */
+    IgnoreClientCertificateExpiry?: IgnoreClientCertificateExpiry;
+    /**
+     * Indicates a shared trust stores association status.
+     */
+    TrustStoreAssociationStatus?: TrustStoreAssociationStatusEnum;
+  }
   export type Name = string;
+  export type NumberOfCaCertificates = number;
+  export type NumberOfRevokedEntries = number;
   export type OutpostId = string;
   export type PageSize = number;
   export type Path = string;
   export interface PathPatternConditionConfig {
     /**
-     * One or more path patterns to compare against the request URL. The maximum size of each string is 128 characters. The comparison is case sensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). If you specify multiple strings, the condition is satisfied if one of them matches the request URL. The path pattern is compared only to the path of the URL, not to its query string. To compare against the query string, use QueryStringConditionConfig.
+     * The path patterns to compare against the request URL. The maximum size of each string is 128 characters. The comparison is case sensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). If you specify multiple strings, the condition is satisfied if one of them matches the request URL. The path pattern is compared only to the path of the URL, not to its query string. To compare against the query string, use QueryStringConditionConfig.
      */
     Values?: ListOfString;
   }
+  export type Policy = string;
   export type Port = number;
   export type PrivateIPv4Address = string;
   export type ProtocolEnum = "HTTP"|"HTTPS"|"TCP"|"TLS"|"UDP"|"TCP_UDP"|"GENEVE"|string;
   export type ProtocolVersion = string;
   export interface QueryStringConditionConfig {
     /**
-     * One or more key/value pairs or values to find in the query string. The maximum size of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, you must escape these characters in Values using a '\' character. If you specify multiple key/value pairs or values, the condition is satisfied if one of them is found in the query string.
+     * The key/value pairs or values to find in the query string. The maximum size of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, you must escape these characters in Values using a '\' character. If you specify multiple key/value pairs or values, the condition is satisfied if one of them is found in the query string.
      */
     Values?: QueryStringKeyValuePairList;
   }
@@ -1478,8 +1926,42 @@ declare namespace ELBv2 {
   }
   export interface RemoveTagsOutput {
   }
+  export interface RemoveTrustStoreRevocationsInput {
+    /**
+     * The Amazon Resource Name (ARN) of the trust store.
+     */
+    TrustStoreArn: TrustStoreArn;
+    /**
+     * The revocation IDs of the revocation files you want to remove.
+     */
+    RevocationIds: RevocationIds;
+  }
+  export interface RemoveTrustStoreRevocationsOutput {
+  }
   export type ResourceArn = string;
   export type ResourceArns = ResourceArn[];
+  export interface RevocationContent {
+    /**
+     * The Amazon S3 bucket for the revocation file.
+     */
+    S3Bucket?: S3Bucket;
+    /**
+     * The Amazon S3 path for the revocation file.
+     */
+    S3Key?: S3Key;
+    /**
+     * The Amazon S3 object version of the revocation file.
+     */
+    S3ObjectVersion?: S3ObjectVersion;
+    /**
+     * The type of revocation file.
+     */
+    RevocationType?: RevocationType;
+  }
+  export type RevocationContents = RevocationContent[];
+  export type RevocationId = number;
+  export type RevocationIds = RevocationId[];
+  export type RevocationType = "CRL"|string;
   export interface Rule {
     /**
      * The Amazon Resource Name (ARN) of the rule.
@@ -1552,6 +2034,9 @@ declare namespace ELBv2 {
     Priority?: RulePriority;
   }
   export type Rules = Rule[];
+  export type S3Bucket = string;
+  export type S3Key = string;
+  export type S3ObjectVersion = string;
   export type SecurityGroupId = string;
   export type SecurityGroups = SecurityGroupId[];
   export interface SetIpAddressTypeInput {
@@ -1560,7 +2045,7 @@ declare namespace ELBv2 {
      */
     LoadBalancerArn: LoadBalancerArn;
     /**
-     * The IP address type. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses). Internal load balancers must use ipv4. You can’t specify dualstack for a load balancer with a UDP or TCP_UDP listener.
+     * Note: Internal load balancers must use the ipv4 IP address type. [Application Load Balancers] The IP address type. The possible values are ipv4 (for only IPv4 addresses), dualstack (for IPv4 and IPv6 addresses), and dualstack-without-public-ipv4 (for IPv6 only public addresses, with private IPv4 and IPv6 addresses). Note: Application Load Balancer authentication only supports IPv4 addresses when connecting to an Identity Provider (IdP) or Amazon Cognito endpoint. Without a public IPv4 address the load balancer cannot complete the authentication process, resulting in HTTP 500 errors. [Network Load Balancers] The IP address type. The possible values are ipv4 (for only IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses). You can’t specify dualstack for a load balancer with a UDP or TCP_UDP listener. [Gateway Load Balancers] The IP address type. The possible values are ipv4 (for only IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses).
      */
     IpAddressType: IpAddressType;
   }
@@ -1591,12 +2076,20 @@ declare namespace ELBv2 {
      * The IDs of the security groups.
      */
     SecurityGroups: SecurityGroups;
+    /**
+     * Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through Amazon Web Services PrivateLink. The default is on.
+     */
+    EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic?: EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum;
   }
   export interface SetSecurityGroupsOutput {
     /**
      * The IDs of the security groups associated with the load balancer.
      */
     SecurityGroupIds?: SecurityGroups;
+    /**
+     * Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through Amazon Web Services PrivateLink.
+     */
+    EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic?: EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum;
   }
   export interface SetSubnetsInput {
     /**
@@ -1604,15 +2097,15 @@ declare namespace ELBv2 {
      */
     LoadBalancerArn: LoadBalancerArn;
     /**
-     * The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings. [Application Load Balancers] You must specify subnets from at least two Availability Zones. [Application Load Balancers on Outposts] You must specify one Outpost subnet. [Application Load Balancers on Local Zones] You can specify subnets from one or more Local Zones. [Network Load Balancers] You can specify subnets from one or more Availability Zones.
+     * The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings. [Application Load Balancers] You must specify subnets from at least two Availability Zones. [Application Load Balancers on Outposts] You must specify one Outpost subnet. [Application Load Balancers on Local Zones] You can specify subnets from one or more Local Zones. [Network Load Balancers] You can specify subnets from one or more Availability Zones. [Gateway Load Balancers] You can specify subnets from one or more Availability Zones.
      */
     Subnets?: Subnets;
     /**
-     * The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings. [Application Load Balancers] You must specify subnets from at least two Availability Zones. You cannot specify Elastic IP addresses for your subnets. [Application Load Balancers on Outposts] You must specify one Outpost subnet. [Application Load Balancers on Local Zones] You can specify subnets from one or more Local Zones. [Network Load Balancers] You can specify subnets from one or more Availability Zones. You can specify one Elastic IP address per subnet if you need static IP addresses for your internet-facing load balancer. For internal load balancers, you can specify one private IP address per subnet from the IPv4 range of the subnet. For internet-facing load balancer, you can specify one IPv6 address per subnet.
+     * The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings. [Application Load Balancers] You must specify subnets from at least two Availability Zones. You cannot specify Elastic IP addresses for your subnets. [Application Load Balancers on Outposts] You must specify one Outpost subnet. [Application Load Balancers on Local Zones] You can specify subnets from one or more Local Zones. [Network Load Balancers] You can specify subnets from one or more Availability Zones. You can specify one Elastic IP address per subnet if you need static IP addresses for your internet-facing load balancer. For internal load balancers, you can specify one private IP address per subnet from the IPv4 range of the subnet. For internet-facing load balancer, you can specify one IPv6 address per subnet. [Gateway Load Balancers] You can specify subnets from one or more Availability Zones.
      */
     SubnetMappings?: SubnetMappings;
     /**
-     * [Network Load Balancers] The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses). You can’t specify dualstack for a load balancer with a UDP or TCP_UDP listener. Internal load balancers must use ipv4.
+     * [Application Load Balancers] The IP address type. The possible values are ipv4 (for only IPv4 addresses), dualstack (for IPv4 and IPv6 addresses), and dualstack-without-public-ipv4 (for IPv6 only public addresses, with private IPv4 and IPv6 addresses). [Network Load Balancers] The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses). You can’t specify dualstack for a load balancer with a UDP or TCP_UDP listener. [Gateway Load Balancers] The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses).
      */
     IpAddressType?: IpAddressType;
   }
@@ -1622,13 +2115,13 @@ declare namespace ELBv2 {
      */
     AvailabilityZones?: AvailabilityZones;
     /**
-     * [Network Load Balancers] The IP address type.
+     * [Application Load Balancers] The IP address type. [Network Load Balancers] The IP address type. [Gateway Load Balancers] The IP address type.
      */
     IpAddressType?: IpAddressType;
   }
   export interface SourceIpConditionConfig {
     /**
-     * One or more source IP addresses, in CIDR format. You can use both IPv4 and IPv6 addresses. Wildcards are not supported. If you specify multiple addresses, the condition is satisfied if the source IP address of the request matches one of the CIDR blocks. This condition is not satisfied by the addresses in the X-Forwarded-For header. To search for addresses in the X-Forwarded-For header, use HttpHeaderConditionConfig.
+     * The source IP addresses, in CIDR format. You can use both IPv4 and IPv6 addresses. Wildcards are not supported. If you specify multiple addresses, the condition is satisfied if the source IP address of the request matches one of the CIDR blocks. This condition is not satisfied by the addresses in the X-Forwarded-For header. To search for addresses in the X-Forwarded-For header, use HttpHeaderConditionConfig. The total number of values must be less than, or equal to five.
      */
     Values?: ListOfString;
   }
@@ -1646,6 +2139,10 @@ declare namespace ELBv2 {
      * The name of the policy.
      */
     Name?: SslPolicyName;
+    /**
+     *  The supported load balancers. 
+     */
+    SupportedLoadBalancerTypes?: ListOfString;
   }
   export type SslPolicyName = string;
   export type SslPolicyNames = SslPolicyName[];
@@ -1702,15 +2199,15 @@ declare namespace ELBv2 {
   export type TagValue = string;
   export interface TargetDescription {
     /**
-     * The ID of the target. If the target type of the target group is instance, specify an instance ID. If the target type is ip, specify an IP address. If the target type is lambda, specify the ARN of the Lambda function.
+     * The ID of the target. If the target type of the target group is instance, specify an instance ID. If the target type is ip, specify an IP address. If the target type is lambda, specify the ARN of the Lambda function. If the target type is alb, specify the ARN of the Application Load Balancer target. 
      */
     Id: TargetId;
     /**
-     * The port on which the target is listening. If the target group protocol is GENEVE, the supported port is 6081. Not used if the target is a Lambda function.
+     * The port on which the target is listening. If the target group protocol is GENEVE, the supported port is 6081. If the target type is alb, the targeted Application Load Balancer must have at least one listener whose port matches the target group port. This parameter is not used if the target is a Lambda function.
      */
     Port?: Port;
     /**
-     * An Availability Zone or all. This determines whether the target receives traffic from the load balancer nodes in the specified Availability Zone or from all enabled Availability Zones for the load balancer. This parameter is not supported if the target type of the target group is instance. If the target type is ip and the IP address is in a subnet of the VPC for the target group, the Availability Zone is automatically detected and this parameter is optional. If the IP address is outside the VPC, this parameter is required. With an Application Load Balancer, if the target type is ip and the IP address is outside the VPC for the target group, the only supported value is all. If the target type is lambda, this parameter is optional and the only supported value is all.
+     * An Availability Zone or all. This determines whether the target receives traffic from the load balancer nodes in the specified Availability Zone or from all enabled Availability Zones for the load balancer. For Application Load Balancer target groups, the specified Availability Zone value is only applicable when cross-zone load balancing is off. Otherwise the parameter is ignored and treated as all. This parameter is not supported if the target type of the target group is instance or alb. If the target type is ip and the IP address is in a subnet of the VPC for the target group, the Availability Zone is automatically detected and this parameter is optional. If the IP address is outside the VPC, this parameter is required. For Application Load Balancer target groups with cross-zone load balancing off, if the target type is ip and the IP address is outside of the VPC for the target group, this should be an Availability Zone inside the VPC for the target group. If the target type is lambda, this parameter is optional and the only supported value is all.
      */
     AvailabilityZone?: ZoneName;
   }
@@ -1729,7 +2226,7 @@ declare namespace ELBv2 {
      */
     Protocol?: ProtocolEnum;
     /**
-     * The port on which the targets are listening. Not used if the target is a Lambda function.
+     * The port on which the targets are listening. This parameter is not used if the target is a Lambda function.
      */
     Port?: Port;
     /**
@@ -1773,23 +2270,27 @@ declare namespace ELBv2 {
      */
     Matcher?: Matcher;
     /**
-     * The Amazon Resource Names (ARN) of the load balancers that route traffic to this target group.
+     * The Amazon Resource Name (ARN) of the load balancer that routes traffic to this target group. You can use each target group with only one load balancer.
      */
     LoadBalancerArns?: LoadBalancerArns;
     /**
-     * The type of target that you must specify when registering targets with this target group. The possible values are instance (register targets by instance ID), ip (register targets by IP address), or lambda (register a single Lambda function as a target).
+     * The type of target that you must specify when registering targets with this target group. The possible values are instance (register targets by instance ID), ip (register targets by IP address), lambda (register a single Lambda function as a target), or alb (register a single Application Load Balancer as a target).
      */
     TargetType?: TargetTypeEnum;
     /**
      * [HTTP/HTTPS protocol] The protocol version. The possible values are GRPC, HTTP1, and HTTP2.
      */
     ProtocolVersion?: ProtocolVersion;
+    /**
+     * The type of IP address used for this target group. The possible values are ipv4 and ipv6. This is an optional parameter. If not specified, the IP address type defaults to ipv4.
+     */
+    IpAddressType?: TargetGroupIpAddressTypeEnum;
   }
   export type TargetGroupArn = string;
   export type TargetGroupArns = TargetGroupArn[];
   export interface TargetGroupAttribute {
     /**
-     * The name of the attribute. The following attribute is supported by all load balancers:    deregistration_delay.timeout_seconds - The amount of time, in seconds, for Elastic Load Balancing to wait before changing the state of a deregistering target from draining to unused. The range is 0-3600 seconds. The default value is 300 seconds. If the target is a Lambda function, this attribute is not supported.   The following attributes are supported by both Application Load Balancers and Network Load Balancers:    stickiness.enabled - Indicates whether sticky sessions are enabled. The value is true or false. The default is false.    stickiness.type - The type of sticky sessions. The possible values are lb_cookie for Application Load Balancers or source_ip for Network Load Balancers.   The following attributes are supported only if the load balancer is an Application Load Balancer and the target is an instance or an IP address:    load_balancing.algorithm.type - The load balancing algorithm determines how the load balancer selects targets when routing requests. The value is round_robin or least_outstanding_requests. The default is round_robin.    slow_start.duration_seconds - The time period, in seconds, during which a newly registered target receives an increasing share of the traffic to the target group. After this time period ends, the target receives its full share of traffic. The range is 30-900 seconds (15 minutes). The default is 0 seconds (disabled).    stickiness.lb_cookie.duration_seconds - The time period, in seconds, during which requests from a client should be routed to the same target. After this time period expires, the load balancer-generated cookie is considered stale. The range is 1 second to 1 week (604800 seconds). The default value is 1 day (86400 seconds).   The following attribute is supported only if the load balancer is an Application Load Balancer and the target is a Lambda function:    lambda.multi_value_headers.enabled - Indicates whether the request and response headers that are exchanged between the load balancer and the Lambda function include arrays of values or strings. The value is true or false. The default is false. If the value is false and the request contains a duplicate header field name or query parameter key, the load balancer uses the last value sent by the client.   The following attributes are supported only by Network Load Balancers:    deregistration_delay.connection_termination.enabled - Indicates whether the load balancer terminates connections at the end of the deregistration timeout. The value is true or false. The default is false.    proxy_protocol_v2.enabled - Indicates whether Proxy Protocol version 2 is enabled. The value is true or false. The default is false.  
+     * The name of the attribute. The following attributes are supported by all load balancers:    deregistration_delay.timeout_seconds - The amount of time, in seconds, for Elastic Load Balancing to wait before changing the state of a deregistering target from draining to unused. The range is 0-3600 seconds. The default value is 300 seconds. If the target is a Lambda function, this attribute is not supported.    stickiness.enabled - Indicates whether target stickiness is enabled. The value is true or false. The default is false.    stickiness.type - Indicates the type of stickiness. The possible values are:    lb_cookie and app_cookie for Application Load Balancers.    source_ip for Network Load Balancers.    source_ip_dest_ip and source_ip_dest_ip_proto for Gateway Load Balancers.     The following attributes are supported by Application Load Balancers and Network Load Balancers:    load_balancing.cross_zone.enabled - Indicates whether cross zone load balancing is enabled. The value is true, false or use_load_balancer_configuration. The default is use_load_balancer_configuration.    target_group_health.dns_failover.minimum_healthy_targets.count - The minimum number of targets that must be healthy. If the number of healthy targets is below this value, mark the zone as unhealthy in DNS, so that traffic is routed only to healthy zones. The possible values are off or an integer from 1 to the maximum number of targets. The default is off.    target_group_health.dns_failover.minimum_healthy_targets.percentage - The minimum percentage of targets that must be healthy. If the percentage of healthy targets is below this value, mark the zone as unhealthy in DNS, so that traffic is routed only to healthy zones. The possible values are off or an integer from 1 to 100. The default is off.    target_group_health.unhealthy_state_routing.minimum_healthy_targets.count - The minimum number of targets that must be healthy. If the number of healthy targets is below this value, send traffic to all targets, including unhealthy targets. The possible values are 1 to the maximum number of targets. The default is 1.    target_group_health.unhealthy_state_routing.minimum_healthy_targets.percentage - The minimum percentage of targets that must be healthy. If the percentage of healthy targets is below this value, send traffic to all targets, including unhealthy targets. The possible values are off or an integer from 1 to 100. The default is off.   The following attributes are supported only if the load balancer is an Application Load Balancer and the target is an instance or an IP address:    load_balancing.algorithm.type - The load balancing algorithm determines how the load balancer selects targets when routing requests. The value is round_robin, least_outstanding_requests, or weighted_random. The default is round_robin.    load_balancing.algorithm.anomaly_mitigation - Only available when load_balancing.algorithm.type is weighted_random. Indicates whether anomaly mitigation is enabled. The value is on or off. The default is off.    slow_start.duration_seconds - The time period, in seconds, during which a newly registered target receives an increasing share of the traffic to the target group. After this time period ends, the target receives its full share of traffic. The range is 30-900 seconds (15 minutes). The default is 0 seconds (disabled).    stickiness.app_cookie.cookie_name - Indicates the name of the application-based cookie. Names that start with the following prefixes are not allowed: AWSALB, AWSALBAPP, and AWSALBTG; they're reserved for use by the load balancer.    stickiness.app_cookie.duration_seconds - The time period, in seconds, during which requests from a client should be routed to the same target. After this time period expires, the application-based cookie is considered stale. The range is 1 second to 1 week (604800 seconds). The default value is 1 day (86400 seconds).    stickiness.lb_cookie.duration_seconds - The time period, in seconds, during which requests from a client should be routed to the same target. After this time period expires, the load balancer-generated cookie is considered stale. The range is 1 second to 1 week (604800 seconds). The default value is 1 day (86400 seconds).    The following attribute is supported only if the load balancer is an Application Load Balancer and the target is a Lambda function:    lambda.multi_value_headers.enabled - Indicates whether the request and response headers that are exchanged between the load balancer and the Lambda function include arrays of values or strings. The value is true or false. The default is false. If the value is false and the request contains a duplicate header field name or query parameter key, the load balancer uses the last value sent by the client.   The following attributes are supported only by Network Load Balancers:    deregistration_delay.connection_termination.enabled - Indicates whether the load balancer terminates connections at the end of the deregistration timeout. The value is true or false. For new UDP/TCP_UDP target groups the default is true. Otherwise, the default is false.    preserve_client_ip.enabled - Indicates whether client IP preservation is enabled. The value is true or false. The default is disabled if the target group type is IP address and the target group protocol is TCP or TLS. Otherwise, the default is enabled. Client IP preservation cannot be disabled for UDP and TCP_UDP target groups.    proxy_protocol_v2.enabled - Indicates whether Proxy Protocol version 2 is enabled. The value is true or false. The default is false.     target_health_state.unhealthy.connection_termination.enabled - Indicates whether the load balancer terminates connections to unhealthy targets. The value is true or false. The default is true.    target_health_state.unhealthy.draining_interval_seconds - The amount of time for Elastic Load Balancing to wait before changing the state of an unhealthy target from unhealthy.draining to unhealthy. The range is 0-360000 seconds. The default value is 0 seconds. Note: This attribute can only be configured when target_health_state.unhealthy.connection_termination.enabled is false.   The following attributes are supported only by Gateway Load Balancers:    target_failover.on_deregistration - Indicates how the Gateway Load Balancer handles existing flows when a target is deregistered. The possible values are rebalance and no_rebalance. The default is no_rebalance. The two attributes (target_failover.on_deregistration and target_failover.on_unhealthy) can't be set independently. The value you set for both attributes must be the same.     target_failover.on_unhealthy - Indicates how the Gateway Load Balancer handles existing flows when a target is unhealthy. The possible values are rebalance and no_rebalance. The default is no_rebalance. The two attributes (target_failover.on_deregistration and target_failover.on_unhealthy) cannot be set independently. The value you set for both attributes must be the same.   
      */
     Key?: TargetGroupAttributeKey;
     /**
@@ -1800,6 +2301,7 @@ declare namespace ELBv2 {
   export type TargetGroupAttributeKey = string;
   export type TargetGroupAttributeValue = string;
   export type TargetGroupAttributes = TargetGroupAttribute[];
+  export type TargetGroupIpAddressTypeEnum = "ipv4"|"ipv6"|string;
   export type TargetGroupList = TargetGroupTuple[];
   export type TargetGroupName = string;
   export type TargetGroupNames = TargetGroupName[];
@@ -1854,12 +2356,73 @@ declare namespace ELBv2 {
      * The health information for the target.
      */
     TargetHealth?: TargetHealth;
+    /**
+     * The anomaly detection result for the target. If no anomalies were detected, the result is normal. If anomalies were detected, the result is anomalous.
+     */
+    AnomalyDetection?: AnomalyDetection;
   }
   export type TargetHealthDescriptions = TargetHealthDescription[];
   export type TargetHealthReasonEnum = "Elb.RegistrationInProgress"|"Elb.InitialHealthChecking"|"Target.ResponseCodeMismatch"|"Target.Timeout"|"Target.FailedHealthChecks"|"Target.NotRegistered"|"Target.NotInUse"|"Target.DeregistrationInProgress"|"Target.InvalidState"|"Target.IpUnusable"|"Target.HealthCheckDisabled"|"Elb.InternalError"|string;
-  export type TargetHealthStateEnum = "initial"|"healthy"|"unhealthy"|"unused"|"draining"|"unavailable"|string;
+  export type TargetHealthStateEnum = "initial"|"healthy"|"unhealthy"|"unhealthy.draining"|"unused"|"draining"|"unavailable"|string;
   export type TargetId = string;
-  export type TargetTypeEnum = "instance"|"ip"|"lambda"|string;
+  export type TargetTypeEnum = "instance"|"ip"|"lambda"|"alb"|string;
+  export type TotalRevokedEntries = number;
+  export interface TrustStore {
+    /**
+     * The name of the trust store.
+     */
+    Name?: TrustStoreName;
+    /**
+     * The Amazon Resource Name (ARN) of the trust store.
+     */
+    TrustStoreArn?: TrustStoreArn;
+    /**
+     * The current status of the trust store.
+     */
+    Status?: TrustStoreStatus;
+    /**
+     * The number of ca certificates in the trust store.
+     */
+    NumberOfCaCertificates?: NumberOfCaCertificates;
+    /**
+     * The number of revoked certificates in the trust store.
+     */
+    TotalRevokedEntries?: TotalRevokedEntries;
+  }
+  export type TrustStoreArn = string;
+  export type TrustStoreArns = TrustStoreArn[];
+  export interface TrustStoreAssociation {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn?: TrustStoreAssociationResourceArn;
+  }
+  export type TrustStoreAssociationResourceArn = string;
+  export type TrustStoreAssociationStatusEnum = "active"|"removed"|string;
+  export type TrustStoreAssociations = TrustStoreAssociation[];
+  export type TrustStoreName = string;
+  export type TrustStoreNames = TrustStoreName[];
+  export interface TrustStoreRevocation {
+    /**
+     * The Amazon Resource Name (ARN) of the trust store.
+     */
+    TrustStoreArn?: TrustStoreArn;
+    /**
+     * The revocation ID of the revocation file.
+     */
+    RevocationId?: RevocationId;
+    /**
+     * The type of revocation file.
+     */
+    RevocationType?: RevocationType;
+    /**
+     * The number of revoked certificates.
+     */
+    NumberOfRevokedEntries?: NumberOfRevokedEntries;
+  }
+  export type TrustStoreRevocations = TrustStoreRevocation[];
+  export type TrustStoreStatus = "ACTIVE"|"CREATING"|string;
+  export type TrustStores = TrustStore[];
   export type VpcId = string;
   export type ZoneName = string;
   /**

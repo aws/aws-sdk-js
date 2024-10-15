@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "AppIntegrations",
+        "description": "The Amazon AppIntegrations service adds a set of APIs (in preview) to manage third party applications to be used in Amazon Connect agent workspace."
+    },
+    {
+        "type": "feature",
+        "category": "AppRunner",
+        "description": "This release allows an App Runner customer to specify a custom source directory to run the build & start command. This change allows App Runner to support monorepo based repositories"
+    },
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "This release updates a set of Amazon Connect APIs that provides the ability to integrate third party applications in the Amazon Connect agent workspace."
+    },
+    {
+        "type": "feature",
+        "category": "DynamoDB",
+        "description": "Amazon DynamoDB now supports Incremental Export as an enhancement to the existing Export Table"
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "The release includes AWS verified access to support FIPs compliance in North America regions"
+    },
+    {
+        "type": "feature",
+        "category": "LakeFormation",
+        "description": "This release adds three new API support \"CreateLakeFormationOptIn\", \"DeleteLakeFormationOptIn\" and \"ListLakeFormationOptIns\", and also updates the corresponding documentation."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "This release adds a new field COMPLETED to the ReplicationStatus Enum. You can now use this field to validate the replication status of S3 objects using the AWS SDK."
+    }
+]

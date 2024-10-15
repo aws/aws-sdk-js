@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "AppConfigData",
+        "description": "Fix FIPS Endpoints in aws-us-gov."
+    },
+    {
+        "type": "feature",
+        "category": "ConnectCases",
+        "description": "This release adds the ability to view audit history on a case and introduces a new parameter, performedBy, for CreateCase and UpdateCase API's."
+    },
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "This release adds support for Transport Layer Security (TLS) and Configurable Timeout to ECS Service Connect. TLS facilitates privacy and data security for inter-service communications, while Configurable Timeout allows customized per-request timeout and idle timeout for Service Connect services."
+    },
+    {
+        "type": "feature",
+        "category": "Finspace",
+        "description": "Allow customer to set zip default through command line arguments."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "Introduced support for the InsufficientDBInstanceCapacityFault error in the RDS CreateDBCluster API method. This provides enhanced error handling, ensuring a more robust experience when creating database clusters with insufficient instance capacity."
+    }
+]

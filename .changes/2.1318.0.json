@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "AppRunner",
+        "description": "This release supports removing MaxSize limit for AutoScalingConfiguration."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Release of Delta Lake Data Lake Format for Glue Studio Service"
+    }
+]

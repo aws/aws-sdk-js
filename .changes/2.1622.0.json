@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "ACMPCA",
+        "description": "This release adds support for waiters to fail on AccessDeniedException when having insufficient permissions"
+    },
+    {
+        "type": "feature",
+        "category": "Kafka",
+        "description": "AWS MSK support for Broker Removal."
+    },
+    {
+        "type": "feature",
+        "category": "MWAA",
+        "description": "Amazon MWAA now supports Airflow web server auto scaling to automatically handle increased demand from REST APIs, Command Line Interface (CLI), or more Airflow User Interface (UI) users. Customers can specify maximum and minimum web server instances during environment creation and update workflow."
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "This release adds DescribeKeyRegistration and UpdateKeyRegistration APIs to manage QuickSight Customer Managed Keys (CMK)."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Introduced WorkerAccessConfiguration to SageMaker Workteam. This allows customers to configure resource access for workers in a workteam."
+    }
+]

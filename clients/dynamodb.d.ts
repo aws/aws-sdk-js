@@ -15,27 +15,27 @@ declare class DynamoDB extends DynamoDBCustomizations {
   constructor(options?: DynamoDB.Types.ClientConfiguration)
   config: Config & DynamoDB.Types.ClientConfiguration;
   /**
-   *  This operation allows you to perform batch reads and writes on data stored in DynamoDB, using PartiQL. 
+   * This operation allows you to perform batch reads or writes on data stored in DynamoDB, using PartiQL. Each read statement in a BatchExecuteStatement must specify an equality condition on all key attributes. This enforces that each SELECT statement in a batch returns at most a single item. For more information, see Running batch operations with PartiQL for DynamoDB .  The entire batch must consist of either read statements or write statements, you cannot mix both in one batch.   A HTTP 200 response does not mean that all statements in the BatchExecuteStatement succeeded. Error details for individual statements can be found under the Error field of the BatchStatementResponse for each statement. 
    */
   batchExecuteStatement(params: DynamoDB.Types.BatchExecuteStatementInput, callback?: (err: AWSError, data: DynamoDB.Types.BatchExecuteStatementOutput) => void): Request<DynamoDB.Types.BatchExecuteStatementOutput, AWSError>;
   /**
-   *  This operation allows you to perform batch reads and writes on data stored in DynamoDB, using PartiQL. 
+   * This operation allows you to perform batch reads or writes on data stored in DynamoDB, using PartiQL. Each read statement in a BatchExecuteStatement must specify an equality condition on all key attributes. This enforces that each SELECT statement in a batch returns at most a single item. For more information, see Running batch operations with PartiQL for DynamoDB .  The entire batch must consist of either read statements or write statements, you cannot mix both in one batch.   A HTTP 200 response does not mean that all statements in the BatchExecuteStatement succeeded. Error details for individual statements can be found under the Error field of the BatchStatementResponse for each statement. 
    */
   batchExecuteStatement(callback?: (err: AWSError, data: DynamoDB.Types.BatchExecuteStatementOutput) => void): Request<DynamoDB.Types.BatchExecuteStatementOutput, AWSError>;
   /**
-   * The BatchGetItem operation returns the attributes of one or more items from one or more tables. You identify requested items by primary key. A single operation can retrieve up to 16 MB of data, which can contain as many as 100 items. BatchGetItem returns a partial result if the response size limit is exceeded, the table's provisioned throughput is exceeded, or an internal processing failure occurs. If a partial result is returned, the operation returns a value for UnprocessedKeys. You can use this value to retry the operation starting with the next item to get.  If you request more than 100 items, BatchGetItem returns a ValidationException with the message "Too many items requested for the BatchGetItem call."  For example, if you ask to retrieve 100 items, but each individual item is 300 KB in size, the system returns 52 items (so as not to exceed the 16 MB limit). It also returns an appropriate UnprocessedKeys value so you can get the next page of results. If desired, your application can include its own logic to assemble the pages of results into one dataset. If none of the items can be processed due to insufficient provisioned throughput on all of the tables in the request, then BatchGetItem returns a ProvisionedThroughputExceededException. If at least one of the items is successfully processed, then BatchGetItem completes successfully, while returning the keys of the unread items in UnprocessedKeys.  If DynamoDB returns any unprocessed items, you should retry the batch operation on those items. However, we strongly recommend that you use an exponential backoff algorithm. If you retry the batch operation immediately, the underlying read or write requests can still fail due to throttling on the individual tables. If you delay the batch operation using exponential backoff, the individual requests in the batch are much more likely to succeed. For more information, see Batch Operations and Error Handling in the Amazon DynamoDB Developer Guide.  By default, BatchGetItem performs eventually consistent reads on every table in the request. If you want strongly consistent reads instead, you can set ConsistentRead to true for any or all tables. In order to minimize response latency, BatchGetItem retrieves items in parallel. When designing your application, keep in mind that DynamoDB does not return items in any particular order. To help parse the response by item, include the primary key values for the items in your request in the ProjectionExpression parameter. If a requested item does not exist, it is not returned in the result. Requests for nonexistent items consume the minimum read capacity units according to the type of read. For more information, see Working with Tables in the Amazon DynamoDB Developer Guide.
+   * The BatchGetItem operation returns the attributes of one or more items from one or more tables. You identify requested items by primary key. A single operation can retrieve up to 16 MB of data, which can contain as many as 100 items. BatchGetItem returns a partial result if the response size limit is exceeded, the table's provisioned throughput is exceeded, more than 1MB per partition is requested, or an internal processing failure occurs. If a partial result is returned, the operation returns a value for UnprocessedKeys. You can use this value to retry the operation starting with the next item to get.  If you request more than 100 items, BatchGetItem returns a ValidationException with the message "Too many items requested for the BatchGetItem call."  For example, if you ask to retrieve 100 items, but each individual item is 300 KB in size, the system returns 52 items (so as not to exceed the 16 MB limit). It also returns an appropriate UnprocessedKeys value so you can get the next page of results. If desired, your application can include its own logic to assemble the pages of results into one dataset. If none of the items can be processed due to insufficient provisioned throughput on all of the tables in the request, then BatchGetItem returns a ProvisionedThroughputExceededException. If at least one of the items is successfully processed, then BatchGetItem completes successfully, while returning the keys of the unread items in UnprocessedKeys.  If DynamoDB returns any unprocessed items, you should retry the batch operation on those items. However, we strongly recommend that you use an exponential backoff algorithm. If you retry the batch operation immediately, the underlying read or write requests can still fail due to throttling on the individual tables. If you delay the batch operation using exponential backoff, the individual requests in the batch are much more likely to succeed. For more information, see Batch Operations and Error Handling in the Amazon DynamoDB Developer Guide.  By default, BatchGetItem performs eventually consistent reads on every table in the request. If you want strongly consistent reads instead, you can set ConsistentRead to true for any or all tables. In order to minimize response latency, BatchGetItem may retrieve items in parallel. When designing your application, keep in mind that DynamoDB does not return items in any particular order. To help parse the response by item, include the primary key values for the items in your request in the ProjectionExpression parameter. If a requested item does not exist, it is not returned in the result. Requests for nonexistent items consume the minimum read capacity units according to the type of read. For more information, see Working with Tables in the Amazon DynamoDB Developer Guide.
    */
   batchGetItem(params: DynamoDB.Types.BatchGetItemInput, callback?: (err: AWSError, data: DynamoDB.Types.BatchGetItemOutput) => void): Request<DynamoDB.Types.BatchGetItemOutput, AWSError>;
   /**
-   * The BatchGetItem operation returns the attributes of one or more items from one or more tables. You identify requested items by primary key. A single operation can retrieve up to 16 MB of data, which can contain as many as 100 items. BatchGetItem returns a partial result if the response size limit is exceeded, the table's provisioned throughput is exceeded, or an internal processing failure occurs. If a partial result is returned, the operation returns a value for UnprocessedKeys. You can use this value to retry the operation starting with the next item to get.  If you request more than 100 items, BatchGetItem returns a ValidationException with the message "Too many items requested for the BatchGetItem call."  For example, if you ask to retrieve 100 items, but each individual item is 300 KB in size, the system returns 52 items (so as not to exceed the 16 MB limit). It also returns an appropriate UnprocessedKeys value so you can get the next page of results. If desired, your application can include its own logic to assemble the pages of results into one dataset. If none of the items can be processed due to insufficient provisioned throughput on all of the tables in the request, then BatchGetItem returns a ProvisionedThroughputExceededException. If at least one of the items is successfully processed, then BatchGetItem completes successfully, while returning the keys of the unread items in UnprocessedKeys.  If DynamoDB returns any unprocessed items, you should retry the batch operation on those items. However, we strongly recommend that you use an exponential backoff algorithm. If you retry the batch operation immediately, the underlying read or write requests can still fail due to throttling on the individual tables. If you delay the batch operation using exponential backoff, the individual requests in the batch are much more likely to succeed. For more information, see Batch Operations and Error Handling in the Amazon DynamoDB Developer Guide.  By default, BatchGetItem performs eventually consistent reads on every table in the request. If you want strongly consistent reads instead, you can set ConsistentRead to true for any or all tables. In order to minimize response latency, BatchGetItem retrieves items in parallel. When designing your application, keep in mind that DynamoDB does not return items in any particular order. To help parse the response by item, include the primary key values for the items in your request in the ProjectionExpression parameter. If a requested item does not exist, it is not returned in the result. Requests for nonexistent items consume the minimum read capacity units according to the type of read. For more information, see Working with Tables in the Amazon DynamoDB Developer Guide.
+   * The BatchGetItem operation returns the attributes of one or more items from one or more tables. You identify requested items by primary key. A single operation can retrieve up to 16 MB of data, which can contain as many as 100 items. BatchGetItem returns a partial result if the response size limit is exceeded, the table's provisioned throughput is exceeded, more than 1MB per partition is requested, or an internal processing failure occurs. If a partial result is returned, the operation returns a value for UnprocessedKeys. You can use this value to retry the operation starting with the next item to get.  If you request more than 100 items, BatchGetItem returns a ValidationException with the message "Too many items requested for the BatchGetItem call."  For example, if you ask to retrieve 100 items, but each individual item is 300 KB in size, the system returns 52 items (so as not to exceed the 16 MB limit). It also returns an appropriate UnprocessedKeys value so you can get the next page of results. If desired, your application can include its own logic to assemble the pages of results into one dataset. If none of the items can be processed due to insufficient provisioned throughput on all of the tables in the request, then BatchGetItem returns a ProvisionedThroughputExceededException. If at least one of the items is successfully processed, then BatchGetItem completes successfully, while returning the keys of the unread items in UnprocessedKeys.  If DynamoDB returns any unprocessed items, you should retry the batch operation on those items. However, we strongly recommend that you use an exponential backoff algorithm. If you retry the batch operation immediately, the underlying read or write requests can still fail due to throttling on the individual tables. If you delay the batch operation using exponential backoff, the individual requests in the batch are much more likely to succeed. For more information, see Batch Operations and Error Handling in the Amazon DynamoDB Developer Guide.  By default, BatchGetItem performs eventually consistent reads on every table in the request. If you want strongly consistent reads instead, you can set ConsistentRead to true for any or all tables. In order to minimize response latency, BatchGetItem may retrieve items in parallel. When designing your application, keep in mind that DynamoDB does not return items in any particular order. To help parse the response by item, include the primary key values for the items in your request in the ProjectionExpression parameter. If a requested item does not exist, it is not returned in the result. Requests for nonexistent items consume the minimum read capacity units according to the type of read. For more information, see Working with Tables in the Amazon DynamoDB Developer Guide.
    */
   batchGetItem(callback?: (err: AWSError, data: DynamoDB.Types.BatchGetItemOutput) => void): Request<DynamoDB.Types.BatchGetItemOutput, AWSError>;
   /**
-   * The BatchWriteItem operation puts or deletes multiple items in one or more tables. A single call to BatchWriteItem can write up to 16 MB of data, which can comprise as many as 25 put or delete requests. Individual items to be written can be as large as 400 KB.   BatchWriteItem cannot update items. To update items, use the UpdateItem action.  The individual PutItem and DeleteItem operations specified in BatchWriteItem are atomic; however BatchWriteItem as a whole is not. If any requested operations fail because the table's provisioned throughput is exceeded or an internal processing failure occurs, the failed operations are returned in the UnprocessedItems response parameter. You can investigate and optionally resend the requests. Typically, you would call BatchWriteItem in a loop. Each iteration would check for unprocessed items and submit a new BatchWriteItem request with those unprocessed items until all items have been processed. If none of the items can be processed due to insufficient provisioned throughput on all of the tables in the request, then BatchWriteItem returns a ProvisionedThroughputExceededException.  If DynamoDB returns any unprocessed items, you should retry the batch operation on those items. However, we strongly recommend that you use an exponential backoff algorithm. If you retry the batch operation immediately, the underlying read or write requests can still fail due to throttling on the individual tables. If you delay the batch operation using exponential backoff, the individual requests in the batch are much more likely to succeed. For more information, see Batch Operations and Error Handling in the Amazon DynamoDB Developer Guide.  With BatchWriteItem, you can efficiently write or delete large amounts of data, such as from Amazon EMR, or copy data from another database into DynamoDB. In order to improve performance with these large-scale operations, BatchWriteItem does not behave in the same way as individual PutItem and DeleteItem calls would. For example, you cannot specify conditions on individual put and delete requests, and BatchWriteItem does not return deleted items in the response. If you use a programming language that supports concurrency, you can use threads to write items in parallel. Your application must include the necessary logic to manage the threads. With languages that don't support threading, you must update or delete the specified items one at a time. In both situations, BatchWriteItem performs the specified put and delete operations in parallel, giving you the power of the thread pool approach without having to introduce complexity into your application. Parallel processing reduces latency, but each specified put and delete request consumes the same number of write capacity units whether it is processed in parallel or not. Delete operations on nonexistent items consume one write capacity unit. If one or more of the following is true, DynamoDB rejects the entire batch write operation:   One or more tables specified in the BatchWriteItem request does not exist.   Primary key attributes specified on an item in the request do not match those in the corresponding table's primary key schema.   You try to perform multiple operations on the same item in the same BatchWriteItem request. For example, you cannot put and delete the same item in the same BatchWriteItem request.     Your request contains at least two items with identical hash and range keys (which essentially is two put operations).    There are more than 25 requests in the batch.   Any individual item in a batch exceeds 400 KB.   The total request size exceeds 16 MB.  
+   * The BatchWriteItem operation puts or deletes multiple items in one or more tables. A single call to BatchWriteItem can transmit up to 16MB of data over the network, consisting of up to 25 item put or delete operations. While individual items can be up to 400 KB once stored, it's important to note that an item's representation might be greater than 400KB while being sent in DynamoDB's JSON format for the API call. For more details on this distinction, see Naming Rules and Data Types.   BatchWriteItem cannot update items. If you perform a BatchWriteItem operation on an existing item, that item's values will be overwritten by the operation and it will appear like it was updated. To update items, we recommend you use the UpdateItem action.  The individual PutItem and DeleteItem operations specified in BatchWriteItem are atomic; however BatchWriteItem as a whole is not. If any requested operations fail because the table's provisioned throughput is exceeded or an internal processing failure occurs, the failed operations are returned in the UnprocessedItems response parameter. You can investigate and optionally resend the requests. Typically, you would call BatchWriteItem in a loop. Each iteration would check for unprocessed items and submit a new BatchWriteItem request with those unprocessed items until all items have been processed. For tables and indexes with provisioned capacity, if none of the items can be processed due to insufficient provisioned throughput on all of the tables in the request, then BatchWriteItem returns a ProvisionedThroughputExceededException. For all tables and indexes, if none of the items can be processed due to other throttling scenarios (such as exceeding partition level limits), then BatchWriteItem returns a ThrottlingException.  If DynamoDB returns any unprocessed items, you should retry the batch operation on those items. However, we strongly recommend that you use an exponential backoff algorithm. If you retry the batch operation immediately, the underlying read or write requests can still fail due to throttling on the individual tables. If you delay the batch operation using exponential backoff, the individual requests in the batch are much more likely to succeed. For more information, see Batch Operations and Error Handling in the Amazon DynamoDB Developer Guide.  With BatchWriteItem, you can efficiently write or delete large amounts of data, such as from Amazon EMR, or copy data from another database into DynamoDB. In order to improve performance with these large-scale operations, BatchWriteItem does not behave in the same way as individual PutItem and DeleteItem calls would. For example, you cannot specify conditions on individual put and delete requests, and BatchWriteItem does not return deleted items in the response. If you use a programming language that supports concurrency, you can use threads to write items in parallel. Your application must include the necessary logic to manage the threads. With languages that don't support threading, you must update or delete the specified items one at a time. In both situations, BatchWriteItem performs the specified put and delete operations in parallel, giving you the power of the thread pool approach without having to introduce complexity into your application. Parallel processing reduces latency, but each specified put and delete request consumes the same number of write capacity units whether it is processed in parallel or not. Delete operations on nonexistent items consume one write capacity unit. If one or more of the following is true, DynamoDB rejects the entire batch write operation:   One or more tables specified in the BatchWriteItem request does not exist.   Primary key attributes specified on an item in the request do not match those in the corresponding table's primary key schema.   You try to perform multiple operations on the same item in the same BatchWriteItem request. For example, you cannot put and delete the same item in the same BatchWriteItem request.     Your request contains at least two items with identical hash and range keys (which essentially is two put operations).    There are more than 25 requests in the batch.   Any individual item in a batch exceeds 400 KB.   The total request size exceeds 16 MB.   Any individual items with keys exceeding the key length limits. For a partition key, the limit is 2048 bytes and for a sort key, the limit is 1024 bytes.  
    */
   batchWriteItem(params: DynamoDB.Types.BatchWriteItemInput, callback?: (err: AWSError, data: DynamoDB.Types.BatchWriteItemOutput) => void): Request<DynamoDB.Types.BatchWriteItemOutput, AWSError>;
   /**
-   * The BatchWriteItem operation puts or deletes multiple items in one or more tables. A single call to BatchWriteItem can write up to 16 MB of data, which can comprise as many as 25 put or delete requests. Individual items to be written can be as large as 400 KB.   BatchWriteItem cannot update items. To update items, use the UpdateItem action.  The individual PutItem and DeleteItem operations specified in BatchWriteItem are atomic; however BatchWriteItem as a whole is not. If any requested operations fail because the table's provisioned throughput is exceeded or an internal processing failure occurs, the failed operations are returned in the UnprocessedItems response parameter. You can investigate and optionally resend the requests. Typically, you would call BatchWriteItem in a loop. Each iteration would check for unprocessed items and submit a new BatchWriteItem request with those unprocessed items until all items have been processed. If none of the items can be processed due to insufficient provisioned throughput on all of the tables in the request, then BatchWriteItem returns a ProvisionedThroughputExceededException.  If DynamoDB returns any unprocessed items, you should retry the batch operation on those items. However, we strongly recommend that you use an exponential backoff algorithm. If you retry the batch operation immediately, the underlying read or write requests can still fail due to throttling on the individual tables. If you delay the batch operation using exponential backoff, the individual requests in the batch are much more likely to succeed. For more information, see Batch Operations and Error Handling in the Amazon DynamoDB Developer Guide.  With BatchWriteItem, you can efficiently write or delete large amounts of data, such as from Amazon EMR, or copy data from another database into DynamoDB. In order to improve performance with these large-scale operations, BatchWriteItem does not behave in the same way as individual PutItem and DeleteItem calls would. For example, you cannot specify conditions on individual put and delete requests, and BatchWriteItem does not return deleted items in the response. If you use a programming language that supports concurrency, you can use threads to write items in parallel. Your application must include the necessary logic to manage the threads. With languages that don't support threading, you must update or delete the specified items one at a time. In both situations, BatchWriteItem performs the specified put and delete operations in parallel, giving you the power of the thread pool approach without having to introduce complexity into your application. Parallel processing reduces latency, but each specified put and delete request consumes the same number of write capacity units whether it is processed in parallel or not. Delete operations on nonexistent items consume one write capacity unit. If one or more of the following is true, DynamoDB rejects the entire batch write operation:   One or more tables specified in the BatchWriteItem request does not exist.   Primary key attributes specified on an item in the request do not match those in the corresponding table's primary key schema.   You try to perform multiple operations on the same item in the same BatchWriteItem request. For example, you cannot put and delete the same item in the same BatchWriteItem request.     Your request contains at least two items with identical hash and range keys (which essentially is two put operations).    There are more than 25 requests in the batch.   Any individual item in a batch exceeds 400 KB.   The total request size exceeds 16 MB.  
+   * The BatchWriteItem operation puts or deletes multiple items in one or more tables. A single call to BatchWriteItem can transmit up to 16MB of data over the network, consisting of up to 25 item put or delete operations. While individual items can be up to 400 KB once stored, it's important to note that an item's representation might be greater than 400KB while being sent in DynamoDB's JSON format for the API call. For more details on this distinction, see Naming Rules and Data Types.   BatchWriteItem cannot update items. If you perform a BatchWriteItem operation on an existing item, that item's values will be overwritten by the operation and it will appear like it was updated. To update items, we recommend you use the UpdateItem action.  The individual PutItem and DeleteItem operations specified in BatchWriteItem are atomic; however BatchWriteItem as a whole is not. If any requested operations fail because the table's provisioned throughput is exceeded or an internal processing failure occurs, the failed operations are returned in the UnprocessedItems response parameter. You can investigate and optionally resend the requests. Typically, you would call BatchWriteItem in a loop. Each iteration would check for unprocessed items and submit a new BatchWriteItem request with those unprocessed items until all items have been processed. For tables and indexes with provisioned capacity, if none of the items can be processed due to insufficient provisioned throughput on all of the tables in the request, then BatchWriteItem returns a ProvisionedThroughputExceededException. For all tables and indexes, if none of the items can be processed due to other throttling scenarios (such as exceeding partition level limits), then BatchWriteItem returns a ThrottlingException.  If DynamoDB returns any unprocessed items, you should retry the batch operation on those items. However, we strongly recommend that you use an exponential backoff algorithm. If you retry the batch operation immediately, the underlying read or write requests can still fail due to throttling on the individual tables. If you delay the batch operation using exponential backoff, the individual requests in the batch are much more likely to succeed. For more information, see Batch Operations and Error Handling in the Amazon DynamoDB Developer Guide.  With BatchWriteItem, you can efficiently write or delete large amounts of data, such as from Amazon EMR, or copy data from another database into DynamoDB. In order to improve performance with these large-scale operations, BatchWriteItem does not behave in the same way as individual PutItem and DeleteItem calls would. For example, you cannot specify conditions on individual put and delete requests, and BatchWriteItem does not return deleted items in the response. If you use a programming language that supports concurrency, you can use threads to write items in parallel. Your application must include the necessary logic to manage the threads. With languages that don't support threading, you must update or delete the specified items one at a time. In both situations, BatchWriteItem performs the specified put and delete operations in parallel, giving you the power of the thread pool approach without having to introduce complexity into your application. Parallel processing reduces latency, but each specified put and delete request consumes the same number of write capacity units whether it is processed in parallel or not. Delete operations on nonexistent items consume one write capacity unit. If one or more of the following is true, DynamoDB rejects the entire batch write operation:   One or more tables specified in the BatchWriteItem request does not exist.   Primary key attributes specified on an item in the request do not match those in the corresponding table's primary key schema.   You try to perform multiple operations on the same item in the same BatchWriteItem request. For example, you cannot put and delete the same item in the same BatchWriteItem request.     Your request contains at least two items with identical hash and range keys (which essentially is two put operations).    There are more than 25 requests in the batch.   Any individual item in a batch exceeds 400 KB.   The total request size exceeds 16 MB.   Any individual items with keys exceeding the key length limits. For a partition key, the limit is 2048 bytes and for a sort key, the limit is 1024 bytes.  
    */
   batchWriteItem(callback?: (err: AWSError, data: DynamoDB.Types.BatchWriteItemOutput) => void): Request<DynamoDB.Types.BatchWriteItemOutput, AWSError>;
   /**
@@ -47,19 +47,19 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   createBackup(callback?: (err: AWSError, data: DynamoDB.Types.CreateBackupOutput) => void): Request<DynamoDB.Types.CreateBackupOutput, AWSError>;
   /**
-   * Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided Regions.   This operation only applies to Version 2017.11.29 of global tables.  If you want to add a new replica table to a global table, each of the following conditions must be true:   The table must have the same primary key as all of the other replicas.   The table must have the same name as all of the other replicas.   The table must have DynamoDB Streams enabled, with the stream containing both the new and the old images of the item.   None of the replica tables in the global table can contain any data.    If global secondary indexes are specified, then the following conditions must also be met:     The global secondary indexes must have the same name.     The global secondary indexes must have the same hash key and sort key (if present).     If local secondary indexes are specified, then the following conditions must also be met:     The local secondary indexes must have the same name.     The local secondary indexes must have the same hash key and sort key (if present).      Write capacity settings should be set consistently across your replica tables and secondary indexes. DynamoDB strongly recommends enabling auto scaling to manage the write capacity settings for all of your global tables replicas and indexes.   If you prefer to manage write capacity settings manually, you should provision equal replicated write capacity units to your replica tables. You should also provision equal replicated write capacity units to matching secondary indexes across your global table.  
+   * Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided Regions.   This documentation is for version 2017.11.29 (Legacy) of global tables, which should be avoided for new global tables. Customers should use Global Tables version 2019.11.21 (Current) when possible, because it provides greater flexibility, higher efficiency, and consumes less write capacity than 2017.11.29 (Legacy). To determine which version you're using, see Determining the global table version you are using. To update existing global tables from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see Upgrading global tables.  If you want to add a new replica table to a global table, each of the following conditions must be true:   The table must have the same primary key as all of the other replicas.   The table must have the same name as all of the other replicas.   The table must have DynamoDB Streams enabled, with the stream containing both the new and the old images of the item.   None of the replica tables in the global table can contain any data.    If global secondary indexes are specified, then the following conditions must also be met:     The global secondary indexes must have the same name.     The global secondary indexes must have the same hash key and sort key (if present).     If local secondary indexes are specified, then the following conditions must also be met:     The local secondary indexes must have the same name.     The local secondary indexes must have the same hash key and sort key (if present).      Write capacity settings should be set consistently across your replica tables and secondary indexes. DynamoDB strongly recommends enabling auto scaling to manage the write capacity settings for all of your global tables replicas and indexes.   If you prefer to manage write capacity settings manually, you should provision equal replicated write capacity units to your replica tables. You should also provision equal replicated write capacity units to matching secondary indexes across your global table.  
    */
   createGlobalTable(params: DynamoDB.Types.CreateGlobalTableInput, callback?: (err: AWSError, data: DynamoDB.Types.CreateGlobalTableOutput) => void): Request<DynamoDB.Types.CreateGlobalTableOutput, AWSError>;
   /**
-   * Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided Regions.   This operation only applies to Version 2017.11.29 of global tables.  If you want to add a new replica table to a global table, each of the following conditions must be true:   The table must have the same primary key as all of the other replicas.   The table must have the same name as all of the other replicas.   The table must have DynamoDB Streams enabled, with the stream containing both the new and the old images of the item.   None of the replica tables in the global table can contain any data.    If global secondary indexes are specified, then the following conditions must also be met:     The global secondary indexes must have the same name.     The global secondary indexes must have the same hash key and sort key (if present).     If local secondary indexes are specified, then the following conditions must also be met:     The local secondary indexes must have the same name.     The local secondary indexes must have the same hash key and sort key (if present).      Write capacity settings should be set consistently across your replica tables and secondary indexes. DynamoDB strongly recommends enabling auto scaling to manage the write capacity settings for all of your global tables replicas and indexes.   If you prefer to manage write capacity settings manually, you should provision equal replicated write capacity units to your replica tables. You should also provision equal replicated write capacity units to matching secondary indexes across your global table.  
+   * Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided Regions.   This documentation is for version 2017.11.29 (Legacy) of global tables, which should be avoided for new global tables. Customers should use Global Tables version 2019.11.21 (Current) when possible, because it provides greater flexibility, higher efficiency, and consumes less write capacity than 2017.11.29 (Legacy). To determine which version you're using, see Determining the global table version you are using. To update existing global tables from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see Upgrading global tables.  If you want to add a new replica table to a global table, each of the following conditions must be true:   The table must have the same primary key as all of the other replicas.   The table must have the same name as all of the other replicas.   The table must have DynamoDB Streams enabled, with the stream containing both the new and the old images of the item.   None of the replica tables in the global table can contain any data.    If global secondary indexes are specified, then the following conditions must also be met:     The global secondary indexes must have the same name.     The global secondary indexes must have the same hash key and sort key (if present).     If local secondary indexes are specified, then the following conditions must also be met:     The local secondary indexes must have the same name.     The local secondary indexes must have the same hash key and sort key (if present).      Write capacity settings should be set consistently across your replica tables and secondary indexes. DynamoDB strongly recommends enabling auto scaling to manage the write capacity settings for all of your global tables replicas and indexes.   If you prefer to manage write capacity settings manually, you should provision equal replicated write capacity units to your replica tables. You should also provision equal replicated write capacity units to matching secondary indexes across your global table.  
    */
   createGlobalTable(callback?: (err: AWSError, data: DynamoDB.Types.CreateGlobalTableOutput) => void): Request<DynamoDB.Types.CreateGlobalTableOutput, AWSError>;
   /**
-   * The CreateTable operation adds a new table to your account. In an AWS account, table names must be unique within each Region. That is, you can have two tables with same name if you create the tables in different Regions.  CreateTable is an asynchronous operation. Upon receiving a CreateTable request, DynamoDB immediately returns a response with a TableStatus of CREATING. After the table is created, DynamoDB sets the TableStatus to ACTIVE. You can perform read and write operations only on an ACTIVE table.  You can optionally define secondary indexes on the new table, as part of the CreateTable operation. If you want to create multiple tables with secondary indexes on them, you must create the tables sequentially. Only one table with secondary indexes can be in the CREATING state at any given time. You can use the DescribeTable action to check the table status.
+   * The CreateTable operation adds a new table to your account. In an Amazon Web Services account, table names must be unique within each Region. That is, you can have two tables with same name if you create the tables in different Regions.  CreateTable is an asynchronous operation. Upon receiving a CreateTable request, DynamoDB immediately returns a response with a TableStatus of CREATING. After the table is created, DynamoDB sets the TableStatus to ACTIVE. You can perform read and write operations only on an ACTIVE table.  You can optionally define secondary indexes on the new table, as part of the CreateTable operation. If you want to create multiple tables with secondary indexes on them, you must create the tables sequentially. Only one table with secondary indexes can be in the CREATING state at any given time. You can use the DescribeTable action to check the table status.
    */
   createTable(params: DynamoDB.Types.CreateTableInput, callback?: (err: AWSError, data: DynamoDB.Types.CreateTableOutput) => void): Request<DynamoDB.Types.CreateTableOutput, AWSError>;
   /**
-   * The CreateTable operation adds a new table to your account. In an AWS account, table names must be unique within each Region. That is, you can have two tables with same name if you create the tables in different Regions.  CreateTable is an asynchronous operation. Upon receiving a CreateTable request, DynamoDB immediately returns a response with a TableStatus of CREATING. After the table is created, DynamoDB sets the TableStatus to ACTIVE. You can perform read and write operations only on an ACTIVE table.  You can optionally define secondary indexes on the new table, as part of the CreateTable operation. If you want to create multiple tables with secondary indexes on them, you must create the tables sequentially. Only one table with secondary indexes can be in the CREATING state at any given time. You can use the DescribeTable action to check the table status.
+   * The CreateTable operation adds a new table to your account. In an Amazon Web Services account, table names must be unique within each Region. That is, you can have two tables with same name if you create the tables in different Regions.  CreateTable is an asynchronous operation. Upon receiving a CreateTable request, DynamoDB immediately returns a response with a TableStatus of CREATING. After the table is created, DynamoDB sets the TableStatus to ACTIVE. You can perform read and write operations only on an ACTIVE table.  You can optionally define secondary indexes on the new table, as part of the CreateTable operation. If you want to create multiple tables with secondary indexes on them, you must create the tables sequentially. Only one table with secondary indexes can be in the CREATING state at any given time. You can use the DescribeTable action to check the table status.
    */
   createTable(callback?: (err: AWSError, data: DynamoDB.Types.CreateTableOutput) => void): Request<DynamoDB.Types.CreateTableOutput, AWSError>;
   /**
@@ -79,11 +79,19 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   deleteItem(callback?: (err: AWSError, data: DynamoDB.Types.DeleteItemOutput) => void): Request<DynamoDB.Types.DeleteItemOutput, AWSError>;
   /**
-   * The DeleteTable operation deletes a table and all of its items. After a DeleteTable request, the specified table is in the DELETING state until DynamoDB completes the deletion. If the table is in the ACTIVE state, you can delete it. If a table is in CREATING or UPDATING states, then DynamoDB returns a ResourceInUseException. If the specified table does not exist, DynamoDB returns a ResourceNotFoundException. If table is already in the DELETING state, no error is returned.   DynamoDB might continue to accept data read and write operations, such as GetItem and PutItem, on a table in the DELETING state until the table deletion is complete.  When you delete a table, any indexes on that table are also deleted. If you have DynamoDB Streams enabled on the table, then the corresponding stream on that table goes into the DISABLED state, and the stream is automatically deleted after 24 hours. Use the DescribeTable action to check the status of the table. 
+   * Deletes the resource-based policy attached to the resource, which can be a table or stream.  DeleteResourcePolicy is an idempotent operation; running it multiple times on the same resource doesn't result in an error response, unless you specify an ExpectedRevisionId, which will then return a PolicyNotFoundException.  To make sure that you don't inadvertently lock yourself out of your own resources, the root principal in your Amazon Web Services account can perform DeleteResourcePolicy requests, even if your resource-based policy explicitly denies the root principal's access.     DeleteResourcePolicy is an asynchronous operation. If you issue a GetResourcePolicy request immediately after running the DeleteResourcePolicy request, DynamoDB might still return the deleted policy. This is because the policy for your resource might not have been deleted yet. Wait for a few seconds, and then try the GetResourcePolicy request again. 
+   */
+  deleteResourcePolicy(params: DynamoDB.Types.DeleteResourcePolicyInput, callback?: (err: AWSError, data: DynamoDB.Types.DeleteResourcePolicyOutput) => void): Request<DynamoDB.Types.DeleteResourcePolicyOutput, AWSError>;
+  /**
+   * Deletes the resource-based policy attached to the resource, which can be a table or stream.  DeleteResourcePolicy is an idempotent operation; running it multiple times on the same resource doesn't result in an error response, unless you specify an ExpectedRevisionId, which will then return a PolicyNotFoundException.  To make sure that you don't inadvertently lock yourself out of your own resources, the root principal in your Amazon Web Services account can perform DeleteResourcePolicy requests, even if your resource-based policy explicitly denies the root principal's access.     DeleteResourcePolicy is an asynchronous operation. If you issue a GetResourcePolicy request immediately after running the DeleteResourcePolicy request, DynamoDB might still return the deleted policy. This is because the policy for your resource might not have been deleted yet. Wait for a few seconds, and then try the GetResourcePolicy request again. 
+   */
+  deleteResourcePolicy(callback?: (err: AWSError, data: DynamoDB.Types.DeleteResourcePolicyOutput) => void): Request<DynamoDB.Types.DeleteResourcePolicyOutput, AWSError>;
+  /**
+   * The DeleteTable operation deletes a table and all of its items. After a DeleteTable request, the specified table is in the DELETING state until DynamoDB completes the deletion. If the table is in the ACTIVE state, you can delete it. If a table is in CREATING or UPDATING states, then DynamoDB returns a ResourceInUseException. If the specified table does not exist, DynamoDB returns a ResourceNotFoundException. If table is already in the DELETING state, no error is returned.   For global tables, this operation only applies to global tables using Version 2019.11.21 (Current version).    DynamoDB might continue to accept data read and write operations, such as GetItem and PutItem, on a table in the DELETING state until the table deletion is complete. For the full list of table states, see TableStatus.  When you delete a table, any indexes on that table are also deleted. If you have DynamoDB Streams enabled on the table, then the corresponding stream on that table goes into the DISABLED state, and the stream is automatically deleted after 24 hours. Use the DescribeTable action to check the status of the table. 
    */
   deleteTable(params: DynamoDB.Types.DeleteTableInput, callback?: (err: AWSError, data: DynamoDB.Types.DeleteTableOutput) => void): Request<DynamoDB.Types.DeleteTableOutput, AWSError>;
   /**
-   * The DeleteTable operation deletes a table and all of its items. After a DeleteTable request, the specified table is in the DELETING state until DynamoDB completes the deletion. If the table is in the ACTIVE state, you can delete it. If a table is in CREATING or UPDATING states, then DynamoDB returns a ResourceInUseException. If the specified table does not exist, DynamoDB returns a ResourceNotFoundException. If table is already in the DELETING state, no error is returned.   DynamoDB might continue to accept data read and write operations, such as GetItem and PutItem, on a table in the DELETING state until the table deletion is complete.  When you delete a table, any indexes on that table are also deleted. If you have DynamoDB Streams enabled on the table, then the corresponding stream on that table goes into the DISABLED state, and the stream is automatically deleted after 24 hours. Use the DescribeTable action to check the status of the table. 
+   * The DeleteTable operation deletes a table and all of its items. After a DeleteTable request, the specified table is in the DELETING state until DynamoDB completes the deletion. If the table is in the ACTIVE state, you can delete it. If a table is in CREATING or UPDATING states, then DynamoDB returns a ResourceInUseException. If the specified table does not exist, DynamoDB returns a ResourceNotFoundException. If table is already in the DELETING state, no error is returned.   For global tables, this operation only applies to global tables using Version 2019.11.21 (Current version).    DynamoDB might continue to accept data read and write operations, such as GetItem and PutItem, on a table in the DELETING state until the table deletion is complete. For the full list of table states, see TableStatus.  When you delete a table, any indexes on that table are also deleted. If you have DynamoDB Streams enabled on the table, then the corresponding stream on that table goes into the DISABLED state, and the stream is automatically deleted after 24 hours. Use the DescribeTable action to check the status of the table. 
    */
   deleteTable(callback?: (err: AWSError, data: DynamoDB.Types.DeleteTableOutput) => void): Request<DynamoDB.Types.DeleteTableOutput, AWSError>;
   /**
@@ -103,19 +111,19 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   describeContinuousBackups(callback?: (err: AWSError, data: DynamoDB.Types.DescribeContinuousBackupsOutput) => void): Request<DynamoDB.Types.DescribeContinuousBackupsOutput, AWSError>;
   /**
-   * Returns information about contributor insights, for a given table or global secondary index.
+   * Returns information about contributor insights for a given table or global secondary index.
    */
   describeContributorInsights(params: DynamoDB.Types.DescribeContributorInsightsInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeContributorInsightsOutput) => void): Request<DynamoDB.Types.DescribeContributorInsightsOutput, AWSError>;
   /**
-   * Returns information about contributor insights, for a given table or global secondary index.
+   * Returns information about contributor insights for a given table or global secondary index.
    */
   describeContributorInsights(callback?: (err: AWSError, data: DynamoDB.Types.DescribeContributorInsightsOutput) => void): Request<DynamoDB.Types.DescribeContributorInsightsOutput, AWSError>;
   /**
-   * Returns the regional endpoint information.
+   * Returns the regional endpoint information. For more information on policy permissions, please see Internetwork traffic privacy.
    */
   describeEndpoints(params: DynamoDB.Types.DescribeEndpointsRequest, callback?: (err: AWSError, data: DynamoDB.Types.DescribeEndpointsResponse) => void): Request<DynamoDB.Types.DescribeEndpointsResponse, AWSError>;
   /**
-   * Returns the regional endpoint information.
+   * Returns the regional endpoint information. For more information on policy permissions, please see Internetwork traffic privacy.
    */
   describeEndpoints(callback?: (err: AWSError, data: DynamoDB.Types.DescribeEndpointsResponse) => void): Request<DynamoDB.Types.DescribeEndpointsResponse, AWSError>;
   /**
@@ -127,21 +135,29 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   describeExport(callback?: (err: AWSError, data: DynamoDB.Types.DescribeExportOutput) => void): Request<DynamoDB.Types.DescribeExportOutput, AWSError>;
   /**
-   * Returns information about the specified global table.  This operation only applies to Version 2017.11.29 of global tables. If you are using global tables Version 2019.11.21 you can use DescribeTable instead. 
+   * Returns information about the specified global table.  This documentation is for version 2017.11.29 (Legacy) of global tables, which should be avoided for new global tables. Customers should use Global Tables version 2019.11.21 (Current) when possible, because it provides greater flexibility, higher efficiency, and consumes less write capacity than 2017.11.29 (Legacy). To determine which version you're using, see Determining the global table version you are using. To update existing global tables from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see Upgrading global tables. 
    */
   describeGlobalTable(params: DynamoDB.Types.DescribeGlobalTableInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeGlobalTableOutput) => void): Request<DynamoDB.Types.DescribeGlobalTableOutput, AWSError>;
   /**
-   * Returns information about the specified global table.  This operation only applies to Version 2017.11.29 of global tables. If you are using global tables Version 2019.11.21 you can use DescribeTable instead. 
+   * Returns information about the specified global table.  This documentation is for version 2017.11.29 (Legacy) of global tables, which should be avoided for new global tables. Customers should use Global Tables version 2019.11.21 (Current) when possible, because it provides greater flexibility, higher efficiency, and consumes less write capacity than 2017.11.29 (Legacy). To determine which version you're using, see Determining the global table version you are using. To update existing global tables from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see Upgrading global tables. 
    */
   describeGlobalTable(callback?: (err: AWSError, data: DynamoDB.Types.DescribeGlobalTableOutput) => void): Request<DynamoDB.Types.DescribeGlobalTableOutput, AWSError>;
   /**
-   * Describes Region-specific settings for a global table.  This operation only applies to Version 2017.11.29 of global tables. 
+   * Describes Region-specific settings for a global table.  This documentation is for version 2017.11.29 (Legacy) of global tables, which should be avoided for new global tables. Customers should use Global Tables version 2019.11.21 (Current) when possible, because it provides greater flexibility, higher efficiency, and consumes less write capacity than 2017.11.29 (Legacy). To determine which version you're using, see Determining the global table version you are using. To update existing global tables from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see Upgrading global tables. 
    */
   describeGlobalTableSettings(params: DynamoDB.Types.DescribeGlobalTableSettingsInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeGlobalTableSettingsOutput) => void): Request<DynamoDB.Types.DescribeGlobalTableSettingsOutput, AWSError>;
   /**
-   * Describes Region-specific settings for a global table.  This operation only applies to Version 2017.11.29 of global tables. 
+   * Describes Region-specific settings for a global table.  This documentation is for version 2017.11.29 (Legacy) of global tables, which should be avoided for new global tables. Customers should use Global Tables version 2019.11.21 (Current) when possible, because it provides greater flexibility, higher efficiency, and consumes less write capacity than 2017.11.29 (Legacy). To determine which version you're using, see Determining the global table version you are using. To update existing global tables from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see Upgrading global tables. 
    */
   describeGlobalTableSettings(callback?: (err: AWSError, data: DynamoDB.Types.DescribeGlobalTableSettingsOutput) => void): Request<DynamoDB.Types.DescribeGlobalTableSettingsOutput, AWSError>;
+  /**
+   *  Represents the properties of the import. 
+   */
+  describeImport(params: DynamoDB.Types.DescribeImportInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeImportOutput) => void): Request<DynamoDB.Types.DescribeImportOutput, AWSError>;
+  /**
+   *  Represents the properties of the import. 
+   */
+  describeImport(callback?: (err: AWSError, data: DynamoDB.Types.DescribeImportOutput) => void): Request<DynamoDB.Types.DescribeImportOutput, AWSError>;
   /**
    * Returns information about the status of Kinesis streaming.
    */
@@ -151,27 +167,27 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   describeKinesisStreamingDestination(callback?: (err: AWSError, data: DynamoDB.Types.DescribeKinesisStreamingDestinationOutput) => void): Request<DynamoDB.Types.DescribeKinesisStreamingDestinationOutput, AWSError>;
   /**
-   * Returns the current provisioned-capacity quotas for your AWS account in a Region, both for the Region as a whole and for any one DynamoDB table that you create there. When you establish an AWS account, the account has initial quotas on the maximum read capacity units and write capacity units that you can provision across all of your DynamoDB tables in a given Region. Also, there are per-table quotas that apply when you create a table there. For more information, see Service, Account, and Table Quotas page in the Amazon DynamoDB Developer Guide. Although you can increase these quotas by filing a case at AWS Support Center, obtaining the increase is not instantaneous. The DescribeLimits action lets you write code to compare the capacity you are currently using to those quotas imposed by your account so that you have enough time to apply for an increase before you hit a quota. For example, you could use one of the AWS SDKs to do the following:   Call DescribeLimits for a particular Region to obtain your current account quotas on provisioned capacity there.   Create a variable to hold the aggregate read capacity units provisioned for all your tables in that Region, and one to hold the aggregate write capacity units. Zero them both.   Call ListTables to obtain a list of all your DynamoDB tables.   For each table name listed by ListTables, do the following:   Call DescribeTable with the table name.   Use the data returned by DescribeTable to add the read capacity units and write capacity units provisioned for the table itself to your variables.   If the table has one or more global secondary indexes (GSIs), loop over these GSIs and add their provisioned capacity values to your variables as well.     Report the account quotas for that Region returned by DescribeLimits, along with the total current provisioned capacity levels you have calculated.   This will let you see whether you are getting close to your account-level quotas. The per-table quotas apply only when you are creating a new table. They restrict the sum of the provisioned capacity of the new table itself and all its global secondary indexes. For existing tables and their GSIs, DynamoDB doesn't let you increase provisioned capacity extremely rapidly, but the only quota that applies is that the aggregate provisioned capacity over all your tables and GSIs cannot exceed either of the per-account quotas.   DescribeLimits should only be called periodically. You can expect throttling errors if you call it more than once in a minute.  The DescribeLimits Request element has no content.
+   * Returns the current provisioned-capacity quotas for your Amazon Web Services account in a Region, both for the Region as a whole and for any one DynamoDB table that you create there. When you establish an Amazon Web Services account, the account has initial quotas on the maximum read capacity units and write capacity units that you can provision across all of your DynamoDB tables in a given Region. Also, there are per-table quotas that apply when you create a table there. For more information, see Service, Account, and Table Quotas page in the Amazon DynamoDB Developer Guide. Although you can increase these quotas by filing a case at Amazon Web Services Support Center, obtaining the increase is not instantaneous. The DescribeLimits action lets you write code to compare the capacity you are currently using to those quotas imposed by your account so that you have enough time to apply for an increase before you hit a quota. For example, you could use one of the Amazon Web Services SDKs to do the following:   Call DescribeLimits for a particular Region to obtain your current account quotas on provisioned capacity there.   Create a variable to hold the aggregate read capacity units provisioned for all your tables in that Region, and one to hold the aggregate write capacity units. Zero them both.   Call ListTables to obtain a list of all your DynamoDB tables.   For each table name listed by ListTables, do the following:   Call DescribeTable with the table name.   Use the data returned by DescribeTable to add the read capacity units and write capacity units provisioned for the table itself to your variables.   If the table has one or more global secondary indexes (GSIs), loop over these GSIs and add their provisioned capacity values to your variables as well.     Report the account quotas for that Region returned by DescribeLimits, along with the total current provisioned capacity levels you have calculated.   This will let you see whether you are getting close to your account-level quotas. The per-table quotas apply only when you are creating a new table. They restrict the sum of the provisioned capacity of the new table itself and all its global secondary indexes. For existing tables and their GSIs, DynamoDB doesn't let you increase provisioned capacity extremely rapidly, but the only quota that applies is that the aggregate provisioned capacity over all your tables and GSIs cannot exceed either of the per-account quotas.   DescribeLimits should only be called periodically. You can expect throttling errors if you call it more than once in a minute.  The DescribeLimits Request element has no content.
    */
   describeLimits(params: DynamoDB.Types.DescribeLimitsInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeLimitsOutput) => void): Request<DynamoDB.Types.DescribeLimitsOutput, AWSError>;
   /**
-   * Returns the current provisioned-capacity quotas for your AWS account in a Region, both for the Region as a whole and for any one DynamoDB table that you create there. When you establish an AWS account, the account has initial quotas on the maximum read capacity units and write capacity units that you can provision across all of your DynamoDB tables in a given Region. Also, there are per-table quotas that apply when you create a table there. For more information, see Service, Account, and Table Quotas page in the Amazon DynamoDB Developer Guide. Although you can increase these quotas by filing a case at AWS Support Center, obtaining the increase is not instantaneous. The DescribeLimits action lets you write code to compare the capacity you are currently using to those quotas imposed by your account so that you have enough time to apply for an increase before you hit a quota. For example, you could use one of the AWS SDKs to do the following:   Call DescribeLimits for a particular Region to obtain your current account quotas on provisioned capacity there.   Create a variable to hold the aggregate read capacity units provisioned for all your tables in that Region, and one to hold the aggregate write capacity units. Zero them both.   Call ListTables to obtain a list of all your DynamoDB tables.   For each table name listed by ListTables, do the following:   Call DescribeTable with the table name.   Use the data returned by DescribeTable to add the read capacity units and write capacity units provisioned for the table itself to your variables.   If the table has one or more global secondary indexes (GSIs), loop over these GSIs and add their provisioned capacity values to your variables as well.     Report the account quotas for that Region returned by DescribeLimits, along with the total current provisioned capacity levels you have calculated.   This will let you see whether you are getting close to your account-level quotas. The per-table quotas apply only when you are creating a new table. They restrict the sum of the provisioned capacity of the new table itself and all its global secondary indexes. For existing tables and their GSIs, DynamoDB doesn't let you increase provisioned capacity extremely rapidly, but the only quota that applies is that the aggregate provisioned capacity over all your tables and GSIs cannot exceed either of the per-account quotas.   DescribeLimits should only be called periodically. You can expect throttling errors if you call it more than once in a minute.  The DescribeLimits Request element has no content.
+   * Returns the current provisioned-capacity quotas for your Amazon Web Services account in a Region, both for the Region as a whole and for any one DynamoDB table that you create there. When you establish an Amazon Web Services account, the account has initial quotas on the maximum read capacity units and write capacity units that you can provision across all of your DynamoDB tables in a given Region. Also, there are per-table quotas that apply when you create a table there. For more information, see Service, Account, and Table Quotas page in the Amazon DynamoDB Developer Guide. Although you can increase these quotas by filing a case at Amazon Web Services Support Center, obtaining the increase is not instantaneous. The DescribeLimits action lets you write code to compare the capacity you are currently using to those quotas imposed by your account so that you have enough time to apply for an increase before you hit a quota. For example, you could use one of the Amazon Web Services SDKs to do the following:   Call DescribeLimits for a particular Region to obtain your current account quotas on provisioned capacity there.   Create a variable to hold the aggregate read capacity units provisioned for all your tables in that Region, and one to hold the aggregate write capacity units. Zero them both.   Call ListTables to obtain a list of all your DynamoDB tables.   For each table name listed by ListTables, do the following:   Call DescribeTable with the table name.   Use the data returned by DescribeTable to add the read capacity units and write capacity units provisioned for the table itself to your variables.   If the table has one or more global secondary indexes (GSIs), loop over these GSIs and add their provisioned capacity values to your variables as well.     Report the account quotas for that Region returned by DescribeLimits, along with the total current provisioned capacity levels you have calculated.   This will let you see whether you are getting close to your account-level quotas. The per-table quotas apply only when you are creating a new table. They restrict the sum of the provisioned capacity of the new table itself and all its global secondary indexes. For existing tables and their GSIs, DynamoDB doesn't let you increase provisioned capacity extremely rapidly, but the only quota that applies is that the aggregate provisioned capacity over all your tables and GSIs cannot exceed either of the per-account quotas.   DescribeLimits should only be called periodically. You can expect throttling errors if you call it more than once in a minute.  The DescribeLimits Request element has no content.
    */
   describeLimits(callback?: (err: AWSError, data: DynamoDB.Types.DescribeLimitsOutput) => void): Request<DynamoDB.Types.DescribeLimitsOutput, AWSError>;
   /**
-   * Returns information about the table, including the current status of the table, when it was created, the primary key schema, and any indexes on the table.  If you issue a DescribeTable request immediately after a CreateTable request, DynamoDB might return a ResourceNotFoundException. This is because DescribeTable uses an eventually consistent query, and the metadata for your table might not be available at that moment. Wait for a few seconds, and then try the DescribeTable request again. 
+   * Returns information about the table, including the current status of the table, when it was created, the primary key schema, and any indexes on the table.  For global tables, this operation only applies to global tables using Version 2019.11.21 (Current version).    If you issue a DescribeTable request immediately after a CreateTable request, DynamoDB might return a ResourceNotFoundException. This is because DescribeTable uses an eventually consistent query, and the metadata for your table might not be available at that moment. Wait for a few seconds, and then try the DescribeTable request again. 
    */
   describeTable(params: DynamoDB.Types.DescribeTableInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeTableOutput) => void): Request<DynamoDB.Types.DescribeTableOutput, AWSError>;
   /**
-   * Returns information about the table, including the current status of the table, when it was created, the primary key schema, and any indexes on the table.  If you issue a DescribeTable request immediately after a CreateTable request, DynamoDB might return a ResourceNotFoundException. This is because DescribeTable uses an eventually consistent query, and the metadata for your table might not be available at that moment. Wait for a few seconds, and then try the DescribeTable request again. 
+   * Returns information about the table, including the current status of the table, when it was created, the primary key schema, and any indexes on the table.  For global tables, this operation only applies to global tables using Version 2019.11.21 (Current version).    If you issue a DescribeTable request immediately after a CreateTable request, DynamoDB might return a ResourceNotFoundException. This is because DescribeTable uses an eventually consistent query, and the metadata for your table might not be available at that moment. Wait for a few seconds, and then try the DescribeTable request again. 
    */
   describeTable(callback?: (err: AWSError, data: DynamoDB.Types.DescribeTableOutput) => void): Request<DynamoDB.Types.DescribeTableOutput, AWSError>;
   /**
-   * Describes auto scaling settings across replicas of the global table at once.  This operation only applies to Version 2019.11.21 of global tables. 
+   * Describes auto scaling settings across replicas of the global table at once.  For global tables, this operation only applies to global tables using Version 2019.11.21 (Current version). 
    */
   describeTableReplicaAutoScaling(params: DynamoDB.Types.DescribeTableReplicaAutoScalingInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeTableReplicaAutoScalingOutput) => void): Request<DynamoDB.Types.DescribeTableReplicaAutoScalingOutput, AWSError>;
   /**
-   * Describes auto scaling settings across replicas of the global table at once.  This operation only applies to Version 2019.11.21 of global tables. 
+   * Describes auto scaling settings across replicas of the global table at once.  For global tables, this operation only applies to global tables using Version 2019.11.21 (Current version). 
    */
   describeTableReplicaAutoScaling(callback?: (err: AWSError, data: DynamoDB.Types.DescribeTableReplicaAutoScalingOutput) => void): Request<DynamoDB.Types.DescribeTableReplicaAutoScalingOutput, AWSError>;
   /**
@@ -199,19 +215,19 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   enableKinesisStreamingDestination(callback?: (err: AWSError, data: DynamoDB.Types.KinesisStreamingDestinationOutput) => void): Request<DynamoDB.Types.KinesisStreamingDestinationOutput, AWSError>;
   /**
-   *  This operation allows you to perform reads and singleton writes on data stored in DynamoDB, using PartiQL. 
+   * This operation allows you to perform reads and singleton writes on data stored in DynamoDB, using PartiQL. For PartiQL reads (SELECT statement), if the total number of processed items exceeds the maximum dataset size limit of 1 MB, the read stops and results are returned to the user as a LastEvaluatedKey value to continue the read in a subsequent operation. If the filter criteria in WHERE clause does not match any data, the read will return an empty result set. A single SELECT statement response can return up to the maximum number of items (if using the Limit parameter) or a maximum of 1 MB of data (and then apply any filtering to the results using WHERE clause). If LastEvaluatedKey is present in the response, you need to paginate the result set. If NextToken is present, you need to paginate the result set and include NextToken.
    */
   executeStatement(params: DynamoDB.Types.ExecuteStatementInput, callback?: (err: AWSError, data: DynamoDB.Types.ExecuteStatementOutput) => void): Request<DynamoDB.Types.ExecuteStatementOutput, AWSError>;
   /**
-   *  This operation allows you to perform reads and singleton writes on data stored in DynamoDB, using PartiQL. 
+   * This operation allows you to perform reads and singleton writes on data stored in DynamoDB, using PartiQL. For PartiQL reads (SELECT statement), if the total number of processed items exceeds the maximum dataset size limit of 1 MB, the read stops and results are returned to the user as a LastEvaluatedKey value to continue the read in a subsequent operation. If the filter criteria in WHERE clause does not match any data, the read will return an empty result set. A single SELECT statement response can return up to the maximum number of items (if using the Limit parameter) or a maximum of 1 MB of data (and then apply any filtering to the results using WHERE clause). If LastEvaluatedKey is present in the response, you need to paginate the result set. If NextToken is present, you need to paginate the result set and include NextToken.
    */
   executeStatement(callback?: (err: AWSError, data: DynamoDB.Types.ExecuteStatementOutput) => void): Request<DynamoDB.Types.ExecuteStatementOutput, AWSError>;
   /**
-   *  This operation allows you to perform transactional reads or writes on data stored in DynamoDB, using PartiQL. 
+   * This operation allows you to perform transactional reads or writes on data stored in DynamoDB, using PartiQL.  The entire transaction must consist of either read statements or write statements, you cannot mix both in one transaction. The EXISTS function is an exception and can be used to check the condition of specific attributes of the item in a similar manner to ConditionCheck in the TransactWriteItems API. 
    */
   executeTransaction(params: DynamoDB.Types.ExecuteTransactionInput, callback?: (err: AWSError, data: DynamoDB.Types.ExecuteTransactionOutput) => void): Request<DynamoDB.Types.ExecuteTransactionOutput, AWSError>;
   /**
-   *  This operation allows you to perform transactional reads or writes on data stored in DynamoDB, using PartiQL. 
+   * This operation allows you to perform transactional reads or writes on data stored in DynamoDB, using PartiQL.  The entire transaction must consist of either read statements or write statements, you cannot mix both in one transaction. The EXISTS function is an exception and can be used to check the condition of specific attributes of the item in a similar manner to ConditionCheck in the TransactWriteItems API. 
    */
   executeTransaction(callback?: (err: AWSError, data: DynamoDB.Types.ExecuteTransactionOutput) => void): Request<DynamoDB.Types.ExecuteTransactionOutput, AWSError>;
   /**
@@ -231,11 +247,27 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   getItem(callback?: (err: AWSError, data: DynamoDB.Types.GetItemOutput) => void): Request<DynamoDB.Types.GetItemOutput, AWSError>;
   /**
-   * List backups associated with an AWS account. To list backups for a given table, specify TableName. ListBackups returns a paginated list of results with at most 1 MB worth of items in a page. You can also specify a maximum number of entries to be returned in a page.  In the request, start time is inclusive, but end time is exclusive. Note that these boundaries are for the time at which the original backup was requested. You can call ListBackups a maximum of five times per second.
+   * Returns the resource-based policy document attached to the resource, which can be a table or stream, in JSON format.  GetResourcePolicy follows an  eventually consistent  model. The following list describes the outcomes when you issue the GetResourcePolicy request immediately after issuing another request:   If you issue a GetResourcePolicy request immediately after a PutResourcePolicy request, DynamoDB might return a PolicyNotFoundException.   If you issue a GetResourcePolicyrequest immediately after a DeleteResourcePolicy request, DynamoDB might return the policy that was present before the deletion request.   If you issue a GetResourcePolicy request immediately after a CreateTable request, which includes a resource-based policy, DynamoDB might return a ResourceNotFoundException or a PolicyNotFoundException.   Because GetResourcePolicy uses an eventually consistent query, the metadata for your policy or table might not be available at that moment. Wait for a few seconds, and then retry the GetResourcePolicy request. After a GetResourcePolicy request returns a policy created using the PutResourcePolicy request, the policy will be applied in the authorization of requests to the resource. Because this process is eventually consistent, it will take some time to apply the policy to all requests to a resource. Policies that you attach while creating a table using the CreateTable request will always be applied to all requests for that table.
+   */
+  getResourcePolicy(params: DynamoDB.Types.GetResourcePolicyInput, callback?: (err: AWSError, data: DynamoDB.Types.GetResourcePolicyOutput) => void): Request<DynamoDB.Types.GetResourcePolicyOutput, AWSError>;
+  /**
+   * Returns the resource-based policy document attached to the resource, which can be a table or stream, in JSON format.  GetResourcePolicy follows an  eventually consistent  model. The following list describes the outcomes when you issue the GetResourcePolicy request immediately after issuing another request:   If you issue a GetResourcePolicy request immediately after a PutResourcePolicy request, DynamoDB might return a PolicyNotFoundException.   If you issue a GetResourcePolicyrequest immediately after a DeleteResourcePolicy request, DynamoDB might return the policy that was present before the deletion request.   If you issue a GetResourcePolicy request immediately after a CreateTable request, which includes a resource-based policy, DynamoDB might return a ResourceNotFoundException or a PolicyNotFoundException.   Because GetResourcePolicy uses an eventually consistent query, the metadata for your policy or table might not be available at that moment. Wait for a few seconds, and then retry the GetResourcePolicy request. After a GetResourcePolicy request returns a policy created using the PutResourcePolicy request, the policy will be applied in the authorization of requests to the resource. Because this process is eventually consistent, it will take some time to apply the policy to all requests to a resource. Policies that you attach while creating a table using the CreateTable request will always be applied to all requests for that table.
+   */
+  getResourcePolicy(callback?: (err: AWSError, data: DynamoDB.Types.GetResourcePolicyOutput) => void): Request<DynamoDB.Types.GetResourcePolicyOutput, AWSError>;
+  /**
+   *  Imports table data from an S3 bucket. 
+   */
+  importTable(params: DynamoDB.Types.ImportTableInput, callback?: (err: AWSError, data: DynamoDB.Types.ImportTableOutput) => void): Request<DynamoDB.Types.ImportTableOutput, AWSError>;
+  /**
+   *  Imports table data from an S3 bucket. 
+   */
+  importTable(callback?: (err: AWSError, data: DynamoDB.Types.ImportTableOutput) => void): Request<DynamoDB.Types.ImportTableOutput, AWSError>;
+  /**
+   * List DynamoDB backups that are associated with an Amazon Web Services account and weren't made with Amazon Web Services Backup. To list these backups for a given table, specify TableName. ListBackups returns a paginated list of results with at most 1 MB worth of items in a page. You can also specify a maximum number of entries to be returned in a page. In the request, start time is inclusive, but end time is exclusive. Note that these boundaries are for the time at which the original backup was requested. You can call ListBackups a maximum of five times per second. If you want to retrieve the complete list of backups made with Amazon Web Services Backup, use the Amazon Web Services Backup list API. 
    */
   listBackups(params: DynamoDB.Types.ListBackupsInput, callback?: (err: AWSError, data: DynamoDB.Types.ListBackupsOutput) => void): Request<DynamoDB.Types.ListBackupsOutput, AWSError>;
   /**
-   * List backups associated with an AWS account. To list backups for a given table, specify TableName. ListBackups returns a paginated list of results with at most 1 MB worth of items in a page. You can also specify a maximum number of entries to be returned in a page.  In the request, start time is inclusive, but end time is exclusive. Note that these boundaries are for the time at which the original backup was requested. You can call ListBackups a maximum of five times per second.
+   * List DynamoDB backups that are associated with an Amazon Web Services account and weren't made with Amazon Web Services Backup. To list these backups for a given table, specify TableName. ListBackups returns a paginated list of results with at most 1 MB worth of items in a page. You can also specify a maximum number of entries to be returned in a page. In the request, start time is inclusive, but end time is exclusive. Note that these boundaries are for the time at which the original backup was requested. You can call ListBackups a maximum of five times per second. If you want to retrieve the complete list of backups made with Amazon Web Services Backup, use the Amazon Web Services Backup list API. 
    */
   listBackups(callback?: (err: AWSError, data: DynamoDB.Types.ListBackupsOutput) => void): Request<DynamoDB.Types.ListBackupsOutput, AWSError>;
   /**
@@ -255,13 +287,21 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   listExports(callback?: (err: AWSError, data: DynamoDB.Types.ListExportsOutput) => void): Request<DynamoDB.Types.ListExportsOutput, AWSError>;
   /**
-   * Lists all global tables that have a replica in the specified Region.  This operation only applies to Version 2017.11.29 of global tables. 
+   * Lists all global tables that have a replica in the specified Region.  This documentation is for version 2017.11.29 (Legacy) of global tables, which should be avoided for new global tables. Customers should use Global Tables version 2019.11.21 (Current) when possible, because it provides greater flexibility, higher efficiency, and consumes less write capacity than 2017.11.29 (Legacy). To determine which version you're using, see Determining the global table version you are using. To update existing global tables from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see Upgrading global tables. 
    */
   listGlobalTables(params: DynamoDB.Types.ListGlobalTablesInput, callback?: (err: AWSError, data: DynamoDB.Types.ListGlobalTablesOutput) => void): Request<DynamoDB.Types.ListGlobalTablesOutput, AWSError>;
   /**
-   * Lists all global tables that have a replica in the specified Region.  This operation only applies to Version 2017.11.29 of global tables. 
+   * Lists all global tables that have a replica in the specified Region.  This documentation is for version 2017.11.29 (Legacy) of global tables, which should be avoided for new global tables. Customers should use Global Tables version 2019.11.21 (Current) when possible, because it provides greater flexibility, higher efficiency, and consumes less write capacity than 2017.11.29 (Legacy). To determine which version you're using, see Determining the global table version you are using. To update existing global tables from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see Upgrading global tables. 
    */
   listGlobalTables(callback?: (err: AWSError, data: DynamoDB.Types.ListGlobalTablesOutput) => void): Request<DynamoDB.Types.ListGlobalTablesOutput, AWSError>;
+  /**
+   *  Lists completed imports within the past 90 days. 
+   */
+  listImports(params: DynamoDB.Types.ListImportsInput, callback?: (err: AWSError, data: DynamoDB.Types.ListImportsOutput) => void): Request<DynamoDB.Types.ListImportsOutput, AWSError>;
+  /**
+   *  Lists completed imports within the past 90 days. 
+   */
+  listImports(callback?: (err: AWSError, data: DynamoDB.Types.ListImportsOutput) => void): Request<DynamoDB.Types.ListImportsOutput, AWSError>;
   /**
    * Returns an array of table names associated with the current account and endpoint. The output from ListTables is paginated, with each page returning a maximum of 100 table names.
    */
@@ -279,43 +319,51 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   listTagsOfResource(callback?: (err: AWSError, data: DynamoDB.Types.ListTagsOfResourceOutput) => void): Request<DynamoDB.Types.ListTagsOfResourceOutput, AWSError>;
   /**
-   * Creates a new item, or replaces an old item with a new item. If an item that has the same primary key as the new item already exists in the specified table, the new item completely replaces the existing item. You can perform a conditional put operation (add a new item if one with the specified primary key doesn't exist), or replace an existing item if it has certain attribute values. You can return the item's attribute values in the same operation, using the ReturnValues parameter.  This topic provides general information about the PutItem API. For information on how to call the PutItem API using the AWS SDK in specific languages, see the following:     PutItem in the AWS Command Line Interface      PutItem in the AWS SDK for .NET      PutItem in the AWS SDK for C++      PutItem in the AWS SDK for Go      PutItem in the AWS SDK for Java      PutItem in the AWS SDK for JavaScript      PutItem in the AWS SDK for PHP V3      PutItem in the AWS SDK for Python      PutItem in the AWS SDK for Ruby V2     When you add an item, the primary key attributes are the only required attributes. Attribute values cannot be null. Empty String and Binary attribute values are allowed. Attribute values of type String and Binary must have a length greater than zero if the attribute is used as a key attribute for a table or index. Set type attributes cannot be empty.  Invalid Requests with empty values will be rejected with a ValidationException exception.  To prevent a new item from replacing an existing item, use a conditional expression that contains the attribute_not_exists function with the name of the attribute being used as the partition key for the table. Since every record must contain that attribute, the attribute_not_exists function will only succeed if no matching item exists.  For more information about PutItem, see Working with Items in the Amazon DynamoDB Developer Guide.
+   * Creates a new item, or replaces an old item with a new item. If an item that has the same primary key as the new item already exists in the specified table, the new item completely replaces the existing item. You can perform a conditional put operation (add a new item if one with the specified primary key doesn't exist), or replace an existing item if it has certain attribute values. You can return the item's attribute values in the same operation, using the ReturnValues parameter. When you add an item, the primary key attributes are the only required attributes.  Empty String and Binary attribute values are allowed. Attribute values of type String and Binary must have a length greater than zero if the attribute is used as a key attribute for a table or index. Set type attributes cannot be empty.  Invalid Requests with empty values will be rejected with a ValidationException exception.  To prevent a new item from replacing an existing item, use a conditional expression that contains the attribute_not_exists function with the name of the attribute being used as the partition key for the table. Since every record must contain that attribute, the attribute_not_exists function will only succeed if no matching item exists.  For more information about PutItem, see Working with Items in the Amazon DynamoDB Developer Guide.
    */
   putItem(params: DynamoDB.Types.PutItemInput, callback?: (err: AWSError, data: DynamoDB.Types.PutItemOutput) => void): Request<DynamoDB.Types.PutItemOutput, AWSError>;
   /**
-   * Creates a new item, or replaces an old item with a new item. If an item that has the same primary key as the new item already exists in the specified table, the new item completely replaces the existing item. You can perform a conditional put operation (add a new item if one with the specified primary key doesn't exist), or replace an existing item if it has certain attribute values. You can return the item's attribute values in the same operation, using the ReturnValues parameter.  This topic provides general information about the PutItem API. For information on how to call the PutItem API using the AWS SDK in specific languages, see the following:     PutItem in the AWS Command Line Interface      PutItem in the AWS SDK for .NET      PutItem in the AWS SDK for C++      PutItem in the AWS SDK for Go      PutItem in the AWS SDK for Java      PutItem in the AWS SDK for JavaScript      PutItem in the AWS SDK for PHP V3      PutItem in the AWS SDK for Python      PutItem in the AWS SDK for Ruby V2     When you add an item, the primary key attributes are the only required attributes. Attribute values cannot be null. Empty String and Binary attribute values are allowed. Attribute values of type String and Binary must have a length greater than zero if the attribute is used as a key attribute for a table or index. Set type attributes cannot be empty.  Invalid Requests with empty values will be rejected with a ValidationException exception.  To prevent a new item from replacing an existing item, use a conditional expression that contains the attribute_not_exists function with the name of the attribute being used as the partition key for the table. Since every record must contain that attribute, the attribute_not_exists function will only succeed if no matching item exists.  For more information about PutItem, see Working with Items in the Amazon DynamoDB Developer Guide.
+   * Creates a new item, or replaces an old item with a new item. If an item that has the same primary key as the new item already exists in the specified table, the new item completely replaces the existing item. You can perform a conditional put operation (add a new item if one with the specified primary key doesn't exist), or replace an existing item if it has certain attribute values. You can return the item's attribute values in the same operation, using the ReturnValues parameter. When you add an item, the primary key attributes are the only required attributes.  Empty String and Binary attribute values are allowed. Attribute values of type String and Binary must have a length greater than zero if the attribute is used as a key attribute for a table or index. Set type attributes cannot be empty.  Invalid Requests with empty values will be rejected with a ValidationException exception.  To prevent a new item from replacing an existing item, use a conditional expression that contains the attribute_not_exists function with the name of the attribute being used as the partition key for the table. Since every record must contain that attribute, the attribute_not_exists function will only succeed if no matching item exists.  For more information about PutItem, see Working with Items in the Amazon DynamoDB Developer Guide.
    */
   putItem(callback?: (err: AWSError, data: DynamoDB.Types.PutItemOutput) => void): Request<DynamoDB.Types.PutItemOutput, AWSError>;
   /**
-   * The Query operation finds items based on primary key values. You can query any table or secondary index that has a composite primary key (a partition key and a sort key).  Use the KeyConditionExpression parameter to provide a specific value for the partition key. The Query operation will return all of the items from the table or index with that partition key value. You can optionally narrow the scope of the Query operation by specifying a sort key value and a comparison operator in KeyConditionExpression. To further refine the Query results, you can optionally provide a FilterExpression. A FilterExpression determines which items within the results should be returned to you. All of the other results are discarded.   A Query operation always returns a result set. If no matching items are found, the result set will be empty. Queries that do not return results consume the minimum number of read capacity units for that type of read operation.    DynamoDB calculates the number of read capacity units consumed based on item size, not on the amount of data that is returned to an application. The number of capacity units consumed will be the same whether you request all of the attributes (the default behavior) or just some of them (using a projection expression). The number will also be the same whether or not you use a FilterExpression.    Query results are always sorted by the sort key value. If the data type of the sort key is Number, the results are returned in numeric order; otherwise, the results are returned in order of UTF-8 bytes. By default, the sort order is ascending. To reverse the order, set the ScanIndexForward parameter to false.   A single Query operation will read up to the maximum number of items set (if using the Limit parameter) or a maximum of 1 MB of data and then apply any filtering to the results using FilterExpression. If LastEvaluatedKey is present in the response, you will need to paginate the result set. For more information, see Paginating the Results in the Amazon DynamoDB Developer Guide.   FilterExpression is applied after a Query finishes, but before the results are returned. A FilterExpression cannot contain partition key or sort key attributes. You need to specify those attributes in the KeyConditionExpression.    A Query operation can return an empty result set and a LastEvaluatedKey if all the items read for the page of results are filtered out.   You can query a table, a local secondary index, or a global secondary index. For a query on a table or on a local secondary index, you can set the ConsistentRead parameter to true and obtain a strongly consistent result. Global secondary indexes support eventually consistent reads only, so do not specify ConsistentRead when querying a global secondary index.
+   * Attaches a resource-based policy document to the resource, which can be a table or stream. When you attach a resource-based policy using this API, the policy application is  eventually consistent .  PutResourcePolicy is an idempotent operation; running it multiple times on the same resource using the same policy document will return the same revision ID. If you specify an ExpectedRevisionId that doesn't match the current policy's RevisionId, the PolicyNotFoundException will be returned.   PutResourcePolicy is an asynchronous operation. If you issue a GetResourcePolicy request immediately after a PutResourcePolicy request, DynamoDB might return your previous policy, if there was one, or return the PolicyNotFoundException. This is because GetResourcePolicy uses an eventually consistent query, and the metadata for your policy or table might not be available at that moment. Wait for a few seconds, and then try the GetResourcePolicy request again. 
+   */
+  putResourcePolicy(params: DynamoDB.Types.PutResourcePolicyInput, callback?: (err: AWSError, data: DynamoDB.Types.PutResourcePolicyOutput) => void): Request<DynamoDB.Types.PutResourcePolicyOutput, AWSError>;
+  /**
+   * Attaches a resource-based policy document to the resource, which can be a table or stream. When you attach a resource-based policy using this API, the policy application is  eventually consistent .  PutResourcePolicy is an idempotent operation; running it multiple times on the same resource using the same policy document will return the same revision ID. If you specify an ExpectedRevisionId that doesn't match the current policy's RevisionId, the PolicyNotFoundException will be returned.   PutResourcePolicy is an asynchronous operation. If you issue a GetResourcePolicy request immediately after a PutResourcePolicy request, DynamoDB might return your previous policy, if there was one, or return the PolicyNotFoundException. This is because GetResourcePolicy uses an eventually consistent query, and the metadata for your policy or table might not be available at that moment. Wait for a few seconds, and then try the GetResourcePolicy request again. 
+   */
+  putResourcePolicy(callback?: (err: AWSError, data: DynamoDB.Types.PutResourcePolicyOutput) => void): Request<DynamoDB.Types.PutResourcePolicyOutput, AWSError>;
+  /**
+   * You must provide the name of the partition key attribute and a single value for that attribute. Query returns all items with that partition key value. Optionally, you can provide a sort key attribute and use a comparison operator to refine the search results. Use the KeyConditionExpression parameter to provide a specific value for the partition key. The Query operation will return all of the items from the table or index with that partition key value. You can optionally narrow the scope of the Query operation by specifying a sort key value and a comparison operator in KeyConditionExpression. To further refine the Query results, you can optionally provide a FilterExpression. A FilterExpression determines which items within the results should be returned to you. All of the other results are discarded.   A Query operation always returns a result set. If no matching items are found, the result set will be empty. Queries that do not return results consume the minimum number of read capacity units for that type of read operation.    DynamoDB calculates the number of read capacity units consumed based on item size, not on the amount of data that is returned to an application. The number of capacity units consumed will be the same whether you request all of the attributes (the default behavior) or just some of them (using a projection expression). The number will also be the same whether or not you use a FilterExpression.    Query results are always sorted by the sort key value. If the data type of the sort key is Number, the results are returned in numeric order; otherwise, the results are returned in order of UTF-8 bytes. By default, the sort order is ascending. To reverse the order, set the ScanIndexForward parameter to false.   A single Query operation will read up to the maximum number of items set (if using the Limit parameter) or a maximum of 1 MB of data and then apply any filtering to the results using FilterExpression. If LastEvaluatedKey is present in the response, you will need to paginate the result set. For more information, see Paginating the Results in the Amazon DynamoDB Developer Guide.   FilterExpression is applied after a Query finishes, but before the results are returned. A FilterExpression cannot contain partition key or sort key attributes. You need to specify those attributes in the KeyConditionExpression.    A Query operation can return an empty result set and a LastEvaluatedKey if all the items read for the page of results are filtered out.   You can query a table, a local secondary index, or a global secondary index. For a query on a table or on a local secondary index, you can set the ConsistentRead parameter to true and obtain a strongly consistent result. Global secondary indexes support eventually consistent reads only, so do not specify ConsistentRead when querying a global secondary index.
    */
   query(params: DynamoDB.Types.QueryInput, callback?: (err: AWSError, data: DynamoDB.Types.QueryOutput) => void): Request<DynamoDB.Types.QueryOutput, AWSError>;
   /**
-   * The Query operation finds items based on primary key values. You can query any table or secondary index that has a composite primary key (a partition key and a sort key).  Use the KeyConditionExpression parameter to provide a specific value for the partition key. The Query operation will return all of the items from the table or index with that partition key value. You can optionally narrow the scope of the Query operation by specifying a sort key value and a comparison operator in KeyConditionExpression. To further refine the Query results, you can optionally provide a FilterExpression. A FilterExpression determines which items within the results should be returned to you. All of the other results are discarded.   A Query operation always returns a result set. If no matching items are found, the result set will be empty. Queries that do not return results consume the minimum number of read capacity units for that type of read operation.    DynamoDB calculates the number of read capacity units consumed based on item size, not on the amount of data that is returned to an application. The number of capacity units consumed will be the same whether you request all of the attributes (the default behavior) or just some of them (using a projection expression). The number will also be the same whether or not you use a FilterExpression.    Query results are always sorted by the sort key value. If the data type of the sort key is Number, the results are returned in numeric order; otherwise, the results are returned in order of UTF-8 bytes. By default, the sort order is ascending. To reverse the order, set the ScanIndexForward parameter to false.   A single Query operation will read up to the maximum number of items set (if using the Limit parameter) or a maximum of 1 MB of data and then apply any filtering to the results using FilterExpression. If LastEvaluatedKey is present in the response, you will need to paginate the result set. For more information, see Paginating the Results in the Amazon DynamoDB Developer Guide.   FilterExpression is applied after a Query finishes, but before the results are returned. A FilterExpression cannot contain partition key or sort key attributes. You need to specify those attributes in the KeyConditionExpression.    A Query operation can return an empty result set and a LastEvaluatedKey if all the items read for the page of results are filtered out.   You can query a table, a local secondary index, or a global secondary index. For a query on a table or on a local secondary index, you can set the ConsistentRead parameter to true and obtain a strongly consistent result. Global secondary indexes support eventually consistent reads only, so do not specify ConsistentRead when querying a global secondary index.
+   * You must provide the name of the partition key attribute and a single value for that attribute. Query returns all items with that partition key value. Optionally, you can provide a sort key attribute and use a comparison operator to refine the search results. Use the KeyConditionExpression parameter to provide a specific value for the partition key. The Query operation will return all of the items from the table or index with that partition key value. You can optionally narrow the scope of the Query operation by specifying a sort key value and a comparison operator in KeyConditionExpression. To further refine the Query results, you can optionally provide a FilterExpression. A FilterExpression determines which items within the results should be returned to you. All of the other results are discarded.   A Query operation always returns a result set. If no matching items are found, the result set will be empty. Queries that do not return results consume the minimum number of read capacity units for that type of read operation.    DynamoDB calculates the number of read capacity units consumed based on item size, not on the amount of data that is returned to an application. The number of capacity units consumed will be the same whether you request all of the attributes (the default behavior) or just some of them (using a projection expression). The number will also be the same whether or not you use a FilterExpression.    Query results are always sorted by the sort key value. If the data type of the sort key is Number, the results are returned in numeric order; otherwise, the results are returned in order of UTF-8 bytes. By default, the sort order is ascending. To reverse the order, set the ScanIndexForward parameter to false.   A single Query operation will read up to the maximum number of items set (if using the Limit parameter) or a maximum of 1 MB of data and then apply any filtering to the results using FilterExpression. If LastEvaluatedKey is present in the response, you will need to paginate the result set. For more information, see Paginating the Results in the Amazon DynamoDB Developer Guide.   FilterExpression is applied after a Query finishes, but before the results are returned. A FilterExpression cannot contain partition key or sort key attributes. You need to specify those attributes in the KeyConditionExpression.    A Query operation can return an empty result set and a LastEvaluatedKey if all the items read for the page of results are filtered out.   You can query a table, a local secondary index, or a global secondary index. For a query on a table or on a local secondary index, you can set the ConsistentRead parameter to true and obtain a strongly consistent result. Global secondary indexes support eventually consistent reads only, so do not specify ConsistentRead when querying a global secondary index.
    */
   query(callback?: (err: AWSError, data: DynamoDB.Types.QueryOutput) => void): Request<DynamoDB.Types.QueryOutput, AWSError>;
   /**
-   * Creates a new table from an existing backup. Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account.  You can call RestoreTableFromBackup at a maximum rate of 10 times per second. You must manually set up the following on the restored table:   Auto scaling policies   IAM policies   Amazon CloudWatch metrics and alarms   Tags   Stream settings   Time to Live (TTL) settings  
+   * Creates a new table from an existing backup. Any number of users can execute up to 50 concurrent restores (any type of restore) in a given account.  You can call RestoreTableFromBackup at a maximum rate of 10 times per second. You must manually set up the following on the restored table:   Auto scaling policies   IAM policies   Amazon CloudWatch metrics and alarms   Tags   Stream settings   Time to Live (TTL) settings  
    */
   restoreTableFromBackup(params: DynamoDB.Types.RestoreTableFromBackupInput, callback?: (err: AWSError, data: DynamoDB.Types.RestoreTableFromBackupOutput) => void): Request<DynamoDB.Types.RestoreTableFromBackupOutput, AWSError>;
   /**
-   * Creates a new table from an existing backup. Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account.  You can call RestoreTableFromBackup at a maximum rate of 10 times per second. You must manually set up the following on the restored table:   Auto scaling policies   IAM policies   Amazon CloudWatch metrics and alarms   Tags   Stream settings   Time to Live (TTL) settings  
+   * Creates a new table from an existing backup. Any number of users can execute up to 50 concurrent restores (any type of restore) in a given account.  You can call RestoreTableFromBackup at a maximum rate of 10 times per second. You must manually set up the following on the restored table:   Auto scaling policies   IAM policies   Amazon CloudWatch metrics and alarms   Tags   Stream settings   Time to Live (TTL) settings  
    */
   restoreTableFromBackup(callback?: (err: AWSError, data: DynamoDB.Types.RestoreTableFromBackupOutput) => void): Request<DynamoDB.Types.RestoreTableFromBackupOutput, AWSError>;
   /**
-   * Restores the specified table to the specified point in time within EarliestRestorableDateTime and LatestRestorableDateTime. You can restore your table to any point in time during the last 35 days. Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account.   When you restore using point in time recovery, DynamoDB restores your table data to the state based on the selected date and time (day:hour:minute:second) to a new table.   Along with data, the following are also included on the new restored table using point in time recovery:    Global secondary indexes (GSIs)   Local secondary indexes (LSIs)   Provisioned read and write capacity   Encryption settings   All these settings come from the current settings of the source table at the time of restore.     You must manually set up the following on the restored table:   Auto scaling policies   IAM policies   Amazon CloudWatch metrics and alarms   Tags   Stream settings   Time to Live (TTL) settings   Point in time recovery settings  
+   * Restores the specified table to the specified point in time within EarliestRestorableDateTime and LatestRestorableDateTime. You can restore your table to any point in time during the last 35 days. Any number of users can execute up to 50 concurrent restores (any type of restore) in a given account.  When you restore using point in time recovery, DynamoDB restores your table data to the state based on the selected date and time (day:hour:minute:second) to a new table.  Along with data, the following are also included on the new restored table using point in time recovery:    Global secondary indexes (GSIs)   Local secondary indexes (LSIs)   Provisioned read and write capacity   Encryption settings   All these settings come from the current settings of the source table at the time of restore.     You must manually set up the following on the restored table:   Auto scaling policies   IAM policies   Amazon CloudWatch metrics and alarms   Tags   Stream settings   Time to Live (TTL) settings   Point in time recovery settings  
    */
   restoreTableToPointInTime(params: DynamoDB.Types.RestoreTableToPointInTimeInput, callback?: (err: AWSError, data: DynamoDB.Types.RestoreTableToPointInTimeOutput) => void): Request<DynamoDB.Types.RestoreTableToPointInTimeOutput, AWSError>;
   /**
-   * Restores the specified table to the specified point in time within EarliestRestorableDateTime and LatestRestorableDateTime. You can restore your table to any point in time during the last 35 days. Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account.   When you restore using point in time recovery, DynamoDB restores your table data to the state based on the selected date and time (day:hour:minute:second) to a new table.   Along with data, the following are also included on the new restored table using point in time recovery:    Global secondary indexes (GSIs)   Local secondary indexes (LSIs)   Provisioned read and write capacity   Encryption settings   All these settings come from the current settings of the source table at the time of restore.     You must manually set up the following on the restored table:   Auto scaling policies   IAM policies   Amazon CloudWatch metrics and alarms   Tags   Stream settings   Time to Live (TTL) settings   Point in time recovery settings  
+   * Restores the specified table to the specified point in time within EarliestRestorableDateTime and LatestRestorableDateTime. You can restore your table to any point in time during the last 35 days. Any number of users can execute up to 50 concurrent restores (any type of restore) in a given account.  When you restore using point in time recovery, DynamoDB restores your table data to the state based on the selected date and time (day:hour:minute:second) to a new table.  Along with data, the following are also included on the new restored table using point in time recovery:    Global secondary indexes (GSIs)   Local secondary indexes (LSIs)   Provisioned read and write capacity   Encryption settings   All these settings come from the current settings of the source table at the time of restore.     You must manually set up the following on the restored table:   Auto scaling policies   IAM policies   Amazon CloudWatch metrics and alarms   Tags   Stream settings   Time to Live (TTL) settings   Point in time recovery settings  
    */
   restoreTableToPointInTime(callback?: (err: AWSError, data: DynamoDB.Types.RestoreTableToPointInTimeOutput) => void): Request<DynamoDB.Types.RestoreTableToPointInTimeOutput, AWSError>;
   /**
-   * The Scan operation returns one or more items and item attributes by accessing every item in a table or a secondary index. To have DynamoDB return fewer items, you can provide a FilterExpression operation. If the total number of scanned items exceeds the maximum dataset size limit of 1 MB, the scan stops and results are returned to the user as a LastEvaluatedKey value to continue the scan in a subsequent operation. The results also include the number of items exceeding the limit. A scan can result in no table data meeting the filter criteria.  A single Scan operation reads up to the maximum number of items set (if using the Limit parameter) or a maximum of 1 MB of data and then apply any filtering to the results using FilterExpression. If LastEvaluatedKey is present in the response, you need to paginate the result set. For more information, see Paginating the Results in the Amazon DynamoDB Developer Guide.   Scan operations proceed sequentially; however, for faster performance on a large table or secondary index, applications can request a parallel Scan operation by providing the Segment and TotalSegments parameters. For more information, see Parallel Scan in the Amazon DynamoDB Developer Guide.  Scan uses eventually consistent reads when accessing the data in a table; therefore, the result set might not include the changes to data in the table immediately before the operation began. If you need a consistent copy of the data, as of the time that the Scan begins, you can set the ConsistentRead parameter to true.
+   * The Scan operation returns one or more items and item attributes by accessing every item in a table or a secondary index. To have DynamoDB return fewer items, you can provide a FilterExpression operation. If the total size of scanned items exceeds the maximum dataset size limit of 1 MB, the scan completes and results are returned to the user. The LastEvaluatedKey value is also returned and the requestor can use the LastEvaluatedKey to continue the scan in a subsequent operation. Each scan response also includes number of items that were scanned (ScannedCount) as part of the request. If using a FilterExpression, a scan result can result in no items meeting the criteria and the Count will result in zero. If you did not use a FilterExpression in the scan request, then Count is the same as ScannedCount.   Count and ScannedCount only return the count of items specific to a single scan request and, unless the table is less than 1MB, do not represent the total number of items in the table.   A single Scan operation first reads up to the maximum number of items set (if using the Limit parameter) or a maximum of 1 MB of data and then applies any filtering to the results if a FilterExpression is provided. If LastEvaluatedKey is present in the response, pagination is required to complete the full table scan. For more information, see Paginating the Results in the Amazon DynamoDB Developer Guide.  Scan operations proceed sequentially; however, for faster performance on a large table or secondary index, applications can request a parallel Scan operation by providing the Segment and TotalSegments parameters. For more information, see Parallel Scan in the Amazon DynamoDB Developer Guide. By default, a Scan uses eventually consistent reads when accessing the items in a table. Therefore, the results from an eventually consistent Scan may not include the latest item changes at the time the scan iterates through each item in the table. If you require a strongly consistent read of each item as the scan iterates through the items in the table, you can set the ConsistentRead parameter to true. Strong consistency only relates to the consistency of the read at the item level.   DynamoDB does not provide snapshot isolation for a scan operation when the ConsistentRead parameter is set to true. Thus, a DynamoDB scan operation does not guarantee that all reads in a scan see a consistent snapshot of the table when the scan operation was requested.  
    */
   scan(params: DynamoDB.Types.ScanInput, callback?: (err: AWSError, data: DynamoDB.Types.ScanOutput) => void): Request<DynamoDB.Types.ScanOutput, AWSError>;
   /**
-   * The Scan operation returns one or more items and item attributes by accessing every item in a table or a secondary index. To have DynamoDB return fewer items, you can provide a FilterExpression operation. If the total number of scanned items exceeds the maximum dataset size limit of 1 MB, the scan stops and results are returned to the user as a LastEvaluatedKey value to continue the scan in a subsequent operation. The results also include the number of items exceeding the limit. A scan can result in no table data meeting the filter criteria.  A single Scan operation reads up to the maximum number of items set (if using the Limit parameter) or a maximum of 1 MB of data and then apply any filtering to the results using FilterExpression. If LastEvaluatedKey is present in the response, you need to paginate the result set. For more information, see Paginating the Results in the Amazon DynamoDB Developer Guide.   Scan operations proceed sequentially; however, for faster performance on a large table or secondary index, applications can request a parallel Scan operation by providing the Segment and TotalSegments parameters. For more information, see Parallel Scan in the Amazon DynamoDB Developer Guide.  Scan uses eventually consistent reads when accessing the data in a table; therefore, the result set might not include the changes to data in the table immediately before the operation began. If you need a consistent copy of the data, as of the time that the Scan begins, you can set the ConsistentRead parameter to true.
+   * The Scan operation returns one or more items and item attributes by accessing every item in a table or a secondary index. To have DynamoDB return fewer items, you can provide a FilterExpression operation. If the total size of scanned items exceeds the maximum dataset size limit of 1 MB, the scan completes and results are returned to the user. The LastEvaluatedKey value is also returned and the requestor can use the LastEvaluatedKey to continue the scan in a subsequent operation. Each scan response also includes number of items that were scanned (ScannedCount) as part of the request. If using a FilterExpression, a scan result can result in no items meeting the criteria and the Count will result in zero. If you did not use a FilterExpression in the scan request, then Count is the same as ScannedCount.   Count and ScannedCount only return the count of items specific to a single scan request and, unless the table is less than 1MB, do not represent the total number of items in the table.   A single Scan operation first reads up to the maximum number of items set (if using the Limit parameter) or a maximum of 1 MB of data and then applies any filtering to the results if a FilterExpression is provided. If LastEvaluatedKey is present in the response, pagination is required to complete the full table scan. For more information, see Paginating the Results in the Amazon DynamoDB Developer Guide.  Scan operations proceed sequentially; however, for faster performance on a large table or secondary index, applications can request a parallel Scan operation by providing the Segment and TotalSegments parameters. For more information, see Parallel Scan in the Amazon DynamoDB Developer Guide. By default, a Scan uses eventually consistent reads when accessing the items in a table. Therefore, the results from an eventually consistent Scan may not include the latest item changes at the time the scan iterates through each item in the table. If you require a strongly consistent read of each item as the scan iterates through the items in the table, you can set the ConsistentRead parameter to true. Strong consistency only relates to the consistency of the read at the item level.   DynamoDB does not provide snapshot isolation for a scan operation when the ConsistentRead parameter is set to true. Thus, a DynamoDB scan operation does not guarantee that all reads in a scan see a consistent snapshot of the table when the scan operation was requested.  
    */
   scan(callback?: (err: AWSError, data: DynamoDB.Types.ScanOutput) => void): Request<DynamoDB.Types.ScanOutput, AWSError>;
   /**
@@ -327,19 +375,19 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  TransactGetItems is a synchronous operation that atomically retrieves multiple items from one or more tables (but not from indexes) in a single account and Region. A TransactGetItems call can contain up to 25 TransactGetItem objects, each of which contains a Get structure that specifies an item to retrieve from a table in the account and Region. A call to TransactGetItems cannot retrieve items from tables in more than one AWS account or Region. The aggregate size of the items in the transaction cannot exceed 4 MB. DynamoDB rejects the entire TransactGetItems request if any of the following is true:   A conflicting operation is in the process of updating an item to be read.   There is insufficient provisioned capacity for the transaction to be completed.   There is a user error, such as an invalid data format.   The aggregate size of the items in the transaction cannot exceed 4 MB.  
+   *  TransactGetItems is a synchronous operation that atomically retrieves multiple items from one or more tables (but not from indexes) in a single account and Region. A TransactGetItems call can contain up to 100 TransactGetItem objects, each of which contains a Get structure that specifies an item to retrieve from a table in the account and Region. A call to TransactGetItems cannot retrieve items from tables in more than one Amazon Web Services account or Region. The aggregate size of the items in the transaction cannot exceed 4 MB. DynamoDB rejects the entire TransactGetItems request if any of the following is true:   A conflicting operation is in the process of updating an item to be read.   There is insufficient provisioned capacity for the transaction to be completed.   There is a user error, such as an invalid data format.   The aggregate size of the items in the transaction exceeded 4 MB.  
    */
   transactGetItems(params: DynamoDB.Types.TransactGetItemsInput, callback?: (err: AWSError, data: DynamoDB.Types.TransactGetItemsOutput) => void): Request<DynamoDB.Types.TransactGetItemsOutput, AWSError>;
   /**
-   *  TransactGetItems is a synchronous operation that atomically retrieves multiple items from one or more tables (but not from indexes) in a single account and Region. A TransactGetItems call can contain up to 25 TransactGetItem objects, each of which contains a Get structure that specifies an item to retrieve from a table in the account and Region. A call to TransactGetItems cannot retrieve items from tables in more than one AWS account or Region. The aggregate size of the items in the transaction cannot exceed 4 MB. DynamoDB rejects the entire TransactGetItems request if any of the following is true:   A conflicting operation is in the process of updating an item to be read.   There is insufficient provisioned capacity for the transaction to be completed.   There is a user error, such as an invalid data format.   The aggregate size of the items in the transaction cannot exceed 4 MB.  
+   *  TransactGetItems is a synchronous operation that atomically retrieves multiple items from one or more tables (but not from indexes) in a single account and Region. A TransactGetItems call can contain up to 100 TransactGetItem objects, each of which contains a Get structure that specifies an item to retrieve from a table in the account and Region. A call to TransactGetItems cannot retrieve items from tables in more than one Amazon Web Services account or Region. The aggregate size of the items in the transaction cannot exceed 4 MB. DynamoDB rejects the entire TransactGetItems request if any of the following is true:   A conflicting operation is in the process of updating an item to be read.   There is insufficient provisioned capacity for the transaction to be completed.   There is a user error, such as an invalid data format.   The aggregate size of the items in the transaction exceeded 4 MB.  
    */
   transactGetItems(callback?: (err: AWSError, data: DynamoDB.Types.TransactGetItemsOutput) => void): Request<DynamoDB.Types.TransactGetItemsOutput, AWSError>;
   /**
-   *  TransactWriteItems is a synchronous write operation that groups up to 25 action requests. These actions can target items in different tables, but not in different AWS accounts or Regions, and no two actions can target the same item. For example, you cannot both ConditionCheck and Update the same item. The aggregate size of the items in the transaction cannot exceed 4 MB. The actions are completed atomically so that either all of them succeed, or all of them fail. They are defined by the following objects:    Put  &#x97;   Initiates a PutItem operation to write a new item. This structure specifies the primary key of the item to be written, the name of the table to write it in, an optional condition expression that must be satisfied for the write to succeed, a list of the item's attributes, and a field indicating whether to retrieve the item's attributes if the condition is not met.    Update  &#x97;   Initiates an UpdateItem operation to update an existing item. This structure specifies the primary key of the item to be updated, the name of the table where it resides, an optional condition expression that must be satisfied for the update to succeed, an expression that defines one or more attributes to be updated, and a field indicating whether to retrieve the item's attributes if the condition is not met.    Delete  &#x97;   Initiates a DeleteItem operation to delete an existing item. This structure specifies the primary key of the item to be deleted, the name of the table where it resides, an optional condition expression that must be satisfied for the deletion to succeed, and a field indicating whether to retrieve the item's attributes if the condition is not met.    ConditionCheck  &#x97;   Applies a condition to an item that is not being modified by the transaction. This structure specifies the primary key of the item to be checked, the name of the table where it resides, a condition expression that must be satisfied for the transaction to succeed, and a field indicating whether to retrieve the item's attributes if the condition is not met.   DynamoDB rejects the entire TransactWriteItems request if any of the following is true:   A condition in one of the condition expressions is not met.   An ongoing operation is in the process of updating the same item.   There is insufficient provisioned capacity for the transaction to be completed.   An item size becomes too large (bigger than 400 KB), a local secondary index (LSI) becomes too large, or a similar validation error occurs because of changes made by the transaction.   The aggregate size of the items in the transaction exceeds 4 MB.   There is a user error, such as an invalid data format.  
+   *  TransactWriteItems is a synchronous write operation that groups up to 100 action requests. These actions can target items in different tables, but not in different Amazon Web Services accounts or Regions, and no two actions can target the same item. For example, you cannot both ConditionCheck and Update the same item. The aggregate size of the items in the transaction cannot exceed 4 MB. The actions are completed atomically so that either all of them succeed, or all of them fail. They are defined by the following objects:    Put  —   Initiates a PutItem operation to write a new item. This structure specifies the primary key of the item to be written, the name of the table to write it in, an optional condition expression that must be satisfied for the write to succeed, a list of the item's attributes, and a field indicating whether to retrieve the item's attributes if the condition is not met.    Update  —   Initiates an UpdateItem operation to update an existing item. This structure specifies the primary key of the item to be updated, the name of the table where it resides, an optional condition expression that must be satisfied for the update to succeed, an expression that defines one or more attributes to be updated, and a field indicating whether to retrieve the item's attributes if the condition is not met.    Delete  —   Initiates a DeleteItem operation to delete an existing item. This structure specifies the primary key of the item to be deleted, the name of the table where it resides, an optional condition expression that must be satisfied for the deletion to succeed, and a field indicating whether to retrieve the item's attributes if the condition is not met.    ConditionCheck  —   Applies a condition to an item that is not being modified by the transaction. This structure specifies the primary key of the item to be checked, the name of the table where it resides, a condition expression that must be satisfied for the transaction to succeed, and a field indicating whether to retrieve the item's attributes if the condition is not met.   DynamoDB rejects the entire TransactWriteItems request if any of the following is true:   A condition in one of the condition expressions is not met.   An ongoing operation is in the process of updating the same item.   There is insufficient provisioned capacity for the transaction to be completed.   An item size becomes too large (bigger than 400 KB), a local secondary index (LSI) becomes too large, or a similar validation error occurs because of changes made by the transaction.   The aggregate size of the items in the transaction exceeds 4 MB.   There is a user error, such as an invalid data format.  
    */
   transactWriteItems(params: DynamoDB.Types.TransactWriteItemsInput, callback?: (err: AWSError, data: DynamoDB.Types.TransactWriteItemsOutput) => void): Request<DynamoDB.Types.TransactWriteItemsOutput, AWSError>;
   /**
-   *  TransactWriteItems is a synchronous write operation that groups up to 25 action requests. These actions can target items in different tables, but not in different AWS accounts or Regions, and no two actions can target the same item. For example, you cannot both ConditionCheck and Update the same item. The aggregate size of the items in the transaction cannot exceed 4 MB. The actions are completed atomically so that either all of them succeed, or all of them fail. They are defined by the following objects:    Put  &#x97;   Initiates a PutItem operation to write a new item. This structure specifies the primary key of the item to be written, the name of the table to write it in, an optional condition expression that must be satisfied for the write to succeed, a list of the item's attributes, and a field indicating whether to retrieve the item's attributes if the condition is not met.    Update  &#x97;   Initiates an UpdateItem operation to update an existing item. This structure specifies the primary key of the item to be updated, the name of the table where it resides, an optional condition expression that must be satisfied for the update to succeed, an expression that defines one or more attributes to be updated, and a field indicating whether to retrieve the item's attributes if the condition is not met.    Delete  &#x97;   Initiates a DeleteItem operation to delete an existing item. This structure specifies the primary key of the item to be deleted, the name of the table where it resides, an optional condition expression that must be satisfied for the deletion to succeed, and a field indicating whether to retrieve the item's attributes if the condition is not met.    ConditionCheck  &#x97;   Applies a condition to an item that is not being modified by the transaction. This structure specifies the primary key of the item to be checked, the name of the table where it resides, a condition expression that must be satisfied for the transaction to succeed, and a field indicating whether to retrieve the item's attributes if the condition is not met.   DynamoDB rejects the entire TransactWriteItems request if any of the following is true:   A condition in one of the condition expressions is not met.   An ongoing operation is in the process of updating the same item.   There is insufficient provisioned capacity for the transaction to be completed.   An item size becomes too large (bigger than 400 KB), a local secondary index (LSI) becomes too large, or a similar validation error occurs because of changes made by the transaction.   The aggregate size of the items in the transaction exceeds 4 MB.   There is a user error, such as an invalid data format.  
+   *  TransactWriteItems is a synchronous write operation that groups up to 100 action requests. These actions can target items in different tables, but not in different Amazon Web Services accounts or Regions, and no two actions can target the same item. For example, you cannot both ConditionCheck and Update the same item. The aggregate size of the items in the transaction cannot exceed 4 MB. The actions are completed atomically so that either all of them succeed, or all of them fail. They are defined by the following objects:    Put  —   Initiates a PutItem operation to write a new item. This structure specifies the primary key of the item to be written, the name of the table to write it in, an optional condition expression that must be satisfied for the write to succeed, a list of the item's attributes, and a field indicating whether to retrieve the item's attributes if the condition is not met.    Update  —   Initiates an UpdateItem operation to update an existing item. This structure specifies the primary key of the item to be updated, the name of the table where it resides, an optional condition expression that must be satisfied for the update to succeed, an expression that defines one or more attributes to be updated, and a field indicating whether to retrieve the item's attributes if the condition is not met.    Delete  —   Initiates a DeleteItem operation to delete an existing item. This structure specifies the primary key of the item to be deleted, the name of the table where it resides, an optional condition expression that must be satisfied for the deletion to succeed, and a field indicating whether to retrieve the item's attributes if the condition is not met.    ConditionCheck  —   Applies a condition to an item that is not being modified by the transaction. This structure specifies the primary key of the item to be checked, the name of the table where it resides, a condition expression that must be satisfied for the transaction to succeed, and a field indicating whether to retrieve the item's attributes if the condition is not met.   DynamoDB rejects the entire TransactWriteItems request if any of the following is true:   A condition in one of the condition expressions is not met.   An ongoing operation is in the process of updating the same item.   There is insufficient provisioned capacity for the transaction to be completed.   An item size becomes too large (bigger than 400 KB), a local secondary index (LSI) becomes too large, or a similar validation error occurs because of changes made by the transaction.   The aggregate size of the items in the transaction exceeds 4 MB.   There is a user error, such as an invalid data format.  
    */
   transactWriteItems(callback?: (err: AWSError, data: DynamoDB.Types.TransactWriteItemsOutput) => void): Request<DynamoDB.Types.TransactWriteItemsOutput, AWSError>;
   /**
@@ -359,27 +407,27 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   updateContinuousBackups(callback?: (err: AWSError, data: DynamoDB.Types.UpdateContinuousBackupsOutput) => void): Request<DynamoDB.Types.UpdateContinuousBackupsOutput, AWSError>;
   /**
-   * Updates the status for contributor insights for a specific table or index.
+   * Updates the status for contributor insights for a specific table or index. CloudWatch Contributor Insights for DynamoDB graphs display the partition key and (if applicable) sort key of frequently accessed items and frequently throttled items in plaintext. If you require the use of Amazon Web Services Key Management Service (KMS) to encrypt this table’s partition key and sort key data with an Amazon Web Services managed key or customer managed key, you should not enable CloudWatch Contributor Insights for DynamoDB for this table.
    */
   updateContributorInsights(params: DynamoDB.Types.UpdateContributorInsightsInput, callback?: (err: AWSError, data: DynamoDB.Types.UpdateContributorInsightsOutput) => void): Request<DynamoDB.Types.UpdateContributorInsightsOutput, AWSError>;
   /**
-   * Updates the status for contributor insights for a specific table or index.
+   * Updates the status for contributor insights for a specific table or index. CloudWatch Contributor Insights for DynamoDB graphs display the partition key and (if applicable) sort key of frequently accessed items and frequently throttled items in plaintext. If you require the use of Amazon Web Services Key Management Service (KMS) to encrypt this table’s partition key and sort key data with an Amazon Web Services managed key or customer managed key, you should not enable CloudWatch Contributor Insights for DynamoDB for this table.
    */
   updateContributorInsights(callback?: (err: AWSError, data: DynamoDB.Types.UpdateContributorInsightsOutput) => void): Request<DynamoDB.Types.UpdateContributorInsightsOutput, AWSError>;
   /**
-   * Adds or removes replicas in the specified global table. The global table must already exist to be able to use this operation. Any replica to be added must be empty, have the same name as the global table, have the same key schema, have DynamoDB Streams enabled, and have the same provisioned and maximum write capacity units.  Although you can use UpdateGlobalTable to add replicas and remove replicas in a single request, for simplicity we recommend that you issue separate requests for adding or removing replicas.   If global secondary indexes are specified, then the following conditions must also be met:     The global secondary indexes must have the same name.     The global secondary indexes must have the same hash key and sort key (if present).     The global secondary indexes must have the same provisioned and maximum write capacity units.   
+   * Adds or removes replicas in the specified global table. The global table must already exist to be able to use this operation. Any replica to be added must be empty, have the same name as the global table, have the same key schema, have DynamoDB Streams enabled, and have the same provisioned and maximum write capacity units.  This documentation is for version 2017.11.29 (Legacy) of global tables, which should be avoided for new global tables. Customers should use Global Tables version 2019.11.21 (Current) when possible, because it provides greater flexibility, higher efficiency, and consumes less write capacity than 2017.11.29 (Legacy). To determine which version you're using, see Determining the global table version you are using. To update existing global tables from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see Upgrading global tables.    For global tables, this operation only applies to global tables using Version 2019.11.21 (Current version). If you are using global tables Version 2019.11.21 you can use UpdateTable instead.   Although you can use UpdateGlobalTable to add replicas and remove replicas in a single request, for simplicity we recommend that you issue separate requests for adding or removing replicas.    If global secondary indexes are specified, then the following conditions must also be met:     The global secondary indexes must have the same name.     The global secondary indexes must have the same hash key and sort key (if present).     The global secondary indexes must have the same provisioned and maximum write capacity units.   
    */
   updateGlobalTable(params: DynamoDB.Types.UpdateGlobalTableInput, callback?: (err: AWSError, data: DynamoDB.Types.UpdateGlobalTableOutput) => void): Request<DynamoDB.Types.UpdateGlobalTableOutput, AWSError>;
   /**
-   * Adds or removes replicas in the specified global table. The global table must already exist to be able to use this operation. Any replica to be added must be empty, have the same name as the global table, have the same key schema, have DynamoDB Streams enabled, and have the same provisioned and maximum write capacity units.  Although you can use UpdateGlobalTable to add replicas and remove replicas in a single request, for simplicity we recommend that you issue separate requests for adding or removing replicas.   If global secondary indexes are specified, then the following conditions must also be met:     The global secondary indexes must have the same name.     The global secondary indexes must have the same hash key and sort key (if present).     The global secondary indexes must have the same provisioned and maximum write capacity units.   
+   * Adds or removes replicas in the specified global table. The global table must already exist to be able to use this operation. Any replica to be added must be empty, have the same name as the global table, have the same key schema, have DynamoDB Streams enabled, and have the same provisioned and maximum write capacity units.  This documentation is for version 2017.11.29 (Legacy) of global tables, which should be avoided for new global tables. Customers should use Global Tables version 2019.11.21 (Current) when possible, because it provides greater flexibility, higher efficiency, and consumes less write capacity than 2017.11.29 (Legacy). To determine which version you're using, see Determining the global table version you are using. To update existing global tables from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see Upgrading global tables.    For global tables, this operation only applies to global tables using Version 2019.11.21 (Current version). If you are using global tables Version 2019.11.21 you can use UpdateTable instead.   Although you can use UpdateGlobalTable to add replicas and remove replicas in a single request, for simplicity we recommend that you issue separate requests for adding or removing replicas.    If global secondary indexes are specified, then the following conditions must also be met:     The global secondary indexes must have the same name.     The global secondary indexes must have the same hash key and sort key (if present).     The global secondary indexes must have the same provisioned and maximum write capacity units.   
    */
   updateGlobalTable(callback?: (err: AWSError, data: DynamoDB.Types.UpdateGlobalTableOutput) => void): Request<DynamoDB.Types.UpdateGlobalTableOutput, AWSError>;
   /**
-   * Updates settings for a global table.
+   * Updates settings for a global table.  This documentation is for version 2017.11.29 (Legacy) of global tables, which should be avoided for new global tables. Customers should use Global Tables version 2019.11.21 (Current) when possible, because it provides greater flexibility, higher efficiency, and consumes less write capacity than 2017.11.29 (Legacy). To determine which version you're using, see Determining the global table version you are using. To update existing global tables from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see Upgrading global tables. 
    */
   updateGlobalTableSettings(params: DynamoDB.Types.UpdateGlobalTableSettingsInput, callback?: (err: AWSError, data: DynamoDB.Types.UpdateGlobalTableSettingsOutput) => void): Request<DynamoDB.Types.UpdateGlobalTableSettingsOutput, AWSError>;
   /**
-   * Updates settings for a global table.
+   * Updates settings for a global table.  This documentation is for version 2017.11.29 (Legacy) of global tables, which should be avoided for new global tables. Customers should use Global Tables version 2019.11.21 (Current) when possible, because it provides greater flexibility, higher efficiency, and consumes less write capacity than 2017.11.29 (Legacy). To determine which version you're using, see Determining the global table version you are using. To update existing global tables from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see Upgrading global tables. 
    */
   updateGlobalTableSettings(callback?: (err: AWSError, data: DynamoDB.Types.UpdateGlobalTableSettingsOutput) => void): Request<DynamoDB.Types.UpdateGlobalTableSettingsOutput, AWSError>;
   /**
@@ -391,19 +439,27 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   updateItem(callback?: (err: AWSError, data: DynamoDB.Types.UpdateItemOutput) => void): Request<DynamoDB.Types.UpdateItemOutput, AWSError>;
   /**
-   * Modifies the provisioned throughput settings, global secondary indexes, or DynamoDB Streams settings for a given table. You can only perform one of the following operations at once:   Modify the provisioned throughput settings of the table.   Enable or disable DynamoDB Streams on the table.   Remove a global secondary index from the table.   Create a new global secondary index on the table. After the index begins backfilling, you can use UpdateTable to perform other operations.    UpdateTable is an asynchronous operation; while it is executing, the table status changes from ACTIVE to UPDATING. While it is UPDATING, you cannot issue another UpdateTable request. When the table returns to the ACTIVE state, the UpdateTable operation is complete.
+   * The command to update the Kinesis stream destination.
+   */
+  updateKinesisStreamingDestination(params: DynamoDB.Types.UpdateKinesisStreamingDestinationInput, callback?: (err: AWSError, data: DynamoDB.Types.UpdateKinesisStreamingDestinationOutput) => void): Request<DynamoDB.Types.UpdateKinesisStreamingDestinationOutput, AWSError>;
+  /**
+   * The command to update the Kinesis stream destination.
+   */
+  updateKinesisStreamingDestination(callback?: (err: AWSError, data: DynamoDB.Types.UpdateKinesisStreamingDestinationOutput) => void): Request<DynamoDB.Types.UpdateKinesisStreamingDestinationOutput, AWSError>;
+  /**
+   * Modifies the provisioned throughput settings, global secondary indexes, or DynamoDB Streams settings for a given table.  For global tables, this operation only applies to global tables using Version 2019.11.21 (Current version).   You can only perform one of the following operations at once:   Modify the provisioned throughput settings of the table.   Remove a global secondary index from the table.   Create a new global secondary index on the table. After the index begins backfilling, you can use UpdateTable to perform other operations.    UpdateTable is an asynchronous operation; while it's executing, the table status changes from ACTIVE to UPDATING. While it's UPDATING, you can't issue another UpdateTable request. When the table returns to the ACTIVE state, the UpdateTable operation is complete.
    */
   updateTable(params: DynamoDB.Types.UpdateTableInput, callback?: (err: AWSError, data: DynamoDB.Types.UpdateTableOutput) => void): Request<DynamoDB.Types.UpdateTableOutput, AWSError>;
   /**
-   * Modifies the provisioned throughput settings, global secondary indexes, or DynamoDB Streams settings for a given table. You can only perform one of the following operations at once:   Modify the provisioned throughput settings of the table.   Enable or disable DynamoDB Streams on the table.   Remove a global secondary index from the table.   Create a new global secondary index on the table. After the index begins backfilling, you can use UpdateTable to perform other operations.    UpdateTable is an asynchronous operation; while it is executing, the table status changes from ACTIVE to UPDATING. While it is UPDATING, you cannot issue another UpdateTable request. When the table returns to the ACTIVE state, the UpdateTable operation is complete.
+   * Modifies the provisioned throughput settings, global secondary indexes, or DynamoDB Streams settings for a given table.  For global tables, this operation only applies to global tables using Version 2019.11.21 (Current version).   You can only perform one of the following operations at once:   Modify the provisioned throughput settings of the table.   Remove a global secondary index from the table.   Create a new global secondary index on the table. After the index begins backfilling, you can use UpdateTable to perform other operations.    UpdateTable is an asynchronous operation; while it's executing, the table status changes from ACTIVE to UPDATING. While it's UPDATING, you can't issue another UpdateTable request. When the table returns to the ACTIVE state, the UpdateTable operation is complete.
    */
   updateTable(callback?: (err: AWSError, data: DynamoDB.Types.UpdateTableOutput) => void): Request<DynamoDB.Types.UpdateTableOutput, AWSError>;
   /**
-   * Updates auto scaling settings on your global tables at once.  This operation only applies to Version 2019.11.21 of global tables. 
+   * Updates auto scaling settings on your global tables at once.  For global tables, this operation only applies to global tables using Version 2019.11.21 (Current version).  
    */
   updateTableReplicaAutoScaling(params: DynamoDB.Types.UpdateTableReplicaAutoScalingInput, callback?: (err: AWSError, data: DynamoDB.Types.UpdateTableReplicaAutoScalingOutput) => void): Request<DynamoDB.Types.UpdateTableReplicaAutoScalingOutput, AWSError>;
   /**
-   * Updates auto scaling settings on your global tables at once.  This operation only applies to Version 2019.11.21 of global tables. 
+   * Updates auto scaling settings on your global tables at once.  For global tables, this operation only applies to global tables using Version 2019.11.21 (Current version).  
    */
   updateTableReplicaAutoScaling(callback?: (err: AWSError, data: DynamoDB.Types.UpdateTableReplicaAutoScalingOutput) => void): Request<DynamoDB.Types.UpdateTableReplicaAutoScalingOutput, AWSError>;
   /**
@@ -436,6 +492,7 @@ declare namespace DynamoDB {
   export import Converter = converter;
 }
 declare namespace DynamoDB {
+  export type ApproximateCreationDateTimePrecision = "MILLISECOND"|"MICROSECOND"|string;
   export type ArchivalReason = string;
   export interface ArchivalSummary {
     /**
@@ -443,7 +500,7 @@ declare namespace DynamoDB {
      */
     ArchivalDateTime?: _Date;
     /**
-     * The reason DynamoDB archived the table. Currently, the only possible value is:    INACCESSIBLE_ENCRYPTION_CREDENTIALS - The table was archived due to the table's AWS KMS key being inaccessible for more than seven days. An On-Demand backup was created at the archival time.  
+     * The reason DynamoDB archived the table. Currently, the only possible value is:    INACCESSIBLE_ENCRYPTION_CREDENTIALS - The table was archived due to the table's KMS key being inaccessible for more than seven days. An On-Demand backup was created at the archival time.  
      */
     ArchivalReason?: ArchivalReason;
     /**
@@ -497,7 +554,7 @@ declare namespace DynamoDB {
      */
     M?: MapAttributeValue;
     /**
-     * An attribute of type List. For example:  "L": [ {"S": "Cookies"} , {"S": "Coffee"}, {"N", "3.14159"}] 
+     * An attribute of type List. For example:  "L": [ {"S": "Cookies"} , {"S": "Coffee"}, {"N": "3.14159"}] 
      */
     L?: ListAttributeValue;
     /**
@@ -516,7 +573,7 @@ declare namespace DynamoDB {
      */
     Value?: AttributeValue;
     /**
-     * Specifies how to perform the update. Valid values are PUT (default), DELETE, and ADD. The behavior depends on whether the specified primary key already exists in the table.  If an item with the specified Key is found in the table:     PUT - Adds the specified attribute to the item. If the attribute already exists, it is replaced by the new value.     DELETE - If no value is specified, the attribute and its value are removed from the item. The data type of the specified value must match the existing value's data type. If a set of values is specified, then those values are subtracted from the old set. For example, if the attribute value was the set [a,b,c] and the DELETE action specified [a,c], then the final attribute value would be [b]. Specifying an empty set is an error.    ADD - If the attribute does not already exist, then the attribute and its values are added to the item. If the attribute does exist, then the behavior of ADD depends on the data type of the attribute:   If the existing attribute is a number, and if Value is also a number, then the Value is mathematically added to the existing attribute. If Value is a negative number, then it is subtracted from the existing attribute.   If you use ADD to increment or decrement a number value for an item that doesn't exist before the update, DynamoDB uses 0 as the initial value. In addition, if you use ADD to update an existing item, and intend to increment or decrement an attribute value which does not yet exist, DynamoDB uses 0 as the initial value. For example, suppose that the item you want to update does not yet have an attribute named itemcount, but you decide to ADD the number 3 to this attribute anyway, even though it currently does not exist. DynamoDB will create the itemcount attribute, set its initial value to 0, and finally add 3 to it. The result will be a new itemcount attribute in the item, with a value of 3.    If the existing data type is a set, and if the Value is also a set, then the Value is added to the existing set. (This is a set operation, not mathematical addition.) For example, if the attribute value was the set [1,2], and the ADD action specified [3], then the final attribute value would be [1,2,3]. An error occurs if an Add action is specified for a set attribute and the attribute type specified does not match the existing set type.  Both sets must have the same primitive data type. For example, if the existing data type is a set of strings, the Value must also be a set of strings. The same holds true for number sets and binary sets.   This action is only valid for an existing attribute whose data type is number or is a set. Do not use ADD for any other data types.    If no item with the specified Key is found:     PUT - DynamoDB creates a new item with the specified primary key, and then adds the attribute.     DELETE - Nothing happens; there is no attribute to delete.    ADD - DynamoDB creates an item with the supplied primary key and number (or set of numbers) for the attribute value. The only data types allowed are number and number set; no other data types can be specified.  
+     * Specifies how to perform the update. Valid values are PUT (default), DELETE, and ADD. The behavior depends on whether the specified primary key already exists in the table.  If an item with the specified Key is found in the table:     PUT - Adds the specified attribute to the item. If the attribute already exists, it is replaced by the new value.     DELETE - If no value is specified, the attribute and its value are removed from the item. The data type of the specified value must match the existing value's data type. If a set of values is specified, then those values are subtracted from the old set. For example, if the attribute value was the set [a,b,c] and the DELETE action specified [a,c], then the final attribute value would be [b]. Specifying an empty set is an error.    ADD - If the attribute does not already exist, then the attribute and its values are added to the item. If the attribute does exist, then the behavior of ADD depends on the data type of the attribute:   If the existing attribute is a number, and if Value is also a number, then the Value is mathematically added to the existing attribute. If Value is a negative number, then it is subtracted from the existing attribute.   If you use ADD to increment or decrement a number value for an item that doesn't exist before the update, DynamoDB uses 0 as the initial value. In addition, if you use ADD to update an existing item, and intend to increment or decrement an attribute value which does not yet exist, DynamoDB uses 0 as the initial value. For example, suppose that the item you want to update does not yet have an attribute named itemcount, but you decide to ADD the number 3 to this attribute anyway, even though it currently does not exist. DynamoDB will create the itemcount attribute, set its initial value to 0, and finally add 3 to it. The result will be a new itemcount attribute in the item, with a value of 3.    If the existing data type is a set, and if the Value is also a set, then the Value is added to the existing set. (This is a set operation, not mathematical addition.) For example, if the attribute value was the set [1,2], and the ADD action specified [3], then the final attribute value would be [1,2,3]. An error occurs if an Add action is specified for a set attribute and the attribute type specified does not match the existing set type.  Both sets must have the same primitive data type. For example, if the existing data type is a set of strings, the Value must also be a set of strings. The same holds true for number sets and binary sets.   This action is only valid for an existing attribute whose data type is number or is a set. Do not use ADD for any other data types.    If no item with the specified Key is found:     PUT - DynamoDB creates a new item with the specified primary key, and then adds the attribute.     DELETE - Nothing happens; there is no attribute to delete.    ADD - DynamoDB creates a new item with the supplied primary key and number (or set) for the attribute value. The only data types allowed are number, number set, string set or binary set.  
      */
     Action?: AttributeAction;
   }
@@ -603,7 +660,7 @@ declare namespace DynamoDB {
     /**
      * The target value for the metric. The range is 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2).
      */
-    TargetValue: Double;
+    TargetValue: DoubleObject;
   }
   export interface AutoScalingTargetTrackingScalingPolicyConfigurationUpdate {
     /**
@@ -621,7 +678,7 @@ declare namespace DynamoDB {
     /**
      * The target value for the metric. The range is 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2).
      */
-    TargetValue: Double;
+    TargetValue: DoubleObject;
   }
   export type Backfilling = boolean;
   export type BackupArn = string;
@@ -650,7 +707,7 @@ declare namespace DynamoDB {
      */
     BackupName: BackupName;
     /**
-     * Size of the backup in bytes.
+     * Size of the backup in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.
      */
     BackupSizeBytes?: BackupSizeBytes;
     /**
@@ -658,7 +715,7 @@ declare namespace DynamoDB {
      */
     BackupStatus: BackupStatus;
     /**
-     * BackupType:    USER - You create and manage these using the on-demand backup feature.    SYSTEM - If you delete a table with point-in-time recovery enabled, a SYSTEM backup is automatically created and is retained for 35 days (at no additional cost). System backups allow you to restore the deleted table to the state it was in just before the point of deletion.     AWS_BACKUP - On-demand backup created by you from AWS Backup service.  
+     * BackupType:    USER - You create and manage these using the on-demand backup feature.    SYSTEM - If you delete a table with point-in-time recovery enabled, a SYSTEM backup is automatically created and is retained for 35 days (at no additional cost). System backups allow you to restore the deleted table to the state it was in just before the point of deletion.     AWS_BACKUP - On-demand backup created by you from Backup service.  
      */
     BackupType: BackupType;
     /**
@@ -708,7 +765,7 @@ declare namespace DynamoDB {
      */
     BackupStatus?: BackupStatus;
     /**
-     * BackupType:    USER - You create and manage these using the on-demand backup feature.    SYSTEM - If you delete a table with point-in-time recovery enabled, a SYSTEM backup is automatically created and is retained for 35 days (at no additional cost). System backups allow you to restore the deleted table to the state it was in just before the point of deletion.     AWS_BACKUP - On-demand backup created by you from AWS Backup service.  
+     * BackupType:    USER - You create and manage these using the on-demand backup feature.    SYSTEM - If you delete a table with point-in-time recovery enabled, a SYSTEM backup is automatically created and is retained for 35 days (at no additional cost). System backups allow you to restore the deleted table to the state it was in just before the point of deletion.     AWS_BACKUP - On-demand backup created by you from Backup service.  
      */
     BackupType?: BackupType;
     /**
@@ -721,26 +778,31 @@ declare namespace DynamoDB {
   export type BackupsInputLimit = number;
   export interface BatchExecuteStatementInput {
     /**
-     *  The list of PartiQL statements representing the batch to run. 
+     * The list of PartiQL statements representing the batch to run.
      */
     Statements: PartiQLBatchRequest;
+    ReturnConsumedCapacity?: ReturnConsumedCapacity;
   }
   export interface BatchExecuteStatementOutput {
     /**
-     *  The response to each PartiQL statement in the batch. 
+     * The response to each PartiQL statement in the batch. The values of the list are ordered according to the ordering of the request statements.
      */
     Responses?: PartiQLBatchResponse;
+    /**
+     * The capacity units consumed by the entire operation. The values of the list are ordered according to the ordering of the statements.
+     */
+    ConsumedCapacity?: ConsumedCapacityMultiple;
   }
   export interface BatchGetItemInput {
     /**
-     * A map of one or more table names and, for each table, a map that describes one or more items to retrieve from that table. Each table name can be used only once per BatchGetItem request. Each element in the map of items to retrieve consists of the following:    ConsistentRead - If true, a strongly consistent read is used; if false (the default), an eventually consistent read is used.    ExpressionAttributeNames - One or more substitution tokens for attribute names in the ProjectionExpression parameter. The following are some use cases for using ExpressionAttributeNames:   To access an attribute whose name conflicts with a DynamoDB reserved word.   To create a placeholder for repeating occurrences of an attribute name in an expression.   To prevent special characters in an attribute name from being misinterpreted in an expression.   Use the # character in an expression to dereference an attribute name. For example, consider the following attribute name:    Percentile    The name of this attribute conflicts with a reserved word, so it cannot be used directly in an expression. (For the complete list of reserved words, see Reserved Words in the Amazon DynamoDB Developer Guide). To work around this, you could specify the following for ExpressionAttributeNames:    {"#P":"Percentile"}    You could then use this substitution in an expression, as in this example:    #P = :val     Tokens that begin with the : character are expression attribute values, which are placeholders for the actual value at runtime.  For more information about expression attribute names, see Accessing Item Attributes in the Amazon DynamoDB Developer Guide.    Keys - An array of primary key attribute values that define specific items in the table. For each primary key, you must provide all of the key attributes. For example, with a simple primary key, you only need to provide the partition key value. For a composite key, you must provide both the partition key value and the sort key value.    ProjectionExpression - A string that identifies one or more attributes to retrieve from the table. These attributes can include scalars, sets, or elements of a JSON document. The attributes in the expression must be separated by commas. If no attribute names are specified, then all attributes are returned. If any of the requested attributes are not found, they do not appear in the result. For more information, see Accessing Item Attributes in the Amazon DynamoDB Developer Guide.    AttributesToGet - This is a legacy parameter. Use ProjectionExpression instead. For more information, see AttributesToGet in the Amazon DynamoDB Developer Guide.   
+     * A map of one or more table names or table ARNs and, for each table, a map that describes one or more items to retrieve from that table. Each table name or ARN can be used only once per BatchGetItem request. Each element in the map of items to retrieve consists of the following:    ConsistentRead - If true, a strongly consistent read is used; if false (the default), an eventually consistent read is used.    ExpressionAttributeNames - One or more substitution tokens for attribute names in the ProjectionExpression parameter. The following are some use cases for using ExpressionAttributeNames:   To access an attribute whose name conflicts with a DynamoDB reserved word.   To create a placeholder for repeating occurrences of an attribute name in an expression.   To prevent special characters in an attribute name from being misinterpreted in an expression.   Use the # character in an expression to dereference an attribute name. For example, consider the following attribute name:    Percentile    The name of this attribute conflicts with a reserved word, so it cannot be used directly in an expression. (For the complete list of reserved words, see Reserved Words in the Amazon DynamoDB Developer Guide). To work around this, you could specify the following for ExpressionAttributeNames:    {"#P":"Percentile"}    You could then use this substitution in an expression, as in this example:    #P = :val     Tokens that begin with the : character are expression attribute values, which are placeholders for the actual value at runtime.  For more information about expression attribute names, see Accessing Item Attributes in the Amazon DynamoDB Developer Guide.    Keys - An array of primary key attribute values that define specific items in the table. For each primary key, you must provide all of the key attributes. For example, with a simple primary key, you only need to provide the partition key value. For a composite key, you must provide both the partition key value and the sort key value.    ProjectionExpression - A string that identifies one or more attributes to retrieve from the table. These attributes can include scalars, sets, or elements of a JSON document. The attributes in the expression must be separated by commas. If no attribute names are specified, then all attributes are returned. If any of the requested attributes are not found, they do not appear in the result. For more information, see Accessing Item Attributes in the Amazon DynamoDB Developer Guide.    AttributesToGet - This is a legacy parameter. Use ProjectionExpression instead. For more information, see AttributesToGet in the Amazon DynamoDB Developer Guide.   
      */
     RequestItems: BatchGetRequestMap;
     ReturnConsumedCapacity?: ReturnConsumedCapacity;
   }
   export interface BatchGetItemOutput {
     /**
-     * A map of table name to a list of items. Each object in Responses consists of a table name, along with a map of attribute data consisting of the data type and attribute value.
+     * A map of table name or table ARN to a list of items. Each object in Responses consists of a table name or ARN, along with a map of attribute data consisting of the data type and attribute value.
      */
     Responses?: BatchGetResponseMap;
     /**
@@ -760,9 +822,13 @@ declare namespace DynamoDB {
      */
     Code?: BatchStatementErrorCodeEnum;
     /**
-     *  The error message associated with the PartiQL batch resposne. 
+     *  The error message associated with the PartiQL batch response. 
      */
     Message?: String;
+    /**
+     * The item which caused the condition check to fail. This will be set if ReturnValuesOnConditionCheckFailure is specified as ALL_OLD.
+     */
+    Item?: AttributeMap;
   }
   export type BatchStatementErrorCodeEnum = "ConditionalCheckFailed"|"ItemCollectionSizeLimitExceeded"|"RequestLimitExceeded"|"ValidationError"|"ProvisionedThroughputExceeded"|"TransactionConflict"|"ThrottlingError"|"InternalServerError"|"ResourceNotFound"|"AccessDenied"|"DuplicateItem"|string;
   export interface BatchStatementRequest {
@@ -778,6 +844,10 @@ declare namespace DynamoDB {
      *  The read consistency of the PartiQL batch request. 
      */
     ConsistentRead?: ConsistentRead;
+    /**
+     * An optional parameter that returns the item attributes for a PartiQL batch request operation that failed a condition check. There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No read capacity units are consumed.
+     */
+    ReturnValuesOnConditionCheckFailure?: ReturnValuesOnConditionCheckFailure;
   }
   export interface BatchStatementResponse {
     /**
@@ -795,7 +865,7 @@ declare namespace DynamoDB {
   }
   export interface BatchWriteItemInput {
     /**
-     * A map of one or more table names and, for each table, a list of operations to be performed (DeleteRequest or PutRequest). Each element in the map consists of the following:    DeleteRequest - Perform a DeleteItem operation on the specified item. The item to be deleted is identified by a Key subelement:    Key - A map of primary key attribute values that uniquely identify the item. Each entry in this map consists of an attribute name and an attribute value. For each primary key, you must provide all of the key attributes. For example, with a simple primary key, you only need to provide a value for the partition key. For a composite primary key, you must provide values for both the partition key and the sort key.      PutRequest - Perform a PutItem operation on the specified item. The item to be put is identified by an Item subelement:    Item - A map of attributes and their values. Each entry in this map consists of an attribute name and an attribute value. Attribute values must not be null; string and binary type attributes must have lengths greater than zero; and set type attributes must not be empty. Requests that contain empty values are rejected with a ValidationException exception. If you specify any attributes that are part of an index key, then the data types for those attributes must match those of the schema in the table's attribute definition.    
+     * A map of one or more table names or table ARNs and, for each table, a list of operations to be performed (DeleteRequest or PutRequest). Each element in the map consists of the following:    DeleteRequest - Perform a DeleteItem operation on the specified item. The item to be deleted is identified by a Key subelement:    Key - A map of primary key attribute values that uniquely identify the item. Each entry in this map consists of an attribute name and an attribute value. For each primary key, you must provide all of the key attributes. For example, with a simple primary key, you only need to provide a value for the partition key. For a composite primary key, you must provide values for both the partition key and the sort key.      PutRequest - Perform a PutItem operation on the specified item. The item to be put is identified by an Item subelement:    Item - A map of attributes and their values. Each entry in this map consists of an attribute name and an attribute value. Attribute values must not be null; string and binary type attributes must have lengths greater than zero; and set type attributes must not be empty. Requests that contain empty values are rejected with a ValidationException exception. If you specify any attributes that are part of an index key, then the data types for those attributes must match those of the schema in the table's attribute definition.    
      */
     RequestItems: BatchWriteItemRequestMap;
     ReturnConsumedCapacity?: ReturnConsumedCapacity;
@@ -806,7 +876,7 @@ declare namespace DynamoDB {
   }
   export interface BatchWriteItemOutput {
     /**
-     * A map of tables and requests against those tables that were not processed. The UnprocessedItems value is in the same form as RequestItems, so you can provide this value directly to a subsequent BatchGetItem operation. For more information, see RequestItems in the Request Parameters section. Each UnprocessedItems entry consists of a table name and, for that table, a list of operations to perform (DeleteRequest or PutRequest).    DeleteRequest - Perform a DeleteItem operation on the specified item. The item to be deleted is identified by a Key subelement:    Key - A map of primary key attribute values that uniquely identify the item. Each entry in this map consists of an attribute name and an attribute value.      PutRequest - Perform a PutItem operation on the specified item. The item to be put is identified by an Item subelement:    Item - A map of attributes and their values. Each entry in this map consists of an attribute name and an attribute value. Attribute values must not be null; string and binary type attributes must have lengths greater than zero; and set type attributes must not be empty. Requests that contain empty values will be rejected with a ValidationException exception. If you specify any attributes that are part of an index key, then the data types for those attributes must match those of the schema in the table's attribute definition.     If there are no unprocessed items remaining, the response contains an empty UnprocessedItems map.
+     * A map of tables and requests against those tables that were not processed. The UnprocessedItems value is in the same form as RequestItems, so you can provide this value directly to a subsequent BatchWriteItem operation. For more information, see RequestItems in the Request Parameters section. Each UnprocessedItems entry consists of a table name or table ARN and, for that table, a list of operations to perform (DeleteRequest or PutRequest).    DeleteRequest - Perform a DeleteItem operation on the specified item. The item to be deleted is identified by a Key subelement:    Key - A map of primary key attribute values that uniquely identify the item. Each entry in this map consists of an attribute name and an attribute value.      PutRequest - Perform a PutItem operation on the specified item. The item to be put is identified by an Item subelement:    Item - A map of attributes and their values. Each entry in this map consists of an attribute name and an attribute value. Attribute values must not be null; string and binary type attributes must have lengths greater than zero; and set type attributes must not be empty. Requests that contain empty values will be rejected with a ValidationException exception. If you specify any attributes that are part of an index key, then the data types for those attributes must match those of the schema in the table's attribute definition.     If there are no unprocessed items remaining, the response contains an empty UnprocessedItems map.
      */
     UnprocessedItems?: BatchWriteItemRequestMap;
     /**
@@ -851,6 +921,7 @@ declare namespace DynamoDB {
   }
   export type ClientRequestToken = string;
   export type ClientToken = string;
+  export type CloudWatchLogGroupArn = string;
   export type ComparisonOperator = "EQ"|"NE"|"IN"|"LE"|"LT"|"GE"|"GT"|"BETWEEN"|"NOT_NULL"|"NULL"|"CONTAINS"|"NOT_CONTAINS"|"BEGINS_WITH"|string;
   export interface Condition {
     /**
@@ -868,19 +939,19 @@ declare namespace DynamoDB {
      */
     Key: Key;
     /**
-     * Name of the table for the check item request.
+     * Name of the table for the check item request. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
     /**
-     * A condition that must be satisfied in order for a conditional update to succeed.
+     * A condition that must be satisfied in order for a conditional update to succeed. For more information, see Condition expressions in the Amazon DynamoDB Developer Guide.
      */
     ConditionExpression: ConditionExpression;
     /**
-     * One or more substitution tokens for attribute names in an expression.
+     * One or more substitution tokens for attribute names in an expression. For more information, see Expression attribute names in the Amazon DynamoDB Developer Guide.
      */
     ExpressionAttributeNames?: ExpressionAttributeNameMap;
     /**
-     * One or more values that can be substituted in an expression.
+     * One or more values that can be substituted in an expression. For more information, see Condition expressions in the Amazon DynamoDB Developer Guide.
      */
     ExpressionAttributeValues?: ExpressionAttributeValueMap;
     /**
@@ -890,12 +961,13 @@ declare namespace DynamoDB {
   }
   export type ConditionExpression = string;
   export type ConditionalOperator = "AND"|"OR"|string;
+  export type ConfirmRemoveSelfResourceAccess = boolean;
   export type ConsistentRead = boolean;
   export interface ConsumedCapacity {
     /**
-     * The name of the table that was affected by the operation.
+     * The name of the table that was affected by the operation. If you had specified the Amazon Resource Name (ARN) of a table in the input, you'll see the table ARN in the response.
      */
-    TableName?: TableName;
+    TableName?: TableArn;
     /**
      * The total number of capacity units consumed by the operation.
      */
@@ -955,9 +1027,9 @@ declare namespace DynamoDB {
   }
   export interface CreateBackupInput {
     /**
-     * The name of the table.
+     * The name of the table. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
     /**
      * Specified name for the backup.
      */
@@ -986,6 +1058,10 @@ declare namespace DynamoDB {
      * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Service, Account, and Table Quotas in the Amazon DynamoDB Developer Guide.
      */
     ProvisionedThroughput?: ProvisionedThroughput;
+    /**
+     * The maximum number of read and write units for the global secondary index being created. If you use this parameter, you must specify MaxReadRequestUnits, MaxWriteRequestUnits, or both.
+     */
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export interface CreateGlobalTableInput {
     /**
@@ -1015,7 +1091,7 @@ declare namespace DynamoDB {
      */
     RegionName: RegionName;
     /**
-     * The AWS KMS customer master key (CMK) that should be used for AWS KMS encryption in the new replica. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB KMS master key alias/aws/dynamodb.
+     * The KMS key that should be used for KMS encryption in the new replica. To specify a key, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB KMS key alias/aws/dynamodb.
      */
     KMSMasterKeyId?: KMSMasterKeyId;
     /**
@@ -1023,9 +1099,17 @@ declare namespace DynamoDB {
      */
     ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
     /**
+     * The maximum on-demand throughput settings for the specified replica table being created. You can only modify MaxReadRequestUnits, because you can't modify MaxWriteRequestUnits for individual replica tables. 
+     */
+    OnDemandThroughputOverride?: OnDemandThroughputOverride;
+    /**
      * Replica-specific global secondary index settings.
      */
     GlobalSecondaryIndexes?: ReplicaGlobalSecondaryIndexList;
+    /**
+     * Replica-specific table class. If not specified, uses the source table's table class.
+     */
+    TableClassOverride?: TableClass;
   }
   export interface CreateTableInput {
     /**
@@ -1033,9 +1117,9 @@ declare namespace DynamoDB {
      */
     AttributeDefinitions: AttributeDefinitions;
     /**
-     * The name of the table to create.
+     * The name of the table to create. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
     /**
      * Specifies the attributes that make up the primary key for a table or an index. The attributes in KeySchema must also be defined in the AttributeDefinitions array. For more information, see Data Model in the Amazon DynamoDB Developer Guide. Each KeySchemaElement in the array is composed of:    AttributeName - The name of this key attribute.    KeyType - The role that the key attribute will assume:    HASH - partition key    RANGE - sort key      The partition key of an item is also known as its hash attribute. The term "hash attribute" derives from the DynamoDB usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its range attribute. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.  For a simple primary key (partition key), you must provide exactly one element with a KeyType of HASH. For a composite primary key (partition key and sort key), you must provide exactly two elements, in this order: The first element must have a KeyType of HASH, and the second element must have a KeyType of RANGE. For more information, see Working with Tables in the Amazon DynamoDB Developer Guide.
      */
@@ -1049,7 +1133,7 @@ declare namespace DynamoDB {
      */
     GlobalSecondaryIndexes?: GlobalSecondaryIndexList;
     /**
-     * Controls how you are charged for read and write throughput and how you manage capacity. This setting can be changed later.    PROVISIONED - We recommend using PROVISIONED for predictable workloads. PROVISIONED sets the billing mode to Provisioned Mode.    PAY_PER_REQUEST - We recommend using PAY_PER_REQUEST for unpredictable workloads. PAY_PER_REQUEST sets the billing mode to On-Demand Mode.   
+     * Controls how you are charged for read and write throughput and how you manage capacity. This setting can be changed later.    PROVISIONED - We recommend using PROVISIONED for predictable workloads. PROVISIONED sets the billing mode to Provisioned capacity mode.    PAY_PER_REQUEST - We recommend using PAY_PER_REQUEST for unpredictable workloads. PAY_PER_REQUEST sets the billing mode to On-demand capacity mode.   
      */
     BillingMode?: BillingMode;
     /**
@@ -1068,12 +1152,41 @@ declare namespace DynamoDB {
      * A list of key-value pairs to label the table. For more information, see Tagging for DynamoDB.
      */
     Tags?: TagList;
+    /**
+     * The table class of the new table. Valid values are STANDARD and STANDARD_INFREQUENT_ACCESS.
+     */
+    TableClass?: TableClass;
+    /**
+     * Indicates whether deletion protection is to be enabled (true) or disabled (false) on the table.
+     */
+    DeletionProtectionEnabled?: DeletionProtectionEnabled;
+    /**
+     * An Amazon Web Services resource-based policy document in JSON format that will be attached to the table. When you attach a resource-based policy while creating a table, the policy application is strongly consistent. The maximum size supported for a resource-based policy document is 20 KB. DynamoDB counts whitespaces when calculating the size of a policy against this limit. For a full list of all considerations that apply for resource-based policies, see Resource-based policy considerations.  You need to specify the CreateTable and PutResourcePolicy IAM actions for authorizing a user to create a table with a resource-based policy. 
+     */
+    ResourcePolicy?: ResourcePolicy;
+    /**
+     * Sets the maximum number of read and write units for the specified table in on-demand capacity mode. If you use this parameter, you must specify MaxReadRequestUnits, MaxWriteRequestUnits, or both.
+     */
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export interface CreateTableOutput {
     /**
      * Represents the properties of the table.
      */
     TableDescription?: TableDescription;
+  }
+  export type CsvDelimiter = string;
+  export type CsvHeader = string;
+  export type CsvHeaderList = CsvHeader[];
+  export interface CsvOptions {
+    /**
+     *  The delimiter used for separating items in the CSV file being imported. 
+     */
+    Delimiter?: CsvDelimiter;
+    /**
+     *  List of the headers used to specify a common header for all source CSV files being imported. If this field is specified then the first line of each CSV file is treated as data instead of the header. If this field is not specified the the first line of each CSV file is treated as the header. 
+     */
+    HeaderList?: CsvHeaderList;
   }
   export type _Date = Date;
   export interface Delete {
@@ -1082,9 +1195,9 @@ declare namespace DynamoDB {
      */
     Key: Key;
     /**
-     * Name of the table in which the item to be deleted resides.
+     * Name of the table in which the item to be deleted resides. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
     /**
      * A condition that must be satisfied in order for a conditional delete to succeed.
      */
@@ -1122,11 +1235,11 @@ declare namespace DynamoDB {
   }
   export interface DeleteItemInput {
     /**
-     * The name of the table from which to delete the item.
+     * The name of the table from which to delete the item. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
     /**
-     * A map of attribute names to AttributeValue objects, representing the primary key of the item to delete. For the primary key, you must provide all of the attributes. For example, with a simple primary key, you only need to provide a value for the partition key. For a composite primary key, you must provide values for both the partition key and the sort key.
+     * A map of attribute names to AttributeValue objects, representing the primary key of the item to delete. For the primary key, you must provide all of the key attributes. For example, with a simple primary key, you only need to provide a value for the partition key. For a composite primary key, you must provide values for both the partition key and the sort key.
      */
     Key: Key;
     /**
@@ -1138,7 +1251,7 @@ declare namespace DynamoDB {
      */
     ConditionalOperator?: ConditionalOperator;
     /**
-     * Use ReturnValues if you want to get the item attributes as they appeared before they were deleted. For DeleteItem, the valid values are:    NONE - If ReturnValues is not specified, or if its value is NONE, then nothing is returned. (This setting is the default for ReturnValues.)    ALL_OLD - The content of the old item is returned.    The ReturnValues parameter is used by several DynamoDB operations; however, DeleteItem does not recognize any values other than NONE or ALL_OLD. 
+     * Use ReturnValues if you want to get the item attributes as they appeared before they were deleted. For DeleteItem, the valid values are:    NONE - If ReturnValues is not specified, or if its value is NONE, then nothing is returned. (This setting is the default for ReturnValues.)    ALL_OLD - The content of the old item is returned.   There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No read capacity units are consumed.  The ReturnValues parameter is used by several DynamoDB operations; however, DeleteItem does not recognize any values other than NONE or ALL_OLD. 
      */
     ReturnValues?: ReturnValue;
     ReturnConsumedCapacity?: ReturnConsumedCapacity;
@@ -1158,6 +1271,10 @@ declare namespace DynamoDB {
      * One or more values that can be substituted in an expression. Use the : (colon) character in an expression to dereference an attribute value. For example, suppose that you wanted to check whether the value of the ProductStatus attribute was one of the following:   Available | Backordered | Discontinued  You would first need to specify ExpressionAttributeValues as follows:  { ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }  You could then use these values in an expression, such as this:  ProductStatus IN (:avail, :back, :disc)  For more information on expression attribute values, see Condition Expressions in the Amazon DynamoDB Developer Guide.
      */
     ExpressionAttributeValues?: ExpressionAttributeValueMap;
+    /**
+     * An optional parameter that returns the item attributes for a DeleteItem operation that failed a condition check. There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No read capacity units are consumed.
+     */
+    ReturnValuesOnConditionCheckFailure?: ReturnValuesOnConditionCheckFailure;
   }
   export interface DeleteItemOutput {
     /**
@@ -1165,7 +1282,7 @@ declare namespace DynamoDB {
      */
     Attributes?: AttributeMap;
     /**
-     * The capacity units consumed by the DeleteItem operation. The data returned includes the total provisioned throughput consumed, along with statistics for the table and any indexes involved in the operation. ConsumedCapacity is only returned if the ReturnConsumedCapacity parameter was specified. For more information, see Provisioned Mode in the Amazon DynamoDB Developer Guide.
+     * The capacity units consumed by the DeleteItem operation. The data returned includes the total provisioned throughput consumed, along with statistics for the table and any indexes involved in the operation. ConsumedCapacity is only returned if the ReturnConsumedCapacity parameter was specified. For more information, see Provisioned capacity mode in the Amazon DynamoDB Developer Guide.
      */
     ConsumedCapacity?: ConsumedCapacity;
     /**
@@ -1191,11 +1308,27 @@ declare namespace DynamoDB {
      */
     Key: Key;
   }
+  export interface DeleteResourcePolicyInput {
+    /**
+     * The Amazon Resource Name (ARN) of the DynamoDB resource from which the policy will be removed. The resources you can specify include tables and streams. If you remove the policy of a table, it will also remove the permissions for the table's indexes defined in that policy document. This is because index permissions are defined in the table's policy.
+     */
+    ResourceArn: ResourceArnString;
+    /**
+     * A string value that you can use to conditionally delete your policy. When you provide an expected revision ID, if the revision ID of the existing policy on the resource doesn't match or if there's no policy attached to the resource, the request will fail and return a PolicyNotFoundException.
+     */
+    ExpectedRevisionId?: PolicyRevisionId;
+  }
+  export interface DeleteResourcePolicyOutput {
+    /**
+     * A unique string that represents the revision ID of the policy. If you're comparing revision IDs, make sure to always use string comparison logic. This value will be empty if you make a request against a resource without a policy.
+     */
+    RevisionId?: PolicyRevisionId;
+  }
   export interface DeleteTableInput {
     /**
-     * The name of the table to delete.
+     * The name of the table to delete. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
   }
   export interface DeleteTableOutput {
     /**
@@ -1203,6 +1336,7 @@ declare namespace DynamoDB {
      */
     TableDescription?: TableDescription;
   }
+  export type DeletionProtectionEnabled = boolean;
   export interface DescribeBackupInput {
     /**
      * The Amazon Resource Name (ARN) associated with the backup.
@@ -1217,9 +1351,9 @@ declare namespace DynamoDB {
   }
   export interface DescribeContinuousBackupsInput {
     /**
-     * Name of the table for which the customer wants to check the continuous backups and point in time recovery settings.
+     * Name of the table for which the customer wants to check the continuous backups and point in time recovery settings. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
   }
   export interface DescribeContinuousBackupsOutput {
     /**
@@ -1229,9 +1363,9 @@ declare namespace DynamoDB {
   }
   export interface DescribeContributorInsightsInput {
     /**
-     * The name of the table to describe.
+     * The name of the table to describe. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
     /**
      * The name of the global secondary index to describe, if applicable.
      */
@@ -1247,11 +1381,11 @@ declare namespace DynamoDB {
      */
     IndexName?: IndexName;
     /**
-     * List of names of the associated Alpine rules.
+     * List of names of the associated contributor insights rules.
      */
     ContributorInsightsRuleList?: ContributorInsightsRuleList;
     /**
-     * Current Status contributor insights.
+     * Current status of contributor insights.
      */
     ContributorInsightsStatus?: ContributorInsightsStatus;
     /**
@@ -1259,7 +1393,7 @@ declare namespace DynamoDB {
      */
     LastUpdateDateTime?: LastUpdateDateTime;
     /**
-     * Returns information about the last failure that encountered. The most common exceptions for a FAILED status are:   LimitExceededException - Per-account Amazon CloudWatch Contributor Insights rule limit reached. Please disable Contributor Insights for other tables/indexes OR disable Contributor Insights rules before retrying.   AccessDeniedException - Amazon CloudWatch Contributor Insights rules cannot be modified due to insufficient permissions.   AccessDeniedException - Failed to create service-linked role for Contributor Insights due to insufficient permissions.   InternalServerError - Failed to create Amazon CloudWatch Contributor Insights rules. Please retry request.  
+     * Returns information about the last failure that was encountered. The most common exceptions for a FAILED status are:   LimitExceededException - Per-account Amazon CloudWatch Contributor Insights rule limit reached. Please disable Contributor Insights for other tables/indexes OR disable Contributor Insights rules before retrying.   AccessDeniedException - Amazon CloudWatch Contributor Insights rules cannot be modified due to insufficient permissions.   AccessDeniedException - Failed to create service-linked role for Contributor Insights due to insufficient permissions.   InternalServerError - Failed to create Amazon CloudWatch Contributor Insights rules. Please retry request.  
      */
     FailureException?: FailureException;
   }
@@ -1311,11 +1445,23 @@ declare namespace DynamoDB {
      */
     ReplicaSettings?: ReplicaSettingsDescriptionList;
   }
+  export interface DescribeImportInput {
+    /**
+     *  The Amazon Resource Name (ARN) associated with the table you're importing to. 
+     */
+    ImportArn: ImportArn;
+  }
+  export interface DescribeImportOutput {
+    /**
+     *  Represents the properties of the table created for the import, and parameters of the import. The import parameters include import status, how many items were processed, and how many errors were encountered. 
+     */
+    ImportTableDescription: ImportTableDescription;
+  }
   export interface DescribeKinesisStreamingDestinationInput {
     /**
-     * The name of the table being described.
+     * The name of the table being described. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
   }
   export interface DescribeKinesisStreamingDestinationOutput {
     /**
@@ -1349,9 +1495,9 @@ declare namespace DynamoDB {
   }
   export interface DescribeTableInput {
     /**
-     * The name of the table to describe.
+     * The name of the table to describe. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
   }
   export interface DescribeTableOutput {
     /**
@@ -1361,9 +1507,9 @@ declare namespace DynamoDB {
   }
   export interface DescribeTableReplicaAutoScalingInput {
     /**
-     * The name of the table.
+     * The name of the table. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
   }
   export interface DescribeTableReplicaAutoScalingOutput {
     /**
@@ -1373,9 +1519,9 @@ declare namespace DynamoDB {
   }
   export interface DescribeTimeToLiveInput {
     /**
-     * The name of the table to be described.
+     * The name of the table to be described. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
   }
   export interface DescribeTimeToLiveOutput {
     /**
@@ -1383,8 +1529,14 @@ declare namespace DynamoDB {
      */
     TimeToLiveDescription?: TimeToLiveDescription;
   }
-  export type DestinationStatus = "ENABLING"|"ACTIVE"|"DISABLING"|"DISABLED"|"ENABLE_FAILED"|string;
-  export type Double = number;
+  export type DestinationStatus = "ENABLING"|"ACTIVE"|"DISABLING"|"DISABLED"|"ENABLE_FAILED"|"UPDATING"|string;
+  export type DoubleObject = number;
+  export interface EnableKinesisStreamingConfiguration {
+    /**
+     * Toggle for the precision of Kinesis data stream timestamp. The values are either MILLISECOND or MICROSECOND.
+     */
+    ApproximateCreationDateTimePrecision?: ApproximateCreationDateTimePrecision;
+  }
   export interface Endpoint {
     /**
      * IP address of the endpoint.
@@ -1396,51 +1548,74 @@ declare namespace DynamoDB {
     CachePeriodInMinutes: Long;
   }
   export type Endpoints = Endpoint[];
+  export type ErrorCount = number;
   export type ExceptionDescription = string;
   export type ExceptionName = string;
   export interface ExecuteStatementInput {
     /**
-     *  The PartiQL statement representing the operation to run. 
+     * The PartiQL statement representing the operation to run.
      */
     Statement: PartiQLStatement;
     /**
-     *  The parameters for the PartiQL statement, if any. 
+     * The parameters for the PartiQL statement, if any.
      */
     Parameters?: PreparedStatementParameters;
     /**
-     *  The consistency of a read operation. If set to true, then a strongly consistent read is used; otherwise, an eventually consistent read is used. 
+     * The consistency of a read operation. If set to true, then a strongly consistent read is used; otherwise, an eventually consistent read is used.
      */
     ConsistentRead?: ConsistentRead;
     /**
-     *  Set this value to get remaining results, if NextToken was returned in the statement response. 
+     * Set this value to get remaining results, if NextToken was returned in the statement response.
      */
     NextToken?: PartiQLNextToken;
+    ReturnConsumedCapacity?: ReturnConsumedCapacity;
+    /**
+     * The maximum number of items to evaluate (not necessarily the number of matching items). If DynamoDB processes the number of items up to the limit while processing the results, it stops the operation and returns the matching values up to that point, along with a key in LastEvaluatedKey to apply in a subsequent operation so you can pick up where you left off. Also, if the processed dataset size exceeds 1 MB before DynamoDB reaches this limit, it stops the operation and returns the matching values up to the limit, and a key in LastEvaluatedKey to apply in a subsequent operation to continue the operation. 
+     */
+    Limit?: PositiveIntegerObject;
+    /**
+     * An optional parameter that returns the item attributes for an ExecuteStatement operation that failed a condition check. There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No read capacity units are consumed.
+     */
+    ReturnValuesOnConditionCheckFailure?: ReturnValuesOnConditionCheckFailure;
   }
   export interface ExecuteStatementOutput {
     /**
-     *  If a read operation was used, this property will contain the result of the reade operation; a map of attribute names and their values. For the write operations this value will be empty. 
+     * If a read operation was used, this property will contain the result of the read operation; a map of attribute names and their values. For the write operations this value will be empty.
      */
     Items?: ItemList;
     /**
-     *  If the response of a read request exceeds the response payload limit DynamoDB will set this value in the response. If set, you can use that this value in the subsequent request to get the remaining results. 
+     * If the response of a read request exceeds the response payload limit DynamoDB will set this value in the response. If set, you can use that this value in the subsequent request to get the remaining results.
      */
     NextToken?: PartiQLNextToken;
+    ConsumedCapacity?: ConsumedCapacity;
+    /**
+     * The primary key of the item where the operation stopped, inclusive of the previous result set. Use this value to start a new operation, excluding this value in the new request. If LastEvaluatedKey is empty, then the "last page" of results has been processed and there is no more data to be retrieved. If LastEvaluatedKey is not empty, it does not necessarily mean that there is more data in the result set. The only way to know when you have reached the end of the result set is when LastEvaluatedKey is empty. 
+     */
+    LastEvaluatedKey?: Key;
   }
   export interface ExecuteTransactionInput {
     /**
-     *  The list of PartiQL statements representing the transaction to run. 
+     * The list of PartiQL statements representing the transaction to run.
      */
     TransactStatements: ParameterizedStatements;
     /**
-     *  Set this value to get remaining results, if NextToken was returned in the statement response. 
+     * Set this value to get remaining results, if NextToken was returned in the statement response.
      */
     ClientRequestToken?: ClientRequestToken;
+    /**
+     * Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response. For more information, see TransactGetItems and TransactWriteItems.
+     */
+    ReturnConsumedCapacity?: ReturnConsumedCapacity;
   }
   export interface ExecuteTransactionOutput {
     /**
-     *  The response to a PartiQL transaction. 
+     * The response to a PartiQL transaction.
      */
     Responses?: ItemResponseList;
+    /**
+     * The capacity units consumed by the entire operation. The values of the list are ordered according to the ordering of the statements.
+     */
+    ConsumedCapacity?: ConsumedCapacityMultiple;
   }
   export type ExpectedAttributeMap = {[key: string]: ExpectedAttributeValue};
   export interface ExpectedAttributeValue {
@@ -1504,7 +1679,7 @@ declare namespace DynamoDB {
      */
     S3Bucket?: S3Bucket;
     /**
-     * The ID of the AWS account that owns the bucket containing the export.
+     * The ID of the Amazon Web Services account that owns the bucket containing the export.
      */
     S3BucketOwner?: S3BucketOwner;
     /**
@@ -1512,11 +1687,11 @@ declare namespace DynamoDB {
      */
     S3Prefix?: S3Prefix;
     /**
-     * Type of encryption used on the bucket where export data is stored. Valid values for S3SseAlgorithm are:    AES256 - server-side encryption with Amazon S3 managed keys    KMS - server-side encryption with AWS KMS managed keys  
+     * Type of encryption used on the bucket where export data is stored. Valid values for S3SseAlgorithm are:    AES256 - server-side encryption with Amazon S3 managed keys    KMS - server-side encryption with KMS managed keys  
      */
     S3SseAlgorithm?: S3SseAlgorithm;
     /**
-     * The ID of the AWS KMS managed key used to encrypt the S3 bucket where export data is stored (if applicable).
+     * The ID of the KMS managed key used to encrypt the S3 bucket where export data is stored (if applicable).
      */
     S3SseKmsKeyId?: S3SseKmsKeyId;
     /**
@@ -1539,9 +1714,18 @@ declare namespace DynamoDB {
      * The number of items exported.
      */
     ItemCount?: ItemCount;
+    /**
+     * The type of export that was performed. Valid values are FULL_EXPORT or INCREMENTAL_EXPORT.
+     */
+    ExportType?: ExportType;
+    /**
+     * Optional object containing the parameters specific to an incremental export.
+     */
+    IncrementalExportSpecification?: IncrementalExportSpecification;
   }
   export type ExportEndTime = Date;
   export type ExportFormat = "DYNAMODB_JSON"|"ION"|string;
+  export type ExportFromTime = Date;
   export type ExportManifest = string;
   export type ExportNextToken = string;
   export type ExportStartTime = Date;
@@ -1556,6 +1740,10 @@ declare namespace DynamoDB {
      * Export can be in one of the following states: IN_PROGRESS, COMPLETED, or FAILED.
      */
     ExportStatus?: ExportStatus;
+    /**
+     * The type of export that was performed. Valid values are FULL_EXPORT or INCREMENTAL_EXPORT.
+     */
+    ExportType?: ExportType;
   }
   export interface ExportTableToPointInTimeInput {
     /**
@@ -1563,11 +1751,11 @@ declare namespace DynamoDB {
      */
     TableArn: TableArn;
     /**
-     * Time in the past from which to export table data. The table export will be a snapshot of the table's state at this point in time.
+     * Time in the past from which to export table data, counted in seconds from the start of the Unix epoch. The table export will be a snapshot of the table's state at this point in time.
      */
     ExportTime?: ExportTime;
     /**
-     * Providing a ClientToken makes the call to ExportTableToPointInTimeInput idempotent, meaning that multiple identical calls have the same effect as one single call. A client token is valid for 8 hours after the first request that uses it is completed. After 8 hours, any request with the same client token is treated as a new request. Do not resubmit the same request with the same client token for more than 8 hours, or the result might not be idempotent. If you submit a request with the same client token but a change in other parameters within the 8-hour idempotency window, DynamoDB returns an IdempotentParameterMismatch exception.
+     * Providing a ClientToken makes the call to ExportTableToPointInTimeInput idempotent, meaning that multiple identical calls have the same effect as one single call. A client token is valid for 8 hours after the first request that uses it is completed. After 8 hours, any request with the same client token is treated as a new request. Do not resubmit the same request with the same client token for more than 8 hours, or the result might not be idempotent. If you submit a request with the same client token but a change in other parameters within the 8-hour idempotency window, DynamoDB returns an ImportConflictException.
      */
     ClientToken?: ClientToken;
     /**
@@ -1575,7 +1763,7 @@ declare namespace DynamoDB {
      */
     S3Bucket: S3Bucket;
     /**
-     * The ID of the AWS account that owns the bucket the export will be stored in.
+     * The ID of the Amazon Web Services account that owns the bucket the export will be stored in.  S3BucketOwner is a required parameter when exporting to a S3 bucket in another account. 
      */
     S3BucketOwner?: S3BucketOwner;
     /**
@@ -1583,17 +1771,25 @@ declare namespace DynamoDB {
      */
     S3Prefix?: S3Prefix;
     /**
-     * Type of encryption used on the bucket where export data will be stored. Valid values for S3SseAlgorithm are:    AES256 - server-side encryption with Amazon S3 managed keys    KMS - server-side encryption with AWS KMS managed keys  
+     * Type of encryption used on the bucket where export data will be stored. Valid values for S3SseAlgorithm are:    AES256 - server-side encryption with Amazon S3 managed keys    KMS - server-side encryption with KMS managed keys  
      */
     S3SseAlgorithm?: S3SseAlgorithm;
     /**
-     * The ID of the AWS KMS managed key used to encrypt the S3 bucket where export data will be stored (if applicable).
+     * The ID of the KMS managed key used to encrypt the S3 bucket where export data will be stored (if applicable).
      */
     S3SseKmsKeyId?: S3SseKmsKeyId;
     /**
      * The format for the exported data. Valid values for ExportFormat are DYNAMODB_JSON or ION.
      */
     ExportFormat?: ExportFormat;
+    /**
+     * Choice of whether to execute as a full export or incremental export. Valid values are FULL_EXPORT or INCREMENTAL_EXPORT. The default value is FULL_EXPORT. If INCREMENTAL_EXPORT is provided, the IncrementalExportSpecification must also be used.
+     */
+    ExportType?: ExportType;
+    /**
+     * Optional object containing the parameters specific to an incremental export.
+     */
+    IncrementalExportSpecification?: IncrementalExportSpecification;
   }
   export interface ExportTableToPointInTimeOutput {
     /**
@@ -1602,6 +1798,9 @@ declare namespace DynamoDB {
     ExportDescription?: ExportDescription;
   }
   export type ExportTime = Date;
+  export type ExportToTime = Date;
+  export type ExportType = "FULL_EXPORT"|"INCREMENTAL_EXPORT"|string;
+  export type ExportViewType = "NEW_IMAGE"|"NEW_AND_OLD_IMAGES"|string;
   export type ExpressionAttributeNameMap = {[key: string]: AttributeName};
   export type ExpressionAttributeNameVariable = string;
   export type ExpressionAttributeValueMap = {[key: string]: AttributeValue};
@@ -1625,9 +1824,9 @@ declare namespace DynamoDB {
      */
     Key: Key;
     /**
-     * The name of the table from which to retrieve the specified item.
+     * The name of the table from which to retrieve the specified item. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
     /**
      * A string that identifies one or more attributes of the specified item to retrieve from the table. The attributes in the expression must be separated by commas. If no attribute names are specified, then all attributes of the specified item are returned. If any of the requested attributes are not found, they do not appear in the result.
      */
@@ -1639,9 +1838,9 @@ declare namespace DynamoDB {
   }
   export interface GetItemInput {
     /**
-     * The name of the table containing the requested item.
+     * The name of the table containing the requested item. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
     /**
      * A map of attribute names to AttributeValue objects, representing the primary key of the item to retrieve. For the primary key, you must provide all of the attributes. For example, with a simple primary key, you only need to provide a value for the partition key. For a composite primary key, you must provide values for both the partition key and the sort key.
      */
@@ -1670,9 +1869,25 @@ declare namespace DynamoDB {
      */
     Item?: AttributeMap;
     /**
-     * The capacity units consumed by the GetItem operation. The data returned includes the total provisioned throughput consumed, along with statistics for the table and any indexes involved in the operation. ConsumedCapacity is only returned if the ReturnConsumedCapacity parameter was specified. For more information, see Read/Write Capacity Mode in the Amazon DynamoDB Developer Guide.
+     * The capacity units consumed by the GetItem operation. The data returned includes the total provisioned throughput consumed, along with statistics for the table and any indexes involved in the operation. ConsumedCapacity is only returned if the ReturnConsumedCapacity parameter was specified. For more information, see Capacity unit consumption for read operations in the Amazon DynamoDB Developer Guide.
      */
     ConsumedCapacity?: ConsumedCapacity;
+  }
+  export interface GetResourcePolicyInput {
+    /**
+     * The Amazon Resource Name (ARN) of the DynamoDB resource to which the policy is attached. The resources you can specify include tables and streams.
+     */
+    ResourceArn: ResourceArnString;
+  }
+  export interface GetResourcePolicyOutput {
+    /**
+     * The resource-based policy document attached to the resource, which can be a table or stream, in JSON format.
+     */
+    Policy?: ResourcePolicy;
+    /**
+     * A unique string that represents the revision ID of the policy. If you're comparing revision IDs, make sure to always use string comparison logic.
+     */
+    RevisionId?: PolicyRevisionId;
   }
   export interface GlobalSecondaryIndex {
     /**
@@ -1691,6 +1906,10 @@ declare namespace DynamoDB {
      * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Service, Account, and Table Quotas in the Amazon DynamoDB Developer Guide.
      */
     ProvisionedThroughput?: ProvisionedThroughput;
+    /**
+     * The maximum number of read and write units for the specified global secondary index. If you use this parameter, you must specify MaxReadRequestUnits, MaxWriteRequestUnits, or both.
+     */
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export interface GlobalSecondaryIndexAutoScalingUpdate {
     /**
@@ -1728,15 +1947,19 @@ declare namespace DynamoDB {
     /**
      * The total size of the specified index, in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.
      */
-    IndexSizeBytes?: Long;
+    IndexSizeBytes?: LongObject;
     /**
      * The number of items in the specified index. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.
      */
-    ItemCount?: Long;
+    ItemCount?: LongObject;
     /**
      * The Amazon Resource Name (ARN) that uniquely identifies the index.
      */
     IndexArn?: String;
+    /**
+     * The maximum number of read and write units for the specified global secondary index. If you use this parameter, you must specify MaxReadRequestUnits, MaxWriteRequestUnits, or both.
+     */
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export type GlobalSecondaryIndexDescriptionList = GlobalSecondaryIndexDescription[];
   export interface GlobalSecondaryIndexInfo {
@@ -1756,6 +1979,7 @@ declare namespace DynamoDB {
      * Represents the provisioned throughput settings for the specified global secondary index. 
      */
     ProvisionedThroughput?: ProvisionedThroughput;
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export type GlobalSecondaryIndexList = GlobalSecondaryIndex[];
   export interface GlobalSecondaryIndexUpdate {
@@ -1824,8 +2048,181 @@ declare namespace DynamoDB {
   export type GlobalTableGlobalSecondaryIndexSettingsUpdateList = GlobalTableGlobalSecondaryIndexSettingsUpdate[];
   export type GlobalTableList = GlobalTable[];
   export type GlobalTableStatus = "CREATING"|"ACTIVE"|"DELETING"|"UPDATING"|string;
+  export type ImportArn = string;
+  export type ImportEndTime = Date;
+  export type ImportNextToken = string;
+  export type ImportStartTime = Date;
+  export type ImportStatus = "IN_PROGRESS"|"COMPLETED"|"CANCELLING"|"CANCELLED"|"FAILED"|string;
+  export interface ImportSummary {
+    /**
+     *  The Amazon Resource Number (ARN) corresponding to the import request. 
+     */
+    ImportArn?: ImportArn;
+    /**
+     *  The status of the import operation. 
+     */
+    ImportStatus?: ImportStatus;
+    /**
+     *  The Amazon Resource Number (ARN) of the table being imported into. 
+     */
+    TableArn?: TableArn;
+    /**
+     *  The path and S3 bucket of the source file that is being imported. This includes the S3Bucket (required), S3KeyPrefix (optional) and S3BucketOwner (optional if the bucket is owned by the requester). 
+     */
+    S3BucketSource?: S3BucketSource;
+    /**
+     *  The Amazon Resource Number (ARN) of the Cloudwatch Log Group associated with this import task. 
+     */
+    CloudWatchLogGroupArn?: CloudWatchLogGroupArn;
+    /**
+     *  The format of the source data. Valid values are CSV, DYNAMODB_JSON or ION.
+     */
+    InputFormat?: InputFormat;
+    /**
+     *  The time at which this import task began. 
+     */
+    StartTime?: ImportStartTime;
+    /**
+     *  The time at which this import task ended. (Does this include the successful complete creation of the table it was imported to?) 
+     */
+    EndTime?: ImportEndTime;
+  }
+  export type ImportSummaryList = ImportSummary[];
+  export interface ImportTableDescription {
+    /**
+     *  The Amazon Resource Number (ARN) corresponding to the import request. 
+     */
+    ImportArn?: ImportArn;
+    /**
+     *  The status of the import. 
+     */
+    ImportStatus?: ImportStatus;
+    /**
+     *  The Amazon Resource Number (ARN) of the table being imported into. 
+     */
+    TableArn?: TableArn;
+    /**
+     *  The table id corresponding to the table created by import table process. 
+     */
+    TableId?: TableId;
+    /**
+     *  The client token that was provided for the import task. Reusing the client token on retry makes a call to ImportTable idempotent. 
+     */
+    ClientToken?: ClientToken;
+    /**
+     *  Values for the S3 bucket the source file is imported from. Includes bucket name (required), key prefix (optional) and bucket account owner ID (optional). 
+     */
+    S3BucketSource?: S3BucketSource;
+    /**
+     *  The number of errors occurred on importing the source file into the target table. 
+     */
+    ErrorCount?: ErrorCount;
+    /**
+     *  The Amazon Resource Number (ARN) of the Cloudwatch Log Group associated with the target table. 
+     */
+    CloudWatchLogGroupArn?: CloudWatchLogGroupArn;
+    /**
+     *  The format of the source data going into the target table. 
+     */
+    InputFormat?: InputFormat;
+    /**
+     *  The format options for the data that was imported into the target table. There is one value, CsvOption. 
+     */
+    InputFormatOptions?: InputFormatOptions;
+    /**
+     *  The compression options for the data that has been imported into the target table. The values are NONE, GZIP, or ZSTD. 
+     */
+    InputCompressionType?: InputCompressionType;
+    /**
+     *  The parameters for the new table that is being imported into. 
+     */
+    TableCreationParameters?: TableCreationParameters;
+    /**
+     *  The time when this import task started. 
+     */
+    StartTime?: ImportStartTime;
+    /**
+     *  The time at which the creation of the table associated with this import task completed. 
+     */
+    EndTime?: ImportEndTime;
+    /**
+     *  The total size of data processed from the source file, in Bytes. 
+     */
+    ProcessedSizeBytes?: LongObject;
+    /**
+     *  The total number of items processed from the source file. 
+     */
+    ProcessedItemCount?: ProcessedItemCount;
+    /**
+     *  The number of items successfully imported into the new table. 
+     */
+    ImportedItemCount?: ImportedItemCount;
+    /**
+     *  The error code corresponding to the failure that the import job ran into during execution. 
+     */
+    FailureCode?: FailureCode;
+    /**
+     *  The error message corresponding to the failure that the import job ran into during execution. 
+     */
+    FailureMessage?: FailureMessage;
+  }
+  export interface ImportTableInput {
+    /**
+     * Providing a ClientToken makes the call to ImportTableInput idempotent, meaning that multiple identical calls have the same effect as one single call. A client token is valid for 8 hours after the first request that uses it is completed. After 8 hours, any request with the same client token is treated as a new request. Do not resubmit the same request with the same client token for more than 8 hours, or the result might not be idempotent. If you submit a request with the same client token but a change in other parameters within the 8-hour idempotency window, DynamoDB returns an IdempotentParameterMismatch exception.
+     */
+    ClientToken?: ClientToken;
+    /**
+     *  The S3 bucket that provides the source for the import. 
+     */
+    S3BucketSource: S3BucketSource;
+    /**
+     *  The format of the source data. Valid values for ImportFormat are CSV, DYNAMODB_JSON or ION. 
+     */
+    InputFormat: InputFormat;
+    /**
+     *  Additional properties that specify how the input is formatted, 
+     */
+    InputFormatOptions?: InputFormatOptions;
+    /**
+     *  Type of compression to be used on the input coming from the imported table. 
+     */
+    InputCompressionType?: InputCompressionType;
+    /**
+     * Parameters for the table to import the data into. 
+     */
+    TableCreationParameters: TableCreationParameters;
+  }
+  export interface ImportTableOutput {
+    /**
+     *  Represents the properties of the table created for the import, and parameters of the import. The import parameters include import status, how many items were processed, and how many errors were encountered. 
+     */
+    ImportTableDescription: ImportTableDescription;
+  }
+  export type ImportedItemCount = number;
+  export interface IncrementalExportSpecification {
+    /**
+     * Time in the past which provides the inclusive start range for the export table's data, counted in seconds from the start of the Unix epoch. The incremental export will reflect the table's state including and after this point in time.
+     */
+    ExportFromTime?: ExportFromTime;
+    /**
+     * Time in the past which provides the exclusive end range for the export table's data, counted in seconds from the start of the Unix epoch. The incremental export will reflect the table's state just prior to this point in time. If this is not provided, the latest time with data available will be used.
+     */
+    ExportToTime?: ExportToTime;
+    /**
+     * The view type that was chosen for the export. Valid values are NEW_AND_OLD_IMAGES and NEW_IMAGES. The default value is NEW_AND_OLD_IMAGES.
+     */
+    ExportViewType?: ExportViewType;
+  }
   export type IndexName = string;
   export type IndexStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|string;
+  export type InputCompressionType = "GZIP"|"ZSTD"|"NONE"|string;
+  export type InputFormat = "DYNAMODB_JSON"|"ION"|"CSV"|string;
+  export interface InputFormatOptions {
+    /**
+     *  The options for imported source files in CSV format. The values are Delimiter and HeaderList. 
+     */
+    Csv?: CsvOptions;
+  }
   export type Integer = number;
   export type IntegerObject = number;
   export type ItemCollectionKeyAttributeMap = {[key: string]: AttributeValue};
@@ -1906,17 +2303,25 @@ declare namespace DynamoDB {
      * The human-readable string that corresponds to the replica status.
      */
     DestinationStatusDescription?: String;
+    /**
+     * The precision of the Kinesis data stream timestamp. The values are either MILLISECOND or MICROSECOND.
+     */
+    ApproximateCreationDateTimePrecision?: ApproximateCreationDateTimePrecision;
   }
   export type KinesisDataStreamDestinations = KinesisDataStreamDestination[];
   export interface KinesisStreamingDestinationInput {
     /**
-     * The name of the DynamoDB table.
+     * The name of the DynamoDB table. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
     /**
      * The ARN for a Kinesis data stream.
      */
     StreamArn: StreamArn;
+    /**
+     * The source for the Kinesis streaming information that is being enabled.
+     */
+    EnableKinesisStreamingConfiguration?: EnableKinesisStreamingConfiguration;
   }
   export interface KinesisStreamingDestinationOutput {
     /**
@@ -1931,14 +2336,18 @@ declare namespace DynamoDB {
      * The current status of the replication.
      */
     DestinationStatus?: DestinationStatus;
+    /**
+     * The destination for the Kinesis streaming information that is being enabled.
+     */
+    EnableKinesisStreamingConfiguration?: EnableKinesisStreamingConfiguration;
   }
   export type LastUpdateDateTime = Date;
   export type ListAttributeValue = AttributeValue[];
   export interface ListBackupsInput {
     /**
-     * The backups from the table specified by TableName are listed. 
+     * Lists the backups from the table specified in TableName. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName?: TableName;
+    TableName?: TableArn;
     /**
      * Maximum number of backups to return at once.
      */
@@ -1956,7 +2365,7 @@ declare namespace DynamoDB {
      */
     ExclusiveStartBackupArn?: BackupArn;
     /**
-     * The backups from the table specified by BackupType are listed. Where BackupType can be:    USER - On-demand backup created by you.    SYSTEM - On-demand backup automatically created by DynamoDB.    ALL - All types of on-demand backups (USER and SYSTEM).  
+     * The backups from the table specified by BackupType are listed. Where BackupType can be:    USER - On-demand backup created by you. (The default setting if no other backup types are specified.)    SYSTEM - On-demand backup automatically created by DynamoDB.    ALL - All types of on-demand backups (USER and SYSTEM).  
      */
     BackupType?: BackupTypeFilter;
   }
@@ -1972,9 +2381,9 @@ declare namespace DynamoDB {
   }
   export interface ListContributorInsightsInput {
     /**
-     * The name of the table.
+     * The name of the table. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName?: TableName;
+    TableName?: TableArn;
     /**
      * A token to for the desired page, if there is one.
      */
@@ -2043,6 +2452,31 @@ declare namespace DynamoDB {
      * Last evaluated global table name.
      */
     LastEvaluatedGlobalTableName?: TableName;
+  }
+  export interface ListImportsInput {
+    /**
+     *  The Amazon Resource Name (ARN) associated with the table that was imported to. 
+     */
+    TableArn?: TableArn;
+    /**
+     *  The number of ImportSummary objects returned in a single page. 
+     */
+    PageSize?: ListImportsMaxLimit;
+    /**
+     *  An optional string that, if supplied, must be copied from the output of a previous call to ListImports. When provided in this manner, the API fetches the next page of results. 
+     */
+    NextToken?: ImportNextToken;
+  }
+  export type ListImportsMaxLimit = number;
+  export interface ListImportsOutput {
+    /**
+     *  A list of ImportSummary objects. 
+     */
+    ImportSummaryList?: ImportSummaryList;
+    /**
+     *  If this value is returned, there are additional results to be displayed. To retrieve them, call ListImports again, with NextToken set to this value. 
+     */
+    NextToken?: ImportNextToken;
   }
   export interface ListTablesInput {
     /**
@@ -2115,11 +2549,11 @@ declare namespace DynamoDB {
     /**
      * The total size of the specified index, in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.
      */
-    IndexSizeBytes?: Long;
+    IndexSizeBytes?: LongObject;
     /**
      * The number of items in the specified index. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.
      */
-    ItemCount?: Long;
+    ItemCount?: LongObject;
     /**
      * The Amazon Resource Name (ARN) that uniquely identifies the index.
      */
@@ -2143,6 +2577,7 @@ declare namespace DynamoDB {
   export type LocalSecondaryIndexList = LocalSecondaryIndex[];
   export type LocalSecondaryIndexes = LocalSecondaryIndexInfo[];
   export type Long = number;
+  export type LongObject = number;
   export type MapAttributeValue = {[key: string]: AttributeValue};
   export type NextTokenString = string;
   export type NonKeyAttributeName = string;
@@ -2151,15 +2586,35 @@ declare namespace DynamoDB {
   export type NullAttributeValue = boolean;
   export type NumberAttributeValue = string;
   export type NumberSetAttributeValue = NumberAttributeValue[];
+  export interface OnDemandThroughput {
+    /**
+     * Maximum number of read request units for the specified table. To specify a maximum OnDemandThroughput on your table, set the value of MaxReadRequestUnits as greater than or equal to 1. To remove the maximum OnDemandThroughput that is currently set on your table, set the value of MaxReadRequestUnits to -1.
+     */
+    MaxReadRequestUnits?: LongObject;
+    /**
+     * Maximum number of write request units for the specified table. To specify a maximum OnDemandThroughput on your table, set the value of MaxWriteRequestUnits as greater than or equal to 1. To remove the maximum OnDemandThroughput that is currently set on your table, set the value of MaxWriteRequestUnits to -1.
+     */
+    MaxWriteRequestUnits?: LongObject;
+  }
+  export interface OnDemandThroughputOverride {
+    /**
+     * Maximum number of read request units for the specified replica table.
+     */
+    MaxReadRequestUnits?: LongObject;
+  }
   export interface ParameterizedStatement {
     /**
-     *  A PartiQL statment that uses parameters. 
+     *  A PartiQL statement that uses parameters. 
      */
     Statement: PartiQLStatement;
     /**
      *  The parameter values. 
      */
     Parameters?: PreparedStatementParameters;
+    /**
+     * An optional parameter that returns the item attributes for a PartiQL ParameterizedStatement operation that failed a condition check. There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No read capacity units are consumed.
+     */
+    ReturnValuesOnConditionCheckFailure?: ReturnValuesOnConditionCheckFailure;
   }
   export type ParameterizedStatements = ParameterizedStatement[];
   export type PartiQLBatchRequest = BatchStatementRequest[];
@@ -2168,7 +2623,7 @@ declare namespace DynamoDB {
   export type PartiQLStatement = string;
   export interface PointInTimeRecoveryDescription {
     /**
-     * The current state of point in time recovery:    ENABLING - Point in time recovery is being enabled.    ENABLED - Point in time recovery is enabled.    DISABLED - Point in time recovery is disabled.  
+     * The current state of point in time recovery:    ENABLED - Point in time recovery is enabled.    DISABLED - Point in time recovery is disabled.  
      */
     PointInTimeRecoveryStatus?: PointInTimeRecoveryStatus;
     /**
@@ -2187,16 +2642,18 @@ declare namespace DynamoDB {
     PointInTimeRecoveryEnabled: BooleanObject;
   }
   export type PointInTimeRecoveryStatus = "ENABLED"|"DISABLED"|string;
+  export type PolicyRevisionId = string;
   export type PositiveIntegerObject = number;
   export type PositiveLongObject = number;
   export type PreparedStatementParameters = AttributeValue[];
+  export type ProcessedItemCount = number;
   export interface Projection {
     /**
-     * The set of attributes that are projected into the index:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - In addition to the attributes described in KEYS_ONLY, the secondary index will include other non-key attributes that you specify.    ALL - All of the table attributes are projected into the index.  
+     * The set of attributes that are projected into the index:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - In addition to the attributes described in KEYS_ONLY, the secondary index will include other non-key attributes that you specify.    ALL - All of the table attributes are projected into the index.   When using the DynamoDB console, ALL is selected by default.
      */
     ProjectionType?: ProjectionType;
     /**
-     * Represents the non-key attribute names which will be projected into the index. For local secondary indexes, the total count of NonKeyAttributes summed across all of the local secondary indexes, must not exceed 20. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.
+     * Represents the non-key attribute names which will be projected into the index. For local secondary indexes, the total count of NonKeyAttributes summed across all of the local secondary indexes, must not exceed 100. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.
      */
     NonKeyAttributes?: NonKeyAttributeNameList;
   }
@@ -2246,9 +2703,9 @@ declare namespace DynamoDB {
      */
     Item: PutItemInputAttributeMap;
     /**
-     * Name of the table in which to write the item.
+     * Name of the table in which to write the item. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
     /**
      * A condition that must be satisfied in order for a conditional update to succeed.
      */
@@ -2268,9 +2725,9 @@ declare namespace DynamoDB {
   }
   export interface PutItemInput {
     /**
-     * The name of the table to contain the item.
+     * The name of the table to contain the item. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
     /**
      * A map of attribute name/value pairs, one for each attribute. Only the primary key attributes are required; you can optionally provide other attribute name-value pairs for the item. You must provide all of the attributes for the primary key. For example, with a simple primary key, you only need to provide a value for the partition key. For a composite primary key, you must provide both values for both the partition key and the sort key. If you specify any attributes that are part of an index key, then the data types for those attributes must match those of the schema in the table's attribute definition. Empty String and Binary attribute values are allowed. Attribute values of type String and Binary must have a length greater than zero if the attribute is used as a key attribute for a table or index. For more information about primary keys, see Primary Key in the Amazon DynamoDB Developer Guide. Each element in the Item map is an AttributeValue object.
      */
@@ -2280,7 +2737,7 @@ declare namespace DynamoDB {
      */
     Expected?: ExpectedAttributeMap;
     /**
-     * Use ReturnValues if you want to get the item attributes as they appeared before they were updated with the PutItem request. For PutItem, the valid values are:    NONE - If ReturnValues is not specified, or if its value is NONE, then nothing is returned. (This setting is the default for ReturnValues.)    ALL_OLD - If PutItem overwrote an attribute name-value pair, then the content of the old item is returned.    The ReturnValues parameter is used by several DynamoDB operations; however, PutItem does not recognize any values other than NONE or ALL_OLD. 
+     * Use ReturnValues if you want to get the item attributes as they appeared before they were updated with the PutItem request. For PutItem, the valid values are:    NONE - If ReturnValues is not specified, or if its value is NONE, then nothing is returned. (This setting is the default for ReturnValues.)    ALL_OLD - If PutItem overwrote an attribute name-value pair, then the content of the old item is returned.   The values returned are strongly consistent. There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No read capacity units are consumed.  The ReturnValues parameter is used by several DynamoDB operations; however, PutItem does not recognize any values other than NONE or ALL_OLD. 
      */
     ReturnValues?: ReturnValue;
     ReturnConsumedCapacity?: ReturnConsumedCapacity;
@@ -2304,6 +2761,10 @@ declare namespace DynamoDB {
      * One or more values that can be substituted in an expression. Use the : (colon) character in an expression to dereference an attribute value. For example, suppose that you wanted to check whether the value of the ProductStatus attribute was one of the following:   Available | Backordered | Discontinued  You would first need to specify ExpressionAttributeValues as follows:  { ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }  You could then use these values in an expression, such as this:  ProductStatus IN (:avail, :back, :disc)  For more information on expression attribute values, see Condition Expressions in the Amazon DynamoDB Developer Guide.
      */
     ExpressionAttributeValues?: ExpressionAttributeValueMap;
+    /**
+     * An optional parameter that returns the item attributes for a PutItem operation that failed a condition check. There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No read capacity units are consumed.
+     */
+    ReturnValuesOnConditionCheckFailure?: ReturnValuesOnConditionCheckFailure;
   }
   export type PutItemInputAttributeMap = {[key: string]: AttributeValue};
   export interface PutItemOutput {
@@ -2312,7 +2773,7 @@ declare namespace DynamoDB {
      */
     Attributes?: AttributeMap;
     /**
-     * The capacity units consumed by the PutItem operation. The data returned includes the total provisioned throughput consumed, along with statistics for the table and any indexes involved in the operation. ConsumedCapacity is only returned if the ReturnConsumedCapacity parameter was specified. For more information, see Read/Write Capacity Mode in the Amazon DynamoDB Developer Guide.
+     * The capacity units consumed by the PutItem operation. The data returned includes the total provisioned throughput consumed, along with statistics for the table and any indexes involved in the operation. ConsumedCapacity is only returned if the ReturnConsumedCapacity parameter was specified. For more information, see Capacity unity consumption for write operations in the Amazon DynamoDB Developer Guide.
      */
     ConsumedCapacity?: ConsumedCapacity;
     /**
@@ -2326,17 +2787,41 @@ declare namespace DynamoDB {
      */
     Item: PutItemInputAttributeMap;
   }
+  export interface PutResourcePolicyInput {
+    /**
+     * The Amazon Resource Name (ARN) of the DynamoDB resource to which the policy will be attached. The resources you can specify include tables and streams. You can control index permissions using the base table's policy. To specify the same permission level for your table and its indexes, you can provide both the table and index Amazon Resource Name (ARN)s in the Resource field of a given Statement in your policy document. Alternatively, to specify different permissions for your table, indexes, or both, you can define multiple Statement fields in your policy document.
+     */
+    ResourceArn: ResourceArnString;
+    /**
+     * An Amazon Web Services resource-based policy document in JSON format.   The maximum size supported for a resource-based policy document is 20 KB. DynamoDB counts whitespaces when calculating the size of a policy against this limit.   Within a resource-based policy, if the action for a DynamoDB service-linked role (SLR) to replicate data for a global table is denied, adding or deleting a replica will fail with an error.   For a full list of all considerations that apply while attaching a resource-based policy, see Resource-based policy considerations.
+     */
+    Policy: ResourcePolicy;
+    /**
+     * A string value that you can use to conditionally update your policy. You can provide the revision ID of your existing policy to make mutating requests against that policy.  When you provide an expected revision ID, if the revision ID of the existing policy on the resource doesn't match or if there's no policy attached to the resource, your request will be rejected with a PolicyNotFoundException.  To conditionally attach a policy when no policy exists for the resource, specify NO_POLICY for the revision ID.
+     */
+    ExpectedRevisionId?: PolicyRevisionId;
+    /**
+     * Set this parameter to true to confirm that you want to remove your permissions to change the policy of this resource in the future.
+     */
+    ConfirmRemoveSelfResourceAccess?: ConfirmRemoveSelfResourceAccess;
+  }
+  export interface PutResourcePolicyOutput {
+    /**
+     * A unique string that represents the revision ID of the policy. If you're comparing revision IDs, make sure to always use string comparison logic.
+     */
+    RevisionId?: PolicyRevisionId;
+  }
   export interface QueryInput {
     /**
-     * The name of the table containing the requested items.
+     * The name of the table containing the requested items. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
     /**
      * The name of an index to query. This index can be any local secondary index or global secondary index on the table. Note that if you use the IndexName parameter, you must also provide TableName. 
      */
     IndexName?: IndexName;
     /**
-     * The attributes to be returned in the result. You can retrieve all item attributes, specific item attributes, the count of matching items, or in the case of an index, some or all of the attributes projected into the index.    ALL_ATTRIBUTES - Returns all of the item attributes from the specified table or index. If you query a local secondary index, then for each matching item in the index, DynamoDB fetches the entire item from the parent table. If the index is configured to project all item attributes, then all of the data can be obtained from the local secondary index, and no fetching is required.    ALL_PROJECTED_ATTRIBUTES - Allowed only when querying an index. Retrieves all attributes that have been projected into the index. If the index is configured to project all attributes, this return value is equivalent to specifying ALL_ATTRIBUTES.    COUNT - Returns the number of matching items, rather than the matching items themselves.    SPECIFIC_ATTRIBUTES - Returns only the attributes listed in AttributesToGet. This return value is equivalent to specifying AttributesToGet without specifying any value for Select. If you query or scan a local secondary index and request only attributes that are projected into that index, the operation will read only the index and not the table. If any of the requested attributes are not projected into the local secondary index, DynamoDB fetches each of these attributes from the parent table. This extra fetching incurs additional throughput cost and latency. If you query or scan a global secondary index, you can only request attributes that are projected into the index. Global secondary index queries cannot fetch attributes from the parent table.   If neither Select nor AttributesToGet are specified, DynamoDB defaults to ALL_ATTRIBUTES when accessing a table, and ALL_PROJECTED_ATTRIBUTES when accessing an index. You cannot use both Select and AttributesToGet together in a single request, unless the value for Select is SPECIFIC_ATTRIBUTES. (This usage is equivalent to specifying AttributesToGet without any value for Select.)  If you use the ProjectionExpression parameter, then the value for Select can only be SPECIFIC_ATTRIBUTES. Any other value for Select will return an error. 
+     * The attributes to be returned in the result. You can retrieve all item attributes, specific item attributes, the count of matching items, or in the case of an index, some or all of the attributes projected into the index.    ALL_ATTRIBUTES - Returns all of the item attributes from the specified table or index. If you query a local secondary index, then for each matching item in the index, DynamoDB fetches the entire item from the parent table. If the index is configured to project all item attributes, then all of the data can be obtained from the local secondary index, and no fetching is required.    ALL_PROJECTED_ATTRIBUTES - Allowed only when querying an index. Retrieves all attributes that have been projected into the index. If the index is configured to project all attributes, this return value is equivalent to specifying ALL_ATTRIBUTES.    COUNT - Returns the number of matching items, rather than the matching items themselves. Note that this uses the same quantity of read capacity units as getting the items, and is subject to the same item size calculations.    SPECIFIC_ATTRIBUTES - Returns only the attributes listed in ProjectionExpression. This return value is equivalent to specifying ProjectionExpression without specifying any value for Select. If you query or scan a local secondary index and request only attributes that are projected into that index, the operation will read only the index and not the table. If any of the requested attributes are not projected into the local secondary index, DynamoDB fetches each of these attributes from the parent table. This extra fetching incurs additional throughput cost and latency. If you query or scan a global secondary index, you can only request attributes that are projected into the index. Global secondary index queries cannot fetch attributes from the parent table.   If neither Select nor ProjectionExpression are specified, DynamoDB defaults to ALL_ATTRIBUTES when accessing a table, and ALL_PROJECTED_ATTRIBUTES when accessing an index. You cannot use both Select and ProjectionExpression together in a single request, unless the value for Select is SPECIFIC_ATTRIBUTES. (This usage is equivalent to specifying ProjectionExpression without any value for Select.)  If you use the ProjectionExpression parameter, then the value for Select can only be SPECIFIC_ATTRIBUTES. Any other value for Select will return an error. 
      */
     Select?: Select;
     /**
@@ -2411,7 +2896,7 @@ declare namespace DynamoDB {
      */
     LastEvaluatedKey?: Key;
     /**
-     * The capacity units consumed by the Query operation. The data returned includes the total provisioned throughput consumed, along with statistics for the table and any indexes involved in the operation. ConsumedCapacity is only returned if the ReturnConsumedCapacity parameter was specified. For more information, see Provisioned Throughput in the Amazon DynamoDB Developer Guide.
+     * The capacity units consumed by the Query operation. The data returned includes the total provisioned throughput consumed, along with statistics for the table and any indexes involved in the operation. ConsumedCapacity is only returned if the ReturnConsumedCapacity parameter was specified. For more information, see Capacity unit consumption for read operations in the Amazon DynamoDB Developer Guide.
      */
     ConsumedCapacity?: ConsumedCapacity;
   }
@@ -2457,7 +2942,7 @@ declare namespace DynamoDB {
      */
     RegionName?: RegionName;
     /**
-     * The current state of the replica:    CREATING - The replica is being created.    UPDATING - The replica is being updated.    DELETING - The replica is being deleted.    ACTIVE - The replica is ready for use.    REGION_DISABLED - The replica is inaccessible because the AWS Region has been disabled.  If the AWS Region remains inaccessible for more than 20 hours, DynamoDB will remove this replica from the replication group. The replica will not be deleted and replication will stop from and to this region.     INACCESSIBLE_ENCRYPTION_CREDENTIALS  - The AWS KMS key used to encrypt the table is inaccessible.  If the AWS KMS key remains inaccessible for more than 20 hours, DynamoDB will remove this replica from the replication group. The replica will not be deleted and replication will stop from and to this region.   
+     * The current state of the replica:    CREATING - The replica is being created.    UPDATING - The replica is being updated.    DELETING - The replica is being deleted.    ACTIVE - The replica is ready for use.    REGION_DISABLED - The replica is inaccessible because the Amazon Web Services Region has been disabled.  If the Amazon Web Services Region remains inaccessible for more than 20 hours, DynamoDB will remove this replica from the replication group. The replica will not be deleted and replication will stop from and to this region.     INACCESSIBLE_ENCRYPTION_CREDENTIALS  - The KMS key used to encrypt the table is inaccessible.  If the KMS key remains inaccessible for more than 20 hours, DynamoDB will remove this replica from the replication group. The replica will not be deleted and replication will stop from and to this region.   
      */
     ReplicaStatus?: ReplicaStatus;
     /**
@@ -2469,13 +2954,17 @@ declare namespace DynamoDB {
      */
     ReplicaStatusPercentProgress?: ReplicaStatusPercentProgress;
     /**
-     * The AWS KMS customer master key (CMK) of the replica that will be used for AWS KMS encryption.
+     * The KMS key of the replica that will be used for KMS encryption.
      */
     KMSMasterKeyId?: KMSMasterKeyId;
     /**
      * Replica-specific provisioned throughput. If not described, uses the source table's provisioned throughput settings.
      */
     ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
+    /**
+     * Overrides the maximum on-demand throughput settings for the specified replica table.
+     */
+    OnDemandThroughputOverride?: OnDemandThroughputOverride;
     /**
      * Replica-specific global secondary index settings.
      */
@@ -2484,6 +2973,7 @@ declare namespace DynamoDB {
      * The time at which the replica was first detected as inaccessible. To determine cause of inaccessibility check the ReplicaStatus property.
      */
     ReplicaInaccessibleDateTime?: _Date;
+    ReplicaTableClassSummary?: TableClassSummary;
   }
   export type ReplicaDescriptionList = ReplicaDescription[];
   export interface ReplicaGlobalSecondaryIndex {
@@ -2495,6 +2985,10 @@ declare namespace DynamoDB {
      * Replica table GSI-specific provisioned throughput. If not specified, uses the source table GSI's read capacity settings.
      */
     ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
+    /**
+     * Overrides the maximum on-demand throughput settings for the specified global secondary index in the specified replica table.
+     */
+    OnDemandThroughputOverride?: OnDemandThroughputOverride;
   }
   export interface ReplicaGlobalSecondaryIndexAutoScalingDescription {
     /**
@@ -2502,7 +2996,7 @@ declare namespace DynamoDB {
      */
     IndexName?: IndexName;
     /**
-     * The current state of the replica global secondary index:    CREATING - The index is being created.    UPDATING - The index is being updated.    DELETING - The index is being deleted.    ACTIVE - The index is ready for use.  
+     * The current state of the replica global secondary index:    CREATING - The index is being created.    UPDATING - The table/index configuration is being updated. The table/index remains available for data operations when UPDATING     DELETING - The index is being deleted.    ACTIVE - The index is ready for use.  
      */
     IndexStatus?: IndexStatus;
     ProvisionedReadCapacityAutoScalingSettings?: AutoScalingSettingsDescription;
@@ -2526,6 +3020,10 @@ declare namespace DynamoDB {
      * If not described, uses the source table GSI's read capacity settings.
      */
     ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
+    /**
+     * Overrides the maximum on-demand throughput for the specified global secondary index in the specified replica table.
+     */
+    OnDemandThroughputOverride?: OnDemandThroughputOverride;
   }
   export type ReplicaGlobalSecondaryIndexDescriptionList = ReplicaGlobalSecondaryIndexDescription[];
   export type ReplicaGlobalSecondaryIndexList = ReplicaGlobalSecondaryIndex[];
@@ -2605,6 +3103,7 @@ declare namespace DynamoDB {
      * Replica global secondary index settings for the global table.
      */
     ReplicaGlobalSecondaryIndexSettings?: ReplicaGlobalSecondaryIndexSettingsDescriptionList;
+    ReplicaTableClassSummary?: TableClassSummary;
   }
   export type ReplicaSettingsDescriptionList = ReplicaSettingsDescription[];
   export interface ReplicaSettingsUpdate {
@@ -2624,6 +3123,10 @@ declare namespace DynamoDB {
      * Represents the settings of a global secondary index for a global table that will be modified.
      */
     ReplicaGlobalSecondaryIndexSettingsUpdate?: ReplicaGlobalSecondaryIndexSettingsUpdateList;
+    /**
+     * Replica-specific table class. If not specified, uses the source table's table class.
+     */
+    ReplicaTableClass?: TableClass;
   }
   export type ReplicaSettingsUpdateList = ReplicaSettingsUpdate[];
   export type ReplicaStatus = "CREATING"|"CREATION_FAILED"|"UPDATING"|"DELETING"|"ACTIVE"|"REGION_DISABLED"|"INACCESSIBLE_ENCRYPTION_CREDENTIALS"|string;
@@ -2656,6 +3159,7 @@ declare namespace DynamoDB {
   }
   export type ReplicationGroupUpdateList = ReplicationGroupUpdate[];
   export type ResourceArnString = string;
+  export type ResourcePolicy = string;
   export type RestoreInProgress = boolean;
   export interface RestoreSummary {
     /**
@@ -2700,6 +3204,7 @@ declare namespace DynamoDB {
      * Provisioned throughput settings for the restored table.
      */
     ProvisionedThroughputOverride?: ProvisionedThroughput;
+    OnDemandThroughputOverride?: OnDemandThroughput;
     /**
      * The new server-side encryption settings for the restored table.
      */
@@ -2748,6 +3253,7 @@ declare namespace DynamoDB {
      * Provisioned throughput settings for the restored table.
      */
     ProvisionedThroughputOverride?: ProvisionedThroughput;
+    OnDemandThroughputOverride?: OnDemandThroughput;
     /**
      * The new server-side encryption settings for the restored table.
      */
@@ -2765,6 +3271,20 @@ declare namespace DynamoDB {
   export type ReturnValuesOnConditionCheckFailure = "ALL_OLD"|"NONE"|string;
   export type S3Bucket = string;
   export type S3BucketOwner = string;
+  export interface S3BucketSource {
+    /**
+     *  The account number of the S3 bucket that is being imported from. If the bucket is owned by the requester this is optional. 
+     */
+    S3BucketOwner?: S3BucketOwner;
+    /**
+     *  The S3 bucket that is being imported from. 
+     */
+    S3Bucket: S3Bucket;
+    /**
+     *  The key prefix shared by all S3 Objects that are being imported. 
+     */
+    S3KeyPrefix?: S3Prefix;
+  }
   export type S3Prefix = string;
   export type S3SseAlgorithm = "AES256"|"KMS"|string;
   export type S3SseKmsKeyId = string;
@@ -2774,30 +3294,30 @@ declare namespace DynamoDB {
      */
     Status?: SSEStatus;
     /**
-     * Server-side encryption type. The only supported value is:    KMS - Server-side encryption that uses AWS Key Management Service. The key is stored in your account and is managed by AWS KMS (AWS KMS charges apply).  
+     * Server-side encryption type. The only supported value is:    KMS - Server-side encryption that uses Key Management Service. The key is stored in your account and is managed by KMS (KMS charges apply).  
      */
     SSEType?: SSEType;
     /**
-     * The AWS KMS customer master key (CMK) ARN used for the AWS KMS encryption.
+     * The KMS key ARN used for the KMS encryption.
      */
     KMSMasterKeyArn?: KMSMasterKeyArn;
     /**
-     * Indicates the time, in UNIX epoch date format, when DynamoDB detected that the table's AWS KMS key was inaccessible. This attribute will automatically be cleared when DynamoDB detects that the table's AWS KMS key is accessible again. DynamoDB will initiate the table archival process when table's AWS KMS key remains inaccessible for more than seven days from this date.
+     * Indicates the time, in UNIX epoch date format, when DynamoDB detected that the table's KMS key was inaccessible. This attribute will automatically be cleared when DynamoDB detects that the table's KMS key is accessible again. DynamoDB will initiate the table archival process when table's KMS key remains inaccessible for more than seven days from this date.
      */
     InaccessibleEncryptionDateTime?: _Date;
   }
   export type SSEEnabled = boolean;
   export interface SSESpecification {
     /**
-     * Indicates whether server-side encryption is done using an AWS managed CMK or an AWS owned CMK. If enabled (true), server-side encryption type is set to KMS and an AWS managed CMK is used (AWS KMS charges apply). If disabled (false) or not specified, server-side encryption is set to AWS owned CMK.
+     * Indicates whether server-side encryption is done using an Amazon Web Services managed key or an Amazon Web Services owned key. If enabled (true), server-side encryption type is set to KMS and an Amazon Web Services managed key is used (KMS charges apply). If disabled (false) or not specified, server-side encryption is set to Amazon Web Services owned key.
      */
     Enabled?: SSEEnabled;
     /**
-     * Server-side encryption type. The only supported value is:    KMS - Server-side encryption that uses AWS Key Management Service. The key is stored in your account and is managed by AWS KMS (AWS KMS charges apply).  
+     * Server-side encryption type. The only supported value is:    KMS - Server-side encryption that uses Key Management Service. The key is stored in your account and is managed by KMS (KMS charges apply).  
      */
     SSEType?: SSEType;
     /**
-     * The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB customer master key alias/aws/dynamodb.
+     * The KMS key that should be used for the KMS encryption. To specify a key, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB key alias/aws/dynamodb.
      */
     KMSMasterKeyId?: KMSMasterKeyId;
   }
@@ -2806,9 +3326,9 @@ declare namespace DynamoDB {
   export type ScalarAttributeType = "S"|"N"|"B"|string;
   export interface ScanInput {
     /**
-     * The name of the table containing the requested items; or, if you provide IndexName, the name of the table to which that index belongs.
+     * The name of the table containing the requested items or if you provide IndexName, the name of the table to which that index belongs. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
     /**
      * The name of a secondary index to scan. This index can be any local secondary index or global secondary index. Note that if you use the IndexName parameter, you must also provide TableName.
      */
@@ -2822,7 +3342,7 @@ declare namespace DynamoDB {
      */
     Limit?: PositiveIntegerObject;
     /**
-     * The attributes to be returned in the result. You can retrieve all item attributes, specific item attributes, the count of matching items, or in the case of an index, some or all of the attributes projected into the index.    ALL_ATTRIBUTES - Returns all of the item attributes from the specified table or index. If you query a local secondary index, then for each matching item in the index, DynamoDB fetches the entire item from the parent table. If the index is configured to project all item attributes, then all of the data can be obtained from the local secondary index, and no fetching is required.    ALL_PROJECTED_ATTRIBUTES - Allowed only when querying an index. Retrieves all attributes that have been projected into the index. If the index is configured to project all attributes, this return value is equivalent to specifying ALL_ATTRIBUTES.    COUNT - Returns the number of matching items, rather than the matching items themselves.    SPECIFIC_ATTRIBUTES - Returns only the attributes listed in AttributesToGet. This return value is equivalent to specifying AttributesToGet without specifying any value for Select. If you query or scan a local secondary index and request only attributes that are projected into that index, the operation reads only the index and not the table. If any of the requested attributes are not projected into the local secondary index, DynamoDB fetches each of these attributes from the parent table. This extra fetching incurs additional throughput cost and latency. If you query or scan a global secondary index, you can only request attributes that are projected into the index. Global secondary index queries cannot fetch attributes from the parent table.   If neither Select nor AttributesToGet are specified, DynamoDB defaults to ALL_ATTRIBUTES when accessing a table, and ALL_PROJECTED_ATTRIBUTES when accessing an index. You cannot use both Select and AttributesToGet together in a single request, unless the value for Select is SPECIFIC_ATTRIBUTES. (This usage is equivalent to specifying AttributesToGet without any value for Select.)  If you use the ProjectionExpression parameter, then the value for Select can only be SPECIFIC_ATTRIBUTES. Any other value for Select will return an error. 
+     * The attributes to be returned in the result. You can retrieve all item attributes, specific item attributes, the count of matching items, or in the case of an index, some or all of the attributes projected into the index.    ALL_ATTRIBUTES - Returns all of the item attributes from the specified table or index. If you query a local secondary index, then for each matching item in the index, DynamoDB fetches the entire item from the parent table. If the index is configured to project all item attributes, then all of the data can be obtained from the local secondary index, and no fetching is required.    ALL_PROJECTED_ATTRIBUTES - Allowed only when querying an index. Retrieves all attributes that have been projected into the index. If the index is configured to project all attributes, this return value is equivalent to specifying ALL_ATTRIBUTES.    COUNT - Returns the number of matching items, rather than the matching items themselves. Note that this uses the same quantity of read capacity units as getting the items, and is subject to the same item size calculations.    SPECIFIC_ATTRIBUTES - Returns only the attributes listed in ProjectionExpression. This return value is equivalent to specifying ProjectionExpression without specifying any value for Select. If you query or scan a local secondary index and request only attributes that are projected into that index, the operation reads only the index and not the table. If any of the requested attributes are not projected into the local secondary index, DynamoDB fetches each of these attributes from the parent table. This extra fetching incurs additional throughput cost and latency. If you query or scan a global secondary index, you can only request attributes that are projected into the index. Global secondary index queries cannot fetch attributes from the parent table.   If neither Select nor ProjectionExpression are specified, DynamoDB defaults to ALL_ATTRIBUTES when accessing a table, and ALL_PROJECTED_ATTRIBUTES when accessing an index. You cannot use both Select and ProjectionExpression together in a single request, unless the value for Select is SPECIFIC_ATTRIBUTES. (This usage is equivalent to specifying ProjectionExpression without any value for Select.)  If you use the ProjectionExpression parameter, then the value for Select can only be SPECIFIC_ATTRIBUTES. Any other value for Select will return an error. 
      */
     Select?: Select;
     /**
@@ -2885,7 +3405,7 @@ declare namespace DynamoDB {
      */
     LastEvaluatedKey?: Key;
     /**
-     * The capacity units consumed by the Scan operation. The data returned includes the total provisioned throughput consumed, along with statistics for the table and any indexes involved in the operation. ConsumedCapacity is only returned if the ReturnConsumedCapacity parameter was specified. For more information, see Provisioned Throughput in the Amazon DynamoDB Developer Guide.
+     * The capacity units consumed by the Scan operation. The data returned includes the total provisioned throughput consumed, along with statistics for the table and any indexes involved in the operation. ConsumedCapacity is only returned if the ReturnConsumedCapacity parameter was specified. For more information, see Capacity unit consumption for read operations in the Amazon DynamoDB Developer Guide.
      */
     ConsumedCapacity?: ConsumedCapacity;
   }
@@ -2909,7 +3429,7 @@ declare namespace DynamoDB {
     /**
      * Size of the table in bytes. Note that this is an approximate value.
      */
-    TableSizeBytes?: Long;
+    TableSizeBytes?: LongObject;
     /**
      * Schema of the table. 
      */
@@ -2922,6 +3442,7 @@ declare namespace DynamoDB {
      * Read IOPs and Write IOPS on the table when the backup was created.
      */
     ProvisionedThroughput: ProvisionedThroughput;
+    OnDemandThroughput?: OnDemandThroughput;
     /**
      * Number of items in the table. Note that this is an approximate value. 
      */
@@ -2984,7 +3505,43 @@ declare namespace DynamoDB {
      */
     Replicas?: ReplicaAutoScalingDescriptionList;
   }
+  export type TableClass = "STANDARD"|"STANDARD_INFREQUENT_ACCESS"|string;
+  export interface TableClassSummary {
+    /**
+     * The table class of the specified table. Valid values are STANDARD and STANDARD_INFREQUENT_ACCESS.
+     */
+    TableClass?: TableClass;
+    /**
+     * The date and time at which the table class was last updated.
+     */
+    LastUpdateDateTime?: _Date;
+  }
   export type TableCreationDateTime = Date;
+  export interface TableCreationParameters {
+    /**
+     *  The name of the table created as part of the import operation. 
+     */
+    TableName: TableName;
+    /**
+     *  The attributes of the table created as part of the import operation. 
+     */
+    AttributeDefinitions: AttributeDefinitions;
+    /**
+     *  The primary key and option sort key of the table created as part of the import operation. 
+     */
+    KeySchema: KeySchema;
+    /**
+     *  The billing mode for provisioning the table created as part of the import operation. 
+     */
+    BillingMode?: BillingMode;
+    ProvisionedThroughput?: ProvisionedThroughput;
+    OnDemandThroughput?: OnDemandThroughput;
+    SSESpecification?: SSESpecification;
+    /**
+     *  The Global Secondary Indexes (GSI) of the table to be created as part of the import operation. 
+     */
+    GlobalSecondaryIndexes?: GlobalSecondaryIndexList;
+  }
   export interface TableDescription {
     /**
      * An array of AttributeDefinition objects. Each of these objects describes one attribute in the table and index key schema. Each AttributeDefinition object in this array is composed of:    AttributeName - The name of the attribute.    AttributeType - The data type for the attribute.  
@@ -2999,7 +3556,7 @@ declare namespace DynamoDB {
      */
     KeySchema?: KeySchema;
     /**
-     * The current state of the table:    CREATING - The table is being created.    UPDATING - The table is being updated.    DELETING - The table is being deleted.    ACTIVE - The table is ready for use.    INACCESSIBLE_ENCRYPTION_CREDENTIALS - The AWS KMS key used to encrypt the table in inaccessible. Table operations may fail due to failure to use the AWS KMS key. DynamoDB will initiate the table archival process when a table's AWS KMS key remains inaccessible for more than seven days.     ARCHIVING - The table is being archived. Operations are not allowed until archival is complete.     ARCHIVED - The table has been archived. See the ArchivalReason for more information.   
+     * The current state of the table:    CREATING - The table is being created.    UPDATING - The table/index configuration is being updated. The table/index remains available for data operations when UPDATING.    DELETING - The table is being deleted.    ACTIVE - The table is ready for use.    INACCESSIBLE_ENCRYPTION_CREDENTIALS - The KMS key used to encrypt the table in inaccessible. Table operations may fail due to failure to use the KMS key. DynamoDB will initiate the table archival process when a table's KMS key remains inaccessible for more than seven days.     ARCHIVING - The table is being archived. Operations are not allowed until archival is complete.     ARCHIVED - The table has been archived. See the ArchivalReason for more information.   
      */
     TableStatus?: TableStatus;
     /**
@@ -3013,11 +3570,11 @@ declare namespace DynamoDB {
     /**
      * The total size of the specified table, in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.
      */
-    TableSizeBytes?: Long;
+    TableSizeBytes?: LongObject;
     /**
      * The number of items in the specified table. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.
      */
-    ItemCount?: Long;
+    ItemCount?: LongObject;
     /**
      * The Amazon Resource Name (ARN) that uniquely identifies the table.
      */
@@ -3031,11 +3588,11 @@ declare namespace DynamoDB {
      */
     BillingModeSummary?: BillingModeSummary;
     /**
-     * Represents one or more local secondary indexes on the table. Each index is scoped to a given partition key value. Tables with one or more local secondary indexes are subject to an item collection size limit, where the amount of data within a given item collection cannot exceed 10 GB. Each element is composed of:    IndexName - The name of the local secondary index.    KeySchema - Specifies the complete index key schema. The attribute names in the key schema must be between 1 and 255 characters (inclusive). The key schema must begin with the same partition key as the table.    Projection - Specifies attributes that are copied (projected) from the table into the index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. Each attribute specification is composed of:    ProjectionType - One of the following:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - Only the specified table attributes are projected into the index. The list of projected attributes is in NonKeyAttributes.    ALL - All of the table attributes are projected into the index.      NonKeyAttributes - A list of one or more non-key attribute names that are projected into the secondary index. The total count of attributes provided in NonKeyAttributes, summed across all of the secondary indexes, must not exceed 20. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.      IndexSizeBytes - Represents the total size of the index, in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.    ItemCount - Represents the number of items in the index. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.   If the table is in the DELETING state, no information about indexes will be returned.
+     * Represents one or more local secondary indexes on the table. Each index is scoped to a given partition key value. Tables with one or more local secondary indexes are subject to an item collection size limit, where the amount of data within a given item collection cannot exceed 10 GB. Each element is composed of:    IndexName - The name of the local secondary index.    KeySchema - Specifies the complete index key schema. The attribute names in the key schema must be between 1 and 255 characters (inclusive). The key schema must begin with the same partition key as the table.    Projection - Specifies attributes that are copied (projected) from the table into the index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. Each attribute specification is composed of:    ProjectionType - One of the following:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - Only the specified table attributes are projected into the index. The list of projected attributes is in NonKeyAttributes.    ALL - All of the table attributes are projected into the index.      NonKeyAttributes - A list of one or more non-key attribute names that are projected into the secondary index. The total count of attributes provided in NonKeyAttributes, summed across all of the secondary indexes, must not exceed 100. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.      IndexSizeBytes - Represents the total size of the index, in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.    ItemCount - Represents the number of items in the index. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.   If the table is in the DELETING state, no information about indexes will be returned.
      */
     LocalSecondaryIndexes?: LocalSecondaryIndexDescriptionList;
     /**
-     * The global secondary indexes, if any, on the table. Each index is scoped to a given partition key value. Each element is composed of:    Backfilling - If true, then the index is currently in the backfilling phase. Backfilling occurs only when a new global secondary index is added to the table. It is the process by which DynamoDB populates the new index with data from the table. (This attribute does not appear for indexes that were created during a CreateTable operation.)   You can delete an index that is being created during the Backfilling phase when IndexStatus is set to CREATING and Backfilling is true. You can't delete the index that is being created when IndexStatus is set to CREATING and Backfilling is false. (This attribute does not appear for indexes that were created during a CreateTable operation.)    IndexName - The name of the global secondary index.    IndexSizeBytes - The total size of the global secondary index, in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.     IndexStatus - The current status of the global secondary index:    CREATING - The index is being created.    UPDATING - The index is being updated.    DELETING - The index is being deleted.    ACTIVE - The index is ready for use.      ItemCount - The number of items in the global secondary index. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.     KeySchema - Specifies the complete index key schema. The attribute names in the key schema must be between 1 and 255 characters (inclusive). The key schema must begin with the same partition key as the table.    Projection - Specifies attributes that are copied (projected) from the table into the index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. Each attribute specification is composed of:    ProjectionType - One of the following:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - In addition to the attributes described in KEYS_ONLY, the secondary index will include other non-key attributes that you specify.    ALL - All of the table attributes are projected into the index.      NonKeyAttributes - A list of one or more non-key attribute names that are projected into the secondary index. The total count of attributes provided in NonKeyAttributes, summed across all of the secondary indexes, must not exceed 20. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.      ProvisionedThroughput - The provisioned throughput settings for the global secondary index, consisting of read and write capacity units, along with data about increases and decreases.    If the table is in the DELETING state, no information about indexes will be returned.
+     * The global secondary indexes, if any, on the table. Each index is scoped to a given partition key value. Each element is composed of:    Backfilling - If true, then the index is currently in the backfilling phase. Backfilling occurs only when a new global secondary index is added to the table. It is the process by which DynamoDB populates the new index with data from the table. (This attribute does not appear for indexes that were created during a CreateTable operation.)   You can delete an index that is being created during the Backfilling phase when IndexStatus is set to CREATING and Backfilling is true. You can't delete the index that is being created when IndexStatus is set to CREATING and Backfilling is false. (This attribute does not appear for indexes that were created during a CreateTable operation.)    IndexName - The name of the global secondary index.    IndexSizeBytes - The total size of the global secondary index, in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.     IndexStatus - The current status of the global secondary index:    CREATING - The index is being created.    UPDATING - The index is being updated.    DELETING - The index is being deleted.    ACTIVE - The index is ready for use.      ItemCount - The number of items in the global secondary index. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.     KeySchema - Specifies the complete index key schema. The attribute names in the key schema must be between 1 and 255 characters (inclusive). The key schema must begin with the same partition key as the table.    Projection - Specifies attributes that are copied (projected) from the table into the index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. Each attribute specification is composed of:    ProjectionType - One of the following:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - In addition to the attributes described in KEYS_ONLY, the secondary index will include other non-key attributes that you specify.    ALL - All of the table attributes are projected into the index.      NonKeyAttributes - A list of one or more non-key attribute names that are projected into the secondary index. The total count of attributes provided in NonKeyAttributes, summed across all of the secondary indexes, must not exceed 100. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.      ProvisionedThroughput - The provisioned throughput settings for the global secondary index, consisting of read and write capacity units, along with data about increases and decreases.    If the table is in the DELETING state, no information about indexes will be returned.
      */
     GlobalSecondaryIndexes?: GlobalSecondaryIndexDescriptionList;
     /**
@@ -3043,7 +3600,7 @@ declare namespace DynamoDB {
      */
     StreamSpecification?: StreamSpecification;
     /**
-     * A timestamp, in ISO 8601 format, for this stream. Note that LatestStreamLabel is not a unique identifier for the stream, because it is possible that a stream from another table might have the same timestamp. However, the combination of the following three elements is guaranteed to be unique:   AWS customer ID   Table name    StreamLabel   
+     * A timestamp, in ISO 8601 format, for this stream. Note that LatestStreamLabel is not a unique identifier for the stream, because it is possible that a stream from another table might have the same timestamp. However, the combination of the following three elements is guaranteed to be unique:   Amazon Web Services customer ID   Table name    StreamLabel   
      */
     LatestStreamLabel?: String;
     /**
@@ -3051,7 +3608,7 @@ declare namespace DynamoDB {
      */
     LatestStreamArn?: StreamArn;
     /**
-     * Represents the version of global tables in use, if the table is replicated across AWS Regions.
+     * Represents the version of global tables in use, if the table is replicated across Amazon Web Services Regions.
      */
     GlobalTableVersion?: String;
     /**
@@ -3070,6 +3627,18 @@ declare namespace DynamoDB {
      * Contains information about the table archive.
      */
     ArchivalSummary?: ArchivalSummary;
+    /**
+     * Contains details of the table class.
+     */
+    TableClassSummary?: TableClassSummary;
+    /**
+     * Indicates whether deletion protection is enabled (true) or disabled (false) on the table.
+     */
+    DeletionProtectionEnabled?: DeletionProtectionEnabled;
+    /**
+     * The maximum number of read and write units for the specified on-demand table. If you use this parameter, you must specify MaxReadRequestUnits, MaxWriteRequestUnits, or both.
+     */
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export type TableId = string;
   export type TableName = string;
@@ -3077,7 +3646,7 @@ declare namespace DynamoDB {
   export type TableStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|"INACCESSIBLE_ENCRYPTION_CREDENTIALS"|"ARCHIVING"|"ARCHIVED"|string;
   export interface Tag {
     /**
-     * The key of the tag. Tag keys are case sensitive. Each DynamoDB table can only have up to one tag with the same key. If you try to add an existing tag (same key), the existing tag value will be updated to the new value. 
+     * The key of the tag. Tag keys are case sensitive. Each DynamoDB table can only have up to one tag with the same key. If you try to add an existing tag (same key), the existing tag value will be updated to the new value.
      */
     Key: TagKeyString;
     /**
@@ -3133,7 +3702,7 @@ declare namespace DynamoDB {
   export type TransactGetItemList = TransactGetItem[];
   export interface TransactGetItemsInput {
     /**
-     * An ordered array of up to 25 TransactGetItem objects, each of which contains a Get structure.
+     * An ordered array of up to 100 TransactGetItem objects, each of which contains a Get structure.
      */
     TransactItems: TransactGetItemList;
     /**
@@ -3147,7 +3716,7 @@ declare namespace DynamoDB {
      */
     ConsumedCapacity?: ConsumedCapacityMultiple;
     /**
-     * An ordered array of up to 25 ItemResponse objects, each of which corresponds to the TransactGetItem object in the same position in the TransactItems array. Each ItemResponse object contains a Map of the name-value pairs that are the projected attributes of the requested item. If a requested item could not be retrieved, the corresponding ItemResponse object is Null, or if the requested item has no projected attributes, the corresponding ItemResponse object is an empty Map. 
+     * An ordered array of up to 100 ItemResponse objects, each of which corresponds to the TransactGetItem object in the same position in the TransactItems array. Each ItemResponse object contains a Map of the name-value pairs that are the projected attributes of the requested item. If a requested item could not be retrieved, the corresponding ItemResponse object is Null, or if the requested item has no projected attributes, the corresponding ItemResponse object is an empty Map. 
      */
     Responses?: ItemResponseList;
   }
@@ -3172,7 +3741,7 @@ declare namespace DynamoDB {
   export type TransactWriteItemList = TransactWriteItem[];
   export interface TransactWriteItemsInput {
     /**
-     * An ordered array of up to 25 TransactWriteItem objects, each of which contains a ConditionCheck, Put, Update, or Delete object. These can operate on items in different tables, but the tables must reside in the same AWS account and Region, and no two of them can operate on the same item. 
+     * An ordered array of up to 100 TransactWriteItem objects, each of which contains a ConditionCheck, Put, Update, or Delete object. These can operate on items in different tables, but the tables must reside in the same Amazon Web Services account and Region, and no two of them can operate on the same item. 
      */
     TransactItems: TransactWriteItemList;
     ReturnConsumedCapacity?: ReturnConsumedCapacity;
@@ -3181,7 +3750,7 @@ declare namespace DynamoDB {
      */
     ReturnItemCollectionMetrics?: ReturnItemCollectionMetrics;
     /**
-     * Providing a ClientRequestToken makes the call to TransactWriteItems idempotent, meaning that multiple identical calls have the same effect as one single call. Although multiple identical calls using the same client request token produce the same result on the server (no side effects), the responses to the calls might not be the same. If the ReturnConsumedCapacity&gt; parameter is set, then the initial TransactWriteItems call returns the amount of write capacity units consumed in making the changes. Subsequent TransactWriteItems calls with the same client token return the number of read capacity units consumed in reading the item. A client request token is valid for 10 minutes after the first request that uses it is completed. After 10 minutes, any request with the same client token is treated as a new request. Do not resubmit the same request with the same client token for more than 10 minutes, or the result might not be idempotent. If you submit a request with the same client token but a change in other parameters within the 10-minute idempotency window, DynamoDB returns an IdempotentParameterMismatch exception.
+     * Providing a ClientRequestToken makes the call to TransactWriteItems idempotent, meaning that multiple identical calls have the same effect as one single call. Although multiple identical calls using the same client request token produce the same result on the server (no side effects), the responses to the calls might not be the same. If the ReturnConsumedCapacity parameter is set, then the initial TransactWriteItems call returns the amount of write capacity units consumed in making the changes. Subsequent TransactWriteItems calls with the same client token return the number of read capacity units consumed in reading the item. A client request token is valid for 10 minutes after the first request that uses it is completed. After 10 minutes, any request with the same client token is treated as a new request. Do not resubmit the same request with the same client token for more than 10 minutes, or the result might not be idempotent. If you submit a request with the same client token but a change in other parameters within the 10-minute idempotency window, DynamoDB returns an IdempotentParameterMismatch exception.
      */
     ClientRequestToken?: ClientRequestToken;
   }
@@ -3215,9 +3784,9 @@ declare namespace DynamoDB {
      */
     UpdateExpression: UpdateExpression;
     /**
-     * Name of the table for the UpdateItem request.
+     * Name of the table for the UpdateItem request. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
     /**
      * A condition that must be satisfied in order for a conditional update to succeed.
      */
@@ -3231,15 +3800,15 @@ declare namespace DynamoDB {
      */
     ExpressionAttributeValues?: ExpressionAttributeValueMap;
     /**
-     * Use ReturnValuesOnConditionCheckFailure to get the item attributes if the Update condition fails. For ReturnValuesOnConditionCheckFailure, the valid values are: NONE, ALL_OLD, UPDATED_OLD, ALL_NEW, UPDATED_NEW.
+     * Use ReturnValuesOnConditionCheckFailure to get the item attributes if the Update condition fails. For ReturnValuesOnConditionCheckFailure, the valid values are: NONE and ALL_OLD.
      */
     ReturnValuesOnConditionCheckFailure?: ReturnValuesOnConditionCheckFailure;
   }
   export interface UpdateContinuousBackupsInput {
     /**
-     * The name of the table.
+     * The name of the table. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
     /**
      * Represents the settings used to enable point in time recovery.
      */
@@ -3253,9 +3822,9 @@ declare namespace DynamoDB {
   }
   export interface UpdateContributorInsightsInput {
     /**
-     * The name of the table.
+     * The name of the table. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
     /**
      * The global secondary index name, if applicable.
      */
@@ -3288,7 +3857,11 @@ declare namespace DynamoDB {
     /**
      * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Service, Account, and Table Quotas in the Amazon DynamoDB Developer Guide.
      */
-    ProvisionedThroughput: ProvisionedThroughput;
+    ProvisionedThroughput?: ProvisionedThroughput;
+    /**
+     * Updates the maximum number of read and write units for the specified global secondary index. If you use this parameter, you must specify MaxReadRequestUnits, MaxWriteRequestUnits, or both.
+     */
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export interface UpdateGlobalTableInput {
     /**
@@ -3312,7 +3885,7 @@ declare namespace DynamoDB {
      */
     GlobalTableName: TableName;
     /**
-     * The billing mode of the global table. If GlobalTableBillingMode is not specified, the global table defaults to PROVISIONED capacity billing mode.    PROVISIONED - We recommend using PROVISIONED for predictable workloads. PROVISIONED sets the billing mode to Provisioned Mode.    PAY_PER_REQUEST - We recommend using PAY_PER_REQUEST for unpredictable workloads. PAY_PER_REQUEST sets the billing mode to On-Demand Mode.   
+     * The billing mode of the global table. If GlobalTableBillingMode is not specified, the global table defaults to PROVISIONED capacity billing mode.    PROVISIONED - We recommend using PROVISIONED for predictable workloads. PROVISIONED sets the billing mode to Provisioned capacity mode.    PAY_PER_REQUEST - We recommend using PAY_PER_REQUEST for unpredictable workloads. PAY_PER_REQUEST sets the billing mode to On-demand capacity mode.   
      */
     GlobalTableBillingMode?: BillingMode;
     /**
@@ -3344,9 +3917,9 @@ declare namespace DynamoDB {
   }
   export interface UpdateItemInput {
     /**
-     * The name of the table containing the item to update.
+     * The name of the table containing the item to update. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
     /**
      * The primary key of the item to be updated. Each element consists of an attribute name and a value for that attribute. For the primary key, you must provide all of the attributes. For example, with a simple primary key, you only need to provide a value for the partition key. For a composite primary key, you must provide values for both the partition key and the sort key.
      */
@@ -3364,7 +3937,7 @@ declare namespace DynamoDB {
      */
     ConditionalOperator?: ConditionalOperator;
     /**
-     * Use ReturnValues if you want to get the item attributes as they appear before or after they are updated. For UpdateItem, the valid values are:    NONE - If ReturnValues is not specified, or if its value is NONE, then nothing is returned. (This setting is the default for ReturnValues.)    ALL_OLD - Returns all of the attributes of the item, as they appeared before the UpdateItem operation.    UPDATED_OLD - Returns only the updated attributes, as they appeared before the UpdateItem operation.    ALL_NEW - Returns all of the attributes of the item, as they appear after the UpdateItem operation.    UPDATED_NEW - Returns only the updated attributes, as they appear after the UpdateItem operation.   There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No read capacity units are consumed. The values returned are strongly consistent.
+     * Use ReturnValues if you want to get the item attributes as they appear before or after they are successfully updated. For UpdateItem, the valid values are:    NONE - If ReturnValues is not specified, or if its value is NONE, then nothing is returned. (This setting is the default for ReturnValues.)    ALL_OLD - Returns all of the attributes of the item, as they appeared before the UpdateItem operation.    UPDATED_OLD - Returns only the updated attributes, as they appeared before the UpdateItem operation.    ALL_NEW - Returns all of the attributes of the item, as they appear after the UpdateItem operation.    UPDATED_NEW - Returns only the updated attributes, as they appear after the UpdateItem operation.   There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No read capacity units are consumed. The values returned are strongly consistent.
      */
     ReturnValues?: ReturnValue;
     ReturnConsumedCapacity?: ReturnConsumedCapacity;
@@ -3388,14 +3961,18 @@ declare namespace DynamoDB {
      * One or more values that can be substituted in an expression. Use the : (colon) character in an expression to dereference an attribute value. For example, suppose that you wanted to check whether the value of the ProductStatus attribute was one of the following:   Available | Backordered | Discontinued  You would first need to specify ExpressionAttributeValues as follows:  { ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }  You could then use these values in an expression, such as this:  ProductStatus IN (:avail, :back, :disc)  For more information on expression attribute values, see Condition Expressions in the Amazon DynamoDB Developer Guide.
      */
     ExpressionAttributeValues?: ExpressionAttributeValueMap;
+    /**
+     * An optional parameter that returns the item attributes for an UpdateItem operation that failed a condition check. There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No read capacity units are consumed.
+     */
+    ReturnValuesOnConditionCheckFailure?: ReturnValuesOnConditionCheckFailure;
   }
   export interface UpdateItemOutput {
     /**
-     * A map of attribute values as they appear before or after the UpdateItem operation, as determined by the ReturnValues parameter. The Attributes map is only present if ReturnValues was specified as something other than NONE in the request. Each element represents one attribute.
+     * A map of attribute values as they appear before or after the UpdateItem operation, as determined by the ReturnValues parameter. The Attributes map is only present if the update was successful and ReturnValues was specified as something other than NONE in the request. Each element represents one attribute.
      */
     Attributes?: AttributeMap;
     /**
-     * The capacity units consumed by the UpdateItem operation. The data returned includes the total provisioned throughput consumed, along with statistics for the table and any indexes involved in the operation. ConsumedCapacity is only returned if the ReturnConsumedCapacity parameter was specified. For more information, see Provisioned Throughput in the Amazon DynamoDB Developer Guide.
+     * The capacity units consumed by the UpdateItem operation. The data returned includes the total provisioned throughput consumed, along with statistics for the table and any indexes involved in the operation. ConsumedCapacity is only returned if the ReturnConsumedCapacity parameter was specified. For more information, see Capacity unity consumption for write operations in the Amazon DynamoDB Developer Guide.
      */
     ConsumedCapacity?: ConsumedCapacity;
     /**
@@ -3403,13 +3980,51 @@ declare namespace DynamoDB {
      */
     ItemCollectionMetrics?: ItemCollectionMetrics;
   }
+  export interface UpdateKinesisStreamingConfiguration {
+    /**
+     * Enables updating the precision of Kinesis data stream timestamp. 
+     */
+    ApproximateCreationDateTimePrecision?: ApproximateCreationDateTimePrecision;
+  }
+  export interface UpdateKinesisStreamingDestinationInput {
+    /**
+     * The table name for the Kinesis streaming destination input. You can also provide the ARN of the table in this parameter.
+     */
+    TableName: TableArn;
+    /**
+     * The Amazon Resource Name (ARN) for the Kinesis stream input.
+     */
+    StreamArn: StreamArn;
+    /**
+     * The command to update the Kinesis stream configuration.
+     */
+    UpdateKinesisStreamingConfiguration?: UpdateKinesisStreamingConfiguration;
+  }
+  export interface UpdateKinesisStreamingDestinationOutput {
+    /**
+     * The table name for the Kinesis streaming destination output.
+     */
+    TableName?: TableName;
+    /**
+     * The ARN for the Kinesis stream input.
+     */
+    StreamArn?: StreamArn;
+    /**
+     * The status of the attempt to update the Kinesis streaming destination output.
+     */
+    DestinationStatus?: DestinationStatus;
+    /**
+     * The command to update the Kinesis streaming destination configuration.
+     */
+    UpdateKinesisStreamingConfiguration?: UpdateKinesisStreamingConfiguration;
+  }
   export interface UpdateReplicationGroupMemberAction {
     /**
      * The Region where the replica exists.
      */
     RegionName: RegionName;
     /**
-     * The AWS KMS customer master key (CMK) of the replica that should be used for AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB KMS master key alias/aws/dynamodb.
+     * The KMS key of the replica that should be used for KMS encryption. To specify a key, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB KMS key alias/aws/dynamodb.
      */
     KMSMasterKeyId?: KMSMasterKeyId;
     /**
@@ -3417,9 +4032,17 @@ declare namespace DynamoDB {
      */
     ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
     /**
+     * Overrides the maximum on-demand throughput for the replica table.
+     */
+    OnDemandThroughputOverride?: OnDemandThroughputOverride;
+    /**
      * Replica-specific global secondary index settings.
      */
     GlobalSecondaryIndexes?: ReplicaGlobalSecondaryIndexList;
+    /**
+     * Replica-specific table class. If not specified, uses the source table's table class.
+     */
+    TableClassOverride?: TableClass;
   }
   export interface UpdateTableInput {
     /**
@@ -3427,11 +4050,11 @@ declare namespace DynamoDB {
      */
     AttributeDefinitions?: AttributeDefinitions;
     /**
-     * The name of the table to be updated.
+     * The name of the table to be updated. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
     /**
-     * Controls how you are charged for read and write throughput and how you manage capacity. When switching from pay-per-request to provisioned capacity, initial provisioned capacity values must be set. The initial provisioned capacity values are estimated based on the consumed read and write capacity of your table and global secondary indexes over the past 30 minutes.    PROVISIONED - We recommend using PROVISIONED for predictable workloads. PROVISIONED sets the billing mode to Provisioned Mode.    PAY_PER_REQUEST - We recommend using PAY_PER_REQUEST for unpredictable workloads. PAY_PER_REQUEST sets the billing mode to On-Demand Mode.   
+     * Controls how you are charged for read and write throughput and how you manage capacity. When switching from pay-per-request to provisioned capacity, initial provisioned capacity values must be set. The initial provisioned capacity values are estimated based on the consumed read and write capacity of your table and global secondary indexes over the past 30 minutes.    PROVISIONED - We recommend using PROVISIONED for predictable workloads. PROVISIONED sets the billing mode to Provisioned capacity mode.    PAY_PER_REQUEST - We recommend using PAY_PER_REQUEST for unpredictable workloads. PAY_PER_REQUEST sets the billing mode to On-demand capacity mode.   
      */
     BillingMode?: BillingMode;
     /**
@@ -3443,7 +4066,7 @@ declare namespace DynamoDB {
      */
     GlobalSecondaryIndexUpdates?: GlobalSecondaryIndexUpdateList;
     /**
-     * Represents the DynamoDB Streams configuration for the table.  You receive a ResourceInUseException if you try to enable a stream on a table that already has a stream, or if you try to disable a stream on a table that doesn't have a stream. 
+     * Represents the DynamoDB Streams configuration for the table.  You receive a ValidationException if you try to enable a stream on a table that already has a stream, or if you try to disable a stream on a table that doesn't have a stream. 
      */
     StreamSpecification?: StreamSpecification;
     /**
@@ -3451,9 +4074,21 @@ declare namespace DynamoDB {
      */
     SSESpecification?: SSESpecification;
     /**
-     * A list of replica update actions (create, delete, or update) for the table.  This property only applies to Version 2019.11.21 of global tables. 
+     * A list of replica update actions (create, delete, or update) for the table.  For global tables, this property only applies to global tables using Version 2019.11.21 (Current version).  
      */
     ReplicaUpdates?: ReplicationGroupUpdateList;
+    /**
+     * The table class of the table to be updated. Valid values are STANDARD and STANDARD_INFREQUENT_ACCESS.
+     */
+    TableClass?: TableClass;
+    /**
+     * Indicates whether deletion protection is to be enabled (true) or disabled (false) on the table.
+     */
+    DeletionProtectionEnabled?: DeletionProtectionEnabled;
+    /**
+     * Updates the maximum number of read and write units for the specified table in on-demand capacity mode. If you use this parameter, you must specify MaxReadRequestUnits, MaxWriteRequestUnits, or both.
+     */
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export interface UpdateTableOutput {
     /**
@@ -3467,9 +4102,9 @@ declare namespace DynamoDB {
      */
     GlobalSecondaryIndexUpdates?: GlobalSecondaryIndexAutoScalingUpdateList;
     /**
-     * The name of the global table to be updated.
+     * The name of the global table to be updated. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
     ProvisionedWriteCapacityAutoScalingUpdate?: AutoScalingSettingsUpdate;
     /**
      * Represents the auto scaling settings of replicas of the table that will be modified.
@@ -3484,9 +4119,9 @@ declare namespace DynamoDB {
   }
   export interface UpdateTimeToLiveInput {
     /**
-     * The name of the table to be configured.
+     * The name of the table to be configured. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.
      */
-    TableName: TableName;
+    TableName: TableArn;
     /**
      * Represents the settings used to enable or disable Time to Live for the specified table.
      */

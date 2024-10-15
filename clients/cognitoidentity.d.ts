@@ -76,11 +76,11 @@ declare class CognitoIdentity extends Service {
    */
   getIdentityPoolRoles(callback?: (err: AWSError, data: CognitoIdentity.Types.GetIdentityPoolRolesResponse) => void): Request<CognitoIdentity.Types.GetIdentityPoolRolesResponse, AWSError>;
   /**
-   * Gets an OpenID token, using a known Cognito ID. This known Cognito ID is returned by GetId. You can optionally add additional logins for the identity. Supplying multiple logins creates an implicit link. The OpenId token is valid for 10 minutes. This is a public API. You do not need any credentials to call this API.
+   * Gets an OpenID token, using a known Cognito ID. This known Cognito ID is returned by GetId. You can optionally add additional logins for the identity. Supplying multiple logins creates an implicit link. The OpenID token is valid for 10 minutes. This is a public API. You do not need any credentials to call this API.
    */
   getOpenIdToken(params: CognitoIdentity.Types.GetOpenIdTokenInput, callback?: (err: AWSError, data: CognitoIdentity.Types.GetOpenIdTokenResponse) => void): Request<CognitoIdentity.Types.GetOpenIdTokenResponse, AWSError>;
   /**
-   * Gets an OpenID token, using a known Cognito ID. This known Cognito ID is returned by GetId. You can optionally add additional logins for the identity. Supplying multiple logins creates an implicit link. The OpenId token is valid for 10 minutes. This is a public API. You do not need any credentials to call this API.
+   * Gets an OpenID token, using a known Cognito ID. This known Cognito ID is returned by GetId. You can optionally add additional logins for the identity. Supplying multiple logins creates an implicit link. The OpenID token is valid for 10 minutes. This is a public API. You do not need any credentials to call this API.
    */
   getOpenIdToken(callback?: (err: AWSError, data: CognitoIdentity.Types.GetOpenIdTokenResponse) => void): Request<CognitoIdentity.Types.GetOpenIdTokenResponse, AWSError>;
   /**
@@ -91,6 +91,14 @@ declare class CognitoIdentity extends Service {
    * Registers (or retrieves) a Cognito IdentityId and an OpenID Connect token for a user authenticated by your backend authentication process. Supplying multiple logins will create an implicit linked account. You can only specify one developer provider as part of the Logins map, which is linked to the identity pool. The developer provider is the "domain" by which Cognito will refer to your users. You can use GetOpenIdTokenForDeveloperIdentity to create a new identity and to link new logins (that is, user credentials issued by a public provider or developer provider) to an existing identity. When you want to create a new identity, the IdentityId should be null. When you want to associate a new login with an existing authenticated/unauthenticated identity, you can do so by providing the existing IdentityId. This API will create the identity in the specified IdentityPoolId. You must use AWS Developer credentials to call this API.
    */
   getOpenIdTokenForDeveloperIdentity(callback?: (err: AWSError, data: CognitoIdentity.Types.GetOpenIdTokenForDeveloperIdentityResponse) => void): Request<CognitoIdentity.Types.GetOpenIdTokenForDeveloperIdentityResponse, AWSError>;
+  /**
+   * Use GetPrincipalTagAttributeMap to list all mappings between PrincipalTags and user attributes.
+   */
+  getPrincipalTagAttributeMap(params: CognitoIdentity.Types.GetPrincipalTagAttributeMapInput, callback?: (err: AWSError, data: CognitoIdentity.Types.GetPrincipalTagAttributeMapResponse) => void): Request<CognitoIdentity.Types.GetPrincipalTagAttributeMapResponse, AWSError>;
+  /**
+   * Use GetPrincipalTagAttributeMap to list all mappings between PrincipalTags and user attributes.
+   */
+  getPrincipalTagAttributeMap(callback?: (err: AWSError, data: CognitoIdentity.Types.GetPrincipalTagAttributeMapResponse) => void): Request<CognitoIdentity.Types.GetPrincipalTagAttributeMapResponse, AWSError>;
   /**
    * Lists the identities in an identity pool. You must use AWS Developer credentials to call this API.
    */
@@ -140,11 +148,19 @@ declare class CognitoIdentity extends Service {
    */
   setIdentityPoolRoles(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Assigns a set of tags to an Amazon Cognito identity pool. A tag is a label that you can use to categorize and manage identity pools in different ways, such as by purpose, owner, environment, or other criteria. Each tag consists of a key and value, both of which you define. A key is a general category for more specific values. For example, if you have two versions of an identity pool, one for testing and another for production, you might assign an Environment tag key to both identity pools. The value of this key might be Test for one identity pool and Production for the other. Tags are useful for cost tracking and access control. You can activate your tags so that they appear on the Billing and Cost Management console, where you can track the costs associated with your identity pools. In an IAM policy, you can constrain permissions for identity pools based on specific tags or tag values. You can use this action up to 5 times per second, per account. An identity pool can have as many as 50 tags.
+   * You can use this operation to use default (username and clientID) attribute or custom attribute mappings.
+   */
+  setPrincipalTagAttributeMap(params: CognitoIdentity.Types.SetPrincipalTagAttributeMapInput, callback?: (err: AWSError, data: CognitoIdentity.Types.SetPrincipalTagAttributeMapResponse) => void): Request<CognitoIdentity.Types.SetPrincipalTagAttributeMapResponse, AWSError>;
+  /**
+   * You can use this operation to use default (username and clientID) attribute or custom attribute mappings.
+   */
+  setPrincipalTagAttributeMap(callback?: (err: AWSError, data: CognitoIdentity.Types.SetPrincipalTagAttributeMapResponse) => void): Request<CognitoIdentity.Types.SetPrincipalTagAttributeMapResponse, AWSError>;
+  /**
+   * Assigns a set of tags to the specified Amazon Cognito identity pool. A tag is a label that you can use to categorize and manage identity pools in different ways, such as by purpose, owner, environment, or other criteria. Each tag consists of a key and value, both of which you define. A key is a general category for more specific values. For example, if you have two versions of an identity pool, one for testing and another for production, you might assign an Environment tag key to both identity pools. The value of this key might be Test for one identity pool and Production for the other. Tags are useful for cost tracking and access control. You can activate your tags so that they appear on the Billing and Cost Management console, where you can track the costs associated with your identity pools. In an IAM policy, you can constrain permissions for identity pools based on specific tags or tag values. You can use this action up to 5 times per second, per account. An identity pool can have as many as 50 tags.
    */
   tagResource(params: CognitoIdentity.Types.TagResourceInput, callback?: (err: AWSError, data: CognitoIdentity.Types.TagResourceResponse) => void): Request<CognitoIdentity.Types.TagResourceResponse, AWSError>;
   /**
-   * Assigns a set of tags to an Amazon Cognito identity pool. A tag is a label that you can use to categorize and manage identity pools in different ways, such as by purpose, owner, environment, or other criteria. Each tag consists of a key and value, both of which you define. A key is a general category for more specific values. For example, if you have two versions of an identity pool, one for testing and another for production, you might assign an Environment tag key to both identity pools. The value of this key might be Test for one identity pool and Production for the other. Tags are useful for cost tracking and access control. You can activate your tags so that they appear on the Billing and Cost Management console, where you can track the costs associated with your identity pools. In an IAM policy, you can constrain permissions for identity pools based on specific tags or tag values. You can use this action up to 5 times per second, per account. An identity pool can have as many as 50 tags.
+   * Assigns a set of tags to the specified Amazon Cognito identity pool. A tag is a label that you can use to categorize and manage identity pools in different ways, such as by purpose, owner, environment, or other criteria. Each tag consists of a key and value, both of which you define. A key is a general category for more specific values. For example, if you have two versions of an identity pool, one for testing and another for production, you might assign an Environment tag key to both identity pools. The value of this key might be Test for one identity pool and Production for the other. Tags are useful for cost tracking and access control. You can activate your tags so that they appear on the Billing and Cost Management console, where you can track the costs associated with your identity pools. In an IAM policy, you can constrain permissions for identity pools based on specific tags or tag values. You can use this action up to 5 times per second, per account. An identity pool can have as many as 50 tags.
    */
   tagResource(callback?: (err: AWSError, data: CognitoIdentity.Types.TagResourceResponse) => void): Request<CognitoIdentity.Types.TagResourceResponse, AWSError>;
   /**
@@ -164,11 +180,11 @@ declare class CognitoIdentity extends Service {
    */
   unlinkIdentity(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the specified tags from an Amazon Cognito identity pool. You can use this action up to 5 times per second, per account
+   * Removes the specified tags from the specified Amazon Cognito identity pool. You can use this action up to 5 times per second, per account
    */
   untagResource(params: CognitoIdentity.Types.UntagResourceInput, callback?: (err: AWSError, data: CognitoIdentity.Types.UntagResourceResponse) => void): Request<CognitoIdentity.Types.UntagResourceResponse, AWSError>;
   /**
-   * Removes the specified tags from an Amazon Cognito identity pool. You can use this action up to 5 times per second, per account
+   * Removes the specified tags from the specified Amazon Cognito identity pool. You can use this action up to 5 times per second, per account
    */
   untagResource(callback?: (err: AWSError, data: CognitoIdentity.Types.UntagResourceResponse) => void): Request<CognitoIdentity.Types.UntagResourceResponse, AWSError>;
   /**
@@ -228,7 +244,7 @@ declare namespace CognitoIdentity {
      */
     DeveloperProviderName?: DeveloperProviderName;
     /**
-     * A list of OpendID Connect provider ARNs.
+     * The Amazon Resource Names (ARN) of the OpenID Connect providers.
      */
     OpenIdConnectProviderARNs?: OIDCProviderList;
     /**
@@ -303,7 +319,7 @@ declare namespace CognitoIdentity {
      */
     IdentityId: IdentityId;
     /**
-     * A set of optional name-value pairs that map provider names to provider tokens. The name-value pair will follow the syntax "provider_name": "provider_user_identifier". Logins should not be specified when trying to get credentials for an unauthenticated identity. The Logins parameter is required when using identities associated with external identity providers such as FaceBook. For examples of Logins maps, see the code examples in the External Identity Providers section of the Amazon Cognito Developer Guide.
+     * A set of optional name-value pairs that map provider names to provider tokens. The name-value pair will follow the syntax "provider_name": "provider_user_identifier". Logins should not be specified when trying to get credentials for an unauthenticated identity. The Logins parameter is required when using identities associated with external identity providers such as Facebook. For examples of Logins maps, see the code examples in the External Identity Providers section of the Amazon Cognito Developer Guide.
      */
     Logins?: LoginsMap;
     /**
@@ -375,6 +391,10 @@ declare namespace CognitoIdentity {
      */
     Logins: LoginsMap;
     /**
+     * Use this operation to configure attribute mappings for custom providers. 
+     */
+    PrincipalTags?: PrincipalTags;
+    /**
      * The expiration time of the token, in seconds. You can specify a custom expiration time for the token so that you can cache it. If you don't provide an expiration time, the token is valid for 15 minutes. You can exchange the token with Amazon STS for temporary AWS credentials, which are valid for a maximum of one hour. The maximum token duration you can set is 24 hours. You should take care in setting the expiration time for a token, as there are significant security implications: an attacker could use a leaked token to access your AWS resources for the token's duration.  Please provide for a small grace period, usually no more than 5 minutes, to account for clock skew. 
      */
     TokenDuration?: TokenDuration;
@@ -395,7 +415,7 @@ declare namespace CognitoIdentity {
      */
     IdentityId: IdentityId;
     /**
-     * A set of optional name-value pairs that map provider names to provider tokens. When using graph.facebook.com and www.amazon.com, supply the access_token returned from the provider's authflow. For accounts.google.com, an Amazon Cognito user pool provider, or any other OpenId Connect provider, always include the id_token.
+     * A set of optional name-value pairs that map provider names to provider tokens. When using graph.facebook.com and www.amazon.com, supply the access_token returned from the provider's authflow. For accounts.google.com, an Amazon Cognito user pool provider, or any other OpenID Connect provider, always include the id_token.
      */
     Logins?: LoginsMap;
   }
@@ -408,6 +428,34 @@ declare namespace CognitoIdentity {
      * An OpenID token, valid for 10 minutes.
      */
     Token?: OIDCToken;
+  }
+  export interface GetPrincipalTagAttributeMapInput {
+    /**
+     * You can use this operation to get the ID of the Identity Pool you setup attribute mappings for.
+     */
+    IdentityPoolId: IdentityPoolId;
+    /**
+     * You can use this operation to get the provider name.
+     */
+    IdentityProviderName: IdentityProviderName;
+  }
+  export interface GetPrincipalTagAttributeMapResponse {
+    /**
+     * You can use this operation to get the ID of the Identity Pool you setup attribute mappings for.
+     */
+    IdentityPoolId?: IdentityPoolId;
+    /**
+     * You can use this operation to get the provider name.
+     */
+    IdentityProviderName?: IdentityProviderName;
+    /**
+     * You can use this operation to list 
+     */
+    UseDefaults?: UseDefaults;
+    /**
+     * You can use this operation to add principal tags. The PrincipalTagsoperation enables you to reference user attributes in your IAM permissions policy.
+     */
+    PrincipalTags?: PrincipalTags;
   }
   export type HideDisabled = boolean;
   export type IdentitiesList = IdentityDescription[];
@@ -457,7 +505,7 @@ declare namespace CognitoIdentity {
      */
     DeveloperProviderName?: DeveloperProviderName;
     /**
-     * A list of OpendID Connect provider ARNs.
+     * The ARNs of the OpenID Connect providers.
      */
     OpenIdConnectProviderARNs?: OIDCProviderList;
     /**
@@ -642,6 +690,9 @@ declare namespace CognitoIdentity {
   export type OIDCProviderList = ARNString[];
   export type OIDCToken = string;
   export type PaginationKey = string;
+  export type PrincipalTagID = string;
+  export type PrincipalTagValue = string;
+  export type PrincipalTags = {[key: string]: PrincipalTagValue};
   export type QueryLimit = number;
   export interface RoleMapping {
     /**
@@ -680,14 +731,50 @@ declare namespace CognitoIdentity {
      */
     Roles: RolesMap;
     /**
-     * How users for a specific identity provider are to mapped to roles. This is a string to RoleMapping object map. The string identifies the identity provider, for example, "graph.facebook.com" or "cognito-idp-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id". Up to 25 rules can be specified per identity provider.
+     * How users for a specific identity provider are to mapped to roles. This is a string to RoleMapping object map. The string identifies the identity provider, for example, "graph.facebook.com" or "cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id". Up to 25 rules can be specified per identity provider.
      */
     RoleMappings?: RoleMappingMap;
+  }
+  export interface SetPrincipalTagAttributeMapInput {
+    /**
+     * The ID of the Identity Pool you want to set attribute mappings for.
+     */
+    IdentityPoolId: IdentityPoolId;
+    /**
+     * The provider name you want to use for attribute mappings.
+     */
+    IdentityProviderName: IdentityProviderName;
+    /**
+     * You can use this operation to use default (username and clientID) attribute mappings.
+     */
+    UseDefaults?: UseDefaults;
+    /**
+     * You can use this operation to add principal tags.
+     */
+    PrincipalTags?: PrincipalTags;
+  }
+  export interface SetPrincipalTagAttributeMapResponse {
+    /**
+     * The ID of the Identity Pool you want to set attribute mappings for.
+     */
+    IdentityPoolId?: IdentityPoolId;
+    /**
+     * The provider name you want to use for attribute mappings.
+     */
+    IdentityProviderName?: IdentityProviderName;
+    /**
+     * You can use this operation to select default (username and clientID) attribute mappings.
+     */
+    UseDefaults?: UseDefaults;
+    /**
+     * You can use this operation to add principal tags. The PrincipalTagsoperation enables you to reference user attributes in your IAM permissions policy.
+     */
+    PrincipalTags?: PrincipalTags;
   }
   export type TagKeysType = string;
   export interface TagResourceInput {
     /**
-     * The Amazon Resource Name (ARN) of the identity pool to assign the tags to.
+     * The Amazon Resource Name (ARN) of the identity pool.
      */
     ResourceArn: ARNString;
     /**
@@ -744,7 +831,7 @@ declare namespace CognitoIdentity {
   export type UnprocessedIdentityIdList = UnprocessedIdentityId[];
   export interface UntagResourceInput {
     /**
-     * The Amazon Resource Name (ARN) of the identity pool that the tags are assigned to.
+     * The Amazon Resource Name (ARN) of the identity pool.
      */
     ResourceArn: ARNString;
     /**
@@ -754,6 +841,7 @@ declare namespace CognitoIdentity {
   }
   export interface UntagResourceResponse {
   }
+  export type UseDefaults = boolean;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

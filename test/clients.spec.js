@@ -8,6 +8,7 @@ var customConstructorArgs = {
 
 for (var serviceAbbreviation in metadata) {
   var clientName = metadata[serviceAbbreviation].name;
+
   describe(
     'Instantiating AWS.' + clientName + ' clients',
     (function(clientName, serviceAbbreviation) {

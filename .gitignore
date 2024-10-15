@@ -1,3 +1,4 @@
+.idea
 configuration
 node_modules
 npm-debug.log
@@ -9,3 +10,5 @@ test/browser/sample/appinfo.js
 dist/aws-sdk-all.js
 yarn.lock
 package-lock.json
+workspace
+Makefile

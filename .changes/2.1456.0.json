@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds support for restricting public sharing of AMIs through AMI Block Public Access"
+    },
+    {
+        "type": "feature",
+        "category": "EventBridge",
+        "description": "Adds sensitive trait to various shapes in Jetstream Connections API model."
+    },
+    {
+        "type": "feature",
+        "category": "Kendra",
+        "description": "Amazon Kendra now supports confidence score buckets for retrieved passage results using the Retrieve API."
+    }
+]

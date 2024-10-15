@@ -13,6 +13,30 @@ declare class AppStream extends Service {
   constructor(options?: AppStream.Types.ClientConfiguration)
   config: Config & AppStream.Types.ClientConfiguration;
   /**
+   * Associates the specified app block builder with the specified app block.
+   */
+  associateAppBlockBuilderAppBlock(params: AppStream.Types.AssociateAppBlockBuilderAppBlockRequest, callback?: (err: AWSError, data: AppStream.Types.AssociateAppBlockBuilderAppBlockResult) => void): Request<AppStream.Types.AssociateAppBlockBuilderAppBlockResult, AWSError>;
+  /**
+   * Associates the specified app block builder with the specified app block.
+   */
+  associateAppBlockBuilderAppBlock(callback?: (err: AWSError, data: AppStream.Types.AssociateAppBlockBuilderAppBlockResult) => void): Request<AppStream.Types.AssociateAppBlockBuilderAppBlockResult, AWSError>;
+  /**
+   * Associates the specified application with the specified fleet. This is only supported for Elastic fleets.
+   */
+  associateApplicationFleet(params: AppStream.Types.AssociateApplicationFleetRequest, callback?: (err: AWSError, data: AppStream.Types.AssociateApplicationFleetResult) => void): Request<AppStream.Types.AssociateApplicationFleetResult, AWSError>;
+  /**
+   * Associates the specified application with the specified fleet. This is only supported for Elastic fleets.
+   */
+  associateApplicationFleet(callback?: (err: AWSError, data: AppStream.Types.AssociateApplicationFleetResult) => void): Request<AppStream.Types.AssociateApplicationFleetResult, AWSError>;
+  /**
+   * Associates an application to entitle.
+   */
+  associateApplicationToEntitlement(params: AppStream.Types.AssociateApplicationToEntitlementRequest, callback?: (err: AWSError, data: AppStream.Types.AssociateApplicationToEntitlementResult) => void): Request<AppStream.Types.AssociateApplicationToEntitlementResult, AWSError>;
+  /**
+   * Associates an application to entitle.
+   */
+  associateApplicationToEntitlement(callback?: (err: AWSError, data: AppStream.Types.AssociateApplicationToEntitlementResult) => void): Request<AppStream.Types.AssociateApplicationToEntitlementResult, AWSError>;
+  /**
    * Associates the specified fleet with the specified stack.
    */
   associateFleet(params: AppStream.Types.AssociateFleetRequest, callback?: (err: AWSError, data: AppStream.Types.AssociateFleetResult) => void): Request<AppStream.Types.AssociateFleetResult, AWSError>;
@@ -45,6 +69,38 @@ declare class AppStream extends Service {
    */
   copyImage(callback?: (err: AWSError, data: AppStream.Types.CopyImageResponse) => void): Request<AppStream.Types.CopyImageResponse, AWSError>;
   /**
+   * Creates an app block. App blocks are an Amazon AppStream 2.0 resource that stores the details about the virtual hard disk in an S3 bucket. It also stores the setup script with details about how to mount the virtual hard disk. The virtual hard disk includes the application binaries and other files necessary to launch your applications. Multiple applications can be assigned to a single app block. This is only supported for Elastic fleets.
+   */
+  createAppBlock(params: AppStream.Types.CreateAppBlockRequest, callback?: (err: AWSError, data: AppStream.Types.CreateAppBlockResult) => void): Request<AppStream.Types.CreateAppBlockResult, AWSError>;
+  /**
+   * Creates an app block. App blocks are an Amazon AppStream 2.0 resource that stores the details about the virtual hard disk in an S3 bucket. It also stores the setup script with details about how to mount the virtual hard disk. The virtual hard disk includes the application binaries and other files necessary to launch your applications. Multiple applications can be assigned to a single app block. This is only supported for Elastic fleets.
+   */
+  createAppBlock(callback?: (err: AWSError, data: AppStream.Types.CreateAppBlockResult) => void): Request<AppStream.Types.CreateAppBlockResult, AWSError>;
+  /**
+   * Creates an app block builder.
+   */
+  createAppBlockBuilder(params: AppStream.Types.CreateAppBlockBuilderRequest, callback?: (err: AWSError, data: AppStream.Types.CreateAppBlockBuilderResult) => void): Request<AppStream.Types.CreateAppBlockBuilderResult, AWSError>;
+  /**
+   * Creates an app block builder.
+   */
+  createAppBlockBuilder(callback?: (err: AWSError, data: AppStream.Types.CreateAppBlockBuilderResult) => void): Request<AppStream.Types.CreateAppBlockBuilderResult, AWSError>;
+  /**
+   * Creates a URL to start a create app block builder streaming session.
+   */
+  createAppBlockBuilderStreamingURL(params: AppStream.Types.CreateAppBlockBuilderStreamingURLRequest, callback?: (err: AWSError, data: AppStream.Types.CreateAppBlockBuilderStreamingURLResult) => void): Request<AppStream.Types.CreateAppBlockBuilderStreamingURLResult, AWSError>;
+  /**
+   * Creates a URL to start a create app block builder streaming session.
+   */
+  createAppBlockBuilderStreamingURL(callback?: (err: AWSError, data: AppStream.Types.CreateAppBlockBuilderStreamingURLResult) => void): Request<AppStream.Types.CreateAppBlockBuilderStreamingURLResult, AWSError>;
+  /**
+   * Creates an application. Applications are an Amazon AppStream 2.0 resource that stores the details about how to launch applications on Elastic fleet streaming instances. An application consists of the launch details, icon, and display name. Applications are associated with an app block that contains the application binaries and other files. The applications assigned to an Elastic fleet are the applications users can launch.  This is only supported for Elastic fleets.
+   */
+  createApplication(params: AppStream.Types.CreateApplicationRequest, callback?: (err: AWSError, data: AppStream.Types.CreateApplicationResult) => void): Request<AppStream.Types.CreateApplicationResult, AWSError>;
+  /**
+   * Creates an application. Applications are an Amazon AppStream 2.0 resource that stores the details about how to launch applications on Elastic fleet streaming instances. An application consists of the launch details, icon, and display name. Applications are associated with an app block that contains the application binaries and other files. The applications assigned to an Elastic fleet are the applications users can launch.  This is only supported for Elastic fleets.
+   */
+  createApplication(callback?: (err: AWSError, data: AppStream.Types.CreateApplicationResult) => void): Request<AppStream.Types.CreateApplicationResult, AWSError>;
+  /**
    * Creates a Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
    */
   createDirectoryConfig(params: AppStream.Types.CreateDirectoryConfigRequest, callback?: (err: AWSError, data: AppStream.Types.CreateDirectoryConfigResult) => void): Request<AppStream.Types.CreateDirectoryConfigResult, AWSError>;
@@ -53,11 +109,19 @@ declare class AppStream extends Service {
    */
   createDirectoryConfig(callback?: (err: AWSError, data: AppStream.Types.CreateDirectoryConfigResult) => void): Request<AppStream.Types.CreateDirectoryConfigResult, AWSError>;
   /**
-   * Creates a fleet. A fleet consists of streaming instances that run a specified image.
+   * Creates a new entitlement. Entitlements control access to specific applications within a stack, based on user attributes. Entitlements apply to SAML 2.0 federated user identities. Amazon AppStream 2.0 user pool and streaming URL users are entitled to all applications in a stack. Entitlements don't apply to the desktop stream view application, or to applications managed by a dynamic app provider using the Dynamic Application Framework.
+   */
+  createEntitlement(params: AppStream.Types.CreateEntitlementRequest, callback?: (err: AWSError, data: AppStream.Types.CreateEntitlementResult) => void): Request<AppStream.Types.CreateEntitlementResult, AWSError>;
+  /**
+   * Creates a new entitlement. Entitlements control access to specific applications within a stack, based on user attributes. Entitlements apply to SAML 2.0 federated user identities. Amazon AppStream 2.0 user pool and streaming URL users are entitled to all applications in a stack. Entitlements don't apply to the desktop stream view application, or to applications managed by a dynamic app provider using the Dynamic Application Framework.
+   */
+  createEntitlement(callback?: (err: AWSError, data: AppStream.Types.CreateEntitlementResult) => void): Request<AppStream.Types.CreateEntitlementResult, AWSError>;
+  /**
+   * Creates a fleet. A fleet consists of streaming instances that your users access for their applications and desktops.
    */
   createFleet(params: AppStream.Types.CreateFleetRequest, callback?: (err: AWSError, data: AppStream.Types.CreateFleetResult) => void): Request<AppStream.Types.CreateFleetResult, AWSError>;
   /**
-   * Creates a fleet. A fleet consists of streaming instances that run a specified image.
+   * Creates a fleet. A fleet consists of streaming instances that your users access for their applications and desktops.
    */
   createFleet(callback?: (err: AWSError, data: AppStream.Types.CreateFleetResult) => void): Request<AppStream.Types.CreateFleetResult, AWSError>;
   /**
@@ -93,6 +157,22 @@ declare class AppStream extends Service {
    */
   createStreamingURL(callback?: (err: AWSError, data: AppStream.Types.CreateStreamingURLResult) => void): Request<AppStream.Types.CreateStreamingURLResult, AWSError>;
   /**
+   * Creates custom branding that customizes the appearance of the streaming application catalog page.
+   */
+  createThemeForStack(params: AppStream.Types.CreateThemeForStackRequest, callback?: (err: AWSError, data: AppStream.Types.CreateThemeForStackResult) => void): Request<AppStream.Types.CreateThemeForStackResult, AWSError>;
+  /**
+   * Creates custom branding that customizes the appearance of the streaming application catalog page.
+   */
+  createThemeForStack(callback?: (err: AWSError, data: AppStream.Types.CreateThemeForStackResult) => void): Request<AppStream.Types.CreateThemeForStackResult, AWSError>;
+  /**
+   * Creates a new image with the latest Windows operating system updates, driver updates, and AppStream 2.0 agent software. For more information, see the "Update an Image by Using Managed AppStream 2.0 Image Updates" section in Administer Your AppStream 2.0 Images, in the Amazon AppStream 2.0 Administration Guide.
+   */
+  createUpdatedImage(params: AppStream.Types.CreateUpdatedImageRequest, callback?: (err: AWSError, data: AppStream.Types.CreateUpdatedImageResult) => void): Request<AppStream.Types.CreateUpdatedImageResult, AWSError>;
+  /**
+   * Creates a new image with the latest Windows operating system updates, driver updates, and AppStream 2.0 agent software. For more information, see the "Update an Image by Using Managed AppStream 2.0 Image Updates" section in Administer Your AppStream 2.0 Images, in the Amazon AppStream 2.0 Administration Guide.
+   */
+  createUpdatedImage(callback?: (err: AWSError, data: AppStream.Types.CreateUpdatedImageResult) => void): Request<AppStream.Types.CreateUpdatedImageResult, AWSError>;
+  /**
    * Creates a usage report subscription. Usage reports are generated daily.
    */
   createUsageReportSubscription(params: AppStream.Types.CreateUsageReportSubscriptionRequest, callback?: (err: AWSError, data: AppStream.Types.CreateUsageReportSubscriptionResult) => void): Request<AppStream.Types.CreateUsageReportSubscriptionResult, AWSError>;
@@ -109,6 +189,30 @@ declare class AppStream extends Service {
    */
   createUser(callback?: (err: AWSError, data: AppStream.Types.CreateUserResult) => void): Request<AppStream.Types.CreateUserResult, AWSError>;
   /**
+   * Deletes an app block.
+   */
+  deleteAppBlock(params: AppStream.Types.DeleteAppBlockRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteAppBlockResult) => void): Request<AppStream.Types.DeleteAppBlockResult, AWSError>;
+  /**
+   * Deletes an app block.
+   */
+  deleteAppBlock(callback?: (err: AWSError, data: AppStream.Types.DeleteAppBlockResult) => void): Request<AppStream.Types.DeleteAppBlockResult, AWSError>;
+  /**
+   * Deletes an app block builder. An app block builder can only be deleted when it has no association with an app block.
+   */
+  deleteAppBlockBuilder(params: AppStream.Types.DeleteAppBlockBuilderRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteAppBlockBuilderResult) => void): Request<AppStream.Types.DeleteAppBlockBuilderResult, AWSError>;
+  /**
+   * Deletes an app block builder. An app block builder can only be deleted when it has no association with an app block.
+   */
+  deleteAppBlockBuilder(callback?: (err: AWSError, data: AppStream.Types.DeleteAppBlockBuilderResult) => void): Request<AppStream.Types.DeleteAppBlockBuilderResult, AWSError>;
+  /**
+   * Deletes an application.
+   */
+  deleteApplication(params: AppStream.Types.DeleteApplicationRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteApplicationResult) => void): Request<AppStream.Types.DeleteApplicationResult, AWSError>;
+  /**
+   * Deletes an application.
+   */
+  deleteApplication(callback?: (err: AWSError, data: AppStream.Types.DeleteApplicationResult) => void): Request<AppStream.Types.DeleteApplicationResult, AWSError>;
+  /**
    * Deletes the specified Directory Config object from AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
    */
   deleteDirectoryConfig(params: AppStream.Types.DeleteDirectoryConfigRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteDirectoryConfigResult) => void): Request<AppStream.Types.DeleteDirectoryConfigResult, AWSError>;
@@ -116,6 +220,14 @@ declare class AppStream extends Service {
    * Deletes the specified Directory Config object from AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
    */
   deleteDirectoryConfig(callback?: (err: AWSError, data: AppStream.Types.DeleteDirectoryConfigResult) => void): Request<AppStream.Types.DeleteDirectoryConfigResult, AWSError>;
+  /**
+   * Deletes the specified entitlement.
+   */
+  deleteEntitlement(params: AppStream.Types.DeleteEntitlementRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteEntitlementResult) => void): Request<AppStream.Types.DeleteEntitlementResult, AWSError>;
+  /**
+   * Deletes the specified entitlement.
+   */
+  deleteEntitlement(callback?: (err: AWSError, data: AppStream.Types.DeleteEntitlementResult) => void): Request<AppStream.Types.DeleteEntitlementResult, AWSError>;
   /**
    * Deletes the specified fleet.
    */
@@ -157,6 +269,14 @@ declare class AppStream extends Service {
    */
   deleteStack(callback?: (err: AWSError, data: AppStream.Types.DeleteStackResult) => void): Request<AppStream.Types.DeleteStackResult, AWSError>;
   /**
+   * Deletes custom branding that customizes the appearance of the streaming application catalog page.
+   */
+  deleteThemeForStack(params: AppStream.Types.DeleteThemeForStackRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteThemeForStackResult) => void): Request<AppStream.Types.DeleteThemeForStackResult, AWSError>;
+  /**
+   * Deletes custom branding that customizes the appearance of the streaming application catalog page.
+   */
+  deleteThemeForStack(callback?: (err: AWSError, data: AppStream.Types.DeleteThemeForStackResult) => void): Request<AppStream.Types.DeleteThemeForStackResult, AWSError>;
+  /**
    * Disables usage report generation.
    */
   deleteUsageReportSubscription(params: AppStream.Types.DeleteUsageReportSubscriptionRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteUsageReportSubscriptionResult) => void): Request<AppStream.Types.DeleteUsageReportSubscriptionResult, AWSError>;
@@ -173,6 +293,46 @@ declare class AppStream extends Service {
    */
   deleteUser(callback?: (err: AWSError, data: AppStream.Types.DeleteUserResult) => void): Request<AppStream.Types.DeleteUserResult, AWSError>;
   /**
+   * Retrieves a list that describes one or more app block builder associations.
+   */
+  describeAppBlockBuilderAppBlockAssociations(params: AppStream.Types.DescribeAppBlockBuilderAppBlockAssociationsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeAppBlockBuilderAppBlockAssociationsResult) => void): Request<AppStream.Types.DescribeAppBlockBuilderAppBlockAssociationsResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more app block builder associations.
+   */
+  describeAppBlockBuilderAppBlockAssociations(callback?: (err: AWSError, data: AppStream.Types.DescribeAppBlockBuilderAppBlockAssociationsResult) => void): Request<AppStream.Types.DescribeAppBlockBuilderAppBlockAssociationsResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more app block builders.
+   */
+  describeAppBlockBuilders(params: AppStream.Types.DescribeAppBlockBuildersRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeAppBlockBuildersResult) => void): Request<AppStream.Types.DescribeAppBlockBuildersResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more app block builders.
+   */
+  describeAppBlockBuilders(callback?: (err: AWSError, data: AppStream.Types.DescribeAppBlockBuildersResult) => void): Request<AppStream.Types.DescribeAppBlockBuildersResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more app blocks.
+   */
+  describeAppBlocks(params: AppStream.Types.DescribeAppBlocksRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeAppBlocksResult) => void): Request<AppStream.Types.DescribeAppBlocksResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more app blocks.
+   */
+  describeAppBlocks(callback?: (err: AWSError, data: AppStream.Types.DescribeAppBlocksResult) => void): Request<AppStream.Types.DescribeAppBlocksResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more application fleet associations. Either ApplicationArn or FleetName must be specified.
+   */
+  describeApplicationFleetAssociations(params: AppStream.Types.DescribeApplicationFleetAssociationsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeApplicationFleetAssociationsResult) => void): Request<AppStream.Types.DescribeApplicationFleetAssociationsResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more application fleet associations. Either ApplicationArn or FleetName must be specified.
+   */
+  describeApplicationFleetAssociations(callback?: (err: AWSError, data: AppStream.Types.DescribeApplicationFleetAssociationsResult) => void): Request<AppStream.Types.DescribeApplicationFleetAssociationsResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more applications.
+   */
+  describeApplications(params: AppStream.Types.DescribeApplicationsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeApplicationsResult) => void): Request<AppStream.Types.DescribeApplicationsResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more applications.
+   */
+  describeApplications(callback?: (err: AWSError, data: AppStream.Types.DescribeApplicationsResult) => void): Request<AppStream.Types.DescribeApplicationsResult, AWSError>;
+  /**
    * Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the configuration information required to join fleets and image builders to Microsoft Active Directory domains.  Although the response syntax in this topic includes the account password, this password is not returned in the actual response.
    */
   describeDirectoryConfigs(params: AppStream.Types.DescribeDirectoryConfigsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeDirectoryConfigsResult) => void): Request<AppStream.Types.DescribeDirectoryConfigsResult, AWSError>;
@@ -180,6 +340,14 @@ declare class AppStream extends Service {
    * Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the configuration information required to join fleets and image builders to Microsoft Active Directory domains.  Although the response syntax in this topic includes the account password, this password is not returned in the actual response.
    */
   describeDirectoryConfigs(callback?: (err: AWSError, data: AppStream.Types.DescribeDirectoryConfigsResult) => void): Request<AppStream.Types.DescribeDirectoryConfigsResult, AWSError>;
+  /**
+   * Retrieves a list that describes one of more entitlements.
+   */
+  describeEntitlements(params: AppStream.Types.DescribeEntitlementsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeEntitlementsResult) => void): Request<AppStream.Types.DescribeEntitlementsResult, AWSError>;
+  /**
+   * Retrieves a list that describes one of more entitlements.
+   */
+  describeEntitlements(callback?: (err: AWSError, data: AppStream.Types.DescribeEntitlementsResult) => void): Request<AppStream.Types.DescribeEntitlementsResult, AWSError>;
   /**
    * Retrieves a list that describes one or more specified fleets, if the fleet names are provided. Otherwise, all fleets in the account are described.
    */
@@ -229,6 +397,14 @@ declare class AppStream extends Service {
    */
   describeStacks(callback?: (err: AWSError, data: AppStream.Types.DescribeStacksResult) => void): Request<AppStream.Types.DescribeStacksResult, AWSError>;
   /**
+   * Retrieves a list that describes the theme for a specified stack. A theme is custom branding that customizes the appearance of the streaming application catalog page.
+   */
+  describeThemeForStack(params: AppStream.Types.DescribeThemeForStackRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeThemeForStackResult) => void): Request<AppStream.Types.DescribeThemeForStackResult, AWSError>;
+  /**
+   * Retrieves a list that describes the theme for a specified stack. A theme is custom branding that customizes the appearance of the streaming application catalog page.
+   */
+  describeThemeForStack(callback?: (err: AWSError, data: AppStream.Types.DescribeThemeForStackResult) => void): Request<AppStream.Types.DescribeThemeForStackResult, AWSError>;
+  /**
    * Retrieves a list that describes one or more usage report subscriptions.
    */
   describeUsageReportSubscriptions(params: AppStream.Types.DescribeUsageReportSubscriptionsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeUsageReportSubscriptionsResult) => void): Request<AppStream.Types.DescribeUsageReportSubscriptionsResult, AWSError>;
@@ -260,6 +436,30 @@ declare class AppStream extends Service {
    * Disables the specified user in the user pool. Users can't sign in to AppStream 2.0 until they are re-enabled. This action does not delete the user. 
    */
   disableUser(callback?: (err: AWSError, data: AppStream.Types.DisableUserResult) => void): Request<AppStream.Types.DisableUserResult, AWSError>;
+  /**
+   * Disassociates a specified app block builder from a specified app block.
+   */
+  disassociateAppBlockBuilderAppBlock(params: AppStream.Types.DisassociateAppBlockBuilderAppBlockRequest, callback?: (err: AWSError, data: AppStream.Types.DisassociateAppBlockBuilderAppBlockResult) => void): Request<AppStream.Types.DisassociateAppBlockBuilderAppBlockResult, AWSError>;
+  /**
+   * Disassociates a specified app block builder from a specified app block.
+   */
+  disassociateAppBlockBuilderAppBlock(callback?: (err: AWSError, data: AppStream.Types.DisassociateAppBlockBuilderAppBlockResult) => void): Request<AppStream.Types.DisassociateAppBlockBuilderAppBlockResult, AWSError>;
+  /**
+   * Disassociates the specified application from the fleet.
+   */
+  disassociateApplicationFleet(params: AppStream.Types.DisassociateApplicationFleetRequest, callback?: (err: AWSError, data: AppStream.Types.DisassociateApplicationFleetResult) => void): Request<AppStream.Types.DisassociateApplicationFleetResult, AWSError>;
+  /**
+   * Disassociates the specified application from the fleet.
+   */
+  disassociateApplicationFleet(callback?: (err: AWSError, data: AppStream.Types.DisassociateApplicationFleetResult) => void): Request<AppStream.Types.DisassociateApplicationFleetResult, AWSError>;
+  /**
+   * Deletes the specified application from the specified entitlement.
+   */
+  disassociateApplicationFromEntitlement(params: AppStream.Types.DisassociateApplicationFromEntitlementRequest, callback?: (err: AWSError, data: AppStream.Types.DisassociateApplicationFromEntitlementResult) => void): Request<AppStream.Types.DisassociateApplicationFromEntitlementResult, AWSError>;
+  /**
+   * Deletes the specified application from the specified entitlement.
+   */
+  disassociateApplicationFromEntitlement(callback?: (err: AWSError, data: AppStream.Types.DisassociateApplicationFromEntitlementResult) => void): Request<AppStream.Types.DisassociateApplicationFromEntitlementResult, AWSError>;
   /**
    * Disassociates the specified fleet from the specified stack.
    */
@@ -301,6 +501,14 @@ declare class AppStream extends Service {
    */
   listAssociatedStacks(callback?: (err: AWSError, data: AppStream.Types.ListAssociatedStacksResult) => void): Request<AppStream.Types.ListAssociatedStacksResult, AWSError>;
   /**
+   * Retrieves a list of entitled applications.
+   */
+  listEntitledApplications(params: AppStream.Types.ListEntitledApplicationsRequest, callback?: (err: AWSError, data: AppStream.Types.ListEntitledApplicationsResult) => void): Request<AppStream.Types.ListEntitledApplicationsResult, AWSError>;
+  /**
+   * Retrieves a list of entitled applications.
+   */
+  listEntitledApplications(callback?: (err: AWSError, data: AppStream.Types.ListEntitledApplicationsResult) => void): Request<AppStream.Types.ListEntitledApplicationsResult, AWSError>;
+  /**
    * Retrieves a list of all tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Administration Guide.
    */
   listTagsForResource(params: AppStream.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: AppStream.Types.ListTagsForResourceResponse) => void): Request<AppStream.Types.ListTagsForResourceResponse, AWSError>;
@@ -308,6 +516,14 @@ declare class AppStream extends Service {
    * Retrieves a list of all tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Administration Guide.
    */
   listTagsForResource(callback?: (err: AWSError, data: AppStream.Types.ListTagsForResourceResponse) => void): Request<AppStream.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Starts an app block builder. An app block builder can only be started when it's associated with an app block. Starting an app block builder starts a new instance, which is equivalent to an elastic fleet instance with application builder assistance functionality.
+   */
+  startAppBlockBuilder(params: AppStream.Types.StartAppBlockBuilderRequest, callback?: (err: AWSError, data: AppStream.Types.StartAppBlockBuilderResult) => void): Request<AppStream.Types.StartAppBlockBuilderResult, AWSError>;
+  /**
+   * Starts an app block builder. An app block builder can only be started when it's associated with an app block. Starting an app block builder starts a new instance, which is equivalent to an elastic fleet instance with application builder assistance functionality.
+   */
+  startAppBlockBuilder(callback?: (err: AWSError, data: AppStream.Types.StartAppBlockBuilderResult) => void): Request<AppStream.Types.StartAppBlockBuilderResult, AWSError>;
   /**
    * Starts the specified fleet.
    */
@@ -324,6 +540,14 @@ declare class AppStream extends Service {
    * Starts the specified image builder.
    */
   startImageBuilder(callback?: (err: AWSError, data: AppStream.Types.StartImageBuilderResult) => void): Request<AppStream.Types.StartImageBuilderResult, AWSError>;
+  /**
+   * Stops an app block builder. Stopping an app block builder terminates the instance, and the instance state is not persisted.
+   */
+  stopAppBlockBuilder(params: AppStream.Types.StopAppBlockBuilderRequest, callback?: (err: AWSError, data: AppStream.Types.StopAppBlockBuilderResult) => void): Request<AppStream.Types.StopAppBlockBuilderResult, AWSError>;
+  /**
+   * Stops an app block builder. Stopping an app block builder terminates the instance, and the instance state is not persisted.
+   */
+  stopAppBlockBuilder(callback?: (err: AWSError, data: AppStream.Types.StopAppBlockBuilderResult) => void): Request<AppStream.Types.StopAppBlockBuilderResult, AWSError>;
   /**
    * Stops the specified fleet.
    */
@@ -357,6 +581,22 @@ declare class AppStream extends Service {
    */
   untagResource(callback?: (err: AWSError, data: AppStream.Types.UntagResourceResponse) => void): Request<AppStream.Types.UntagResourceResponse, AWSError>;
   /**
+   * Updates an app block builder. If the app block builder is in the STARTING or STOPPING state, you can't update it. If the app block builder is in the RUNNING state, you can only update the DisplayName and Description. If the app block builder is in the STOPPED state, you can update any attribute except the Name.
+   */
+  updateAppBlockBuilder(params: AppStream.Types.UpdateAppBlockBuilderRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateAppBlockBuilderResult) => void): Request<AppStream.Types.UpdateAppBlockBuilderResult, AWSError>;
+  /**
+   * Updates an app block builder. If the app block builder is in the STARTING or STOPPING state, you can't update it. If the app block builder is in the RUNNING state, you can only update the DisplayName and Description. If the app block builder is in the STOPPED state, you can update any attribute except the Name.
+   */
+  updateAppBlockBuilder(callback?: (err: AWSError, data: AppStream.Types.UpdateAppBlockBuilderResult) => void): Request<AppStream.Types.UpdateAppBlockBuilderResult, AWSError>;
+  /**
+   * Updates the specified application.
+   */
+  updateApplication(params: AppStream.Types.UpdateApplicationRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateApplicationResult) => void): Request<AppStream.Types.UpdateApplicationResult, AWSError>;
+  /**
+   * Updates the specified application.
+   */
+  updateApplication(callback?: (err: AWSError, data: AppStream.Types.UpdateApplicationResult) => void): Request<AppStream.Types.UpdateApplicationResult, AWSError>;
+  /**
    * Updates the specified Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
    */
   updateDirectoryConfig(params: AppStream.Types.UpdateDirectoryConfigRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateDirectoryConfigResult) => void): Request<AppStream.Types.UpdateDirectoryConfigResult, AWSError>;
@@ -365,11 +605,19 @@ declare class AppStream extends Service {
    */
   updateDirectoryConfig(callback?: (err: AWSError, data: AppStream.Types.UpdateDirectoryConfigResult) => void): Request<AppStream.Types.UpdateDirectoryConfigResult, AWSError>;
   /**
-   * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the DisplayName, ComputeCapacity, ImageARN, ImageName, IdleDisconnectTimeoutInSeconds, and DisconnectTimeoutInSeconds attributes. If the fleet is in the STARTING or STOPPING state, you can't update it.
+   * Updates the specified entitlement.
+   */
+  updateEntitlement(params: AppStream.Types.UpdateEntitlementRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateEntitlementResult) => void): Request<AppStream.Types.UpdateEntitlementResult, AWSError>;
+  /**
+   * Updates the specified entitlement.
+   */
+  updateEntitlement(callback?: (err: AWSError, data: AppStream.Types.UpdateEntitlementResult) => void): Request<AppStream.Types.UpdateEntitlementResult, AWSError>;
+  /**
+   * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the following based on the fleet type:   Always-On and On-Demand fleet types You can update the DisplayName, ComputeCapacity, ImageARN, ImageName, IdleDisconnectTimeoutInSeconds, and DisconnectTimeoutInSeconds attributes.   Elastic fleet type You can update the DisplayName, IdleDisconnectTimeoutInSeconds, DisconnectTimeoutInSeconds, MaxConcurrentSessions, SessionScriptS3Location and UsbDeviceFilterStrings attributes.   If the fleet is in the STARTING or STOPPED state, you can't update it.
    */
   updateFleet(params: AppStream.Types.UpdateFleetRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateFleetResult) => void): Request<AppStream.Types.UpdateFleetResult, AWSError>;
   /**
-   * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the DisplayName, ComputeCapacity, ImageARN, ImageName, IdleDisconnectTimeoutInSeconds, and DisconnectTimeoutInSeconds attributes. If the fleet is in the STARTING or STOPPING state, you can't update it.
+   * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the following based on the fleet type:   Always-On and On-Demand fleet types You can update the DisplayName, ComputeCapacity, ImageARN, ImageName, IdleDisconnectTimeoutInSeconds, and DisconnectTimeoutInSeconds attributes.   Elastic fleet type You can update the DisplayName, IdleDisconnectTimeoutInSeconds, DisconnectTimeoutInSeconds, MaxConcurrentSessions, SessionScriptS3Location and UsbDeviceFilterStrings attributes.   If the fleet is in the STARTING or STOPPED state, you can't update it.
    */
   updateFleet(callback?: (err: AWSError, data: AppStream.Types.UpdateFleetResult) => void): Request<AppStream.Types.UpdateFleetResult, AWSError>;
   /**
@@ -388,6 +636,14 @@ declare class AppStream extends Service {
    * Updates the specified fields for the specified stack.
    */
   updateStack(callback?: (err: AWSError, data: AppStream.Types.UpdateStackResult) => void): Request<AppStream.Types.UpdateStackResult, AWSError>;
+  /**
+   * Updates custom branding that customizes the appearance of the streaming application catalog page.
+   */
+  updateThemeForStack(params: AppStream.Types.UpdateThemeForStackRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateThemeForStackResult) => void): Request<AppStream.Types.UpdateThemeForStackResult, AWSError>;
+  /**
+   * Updates custom branding that customizes the appearance of the streaming application catalog page.
+   */
+  updateThemeForStack(callback?: (err: AWSError, data: AppStream.Types.UpdateThemeForStackResult) => void): Request<AppStream.Types.UpdateThemeForStackResult, AWSError>;
   /**
    * Waits for the fleetStarted state by periodically calling the underlying AppStream.describeFleetsoperation every 30 seconds (at most 40 times).
    */
@@ -420,7 +676,141 @@ declare namespace AppStream {
   export type AccessEndpointType = "STREAMING"|string;
   export type AccountName = string;
   export type AccountPassword = string;
-  export type Action = "CLIPBOARD_COPY_FROM_LOCAL_DEVICE"|"CLIPBOARD_COPY_TO_LOCAL_DEVICE"|"FILE_UPLOAD"|"FILE_DOWNLOAD"|"PRINTING_TO_LOCAL_DEVICE"|string;
+  export type Action = "CLIPBOARD_COPY_FROM_LOCAL_DEVICE"|"CLIPBOARD_COPY_TO_LOCAL_DEVICE"|"FILE_UPLOAD"|"FILE_DOWNLOAD"|"PRINTING_TO_LOCAL_DEVICE"|"DOMAIN_PASSWORD_SIGNIN"|"DOMAIN_SMART_CARD_SIGNIN"|string;
+  export interface AppBlock {
+    /**
+     * The name of the app block.
+     */
+    Name: String;
+    /**
+     * The ARN of the app block.
+     */
+    Arn: Arn;
+    /**
+     * The description of the app block.
+     */
+    Description?: String;
+    /**
+     * The display name of the app block.
+     */
+    DisplayName?: String;
+    /**
+     * The source S3 location of the app block.
+     */
+    SourceS3Location?: S3Location;
+    /**
+     * The setup script details of the app block. This only applies to app blocks with PackagingType CUSTOM.
+     */
+    SetupScriptDetails?: ScriptDetails;
+    /**
+     * The created time of the app block.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The post setup script details of the app block. This only applies to app blocks with PackagingType APPSTREAM2.
+     */
+    PostSetupScriptDetails?: ScriptDetails;
+    /**
+     * The packaging type of the app block.
+     */
+    PackagingType?: PackagingType;
+    /**
+     * The state of the app block. An app block with AppStream 2.0 packaging will be in the INACTIVE state if no application package (VHD) is assigned to it. After an application package (VHD) is created by an app block builder for an app block, it becomes ACTIVE.  Custom app blocks are always in the ACTIVE state and no action is required to use them.
+     */
+    State?: AppBlockState;
+    /**
+     * The errors of the app block.
+     */
+    AppBlockErrors?: ErrorDetailsList;
+  }
+  export interface AppBlockBuilder {
+    /**
+     * The ARN of the app block builder.
+     */
+    Arn: Arn;
+    /**
+     * The name of the app block builder.
+     */
+    Name: String;
+    /**
+     * The display name of the app block builder.
+     */
+    DisplayName?: String;
+    /**
+     * The description of the app block builder.
+     */
+    Description?: String;
+    /**
+     * The platform of the app block builder.  WINDOWS_SERVER_2019 is the only valid value.
+     */
+    Platform: AppBlockBuilderPlatformType;
+    /**
+     * The instance type of the app block builder.
+     */
+    InstanceType: String;
+    /**
+     * Indicates whether default internet access is enabled for the app block builder.
+     */
+    EnableDefaultInternetAccess?: BooleanObject;
+    /**
+     * The ARN of the IAM role that is applied to the app block builder.
+     */
+    IamRoleArn?: Arn;
+    /**
+     * The VPC configuration for the app block builder.
+     */
+    VpcConfig: VpcConfig;
+    /**
+     * The state of the app block builder.
+     */
+    State: AppBlockBuilderState;
+    /**
+     * The creation time of the app block builder.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The app block builder errors.
+     */
+    AppBlockBuilderErrors?: ResourceErrors;
+    /**
+     * The state change reason.
+     */
+    StateChangeReason?: AppBlockBuilderStateChangeReason;
+    /**
+     * The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the app block builder only through the specified endpoints.
+     */
+    AccessEndpoints?: AccessEndpointList;
+  }
+  export interface AppBlockBuilderAppBlockAssociation {
+    /**
+     * The ARN of the app block.
+     */
+    AppBlockArn: Arn;
+    /**
+     * The name of the app block builder.
+     */
+    AppBlockBuilderName: Name;
+  }
+  export type AppBlockBuilderAppBlockAssociationsList = AppBlockBuilderAppBlockAssociation[];
+  export type AppBlockBuilderAttribute = "IAM_ROLE_ARN"|"ACCESS_ENDPOINTS"|"VPC_CONFIGURATION_SECURITY_GROUP_IDS"|string;
+  export type AppBlockBuilderAttributes = AppBlockBuilderAttribute[];
+  export type AppBlockBuilderList = AppBlockBuilder[];
+  export type AppBlockBuilderPlatformType = "WINDOWS_SERVER_2019"|string;
+  export type AppBlockBuilderState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|string;
+  export interface AppBlockBuilderStateChangeReason {
+    /**
+     * The state change reason code.
+     */
+    Code?: AppBlockBuilderStateChangeReasonCode;
+    /**
+     * The state change reason message.
+     */
+    Message?: String;
+  }
+  export type AppBlockBuilderStateChangeReasonCode = "INTERNAL_ERROR"|string;
+  export type AppBlockState = "INACTIVE"|"ACTIVE"|string;
+  export type AppBlocks = AppBlock[];
+  export type AppVisibility = "ALL"|"ASSOCIATED"|string;
   export interface Application {
     /**
      * The name of the application.
@@ -450,7 +840,52 @@ declare namespace AppStream {
      * Additional attributes that describe the application.
      */
     Metadata?: Metadata;
+    /**
+     * The working directory for the application.
+     */
+    WorkingDirectory?: String;
+    /**
+     * The description of the application.
+     */
+    Description?: String;
+    /**
+     * The ARN of the application.
+     */
+    Arn?: Arn;
+    /**
+     * The app block ARN of the application.
+     */
+    AppBlockArn?: Arn;
+    /**
+     * The S3 location of the application icon.
+     */
+    IconS3Location?: S3Location;
+    /**
+     * The platforms on which the application can run.
+     */
+    Platforms?: Platforms;
+    /**
+     * The instance families for the application.
+     */
+    InstanceFamilies?: StringList;
+    /**
+     * The time at which the application was created within the app block.
+     */
+    CreatedTime?: Timestamp;
   }
+  export type ApplicationAttribute = "LAUNCH_PARAMETERS"|"WORKING_DIRECTORY"|string;
+  export type ApplicationAttributes = ApplicationAttribute[];
+  export interface ApplicationFleetAssociation {
+    /**
+     * The name of the fleet associated with the application.
+     */
+    FleetName: String;
+    /**
+     * The ARN of the application associated with the fleet.
+     */
+    ApplicationArn: Arn;
+  }
+  export type ApplicationFleetAssociationList = ApplicationFleetAssociation[];
   export interface ApplicationSettings {
     /**
      * Enables or disables persistent application settings for users during their streaming sessions. 
@@ -479,6 +914,54 @@ declare namespace AppStream {
   export type AppstreamAgentVersion = string;
   export type Arn = string;
   export type ArnList = Arn[];
+  export interface AssociateAppBlockBuilderAppBlockRequest {
+    /**
+     * The ARN of the app block.
+     */
+    AppBlockArn: Arn;
+    /**
+     * The name of the app block builder.
+     */
+    AppBlockBuilderName: Name;
+  }
+  export interface AssociateAppBlockBuilderAppBlockResult {
+    /**
+     * The list of app block builders associated with app blocks.
+     */
+    AppBlockBuilderAppBlockAssociation?: AppBlockBuilderAppBlockAssociation;
+  }
+  export interface AssociateApplicationFleetRequest {
+    /**
+     * The name of the fleet.
+     */
+    FleetName: Name;
+    /**
+     * The ARN of the application.
+     */
+    ApplicationArn: Arn;
+  }
+  export interface AssociateApplicationFleetResult {
+    /**
+     * If fleet name is specified, this returns the list of applications that are associated to it. If application ARN is specified, this returns the list of fleets to which it is associated.
+     */
+    ApplicationFleetAssociation?: ApplicationFleetAssociation;
+  }
+  export interface AssociateApplicationToEntitlementRequest {
+    /**
+     * The name of the stack.
+     */
+    StackName: Name;
+    /**
+     * The name of the entitlement.
+     */
+    EntitlementName: Name;
+    /**
+     * The identifier of the application.
+     */
+    ApplicationIdentifier: String;
+  }
+  export interface AssociateApplicationToEntitlementResult {
+  }
   export interface AssociateFleetRequest {
     /**
      * The name of the fleet. 
@@ -491,7 +974,7 @@ declare namespace AppStream {
   }
   export interface AssociateFleetResult {
   }
-  export type AuthenticationType = "API"|"SAML"|"USERPOOL"|string;
+  export type AuthenticationType = "API"|"SAML"|"USERPOOL"|"AWS_AD"|string;
   export type AwsAccountId = string;
   export type AwsAccountIdList = AwsAccountId[];
   export interface BatchAssociateUserStackRequest {
@@ -520,11 +1003,26 @@ declare namespace AppStream {
   }
   export type Boolean = boolean;
   export type BooleanObject = boolean;
+  export interface CertificateBasedAuthProperties {
+    /**
+     * The status of the certificate-based authentication properties.
+     */
+    Status?: CertificateBasedAuthStatus;
+    /**
+     * The ARN of the AWS Certificate Manager Private CA resource.
+     */
+    CertificateAuthorityArn?: Arn;
+  }
+  export type CertificateBasedAuthStatus = "DISABLED"|"ENABLED"|"ENABLED_NO_DIRECTORY_LOGIN_FALLBACK"|string;
   export interface ComputeCapacity {
     /**
      * The desired number of streaming instances.
      */
-    DesiredInstances: Integer;
+    DesiredInstances?: Integer;
+    /**
+     * The desired number of user sessions for a multi-session fleet. This is not allowed for single-session fleets. When you create a fleet, you must set either the DesiredSessions or DesiredInstances attribute, based on the type of fleet you create. You can’t define both attributes or leave both attributes blank.
+     */
+    DesiredSessions?: Integer;
   }
   export interface ComputeCapacityStatus {
     /**
@@ -543,6 +1041,22 @@ declare namespace AppStream {
      * The number of currently available instances that can be used to stream sessions.
      */
     Available?: Integer;
+    /**
+     * The total number of sessions slots that are either running or pending. This represents the total number of concurrent streaming sessions your fleet can support in a steady state. DesiredUserSessionCapacity = ActualUserSessionCapacity + PendingUserSessionCapacity This only applies to multi-session fleets.
+     */
+    DesiredUserSessions?: Integer;
+    /**
+     * The number of idle session slots currently available for user sessions. AvailableUserSessionCapacity = ActualUserSessionCapacity - ActiveUserSessions This only applies to multi-session fleets.
+     */
+    AvailableUserSessions?: Integer;
+    /**
+     * The number of user sessions currently being used for streaming sessions. This only applies to multi-session fleets.
+     */
+    ActiveUserSessions?: Integer;
+    /**
+     * The total number of session slots that are available for streaming or are currently streaming. ActualUserSessionCapacity = AvailableUserSessionCapacity + ActiveUserSessions This only applies to multi-session fleets.
+     */
+    ActualUserSessions?: Integer;
   }
   export interface CopyImageRequest {
     /**
@@ -568,6 +1082,160 @@ declare namespace AppStream {
      */
     DestinationImageName?: Name;
   }
+  export interface CreateAppBlockBuilderRequest {
+    /**
+     * The unique name for the app block builder.
+     */
+    Name: Name;
+    /**
+     * The description of the app block builder.
+     */
+    Description?: Description;
+    /**
+     * The display name of the app block builder.
+     */
+    DisplayName?: DisplayName;
+    /**
+     * The tags to associate with the app block builder. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=.  If you do not specify a value, the value is set to an empty string. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters:  _ . : / = + \ - @ For more information, see Tagging Your Resources in the Amazon AppStream 2.0 Administration Guide.
+     */
+    Tags?: Tags;
+    /**
+     * The platform of the app block builder.  WINDOWS_SERVER_2019 is the only valid value.
+     */
+    Platform: AppBlockBuilderPlatformType;
+    /**
+     * The instance type to use when launching the app block builder. The following instance types are available:   stream.standard.small   stream.standard.medium   stream.standard.large   stream.standard.xlarge   stream.standard.2xlarge  
+     */
+    InstanceType: String;
+    /**
+     * The VPC configuration for the app block builder. App block builders require that you specify at least two subnets in different availability zones.
+     */
+    VpcConfig: VpcConfig;
+    /**
+     * Enables or disables default internet access for the app block builder.
+     */
+    EnableDefaultInternetAccess?: BooleanObject;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role to apply to the app block builder. To assume a role, the app block builder calls the AWS Security Token Service (STS) AssumeRole API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the appstream_machine_role credential profile on the instance. For more information, see Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances in the Amazon AppStream 2.0 Administration Guide.
+     */
+    IamRoleArn?: Arn;
+    /**
+     * The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the app block builder only through the specified endpoints.
+     */
+    AccessEndpoints?: AccessEndpointList;
+  }
+  export interface CreateAppBlockBuilderResult {
+    AppBlockBuilder?: AppBlockBuilder;
+  }
+  export interface CreateAppBlockBuilderStreamingURLRequest {
+    /**
+     * The name of the app block builder.
+     */
+    AppBlockBuilderName: Name;
+    /**
+     * The time that the streaming URL will be valid, in seconds. Specify a value between 1 and 604800 seconds. The default is 3600 seconds.
+     */
+    Validity?: Long;
+  }
+  export interface CreateAppBlockBuilderStreamingURLResult {
+    /**
+     * The URL to start the streaming session.
+     */
+    StreamingURL?: String;
+    /**
+     * The elapsed time, in seconds after the Unix epoch, when this URL expires.
+     */
+    Expires?: Timestamp;
+  }
+  export interface CreateAppBlockRequest {
+    /**
+     * The name of the app block.
+     */
+    Name: Name;
+    /**
+     * The description of the app block.
+     */
+    Description?: Description;
+    /**
+     * The display name of the app block. This is not displayed to the user.
+     */
+    DisplayName?: DisplayName;
+    /**
+     * The source S3 location of the app block.
+     */
+    SourceS3Location: S3Location;
+    /**
+     * The setup script details of the app block. This must be provided for the CUSTOM PackagingType.
+     */
+    SetupScriptDetails?: ScriptDetails;
+    /**
+     * The tags assigned to the app block.
+     */
+    Tags?: Tags;
+    /**
+     * The post setup script details of the app block. This can only be provided for the APPSTREAM2 PackagingType.
+     */
+    PostSetupScriptDetails?: ScriptDetails;
+    /**
+     * The packaging type of the app block.
+     */
+    PackagingType?: PackagingType;
+  }
+  export interface CreateAppBlockResult {
+    /**
+     * The app block.
+     */
+    AppBlock?: AppBlock;
+  }
+  export interface CreateApplicationRequest {
+    /**
+     * The name of the application. This name is visible to users when display name is not specified.
+     */
+    Name: Name;
+    /**
+     * The display name of the application. This name is visible to users in the application catalog.
+     */
+    DisplayName?: DisplayName;
+    /**
+     * The description of the application.
+     */
+    Description?: Description;
+    /**
+     * The location in S3 of the application icon.
+     */
+    IconS3Location: S3Location;
+    /**
+     * The launch path of the application.
+     */
+    LaunchPath: String;
+    /**
+     * The working directory of the application.
+     */
+    WorkingDirectory?: String;
+    /**
+     * The launch parameters of the application.
+     */
+    LaunchParameters?: String;
+    /**
+     * The platforms the application supports. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for Elastic fleets.
+     */
+    Platforms: Platforms;
+    /**
+     * The instance families the application supports. Valid values are GENERAL_PURPOSE and GRAPHICS_G4.
+     */
+    InstanceFamilies: StringList;
+    /**
+     * The app block ARN to which the application should be associated
+     */
+    AppBlockArn: Arn;
+    /**
+     * The tags assigned to the application.
+     */
+    Tags?: Tags;
+  }
+  export interface CreateApplicationResult {
+    Application?: Application;
+  }
   export interface CreateDirectoryConfigRequest {
     /**
      * The fully qualified name of the directory (for example, corp.example.com).
@@ -581,12 +1249,44 @@ declare namespace AppStream {
      * The credentials for the service account used by the fleet or image builder to connect to the directory.
      */
     ServiceAccountCredentials?: ServiceAccountCredentials;
+    /**
+     * The certificate-based authentication properties used to authenticate SAML 2.0 Identity Provider (IdP) user identities to Active Directory domain-joined streaming instances. Fallback is turned on by default when certificate-based authentication is Enabled . Fallback allows users to log in using their AD domain password if certificate-based authentication is unsuccessful, or to unlock a desktop lock screen. Enabled_no_directory_login_fallback enables certificate-based authentication, but does not allow users to log in using their AD domain password. Users will be disconnected to re-authenticate using certificates.
+     */
+    CertificateBasedAuthProperties?: CertificateBasedAuthProperties;
   }
   export interface CreateDirectoryConfigResult {
     /**
      * Information about the directory configuration.
      */
     DirectoryConfig?: DirectoryConfig;
+  }
+  export interface CreateEntitlementRequest {
+    /**
+     * The name of the entitlement.
+     */
+    Name: Name;
+    /**
+     * The name of the stack with which the entitlement is associated.
+     */
+    StackName: Name;
+    /**
+     * The description of the entitlement.
+     */
+    Description?: Description;
+    /**
+     * Specifies whether all or selected apps are entitled.
+     */
+    AppVisibility: AppVisibility;
+    /**
+     * The attributes of the entitlement.
+     */
+    Attributes: EntitlementAttributeList;
+  }
+  export interface CreateEntitlementResult {
+    /**
+     * The entitlement.
+     */
+    Entitlement?: Entitlement;
   }
   export interface CreateFleetRequest {
     /**
@@ -596,13 +1296,13 @@ declare namespace AppStream {
     /**
      * The name of the image used to create the fleet.
      */
-    ImageName?: String;
+    ImageName?: Name;
     /**
      * The ARN of the public, private, or shared image to use.
      */
     ImageArn?: Arn;
     /**
-     * The instance type to use when launching fleet instances. The following instance types are available:   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.memory.z1d.large   stream.memory.z1d.xlarge   stream.memory.z1d.2xlarge   stream.memory.z1d.3xlarge   stream.memory.z1d.6xlarge   stream.memory.z1d.12xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics.g4dn.xlarge   stream.graphics.g4dn.2xlarge   stream.graphics.g4dn.4xlarge   stream.graphics.g4dn.8xlarge   stream.graphics.g4dn.12xlarge   stream.graphics.g4dn.16xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge  
+     * The instance type to use when launching fleet instances. The following instance types are available:   stream.standard.small   stream.standard.medium   stream.standard.large   stream.standard.xlarge   stream.standard.2xlarge   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.memory.z1d.large   stream.memory.z1d.xlarge   stream.memory.z1d.2xlarge   stream.memory.z1d.3xlarge   stream.memory.z1d.6xlarge   stream.memory.z1d.12xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics.g4dn.xlarge   stream.graphics.g4dn.2xlarge   stream.graphics.g4dn.4xlarge   stream.graphics.g4dn.8xlarge   stream.graphics.g4dn.12xlarge   stream.graphics.g4dn.16xlarge   stream.graphics.g5.xlarge   stream.graphics.g5.2xlarge   stream.graphics.g5.4xlarge   stream.graphics.g5.8xlarge   stream.graphics.g5.12xlarge   stream.graphics.g5.16xlarge   stream.graphics.g5.24xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge   The following instance types are available for Elastic fleets:   stream.standard.small   stream.standard.medium   stream.standard.large   stream.standard.xlarge   stream.standard.2xlarge  
      */
     InstanceType: String;
     /**
@@ -610,19 +1310,19 @@ declare namespace AppStream {
      */
     FleetType?: FleetType;
     /**
-     * The desired capacity for the fleet.
+     * The desired capacity for the fleet. This is not allowed for Elastic fleets. For Elastic fleets, specify MaxConcurrentSessions instead.
      */
-    ComputeCapacity: ComputeCapacity;
+    ComputeCapacity?: ComputeCapacity;
     /**
-     * The VPC configuration for the fleet.
+     * The VPC configuration for the fleet. This is required for Elastic fleets, but not required for other fleet types. Elastic fleets require that you specify at least two subnets in different availability zones.
      */
     VpcConfig?: VpcConfig;
     /**
-     * The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance. Specify a value between 600 and 360000.
+     * The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance. Specify a value between 600 and 432000.
      */
     MaxUserDurationInSeconds?: Integer;
     /**
-     * The amount of time that a streaming session remains active after users disconnect. If users try to reconnect to the streaming session after a disconnection or network interruption within this time interval, they are connected to their previous session. Otherwise, they are connected to a new session with a new streaming instance.  Specify a value between 60 and 360000.
+     * The amount of time that a streaming session remains active after users disconnect. If users try to reconnect to the streaming session after a disconnection or network interruption within this time interval, they are connected to their previous session. Otherwise, they are connected to a new session with a new streaming instance.  Specify a value between 60 and 36000.
      */
     DisconnectTimeoutInSeconds?: Integer;
     /**
@@ -638,7 +1338,7 @@ declare namespace AppStream {
      */
     EnableDefaultInternetAccess?: BooleanObject;
     /**
-     * The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. 
+     * The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. This is not allowed for Elastic fleets. 
      */
     DomainJoinInfo?: DomainJoinInfo;
     /**
@@ -646,7 +1346,7 @@ declare namespace AppStream {
      */
     Tags?: Tags;
     /**
-     * The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the DisconnectTimeoutInSeconds time interval begins. Users are notified before they are disconnected due to inactivity. If they try to reconnect to the streaming session before the time interval specified in DisconnectTimeoutInSeconds elapses, they are connected to their previous session. Users are considered idle when they stop providing keyboard or mouse input during their streaming session. File uploads and downloads, audio in, audio out, and pixels changing do not qualify as user activity. If users continue to be idle after the time interval in IdleDisconnectTimeoutInSeconds elapses, they are disconnected. To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 3600. The default value is 0.  If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity.  
+     * The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the DisconnectTimeoutInSeconds time interval begins. Users are notified before they are disconnected due to inactivity. If they try to reconnect to the streaming session before the time interval specified in DisconnectTimeoutInSeconds elapses, they are connected to their previous session. Users are considered idle when they stop providing keyboard or mouse input during their streaming session. File uploads and downloads, audio in, audio out, and pixels changing do not qualify as user activity. If users continue to be idle after the time interval in IdleDisconnectTimeoutInSeconds elapses, they are disconnected. To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 36000. The default value is 0.  If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity.  
      */
     IdleDisconnectTimeoutInSeconds?: Integer;
     /**
@@ -657,6 +1357,26 @@ declare namespace AppStream {
      * The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When APP is specified, only the windows of applications opened by users display. When DESKTOP is specified, the standard desktop that is provided by the operating system displays. The default value is APP.
      */
     StreamView?: StreamView;
+    /**
+     * The fleet platform. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for Elastic fleets. 
+     */
+    Platform?: PlatformType;
+    /**
+     * The maximum concurrent sessions of the Elastic fleet. This is required for Elastic fleets, and not allowed for other fleet types.
+     */
+    MaxConcurrentSessions?: Integer;
+    /**
+     * The USB device filter strings that specify which USB devices a user can redirect to the fleet streaming session, when using the Windows native client. This is allowed but not required for Elastic fleets.
+     */
+    UsbDeviceFilterStrings?: UsbDeviceFilterStrings;
+    /**
+     * The S3 location of the session scripts configuration zip file. This only applies to Elastic fleets.
+     */
+    SessionScriptS3Location?: S3Location;
+    /**
+     * The maximum number of user sessions on an instance. This only applies to multi-session fleets.
+     */
+    MaxSessionsPerInstance?: Integer;
   }
   export interface CreateFleetResult {
     /**
@@ -678,7 +1398,7 @@ declare namespace AppStream {
      */
     ImageArn?: Arn;
     /**
-     * The instance type to use when launching the image builder. The following instance types are available:   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.memory.z1d.large   stream.memory.z1d.xlarge   stream.memory.z1d.2xlarge   stream.memory.z1d.3xlarge   stream.memory.z1d.6xlarge   stream.memory.z1d.12xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics.g4dn.xlarge   stream.graphics.g4dn.2xlarge   stream.graphics.g4dn.4xlarge   stream.graphics.g4dn.8xlarge   stream.graphics.g4dn.12xlarge   stream.graphics.g4dn.16xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge  
+     * The instance type to use when launching the image builder. The following instance types are available:   stream.standard.small   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.memory.z1d.large   stream.memory.z1d.xlarge   stream.memory.z1d.2xlarge   stream.memory.z1d.3xlarge   stream.memory.z1d.6xlarge   stream.memory.z1d.12xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics.g4dn.xlarge   stream.graphics.g4dn.2xlarge   stream.graphics.g4dn.4xlarge   stream.graphics.g4dn.8xlarge   stream.graphics.g4dn.12xlarge   stream.graphics.g4dn.16xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge  
      */
     InstanceType: String;
     /**
@@ -789,6 +1509,10 @@ declare namespace AppStream {
      * The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions. 
      */
     EmbedHostDomains?: EmbedHostDomains;
+    /**
+     * The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.
+     */
+    StreamingExperienceSettings?: StreamingExperienceSettings;
   }
   export interface CreateStackResult {
     /**
@@ -810,7 +1534,7 @@ declare namespace AppStream {
      */
     UserId: StreamingUrlUserId;
     /**
-     * The name of the application to launch after the session starts. This is the name that you specified as Name in the Image Assistant.
+     * The name of the application to launch after the session starts. This is the name that you specified as Name in the Image Assistant. If your fleet is enabled for the Desktop stream view, you can also choose to launch directly to the operating system desktop. To do so, specify Desktop.
      */
     ApplicationId?: String;
     /**
@@ -831,6 +1555,71 @@ declare namespace AppStream {
      * The elapsed time, in seconds after the Unix epoch, when this URL expires.
      */
     Expires?: Timestamp;
+  }
+  export interface CreateThemeForStackRequest {
+    /**
+     * The name of the stack for the theme.
+     */
+    StackName: Name;
+    /**
+     * The links that are displayed in the footer of the streaming application catalog page. These links are helpful resources for users, such as the organization's IT support and product marketing sites.
+     */
+    FooterLinks?: ThemeFooterLinks;
+    /**
+     * The title that is displayed at the top of the browser tab during users' application streaming sessions.
+     */
+    TitleText: ThemeTitleText;
+    /**
+     * The color theme that is applied to website links, text, and buttons. These colors are also applied as accents in the background for the streaming application catalog page.
+     */
+    ThemeStyling: ThemeStyling;
+    /**
+     * The organization logo that appears on the streaming application catalog page.
+     */
+    OrganizationLogoS3Location: S3Location;
+    /**
+     * The S3 location of the favicon. The favicon enables users to recognize their application streaming site in a browser full of tabs or bookmarks. It is displayed at the top of the browser tab for the application streaming site during users' streaming sessions.
+     */
+    FaviconS3Location: S3Location;
+  }
+  export interface CreateThemeForStackResult {
+    /**
+     *  The theme object that contains the metadata of the custom branding.
+     */
+    Theme?: Theme;
+  }
+  export interface CreateUpdatedImageRequest {
+    /**
+     * The name of the image to update.
+     */
+    existingImageName: Name;
+    /**
+     * The name of the new image. The name must be unique within the AWS account and Region.
+     */
+    newImageName: Name;
+    /**
+     * The description to display for the new image.
+     */
+    newImageDescription?: Description;
+    /**
+     * The name to display for the new image.
+     */
+    newImageDisplayName?: DisplayName;
+    /**
+     * The tags to associate with the new image. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=.  Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters:  _ . : / = + \ - @ If you do not specify a value, the value is set to an empty string. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Administration Guide.
+     */
+    newImageTags?: Tags;
+    /**
+     * Indicates whether to display the status of image update availability before AppStream 2.0 initiates the process of creating a new updated image. If this value is set to true, AppStream 2.0 displays whether image updates are available. If this value is set to false, AppStream 2.0 initiates the process of creating a new updated image without displaying whether image updates are available.
+     */
+    dryRun?: Boolean;
+  }
+  export interface CreateUpdatedImageResult {
+    image?: Image;
+    /**
+     * Indicates whether a new image can be created.
+     */
+    canUpdateImage?: Boolean;
   }
   export interface CreateUsageReportSubscriptionRequest {
   }
@@ -868,6 +1657,30 @@ declare namespace AppStream {
   }
   export interface CreateUserResult {
   }
+  export interface DeleteAppBlockBuilderRequest {
+    /**
+     * The name of the app block builder.
+     */
+    Name: Name;
+  }
+  export interface DeleteAppBlockBuilderResult {
+  }
+  export interface DeleteAppBlockRequest {
+    /**
+     * The name of the app block.
+     */
+    Name: Name;
+  }
+  export interface DeleteAppBlockResult {
+  }
+  export interface DeleteApplicationRequest {
+    /**
+     * The name of the application.
+     */
+    Name: Name;
+  }
+  export interface DeleteApplicationResult {
+  }
   export interface DeleteDirectoryConfigRequest {
     /**
      * The name of the directory configuration.
@@ -875,6 +1688,18 @@ declare namespace AppStream {
     DirectoryName: DirectoryName;
   }
   export interface DeleteDirectoryConfigResult {
+  }
+  export interface DeleteEntitlementRequest {
+    /**
+     * The name of the entitlement.
+     */
+    Name: Name;
+    /**
+     * The name of the stack with which the entitlement is associated.
+     */
+    StackName: Name;
+  }
+  export interface DeleteEntitlementResult {
   }
   export interface DeleteFleetRequest {
     /**
@@ -928,6 +1753,14 @@ declare namespace AppStream {
   }
   export interface DeleteStackResult {
   }
+  export interface DeleteThemeForStackRequest {
+    /**
+     * The name of the stack for the theme.
+     */
+    StackName: Name;
+  }
+  export interface DeleteThemeForStackResult {
+  }
   export interface DeleteUsageReportSubscriptionRequest {
   }
   export interface DeleteUsageReportSubscriptionResult {
@@ -943,6 +1776,134 @@ declare namespace AppStream {
     AuthenticationType: AuthenticationType;
   }
   export interface DeleteUserResult {
+  }
+  export interface DescribeAppBlockBuilderAppBlockAssociationsRequest {
+    /**
+     * The ARN of the app block.
+     */
+    AppBlockArn?: Arn;
+    /**
+     * The name of the app block builder.
+     */
+    AppBlockBuilderName?: Name;
+    /**
+     * The maximum size of each page of results.
+     */
+    MaxResults?: Integer;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeAppBlockBuilderAppBlockAssociationsResult {
+    /**
+     * This list of app block builders associated with app blocks.
+     */
+    AppBlockBuilderAppBlockAssociations?: AppBlockBuilderAppBlockAssociationsList;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeAppBlockBuildersRequest {
+    /**
+     * The names of the app block builders.
+     */
+    Names?: StringList;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+    /**
+     * The maximum size of each page of results. The maximum value is 25.
+     */
+    MaxResults?: Integer;
+  }
+  export interface DescribeAppBlockBuildersResult {
+    /**
+     * The list that describes one or more app block builders.
+     */
+    AppBlockBuilders?: AppBlockBuilderList;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeAppBlocksRequest {
+    /**
+     * The ARNs of the app blocks.
+     */
+    Arns?: ArnList;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+    /**
+     * The maximum size of each page of results.
+     */
+    MaxResults?: Integer;
+  }
+  export interface DescribeAppBlocksResult {
+    /**
+     * The app blocks in the list.
+     */
+    AppBlocks?: AppBlocks;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeApplicationFleetAssociationsRequest {
+    /**
+     * The name of the fleet.
+     */
+    FleetName?: Name;
+    /**
+     * The ARN of the application.
+     */
+    ApplicationArn?: Arn;
+    /**
+     * The maximum size of each page of results.
+     */
+    MaxResults?: Integer;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeApplicationFleetAssociationsResult {
+    /**
+     * The application fleet associations in the list.
+     */
+    ApplicationFleetAssociations?: ApplicationFleetAssociationList;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeApplicationsRequest {
+    /**
+     * The ARNs for the applications.
+     */
+    Arns?: ArnList;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+    /**
+     * The maximum size of each page of results.
+     */
+    MaxResults?: Integer;
+  }
+  export interface DescribeApplicationsResult {
+    /**
+     * The applications in the list.
+     */
+    Applications?: Applications;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
   }
   export interface DescribeDirectoryConfigsRequest {
     /**
@@ -965,6 +1926,34 @@ declare namespace AppStream {
     DirectoryConfigs?: DirectoryConfigList;
     /**
      * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeEntitlementsRequest {
+    /**
+     * The name of the entitlement.
+     */
+    Name?: Name;
+    /**
+     * The name of the stack with which the entitlement is associated.
+     */
+    StackName: Name;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+    /**
+     * The maximum size of each page of results.
+     */
+    MaxResults?: Integer;
+  }
+  export interface DescribeEntitlementsResult {
+    /**
+     * The entitlements.
+     */
+    Entitlements?: EntitlementList;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
      */
     NextToken?: String;
   }
@@ -1081,11 +2070,11 @@ declare namespace AppStream {
     /**
      * The name of the stack. This value is case-sensitive.
      */
-    StackName: String;
+    StackName: Name;
     /**
      * The name of the fleet. This value is case-sensitive.
      */
-    FleetName: String;
+    FleetName: Name;
     /**
      * The user identifier (ID). If you specify a user ID, you must also specify the authentication type.
      */
@@ -1102,6 +2091,10 @@ declare namespace AppStream {
      * The authentication method. Specify API for a user authenticated using a streaming URL or SAML for a SAML federated user. The default is to authenticate users using a streaming URL.
      */
     AuthenticationType?: AuthenticationType;
+    /**
+     * The identifier for the instance hosting the session.
+     */
+    InstanceId?: String;
   }
   export interface DescribeSessionsResult {
     /**
@@ -1132,6 +2125,18 @@ declare namespace AppStream {
      * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
      */
     NextToken?: String;
+  }
+  export interface DescribeThemeForStackRequest {
+    /**
+     * The name of the stack for the theme.
+     */
+    StackName: Name;
+  }
+  export interface DescribeThemeForStackResult {
+    /**
+     *  The theme object that contains the metadata of the custom branding.
+     */
+    Theme?: Theme;
   }
   export interface DescribeUsageReportSubscriptionsRequest {
     /**
@@ -1227,6 +2232,10 @@ declare namespace AppStream {
      * The time the directory configuration was created.
      */
     CreatedTime?: Timestamp;
+    /**
+     * The certificate-based authentication properties used to authenticate SAML 2.0 Identity Provider (IdP) user identities to Active Directory domain-joined streaming instances. Fallback is turned on by default when certificate-based authentication is Enabled . Fallback allows users to log in using their AD domain password if certificate-based authentication is unsuccessful, or to unlock a desktop lock screen. Enabled_no_directory_login_fallback enables certificate-based authentication, but does not allow users to log in using their AD domain password. Users will be disconnected to re-authenticate using certificates.
+     */
+    CertificateBasedAuthProperties?: CertificateBasedAuthProperties;
   }
   export type DirectoryConfigList = DirectoryConfig[];
   export type DirectoryName = string;
@@ -1242,6 +2251,46 @@ declare namespace AppStream {
     AuthenticationType: AuthenticationType;
   }
   export interface DisableUserResult {
+  }
+  export interface DisassociateAppBlockBuilderAppBlockRequest {
+    /**
+     * The ARN of the app block.
+     */
+    AppBlockArn: Arn;
+    /**
+     * The name of the app block builder.
+     */
+    AppBlockBuilderName: Name;
+  }
+  export interface DisassociateAppBlockBuilderAppBlockResult {
+  }
+  export interface DisassociateApplicationFleetRequest {
+    /**
+     * The name of the fleet.
+     */
+    FleetName: Name;
+    /**
+     * The ARN of the application.
+     */
+    ApplicationArn: Arn;
+  }
+  export interface DisassociateApplicationFleetResult {
+  }
+  export interface DisassociateApplicationFromEntitlementRequest {
+    /**
+     * The name of the stack with which the entitlement is associated.
+     */
+    StackName: Name;
+    /**
+     * The name of the entitlement.
+     */
+    EntitlementName: Name;
+    /**
+     * The identifier of the application to remove from the entitlement.
+     */
+    ApplicationIdentifier: String;
+  }
+  export interface DisassociateApplicationFromEntitlementResult {
   }
   export interface DisassociateFleetRequest {
     /**
@@ -1268,6 +2317,7 @@ declare namespace AppStream {
     OrganizationalUnitDistinguishedName?: OrganizationalUnitDistinguishedName;
   }
   export type DomainList = Domain[];
+  export type DynamicAppProvidersEnabled = "ENABLED"|"DISABLED"|string;
   export type EmbedHostDomain = string;
   export type EmbedHostDomains = EmbedHostDomain[];
   export interface EnableUserRequest {
@@ -1282,6 +2332,66 @@ declare namespace AppStream {
   }
   export interface EnableUserResult {
   }
+  export interface EntitledApplication {
+    /**
+     * The identifier of the application.
+     */
+    ApplicationIdentifier: String;
+  }
+  export type EntitledApplicationList = EntitledApplication[];
+  export interface Entitlement {
+    /**
+     * The name of the entitlement.
+     */
+    Name: Name;
+    /**
+     * The name of the stack with which the entitlement is associated.
+     */
+    StackName: Name;
+    /**
+     * The description of the entitlement.
+     */
+    Description?: Description;
+    /**
+     * Specifies whether all or selected apps are entitled.
+     */
+    AppVisibility: AppVisibility;
+    /**
+     * The attributes of the entitlement.
+     */
+    Attributes: EntitlementAttributeList;
+    /**
+     * The time when the entitlement was created.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The time when the entitlement was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+  }
+  export interface EntitlementAttribute {
+    /**
+     * A supported AWS IAM SAML PrincipalTag attribute that is matched to the associated value when a user identity federates into an Amazon AppStream 2.0 SAML application. The following are valid values:   roles   department    organization    groups    title    costCenter    userType    
+     */
+    Name: String;
+    /**
+     * A value that is matched to a supported SAML attribute name when a user identity federates into an Amazon AppStream 2.0 SAML application. 
+     */
+    Value: String;
+  }
+  export type EntitlementAttributeList = EntitlementAttribute[];
+  export type EntitlementList = Entitlement[];
+  export interface ErrorDetails {
+    /**
+     * The error code.
+     */
+    ErrorCode?: String;
+    /**
+     * The error message.
+     */
+    ErrorMessage?: String;
+  }
+  export type ErrorDetailsList = ErrorDetails[];
   export interface ExpireSessionRequest {
     /**
      * The identifier of the streaming session.
@@ -1317,7 +2427,7 @@ declare namespace AppStream {
      */
     ImageArn?: Arn;
     /**
-     * The instance type to use when launching fleet instances. The following instance types are available:   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.memory.z1d.large   stream.memory.z1d.xlarge   stream.memory.z1d.2xlarge   stream.memory.z1d.3xlarge   stream.memory.z1d.6xlarge   stream.memory.z1d.12xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics.g4dn.xlarge   stream.graphics.g4dn.2xlarge   stream.graphics.g4dn.4xlarge   stream.graphics.g4dn.8xlarge   stream.graphics.g4dn.12xlarge   stream.graphics.g4dn.16xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge  
+     * The instance type to use when launching fleet instances. The following instance types are available:   stream.standard.small   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.memory.z1d.large   stream.memory.z1d.xlarge   stream.memory.z1d.2xlarge   stream.memory.z1d.3xlarge   stream.memory.z1d.6xlarge   stream.memory.z1d.12xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics.g4dn.xlarge   stream.graphics.g4dn.2xlarge   stream.graphics.g4dn.4xlarge   stream.graphics.g4dn.8xlarge   stream.graphics.g4dn.12xlarge   stream.graphics.g4dn.16xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge  
      */
     InstanceType: String;
     /**
@@ -1333,7 +2443,7 @@ declare namespace AppStream {
      */
     MaxUserDurationInSeconds?: Integer;
     /**
-     * The amount of time that a streaming session remains active after users disconnect. If they try to reconnect to the streaming session after a disconnection or network interruption within this time interval, they are connected to their previous session. Otherwise, they are connected to a new session with a new streaming instance. Specify a value between 60 and 360000.
+     * The amount of time that a streaming session remains active after users disconnect. If they try to reconnect to the streaming session after a disconnection or network interruption within this time interval, they are connected to their previous session. Otherwise, they are connected to a new session with a new streaming instance. Specify a value between 60 and 36000.
      */
     DisconnectTimeoutInSeconds?: Integer;
     /**
@@ -1361,7 +2471,7 @@ declare namespace AppStream {
      */
     DomainJoinInfo?: DomainJoinInfo;
     /**
-     * The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the DisconnectTimeoutInSeconds time interval begins. Users are notified before they are disconnected due to inactivity. If users try to reconnect to the streaming session before the time interval specified in DisconnectTimeoutInSeconds elapses, they are connected to their previous session. Users are considered idle when they stop providing keyboard or mouse input during their streaming session. File uploads and downloads, audio in, audio out, and pixels changing do not qualify as user activity. If users continue to be idle after the time interval in IdleDisconnectTimeoutInSeconds elapses, they are disconnected. To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 3600. The default value is 0.  If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity.  
+     * The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the DisconnectTimeoutInSeconds time interval begins. Users are notified before they are disconnected due to inactivity. If users try to reconnect to the streaming session before the time interval specified in DisconnectTimeoutInSeconds elapses, they are connected to their previous session. Users are considered idle when they stop providing keyboard or mouse input during their streaming session. File uploads and downloads, audio in, audio out, and pixels changing do not qualify as user activity. If users continue to be idle after the time interval in IdleDisconnectTimeoutInSeconds elapses, they are disconnected. To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 36000. The default value is 0.  If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity.  
      */
     IdleDisconnectTimeoutInSeconds?: Integer;
     /**
@@ -1372,8 +2482,28 @@ declare namespace AppStream {
      * The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When APP is specified, only the windows of applications opened by users display. When DESKTOP is specified, the standard desktop that is provided by the operating system displays. The default value is APP.
      */
     StreamView?: StreamView;
+    /**
+     * The platform of the fleet.
+     */
+    Platform?: PlatformType;
+    /**
+     * The maximum number of concurrent sessions for the fleet.
+     */
+    MaxConcurrentSessions?: Integer;
+    /**
+     * The USB device filter strings associated with the fleet.
+     */
+    UsbDeviceFilterStrings?: UsbDeviceFilterStrings;
+    /**
+     * The S3 location of the session scripts configuration zip file. This only applies to Elastic fleets.
+     */
+    SessionScriptS3Location?: S3Location;
+    /**
+     * The maximum number of user sessions on an instance. This only applies to multi-session fleets.
+     */
+    MaxSessionsPerInstance?: Integer;
   }
-  export type FleetAttribute = "VPC_CONFIGURATION"|"VPC_CONFIGURATION_SECURITY_GROUP_IDS"|"DOMAIN_JOIN_INFO"|"IAM_ROLE_ARN"|string;
+  export type FleetAttribute = "VPC_CONFIGURATION"|"VPC_CONFIGURATION_SECURITY_GROUP_IDS"|"DOMAIN_JOIN_INFO"|"IAM_ROLE_ARN"|"USB_DEVICE_FILTER_STRINGS"|"SESSION_SCRIPT_S3_LOCATION"|"MAX_SESSIONS_PER_INSTANCE"|string;
   export type FleetAttributes = FleetAttribute[];
   export interface FleetError {
     /**
@@ -1385,11 +2515,11 @@ declare namespace AppStream {
      */
     ErrorMessage?: String;
   }
-  export type FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION"|"IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION"|"IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION"|"NETWORK_INTERFACE_LIMIT_EXCEEDED"|"INTERNAL_SERVICE_ERROR"|"IAM_SERVICE_ROLE_IS_MISSING"|"MACHINE_ROLE_IS_MISSING"|"STS_DISABLED_IN_REGION"|"SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES"|"IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION"|"SUBNET_NOT_FOUND"|"IMAGE_NOT_FOUND"|"INVALID_SUBNET_CONFIGURATION"|"SECURITY_GROUPS_NOT_FOUND"|"IGW_NOT_ATTACHED"|"IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION"|"DOMAIN_JOIN_ERROR_FILE_NOT_FOUND"|"DOMAIN_JOIN_ERROR_ACCESS_DENIED"|"DOMAIN_JOIN_ERROR_LOGON_FAILURE"|"DOMAIN_JOIN_ERROR_INVALID_PARAMETER"|"DOMAIN_JOIN_ERROR_MORE_DATA"|"DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN"|"DOMAIN_JOIN_ERROR_NOT_SUPPORTED"|"DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME"|"DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED"|"DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED"|"DOMAIN_JOIN_NERR_PASSWORD_EXPIRED"|"DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"|string;
+  export type FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION"|"IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION"|"IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION"|"NETWORK_INTERFACE_LIMIT_EXCEEDED"|"INTERNAL_SERVICE_ERROR"|"IAM_SERVICE_ROLE_IS_MISSING"|"MACHINE_ROLE_IS_MISSING"|"STS_DISABLED_IN_REGION"|"SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES"|"IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION"|"SUBNET_NOT_FOUND"|"IMAGE_NOT_FOUND"|"INVALID_SUBNET_CONFIGURATION"|"SECURITY_GROUPS_NOT_FOUND"|"IGW_NOT_ATTACHED"|"IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION"|"FLEET_STOPPED"|"FLEET_INSTANCE_PROVISIONING_FAILURE"|"DOMAIN_JOIN_ERROR_FILE_NOT_FOUND"|"DOMAIN_JOIN_ERROR_ACCESS_DENIED"|"DOMAIN_JOIN_ERROR_LOGON_FAILURE"|"DOMAIN_JOIN_ERROR_INVALID_PARAMETER"|"DOMAIN_JOIN_ERROR_MORE_DATA"|"DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN"|"DOMAIN_JOIN_ERROR_NOT_SUPPORTED"|"DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME"|"DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED"|"DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED"|"DOMAIN_JOIN_NERR_PASSWORD_EXPIRED"|"DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"|string;
   export type FleetErrors = FleetError[];
   export type FleetList = Fleet[];
   export type FleetState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|string;
-  export type FleetType = "ALWAYS_ON"|"ON_DEMAND"|string;
+  export type FleetType = "ALWAYS_ON"|"ON_DEMAND"|"ELASTIC"|string;
   export interface Image {
     /**
      * The name of the image.
@@ -1455,6 +2585,26 @@ declare namespace AppStream {
      * The permissions to provide to the destination AWS account for the specified image.
      */
     ImagePermissions?: ImagePermissions;
+    /**
+     * Describes the errors that are returned when a new image can't be created.
+     */
+    ImageErrors?: ResourceErrors;
+    /**
+     * Indicates whether the image is using the latest AppStream 2.0 agent version or not.
+     */
+    LatestAppstreamAgentVersion?: LatestAppstreamAgentVersion;
+    /**
+     * The supported instances families that determine which image a customer can use when the customer launches a fleet or image builder. The following instances families are supported:   General Purpose   Compute Optimized   Memory Optimized   Graphics   Graphics Design   Graphics Pro   Graphics G4   Graphics G5  
+     */
+    SupportedInstanceFamilies?: StringList;
+    /**
+     * Indicates whether dynamic app providers are enabled within an AppStream 2.0 image or not.
+     */
+    DynamicAppProvidersEnabled?: DynamicAppProvidersEnabled;
+    /**
+     * Indicates whether the image is shared with another account ID.
+     */
+    ImageSharedWithOthers?: ImageSharedWithOthers;
   }
   export interface ImageBuilder {
     /**
@@ -1482,7 +2632,7 @@ declare namespace AppStream {
      */
     VpcConfig?: VpcConfig;
     /**
-     * The instance type for the image builder. The following instance types are available:   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.memory.z1d.large   stream.memory.z1d.xlarge   stream.memory.z1d.2xlarge   stream.memory.z1d.3xlarge   stream.memory.z1d.6xlarge   stream.memory.z1d.12xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics.g4dn.xlarge   stream.graphics.g4dn.2xlarge   stream.graphics.g4dn.4xlarge   stream.graphics.g4dn.8xlarge   stream.graphics.g4dn.12xlarge   stream.graphics.g4dn.16xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge  
+     * The instance type for the image builder. The following instance types are available:   stream.standard.small   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.memory.z1d.large   stream.memory.z1d.xlarge   stream.memory.z1d.2xlarge   stream.memory.z1d.3xlarge   stream.memory.z1d.6xlarge   stream.memory.z1d.12xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics.g4dn.xlarge   stream.graphics.g4dn.2xlarge   stream.graphics.g4dn.4xlarge   stream.graphics.g4dn.8xlarge   stream.graphics.g4dn.12xlarge   stream.graphics.g4dn.16xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge  
      */
     InstanceType?: String;
     /**
@@ -1526,9 +2676,13 @@ declare namespace AppStream {
      * The list of virtual private cloud (VPC) interface endpoint objects. Administrators can connect to the image builder only through the specified endpoints.
      */
     AccessEndpoints?: AccessEndpointList;
+    /**
+     * Indicates whether the image builder is using the latest AppStream 2.0 agent version or not.
+     */
+    LatestAppstreamAgentVersion?: LatestAppstreamAgentVersion;
   }
   export type ImageBuilderList = ImageBuilder[];
-  export type ImageBuilderState = "PENDING"|"UPDATING_AGENT"|"RUNNING"|"STOPPING"|"STOPPED"|"REBOOTING"|"SNAPSHOTTING"|"DELETING"|"FAILED"|string;
+  export type ImageBuilderState = "PENDING"|"UPDATING_AGENT"|"RUNNING"|"STOPPING"|"STOPPED"|"REBOOTING"|"SNAPSHOTTING"|"DELETING"|"FAILED"|"UPDATING"|"PENDING_QUALIFICATION"|string;
   export interface ImageBuilderStateChangeReason {
     /**
      * The state change reason code.
@@ -1551,7 +2705,8 @@ declare namespace AppStream {
      */
     allowImageBuilder?: BooleanObject;
   }
-  export type ImageState = "PENDING"|"AVAILABLE"|"FAILED"|"COPYING"|"DELETING"|string;
+  export type ImageSharedWithOthers = "TRUE"|"FALSE"|string;
+  export type ImageState = "PENDING"|"AVAILABLE"|"FAILED"|"COPYING"|"DELETING"|"CREATING"|"IMPORTING"|string;
   export interface ImageStateChangeReason {
     /**
      * The state change reason code.
@@ -1575,6 +2730,7 @@ declare namespace AppStream {
     ErrorMessage?: String;
   }
   export type LastReportGenerationExecutionErrors = LastReportGenerationExecutionError[];
+  export type LatestAppstreamAgentVersion = "TRUE"|"FALSE"|string;
   export interface ListAssociatedFleetsRequest {
     /**
      * The name of the stack.
@@ -1615,6 +2771,34 @@ declare namespace AppStream {
      */
     NextToken?: String;
   }
+  export interface ListEntitledApplicationsRequest {
+    /**
+     * The name of the stack with which the entitlement is associated.
+     */
+    StackName: Name;
+    /**
+     * The name of the entitlement.
+     */
+    EntitlementName: Name;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+    /**
+     * The maximum size of each page of results.
+     */
+    MaxResults?: Integer;
+  }
+  export interface ListEntitledApplicationsResult {
+    /**
+     * The entitled applications.
+     */
+    EntitledApplications?: EntitledApplicationList;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -1644,8 +2828,11 @@ declare namespace AppStream {
   }
   export type OrganizationalUnitDistinguishedName = string;
   export type OrganizationalUnitDistinguishedNamesList = OrganizationalUnitDistinguishedName[];
+  export type PackagingType = "CUSTOM"|"APPSTREAM2"|string;
   export type Permission = "ENABLED"|"DISABLED"|string;
-  export type PlatformType = "WINDOWS"|"WINDOWS_SERVER_2016"|"WINDOWS_SERVER_2019"|string;
+  export type PlatformType = "WINDOWS"|"WINDOWS_SERVER_2016"|"WINDOWS_SERVER_2019"|"WINDOWS_SERVER_2022"|"AMAZON_LINUX2"|"RHEL8"|string;
+  export type Platforms = PlatformType[];
+  export type PreferredProtocol = "TCP"|"UDP"|string;
   export type RedirectURL = string;
   export type RegionName = string;
   export interface ResourceError {
@@ -1664,6 +2851,36 @@ declare namespace AppStream {
   }
   export type ResourceErrors = ResourceError[];
   export type ResourceIdentifier = string;
+  export type S3Bucket = string;
+  export type S3Key = string;
+  export interface S3Location {
+    /**
+     * The S3 bucket of the S3 object.
+     */
+    S3Bucket: S3Bucket;
+    /**
+     * The S3 key of the S3 object. This is required when used for the following:   IconS3Location (Actions: CreateApplication and UpdateApplication)   SessionScriptS3Location (Actions: CreateFleet and UpdateFleet)   ScriptDetails (Actions: CreateAppBlock)   SourceS3Location when creating an app block with CUSTOM PackagingType (Actions: CreateAppBlock)   SourceS3Location when creating an app block with APPSTREAM2 PackagingType, and using an existing application package (VHD file). In this case, S3Key refers to the VHD file. If a new application package is required, then S3Key is not required. (Actions: CreateAppBlock)  
+     */
+    S3Key?: S3Key;
+  }
+  export interface ScriptDetails {
+    /**
+     * The S3 object location for the script.
+     */
+    ScriptS3Location: S3Location;
+    /**
+     * The run path for the script.
+     */
+    ExecutablePath: String;
+    /**
+     * The runtime parameters passed to the run path for the script.
+     */
+    ExecutableParameters?: String;
+    /**
+     * The run timeout, in seconds, for the script.
+     */
+    TimeoutInSeconds: Integer;
+  }
   export type SecurityGroupIdList = String[];
   export interface ServiceAccountCredentials {
     /**
@@ -1716,6 +2933,10 @@ declare namespace AppStream {
      * The network details for the streaming session.
      */
     NetworkAccessConfiguration?: NetworkAccessConfiguration;
+    /**
+     * The identifier for the instance hosting the session.
+     */
+    InstanceId?: String;
   }
   export type SessionConnectionState = "CONNECTED"|"NOT_CONNECTED"|string;
   export type SessionList = Session[];
@@ -1785,8 +3006,12 @@ declare namespace AppStream {
      * The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.
      */
     EmbedHostDomains?: EmbedHostDomains;
+    /**
+     * The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.
+     */
+    StreamingExperienceSettings?: StreamingExperienceSettings;
   }
-  export type StackAttribute = "STORAGE_CONNECTORS"|"STORAGE_CONNECTOR_HOMEFOLDERS"|"STORAGE_CONNECTOR_GOOGLE_DRIVE"|"STORAGE_CONNECTOR_ONE_DRIVE"|"REDIRECT_URL"|"FEEDBACK_URL"|"THEME_NAME"|"USER_SETTINGS"|"EMBED_HOST_DOMAINS"|"IAM_ROLE_ARN"|"ACCESS_ENDPOINTS"|string;
+  export type StackAttribute = "STORAGE_CONNECTORS"|"STORAGE_CONNECTOR_HOMEFOLDERS"|"STORAGE_CONNECTOR_GOOGLE_DRIVE"|"STORAGE_CONNECTOR_ONE_DRIVE"|"REDIRECT_URL"|"FEEDBACK_URL"|"THEME_NAME"|"USER_SETTINGS"|"EMBED_HOST_DOMAINS"|"IAM_ROLE_ARN"|"ACCESS_ENDPOINTS"|"STREAMING_EXPERIENCE_SETTINGS"|string;
   export type StackAttributes = StackAttribute[];
   export interface StackError {
     /**
@@ -1801,6 +3026,15 @@ declare namespace AppStream {
   export type StackErrorCode = "STORAGE_CONNECTOR_ERROR"|"INTERNAL_SERVICE_ERROR"|string;
   export type StackErrors = StackError[];
   export type StackList = Stack[];
+  export interface StartAppBlockBuilderRequest {
+    /**
+     * The name of the app block builder.
+     */
+    Name: Name;
+  }
+  export interface StartAppBlockBuilderResult {
+    AppBlockBuilder?: AppBlockBuilder;
+  }
   export interface StartFleetRequest {
     /**
      * The name of the fleet.
@@ -1824,6 +3058,15 @@ declare namespace AppStream {
      * Information about the image builder.
      */
     ImageBuilder?: ImageBuilder;
+  }
+  export interface StopAppBlockBuilderRequest {
+    /**
+     * The name of the app block builder.
+     */
+    Name: Name;
+  }
+  export interface StopAppBlockBuilderResult {
+    AppBlockBuilder?: AppBlockBuilder;
   }
   export interface StopFleetRequest {
     /**
@@ -1862,6 +3105,12 @@ declare namespace AppStream {
   export type StorageConnectorList = StorageConnector[];
   export type StorageConnectorType = "HOMEFOLDERS"|"GOOGLE_DRIVE"|"ONE_DRIVE"|string;
   export type StreamView = "APP"|"DESKTOP"|string;
+  export interface StreamingExperienceSettings {
+    /**
+     * The preferred protocol that you want to use while streaming your application.
+     */
+    PreferredProtocol?: PreferredProtocol;
+  }
   export type StreamingUrlUserId = string;
   export type String = string;
   export type StringList = String[];
@@ -1882,6 +3131,58 @@ declare namespace AppStream {
   }
   export type TagValue = string;
   export type Tags = {[key: string]: TagValue};
+  export interface Theme {
+    /**
+     * The stack that has the custom branding theme.
+     */
+    StackName?: Name;
+    /**
+     * The state of the theme.
+     */
+    State?: ThemeState;
+    /**
+     * The browser tab page title.
+     */
+    ThemeTitleText?: ThemeTitleText;
+    /**
+     * The color that is used for the website links, text, buttons, and catalog page background.
+     */
+    ThemeStyling?: ThemeStyling;
+    /**
+     * The website links that display in the catalog page footer.
+     */
+    ThemeFooterLinks?: ThemeFooterLinks;
+    /**
+     * The URL of the logo that displays in the catalog page header.
+     */
+    ThemeOrganizationLogoURL?: String;
+    /**
+     * The URL of the icon that displays at the top of a user's browser tab during streaming sessions.
+     */
+    ThemeFaviconURL?: String;
+    /**
+     * The time the theme was created.
+     */
+    CreatedTime?: Timestamp;
+  }
+  export type ThemeAttribute = "FOOTER_LINKS"|string;
+  export type ThemeAttributes = ThemeAttribute[];
+  export interface ThemeFooterLink {
+    /**
+     * The name of the websites that display in the catalog page footer.
+     */
+    DisplayName?: ThemeFooterLinkDisplayName;
+    /**
+     * The URL of the websites that display in the catalog page footer.
+     */
+    FooterLinkURL?: ThemeFooterLinkURL;
+  }
+  export type ThemeFooterLinkDisplayName = string;
+  export type ThemeFooterLinkURL = string;
+  export type ThemeFooterLinks = ThemeFooterLink[];
+  export type ThemeState = "ENABLED"|"DISABLED"|string;
+  export type ThemeStyling = "LIGHT_BLUE"|"BLUE"|"PINK"|"RED"|string;
+  export type ThemeTitleText = string;
   export type Timestamp = Date;
   export interface UntagResourceRequest {
     /**
@@ -1894,6 +3195,92 @@ declare namespace AppStream {
     TagKeys: TagKeyList;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateAppBlockBuilderRequest {
+    /**
+     * The unique name for the app block builder.
+     */
+    Name: Name;
+    /**
+     * The description of the app block builder.
+     */
+    Description?: Description;
+    /**
+     * The display name of the app block builder.
+     */
+    DisplayName?: DisplayName;
+    /**
+     * The platform of the app block builder.  WINDOWS_SERVER_2019 is the only valid value.
+     */
+    Platform?: PlatformType;
+    /**
+     * The instance type to use when launching the app block builder. The following instance types are available:   stream.standard.small   stream.standard.medium   stream.standard.large   stream.standard.xlarge   stream.standard.2xlarge  
+     */
+    InstanceType?: String;
+    /**
+     * The VPC configuration for the app block builder. App block builders require that you specify at least two subnets in different availability zones.
+     */
+    VpcConfig?: VpcConfig;
+    /**
+     * Enables or disables default internet access for the app block builder.
+     */
+    EnableDefaultInternetAccess?: BooleanObject;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role to apply to the app block builder. To assume a role, the app block builder calls the AWS Security Token Service (STS) AssumeRole API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the appstream_machine_role credential profile on the instance. For more information, see Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances in the Amazon AppStream 2.0 Administration Guide.
+     */
+    IamRoleArn?: Arn;
+    /**
+     * The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the app block builder only through the specified endpoints.
+     */
+    AccessEndpoints?: AccessEndpointList;
+    /**
+     * The attributes to delete from the app block builder.
+     */
+    AttributesToDelete?: AppBlockBuilderAttributes;
+  }
+  export interface UpdateAppBlockBuilderResult {
+    AppBlockBuilder?: AppBlockBuilder;
+  }
+  export interface UpdateApplicationRequest {
+    /**
+     * The name of the application. This name is visible to users when display name is not specified.
+     */
+    Name: Name;
+    /**
+     * The display name of the application. This name is visible to users in the application catalog.
+     */
+    DisplayName?: DisplayName;
+    /**
+     * The description of the application.
+     */
+    Description?: Description;
+    /**
+     * The icon S3 location of the application.
+     */
+    IconS3Location?: S3Location;
+    /**
+     * The launch path of the application.
+     */
+    LaunchPath?: String;
+    /**
+     * The working directory of the application.
+     */
+    WorkingDirectory?: String;
+    /**
+     * The launch parameters of the application.
+     */
+    LaunchParameters?: String;
+    /**
+     * The ARN of the app block.
+     */
+    AppBlockArn?: Arn;
+    /**
+     * The attributes to delete for an application.
+     */
+    AttributesToDelete?: ApplicationAttributes;
+  }
+  export interface UpdateApplicationResult {
+    Application?: Application;
   }
   export interface UpdateDirectoryConfigRequest {
     /**
@@ -1908,12 +3295,44 @@ declare namespace AppStream {
      * The credentials for the service account used by the fleet or image builder to connect to the directory.
      */
     ServiceAccountCredentials?: ServiceAccountCredentials;
+    /**
+     * The certificate-based authentication properties used to authenticate SAML 2.0 Identity Provider (IdP) user identities to Active Directory domain-joined streaming instances. Fallback is turned on by default when certificate-based authentication is Enabled . Fallback allows users to log in using their AD domain password if certificate-based authentication is unsuccessful, or to unlock a desktop lock screen. Enabled_no_directory_login_fallback enables certificate-based authentication, but does not allow users to log in using their AD domain password. Users will be disconnected to re-authenticate using certificates.
+     */
+    CertificateBasedAuthProperties?: CertificateBasedAuthProperties;
   }
   export interface UpdateDirectoryConfigResult {
     /**
      * Information about the Directory Config object.
      */
     DirectoryConfig?: DirectoryConfig;
+  }
+  export interface UpdateEntitlementRequest {
+    /**
+     * The name of the entitlement.
+     */
+    Name: Name;
+    /**
+     * The name of the stack with which the entitlement is associated.
+     */
+    StackName: Name;
+    /**
+     * The description of the entitlement.
+     */
+    Description?: Description;
+    /**
+     * Specifies whether all or only selected apps are entitled.
+     */
+    AppVisibility?: AppVisibility;
+    /**
+     * The attributes of the entitlement.
+     */
+    Attributes?: EntitlementAttributeList;
+  }
+  export interface UpdateEntitlementResult {
+    /**
+     * The entitlement.
+     */
+    Entitlement?: Entitlement;
   }
   export interface UpdateFleetRequest {
     /**
@@ -1927,25 +3346,25 @@ declare namespace AppStream {
     /**
      * A unique name for the fleet.
      */
-    Name?: String;
+    Name?: Name;
     /**
-     * The instance type to use when launching fleet instances. The following instance types are available:   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.memory.z1d.large   stream.memory.z1d.xlarge   stream.memory.z1d.2xlarge   stream.memory.z1d.3xlarge   stream.memory.z1d.6xlarge   stream.memory.z1d.12xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics.g4dn.xlarge   stream.graphics.g4dn.2xlarge   stream.graphics.g4dn.4xlarge   stream.graphics.g4dn.8xlarge   stream.graphics.g4dn.12xlarge   stream.graphics.g4dn.16xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge  
+     * The instance type to use when launching fleet instances. The following instance types are available:   stream.standard.small   stream.standard.medium   stream.standard.large   stream.standard.xlarge   stream.standard.2xlarge   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.memory.z1d.large   stream.memory.z1d.xlarge   stream.memory.z1d.2xlarge   stream.memory.z1d.3xlarge   stream.memory.z1d.6xlarge   stream.memory.z1d.12xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics.g4dn.xlarge   stream.graphics.g4dn.2xlarge   stream.graphics.g4dn.4xlarge   stream.graphics.g4dn.8xlarge   stream.graphics.g4dn.12xlarge   stream.graphics.g4dn.16xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge   The following instance types are available for Elastic fleets:   stream.standard.small   stream.standard.medium   stream.standard.large   stream.standard.xlarge   stream.standard.2xlarge  
      */
     InstanceType?: String;
     /**
-     * The desired capacity for the fleet.
+     * The desired capacity for the fleet. This is not allowed for Elastic fleets.
      */
     ComputeCapacity?: ComputeCapacity;
     /**
-     * The VPC configuration for the fleet.
+     * The VPC configuration for the fleet. This is required for Elastic fleets, but not required for other fleet types. Elastic fleets require that you specify at least two subnets in different availability zones. 
      */
     VpcConfig?: VpcConfig;
     /**
-     * The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance. Specify a value between 600 and 360000.
+     * The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance. Specify a value between 600 and 432000.
      */
     MaxUserDurationInSeconds?: Integer;
     /**
-     * The amount of time that a streaming session remains active after users disconnect. If users try to reconnect to the streaming session after a disconnection or network interruption within this time interval, they are connected to their previous session. Otherwise, they are connected to a new session with a new streaming instance.  Specify a value between 60 and 360000.
+     * The amount of time that a streaming session remains active after users disconnect. If users try to reconnect to the streaming session after a disconnection or network interruption within this time interval, they are connected to their previous session. Otherwise, they are connected to a new session with a new streaming instance.  Specify a value between 60 and 36000.
      */
     DisconnectTimeoutInSeconds?: Integer;
     /**
@@ -1969,7 +3388,7 @@ declare namespace AppStream {
      */
     DomainJoinInfo?: DomainJoinInfo;
     /**
-     * The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the DisconnectTimeoutInSeconds time interval begins. Users are notified before they are disconnected due to inactivity. If users try to reconnect to the streaming session before the time interval specified in DisconnectTimeoutInSeconds elapses, they are connected to their previous session. Users are considered idle when they stop providing keyboard or mouse input during their streaming session. File uploads and downloads, audio in, audio out, and pixels changing do not qualify as user activity. If users continue to be idle after the time interval in IdleDisconnectTimeoutInSeconds elapses, they are disconnected.  To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 3600. The default value is 0.  If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity.  
+     * The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the DisconnectTimeoutInSeconds time interval begins. Users are notified before they are disconnected due to inactivity. If users try to reconnect to the streaming session before the time interval specified in DisconnectTimeoutInSeconds elapses, they are connected to their previous session. Users are considered idle when they stop providing keyboard or mouse input during their streaming session. File uploads and downloads, audio in, audio out, and pixels changing do not qualify as user activity. If users continue to be idle after the time interval in IdleDisconnectTimeoutInSeconds elapses, they are disconnected.  To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 36000. The default value is 0.  If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity.  
      */
     IdleDisconnectTimeoutInSeconds?: Integer;
     /**
@@ -1984,6 +3403,26 @@ declare namespace AppStream {
      * The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When APP is specified, only the windows of applications opened by users display. When DESKTOP is specified, the standard desktop that is provided by the operating system displays. The default value is APP.
      */
     StreamView?: StreamView;
+    /**
+     * The platform of the fleet. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for Elastic fleets. 
+     */
+    Platform?: PlatformType;
+    /**
+     * The maximum number of concurrent sessions for a fleet.
+     */
+    MaxConcurrentSessions?: Integer;
+    /**
+     * The USB device filter strings that specify which USB devices a user can redirect to the fleet streaming session, when using the Windows native client. This is allowed but not required for Elastic fleets.
+     */
+    UsbDeviceFilterStrings?: UsbDeviceFilterStrings;
+    /**
+     * The S3 location of the session scripts configuration zip file. This only applies to Elastic fleets. 
+     */
+    SessionScriptS3Location?: S3Location;
+    /**
+     * The maximum number of user sessions on an instance. This only applies to multi-session fleets.
+     */
+    MaxSessionsPerInstance?: Integer;
   }
   export interface UpdateFleetResult {
     /**
@@ -2056,12 +3495,56 @@ declare namespace AppStream {
      * The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions. 
      */
     EmbedHostDomains?: EmbedHostDomains;
+    /**
+     * The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.
+     */
+    StreamingExperienceSettings?: StreamingExperienceSettings;
   }
   export interface UpdateStackResult {
     /**
      * Information about the stack.
      */
     Stack?: Stack;
+  }
+  export interface UpdateThemeForStackRequest {
+    /**
+     * The name of the stack for the theme.
+     */
+    StackName: Name;
+    /**
+     * The links that are displayed in the footer of the streaming application catalog page. These links are helpful resources for users, such as the organization's IT support and product marketing sites.
+     */
+    FooterLinks?: ThemeFooterLinks;
+    /**
+     * The title that is displayed at the top of the browser tab during users' application streaming sessions.
+     */
+    TitleText?: ThemeTitleText;
+    /**
+     * The color theme that is applied to website links, text, and buttons. These colors are also applied as accents in the background for the streaming application catalog page.
+     */
+    ThemeStyling?: ThemeStyling;
+    /**
+     * The organization logo that appears on the streaming application catalog page.
+     */
+    OrganizationLogoS3Location?: S3Location;
+    /**
+     * The S3 location of the favicon. The favicon enables users to recognize their application streaming site in a browser full of tabs or bookmarks. It is displayed at the top of the browser tab for the application streaming site during users' streaming sessions.
+     */
+    FaviconS3Location?: S3Location;
+    /**
+     * Specifies whether custom branding should be applied to catalog page or not.
+     */
+    State?: ThemeState;
+    /**
+     * The attributes to delete.
+     */
+    AttributesToDelete?: ThemeAttributes;
+  }
+  export interface UpdateThemeForStackResult {
+    /**
+     *  The theme object that contains the metadata of the custom branding.
+     */
+    Theme?: Theme;
   }
   export type UsageReportExecutionErrorCode = "RESOURCE_NOT_FOUND"|"ACCESS_DENIED"|"INTERNAL_SERVICE_ERROR"|string;
   export type UsageReportSchedule = "DAILY"|string;
@@ -2084,6 +3567,8 @@ declare namespace AppStream {
     SubscriptionErrors?: LastReportGenerationExecutionErrors;
   }
   export type UsageReportSubscriptionList = UsageReportSubscription[];
+  export type UsbDeviceFilterString = string;
+  export type UsbDeviceFilterStrings = UsbDeviceFilterString[];
   export interface User {
     /**
      * The ARN of the user.
@@ -2130,6 +3615,10 @@ declare namespace AppStream {
      * Indicates whether the action is enabled or disabled.
      */
     Permission: Permission;
+    /**
+     * Specifies the number of characters that can be copied by end users from the local device to the remote session, and to the local device from the remote session. This can be specified only for the CLIPBOARD_COPY_FROM_LOCAL_DEVICE and CLIPBOARD_COPY_TO_LOCAL_DEVICE actions. This defaults to 20,971,520 (20 MB) when unspecified and the permission is ENABLED. This can't be specified when the permission is DISABLED.  The value can be between 1 and 20,971,520 (20 MB).
+     */
+    MaximumLength?: Integer;
   }
   export type UserSettingList = UserSetting[];
   export interface UserStackAssociation {

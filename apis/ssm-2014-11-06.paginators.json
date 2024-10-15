@@ -78,6 +78,12 @@
       "output_token": "NextToken",
       "result_key": "Patches"
     },
+    "DescribeInstanceProperties": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "InstanceProperties"
+    },
     "DescribeInventoryDeletions": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
@@ -195,6 +201,12 @@
       "limit_key": "MaxResults",
       "output_token": "NextToken"
     },
+    "GetResourcePolicies": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "Policies"
+    },
     "ListAssociationVersions": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
@@ -244,6 +256,12 @@
       "result_key": "DocumentIdentifiers"
     },
     "ListOpsItemEvents": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "Summaries"
+    },
+    "ListOpsItemRelatedItems": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
       "output_token": "NextToken",

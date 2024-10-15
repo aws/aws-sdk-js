@@ -1,0 +1,27 @@
+[
+    {
+        "type": "bugfix",
+        "category": "ManagedUpload",
+        "description": "Use resolved credentials if customer supplies configured S3 Client"
+    },
+    {
+        "type": "feature",
+        "category": "AppStream",
+        "description": "This release provides support for image updates"
+    },
+    {
+        "type": "feature",
+        "category": "AutoScaling",
+        "description": "Amazon EC2 Auto Scaling announces Warm Pools that help applications to scale out faster by pre-initializing EC2 instances and save money by requiring fewer continuously running instances"
+    },
+    {
+        "type": "feature",
+        "category": "LookoutEquipment",
+        "description": "This release introduces support for Amazon Lookout for Equipment."
+    },
+    {
+        "type": "feature",
+        "category": "RoboMaker",
+        "description": "This release allows RoboMaker customers to specify custom tools to run with their simulation job"
+    }
+]

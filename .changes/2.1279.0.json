@@ -1,0 +1,47 @@
+[
+    {
+        "type": "feature",
+        "category": "Batch",
+        "description": "Adds isCancelled and isTerminated to DescribeJobs response."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Adds support for pagination in the EC2 DescribeImages API."
+    },
+    {
+        "type": "feature",
+        "category": "LookoutEquipment",
+        "description": "This release adds support for listing inference schedulers by status."
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "This release adds support for two new features to AWS Elemental MediaLive. First, you can now burn-in timecodes to your MediaLive outputs. Second, we now now support the ability to decode Dolby E audio when it comes in on an input."
+    },
+    {
+        "type": "feature",
+        "category": "Nimble",
+        "description": "Amazon Nimble Studio now supports configuring session storage volumes and persistence, as well as backup and restore sessions through launch profiles."
+    },
+    {
+        "type": "feature",
+        "category": "ResourceExplorer2",
+        "description": "Documentation updates for AWS Resource Explorer."
+    },
+    {
+        "type": "feature",
+        "category": "Route53Domains",
+        "description": "Use Route 53 domain APIs to change owner, create/delete DS record, modify IPS tag, resend authorization. New: AssociateDelegationSignerToDomain, DisassociateDelegationSignerFromDomain, PushDomain, ResendOperationAuthorization. Updated: UpdateDomainContact, ListOperations, CheckDomainTransferability."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Amazon SageMaker Autopilot adds support for new objective metrics in CreateAutoMLJob API."
+    },
+    {
+        "type": "feature",
+        "category": "TranscribeService",
+        "description": "Enable our batch transcription jobs for Swedish and Vietnamese."
+    }
+]

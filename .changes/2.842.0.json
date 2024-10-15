@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "DataBrew",
+        "description": "This release adds support for profile job sampling, which determines the number of rows on which the profile job will be executed."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "Adding support for RDS Aurora Global Database Failover"
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "Support cross-region copying in DocDB and Neptune"
+    }
+]

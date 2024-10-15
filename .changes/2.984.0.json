@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "Amp",
+        "description": "This release adds tagging support for Amazon Managed Service for Prometheus workspace."
+    },
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Adding RegisterCluster and DeregisterCluster operations, to support connecting external clusters to EKS."
+    },
+    {
+        "type": "feature",
+        "category": "ForecastService",
+        "description": "Predictor creation now supports selecting an accuracy metric to optimize in AutoML and hyperparameter optimization. This release adds additional accuracy metrics for predictors - AverageWeightedQuantileLoss, MAPE and MASE."
+    },
+    {
+        "type": "feature",
+        "category": "MediaPackage",
+        "description": "SPEKE v2 support for live CMAF packaging type. SPEKE v2 is an upgrade to the existing SPEKE API to support multiple encryption keys, it supports live DASH currently."
+    }
+]

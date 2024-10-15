@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "CodePipeline",
+        "description": "Add ability to manually and automatically roll back a pipeline stage to a previously successful execution."
+    },
+    {
+        "type": "feature",
+        "category": "CognitoIdentityServiceProvider",
+        "description": "Add LimitExceededException to SignUp errors"
+    },
+    {
+        "type": "feature",
+        "category": "ConnectCampaigns",
+        "description": "This release adds support for specifying if Answering Machine should wait for prompt sound."
+    },
+    {
+        "type": "feature",
+        "category": "MarketplaceEntitlementService",
+        "description": "Releasing minor endpoint updates."
+    },
+    {
+        "type": "feature",
+        "category": "OAM",
+        "description": "This release introduces support for Source Accounts to define which Metrics and Logs to share with the Monitoring Account"
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "SupportsLimitlessDatabase field added to describe-db-engine-versions to indicate whether the DB engine version supports Aurora Limitless Database."
+    },
+    {
+        "type": "feature",
+        "category": "Support",
+        "description": "Releasing minor endpoint updates."
+    }
+]

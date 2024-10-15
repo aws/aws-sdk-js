@@ -6,11 +6,23 @@
       "output_token": "nextToken",
       "result_key": "batchInferenceJobs"
     },
+    "ListBatchSegmentJobs": {
+      "input_token": "nextToken",
+      "limit_key": "maxResults",
+      "output_token": "nextToken",
+      "result_key": "batchSegmentJobs"
+    },
     "ListCampaigns": {
       "input_token": "nextToken",
       "limit_key": "maxResults",
       "output_token": "nextToken",
       "result_key": "campaigns"
+    },
+    "ListDatasetExportJobs": {
+      "input_token": "nextToken",
+      "limit_key": "maxResults",
+      "output_token": "nextToken",
+      "result_key": "datasetExportJobs"
     },
     "ListDatasetGroups": {
       "input_token": "nextToken",
@@ -36,11 +48,35 @@
       "output_token": "nextToken",
       "result_key": "eventTrackers"
     },
+    "ListFilters": {
+      "input_token": "nextToken",
+      "limit_key": "maxResults",
+      "output_token": "nextToken",
+      "result_key": "Filters"
+    },
+    "ListMetricAttributionMetrics": {
+      "input_token": "nextToken",
+      "limit_key": "maxResults",
+      "output_token": "nextToken",
+      "result_key": "metrics"
+    },
+    "ListMetricAttributions": {
+      "input_token": "nextToken",
+      "limit_key": "maxResults",
+      "output_token": "nextToken",
+      "result_key": "metricAttributions"
+    },
     "ListRecipes": {
       "input_token": "nextToken",
       "limit_key": "maxResults",
       "output_token": "nextToken",
       "result_key": "recipes"
+    },
+    "ListRecommenders": {
+      "input_token": "nextToken",
+      "limit_key": "maxResults",
+      "output_token": "nextToken",
+      "result_key": "recommenders"
     },
     "ListSchemas": {
       "input_token": "nextToken",

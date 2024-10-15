@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "EMR",
+        "description": "Added GetClusterSessionCredentials API to allow Amazon SageMaker Studio to connect to EMR on EC2 clusters with runtime roles and AWS Lake Formation-based access control for Apache Spark, Apache Hive, and Presto queries."
+    },
+    {
+        "type": "feature",
+        "category": "SecretsManager",
+        "description": "Added owning service filter, include planned deletion flag, and next rotation date response parameter in ListSecrets."
+    },
+    {
+        "type": "feature",
+        "category": "Wisdom",
+        "description": "This release extends Wisdom CreateContent and StartContentUpload APIs to support PDF and MicrosoftWord docx document uploading."
+    }
+]

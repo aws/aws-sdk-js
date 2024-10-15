@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "Supervisor Barge for Chat is now supported through the MonitorContact API."
+    },
+    {
+        "type": "feature",
+        "category": "ConnectParticipant",
+        "description": "Introduce new Supervisor participant role"
+    },
+    {
+        "type": "feature",
+        "category": "MWAA",
+        "description": "This Amazon MWAA feature release includes new fields in CreateWebLoginToken response model. The new fields IamIdentity and AirflowIdentity will let you match identifications, as the Airflow identity length is currently hashed to 64 characters."
+    },
+    {
+        "type": "feature",
+        "category": "S3Control",
+        "description": "S3 On Outposts team adds dualstack endpoints support for S3Control and S3Outposts API calls."
+    },
+    {
+        "type": "feature",
+        "category": "SupplyChain",
+        "description": "This release includes APIs CreateBillOfMaterialsImportJob and GetBillOfMaterialsImportJob."
+    },
+    {
+        "type": "feature",
+        "category": "Transfer",
+        "description": "AWS Transfer Family now supports static IP addresses for SFTP & AS2 connectors and for async MDNs on AS2 servers."
+    }
+]

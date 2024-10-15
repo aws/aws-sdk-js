@@ -1,30 +1,64 @@
 # AWS SDK for JavaScript
 
 [![NPM version](https://img.shields.io/npm/v/aws-sdk.svg)](https://www.npmjs.com/package/aws-sdk)
-[![NPM downloads](https://img.shields.io/npm/dm/aws-sdk.svg)](https://www.npmjs.com/package/aws-sdk)
-[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/aws/aws-sdk-js)
 
-[![Build Status](https://travis-ci.org/aws/aws-sdk-js.svg?branch=master)](https://travis-ci.org/aws/aws-sdk-js)
-[![Coverage Status](https://codecov.io/gh/aws/aws-sdk-js/branch/master/graph/badge.svg)](https://codecov.io/gh/aws/aws-sdk-js)
-[![Known Vulnerabilities](https://snyk.io/test/github/aws/aws-sdk-js/badge.svg)](https://snyk.io/test/github/aws/aws-sdk-js)
+## In Maintenance Mode as of September 8, 2024
 
-**Note**: The [version 3.x](https://github.com/aws/aws-sdk-js-v3) of the AWS SDK for JavaScript is generally available. For more information see the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/) or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
+The AWS SDK for JavaScript v2 [has entered][v2-maintenance-mode] maintenance mode on **September 8, 2024** and will be reaching end-of-support on **September 8, 2025**. During maintenance mode, AWS will limit SDK releases to address critical bug fixes and security issues only. The SDK will not receive API updates for new or existing services, or be updated to support new regions.
 
-For release notes, see the [CHANGELOG](https://github.com/aws/aws-sdk-js/blob/master/CHANGELOG.md). Prior to v2.4.8, release notes can be found at https://aws.amazon.com/releasenotes/?tag=releasenotes%23keywords%23javascript
+We recommend that you migrate to [AWS SDK for JavaScript v3][aws-sdk-js-v3].
+For dates, additional details, and information on how to migrate, please refer to the linked announcement.
 
-If you are upgrading from 1.x to 2.0 of the SDK, please see the
-[upgrading notes](https://github.com/aws/aws-sdk-js/blob/master/UPGRADING.md)
-for information on how to migrate existing code to work with the new major
-version.
+The **AWS SDK for JavaScript v3** is the latest and recommended version, 
+which has been GA since December 2020. Here is [why and how you should use
+**AWS SDK for JavaScript v3**][v3-recommended-blog]. You can try our migration scripts in [aws-sdk-js-codemod][aws-sdk-js-codemod] to migrate
+your application from v2 to v3.
 
-## Installing
+To get help with your migration, please follow our general guidelines to 
+[open an issue][v3-new-issue] and choose [guidance][open-issue-v3-guidance].
+To give feedback on and report issues in the v3 repo, please refer to 
+[Giving feedback and contributing][v3-contributing].
+
+Watch this README and the [AWS Developer Tools Blog][aws-devtools-blog]
+for updates and announcements regarding the maintenance plans and timelines.
+
+A maintenance mode message may be emitted by this package on startup. 
+To suppress this message, use an environment variable:
+
+```sh
+AWS_SDK_JS_SUPPRESS_MAINTENANCE_MODE_MESSAGE=1 node my_program.js
+```
+
+or a JavaScript setting as follows:
+```js
+var SDK = require('aws-sdk');
+require('aws-sdk/lib/maintenance_mode_message').suppress = true;
+```
+
+[v3-new-issue]: https://github.com/aws/aws-sdk-js-v3/issues/new?assignees=&labels=needs-triage%2Cv2-v3-inconsistency&projects=&template=v2-to-v3-migration.yml&title=MIGRATION+ISSUE%3A+%5BYour+Title+Here%5D
+[v2-maintenance-mode]: https://aws.amazon.com/blogs/developer/announcing-end-of-support-for-aws-sdk-for-javascript-v2
+[v3-recommended-blog]: https://aws.amazon.com/blogs/developer/why-and-how-you-should-use-aws-sdk-for-javascript-v3-on-node-js-18/
+[v3-contributing]: https://github.com/aws/aws-sdk-js-v3#giving-feedback-and-contributing
+[aws-sdk-js-v3]: https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html
+[aws-devtools-blog]: https://aws.amazon.com/blogs/developer/
+[open-issue-v3-guidance]: https://github.com/aws/aws-sdk-js-v3/issues/new?assignees=&labels=guidance%2C+needs-triage&template=---questions---help.md&title=
+[aws-sdk-js-codemod]: https://www.npmjs.com/package/aws-sdk-js-codemod
+
+## Table of Contents:
+* [Getting Started](#getting-Started)
+* [Getting Help](#getting-help)
+* [Contributing](#contributing)
+
+## Getting Started
+
+## How To Install
 
 ### In the Browser
 
 To use the SDK in the browser, simply add the following script tag to your
 HTML pages:
 
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.824.0.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1691.0.min.js"></script>
 
 You can also build a custom browser SDK with your specified set of AWS services.
 This can allow you to reduce the SDK's size, specify different API versions of
@@ -71,16 +105,6 @@ following into a terminal window:
 bower install aws-sdk-js
 ```
 
-## Usage and Getting Started
-
-You can find a getting started guide at:
-
-http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide
-
-API reference at:
-
-https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/
-
 ## Usage with TypeScript
 The AWS SDK for JavaScript bundles TypeScript definition files for use in TypeScript projects and to support tools that can read `.d.ts` files.
 Our goal is to keep these TypeScript definition files updated with each release for any public api.
@@ -88,7 +112,7 @@ Our goal is to keep these TypeScript definition files updated with each release 
 ### Pre-requisites
 Before you can begin using these TypeScript definitions with your project, you need to make sure your project meets a few of these requirements:
 
- * Use TypeScript v2.x
+ * Use latest version of TypeScript. We recommend 4.x+
  * Includes the TypeScript definitions for node. You can use npm to install this by typing the following into a terminal window:
 
     ```sh
@@ -154,31 +178,32 @@ There are a few known limitations with the bundled TypeScript definitions at thi
  * Service client typings reflect the latest `apiVersion`, regardless of which `apiVersion` is specified when creating a client.
  * Service-bound parameters use the `any` type.
 
-## Getting Help
-Please use these community resources for getting help. We use the GitHub issues for tracking bugs and feature requests and have limited bandwidth to address them.
+# Getting Help
 
- * Ask a question on [StackOverflow](https://stackoverflow.com/) and tag it with `aws-sdk-js`
- * Come join the AWS JavaScript community on [gitter](https://gitter.im/aws/aws-sdk-js?source=orgpage)
- * Open a support ticket with [AWS Support](https://console.aws.amazon.com/support/home#/)
- * If it turns out that you may have found a bug, please [open an issue](https://github.com/aws/aws-sdk-js/issues/new)
+The best way to interact with our team is through GitHub. 
+You can [open an issue](https://github.com/aws/aws-sdk-js/issues/new/choose) and choose from one of our templates for 
+[bug reports](https://github.com/aws/aws-sdk-js/issues/new?assignees=&labels=bug%2C+needs-triage&template=---bug-report.md&title=), 
+[feature requests](https://github.com/aws/aws-sdk-js/issues/new?assignees=&labels=feature-request&template=---feature-request.md&title=) 
+or [guidance](https://github.com/aws/aws-sdk-js/issues/new?assignees=&labels=guidance%2C+needs-triage&template=---questions---help.md&title=). 
+You may also find help on community resources such as [StackOverFlow](https://stackoverflow.com/questions/tagged/aws-sdk-js) with the tag #aws-sdk-js.
+If you have a support plan with [AWS Support](https://aws.amazon.com/premiumsupport/), you can also create a new support case.
 
-## Opening Issues
-If you encounter a bug with the AWS SDK for JavaScript we would like to hear
-about it. Search the [existing issues](https://github.com/aws/aws-sdk-js/issues)
-and try to make sure your problem doesn’t already exist before opening a new
-issue. It’s helpful if you include the version of the SDK, Node.js or browser
-environment and OS you’re using. Please include a stack trace and reduced repro
-case when appropriate, too.
-
-The GitHub issues are intended for bug reports and feature requests. For help
-and questions with using the AWS SDK for JavaScript please make use of the
-resources listed in the [Getting Help](https://github.com/aws/aws-sdk-js#getting-help)
-section. There are limited resources available for handling issues and by
-keeping the list of open issues lean we can respond in a timely manner.
-
-## Supported Services
+Please make sure to check out our resources too before opening an issue:
+* Our [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/welcome.html) and [API reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/)
+* Our [Changelog](https://github.com/aws/aws-sdk-js/blob/master/CHANGELOG.md) for recent changes.
+* Our [code examples](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/sdk-code-samples.html).
 
 Please see [SERVICES.md](https://github.com/aws/aws-sdk-js/blob/master/SERVICES.md) for a list of supported services.
+
+# Maintenance and support for SDK major versions
+For information about maintenance and support for SDK major versions and their underlying dependencies, see the following in the [AWS SDKs and Tools Shared Configuration and Credentials Reference Guide](https://docs.aws.amazon.com/credref/latest/refdocs/overview.html):
+* [AWS SDKs and Tools Maintenance Policy](https://docs.aws.amazon.com/credref/latest/refdocs/maint-policy.html)
+* [AWS SDKs and Tools Version Support Matrix](https://docs.aws.amazon.com/credref/latest/refdocs/version-support-matrix.html)
+
+
+
+# Contributing
+We welcome community contributions and pull requests. See [CONTRIBUTING.md](https://github.com/aws/aws-sdk-js/blob/master/CONTRIBUTING.md) for information on how to set up a development environment and submit code.
 
 ## License
 

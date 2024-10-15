@@ -68,11 +68,11 @@ declare class WorkDocs extends Service {
    */
   createLabels(callback?: (err: AWSError, data: WorkDocs.Types.CreateLabelsResponse) => void): Request<WorkDocs.Types.CreateLabelsResponse, AWSError>;
   /**
-   * Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a confirmation message, and must confirm the subscription. For more information, see Subscribe to Notifications in the Amazon WorkDocs Developer Guide.
+   * Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a confirmation message, and must confirm the subscription. For more information, see Setting up notifications for an IAM user or role in the Amazon WorkDocs Developer Guide.
    */
   createNotificationSubscription(params: WorkDocs.Types.CreateNotificationSubscriptionRequest, callback?: (err: AWSError, data: WorkDocs.Types.CreateNotificationSubscriptionResponse) => void): Request<WorkDocs.Types.CreateNotificationSubscriptionResponse, AWSError>;
   /**
-   * Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a confirmation message, and must confirm the subscription. For more information, see Subscribe to Notifications in the Amazon WorkDocs Developer Guide.
+   * Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a confirmation message, and must confirm the subscription. For more information, see Setting up notifications for an IAM user or role in the Amazon WorkDocs Developer Guide.
    */
   createNotificationSubscription(callback?: (err: AWSError, data: WorkDocs.Types.CreateNotificationSubscriptionResponse) => void): Request<WorkDocs.Types.CreateNotificationSubscriptionResponse, AWSError>;
   /**
@@ -116,6 +116,14 @@ declare class WorkDocs extends Service {
    */
   deleteDocument(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes a specific version of a document.
+   */
+  deleteDocumentVersion(params: WorkDocs.Types.DeleteDocumentVersionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a specific version of a document.
+   */
+  deleteDocumentVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Permanently deletes the specified folder and its contents.
    */
   deleteFolder(params: WorkDocs.Types.DeleteFolderRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -148,11 +156,11 @@ declare class WorkDocs extends Service {
    */
   deleteNotificationSubscription(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified user from a Simple AD or Microsoft AD directory.
+   * Deletes the specified user from a Simple AD or Microsoft AD directory.  Deleting a user immediately and permanently deletes all content in that user's folder structure. Site retention policies do NOT apply to this type of deletion. 
    */
   deleteUser(params: WorkDocs.Types.DeleteUserRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified user from a Simple AD or Microsoft AD directory.
+   * Deletes the specified user from a Simple AD or Microsoft AD directory.  Deleting a user immediately and permanently deletes all content in that user's folder structure. Site retention policies do NOT apply to this type of deletion. 
    */
   deleteUser(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -308,6 +316,22 @@ declare class WorkDocs extends Service {
    */
   removeResourcePermission(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Recovers a deleted version of an Amazon WorkDocs document.
+   */
+  restoreDocumentVersions(params: WorkDocs.Types.RestoreDocumentVersionsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Recovers a deleted version of an Amazon WorkDocs document.
+   */
+  restoreDocumentVersions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Searches metadata and the content of folders, documents, document versions, and comments.
+   */
+  searchResources(params: WorkDocs.Types.SearchResourcesRequest, callback?: (err: AWSError, data: WorkDocs.Types.SearchResourcesResponse) => void): Request<WorkDocs.Types.SearchResourcesResponse, AWSError>;
+  /**
+   * Searches metadata and the content of folders, documents, document versions, and comments.
+   */
+  searchResources(callback?: (err: AWSError, data: WorkDocs.Types.SearchResourcesResponse) => void): Request<WorkDocs.Types.SearchResourcesResponse, AWSError>;
+  /**
    * Updates the specified attributes of a document. The user must have access to both the document and its parent folder, if applicable.
    */
   updateDocument(params: WorkDocs.Types.UpdateDocumentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -343,7 +367,7 @@ declare class WorkDocs extends Service {
 declare namespace WorkDocs {
   export interface AbortDocumentVersionUploadRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -361,7 +385,7 @@ declare namespace WorkDocs {
      */
     UserId: IdType;
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
   }
@@ -413,7 +437,7 @@ declare namespace WorkDocs {
   export type ActivityType = "DOCUMENT_CHECKED_IN"|"DOCUMENT_CHECKED_OUT"|"DOCUMENT_RENAMED"|"DOCUMENT_VERSION_UPLOADED"|"DOCUMENT_VERSION_DELETED"|"DOCUMENT_VERSION_VIEWED"|"DOCUMENT_VERSION_DOWNLOADED"|"DOCUMENT_RECYCLED"|"DOCUMENT_RESTORED"|"DOCUMENT_REVERTED"|"DOCUMENT_SHARED"|"DOCUMENT_UNSHARED"|"DOCUMENT_SHARE_PERMISSION_CHANGED"|"DOCUMENT_SHAREABLE_LINK_CREATED"|"DOCUMENT_SHAREABLE_LINK_REMOVED"|"DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED"|"DOCUMENT_MOVED"|"DOCUMENT_COMMENT_ADDED"|"DOCUMENT_COMMENT_DELETED"|"DOCUMENT_ANNOTATION_ADDED"|"DOCUMENT_ANNOTATION_DELETED"|"FOLDER_CREATED"|"FOLDER_DELETED"|"FOLDER_RENAMED"|"FOLDER_RECYCLED"|"FOLDER_RESTORED"|"FOLDER_SHARED"|"FOLDER_UNSHARED"|"FOLDER_SHARE_PERMISSION_CHANGED"|"FOLDER_SHAREABLE_LINK_CREATED"|"FOLDER_SHAREABLE_LINK_REMOVED"|"FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED"|"FOLDER_MOVED"|string;
   export interface AddResourcePermissionsRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -435,6 +459,8 @@ declare namespace WorkDocs {
      */
     ShareResults?: ShareResultsList;
   }
+  export type AdditionalResponseFieldType = "WEBURL"|string;
+  export type AdditionalResponseFieldsList = AdditionalResponseFieldType[];
   export type AuthenticationHeaderType = string;
   export type BooleanEnumType = "TRUE"|"FALSE"|string;
   export type BooleanType = boolean;
@@ -499,13 +525,18 @@ declare namespace WorkDocs {
      * The ID of the user being replied to.
      */
     RecipientId?: IdType;
+    /**
+     * The ID of the user who made the comment.
+     */
+    ContributorId?: IdType;
   }
   export type CommentStatusType = "DRAFT"|"PUBLISHED"|"DELETED"|string;
   export type CommentTextType = string;
   export type CommentVisibilityType = "PUBLIC"|"PRIVATE"|string;
+  export type ContentCategoryType = "IMAGE"|"DOCUMENT"|"PDF"|"SPREADSHEET"|"PRESENTATION"|"AUDIO"|"VIDEO"|"SOURCE_CODE"|"OTHER"|string;
   export interface CreateCommentRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -545,7 +576,7 @@ declare namespace WorkDocs {
   }
   export interface CreateCustomMetadataRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -565,7 +596,7 @@ declare namespace WorkDocs {
   }
   export interface CreateFolderRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -593,7 +624,7 @@ declare namespace WorkDocs {
      */
     Labels: SharedLabels;
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
   }
@@ -657,7 +688,7 @@ declare namespace WorkDocs {
      */
     StorageRule?: StorageRuleType;
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
   }
@@ -671,19 +702,29 @@ declare namespace WorkDocs {
   export type CustomMetadataKeyType = string;
   export type CustomMetadataMap = {[key: string]: CustomMetadataValueType};
   export type CustomMetadataValueType = string;
+  export interface DateRangeType {
+    /**
+     * Timestamp range start value (in epochs)
+     */
+    StartValue?: TimestampType;
+    /**
+     * Timestamp range end value (in epochs).
+     */
+    EndValue?: TimestampType;
+  }
   export interface DeactivateUserRequest {
     /**
      * The ID of the user.
      */
     UserId: IdType;
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
   }
   export interface DeleteCommentRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -701,7 +742,7 @@ declare namespace WorkDocs {
   }
   export interface DeleteCustomMetadataRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -725,7 +766,7 @@ declare namespace WorkDocs {
   }
   export interface DeleteDocumentRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -733,9 +774,27 @@ declare namespace WorkDocs {
      */
     DocumentId: ResourceIdType;
   }
+  export interface DeleteDocumentVersionRequest {
+    /**
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
+     */
+    AuthenticationToken?: AuthenticationHeaderType;
+    /**
+     * The ID of the document associated with the version being deleted.
+     */
+    DocumentId: ResourceIdType;
+    /**
+     * The ID of the version being deleted.
+     */
+    VersionId: DocumentVersionIdType;
+    /**
+     * Deletes all versions of a document prior to the current version.
+     */
+    DeletePriorVersions: BooleanType;
+  }
   export interface DeleteFolderContentsRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -745,7 +804,7 @@ declare namespace WorkDocs {
   }
   export interface DeleteFolderRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -759,7 +818,7 @@ declare namespace WorkDocs {
      */
     ResourceId: ResourceIdType;
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -785,7 +844,7 @@ declare namespace WorkDocs {
   }
   export interface DeleteUserRequest {
     /**
-     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+     * Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using Amazon Web Services credentials.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -795,7 +854,7 @@ declare namespace WorkDocs {
   }
   export interface DescribeActivitiesRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -833,7 +892,7 @@ declare namespace WorkDocs {
     /**
      * The marker for the next set of results.
      */
-    Marker?: MarkerType;
+    Marker?: SearchMarkerType;
   }
   export interface DescribeActivitiesResponse {
     /**
@@ -843,11 +902,11 @@ declare namespace WorkDocs {
     /**
      * The marker for the next set of results.
      */
-    Marker?: MarkerType;
+    Marker?: SearchMarkerType;
   }
   export interface DescribeCommentsRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -879,7 +938,7 @@ declare namespace WorkDocs {
   }
   export interface DescribeDocumentVersionsRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -915,7 +974,7 @@ declare namespace WorkDocs {
   }
   export interface DescribeFolderContentsRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -963,7 +1022,7 @@ declare namespace WorkDocs {
   }
   export interface DescribeGroupsRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1019,7 +1078,7 @@ declare namespace WorkDocs {
   }
   export interface DescribeResourcePermissionsRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1075,7 +1134,7 @@ declare namespace WorkDocs {
   }
   export interface DescribeUsersRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1087,7 +1146,7 @@ declare namespace WorkDocs {
      */
     UserIds?: UserIdsType;
     /**
-     * A query to filter users by user name.
+     * A query to filter users by user name. Remember the following about the Userids and Query parameters:   If you don't use either parameter, the API returns a paginated list of all users on the site.   If you use both parameters, the API ignores the Query parameter.   The Userid parameter only returns user names that match a corresponding user ID.   The Query parameter runs a "prefix" search for users by the GivenName, SurName, or UserName fields included in a CreateUser API call. For example, querying on Ma returns Márcia Oliveira, María García, and Mateo Jackson. If you use multiple characters, the API only returns data that matches all characters. For example, querying on Ma J only returns Mateo Jackson.  
      */
     Query?: SearchQueryType;
     /**
@@ -1229,6 +1288,48 @@ declare namespace WorkDocs {
   export type DocumentVersionStatus = "ACTIVE"|string;
   export type EmailAddressType = string;
   export type FieldNamesType = string;
+  export interface Filters {
+    /**
+     * Filters by the locale of the content or comment.
+     */
+    TextLocales?: TextLocaleTypeList;
+    /**
+     * Filters by content category.
+     */
+    ContentCategories?: SearchContentCategoryTypeList;
+    /**
+     * Filters based on entity type.
+     */
+    ResourceTypes?: SearchResourceTypeList;
+    /**
+     * Filter by labels using exact match.
+     */
+    Labels?: SearchLabelList;
+    /**
+     * Filter based on UserIds or GroupIds.
+     */
+    Principals?: SearchPrincipalTypeList;
+    /**
+     * Filter based on resource’s path.
+     */
+    AncestorIds?: SearchAncestorIdList;
+    /**
+     * Filter based on file groupings.
+     */
+    SearchCollectionTypes?: SearchCollectionTypeList;
+    /**
+     * Filter based on size (in bytes).
+     */
+    SizeRange?: LongRangeType;
+    /**
+     * Filter based on resource’s creation timestamp.
+     */
+    CreatedRange?: DateRangeType;
+    /**
+     * Filter based on resource’s modified timestamp.
+     */
+    ModifiedRange?: DateRangeType;
+  }
   export type FolderContentType = "ALL"|"DOCUMENT"|"FOLDER"|string;
   export interface FolderMetadata {
     /**
@@ -1291,7 +1392,7 @@ declare namespace WorkDocs {
   }
   export interface GetDocumentPathRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1319,7 +1420,7 @@ declare namespace WorkDocs {
   }
   export interface GetDocumentRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1343,7 +1444,7 @@ declare namespace WorkDocs {
   }
   export interface GetDocumentVersionRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1375,7 +1476,7 @@ declare namespace WorkDocs {
   }
   export interface GetFolderPathRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1403,7 +1504,7 @@ declare namespace WorkDocs {
   }
   export interface GetFolderRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1427,7 +1528,7 @@ declare namespace WorkDocs {
   }
   export interface GetResourcesRequest {
     /**
-     * The Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * The Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1479,7 +1580,7 @@ declare namespace WorkDocs {
   export type IdType = string;
   export interface InitiateDocumentVersionUploadRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1509,7 +1610,7 @@ declare namespace WorkDocs {
     /**
      * The ID of the parent folder.
      */
-    ParentFolderId: ResourceIdType;
+    ParentFolderId?: ResourceIdType;
   }
   export interface InitiateDocumentVersionUploadResponse {
     /**
@@ -1521,13 +1622,26 @@ declare namespace WorkDocs {
      */
     UploadMetadata?: UploadMetadata;
   }
+  export type LanguageCodeType = "AR"|"BG"|"BN"|"DA"|"DE"|"CS"|"EL"|"EN"|"ES"|"FA"|"FI"|"FR"|"HI"|"HU"|"ID"|"IT"|"JA"|"KO"|"LT"|"LV"|"NL"|"NO"|"PT"|"RO"|"RU"|"SV"|"SW"|"TH"|"TR"|"ZH"|"DEFAULT"|string;
   export type LimitType = number;
   export type LocaleType = "en"|"fr"|"ko"|"de"|"es"|"ja"|"ru"|"zh_CN"|"zh_TW"|"pt_BR"|"default"|string;
+  export interface LongRangeType {
+    /**
+     * The size start range (in bytes).
+     */
+    StartValue?: LongType;
+    /**
+     * The size end range (in bytes).
+     */
+    EndValue?: LongType;
+  }
+  export type LongType = number;
   export type MarkerType = string;
   export type MessageType = string;
+  export type NextMarkerType = string;
   export interface NotificationOptions {
     /**
-     * Boolean value to indicate an email notification should be sent to the receipients.
+     * Boolean value to indicate an email notification should be sent to the recipients.
      */
     SendEmail?: BooleanType;
     /**
@@ -1535,6 +1649,7 @@ declare namespace WorkDocs {
      */
     EmailMessage?: MessageType;
   }
+  export type OrderByFieldType = "RELEVANCE"|"NAME"|"SIZE"|"CREATED_TIMESTAMP"|"MODIFIED_TIMESTAMP"|string;
   export type OrderType = "ASCENDING"|"DESCENDING"|string;
   export type OrganizationUserList = User[];
   export type PageMarkerType = string;
@@ -1577,10 +1692,11 @@ declare namespace WorkDocs {
     Roles?: PermissionInfoList;
   }
   export type PrincipalList = Principal[];
+  export type PrincipalRoleType = "VIEWER"|"CONTRIBUTOR"|"OWNER"|"COOWNER"|string;
   export type PrincipalType = "USER"|"GROUP"|"INVITE"|"ANONYMOUS"|"ORGANIZATION"|string;
   export interface RemoveAllResourcePermissionsRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1590,7 +1706,7 @@ declare namespace WorkDocs {
   }
   export interface RemoveResourcePermissionRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1659,9 +1775,132 @@ declare namespace WorkDocs {
   export type ResourceSortType = "DATE"|"NAME"|string;
   export type ResourceStateType = "ACTIVE"|"RESTORING"|"RECYCLING"|"RECYCLED"|string;
   export type ResourceType = "FOLDER"|"DOCUMENT"|string;
+  export interface ResponseItem {
+    /**
+     * The type of item being returned.
+     */
+    ResourceType?: ResponseItemType;
+    /**
+     * The webUrl of the item being returned.
+     */
+    WebUrl?: ResponseItemWebUrl;
+    /**
+     * The document that matches the query.
+     */
+    DocumentMetadata?: DocumentMetadata;
+    /**
+     * The folder that matches the query.
+     */
+    FolderMetadata?: FolderMetadata;
+    /**
+     * The comment that matches the query.
+     */
+    CommentMetadata?: CommentMetadata;
+    /**
+     * The document version that matches the metadata.
+     */
+    DocumentVersionMetadata?: DocumentVersionMetadata;
+  }
+  export type ResponseItemType = "DOCUMENT"|"FOLDER"|"COMMENT"|"DOCUMENT_VERSION"|string;
+  export type ResponseItemWebUrl = string;
+  export type ResponseItemsList = ResponseItem[];
+  export interface RestoreDocumentVersionsRequest {
+    /**
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
+     */
+    AuthenticationToken?: AuthenticationHeaderType;
+    /**
+     * The ID of the document.
+     */
+    DocumentId: ResourceIdType;
+  }
   export type RolePermissionType = "DIRECT"|"INHERITED"|string;
   export type RoleType = "VIEWER"|"CONTRIBUTOR"|"OWNER"|"COOWNER"|string;
+  export type SearchAncestorId = string;
+  export type SearchAncestorIdList = SearchAncestorId[];
+  export type SearchCollectionType = "OWNED"|"SHARED_WITH_ME"|string;
+  export type SearchCollectionTypeList = SearchCollectionType[];
+  export type SearchContentCategoryTypeList = ContentCategoryType[];
+  export type SearchLabel = string;
+  export type SearchLabelList = SearchLabel[];
+  export type SearchMarkerType = string;
+  export type SearchPrincipalRoleList = PrincipalRoleType[];
+  export interface SearchPrincipalType {
+    /**
+     * UserIds or GroupIds.
+     */
+    Id: IdType;
+    /**
+     * The Role of a User or Group.
+     */
+    Roles?: SearchPrincipalRoleList;
+  }
+  export type SearchPrincipalTypeList = SearchPrincipalType[];
+  export type SearchQueryScopeType = "NAME"|"CONTENT"|string;
+  export type SearchQueryScopeTypeList = SearchQueryScopeType[];
   export type SearchQueryType = string;
+  export type SearchResourceType = "FOLDER"|"DOCUMENT"|"COMMENT"|"DOCUMENT_VERSION"|string;
+  export type SearchResourceTypeList = SearchResourceType[];
+  export interface SearchResourcesRequest {
+    /**
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
+     */
+    AuthenticationToken?: AuthenticationHeaderType;
+    /**
+     * The String to search for. Searches across different text fields based on request parameters. Use double quotes around the query string for exact phrase matches.
+     */
+    QueryText?: SearchQueryType;
+    /**
+     * Filter based on the text field type. A Folder has only a name and no content. A Comment has only content and no name. A Document or Document Version has a name and content
+     */
+    QueryScopes?: SearchQueryScopeTypeList;
+    /**
+     * Filters based on the resource owner OrgId. This is a mandatory parameter when using Admin SigV4 credentials.
+     */
+    OrganizationId?: IdType;
+    /**
+     * A list of attributes to include in the response. Used to request fields that are not normally returned in a standard response.
+     */
+    AdditionalResponseFields?: AdditionalResponseFieldsList;
+    /**
+     * Filters results based on entity metadata.
+     */
+    Filters?: Filters;
+    /**
+     * Order by results in one or more categories.
+     */
+    OrderBy?: SearchResultSortList;
+    /**
+     * Max results count per page.
+     */
+    Limit?: SearchResultsLimitType;
+    /**
+     * The marker for the next set of results.
+     */
+    Marker?: NextMarkerType;
+  }
+  export interface SearchResourcesResponse {
+    /**
+     * List of Documents, Folders, Comments, and Document Versions matching the query.
+     */
+    Items?: ResponseItemsList;
+    /**
+     * The marker to use when requesting the next set of results. If there are no additional results, the string is empty.
+     */
+    Marker?: NextMarkerType;
+  }
+  export type SearchResultSortList = SearchSortResult[];
+  export type SearchResultsLimitType = number;
+  export interface SearchSortResult {
+    /**
+     * Sort search results based on this field name.
+     */
+    Field?: OrderByFieldType;
+    /**
+     * Sort direction.
+     */
+    Order?: SortOrder;
+  }
   export interface SharePrincipal {
     /**
      * The ID of the recipient.
@@ -1709,6 +1948,7 @@ declare namespace WorkDocs {
   export type SharedLabels = SharedLabel[];
   export type SignedHeaderMap = {[key: string]: HeaderValueType};
   export type SizeType = number;
+  export type SortOrder = "ASC"|"DESC"|string;
   export interface StorageRuleType {
     /**
      * The amount of storage allocated, in bytes.
@@ -1736,13 +1976,14 @@ declare namespace WorkDocs {
   }
   export type SubscriptionEndPointType = string;
   export type SubscriptionList = Subscription[];
-  export type SubscriptionProtocolType = "HTTPS"|string;
+  export type SubscriptionProtocolType = "HTTPS"|"SQS"|string;
   export type SubscriptionType = "ALL"|string;
+  export type TextLocaleTypeList = LanguageCodeType[];
   export type TimeZoneIdType = string;
   export type TimestampType = Date;
   export interface UpdateDocumentRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1764,7 +2005,7 @@ declare namespace WorkDocs {
   }
   export interface UpdateDocumentVersionRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1782,7 +2023,7 @@ declare namespace WorkDocs {
   }
   export interface UpdateFolderRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1804,7 +2045,7 @@ declare namespace WorkDocs {
   }
   export interface UpdateUserRequest {
     /**
-     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
      */
     AuthenticationToken?: AuthenticationHeaderType;
     /**
@@ -1836,7 +2077,7 @@ declare namespace WorkDocs {
      */
     Locale?: LocaleType;
     /**
-     * Boolean value to determine whether the user is granted Poweruser privileges.
+     * Boolean value to determine whether the user is granted Power user privileges.
      */
     GrantPoweruserPrivileges?: BooleanEnumType;
   }

@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "DeviceFarm",
+        "description": "Introduces support for using our desktop testing service with applications hosted within your Virtual Private Cloud (VPC)."
+    },
+    {
+        "type": "feature",
+        "category": "FSx",
+        "description": "This release adds LZ4 data compression support to FSx for Lustre to reduce storage consumption of both file system storage and file system backups."
+    },
+    {
+        "type": "feature",
+        "category": "IoTEvents",
+        "description": "Releasing new APIs for AWS IoT Events Alarms"
+    },
+    {
+        "type": "feature",
+        "category": "IoTEventsData",
+        "description": "Releasing new APIs for AWS IoT Events Alarms"
+    },
+    {
+        "type": "feature",
+        "category": "IoTSiteWise",
+        "description": "IoT SiteWise Monitor Portal API updates to add alarms feature configuration."
+    },
+    {
+        "type": "feature",
+        "category": "Kendra",
+        "description": "Amazon Kendra now suggests popular queries in order to help guide query typing and help overall accuracy."
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "R6a instances are powered by 3rd generation AMD EPYC (Milan) processors delivering all-core turbo frequency of 3.6 GHz. C6id, M6id, and R6id instances are powered by 3rd generation Intel Xeon Scalable processor (Ice Lake) delivering all-core turbo frequency of 3.5 GHz."
+    },
+    {
+        "type": "feature",
+        "category": "ForecastQueryService",
+        "description": "releasing What-If Analysis APIs"
+    },
+    {
+        "type": "feature",
+        "category": "ForecastService",
+        "description": "releasing What-If Analysis APIs and update ARN regex pattern to be more strict in accordance with security recommendation"
+    },
+    {
+        "type": "feature",
+        "category": "IoTSiteWise",
+        "description": "Enable non-unique asset names under different hierarchies"
+    },
+    {
+        "type": "feature",
+        "category": "LexModelsV2",
+        "description": "This release introduces a new feature to stop a running BotRecommendation Job for Automated Chatbot Designer."
+    },
+    {
+        "type": "feature",
+        "category": "SecurityHub",
+        "description": "Added new resource details objects to ASFF, including resources for AwsBackupBackupVault, AwsBackupBackupPlan and AwsBackupRecoveryPoint. Added FixAvailable, FixedInVersion and Remediation  to Vulnerability."
+    },
+    {
+        "type": "feature",
+        "category": "SupportApp",
+        "description": "This is the initial SDK release for the AWS Support App in Slack."
+    }
+]

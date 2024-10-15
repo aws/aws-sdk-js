@@ -1,0 +1,47 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudTrail",
+        "description": "This release includes support for exporting CloudTrail Lake query results to an Amazon S3 bucket."
+    },
+    {
+        "type": "feature",
+        "category": "ConfigService",
+        "description": "This release adds resourceType enums for AppConfig, AppSync, DataSync, EC2, EKS, Glue, GuardDuty, SageMaker, ServiceDiscovery, SES, Route53 types."
+    },
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "This release adds API support for managing phone numbers that can be used across multiple AWS regions through telephony traffic distribution."
+    },
+    {
+        "type": "feature",
+        "category": "EventBridge",
+        "description": "Updates internal logic for constructing API endpoints. We have added rule-based endpoints and internal model parameters."
+    },
+    {
+        "type": "feature",
+        "category": "ManagedBlockchain",
+        "description": "Adding new Accessor APIs for Amazon Managed Blockchain"
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "Updates internal logic for constructing API endpoints. We have added rule-based endpoints and internal model parameters."
+    },
+    {
+        "type": "feature",
+        "category": "S3Control",
+        "description": "Updates internal logic for constructing API endpoints. We have added rule-based endpoints and internal model parameters."
+    },
+    {
+        "type": "feature",
+        "category": "SupportApp",
+        "description": "This release adds the RegisterSlackWorkspaceForOrganization API. You can use the API to register a Slack workspace for an AWS account that is part of an organization."
+    },
+    {
+        "type": "feature",
+        "category": "WorkSpacesWeb",
+        "description": "WorkSpaces Web now supports user access logging for recording session start, stop, and URL navigation."
+    }
+]

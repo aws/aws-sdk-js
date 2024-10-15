@@ -13,10 +13,7 @@ Feature: Amazon Relational Database Service
   Scenario: Error handling
     Given I create a RDS security group with prefix name ""
     Then the error code should be "InvalidParameterValue"
-    Then the error message should be:
-    """
-    DBSecurityGroupName is required
-    """
+    And the status code should be 400
 
   @pagination
   Scenario: Paginating responses

@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "EMR",
+        "description": "Add support for customers to modify cluster attribute auto-terminate post cluster launch"
+    }
+]

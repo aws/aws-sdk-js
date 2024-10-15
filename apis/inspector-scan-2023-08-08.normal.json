@@ -1,0 +1,87 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2023-08-08",
+    "endpointPrefix": "inspector-scan",
+    "jsonVersion": "1.1",
+    "protocol": "rest-json",
+    "serviceAbbreviation": "inspector-scan",
+    "serviceFullName": "Inspector Scan",
+    "serviceId": "Inspector Scan",
+    "signatureVersion": "v4",
+    "signingName": "inspector-scan",
+    "uid": "inspector-scan-2023-08-08"
+  },
+  "operations": {
+    "ScanSbom": {
+      "name": "ScanSbom",
+      "http": {
+        "method": "POST",
+        "requestUri": "/scan/sbom",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ScanSbomRequest"
+      },
+      "output": {
+        "shape": "ScanSbomResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Scans a provided CycloneDX 1.5 SBOM and reports on any vulnerabilities discovered in that SBOM. You can generate compatible SBOMs for your resources using the <a href=\"\">Amazon Inspector SBOM generator</a>.</p>",
+      "idempotent": true
+    }
+  },
+  "shapes": {
+    "OutputFormat": {
+      "type": "string",
+      "enum": [
+        "CYCLONE_DX_1_5",
+        "INSPECTOR"
+      ]
+    },
+    "Sbom": {
+      "type": "structure",
+      "members": {},
+      "document": true
+    },
+    "ScanSbomRequest": {
+      "type": "structure",
+      "required": [
+        "sbom"
+      ],
+      "members": {
+        "sbom": {
+          "shape": "Sbom",
+          "documentation": "<p>The JSON file for the SBOM you want to scan. The SBOM must be in CycloneDX 1.5 format.</p>"
+        },
+        "outputFormat": {
+          "shape": "OutputFormat",
+          "documentation": "<p>The output format for the vulnerability report.</p>"
+        }
+      }
+    },
+    "ScanSbomResponse": {
+      "type": "structure",
+      "members": {
+        "sbom": {
+          "shape": "Sbom",
+          "documentation": "<p>The vulnerability report for the scanned SBOM.</p>"
+        }
+      }
+    }
+  },
+  "documentation": "<p>Amazon Inspector Scan is a vulnerability discovery service that scans a provided Software Bill of Materials (SBOM) for security vulnerabilities.</p>"
+}

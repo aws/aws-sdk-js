@@ -1,0 +1,12 @@
+---
+blank_issues_enabled: false
+contact_links:
+  - name: 🚀 Feature Request
+    url: https://github.com/aws/aws-sdk-js-v3
+    about: Feature requests are no longer accepted in this repository. Please migrate to AWS SDK for JavaScript v3.
+  - name: 📕 Documentation Issue
+    url: https://github.com/aws/aws-sdk-js-v3
+    about: Documentation requests are no longer accepted in this repository. Please migrate to AWS SDK for JavaScript v3.
+  - name: 💬 General Question
+    url: https://github.com/aws/aws-sdk-js/discussions/categories/q-a
+    about: Please ask and answer questions as a discussion thread

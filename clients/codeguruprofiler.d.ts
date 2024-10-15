@@ -28,11 +28,11 @@ declare class CodeGuruProfiler extends Service {
    */
   batchGetFrameMetricData(callback?: (err: AWSError, data: CodeGuruProfiler.Types.BatchGetFrameMetricDataResponse) => void): Request<CodeGuruProfiler.Types.BatchGetFrameMetricDataResponse, AWSError>;
   /**
-   *  Used by profiler agents to report their current state and to receive remote configuration updates. For example, ConfigureAgent can be used to tell and agent whether to profile or not and for how long to return profiling data. 
+   *  Used by profiler agents to report their current state and to receive remote configuration updates. For example, ConfigureAgent can be used to tell an agent whether to profile or not and for how long to return profiling data. 
    */
   configureAgent(params: CodeGuruProfiler.Types.ConfigureAgentRequest, callback?: (err: AWSError, data: CodeGuruProfiler.Types.ConfigureAgentResponse) => void): Request<CodeGuruProfiler.Types.ConfigureAgentResponse, AWSError>;
   /**
-   *  Used by profiler agents to report their current state and to receive remote configuration updates. For example, ConfigureAgent can be used to tell and agent whether to profile or not and for how long to return profiling data. 
+   *  Used by profiler agents to report their current state and to receive remote configuration updates. For example, ConfigureAgent can be used to tell an agent whether to profile or not and for how long to return profiling data. 
    */
   configureAgent(callback?: (err: AWSError, data: CodeGuruProfiler.Types.ConfigureAgentResponse) => void): Request<CodeGuruProfiler.Types.ConfigureAgentResponse, AWSError>;
   /**
@@ -234,7 +234,7 @@ declare namespace CodeGuruProfiler {
      */
     profilingEnabled: Boolean;
   }
-  export type AgentParameterField = "MaxStackDepth"|"MemoryUsageLimitPercent"|"MinimumTimeForReportingInMilliseconds"|"ReportingIntervalInMilliseconds"|"SamplingIntervalInMilliseconds"|string;
+  export type AgentParameterField = "SamplingIntervalInMilliseconds"|"ReportingIntervalInMilliseconds"|"MinimumTimeForReportingInMilliseconds"|"MemoryUsageLimitPercent"|"MaxStackDepth"|string;
   export type AgentParameters = {[key: string]: String};
   export type AgentProfile = Buffer|Uint8Array|Blob|string;
   export type AggregatedProfile = Buffer|Uint8Array|Blob|string;
@@ -248,7 +248,7 @@ declare namespace CodeGuruProfiler {
      */
     start?: Timestamp;
   }
-  export type AggregationPeriod = "P1D"|"PT1H"|"PT5M"|string;
+  export type AggregationPeriod = "PT5M"|"PT1H"|"P1D"|string;
   export type Anomalies = Anomaly[];
   export interface Anomaly {
     /**
@@ -355,7 +355,7 @@ declare namespace CodeGuruProfiler {
   export type ChannelUri = string;
   export type Channels = Channel[];
   export type ClientToken = string;
-  export type ComputePlatform = "AWSLambda"|"Default"|string;
+  export type ComputePlatform = "Default"|"AWSLambda"|string;
   export interface ConfigureAgentRequest {
     /**
      *  A universally unique identifier (UUID) for a profiling instance. For example, if the profiling instance is an Amazon EC2 instance, it is the instance ID. If it is an AWS Fargate container, it is the container's task ID. 
@@ -427,7 +427,7 @@ declare namespace CodeGuruProfiler {
   export type Double = number;
   export type EventPublisher = "AnomalyDetection"|string;
   export type EventPublishers = EventPublisher[];
-  export type FeedbackType = "Negative"|"Positive"|string;
+  export type FeedbackType = "Positive"|"Negative"|string;
   export type FindingsReportId = string;
   export type FindingsReportSummaries = FindingsReportSummary[];
   export interface FindingsReportSummary {
@@ -475,7 +475,8 @@ declare namespace CodeGuruProfiler {
      */
     values: FrameMetricValues;
   }
-  export type FrameMetricValues = Double[];
+  export type FrameMetricValue = number;
+  export type FrameMetricValues = FrameMetricValue[];
   export type FrameMetrics = FrameMetric[];
   export interface GetFindingsReportAccountSummaryRequest {
     /**
@@ -746,7 +747,7 @@ declare namespace CodeGuruProfiler {
   export type MaxDepth = number;
   export type MaxResults = number;
   export type Metadata = {[key: string]: String};
-  export type MetadataField = "AgentId"|"AwsRequestId"|"ComputePlatform"|"ExecutionEnvironment"|"LambdaFunctionArn"|"LambdaMemoryLimitInMB"|"LambdaPreviousExecutionTimeInMilliseconds"|"LambdaRemainingTimeInMilliseconds"|"LambdaTimeGapBetweenInvokesInMilliseconds"|string;
+  export type MetadataField = "ComputePlatform"|"AgentId"|"AwsRequestId"|"ExecutionEnvironment"|"LambdaFunctionArn"|"LambdaMemoryLimitInMB"|"LambdaRemainingTimeInMilliseconds"|"LambdaTimeGapBetweenInvokesInMilliseconds"|"LambdaPreviousExecutionTimeInMilliseconds"|string;
   export interface Metric {
     /**
      *  The name of the method that appears as a frame in any stack in a profile. 
@@ -768,7 +769,7 @@ declare namespace CodeGuruProfiler {
      */
     channels?: Channels;
   }
-  export type OrderBy = "TimestampAscending"|"TimestampDescending"|string;
+  export type OrderBy = "TimestampDescending"|"TimestampAscending"|string;
   export type PaginationToken = string;
   export interface Pattern {
     /**

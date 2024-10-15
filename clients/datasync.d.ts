@@ -12,181 +12,317 @@ declare class DataSync extends Service {
   constructor(options?: DataSync.Types.ClientConfiguration)
   config: Config & DataSync.Types.ClientConfiguration;
   /**
-   * Cancels execution of a task.  When you cancel a task execution, the transfer of some files is abruptly interrupted. The contents of files that are transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution on the same task and you allow the task execution to complete, file content on the destination is complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, AWS DataSync successfully complete the transfer when you start the next task execution.
+   * Creates an Amazon Web Services resource for an on-premises storage system that you want DataSync Discovery to collect information about.
+   */
+  addStorageSystem(params: DataSync.Types.AddStorageSystemRequest, callback?: (err: AWSError, data: DataSync.Types.AddStorageSystemResponse) => void): Request<DataSync.Types.AddStorageSystemResponse, AWSError>;
+  /**
+   * Creates an Amazon Web Services resource for an on-premises storage system that you want DataSync Discovery to collect information about.
+   */
+  addStorageSystem(callback?: (err: AWSError, data: DataSync.Types.AddStorageSystemResponse) => void): Request<DataSync.Types.AddStorageSystemResponse, AWSError>;
+  /**
+   * Stops an DataSync task execution that's in progress. The transfer of some files are abruptly interrupted. File contents that're transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution using the same task and allow it to finish, file content on the destination will be complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, DataSync successfully completes the transfer when you start the next task execution.
    */
   cancelTaskExecution(params: DataSync.Types.CancelTaskExecutionRequest, callback?: (err: AWSError, data: DataSync.Types.CancelTaskExecutionResponse) => void): Request<DataSync.Types.CancelTaskExecutionResponse, AWSError>;
   /**
-   * Cancels execution of a task.  When you cancel a task execution, the transfer of some files is abruptly interrupted. The contents of files that are transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution on the same task and you allow the task execution to complete, file content on the destination is complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, AWS DataSync successfully complete the transfer when you start the next task execution.
+   * Stops an DataSync task execution that's in progress. The transfer of some files are abruptly interrupted. File contents that're transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution using the same task and allow it to finish, file content on the destination will be complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, DataSync successfully completes the transfer when you start the next task execution.
    */
   cancelTaskExecution(callback?: (err: AWSError, data: DataSync.Types.CancelTaskExecutionResponse) => void): Request<DataSync.Types.CancelTaskExecutionResponse, AWSError>;
   /**
-   * Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region. You can activate the agent in a VPC (virtual private cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public internet. You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run.  Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks. 
+   * Activates an DataSync agent that you've deployed in your storage environment. The activation process associates the agent with your Amazon Web Services account. If you haven't deployed an agent yet, see the following topics to learn more:    Agent requirements     Create an agent     If you're transferring between Amazon Web Services storage services, you don't need a DataSync agent.  
    */
   createAgent(params: DataSync.Types.CreateAgentRequest, callback?: (err: AWSError, data: DataSync.Types.CreateAgentResponse) => void): Request<DataSync.Types.CreateAgentResponse, AWSError>;
   /**
-   * Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region. You can activate the agent in a VPC (virtual private cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public internet. You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run.  Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks. 
+   * Activates an DataSync agent that you've deployed in your storage environment. The activation process associates the agent with your Amazon Web Services account. If you haven't deployed an agent yet, see the following topics to learn more:    Agent requirements     Create an agent     If you're transferring between Amazon Web Services storage services, you don't need a DataSync agent.  
    */
   createAgent(callback?: (err: AWSError, data: DataSync.Types.CreateAgentResponse) => void): Request<DataSync.Types.CreateAgentResponse, AWSError>;
   /**
-   * Creates an endpoint for an Amazon EFS file system.
+   * Creates a transfer location for a Microsoft Azure Blob Storage container. DataSync can use this location as a transfer source or destination. Before you begin, make sure you know how DataSync accesses Azure Blob Storage and works with access tiers and blob types. You also need a DataSync agent that can connect to your container.
+   */
+  createLocationAzureBlob(params: DataSync.Types.CreateLocationAzureBlobRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationAzureBlobResponse) => void): Request<DataSync.Types.CreateLocationAzureBlobResponse, AWSError>;
+  /**
+   * Creates a transfer location for a Microsoft Azure Blob Storage container. DataSync can use this location as a transfer source or destination. Before you begin, make sure you know how DataSync accesses Azure Blob Storage and works with access tiers and blob types. You also need a DataSync agent that can connect to your container.
+   */
+  createLocationAzureBlob(callback?: (err: AWSError, data: DataSync.Types.CreateLocationAzureBlobResponse) => void): Request<DataSync.Types.CreateLocationAzureBlobResponse, AWSError>;
+  /**
+   * Creates a transfer location for an Amazon EFS file system. DataSync can use this location as a source or destination for transferring data. Before you begin, make sure that you understand how DataSync accesses Amazon EFS file systems.
    */
   createLocationEfs(params: DataSync.Types.CreateLocationEfsRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationEfsResponse) => void): Request<DataSync.Types.CreateLocationEfsResponse, AWSError>;
   /**
-   * Creates an endpoint for an Amazon EFS file system.
+   * Creates a transfer location for an Amazon EFS file system. DataSync can use this location as a source or destination for transferring data. Before you begin, make sure that you understand how DataSync accesses Amazon EFS file systems.
    */
   createLocationEfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationEfsResponse) => void): Request<DataSync.Types.CreateLocationEfsResponse, AWSError>;
   /**
-   * Creates an endpoint for an Amazon FSx for Windows file system.
+   * Creates a transfer location for an Amazon FSx for Lustre file system. DataSync can use this location as a source or destination for transferring data. Before you begin, make sure that you understand how DataSync accesses FSx for Lustre file systems.
+   */
+  createLocationFsxLustre(params: DataSync.Types.CreateLocationFsxLustreRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxLustreResponse) => void): Request<DataSync.Types.CreateLocationFsxLustreResponse, AWSError>;
+  /**
+   * Creates a transfer location for an Amazon FSx for Lustre file system. DataSync can use this location as a source or destination for transferring data. Before you begin, make sure that you understand how DataSync accesses FSx for Lustre file systems.
+   */
+  createLocationFsxLustre(callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxLustreResponse) => void): Request<DataSync.Types.CreateLocationFsxLustreResponse, AWSError>;
+  /**
+   * Creates a transfer location for an Amazon FSx for NetApp ONTAP file system. DataSync can use this location as a source or destination for transferring data. Before you begin, make sure that you understand how DataSync accesses FSx for ONTAP file systems.
+   */
+  createLocationFsxOntap(params: DataSync.Types.CreateLocationFsxOntapRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxOntapResponse) => void): Request<DataSync.Types.CreateLocationFsxOntapResponse, AWSError>;
+  /**
+   * Creates a transfer location for an Amazon FSx for NetApp ONTAP file system. DataSync can use this location as a source or destination for transferring data. Before you begin, make sure that you understand how DataSync accesses FSx for ONTAP file systems.
+   */
+  createLocationFsxOntap(callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxOntapResponse) => void): Request<DataSync.Types.CreateLocationFsxOntapResponse, AWSError>;
+  /**
+   * Creates a transfer location for an Amazon FSx for OpenZFS file system. DataSync can use this location as a source or destination for transferring data. Before you begin, make sure that you understand how DataSync accesses FSx for OpenZFS file systems.  Request parameters related to SMB aren't supported with the CreateLocationFsxOpenZfs operation. 
+   */
+  createLocationFsxOpenZfs(params: DataSync.Types.CreateLocationFsxOpenZfsRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxOpenZfsResponse) => void): Request<DataSync.Types.CreateLocationFsxOpenZfsResponse, AWSError>;
+  /**
+   * Creates a transfer location for an Amazon FSx for OpenZFS file system. DataSync can use this location as a source or destination for transferring data. Before you begin, make sure that you understand how DataSync accesses FSx for OpenZFS file systems.  Request parameters related to SMB aren't supported with the CreateLocationFsxOpenZfs operation. 
+   */
+  createLocationFsxOpenZfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxOpenZfsResponse) => void): Request<DataSync.Types.CreateLocationFsxOpenZfsResponse, AWSError>;
+  /**
+   * Creates a transfer location for an Amazon FSx for Windows File Server file system. DataSync can use this location as a source or destination for transferring data. Before you begin, make sure that you understand how DataSync accesses FSx for Windows File Server file systems.
    */
   createLocationFsxWindows(params: DataSync.Types.CreateLocationFsxWindowsRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxWindowsResponse) => void): Request<DataSync.Types.CreateLocationFsxWindowsResponse, AWSError>;
   /**
-   * Creates an endpoint for an Amazon FSx for Windows file system.
+   * Creates a transfer location for an Amazon FSx for Windows File Server file system. DataSync can use this location as a source or destination for transferring data. Before you begin, make sure that you understand how DataSync accesses FSx for Windows File Server file systems.
    */
   createLocationFsxWindows(callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxWindowsResponse) => void): Request<DataSync.Types.CreateLocationFsxWindowsResponse, AWSError>;
   /**
-   * Defines a file system on a Network File System (NFS) server that can be read from or written to.
+   * Creates a transfer location for a Hadoop Distributed File System (HDFS). DataSync can use this location as a source or destination for transferring data. Before you begin, make sure that you understand how DataSync accesses HDFS clusters.
+   */
+  createLocationHdfs(params: DataSync.Types.CreateLocationHdfsRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationHdfsResponse) => void): Request<DataSync.Types.CreateLocationHdfsResponse, AWSError>;
+  /**
+   * Creates a transfer location for a Hadoop Distributed File System (HDFS). DataSync can use this location as a source or destination for transferring data. Before you begin, make sure that you understand how DataSync accesses HDFS clusters.
+   */
+  createLocationHdfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationHdfsResponse) => void): Request<DataSync.Types.CreateLocationHdfsResponse, AWSError>;
+  /**
+   * Creates a transfer location for a Network File System (NFS) file server. DataSync can use this location as a source or destination for transferring data. Before you begin, make sure that you understand how DataSync accesses NFS file servers.  If you're copying data to or from an Snowcone device, you can also use CreateLocationNfs to create your transfer location. For more information, see Configuring transfers with Snowcone. 
    */
   createLocationNfs(params: DataSync.Types.CreateLocationNfsRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationNfsResponse) => void): Request<DataSync.Types.CreateLocationNfsResponse, AWSError>;
   /**
-   * Defines a file system on a Network File System (NFS) server that can be read from or written to.
+   * Creates a transfer location for a Network File System (NFS) file server. DataSync can use this location as a source or destination for transferring data. Before you begin, make sure that you understand how DataSync accesses NFS file servers.  If you're copying data to or from an Snowcone device, you can also use CreateLocationNfs to create your transfer location. For more information, see Configuring transfers with Snowcone. 
    */
   createLocationNfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationNfsResponse) => void): Request<DataSync.Types.CreateLocationNfsResponse, AWSError>;
   /**
-   * Creates an endpoint for a self-managed object storage bucket. For more information about self-managed object storage locations, see create-object-location.
+   * Creates a transfer location for an object storage system. DataSync can use this location as a source or destination for transferring data. Before you begin, make sure that you understand the prerequisites for DataSync to work with object storage systems.
    */
   createLocationObjectStorage(params: DataSync.Types.CreateLocationObjectStorageRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationObjectStorageResponse) => void): Request<DataSync.Types.CreateLocationObjectStorageResponse, AWSError>;
   /**
-   * Creates an endpoint for a self-managed object storage bucket. For more information about self-managed object storage locations, see create-object-location.
+   * Creates a transfer location for an object storage system. DataSync can use this location as a source or destination for transferring data. Before you begin, make sure that you understand the prerequisites for DataSync to work with object storage systems.
    */
   createLocationObjectStorage(callback?: (err: AWSError, data: DataSync.Types.CreateLocationObjectStorageResponse) => void): Request<DataSync.Types.CreateLocationObjectStorageResponse, AWSError>;
   /**
-   * Creates an endpoint for an Amazon S3 bucket. For more information, see https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli in the AWS DataSync User Guide.
+   * Creates a transfer location for an Amazon S3 bucket. DataSync can use this location as a source or destination for transferring data.  Before you begin, make sure that you read the following topics:    Storage class considerations with Amazon S3 locations     Evaluating S3 request costs when using DataSync      For more information, see Configuring transfers with Amazon S3.
    */
   createLocationS3(params: DataSync.Types.CreateLocationS3Request, callback?: (err: AWSError, data: DataSync.Types.CreateLocationS3Response) => void): Request<DataSync.Types.CreateLocationS3Response, AWSError>;
   /**
-   * Creates an endpoint for an Amazon S3 bucket. For more information, see https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli in the AWS DataSync User Guide.
+   * Creates a transfer location for an Amazon S3 bucket. DataSync can use this location as a source or destination for transferring data.  Before you begin, make sure that you read the following topics:    Storage class considerations with Amazon S3 locations     Evaluating S3 request costs when using DataSync      For more information, see Configuring transfers with Amazon S3.
    */
   createLocationS3(callback?: (err: AWSError, data: DataSync.Types.CreateLocationS3Response) => void): Request<DataSync.Types.CreateLocationS3Response, AWSError>;
   /**
-   * Defines a file system on a Server Message Block (SMB) server that can be read from or written to.
+   * Creates a transfer location for a Server Message Block (SMB) file server. DataSync can use this location as a source or destination for transferring data. Before you begin, make sure that you understand how DataSync accesses SMB file servers.
    */
   createLocationSmb(params: DataSync.Types.CreateLocationSmbRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationSmbResponse) => void): Request<DataSync.Types.CreateLocationSmbResponse, AWSError>;
   /**
-   * Defines a file system on a Server Message Block (SMB) server that can be read from or written to.
+   * Creates a transfer location for a Server Message Block (SMB) file server. DataSync can use this location as a source or destination for transferring data. Before you begin, make sure that you understand how DataSync accesses SMB file servers.
    */
   createLocationSmb(callback?: (err: AWSError, data: DataSync.Types.CreateLocationSmbResponse) => void): Request<DataSync.Types.CreateLocationSmbResponse, AWSError>;
   /**
-   * Creates a task. A task is a set of two locations (source and destination) and a set of Options that you use to control the behavior of a task. If you don't specify Options when you create a task, AWS DataSync populates them with service defaults. When you create a task, it first enters the CREATING state. During CREATING AWS DataSync attempts to mount the on-premises Network File System (NFS) location. The task transitions to the AVAILABLE state without waiting for the AWS location to become mounted. If required, AWS DataSync mounts the AWS location before each task execution. If an agent that is associated with a source (NFS) location goes offline, the task transitions to the UNAVAILABLE status. If the status of the task remains in the CREATING status for more than a few minutes, it means that your agent might be having trouble mounting the source NFS file system. Check the task's ErrorCode and ErrorDetail. Mount issues are often caused by either a misconfigured firewall or a mistyped NFS server hostname.
+   * Configures a task, which defines where and how DataSync transfers your data. A task includes a source location, destination location, and transfer options (such as bandwidth limits, scheduling, and more).  If you're planning to transfer data to or from an Amazon S3 location, review how DataSync can affect your S3 request charges and the DataSync pricing page before you begin. 
    */
   createTask(params: DataSync.Types.CreateTaskRequest, callback?: (err: AWSError, data: DataSync.Types.CreateTaskResponse) => void): Request<DataSync.Types.CreateTaskResponse, AWSError>;
   /**
-   * Creates a task. A task is a set of two locations (source and destination) and a set of Options that you use to control the behavior of a task. If you don't specify Options when you create a task, AWS DataSync populates them with service defaults. When you create a task, it first enters the CREATING state. During CREATING AWS DataSync attempts to mount the on-premises Network File System (NFS) location. The task transitions to the AVAILABLE state without waiting for the AWS location to become mounted. If required, AWS DataSync mounts the AWS location before each task execution. If an agent that is associated with a source (NFS) location goes offline, the task transitions to the UNAVAILABLE status. If the status of the task remains in the CREATING status for more than a few minutes, it means that your agent might be having trouble mounting the source NFS file system. Check the task's ErrorCode and ErrorDetail. Mount issues are often caused by either a misconfigured firewall or a mistyped NFS server hostname.
+   * Configures a task, which defines where and how DataSync transfers your data. A task includes a source location, destination location, and transfer options (such as bandwidth limits, scheduling, and more).  If you're planning to transfer data to or from an Amazon S3 location, review how DataSync can affect your S3 request charges and the DataSync pricing page before you begin. 
    */
   createTask(callback?: (err: AWSError, data: DataSync.Types.CreateTaskResponse) => void): Request<DataSync.Types.CreateTaskResponse, AWSError>;
   /**
-   * Deletes an agent. To specify which agent to delete, use the Amazon Resource Name (ARN) of the agent in your request. The operation disassociates the agent from your AWS account. However, it doesn't delete the agent virtual machine (VM) from your on-premises environment.
+   * Removes an DataSync agent resource from your Amazon Web Services account. Keep in mind that this operation (which can't be undone) doesn't remove the agent's virtual machine (VM) or Amazon EC2 instance from your storage environment. For next steps, you can delete the VM or instance from your storage environment or reuse it to activate a new agent.
    */
   deleteAgent(params: DataSync.Types.DeleteAgentRequest, callback?: (err: AWSError, data: DataSync.Types.DeleteAgentResponse) => void): Request<DataSync.Types.DeleteAgentResponse, AWSError>;
   /**
-   * Deletes an agent. To specify which agent to delete, use the Amazon Resource Name (ARN) of the agent in your request. The operation disassociates the agent from your AWS account. However, it doesn't delete the agent virtual machine (VM) from your on-premises environment.
+   * Removes an DataSync agent resource from your Amazon Web Services account. Keep in mind that this operation (which can't be undone) doesn't remove the agent's virtual machine (VM) or Amazon EC2 instance from your storage environment. For next steps, you can delete the VM or instance from your storage environment or reuse it to activate a new agent.
    */
   deleteAgent(callback?: (err: AWSError, data: DataSync.Types.DeleteAgentResponse) => void): Request<DataSync.Types.DeleteAgentResponse, AWSError>;
   /**
-   * Deletes the configuration of a location used by AWS DataSync. 
+   * Deletes a transfer location resource from DataSync. 
    */
   deleteLocation(params: DataSync.Types.DeleteLocationRequest, callback?: (err: AWSError, data: DataSync.Types.DeleteLocationResponse) => void): Request<DataSync.Types.DeleteLocationResponse, AWSError>;
   /**
-   * Deletes the configuration of a location used by AWS DataSync. 
+   * Deletes a transfer location resource from DataSync. 
    */
   deleteLocation(callback?: (err: AWSError, data: DataSync.Types.DeleteLocationResponse) => void): Request<DataSync.Types.DeleteLocationResponse, AWSError>;
   /**
-   * Deletes a task.
+   * Deletes a transfer task resource from DataSync.
    */
   deleteTask(params: DataSync.Types.DeleteTaskRequest, callback?: (err: AWSError, data: DataSync.Types.DeleteTaskResponse) => void): Request<DataSync.Types.DeleteTaskResponse, AWSError>;
   /**
-   * Deletes a task.
+   * Deletes a transfer task resource from DataSync.
    */
   deleteTask(callback?: (err: AWSError, data: DataSync.Types.DeleteTaskResponse) => void): Request<DataSync.Types.DeleteTaskResponse, AWSError>;
   /**
-   * Returns metadata such as the name, the network interfaces, and the status (that is, whether the agent is running or not) for an agent. To specify which agent to describe, use the Amazon Resource Name (ARN) of the agent in your request. 
+   * Returns information about an DataSync agent, such as its name, service endpoint type, and status.
    */
   describeAgent(params: DataSync.Types.DescribeAgentRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeAgentResponse) => void): Request<DataSync.Types.DescribeAgentResponse, AWSError>;
   /**
-   * Returns metadata such as the name, the network interfaces, and the status (that is, whether the agent is running or not) for an agent. To specify which agent to describe, use the Amazon Resource Name (ARN) of the agent in your request. 
+   * Returns information about an DataSync agent, such as its name, service endpoint type, and status.
    */
   describeAgent(callback?: (err: AWSError, data: DataSync.Types.DescribeAgentResponse) => void): Request<DataSync.Types.DescribeAgentResponse, AWSError>;
   /**
-   * Returns metadata, such as the path information about an Amazon EFS location.
+   * Returns information about a DataSync discovery job.
+   */
+  describeDiscoveryJob(params: DataSync.Types.DescribeDiscoveryJobRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeDiscoveryJobResponse) => void): Request<DataSync.Types.DescribeDiscoveryJobResponse, AWSError>;
+  /**
+   * Returns information about a DataSync discovery job.
+   */
+  describeDiscoveryJob(callback?: (err: AWSError, data: DataSync.Types.DescribeDiscoveryJobResponse) => void): Request<DataSync.Types.DescribeDiscoveryJobResponse, AWSError>;
+  /**
+   * Provides details about how an DataSync transfer location for Microsoft Azure Blob Storage is configured.
+   */
+  describeLocationAzureBlob(params: DataSync.Types.DescribeLocationAzureBlobRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationAzureBlobResponse) => void): Request<DataSync.Types.DescribeLocationAzureBlobResponse, AWSError>;
+  /**
+   * Provides details about how an DataSync transfer location for Microsoft Azure Blob Storage is configured.
+   */
+  describeLocationAzureBlob(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationAzureBlobResponse) => void): Request<DataSync.Types.DescribeLocationAzureBlobResponse, AWSError>;
+  /**
+   * Provides details about how an DataSync transfer location for an Amazon EFS file system is configured.
    */
   describeLocationEfs(params: DataSync.Types.DescribeLocationEfsRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationEfsResponse) => void): Request<DataSync.Types.DescribeLocationEfsResponse, AWSError>;
   /**
-   * Returns metadata, such as the path information about an Amazon EFS location.
+   * Provides details about how an DataSync transfer location for an Amazon EFS file system is configured.
    */
   describeLocationEfs(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationEfsResponse) => void): Request<DataSync.Types.DescribeLocationEfsResponse, AWSError>;
   /**
-   * Returns metadata, such as the path information about an Amazon FSx for Windows location.
+   * Provides details about how an DataSync transfer location for an Amazon FSx for Lustre file system is configured.
+   */
+  describeLocationFsxLustre(params: DataSync.Types.DescribeLocationFsxLustreRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxLustreResponse) => void): Request<DataSync.Types.DescribeLocationFsxLustreResponse, AWSError>;
+  /**
+   * Provides details about how an DataSync transfer location for an Amazon FSx for Lustre file system is configured.
+   */
+  describeLocationFsxLustre(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxLustreResponse) => void): Request<DataSync.Types.DescribeLocationFsxLustreResponse, AWSError>;
+  /**
+   * Provides details about how an DataSync transfer location for an Amazon FSx for NetApp ONTAP file system is configured.  If your location uses SMB, the DescribeLocationFsxOntap operation doesn't actually return a Password. 
+   */
+  describeLocationFsxOntap(params: DataSync.Types.DescribeLocationFsxOntapRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxOntapResponse) => void): Request<DataSync.Types.DescribeLocationFsxOntapResponse, AWSError>;
+  /**
+   * Provides details about how an DataSync transfer location for an Amazon FSx for NetApp ONTAP file system is configured.  If your location uses SMB, the DescribeLocationFsxOntap operation doesn't actually return a Password. 
+   */
+  describeLocationFsxOntap(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxOntapResponse) => void): Request<DataSync.Types.DescribeLocationFsxOntapResponse, AWSError>;
+  /**
+   * Provides details about how an DataSync transfer location for an Amazon FSx for OpenZFS file system is configured.  Response elements related to SMB aren't supported with the DescribeLocationFsxOpenZfs operation. 
+   */
+  describeLocationFsxOpenZfs(params: DataSync.Types.DescribeLocationFsxOpenZfsRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxOpenZfsResponse) => void): Request<DataSync.Types.DescribeLocationFsxOpenZfsResponse, AWSError>;
+  /**
+   * Provides details about how an DataSync transfer location for an Amazon FSx for OpenZFS file system is configured.  Response elements related to SMB aren't supported with the DescribeLocationFsxOpenZfs operation. 
+   */
+  describeLocationFsxOpenZfs(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxOpenZfsResponse) => void): Request<DataSync.Types.DescribeLocationFsxOpenZfsResponse, AWSError>;
+  /**
+   * Provides details about how an DataSync transfer location for an Amazon FSx for Windows File Server file system is configured.
    */
   describeLocationFsxWindows(params: DataSync.Types.DescribeLocationFsxWindowsRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxWindowsResponse) => void): Request<DataSync.Types.DescribeLocationFsxWindowsResponse, AWSError>;
   /**
-   * Returns metadata, such as the path information about an Amazon FSx for Windows location.
+   * Provides details about how an DataSync transfer location for an Amazon FSx for Windows File Server file system is configured.
    */
   describeLocationFsxWindows(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxWindowsResponse) => void): Request<DataSync.Types.DescribeLocationFsxWindowsResponse, AWSError>;
   /**
-   * Returns metadata, such as the path information, about an NFS location.
+   * Provides details about how an DataSync transfer location for a Hadoop Distributed File System (HDFS) is configured.
+   */
+  describeLocationHdfs(params: DataSync.Types.DescribeLocationHdfsRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationHdfsResponse) => void): Request<DataSync.Types.DescribeLocationHdfsResponse, AWSError>;
+  /**
+   * Provides details about how an DataSync transfer location for a Hadoop Distributed File System (HDFS) is configured.
+   */
+  describeLocationHdfs(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationHdfsResponse) => void): Request<DataSync.Types.DescribeLocationHdfsResponse, AWSError>;
+  /**
+   * Provides details about how an DataSync transfer location for a Network File System (NFS) file server is configured.
    */
   describeLocationNfs(params: DataSync.Types.DescribeLocationNfsRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationNfsResponse) => void): Request<DataSync.Types.DescribeLocationNfsResponse, AWSError>;
   /**
-   * Returns metadata, such as the path information, about an NFS location.
+   * Provides details about how an DataSync transfer location for a Network File System (NFS) file server is configured.
    */
   describeLocationNfs(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationNfsResponse) => void): Request<DataSync.Types.DescribeLocationNfsResponse, AWSError>;
   /**
-   * Returns metadata about a self-managed object storage server location. For more information about self-managed object storage locations, see create-object-location.
+   * Provides details about how an DataSync transfer location for an object storage system is configured.
    */
   describeLocationObjectStorage(params: DataSync.Types.DescribeLocationObjectStorageRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationObjectStorageResponse) => void): Request<DataSync.Types.DescribeLocationObjectStorageResponse, AWSError>;
   /**
-   * Returns metadata about a self-managed object storage server location. For more information about self-managed object storage locations, see create-object-location.
+   * Provides details about how an DataSync transfer location for an object storage system is configured.
    */
   describeLocationObjectStorage(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationObjectStorageResponse) => void): Request<DataSync.Types.DescribeLocationObjectStorageResponse, AWSError>;
   /**
-   * Returns metadata, such as bucket name, about an Amazon S3 bucket location.
+   * Provides details about how an DataSync transfer location for an S3 bucket is configured.
    */
   describeLocationS3(params: DataSync.Types.DescribeLocationS3Request, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationS3Response) => void): Request<DataSync.Types.DescribeLocationS3Response, AWSError>;
   /**
-   * Returns metadata, such as bucket name, about an Amazon S3 bucket location.
+   * Provides details about how an DataSync transfer location for an S3 bucket is configured.
    */
   describeLocationS3(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationS3Response) => void): Request<DataSync.Types.DescribeLocationS3Response, AWSError>;
   /**
-   * Returns metadata, such as the path and user information about an SMB location.
+   * Provides details about how an DataSync transfer location for a Server Message Block (SMB) file server is configured.
    */
   describeLocationSmb(params: DataSync.Types.DescribeLocationSmbRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationSmbResponse) => void): Request<DataSync.Types.DescribeLocationSmbResponse, AWSError>;
   /**
-   * Returns metadata, such as the path and user information about an SMB location.
+   * Provides details about how an DataSync transfer location for a Server Message Block (SMB) file server is configured.
    */
   describeLocationSmb(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationSmbResponse) => void): Request<DataSync.Types.DescribeLocationSmbResponse, AWSError>;
   /**
-   * Returns metadata about a task.
+   * Returns information about an on-premises storage system that you're using with DataSync Discovery.
+   */
+  describeStorageSystem(params: DataSync.Types.DescribeStorageSystemRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeStorageSystemResponse) => void): Request<DataSync.Types.DescribeStorageSystemResponse, AWSError>;
+  /**
+   * Returns information about an on-premises storage system that you're using with DataSync Discovery.
+   */
+  describeStorageSystem(callback?: (err: AWSError, data: DataSync.Types.DescribeStorageSystemResponse) => void): Request<DataSync.Types.DescribeStorageSystemResponse, AWSError>;
+  /**
+   * Returns information, including performance data and capacity usage, which DataSync Discovery collects about a specific resource in your-premises storage system.
+   */
+  describeStorageSystemResourceMetrics(params: DataSync.Types.DescribeStorageSystemResourceMetricsRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeStorageSystemResourceMetricsResponse) => void): Request<DataSync.Types.DescribeStorageSystemResourceMetricsResponse, AWSError>;
+  /**
+   * Returns information, including performance data and capacity usage, which DataSync Discovery collects about a specific resource in your-premises storage system.
+   */
+  describeStorageSystemResourceMetrics(callback?: (err: AWSError, data: DataSync.Types.DescribeStorageSystemResourceMetricsResponse) => void): Request<DataSync.Types.DescribeStorageSystemResourceMetricsResponse, AWSError>;
+  /**
+   * Returns information that DataSync Discovery collects about resources in your on-premises storage system.
+   */
+  describeStorageSystemResources(params: DataSync.Types.DescribeStorageSystemResourcesRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeStorageSystemResourcesResponse) => void): Request<DataSync.Types.DescribeStorageSystemResourcesResponse, AWSError>;
+  /**
+   * Returns information that DataSync Discovery collects about resources in your on-premises storage system.
+   */
+  describeStorageSystemResources(callback?: (err: AWSError, data: DataSync.Types.DescribeStorageSystemResourcesResponse) => void): Request<DataSync.Types.DescribeStorageSystemResourcesResponse, AWSError>;
+  /**
+   * Provides information about a task, which defines where and how DataSync transfers your data.
    */
   describeTask(params: DataSync.Types.DescribeTaskRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeTaskResponse) => void): Request<DataSync.Types.DescribeTaskResponse, AWSError>;
   /**
-   * Returns metadata about a task.
+   * Provides information about a task, which defines where and how DataSync transfers your data.
    */
   describeTask(callback?: (err: AWSError, data: DataSync.Types.DescribeTaskResponse) => void): Request<DataSync.Types.DescribeTaskResponse, AWSError>;
   /**
-   * Returns detailed metadata about a task that is being executed.
+   * Provides information about an execution of your DataSync task. You can use this operation to help monitor the progress of an ongoing transfer or check the results of the transfer.
    */
   describeTaskExecution(params: DataSync.Types.DescribeTaskExecutionRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeTaskExecutionResponse) => void): Request<DataSync.Types.DescribeTaskExecutionResponse, AWSError>;
   /**
-   * Returns detailed metadata about a task that is being executed.
+   * Provides information about an execution of your DataSync task. You can use this operation to help monitor the progress of an ongoing transfer or check the results of the transfer.
    */
   describeTaskExecution(callback?: (err: AWSError, data: DataSync.Types.DescribeTaskExecutionResponse) => void): Request<DataSync.Types.DescribeTaskExecutionResponse, AWSError>;
   /**
-   * Returns a list of agents owned by an AWS account in the AWS Region specified in the request. The returned list is ordered by agent Amazon Resource Name (ARN). By default, this operation returns a maximum of 100 agents. This operation supports pagination that enables you to optionally reduce the number of agents returned in a response. If you have more agents than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a marker that you can specify in your next request to fetch the next page of agents.
+   * Creates recommendations about where to migrate your data to in Amazon Web Services. Recommendations are generated based on information that DataSync Discovery collects about your on-premises storage system's resources. For more information, see Recommendations provided by DataSync Discovery. Once generated, you can view your recommendations by using the DescribeStorageSystemResources operation.
+   */
+  generateRecommendations(params: DataSync.Types.GenerateRecommendationsRequest, callback?: (err: AWSError, data: DataSync.Types.GenerateRecommendationsResponse) => void): Request<DataSync.Types.GenerateRecommendationsResponse, AWSError>;
+  /**
+   * Creates recommendations about where to migrate your data to in Amazon Web Services. Recommendations are generated based on information that DataSync Discovery collects about your on-premises storage system's resources. For more information, see Recommendations provided by DataSync Discovery. Once generated, you can view your recommendations by using the DescribeStorageSystemResources operation.
+   */
+  generateRecommendations(callback?: (err: AWSError, data: DataSync.Types.GenerateRecommendationsResponse) => void): Request<DataSync.Types.GenerateRecommendationsResponse, AWSError>;
+  /**
+   * Returns a list of DataSync agents that belong to an Amazon Web Services account in the Amazon Web Services Region specified in the request. With pagination, you can reduce the number of agents returned in a response. If you get a truncated list of agents in a response, the response contains a marker that you can specify in your next request to fetch the next page of agents.  ListAgents is eventually consistent. This means the result of running the operation might not reflect that you just created or deleted an agent. For example, if you create an agent with CreateAgent and then immediately run ListAgents, that agent might not show up in the list right away. In situations like this, you can always confirm whether an agent has been created (or deleted) by using DescribeAgent.
    */
   listAgents(params: DataSync.Types.ListAgentsRequest, callback?: (err: AWSError, data: DataSync.Types.ListAgentsResponse) => void): Request<DataSync.Types.ListAgentsResponse, AWSError>;
   /**
-   * Returns a list of agents owned by an AWS account in the AWS Region specified in the request. The returned list is ordered by agent Amazon Resource Name (ARN). By default, this operation returns a maximum of 100 agents. This operation supports pagination that enables you to optionally reduce the number of agents returned in a response. If you have more agents than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a marker that you can specify in your next request to fetch the next page of agents.
+   * Returns a list of DataSync agents that belong to an Amazon Web Services account in the Amazon Web Services Region specified in the request. With pagination, you can reduce the number of agents returned in a response. If you get a truncated list of agents in a response, the response contains a marker that you can specify in your next request to fetch the next page of agents.  ListAgents is eventually consistent. This means the result of running the operation might not reflect that you just created or deleted an agent. For example, if you create an agent with CreateAgent and then immediately run ListAgents, that agent might not show up in the list right away. In situations like this, you can always confirm whether an agent has been created (or deleted) by using DescribeAgent.
    */
   listAgents(callback?: (err: AWSError, data: DataSync.Types.ListAgentsResponse) => void): Request<DataSync.Types.ListAgentsResponse, AWSError>;
+  /**
+   * Provides a list of the existing discovery jobs in the Amazon Web Services Region and Amazon Web Services account where you're using DataSync Discovery.
+   */
+  listDiscoveryJobs(params: DataSync.Types.ListDiscoveryJobsRequest, callback?: (err: AWSError, data: DataSync.Types.ListDiscoveryJobsResponse) => void): Request<DataSync.Types.ListDiscoveryJobsResponse, AWSError>;
+  /**
+   * Provides a list of the existing discovery jobs in the Amazon Web Services Region and Amazon Web Services account where you're using DataSync Discovery.
+   */
+  listDiscoveryJobs(callback?: (err: AWSError, data: DataSync.Types.ListDiscoveryJobsResponse) => void): Request<DataSync.Types.ListDiscoveryJobsResponse, AWSError>;
   /**
    * Returns a list of source and destination locations. If you have more locations than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a token that you can specify in your next request to fetch the next page of locations.
    */
@@ -196,374 +332,743 @@ declare class DataSync extends Service {
    */
   listLocations(callback?: (err: AWSError, data: DataSync.Types.ListLocationsResponse) => void): Request<DataSync.Types.ListLocationsResponse, AWSError>;
   /**
-   * Returns all the tags associated with a specified resource. 
+   * Lists the on-premises storage systems that you're using with DataSync Discovery.
+   */
+  listStorageSystems(params: DataSync.Types.ListStorageSystemsRequest, callback?: (err: AWSError, data: DataSync.Types.ListStorageSystemsResponse) => void): Request<DataSync.Types.ListStorageSystemsResponse, AWSError>;
+  /**
+   * Lists the on-premises storage systems that you're using with DataSync Discovery.
+   */
+  listStorageSystems(callback?: (err: AWSError, data: DataSync.Types.ListStorageSystemsResponse) => void): Request<DataSync.Types.ListStorageSystemsResponse, AWSError>;
+  /**
+   * Returns all the tags associated with an Amazon Web Services resource.
    */
   listTagsForResource(params: DataSync.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: DataSync.Types.ListTagsForResourceResponse) => void): Request<DataSync.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Returns all the tags associated with a specified resource. 
+   * Returns all the tags associated with an Amazon Web Services resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: DataSync.Types.ListTagsForResourceResponse) => void): Request<DataSync.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Returns a list of executed tasks.
+   * Returns a list of executions for an DataSync transfer task.
    */
   listTaskExecutions(params: DataSync.Types.ListTaskExecutionsRequest, callback?: (err: AWSError, data: DataSync.Types.ListTaskExecutionsResponse) => void): Request<DataSync.Types.ListTaskExecutionsResponse, AWSError>;
   /**
-   * Returns a list of executed tasks.
+   * Returns a list of executions for an DataSync transfer task.
    */
   listTaskExecutions(callback?: (err: AWSError, data: DataSync.Types.ListTaskExecutionsResponse) => void): Request<DataSync.Types.ListTaskExecutionsResponse, AWSError>;
   /**
-   * Returns a list of all the tasks.
+   * Returns a list of the DataSync tasks you created.
    */
   listTasks(params: DataSync.Types.ListTasksRequest, callback?: (err: AWSError, data: DataSync.Types.ListTasksResponse) => void): Request<DataSync.Types.ListTasksResponse, AWSError>;
   /**
-   * Returns a list of all the tasks.
+   * Returns a list of the DataSync tasks you created.
    */
   listTasks(callback?: (err: AWSError, data: DataSync.Types.ListTasksResponse) => void): Request<DataSync.Types.ListTasksResponse, AWSError>;
   /**
-   * Starts a specific invocation of a task. A TaskExecution value represents an individual run of a task. Each task can have at most one TaskExecution at a time.  TaskExecution has the following transition phases: INITIALIZING | PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE.  For detailed information, see the Task Execution section in the Components and Terminology topic in the AWS DataSync User Guide.
+   * Permanently removes a storage system resource from DataSync Discovery, including the associated discovery jobs, collected data, and recommendations.
+   */
+  removeStorageSystem(params: DataSync.Types.RemoveStorageSystemRequest, callback?: (err: AWSError, data: DataSync.Types.RemoveStorageSystemResponse) => void): Request<DataSync.Types.RemoveStorageSystemResponse, AWSError>;
+  /**
+   * Permanently removes a storage system resource from DataSync Discovery, including the associated discovery jobs, collected data, and recommendations.
+   */
+  removeStorageSystem(callback?: (err: AWSError, data: DataSync.Types.RemoveStorageSystemResponse) => void): Request<DataSync.Types.RemoveStorageSystemResponse, AWSError>;
+  /**
+   * Runs a DataSync discovery job on your on-premises storage system. If you haven't added the storage system to DataSync Discovery yet, do this first by using the AddStorageSystem operation.
+   */
+  startDiscoveryJob(params: DataSync.Types.StartDiscoveryJobRequest, callback?: (err: AWSError, data: DataSync.Types.StartDiscoveryJobResponse) => void): Request<DataSync.Types.StartDiscoveryJobResponse, AWSError>;
+  /**
+   * Runs a DataSync discovery job on your on-premises storage system. If you haven't added the storage system to DataSync Discovery yet, do this first by using the AddStorageSystem operation.
+   */
+  startDiscoveryJob(callback?: (err: AWSError, data: DataSync.Types.StartDiscoveryJobResponse) => void): Request<DataSync.Types.StartDiscoveryJobResponse, AWSError>;
+  /**
+   * Starts an DataSync transfer task. For each task, you can only run one task execution at a time. There are several phases to a task execution. For more information, see Task execution statuses.  If you're planning to transfer data to or from an Amazon S3 location, review how DataSync can affect your S3 request charges and the DataSync pricing page before you begin. 
    */
   startTaskExecution(params: DataSync.Types.StartTaskExecutionRequest, callback?: (err: AWSError, data: DataSync.Types.StartTaskExecutionResponse) => void): Request<DataSync.Types.StartTaskExecutionResponse, AWSError>;
   /**
-   * Starts a specific invocation of a task. A TaskExecution value represents an individual run of a task. Each task can have at most one TaskExecution at a time.  TaskExecution has the following transition phases: INITIALIZING | PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE.  For detailed information, see the Task Execution section in the Components and Terminology topic in the AWS DataSync User Guide.
+   * Starts an DataSync transfer task. For each task, you can only run one task execution at a time. There are several phases to a task execution. For more information, see Task execution statuses.  If you're planning to transfer data to or from an Amazon S3 location, review how DataSync can affect your S3 request charges and the DataSync pricing page before you begin. 
    */
   startTaskExecution(callback?: (err: AWSError, data: DataSync.Types.StartTaskExecutionResponse) => void): Request<DataSync.Types.StartTaskExecutionResponse, AWSError>;
   /**
-   * Applies a key-value pair to an AWS resource.
+   * Stops a running DataSync discovery job. You can stop a discovery job anytime. A job that's stopped before it's scheduled to end likely will provide you some information about your on-premises storage system resources. To get recommendations for a stopped job, you must use the GenerateRecommendations operation.
+   */
+  stopDiscoveryJob(params: DataSync.Types.StopDiscoveryJobRequest, callback?: (err: AWSError, data: DataSync.Types.StopDiscoveryJobResponse) => void): Request<DataSync.Types.StopDiscoveryJobResponse, AWSError>;
+  /**
+   * Stops a running DataSync discovery job. You can stop a discovery job anytime. A job that's stopped before it's scheduled to end likely will provide you some information about your on-premises storage system resources. To get recommendations for a stopped job, you must use the GenerateRecommendations operation.
+   */
+  stopDiscoveryJob(callback?: (err: AWSError, data: DataSync.Types.StopDiscoveryJobResponse) => void): Request<DataSync.Types.StopDiscoveryJobResponse, AWSError>;
+  /**
+   * Applies a tag to an Amazon Web Services resource. Tags are key-value pairs that can help you manage, filter, and search for your resources. These include DataSync resources, such as locations, tasks, and task executions.
    */
   tagResource(params: DataSync.Types.TagResourceRequest, callback?: (err: AWSError, data: DataSync.Types.TagResourceResponse) => void): Request<DataSync.Types.TagResourceResponse, AWSError>;
   /**
-   * Applies a key-value pair to an AWS resource.
+   * Applies a tag to an Amazon Web Services resource. Tags are key-value pairs that can help you manage, filter, and search for your resources. These include DataSync resources, such as locations, tasks, and task executions.
    */
   tagResource(callback?: (err: AWSError, data: DataSync.Types.TagResourceResponse) => void): Request<DataSync.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes a tag from an AWS resource.
+   * Removes tags from an Amazon Web Services resource.
    */
   untagResource(params: DataSync.Types.UntagResourceRequest, callback?: (err: AWSError, data: DataSync.Types.UntagResourceResponse) => void): Request<DataSync.Types.UntagResourceResponse, AWSError>;
   /**
-   * Removes a tag from an AWS resource.
+   * Removes tags from an Amazon Web Services resource.
    */
   untagResource(callback?: (err: AWSError, data: DataSync.Types.UntagResourceResponse) => void): Request<DataSync.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the name of an agent.
+   * Updates the name of an DataSync agent.
    */
   updateAgent(params: DataSync.Types.UpdateAgentRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateAgentResponse) => void): Request<DataSync.Types.UpdateAgentResponse, AWSError>;
   /**
-   * Updates the name of an agent.
+   * Updates the name of an DataSync agent.
    */
   updateAgent(callback?: (err: AWSError, data: DataSync.Types.UpdateAgentResponse) => void): Request<DataSync.Types.UpdateAgentResponse, AWSError>;
   /**
-   * Updates the metadata associated with a task.
+   * Edits a DataSync discovery job configuration.
+   */
+  updateDiscoveryJob(params: DataSync.Types.UpdateDiscoveryJobRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateDiscoveryJobResponse) => void): Request<DataSync.Types.UpdateDiscoveryJobResponse, AWSError>;
+  /**
+   * Edits a DataSync discovery job configuration.
+   */
+  updateDiscoveryJob(callback?: (err: AWSError, data: DataSync.Types.UpdateDiscoveryJobResponse) => void): Request<DataSync.Types.UpdateDiscoveryJobResponse, AWSError>;
+  /**
+   * Modifies some configurations of the Microsoft Azure Blob Storage transfer location that you're using with DataSync.
+   */
+  updateLocationAzureBlob(params: DataSync.Types.UpdateLocationAzureBlobRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateLocationAzureBlobResponse) => void): Request<DataSync.Types.UpdateLocationAzureBlobResponse, AWSError>;
+  /**
+   * Modifies some configurations of the Microsoft Azure Blob Storage transfer location that you're using with DataSync.
+   */
+  updateLocationAzureBlob(callback?: (err: AWSError, data: DataSync.Types.UpdateLocationAzureBlobResponse) => void): Request<DataSync.Types.UpdateLocationAzureBlobResponse, AWSError>;
+  /**
+   * Updates some parameters of a previously created location for a Hadoop Distributed File System cluster.
+   */
+  updateLocationHdfs(params: DataSync.Types.UpdateLocationHdfsRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateLocationHdfsResponse) => void): Request<DataSync.Types.UpdateLocationHdfsResponse, AWSError>;
+  /**
+   * Updates some parameters of a previously created location for a Hadoop Distributed File System cluster.
+   */
+  updateLocationHdfs(callback?: (err: AWSError, data: DataSync.Types.UpdateLocationHdfsResponse) => void): Request<DataSync.Types.UpdateLocationHdfsResponse, AWSError>;
+  /**
+   * Modifies some configurations of the Network File System (NFS) transfer location that you're using with DataSync. For more information, see Configuring transfers to or from an NFS file server.
+   */
+  updateLocationNfs(params: DataSync.Types.UpdateLocationNfsRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateLocationNfsResponse) => void): Request<DataSync.Types.UpdateLocationNfsResponse, AWSError>;
+  /**
+   * Modifies some configurations of the Network File System (NFS) transfer location that you're using with DataSync. For more information, see Configuring transfers to or from an NFS file server.
+   */
+  updateLocationNfs(callback?: (err: AWSError, data: DataSync.Types.UpdateLocationNfsResponse) => void): Request<DataSync.Types.UpdateLocationNfsResponse, AWSError>;
+  /**
+   * Updates some parameters of an existing DataSync location for an object storage system.
+   */
+  updateLocationObjectStorage(params: DataSync.Types.UpdateLocationObjectStorageRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateLocationObjectStorageResponse) => void): Request<DataSync.Types.UpdateLocationObjectStorageResponse, AWSError>;
+  /**
+   * Updates some parameters of an existing DataSync location for an object storage system.
+   */
+  updateLocationObjectStorage(callback?: (err: AWSError, data: DataSync.Types.UpdateLocationObjectStorageResponse) => void): Request<DataSync.Types.UpdateLocationObjectStorageResponse, AWSError>;
+  /**
+   * Updates some of the parameters of a Server Message Block (SMB) file server location that you can use for DataSync transfers.
+   */
+  updateLocationSmb(params: DataSync.Types.UpdateLocationSmbRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateLocationSmbResponse) => void): Request<DataSync.Types.UpdateLocationSmbResponse, AWSError>;
+  /**
+   * Updates some of the parameters of a Server Message Block (SMB) file server location that you can use for DataSync transfers.
+   */
+  updateLocationSmb(callback?: (err: AWSError, data: DataSync.Types.UpdateLocationSmbResponse) => void): Request<DataSync.Types.UpdateLocationSmbResponse, AWSError>;
+  /**
+   * Modifies some configurations of an on-premises storage system resource that you're using with DataSync Discovery.
+   */
+  updateStorageSystem(params: DataSync.Types.UpdateStorageSystemRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateStorageSystemResponse) => void): Request<DataSync.Types.UpdateStorageSystemResponse, AWSError>;
+  /**
+   * Modifies some configurations of an on-premises storage system resource that you're using with DataSync Discovery.
+   */
+  updateStorageSystem(callback?: (err: AWSError, data: DataSync.Types.UpdateStorageSystemResponse) => void): Request<DataSync.Types.UpdateStorageSystemResponse, AWSError>;
+  /**
+   * Updates the configuration of a task, which defines where and how DataSync transfers your data.
    */
   updateTask(params: DataSync.Types.UpdateTaskRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateTaskResponse) => void): Request<DataSync.Types.UpdateTaskResponse, AWSError>;
   /**
-   * Updates the metadata associated with a task.
+   * Updates the configuration of a task, which defines where and how DataSync transfers your data.
    */
   updateTask(callback?: (err: AWSError, data: DataSync.Types.UpdateTaskResponse) => void): Request<DataSync.Types.UpdateTaskResponse, AWSError>;
   /**
-   * Updates execution of a task. You can modify bandwidth throttling for a task execution that is running or queued. For more information, see Adjusting Bandwidth Throttling for a Task Execution.  The only Option that can be modified by UpdateTaskExecution is  BytesPerSecond . 
+   * Updates the configuration of a running DataSync task execution.  Currently, the only Option that you can modify with UpdateTaskExecution is  BytesPerSecond , which throttles bandwidth for a running or queued task execution. 
    */
   updateTaskExecution(params: DataSync.Types.UpdateTaskExecutionRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateTaskExecutionResponse) => void): Request<DataSync.Types.UpdateTaskExecutionResponse, AWSError>;
   /**
-   * Updates execution of a task. You can modify bandwidth throttling for a task execution that is running or queued. For more information, see Adjusting Bandwidth Throttling for a Task Execution.  The only Option that can be modified by UpdateTaskExecution is  BytesPerSecond . 
+   * Updates the configuration of a running DataSync task execution.  Currently, the only Option that you can modify with UpdateTaskExecution is  BytesPerSecond , which throttles bandwidth for a running or queued task execution. 
    */
   updateTaskExecution(callback?: (err: AWSError, data: DataSync.Types.UpdateTaskExecutionResponse) => void): Request<DataSync.Types.UpdateTaskExecutionResponse, AWSError>;
 }
 declare namespace DataSync {
   export type ActivationKey = string;
+  export interface AddStorageSystemRequest {
+    /**
+     * Specifies the server name and network port required to connect with the management interface of your on-premises storage system.
+     */
+    ServerConfiguration: DiscoveryServerConfiguration;
+    /**
+     * Specifies the type of on-premises storage system that you want DataSync Discovery to collect information about.  DataSync Discovery currently supports NetApp Fabric-Attached Storage (FAS) and All Flash FAS (AFF) systems running ONTAP 9.7 or later. 
+     */
+    SystemType: DiscoverySystemType;
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the DataSync agent that connects to and reads from your on-premises storage system's management interface. You can only specify one ARN.
+     */
+    AgentArns: DiscoveryAgentArnList;
+    /**
+     * Specifies the ARN of the Amazon CloudWatch log group for monitoring and logging discovery job events.
+     */
+    CloudWatchLogGroupArn?: LogGroupArn;
+    /**
+     * Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources. We recommend creating at least a name tag for your on-premises storage system.
+     */
+    Tags?: InputTagList;
+    /**
+     * Specifies a familiar name for your on-premises storage system.
+     */
+    Name?: Name;
+    /**
+     * Specifies a client token to make sure requests with this API operation are idempotent. If you don't specify a client token, DataSync generates one for you automatically.
+     */
+    ClientToken: PtolemyUUID;
+    /**
+     * Specifies the user name and password for accessing your on-premises storage system's management interface.
+     */
+    Credentials: Credentials;
+  }
+  export interface AddStorageSystemResponse {
+    /**
+     * The ARN of the on-premises storage system that you can use with DataSync Discovery.
+     */
+    StorageSystemArn: StorageSystemArn;
+  }
   export type AgentArn = string;
   export type AgentArnList = AgentArn[];
   export type AgentList = AgentListEntry[];
   export interface AgentListEntry {
     /**
-     * The Amazon Resource Name (ARN) of the agent.
+     * The Amazon Resource Name (ARN) of a DataSync agent.
      */
     AgentArn?: AgentArn;
     /**
-     * The name of the agent.
+     * The name of an agent.
      */
     Name?: TagValue;
     /**
-     * The status of the agent.
+     * The status of an agent.   If the status is ONLINE, the agent is configured properly and ready to use.   If the status is OFFLINE, the agent has been out of contact with DataSync for five minutes or longer. This can happen for a few reasons. For more information, see What do I do if my agent is offline?   
      */
     Status?: AgentStatus;
+    /**
+     * The platform-related details about the agent, such as the version number.
+     */
+    Platform?: Platform;
   }
   export type AgentStatus = "ONLINE"|"OFFLINE"|string;
+  export type AgentVersion = string;
   export type Atime = "NONE"|"BEST_EFFORT"|string;
+  export type AzureAccessTier = "HOT"|"COOL"|"ARCHIVE"|string;
+  export type AzureBlobAuthenticationType = "SAS"|string;
+  export type AzureBlobContainerUrl = string;
+  export interface AzureBlobSasConfiguration {
+    /**
+     * Specifies a SAS token that provides permissions to access your Azure Blob Storage. The token is part of the SAS URI string that comes after the storage resource URI and a question mark. A token looks something like this:  sp=r&amp;st=2023-12-20T14:54:52Z&amp;se=2023-12-20T22:54:52Z&amp;spr=https&amp;sv=2021-06-08&amp;sr=c&amp;sig=aBBKDWQvyuVcTPH9EBp%2FXTI9E%2F%2Fmq171%2BZU178wcwqU%3D 
+     */
+    Token: AzureBlobSasToken;
+  }
+  export type AzureBlobSasToken = string;
+  export type AzureBlobSubdirectory = string;
+  export type AzureBlobType = "BLOCK"|string;
   export type BytesPerSecond = number;
   export interface CancelTaskExecutionRequest {
     /**
-     * The Amazon Resource Name (ARN) of the task execution to cancel.
+     * The Amazon Resource Name (ARN) of the task execution to stop.
      */
     TaskExecutionArn: TaskExecutionArn;
   }
   export interface CancelTaskExecutionResponse {
   }
+  export interface Capacity {
+    /**
+     * The amount of space that's being used in a storage system resource.
+     */
+    Used?: NonNegativeLong;
+    /**
+     * The total amount of space available in a storage system resource.
+     */
+    Provisioned?: NonNegativeLong;
+    /**
+     * The amount of space that's being used in a storage system resource without accounting for compression or deduplication.
+     */
+    LogicalUsed?: NonNegativeLong;
+    /**
+     * The amount of space in the cluster that's in cloud storage (for example, if you're using data tiering).
+     */
+    ClusterCloudStorageUsed?: NonNegativeLong;
+  }
+  export type CollectionDurationMinutes = number;
   export interface CreateAgentRequest {
     /**
-     * Your agent activation key. You can get the activation key either by sending an HTTP GET request with redirects that enable you to get the agent IP address (port 80). Alternatively, you can get it from the AWS DataSync console. The redirect URL returned in the response provides you the activation key for your agent in the query string parameter activationKey. It might also include other activation-related parameters; however, these are merely defaults. The arguments you pass to this API call determine the actual configuration of your agent. For more information, see Activating an Agent in the AWS DataSync User Guide. 
+     * Specifies your DataSync agent's activation key. If you don't have an activation key, see Activate your agent.
      */
     ActivationKey: ActivationKey;
     /**
-     * The name you configured for your agent. This value is a text reference that is used to identify the agent in the console.
+     * Specifies a name for your agent. You can see this name in the DataSync console.
      */
     AgentName?: TagValue;
     /**
-     * The key-value pair that represents the tag that you want to associate with the agent. The value can be an empty string. This value helps you manage, filter, and search for your agents.  Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @.  
+     * Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources. We recommend creating at least one tag for your agent.
      */
     Tags?: InputTagList;
     /**
-     * The ID of the VPC (virtual private cloud) endpoint that the agent has access to. This is the client-side VPC endpoint, also called a PrivateLink. If you don't have a PrivateLink VPC endpoint, see Creating a VPC Endpoint Service Configuration in the Amazon VPC User Guide. VPC endpoint ID looks like this: vpce-01234d5aff67890e1.
+     * Specifies the ID of the VPC endpoint that you want your agent to connect to. For example, a VPC endpoint ID looks like vpce-01234d5aff67890e1.  The VPC endpoint you use must include the DataSync service name (for example, com.amazonaws.us-east-2.datasync). 
      */
     VpcEndpointId?: VpcEndpointId;
     /**
-     * The Amazon Resource Names (ARNs) of the subnets in which DataSync will create elastic network interfaces for each data transfer task. The agent that runs a task must be private. When you start a task that is associated with an agent created in a VPC, or one that has access to an IP address in a VPC, then the task is also private. In this case, DataSync creates four network interfaces for each task in your subnet. For a data transfer to work, the agent must be able to route to all these four network interfaces.
+     * Specifies the ARN of the subnet where you want to run your DataSync task when using a VPC endpoint. This is the subnet where DataSync creates and manages the network interfaces for your transfer. You can only specify one ARN.
      */
     SubnetArns?: PLSubnetArnList;
     /**
-     * The ARNs of the security groups used to protect your data transfer task subnets. See CreateAgentRequest$SubnetArns.
+     * Specifies the Amazon Resource Name (ARN) of the security group that protects your task's network interfaces when using a virtual private cloud (VPC) endpoint. You can only specify one ARN.
      */
     SecurityGroupArns?: PLSecurityGroupArnList;
   }
   export interface CreateAgentResponse {
     /**
-     * The Amazon Resource Name (ARN) of the agent. Use the ListAgents operation to return a list of agents for your account and AWS Region.
+     * The ARN of the agent that you just activated. Use the ListAgents operation to return a list of agents in your Amazon Web Services account and Amazon Web Services Region.
      */
     AgentArn?: AgentArn;
   }
+  export interface CreateLocationAzureBlobRequest {
+    /**
+     * Specifies the URL of the Azure Blob Storage container involved in your transfer.
+     */
+    ContainerUrl: AzureBlobContainerUrl;
+    /**
+     * Specifies the authentication method DataSync uses to access your Azure Blob Storage. DataSync can access blob storage using a shared access signature (SAS).
+     */
+    AuthenticationType: AzureBlobAuthenticationType;
+    /**
+     * Specifies the SAS configuration that allows DataSync to access your Azure Blob Storage.
+     */
+    SasConfiguration?: AzureBlobSasConfiguration;
+    /**
+     * Specifies the type of blob that you want your objects or files to be when transferring them into Azure Blob Storage. Currently, DataSync only supports moving data into Azure Blob Storage as block blobs. For more information on blob types, see the Azure Blob Storage documentation.
+     */
+    BlobType?: AzureBlobType;
+    /**
+     * Specifies the access tier that you want your objects or files transferred into. This only applies when using the location as a transfer destination. For more information, see Access tiers.
+     */
+    AccessTier?: AzureAccessTier;
+    /**
+     * Specifies path segments if you want to limit your transfer to a virtual directory in your container (for example, /my/images).
+     */
+    Subdirectory?: AzureBlobSubdirectory;
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the DataSync agent that can connect with your Azure Blob Storage container. You can specify more than one agent. For more information, see Using multiple agents for your transfer.
+     */
+    AgentArns: AgentArnList;
+    /**
+     * Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources. We recommend creating at least a name tag for your transfer location.
+     */
+    Tags?: InputTagList;
+  }
+  export interface CreateLocationAzureBlobResponse {
+    /**
+     * The ARN of the Azure Blob Storage transfer location that you created.
+     */
+    LocationArn?: LocationArn;
+  }
   export interface CreateLocationEfsRequest {
     /**
-     * A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination. By default, AWS DataSync uses the root directory.   Subdirectory must be specified with forward slashes. For example, /path/to/folder. 
+     * Specifies a mount path for your Amazon EFS file system. This is where DataSync reads or writes data (depending on if this is a source or destination location). By default, DataSync uses the root directory, but you can also include subdirectories.  You must specify a value with forward slashes (for example, /path/to/folder). 
      */
     Subdirectory?: EfsSubdirectory;
     /**
-     * The Amazon Resource Name (ARN) for the Amazon EFS file system.
+     * Specifies the ARN for the Amazon EFS file system.
      */
     EfsFilesystemArn: EfsFilesystemArn;
     /**
-     * The subnet and security group that the Amazon EFS file system uses. The security group that you provide needs to be able to communicate with the security group on the mount target in the subnet specified. The exact relationship between security group M (of the mount target) and security group S (which you provide for DataSync to use at this stage) is as follows:     Security group M (which you associate with the mount target) must allow inbound access for the Transmission Control Protocol (TCP) on the NFS port (2049) from security group S. You can enable inbound connections either by IP address (CIDR range) or security group.    Security group S (provided to DataSync to access EFS) should have a rule that enables outbound connections to the NFS port on one of the file system’s mount targets. You can enable outbound connections either by IP address (CIDR range) or security group. For information about security groups and mount targets, see Security Groups for Amazon EC2 Instances and Mount Targets in the Amazon EFS User Guide.   
+     * Specifies the subnet and security groups DataSync uses to access your Amazon EFS file system.
      */
     Ec2Config: Ec2Config;
+    /**
+     * Specifies the key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.
+     */
+    Tags?: InputTagList;
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the access point that DataSync uses to access the Amazon EFS file system.
+     */
+    AccessPointArn?: EfsAccessPointArn;
+    /**
+     * Specifies an Identity and Access Management (IAM) role that DataSync assumes when mounting the Amazon EFS file system.
+     */
+    FileSystemAccessRoleArn?: IamRoleArn;
+    /**
+     * Specifies whether you want DataSync to use Transport Layer Security (TLS) 1.2 encryption when it copies data to or from the Amazon EFS file system. If you specify an access point using AccessPointArn or an IAM role using FileSystemAccessRoleArn, you must set this parameter to TLS1_2.
+     */
+    InTransitEncryption?: EfsInTransitEncryption;
+  }
+  export interface CreateLocationEfsResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon EFS file system location that you create.
+     */
+    LocationArn?: LocationArn;
+  }
+  export interface CreateLocationFsxLustreRequest {
+    /**
+     * The Amazon Resource Name (ARN) for the FSx for Lustre file system.
+     */
+    FsxFilesystemArn: FsxFilesystemArn;
+    /**
+     * The Amazon Resource Names (ARNs) of the security groups that are used to configure the FSx for Lustre file system.
+     */
+    SecurityGroupArns: Ec2SecurityGroupArnList;
+    /**
+     * A subdirectory in the location's path. This subdirectory in the FSx for Lustre file system is used to read data from the FSx for Lustre source location or write data to the FSx for Lustre destination.
+     */
+    Subdirectory?: FsxLustreSubdirectory;
     /**
      * The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.
      */
     Tags?: InputTagList;
   }
-  export interface CreateLocationEfsResponse {
+  export interface CreateLocationFsxLustreResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon EFS file system location that is created.
+     * The Amazon Resource Name (ARN) of the FSx for Lustre file system location that's created. 
+     */
+    LocationArn?: LocationArn;
+  }
+  export interface CreateLocationFsxOntapRequest {
+    Protocol: FsxProtocol;
+    /**
+     * Specifies the Amazon EC2 security groups that provide access to your file system's preferred subnet. The security groups must allow outbound traffic on the following ports (depending on the protocol you use):    Network File System (NFS): TCP ports 111, 635, and 2049    Server Message Block (SMB): TCP port 445   Your file system's security groups must also allow inbound traffic on the same ports.
+     */
+    SecurityGroupArns: Ec2SecurityGroupArnList;
+    /**
+     * Specifies the ARN of the storage virtual machine (SVM) in your file system where you want to copy data to or from.
+     */
+    StorageVirtualMachineArn: StorageVirtualMachineArn;
+    /**
+     * Specifies a path to the file share in the SVM where you'll copy your data. You can specify a junction path (also known as a mount point), qtree path (for NFS file shares), or share name (for SMB file shares). For example, your mount path might be /vol1, /vol1/tree1, or /share1.  Don't specify a junction path in the SVM's root volume. For more information, see Managing FSx for ONTAP storage virtual machines in the Amazon FSx for NetApp ONTAP User Guide. 
+     */
+    Subdirectory?: FsxOntapSubdirectory;
+    /**
+     * Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources. We recommend creating at least a name tag for your location.
+     */
+    Tags?: InputTagList;
+  }
+  export interface CreateLocationFsxOntapResponse {
+    /**
+     * Specifies the ARN of the FSx for ONTAP file system location that you create.
+     */
+    LocationArn?: LocationArn;
+  }
+  export interface CreateLocationFsxOpenZfsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the FSx for OpenZFS file system.
+     */
+    FsxFilesystemArn: FsxFilesystemArn;
+    /**
+     * The type of protocol that DataSync uses to access your file system.
+     */
+    Protocol: FsxProtocol;
+    /**
+     * The ARNs of the security groups that are used to configure the FSx for OpenZFS file system.
+     */
+    SecurityGroupArns: Ec2SecurityGroupArnList;
+    /**
+     * A subdirectory in the location's path that must begin with /fsx. DataSync uses this subdirectory to read or write data (depending on whether the file system is a source or destination location).
+     */
+    Subdirectory?: FsxOpenZfsSubdirectory;
+    /**
+     * The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.
+     */
+    Tags?: InputTagList;
+  }
+  export interface CreateLocationFsxOpenZfsResponse {
+    /**
+     * The ARN of the FSx for OpenZFS file system location that you created.
      */
     LocationArn?: LocationArn;
   }
   export interface CreateLocationFsxWindowsRequest {
     /**
-     * A subdirectory in the location’s path. This subdirectory in the Amazon FSx for Windows file system is used to read data from the Amazon FSx for Windows source location or write data to the FSx for Windows destination.
+     * Specifies a mount path for your file system using forward slashes. This is where DataSync reads or writes data (depending on if this is a source or destination location).
      */
     Subdirectory?: FsxWindowsSubdirectory;
     /**
-     * The Amazon Resource Name (ARN) for the FSx for Windows file system.
+     * Specifies the Amazon Resource Name (ARN) for the FSx for Windows File Server file system.
      */
     FsxFilesystemArn: FsxFilesystemArn;
     /**
-     * The Amazon Resource Names (ARNs) of the security groups that are to use to configure the FSx for Windows file system.
+     * Specifies the ARNs of the security groups that provide access to your file system's preferred subnet.  If you choose a security group that doesn't allow connections from within itself, do one of the following:   Configure the security group to allow it to communicate within itself.   Choose a different security group that can communicate with the mount target's security group.   
      */
     SecurityGroupArns: Ec2SecurityGroupArnList;
     /**
-     * The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.
+     * Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources. We recommend creating at least a name tag for your location.
      */
     Tags?: InputTagList;
     /**
-     * The user who has the permissions to access files and folders in the FSx for Windows file system.
+     * Specifies the user with the permissions to mount and access the files, folders, and file metadata in your FSx for Windows File Server file system. For information about choosing a user with the right level of access for your transfer, see required permissions for FSx for Windows File Server locations.
      */
     User: SmbUser;
     /**
-     * The name of the Windows domain that the FSx for Windows server belongs to.
+     * Specifies the name of the Microsoft Active Directory domain that the FSx for Windows File Server file system belongs to. If you have multiple Active Directory domains in your environment, configuring this parameter makes sure that DataSync connects to the right file system.
      */
     Domain?: SmbDomain;
     /**
-     * The password of the user who has the permissions to access files and folders in the FSx for Windows file system.
+     * Specifies the password of the user with the permissions to mount and access the files, folders, and file metadata in your FSx for Windows File Server file system.
      */
     Password: SmbPassword;
   }
   export interface CreateLocationFsxWindowsResponse {
     /**
-     * The Amazon Resource Name (ARN) of the FSx for Windows file system location that is created.
+     * The ARN of the FSx for Windows File Server file system location you created.
+     */
+    LocationArn?: LocationArn;
+  }
+  export interface CreateLocationHdfsRequest {
+    /**
+     * A subdirectory in the HDFS cluster. This subdirectory is used to read data from or write data to the HDFS cluster. If the subdirectory isn't specified, it will default to /.
+     */
+    Subdirectory?: HdfsSubdirectory;
+    /**
+     * The NameNode that manages the HDFS namespace. The NameNode performs operations such as opening, closing, and renaming files and directories. The NameNode contains the information to map blocks of data to the DataNodes. You can use only one NameNode.
+     */
+    NameNodes: HdfsNameNodeList;
+    /**
+     * The size of data blocks to write into the HDFS cluster. The block size must be a multiple of 512 bytes. The default block size is 128 mebibytes (MiB).
+     */
+    BlockSize?: HdfsBlockSize;
+    /**
+     * The number of DataNodes to replicate the data to when writing to the HDFS cluster. By default, data is replicated to three DataNodes.
+     */
+    ReplicationFactor?: HdfsReplicationFactor;
+    /**
+     * The URI of the HDFS cluster's Key Management Server (KMS). 
+     */
+    KmsKeyProviderUri?: KmsKeyProviderUri;
+    /**
+     * The Quality of Protection (QOP) configuration specifies the Remote Procedure Call (RPC) and data transfer protection settings configured on the Hadoop Distributed File System (HDFS) cluster. If QopConfiguration isn't specified, RpcProtection and DataTransferProtection default to PRIVACY. If you set RpcProtection or DataTransferProtection, the other parameter assumes the same value. 
+     */
+    QopConfiguration?: QopConfiguration;
+    /**
+     * The type of authentication used to determine the identity of the user. 
+     */
+    AuthenticationType: HdfsAuthenticationType;
+    /**
+     * The user name used to identify the client on the host operating system.   If SIMPLE is specified for AuthenticationType, this parameter is required.  
+     */
+    SimpleUser?: HdfsUser;
+    /**
+     * The Kerberos principal with access to the files and folders on the HDFS cluster.   If KERBEROS is specified for AuthenticationType, this parameter is required. 
+     */
+    KerberosPrincipal?: KerberosPrincipal;
+    /**
+     * The Kerberos key table (keytab) that contains mappings between the defined Kerberos principal and the encrypted keys. You can load the keytab from a file by providing the file's address. If you're using the CLI, it performs base64 encoding for you. Otherwise, provide the base64-encoded text.   If KERBEROS is specified for AuthenticationType, this parameter is required.  
+     */
+    KerberosKeytab?: KerberosKeytabFile;
+    /**
+     * The krb5.conf file that contains the Kerberos configuration information. You can load the krb5.conf file by providing the file's address. If you're using the CLI, it performs the base64 encoding for you. Otherwise, provide the base64-encoded text.   If KERBEROS is specified for AuthenticationType, this parameter is required. 
+     */
+    KerberosKrb5Conf?: KerberosKrb5ConfFile;
+    /**
+     * The Amazon Resource Names (ARNs) of the agents that are used to connect to the HDFS cluster.
+     */
+    AgentArns: AgentArnList;
+    /**
+     * The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources. 
+     */
+    Tags?: InputTagList;
+  }
+  export interface CreateLocationHdfsResponse {
+    /**
+     * The ARN of the source HDFS cluster location that's created. 
      */
     LocationArn?: LocationArn;
   }
   export interface CreateLocationNfsRequest {
     /**
-     * The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that's exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network.  To see all the paths exported by your NFS server, run "showmount -e nfs-server-name" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication.  To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with no_root_squash, or ensure that the permissions for all of the files that you want DataSync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access. If you are copying data to or from your AWS Snowcone device, see NFS Server on AWS Snowcone for more information. For information about NFS export configuration, see 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux documentation.
+     * Specifies the export path in your NFS file server that you want DataSync to mount. This path (or a subdirectory of the path) is where DataSync transfers data to or from. For information on configuring an export for DataSync, see Accessing NFS file servers.
      */
     Subdirectory: NfsSubdirectory;
     /**
-     * The name of the NFS server. This value is the IP address or Domain Name Service (DNS) name of the NFS server. An agent that is installed on-premises uses this host name to mount the NFS server in a network.  If you are copying data to or from your AWS Snowcone device, see NFS Server on AWS Snowcone for more information.  This name must either be DNS-compliant or must be an IP version 4 (IPv4) address. 
+     * Specifies the Domain Name System (DNS) name or IP version 4 address of the NFS file server that your DataSync agent connects to.
      */
     ServerHostname: ServerHostname;
     /**
-     * Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect to an NFS server.  If you are copying data to or from your AWS Snowcone device, see NFS Server on AWS Snowcone for more information.
+     * Specifies the Amazon Resource Name (ARN) of the DataSync agent that want to connect to your NFS file server. You can specify more than one agent. For more information, see Using multiple agents for transfers.
      */
     OnPremConfig: OnPremConfig;
     /**
-     * The NFS mount options that DataSync can use to mount your NFS share.
+     * Specifies the options that DataSync can use to mount your NFS file server.
      */
     MountOptions?: NfsMountOptions;
     /**
-     * The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
+     * Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources. We recommend creating at least a name tag for your location.
      */
     Tags?: InputTagList;
   }
   export interface CreateLocationNfsResponse {
     /**
-     * The Amazon Resource Name (ARN) of the source NFS file system location that is created.
+     * The ARN of the transfer location that you created for your NFS file server.
      */
     LocationArn?: LocationArn;
   }
   export interface CreateLocationObjectStorageRequest {
     /**
-     * The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server. An agent uses this host name to mount the object storage server in a network. 
+     * Specifies the domain name or IP address of the object storage server. A DataSync agent uses this hostname to mount the object storage server in a network.
      */
     ServerHostname: ServerHostname;
     /**
-     * The port that your self-managed object storage server accepts inbound network traffic on. The server port is set by default to TCP 80 (HTTP) or TCP 443 (HTTPS). You can specify a custom port if your self-managed object storage server requires one.
+     * Specifies the port that your object storage server accepts inbound network traffic on (for example, port 443).
      */
     ServerPort?: ObjectStorageServerPort;
     /**
-     * The protocol that the object storage server uses to communicate. Valid values are HTTP or HTTPS.
+     * Specifies the protocol that your object storage server uses to communicate.
      */
     ServerProtocol?: ObjectStorageServerProtocol;
     /**
-     * The subdirectory in the self-managed object storage server that is used to read data from.
+     * Specifies the object prefix for your object storage server. If this is a source location, DataSync only copies objects with this prefix. If this is a destination location, DataSync writes all objects with this prefix. 
      */
     Subdirectory?: S3Subdirectory;
     /**
-     * The bucket on the self-managed object storage server that is used to read data from.
+     * Specifies the name of the object storage bucket involved in the transfer.
      */
     BucketName: ObjectStorageBucketName;
     /**
-     * Optional. The access key is used if credentials are required to access the self-managed object storage server. If your object storage requires a user name and password to authenticate, use AccessKey and SecretKey to provide the user name and password, respectively.
+     * Specifies the access key (for example, a user name) if credentials are required to authenticate with the object storage server.
      */
     AccessKey?: ObjectStorageAccessKey;
     /**
-     * Optional. The secret key is used if credentials are required to access the self-managed object storage server. If your object storage requires a user name and password to authenticate, use AccessKey and SecretKey to provide the user name and password, respectively.
+     * Specifies the secret key (for example, a password) if credentials are required to authenticate with the object storage server.
      */
     SecretKey?: ObjectStorageSecretKey;
     /**
-     * The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.
+     * Specifies the Amazon Resource Names (ARNs) of the DataSync agents that can securely connect with your location.
      */
     AgentArns: AgentArnList;
     /**
-     * The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
+     * Specifies the key-value pair that represents a tag that you want to add to the resource. Tags can help you manage, filter, and search for your resources. We recommend creating a name tag for your location.
      */
     Tags?: InputTagList;
+    /**
+     * Specifies a certificate chain for DataSync to authenticate with your object storage system if the system uses a private or self-signed certificate authority (CA). You must specify a single .pem file with a full certificate chain (for example, file:///home/user/.ssh/object_storage_certificates.pem). The certificate chain might include:   The object storage system's certificate   All intermediate certificates (if there are any)   The root certificate of the signing CA   You can concatenate your certificates into a .pem file (which can be up to 32768 bytes before base64 encoding). The following example cat command creates an object_storage_certificates.pem file that includes three certificates:  cat object_server_certificate.pem intermediate_certificate.pem ca_root_certificate.pem &gt; object_storage_certificates.pem  To use this parameter, configure ServerProtocol to HTTPS.
+     */
+    ServerCertificate?: ObjectStorageCertificate;
   }
   export interface CreateLocationObjectStorageResponse {
     /**
-     * The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.
+     * Specifies the ARN of the object storage system location that you create.
      */
     LocationArn?: LocationArn;
   }
   export interface CreateLocationS3Request {
     /**
-     * A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used to read data from the S3 source location or write data to the S3 destination.
+     * Specifies a prefix in the S3 bucket that DataSync reads from or writes to (depending on whether the bucket is a source or destination location).  DataSync can't transfer objects with a prefix that begins with a slash (/) or includes //, /./, or /../ patterns. For example:    /photos     photos//2006/January     photos/./2006/February     photos/../2006/March    
      */
     Subdirectory?: S3Subdirectory;
     /**
-     * The ARN of the Amazon S3 bucket. If the bucket is on an AWS Outpost, this must be an access point ARN.
+     * Specifies the ARN of the S3 bucket that you want to use as a location. (When creating your DataSync task later, you specify whether this location is a transfer source or destination.)  If your S3 bucket is located on an Outposts resource, you must specify an Amazon S3 access point. For more information, see Managing data access with Amazon S3 access points in the Amazon S3 User Guide.
      */
     S3BucketArn: S3BucketArn;
     /**
-     * The Amazon S3 storage class that you want to store your files in when this location is used as a task destination. For buckets in AWS Regions, the storage class defaults to Standard. For buckets on AWS Outposts, the storage class defaults to AWS S3 Outposts. For more information about S3 storage classes, see Amazon S3 Storage Classes. Some storage classes have behaviors that can affect your S3 storage cost. For detailed information, see using-storage-classes.
+     * Specifies the storage class that you want your objects to use when Amazon S3 is a transfer destination. For buckets in Amazon Web Services Regions, the storage class defaults to STANDARD. For buckets on Outposts, the storage class defaults to OUTPOSTS. For more information, see Storage class considerations with Amazon S3 transfers.
      */
     S3StorageClass?: S3StorageClass;
     S3Config: S3Config;
     /**
-     * If you are using DataSync on an AWS Outpost, specify the Amazon Resource Names (ARNs) of the DataSync agents deployed on your Outpost. For more information about launching a DataSync agent on an AWS Outpost, see outposts-agent.
+     * (Amazon S3 on Outposts only) Specifies the Amazon Resource Name (ARN) of the DataSync agent on your Outpost. For more information, see Deploy your DataSync agent on Outposts.
      */
     AgentArns?: AgentArnList;
     /**
-     * The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
+     * Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources. We recommend creating at least a name tag for your transfer location.
      */
     Tags?: InputTagList;
   }
   export interface CreateLocationS3Response {
     /**
-     * The Amazon Resource Name (ARN) of the source Amazon S3 bucket location that is created.
+     * The ARN of the S3 location that you created.
      */
     LocationArn?: LocationArn;
   }
   export interface CreateLocationSmbRequest {
     /**
-     * The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that's exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network.   Subdirectory must be specified with forward slashes. For example, /path/to/folder.  To transfer all the data in the folder you specified, DataSync needs to have permissions to mount the SMB share, as well as to access all the data in that share. To ensure this, either ensure that the user/password specified belongs to the user who can mount the share, and who has the appropriate permissions for all of the files and directories that you want DataSync to access, or use credentials of a member of the Backup Operators group to mount the share. Doing either enables the agent to access the data. For the agent to access directories, you must additionally enable all execute access.
+     * Specifies the name of the share exported by your SMB file server where DataSync will read or write data. You can include a subdirectory in the share path (for example, /path/to/subdirectory). Make sure that other SMB clients in your network can also mount this path. To copy all data in the subdirectory, DataSync must be able to mount the SMB share and access all of its data. For more information, see required permissions for SMB locations.
      */
     Subdirectory: SmbSubdirectory;
     /**
-     * The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server. An agent that is installed on-premises uses this hostname to mount the SMB server in a network.  This name must either be DNS-compliant or must be an IP version 4 (IPv4) address. 
+     * Specifies the Domain Name Service (DNS) name or IP address of the SMB file server that your DataSync agent will mount.  You can't specify an IP version 6 (IPv6) address. 
      */
     ServerHostname: ServerHostname;
     /**
-     * The user who can mount the share, has the permissions to access files and folders in the SMB share.
+     * Specifies the user that can mount and access the files, folders, and file metadata in your SMB file server. For information about choosing a user with the right level of access for your transfer, see required permissions for SMB locations.
      */
     User: SmbUser;
     /**
-     * The name of the Windows domain that the SMB server belongs to.
+     * Specifies the name of the Active Directory domain that your SMB file server belongs to.  If you have multiple Active Directory domains in your environment, configuring this parameter makes sure that DataSync connects to the right file server.
      */
     Domain?: SmbDomain;
     /**
-     * The password of the user who can mount the share, has the permissions to access files and folders in the SMB share.
+     * Specifies the password of the user who can mount your SMB file server and has permission to access the files and folders involved in your transfer. For more information, see required permissions for SMB locations.
      */
     Password: SmbPassword;
     /**
-     * The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location. 
+     * Specifies the DataSync agent (or agents) which you want to connect to your SMB file server. You specify an agent by using its Amazon Resource Name (ARN).
      */
     AgentArns: AgentArnList;
     /**
-     * The mount options used by DataSync to access the SMB server.
+     * Specifies the version of the SMB protocol that DataSync uses to access your SMB file server.
      */
     MountOptions?: SmbMountOptions;
     /**
-     * The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
+     * Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources. We recommend creating at least a name tag for your location.
      */
     Tags?: InputTagList;
   }
   export interface CreateLocationSmbResponse {
     /**
-     * The Amazon Resource Name (ARN) of the source SMB file system location that is created.
+     * The ARN of the SMB location that you created.
      */
     LocationArn?: LocationArn;
   }
   export interface CreateTaskRequest {
     /**
-     * The Amazon Resource Name (ARN) of the source location for the task.
+     * Specifies the ARN of your transfer's source location.
      */
     SourceLocationArn: LocationArn;
     /**
-     * The Amazon Resource Name (ARN) of an AWS storage resource's location. 
+     * Specifies the ARN of your transfer's destination location. 
      */
     DestinationLocationArn: LocationArn;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that is used to monitor and log events in the task. 
+     * Specifies the Amazon Resource Name (ARN) of an Amazon CloudWatch log group for monitoring your task.
      */
     CloudWatchLogGroupArn?: LogGroupArn;
     /**
-     * The name of a task. This value is a text reference that is used to identify the task in the console. 
+     * Specifies the name of your task.
      */
     Name?: TagValue;
     /**
-     * The set of configuration options that control the behavior of a single execution of the task that occurs when you call StartTaskExecution. You can configure these options to preserve metadata such as user ID (UID) and group ID (GID), file permissions, data integrity verification, and so on. For each individual task execution, you can override these options by specifying the OverrideOptions before starting the task execution. For more information, see the operation. 
+     * Specifies your task's settings, such as preserving file metadata, verifying data integrity, among other options.
      */
     Options?: Options;
     /**
-     * A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example, "/folder1|/folder2".   
+     * Specifies exclude filters that define the files, objects, and folders in your source location that you don't want DataSync to transfer. For more information and examples, see Specifying what DataSync transfers by using filters.
      */
     Excludes?: FilterList;
     /**
-     * Specifies a schedule used to periodically transfer files from a source to a destination location. The schedule should be specified in UTC time. For more information, see task-scheduling.
+     * Specifies a schedule for when you want your task to run. For more information, see Scheduling your task.
      */
     Schedule?: TaskSchedule;
     /**
-     * The key-value pair that represents the tag that you want to add to the resource. The value can be an empty string. 
+     * Specifies the tags that you want to apply to your task.  Tags are key-value pairs that help you manage, filter, and search for your DataSync resources.
      */
     Tags?: InputTagList;
+    /**
+     * Specifies include filters define the files, objects, and folders in your source location that you want DataSync to transfer. For more information and examples, see Specifying what DataSync transfers by using filters.
+     */
+    Includes?: FilterList;
+    /**
+     * Configures a manifest, which is a list of files or objects that you want DataSync to transfer. For more information and configuration examples, see Specifying what DataSync transfers by using a manifest. When using this parameter, your caller identity (the role that you're using DataSync with) must have the iam:PassRole permission. The AWSDataSyncFullAccess policy includes this permission.
+     */
+    ManifestConfig?: ManifestConfig;
+    /**
+     * Specifies how you want to configure a task report, which provides detailed information about your DataSync transfer. For more information, see Monitoring your DataSync transfers with task reports. When using this parameter, your caller identity (the role that you're using DataSync with) must have the iam:PassRole permission. The AWSDataSyncFullAccess policy includes this permission.
+     */
+    TaskReportConfig?: TaskReportConfig;
   }
   export interface CreateTaskResponse {
     /**
@@ -571,9 +1076,19 @@ declare namespace DataSync {
      */
     TaskArn?: TaskArn;
   }
+  export interface Credentials {
+    /**
+     * Specifies the user name for your storage system's management interface.
+     */
+    Username: PtolemyUsername;
+    /**
+     * Specifies the password for your storage system's management interface.
+     */
+    Password: PtolemyPassword;
+  }
   export interface DeleteAgentRequest {
     /**
-     * The Amazon Resource Name (ARN) of the agent to delete. Use the ListAgents operation to return a list of agents for your account and AWS Region.
+     * The Amazon Resource Name (ARN) of the agent to delete. Use the ListAgents operation to return a list of agents for your account and Amazon Web Services Region.
      */
     AgentArn: AgentArn;
   }
@@ -589,7 +1104,7 @@ declare namespace DataSync {
   }
   export interface DeleteTaskRequest {
     /**
-     * The Amazon Resource Name (ARN) of the task to delete.
+     * Specifies the Amazon Resource Name (ARN) of the task that you want to delete.
      */
     TaskArn: TaskArn;
   }
@@ -597,13 +1112,13 @@ declare namespace DataSync {
   }
   export interface DescribeAgentRequest {
     /**
-     * The Amazon Resource Name (ARN) of the agent to describe.
+     * Specifies the Amazon Resource Name (ARN) of the DataSync agent that you want information about.
      */
     AgentArn: AgentArn;
   }
   export interface DescribeAgentResponse {
     /**
-     * The Amazon Resource Name (ARN) of the agent.
+     * The ARN of the agent.
      */
     AgentArn?: AgentArn;
     /**
@@ -611,149 +1126,378 @@ declare namespace DataSync {
      */
     Name?: TagValue;
     /**
-     * The status of the agent. If the status is ONLINE, then the agent is configured properly and is available to use. The Running status is the normal running status for an agent. If the status is OFFLINE, the agent's VM is turned off or the agent is in an unhealthy state. When the issue that caused the unhealthy state is resolved, the agent returns to ONLINE status.
+     * The status of the agent.   If the status is ONLINE, the agent is configured properly and ready to use.   If the status is OFFLINE, the agent has been out of contact with DataSync for five minutes or longer. This can happen for a few reasons. For more information, see What do I do if my agent is offline?   
      */
     Status?: AgentStatus;
     /**
-     * The time that the agent last connected to DataSyc.
+     * The last time that the agent was communicating with the DataSync service.
      */
     LastConnectionTime?: Time;
     /**
-     * The time that the agent was activated (that is, created in your account).
+     * The time that the agent was activated.
      */
     CreationTime?: Time;
     /**
-     * The type of endpoint that your agent is connected to. If the endpoint is a VPC endpoint, the agent is not accessible over the public internet. 
+     * The type of service endpoint that your agent is connected to.
      */
     EndpointType?: EndpointType;
     /**
-     * The subnet and the security group that DataSync used to access a VPC endpoint.
+     * The network configuration that the agent uses when connecting to a VPC service endpoint.
      */
     PrivateLinkConfig?: PrivateLinkConfig;
+    /**
+     * The platform-related details about the agent, such as the version number.
+     */
+    Platform?: Platform;
+  }
+  export interface DescribeDiscoveryJobRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the discovery job that you want information about.
+     */
+    DiscoveryJobArn: DiscoveryJobArn;
+  }
+  export interface DescribeDiscoveryJobResponse {
+    /**
+     * The ARN of the on-premises storage system you're running the discovery job on.
+     */
+    StorageSystemArn?: StorageSystemArn;
+    /**
+     * The ARN of the discovery job.
+     */
+    DiscoveryJobArn?: DiscoveryJobArn;
+    /**
+     * The number of minutes that the discovery job runs.
+     */
+    CollectionDurationMinutes?: CollectionDurationMinutes;
+    /**
+     * Indicates the status of a discovery job. For more information, see Discovery job statuses.
+     */
+    Status?: DiscoveryJobStatus;
+    /**
+     * The time when the discovery job started.
+     */
+    JobStartTime?: DiscoveryTime;
+    /**
+     * The time when the discovery job ended.
+     */
+    JobEndTime?: DiscoveryTime;
+  }
+  export interface DescribeLocationAzureBlobRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of your Azure Blob Storage transfer location.
+     */
+    LocationArn: LocationArn;
+  }
+  export interface DescribeLocationAzureBlobResponse {
+    /**
+     * The ARN of your Azure Blob Storage transfer location.
+     */
+    LocationArn?: LocationArn;
+    /**
+     * The URL of the Azure Blob Storage container involved in your transfer.
+     */
+    LocationUri?: LocationUri;
+    /**
+     * The authentication method DataSync uses to access your Azure Blob Storage. DataSync can access blob storage using a shared access signature (SAS).
+     */
+    AuthenticationType?: AzureBlobAuthenticationType;
+    /**
+     * The type of blob that you want your objects or files to be when transferring them into Azure Blob Storage. Currently, DataSync only supports moving data into Azure Blob Storage as block blobs. For more information on blob types, see the Azure Blob Storage documentation.
+     */
+    BlobType?: AzureBlobType;
+    /**
+     * The access tier that you want your objects or files transferred into. This only applies when using the location as a transfer destination. For more information, see Access tiers.
+     */
+    AccessTier?: AzureAccessTier;
+    /**
+     * The ARNs of the DataSync agents that can connect with your Azure Blob Storage container.
+     */
+    AgentArns?: AgentArnList;
+    /**
+     * The time that your Azure Blob Storage transfer location was created.
+     */
+    CreationTime?: Time;
   }
   export interface DescribeLocationEfsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the EFS location to describe.
+     * The Amazon Resource Name (ARN) of the Amazon EFS file system location that you want information about.
      */
     LocationArn: LocationArn;
   }
   export interface DescribeLocationEfsResponse {
     /**
-     * The Amazon Resource Name (ARN) of the EFS location that was described.
+     * The ARN of the Amazon EFS file system location.
      */
     LocationArn?: LocationArn;
     /**
-     * The URL of the EFS location that was described.
+     * The URL of the Amazon EFS file system location.
      */
     LocationUri?: LocationUri;
     Ec2Config?: Ec2Config;
     /**
-     * The time that the EFS location was created.
+     * The time that the location was created.
+     */
+    CreationTime?: Time;
+    /**
+     * The ARN of the access point that DataSync uses to access the Amazon EFS file system.
+     */
+    AccessPointArn?: EfsAccessPointArn;
+    /**
+     * The Identity and Access Management (IAM) role that DataSync assumes when mounting the Amazon EFS file system.
+     */
+    FileSystemAccessRoleArn?: IamRoleArn;
+    /**
+     * Describes whether DataSync uses Transport Layer Security (TLS) encryption when copying data to or from the Amazon EFS file system.
+     */
+    InTransitEncryption?: EfsInTransitEncryption;
+  }
+  export interface DescribeLocationFsxLustreRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the FSx for Lustre location to describe. 
+     */
+    LocationArn: LocationArn;
+  }
+  export interface DescribeLocationFsxLustreResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the FSx for Lustre location that was described.
+     */
+    LocationArn?: LocationArn;
+    /**
+     * The URI of the FSx for Lustre location that was described.
+     */
+    LocationUri?: LocationUri;
+    /**
+     * The Amazon Resource Names (ARNs) of the security groups that are configured for the FSx for Lustre file system.
+     */
+    SecurityGroupArns?: Ec2SecurityGroupArnList;
+    /**
+     * The time that the FSx for Lustre location was created.
+     */
+    CreationTime?: Time;
+  }
+  export interface DescribeLocationFsxOntapRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the FSx for ONTAP file system location that you want information about.
+     */
+    LocationArn: LocationArn;
+  }
+  export interface DescribeLocationFsxOntapResponse {
+    /**
+     * The time that the location was created.
+     */
+    CreationTime?: Time;
+    /**
+     * The ARN of the FSx for ONTAP file system location.
+     */
+    LocationArn?: LocationArn;
+    /**
+     * The uniform resource identifier (URI) of the FSx for ONTAP file system location.
+     */
+    LocationUri?: LocationUri;
+    Protocol?: FsxProtocol;
+    /**
+     * The security groups that DataSync uses to access your FSx for ONTAP file system.
+     */
+    SecurityGroupArns?: Ec2SecurityGroupArnList;
+    /**
+     * The ARN of the storage virtual machine (SVM) on your FSx for ONTAP file system where you're copying data to or from.
+     */
+    StorageVirtualMachineArn?: StorageVirtualMachineArn;
+    /**
+     * The ARN of the FSx for ONTAP file system.
+     */
+    FsxFilesystemArn?: FsxFilesystemArn;
+  }
+  export interface DescribeLocationFsxOpenZfsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the FSx for OpenZFS location to describe.
+     */
+    LocationArn: LocationArn;
+  }
+  export interface DescribeLocationFsxOpenZfsResponse {
+    /**
+     * The ARN of the FSx for OpenZFS location that was described.
+     */
+    LocationArn?: LocationArn;
+    /**
+     * The uniform resource identifier (URI) of the FSx for OpenZFS location that was described. Example: fsxz://us-west-2.fs-1234567890abcdef02/fsx/folderA/folder 
+     */
+    LocationUri?: LocationUri;
+    /**
+     * The ARNs of the security groups that are configured for the FSx for OpenZFS file system.
+     */
+    SecurityGroupArns?: Ec2SecurityGroupArnList;
+    /**
+     * The type of protocol that DataSync uses to access your file system.
+     */
+    Protocol?: FsxProtocol;
+    /**
+     * The time that the FSx for OpenZFS location was created.
      */
     CreationTime?: Time;
   }
   export interface DescribeLocationFsxWindowsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the FSx for Windows location to describe.
+     * Specifies the Amazon Resource Name (ARN) of the FSx for Windows File Server location.
      */
     LocationArn: LocationArn;
   }
   export interface DescribeLocationFsxWindowsResponse {
     /**
-     * The Amazon Resource Name (ARN) of the FSx for Windows location that was described.
+     * The ARN of the FSx for Windows File Server location.
      */
     LocationArn?: LocationArn;
     /**
-     * The URL of the FSx for Windows location that was described.
+     * The uniform resource identifier (URI) of the FSx for Windows File Server location.
      */
     LocationUri?: LocationUri;
     /**
-     * The Amazon Resource Names (ARNs) of the security groups that are configured for the FSx for Windows file system.
+     * The ARNs of the security groups that are configured for the FSx for Windows File Server file system.
      */
     SecurityGroupArns?: Ec2SecurityGroupArnList;
     /**
-     * The time that the FSx for Windows location was created.
+     * The time that the FSx for Windows File Server location was created.
      */
     CreationTime?: Time;
     /**
-     * The user who has the permissions to access files and folders in the FSx for Windows file system.
+     * The user with the permissions to mount and access the FSx for Windows File Server file system.
      */
     User?: SmbUser;
     /**
-     * The name of the Windows domain that the FSx for Windows server belongs to.
+     * The name of the Microsoft Active Directory domain that the FSx for Windows File Server file system belongs to.
      */
     Domain?: SmbDomain;
   }
+  export interface DescribeLocationHdfsRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the HDFS location.
+     */
+    LocationArn: LocationArn;
+  }
+  export interface DescribeLocationHdfsResponse {
+    /**
+     * The ARN of the HDFS location.
+     */
+    LocationArn?: LocationArn;
+    /**
+     * The URI of the HDFS location.
+     */
+    LocationUri?: LocationUri;
+    /**
+     * The NameNode that manages the HDFS namespace. 
+     */
+    NameNodes?: HdfsNameNodeList;
+    /**
+     * The size of the data blocks to write into the HDFS cluster. 
+     */
+    BlockSize?: HdfsBlockSize;
+    /**
+     * The number of DataNodes to replicate the data to when writing to the HDFS cluster. 
+     */
+    ReplicationFactor?: HdfsReplicationFactor;
+    /**
+     *  The URI of the HDFS cluster's Key Management Server (KMS). 
+     */
+    KmsKeyProviderUri?: KmsKeyProviderUri;
+    /**
+     * The Quality of Protection (QOP) configuration, which specifies the Remote Procedure Call (RPC) and data transfer protection settings configured on the HDFS cluster. 
+     */
+    QopConfiguration?: QopConfiguration;
+    /**
+     * The type of authentication used to determine the identity of the user. 
+     */
+    AuthenticationType?: HdfsAuthenticationType;
+    /**
+     * The user name to identify the client on the host operating system. This parameter is used if the AuthenticationType is defined as SIMPLE.
+     */
+    SimpleUser?: HdfsUser;
+    /**
+     * The Kerberos principal with access to the files and folders on the HDFS cluster. This parameter is used if the AuthenticationType is defined as KERBEROS.
+     */
+    KerberosPrincipal?: KerberosPrincipal;
+    /**
+     * The ARNs of the DataSync agents that can connect with your HDFS cluster.
+     */
+    AgentArns?: AgentArnList;
+    /**
+     * The time that the HDFS location was created.
+     */
+    CreationTime?: Time;
+  }
   export interface DescribeLocationNfsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the NFS location to describe.
+     * Specifies the Amazon Resource Name (ARN) of the NFS location that you want information about.
      */
     LocationArn: LocationArn;
   }
   export interface DescribeLocationNfsResponse {
     /**
-     * The Amazon Resource Name (ARN) of the NFS location that was described.
+     * The ARN of the NFS location.
      */
     LocationArn?: LocationArn;
     /**
-     * The URL of the source NFS location that was described.
+     * The URI of the NFS location.
      */
     LocationUri?: LocationUri;
     OnPremConfig?: OnPremConfig;
     /**
-     * The NFS mount options that DataSync used to mount your NFS share.
+     * The mount options that DataSync uses to mount your NFS file server.
      */
     MountOptions?: NfsMountOptions;
     /**
-     * The time that the NFS location was created.
+     * The time when the NFS location was created.
      */
     CreationTime?: Time;
   }
   export interface DescribeLocationObjectStorageRequest {
     /**
-     * The Amazon Resource Name (ARN) of the self-managed object storage server location that was described.
+     * Specifies the Amazon Resource Name (ARN) of the object storage system location.
      */
     LocationArn: LocationArn;
   }
   export interface DescribeLocationObjectStorageResponse {
     /**
-     * The Amazon Resource Name (ARN) of the self-managed object storage server location to describe.
+     * The ARN of the object storage system location.
      */
     LocationArn?: LocationArn;
     /**
-     * The URL of the source self-managed object storage server location that was described.
+     * The URI of the object storage system location.
      */
     LocationUri?: LocationUri;
     /**
-     * Optional. The access key is used if credentials are required to access the self-managed object storage server. If your object storage requires a user name and password to authenticate, use AccessKey and SecretKey to provide the user name and password, respectively.
+     * The access key (for example, a user name) required to authenticate with the object storage system.
      */
     AccessKey?: ObjectStorageAccessKey;
     /**
-     * The port that your self-managed object storage server accepts inbound network traffic on. The server port is set by default to TCP 80 (HTTP) or TCP 443 (HTTPS).
+     * The port that your object storage server accepts inbound network traffic on (for example, port 443).
      */
     ServerPort?: ObjectStorageServerPort;
     /**
-     * The protocol that the object storage server uses to communicate. Valid values are HTTP or HTTPS.
+     * The protocol that your object storage system uses to communicate.
      */
     ServerProtocol?: ObjectStorageServerProtocol;
     /**
-     * The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.
+     * The ARNs of the DataSync agents that can connect with your object storage system.
      */
     AgentArns?: AgentArnList;
     /**
-     * The time that the self-managed object storage server agent was created.
+     * The time that the location was created.
      */
     CreationTime?: Time;
+    /**
+     * The certificate chain for DataSync to authenticate with your object storage system if the system uses a private or self-signed certificate authority (CA).
+     */
+    ServerCertificate?: ObjectStorageCertificate;
   }
   export interface DescribeLocationS3Request {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon S3 bucket location to describe.
+     * Specifies the Amazon Resource Name (ARN) of the Amazon S3 location.
      */
     LocationArn: LocationArn;
   }
   export interface DescribeLocationS3Response {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon S3 bucket or access point.
+     * The ARN of the Amazon S3 location.
      */
     LocationArn?: LocationArn;
     /**
@@ -761,48 +1505,48 @@ declare namespace DataSync {
      */
     LocationUri?: LocationUri;
     /**
-     * The Amazon S3 storage class that you chose to store your files in when this location is used as a task destination. For more information about S3 storage classes, see Amazon S3 Storage Classes. Some storage classes have behaviors that can affect your S3 storage cost. For detailed information, see using-storage-classes.
+     * When Amazon S3 is a destination location, this is the storage class that you chose for your objects. Some storage classes have behaviors that can affect your Amazon S3 storage costs. For more information, see Storage class considerations with Amazon S3 transfers.
      */
     S3StorageClass?: S3StorageClass;
     S3Config?: S3Config;
     /**
-     * If you are using DataSync on an AWS Outpost, the Amazon Resource Name (ARNs) of the EC2 agents deployed on your Outpost. For more information about launching a DataSync agent on an AWS Outpost, see outposts-agent.
+     * The ARNs of the DataSync agents deployed on your Outpost when using working with Amazon S3 on Outposts. For more information, see Deploy your DataSync agent on Outposts.
      */
     AgentArns?: AgentArnList;
     /**
-     * The time that the Amazon S3 bucket location was created.
+     * The time that the Amazon S3 location was created.
      */
     CreationTime?: Time;
   }
   export interface DescribeLocationSmbRequest {
     /**
-     * The Amazon Resource Name (ARN) of the SMB location to describe.
+     * Specifies the Amazon Resource Name (ARN) of the SMB location that you want information about.
      */
     LocationArn: LocationArn;
   }
   export interface DescribeLocationSmbResponse {
     /**
-     * The Amazon Resource Name (ARN) of the SMB location that was described.
+     * The ARN of the SMB location.
      */
     LocationArn?: LocationArn;
     /**
-     * The URL of the source SBM location that was described.
+     * The URI of the SMB location.
      */
     LocationUri?: LocationUri;
     /**
-     * The Amazon Resource Name (ARN) of the source SMB file system location that is created.
+     * The ARNs of the DataSync agents that can connect with your SMB file server.
      */
     AgentArns?: AgentArnList;
     /**
-     * The user who can mount the share, has the permissions to access files and folders in the SMB share.
+     * The user that can mount and access the files, folders, and file metadata in your SMB file server.
      */
     User?: SmbUser;
     /**
-     * The name of the Windows domain that the SMB server belongs to.
+     * The name of the Microsoft Active Directory domain that the SMB file server belongs to.
      */
     Domain?: SmbDomain;
     /**
-     * The mount options that are available for DataSync to use to access an SMB location.
+     * The protocol that DataSync use to access your SMB file.
      */
     MountOptions?: SmbMountOptions;
     /**
@@ -810,151 +1554,360 @@ declare namespace DataSync {
      */
     CreationTime?: Time;
   }
+  export interface DescribeStorageSystemRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of an on-premises storage system that you're using with DataSync Discovery.
+     */
+    StorageSystemArn: StorageSystemArn;
+  }
+  export interface DescribeStorageSystemResourceMetricsRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the discovery job that collects information about your on-premises storage system.
+     */
+    DiscoveryJobArn: DiscoveryJobArn;
+    /**
+     * Specifies the kind of storage system resource that you want information about.
+     */
+    ResourceType: DiscoveryResourceType;
+    /**
+     * Specifies the universally unique identifier (UUID) of the storage system resource that you want information about.
+     */
+    ResourceId: ResourceId;
+    /**
+     * Specifies a time within the total duration that the discovery job ran. To see information gathered during a certain time frame, use this parameter with EndTime.
+     */
+    StartTime?: DiscoveryTime;
+    /**
+     * Specifies a time within the total duration that the discovery job ran. To see information gathered during a certain time frame, use this parameter with StartTime.
+     */
+    EndTime?: DiscoveryTime;
+    /**
+     * Specifies how many results that you want in the response.
+     */
+    MaxResults?: DiscoveryMaxResults;
+    /**
+     * Specifies an opaque string that indicates the position to begin the next list of results in the response.
+     */
+    NextToken?: DiscoveryNextToken;
+  }
+  export interface DescribeStorageSystemResourceMetricsResponse {
+    /**
+     * The details that your discovery job collected about your storage system resource.
+     */
+    Metrics?: Metrics;
+    /**
+     * The opaque string that indicates the position to begin the next list of results in the response.
+     */
+    NextToken?: DiscoveryNextToken;
+  }
+  export interface DescribeStorageSystemResourcesRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the discovery job that's collecting data from your on-premises storage system.
+     */
+    DiscoveryJobArn: DiscoveryJobArn;
+    /**
+     * Specifies what kind of storage system resources that you want information about.
+     */
+    ResourceType: DiscoveryResourceType;
+    /**
+     * Specifies the universally unique identifiers (UUIDs) of the storage system resources that you want information about. You can't use this parameter in combination with the Filter parameter.
+     */
+    ResourceIds?: ResourceIds;
+    /**
+     * Filters the storage system resources that you want returned. For example, this might be volumes associated with a specific storage virtual machine (SVM).
+     */
+    Filter?: ResourceFilters;
+    /**
+     * Specifies the maximum number of storage system resources that you want to list in a response.
+     */
+    MaxResults?: DiscoveryMaxResults;
+    /**
+     * Specifies an opaque string that indicates the position to begin the next list of results in the response.
+     */
+    NextToken?: DiscoveryNextToken;
+  }
+  export interface DescribeStorageSystemResourcesResponse {
+    /**
+     * The information collected about your storage system's resources. A response can also include Amazon Web Services storage service recommendations. For more information, see storage resource information collected by and recommendations provided by DataSync Discovery.
+     */
+    ResourceDetails?: ResourceDetails;
+    /**
+     * The opaque string that indicates the position to begin the next list of results in the response.
+     */
+    NextToken?: DiscoveryNextToken;
+  }
+  export interface DescribeStorageSystemResponse {
+    /**
+     * The ARN of the on-premises storage system that the discovery job looked at.
+     */
+    StorageSystemArn?: StorageSystemArn;
+    /**
+     * The server name and network port required to connect with your on-premises storage system's management interface.
+     */
+    ServerConfiguration?: DiscoveryServerConfiguration;
+    /**
+     * The type of on-premises storage system.  DataSync Discovery currently only supports NetApp Fabric-Attached Storage (FAS) and All Flash FAS (AFF) systems running ONTAP 9.7 or later.  
+     */
+    SystemType?: DiscoverySystemType;
+    /**
+     * The ARN of the DataSync agent that connects to and reads from your on-premises storage system.
+     */
+    AgentArns?: DiscoveryAgentArnList;
+    /**
+     * The name that you gave your on-premises storage system when adding it to DataSync Discovery.
+     */
+    Name?: Name;
+    /**
+     * Describes the connectivity error that the DataSync agent is encountering with your on-premises storage system.
+     */
+    ErrorMessage?: ErrorMessage;
+    /**
+     * Indicates whether your DataSync agent can connect to your on-premises storage system.
+     */
+    ConnectivityStatus?: StorageSystemConnectivityStatus;
+    /**
+     * The ARN of the Amazon CloudWatch log group that's used to monitor and log discovery job events.
+     */
+    CloudWatchLogGroupArn?: LogGroupArn;
+    /**
+     * The time when you added the on-premises storage system to DataSync Discovery.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The ARN of the secret that stores your on-premises storage system's credentials. DataSync Discovery stores these credentials in Secrets Manager.
+     */
+    SecretsManagerArn?: SecretsManagerArn;
+  }
   export interface DescribeTaskExecutionRequest {
     /**
-     * The Amazon Resource Name (ARN) of the task that is being executed.
+     * Specifies the Amazon Resource Name (ARN) of the task execution that you want information about.
      */
     TaskExecutionArn: TaskExecutionArn;
   }
   export interface DescribeTaskExecutionResponse {
     /**
-     * The Amazon Resource Name (ARN) of the task execution that was described. TaskExecutionArn is hierarchical and includes TaskArn for the task that was executed.  For example, a TaskExecution value with the ARN arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2/execution/exec-08ef1e88ec491019b executed the task with the ARN arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2. 
+     * The ARN of the task execution that you wanted information about. TaskExecutionArn is hierarchical and includes TaskArn for the task that was executed.  For example, a TaskExecution value with the ARN arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2/execution/exec-08ef1e88ec491019b executed the task with the ARN arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2. 
      */
     TaskExecutionArn?: TaskExecutionArn;
     /**
-     * The status of the task execution.  For detailed information about task execution statuses, see Understanding Task Statuses in the AWS DataSync User Guide. 
+     * The status of the task execution. 
      */
     Status?: TaskExecutionStatus;
     Options?: Options;
     /**
-     * A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: "/folder1|/folder2"   
+     * A list of filter rules that exclude specific data during your transfer. For more information and examples, see Filtering data transferred by DataSync.
      */
     Excludes?: FilterList;
     /**
-     * A list of filter rules that determines which files to include when running a task. The list should contain a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe), for example: "/folder1|/folder2"   
+     * A list of filter rules that include specific data during your transfer. For more information and examples, see Filtering data transferred by DataSync.
      */
     Includes?: FilterList;
     /**
-     * The time that the task execution was started.
+     * The configuration of the manifest that lists the files or objects to transfer. For more information, see Specifying what DataSync transfers by using a manifest.
+     */
+    ManifestConfig?: ManifestConfig;
+    /**
+     * The time when the task execution started.
      */
     StartTime?: Time;
     /**
-     * The expected number of files that is to be transferred over the network. This value is calculated during the PREPARING phase, before the TRANSFERRING phase. This value is the expected number of files to be transferred. It's calculated based on comparing the content of the source and destination locations and finding the delta that needs to be transferred. 
+     * The expected number of files, objects, and directories that DataSync will transfer over the network. This value is calculated during the task execution's PREPARING phase before the TRANSFERRING phase. The calculation is based on comparing the content of the source and destination locations and finding the difference that needs to be transferred. 
      */
     EstimatedFilesToTransfer?: long;
     /**
-     * The estimated physical number of bytes that is to be transferred over the network.
+     * The estimated physical number of bytes that will transfer over the network.
      */
     EstimatedBytesToTransfer?: long;
     /**
-     * The actual number of files that was transferred over the network. This value is calculated and updated on an ongoing basis during the TRANSFERRING phase. It's updated periodically when each file is read from the source and sent over the network.  If failures occur during a transfer, this value can be less than EstimatedFilesToTransfer. This value can also be greater than EstimatedFilesTransferred in some cases. This element is implementation-specific for some location types, so don't use it as an indicator for a correct file number or to monitor your task execution.
+     * The actual number of files, objects, and directories that DataSync transferred over the network. This value is updated periodically during the task execution's TRANSFERRING phase when something is read from the source and sent over the network. If DataSync fails to transfer something, this value can be less than EstimatedFilesToTransfer. In some cases, this value can also be greater than EstimatedFilesToTransfer. This element is implementation-specific for some location types, so don't use it as an exact indication of what transferred or to monitor your task execution.
      */
     FilesTransferred?: long;
     /**
-     * The number of logical bytes written to the destination AWS storage resource.
+     * The number of logical bytes written to the destination location.
      */
     BytesWritten?: long;
     /**
-     * The physical number of bytes transferred over the network.
+     * The total number of bytes that are involved in the transfer. For the number of bytes sent over the network, see BytesCompressed. 
      */
     BytesTransferred?: long;
+    /**
+     * The physical number of bytes transferred over the network after compression was applied. In most cases, this number is less than BytesTransferred unless the data isn't compressible.
+     */
+    BytesCompressed?: long;
     /**
      * The result of the task execution.
      */
     Result?: TaskExecutionResultDetail;
+    /**
+     * The configuration of your task report, which provides detailed information about for your DataSync transfer. For more information, see Creating a task report.
+     */
+    TaskReportConfig?: TaskReportConfig;
+    /**
+     * The number of files, objects, and directories that DataSync deleted in your destination location. If you don't configure your task to delete data in the destination that isn't in the source, the value is always 0.
+     */
+    FilesDeleted?: long;
+    /**
+     * The number of files, objects, and directories that DataSync skipped during your transfer.
+     */
+    FilesSkipped?: long;
+    /**
+     * The number of files, objects, and directories that DataSync verified during your transfer.  When you configure your task to verify only the data that's transferred, DataSync doesn't verify directories in some situations or files that fail to transfer. 
+     */
+    FilesVerified?: long;
+    /**
+     * Indicates whether DataSync generated a complete task report for your transfer.
+     */
+    ReportResult?: ReportResult;
+    /**
+     * The expected number of files, objects, and directories that DataSync will delete in your destination location. If you don't configure your task to delete data in the destination that isn't in the source, the value is always 0.
+     */
+    EstimatedFilesToDelete?: long;
   }
   export interface DescribeTaskRequest {
     /**
-     * The Amazon Resource Name (ARN) of the task to describe.
+     * Specifies the Amazon Resource Name (ARN) of the transfer task that you want information about.
      */
     TaskArn: TaskArn;
   }
   export interface DescribeTaskResponse {
     /**
-     * The Amazon Resource Name (ARN) of the task that was described.
+     * The ARN of your task.
      */
     TaskArn?: TaskArn;
     /**
-     * The status of the task that was described. For detailed information about task execution statuses, see Understanding Task Statuses in the AWS DataSync User Guide.
+     * The status of your task. For information about what each status means, see Task statuses.
      */
     Status?: TaskStatus;
     /**
-     * The name of the task that was described.
+     * The name of your task.
      */
     Name?: TagValue;
     /**
-     * The Amazon Resource Name (ARN) of the task execution that is syncing files.
+     * The ARN of the most recent task execution.
      */
     CurrentTaskExecutionArn?: TaskExecutionArn;
     /**
-     * The Amazon Resource Name (ARN) of the source file system's location.
+     * The ARN of your transfer's source location.
      */
     SourceLocationArn?: LocationArn;
     /**
-     * The Amazon Resource Name (ARN) of the AWS storage resource's location.
+     * The ARN of your transfer's destination location.
      */
     DestinationLocationArn?: LocationArn;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was used to monitor and log events in the task. For more information on these groups, see Working with Log Groups and Log Streams in the Amazon CloudWatch User Guide.
+     * The Amazon Resource Name (ARN) of an Amazon CloudWatch log group for monitoring your task. For more information, see Monitoring DataSync with Amazon CloudWatch.
      */
     CloudWatchLogGroupArn?: LogGroupArn;
     /**
-     * The Amazon Resource Name (ARN) of the source ENIs (Elastic Network Interface) that was created for your subnet.
+     * The ARNs of the network interfaces that DataSync created for your source location.
      */
     SourceNetworkInterfaceArns?: SourceNetworkInterfaceArns;
     /**
-     * The Amazon Resource Name (ARN) of the destination ENIs (Elastic Network Interface) that was created for your subnet.
+     * The ARNs of the network interfaces that DataSync created for your destination location.
      */
     DestinationNetworkInterfaceArns?: DestinationNetworkInterfaceArns;
     /**
-     * The set of configuration options that control the behavior of a single execution of the task that occurs when you call StartTaskExecution. You can configure these options to preserve metadata such as user ID (UID) and group (GID), file permissions, data integrity verification, and so on. For each individual task execution, you can override these options by specifying the overriding OverrideOptions value to operation. 
+     * The task's settings. For example, what file metadata gets preserved, how data integrity gets verified at the end of your transfer, bandwidth limits, among other options.
      */
     Options?: Options;
     /**
-     * A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: "/folder1|/folder2"   
+     * The exclude filters that define the files, objects, and folders in your source location that you don't want DataSync to transfer. For more information and examples, see Specifying what DataSync transfers by using filters.
      */
     Excludes?: FilterList;
     /**
-     * The schedule used to periodically transfer files from a source to a destination location.
+     * The schedule for when you want your task to run. For more information, see Scheduling your task.
      */
     Schedule?: TaskSchedule;
     /**
-     * Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.
+     * If there's an issue with your task, you can use the error code to help you troubleshoot the problem. For more information, see Troubleshooting issues with DataSync transfers.
      */
     ErrorCode?: string;
     /**
-     * Detailed description of an error that was encountered during the task execution. You can use this information to help troubleshoot issues. 
+     * If there's an issue with your task, you can use the error details to help you troubleshoot the problem. For more information, see Troubleshooting issues with DataSync transfers.
      */
     ErrorDetail?: string;
     /**
      * The time that the task was created.
      */
     CreationTime?: Time;
+    /**
+     * The include filters that define the files, objects, and folders in your source location that you want DataSync to transfer. For more information and examples, see Specifying what DataSync transfers by using filters.
+     */
+    Includes?: FilterList;
+    /**
+     * The configuration of the manifest that lists the files or objects that you want DataSync to transfer. For more information, see Specifying what DataSync transfers by using a manifest.
+     */
+    ManifestConfig?: ManifestConfig;
+    /**
+     * The configuration of your task report, which provides detailed information about your DataSync transfer. For more information, see Monitoring your DataSync transfers with task reports.
+     */
+    TaskReportConfig?: TaskReportConfig;
+    /**
+     * The details about your task schedule.
+     */
+    ScheduleDetails?: TaskScheduleDetails;
   }
   export type DestinationNetworkInterfaceArns = NetworkInterfaceArn[];
+  export type DiscoveryAgentArnList = AgentArn[];
+  export type DiscoveryJobArn = string;
+  export type DiscoveryJobList = DiscoveryJobListEntry[];
+  export interface DiscoveryJobListEntry {
+    /**
+     * The Amazon Resource Name (ARN) of a discovery job.
+     */
+    DiscoveryJobArn?: DiscoveryJobArn;
+    /**
+     * The status of a discovery job. For more information, see Discovery job statuses.
+     */
+    Status?: DiscoveryJobStatus;
+  }
+  export type DiscoveryJobStatus = "RUNNING"|"WARNING"|"TERMINATED"|"FAILED"|"STOPPED"|"COMPLETED"|"COMPLETED_WITH_ISSUES"|string;
+  export type DiscoveryMaxResults = number;
+  export type DiscoveryNextToken = string;
+  export type DiscoveryResourceFilter = "SVM"|string;
+  export type DiscoveryResourceType = "SVM"|"VOLUME"|"CLUSTER"|string;
+  export interface DiscoveryServerConfiguration {
+    /**
+     * The domain name or IP address of your storage system's management interface.
+     */
+    ServerHostname: DiscoveryServerHostname;
+    /**
+     * The network port for accessing the storage system's management interface.
+     */
+    ServerPort?: DiscoveryServerPort;
+  }
+  export type DiscoveryServerHostname = string;
+  export type DiscoveryServerPort = number;
+  export type DiscoverySystemType = "NetAppONTAP"|string;
+  export type DiscoveryTime = Date;
   export type Duration = number;
   export interface Ec2Config {
     /**
-     * The ARN of the subnet and the security group that DataSync uses to access the target EFS file system.
+     * Specifies the ARN of a subnet where DataSync creates the network interfaces for managing traffic during your transfer. The subnet must be located:   In the same virtual private cloud (VPC) as the Amazon EFS file system.   In the same Availability Zone as at least one mount target for the Amazon EFS file system.    You don't need to specify a subnet that includes a file system mount target. 
      */
     SubnetArn: Ec2SubnetArn;
     /**
-     * The Amazon Resource Names (ARNs) of the security groups that are configured for the Amazon EC2 resource.
+     * Specifies the Amazon Resource Names (ARNs) of the security groups associated with an Amazon EFS file system's mount target.
      */
     SecurityGroupArns: Ec2SecurityGroupArnList;
   }
   export type Ec2SecurityGroupArn = string;
   export type Ec2SecurityGroupArnList = Ec2SecurityGroupArn[];
   export type Ec2SubnetArn = string;
+  export type EfsAccessPointArn = string;
   export type EfsFilesystemArn = string;
+  export type EfsInTransitEncryption = "NONE"|"TLS1_2"|string;
   export type EfsSubdirectory = string;
+  export type EnabledProtocols = PtolemyString[];
   export type Endpoint = string;
   export type EndpointType = "PUBLIC"|"PRIVATE_LINK"|"FIPS"|string;
+  export type ErrorMessage = string;
   export type FilterAttributeValue = string;
   export type FilterList = FilterRule[];
+  export type FilterMembers = PtolemyString[];
   export interface FilterRule {
     /**
-     * The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.
+     * The type of filter rule to apply. DataSync only supports the SIMPLE_PATTERN rule type.
      */
     FilterType?: FilterType;
     /**
@@ -966,29 +1919,156 @@ declare namespace DataSync {
   export type FilterValue = string;
   export type FilterValues = FilterAttributeValue[];
   export type FsxFilesystemArn = string;
+  export type FsxLustreSubdirectory = string;
+  export type FsxOntapSubdirectory = string;
+  export type FsxOpenZfsSubdirectory = string;
+  export interface FsxProtocol {
+    /**
+     * Specifies the Network File System (NFS) protocol configuration that DataSync uses to access your FSx for OpenZFS file system or FSx for ONTAP file system's storage virtual machine (SVM).
+     */
+    NFS?: FsxProtocolNfs;
+    /**
+     * Specifies the Server Message Block (SMB) protocol configuration that DataSync uses to access your FSx for ONTAP file system's SVM.
+     */
+    SMB?: FsxProtocolSmb;
+  }
+  export interface FsxProtocolNfs {
+    MountOptions?: NfsMountOptions;
+  }
+  export interface FsxProtocolSmb {
+    /**
+     * Specifies the fully qualified domain name (FQDN) of the Microsoft Active Directory that your storage virtual machine (SVM) belongs to. If you have multiple domains in your environment, configuring this setting makes sure that DataSync connects to the right SVM.
+     */
+    Domain?: SmbDomain;
+    MountOptions?: SmbMountOptions;
+    /**
+     * Specifies the password of a user who has permission to access your SVM.
+     */
+    Password: SmbPassword;
+    /**
+     * Specifies a user that can mount and access the files, folders, and metadata in your SVM. For information about choosing a user with the right level of access for your transfer, see Using the SMB protocol.
+     */
+    User: SmbUser;
+  }
   export type FsxWindowsSubdirectory = string;
+  export interface GenerateRecommendationsRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the discovery job that collects information about your on-premises storage system.
+     */
+    DiscoveryJobArn: DiscoveryJobArn;
+    /**
+     * Specifies the universally unique identifiers (UUIDs) of the resources in your storage system that you want recommendations on.
+     */
+    ResourceIds: ResourceIds;
+    /**
+     * Specifies the type of resource in your storage system that you want recommendations on.
+     */
+    ResourceType: DiscoveryResourceType;
+  }
+  export interface GenerateRecommendationsResponse {
+  }
   export type Gid = "NONE"|"INT_VALUE"|"NAME"|"BOTH"|string;
+  export type HdfsAuthenticationType = "SIMPLE"|"KERBEROS"|string;
+  export type HdfsBlockSize = number;
+  export type HdfsDataTransferProtection = "DISABLED"|"AUTHENTICATION"|"INTEGRITY"|"PRIVACY"|string;
+  export interface HdfsNameNode {
+    /**
+     * The hostname of the NameNode in the HDFS cluster. This value is the IP address or Domain Name Service (DNS) name of the NameNode. An agent that's installed on-premises uses this hostname to communicate with the NameNode in the network.
+     */
+    Hostname: HdfsServerHostname;
+    /**
+     * The port that the NameNode uses to listen to client requests.
+     */
+    Port: HdfsServerPort;
+  }
+  export type HdfsNameNodeList = HdfsNameNode[];
+  export type HdfsReplicationFactor = number;
+  export type HdfsRpcProtection = "DISABLED"|"AUTHENTICATION"|"INTEGRITY"|"PRIVACY"|string;
+  export type HdfsServerHostname = string;
+  export type HdfsServerPort = number;
+  export type HdfsSubdirectory = string;
+  export type HdfsUser = string;
+  export interface IOPS {
+    /**
+     * Peak IOPS related to read operations.
+     */
+    Read?: NonNegativeDouble;
+    /**
+     * Peak IOPS related to write operations.
+     */
+    Write?: NonNegativeDouble;
+    /**
+     * Peak IOPS unrelated to read and write operations.
+     */
+    Other?: NonNegativeDouble;
+    /**
+     * Peak total IOPS on your on-premises storage system resource.
+     */
+    Total?: NonNegativeDouble;
+  }
   export type IamRoleArn = string;
   export type InputTagList = TagListEntry[];
+  export type KerberosKeytabFile = Buffer|Uint8Array|Blob|string;
+  export type KerberosKrb5ConfFile = Buffer|Uint8Array|Blob|string;
+  export type KerberosPrincipal = string;
+  export type KmsKeyProviderUri = string;
+  export interface Latency {
+    /**
+     * Peak latency for read operations.
+     */
+    Read?: NonNegativeDouble;
+    /**
+     * Peak latency for write operations.
+     */
+    Write?: NonNegativeDouble;
+    /**
+     * Peak latency for operations unrelated to read and write operations.
+     */
+    Other?: NonNegativeDouble;
+  }
   export interface ListAgentsRequest {
     /**
-     * The maximum number of agents to list.
+     * Specifies the maximum number of DataSync agents to list in a response. By default, a response shows a maximum of 100 agents.
      */
     MaxResults?: MaxResults;
     /**
-     * An opaque string that indicates the position at which to begin the next list of agents.
+     * Specifies an opaque string that indicates the position to begin the next list of results in the response.
      */
     NextToken?: NextToken;
   }
   export interface ListAgentsResponse {
     /**
-     * A list of agents in your account.
+     * A list of DataSync agents in your Amazon Web Services account in the Amazon Web Services Region specified in the request. The list is ordered by the agents' Amazon Resource Names (ARNs).
      */
     Agents?: AgentList;
     /**
-     * An opaque string that indicates the position at which to begin returning the next list of agents.
+     * The opaque string that indicates the position to begin the next list of results in the response.
      */
     NextToken?: NextToken;
+  }
+  export interface ListDiscoveryJobsRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of an on-premises storage system. Use this parameter if you only want to list the discovery jobs that are associated with a specific storage system.
+     */
+    StorageSystemArn?: StorageSystemArn;
+    /**
+     * Specifies how many results you want in the response.
+     */
+    MaxResults?: DiscoveryMaxResults;
+    /**
+     * Specifies an opaque string that indicates the position to begin the next list of results in the response.
+     */
+    NextToken?: DiscoveryNextToken;
+  }
+  export interface ListDiscoveryJobsResponse {
+    /**
+     * The discovery jobs that you've run.
+     */
+    DiscoveryJobs?: DiscoveryJobList;
+    /**
+     * The opaque string that indicates the position to begin the next list of results in the response.
+     */
+    NextToken?: DiscoveryNextToken;
   }
   export interface ListLocationsRequest {
     /**
@@ -1014,51 +2094,71 @@ declare namespace DataSync {
      */
     NextToken?: NextToken;
   }
+  export interface ListStorageSystemsRequest {
+    /**
+     * Specifies how many results you want in the response.
+     */
+    MaxResults?: DiscoveryMaxResults;
+    /**
+     * Specifies an opaque string that indicates the position to begin the next list of results in the response. 
+     */
+    NextToken?: DiscoveryNextToken;
+  }
+  export interface ListStorageSystemsResponse {
+    /**
+     * The Amazon Resource Names ARNs) of the on-premises storage systems that you're using with DataSync Discovery.
+     */
+    StorageSystems?: StorageSystemList;
+    /**
+     * The opaque string that indicates the position to begin the next list of results in the response.
+     */
+    NextToken?: DiscoveryNextToken;
+  }
   export interface ListTagsForResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource whose tags to list.
+     * Specifies the Amazon Resource Name (ARN) of the resource that you want tag information on.
      */
     ResourceArn: TaggableResourceArn;
     /**
-     * The maximum number of locations to return.
+     * Specifies how many results that you want in the response.
      */
     MaxResults?: MaxResults;
     /**
-     * An opaque string that indicates the position at which to begin the next list of locations.
+     * Specifies an opaque string that indicates the position to begin the next list of results in the response.
      */
     NextToken?: NextToken;
   }
   export interface ListTagsForResourceResponse {
     /**
-     * Array of resource tags.
+     * An array of tags applied to the specified resource.
      */
     Tags?: OutputTagList;
     /**
-     * An opaque string that indicates the position at which to begin returning the next list of resource tags.
+     * The opaque string that indicates the position to begin the next list of results in the response.
      */
     NextToken?: NextToken;
   }
   export interface ListTaskExecutionsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the task whose tasks you want to list.
+     * Specifies the Amazon Resource Name (ARN) of the task that you want execution information about.
      */
     TaskArn?: TaskArn;
     /**
-     * The maximum number of executed tasks to list.
+     * Specifies how many results you want in the response.
      */
     MaxResults?: MaxResults;
     /**
-     * An opaque string that indicates the position at which to begin the next list of the executed tasks.
+     * Specifies an opaque string that indicates the position at which to begin the next list of results in the response.
      */
     NextToken?: NextToken;
   }
   export interface ListTaskExecutionsResponse {
     /**
-     * A list of executed tasks.
+     * A list of the task's executions.
      */
     TaskExecutions?: TaskExecutionList;
     /**
-     * An opaque string that indicates the position at which to begin returning the next list of executed tasks.
+     * The opaque string that indicates the position to begin the next list of results in the response.
      */
     NextToken?: NextToken;
   }
@@ -1097,7 +2197,7 @@ declare namespace DataSync {
      */
     Values: FilterValues;
     /**
-     * The operator that is used to compare filter values (for example, Equals or Contains). For more about API filtering operators, see query-resources.
+     * The operator that is used to compare filter values (for example, Equals or Contains).
      */
     Operator: Operator;
   }
@@ -1110,176 +2210,677 @@ declare namespace DataSync {
      */
     LocationArn?: LocationArn;
     /**
-     * Represents a list of URLs of a location. LocationUri returns an array that contains a list of locations when the ListLocations operation is called. Format: TYPE://GLOBAL_ID/SUBDIR. TYPE designates the type of location. Valid values: NFS | EFS | S3. GLOBAL_ID is the globally unique identifier of the resource that backs the location. An example for EFS is us-east-2.fs-abcd1234. An example for Amazon S3 is the bucket name, such as myBucket. An example for NFS is a valid IPv4 address or a host name compliant with Domain Name Service (DNS). SUBDIR is a valid file system path, delimited by forward slashes as is the *nix convention. For NFS and Amazon EFS, it's the export path to mount the location. For Amazon S3, it's the prefix path that you mount to and treat as the root of the location. 
+     * Represents a list of URIs of a location. LocationUri returns an array that contains a list of locations when the ListLocations operation is called. Format: TYPE://GLOBAL_ID/SUBDIR. TYPE designates the type of location (for example, nfs or s3). GLOBAL_ID is the globally unique identifier of the resource that backs the location. An example for EFS is us-east-2.fs-abcd1234. An example for Amazon S3 is the bucket name, such as myBucket. An example for NFS is a valid IPv4 address or a hostname that is compliant with Domain Name Service (DNS). SUBDIR is a valid file system path, delimited by forward slashes as is the *nix convention. For NFS and Amazon EFS, it's the export path to mount the location. For Amazon S3, it's the prefix path that you mount to and treat as the root of the location. 
      */
     LocationUri?: LocationUri;
   }
   export type LocationUri = string;
   export type LogGroupArn = string;
   export type LogLevel = "OFF"|"BASIC"|"TRANSFER"|string;
+  export type ManifestAction = "TRANSFER"|string;
+  export interface ManifestConfig {
+    /**
+     * Specifies what DataSync uses the manifest for.
+     */
+    Action?: ManifestAction;
+    /**
+     * Specifies the file format of your manifest. For more information, see Creating a manifest.
+     */
+    Format?: ManifestFormat;
+    /**
+     * Specifies the manifest that you want DataSync to use and where it's hosted.  You must specify this parameter if you're configuring a new manifest on or after February 7, 2024. If you don't, you'll get a 400 status code and ValidationException error stating that you're missing the IAM role for DataSync to access the S3 bucket where you're hosting your manifest. For more information, see Providing DataSync access to your manifest. 
+     */
+    Source?: SourceManifestConfig;
+  }
+  export type ManifestFormat = "CSV"|string;
+  export interface MaxP95Performance {
+    /**
+     * Peak IOPS related to read operations.
+     */
+    IopsRead?: NonNegativeDouble;
+    /**
+     * Peak IOPS related to write operations.
+     */
+    IopsWrite?: NonNegativeDouble;
+    /**
+     * Peak IOPS unrelated to read and write operations.
+     */
+    IopsOther?: NonNegativeDouble;
+    /**
+     * Peak total IOPS on your on-premises storage system resource.
+     */
+    IopsTotal?: NonNegativeDouble;
+    /**
+     * Peak throughput related to read operations.
+     */
+    ThroughputRead?: NonNegativeDouble;
+    /**
+     * Peak throughput related to write operations.
+     */
+    ThroughputWrite?: NonNegativeDouble;
+    /**
+     * Peak throughput unrelated to read and write operations.
+     */
+    ThroughputOther?: NonNegativeDouble;
+    /**
+     * Peak total throughput on your on-premises storage system resource.
+     */
+    ThroughputTotal?: NonNegativeDouble;
+    /**
+     * Peak latency for read operations.
+     */
+    LatencyRead?: NonNegativeDouble;
+    /**
+     * Peak latency for write operations.
+     */
+    LatencyWrite?: NonNegativeDouble;
+    /**
+     * Peak latency for operations unrelated to read and write operations.
+     */
+    LatencyOther?: NonNegativeDouble;
+  }
   export type MaxResults = number;
+  export type Metrics = ResourceMetrics[];
   export type Mtime = "NONE"|"PRESERVE"|string;
+  export type Name = string;
+  export interface NetAppONTAPCluster {
+    /**
+     * The number of CIFS shares in the cluster.
+     */
+    CifsShareCount?: NonNegativeLong;
+    /**
+     * The number of NFS volumes in the cluster.
+     */
+    NfsExportedVolumes?: NonNegativeLong;
+    /**
+     * The universally unique identifier (UUID) of the cluster.
+     */
+    ResourceId?: PtolemyUUID;
+    /**
+     * The name of the cluster.
+     */
+    ClusterName?: PtolemyString;
+    /**
+     * The performance data that DataSync Discovery collects about the cluster.
+     */
+    MaxP95Performance?: MaxP95Performance;
+    /**
+     * The total storage space that's available in the cluster.
+     */
+    ClusterBlockStorageSize?: NonNegativeLong;
+    /**
+     * The storage space that's being used in a cluster.
+     */
+    ClusterBlockStorageUsed?: NonNegativeLong;
+    /**
+     * The storage space that's being used in the cluster without accounting for compression or deduplication.
+     */
+    ClusterBlockStorageLogicalUsed?: NonNegativeLong;
+    /**
+     * The Amazon Web Services storage services that DataSync Discovery recommends for the cluster. For more information, see Recommendations provided by DataSync Discovery.
+     */
+    Recommendations?: Recommendations;
+    /**
+     * Indicates whether DataSync Discovery recommendations for the cluster are ready to view, incomplete, or can't be determined. For more information, see Recommendation statuses.
+     */
+    RecommendationStatus?: RecommendationStatus;
+    /**
+     * The number of LUNs (logical unit numbers) in the cluster.
+     */
+    LunCount?: NonNegativeLong;
+    /**
+     * The amount of space in the cluster that's in cloud storage (for example, if you're using data tiering).
+     */
+    ClusterCloudStorageUsed?: NonNegativeLong;
+  }
+  export type NetAppONTAPClusters = NetAppONTAPCluster[];
+  export interface NetAppONTAPSVM {
+    /**
+     * The universally unique identifier (UUID) of the cluster associated with the SVM.
+     */
+    ClusterUuid?: PtolemyUUID;
+    /**
+     * The UUID of the SVM.
+     */
+    ResourceId?: PtolemyUUID;
+    /**
+     * The name of the SVM
+     */
+    SvmName?: PtolemyString;
+    /**
+     * The number of CIFS shares in the SVM.
+     */
+    CifsShareCount?: NonNegativeLong;
+    /**
+     * The data transfer protocols (such as NFS) configured for the SVM.
+     */
+    EnabledProtocols?: EnabledProtocols;
+    /**
+     * The storage space that's being used in the SVM.
+     */
+    TotalCapacityUsed?: NonNegativeLong;
+    /**
+     * The total storage space that's available in the SVM.
+     */
+    TotalCapacityProvisioned?: NonNegativeLong;
+    /**
+     * The storage space that's being used in the SVM without accounting for compression or deduplication.
+     */
+    TotalLogicalCapacityUsed?: NonNegativeLong;
+    /**
+     * The performance data that DataSync Discovery collects about the SVM.
+     */
+    MaxP95Performance?: MaxP95Performance;
+    /**
+     * The Amazon Web Services storage services that DataSync Discovery recommends for the SVM. For more information, see Recommendations provided by DataSync Discovery.
+     */
+    Recommendations?: Recommendations;
+    /**
+     * The number of NFS volumes in the SVM.
+     */
+    NfsExportedVolumes?: NonNegativeLong;
+    /**
+     * Indicates whether DataSync Discovery recommendations for the SVM are ready to view, incomplete, or can't be determined. For more information, see Recommendation statuses.
+     */
+    RecommendationStatus?: RecommendationStatus;
+    /**
+     * The amount of storage in the SVM that's being used for snapshots.
+     */
+    TotalSnapshotCapacityUsed?: NonNegativeLong;
+    /**
+     * The number of LUNs (logical unit numbers) in the SVM.
+     */
+    LunCount?: NonNegativeLong;
+  }
+  export type NetAppONTAPSVMs = NetAppONTAPSVM[];
+  export interface NetAppONTAPVolume {
+    /**
+     * The name of the volume.
+     */
+    VolumeName?: PtolemyString;
+    /**
+     * The universally unique identifier (UUID) of the volume.
+     */
+    ResourceId?: PtolemyUUID;
+    /**
+     * The number of CIFS shares in the volume.
+     */
+    CifsShareCount?: NonNegativeLong;
+    /**
+     * The volume's security style (such as Unix or NTFS).
+     */
+    SecurityStyle?: PtolemyString;
+    /**
+     * The UUID of the storage virtual machine (SVM) associated with the volume.
+     */
+    SvmUuid?: PtolemyUUID;
+    /**
+     * The name of the SVM associated with the volume.
+     */
+    SvmName?: PtolemyString;
+    /**
+     * The storage space that's being used in the volume.
+     */
+    CapacityUsed?: NonNegativeLong;
+    /**
+     * The total storage space that's available in the volume.
+     */
+    CapacityProvisioned?: NonNegativeLong;
+    /**
+     * The storage space that's being used in the volume without accounting for compression or deduplication.
+     */
+    LogicalCapacityUsed?: NonNegativeLong;
+    /**
+     * The number of NFS volumes in the volume.
+     */
+    NfsExported?: PtolemyBoolean;
+    /**
+     * The amount of storage in the volume that's being used for snapshots.
+     */
+    SnapshotCapacityUsed?: NonNegativeLong;
+    /**
+     * The performance data that DataSync Discovery collects about the volume.
+     */
+    MaxP95Performance?: MaxP95Performance;
+    /**
+     * The Amazon Web Services storage services that DataSync Discovery recommends for the volume. For more information, see Recommendations provided by DataSync Discovery.
+     */
+    Recommendations?: Recommendations;
+    /**
+     * Indicates whether DataSync Discovery recommendations for the volume are ready to view, incomplete, or can't be determined. For more information, see Recommendation statuses.
+     */
+    RecommendationStatus?: RecommendationStatus;
+    /**
+     * The number of LUNs (logical unit numbers) in the volume.
+     */
+    LunCount?: NonNegativeLong;
+  }
+  export type NetAppONTAPVolumes = NetAppONTAPVolume[];
   export type NetworkInterfaceArn = string;
   export type NextToken = string;
   export interface NfsMountOptions {
     /**
-     * The specific NFS version that you want DataSync to use to mount your NFS share. If the server refuses to use the version specified, the sync will fail. If you don't specify a version, DataSync defaults to AUTOMATIC. That is, DataSync automatically selects a version based on negotiation with the NFS server. You can specify the following NFS versions:     NFSv3  - stateless protocol version that allows for asynchronous writes on the server.     NFSv4.0  - stateful, firewall-friendly protocol version that supports delegations and pseudo filesystems.     NFSv4.1  - stateful protocol version that supports sessions, directory delegations, and parallel data processing. Version 4.1 also includes all features available in version 4.0.  
+     * Specifies the NFS version that you want DataSync to use when mounting your NFS share. If the server refuses to use the version specified, the task fails. You can specify the following options:    AUTOMATIC (default): DataSync chooses NFS version 4.1.    NFS3: Stateless protocol version that allows for asynchronous writes on the server.    NFSv4_0: Stateful, firewall-friendly protocol version that supports delegations and pseudo file systems.    NFSv4_1: Stateful protocol version that supports sessions, directory delegations, and parallel data processing. NFS version 4.1 also includes all features available in version 4.0.    DataSync currently only supports NFS version 3 with Amazon FSx for NetApp ONTAP locations. 
      */
     Version?: NfsVersion;
   }
   export type NfsSubdirectory = string;
   export type NfsVersion = "AUTOMATIC"|"NFS3"|"NFS4_0"|"NFS4_1"|string;
+  export type NonNegativeDouble = number;
+  export type NonNegativeLong = number;
   export type ObjectStorageAccessKey = string;
   export type ObjectStorageBucketName = string;
+  export type ObjectStorageCertificate = Buffer|Uint8Array|Blob|string;
   export type ObjectStorageSecretKey = string;
   export type ObjectStorageServerPort = number;
   export type ObjectStorageServerProtocol = "HTTPS"|"HTTP"|string;
+  export type ObjectTags = "PRESERVE"|"NONE"|string;
+  export type ObjectVersionIds = "INCLUDE"|"NONE"|string;
   export interface OnPremConfig {
     /**
-     * ARNs of the agents to use for an NFS location.
+     * The Amazon Resource Names (ARNs) of the agents connecting to a transfer location.
      */
     AgentArns: AgentArnList;
   }
   export type Operator = "Equals"|"NotEquals"|"In"|"LessThanOrEqual"|"LessThan"|"GreaterThanOrEqual"|"GreaterThan"|"Contains"|"NotContains"|"BeginsWith"|string;
   export interface Options {
     /**
-     * A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred. For more information, see create-task  Default value: POINT_IN_TIME_CONSISTENT. ONLY_FILES_TRANSFERRED (recommended): Perform verification only on files that were transferred.  POINT_IN_TIME_CONSISTENT: Scan the entire source and entire destination at the end of the transfer to verify that source and destination are fully synchronized. This option isn't supported when transferring to S3 Glacier or S3 Glacier Deep Archive storage classes. NONE: No additional verification is done at the end of the transfer, but all data transmissions are integrity-checked with checksum verification during the transfer.
+     * Specifies how and when DataSync checks the integrity of your data during a transfer.    ONLY_FILES_TRANSFERRED (recommended) - DataSync calculates the checksum of transferred files and metadata at the source location. At the end of the transfer, DataSync then compares this checksum to the checksum calculated on those files at the destination. We recommend this option when transferring to S3 Glacier Flexible Retrieval or S3 Glacier Deep Archive storage classes. For more information, see Storage class considerations with Amazon S3 locations.    POINT_IN_TIME_CONSISTENT (default) - At the end of the transfer, DataSync scans the entire source and destination to verify that both locations are fully synchronized. If you use a manifest, DataSync only scans and verifies what's listed in the manifest. You can't use this option when transferring to S3 Glacier Flexible Retrieval or S3 Glacier Deep Archive storage classes. For more information, see Storage class considerations with Amazon S3 locations.    NONE - DataSync doesn't run additional verification at the end of the transfer. All data transmissions are still integrity-checked with checksum verification during the transfer.  
      */
     VerifyMode?: VerifyMode;
     /**
-     * A value that determines whether files at the destination should be overwritten or preserved when copying files. If set to NEVER a destination file will not be replaced by a source file, even if the destination file differs from the source file. If you modify files in the destination and you sync the files, you can use this value to protect against overwriting those changes.  Some storage classes have specific behaviors that can affect your S3 storage cost. For detailed information, see using-storage-classes in the AWS DataSync User Guide.
+     * Specifies whether DataSync should modify or preserve data at the destination location.    ALWAYS (default) - DataSync modifies data in the destination location when source data (including metadata) has changed. If DataSync overwrites objects, you might incur additional charges for certain Amazon S3 storage classes (for example, for retrieval or early deletion). For more information, see Storage class considerations with Amazon S3 transfers.    NEVER - DataSync doesn't overwrite data in the destination location even if the source data has changed. You can use this option to protect against overwriting changes made to files or objects in the destination.  
      */
     OverwriteMode?: OverwriteMode;
     /**
-     * A file metadata value that shows the last time a file was accessed (that is, when the file was read or written to). If you set Atime to BEST_EFFORT, DataSync attempts to preserve the original Atime attribute on all source files (that is, the version before the PREPARING phase). However, Atime's behavior is not fully standard across platforms, so AWS DataSync can only do this on a best-effort basis.  Default value: BEST_EFFORT. BEST_EFFORT: Attempt to preserve the per-file Atime value (recommended). NONE: Ignore Atime.  If Atime is set to BEST_EFFORT, Mtime must be set to PRESERVE.  If Atime is set to NONE, Mtime must also be NONE.  
+     * Specifies whether to preserve metadata indicating the last time a file was read or written to.  The behavior of Atime isn't fully standard across platforms, so DataSync can only do this on a best-effort basis.     BEST_EFFORT (default) - DataSync attempts to preserve the original Atime attribute on all source files (that is, the version before the PREPARING phase of the task execution). This option is recommended.    NONE - Ignores Atime.    If Atime is set to BEST_EFFORT, Mtime must be set to PRESERVE.  If Atime is set to NONE, Mtime must also be NONE.  
      */
     Atime?: Atime;
     /**
-     * A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase.  Default value: PRESERVE.  PRESERVE: Preserve original Mtime (recommended)  NONE: Ignore Mtime.   If Mtime is set to PRESERVE, Atime must be set to BEST_EFFORT. If Mtime is set to NONE, Atime must also be set to NONE.  
+     * Specifies whether to preserve metadata indicating the last time that a file was written to before the PREPARING phase of your task execution. This option is required when you need to run the a task more than once.    PRESERVE (default) - Preserves original Mtime, which is recommended.    NONE - Ignores Mtime.    If Mtime is set to PRESERVE, Atime must be set to BEST_EFFORT. If Mtime is set to NONE, Atime must also be set to NONE.  
      */
     Mtime?: Mtime;
     /**
-     * The user ID (UID) of the file's owner.  Default value: INT_VALUE. This preserves the integer value of the ID. INT_VALUE: Preserve the integer value of UID and group ID (GID) (recommended). NONE: Ignore UID and GID. 
+     * Specifies the POSIX user ID (UID) of the file's owner.    INT_VALUE (default) - Preserves the integer value of UID and group ID (GID), which is recommended.    NONE - Ignores UID and GID.    For more information, see Metadata copied by DataSync.
      */
     Uid?: Uid;
     /**
-     * The group ID (GID) of the file's owners.  Default value: INT_VALUE. This preserves the integer value of the ID. INT_VALUE: Preserve the integer value of user ID (UID) and GID (recommended). NONE: Ignore UID and GID. 
+     * Specifies the POSIX group ID (GID) of the file's owners.    INT_VALUE (default) - Preserves the integer value of user ID (UID) and GID, which is recommended.    NONE - Ignores UID and GID.   For more information, see Metadata copied by DataSync.
      */
     Gid?: Gid;
     /**
-     * A value that specifies whether files in the destination that don't exist in the source file system should be preserved. This option can affect your storage cost. If your task deletes objects, you might incur minimum storage duration charges for certain storage classes. For detailed information, see using-storage-classes in the AWS DataSync User Guide. Default value: PRESERVE. PRESERVE: Ignore such destination files (recommended).  REMOVE: Delete destination files that aren’t present in the source.
+     * Specifies whether files in the destination location that don't exist in the source should be preserved. This option can affect your Amazon S3 storage cost. If your task deletes objects, you might incur minimum storage duration charges for certain storage classes. For detailed information, see Considerations when working with Amazon S3 storage classes in DataSync.    PRESERVE (default) - Ignores such destination files, which is recommended.     REMOVE - Deletes destination files that aren’t present in the source.    If you set this parameter to REMOVE, you can't set TransferMode to ALL. When you transfer all data, DataSync doesn't scan your destination location and doesn't know what to delete. 
      */
     PreserveDeletedFiles?: PreserveDeletedFiles;
     /**
-     * A value that determines whether AWS DataSync should preserve the metadata of block and character devices in the source file system, and recreate the files with that device name and metadata on the destination.  AWS DataSync can't sync the actual contents of such devices, because they are nonterminal and don't return an end-of-file (EOF) marker.  Default value: NONE. NONE: Ignore special devices (recommended).  PRESERVE: Preserve character and block device metadata. This option isn't currently supported for Amazon EFS. 
+     * Specifies whether DataSync should preserve the metadata of block and character devices in the source location and recreate the files with that device name and metadata on the destination. DataSync copies only the name and metadata of such devices.  DataSync can't copy the actual contents of these devices because they're nonterminal and don't return an end-of-file (EOF) marker.     NONE (default) - Ignores special devices (recommended).    PRESERVE - Preserves character and block device metadata. This option currently isn't supported for Amazon EFS.  
      */
     PreserveDevices?: PreserveDevices;
     /**
-     * A value that determines which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file.  Default value: PRESERVE. PRESERVE: Preserve POSIX-style permissions (recommended). NONE: Ignore permissions.   AWS DataSync can preserve extant permissions of a source location. 
+     * Specifies which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file. For more information, see Metadata copied by DataSync.    PRESERVE (default) - Preserves POSIX-style permissions, which is recommended.    NONE - Ignores POSIX-style permissions.     DataSync can preserve extant permissions of a source location. 
      */
     PosixPermissions?: PosixPermissions;
     /**
-     * A value that limits the bandwidth used by AWS DataSync. For example, if you want AWS DataSync to use a maximum of 1 MB, set this value to 1048576 (=1024*1024).
+     * Limits the bandwidth used by a DataSync task. For example, if you want DataSync to use a maximum of 1 MB, set this value to 1048576 (=1024*1024).
      */
     BytesPerSecond?: BytesPerSecond;
     /**
-     * A value that determines whether tasks should be queued before executing the tasks. If set to ENABLED, the tasks will be queued. The default is ENABLED. If you use the same agent to run multiple tasks, you can enable the tasks to run in series. For more information, see queue-task-execution.
+     * Specifies whether your transfer tasks should be put into a queue during certain scenarios when running multiple tasks. This is ENABLED by default.
      */
     TaskQueueing?: TaskQueueing;
     /**
-     * A value that determines the type of logs that DataSync publishes to a log stream in the Amazon CloudWatch log group that you provide. For more information about providing a log group for DataSync, see CloudWatchLogGroupArn. If set to OFF, no logs are published. BASIC publishes logs on errors for individual files transferred, and TRANSFER publishes logs for every file or object that is transferred and integrity checked.
+     * Specifies the type of logs that DataSync publishes to a Amazon CloudWatch Logs log group. To specify the log group, see CloudWatchLogGroupArn.    BASIC - Publishes logs with only basic information (such as transfer errors).    TRANSFER - Publishes logs for all files or objects that your DataSync task transfers and performs data-integrity checks on.    OFF - No logs are published.  
      */
     LogLevel?: LogLevel;
     /**
-     * A value that determines whether DataSync transfers only the data and metadata that differ between the source and the destination location, or whether DataSync transfers all the content from the source, without comparing to the destination location.  CHANGED: DataSync copies only data or metadata that is new or different content from the source location to the destination location. ALL: DataSync copies all source location content to the destination, without comparing to existing content on the destination.
+     * Determines whether DataSync transfers only the data and metadata that differ between the source and the destination location or transfers all the content from the source (without comparing what's in the destination).    CHANGED (default) - DataSync copies only data or metadata that is new or different content from the source location to the destination location.    ALL - DataSync copies everything in the source to the destination without comparing differences between the locations.  
      */
     TransferMode?: TransferMode;
+    /**
+     * Specifies which components of the SMB security descriptor are copied from source to destination objects.  This value is only used for transfers between SMB and Amazon FSx for Windows File Server locations or between two FSx for Windows File Server locations. For more information, see how DataSync handles metadata.    OWNER_DACL (default) - For each copied object, DataSync copies the following metadata:   The object owner.   NTFS discretionary access control lists (DACLs), which determine whether to grant access to an object. DataSync won't copy NTFS system access control lists (SACLs) with this option.      OWNER_DACL_SACL - For each copied object, DataSync copies the following metadata:   The object owner.   NTFS discretionary access control lists (DACLs), which determine whether to grant access to an object.   SACLs, which are used by administrators to log attempts to access a secured object. Copying SACLs requires granting additional permissions to the Windows user that DataSync uses to access your SMB location. For information about choosing a user with the right permissions, see required permissions for SMB, FSx for Windows File Server, or FSx for ONTAP (depending on the type of location in your transfer).      NONE - None of the SMB security descriptor components are copied. Destination objects are owned by the user that was provided for accessing the destination location. DACLs and SACLs are set based on the destination server’s configuration.   
+     */
+    SecurityDescriptorCopyFlags?: SmbSecurityDescriptorCopyFlags;
+    /**
+     * Specifies whether you want DataSync to PRESERVE object tags (default behavior) when transferring between object storage systems. If you want your DataSync task to ignore object tags, specify the NONE value.
+     */
+    ObjectTags?: ObjectTags;
   }
   export type OutputTagList = TagListEntry[];
   export type OverwriteMode = "ALWAYS"|"NEVER"|string;
+  export interface P95Metrics {
+    /**
+     * The IOPS peaks for an on-premises storage system resource. Each data point represents the 95th percentile peak value during a 1-hour interval.
+     */
+    IOPS?: IOPS;
+    /**
+     * The throughput peaks for an on-premises storage system resource. Each data point represents the 95th percentile peak value during a 1-hour interval.
+     */
+    Throughput?: Throughput;
+    /**
+     * The latency peaks for an on-premises storage system resource. Each data point represents the 95th percentile peak value during a 1-hour interval.
+     */
+    Latency?: Latency;
+  }
   export type PLSecurityGroupArnList = Ec2SecurityGroupArn[];
   export type PLSubnetArnList = Ec2SubnetArn[];
   export type PhaseStatus = "PENDING"|"SUCCESS"|"ERROR"|string;
+  export interface Platform {
+    /**
+     * The version of the DataSync agent.
+     */
+    Version?: AgentVersion;
+  }
   export type PosixPermissions = "NONE"|"PRESERVE"|string;
   export type PreserveDeletedFiles = "PRESERVE"|"REMOVE"|string;
   export type PreserveDevices = "NONE"|"PRESERVE"|string;
   export interface PrivateLinkConfig {
     /**
-     * The ID of the VPC endpoint that is configured for an agent. An agent that is configured with a VPC endpoint will not be accessible over the public internet.
+     * Specifies the ID of the VPC endpoint that your agent connects to.
      */
     VpcEndpointId?: VpcEndpointId;
     /**
-     * The private endpoint that is configured for an agent that has access to IP addresses in a PrivateLink. An agent that is configured with this endpoint will not be accessible over the public internet.
+     * Specifies the VPC endpoint provided by Amazon Web Services PrivateLink that your agent connects to.
      */
     PrivateLinkEndpoint?: Endpoint;
     /**
-     * The Amazon Resource Names (ARNs) of the subnets that are configured for an agent activated in a VPC or an agent that has access to a VPC endpoint.
+     * Specifies the ARN of the subnet where your VPC endpoint is located. You can only specify one ARN.
      */
     SubnetArns?: PLSubnetArnList;
     /**
-     * The Amazon Resource Names (ARNs) of the security groups that are configured for the EC2 resource that hosts an agent activated in a VPC or an agent that has access to a VPC endpoint.
+     * Specifies the Amazon Resource Names (ARN) of the security group that provides DataSync access to your VPC endpoint. You can only specify one ARN.
      */
     SecurityGroupArns?: PLSecurityGroupArnList;
+  }
+  export type PtolemyBoolean = boolean;
+  export type PtolemyPassword = string;
+  export type PtolemyString = string;
+  export type PtolemyUUID = string;
+  export type PtolemyUsername = string;
+  export interface QopConfiguration {
+    /**
+     * The RPC protection setting configured on the HDFS cluster. This setting corresponds to your hadoop.rpc.protection setting in your core-site.xml file on your Hadoop cluster.
+     */
+    RpcProtection?: HdfsRpcProtection;
+    /**
+     * The data transfer protection setting configured on the HDFS cluster. This setting corresponds to your dfs.data.transfer.protection setting in the hdfs-site.xml file on your Hadoop cluster.
+     */
+    DataTransferProtection?: HdfsDataTransferProtection;
+  }
+  export interface Recommendation {
+    /**
+     * A recommended Amazon Web Services storage service that you can migrate data to based on information that DataSync Discovery collects about your on-premises storage system.
+     */
+    StorageType?: PtolemyString;
+    /**
+     * Information about how you can set up a recommended Amazon Web Services storage service.
+     */
+    StorageConfiguration?: RecommendationsConfigMap;
+    /**
+     * The estimated monthly cost of the recommended Amazon Web Services storage service.
+     */
+    EstimatedMonthlyStorageCost?: PtolemyString;
+  }
+  export type RecommendationStatus = "NONE"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|string;
+  export type Recommendations = Recommendation[];
+  export type RecommendationsConfigMap = {[key: string]: PtolemyString};
+  export interface RemoveStorageSystemRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the storage system that you want to permanently remove from DataSync Discovery.
+     */
+    StorageSystemArn: StorageSystemArn;
+  }
+  export interface RemoveStorageSystemResponse {
+  }
+  export interface ReportDestination {
+    /**
+     * Specifies the Amazon S3 bucket where DataSync uploads your task report.
+     */
+    S3?: ReportDestinationS3;
+  }
+  export interface ReportDestinationS3 {
+    /**
+     * Specifies a bucket prefix for your report.
+     */
+    Subdirectory?: S3Subdirectory;
+    /**
+     * Specifies the ARN of the S3 bucket where DataSync uploads your report.
+     */
+    S3BucketArn: S3BucketArn;
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the IAM policy that allows DataSync to upload a task report to your S3 bucket. For more information, see Allowing DataSync to upload a task report to an Amazon S3 bucket.
+     */
+    BucketAccessRoleArn: IamRoleArn;
+  }
+  export type ReportLevel = "ERRORS_ONLY"|"SUCCESSES_AND_ERRORS"|string;
+  export type ReportOutputType = "SUMMARY_ONLY"|"STANDARD"|string;
+  export interface ReportOverride {
+    /**
+     * Specifies whether your task report includes errors only or successes and errors. For example, your report might mostly include only what didn't go well in your transfer (ERRORS_ONLY). At the same time, you want to verify that your task filter is working correctly. In this situation, you can get a list of what files DataSync successfully skipped and if something transferred that you didn't to transfer (SUCCESSES_AND_ERRORS).
+     */
+    ReportLevel?: ReportLevel;
+  }
+  export interface ReportOverrides {
+    /**
+     * Specifies the level of reporting for the files, objects, and directories that DataSync attempted to transfer.
+     */
+    Transferred?: ReportOverride;
+    /**
+     * Specifies the level of reporting for the files, objects, and directories that DataSync attempted to verify at the end of your transfer.
+     */
+    Verified?: ReportOverride;
+    /**
+     * Specifies the level of reporting for the files, objects, and directories that DataSync attempted to delete in your destination location. This only applies if you configure your task to delete data in the destination that isn't in the source.
+     */
+    Deleted?: ReportOverride;
+    /**
+     * Specifies the level of reporting for the files, objects, and directories that DataSync attempted to skip during your transfer.
+     */
+    Skipped?: ReportOverride;
+  }
+  export interface ReportResult {
+    /**
+     * Indicates whether DataSync is still working on your report, created a report, or can't create a complete report.
+     */
+    Status?: PhaseStatus;
+    /**
+     * Indicates the code associated with the error if DataSync can't create a complete report.
+     */
+    ErrorCode?: string;
+    /**
+     * Provides details about issues creating a report.
+     */
+    ErrorDetail?: string;
+  }
+  export interface ResourceDetails {
+    /**
+     * The information that DataSync Discovery collects about storage virtual machines (SVMs) in your on-premises storage system.
+     */
+    NetAppONTAPSVMs?: NetAppONTAPSVMs;
+    /**
+     * The information that DataSync Discovery collects about volumes in your on-premises storage system.
+     */
+    NetAppONTAPVolumes?: NetAppONTAPVolumes;
+    /**
+     * The information that DataSync Discovery collects about the cluster in your on-premises storage system.
+     */
+    NetAppONTAPClusters?: NetAppONTAPClusters;
+  }
+  export type ResourceFilters = {[key: string]: FilterMembers};
+  export type ResourceId = string;
+  export type ResourceIds = ResourceId[];
+  export interface ResourceMetrics {
+    /**
+     * The time when DataSync Discovery collected this information from the resource.
+     */
+    Timestamp?: Timestamp;
+    /**
+     * The types of performance data that DataSync Discovery collects about the on-premises storage system resource.
+     */
+    P95Metrics?: P95Metrics;
+    /**
+     * The storage capacity of the on-premises storage system resource.
+     */
+    Capacity?: Capacity;
+    /**
+     * The universally unique identifier (UUID) of the on-premises storage system resource.
+     */
+    ResourceId?: ResourceId;
+    /**
+     * The type of on-premises storage system resource.
+     */
+    ResourceType?: DiscoveryResourceType;
   }
   export type S3BucketArn = string;
   export interface S3Config {
     /**
-     * The Amazon S3 bucket to access. This bucket is used as a parameter in the CreateLocationS3 operation. 
+     * Specifies the ARN of the IAM role that DataSync uses to access your S3 bucket.
      */
     BucketAccessRoleArn: IamRoleArn;
   }
-  export type S3StorageClass = "STANDARD"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|"DEEP_ARCHIVE"|"OUTPOSTS"|string;
+  export interface S3ManifestConfig {
+    /**
+     * Specifies the Amazon S3 object key of your manifest. This can include a prefix (for example, prefix/my-manifest.csv).
+     */
+    ManifestObjectPath: S3Subdirectory;
+    /**
+     * Specifies the Identity and Access Management (IAM) role that allows DataSync to access your manifest. For more information, see Providing DataSync access to your manifest.
+     */
+    BucketAccessRoleArn: IamRoleArn;
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the S3 bucket where you're hosting your manifest.
+     */
+    S3BucketArn: S3BucketArn;
+    /**
+     * Specifies the object version ID of the manifest that you want DataSync to use. If you don't set this, DataSync uses the latest version of the object.
+     */
+    ManifestObjectVersionId?: S3ObjectVersionId;
+  }
+  export type S3ObjectVersionId = string;
+  export type S3StorageClass = "STANDARD"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|"DEEP_ARCHIVE"|"OUTPOSTS"|"GLACIER_INSTANT_RETRIEVAL"|string;
   export type S3Subdirectory = string;
+  export type ScheduleDisabledBy = "USER"|"SERVICE"|string;
+  export type ScheduleDisabledReason = string;
   export type ScheduleExpressionCron = string;
+  export type ScheduleStatus = "ENABLED"|"DISABLED"|string;
+  export type SecretsManagerArn = string;
   export type ServerHostname = string;
   export type SmbDomain = string;
   export interface SmbMountOptions {
     /**
-     * The specific SMB version that you want DataSync to use to mount your SMB share. If you don't specify a version, DataSync defaults to AUTOMATIC. That is, DataSync automatically selects a version based on negotiation with the SMB server.
+     * By default, DataSync automatically chooses an SMB protocol version based on negotiation with your SMB file server. You also can configure DataSync to use a specific SMB version, but we recommend doing this only if DataSync has trouble negotiating with the SMB file server automatically. These are the following options for configuring the SMB version:    AUTOMATIC (default): DataSync and the SMB file server negotiate the highest version of SMB that they mutually support between 2.1 and 3.1.1. This is the recommended option. If you instead choose a specific version that your file server doesn't support, you may get an Operation Not Supported error.    SMB3: Restricts the protocol negotiation to only SMB version 3.0.2.    SMB2: Restricts the protocol negotiation to only SMB version 2.1.    SMB2_0: Restricts the protocol negotiation to only SMB version 2.0.    SMB1: Restricts the protocol negotiation to only SMB version 1.0.  The SMB1 option isn't available when creating an Amazon FSx for NetApp ONTAP location.   
      */
     Version?: SmbVersion;
   }
   export type SmbPassword = string;
+  export type SmbSecurityDescriptorCopyFlags = "NONE"|"OWNER_DACL"|"OWNER_DACL_SACL"|string;
   export type SmbSubdirectory = string;
   export type SmbUser = string;
-  export type SmbVersion = "AUTOMATIC"|"SMB2"|"SMB3"|string;
+  export type SmbVersion = "AUTOMATIC"|"SMB2"|"SMB3"|"SMB1"|"SMB2_0"|string;
+  export interface SourceManifestConfig {
+    /**
+     * Specifies the S3 bucket where you're hosting your manifest.
+     */
+    S3: S3ManifestConfig;
+  }
   export type SourceNetworkInterfaceArns = NetworkInterfaceArn[];
+  export interface StartDiscoveryJobRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the on-premises storage system that you want to run the discovery job on.
+     */
+    StorageSystemArn: StorageSystemArn;
+    /**
+     * Specifies in minutes how long you want the discovery job to run.  For more accurate recommendations, we recommend a duration of at least 14 days. Longer durations allow time to collect a sufficient number of data points and provide a realistic representation of storage performance and utilization. 
+     */
+    CollectionDurationMinutes: CollectionDurationMinutes;
+    /**
+     * Specifies a client token to make sure requests with this API operation are idempotent. If you don't specify a client token, DataSync generates one for you automatically.
+     */
+    ClientToken: PtolemyUUID;
+    /**
+     * Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources.
+     */
+    Tags?: InputTagList;
+  }
+  export interface StartDiscoveryJobResponse {
+    /**
+     * The ARN of the discovery job that you started.
+     */
+    DiscoveryJobArn?: DiscoveryJobArn;
+  }
   export interface StartTaskExecutionRequest {
     /**
-     * The Amazon Resource Name (ARN) of the task to start.
+     * Specifies the Amazon Resource Name (ARN) of the task that you want to start.
      */
     TaskArn: TaskArn;
     OverrideOptions?: Options;
     /**
-     * A list of filter rules that determines which files to include when running a task. The pattern should contain a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe). For example: "/folder1|/folder2"   
+     * Specifies a list of filter rules that determines which files to include when running a task. The pattern should contain a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe), for example, "/folder1|/folder2". 
      */
     Includes?: FilterList;
+    /**
+     * Specifies a list of filter rules that determines which files to exclude from a task. The list contains a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example, "/folder1|/folder2". 
+     */
+    Excludes?: FilterList;
+    /**
+     * Configures a manifest, which is a list of files or objects that you want DataSync to transfer. For more information and configuration examples, see Specifying what DataSync transfers by using a manifest. When using this parameter, your caller identity (the role that you're using DataSync with) must have the iam:PassRole permission. The AWSDataSyncFullAccess policy includes this permission. To remove a manifest configuration, specify this parameter with an empty value.
+     */
+    ManifestConfig?: ManifestConfig;
+    /**
+     * Specifies how you want to configure a task report, which provides detailed information about your DataSync transfer. For more information, see Monitoring your DataSync transfers with task reports. When using this parameter, your caller identity (the role that you're using DataSync with) must have the iam:PassRole permission. The AWSDataSyncFullAccess policy includes this permission. To remove a task report configuration, specify this parameter as empty.
+     */
+    TaskReportConfig?: TaskReportConfig;
+    /**
+     * Specifies the tags that you want to apply to the Amazon Resource Name (ARN) representing the task execution.  Tags are key-value pairs that help you manage, filter, and search for your DataSync resources.
+     */
+    Tags?: InputTagList;
   }
   export interface StartTaskExecutionResponse {
     /**
-     * The Amazon Resource Name (ARN) of the specific task execution that was started.
+     * The ARN of the running task execution.
      */
     TaskExecutionArn?: TaskExecutionArn;
   }
+  export interface StopDiscoveryJobRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the discovery job that you want to stop. 
+     */
+    DiscoveryJobArn: DiscoveryJobArn;
+  }
+  export interface StopDiscoveryJobResponse {
+  }
+  export type StorageSystemArn = string;
+  export type StorageSystemConnectivityStatus = "PASS"|"FAIL"|"UNKNOWN"|string;
+  export type StorageSystemList = StorageSystemListEntry[];
+  export interface StorageSystemListEntry {
+    /**
+     * The Amazon Resource Names (ARN) of an on-premises storage system that you added to DataSync Discovery.
+     */
+    StorageSystemArn?: StorageSystemArn;
+    /**
+     * The name of an on-premises storage system that you added to DataSync Discovery.
+     */
+    Name?: Name;
+  }
+  export type StorageVirtualMachineArn = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export interface TagListEntry {
     /**
-     * The key for an AWS resource tag.
+     * The key for an Amazon Web Services resource tag.
      */
     Key: TagKey;
     /**
-     * The value for an AWS resource tag.
+     * The value for an Amazon Web Services resource tag.
      */
     Value?: TagValue;
   }
   export interface TagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource to apply the tag to.
+     * Specifies the Amazon Resource Name (ARN) of the resource to apply the tag to.
      */
     ResourceArn: TaggableResourceArn;
     /**
-     * The tags to apply.
+     * Specifies the tags that you want to apply to the resource.
      */
     Tags: InputTagList;
   }
@@ -1292,17 +2893,17 @@ declare namespace DataSync {
   export type TaskExecutionList = TaskExecutionListEntry[];
   export interface TaskExecutionListEntry {
     /**
-     * The Amazon Resource Name (ARN) of the task that was executed.
+     * The Amazon Resource Name (ARN) of a task execution.
      */
     TaskExecutionArn?: TaskExecutionArn;
     /**
-     * The status of a task execution.
+     * The status of a task execution. For more information, see Task execution statuses.
      */
     Status?: TaskExecutionStatus;
   }
   export interface TaskExecutionResultDetail {
     /**
-     * The total time in milliseconds that AWS DataSync spent in the PREPARING phase. 
+     * The total time in milliseconds that DataSync spent in the PREPARING phase. 
      */
     PrepareDuration?: Duration;
     /**
@@ -1310,11 +2911,11 @@ declare namespace DataSync {
      */
     PrepareStatus?: PhaseStatus;
     /**
-     * The total time in milliseconds that AWS DataSync took to transfer the file from the source to the destination location.
+     * The total time in milliseconds that DataSync took to transfer the file from the source to the destination location.
      */
     TotalDuration?: Duration;
     /**
-     * The total time in milliseconds that AWS DataSync spent in the TRANSFERRING phase.
+     * The total time in milliseconds that DataSync spent in the TRANSFERRING phase.
      */
     TransferDuration?: Duration;
     /**
@@ -1322,7 +2923,7 @@ declare namespace DataSync {
      */
     TransferStatus?: PhaseStatus;
     /**
-     * The total time in milliseconds that AWS DataSync spent in the VERIFYING phase.
+     * The total time in milliseconds that DataSync spent in the VERIFYING phase.
      */
     VerifyDuration?: Duration;
     /**
@@ -1330,7 +2931,7 @@ declare namespace DataSync {
      */
     VerifyStatus?: PhaseStatus;
     /**
-     * Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.
+     * Errors that DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.
      */
     ErrorCode?: string;
     /**
@@ -1338,7 +2939,7 @@ declare namespace DataSync {
      */
     ErrorDetail?: string;
   }
-  export type TaskExecutionStatus = "QUEUED"|"LAUNCHING"|"PREPARING"|"TRANSFERRING"|"VERIFYING"|"SUCCESS"|"ERROR"|string;
+  export type TaskExecutionStatus = "QUEUED"|"CANCELLING"|"LAUNCHING"|"PREPARING"|"TRANSFERRING"|"VERIFYING"|"SUCCESS"|"ERROR"|string;
   export interface TaskFilter {
     /**
      * The name of the filter being used. Each API call supports a list of filters that are available for it. For example, LocationId for ListTasks.
@@ -1349,7 +2950,7 @@ declare namespace DataSync {
      */
     Values: FilterValues;
     /**
-     * The operator that is used to compare filter values (for example, Equals or Contains). For more about API filtering operators, see query-resources.
+     * The operator that is used to compare filter values (for example, Equals or Contains).
      */
     Operator: Operator;
   }
@@ -1371,23 +2972,82 @@ declare namespace DataSync {
     Name?: TagValue;
   }
   export type TaskQueueing = "ENABLED"|"DISABLED"|string;
+  export interface TaskReportConfig {
+    /**
+     * Specifies the Amazon S3 bucket where DataSync uploads your task report. For more information, see Task reports.
+     */
+    Destination?: ReportDestination;
+    /**
+     * Specifies the type of task report that you want:    SUMMARY_ONLY: Provides necessary details about your task, including the number of files, objects, and directories transferred and transfer duration.    STANDARD: Provides complete details about your task, including a full list of files, objects, and directories that were transferred, skipped, verified, and more.  
+     */
+    OutputType?: ReportOutputType;
+    /**
+     * Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.    ERRORS_ONLY: A report shows what DataSync was unable to transfer, skip, verify, and delete.    SUCCESSES_AND_ERRORS: A report shows what DataSync was able and unable to transfer, skip, verify, and delete.  
+     */
+    ReportLevel?: ReportLevel;
+    /**
+     * Specifies whether your task report includes the new version of each object transferred into an S3 bucket. This only applies if you enable versioning on your bucket. Keep in mind that setting this to INCLUDE can increase the duration of your task execution.
+     */
+    ObjectVersionIds?: ObjectVersionIds;
+    /**
+     * Customizes the reporting level for aspects of your task report. For example, your report might generally only include errors, but you could specify that you want a list of successes and errors just for the files that DataSync attempted to delete in your destination location.
+     */
+    Overrides?: ReportOverrides;
+  }
   export interface TaskSchedule {
     /**
-     * A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location. 
+     * Specifies your task schedule by using a cron expression in UTC time. For information about cron expression syntax, see the  Amazon EventBridge User Guide .
      */
     ScheduleExpression: ScheduleExpressionCron;
+    /**
+     * Specifies whether to enable or disable your task schedule. Your schedule is enabled by default, but there can be situations where you need to disable it. For example, you might need to pause a recurring transfer to fix an issue with your task or perform maintenance on your storage system. DataSync might disable your schedule automatically if your task fails repeatedly with the same error. For more information, see TaskScheduleDetails.
+     */
+    Status?: ScheduleStatus;
+  }
+  export interface TaskScheduleDetails {
+    /**
+     * Indicates the last time the status of your task schedule changed. For example, if DataSync automatically disables your schedule because of a repeated error, you can see when the schedule was disabled.
+     */
+    StatusUpdateTime?: Time;
+    /**
+     * Provides a reason if the task schedule is disabled. If your schedule is disabled by USER, you see a Manually disabled by user. message. If your schedule is disabled by SERVICE, you see an error message to help you understand why the task keeps failing. For information on resolving DataSync errors, see Troubleshooting issues with DataSync transfers.
+     */
+    DisabledReason?: ScheduleDisabledReason;
+    /**
+     * Indicates how your task schedule was disabled.    USER - Your schedule was manually disabled by using the UpdateTask operation or DataSync console.    SERVICE - Your schedule was automatically disabled by DataSync because the task failed repeatedly with the same error.  
+     */
+    DisabledBy?: ScheduleDisabledBy;
   }
   export type TaskStatus = "AVAILABLE"|"CREATING"|"QUEUED"|"RUNNING"|"UNAVAILABLE"|string;
+  export interface Throughput {
+    /**
+     * Peak throughput related to read operations.
+     */
+    Read?: NonNegativeDouble;
+    /**
+     * Peak throughput related to write operations.
+     */
+    Write?: NonNegativeDouble;
+    /**
+     * Peak throughput unrelated to read and write operations.
+     */
+    Other?: NonNegativeDouble;
+    /**
+     * Peak total throughput on your on-premises storage system resource.
+     */
+    Total?: NonNegativeDouble;
+  }
   export type Time = Date;
+  export type Timestamp = Date;
   export type TransferMode = "CHANGED"|"ALL"|string;
   export type Uid = "NONE"|"INT_VALUE"|"NAME"|"BOTH"|string;
   export interface UntagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource to remove the tag from.
+     * Specifies the Amazon Resource Name (ARN) of the resource to remove the tags from.
      */
     ResourceArn: TaggableResourceArn;
     /**
-     * The keys in the key-value pair in the tag to remove.
+     * Specifies the keys in the tags that you want to remove.
      */
     Keys: TagKeyList;
   }
@@ -1405,9 +3065,216 @@ declare namespace DataSync {
   }
   export interface UpdateAgentResponse {
   }
+  export interface UpdateDiscoveryJobRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the discovery job that you want to update.
+     */
+    DiscoveryJobArn: DiscoveryJobArn;
+    /**
+     * Specifies in minutes how long that you want the discovery job to run. (You can't set this parameter to less than the number of minutes that the job has already run for.)
+     */
+    CollectionDurationMinutes: CollectionDurationMinutes;
+  }
+  export interface UpdateDiscoveryJobResponse {
+  }
+  export interface UpdateLocationAzureBlobRequest {
+    /**
+     * Specifies the ARN of the Azure Blob Storage transfer location that you're updating.
+     */
+    LocationArn: LocationArn;
+    /**
+     * Specifies path segments if you want to limit your transfer to a virtual directory in your container (for example, /my/images).
+     */
+    Subdirectory?: AzureBlobSubdirectory;
+    /**
+     * Specifies the authentication method DataSync uses to access your Azure Blob Storage. DataSync can access blob storage using a shared access signature (SAS).
+     */
+    AuthenticationType?: AzureBlobAuthenticationType;
+    /**
+     * Specifies the SAS configuration that allows DataSync to access your Azure Blob Storage.
+     */
+    SasConfiguration?: AzureBlobSasConfiguration;
+    /**
+     * Specifies the type of blob that you want your objects or files to be when transferring them into Azure Blob Storage. Currently, DataSync only supports moving data into Azure Blob Storage as block blobs. For more information on blob types, see the Azure Blob Storage documentation.
+     */
+    BlobType?: AzureBlobType;
+    /**
+     * Specifies the access tier that you want your objects or files transferred into. This only applies when using the location as a transfer destination. For more information, see Access tiers.
+     */
+    AccessTier?: AzureAccessTier;
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the DataSync agent that can connect with your Azure Blob Storage container. You can specify more than one agent. For more information, see Using multiple agents for your transfer.
+     */
+    AgentArns?: AgentArnList;
+  }
+  export interface UpdateLocationAzureBlobResponse {
+  }
+  export interface UpdateLocationHdfsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the source HDFS cluster location.
+     */
+    LocationArn: LocationArn;
+    /**
+     * A subdirectory in the HDFS cluster. This subdirectory is used to read data from or write data to the HDFS cluster.
+     */
+    Subdirectory?: HdfsSubdirectory;
+    /**
+     * The NameNode that manages the HDFS namespace. The NameNode performs operations such as opening, closing, and renaming files and directories. The NameNode contains the information to map blocks of data to the DataNodes. You can use only one NameNode.
+     */
+    NameNodes?: HdfsNameNodeList;
+    /**
+     * The size of the data blocks to write into the HDFS cluster. 
+     */
+    BlockSize?: HdfsBlockSize;
+    /**
+     * The number of DataNodes to replicate the data to when writing to the HDFS cluster. 
+     */
+    ReplicationFactor?: HdfsReplicationFactor;
+    /**
+     * The URI of the HDFS cluster's Key Management Server (KMS). 
+     */
+    KmsKeyProviderUri?: KmsKeyProviderUri;
+    /**
+     * The Quality of Protection (QOP) configuration specifies the Remote Procedure Call (RPC) and data transfer privacy settings configured on the Hadoop Distributed File System (HDFS) cluster. 
+     */
+    QopConfiguration?: QopConfiguration;
+    /**
+     * The type of authentication used to determine the identity of the user. 
+     */
+    AuthenticationType?: HdfsAuthenticationType;
+    /**
+     * The user name used to identify the client on the host operating system.
+     */
+    SimpleUser?: HdfsUser;
+    /**
+     * The Kerberos principal with access to the files and folders on the HDFS cluster. 
+     */
+    KerberosPrincipal?: KerberosPrincipal;
+    /**
+     * The Kerberos key table (keytab) that contains mappings between the defined Kerberos principal and the encrypted keys. You can load the keytab from a file by providing the file's address. If you use the CLI, it performs base64 encoding for you. Otherwise, provide the base64-encoded text.
+     */
+    KerberosKeytab?: KerberosKeytabFile;
+    /**
+     * The krb5.conf file that contains the Kerberos configuration information. You can load the krb5.conf file by providing the file's address. If you're using the CLI, it performs the base64 encoding for you. Otherwise, provide the base64-encoded text.
+     */
+    KerberosKrb5Conf?: KerberosKrb5ConfFile;
+    /**
+     * The ARNs of the agents that are used to connect to the HDFS cluster. 
+     */
+    AgentArns?: AgentArnList;
+  }
+  export interface UpdateLocationHdfsResponse {
+  }
+  export interface UpdateLocationNfsRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the NFS transfer location that you want to update.
+     */
+    LocationArn: LocationArn;
+    /**
+     * Specifies the export path in your NFS file server that you want DataSync to mount. This path (or a subdirectory of the path) is where DataSync transfers data to or from. For information on configuring an export for DataSync, see Accessing NFS file servers.
+     */
+    Subdirectory?: NfsSubdirectory;
+    OnPremConfig?: OnPremConfig;
+    MountOptions?: NfsMountOptions;
+  }
+  export interface UpdateLocationNfsResponse {
+  }
+  export interface UpdateLocationObjectStorageRequest {
+    /**
+     * Specifies the ARN of the object storage system location that you're updating.
+     */
+    LocationArn: LocationArn;
+    /**
+     * Specifies the port that your object storage server accepts inbound network traffic on (for example, port 443).
+     */
+    ServerPort?: ObjectStorageServerPort;
+    /**
+     * Specifies the protocol that your object storage server uses to communicate.
+     */
+    ServerProtocol?: ObjectStorageServerProtocol;
+    /**
+     * Specifies the object prefix for your object storage server. If this is a source location, DataSync only copies objects with this prefix. If this is a destination location, DataSync writes all objects with this prefix.
+     */
+    Subdirectory?: S3Subdirectory;
+    /**
+     * Specifies the access key (for example, a user name) if credentials are required to authenticate with the object storage server.
+     */
+    AccessKey?: ObjectStorageAccessKey;
+    /**
+     * Specifies the secret key (for example, a password) if credentials are required to authenticate with the object storage server.
+     */
+    SecretKey?: ObjectStorageSecretKey;
+    /**
+     * Specifies the Amazon Resource Names (ARNs) of the DataSync agents that can securely connect with your location.
+     */
+    AgentArns?: AgentArnList;
+    /**
+     * Specifies a certificate chain for DataSync to authenticate with your object storage system if the system uses a private or self-signed certificate authority (CA). You must specify a single .pem file with a full certificate chain (for example, file:///home/user/.ssh/object_storage_certificates.pem). The certificate chain might include:   The object storage system's certificate   All intermediate certificates (if there are any)   The root certificate of the signing CA   You can concatenate your certificates into a .pem file (which can be up to 32768 bytes before base64 encoding). The following example cat command creates an object_storage_certificates.pem file that includes three certificates:  cat object_server_certificate.pem intermediate_certificate.pem ca_root_certificate.pem &gt; object_storage_certificates.pem  To use this parameter, configure ServerProtocol to HTTPS. Updating this parameter doesn't interfere with tasks that you have in progress.
+     */
+    ServerCertificate?: ObjectStorageCertificate;
+  }
+  export interface UpdateLocationObjectStorageResponse {
+  }
+  export interface UpdateLocationSmbRequest {
+    /**
+     * Specifies the ARN of the SMB location that you want to update.
+     */
+    LocationArn: LocationArn;
+    /**
+     * Specifies the name of the share exported by your SMB file server where DataSync will read or write data. You can include a subdirectory in the share path (for example, /path/to/subdirectory). Make sure that other SMB clients in your network can also mount this path. To copy all data in the specified subdirectory, DataSync must be able to mount the SMB share and access all of its data. For more information, see required permissions for SMB locations.
+     */
+    Subdirectory?: SmbSubdirectory;
+    /**
+     * Specifies the user name that can mount your SMB file server and has permission to access the files and folders involved in your transfer. For information about choosing a user with the right level of access for your transfer, see required permissions for SMB locations.
+     */
+    User?: SmbUser;
+    /**
+     * Specifies the Windows domain name that your SMB file server belongs to.  If you have multiple domains in your environment, configuring this parameter makes sure that DataSync connects to the right file server. For more information, see required permissions for SMB locations.
+     */
+    Domain?: SmbDomain;
+    /**
+     * Specifies the password of the user who can mount your SMB file server and has permission to access the files and folders involved in your transfer. For more information, see required permissions for SMB locations.
+     */
+    Password?: SmbPassword;
+    /**
+     * Specifies the DataSync agent (or agents) which you want to connect to your SMB file server. You specify an agent by using its Amazon Resource Name (ARN).
+     */
+    AgentArns?: AgentArnList;
+    MountOptions?: SmbMountOptions;
+  }
+  export interface UpdateLocationSmbResponse {
+  }
+  export interface UpdateStorageSystemRequest {
+    /**
+     * Specifies the ARN of the on-premises storage system that you want reconfigure.
+     */
+    StorageSystemArn: StorageSystemArn;
+    /**
+     * Specifies the server name and network port required to connect with your on-premises storage system's management interface.
+     */
+    ServerConfiguration?: DiscoveryServerConfiguration;
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the DataSync agent that connects to and reads your on-premises storage system. You can only specify one ARN.
+     */
+    AgentArns?: DiscoveryAgentArnList;
+    /**
+     * Specifies a familiar name for your on-premises storage system.
+     */
+    Name?: Name;
+    /**
+     * Specifies the ARN of the Amazon CloudWatch log group for monitoring and logging discovery job events.
+     */
+    CloudWatchLogGroupArn?: LogGroupArn;
+    /**
+     * Specifies the user name and password for accessing your on-premises storage system's management interface.
+     */
+    Credentials?: Credentials;
+  }
+  export interface UpdateStorageSystemResponse {
+  }
   export interface UpdateTaskExecutionRequest {
     /**
-     * The Amazon Resource Name (ARN) of the specific task execution that is being updated. 
+     * Specifies the Amazon Resource Name (ARN) of the task execution that you're updating.
      */
     TaskExecutionArn: TaskExecutionArn;
     Options: Options;
@@ -1416,26 +3283,38 @@ declare namespace DataSync {
   }
   export interface UpdateTaskRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource name of the task to update.
+     * Specifies the ARN of the task that you want to update.
      */
     TaskArn: TaskArn;
     Options?: Options;
     /**
-     * A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: "/folder1|/folder2"   
+     * Specifies exclude filters that define the files, objects, and folders in your source location that you don't want DataSync to transfer. For more information and examples, see Specifying what DataSync transfers by using filters.
      */
     Excludes?: FilterList;
     /**
-     * Specifies a schedule used to periodically transfer files from a source to a destination location. You can configure your task to execute hourly, daily, weekly or on specific days of the week. You control when in the day or hour you want the task to execute. The time you specify is UTC time. For more information, see task-scheduling.
+     * Specifies a schedule for when you want your task to run. For more information, see Scheduling your task.
      */
     Schedule?: TaskSchedule;
     /**
-     * The name of the task to update.
+     * Specifies the name of your task.
      */
     Name?: TagValue;
     /**
-     * The Amazon Resource Name (ARN) of the resource name of the CloudWatch LogGroup.
+     * Specifies the Amazon Resource Name (ARN) of an Amazon CloudWatch log group for monitoring your task.
      */
     CloudWatchLogGroupArn?: LogGroupArn;
+    /**
+     * Specifies include filters define the files, objects, and folders in your source location that you want DataSync to transfer. For more information and examples, see Specifying what DataSync transfers by using filters.
+     */
+    Includes?: FilterList;
+    /**
+     * Configures a manifest, which is a list of files or objects that you want DataSync to transfer. For more information and configuration examples, see Specifying what DataSync transfers by using a manifest. When using this parameter, your caller identity (the IAM role that you're using DataSync with) must have the iam:PassRole permission. The AWSDataSyncFullAccess policy includes this permission. To remove a manifest configuration, specify this parameter as empty.
+     */
+    ManifestConfig?: ManifestConfig;
+    /**
+     * Specifies how you want to configure a task report, which provides detailed information about your DataSync transfer. For more information, see Monitoring your DataSync transfers with task reports. When using this parameter, your caller identity (the IAM role that you're using DataSync with) must have the iam:PassRole permission. The AWSDataSyncFullAccess policy includes this permission. To remove a task report configuration, specify this parameter as empty.
+     */
+    TaskReportConfig?: TaskReportConfig;
   }
   export interface UpdateTaskResponse {
   }

@@ -12,6 +12,14 @@ declare class WorkSpaces extends Service {
   constructor(options?: WorkSpaces.Types.ClientConfiguration)
   config: Config & WorkSpaces.Types.ClientConfiguration;
   /**
+   * Accepts the account link invitation.  There's currently no unlinking capability after you accept the account linking invitation. 
+   */
+  acceptAccountLinkInvitation(params: WorkSpaces.Types.AcceptAccountLinkInvitationRequest, callback?: (err: AWSError, data: WorkSpaces.Types.AcceptAccountLinkInvitationResult) => void): Request<WorkSpaces.Types.AcceptAccountLinkInvitationResult, AWSError>;
+  /**
+   * Accepts the account link invitation.  There's currently no unlinking capability after you accept the account linking invitation. 
+   */
+  acceptAccountLinkInvitation(callback?: (err: AWSError, data: WorkSpaces.Types.AcceptAccountLinkInvitationResult) => void): Request<WorkSpaces.Types.AcceptAccountLinkInvitationResult, AWSError>;
+  /**
    * Associates the specified connection alias with the specified directory to enable cross-Region redirection. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.  Before performing this operation, call  DescribeConnectionAliases to make sure that the current state of the connection alias is CREATED. 
    */
   associateConnectionAlias(params: WorkSpaces.Types.AssociateConnectionAliasRequest, callback?: (err: AWSError, data: WorkSpaces.Types.AssociateConnectionAliasResult) => void): Request<WorkSpaces.Types.AssociateConnectionAliasResult, AWSError>;
@@ -28,6 +36,14 @@ declare class WorkSpaces extends Service {
    */
   associateIpGroups(callback?: (err: AWSError, data: WorkSpaces.Types.AssociateIpGroupsResult) => void): Request<WorkSpaces.Types.AssociateIpGroupsResult, AWSError>;
   /**
+   * Associates the specified application to the specified WorkSpace.
+   */
+  associateWorkspaceApplication(params: WorkSpaces.Types.AssociateWorkspaceApplicationRequest, callback?: (err: AWSError, data: WorkSpaces.Types.AssociateWorkspaceApplicationResult) => void): Request<WorkSpaces.Types.AssociateWorkspaceApplicationResult, AWSError>;
+  /**
+   * Associates the specified application to the specified WorkSpace.
+   */
+  associateWorkspaceApplication(callback?: (err: AWSError, data: WorkSpaces.Types.AssociateWorkspaceApplicationResult) => void): Request<WorkSpaces.Types.AssociateWorkspaceApplicationResult, AWSError>;
+  /**
    * Adds one or more rules to the specified IP access control group. This action gives users permission to access their WorkSpaces from the CIDR address ranges specified in the rules.
    */
   authorizeIpRules(params: WorkSpaces.Types.AuthorizeIpRulesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.AuthorizeIpRulesResult) => void): Request<WorkSpaces.Types.AuthorizeIpRulesResult, AWSError>;
@@ -36,13 +52,29 @@ declare class WorkSpaces extends Service {
    */
   authorizeIpRules(callback?: (err: AWSError, data: WorkSpaces.Types.AuthorizeIpRulesResult) => void): Request<WorkSpaces.Types.AuthorizeIpRulesResult, AWSError>;
   /**
-   * Copies the specified image from the specified Region to the current Region. For more information about copying images, see  Copy a Custom WorkSpaces Image.  In the China (Ningxia) Region, you can copy images only within the same Region. In the AWS GovCloud (US-West) Region, to copy images to and from other AWS Regions, contact AWS Support.   Before copying a shared image, be sure to verify that it has been shared from the correct AWS account. To determine if an image has been shared and to see the AWS account ID that owns an image, use the DescribeWorkSpaceImages and DescribeWorkspaceImagePermissions API operations.  
+   * Copies the specified image from the specified Region to the current Region. For more information about copying images, see  Copy a Custom WorkSpaces Image. In the China (Ningxia) Region, you can copy images only within the same Region. In Amazon Web Services GovCloud (US), to copy images to and from other Regions, contact Amazon Web Services Support.  Before copying a shared image, be sure to verify that it has been shared from the correct Amazon Web Services account. To determine if an image has been shared and to see the ID of the Amazon Web Services account that owns an image, use the DescribeWorkSpaceImages and DescribeWorkspaceImagePermissions API operations.  
    */
   copyWorkspaceImage(params: WorkSpaces.Types.CopyWorkspaceImageRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CopyWorkspaceImageResult) => void): Request<WorkSpaces.Types.CopyWorkspaceImageResult, AWSError>;
   /**
-   * Copies the specified image from the specified Region to the current Region. For more information about copying images, see  Copy a Custom WorkSpaces Image.  In the China (Ningxia) Region, you can copy images only within the same Region. In the AWS GovCloud (US-West) Region, to copy images to and from other AWS Regions, contact AWS Support.   Before copying a shared image, be sure to verify that it has been shared from the correct AWS account. To determine if an image has been shared and to see the AWS account ID that owns an image, use the DescribeWorkSpaceImages and DescribeWorkspaceImagePermissions API operations.  
+   * Copies the specified image from the specified Region to the current Region. For more information about copying images, see  Copy a Custom WorkSpaces Image. In the China (Ningxia) Region, you can copy images only within the same Region. In Amazon Web Services GovCloud (US), to copy images to and from other Regions, contact Amazon Web Services Support.  Before copying a shared image, be sure to verify that it has been shared from the correct Amazon Web Services account. To determine if an image has been shared and to see the ID of the Amazon Web Services account that owns an image, use the DescribeWorkSpaceImages and DescribeWorkspaceImagePermissions API operations.  
    */
   copyWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.CopyWorkspaceImageResult) => void): Request<WorkSpaces.Types.CopyWorkspaceImageResult, AWSError>;
+  /**
+   * Creates the account link invitation.
+   */
+  createAccountLinkInvitation(params: WorkSpaces.Types.CreateAccountLinkInvitationRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateAccountLinkInvitationResult) => void): Request<WorkSpaces.Types.CreateAccountLinkInvitationResult, AWSError>;
+  /**
+   * Creates the account link invitation.
+   */
+  createAccountLinkInvitation(callback?: (err: AWSError, data: WorkSpaces.Types.CreateAccountLinkInvitationResult) => void): Request<WorkSpaces.Types.CreateAccountLinkInvitationResult, AWSError>;
+  /**
+   * Creates a client-add-in for Amazon Connect within a directory. You can create only one Amazon Connect client add-in within a directory. This client add-in allows WorkSpaces users to seamlessly connect to Amazon Connect.
+   */
+  createConnectClientAddIn(params: WorkSpaces.Types.CreateConnectClientAddInRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateConnectClientAddInResult) => void): Request<WorkSpaces.Types.CreateConnectClientAddInResult, AWSError>;
+  /**
+   * Creates a client-add-in for Amazon Connect within a directory. You can create only one Amazon Connect client add-in within a directory. This client add-in allows WorkSpaces users to seamlessly connect to Amazon Connect.
+   */
+  createConnectClientAddIn(callback?: (err: AWSError, data: WorkSpaces.Types.CreateConnectClientAddInResult) => void): Request<WorkSpaces.Types.CreateConnectClientAddInResult, AWSError>;
   /**
    * Creates the specified connection alias for use with cross-Region redirection. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.
    */
@@ -60,6 +92,14 @@ declare class WorkSpaces extends Service {
    */
   createIpGroup(callback?: (err: AWSError, data: WorkSpaces.Types.CreateIpGroupResult) => void): Request<WorkSpaces.Types.CreateIpGroupResult, AWSError>;
   /**
+   * Creates a standby WorkSpace in a secondary Region.
+   */
+  createStandbyWorkspaces(params: WorkSpaces.Types.CreateStandbyWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateStandbyWorkspacesResult) => void): Request<WorkSpaces.Types.CreateStandbyWorkspacesResult, AWSError>;
+  /**
+   * Creates a standby WorkSpace in a secondary Region.
+   */
+  createStandbyWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.CreateStandbyWorkspacesResult) => void): Request<WorkSpaces.Types.CreateStandbyWorkspacesResult, AWSError>;
+  /**
    * Creates the specified tags for the specified WorkSpaces resource.
    */
   createTags(params: WorkSpaces.Types.CreateTagsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateTagsResult) => void): Request<WorkSpaces.Types.CreateTagsResult, AWSError>;
@@ -68,13 +108,69 @@ declare class WorkSpaces extends Service {
    */
   createTags(callback?: (err: AWSError, data: WorkSpaces.Types.CreateTagsResult) => void): Request<WorkSpaces.Types.CreateTagsResult, AWSError>;
   /**
-   * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.
+   * Creates a new updated WorkSpace image based on the specified source image. The new updated WorkSpace image has the latest drivers and other updates required by the Amazon WorkSpaces components. To determine which WorkSpace images need to be updated with the latest Amazon WorkSpaces requirements, use  DescribeWorkspaceImages.    Only Windows 10, Windows Server 2016, and Windows Server 2019 WorkSpace images can be programmatically updated at this time.   Microsoft Windows updates and other application updates are not included in the update process.   The source WorkSpace image is not deleted. You can delete the source image after you've verified your new updated image and created a new bundle.    
+   */
+  createUpdatedWorkspaceImage(params: WorkSpaces.Types.CreateUpdatedWorkspaceImageRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateUpdatedWorkspaceImageResult) => void): Request<WorkSpaces.Types.CreateUpdatedWorkspaceImageResult, AWSError>;
+  /**
+   * Creates a new updated WorkSpace image based on the specified source image. The new updated WorkSpace image has the latest drivers and other updates required by the Amazon WorkSpaces components. To determine which WorkSpace images need to be updated with the latest Amazon WorkSpaces requirements, use  DescribeWorkspaceImages.    Only Windows 10, Windows Server 2016, and Windows Server 2019 WorkSpace images can be programmatically updated at this time.   Microsoft Windows updates and other application updates are not included in the update process.   The source WorkSpace image is not deleted. You can delete the source image after you've verified your new updated image and created a new bundle.    
+   */
+  createUpdatedWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.CreateUpdatedWorkspaceImageResult) => void): Request<WorkSpaces.Types.CreateUpdatedWorkspaceImageResult, AWSError>;
+  /**
+   * Creates the specified WorkSpace bundle. For more information about creating WorkSpace bundles, see  Create a Custom WorkSpaces Image and Bundle.
+   */
+  createWorkspaceBundle(params: WorkSpaces.Types.CreateWorkspaceBundleRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspaceBundleResult) => void): Request<WorkSpaces.Types.CreateWorkspaceBundleResult, AWSError>;
+  /**
+   * Creates the specified WorkSpace bundle. For more information about creating WorkSpace bundles, see  Create a Custom WorkSpaces Image and Bundle.
+   */
+  createWorkspaceBundle(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspaceBundleResult) => void): Request<WorkSpaces.Types.CreateWorkspaceBundleResult, AWSError>;
+  /**
+   * Creates a new WorkSpace image from an existing WorkSpace.
+   */
+  createWorkspaceImage(params: WorkSpaces.Types.CreateWorkspaceImageRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspaceImageResult) => void): Request<WorkSpaces.Types.CreateWorkspaceImageResult, AWSError>;
+  /**
+   * Creates a new WorkSpace image from an existing WorkSpace.
+   */
+  createWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspaceImageResult) => void): Request<WorkSpaces.Types.CreateWorkspaceImageResult, AWSError>;
+  /**
+   * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.    The MANUAL running mode value is only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use this value. For more information, see Amazon WorkSpaces Core.   You don't need to specify the PCOIP protocol for Linux bundles because WSP is the default protocol for those bundles.   User-decoupled WorkSpaces are only supported by Amazon WorkSpaces Core.   Review your running mode to ensure you are using one that is optimal for your needs and budget. For more information on switching running modes, see  Can I switch between hourly and monthly billing?    
    */
   createWorkspaces(params: WorkSpaces.Types.CreateWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesResult) => void): Request<WorkSpaces.Types.CreateWorkspacesResult, AWSError>;
   /**
-   * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.
+   * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.    The MANUAL running mode value is only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use this value. For more information, see Amazon WorkSpaces Core.   You don't need to specify the PCOIP protocol for Linux bundles because WSP is the default protocol for those bundles.   User-decoupled WorkSpaces are only supported by Amazon WorkSpaces Core.   Review your running mode to ensure you are using one that is optimal for your needs and budget. For more information on switching running modes, see  Can I switch between hourly and monthly billing?    
    */
   createWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesResult) => void): Request<WorkSpaces.Types.CreateWorkspacesResult, AWSError>;
+  /**
+   * Creates a pool of WorkSpaces.
+   */
+  createWorkspacesPool(params: WorkSpaces.Types.CreateWorkspacesPoolRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesPoolResult) => void): Request<WorkSpaces.Types.CreateWorkspacesPoolResult, AWSError>;
+  /**
+   * Creates a pool of WorkSpaces.
+   */
+  createWorkspacesPool(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesPoolResult) => void): Request<WorkSpaces.Types.CreateWorkspacesPoolResult, AWSError>;
+  /**
+   * Deletes the account link invitation.
+   */
+  deleteAccountLinkInvitation(params: WorkSpaces.Types.DeleteAccountLinkInvitationRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteAccountLinkInvitationResult) => void): Request<WorkSpaces.Types.DeleteAccountLinkInvitationResult, AWSError>;
+  /**
+   * Deletes the account link invitation.
+   */
+  deleteAccountLinkInvitation(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteAccountLinkInvitationResult) => void): Request<WorkSpaces.Types.DeleteAccountLinkInvitationResult, AWSError>;
+  /**
+   * Deletes customized client branding. Client branding allows you to customize your WorkSpace's client login portal. You can tailor your login portal company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in. After you delete your customized client branding, your login portal reverts to the default client branding.
+   */
+  deleteClientBranding(params: WorkSpaces.Types.DeleteClientBrandingRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteClientBrandingResult) => void): Request<WorkSpaces.Types.DeleteClientBrandingResult, AWSError>;
+  /**
+   * Deletes customized client branding. Client branding allows you to customize your WorkSpace's client login portal. You can tailor your login portal company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in. After you delete your customized client branding, your login portal reverts to the default client branding.
+   */
+  deleteClientBranding(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteClientBrandingResult) => void): Request<WorkSpaces.Types.DeleteClientBrandingResult, AWSError>;
+  /**
+   * Deletes a client-add-in for Amazon Connect that is configured within a directory.
+   */
+  deleteConnectClientAddIn(params: WorkSpaces.Types.DeleteConnectClientAddInRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteConnectClientAddInResult) => void): Request<WorkSpaces.Types.DeleteConnectClientAddInResult, AWSError>;
+  /**
+   * Deletes a client-add-in for Amazon Connect that is configured within a directory.
+   */
+  deleteConnectClientAddIn(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteConnectClientAddInResult) => void): Request<WorkSpaces.Types.DeleteConnectClientAddInResult, AWSError>;
   /**
    * Deletes the specified connection alias. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.   If you will no longer be using a fully qualified domain name (FQDN) as the registration code for your WorkSpaces users, you must take certain precautions to prevent potential security issues. For more information, see  Security Considerations if You Stop Using Cross-Region Redirection.   To delete a connection alias that has been shared, the shared account must first disassociate the connection alias from any directories it has been associated with. Then you must unshare the connection alias from the account it has been shared with. You can delete a connection alias only after it is no longer shared with any accounts or associated with any directories. 
    */
@@ -100,6 +196,14 @@ declare class WorkSpaces extends Service {
    */
   deleteTags(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteTagsResult) => void): Request<WorkSpaces.Types.DeleteTagsResult, AWSError>;
   /**
+   * Deletes the specified WorkSpace bundle. For more information about deleting WorkSpace bundles, see  Delete a Custom WorkSpaces Bundle or Image.
+   */
+  deleteWorkspaceBundle(params: WorkSpaces.Types.DeleteWorkspaceBundleRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteWorkspaceBundleResult) => void): Request<WorkSpaces.Types.DeleteWorkspaceBundleResult, AWSError>;
+  /**
+   * Deletes the specified WorkSpace bundle. For more information about deleting WorkSpace bundles, see  Delete a Custom WorkSpaces Bundle or Image.
+   */
+  deleteWorkspaceBundle(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteWorkspaceBundleResult) => void): Request<WorkSpaces.Types.DeleteWorkspaceBundleResult, AWSError>;
+  /**
    * Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image and unshare the image if it is shared with other accounts. 
    */
   deleteWorkspaceImage(params: WorkSpaces.Types.DeleteWorkspaceImageRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteWorkspaceImageResult) => void): Request<WorkSpaces.Types.DeleteWorkspaceImageResult, AWSError>;
@@ -108,11 +212,19 @@ declare class WorkSpaces extends Service {
    */
   deleteWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteWorkspaceImageResult) => void): Request<WorkSpaces.Types.DeleteWorkspaceImageResult, AWSError>;
   /**
-   * Deregisters the specified directory. This operation is asynchronous and returns before the WorkSpace directory is deregistered. If any WorkSpaces are registered to this directory, you must remove them before you can deregister the directory.  Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the AWS Directory Services pricing terms. To delete empty directories, see  Delete the Directory for Your WorkSpaces. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again. 
+   * Deploys associated applications to the specified WorkSpace
+   */
+  deployWorkspaceApplications(params: WorkSpaces.Types.DeployWorkspaceApplicationsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeployWorkspaceApplicationsResult) => void): Request<WorkSpaces.Types.DeployWorkspaceApplicationsResult, AWSError>;
+  /**
+   * Deploys associated applications to the specified WorkSpace
+   */
+  deployWorkspaceApplications(callback?: (err: AWSError, data: WorkSpaces.Types.DeployWorkspaceApplicationsResult) => void): Request<WorkSpaces.Types.DeployWorkspaceApplicationsResult, AWSError>;
+  /**
+   * Deregisters the specified directory. This operation is asynchronous and returns before the WorkSpace directory is deregistered. If any WorkSpaces are registered to this directory, you must remove them before you can deregister the directory.  Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the Directory Service pricing terms. To delete empty directories, see  Delete the Directory for Your WorkSpaces. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again. 
    */
   deregisterWorkspaceDirectory(params: WorkSpaces.Types.DeregisterWorkspaceDirectoryRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeregisterWorkspaceDirectoryResult) => void): Request<WorkSpaces.Types.DeregisterWorkspaceDirectoryResult, AWSError>;
   /**
-   * Deregisters the specified directory. This operation is asynchronous and returns before the WorkSpace directory is deregistered. If any WorkSpaces are registered to this directory, you must remove them before you can deregister the directory.  Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the AWS Directory Services pricing terms. To delete empty directories, see  Delete the Directory for Your WorkSpaces. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again. 
+   * Deregisters the specified directory. This operation is asynchronous and returns before the WorkSpace directory is deregistered. If any WorkSpaces are registered to this directory, you must remove them before you can deregister the directory.  Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the Directory Service pricing terms. To delete empty directories, see  Delete the Directory for Your WorkSpaces. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again. 
    */
   deregisterWorkspaceDirectory(callback?: (err: AWSError, data: WorkSpaces.Types.DeregisterWorkspaceDirectoryResult) => void): Request<WorkSpaces.Types.DeregisterWorkspaceDirectoryResult, AWSError>;
   /**
@@ -132,6 +244,38 @@ declare class WorkSpaces extends Service {
    */
   describeAccountModifications(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeAccountModificationsResult) => void): Request<WorkSpaces.Types.DescribeAccountModificationsResult, AWSError>;
   /**
+   * Describes the associations between the application and the specified associated resources.
+   */
+  describeApplicationAssociations(params: WorkSpaces.Types.DescribeApplicationAssociationsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeApplicationAssociationsResult) => void): Request<WorkSpaces.Types.DescribeApplicationAssociationsResult, AWSError>;
+  /**
+   * Describes the associations between the application and the specified associated resources.
+   */
+  describeApplicationAssociations(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeApplicationAssociationsResult) => void): Request<WorkSpaces.Types.DescribeApplicationAssociationsResult, AWSError>;
+  /**
+   * Describes the specified applications by filtering based on their compute types, license availability, operating systems, and owners.
+   */
+  describeApplications(params: WorkSpaces.Types.DescribeApplicationsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeApplicationsResult) => void): Request<WorkSpaces.Types.DescribeApplicationsResult, AWSError>;
+  /**
+   * Describes the specified applications by filtering based on their compute types, license availability, operating systems, and owners.
+   */
+  describeApplications(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeApplicationsResult) => void): Request<WorkSpaces.Types.DescribeApplicationsResult, AWSError>;
+  /**
+   * Describes the associations between the applications and the specified bundle.
+   */
+  describeBundleAssociations(params: WorkSpaces.Types.DescribeBundleAssociationsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeBundleAssociationsResult) => void): Request<WorkSpaces.Types.DescribeBundleAssociationsResult, AWSError>;
+  /**
+   * Describes the associations between the applications and the specified bundle.
+   */
+  describeBundleAssociations(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeBundleAssociationsResult) => void): Request<WorkSpaces.Types.DescribeBundleAssociationsResult, AWSError>;
+  /**
+   * Describes the specified client branding. Client branding allows you to customize the log in page of various device types for your users. You can add your company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in.  Only device types that have branding information configured will be shown in the response. 
+   */
+  describeClientBranding(params: WorkSpaces.Types.DescribeClientBrandingRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeClientBrandingResult) => void): Request<WorkSpaces.Types.DescribeClientBrandingResult, AWSError>;
+  /**
+   * Describes the specified client branding. Client branding allows you to customize the log in page of various device types for your users. You can add your company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in.  Only device types that have branding information configured will be shown in the response. 
+   */
+  describeClientBranding(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeClientBrandingResult) => void): Request<WorkSpaces.Types.DescribeClientBrandingResult, AWSError>;
+  /**
    * Retrieves a list that describes one or more specified Amazon WorkSpaces clients.
    */
   describeClientProperties(params: WorkSpaces.Types.DescribeClientPropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeClientPropertiesResult) => void): Request<WorkSpaces.Types.DescribeClientPropertiesResult, AWSError>;
@@ -140,11 +284,19 @@ declare class WorkSpaces extends Service {
    */
   describeClientProperties(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeClientPropertiesResult) => void): Request<WorkSpaces.Types.DescribeClientPropertiesResult, AWSError>;
   /**
-   * Describes the permissions that the owner of a connection alias has granted to another AWS account for the specified connection alias. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.
+   * Retrieves a list of Amazon Connect client add-ins that have been created.
+   */
+  describeConnectClientAddIns(params: WorkSpaces.Types.DescribeConnectClientAddInsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeConnectClientAddInsResult) => void): Request<WorkSpaces.Types.DescribeConnectClientAddInsResult, AWSError>;
+  /**
+   * Retrieves a list of Amazon Connect client add-ins that have been created.
+   */
+  describeConnectClientAddIns(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeConnectClientAddInsResult) => void): Request<WorkSpaces.Types.DescribeConnectClientAddInsResult, AWSError>;
+  /**
+   * Describes the permissions that the owner of a connection alias has granted to another Amazon Web Services account for the specified connection alias. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.
    */
   describeConnectionAliasPermissions(params: WorkSpaces.Types.DescribeConnectionAliasPermissionsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeConnectionAliasPermissionsResult) => void): Request<WorkSpaces.Types.DescribeConnectionAliasPermissionsResult, AWSError>;
   /**
-   * Describes the permissions that the owner of a connection alias has granted to another AWS account for the specified connection alias. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.
+   * Describes the permissions that the owner of a connection alias has granted to another Amazon Web Services account for the specified connection alias. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.
    */
   describeConnectionAliasPermissions(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeConnectionAliasPermissionsResult) => void): Request<WorkSpaces.Types.DescribeConnectionAliasPermissionsResult, AWSError>;
   /**
@@ -155,6 +307,14 @@ declare class WorkSpaces extends Service {
    * Retrieves a list that describes the connection aliases used for cross-Region redirection. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.
    */
   describeConnectionAliases(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeConnectionAliasesResult) => void): Request<WorkSpaces.Types.DescribeConnectionAliasesResult, AWSError>;
+  /**
+   * Describes the associations between the applications and the specified image.
+   */
+  describeImageAssociations(params: WorkSpaces.Types.DescribeImageAssociationsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeImageAssociationsResult) => void): Request<WorkSpaces.Types.DescribeImageAssociationsResult, AWSError>;
+  /**
+   * Describes the associations between the applications and the specified image.
+   */
+  describeImageAssociations(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeImageAssociationsResult) => void): Request<WorkSpaces.Types.DescribeImageAssociationsResult, AWSError>;
   /**
    * Describes one or more of your IP access control groups.
    */
@@ -172,6 +332,14 @@ declare class WorkSpaces extends Service {
    */
   describeTags(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeTagsResult) => void): Request<WorkSpaces.Types.DescribeTagsResult, AWSError>;
   /**
+   * Describes the associations betweens applications and the specified WorkSpace.
+   */
+  describeWorkspaceAssociations(params: WorkSpaces.Types.DescribeWorkspaceAssociationsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceAssociationsResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceAssociationsResult, AWSError>;
+  /**
+   * Describes the associations betweens applications and the specified WorkSpace.
+   */
+  describeWorkspaceAssociations(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceAssociationsResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceAssociationsResult, AWSError>;
+  /**
    * Retrieves a list that describes the available WorkSpace bundles. You can filter the results using either bundle ID or owner, but not both.
    */
   describeWorkspaceBundles(params: WorkSpaces.Types.DescribeWorkspaceBundlesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceBundlesResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceBundlesResult, AWSError>;
@@ -188,11 +356,11 @@ declare class WorkSpaces extends Service {
    */
   describeWorkspaceDirectories(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceDirectoriesResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceDirectoriesResult, AWSError>;
   /**
-   * Describes the permissions that the owner of an image has granted to other AWS accounts for an image.
+   * Describes the permissions that the owner of an image has granted to other Amazon Web Services accounts for an image.
    */
   describeWorkspaceImagePermissions(params: WorkSpaces.Types.DescribeWorkspaceImagePermissionsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceImagePermissionsResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceImagePermissionsResult, AWSError>;
   /**
-   * Describes the permissions that the owner of an image has granted to other AWS accounts for an image.
+   * Describes the permissions that the owner of an image has granted to other Amazon Web Services accounts for an image.
    */
   describeWorkspaceImagePermissions(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceImagePermissionsResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceImagePermissionsResult, AWSError>;
   /**
@@ -228,11 +396,27 @@ declare class WorkSpaces extends Service {
    */
   describeWorkspacesConnectionStatus(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesConnectionStatusResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesConnectionStatusResult, AWSError>;
   /**
-   * Disassociates a connection alias from a directory. Disassociating a connection alias disables cross-Region redirection between two directories in different AWS Regions. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.  Before performing this operation, call  DescribeConnectionAliases to make sure that the current state of the connection alias is CREATED. 
+   * Retrieves a list that describes the streaming sessions for a specified pool.
+   */
+  describeWorkspacesPoolSessions(params: WorkSpaces.Types.DescribeWorkspacesPoolSessionsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesPoolSessionsResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesPoolSessionsResult, AWSError>;
+  /**
+   * Retrieves a list that describes the streaming sessions for a specified pool.
+   */
+  describeWorkspacesPoolSessions(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesPoolSessionsResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesPoolSessionsResult, AWSError>;
+  /**
+   * Describes the specified WorkSpaces Pools.
+   */
+  describeWorkspacesPools(params: WorkSpaces.Types.DescribeWorkspacesPoolsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesPoolsResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesPoolsResult, AWSError>;
+  /**
+   * Describes the specified WorkSpaces Pools.
+   */
+  describeWorkspacesPools(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesPoolsResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesPoolsResult, AWSError>;
+  /**
+   * Disassociates a connection alias from a directory. Disassociating a connection alias disables cross-Region redirection between two directories in different Regions. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.  Before performing this operation, call  DescribeConnectionAliases to make sure that the current state of the connection alias is CREATED. 
    */
   disassociateConnectionAlias(params: WorkSpaces.Types.DisassociateConnectionAliasRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateConnectionAliasResult) => void): Request<WorkSpaces.Types.DisassociateConnectionAliasResult, AWSError>;
   /**
-   * Disassociates a connection alias from a directory. Disassociating a connection alias disables cross-Region redirection between two directories in different AWS Regions. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.  Before performing this operation, call  DescribeConnectionAliases to make sure that the current state of the connection alias is CREATED. 
+   * Disassociates a connection alias from a directory. Disassociating a connection alias disables cross-Region redirection between two directories in different Regions. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.  Before performing this operation, call  DescribeConnectionAliases to make sure that the current state of the connection alias is CREATED. 
    */
   disassociateConnectionAlias(callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateConnectionAliasResult) => void): Request<WorkSpaces.Types.DisassociateConnectionAliasResult, AWSError>;
   /**
@@ -244,19 +428,51 @@ declare class WorkSpaces extends Service {
    */
   disassociateIpGroups(callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateIpGroupsResult) => void): Request<WorkSpaces.Types.DisassociateIpGroupsResult, AWSError>;
   /**
-   * Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is in your AWS account, and you must own the image. For more information about creating BYOL images, see  Bring Your Own Windows Desktop Licenses.
+   * Disassociates the specified application from a WorkSpace.
+   */
+  disassociateWorkspaceApplication(params: WorkSpaces.Types.DisassociateWorkspaceApplicationRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateWorkspaceApplicationResult) => void): Request<WorkSpaces.Types.DisassociateWorkspaceApplicationResult, AWSError>;
+  /**
+   * Disassociates the specified application from a WorkSpace.
+   */
+  disassociateWorkspaceApplication(callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateWorkspaceApplicationResult) => void): Request<WorkSpaces.Types.DisassociateWorkspaceApplicationResult, AWSError>;
+  /**
+   * Retrieves account link information.
+   */
+  getAccountLink(params: WorkSpaces.Types.GetAccountLinkRequest, callback?: (err: AWSError, data: WorkSpaces.Types.GetAccountLinkResult) => void): Request<WorkSpaces.Types.GetAccountLinkResult, AWSError>;
+  /**
+   * Retrieves account link information.
+   */
+  getAccountLink(callback?: (err: AWSError, data: WorkSpaces.Types.GetAccountLinkResult) => void): Request<WorkSpaces.Types.GetAccountLinkResult, AWSError>;
+  /**
+   * Imports client branding. Client branding allows you to customize your WorkSpace's client login portal. You can tailor your login portal company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in. After you import client branding, the default branding experience for the specified platform type is replaced with the imported experience    You must specify at least one platform type when importing client branding.   You can import up to 6 MB of data with each request. If your request exceeds this limit, you can import client branding for different platform types using separate requests.   In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify only one parameter for each platform type, but not both.   Imported data can take up to a minute to appear in the WorkSpaces client.   
+   */
+  importClientBranding(params: WorkSpaces.Types.ImportClientBrandingRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ImportClientBrandingResult) => void): Request<WorkSpaces.Types.ImportClientBrandingResult, AWSError>;
+  /**
+   * Imports client branding. Client branding allows you to customize your WorkSpace's client login portal. You can tailor your login portal company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in. After you import client branding, the default branding experience for the specified platform type is replaced with the imported experience    You must specify at least one platform type when importing client branding.   You can import up to 6 MB of data with each request. If your request exceeds this limit, you can import client branding for different platform types using separate requests.   In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify only one parameter for each platform type, but not both.   Imported data can take up to a minute to appear in the WorkSpaces client.   
+   */
+  importClientBranding(callback?: (err: AWSError, data: WorkSpaces.Types.ImportClientBrandingResult) => void): Request<WorkSpaces.Types.ImportClientBrandingResult, AWSError>;
+  /**
+   * Imports the specified Windows 10 or 11 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is in your Amazon Web Services account, and you must own the image. For more information about creating BYOL images, see  Bring Your Own Windows Desktop Licenses.
    */
   importWorkspaceImage(params: WorkSpaces.Types.ImportWorkspaceImageRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ImportWorkspaceImageResult) => void): Request<WorkSpaces.Types.ImportWorkspaceImageResult, AWSError>;
   /**
-   * Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is in your AWS account, and you must own the image. For more information about creating BYOL images, see  Bring Your Own Windows Desktop Licenses.
+   * Imports the specified Windows 10 or 11 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is in your Amazon Web Services account, and you must own the image. For more information about creating BYOL images, see  Bring Your Own Windows Desktop Licenses.
    */
   importWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.ImportWorkspaceImageResult) => void): Request<WorkSpaces.Types.ImportWorkspaceImageResult, AWSError>;
   /**
-   * Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable Bring Your Own License (BYOL).  This operation can be run only by AWS accounts that are enabled for BYOL. If your account isn't enabled for BYOL, you'll receive an AccessDeniedException error. The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
+   * Lists all account links.
+   */
+  listAccountLinks(params: WorkSpaces.Types.ListAccountLinksRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ListAccountLinksResult) => void): Request<WorkSpaces.Types.ListAccountLinksResult, AWSError>;
+  /**
+   * Lists all account links.
+   */
+  listAccountLinks(callback?: (err: AWSError, data: WorkSpaces.Types.ListAccountLinksResult) => void): Request<WorkSpaces.Types.ListAccountLinksResult, AWSError>;
+  /**
+   * Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable Bring Your Own License (BYOL).  This operation can be run only by Amazon Web Services accounts that are enabled for BYOL. If your account isn't enabled for BYOL, you'll receive an AccessDeniedException error. The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
    */
   listAvailableManagementCidrRanges(params: WorkSpaces.Types.ListAvailableManagementCidrRangesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ListAvailableManagementCidrRangesResult) => void): Request<WorkSpaces.Types.ListAvailableManagementCidrRangesResult, AWSError>;
   /**
-   * Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable Bring Your Own License (BYOL).  This operation can be run only by AWS accounts that are enabled for BYOL. If your account isn't enabled for BYOL, you'll receive an AccessDeniedException error. The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
+   * Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable Bring Your Own License (BYOL).  This operation can be run only by Amazon Web Services accounts that are enabled for BYOL. If your account isn't enabled for BYOL, you'll receive an AccessDeniedException error. The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
    */
   listAvailableManagementCidrRanges(callback?: (err: AWSError, data: WorkSpaces.Types.ListAvailableManagementCidrRangesResult) => void): Request<WorkSpaces.Types.ListAvailableManagementCidrRangesResult, AWSError>;
   /**
@@ -276,6 +492,14 @@ declare class WorkSpaces extends Service {
    */
   modifyAccount(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyAccountResult) => void): Request<WorkSpaces.Types.ModifyAccountResult, AWSError>;
   /**
+   * Modifies the properties of the certificate-based authentication you want to use with your WorkSpaces.
+   */
+  modifyCertificateBasedAuthProperties(params: WorkSpaces.Types.ModifyCertificateBasedAuthPropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyCertificateBasedAuthPropertiesResult) => void): Request<WorkSpaces.Types.ModifyCertificateBasedAuthPropertiesResult, AWSError>;
+  /**
+   * Modifies the properties of the certificate-based authentication you want to use with your WorkSpaces.
+   */
+  modifyCertificateBasedAuthProperties(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyCertificateBasedAuthPropertiesResult) => void): Request<WorkSpaces.Types.ModifyCertificateBasedAuthPropertiesResult, AWSError>;
+  /**
    * Modifies the properties of the specified Amazon WorkSpaces clients.
    */
   modifyClientProperties(params: WorkSpaces.Types.ModifyClientPropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyClientPropertiesResult) => void): Request<WorkSpaces.Types.ModifyClientPropertiesResult, AWSError>;
@@ -284,6 +508,14 @@ declare class WorkSpaces extends Service {
    */
   modifyClientProperties(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyClientPropertiesResult) => void): Request<WorkSpaces.Types.ModifyClientPropertiesResult, AWSError>;
   /**
+   * Modifies multiple properties related to SAML 2.0 authentication, including the enablement status, user access URL, and relay state parameter name that are used for configuring federation with an SAML 2.0 identity provider.
+   */
+  modifySamlProperties(params: WorkSpaces.Types.ModifySamlPropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifySamlPropertiesResult) => void): Request<WorkSpaces.Types.ModifySamlPropertiesResult, AWSError>;
+  /**
+   * Modifies multiple properties related to SAML 2.0 authentication, including the enablement status, user access URL, and relay state parameter name that are used for configuring federation with an SAML 2.0 identity provider.
+   */
+  modifySamlProperties(callback?: (err: AWSError, data: WorkSpaces.Types.ModifySamlPropertiesResult) => void): Request<WorkSpaces.Types.ModifySamlPropertiesResult, AWSError>;
+  /**
    * Modifies the self-service WorkSpace management capabilities for your users. For more information, see Enable Self-Service WorkSpace Management Capabilities for Your Users.
    */
   modifySelfservicePermissions(params: WorkSpaces.Types.ModifySelfservicePermissionsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifySelfservicePermissionsResult) => void): Request<WorkSpaces.Types.ModifySelfservicePermissionsResult, AWSError>;
@@ -291,6 +523,14 @@ declare class WorkSpaces extends Service {
    * Modifies the self-service WorkSpace management capabilities for your users. For more information, see Enable Self-Service WorkSpace Management Capabilities for Your Users.
    */
   modifySelfservicePermissions(callback?: (err: AWSError, data: WorkSpaces.Types.ModifySelfservicePermissionsResult) => void): Request<WorkSpaces.Types.ModifySelfservicePermissionsResult, AWSError>;
+  /**
+   * Modifies the specified streaming properties.
+   */
+  modifyStreamingProperties(params: WorkSpaces.Types.ModifyStreamingPropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyStreamingPropertiesResult) => void): Request<WorkSpaces.Types.ModifyStreamingPropertiesResult, AWSError>;
+  /**
+   * Modifies the specified streaming properties.
+   */
+  modifyStreamingProperties(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyStreamingPropertiesResult) => void): Request<WorkSpaces.Types.ModifyStreamingPropertiesResult, AWSError>;
   /**
    * Specifies which devices and operating systems users can use to access their WorkSpaces. For more information, see  Control Device Access.
    */
@@ -308,11 +548,11 @@ declare class WorkSpaces extends Service {
    */
   modifyWorkspaceCreationProperties(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspaceCreationPropertiesResult) => void): Request<WorkSpaces.Types.ModifyWorkspaceCreationPropertiesResult, AWSError>;
   /**
-   * Modifies the specified WorkSpace properties. For important information about how to modify the size of the root and user volumes, see  Modify a WorkSpace. 
+   * Modifies the specified WorkSpace properties. For important information about how to modify the size of the root and user volumes, see  Modify a WorkSpace.   The MANUAL running mode value is only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use this value. For more information, see Amazon WorkSpaces Core. 
    */
   modifyWorkspaceProperties(params: WorkSpaces.Types.ModifyWorkspacePropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspacePropertiesResult) => void): Request<WorkSpaces.Types.ModifyWorkspacePropertiesResult, AWSError>;
   /**
-   * Modifies the specified WorkSpace properties. For important information about how to modify the size of the root and user volumes, see  Modify a WorkSpace. 
+   * Modifies the specified WorkSpace properties. For important information about how to modify the size of the root and user volumes, see  Modify a WorkSpace.   The MANUAL running mode value is only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use this value. For more information, see Amazon WorkSpaces Core. 
    */
   modifyWorkspaceProperties(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspacePropertiesResult) => void): Request<WorkSpaces.Types.ModifyWorkspacePropertiesResult, AWSError>;
   /**
@@ -324,11 +564,11 @@ declare class WorkSpaces extends Service {
    */
   modifyWorkspaceState(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspaceStateResult) => void): Request<WorkSpaces.Types.ModifyWorkspaceStateResult, AWSError>;
   /**
-   * Reboots the specified WorkSpaces. You cannot reboot a WorkSpace unless its state is AVAILABLE or UNHEALTHY. This operation is asynchronous and returns before the WorkSpaces have rebooted.
+   * Reboots the specified WorkSpaces. You cannot reboot a WorkSpace unless its state is AVAILABLE, UNHEALTHY, or REBOOTING. Reboot a WorkSpace in the REBOOTING state only if your WorkSpace has been stuck in the REBOOTING state for over 20 minutes. This operation is asynchronous and returns before the WorkSpaces have rebooted.
    */
   rebootWorkspaces(params: WorkSpaces.Types.RebootWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.RebootWorkspacesResult) => void): Request<WorkSpaces.Types.RebootWorkspacesResult, AWSError>;
   /**
-   * Reboots the specified WorkSpaces. You cannot reboot a WorkSpace unless its state is AVAILABLE or UNHEALTHY. This operation is asynchronous and returns before the WorkSpaces have rebooted.
+   * Reboots the specified WorkSpaces. You cannot reboot a WorkSpace unless its state is AVAILABLE, UNHEALTHY, or REBOOTING. Reboot a WorkSpace in the REBOOTING state only if your WorkSpace has been stuck in the REBOOTING state for over 20 minutes. This operation is asynchronous and returns before the WorkSpaces have rebooted.
    */
   rebootWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.RebootWorkspacesResult) => void): Request<WorkSpaces.Types.RebootWorkspacesResult, AWSError>;
   /**
@@ -348,6 +588,14 @@ declare class WorkSpaces extends Service {
    */
   registerWorkspaceDirectory(callback?: (err: AWSError, data: WorkSpaces.Types.RegisterWorkspaceDirectoryResult) => void): Request<WorkSpaces.Types.RegisterWorkspaceDirectoryResult, AWSError>;
   /**
+   * Rejects the account link invitation.
+   */
+  rejectAccountLinkInvitation(params: WorkSpaces.Types.RejectAccountLinkInvitationRequest, callback?: (err: AWSError, data: WorkSpaces.Types.RejectAccountLinkInvitationResult) => void): Request<WorkSpaces.Types.RejectAccountLinkInvitationResult, AWSError>;
+  /**
+   * Rejects the account link invitation.
+   */
+  rejectAccountLinkInvitation(callback?: (err: AWSError, data: WorkSpaces.Types.RejectAccountLinkInvitationResult) => void): Request<WorkSpaces.Types.RejectAccountLinkInvitationResult, AWSError>;
+  /**
    * Restores the specified WorkSpace to its last known healthy state. You cannot restore a WorkSpace unless its state is  AVAILABLE, ERROR, UNHEALTHY, or STOPPED. Restoring a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see Restore a WorkSpace. This operation is asynchronous and returns before the WorkSpace is completely restored.
    */
   restoreWorkspace(params: WorkSpaces.Types.RestoreWorkspaceRequest, callback?: (err: AWSError, data: WorkSpaces.Types.RestoreWorkspaceResult) => void): Request<WorkSpaces.Types.RestoreWorkspaceResult, AWSError>;
@@ -364,29 +612,69 @@ declare class WorkSpaces extends Service {
    */
   revokeIpRules(callback?: (err: AWSError, data: WorkSpaces.Types.RevokeIpRulesResult) => void): Request<WorkSpaces.Types.RevokeIpRulesResult, AWSError>;
   /**
-   * Starts the specified WorkSpaces. You cannot start a WorkSpace unless it has a running mode of AutoStop and a state of STOPPED.
+   * Starts the specified WorkSpaces. You cannot start a WorkSpace unless it has a running mode of AutoStop or Manual and a state of STOPPED.
    */
   startWorkspaces(params: WorkSpaces.Types.StartWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.StartWorkspacesResult) => void): Request<WorkSpaces.Types.StartWorkspacesResult, AWSError>;
   /**
-   * Starts the specified WorkSpaces. You cannot start a WorkSpace unless it has a running mode of AutoStop and a state of STOPPED.
+   * Starts the specified WorkSpaces. You cannot start a WorkSpace unless it has a running mode of AutoStop or Manual and a state of STOPPED.
    */
   startWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.StartWorkspacesResult) => void): Request<WorkSpaces.Types.StartWorkspacesResult, AWSError>;
   /**
-   *  Stops the specified WorkSpaces. You cannot stop a WorkSpace unless it has a running mode of AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
+   * Starts the specified pool. You cannot start a pool unless it has a running mode of AutoStop and a state of STOPPED.
+   */
+  startWorkspacesPool(params: WorkSpaces.Types.StartWorkspacesPoolRequest, callback?: (err: AWSError, data: WorkSpaces.Types.StartWorkspacesPoolResult) => void): Request<WorkSpaces.Types.StartWorkspacesPoolResult, AWSError>;
+  /**
+   * Starts the specified pool. You cannot start a pool unless it has a running mode of AutoStop and a state of STOPPED.
+   */
+  startWorkspacesPool(callback?: (err: AWSError, data: WorkSpaces.Types.StartWorkspacesPoolResult) => void): Request<WorkSpaces.Types.StartWorkspacesPoolResult, AWSError>;
+  /**
+   * Stops the specified WorkSpaces. You cannot stop a WorkSpace unless it has a running mode of AutoStop or Manual and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
    */
   stopWorkspaces(params: WorkSpaces.Types.StopWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.StopWorkspacesResult) => void): Request<WorkSpaces.Types.StopWorkspacesResult, AWSError>;
   /**
-   *  Stops the specified WorkSpaces. You cannot stop a WorkSpace unless it has a running mode of AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
+   * Stops the specified WorkSpaces. You cannot stop a WorkSpace unless it has a running mode of AutoStop or Manual and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
    */
   stopWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.StopWorkspacesResult) => void): Request<WorkSpaces.Types.StopWorkspacesResult, AWSError>;
   /**
-   * Terminates the specified WorkSpaces.  Terminating a WorkSpace is a permanent action and cannot be undone. The user's data is destroyed. If you need to archive any user data, contact AWS Support before terminating the WorkSpace.  You can terminate a WorkSpace that is in any state except SUSPENDED. This operation is asynchronous and returns before the WorkSpaces have been completely terminated. After a WorkSpace is terminated, the TERMINATED state is returned only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using  DescribeWorkSpaces. If the WorkSpace ID isn't returned, then the WorkSpace has been successfully terminated.  Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the AWS Directory Services pricing terms. To delete empty directories, see  Delete the Directory for Your WorkSpaces. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again. 
+   * Stops the specified pool. You cannot stop a WorkSpace pool unless it has a running mode of AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
+   */
+  stopWorkspacesPool(params: WorkSpaces.Types.StopWorkspacesPoolRequest, callback?: (err: AWSError, data: WorkSpaces.Types.StopWorkspacesPoolResult) => void): Request<WorkSpaces.Types.StopWorkspacesPoolResult, AWSError>;
+  /**
+   * Stops the specified pool. You cannot stop a WorkSpace pool unless it has a running mode of AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
+   */
+  stopWorkspacesPool(callback?: (err: AWSError, data: WorkSpaces.Types.StopWorkspacesPoolResult) => void): Request<WorkSpaces.Types.StopWorkspacesPoolResult, AWSError>;
+  /**
+   * Terminates the specified WorkSpaces.  Terminating a WorkSpace is a permanent action and cannot be undone. The user's data is destroyed. If you need to archive any user data, contact Amazon Web Services Support before terminating the WorkSpace.  You can terminate a WorkSpace that is in any state except SUSPENDED. This operation is asynchronous and returns before the WorkSpaces have been completely terminated. After a WorkSpace is terminated, the TERMINATED state is returned only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using  DescribeWorkSpaces. If the WorkSpace ID isn't returned, then the WorkSpace has been successfully terminated.  Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the Directory Service pricing terms. To delete empty directories, see  Delete the Directory for Your WorkSpaces. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again. 
    */
   terminateWorkspaces(params: WorkSpaces.Types.TerminateWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesResult, AWSError>;
   /**
-   * Terminates the specified WorkSpaces.  Terminating a WorkSpace is a permanent action and cannot be undone. The user's data is destroyed. If you need to archive any user data, contact AWS Support before terminating the WorkSpace.  You can terminate a WorkSpace that is in any state except SUSPENDED. This operation is asynchronous and returns before the WorkSpaces have been completely terminated. After a WorkSpace is terminated, the TERMINATED state is returned only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using  DescribeWorkSpaces. If the WorkSpace ID isn't returned, then the WorkSpace has been successfully terminated.  Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the AWS Directory Services pricing terms. To delete empty directories, see  Delete the Directory for Your WorkSpaces. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again. 
+   * Terminates the specified WorkSpaces.  Terminating a WorkSpace is a permanent action and cannot be undone. The user's data is destroyed. If you need to archive any user data, contact Amazon Web Services Support before terminating the WorkSpace.  You can terminate a WorkSpace that is in any state except SUSPENDED. This operation is asynchronous and returns before the WorkSpaces have been completely terminated. After a WorkSpace is terminated, the TERMINATED state is returned only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using  DescribeWorkSpaces. If the WorkSpace ID isn't returned, then the WorkSpace has been successfully terminated.  Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the Directory Service pricing terms. To delete empty directories, see  Delete the Directory for Your WorkSpaces. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again. 
    */
   terminateWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesResult, AWSError>;
+  /**
+   * Terminates the specified pool.
+   */
+  terminateWorkspacesPool(params: WorkSpaces.Types.TerminateWorkspacesPoolRequest, callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesPoolResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesPoolResult, AWSError>;
+  /**
+   * Terminates the specified pool.
+   */
+  terminateWorkspacesPool(callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesPoolResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesPoolResult, AWSError>;
+  /**
+   * Terminates the pool session.
+   */
+  terminateWorkspacesPoolSession(params: WorkSpaces.Types.TerminateWorkspacesPoolSessionRequest, callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesPoolSessionResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesPoolSessionResult, AWSError>;
+  /**
+   * Terminates the pool session.
+   */
+  terminateWorkspacesPoolSession(callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesPoolSessionResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesPoolSessionResult, AWSError>;
+  /**
+   * Updates a Amazon Connect client add-in. Use this action to update the name and endpoint URL of a Amazon Connect client add-in.
+   */
+  updateConnectClientAddIn(params: WorkSpaces.Types.UpdateConnectClientAddInRequest, callback?: (err: AWSError, data: WorkSpaces.Types.UpdateConnectClientAddInResult) => void): Request<WorkSpaces.Types.UpdateConnectClientAddInResult, AWSError>;
+  /**
+   * Updates a Amazon Connect client add-in. Use this action to update the name and endpoint URL of a Amazon Connect client add-in.
+   */
+  updateConnectClientAddIn(callback?: (err: AWSError, data: WorkSpaces.Types.UpdateConnectClientAddInResult) => void): Request<WorkSpaces.Types.UpdateConnectClientAddInResult, AWSError>;
   /**
    * Shares or unshares a connection alias with one account by specifying whether that account has permission to associate the connection alias with a directory. If the association permission is granted, the connection alias is shared with that account. If the association permission is revoked, the connection alias is unshared with the account. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.    Before performing this operation, call  DescribeConnectionAliases to make sure that the current state of the connection alias is CREATED.   To delete a connection alias that has been shared, the shared account must first disassociate the connection alias from any directories it has been associated with. Then you must unshare the connection alias from the account it has been shared with. You can delete a connection alias only after it is no longer shared with any accounts or associated with any directories.   
    */
@@ -404,17 +692,69 @@ declare class WorkSpaces extends Service {
    */
   updateRulesOfIpGroup(callback?: (err: AWSError, data: WorkSpaces.Types.UpdateRulesOfIpGroupResult) => void): Request<WorkSpaces.Types.UpdateRulesOfIpGroupResult, AWSError>;
   /**
-   * Shares or unshares an image with one account in the same AWS Region by specifying whether that account has permission to copy the image. If the copy image permission is granted, the image is shared with that account. If the copy image permission is revoked, the image is unshared with the account. After an image has been shared, the recipient account can copy the image to other AWS Regions as needed.  In the China (Ningxia) Region, you can copy images only within the same Region. In the AWS GovCloud (US-West) Region, to copy images to and from other AWS Regions, contact AWS Support.  For more information about sharing images, see  Share or Unshare a Custom WorkSpaces Image.    To delete an image that has been shared, you must unshare the image before you delete it.   Sharing Bring Your Own License (BYOL) images across AWS accounts isn't supported at this time in the AWS GovCloud (US-West) Region. To share BYOL images across accounts in the AWS GovCloud (US-West) Region, contact AWS Support.   
+   * Updates a WorkSpace bundle with a new image. For more information about updating WorkSpace bundles, see  Update a Custom WorkSpaces Bundle.  Existing WorkSpaces aren't automatically updated when you update the bundle that they're based on. To update existing WorkSpaces that are based on a bundle that you've updated, you must either rebuild the WorkSpaces or delete and recreate them. 
+   */
+  updateWorkspaceBundle(params: WorkSpaces.Types.UpdateWorkspaceBundleRequest, callback?: (err: AWSError, data: WorkSpaces.Types.UpdateWorkspaceBundleResult) => void): Request<WorkSpaces.Types.UpdateWorkspaceBundleResult, AWSError>;
+  /**
+   * Updates a WorkSpace bundle with a new image. For more information about updating WorkSpace bundles, see  Update a Custom WorkSpaces Bundle.  Existing WorkSpaces aren't automatically updated when you update the bundle that they're based on. To update existing WorkSpaces that are based on a bundle that you've updated, you must either rebuild the WorkSpaces or delete and recreate them. 
+   */
+  updateWorkspaceBundle(callback?: (err: AWSError, data: WorkSpaces.Types.UpdateWorkspaceBundleResult) => void): Request<WorkSpaces.Types.UpdateWorkspaceBundleResult, AWSError>;
+  /**
+   * Shares or unshares an image with one account in the same Amazon Web Services Region by specifying whether that account has permission to copy the image. If the copy image permission is granted, the image is shared with that account. If the copy image permission is revoked, the image is unshared with the account. After an image has been shared, the recipient account can copy the image to other Regions as needed. In the China (Ningxia) Region, you can copy images only within the same Region. In Amazon Web Services GovCloud (US), to copy images to and from other Regions, contact Amazon Web Services Support. For more information about sharing images, see  Share or Unshare a Custom WorkSpaces Image.    To delete an image that has been shared, you must unshare the image before you delete it.   Sharing Bring Your Own License (BYOL) images across Amazon Web Services accounts isn't supported at this time in Amazon Web Services GovCloud (US). To share BYOL images across accounts in Amazon Web Services GovCloud (US), contact Amazon Web Services Support.   
    */
   updateWorkspaceImagePermission(params: WorkSpaces.Types.UpdateWorkspaceImagePermissionRequest, callback?: (err: AWSError, data: WorkSpaces.Types.UpdateWorkspaceImagePermissionResult) => void): Request<WorkSpaces.Types.UpdateWorkspaceImagePermissionResult, AWSError>;
   /**
-   * Shares or unshares an image with one account in the same AWS Region by specifying whether that account has permission to copy the image. If the copy image permission is granted, the image is shared with that account. If the copy image permission is revoked, the image is unshared with the account. After an image has been shared, the recipient account can copy the image to other AWS Regions as needed.  In the China (Ningxia) Region, you can copy images only within the same Region. In the AWS GovCloud (US-West) Region, to copy images to and from other AWS Regions, contact AWS Support.  For more information about sharing images, see  Share or Unshare a Custom WorkSpaces Image.    To delete an image that has been shared, you must unshare the image before you delete it.   Sharing Bring Your Own License (BYOL) images across AWS accounts isn't supported at this time in the AWS GovCloud (US-West) Region. To share BYOL images across accounts in the AWS GovCloud (US-West) Region, contact AWS Support.   
+   * Shares or unshares an image with one account in the same Amazon Web Services Region by specifying whether that account has permission to copy the image. If the copy image permission is granted, the image is shared with that account. If the copy image permission is revoked, the image is unshared with the account. After an image has been shared, the recipient account can copy the image to other Regions as needed. In the China (Ningxia) Region, you can copy images only within the same Region. In Amazon Web Services GovCloud (US), to copy images to and from other Regions, contact Amazon Web Services Support. For more information about sharing images, see  Share or Unshare a Custom WorkSpaces Image.    To delete an image that has been shared, you must unshare the image before you delete it.   Sharing Bring Your Own License (BYOL) images across Amazon Web Services accounts isn't supported at this time in Amazon Web Services GovCloud (US). To share BYOL images across accounts in Amazon Web Services GovCloud (US), contact Amazon Web Services Support.   
    */
   updateWorkspaceImagePermission(callback?: (err: AWSError, data: WorkSpaces.Types.UpdateWorkspaceImagePermissionResult) => void): Request<WorkSpaces.Types.UpdateWorkspaceImagePermissionResult, AWSError>;
+  /**
+   * Updates the specified pool.
+   */
+  updateWorkspacesPool(params: WorkSpaces.Types.UpdateWorkspacesPoolRequest, callback?: (err: AWSError, data: WorkSpaces.Types.UpdateWorkspacesPoolResult) => void): Request<WorkSpaces.Types.UpdateWorkspacesPoolResult, AWSError>;
+  /**
+   * Updates the specified pool.
+   */
+  updateWorkspacesPool(callback?: (err: AWSError, data: WorkSpaces.Types.UpdateWorkspacesPoolResult) => void): Request<WorkSpaces.Types.UpdateWorkspacesPoolResult, AWSError>;
 }
 declare namespace WorkSpaces {
   export type ARN = string;
+  export interface AcceptAccountLinkInvitationRequest {
+    /**
+     * The identifier of the account link.
+     */
+    LinkId: LinkId;
+    /**
+     * A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent creation.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface AcceptAccountLinkInvitationResult {
+    /**
+     * Information about the account link.
+     */
+    AccountLink?: AccountLink;
+  }
   export type AccessPropertyValue = "ALLOW"|"DENY"|string;
+  export interface AccountLink {
+    /**
+     * The identifier of the account link.
+     */
+    AccountLinkId?: LinkId;
+    /**
+     * The status of the account link.
+     */
+    AccountLinkStatus?: AccountLinkStatusEnum;
+    /**
+     * The identifier of the source account.
+     */
+    SourceAccountId?: AwsAccount;
+    /**
+     * The identifier of the target account.
+     */
+    TargetAccountId?: AwsAccount;
+  }
+  export type AccountLinkList = AccountLink[];
+  export type AccountLinkStatusEnum = "LINKED"|"LINKING_FAILED"|"LINK_NOT_FOUND"|"PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT"|"REJECTED"|string;
   export interface AccountModification {
     /**
      * The state of the modification to the configuration of BYOL.
@@ -442,9 +782,82 @@ declare namespace WorkSpaces {
     ErrorMessage?: Description;
   }
   export type AccountModificationList = AccountModification[];
+  export interface ActiveDirectoryConfig {
+    /**
+     * The name of the domain.
+     */
+    DomainName: DomainName;
+    /**
+     * Indicates the secret ARN on the service account.
+     */
+    ServiceAccountSecretArn: SecretsManagerArn;
+  }
+  export type ActiveUserSessions = number;
+  export type ActualUserSessions = number;
+  export type AddInName = string;
+  export type AddInUrl = string;
   export type Alias = string;
+  export type AmazonUuid = string;
   export type Application = "Microsoft_Office_2016"|"Microsoft_Office_2019"|string;
+  export type ApplicationAssociatedResourceType = "WORKSPACE"|"BUNDLE"|"IMAGE"|string;
+  export type ApplicationAssociatedResourceTypeList = ApplicationAssociatedResourceType[];
   export type ApplicationList = Application[];
+  export interface ApplicationResourceAssociation {
+    /**
+     * The identifier of the application.
+     */
+    ApplicationId?: WorkSpaceApplicationId;
+    /**
+     * The identifier of the associated resource.
+     */
+    AssociatedResourceId?: NonEmptyString;
+    /**
+     * The resource type of the associated resource.
+     */
+    AssociatedResourceType?: ApplicationAssociatedResourceType;
+    /**
+     * The time the association was created.
+     */
+    Created?: Timestamp;
+    /**
+     * The time the association status was last updated.
+     */
+    LastUpdatedTime?: Timestamp;
+    /**
+     * The status of the application resource association.
+     */
+    State?: AssociationState;
+    /**
+     * The reason the association deployment failed.
+     */
+    StateReason?: AssociationStateReason;
+  }
+  export type ApplicationResourceAssociationList = ApplicationResourceAssociation[];
+  export interface ApplicationSettingsRequest {
+    /**
+     * Enables or disables persistent application settings for users during their pool sessions.
+     */
+    Status: ApplicationSettingsStatusEnum;
+    /**
+     * The path prefix for the S3 bucket where users’ persistent application settings are stored. You can allow the same persistent application settings to be used across multiple pools by specifying the same settings group for each pool.
+     */
+    SettingsGroup?: SettingsGroup;
+  }
+  export interface ApplicationSettingsResponse {
+    /**
+     * Specifies whether persistent application settings are enabled for users during their pool sessions.
+     */
+    Status: ApplicationSettingsStatusEnum;
+    /**
+     * The path prefix for the S3 bucket where users’ persistent application settings are stored.
+     */
+    SettingsGroup?: SettingsGroup;
+    /**
+     * The S3 bucket where users’ persistent application settings are stored. When persistent application settings are enabled for the first time for an account in an Amazon Web Services Region, an S3 bucket is created. The bucket is unique to the Amazon Web Services account and the Region.
+     */
+    S3BucketName?: S3BucketName;
+  }
+  export type ApplicationSettingsStatusEnum = "DISABLED"|"ENABLED"|string;
   export interface AssociateConnectionAliasRequest {
     /**
      * The identifier of the connection alias.
@@ -473,7 +886,36 @@ declare namespace WorkSpaces {
   }
   export interface AssociateIpGroupsResult {
   }
+  export interface AssociateWorkspaceApplicationRequest {
+    /**
+     * The identifier of the WorkSpace.
+     */
+    WorkspaceId: WorkspaceId;
+    /**
+     * The identifier of the application.
+     */
+    ApplicationId: WorkSpaceApplicationId;
+  }
+  export interface AssociateWorkspaceApplicationResult {
+    /**
+     * Information about the association between the specified WorkSpace and the specified application.
+     */
+    Association?: WorkspaceResourceAssociation;
+  }
+  export type AssociationErrorCode = "ValidationError.InsufficientDiskSpace"|"ValidationError.InsufficientMemory"|"ValidationError.UnsupportedOperatingSystem"|"DeploymentError.InternalServerError"|"DeploymentError.WorkspaceUnreachable"|string;
+  export type AssociationState = "PENDING_INSTALL"|"PENDING_INSTALL_DEPLOYMENT"|"PENDING_UNINSTALL"|"PENDING_UNINSTALL_DEPLOYMENT"|"INSTALLING"|"UNINSTALLING"|"ERROR"|"COMPLETED"|"REMOVED"|string;
+  export interface AssociationStateReason {
+    /**
+     * The error code of the association deployment failure.
+     */
+    ErrorCode?: AssociationErrorCode;
+    /**
+     * The error message of the association deployment failure.
+     */
+    ErrorMessage?: String2048;
+  }
   export type AssociationStatus = "NOT_ASSOCIATED"|"ASSOCIATED_WITH_OWNER_ACCOUNT"|"ASSOCIATED_WITH_SHARED_ACCOUNT"|"PENDING_ASSOCIATION"|"PENDING_DISASSOCIATION"|string;
+  export type AuthenticationType = "SAML"|string;
   export interface AuthorizeIpRulesRequest {
     /**
      * The identifier of the group.
@@ -486,17 +928,97 @@ declare namespace WorkSpaces {
   }
   export interface AuthorizeIpRulesResult {
   }
+  export type AvailableUserSessions = number;
   export type AwsAccount = string;
   export type BooleanObject = boolean;
+  export type BundleAssociatedResourceType = "APPLICATION"|string;
+  export type BundleAssociatedResourceTypeList = BundleAssociatedResourceType[];
   export type BundleId = string;
   export type BundleIdList = BundleId[];
   export type BundleList = WorkspaceBundle[];
   export type BundleOwner = string;
+  export interface BundleResourceAssociation {
+    /**
+     * The identifier of the associated resource.
+     */
+    AssociatedResourceId?: NonEmptyString;
+    /**
+     * The resource type of the associated resources.
+     */
+    AssociatedResourceType?: BundleAssociatedResourceType;
+    /**
+     * The identifier of the bundle.
+     */
+    BundleId?: BundleId;
+    /**
+     * The time the association is created.
+     */
+    Created?: Timestamp;
+    /**
+     * The time the association status was last updated.
+     */
+    LastUpdatedTime?: Timestamp;
+    /**
+     * The status of the bundle resource association.
+     */
+    State?: AssociationState;
+    /**
+     * The reason the association deployment failed.
+     */
+    StateReason?: AssociationStateReason;
+  }
+  export type BundleResourceAssociationList = BundleResourceAssociation[];
+  export type BundleType = "REGULAR"|"STANDBY"|string;
+  export interface Capacity {
+    /**
+     * The desired number of user sessions for the WorkSpaces in the pool.
+     */
+    DesiredUserSessions: DesiredUserSessions;
+  }
+  export interface CapacityStatus {
+    /**
+     * The number of user sessions currently available for streaming from your pool. AvailableUserSessions = ActualUserSessions - ActiveUserSessions
+     */
+    AvailableUserSessions: AvailableUserSessions;
+    /**
+     * The total number of sessions slots that are either running or pending. This represents the total number of concurrent streaming sessions your pool can support in a steady state.
+     */
+    DesiredUserSessions: DesiredUserSessions;
+    /**
+     * The total number of user sessions that are available for streaming or are currently streaming in your pool. ActualUserSessions = AvailableUserSessions + ActiveUserSessions
+     */
+    ActualUserSessions: ActualUserSessions;
+    /**
+     * The number of user sessions currently being used for your pool.
+     */
+    ActiveUserSessions: ActiveUserSessions;
+  }
+  export type CertificateAuthorityArn = string;
+  export interface CertificateBasedAuthProperties {
+    /**
+     * The status of the certificate-based authentication properties.
+     */
+    Status?: CertificateBasedAuthStatusEnum;
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Web Services Certificate Manager Private CA resource.
+     */
+    CertificateAuthorityArn?: CertificateAuthorityArn;
+  }
+  export type CertificateBasedAuthStatusEnum = "DISABLED"|"ENABLED"|string;
+  export type ClientDeviceType = "DeviceTypeWindows"|"DeviceTypeOsx"|"DeviceTypeAndroid"|"DeviceTypeIos"|"DeviceTypeLinux"|"DeviceTypeWeb"|string;
+  export type ClientDeviceTypeList = ClientDeviceType[];
+  export type ClientEmail = string;
+  export type ClientLocale = string;
+  export type ClientLoginMessage = string;
   export interface ClientProperties {
     /**
      * Specifies whether users can cache their credentials on the Amazon WorkSpaces client. When enabled, users can choose to reconnect to their WorkSpaces without re-entering their credentials. 
      */
     ReconnectEnabled?: ReconnectEnum;
+    /**
+     * Specifies whether users can upload diagnostic log files of Amazon WorkSpaces client directly to WorkSpaces to troubleshoot issues when using the WorkSpaces client. When enabled, the log files will be sent to WorkSpaces automatically and will be applied to all users in the specified directory.
+     */
+    LogUploadEnabled?: LogUploadEnum;
   }
   export type ClientPropertiesList = ClientPropertiesResult[];
   export interface ClientPropertiesResult {
@@ -509,7 +1031,10 @@ declare namespace WorkSpaces {
      */
     ClientProperties?: ClientProperties;
   }
-  export type Compute = "VALUE"|"STANDARD"|"PERFORMANCE"|"POWER"|"GRAPHICS"|"POWERPRO"|"GRAPHICSPRO"|string;
+  export type ClientToken = string;
+  export type ClientUrl = string;
+  export type Compute = "VALUE"|"STANDARD"|"PERFORMANCE"|"POWER"|"GRAPHICS"|"POWERPRO"|"GRAPHICSPRO"|"GRAPHICS_G4DN"|"GRAPHICSPRO_G4DN"|string;
+  export type ComputeList = Compute[];
   export interface ComputeType {
     /**
      * The compute type.
@@ -517,6 +1042,25 @@ declare namespace WorkSpaces {
     Name?: Compute;
   }
   export type ComputerName = string;
+  export interface ConnectClientAddIn {
+    /**
+     * The client add-in identifier.
+     */
+    AddInId?: AmazonUuid;
+    /**
+     * The directory identifier for which the client add-in is configured.
+     */
+    ResourceId?: DirectoryId;
+    /**
+     * The name of the client add in.
+     */
+    Name?: AddInName;
+    /**
+     * The endpoint URL of the client add-in.
+     */
+    URL?: AddInUrl;
+  }
+  export type ConnectClientAddInList = ConnectClientAddIn[];
   export interface ConnectionAlias {
     /**
      * The connection string specified for the connection alias. The connection string must be in the form of a fully qualified domain name (FQDN), such as www.example.com.
@@ -531,7 +1075,7 @@ declare namespace WorkSpaces {
      */
     State?: ConnectionAliasState;
     /**
-     * The identifier of the AWS account that owns the connection alias.
+     * The identifier of the Amazon Web Services account that owns the connection alias.
      */
     OwnerAccountId?: AwsAccount;
     /**
@@ -545,7 +1089,7 @@ declare namespace WorkSpaces {
      */
     AssociationStatus?: AssociationStatus;
     /**
-     * The identifier of the AWS account that associated the connection alias with a directory.
+     * The identifier of the Amazon Web Services account that associated the connection alias with a directory.
      */
     AssociatedAccountId?: AwsAccount;
     /**
@@ -563,11 +1107,11 @@ declare namespace WorkSpaces {
   export type ConnectionAliasList = ConnectionAlias[];
   export interface ConnectionAliasPermission {
     /**
-     * The identifier of the AWS account that the connection alias is shared with.
+     * The identifier of the Amazon Web Services account that the connection alias is shared with.
      */
     SharedAccountId: AwsAccount;
     /**
-     * Indicates whether the specified AWS account is allowed to associate the connection alias with a directory.
+     * Indicates whether the specified Amazon Web Services account is allowed to associate the connection alias with a directory.
      */
     AllowAssociation: BooleanObject;
   }
@@ -604,9 +1148,45 @@ declare namespace WorkSpaces {
      */
     ImageId?: WorkspaceImageId;
   }
+  export interface CreateAccountLinkInvitationRequest {
+    /**
+     * The identifier of the target account.
+     */
+    TargetAccountId: AwsAccount;
+    /**
+     * A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent creation.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface CreateAccountLinkInvitationResult {
+    /**
+     * Information about the account link.
+     */
+    AccountLink?: AccountLink;
+  }
+  export interface CreateConnectClientAddInRequest {
+    /**
+     * The directory identifier for which to configure the client add-in.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * The name of the client add-in.
+     */
+    Name: AddInName;
+    /**
+     * The endpoint URL of the Amazon Connect client add-in.
+     */
+    URL: AddInUrl;
+  }
+  export interface CreateConnectClientAddInResult {
+    /**
+     * The client add-in identifier.
+     */
+    AddInId?: AmazonUuid;
+  }
   export interface CreateConnectionAliasRequest {
     /**
-     * A connection string in the form of a fully qualified domain name (FQDN), such as www.example.com.  After you create a connection string, it is always associated to your AWS account. You cannot recreate the same connection string with a different account, even if you delete all instances of it from the original account. The connection string is globally reserved for your account. 
+     * A connection string in the form of a fully qualified domain name (FQDN), such as www.example.com.  After you create a connection string, it is always associated to your Amazon Web Services account. You cannot recreate the same connection string with a different account, even if you delete all instances of it from the original account. The connection string is globally reserved for your account. 
      */
     ConnectionString: ConnectionString;
     /**
@@ -644,6 +1224,26 @@ declare namespace WorkSpaces {
      */
     GroupId?: IpGroupId;
   }
+  export interface CreateStandbyWorkspacesRequest {
+    /**
+     * The Region of the primary WorkSpace.
+     */
+    PrimaryRegion: Region;
+    /**
+     * Information about the standby WorkSpace to be created.
+     */
+    StandbyWorkspaces: StandbyWorkspacesList;
+  }
+  export interface CreateStandbyWorkspacesResult {
+    /**
+     * Information about the standby WorkSpace that could not be created. 
+     */
+    FailedStandbyRequests?: FailedCreateStandbyWorkspacesRequestList;
+    /**
+     * Information about the standby WorkSpace that was created.
+     */
+    PendingStandbyRequests?: PendingCreateStandbyWorkspacesRequestList;
+  }
   export interface CreateTagsRequest {
     /**
      * The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, IP access control groups, and connection aliases.
@@ -655,6 +1255,146 @@ declare namespace WorkSpaces {
     Tags: TagList;
   }
   export interface CreateTagsResult {
+  }
+  export interface CreateUpdatedWorkspaceImageRequest {
+    /**
+     * The name of the new updated WorkSpace image.
+     */
+    Name: WorkspaceImageName;
+    /**
+     * A description of whether updates for the WorkSpace image are available.
+     */
+    Description: WorkspaceImageDescription;
+    /**
+     * The identifier of the source WorkSpace image.
+     */
+    SourceImageId: WorkspaceImageId;
+    /**
+     * The tags that you want to add to the new updated WorkSpace image.  To add tags at the same time when you're creating the updated image, you must create an IAM policy that grants your IAM user permissions to use workspaces:CreateTags.  
+     */
+    Tags?: TagList;
+  }
+  export interface CreateUpdatedWorkspaceImageResult {
+    /**
+     * The identifier of the new updated WorkSpace image.
+     */
+    ImageId?: WorkspaceImageId;
+  }
+  export interface CreateWorkspaceBundleRequest {
+    /**
+     * The name of the bundle.
+     */
+    BundleName: WorkspaceBundleName;
+    /**
+     * The description of the bundle.
+     */
+    BundleDescription: WorkspaceBundleDescription;
+    /**
+     * The identifier of the image that is used to create the bundle.
+     */
+    ImageId: WorkspaceImageId;
+    ComputeType: ComputeType;
+    UserStorage: UserStorage;
+    RootStorage?: RootStorage;
+    /**
+     * The tags associated with the bundle.  To add tags at the same time when you're creating the bundle, you must create an IAM policy that grants your IAM user permissions to use workspaces:CreateTags.  
+     */
+    Tags?: TagList;
+  }
+  export interface CreateWorkspaceBundleResult {
+    WorkspaceBundle?: WorkspaceBundle;
+  }
+  export interface CreateWorkspaceImageRequest {
+    /**
+     * The name of the new WorkSpace image.
+     */
+    Name: WorkspaceImageName;
+    /**
+     * The description of the new WorkSpace image.
+     */
+    Description: WorkspaceImageDescription;
+    /**
+     * The identifier of the source WorkSpace
+     */
+    WorkspaceId: WorkspaceId;
+    /**
+     * The tags that you want to add to the new WorkSpace image. To add tags when you're creating the image, you must create an IAM policy that grants your IAM user permission to use workspaces:CreateTags.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateWorkspaceImageResult {
+    /**
+     * The identifier of the new WorkSpace image.
+     */
+    ImageId?: WorkspaceImageId;
+    /**
+     * The name of the image.
+     */
+    Name?: WorkspaceImageName;
+    /**
+     * The description of the image.
+     */
+    Description?: WorkspaceImageDescription;
+    /**
+     * The operating system that the image is running.
+     */
+    OperatingSystem?: OperatingSystem;
+    /**
+     * The availability status of the image.
+     */
+    State?: WorkspaceImageState;
+    /**
+     * Specifies whether the image is running on dedicated hardware. When Bring Your Own License (BYOL) is enabled, this value is set to DEDICATED. For more information, see  Bring Your Own Windows Desktop Images..
+     */
+    RequiredTenancy?: WorkspaceImageRequiredTenancy;
+    /**
+     * The date when the image was created.
+     */
+    Created?: Timestamp;
+    /**
+     * The identifier of the Amazon Web Services account that owns the image.
+     */
+    OwnerAccountId?: AwsAccount;
+  }
+  export interface CreateWorkspacesPoolRequest {
+    /**
+     * The name of the pool.
+     */
+    PoolName: WorkspacesPoolName;
+    /**
+     * The pool description.
+     */
+    Description: UpdateDescription;
+    /**
+     * The identifier of the bundle for the pool.
+     */
+    BundleId: BundleId;
+    /**
+     * The identifier of the directory for the pool.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The user capacity of the pool.
+     */
+    Capacity: Capacity;
+    /**
+     * The tags for the pool.
+     */
+    Tags?: TagList;
+    /**
+     * Indicates the application settings of the pool.
+     */
+    ApplicationSettings?: ApplicationSettingsRequest;
+    /**
+     * Indicates the timeout settings of the pool.
+     */
+    TimeoutSettings?: TimeoutSettings;
+  }
+  export interface CreateWorkspacesPoolResult {
+    /**
+     * Indicates the pool to create.
+     */
+    WorkspacesPool?: WorkspacesPool;
   }
   export interface CreateWorkspacesRequest {
     /**
@@ -672,11 +1412,68 @@ declare namespace WorkSpaces {
      */
     PendingRequests?: WorkspaceList;
   }
+  export type DataReplication = "NO_REPLICATION"|"PRIMARY_AS_SOURCE"|string;
+  export interface DataReplicationSettings {
+    /**
+     * Indicates whether data replication is enabled, and if enabled, the type of data replication.
+     */
+    DataReplication?: DataReplication;
+    /**
+     * The date and time at which the last successful snapshot was taken of the primary WorkSpace used for replicating data.
+     */
+    RecoverySnapshotTime?: Timestamp;
+  }
+  export type DedicatedTenancyAccountType = "SOURCE_ACCOUNT"|"TARGET_ACCOUNT"|string;
   export type DedicatedTenancyCidrRangeList = DedicatedTenancyManagementCidrRange[];
   export type DedicatedTenancyManagementCidrRange = string;
   export type DedicatedTenancyModificationStateEnum = "PENDING"|"COMPLETED"|"FAILED"|string;
   export type DedicatedTenancySupportEnum = "ENABLED"|string;
   export type DedicatedTenancySupportResultEnum = "ENABLED"|"DISABLED"|string;
+  export interface DefaultClientBrandingAttributes {
+    /**
+     * The logo. The only image format accepted is a binary data object that is converted from a .png file.
+     */
+    LogoUrl?: ClientUrl;
+    /**
+     * The support email. The company's customer support email address.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.   The default email is workspaces-feedback@amazon.com.   
+     */
+    SupportEmail?: ClientEmail;
+    /**
+     * The support link. The link for the company's customer support page for their WorkSpace.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive.You can specify one parameter for each platform type, but not both.   The default support link is workspaces-feedback@amazon.com.   
+     */
+    SupportLink?: ClientUrl;
+    /**
+     * The forgotten password link. This is the web address that users can go to if they forget the password for their WorkSpace.
+     */
+    ForgotPasswordLink?: ClientUrl;
+    /**
+     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. The HTML tags supported include the following: a, b, blockquote, br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul.
+     */
+    LoginMessage?: LoginMessage;
+  }
+  export interface DefaultImportClientBrandingAttributes {
+    /**
+     * The logo. The only image format accepted is a binary data object that is converted from a .png file.
+     */
+    Logo?: DefaultLogo;
+    /**
+     * The support email. The company's customer support email address.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.   The default email is workspaces-feedback@amazon.com.   
+     */
+    SupportEmail?: ClientEmail;
+    /**
+     * The support link. The link for the company's customer support page for their WorkSpace.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.   The default support link is workspaces-feedback@amazon.com.   
+     */
+    SupportLink?: ClientUrl;
+    /**
+     * The forgotten password link. This is the web address that users can go to if they forget the password for their WorkSpace.
+     */
+    ForgotPasswordLink?: ClientUrl;
+    /**
+     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. The HTML tags supported include the following: a, b, blockquote, br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul.
+     */
+    LoginMessage?: LoginMessage;
+  }
+  export type DefaultLogo = Buffer|Uint8Array|Blob|string;
   export type DefaultOu = string;
   export interface DefaultWorkspaceCreationProperties {
     /**
@@ -703,6 +1500,54 @@ declare namespace WorkSpaces {
      * Specifies whether maintenance mode is enabled for WorkSpaces. For more information, see WorkSpace Maintenance.
      */
     EnableMaintenanceMode?: BooleanObject;
+    /**
+     * Indicates the IAM role ARN of the instance.
+     */
+    InstanceIamRoleArn?: ARN;
+  }
+  export type DeletableCertificateBasedAuthPropertiesList = DeletableCertificateBasedAuthProperty[];
+  export type DeletableCertificateBasedAuthProperty = "CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN"|string;
+  export type DeletableSamlPropertiesList = DeletableSamlProperty[];
+  export type DeletableSamlProperty = "SAML_PROPERTIES_USER_ACCESS_URL"|"SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME"|string;
+  export interface DeleteAccountLinkInvitationRequest {
+    /**
+     * The identifier of the account link.
+     */
+    LinkId: LinkId;
+    /**
+     * A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent creation.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface DeleteAccountLinkInvitationResult {
+    /**
+     * Information about the account link.
+     */
+    AccountLink?: AccountLink;
+  }
+  export interface DeleteClientBrandingRequest {
+    /**
+     * The directory identifier of the WorkSpace for which you want to delete client branding.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * The device type for which you want to delete client branding.
+     */
+    Platforms: ClientDeviceTypeList;
+  }
+  export interface DeleteClientBrandingResult {
+  }
+  export interface DeleteConnectClientAddInRequest {
+    /**
+     * The identifier of the client add-in to delete.
+     */
+    AddInId: AmazonUuid;
+    /**
+     * The directory identifier for which the client add-in is configured.
+     */
+    ResourceId: DirectoryId;
+  }
+  export interface DeleteConnectClientAddInResult {
   }
   export interface DeleteConnectionAliasRequest {
     /**
@@ -732,6 +1577,14 @@ declare namespace WorkSpaces {
   }
   export interface DeleteTagsResult {
   }
+  export interface DeleteWorkspaceBundleRequest {
+    /**
+     * The identifier of the bundle.
+     */
+    BundleId?: BundleId;
+  }
+  export interface DeleteWorkspaceBundleResult {
+  }
   export interface DeleteWorkspaceImageRequest {
     /**
      * The identifier of the image.
@@ -739,6 +1592,22 @@ declare namespace WorkSpaces {
     ImageId: WorkspaceImageId;
   }
   export interface DeleteWorkspaceImageResult {
+  }
+  export interface DeployWorkspaceApplicationsRequest {
+    /**
+     * The identifier of the WorkSpace.
+     */
+    WorkspaceId: WorkspaceId;
+    /**
+     * Indicates whether the force flag is applied for the specified WorkSpace. When the force flag is enabled, it allows previously failed deployments to be retried.
+     */
+    Force?: BooleanObject;
+  }
+  export interface DeployWorkspaceApplicationsResult {
+    /**
+     * The list of deployed associations and information about them.
+     */
+    Deployment?: WorkSpaceApplicationDeployment;
   }
   export interface DeregisterWorkspaceDirectoryRequest {
     /**
@@ -760,7 +1629,7 @@ declare namespace WorkSpaces {
      */
     AccountModifications?: AccountModificationList;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
@@ -775,6 +1644,126 @@ declare namespace WorkSpaces {
      * The IP address range, specified as an IPv4 CIDR block, used for the management network interface. The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
      */
     DedicatedTenancyManagementCidrRange?: DedicatedTenancyManagementCidrRange;
+    /**
+     * The type of linked account.
+     */
+    DedicatedTenancyAccountType?: DedicatedTenancyAccountType;
+  }
+  export interface DescribeApplicationAssociationsRequest {
+    /**
+     * The maximum number of associations to return.
+     */
+    MaxResults?: Limit;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The identifier of the specified application.
+     */
+    ApplicationId: WorkSpaceApplicationId;
+    /**
+     * The resource type of the associated resources.
+     */
+    AssociatedResourceTypes: ApplicationAssociatedResourceTypeList;
+  }
+  export interface DescribeApplicationAssociationsResult {
+    /**
+     * List of associations and information about them.
+     */
+    Associations?: ApplicationResourceAssociationList;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface DescribeApplicationsRequest {
+    /**
+     * The identifiers of one or more applications.
+     */
+    ApplicationIds?: WorkSpaceApplicationIdList;
+    /**
+     * The compute types supported by the applications.
+     */
+    ComputeTypeNames?: ComputeList;
+    /**
+     * The license availability for the applications.
+     */
+    LicenseType?: WorkSpaceApplicationLicenseType;
+    /**
+     * The operating systems supported by the applications.
+     */
+    OperatingSystemNames?: OperatingSystemNameList;
+    /**
+     * The owner of the applications.
+     */
+    Owner?: WorkSpaceApplicationOwner;
+    /**
+     * The maximum number of applications to return.
+     */
+    MaxResults?: Limit;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface DescribeApplicationsResult {
+    /**
+     * List of information about the specified applications.
+     */
+    Applications?: WorkSpaceApplicationList;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface DescribeBundleAssociationsRequest {
+    /**
+     * The identifier of the bundle.
+     */
+    BundleId: BundleId;
+    /**
+     * The resource types of the associated resource.
+     */
+    AssociatedResourceTypes: BundleAssociatedResourceTypeList;
+  }
+  export interface DescribeBundleAssociationsResult {
+    /**
+     * List of information about the specified associations.
+     */
+    Associations?: BundleResourceAssociationList;
+  }
+  export interface DescribeClientBrandingRequest {
+    /**
+     * The directory identifier of the WorkSpace for which you want to view client branding information.
+     */
+    ResourceId: DirectoryId;
+  }
+  export interface DescribeClientBrandingResult {
+    /**
+     * The branding information for Windows devices.
+     */
+    DeviceTypeWindows?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information for macOS devices.
+     */
+    DeviceTypeOsx?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information for Android devices.
+     */
+    DeviceTypeAndroid?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information for iOS devices.
+     */
+    DeviceTypeIos?: IosClientBrandingAttributes;
+    /**
+     * The branding information for Linux devices.
+     */
+    DeviceTypeLinux?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information for Web access.
+     */
+    DeviceTypeWeb?: DefaultClientBrandingAttributes;
   }
   export interface DescribeClientPropertiesRequest {
     /**
@@ -787,6 +1776,30 @@ declare namespace WorkSpaces {
      * Information about the specified Amazon WorkSpaces clients.
      */
     ClientPropertiesList?: ClientPropertiesList;
+  }
+  export interface DescribeConnectClientAddInsRequest {
+    /**
+     * The directory identifier for which the client add-in is configured.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of items to return.
+     */
+    MaxResults?: Limit;
+  }
+  export interface DescribeConnectClientAddInsResult {
+    /**
+     * Information about client add-ins.
+     */
+    AddIns?: ConnectClientAddInList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
+     */
+    NextToken?: PaginationToken;
   }
   export interface DescribeConnectionAliasPermissionsRequest {
     /**
@@ -812,7 +1825,7 @@ declare namespace WorkSpaces {
      */
     ConnectionAliasPermissions?: ConnectionAliasPermissions;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
@@ -840,9 +1853,25 @@ declare namespace WorkSpaces {
      */
     ConnectionAliases?: ConnectionAliasList;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
+  }
+  export interface DescribeImageAssociationsRequest {
+    /**
+     * The identifier of the image.
+     */
+    ImageId: WorkspaceImageId;
+    /**
+     * The resource types of the associated resource.
+     */
+    AssociatedResourceTypes: ImageAssociatedResourceTypeList;
+  }
+  export interface DescribeImageAssociationsResult {
+    /**
+     * List of information about the specified associations.
+     */
+    Associations?: ImageResourceAssociationList;
   }
   export interface DescribeIpGroupsRequest {
     /**
@@ -864,7 +1893,7 @@ declare namespace WorkSpaces {
      */
     Result?: WorkspacesIpGroupsList;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
@@ -880,13 +1909,29 @@ declare namespace WorkSpaces {
      */
     TagList?: TagList;
   }
+  export interface DescribeWorkspaceAssociationsRequest {
+    /**
+     * The identifier of the WorkSpace.
+     */
+    WorkspaceId: WorkspaceId;
+    /**
+     * The resource types of the associated resources.
+     */
+    AssociatedResourceTypes: WorkSpaceAssociatedResourceTypeList;
+  }
+  export interface DescribeWorkspaceAssociationsResult {
+    /**
+     * List of information about the specified associations.
+     */
+    Associations?: WorkspaceResourceAssociationList;
+  }
   export interface DescribeWorkspaceBundlesRequest {
     /**
      * The identifiers of the bundles. You cannot combine this parameter with any other filter.
      */
     BundleIds?: BundleIdList;
     /**
-     * The owner of the bundles. You cannot combine this parameter with any other filter. Specify AMAZON to describe the bundles provided by AWS or null to describe the bundles that belong to your account.
+     * The owner of the bundles. You cannot combine this parameter with any other filter. To describe the bundles provided by Amazon Web Services, specify AMAZON. To describe the bundles that belong to your account, don't specify a value.
      */
     Owner?: BundleOwner;
     /**
@@ -900,15 +1945,33 @@ declare namespace WorkSpaces {
      */
     Bundles?: BundleList;
     /**
-     * The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. This token is valid for one day and must be used within that time frame.
      */
     NextToken?: PaginationToken;
   }
+  export interface DescribeWorkspaceDirectoriesFilter {
+    /**
+     * The name of the WorkSpaces to filter.
+     */
+    Name: DescribeWorkspaceDirectoriesFilterName;
+    /**
+     * The values for filtering WorkSpaces
+     */
+    Values: DescribeWorkspaceDirectoriesFilterValues;
+  }
+  export type DescribeWorkspaceDirectoriesFilterList = DescribeWorkspaceDirectoriesFilter[];
+  export type DescribeWorkspaceDirectoriesFilterName = "USER_IDENTITY_TYPE"|"WORKSPACE_TYPE"|string;
+  export type DescribeWorkspaceDirectoriesFilterValue = string;
+  export type DescribeWorkspaceDirectoriesFilterValues = DescribeWorkspaceDirectoriesFilterValue[];
   export interface DescribeWorkspaceDirectoriesRequest {
     /**
      * The identifiers of the directories. If the value is null, all directories are retrieved.
      */
     DirectoryIds?: DirectoryIdList;
+    /**
+     * The names of the WorkSpace directories.
+     */
+    WorkspaceDirectoryNames?: WorkspaceDirectoryNameList;
     /**
      * The maximum number of directories to return.
      */
@@ -917,6 +1980,10 @@ declare namespace WorkSpaces {
      * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
      */
     NextToken?: PaginationToken;
+    /**
+     * The filter condition for the WorkSpaces.
+     */
+    Filters?: DescribeWorkspaceDirectoriesFilterList;
   }
   export interface DescribeWorkspaceDirectoriesResult {
     /**
@@ -924,7 +1991,7 @@ declare namespace WorkSpaces {
      */
     Directories?: DirectoryList;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
@@ -948,11 +2015,11 @@ declare namespace WorkSpaces {
      */
     ImageId?: WorkspaceImageId;
     /**
-     * The identifiers of the AWS accounts that the image has been shared with.
+     * The identifiers of the Amazon Web Services accounts that the image has been shared with.
      */
     ImagePermissions?: ImagePermissions;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
@@ -980,7 +2047,7 @@ declare namespace WorkSpaces {
      */
     Images?: WorkspaceImageList;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
@@ -1016,7 +2083,82 @@ declare namespace WorkSpaces {
      */
     WorkspacesConnectionStatus?: WorkspaceConnectionStatusList;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface DescribeWorkspacesPoolSessionsRequest {
+    /**
+     * The identifier of the pool.
+     */
+    PoolId: WorkspacesPoolId;
+    /**
+     * The identifier of the user.
+     */
+    UserId?: WorkspacesPoolUserId;
+    /**
+     * The maximum number of items to return.
+     */
+    Limit?: Limit50;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface DescribeWorkspacesPoolSessionsResult {
+    /**
+     * Describes the pool sessions.
+     */
+    Sessions?: WorkspacesPoolSessions;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface DescribeWorkspacesPoolsFilter {
+    /**
+     * The name of the pool to filter.
+     */
+    Name: DescribeWorkspacesPoolsFilterName;
+    /**
+     * The values for filtering WorkSpaces Pools.
+     */
+    Values: DescribeWorkspacesPoolsFilterValues;
+    /**
+     * The operator values for filtering WorkSpaces Pools.
+     */
+    Operator: DescribeWorkspacesPoolsFilterOperator;
+  }
+  export type DescribeWorkspacesPoolsFilterName = "PoolName"|string;
+  export type DescribeWorkspacesPoolsFilterOperator = "EQUALS"|"NOTEQUALS"|"CONTAINS"|"NOTCONTAINS"|string;
+  export type DescribeWorkspacesPoolsFilterValue = string;
+  export type DescribeWorkspacesPoolsFilterValues = DescribeWorkspacesPoolsFilterValue[];
+  export type DescribeWorkspacesPoolsFilters = DescribeWorkspacesPoolsFilter[];
+  export interface DescribeWorkspacesPoolsRequest {
+    /**
+     * The identifier of the WorkSpaces Pools.
+     */
+    PoolIds?: WorkspacesPoolIds;
+    /**
+     * The filter conditions for the WorkSpaces Pool to return.
+     */
+    Filters?: DescribeWorkspacesPoolsFilters;
+    /**
+     * The maximum number of items to return.
+     */
+    Limit?: Limit;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface DescribeWorkspacesPoolsResult {
+    /**
+     * Information about the WorkSpaces Pools.
+     */
+    WorkspacesPools?: WorkspacesPools;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
      */
     NextToken?: PaginationToken;
   }
@@ -1045,6 +2187,10 @@ declare namespace WorkSpaces {
      * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
      */
     NextToken?: PaginationToken;
+    /**
+     * The name of the user-decoupled WorkSpace.
+     */
+    WorkspaceName?: WorkspaceName;
   }
   export interface DescribeWorkspacesResult {
     /**
@@ -1052,11 +2198,12 @@ declare namespace WorkSpaces {
      */
     Workspaces?: WorkspaceList;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
   export type Description = string;
+  export type DesiredUserSessions = number;
   export type DirectoryId = string;
   export type DirectoryIdList = DirectoryId[];
   export type DirectoryList = WorkspaceDirectory[];
@@ -1081,9 +2228,54 @@ declare namespace WorkSpaces {
   }
   export interface DisassociateIpGroupsResult {
   }
+  export interface DisassociateWorkspaceApplicationRequest {
+    /**
+     * The identifier of the WorkSpace.
+     */
+    WorkspaceId: WorkspaceId;
+    /**
+     * The identifier of the application.
+     */
+    ApplicationId: WorkSpaceApplicationId;
+  }
+  export interface DisassociateWorkspaceApplicationResult {
+    /**
+     * Information about the targeted association.
+     */
+    Association?: WorkspaceResourceAssociation;
+  }
+  export type DisconnectTimeoutInSeconds = number;
   export type DnsIpAddresses = IpAddress[];
+  export type DomainName = string;
   export type Ec2ImageId = string;
+  export interface ErrorDetails {
+    /**
+     * Indicates the error code returned.
+     */
+    ErrorCode?: WorkspaceImageErrorDetailCode;
+    /**
+     * The text of the error message related the error code.
+     */
+    ErrorMessage?: Description;
+  }
+  export type ErrorDetailsList = ErrorDetails[];
+  export type ErrorMessage = string;
   export type ErrorType = string;
+  export interface FailedCreateStandbyWorkspacesRequest {
+    /**
+     * Information about the standby WorkSpace that could not be created.
+     */
+    StandbyWorkspaceRequest?: StandbyWorkspace;
+    /**
+     * The error code that is returned if the standby WorkSpace could not be created.
+     */
+    ErrorCode?: WorkspaceErrorCode;
+    /**
+     * The text of the error message that is returned if the standby WorkSpace could not be created.
+     */
+    ErrorMessage?: Description;
+  }
+  export type FailedCreateStandbyWorkspacesRequestList = FailedCreateStandbyWorkspacesRequest[];
   export interface FailedCreateWorkspaceRequest {
     /**
      * Information about the WorkSpace.
@@ -1118,21 +2310,137 @@ declare namespace WorkSpaces {
      */
     ErrorMessage?: Description;
   }
+  export interface GetAccountLinkRequest {
+    /**
+     * The identifier of the account to link.
+     */
+    LinkId?: LinkId;
+    /**
+     * The identifier of the account link
+     */
+    LinkedAccountId?: AwsAccount;
+  }
+  export interface GetAccountLinkResult {
+    /**
+     * The account link of the account link to retrieve.
+     */
+    AccountLink?: AccountLink;
+  }
+  export interface IDCConfig {
+    /**
+     * The Amazon Resource Name (ARN) of the identity center instance.
+     */
+    InstanceArn?: ARN;
+    /**
+     * The Amazon Resource Name (ARN) of the application.
+     */
+    ApplicationArn?: ARN;
+  }
+  export type IdleDisconnectTimeoutInSeconds = number;
+  export type ImageAssociatedResourceType = "APPLICATION"|string;
+  export type ImageAssociatedResourceTypeList = ImageAssociatedResourceType[];
   export interface ImagePermission {
     /**
-     * The identifier of the AWS account that an image has been shared with.
+     * The identifier of the Amazon Web Services account that an image has been shared with.
      */
     SharedAccountId?: AwsAccount;
   }
   export type ImagePermissions = ImagePermission[];
+  export interface ImageResourceAssociation {
+    /**
+     * The identifier of the associated resource.
+     */
+    AssociatedResourceId?: NonEmptyString;
+    /**
+     * The resource type of the associated resources.
+     */
+    AssociatedResourceType?: ImageAssociatedResourceType;
+    /**
+     * The time the association is created.
+     */
+    Created?: Timestamp;
+    /**
+     * The time the association status was last updated.
+     */
+    LastUpdatedTime?: Timestamp;
+    /**
+     * The identifier of the image.
+     */
+    ImageId?: WorkspaceImageId;
+    /**
+     * The status of the image resource association.
+     */
+    State?: AssociationState;
+    /**
+     * The reason the association deployment failed.
+     */
+    StateReason?: AssociationStateReason;
+  }
+  export type ImageResourceAssociationList = ImageResourceAssociation[];
   export type ImageType = "OWNED"|"SHARED"|string;
+  export interface ImportClientBrandingRequest {
+    /**
+     * The directory identifier of the WorkSpace for which you want to import client branding.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * The branding information to import for Windows devices.
+     */
+    DeviceTypeWindows?: DefaultImportClientBrandingAttributes;
+    /**
+     * The branding information to import for macOS devices.
+     */
+    DeviceTypeOsx?: DefaultImportClientBrandingAttributes;
+    /**
+     * The branding information to import for Android devices.
+     */
+    DeviceTypeAndroid?: DefaultImportClientBrandingAttributes;
+    /**
+     * The branding information to import for iOS devices.
+     */
+    DeviceTypeIos?: IosImportClientBrandingAttributes;
+    /**
+     * The branding information to import for Linux devices.
+     */
+    DeviceTypeLinux?: DefaultImportClientBrandingAttributes;
+    /**
+     * The branding information to import for web access.
+     */
+    DeviceTypeWeb?: DefaultImportClientBrandingAttributes;
+  }
+  export interface ImportClientBrandingResult {
+    /**
+     * The branding information configured for Windows devices.
+     */
+    DeviceTypeWindows?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information configured for macOS devices.
+     */
+    DeviceTypeOsx?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information configured for Android devices.
+     */
+    DeviceTypeAndroid?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information configured for iOS devices.
+     */
+    DeviceTypeIos?: IosClientBrandingAttributes;
+    /**
+     * The branding information configured for Linux devices.
+     */
+    DeviceTypeLinux?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information configured for web access.
+     */
+    DeviceTypeWeb?: DefaultClientBrandingAttributes;
+  }
   export interface ImportWorkspaceImageRequest {
     /**
      * The identifier of the EC2 image.
      */
     Ec2ImageId: Ec2ImageId;
     /**
-     * The ingestion process to be used when importing the image, depending on which protocol you want to use for your BYOL Workspace image, either PCoIP or WorkSpaces Streaming Protocol (WSP). To use WSP, specify a value that ends in _WSP. To use PCoIP, specify a value that does not end in _WSP.  For non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro), specify BYOL_REGULAR or BYOL_REGULAR_WSP, depending on the protocol.
+     * The ingestion process to be used when importing the image, depending on which protocol you want to use for your BYOL Workspace image, either PCoIP, WorkSpaces Streaming Protocol (WSP), or bring your own protocol (BYOP). To use WSP, specify a value that ends in _WSP. To use PCoIP, specify a value that does not end in _WSP. To use BYOP, specify a value that ends in _BYOP. For non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro), specify BYOL_REGULAR, BYOL_REGULAR_WSP, or BYOL_REGULAR_BYOP, depending on the protocol.  The BYOL_REGULAR_BYOP and BYOL_GRAPHICS_G4DN_BYOP values are only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use these values. For more information, see Amazon WorkSpaces Core. 
      */
     IngestionProcess: WorkspaceImageIngestionProcess;
     /**
@@ -1148,7 +2456,7 @@ declare namespace WorkSpaces {
      */
     Tags?: TagList;
     /**
-     * If specified, the version of Microsoft Office to subscribe to. Valid only for Windows 10 BYOL images. For more information about subscribing to Office for BYOL images, see  Bring Your Own Windows Desktop Licenses.  Although this parameter is an array, only one item is allowed at this time. 
+     * If specified, the version of Microsoft Office to subscribe to. Valid only for Windows 10 and 11 BYOL images. For more information about subscribing to Office for BYOL images, see  Bring Your Own Windows Desktop Licenses.    Although this parameter is an array, only one item is allowed at this time.   During the image import process, non-GPU WSP WorkSpaces with Windows 11 support only Microsoft_Office_2019. GPU WSP WorkSpaces with Windows 11 do not support Office installation.   
      */
     Applications?: ApplicationList;
   }
@@ -1158,6 +2466,69 @@ declare namespace WorkSpaces {
      */
     ImageId?: WorkspaceImageId;
   }
+  export type Ios2XLogo = Buffer|Uint8Array|Blob|string;
+  export type Ios3XLogo = Buffer|Uint8Array|Blob|string;
+  export interface IosClientBrandingAttributes {
+    /**
+     * The logo. This is the standard-resolution display that has a 1:1 pixel density (or @1x), where one pixel is equal to one point. The only image format accepted is a binary data object that is converted from a .png file.
+     */
+    LogoUrl?: ClientUrl;
+    /**
+     * The @2x version of the logo. This is the higher resolution display that offers a scale factor of 2.0 (or @2x). The only image format accepted is a binary data object that is converted from a .png file.   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
+     */
+    Logo2xUrl?: ClientUrl;
+    /**
+     * The @3x version of the logo. This is the higher resolution display that offers a scale factor of 3.0 (or @3x).The only image format accepted is a binary data object that is converted from a .png file.   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
+     */
+    Logo3xUrl?: ClientUrl;
+    /**
+     * The support email. The company's customer support email address.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.   The default email is workspaces-feedback@amazon.com.   
+     */
+    SupportEmail?: ClientEmail;
+    /**
+     * The support link. The link for the company's customer support page for their WorkSpace.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.   The default support link is workspaces-feedback@amazon.com.   
+     */
+    SupportLink?: ClientUrl;
+    /**
+     * The forgotten password link. This is the web address that users can go to if they forget the password for their WorkSpace.
+     */
+    ForgotPasswordLink?: ClientUrl;
+    /**
+     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. The HTML tags supported include the following: a, b, blockquote, br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul.
+     */
+    LoginMessage?: LoginMessage;
+  }
+  export interface IosImportClientBrandingAttributes {
+    /**
+     * The logo. This is the standard-resolution display that has a 1:1 pixel density (or @1x), where one pixel is equal to one point. The only image format accepted is a binary data object that is converted from a .png file.
+     */
+    Logo?: IosLogo;
+    /**
+     * The @2x version of the logo. This is the higher resolution display that offers a scale factor of 2.0 (or @2x). The only image format accepted is a binary data object that is converted from a .png file.   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
+     */
+    Logo2x?: Ios2XLogo;
+    /**
+     * The @3x version of the logo. This is the higher resolution display that offers a scale factor of 3.0 (or @3x). The only image format accepted is a binary data object that is converted from a .png file.   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
+     */
+    Logo3x?: Ios3XLogo;
+    /**
+     * The support email. The company's customer support email address.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.   The default email is workspaces-feedback@amazon.com.   
+     */
+    SupportEmail?: ClientEmail;
+    /**
+     * The support link. The link for the company's customer support page for their WorkSpace.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.   The default support link is workspaces-feedback@amazon.com.   
+     */
+    SupportLink?: ClientUrl;
+    /**
+     * The forgotten password link. This is the web address that users can go to if they forget the password for their WorkSpace.
+     */
+    ForgotPasswordLink?: ClientUrl;
+    /**
+     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. The HTML tags supported include the following: a, b, blockquote, br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul.
+     */
+    LoginMessage?: LoginMessage;
+  }
+  export type IosLogo = Buffer|Uint8Array|Blob|string;
   export type IpAddress = string;
   export type IpGroupDesc = string;
   export type IpGroupId = string;
@@ -1178,6 +2549,33 @@ declare namespace WorkSpaces {
   }
   export type IpRuleList = IpRuleItem[];
   export type Limit = number;
+  export type Limit50 = number;
+  export type LinkId = string;
+  export type LinkStatusFilterList = AccountLinkStatusEnum[];
+  export interface ListAccountLinksRequest {
+    /**
+     * Filters the account based on their link status.
+     */
+    LinkStatusFilter?: LinkStatusFilterList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of accounts to return.
+     */
+    MaxResults?: Limit;
+  }
+  export interface ListAccountLinksResult {
+    /**
+     * Information about the account links.
+     */
+    AccountLinks?: AccountLinkList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: PaginationToken;
+  }
   export interface ListAvailableManagementCidrRangesRequest {
     /**
      * The IP address range to search. Specify an IP address range that is compatible with your network and in CIDR notation (that is, specify the range as an IPv4 CIDR block).
@@ -1198,12 +2596,27 @@ declare namespace WorkSpaces {
      */
     ManagementCidrRanges?: DedicatedTenancyCidrRangeList;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
+  export type LogUploadEnum = "ENABLED"|"DISABLED"|string;
+  export type LoginMessage = {[key: string]: ClientLoginMessage};
   export type ManagementCidrRangeConstraint = string;
   export type ManagementCidrRangeMaxResults = number;
+  export type MaxUserDurationInSeconds = number;
+  export type MaximumLength = number;
+  export interface MicrosoftEntraConfig {
+    /**
+     * The identifier of the tenant.
+     */
+    TenantId?: MicrosoftEntraConfigTenantId;
+    /**
+     * The Amazon Resource Name (ARN) of the application config.
+     */
+    ApplicationConfigSecretArn?: SecretsManagerArn;
+  }
+  export type MicrosoftEntraConfigTenantId = string;
   export interface MigrateWorkspaceRequest {
     /**
      * The identifier of the WorkSpace to migrate from.
@@ -1249,6 +2662,22 @@ declare namespace WorkSpaces {
   }
   export interface ModifyAccountResult {
   }
+  export interface ModifyCertificateBasedAuthPropertiesRequest {
+    /**
+     * The resource identifiers, in the form of directory IDs.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * The properties of the certificate-based authentication.
+     */
+    CertificateBasedAuthProperties?: CertificateBasedAuthProperties;
+    /**
+     * The properties of the certificate-based authentication you want to delete.
+     */
+    PropertiesToDelete?: DeletableCertificateBasedAuthPropertiesList;
+  }
+  export interface ModifyCertificateBasedAuthPropertiesResult {
+  }
   export interface ModifyClientPropertiesRequest {
     /**
      * The resource identifiers, in the form of directory IDs.
@@ -1261,6 +2690,22 @@ declare namespace WorkSpaces {
   }
   export interface ModifyClientPropertiesResult {
   }
+  export interface ModifySamlPropertiesRequest {
+    /**
+     * The directory identifier for which you want to configure SAML properties.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * The properties for configuring SAML 2.0 authentication.
+     */
+    SamlProperties?: SamlProperties;
+    /**
+     * The SAML properties to delete as part of your request. Specify one of the following options:    SAML_PROPERTIES_USER_ACCESS_URL to delete the user access URL.    SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME to delete the relay state parameter name.  
+     */
+    PropertiesToDelete?: DeletableSamlPropertiesList;
+  }
+  export interface ModifySamlPropertiesResult {
+  }
   export interface ModifySelfservicePermissionsRequest {
     /**
      * The identifier of the directory.
@@ -1272,6 +2717,18 @@ declare namespace WorkSpaces {
     SelfservicePermissions: SelfservicePermissions;
   }
   export interface ModifySelfservicePermissionsResult {
+  }
+  export interface ModifyStreamingPropertiesRequest {
+    /**
+     * The identifier of the resource.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * The streaming properties to configure.
+     */
+    StreamingProperties?: StreamingProperties;
+  }
+  export interface ModifyStreamingPropertiesResult {
   }
   export interface ModifyWorkspaceAccessPropertiesRequest {
     /**
@@ -1305,7 +2762,11 @@ declare namespace WorkSpaces {
     /**
      * The properties of the WorkSpace.
      */
-    WorkspaceProperties: WorkspaceProperties;
+    WorkspaceProperties?: WorkspaceProperties;
+    /**
+     * Indicates the data replication status.
+     */
+    DataReplication?: DataReplication;
   }
   export interface ModifyWorkspacePropertiesResult {
   }
@@ -1321,6 +2782,16 @@ declare namespace WorkSpaces {
   }
   export interface ModifyWorkspaceStateResult {
   }
+  export interface NetworkAccessConfiguration {
+    /**
+     * The private IP address of the elastic network interface that is attached to instances in your VPC.
+     */
+    EniPrivateIpAddress?: NonEmptyString;
+    /**
+     * The resource identifier of the elastic network interface that is attached to instances in your VPC. All network interfaces have the eni-xxxxxxxx resource identifier.
+     */
+    EniId?: NonEmptyString;
+  }
   export type NonEmptyString = string;
   export interface OperatingSystem {
     /**
@@ -1328,8 +2799,31 @@ declare namespace WorkSpaces {
      */
     Type?: OperatingSystemType;
   }
+  export type OperatingSystemName = "AMAZON_LINUX_2"|"UBUNTU_18_04"|"UBUNTU_20_04"|"UBUNTU_22_04"|"UNKNOWN"|"WINDOWS_10"|"WINDOWS_11"|"WINDOWS_7"|"WINDOWS_SERVER_2016"|"WINDOWS_SERVER_2019"|"WINDOWS_SERVER_2022"|"RHEL_8"|string;
+  export type OperatingSystemNameList = OperatingSystemName[];
   export type OperatingSystemType = "WINDOWS"|"LINUX"|string;
   export type PaginationToken = string;
+  export interface PendingCreateStandbyWorkspacesRequest {
+    /**
+     * Describes the standby WorkSpace that was created. Because this operation is asynchronous, the identifier returned is not immediately available for use with other operations. For example, if you call  DescribeWorkspaces before the WorkSpace is created, the information returned can be incomplete. 
+     */
+    UserName?: UserName;
+    /**
+     * The identifier of the directory for the standby WorkSpace.
+     */
+    DirectoryId?: DirectoryId;
+    /**
+     * The operational state of the standby WorkSpace.
+     */
+    State?: WorkspaceState;
+    /**
+     * The identifier of the standby WorkSpace.
+     */
+    WorkspaceId?: WorkspaceId;
+  }
+  export type PendingCreateStandbyWorkspacesRequestList = PendingCreateStandbyWorkspacesRequest[];
+  export type Protocol = "PCOIP"|"WSP"|string;
+  export type ProtocolList = Protocol[];
   export interface RebootRequest {
     /**
      * The identifier of the WorkSpace.
@@ -1374,7 +2868,7 @@ declare namespace WorkSpaces {
     /**
      * The identifier of the directory. You cannot register a directory if it does not have a status of Active. If the directory does not have a status of Active, you will receive an InvalidResourceStateException error. If you have already registered the maximum number of directories that you can register with Amazon WorkSpaces, you will receive a ResourceLimitExceededException error. Deregister directories that you are not using for WorkSpaces, and try again.
      */
-    DirectoryId: DirectoryId;
+    DirectoryId?: DirectoryId;
     /**
      * The identifiers of the subnets for your virtual private cloud (VPC). Make sure that the subnets are in supported Availability Zones. The subnets must also be in separate Availability Zones. If these conditions are not met, you will receive an OperationNotSupportedException error.
      */
@@ -1382,23 +2876,94 @@ declare namespace WorkSpaces {
     /**
      * Indicates whether Amazon WorkDocs is enabled or disabled. If you have enabled this parameter and WorkDocs is not available in the Region, you will receive an OperationNotSupportedException error. Set EnableWorkDocs to disabled, and try again.
      */
-    EnableWorkDocs: BooleanObject;
+    EnableWorkDocs?: BooleanObject;
     /**
      * Indicates whether self-service capabilities are enabled or disabled.
      */
     EnableSelfService?: BooleanObject;
     /**
-     * Indicates whether your WorkSpace directory is dedicated or shared. To use Bring Your Own License (BYOL) images, this value must be set to DEDICATED and your AWS account must be enabled for BYOL. If your account has not been enabled for BYOL, you will receive an InvalidParameterValuesException error. For more information about BYOL images, see Bring Your Own Windows Desktop Images.
+     * Indicates whether your WorkSpace directory is dedicated or shared. To use Bring Your Own License (BYOL) images, this value must be set to DEDICATED and your Amazon Web Services account must be enabled for BYOL. If your account has not been enabled for BYOL, you will receive an InvalidParameterValuesException error. For more information about BYOL images, see Bring Your Own Windows Desktop Images.
      */
     Tenancy?: Tenancy;
     /**
      * The tags associated with the directory.
      */
     Tags?: TagList;
+    /**
+     * The name of the directory to register.
+     */
+    WorkspaceDirectoryName?: WorkspaceDirectoryName;
+    /**
+     * Description of the directory to register.
+     */
+    WorkspaceDirectoryDescription?: WorkspaceDirectoryDescription;
+    /**
+     * The type of identity management the user is using.
+     */
+    UserIdentityType?: UserIdentityType;
+    /**
+     * The Amazon Resource Name (ARN) of the identity center instance.
+     */
+    IdcInstanceArn?: ARN;
+    /**
+     * The details about Microsoft Entra config.
+     */
+    MicrosoftEntraConfig?: MicrosoftEntraConfig;
+    /**
+     * Indicates whether the directory's WorkSpace type is personal or pools.
+     */
+    WorkspaceType?: WorkspaceType;
+    /**
+     * The active directory config of the directory.
+     */
+    ActiveDirectoryConfig?: ActiveDirectoryConfig;
   }
   export interface RegisterWorkspaceDirectoryResult {
+    /**
+     * The identifier of the directory.
+     */
+    DirectoryId?: DirectoryId;
+    /**
+     * The registration status of the WorkSpace directory.
+     */
+    State?: WorkspaceDirectoryState;
   }
   export type RegistrationCode = string;
+  export interface RejectAccountLinkInvitationRequest {
+    /**
+     * The identifier of the account link
+     */
+    LinkId: LinkId;
+    /**
+     * The client token of the account link invitation to reject.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface RejectAccountLinkInvitationResult {
+    /**
+     * Information about the account link.
+     */
+    AccountLink?: AccountLink;
+  }
+  export interface RelatedWorkspaceProperties {
+    /**
+     * The identifier of the related WorkSpace.
+     */
+    WorkspaceId?: WorkspaceId;
+    /**
+     * The Region of the related WorkSpace.
+     */
+    Region?: Region;
+    /**
+     * Indicates the state of the WorkSpace.
+     */
+    State?: WorkspaceState;
+    /**
+     * Indicates the type of WorkSpace.
+     */
+    Type?: StandbyWorkspaceRelationshipType;
+  }
+  export type RelatedWorkspaces = RelatedWorkspaceProperties[];
   export type ResourceIdList = NonEmptyString[];
   export interface RestoreWorkspaceRequest {
     /**
@@ -1424,11 +2989,29 @@ declare namespace WorkSpaces {
     /**
      * The size of the root volume.
      */
-    Capacity?: NonEmptyString;
+    Capacity: NonEmptyString;
   }
   export type RootVolumeSizeGib = number;
-  export type RunningMode = "AUTO_STOP"|"ALWAYS_ON"|string;
+  export type RunningMode = "AUTO_STOP"|"ALWAYS_ON"|"MANUAL"|string;
   export type RunningModeAutoStopTimeoutInMinutes = number;
+  export type S3BucketName = string;
+  export interface SamlProperties {
+    /**
+     * Indicates the status of SAML 2.0 authentication. These statuses include the following.   If the setting is DISABLED, end users will be directed to login with their directory credentials.   If the setting is ENABLED, end users will be directed to login via the user access URL. Users attempting to connect to WorkSpaces from a client application that does not support SAML 2.0 authentication will not be able to connect.   If the setting is ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK, end users will be directed to login via the user access URL on supported client applications, but will not prevent clients that do not support SAML 2.0 authentication from connecting as if SAML 2.0 authentication was disabled.  
+     */
+    Status?: SamlStatusEnum;
+    /**
+     * The SAML 2.0 identity provider (IdP) user access URL is the URL a user would navigate to in their web browser in order to federate from the IdP and directly access the application, without any SAML 2.0 service provider (SP) bindings.
+     */
+    UserAccessUrl?: SamlUserAccessUrl;
+    /**
+     * The relay state parameter name supported by the SAML 2.0 identity provider (IdP). When the end user is redirected to the user access URL from the WorkSpaces client application, this relay state parameter name is appended as a query parameter to the URL along with the relay state endpoint to return the user to the client application session. To use SAML 2.0 authentication with WorkSpaces, the IdP must support IdP-initiated deep linking for the relay state URL. Consult your IdP documentation for more information.
+     */
+    RelayStateParameterName?: NonEmptyString;
+  }
+  export type SamlStatusEnum = "DISABLED"|"ENABLED"|"ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK"|string;
+  export type SamlUserAccessUrl = string;
+  export type SecretsManagerArn = string;
   export type SecurityGroupId = string;
   export interface SelfservicePermissions {
     /**
@@ -1452,6 +3035,9 @@ declare namespace WorkSpaces {
      */
     RebuildWorkspace?: ReconnectEnum;
   }
+  export type SessionConnectionState = "CONNECTED"|"NOT_CONNECTED"|string;
+  export type SessionInstanceId = string;
+  export type SettingsGroup = string;
   export interface Snapshot {
     /**
      * The time when the snapshot was created.
@@ -1459,6 +3045,45 @@ declare namespace WorkSpaces {
     SnapshotTime?: Timestamp;
   }
   export type SnapshotList = Snapshot[];
+  export interface StandbyWorkspace {
+    /**
+     * The identifier of the standby WorkSpace.
+     */
+    PrimaryWorkspaceId: WorkspaceId;
+    /**
+     * The volume encryption key of the standby WorkSpace.
+     */
+    VolumeEncryptionKey?: VolumeEncryptionKey;
+    /**
+     * The identifier of the directory for the standby WorkSpace.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The tags associated with the standby WorkSpace.
+     */
+    Tags?: TagList;
+    /**
+     * Indicates whether data replication is enabled, and if enabled, the type of data replication.
+     */
+    DataReplication?: DataReplication;
+  }
+  export type StandbyWorkspaceRelationshipType = "PRIMARY"|"STANDBY"|string;
+  export type StandbyWorkspacesList = StandbyWorkspace[];
+  export interface StandbyWorkspacesProperties {
+    /**
+     * The identifier of the standby WorkSpace
+     */
+    StandbyWorkspaceId?: WorkspaceId;
+    /**
+     * Indicates whether data replication is enabled, and if enabled, the type of data replication.
+     */
+    DataReplication?: DataReplication;
+    /**
+     * The date and time at which the last successful snapshot was taken of the primary WorkSpace used for replicating data.
+     */
+    RecoverySnapshotTime?: Timestamp;
+  }
+  export type StandbyWorkspacesPropertiesList = StandbyWorkspacesProperties[];
   export interface StartRequest {
     /**
      * The identifier of the WorkSpace.
@@ -1466,6 +3091,14 @@ declare namespace WorkSpaces {
     WorkspaceId?: WorkspaceId;
   }
   export type StartWorkspaceRequests = StartRequest[];
+  export interface StartWorkspacesPoolRequest {
+    /**
+     * The identifier of the pool.
+     */
+    PoolId: WorkspacesPoolId;
+  }
+  export interface StartWorkspacesPoolResult {
+  }
   export interface StartWorkspacesRequest {
     /**
      * The WorkSpaces to start. You can specify up to 25 WorkSpaces.
@@ -1485,6 +3118,14 @@ declare namespace WorkSpaces {
     WorkspaceId?: WorkspaceId;
   }
   export type StopWorkspaceRequests = StopRequest[];
+  export interface StopWorkspacesPoolRequest {
+    /**
+     * The identifier of the pool.
+     */
+    PoolId: WorkspacesPoolId;
+  }
+  export interface StopWorkspacesPoolResult {
+  }
   export interface StopWorkspacesRequest {
     /**
      * The WorkSpaces to stop. You can specify up to 25 WorkSpaces.
@@ -1497,6 +3138,35 @@ declare namespace WorkSpaces {
      */
     FailedRequests?: FailedStopWorkspaceRequests;
   }
+  export interface StorageConnector {
+    /**
+     * The type of connector used to save user files.
+     */
+    ConnectorType: StorageConnectorTypeEnum;
+    /**
+     * Indicates if the storage connetor is enabled or disabled.
+     */
+    Status: StorageConnectorStatusEnum;
+  }
+  export type StorageConnectorStatusEnum = "ENABLED"|"DISABLED"|string;
+  export type StorageConnectorTypeEnum = "HOME_FOLDER"|string;
+  export type StorageConnectors = StorageConnector[];
+  export type StreamingExperiencePreferredProtocolEnum = "TCP"|"UDP"|string;
+  export interface StreamingProperties {
+    /**
+     * Indicates the type of preferred protocol for the streaming experience.
+     */
+    StreamingExperiencePreferredProtocol?: StreamingExperiencePreferredProtocolEnum;
+    /**
+     * Indicates the permission settings asscoiated with the user.
+     */
+    UserSettings?: UserSettings;
+    /**
+     * Indicates the storage connector used 
+     */
+    StorageConnectors?: StorageConnectors;
+  }
+  export type String2048 = string;
   export type SubnetId = string;
   export type SubnetIds = SubnetId[];
   export interface Tag {
@@ -1522,6 +3192,22 @@ declare namespace WorkSpaces {
     WorkspaceId: WorkspaceId;
   }
   export type TerminateWorkspaceRequests = TerminateRequest[];
+  export interface TerminateWorkspacesPoolRequest {
+    /**
+     * The identifier of the pool.
+     */
+    PoolId: WorkspacesPoolId;
+  }
+  export interface TerminateWorkspacesPoolResult {
+  }
+  export interface TerminateWorkspacesPoolSessionRequest {
+    /**
+     * The identifier of the pool session.
+     */
+    SessionId: AmazonUuid;
+  }
+  export interface TerminateWorkspacesPoolSessionResult {
+  }
   export interface TerminateWorkspacesRequest {
     /**
      * The WorkSpaces to terminate. You can specify up to 25 WorkSpaces.
@@ -1534,18 +3220,63 @@ declare namespace WorkSpaces {
      */
     FailedRequests?: FailedTerminateWorkspaceRequests;
   }
+  export interface TimeoutSettings {
+    /**
+     * Specifies the amount of time, in seconds, that a streaming session remains active after users disconnect. If users try to reconnect to the streaming session after a disconnection or network interruption within the time set, they are connected to their previous session. Otherwise, they are connected to a new session with a new streaming instance.
+     */
+    DisconnectTimeoutInSeconds?: DisconnectTimeoutInSeconds;
+    /**
+     * The amount of time in seconds a connection will stay active while idle.
+     */
+    IdleDisconnectTimeoutInSeconds?: IdleDisconnectTimeoutInSeconds;
+    /**
+     * Specifies the maximum amount of time, in seconds, that a streaming session can remain active. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance.
+     */
+    MaxUserDurationInSeconds?: MaxUserDurationInSeconds;
+  }
   export type Timestamp = Date;
+  export interface UpdateConnectClientAddInRequest {
+    /**
+     * The identifier of the client add-in to update.
+     */
+    AddInId: AmazonUuid;
+    /**
+     * The directory identifier for which the client add-in is configured.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * The name of the client add-in.
+     */
+    Name?: AddInName;
+    /**
+     * The endpoint URL of the Amazon Connect client add-in.
+     */
+    URL?: AddInUrl;
+  }
+  export interface UpdateConnectClientAddInResult {
+  }
   export interface UpdateConnectionAliasPermissionRequest {
     /**
      * The identifier of the connection alias that you want to update permissions for.
      */
     AliasId: ConnectionAliasId;
     /**
-     * Indicates whether to share or unshare the connection alias with the specified AWS account.
+     * Indicates whether to share or unshare the connection alias with the specified Amazon Web Services account.
      */
     ConnectionAliasPermission: ConnectionAliasPermission;
   }
   export interface UpdateConnectionAliasPermissionResult {
+  }
+  export type UpdateDescription = string;
+  export interface UpdateResult {
+    /**
+     * Indicates whether updated drivers or other components are available for the specified WorkSpace image.
+     */
+    UpdateAvailable?: BooleanObject;
+    /**
+     * A description of whether updates for the WorkSpace image are pending or available.
+     */
+    Description?: UpdateDescription;
   }
   export interface UpdateRulesOfIpGroupRequest {
     /**
@@ -1559,6 +3290,18 @@ declare namespace WorkSpaces {
   }
   export interface UpdateRulesOfIpGroupResult {
   }
+  export interface UpdateWorkspaceBundleRequest {
+    /**
+     * The identifier of the bundle.
+     */
+    BundleId?: BundleId;
+    /**
+     * The identifier of the image.
+     */
+    ImageId?: WorkspaceImageId;
+  }
+  export interface UpdateWorkspaceBundleResult {
+  }
   export interface UpdateWorkspaceImagePermissionRequest {
     /**
      * The identifier of the image.
@@ -1569,28 +3312,134 @@ declare namespace WorkSpaces {
      */
     AllowCopyImage: BooleanObject;
     /**
-     * The identifier of the AWS account to share or unshare the image with.  Before sharing the image, confirm that you are sharing to the correct AWS account ID. 
+     * The identifier of the Amazon Web Services account to share or unshare the image with.  Before sharing the image, confirm that you are sharing to the correct Amazon Web Services account ID. 
      */
     SharedAccountId: AwsAccount;
   }
   export interface UpdateWorkspaceImagePermissionResult {
   }
+  export interface UpdateWorkspacesPoolRequest {
+    /**
+     * The identifier of the specified pool to update.
+     */
+    PoolId: WorkspacesPoolId;
+    /**
+     * Describes the specified pool to update.
+     */
+    Description?: UpdateDescription;
+    /**
+     * The identifier of the bundle.
+     */
+    BundleId?: BundleId;
+    /**
+     * The identifier of the directory.
+     */
+    DirectoryId?: DirectoryId;
+    /**
+     * The desired capacity for the pool.
+     */
+    Capacity?: Capacity;
+    /**
+     * The persistent application settings for users in the pool.
+     */
+    ApplicationSettings?: ApplicationSettingsRequest;
+    /**
+     * Indicates the timeout settings of the specified pool.
+     */
+    TimeoutSettings?: TimeoutSettings;
+  }
+  export interface UpdateWorkspacesPoolResult {
+    /**
+     * Describes the specified pool.
+     */
+    WorkspacesPool?: WorkspacesPool;
+  }
+  export type UserIdentityType = "CUSTOMER_MANAGED"|"AWS_DIRECTORY_SERVICE"|"AWS_IAM_IDENTITY_CENTER"|string;
   export type UserName = string;
+  export interface UserSetting {
+    /**
+     * Indicates the type of action.
+     */
+    Action: UserSettingActionEnum;
+    /**
+     * Indicates if the setting is enabled or disabled.
+     */
+    Permission: UserSettingPermissionEnum;
+    /**
+     * Indicates the maximum character length for the specified user setting.
+     */
+    MaximumLength?: MaximumLength;
+  }
+  export type UserSettingActionEnum = "CLIPBOARD_COPY_FROM_LOCAL_DEVICE"|"CLIPBOARD_COPY_TO_LOCAL_DEVICE"|"PRINTING_TO_LOCAL_DEVICE"|"SMART_CARD"|string;
+  export type UserSettingPermissionEnum = "ENABLED"|"DISABLED"|string;
+  export type UserSettings = UserSetting[];
   export interface UserStorage {
     /**
-     * The size of the user storage.
+     * The size of the user volume.
      */
-    Capacity?: NonEmptyString;
+    Capacity: NonEmptyString;
   }
   export type UserVolumeSizeGib = number;
   export type VolumeEncryptionKey = string;
+  export interface WorkSpaceApplication {
+    /**
+     * The identifier of the application.
+     */
+    ApplicationId?: WorkSpaceApplicationId;
+    /**
+     * The time the application is created.
+     */
+    Created?: Timestamp;
+    /**
+     * The description of the WorkSpace application.
+     */
+    Description?: String2048;
+    /**
+     * The license availability for the applications.
+     */
+    LicenseType?: WorkSpaceApplicationLicenseType;
+    /**
+     * The name of the WorkSpace application.
+     */
+    Name?: NonEmptyString;
+    /**
+     * The owner of the WorkSpace application.
+     */
+    Owner?: WorkSpaceApplicationOwner;
+    /**
+     * The status of WorkSpace application.
+     */
+    State?: WorkSpaceApplicationState;
+    /**
+     * The supported compute types of the WorkSpace application.
+     */
+    SupportedComputeTypeNames?: ComputeList;
+    /**
+     * The supported operating systems of the WorkSpace application.
+     */
+    SupportedOperatingSystemNames?: OperatingSystemNameList;
+  }
+  export interface WorkSpaceApplicationDeployment {
+    /**
+     * The associations between the applications and the associated resources.
+     */
+    Associations?: WorkspaceResourceAssociationList;
+  }
+  export type WorkSpaceApplicationId = string;
+  export type WorkSpaceApplicationIdList = WorkSpaceApplicationId[];
+  export type WorkSpaceApplicationLicenseType = "LICENSED"|"UNLICENSED"|string;
+  export type WorkSpaceApplicationList = WorkSpaceApplication[];
+  export type WorkSpaceApplicationOwner = string;
+  export type WorkSpaceApplicationState = "PENDING"|"ERROR"|"AVAILABLE"|"UNINSTALL_ONLY"|string;
+  export type WorkSpaceAssociatedResourceType = "APPLICATION"|string;
+  export type WorkSpaceAssociatedResourceTypeList = WorkSpaceAssociatedResourceType[];
   export interface Workspace {
     /**
      * The identifier of the WorkSpace.
      */
     WorkspaceId?: WorkspaceId;
     /**
-     * The identifier of the AWS Directory Service directory for the WorkSpace.
+     * The identifier of the Directory Service directory for the WorkSpace.
      */
     DirectoryId?: DirectoryId;
     /**
@@ -1602,7 +3451,7 @@ declare namespace WorkSpaces {
      */
     IpAddress?: IpAddress;
     /**
-     * The operational state of the WorkSpace.  After a WorkSpace is terminated, the TERMINATED state is returned only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using  DescribeWorkSpaces. If the WorkSpace ID isn't returned, then the WorkSpace has been successfully terminated. 
+     * The operational state of the WorkSpace.    PENDING – The WorkSpace is in a waiting state (for example, the WorkSpace is being created).    AVAILABLE – The WorkSpace is running and has passed the health checks.    IMPAIRED – Refer to UNHEALTHY state.    UNHEALTHY – The WorkSpace is not responding to health checks.    REBOOTING – The WorkSpace is being rebooted (restarted).    STARTING – The WorkSpace is starting up and health checks are being run.    REBUILDING – The WorkSpace is being rebuilt.    RESTORING – The WorkSpace is being restored.    MAINTENANCE – The WorkSpace is undergoing scheduled maintenance by Amazon Web Services.    ADMIN_MAINTENANCE – The WorkSpace is undergoing maintenance by the WorkSpaces administrator.    TERMINATING – The WorkSpace is being deleted.    TERMINATED – The WorkSpace has been deleted.    SUSPENDED – The WorkSpace has been suspended for image creation.    UPDATING – The WorkSpace is undergoing an update.    STOPPING – The WorkSpace is being stopped.    STOPPED – The WorkSpace has been stopped.    ERROR  – The WorkSpace is an error state (for example, an error occurred during startup).    After a WorkSpace is terminated, the TERMINATED state is returned only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using  DescribeWorkSpaces. If the WorkSpace ID isn't returned, then the WorkSpace has been successfully terminated. 
      */
     State?: WorkspaceState;
     /**
@@ -1626,7 +3475,7 @@ declare namespace WorkSpaces {
      */
     ComputerName?: ComputerName;
     /**
-     * The symmetric AWS KMS customer master key (CMK) used to encrypt data stored on your WorkSpace. Amazon WorkSpaces does not support asymmetric CMKs.
+     * The ARN of the symmetric KMS key used to encrypt data stored on your WorkSpace. Amazon WorkSpaces does not support asymmetric KMS keys.
      */
     VolumeEncryptionKey?: VolumeEncryptionKey;
     /**
@@ -1638,6 +3487,10 @@ declare namespace WorkSpaces {
      */
     RootVolumeEncryptionEnabled?: BooleanObject;
     /**
+     * The name of the user-decoupled WorkSpace.
+     */
+    WorkspaceName?: WorkspaceName;
+    /**
      * The properties of the WorkSpace.
      */
     WorkspaceProperties?: WorkspaceProperties;
@@ -1645,14 +3498,26 @@ declare namespace WorkSpaces {
      * The modification states of the WorkSpace.
      */
     ModificationStates?: ModificationStateList;
+    /**
+     * The standby WorkSpace or primary WorkSpace related to the specified WorkSpace.
+     */
+    RelatedWorkspaces?: RelatedWorkspaces;
+    /**
+     * Indicates the settings of the data replication.
+     */
+    DataReplicationSettings?: DataReplicationSettings;
+    /**
+     * The properties of the standby WorkSpace
+     */
+    StandbyWorkspacesProperties?: StandbyWorkspacesPropertiesList;
   }
   export interface WorkspaceAccessProperties {
     /**
-     * Indicates whether users can use Windows clients to access their WorkSpaces. To restrict WorkSpaces access to trusted devices (also known as managed devices) with valid certificates, specify a value of TRUST. For more information, see Restrict WorkSpaces Access to Trusted Devices. 
+     * Indicates whether users can use Windows clients to access their WorkSpaces.
      */
     DeviceTypeWindows?: AccessPropertyValue;
     /**
-     * Indicates whether users can use macOS clients to access their WorkSpaces. To restrict WorkSpaces access to trusted devices (also known as managed devices) with valid certificates, specify a value of TRUST. For more information, see Restrict WorkSpaces Access to Trusted Devices. 
+     * Indicates whether users can use macOS clients to access their WorkSpaces.
      */
     DeviceTypeOsx?: AccessPropertyValue;
     /**
@@ -1664,7 +3529,7 @@ declare namespace WorkSpaces {
      */
     DeviceTypeIos?: AccessPropertyValue;
     /**
-     * Indicates whether users can use Android devices to access their WorkSpaces.
+     * Indicates whether users can use Android and Android-compatible Chrome OS devices to access their WorkSpaces.
      */
     DeviceTypeAndroid?: AccessPropertyValue;
     /**
@@ -1675,10 +3540,14 @@ declare namespace WorkSpaces {
      * Indicates whether users can use zero client devices to access their WorkSpaces.
      */
     DeviceTypeZeroClient?: AccessPropertyValue;
+    /**
+     * Indicates whether users can use Linux clients to access their WorkSpaces.
+     */
+    DeviceTypeLinux?: AccessPropertyValue;
   }
   export interface WorkspaceBundle {
     /**
-     * The bundle identifier.
+     * The identifier of the bundle.
      */
     BundleId?: BundleId;
     /**
@@ -1686,15 +3555,15 @@ declare namespace WorkSpaces {
      */
     Name?: NonEmptyString;
     /**
-     * The owner of the bundle. This is the account identifier of the owner, or AMAZON if the bundle is provided by AWS.
+     * The owner of the bundle. This is the account identifier of the owner, or AMAZON if the bundle is provided by Amazon Web Services.
      */
     Owner?: BundleOwner;
     /**
-     * A description.
+     * The description of the bundle.
      */
     Description?: Description;
     /**
-     * The image identifier of the bundle.
+     * The identifier of the image that was used to create the bundle.
      */
     ImageId?: WorkspaceImageId;
     /**
@@ -1702,18 +3571,33 @@ declare namespace WorkSpaces {
      */
     RootStorage?: RootStorage;
     /**
-     * The size of the user storage.
+     * The size of the user volume.
      */
     UserStorage?: UserStorage;
     /**
-     * The compute type. For more information, see Amazon WorkSpaces Bundles.
+     * The compute type of the bundle. For more information, see Amazon WorkSpaces Bundles.
      */
     ComputeType?: ComputeType;
     /**
      * The last time that the bundle was updated.
      */
     LastUpdatedTime?: Timestamp;
+    /**
+     * The time when the bundle was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The state of the WorkSpace bundle.
+     */
+    State?: WorkspaceBundleState;
+    /**
+     * The type of WorkSpace bundle.
+     */
+    BundleType?: BundleType;
   }
+  export type WorkspaceBundleDescription = string;
+  export type WorkspaceBundleName = string;
+  export type WorkspaceBundleState = "AVAILABLE"|"PENDING"|"ERROR"|string;
   export interface WorkspaceConnectionStatus {
     /**
      * The identifier of the WorkSpace.
@@ -1758,6 +3642,10 @@ declare namespace WorkSpaces {
      * Indicates whether maintenance mode is enabled for your WorkSpaces. For more information, see WorkSpace Maintenance. 
      */
     EnableMaintenanceMode?: BooleanObject;
+    /**
+     * Indicates the IAM role ARN of the instance.
+     */
+    InstanceIamRoleArn?: ARN;
   }
   export interface WorkspaceDirectory {
     /**
@@ -1824,9 +3712,56 @@ declare namespace WorkSpaces {
      * The default self-service permissions for WorkSpaces in the directory.
      */
     SelfservicePermissions?: SelfservicePermissions;
+    /**
+     * Describes the enablement status, user access URL, and relay state parameter name that are used for configuring federation with an SAML 2.0 identity provider.
+     */
+    SamlProperties?: SamlProperties;
+    /**
+     * The certificate-based authentication properties used to authenticate SAML 2.0 Identity Provider (IdP) user identities to Active Directory for WorkSpaces login.
+     */
+    CertificateBasedAuthProperties?: CertificateBasedAuthProperties;
+    /**
+     * Specifies details about Microsoft Entra configurations.
+     */
+    MicrosoftEntraConfig?: MicrosoftEntraConfig;
+    /**
+     * The name fo the WorkSpace directory.
+     */
+    WorkspaceDirectoryName?: WorkspaceDirectoryName;
+    /**
+     * The description of the WorkSpace directory
+     */
+    WorkspaceDirectoryDescription?: WorkspaceDirectoryDescription;
+    /**
+     * Indicates the identity type of the specifired user.
+     */
+    UserIdentityType?: UserIdentityType;
+    /**
+     * Indicates whether the directory's WorkSpace type is personal or pools.
+     */
+    WorkspaceType?: WorkspaceType;
+    /**
+     * Specifies details about identity center configurations.
+     */
+    IDCConfig?: IDCConfig;
+    /**
+     * Information about the Active Directory config.
+     */
+    ActiveDirectoryConfig?: ActiveDirectoryConfig;
+    /**
+     * The streaming properties to configure.
+     */
+    StreamingProperties?: StreamingProperties;
+    /**
+     * The error message returned.
+     */
+    ErrorMessage?: Description;
   }
+  export type WorkspaceDirectoryDescription = string;
+  export type WorkspaceDirectoryName = string;
+  export type WorkspaceDirectoryNameList = WorkspaceDirectoryName[];
   export type WorkspaceDirectoryState = "REGISTERING"|"REGISTERED"|"DEREGISTERING"|"DEREGISTERED"|"ERROR"|string;
-  export type WorkspaceDirectoryType = "SIMPLE_AD"|"AD_CONNECTOR"|string;
+  export type WorkspaceDirectoryType = "SIMPLE_AD"|"AD_CONNECTOR"|"CUSTOMER_MANAGED"|"AWS_IAM_IDENTITY_CENTER"|string;
   export type WorkspaceErrorCode = string;
   export type WorkspaceId = string;
   export type WorkspaceIdList = WorkspaceId[];
@@ -1864,27 +3799,37 @@ declare namespace WorkSpaces {
      */
     ErrorMessage?: Description;
     /**
-     * The date when the image was created. If the image has been shared, the AWS account that the image has been shared with sees the original creation date of the image.
+     * The date when the image was created. If the image has been shared, the Amazon Web Services account that the image has been shared with sees the original creation date of the image.
      */
     Created?: Timestamp;
     /**
-     * The identifier of the AWS account that owns the image.
+     * The identifier of the Amazon Web Services account that owns the image.
      */
     OwnerAccountId?: AwsAccount;
+    /**
+     * The updates (if any) that are available for the specified image.
+     */
+    Updates?: UpdateResult;
+    /**
+     * Additional details of the error returned for the image, including the possible causes of the errors and troubleshooting information.
+     */
+    ErrorDetails?: ErrorDetailsList;
   }
   export type WorkspaceImageDescription = string;
   export type WorkspaceImageErrorCode = string;
+  export type WorkspaceImageErrorDetailCode = "OutdatedPowershellVersion"|"OfficeInstalled"|"PCoIPAgentInstalled"|"WindowsUpdatesEnabled"|"AutoMountDisabled"|"WorkspacesBYOLAccountNotFound"|"WorkspacesBYOLAccountDisabled"|"DHCPDisabled"|"DiskFreeSpace"|"AdditionalDrivesAttached"|"OSNotSupported"|"DomainJoined"|"AzureDomainJoined"|"FirewallEnabled"|"VMWareToolsInstalled"|"DiskSizeExceeded"|"IncompatiblePartitioning"|"PendingReboot"|"AutoLogonEnabled"|"RealTimeUniversalDisabled"|"MultipleBootPartition"|"Requires64BitOS"|"ZeroRearmCount"|"InPlaceUpgrade"|"AntiVirusInstalled"|"UEFINotSupported"|string;
   export type WorkspaceImageId = string;
   export type WorkspaceImageIdList = WorkspaceImageId[];
-  export type WorkspaceImageIngestionProcess = "BYOL_REGULAR"|"BYOL_GRAPHICS"|"BYOL_GRAPHICSPRO"|"BYOL_REGULAR_WSP"|string;
+  export type WorkspaceImageIngestionProcess = "BYOL_REGULAR"|"BYOL_GRAPHICS"|"BYOL_GRAPHICSPRO"|"BYOL_GRAPHICS_G4DN"|"BYOL_REGULAR_WSP"|"BYOL_GRAPHICS_G4DN_WSP"|"BYOL_REGULAR_BYOP"|"BYOL_GRAPHICS_G4DN_BYOP"|string;
   export type WorkspaceImageList = WorkspaceImage[];
   export type WorkspaceImageName = string;
   export type WorkspaceImageRequiredTenancy = "DEFAULT"|"DEDICATED"|string;
   export type WorkspaceImageState = "AVAILABLE"|"PENDING"|"ERROR"|string;
   export type WorkspaceList = Workspace[];
+  export type WorkspaceName = string;
   export interface WorkspaceProperties {
     /**
-     * The running mode. For more information, see Manage the WorkSpace Running Mode.
+     * The running mode. For more information, see Manage the WorkSpace Running Mode.  The MANUAL value is only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use this value. For more information, see Amazon WorkSpaces Core.  Review your running mode to ensure you are using one that is optimal for your needs and budget. For more information on switching running modes, see  Can I switch between hourly and monthly billing? 
      */
     RunningMode?: RunningMode;
     /**
@@ -1903,14 +3848,22 @@ declare namespace WorkSpaces {
      * The compute type. For more information, see Amazon WorkSpaces Bundles.
      */
     ComputeTypeName?: Compute;
+    /**
+     * The protocol. For more information, see  Protocols for Amazon WorkSpaces.    Only available for WorkSpaces created with PCoIP bundles.   The Protocols property is case sensitive. Ensure you use PCOIP or WSP.   Unavailable for Windows 7 WorkSpaces and WorkSpaces using GPU-based bundles (Graphics, GraphicsPro, Graphics.g4dn, and GraphicsPro.g4dn).   
+     */
+    Protocols?: ProtocolList;
+    /**
+     * The name of the operating system.
+     */
+    OperatingSystemName?: OperatingSystemName;
   }
   export interface WorkspaceRequest {
     /**
-     * The identifier of the AWS Directory Service directory for the WorkSpace. You can use DescribeWorkspaceDirectories to list the available directories.
+     * The identifier of the Directory Service directory for the WorkSpace. You can use DescribeWorkspaceDirectories to list the available directories.
      */
     DirectoryId: DirectoryId;
     /**
-     * The user name of the user for the WorkSpace. This user name must exist in the AWS Directory Service directory for the WorkSpace.
+     * The user name of the user for the WorkSpace. This user name must exist in the Directory Service directory for the WorkSpace. The reserved keyword, [UNDEFINED], is used when creating user-decoupled WorkSpaces.
      */
     UserName: UserName;
     /**
@@ -1918,7 +3871,7 @@ declare namespace WorkSpaces {
      */
     BundleId: BundleId;
     /**
-     * The symmetric AWS KMS customer master key (CMK) used to encrypt data stored on your WorkSpace. Amazon WorkSpaces does not support asymmetric CMKs.
+     * The ARN of the symmetric KMS key used to encrypt data stored on your WorkSpace. Amazon WorkSpaces does not support asymmetric KMS keys.
      */
     VolumeEncryptionKey?: VolumeEncryptionKey;
     /**
@@ -1937,9 +3890,45 @@ declare namespace WorkSpaces {
      * The tags for the WorkSpace.
      */
     Tags?: TagList;
+    /**
+     * The name of the user-decoupled WorkSpace.   WorkspaceName is required if UserName is [UNDEFINED] for user-decoupled WorkSpaces. WorkspaceName is not applicable if UserName is specified for user-assigned WorkSpaces. 
+     */
+    WorkspaceName?: WorkspaceName;
   }
   export type WorkspaceRequestList = WorkspaceRequest[];
+  export interface WorkspaceResourceAssociation {
+    /**
+     * The identifier of the associated resource.
+     */
+    AssociatedResourceId?: NonEmptyString;
+    /**
+     * The resource types of the associated resource.
+     */
+    AssociatedResourceType?: WorkSpaceAssociatedResourceType;
+    /**
+     * The time the association is created.
+     */
+    Created?: Timestamp;
+    /**
+     * The time the association status was last updated.
+     */
+    LastUpdatedTime?: Timestamp;
+    /**
+     * The status of the WorkSpace resource association.
+     */
+    State?: AssociationState;
+    /**
+     * The reason the association deployment failed.
+     */
+    StateReason?: AssociationStateReason;
+    /**
+     * The identifier of the WorkSpace.
+     */
+    WorkspaceId?: WorkspaceId;
+  }
+  export type WorkspaceResourceAssociationList = WorkspaceResourceAssociation[];
   export type WorkspaceState = "PENDING"|"AVAILABLE"|"IMPAIRED"|"UNHEALTHY"|"REBOOTING"|"STARTING"|"REBUILDING"|"RESTORING"|"MAINTENANCE"|"ADMIN_MAINTENANCE"|"TERMINATING"|"TERMINATED"|"SUSPENDED"|"UPDATING"|"STOPPING"|"STOPPED"|"ERROR"|string;
+  export type WorkspaceType = "PERSONAL"|"POOLS"|string;
   export interface WorkspacesIpGroup {
     /**
      * The identifier of the group.
@@ -1959,6 +3948,113 @@ declare namespace WorkSpaces {
     userRules?: IpRuleList;
   }
   export type WorkspacesIpGroupsList = WorkspacesIpGroup[];
+  export interface WorkspacesPool {
+    /**
+     * The identifier of a pool.
+     */
+    PoolId: WorkspacesPoolId;
+    /**
+     * The Amazon Resource Name (ARN) for the pool.
+     */
+    PoolArn: ARN;
+    /**
+     * The capacity status for the pool
+     */
+    CapacityStatus: CapacityStatus;
+    /**
+     * The name of the pool,
+     */
+    PoolName: WorkspacesPoolName;
+    /**
+     * The description of the pool.
+     */
+    Description?: UpdateDescription;
+    /**
+     * The current state of the pool.
+     */
+    State: WorkspacesPoolState;
+    /**
+     * The time the pool was created.
+     */
+    CreatedAt: Timestamp;
+    /**
+     * The identifier of the bundle used by the pool.
+     */
+    BundleId: BundleId;
+    /**
+     * The identifier of the directory used by the pool.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The pool errors.
+     */
+    Errors?: WorkspacesPoolErrors;
+    /**
+     * The persistent application settings for users of the pool.
+     */
+    ApplicationSettings?: ApplicationSettingsResponse;
+    /**
+     * The amount of time that a pool session remains active after users disconnect. If they try to reconnect to the pool session after a disconnection or network interruption within this time interval, they are connected to their previous session. Otherwise, they are connected to a new session with a new pool instance.
+     */
+    TimeoutSettings?: TimeoutSettings;
+  }
+  export interface WorkspacesPoolError {
+    /**
+     * The error code.
+     */
+    ErrorCode?: WorkspacesPoolErrorCode;
+    /**
+     * The error message.
+     */
+    ErrorMessage?: ErrorMessage;
+  }
+  export type WorkspacesPoolErrorCode = "IAM_SERVICE_ROLE_IS_MISSING"|"IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION"|"IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION"|"IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION"|"NETWORK_INTERFACE_LIMIT_EXCEEDED"|"INTERNAL_SERVICE_ERROR"|"MACHINE_ROLE_IS_MISSING"|"STS_DISABLED_IN_REGION"|"SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES"|"IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION"|"SUBNET_NOT_FOUND"|"IMAGE_NOT_FOUND"|"INVALID_SUBNET_CONFIGURATION"|"SECURITY_GROUPS_NOT_FOUND"|"IGW_NOT_ATTACHED"|"IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION"|"WORKSPACES_POOL_STOPPED"|"WORKSPACES_POOL_INSTANCE_PROVISIONING_FAILURE"|"DOMAIN_JOIN_ERROR_FILE_NOT_FOUND"|"DOMAIN_JOIN_ERROR_ACCESS_DENIED"|"DOMAIN_JOIN_ERROR_LOGON_FAILURE"|"DOMAIN_JOIN_ERROR_INVALID_PARAMETER"|"DOMAIN_JOIN_ERROR_MORE_DATA"|"DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN"|"DOMAIN_JOIN_ERROR_NOT_SUPPORTED"|"DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME"|"DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED"|"DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED"|"DOMAIN_JOIN_NERR_PASSWORD_EXPIRED"|"DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"|"DOMAIN_JOIN_ERROR_SECRET_ACTION_PERMISSION_IS_MISSING"|"DOMAIN_JOIN_ERROR_SECRET_DECRYPTION_FAILURE"|"DOMAIN_JOIN_ERROR_SECRET_STATE_INVALID"|"DOMAIN_JOIN_ERROR_SECRET_NOT_FOUND"|"DOMAIN_JOIN_ERROR_SECRET_VALUE_KEY_NOT_FOUND"|"DOMAIN_JOIN_ERROR_SECRET_INVALID"|"BUNDLE_NOT_FOUND"|"DIRECTORY_NOT_FOUND"|"INSUFFICIENT_PERMISSIONS_ERROR"|"DEFAULT_OU_IS_MISSING"|string;
+  export type WorkspacesPoolErrors = WorkspacesPoolError[];
+  export type WorkspacesPoolId = string;
+  export type WorkspacesPoolIds = WorkspacesPoolId[];
+  export type WorkspacesPoolName = string;
+  export interface WorkspacesPoolSession {
+    /**
+     * The authentication method. The user is authenticated using a WorkSpaces Pools URL (API) or SAML 2.0 federation (SAML).
+     */
+    AuthenticationType?: AuthenticationType;
+    /**
+     * Specifies whether a user is connected to the pool session.
+     */
+    ConnectionState?: SessionConnectionState;
+    /**
+     * The identifier of the session.
+     */
+    SessionId: AmazonUuid;
+    /**
+     * The identifier for the instance hosting the session.
+     */
+    InstanceId?: SessionInstanceId;
+    /**
+     * The identifier of the pool.
+     */
+    PoolId: WorkspacesPoolId;
+    /**
+     * The time that the pool session ended.
+     */
+    ExpirationTime?: Timestamp;
+    /**
+     * Describes the network details of the pool.
+     */
+    NetworkAccessConfiguration?: NetworkAccessConfiguration;
+    /**
+     * The time that the pool sission started.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The identifier of the user.
+     */
+    UserId: WorkspacesPoolUserId;
+  }
+  export type WorkspacesPoolSessions = WorkspacesPoolSession[];
+  export type WorkspacesPoolState = "CREATING"|"DELETING"|"RUNNING"|"STARTING"|"STOPPED"|"STOPPING"|"UPDATING"|string;
+  export type WorkspacesPoolUserId = string;
+  export type WorkspacesPools = WorkspacesPool[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

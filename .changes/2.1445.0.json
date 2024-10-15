@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudTrail",
+        "description": "Add ThrottlingException with error code 429 to handle CloudTrail Delegated Admin request rate exceeded on organization resources."
+    },
+    {
+        "type": "feature",
+        "category": "Detective",
+        "description": "Added protections to interacting with fields containing customer information."
+    }
+]

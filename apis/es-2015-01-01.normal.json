@@ -4,10 +4,16 @@
     "apiVersion": "2015-01-01",
     "endpointPrefix": "es",
     "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
     "serviceFullName": "Amazon Elasticsearch Service",
     "serviceId": "Elasticsearch Service",
     "signatureVersion": "v4",
-    "uid": "es-2015-01-01"
+    "uid": "es-2015-01-01",
+    "auth": [
+      "aws.auth#sigv4"
+    ]
   },
   "operations": {
     "AcceptInboundCrossClusterSearchConnection": {
@@ -93,6 +99,71 @@
         }
       ],
       "documentation": "<p>Associates a package with an Amazon ES domain.</p>"
+    },
+    "AuthorizeVpcEndpointAccess": {
+      "name": "AuthorizeVpcEndpointAccess",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2015-01-01/es/domain/{DomainName}/authorizeVpcEndpointAccess"
+      },
+      "input": {
+        "shape": "AuthorizeVpcEndpointAccessRequest"
+      },
+      "output": {
+        "shape": "AuthorizeVpcEndpointAccessResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "DisabledOperationException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "BaseException"
+        }
+      ],
+      "documentation": "<p>Provides access to an Amazon OpenSearch Service domain through the use of an interface VPC endpoint.</p>"
+    },
+    "CancelDomainConfigChange": {
+      "name": "CancelDomainConfigChange",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2015-01-01/es/domain/{DomainName}/config/cancel"
+      },
+      "input": {
+        "shape": "CancelDomainConfigChangeRequest"
+      },
+      "output": {
+        "shape": "CancelDomainConfigChangeResponse"
+      },
+      "errors": [
+        {
+          "shape": "BaseException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "DisabledOperationException"
+        }
+      ],
+      "documentation": "<p>Cancels a pending configuration change on an Amazon OpenSearch Service domain.</p>"
     },
     "CancelElasticsearchServiceSoftwareUpdate": {
       "name": "CancelElasticsearchServiceSoftwareUpdate",
@@ -224,6 +295,40 @@
       ],
       "documentation": "<p>Create a package for use with Amazon ES domains.</p>"
     },
+    "CreateVpcEndpoint": {
+      "name": "CreateVpcEndpoint",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2015-01-01/es/vpcEndpoints"
+      },
+      "input": {
+        "shape": "CreateVpcEndpointRequest"
+      },
+      "output": {
+        "shape": "CreateVpcEndpointResponse"
+      },
+      "errors": [
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "DisabledOperationException"
+        },
+        {
+          "shape": "BaseException"
+        }
+      ],
+      "documentation": "<p>Creates an Amazon OpenSearch Service-managed VPC endpoint.</p>"
+    },
     "DeleteElasticsearchDomain": {
       "name": "DeleteElasticsearchDomain",
       "http": {
@@ -348,6 +453,90 @@
         }
       ],
       "documentation": "<p>Delete the package.</p>"
+    },
+    "DeleteVpcEndpoint": {
+      "name": "DeleteVpcEndpoint",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/2015-01-01/es/vpcEndpoints/{VpcEndpointId}"
+      },
+      "input": {
+        "shape": "DeleteVpcEndpointRequest"
+      },
+      "output": {
+        "shape": "DeleteVpcEndpointResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "DisabledOperationException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "BaseException"
+        }
+      ],
+      "documentation": "<p>Deletes an Amazon OpenSearch Service-managed interface VPC endpoint.</p>"
+    },
+    "DescribeDomainAutoTunes": {
+      "name": "DescribeDomainAutoTunes",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2015-01-01/es/domain/{DomainName}/autoTunes"
+      },
+      "input": {
+        "shape": "DescribeDomainAutoTunesRequest"
+      },
+      "output": {
+        "shape": "DescribeDomainAutoTunesResponse"
+      },
+      "errors": [
+        {
+          "shape": "BaseException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Provides scheduled Auto-Tune action details for the Elasticsearch domain, such as Auto-Tune action type, description, severity, and scheduled date.</p>"
+    },
+    "DescribeDomainChangeProgress": {
+      "name": "DescribeDomainChangeProgress",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2015-01-01/es/domain/{DomainName}/progress"
+      },
+      "input": {
+        "shape": "DescribeDomainChangeProgressRequest"
+      },
+      "output": {
+        "shape": "DescribeDomainChangeProgressResponse"
+      },
+      "errors": [
+        {
+          "shape": "BaseException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Returns information about the current blue/green deployment happening on a domain, including a change ID, status, and progress stages.</p>"
     },
     "DescribeElasticsearchDomain": {
       "name": "DescribeElasticsearchDomain",
@@ -595,6 +784,34 @@
       ],
       "documentation": "<p>Returns information about reserved Elasticsearch instances for this account.</p>"
     },
+    "DescribeVpcEndpoints": {
+      "name": "DescribeVpcEndpoints",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2015-01-01/es/vpcEndpoints/describe"
+      },
+      "input": {
+        "shape": "DescribeVpcEndpointsRequest"
+      },
+      "output": {
+        "shape": "DescribeVpcEndpointsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "DisabledOperationException"
+        },
+        {
+          "shape": "BaseException"
+        }
+      ],
+      "documentation": "<p>Describes one or more Amazon OpenSearch Service-managed VPC endpoints.</p>"
+    },
     "DissociatePackage": {
       "name": "DissociatePackage",
       "http": {
@@ -759,6 +976,9 @@
         "method": "GET",
         "requestUri": "/2015-01-01/domain"
       },
+      "input": {
+        "shape": "ListDomainNamesRequest"
+      },
       "output": {
         "shape": "ListDomainNamesResponse"
       },
@@ -918,6 +1138,87 @@
       ],
       "documentation": "<p>Returns all tags for the given Elasticsearch domain.</p>"
     },
+    "ListVpcEndpointAccess": {
+      "name": "ListVpcEndpointAccess",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2015-01-01/es/domain/{DomainName}/listVpcEndpointAccess"
+      },
+      "input": {
+        "shape": "ListVpcEndpointAccessRequest"
+      },
+      "output": {
+        "shape": "ListVpcEndpointAccessResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "DisabledOperationException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "BaseException"
+        }
+      ],
+      "documentation": "<p>Retrieves information about each principal that is allowed to access a given Amazon OpenSearch Service domain through the use of an interface VPC endpoint.</p>"
+    },
+    "ListVpcEndpoints": {
+      "name": "ListVpcEndpoints",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2015-01-01/es/vpcEndpoints"
+      },
+      "input": {
+        "shape": "ListVpcEndpointsRequest"
+      },
+      "output": {
+        "shape": "ListVpcEndpointsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "DisabledOperationException"
+        },
+        {
+          "shape": "BaseException"
+        }
+      ],
+      "documentation": "<p>Retrieves all Amazon OpenSearch Service-managed VPC endpoints in the current account and Region.</p>"
+    },
+    "ListVpcEndpointsForDomain": {
+      "name": "ListVpcEndpointsForDomain",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2015-01-01/es/domain/{DomainName}/vpcEndpoints"
+      },
+      "input": {
+        "shape": "ListVpcEndpointsForDomainRequest"
+      },
+      "output": {
+        "shape": "ListVpcEndpointsForDomainResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "DisabledOperationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "BaseException"
+        }
+      ],
+      "documentation": "<p>Retrieves all Amazon OpenSearch Service-managed VPC endpoints associated with a particular domain.</p>"
+    },
     "PurchaseReservedElasticsearchInstanceOffering": {
       "name": "PurchaseReservedElasticsearchInstanceOffering",
       "http": {
@@ -995,6 +1296,37 @@
         }
       ],
       "documentation": "<p>Removes the specified set of tags from the specified Elasticsearch domain.</p>"
+    },
+    "RevokeVpcEndpointAccess": {
+      "name": "RevokeVpcEndpointAccess",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2015-01-01/es/domain/{DomainName}/revokeVpcEndpointAccess"
+      },
+      "input": {
+        "shape": "RevokeVpcEndpointAccessRequest"
+      },
+      "output": {
+        "shape": "RevokeVpcEndpointAccessResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "DisabledOperationException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "BaseException"
+        }
+      ],
+      "documentation": "<p>Revokes access to an Amazon OpenSearch Service domain that was provided through an interface VPC endpoint.</p>"
     },
     "StartElasticsearchServiceSoftwareUpdate": {
       "name": "StartElasticsearchServiceSoftwareUpdate",
@@ -1092,6 +1424,40 @@
       ],
       "documentation": "<p>Updates a package for use with Amazon ES domains.</p>"
     },
+    "UpdateVpcEndpoint": {
+      "name": "UpdateVpcEndpoint",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2015-01-01/es/vpcEndpoints/update"
+      },
+      "input": {
+        "shape": "UpdateVpcEndpointRequest"
+      },
+      "output": {
+        "shape": "UpdateVpcEndpointResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "DisabledOperationException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "BaseException"
+        }
+      ],
+      "documentation": "<p>Modifies an Amazon OpenSearch Service-managed interface VPC endpoint.</p>"
+    },
     "UpgradeElasticsearchDomain": {
       "name": "UpgradeElasticsearchDomain",
       "http": {
@@ -1131,6 +1497,10 @@
     "ARN": {
       "type": "string",
       "documentation": "<p>The Amazon Resource Name (ARN) of the Elasticsearch domain. See <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html\" target=\"_blank\">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>"
+    },
+    "AWSAccount": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
     },
     "AcceptInboundCrossClusterSearchConnectionRequest": {
       "type": "structure",
@@ -1255,6 +1625,14 @@
         "SAMLOptions": {
           "shape": "SAMLOptionsOutput",
           "documentation": "<p>Describes the SAML application configured for a domain.</p>"
+        },
+        "AnonymousAuthDisableDate": {
+          "shape": "DisableTimestamp",
+          "documentation": "<p>Specifies the Anonymous Auth Disable Date when Anonymous Auth is enabled.</p>"
+        },
+        "AnonymousAuthEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>True if Anonymous auth is enabled. Anonymous auth can be enabled only when AdvancedSecurity is enabled on existing domains.</p>"
         }
       },
       "documentation": "<p>Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled.</p>"
@@ -1277,6 +1655,10 @@
         "SAMLOptions": {
           "shape": "SAMLOptionsInput",
           "documentation": "<p>Specifies the SAML application configuration for the domain.</p>"
+        },
+        "AnonymousAuthEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>True if Anonymous auth is enabled. Anonymous auth can be enabled only when AdvancedSecurity is enabled on existing domains.</p>"
         }
       },
       "documentation": "<p>Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled, master username and password (if internal database is enabled), and master user ARN (if IAM is enabled).</p>"
@@ -1331,6 +1713,242 @@
       },
       "documentation": "<p> Container for response returned by <code> <a>AssociatePackage</a> </code> operation. </p>"
     },
+    "AuthorizeVpcEndpointAccessRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName",
+        "Account"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The name of the OpenSearch Service domain to provide access to.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        },
+        "Account": {
+          "shape": "AWSAccount",
+          "documentation": "<p>The account ID to grant access to.</p>"
+        }
+      },
+      "documentation": "<p>Container for request parameters to the <code><a>AuthorizeVpcEndpointAccess</a></code> operation. Specifies the account to be permitted to manage VPC endpoints against the domain.</p>"
+    },
+    "AuthorizeVpcEndpointAccessResponse": {
+      "type": "structure",
+      "required": [
+        "AuthorizedPrincipal"
+      ],
+      "members": {
+        "AuthorizedPrincipal": {
+          "shape": "AuthorizedPrincipal",
+          "documentation": "<p>Information about the account or service that was provided access to the domain.</p>"
+        }
+      },
+      "documentation": "<p>Container for response parameters to the <code><a>AuthorizeVpcEndpointAccess</a></code> operation. Contains the account ID and the type of the account being authorized to access the VPC endpoint.</p>"
+    },
+    "AuthorizedPrincipal": {
+      "type": "structure",
+      "members": {
+        "PrincipalType": {
+          "shape": "PrincipalType",
+          "documentation": "<p>The type of principal.</p>"
+        },
+        "Principal": {
+          "shape": "String",
+          "documentation": "<p>The IAM principal that is allowed access to the domain.</p>"
+        }
+      },
+      "documentation": "<p>Information about an account or service that has access to an Amazon OpenSearch Service domain through the use of an interface VPC endpoint.</p>"
+    },
+    "AuthorizedPrincipalList": {
+      "type": "list",
+      "member": {
+        "shape": "AuthorizedPrincipal"
+      }
+    },
+    "AutoTune": {
+      "type": "structure",
+      "members": {
+        "AutoTuneType": {
+          "shape": "AutoTuneType",
+          "documentation": "<p>Specifies Auto-Tune type. Valid value is SCHEDULED_ACTION. </p>"
+        },
+        "AutoTuneDetails": {
+          "shape": "AutoTuneDetails",
+          "documentation": "<p>Specifies details of the Auto-Tune action. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information. </p>"
+        }
+      },
+      "documentation": "<p>Specifies Auto-Tune type and Auto-Tune action details. </p>"
+    },
+    "AutoTuneDate": {
+      "type": "timestamp",
+      "documentation": "<p>Specifies timestamp for the Auto-Tune action scheduled for the domain. </p>"
+    },
+    "AutoTuneDesiredState": {
+      "type": "string",
+      "documentation": "<p>Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED.</p>",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "AutoTuneDetails": {
+      "type": "structure",
+      "members": {
+        "ScheduledAutoTuneDetails": {
+          "shape": "ScheduledAutoTuneDetails"
+        }
+      },
+      "documentation": "<p>Specifies details of the Auto-Tune action. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information. </p>"
+    },
+    "AutoTuneList": {
+      "type": "list",
+      "member": {
+        "shape": "AutoTune"
+      }
+    },
+    "AutoTuneMaintenanceSchedule": {
+      "type": "structure",
+      "members": {
+        "StartAt": {
+          "shape": "StartAt",
+          "documentation": "<p>Specifies timestamp at which Auto-Tune maintenance schedule start. </p>"
+        },
+        "Duration": {
+          "shape": "Duration",
+          "documentation": "<p>Specifies maintenance schedule duration: duration value and duration unit. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+        },
+        "CronExpressionForRecurrence": {
+          "shape": "String",
+          "documentation": "<p>Specifies cron expression for a recurring maintenance schedule. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+        }
+      },
+      "documentation": "<p>Specifies Auto-Tune maitenance schedule. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+    },
+    "AutoTuneMaintenanceScheduleList": {
+      "type": "list",
+      "member": {
+        "shape": "AutoTuneMaintenanceSchedule"
+      },
+      "max": 100
+    },
+    "AutoTuneOptions": {
+      "type": "structure",
+      "members": {
+        "DesiredState": {
+          "shape": "AutoTuneDesiredState",
+          "documentation": "<p>Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED. </p>"
+        },
+        "RollbackOnDisable": {
+          "shape": "RollbackOnDisable",
+          "documentation": "<p>Specifies the rollback state while disabling Auto-Tune for the domain. Valid values are NO_ROLLBACK, DEFAULT_ROLLBACK. </p>"
+        },
+        "MaintenanceSchedules": {
+          "shape": "AutoTuneMaintenanceScheduleList",
+          "documentation": "<p>Specifies list of maitenance schedules. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the Auto-Tune options: the Auto-Tune desired state for the domain, rollback state when disabling Auto-Tune options and list of maintenance schedules.</p>"
+    },
+    "AutoTuneOptionsInput": {
+      "type": "structure",
+      "members": {
+        "DesiredState": {
+          "shape": "AutoTuneDesiredState",
+          "documentation": "<p>Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED. </p>"
+        },
+        "MaintenanceSchedules": {
+          "shape": "AutoTuneMaintenanceScheduleList",
+          "documentation": "<p>Specifies list of maitenance schedules. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the Auto-Tune options: the Auto-Tune desired state for the domain and list of maintenance schedules.</p>"
+    },
+    "AutoTuneOptionsOutput": {
+      "type": "structure",
+      "members": {
+        "State": {
+          "shape": "AutoTuneState",
+          "documentation": "<p>Specifies the <code>AutoTuneState</code> for the Elasticsearch domain.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "String",
+          "documentation": "<p>Specifies the error message while enabling or disabling the Auto-Tune.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the Auto-Tune options: the Auto-Tune desired state for the domain and list of maintenance schedules.</p>"
+    },
+    "AutoTuneOptionsStatus": {
+      "type": "structure",
+      "members": {
+        "Options": {
+          "shape": "AutoTuneOptions",
+          "documentation": "<p> Specifies Auto-Tune options for the specified Elasticsearch domain.</p>"
+        },
+        "Status": {
+          "shape": "AutoTuneStatus",
+          "documentation": "<p> Specifies Status of the Auto-Tune options for the specified Elasticsearch domain.</p>"
+        }
+      },
+      "documentation": "<p> Specifies the status of Auto-Tune options for the specified Elasticsearch domain.</p>"
+    },
+    "AutoTuneState": {
+      "type": "string",
+      "documentation": "<p>Specifies the Auto-Tune state for the Elasticsearch domain. For valid states see the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a>.</p>",
+      "enum": [
+        "ENABLED",
+        "DISABLED",
+        "ENABLE_IN_PROGRESS",
+        "DISABLE_IN_PROGRESS",
+        "DISABLED_AND_ROLLBACK_SCHEDULED",
+        "DISABLED_AND_ROLLBACK_IN_PROGRESS",
+        "DISABLED_AND_ROLLBACK_COMPLETE",
+        "DISABLED_AND_ROLLBACK_ERROR",
+        "ERROR"
+      ]
+    },
+    "AutoTuneStatus": {
+      "type": "structure",
+      "required": [
+        "CreationDate",
+        "UpdateDate",
+        "State"
+      ],
+      "members": {
+        "CreationDate": {
+          "shape": "UpdateTimestamp",
+          "documentation": "<p>Timestamp which tells Auto-Tune options creation date .</p>"
+        },
+        "UpdateDate": {
+          "shape": "UpdateTimestamp",
+          "documentation": "<p>Timestamp which tells Auto-Tune options last updated time.</p>"
+        },
+        "UpdateVersion": {
+          "shape": "UIntValue",
+          "documentation": "<p>Specifies the Auto-Tune options latest version.</p>"
+        },
+        "State": {
+          "shape": "AutoTuneState",
+          "documentation": "<p>Specifies the <code>AutoTuneState</code> for the Elasticsearch domain.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "String",
+          "documentation": "<p>Specifies the error message while enabling or disabling the Auto-Tune options.</p>"
+        },
+        "PendingDeletion": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the Elasticsearch domain is being deleted.</p>"
+        }
+      },
+      "documentation": "<p>Provides the current status of the Auto-Tune options. </p>"
+    },
+    "AutoTuneType": {
+      "type": "string",
+      "documentation": "<p>Specifies Auto-Tune type. Valid value is SCHEDULED_ACTION. </p>",
+      "enum": [
+        "SCHEDULED_ACTION"
+      ]
+    },
     "BackendRole": {
       "type": "string",
       "max": 256,
@@ -1338,6 +1956,43 @@
     },
     "Boolean": {
       "type": "boolean"
+    },
+    "CancelDomainConfigChangeRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>Name of the OpenSearch Service domain configuration request to cancel.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        },
+        "DryRun": {
+          "shape": "DryRun",
+          "documentation": "<p>When set to <b>True</b>, returns the list of change IDs and properties that will be cancelled without actually cancelling the change.</p>"
+        }
+      },
+      "documentation": "<p>Container for parameters of the <code>CancelDomainConfigChange</code> operation.</p>"
+    },
+    "CancelDomainConfigChangeResponse": {
+      "type": "structure",
+      "members": {
+        "DryRun": {
+          "shape": "DryRun",
+          "documentation": "<p>Whether or not the request was a dry run. If <b>True</b>, the changes were not actually cancelled.</p>"
+        },
+        "CancelledChangeIds": {
+          "shape": "GUIDList",
+          "documentation": "<p>The unique identifiers of the changes that were cancelled.</p>"
+        },
+        "CancelledChangeProperties": {
+          "shape": "CancelledChangePropertyList",
+          "documentation": "<p>The domain change properties that were cancelled.</p>"
+        }
+      },
+      "documentation": "<p>Contains the details of the cancelled domain config change.</p>"
     },
     "CancelElasticsearchServiceSoftwareUpdateRequest": {
       "type": "structure",
@@ -1361,6 +2016,150 @@
         }
       },
       "documentation": "<p>The result of a <code>CancelElasticsearchServiceSoftwareUpdate</code> operation. Contains the status of the update.</p>"
+    },
+    "CancelledChangeProperty": {
+      "type": "structure",
+      "members": {
+        "PropertyName": {
+          "shape": "String",
+          "documentation": "<p>The name of the property whose change was cancelled.</p>"
+        },
+        "CancelledValue": {
+          "shape": "String",
+          "documentation": "<p>The pending value of the property that was cancelled. This would have been the eventual value of the property if the chance had not been cancelled.</p>"
+        },
+        "ActiveValue": {
+          "shape": "String",
+          "documentation": "<p>The current value of the property, after the change was cancelled.</p>"
+        }
+      },
+      "documentation": "<p>A property change that was cancelled for an Amazon OpenSearch Service domain.</p>"
+    },
+    "CancelledChangePropertyList": {
+      "type": "list",
+      "member": {
+        "shape": "CancelledChangeProperty"
+      }
+    },
+    "ChangeProgressDetails": {
+      "type": "structure",
+      "members": {
+        "ChangeId": {
+          "shape": "GUID",
+          "documentation": "<p>The unique change identifier associated with a specific domain configuration change.</p>"
+        },
+        "Message": {
+          "shape": "Message",
+          "documentation": "<p>Contains an optional message associated with the domain configuration change.</p>"
+        },
+        "ConfigChangeStatus": {
+          "shape": "ConfigChangeStatus",
+          "documentation": "<p>The current status of the configuration change.</p>"
+        },
+        "StartTime": {
+          "shape": "UpdateTimestamp",
+          "documentation": "<p>The time that the configuration change was initiated, in Universal Coordinated Time (UTC).</p>"
+        },
+        "LastUpdatedTime": {
+          "shape": "UpdateTimestamp",
+          "documentation": "<p>The last time that the configuration change was updated.</p>"
+        },
+        "InitiatedBy": {
+          "shape": "InitiatedBy",
+          "documentation": "<p>The IAM principal who initiated the configuration change.</p>"
+        }
+      },
+      "documentation": "<p>Specifies change details of the domain configuration change.</p>"
+    },
+    "ChangeProgressStage": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "ChangeProgressStageName",
+          "documentation": "<p>The name of the specific progress stage.</p>"
+        },
+        "Status": {
+          "shape": "ChangeProgressStageStatus",
+          "documentation": "<p>The overall status of a specific progress stage.</p>"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>The description of the progress stage.</p>"
+        },
+        "LastUpdated": {
+          "shape": "LastUpdated",
+          "documentation": "<p>The last updated timestamp of the progress stage.</p>"
+        }
+      },
+      "documentation": "<p>A progress stage details of a specific domain configuration change.</p>"
+    },
+    "ChangeProgressStageList": {
+      "type": "list",
+      "member": {
+        "shape": "ChangeProgressStage"
+      },
+      "documentation": "<p>The list of progress stages of a specific domain configuration change.</p>"
+    },
+    "ChangeProgressStageName": {
+      "type": "string",
+      "max": 64,
+      "min": 1
+    },
+    "ChangeProgressStageStatus": {
+      "type": "string",
+      "max": 256,
+      "min": 1
+    },
+    "ChangeProgressStatusDetails": {
+      "type": "structure",
+      "members": {
+        "ChangeId": {
+          "shape": "GUID",
+          "documentation": "<p>The unique change identifier associated with a specific domain configuration change.</p>"
+        },
+        "StartTime": {
+          "shape": "UpdateTimestamp",
+          "documentation": "<p>The time at which the configuration change is made on the domain.</p>"
+        },
+        "Status": {
+          "shape": "OverallChangeStatus",
+          "documentation": "<p>The overall status of the domain configuration change. This field can take the following values: <code>PENDING</code>, <code>PROCESSING</code>, <code>COMPLETED</code> and <code>FAILED</code></p>"
+        },
+        "PendingProperties": {
+          "shape": "StringList",
+          "documentation": "<p>The list of properties involved in the domain configuration change that are still in pending.</p>"
+        },
+        "CompletedProperties": {
+          "shape": "StringList",
+          "documentation": "<p>The list of properties involved in the domain configuration change that are completed.</p>"
+        },
+        "TotalNumberOfStages": {
+          "shape": "TotalNumberOfStages",
+          "documentation": "<p>The total number of stages required for the configuration change.</p>"
+        },
+        "ChangeProgressStages": {
+          "shape": "ChangeProgressStageList",
+          "documentation": "<p>The specific stages that the domain is going through to perform the configuration change.</p>"
+        },
+        "ConfigChangeStatus": {
+          "shape": "ConfigChangeStatus",
+          "documentation": "<p>The current status of the configuration change.</p>"
+        },
+        "LastUpdatedTime": {
+          "shape": "UpdateTimestamp",
+          "documentation": "<p>The last time that the status of the configuration change was updated.</p>"
+        },
+        "InitiatedBy": {
+          "shape": "InitiatedBy",
+          "documentation": "<p>The IAM principal who initiated the configuration change.</p>"
+        }
+      },
+      "documentation": "<p>The progress details of a specific domain configuration change.</p>"
+    },
+    "ClientToken": {
+      "type": "string",
+      "max": 64,
+      "min": 1
     },
     "CloudWatchLogsLogGroupArn": {
       "type": "string",
@@ -1406,6 +2205,19 @@
       },
       "documentation": "<p>Status of the Cognito options for the specified Elasticsearch domain.</p>"
     },
+    "ColdStorageOptions": {
+      "type": "structure",
+      "required": [
+        "Enabled"
+      ],
+      "members": {
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Enable cold storage option. Accepted values true or false</p>"
+        }
+      },
+      "documentation": "<p>Specifies the configuration for cold storage options such as enabled</p>"
+    },
     "CommitMessage": {
       "type": "string",
       "max": 160
@@ -1428,6 +2240,19 @@
         }
       },
       "documentation": "<p> A map from an <code> <a>ElasticsearchVersion</a> </code> to a list of compatible <code> <a>ElasticsearchVersion</a> </code> s to which the domain can be upgraded. </p>"
+    },
+    "ConfigChangeStatus": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Initializing",
+        "Validating",
+        "ValidationFailed",
+        "ApplyingChanges",
+        "Completed",
+        "PendingUserInput",
+        "Cancelled"
+      ]
     },
     "ConnectionAlias": {
       "type": "string",
@@ -1494,6 +2319,14 @@
         "AdvancedSecurityOptions": {
           "shape": "AdvancedSecurityOptionsInput",
           "documentation": "<p>Specifies advanced security options.</p>"
+        },
+        "AutoTuneOptions": {
+          "shape": "AutoTuneOptionsInput",
+          "documentation": "<p>Specifies Auto-Tune options.</p>"
+        },
+        "TagList": {
+          "shape": "TagList",
+          "documentation": "<p>A list of <code>Tag</code> added during domain creation.</p>"
         }
       }
     },
@@ -1592,6 +2425,41 @@
         }
       },
       "documentation": "<p> Container for response returned by <code> <a>CreatePackage</a> </code> operation. </p>"
+    },
+    "CreateVpcEndpointRequest": {
+      "type": "structure",
+      "required": [
+        "DomainArn",
+        "VpcOptions"
+      ],
+      "members": {
+        "DomainArn": {
+          "shape": "DomainArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the domain to grant access to.</p>"
+        },
+        "VpcOptions": {
+          "shape": "VPCOptions",
+          "documentation": "<p>Options to specify the subnets and security groups for the endpoint.</p>"
+        },
+        "ClientToken": {
+          "shape": "ClientToken",
+          "documentation": "<p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>"
+        }
+      },
+      "documentation": "<p>Container for the parameters to the <code><a>CreateVpcEndpointRequest</a></code> operation.</p>"
+    },
+    "CreateVpcEndpointResponse": {
+      "type": "structure",
+      "required": [
+        "VpcEndpoint"
+      ],
+      "members": {
+        "VpcEndpoint": {
+          "shape": "VpcEndpoint",
+          "documentation": "<p>Information about the newly created VPC endpoint.</p>"
+        }
+      },
+      "documentation": "<p>Container for response parameters to the <code><a>CreateVpcEndpoint</a></code> operation. Contains the configuration and status of the VPC Endpoint being created.</p>"
     },
     "CreatedAt": {
       "type": "timestamp"
@@ -1702,6 +2570,34 @@
       },
       "documentation": "<p> Container for response parameters to <code> <a>DeletePackage</a> </code> operation. </p>"
     },
+    "DeleteVpcEndpointRequest": {
+      "type": "structure",
+      "required": [
+        "VpcEndpointId"
+      ],
+      "members": {
+        "VpcEndpointId": {
+          "shape": "VpcEndpointId",
+          "documentation": "<p>The unique identifier of the endpoint to be deleted.</p>",
+          "location": "uri",
+          "locationName": "VpcEndpointId"
+        }
+      },
+      "documentation": "<p>Deletes an Amazon OpenSearch Service-managed interface VPC endpoint.</p>"
+    },
+    "DeleteVpcEndpointResponse": {
+      "type": "structure",
+      "required": [
+        "VpcEndpointSummary"
+      ],
+      "members": {
+        "VpcEndpointSummary": {
+          "shape": "VpcEndpointSummary",
+          "documentation": "<p>Information about the deleted endpoint, including its current status (<code>DELETING</code> or <code>DELETE_FAILED</code>).</p>"
+        }
+      },
+      "documentation": "<p>Container for response parameters to the <code><a>DeleteVpcEndpoint</a></code> operation. Contains the summarized detail of the VPC Endpoint being deleted.</p>"
+    },
     "DeploymentCloseDateTimeStamp": {
       "type": "timestamp"
     },
@@ -1714,6 +2610,79 @@
         "NOT_ELIGIBLE",
         "ELIGIBLE"
       ]
+    },
+    "DeploymentType": {
+      "type": "string",
+      "max": 128,
+      "min": 2
+    },
+    "DescribeDomainAutoTunesRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>Specifies the domain name for which you want Auto-Tune action details.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>Set this value to limit the number of results returned. If not specified, defaults to 100.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.</p>"
+        }
+      },
+      "documentation": "<p>Container for the parameters to the <code>DescribeDomainAutoTunes</code> operation.</p>"
+    },
+    "DescribeDomainAutoTunesResponse": {
+      "type": "structure",
+      "members": {
+        "AutoTunes": {
+          "shape": "AutoTuneList",
+          "documentation": "<p>Specifies the list of setting adjustments that Auto-Tune has made to the domain. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Specifies an identifier to allow retrieval of paginated results.</p>"
+        }
+      },
+      "documentation": "<p>The result of <code>DescribeDomainAutoTunes</code> request. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information. </p>"
+    },
+    "DescribeDomainChangeProgressRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The domain you want to get the progress information about.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        },
+        "ChangeId": {
+          "shape": "GUID",
+          "documentation": "<p>The specific change ID for which you want to get progress information. This is an optional parameter. If omitted, the service returns information about the most recent configuration change. </p>",
+          "location": "querystring",
+          "locationName": "changeid"
+        }
+      },
+      "documentation": "<p>Container for the parameters to the <code>DescribeDomainChangeProgress</code> operation. Specifies the domain name and optional change specific identity for which you want progress information. </p>"
+    },
+    "DescribeDomainChangeProgressResponse": {
+      "type": "structure",
+      "members": {
+        "ChangeProgressStatus": {
+          "shape": "ChangeProgressStatusDetails",
+          "documentation": "<p>Progress information for the configuration change that is requested in the <code>DescribeDomainChangeProgress</code> request. </p>"
+        }
+      },
+      "documentation": "<p>The result of a <code>DescribeDomainChangeProgress</code> request. Contains the progress information of the requested domain change. </p>"
     },
     "DescribeElasticsearchDomainConfigRequest": {
       "type": "structure",
@@ -1907,7 +2876,7 @@
         },
         "Value": {
           "shape": "DescribePackagesFilterValues",
-          "documentation": "<p>A list of values for the specified field.</p>"
+          "documentation": "<p>A non-empty list of values for the specified field.</p>"
         }
       },
       "documentation": "<p>Filter to apply in <code>DescribePackage</code> response.</p>"
@@ -1935,7 +2904,8 @@
       "type": "list",
       "member": {
         "shape": "DescribePackagesFilterValue"
-      }
+      },
+      "min": 1
     },
     "DescribePackagesRequest": {
       "type": "structure",
@@ -2044,6 +3014,43 @@
       },
       "documentation": "<p>Container for results from <code>DescribeReservedElasticsearchInstances</code></p>"
     },
+    "DescribeVpcEndpointsRequest": {
+      "type": "structure",
+      "required": [
+        "VpcEndpointIds"
+      ],
+      "members": {
+        "VpcEndpointIds": {
+          "shape": "VpcEndpointIdList",
+          "documentation": "<p>The unique identifiers of the endpoints to get information about.</p>"
+        }
+      },
+      "documentation": "<p>Container for request parameters to the <code><a>DescribeVpcEndpoints</a></code> operation. Specifies the list of VPC endpoints to be described.</p>"
+    },
+    "DescribeVpcEndpointsResponse": {
+      "type": "structure",
+      "required": [
+        "VpcEndpoints",
+        "VpcEndpointErrors"
+      ],
+      "members": {
+        "VpcEndpoints": {
+          "shape": "VpcEndpoints",
+          "documentation": "<p>Information about each requested VPC endpoint.</p>"
+        },
+        "VpcEndpointErrors": {
+          "shape": "VpcEndpointErrorList",
+          "documentation": "<p>Any errors associated with the request.</p>"
+        }
+      },
+      "documentation": "<p>Container for response parameters to the <code><a>DescribeVpcEndpoints</a></code> operation. Returns a list containing configuration details and status of the VPC Endpoints as well as a list containing error responses of the endpoints that could not be described</p>"
+    },
+    "Description": {
+      "type": "string"
+    },
+    "DisableTimestamp": {
+      "type": "timestamp"
+    },
     "DissociatePackageRequest": {
       "type": "structure",
       "required": [
@@ -2076,6 +3083,12 @@
       },
       "documentation": "<p> Container for response returned by <code> <a>DissociatePackage</a> </code> operation. </p>"
     },
+    "DomainArn": {
+      "type": "string",
+      "max": 512,
+      "min": 1,
+      "pattern": "arn:aws[a-z\\-]*:[a-z]+:[a-z0-9\\-]+:[0-9]+:domain\\/[a-z0-9\\-]+"
+    },
     "DomainEndpointOptions": {
       "type": "structure",
       "members": {
@@ -2085,7 +3098,7 @@
         },
         "TLSSecurityPolicy": {
           "shape": "TLSSecurityPolicy",
-          "documentation": "<p>Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain. <br/> It can be one of the following values: <ul> <li><b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy which supports TLSv1.0 and higher.</li> <li><b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy which supports only TLSv1.2</li> </ul> </p>"
+          "documentation": "<p>Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain. <br/> It can be one of the following values: <ul> <li><b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy that supports TLS version 1.0 to TLS version 1.2</li> <li><b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy that supports only TLS version 1.2</li> <li><b>Policy-Min-TLS-1-2-PFS-2023-10: </b> TLS security policy that supports TLS version 1.2 to TLS version 1.3 with perfect forward secrecy cipher suites</li> </ul> </p>"
         },
         "CustomEndpointEnabled": {
           "shape": "Boolean",
@@ -2132,6 +3145,10 @@
         "DomainName": {
           "shape": "DomainName",
           "documentation": "<p> Specifies the <code>DomainName</code>.</p>"
+        },
+        "EngineType": {
+          "shape": "EngineType",
+          "documentation": "<p> Specifies the <code>EngineType</code> of the domain.</p>"
         }
       }
     },
@@ -2236,8 +3253,56 @@
         "DISSOCIATION_FAILED"
       ]
     },
+    "DomainProcessingStatusType": {
+      "type": "string",
+      "enum": [
+        "Creating",
+        "Active",
+        "Modifying",
+        "UpgradingEngineVersion",
+        "UpdatingServiceSoftware",
+        "Isolated",
+        "Deleting"
+      ]
+    },
     "Double": {
       "type": "double"
+    },
+    "DryRun": {
+      "type": "boolean"
+    },
+    "DryRunResults": {
+      "type": "structure",
+      "members": {
+        "DeploymentType": {
+          "shape": "DeploymentType",
+          "documentation": "<p> Specifies the deployment mechanism through which the update shall be applied on the domain. Possible responses are <code>Blue/Green</code> (The update will require a blue/green deployment.) <code>DynamicUpdate</code> (The update can be applied in-place without a Blue/Green deployment required.) <code>Undetermined</code> (The domain is undergoing an update which needs to complete before the deployment type can be predicted.) <code>None</code> (The configuration change matches the current configuration and will not result in any update.) </p>"
+        },
+        "Message": {
+          "shape": "Message",
+          "documentation": "<p>Contains an optional message associated with the DryRunResults.</p>"
+        }
+      }
+    },
+    "Duration": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "DurationValue",
+          "documentation": "<p> Integer to specify the value of a maintenance schedule duration. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+        },
+        "Unit": {
+          "shape": "TimeUnit",
+          "documentation": "<p>Specifies the unit of a maintenance schedule duration. Valid value is HOURS. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+        }
+      },
+      "documentation": "<p>Specifies maintenance schedule duration: duration value and duration unit. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+    },
+    "DurationValue": {
+      "type": "long",
+      "documentation": "<p> Integer to specify the value of a maintenance schedule duration. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>",
+      "max": 24,
+      "min": 1
     },
     "EBSOptions": {
       "type": "structure",
@@ -2256,7 +3321,11 @@
         },
         "Iops": {
           "shape": "IntegerClass",
-          "documentation": "<p>Specifies the IOPD for a Provisioned IOPS EBS volume (SSD).</p>"
+          "documentation": "<p>Specifies the IOPS for Provisioned IOPS And GP3 EBS volume (SSD).</p>"
+        },
+        "Throughput": {
+          "shape": "IntegerClass",
+          "documentation": "<p>Specifies the Throughput for GP3 EBS volume (SSD).</p>"
         }
       },
       "documentation": "<p>Options to enable, disable, and specify the properties of EBS storage volumes. For more information, see <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs\" target=\"_blank\"> Configuring EBS-based Storage</a>.</p>"
@@ -2391,6 +3460,10 @@
         "WarmCount": {
           "shape": "IntegerClass",
           "documentation": "<p>The number of warm nodes in the cluster.</p>"
+        },
+        "ColdStorageOptions": {
+          "shape": "ColdStorageOptions",
+          "documentation": "<p>Specifies the <code>ColdStorageOptions</code> config for Elasticsearch Domain</p>"
         }
       },
       "documentation": "<p>Specifies the configuration for the domain cluster, such as the type and number of instances.</p>"
@@ -2467,6 +3540,18 @@
         "AdvancedSecurityOptions": {
           "shape": "AdvancedSecurityOptionsStatus",
           "documentation": "<p>Specifies <code>AdvancedSecurityOptions</code> for the domain. </p>"
+        },
+        "AutoTuneOptions": {
+          "shape": "AutoTuneOptionsStatus",
+          "documentation": "<p>Specifies <code>AutoTuneOptions</code> for the domain. </p>"
+        },
+        "ChangeProgressDetails": {
+          "shape": "ChangeProgressDetails",
+          "documentation": "<p>Specifies change details of the domain configuration change.</p>"
+        },
+        "ModifyingProperties": {
+          "shape": "ModifyingPropertiesList",
+          "documentation": "<p>Information about the domain properties that are currently being modified.</p>"
         }
       },
       "documentation": "<p>The configuration of an Elasticsearch domain.</p>"
@@ -2570,6 +3655,22 @@
         "AdvancedSecurityOptions": {
           "shape": "AdvancedSecurityOptions",
           "documentation": "<p>The current status of the Elasticsearch domain's advanced security options.</p>"
+        },
+        "AutoTuneOptions": {
+          "shape": "AutoTuneOptionsOutput",
+          "documentation": "<p>The current status of the Elasticsearch domain's Auto-Tune options.</p>"
+        },
+        "ChangeProgressDetails": {
+          "shape": "ChangeProgressDetails",
+          "documentation": "<p>Specifies change details of the domain configuration change.</p>"
+        },
+        "DomainProcessingStatus": {
+          "shape": "DomainProcessingStatusType",
+          "documentation": "<p>The status of any changes that are currently in progress for the domain.</p>"
+        },
+        "ModifyingProperties": {
+          "shape": "ModifyingPropertiesList",
+          "documentation": "<p>Information about the domain properties that are currently being modified.</p>"
         }
       },
       "documentation": "<p>The current status of an Elasticsearch domain.</p>"
@@ -2614,7 +3715,8 @@
       "documentation": "<p> Status of the Elasticsearch version options for the specified Elasticsearch domain.</p>"
     },
     "ElasticsearchVersionString": {
-      "type": "string"
+      "type": "string",
+      "pattern": "^[0-9]{1}\\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\\.[0-9]{1,2}$|^OS_[0-9]{1,2}\\.[0-9]{1,2}$"
     },
     "EncryptionAtRestOptions": {
       "type": "structure",
@@ -2648,6 +3750,10 @@
       },
       "documentation": "<p> Status of the Encryption At Rest options for the specified Elasticsearch domain.</p>"
     },
+    "Endpoint": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9\\-\\.]+$"
+    },
     "EndpointsMap": {
       "type": "map",
       "key": {
@@ -2656,6 +3762,13 @@
       "value": {
         "shape": "ServiceUrl"
       }
+    },
+    "EngineType": {
+      "type": "string",
+      "enum": [
+        "OpenSearch",
+        "Elasticsearch"
+      ]
     },
     "ErrorDetails": {
       "type": "structure",
@@ -2697,6 +3810,12 @@
     "GUID": {
       "type": "string",
       "pattern": "\\p{XDigit}{8}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{12}"
+    },
+    "GUIDList": {
+      "type": "list",
+      "member": {
+        "shape": "GUID"
+      }
     },
     "GetCompatibleElasticsearchVersionsRequest": {
       "type": "structure",
@@ -2891,6 +4010,13 @@
         "shape": "InboundCrossClusterSearchConnection"
       }
     },
+    "InitiatedBy": {
+      "type": "string",
+      "enum": [
+        "CUSTOMER",
+        "SERVICE"
+      ]
+    },
     "InstanceCount": {
       "type": "integer",
       "documentation": "<p>Specifies the number of EC2 instances in the Elasticsearch domain.</p>",
@@ -2982,15 +4108,27 @@
       },
       "documentation": "<p> Map of Role of the Instance and Limits that are applicable. Role performed by given Instance in Elasticsearch can be one of the following: <ul> <li>data: If the given InstanceType is used as data node</li> <li>master: If the given InstanceType is used as master node</li> <li>ultra_warm: If the given InstanceType is used as warm node</li> </ul> </p>"
     },
+    "ListDomainNamesRequest": {
+      "type": "structure",
+      "members": {
+        "EngineType": {
+          "shape": "EngineType",
+          "documentation": "<p> Optional parameter to filter the output by domain engine type. Acceptable values are 'Elasticsearch' and 'OpenSearch'. </p>",
+          "location": "querystring",
+          "locationName": "engineType"
+        }
+      },
+      "documentation": "<p> Container for the parameters to the <code><a>ListDomainNames</a></code> operation.</p>"
+    },
     "ListDomainNamesResponse": {
       "type": "structure",
       "members": {
         "DomainNames": {
           "shape": "DomainInfoList",
-          "documentation": "<p>List of Elasticsearch domain names.</p>"
+          "documentation": "<p>List of domain names and respective engine types.</p>"
         }
       },
-      "documentation": "<p>The result of a <code>ListDomainNames</code> operation. Contains the names of all Elasticsearch domains owned by this account.</p>"
+      "documentation": "<p>The result of a <code>ListDomainNames</code> operation. Contains the names of all domains owned by this account and their respective engine types.</p>"
     },
     "ListDomainsForPackageRequest": {
       "type": "structure",
@@ -3174,6 +4312,114 @@
       },
       "documentation": "<p>The result of a <code>ListTags</code> operation. Contains tags for all requested Elasticsearch domains.</p>"
     },
+    "ListVpcEndpointAccessRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The name of the OpenSearch Service domain to retrieve access information for.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Provides an identifier to allow retrieval of paginated results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      },
+      "documentation": "<p>Retrieves information about each principal that is allowed to access a given Amazon OpenSearch Service domain through the use of an interface VPC endpoint</p>"
+    },
+    "ListVpcEndpointAccessResponse": {
+      "type": "structure",
+      "required": [
+        "AuthorizedPrincipalList",
+        "NextToken"
+      ],
+      "members": {
+        "AuthorizedPrincipalList": {
+          "shape": "AuthorizedPrincipalList",
+          "documentation": "<p>List of <code>AuthorizedPrincipal</code> describing the details of the permissions to manage VPC endpoints against the specified domain.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Provides an identifier to allow retrieval of paginated results.</p>"
+        }
+      },
+      "documentation": "<p>Container for response parameters to the <code><a>ListVpcEndpointAccess</a></code> operation. Returns a list of accounts id and account type authorized to manage VPC endpoints.</p>"
+    },
+    "ListVpcEndpointsForDomainRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>Name of the ElasticSearch domain whose VPC endpoints are to be listed.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Provides an identifier to allow retrieval of paginated results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      },
+      "documentation": "<p>Container for request parameters to the <code><a>ListVpcEndpointsForDomain</a></code> operation. Specifies the domain whose VPC endpoints will be listed.</p>"
+    },
+    "ListVpcEndpointsForDomainResponse": {
+      "type": "structure",
+      "required": [
+        "VpcEndpointSummaryList",
+        "NextToken"
+      ],
+      "members": {
+        "VpcEndpointSummaryList": {
+          "shape": "VpcEndpointSummaryList",
+          "documentation": "<p>Provides list of <code>VpcEndpointSummary</code> summarizing details of the VPC endpoints.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Information about each endpoint associated with the domain.</p>"
+        }
+      },
+      "documentation": "<p>Container for response parameters to the <code><a>ListVpcEndpointsForDomain</a></code> operation. Returns a list containing summarized details of the VPC endpoints.</p>"
+    },
+    "ListVpcEndpointsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Identifier to allow retrieval of paginated results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      },
+      "documentation": "<p>Container for request parameters to the <code><a>ListVpcEndpoints</a></code> operation.</p>"
+    },
+    "ListVpcEndpointsResponse": {
+      "type": "structure",
+      "required": [
+        "VpcEndpointSummaryList",
+        "NextToken"
+      ],
+      "members": {
+        "VpcEndpointSummaryList": {
+          "shape": "VpcEndpointSummaryList",
+          "documentation": "<p>Information about each endpoint.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Provides an identifier to allow retrieval of paginated results.</p>"
+        }
+      },
+      "documentation": "<p>Container for response parameters to the <code><a>ListVpcEndpoints</a></code> operation. Returns a list containing summarized details of the VPC endpoints.</p>"
+    },
     "LogPublishingOption": {
       "type": "structure",
       "members": {
@@ -3247,9 +4493,42 @@
       "type": "integer",
       "documentation": "<p> Maximum number of Instances that can be instantiated for given InstanceType. </p>"
     },
+    "Message": {
+      "type": "string",
+      "max": 1024,
+      "min": 0
+    },
     "MinimumInstanceCount": {
       "type": "integer",
       "documentation": "<p> Minimum number of Instances that can be instantiated for given InstanceType. </p>"
+    },
+    "ModifyingProperties": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "String",
+          "documentation": "<p>The name of the property that is currently being modified.</p>"
+        },
+        "ActiveValue": {
+          "shape": "String",
+          "documentation": "<p>The current value of the domain property that is being modified.</p>"
+        },
+        "PendingValue": {
+          "shape": "String",
+          "documentation": "<p>The value that the property that is currently being modified will eventually have.</p>"
+        },
+        "ValueType": {
+          "shape": "PropertyValueType",
+          "documentation": "<p>The type of value that is currently being modified. Properties can have two types:</p> <ul> <li><b>PLAIN_TEXT</b>: Contain direct values such as \"1\", \"True\", or \"c5.large.search\".</li> <li><b>STRINGIFIED_JSON</b>: Contain content in JSON format, such as {\"Enabled\":\"True\"}\".</li> </ul>"
+        }
+      },
+      "documentation": "<p>Information about the domain properties that are currently being modified.</p>"
+    },
+    "ModifyingPropertiesList": {
+      "type": "list",
+      "member": {
+        "shape": "ModifyingProperties"
+      }
     },
     "NextToken": {
       "type": "string",
@@ -3386,6 +4665,16 @@
         "shape": "OutboundCrossClusterSearchConnection"
       }
     },
+    "OverallChangeStatus": {
+      "type": "string",
+      "documentation": "<p>The overall status value of the domain configuration change.</p>",
+      "enum": [
+        "PENDING",
+        "PROCESSING",
+        "COMPLETED",
+        "FAILED"
+      ]
+    },
     "OwnerId": {
       "type": "string",
       "max": 12,
@@ -3518,6 +4807,21 @@
     "PolicyDocument": {
       "type": "string",
       "documentation": "<p>Access policy rules for an Elasticsearch domain service endpoints. For more information, see <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-access-policies\" target=\"_blank\">Configuring Access Policies</a> in the <i>Amazon Elasticsearch Service Developer Guide</i>. The maximum size of a policy document is 100 KB.</p>"
+    },
+    "PrincipalType": {
+      "type": "string",
+      "documentation": "<p>Specifies the type of AWS account permitted to manage VPC endpoints.: <ul> <li>AWS_ACCOUNT: Indicates that the account is owned by an AWS user.</li> <li>AWS_SERVICE: Indicates the the account is owned by an AWS service.</li> </ul> </p>",
+      "enum": [
+        "AWS_ACCOUNT",
+        "AWS_SERVICE"
+      ]
+    },
+    "PropertyValueType": {
+      "type": "string",
+      "enum": [
+        "PLAIN_TEXT",
+        "STRINGIFIED_JSON"
+      ]
     },
     "PurchaseReservedElasticsearchInstanceOfferingRequest": {
       "type": "structure",
@@ -3745,10 +5049,43 @@
         "NO_UPFRONT"
       ]
     },
+    "RevokeVpcEndpointAccessRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName",
+        "Account"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The name of the OpenSearch Service domain.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        },
+        "Account": {
+          "shape": "AWSAccount",
+          "documentation": "<p>The account ID to revoke access from.</p>"
+        }
+      },
+      "documentation": "<p>Revokes access to an Amazon OpenSearch Service domain that was provided through an interface VPC endpoint.</p>"
+    },
+    "RevokeVpcEndpointAccessResponse": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p>Container for response parameters to the <code><a>RevokeVpcEndpointAccess</a></code> operation. The response body for this operation is empty.</p>"
+    },
     "RoleArn": {
       "type": "string",
       "max": 2048,
       "min": 20
+    },
+    "RollbackOnDisable": {
+      "type": "string",
+      "documentation": "<p>Specifies the rollback state while disabling Auto-Tune for the domain. Valid values are NO_ROLLBACK, DEFAULT_ROLLBACK.</p>",
+      "enum": [
+        "NO_ROLLBACK",
+        "DEFAULT_ROLLBACK"
+      ]
     },
     "S3BucketName": {
       "type": "string",
@@ -3846,6 +5183,49 @@
       },
       "documentation": "<p>Describes the SAML application configured for the domain.</p>"
     },
+    "ScheduledAutoTuneActionType": {
+      "type": "string",
+      "documentation": "<p>Specifies Auto-Tune action type. Valid values are JVM_HEAP_SIZE_TUNING and JVM_YOUNG_GEN_TUNING. </p>",
+      "enum": [
+        "JVM_HEAP_SIZE_TUNING",
+        "JVM_YOUNG_GEN_TUNING"
+      ]
+    },
+    "ScheduledAutoTuneDescription": {
+      "type": "string",
+      "documentation": "<p>Specifies Auto-Tune action description. </p>"
+    },
+    "ScheduledAutoTuneDetails": {
+      "type": "structure",
+      "members": {
+        "Date": {
+          "shape": "AutoTuneDate",
+          "documentation": "<p>Specifies timestamp for the Auto-Tune action scheduled for the domain. </p>"
+        },
+        "ActionType": {
+          "shape": "ScheduledAutoTuneActionType",
+          "documentation": "<p>Specifies Auto-Tune action type. Valid values are JVM_HEAP_SIZE_TUNING and JVM_YOUNG_GEN_TUNING. </p>"
+        },
+        "Action": {
+          "shape": "ScheduledAutoTuneDescription",
+          "documentation": "<p>Specifies Auto-Tune action description. </p>"
+        },
+        "Severity": {
+          "shape": "ScheduledAutoTuneSeverityType",
+          "documentation": "<p>Specifies Auto-Tune action severity. Valid values are LOW, MEDIUM and HIGH. </p>"
+        }
+      },
+      "documentation": "<p>Specifies details of the scheduled Auto-Tune action. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information. </p>"
+    },
+    "ScheduledAutoTuneSeverityType": {
+      "type": "string",
+      "documentation": "<p>Specifies Auto-Tune action severity. Valid values are LOW, MEDIUM and HIGH. </p>",
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH"
+      ]
+    },
     "ServiceSoftwareOptions": {
       "type": "structure",
       "members": {
@@ -3916,6 +5296,9 @@
       },
       "documentation": "<p>Status of a daily automated snapshot.</p>"
     },
+    "StartAt": {
+      "type": "timestamp"
+    },
     "StartElasticsearchServiceSoftwareUpdateRequest": {
       "type": "structure",
       "required": [
@@ -3944,7 +5327,7 @@
     },
     "StorageSubTypeName": {
       "type": "string",
-      "documentation": "<p> SubType of the given storage type. List of available sub-storage options: For \"instance\" storageType we wont have any storageSubType, in case of \"ebs\" storageType we will have following valid storageSubTypes <ol> <li>standard</li> <li>gp2</li> <li>io1</li> </ol> Refer <code><a>VolumeType</a></code> for more information regarding above EBS storage options. </p>"
+      "documentation": "<p> SubType of the given storage type. List of available sub-storage options: For \"instance\" storageType we wont have any storageSubType, in case of \"ebs\" storageType we will have following valid storageSubTypes <ol> <li>standard</li> <li>gp2</li> <li>gp3</li> <li>io1</li> </ol> Refer <code><a>VolumeType</a></code> for more information regarding above EBS storage options. </p>"
     },
     "StorageType": {
       "type": "structure",
@@ -3967,7 +5350,7 @@
       "members": {
         "LimitName": {
           "shape": "LimitName",
-          "documentation": "<p> Name of storage limits that are applicable for given storage type. If <code> <a>StorageType</a> </code> is ebs, following storage options are applicable <ol> <li>MinimumVolumeSize</li> Minimum amount of volume size that is applicable for given storage type.It can be empty if it is not applicable. <li>MaximumVolumeSize</li> Maximum amount of volume size that is applicable for given storage type.It can be empty if it is not applicable. <li>MaximumIops</li> Maximum amount of Iops that is applicable for given storage type.It can be empty if it is not applicable. <li>MinimumIops</li> Minimum amount of Iops that is applicable for given storage type.It can be empty if it is not applicable. </ol> </p>"
+          "documentation": "<p> Name of storage limits that are applicable for given storage type. If <code> <a>StorageType</a> </code> is ebs, following storage options are applicable <ol> <li>MinimumVolumeSize</li> Minimum amount of volume size that is applicable for given storage type.It can be empty if it is not applicable. <li>MaximumVolumeSize</li> Maximum amount of volume size that is applicable for given storage type.It can be empty if it is not applicable. <li>MaximumIops</li> Maximum amount of Iops that is applicable for given storage type.It can be empty if it is not applicable. <li>MinimumIops</li> Minimum amount of Iops that is applicable for given storage type.It can be empty if it is not applicable. <li>MaximumThroughput</li> Maximum amount of Throughput that is applicable for given storage type.It can be empty if it is not applicable. <li>MinimumThroughput</li> Minimum amount of Throughput that is applicable for given storage type.It can be empty if it is not applicable. </ol> </p>"
         },
         "LimitValues": {
           "shape": "LimitValueList",
@@ -4005,7 +5388,8 @@
       "type": "string",
       "enum": [
         "Policy-Min-TLS-1-0-2019-07",
-        "Policy-Min-TLS-1-2-2019-07"
+        "Policy-Min-TLS-1-2-2019-07",
+        "Policy-Min-TLS-1-2-PFS-2023-10"
       ]
     },
     "Tag": {
@@ -4044,6 +5428,16 @@
       "documentation": "<p>A string of length from 0 to 256 characters that specifies the value for a Tag. Tag values can be null and do not have to be unique in a tag set.</p>",
       "max": 256,
       "min": 0
+    },
+    "TimeUnit": {
+      "type": "string",
+      "documentation": "<p>Specifies the unit of a maintenance schedule duration. Valid value is HOUR. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>",
+      "enum": [
+        "HOURS"
+      ]
+    },
+    "TotalNumberOfStages": {
+      "type": "integer"
     },
     "UIntValue": {
       "type": "integer",
@@ -4100,6 +5494,22 @@
         "AdvancedSecurityOptions": {
           "shape": "AdvancedSecurityOptionsInput",
           "documentation": "<p>Specifies advanced security options.</p>"
+        },
+        "NodeToNodeEncryptionOptions": {
+          "shape": "NodeToNodeEncryptionOptions",
+          "documentation": "<p>Specifies the NodeToNodeEncryptionOptions.</p>"
+        },
+        "EncryptionAtRestOptions": {
+          "shape": "EncryptionAtRestOptions",
+          "documentation": "<p>Specifies the Encryption At Rest Options.</p>"
+        },
+        "AutoTuneOptions": {
+          "shape": "AutoTuneOptions",
+          "documentation": "<p>Specifies Auto-Tune options.</p>"
+        },
+        "DryRun": {
+          "shape": "DryRun",
+          "documentation": "<p> This flag, when set to True, specifies whether the <code>UpdateElasticsearchDomain</code> request should return the results of validation checks without actually applying the change. This flag, when set to True, specifies the deployment mechanism through which the update shall be applied on the domain. This will not actually perform the Update. </p>"
         }
       },
       "documentation": "<p>Container for the parameters to the <code><a>UpdateElasticsearchDomain</a></code> operation. Specifies the type and number of instances in the domain cluster.</p>"
@@ -4113,6 +5523,10 @@
         "DomainConfig": {
           "shape": "ElasticsearchDomainConfig",
           "documentation": "<p>The status of the updated Elasticsearch domain. </p>"
+        },
+        "DryRunResults": {
+          "shape": "DryRunResults",
+          "documentation": "<p>Contains result of DryRun. </p>"
         }
       },
       "documentation": "<p>The result of an <code>UpdateElasticsearchDomain</code> request. Contains the status of the Elasticsearch domain being updated.</p>"
@@ -4155,6 +5569,37 @@
     "UpdateTimestamp": {
       "type": "timestamp"
     },
+    "UpdateVpcEndpointRequest": {
+      "type": "structure",
+      "required": [
+        "VpcEndpointId",
+        "VpcOptions"
+      ],
+      "members": {
+        "VpcEndpointId": {
+          "shape": "VpcEndpointId",
+          "documentation": "<p>Unique identifier of the VPC endpoint to be updated.</p>"
+        },
+        "VpcOptions": {
+          "shape": "VPCOptions",
+          "documentation": "<p>The security groups and/or subnets to add, remove, or modify.</p>"
+        }
+      },
+      "documentation": "<p>Modifies an Amazon OpenSearch Service-managed interface VPC endpoint.</p>"
+    },
+    "UpdateVpcEndpointResponse": {
+      "type": "structure",
+      "required": [
+        "VpcEndpoint"
+      ],
+      "members": {
+        "VpcEndpoint": {
+          "shape": "VpcEndpoint",
+          "documentation": "<p>The endpoint to be updated.</p>"
+        }
+      },
+      "documentation": "<p>Contains the configuration and status of the VPC endpoint being updated.</p>"
+    },
     "UpgradeElasticsearchDomainRequest": {
       "type": "structure",
       "required": [
@@ -4189,6 +5634,9 @@
         "PerformCheckOnly": {
           "shape": "Boolean",
           "documentation": "<p> This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed. This will not actually perform the Upgrade. </p>"
+        },
+        "ChangeProgressDetails": {
+          "shape": "ChangeProgressDetails"
         }
       },
       "documentation": "<p> Container for response returned by <code> <a>UpgradeElasticsearchDomain</a> </code> operation. </p>"
@@ -4343,12 +5791,134 @@
     },
     "VolumeType": {
       "type": "string",
-      "documentation": "<p> The type of EBS volume, standard, gp2, or io1. See <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs\" target=\"_blank\">Configuring EBS-based Storage</a>for more information.</p>",
+      "documentation": "<p> The type of EBS volume, standard, gp2, gp3 or io1. See <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs\" target=\"_blank\">Configuring EBS-based Storage</a>for more information.</p>",
       "enum": [
         "standard",
         "gp2",
-        "io1"
+        "io1",
+        "gp3"
       ]
+    },
+    "VpcEndpoint": {
+      "type": "structure",
+      "members": {
+        "VpcEndpointId": {
+          "shape": "VpcEndpointId",
+          "documentation": "<p>The unique identifier of the endpoint.</p>"
+        },
+        "VpcEndpointOwner": {
+          "shape": "AWSAccount",
+          "documentation": "<p>The creator of the endpoint.</p>"
+        },
+        "DomainArn": {
+          "shape": "DomainArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the domain associated with the endpoint.</p>"
+        },
+        "VpcOptions": {
+          "shape": "VPCDerivedInfo",
+          "documentation": "<p>Options to specify the subnets and security groups for an Amazon OpenSearch Service VPC endpoint.</p>"
+        },
+        "Status": {
+          "shape": "VpcEndpointStatus",
+          "documentation": "<p>The current status of the endpoint.</p>"
+        },
+        "Endpoint": {
+          "shape": "Endpoint",
+          "documentation": "<p>The connection endpoint ID for connecting to the domain.</p>"
+        }
+      },
+      "documentation": "<p>The connection endpoint for connecting to an Amazon OpenSearch Service domain through a proxy.</p>"
+    },
+    "VpcEndpointError": {
+      "type": "structure",
+      "members": {
+        "VpcEndpointId": {
+          "shape": "VpcEndpointId",
+          "documentation": "<p>The unique identifier of the endpoint. </p>"
+        },
+        "ErrorCode": {
+          "shape": "VpcEndpointErrorCode",
+          "documentation": "<p>The code associated with the error.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "String",
+          "documentation": "<p>A message describing the error.</p>"
+        }
+      },
+      "documentation": "<p>Error information when attempting to describe an Amazon OpenSearch Service-managed VPC endpoint.</p>"
+    },
+    "VpcEndpointErrorCode": {
+      "type": "string",
+      "documentation": "<p>Specifies the error code of the failure encountered while describing the VPC endpoint: <ul> <li>ENDPOINT_NOT_FOUND: Indicates that the requested VPC endpoint does not exist.</li> <li>SERVER_ERROR: Indicates the describe endpoint operation failed due to an internal server error.</li> </ul> </p>",
+      "enum": [
+        "ENDPOINT_NOT_FOUND",
+        "SERVER_ERROR"
+      ]
+    },
+    "VpcEndpointErrorList": {
+      "type": "list",
+      "member": {
+        "shape": "VpcEndpointError"
+      }
+    },
+    "VpcEndpointId": {
+      "type": "string",
+      "max": 256,
+      "min": 5,
+      "pattern": "^aos-[a-zA-Z0-9]*$"
+    },
+    "VpcEndpointIdList": {
+      "type": "list",
+      "member": {
+        "shape": "VpcEndpointId"
+      }
+    },
+    "VpcEndpointStatus": {
+      "type": "string",
+      "documentation": "<p>Specifies the current status of the VPC endpoint: <ul> <li>CREATING: Indicates that the VPC endpoint is currently being created.</li> <li>CREATE_FAILED: Indicates that the VPC endpoint creation failed.</li> <li>ACTIVE: Indicates that the VPC endpoint is currently active.</li> <li>UPDATING: Indicates that the VPC endpoint is currently being updated.</li> <li>UPDATE_FAILED: Indicates that the VPC endpoint update failed.</li> <li>DELETING: Indicates that the VPC endpoint is currently being deleted.</li> <li>DELETE_FAILED: Indicates that the VPC endpoint deletion failed.</li> </ul> </p>",
+      "enum": [
+        "CREATING",
+        "CREATE_FAILED",
+        "ACTIVE",
+        "UPDATING",
+        "UPDATE_FAILED",
+        "DELETING",
+        "DELETE_FAILED"
+      ]
+    },
+    "VpcEndpointSummary": {
+      "type": "structure",
+      "members": {
+        "VpcEndpointId": {
+          "shape": "VpcEndpointId",
+          "documentation": "<p>The unique identifier of the endpoint.</p>"
+        },
+        "VpcEndpointOwner": {
+          "shape": "String",
+          "documentation": "<p>The creator of the endpoint.</p>"
+        },
+        "DomainArn": {
+          "shape": "DomainArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the domain associated with the endpoint.</p>"
+        },
+        "Status": {
+          "shape": "VpcEndpointStatus",
+          "documentation": "<p>The current status of the endpoint.</p>"
+        }
+      },
+      "documentation": "<p>Summary information for an Amazon OpenSearch Service-managed VPC endpoint.</p>"
+    },
+    "VpcEndpointSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "VpcEndpointSummary"
+      }
+    },
+    "VpcEndpoints": {
+      "type": "list",
+      "member": {
+        "shape": "VpcEndpoint"
+      }
     },
     "ZoneAwarenessConfig": {
       "type": "structure",

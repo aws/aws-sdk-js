@@ -435,9 +435,6 @@
   "workspaces": {
     "name": "WorkSpaces"
   },
-  "codestar": {
-    "name": "CodeStar"
-  },
   "lexmodelbuildingservice": {
     "prefix": "lex-models",
     "name": "LexModelBuildingService",
@@ -448,7 +445,8 @@
     "name": "MarketplaceEntitlementService"
   },
   "athena": {
-    "name": "Athena"
+    "name": "Athena",
+    "cors": true
   },
   "greengrass": {
     "name": "Greengrass"
@@ -461,13 +459,11 @@
     "name": "MigrationHub"
   },
   "cloudhsmv2": {
-    "name": "CloudHSMV2"
+    "name": "CloudHSMV2",
+    "cors": true
   },
   "glue": {
     "name": "Glue"
-  },
-  "mobile": {
-    "name": "Mobile"
   },
   "pricing": {
     "name": "Pricing",
@@ -542,9 +538,6 @@
     "name": "ResourceGroups",
     "cors": true
   },
-  "alexaforbusiness": {
-    "name": "AlexaForBusiness"
-  },
   "cloud9": {
     "name": "Cloud9"
   },
@@ -604,9 +597,6 @@
   },
   "eks": {
     "name": "EKS"
-  },
-  "macie": {
-    "name": "Macie"
   },
   "dlm": {
     "name": "DLM"
@@ -788,7 +778,8 @@
   },
   "marketplacecatalog": {
     "prefix": "marketplace-catalog",
-    "name": "MarketplaceCatalog"
+    "name": "MarketplaceCatalog",
+    "cors": true
   },
   "dataexchange": {
     "name": "DataExchange"
@@ -879,9 +870,6 @@
   "codeartifact": {
     "name": "CodeArtifact"
   },
-  "honeycode": {
-    "name": "Honeycode"
-  },
   "ivs": {
     "name": "IVS"
   },
@@ -971,7 +959,8 @@
     "name": "SagemakerEdge"
   },
   "amp": {
-    "name": "Amp"
+    "name": "Amp",
+    "cors": true
   },
   "greengrassv2": {
     "name": "GreengrassV2"
@@ -986,9 +975,466 @@
     "name": "IoTWireless"
   },
   "location": {
-    "name": "Location"
+    "name": "Location",
+    "cors": true
   },
   "wellarchitected": {
     "name": "WellArchitected"
+  },
+  "lexmodelsv2": {
+    "prefix": "models.lex.v2",
+    "name": "LexModelsV2"
+  },
+  "lexruntimev2": {
+    "prefix": "runtime.lex.v2",
+    "name": "LexRuntimeV2",
+    "cors": true
+  },
+  "fis": {
+    "name": "Fis"
+  },
+  "lookoutmetrics": {
+    "name": "LookoutMetrics"
+  },
+  "mgn": {
+    "name": "Mgn"
+  },
+  "lookoutequipment": {
+    "name": "LookoutEquipment"
+  },
+  "nimble": {
+    "name": "Nimble"
+  },
+  "finspace": {
+    "name": "Finspace"
+  },
+  "finspacedata": {
+    "prefix": "finspace-data",
+    "name": "Finspacedata"
+  },
+  "ssmcontacts": {
+    "prefix": "ssm-contacts",
+    "name": "SSMContacts"
+  },
+  "ssmincidents": {
+    "prefix": "ssm-incidents",
+    "name": "SSMIncidents"
+  },
+  "applicationcostprofiler": {
+    "name": "ApplicationCostProfiler"
+  },
+  "apprunner": {
+    "name": "AppRunner"
+  },
+  "proton": {
+    "name": "Proton"
+  },
+  "route53recoverycluster": {
+    "prefix": "route53-recovery-cluster",
+    "name": "Route53RecoveryCluster"
+  },
+  "route53recoverycontrolconfig": {
+    "prefix": "route53-recovery-control-config",
+    "name": "Route53RecoveryControlConfig"
+  },
+  "route53recoveryreadiness": {
+    "prefix": "route53-recovery-readiness",
+    "name": "Route53RecoveryReadiness"
+  },
+  "chimesdkidentity": {
+    "prefix": "chime-sdk-identity",
+    "name": "ChimeSDKIdentity"
+  },
+  "chimesdkmessaging": {
+    "prefix": "chime-sdk-messaging",
+    "name": "ChimeSDKMessaging"
+  },
+  "snowdevicemanagement": {
+    "prefix": "snow-device-management",
+    "name": "SnowDeviceManagement"
+  },
+  "memorydb": {
+    "name": "MemoryDB"
+  },
+  "opensearch": {
+    "name": "OpenSearch"
+  },
+  "kafkaconnect": {
+    "name": "KafkaConnect"
+  },
+  "voiceid": {
+    "prefix": "voice-id",
+    "name": "VoiceID"
+  },
+  "wisdom": {
+    "name": "Wisdom"
+  },
+  "account": {
+    "name": "Account"
+  },
+  "cloudcontrol": {
+    "name": "CloudControl"
+  },
+  "grafana": {
+    "name": "Grafana"
+  },
+  "panorama": {
+    "name": "Panorama"
+  },
+  "chimesdkmeetings": {
+    "prefix": "chime-sdk-meetings",
+    "name": "ChimeSDKMeetings"
+  },
+  "resiliencehub": {
+    "name": "Resiliencehub"
+  },
+  "migrationhubstrategy": {
+    "name": "MigrationHubStrategy"
+  },
+  "appconfigdata": {
+    "name": "AppConfigData"
+  },
+  "drs": {
+    "name": "Drs"
+  },
+  "migrationhubrefactorspaces": {
+    "prefix": "migration-hub-refactor-spaces",
+    "name": "MigrationHubRefactorSpaces"
+  },
+  "evidently": {
+    "name": "Evidently"
+  },
+  "inspector2": {
+    "name": "Inspector2"
+  },
+  "rbin": {
+    "name": "Rbin"
+  },
+  "rum": {
+    "name": "RUM"
+  },
+  "backupgateway": {
+    "prefix": "backup-gateway",
+    "name": "BackupGateway"
+  },
+  "iottwinmaker": {
+    "name": "IoTTwinMaker"
+  },
+  "workspacesweb": {
+    "prefix": "workspaces-web",
+    "name": "WorkSpacesWeb"
+  },
+  "amplifyuibuilder": {
+    "name": "AmplifyUIBuilder"
+  },
+  "keyspaces": {
+    "name": "Keyspaces"
+  },
+  "billingconductor": {
+    "name": "Billingconductor"
+  },
+  "pinpointsmsvoicev2": {
+    "prefix": "pinpoint-sms-voice-v2",
+    "name": "PinpointSMSVoiceV2"
+  },
+  "ivschat": {
+    "name": "Ivschat"
+  },
+  "chimesdkmediapipelines": {
+    "prefix": "chime-sdk-media-pipelines",
+    "name": "ChimeSDKMediaPipelines"
+  },
+  "emrserverless": {
+    "prefix": "emr-serverless",
+    "name": "EMRServerless"
+  },
+  "m2": {
+    "name": "M2"
+  },
+  "connectcampaigns": {
+    "name": "ConnectCampaigns"
+  },
+  "redshiftserverless": {
+    "prefix": "redshift-serverless",
+    "name": "RedshiftServerless"
+  },
+  "rolesanywhere": {
+    "name": "RolesAnywhere"
+  },
+  "licensemanagerusersubscriptions": {
+    "prefix": "license-manager-user-subscriptions",
+    "name": "LicenseManagerUserSubscriptions"
+  },
+  "privatenetworks": {
+    "name": "PrivateNetworks"
+  },
+  "supportapp": {
+    "prefix": "support-app",
+    "name": "SupportApp"
+  },
+  "controltower": {
+    "name": "ControlTower"
+  },
+  "iotfleetwise": {
+    "name": "IoTFleetWise"
+  },
+  "migrationhuborchestrator": {
+    "name": "MigrationHubOrchestrator"
+  },
+  "connectcases": {
+    "name": "ConnectCases"
+  },
+  "resourceexplorer2": {
+    "prefix": "resource-explorer-2",
+    "name": "ResourceExplorer2"
+  },
+  "scheduler": {
+    "name": "Scheduler"
+  },
+  "chimesdkvoice": {
+    "prefix": "chime-sdk-voice",
+    "name": "ChimeSDKVoice"
+  },
+  "ssmsap": {
+    "prefix": "ssm-sap",
+    "name": "SsmSap"
+  },
+  "oam": {
+    "name": "OAM"
+  },
+  "arczonalshift": {
+    "prefix": "arc-zonal-shift",
+    "name": "ARCZonalShift"
+  },
+  "omics": {
+    "name": "Omics"
+  },
+  "opensearchserverless": {
+    "name": "OpenSearchServerless"
+  },
+  "securitylake": {
+    "name": "SecurityLake"
+  },
+  "simspaceweaver": {
+    "name": "SimSpaceWeaver"
+  },
+  "docdbelastic": {
+    "prefix": "docdb-elastic",
+    "name": "DocDBElastic"
+  },
+  "sagemakergeospatial": {
+    "prefix": "sagemaker-geospatial",
+    "name": "SageMakerGeospatial"
+  },
+  "codecatalyst": {
+    "name": "CodeCatalyst"
+  },
+  "pipes": {
+    "name": "Pipes"
+  },
+  "sagemakermetrics": {
+    "prefix": "sagemaker-metrics",
+    "name": "SageMakerMetrics"
+  },
+  "kinesisvideowebrtcstorage": {
+    "prefix": "kinesis-video-webrtc-storage",
+    "name": "KinesisVideoWebRTCStorage"
+  },
+  "licensemanagerlinuxsubscriptions": {
+    "prefix": "license-manager-linux-subscriptions",
+    "name": "LicenseManagerLinuxSubscriptions"
+  },
+  "kendraranking": {
+    "prefix": "kendra-ranking",
+    "name": "KendraRanking"
+  },
+  "cleanrooms": {
+    "name": "CleanRooms"
+  },
+  "cloudtraildata": {
+    "prefix": "cloudtrail-data",
+    "name": "CloudTrailData"
+  },
+  "tnb": {
+    "name": "Tnb"
+  },
+  "internetmonitor": {
+    "name": "InternetMonitor"
+  },
+  "ivsrealtime": {
+    "prefix": "ivs-realtime",
+    "name": "IVSRealTime"
+  },
+  "vpclattice": {
+    "prefix": "vpc-lattice",
+    "name": "VPCLattice"
+  },
+  "osis": {
+    "name": "OSIS"
+  },
+  "mediapackagev2": {
+    "name": "MediaPackageV2"
+  },
+  "paymentcryptography": {
+    "prefix": "payment-cryptography",
+    "name": "PaymentCryptography"
+  },
+  "paymentcryptographydata": {
+    "prefix": "payment-cryptography-data",
+    "name": "PaymentCryptographyData"
+  },
+  "codegurusecurity": {
+    "prefix": "codeguru-security",
+    "name": "CodeGuruSecurity"
+  },
+  "verifiedpermissions": {
+    "name": "VerifiedPermissions"
+  },
+  "appfabric": {
+    "name": "AppFabric"
+  },
+  "medicalimaging": {
+    "prefix": "medical-imaging",
+    "name": "MedicalImaging"
+  },
+  "entityresolution": {
+    "name": "EntityResolution"
+  },
+  "managedblockchainquery": {
+    "prefix": "managedblockchain-query",
+    "name": "ManagedBlockchainQuery"
+  },
+  "neptunedata": {
+    "name": "Neptunedata"
+  },
+  "pcaconnectorad": {
+    "prefix": "pca-connector-ad",
+    "name": "PcaConnectorAd"
+  },
+  "bedrock": {
+    "name": "Bedrock"
+  },
+  "bedrockruntime": {
+    "prefix": "bedrock-runtime",
+    "name": "BedrockRuntime"
+  },
+  "datazone": {
+    "name": "DataZone"
+  },
+  "launchwizard": {
+    "prefix": "launch-wizard",
+    "name": "LaunchWizard"
+  },
+  "trustedadvisor": {
+    "name": "TrustedAdvisor"
+  },
+  "inspectorscan": {
+    "prefix": "inspector-scan",
+    "name": "InspectorScan"
+  },
+  "bcmdataexports": {
+    "prefix": "bcm-data-exports",
+    "name": "BCMDataExports"
+  },
+  "costoptimizationhub": {
+    "prefix": "cost-optimization-hub",
+    "name": "CostOptimizationHub"
+  },
+  "eksauth": {
+    "prefix": "eks-auth",
+    "name": "EKSAuth"
+  },
+  "freetier": {
+    "name": "FreeTier"
+  },
+  "repostspace": {
+    "name": "Repostspace"
+  },
+  "workspacesthinclient": {
+    "prefix": "workspaces-thin-client",
+    "name": "WorkSpacesThinClient"
+  },
+  "b2bi": {
+    "name": "B2bi"
+  },
+  "bedrockagent": {
+    "prefix": "bedrock-agent",
+    "name": "BedrockAgent"
+  },
+  "bedrockagentruntime": {
+    "prefix": "bedrock-agent-runtime",
+    "name": "BedrockAgentRuntime"
+  },
+  "qbusiness": {
+    "name": "QBusiness"
+  },
+  "qconnect": {
+    "name": "QConnect"
+  },
+  "cleanroomsml": {
+    "name": "CleanRoomsML"
+  },
+  "marketplaceagreement": {
+    "prefix": "marketplace-agreement",
+    "name": "MarketplaceAgreement"
+  },
+  "marketplacedeployment": {
+    "prefix": "marketplace-deployment",
+    "name": "MarketplaceDeployment"
+  },
+  "networkmonitor": {
+    "name": "NetworkMonitor"
+  },
+  "supplychain": {
+    "name": "SupplyChain"
+  },
+  "artifact": {
+    "name": "Artifact"
+  },
+  "chatbot": {
+    "name": "Chatbot"
+  },
+  "timestreaminfluxdb": {
+    "prefix": "timestream-influxdb",
+    "name": "TimestreamInfluxDB"
+  },
+  "codeconnections": {
+    "name": "CodeConnections"
+  },
+  "deadline": {
+    "name": "Deadline"
+  },
+  "controlcatalog": {
+    "name": "ControlCatalog"
+  },
+  "route53profiles": {
+    "name": "Route53Profiles"
+  },
+  "mailmanager": {
+    "name": "MailManager"
+  },
+  "taxsettings": {
+    "name": "TaxSettings"
+  },
+  "applicationsignals": {
+    "prefix": "application-signals",
+    "name": "ApplicationSignals"
+  },
+  "pcaconnectorscep": {
+    "prefix": "pca-connector-scep",
+    "name": "PcaConnectorScep"
+  },
+  "apptest": {
+    "name": "AppTest"
+  },
+  "qapps": {
+    "name": "QApps"
+  },
+  "ssmquicksetup": {
+    "prefix": "ssm-quicksetup",
+    "name": "SSMQuickSetup"
+  },
+  "pcs": {
+    "name": "PCS"
   }
 }

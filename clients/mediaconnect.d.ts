@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config-base';
 interface Blob {}
@@ -11,6 +12,30 @@ declare class MediaConnect extends Service {
    */
   constructor(options?: MediaConnect.Types.ClientConfiguration)
   config: Config & MediaConnect.Types.ClientConfiguration;
+  /**
+   * Adds outputs to an existing bridge.
+   */
+  addBridgeOutputs(params: MediaConnect.Types.AddBridgeOutputsRequest, callback?: (err: AWSError, data: MediaConnect.Types.AddBridgeOutputsResponse) => void): Request<MediaConnect.Types.AddBridgeOutputsResponse, AWSError>;
+  /**
+   * Adds outputs to an existing bridge.
+   */
+  addBridgeOutputs(callback?: (err: AWSError, data: MediaConnect.Types.AddBridgeOutputsResponse) => void): Request<MediaConnect.Types.AddBridgeOutputsResponse, AWSError>;
+  /**
+   * Adds sources to an existing bridge.
+   */
+  addBridgeSources(params: MediaConnect.Types.AddBridgeSourcesRequest, callback?: (err: AWSError, data: MediaConnect.Types.AddBridgeSourcesResponse) => void): Request<MediaConnect.Types.AddBridgeSourcesResponse, AWSError>;
+  /**
+   * Adds sources to an existing bridge.
+   */
+  addBridgeSources(callback?: (err: AWSError, data: MediaConnect.Types.AddBridgeSourcesResponse) => void): Request<MediaConnect.Types.AddBridgeSourcesResponse, AWSError>;
+  /**
+   * Adds media streams to an existing flow. After you add a media stream to a flow, you can associate it with a source and/or an output that uses the ST 2110 JPEG XS or CDI protocol.
+   */
+  addFlowMediaStreams(params: MediaConnect.Types.AddFlowMediaStreamsRequest, callback?: (err: AWSError, data: MediaConnect.Types.AddFlowMediaStreamsResponse) => void): Request<MediaConnect.Types.AddFlowMediaStreamsResponse, AWSError>;
+  /**
+   * Adds media streams to an existing flow. After you add a media stream to a flow, you can associate it with a source and/or an output that uses the ST 2110 JPEG XS or CDI protocol.
+   */
+  addFlowMediaStreams(callback?: (err: AWSError, data: MediaConnect.Types.AddFlowMediaStreamsResponse) => void): Request<MediaConnect.Types.AddFlowMediaStreamsResponse, AWSError>;
   /**
    * Adds outputs to an existing flow. You can create up to 50 outputs per flow.
    */
@@ -36,6 +61,14 @@ declare class MediaConnect extends Service {
    */
   addFlowVpcInterfaces(callback?: (err: AWSError, data: MediaConnect.Types.AddFlowVpcInterfacesResponse) => void): Request<MediaConnect.Types.AddFlowVpcInterfacesResponse, AWSError>;
   /**
+   * Creates a new bridge. The request must include one source.
+   */
+  createBridge(params: MediaConnect.Types.CreateBridgeRequest, callback?: (err: AWSError, data: MediaConnect.Types.CreateBridgeResponse) => void): Request<MediaConnect.Types.CreateBridgeResponse, AWSError>;
+  /**
+   * Creates a new bridge. The request must include one source.
+   */
+  createBridge(callback?: (err: AWSError, data: MediaConnect.Types.CreateBridgeResponse) => void): Request<MediaConnect.Types.CreateBridgeResponse, AWSError>;
+  /**
    * Creates a new flow. The request must include one source. The request optionally can include outputs (up to 50) and entitlements (up to 50).
    */
   createFlow(params: MediaConnect.Types.CreateFlowRequest, callback?: (err: AWSError, data: MediaConnect.Types.CreateFlowResponse) => void): Request<MediaConnect.Types.CreateFlowResponse, AWSError>;
@@ -43,6 +76,22 @@ declare class MediaConnect extends Service {
    * Creates a new flow. The request must include one source. The request optionally can include outputs (up to 50) and entitlements (up to 50).
    */
   createFlow(callback?: (err: AWSError, data: MediaConnect.Types.CreateFlowResponse) => void): Request<MediaConnect.Types.CreateFlowResponse, AWSError>;
+  /**
+   * Creates a new gateway. The request must include at least one network (up to 4).
+   */
+  createGateway(params: MediaConnect.Types.CreateGatewayRequest, callback?: (err: AWSError, data: MediaConnect.Types.CreateGatewayResponse) => void): Request<MediaConnect.Types.CreateGatewayResponse, AWSError>;
+  /**
+   * Creates a new gateway. The request must include at least one network (up to 4).
+   */
+  createGateway(callback?: (err: AWSError, data: MediaConnect.Types.CreateGatewayResponse) => void): Request<MediaConnect.Types.CreateGatewayResponse, AWSError>;
+  /**
+   * Deletes a bridge. Before you can delete a bridge, you must stop the bridge.
+   */
+  deleteBridge(params: MediaConnect.Types.DeleteBridgeRequest, callback?: (err: AWSError, data: MediaConnect.Types.DeleteBridgeResponse) => void): Request<MediaConnect.Types.DeleteBridgeResponse, AWSError>;
+  /**
+   * Deletes a bridge. Before you can delete a bridge, you must stop the bridge.
+   */
+  deleteBridge(callback?: (err: AWSError, data: MediaConnect.Types.DeleteBridgeResponse) => void): Request<MediaConnect.Types.DeleteBridgeResponse, AWSError>;
   /**
    * Deletes a flow. Before you can delete a flow, you must stop the flow.
    */
@@ -52,6 +101,30 @@ declare class MediaConnect extends Service {
    */
   deleteFlow(callback?: (err: AWSError, data: MediaConnect.Types.DeleteFlowResponse) => void): Request<MediaConnect.Types.DeleteFlowResponse, AWSError>;
   /**
+   * Deletes a gateway. Before you can delete a gateway, you must deregister its instances and delete its bridges.
+   */
+  deleteGateway(params: MediaConnect.Types.DeleteGatewayRequest, callback?: (err: AWSError, data: MediaConnect.Types.DeleteGatewayResponse) => void): Request<MediaConnect.Types.DeleteGatewayResponse, AWSError>;
+  /**
+   * Deletes a gateway. Before you can delete a gateway, you must deregister its instances and delete its bridges.
+   */
+  deleteGateway(callback?: (err: AWSError, data: MediaConnect.Types.DeleteGatewayResponse) => void): Request<MediaConnect.Types.DeleteGatewayResponse, AWSError>;
+  /**
+   * Deregisters an instance. Before you deregister an instance, all bridges running on the instance must be stopped. If you want to deregister an instance without stopping the bridges, you must use the --force option.
+   */
+  deregisterGatewayInstance(params: MediaConnect.Types.DeregisterGatewayInstanceRequest, callback?: (err: AWSError, data: MediaConnect.Types.DeregisterGatewayInstanceResponse) => void): Request<MediaConnect.Types.DeregisterGatewayInstanceResponse, AWSError>;
+  /**
+   * Deregisters an instance. Before you deregister an instance, all bridges running on the instance must be stopped. If you want to deregister an instance without stopping the bridges, you must use the --force option.
+   */
+  deregisterGatewayInstance(callback?: (err: AWSError, data: MediaConnect.Types.DeregisterGatewayInstanceResponse) => void): Request<MediaConnect.Types.DeregisterGatewayInstanceResponse, AWSError>;
+  /**
+   * Displays the details of a bridge.
+   */
+  describeBridge(params: MediaConnect.Types.DescribeBridgeRequest, callback?: (err: AWSError, data: MediaConnect.Types.DescribeBridgeResponse) => void): Request<MediaConnect.Types.DescribeBridgeResponse, AWSError>;
+  /**
+   * Displays the details of a bridge.
+   */
+  describeBridge(callback?: (err: AWSError, data: MediaConnect.Types.DescribeBridgeResponse) => void): Request<MediaConnect.Types.DescribeBridgeResponse, AWSError>;
+  /**
    * Displays the details of a flow. The response includes the flow ARN, name, and Availability Zone, as well as details about the source, outputs, and entitlements.
    */
   describeFlow(params: MediaConnect.Types.DescribeFlowRequest, callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowResponse) => void): Request<MediaConnect.Types.DescribeFlowResponse, AWSError>;
@@ -59,6 +132,38 @@ declare class MediaConnect extends Service {
    * Displays the details of a flow. The response includes the flow ARN, name, and Availability Zone, as well as details about the source, outputs, and entitlements.
    */
   describeFlow(callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowResponse) => void): Request<MediaConnect.Types.DescribeFlowResponse, AWSError>;
+  /**
+   * Displays details of the flow's source stream. The response contains information about the contents of the stream and its programs.
+   */
+  describeFlowSourceMetadata(params: MediaConnect.Types.DescribeFlowSourceMetadataRequest, callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowSourceMetadataResponse) => void): Request<MediaConnect.Types.DescribeFlowSourceMetadataResponse, AWSError>;
+  /**
+   * Displays details of the flow's source stream. The response contains information about the contents of the stream and its programs.
+   */
+  describeFlowSourceMetadata(callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowSourceMetadataResponse) => void): Request<MediaConnect.Types.DescribeFlowSourceMetadataResponse, AWSError>;
+  /**
+   * Displays the thumbnail details of a flow's source stream.
+   */
+  describeFlowSourceThumbnail(params: MediaConnect.Types.DescribeFlowSourceThumbnailRequest, callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowSourceThumbnailResponse) => void): Request<MediaConnect.Types.DescribeFlowSourceThumbnailResponse, AWSError>;
+  /**
+   * Displays the thumbnail details of a flow's source stream.
+   */
+  describeFlowSourceThumbnail(callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowSourceThumbnailResponse) => void): Request<MediaConnect.Types.DescribeFlowSourceThumbnailResponse, AWSError>;
+  /**
+   * Displays the details of a gateway. The response includes the gateway ARN, name, and CIDR blocks, as well as details about the networks.
+   */
+  describeGateway(params: MediaConnect.Types.DescribeGatewayRequest, callback?: (err: AWSError, data: MediaConnect.Types.DescribeGatewayResponse) => void): Request<MediaConnect.Types.DescribeGatewayResponse, AWSError>;
+  /**
+   * Displays the details of a gateway. The response includes the gateway ARN, name, and CIDR blocks, as well as details about the networks.
+   */
+  describeGateway(callback?: (err: AWSError, data: MediaConnect.Types.DescribeGatewayResponse) => void): Request<MediaConnect.Types.DescribeGatewayResponse, AWSError>;
+  /**
+   * Displays the details of an instance.
+   */
+  describeGatewayInstance(params: MediaConnect.Types.DescribeGatewayInstanceRequest, callback?: (err: AWSError, data: MediaConnect.Types.DescribeGatewayInstanceResponse) => void): Request<MediaConnect.Types.DescribeGatewayInstanceResponse, AWSError>;
+  /**
+   * Displays the details of an instance.
+   */
+  describeGatewayInstance(callback?: (err: AWSError, data: MediaConnect.Types.DescribeGatewayInstanceResponse) => void): Request<MediaConnect.Types.DescribeGatewayInstanceResponse, AWSError>;
   /**
    * Displays the details of an offering. The response includes the offering description, duration, outbound bandwidth, price, and Amazon Resource Name (ARN).
    */
@@ -84,6 +189,14 @@ declare class MediaConnect extends Service {
    */
   grantFlowEntitlements(callback?: (err: AWSError, data: MediaConnect.Types.GrantFlowEntitlementsResponse) => void): Request<MediaConnect.Types.GrantFlowEntitlementsResponse, AWSError>;
   /**
+   * Displays a list of bridges that are associated with this account and an optionally specified Arn. This request returns a paginated result.
+   */
+  listBridges(params: MediaConnect.Types.ListBridgesRequest, callback?: (err: AWSError, data: MediaConnect.Types.ListBridgesResponse) => void): Request<MediaConnect.Types.ListBridgesResponse, AWSError>;
+  /**
+   * Displays a list of bridges that are associated with this account and an optionally specified Arn. This request returns a paginated result.
+   */
+  listBridges(callback?: (err: AWSError, data: MediaConnect.Types.ListBridgesResponse) => void): Request<MediaConnect.Types.ListBridgesResponse, AWSError>;
+  /**
    * Displays a list of all entitlements that have been granted to this account. This request returns 20 results per page.
    */
   listEntitlements(params: MediaConnect.Types.ListEntitlementsRequest, callback?: (err: AWSError, data: MediaConnect.Types.ListEntitlementsResponse) => void): Request<MediaConnect.Types.ListEntitlementsResponse, AWSError>;
@@ -99,6 +212,22 @@ declare class MediaConnect extends Service {
    * Displays a list of flows that are associated with this account. This request returns a paginated result.
    */
   listFlows(callback?: (err: AWSError, data: MediaConnect.Types.ListFlowsResponse) => void): Request<MediaConnect.Types.ListFlowsResponse, AWSError>;
+  /**
+   * Displays a list of instances associated with the AWS account. This request returns a paginated result. You can use the filterArn property to display only the instances associated with the selected Gateway Amazon Resource Name (ARN).
+   */
+  listGatewayInstances(params: MediaConnect.Types.ListGatewayInstancesRequest, callback?: (err: AWSError, data: MediaConnect.Types.ListGatewayInstancesResponse) => void): Request<MediaConnect.Types.ListGatewayInstancesResponse, AWSError>;
+  /**
+   * Displays a list of instances associated with the AWS account. This request returns a paginated result. You can use the filterArn property to display only the instances associated with the selected Gateway Amazon Resource Name (ARN).
+   */
+  listGatewayInstances(callback?: (err: AWSError, data: MediaConnect.Types.ListGatewayInstancesResponse) => void): Request<MediaConnect.Types.ListGatewayInstancesResponse, AWSError>;
+  /**
+   * Displays a list of gateways that are associated with this account. This request returns a paginated result.
+   */
+  listGateways(params: MediaConnect.Types.ListGatewaysRequest, callback?: (err: AWSError, data: MediaConnect.Types.ListGatewaysResponse) => void): Request<MediaConnect.Types.ListGatewaysResponse, AWSError>;
+  /**
+   * Displays a list of gateways that are associated with this account. This request returns a paginated result.
+   */
+  listGateways(callback?: (err: AWSError, data: MediaConnect.Types.ListGatewaysResponse) => void): Request<MediaConnect.Types.ListGatewaysResponse, AWSError>;
   /**
    * Displays a list of all offerings that are available to this account in the current AWS Region. If you have an active reservation (which means you've purchased an offering that has already started and hasn't expired yet), your account isn't eligible for other offerings.
    */
@@ -131,6 +260,30 @@ declare class MediaConnect extends Service {
    * Submits a request to purchase an offering. If you already have an active reservation, you can't purchase another offering.
    */
   purchaseOffering(callback?: (err: AWSError, data: MediaConnect.Types.PurchaseOfferingResponse) => void): Request<MediaConnect.Types.PurchaseOfferingResponse, AWSError>;
+  /**
+   * Removes an output from a bridge.
+   */
+  removeBridgeOutput(params: MediaConnect.Types.RemoveBridgeOutputRequest, callback?: (err: AWSError, data: MediaConnect.Types.RemoveBridgeOutputResponse) => void): Request<MediaConnect.Types.RemoveBridgeOutputResponse, AWSError>;
+  /**
+   * Removes an output from a bridge.
+   */
+  removeBridgeOutput(callback?: (err: AWSError, data: MediaConnect.Types.RemoveBridgeOutputResponse) => void): Request<MediaConnect.Types.RemoveBridgeOutputResponse, AWSError>;
+  /**
+   * Removes a source from a bridge.
+   */
+  removeBridgeSource(params: MediaConnect.Types.RemoveBridgeSourceRequest, callback?: (err: AWSError, data: MediaConnect.Types.RemoveBridgeSourceResponse) => void): Request<MediaConnect.Types.RemoveBridgeSourceResponse, AWSError>;
+  /**
+   * Removes a source from a bridge.
+   */
+  removeBridgeSource(callback?: (err: AWSError, data: MediaConnect.Types.RemoveBridgeSourceResponse) => void): Request<MediaConnect.Types.RemoveBridgeSourceResponse, AWSError>;
+  /**
+   * Removes a media stream from a flow. This action is only available if the media stream is not associated with a source or output.
+   */
+  removeFlowMediaStream(params: MediaConnect.Types.RemoveFlowMediaStreamRequest, callback?: (err: AWSError, data: MediaConnect.Types.RemoveFlowMediaStreamResponse) => void): Request<MediaConnect.Types.RemoveFlowMediaStreamResponse, AWSError>;
+  /**
+   * Removes a media stream from a flow. This action is only available if the media stream is not associated with a source or output.
+   */
+  removeFlowMediaStream(callback?: (err: AWSError, data: MediaConnect.Types.RemoveFlowMediaStreamResponse) => void): Request<MediaConnect.Types.RemoveFlowMediaStreamResponse, AWSError>;
   /**
    * Removes an output from an existing flow. This request can be made only on an output that does not have an entitlement associated with it. If the output has an entitlement, you must revoke the entitlement instead. When an entitlement is revoked from a flow, the service automatically removes the associated output.
    */
@@ -196,6 +349,38 @@ declare class MediaConnect extends Service {
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Updates the bridge
+   */
+  updateBridge(params: MediaConnect.Types.UpdateBridgeRequest, callback?: (err: AWSError, data: MediaConnect.Types.UpdateBridgeResponse) => void): Request<MediaConnect.Types.UpdateBridgeResponse, AWSError>;
+  /**
+   * Updates the bridge
+   */
+  updateBridge(callback?: (err: AWSError, data: MediaConnect.Types.UpdateBridgeResponse) => void): Request<MediaConnect.Types.UpdateBridgeResponse, AWSError>;
+  /**
+   * Updates an existing bridge output.
+   */
+  updateBridgeOutput(params: MediaConnect.Types.UpdateBridgeOutputRequest, callback?: (err: AWSError, data: MediaConnect.Types.UpdateBridgeOutputResponse) => void): Request<MediaConnect.Types.UpdateBridgeOutputResponse, AWSError>;
+  /**
+   * Updates an existing bridge output.
+   */
+  updateBridgeOutput(callback?: (err: AWSError, data: MediaConnect.Types.UpdateBridgeOutputResponse) => void): Request<MediaConnect.Types.UpdateBridgeOutputResponse, AWSError>;
+  /**
+   * Updates an existing bridge source.
+   */
+  updateBridgeSource(params: MediaConnect.Types.UpdateBridgeSourceRequest, callback?: (err: AWSError, data: MediaConnect.Types.UpdateBridgeSourceResponse) => void): Request<MediaConnect.Types.UpdateBridgeSourceResponse, AWSError>;
+  /**
+   * Updates an existing bridge source.
+   */
+  updateBridgeSource(callback?: (err: AWSError, data: MediaConnect.Types.UpdateBridgeSourceResponse) => void): Request<MediaConnect.Types.UpdateBridgeSourceResponse, AWSError>;
+  /**
+   * Updates the bridge state
+   */
+  updateBridgeState(params: MediaConnect.Types.UpdateBridgeStateRequest, callback?: (err: AWSError, data: MediaConnect.Types.UpdateBridgeStateResponse) => void): Request<MediaConnect.Types.UpdateBridgeStateResponse, AWSError>;
+  /**
+   * Updates the bridge state
+   */
+  updateBridgeState(callback?: (err: AWSError, data: MediaConnect.Types.UpdateBridgeStateResponse) => void): Request<MediaConnect.Types.UpdateBridgeStateResponse, AWSError>;
+  /**
    * Updates flow
    */
   updateFlow(params: MediaConnect.Types.UpdateFlowRequest, callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowResponse) => void): Request<MediaConnect.Types.UpdateFlowResponse, AWSError>;
@@ -212,6 +397,14 @@ declare class MediaConnect extends Service {
    */
   updateFlowEntitlement(callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowEntitlementResponse) => void): Request<MediaConnect.Types.UpdateFlowEntitlementResponse, AWSError>;
   /**
+   * Updates an existing media stream.
+   */
+  updateFlowMediaStream(params: MediaConnect.Types.UpdateFlowMediaStreamRequest, callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowMediaStreamResponse) => void): Request<MediaConnect.Types.UpdateFlowMediaStreamResponse, AWSError>;
+  /**
+   * Updates an existing media stream.
+   */
+  updateFlowMediaStream(callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowMediaStreamResponse) => void): Request<MediaConnect.Types.UpdateFlowMediaStreamResponse, AWSError>;
+  /**
    * Updates an existing flow output.
    */
   updateFlowOutput(params: MediaConnect.Types.UpdateFlowOutputRequest, callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowOutputResponse) => void): Request<MediaConnect.Types.UpdateFlowOutputResponse, AWSError>;
@@ -227,8 +420,175 @@ declare class MediaConnect extends Service {
    * Updates the source of a flow.
    */
   updateFlowSource(callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowSourceResponse) => void): Request<MediaConnect.Types.UpdateFlowSourceResponse, AWSError>;
+  /**
+   * Updates the configuration of an existing Gateway Instance.
+   */
+  updateGatewayInstance(params: MediaConnect.Types.UpdateGatewayInstanceRequest, callback?: (err: AWSError, data: MediaConnect.Types.UpdateGatewayInstanceResponse) => void): Request<MediaConnect.Types.UpdateGatewayInstanceResponse, AWSError>;
+  /**
+   * Updates the configuration of an existing Gateway Instance.
+   */
+  updateGatewayInstance(callback?: (err: AWSError, data: MediaConnect.Types.UpdateGatewayInstanceResponse) => void): Request<MediaConnect.Types.UpdateGatewayInstanceResponse, AWSError>;
+  /**
+   * Waits for the flowActive state by periodically calling the underlying MediaConnect.describeFlowoperation every 3 seconds (at most 40 times). Wait until a flow is active
+   */
+  waitFor(state: "flowActive", params: MediaConnect.Types.DescribeFlowRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowResponse) => void): Request<MediaConnect.Types.DescribeFlowResponse, AWSError>;
+  /**
+   * Waits for the flowActive state by periodically calling the underlying MediaConnect.describeFlowoperation every 3 seconds (at most 40 times). Wait until a flow is active
+   */
+  waitFor(state: "flowActive", callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowResponse) => void): Request<MediaConnect.Types.DescribeFlowResponse, AWSError>;
+  /**
+   * Waits for the flowStandby state by periodically calling the underlying MediaConnect.describeFlowoperation every 3 seconds (at most 40 times). Wait until a flow is in standby mode
+   */
+  waitFor(state: "flowStandby", params: MediaConnect.Types.DescribeFlowRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowResponse) => void): Request<MediaConnect.Types.DescribeFlowResponse, AWSError>;
+  /**
+   * Waits for the flowStandby state by periodically calling the underlying MediaConnect.describeFlowoperation every 3 seconds (at most 40 times). Wait until a flow is in standby mode
+   */
+  waitFor(state: "flowStandby", callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowResponse) => void): Request<MediaConnect.Types.DescribeFlowResponse, AWSError>;
+  /**
+   * Waits for the flowDeleted state by periodically calling the underlying MediaConnect.describeFlowoperation every 3 seconds (at most 40 times). Wait until a flow is deleted
+   */
+  waitFor(state: "flowDeleted", params: MediaConnect.Types.DescribeFlowRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowResponse) => void): Request<MediaConnect.Types.DescribeFlowResponse, AWSError>;
+  /**
+   * Waits for the flowDeleted state by periodically calling the underlying MediaConnect.describeFlowoperation every 3 seconds (at most 40 times). Wait until a flow is deleted
+   */
+  waitFor(state: "flowDeleted", callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowResponse) => void): Request<MediaConnect.Types.DescribeFlowResponse, AWSError>;
 }
 declare namespace MediaConnect {
+  export interface AddBridgeFlowSourceRequest {
+    /**
+     * The Amazon Resource Number (ARN) of the cloud flow to use as a source of this bridge.
+     */
+    FlowArn: __string;
+    /**
+     * The name of the VPC interface attachment to use for this source.
+     */
+    FlowVpcInterfaceAttachment?: VpcInterfaceAttachment;
+    /**
+     * The name of the flow source. This name is used to reference the source and must be unique among sources in this bridge.
+     */
+    Name: __string;
+  }
+  export interface AddBridgeNetworkOutputRequest {
+    /**
+     * The network output IP Address.
+     */
+    IpAddress: __string;
+    /**
+     * The network output name. This name is used to reference the output and must be unique among outputs in this bridge.
+     */
+    Name: __string;
+    /**
+     * The network output's gateway network name.
+     */
+    NetworkName: __string;
+    /**
+     * The network output port.
+     */
+    Port: __integer;
+    /**
+     * The network output protocol.
+     */
+    Protocol: Protocol;
+    /**
+     * The network output TTL.
+     */
+    Ttl: __integer;
+  }
+  export interface AddBridgeNetworkSourceRequest {
+    /**
+     * The network source multicast IP.
+     */
+    MulticastIp: __string;
+    /**
+     * The name of the network source. This name is used to reference the source and must be unique among sources in this bridge.
+     */
+    Name: __string;
+    /**
+     * The network source's gateway network name.
+     */
+    NetworkName: __string;
+    /**
+     * The network source port.
+     */
+    Port: __integer;
+    /**
+     * The network source protocol.
+     */
+    Protocol: Protocol;
+  }
+  export interface AddBridgeOutputRequest {
+    NetworkOutput?: AddBridgeNetworkOutputRequest;
+  }
+  export interface AddBridgeOutputsRequest {
+    /**
+     * The ARN of the bridge that you want to update.
+     */
+    BridgeArn: __string;
+    /**
+     * The outputs that you want to add to this bridge.
+     */
+    Outputs: __listOfAddBridgeOutputRequest;
+  }
+  export interface AddBridgeOutputsResponse {
+    /**
+     * The Amazon Resource Number (ARN) of the bridge.
+     */
+    BridgeArn?: __string;
+    /**
+     * The outputs that you added to this bridge.
+     */
+    Outputs?: __listOfBridgeOutput;
+  }
+  export interface AddBridgeSourceRequest {
+    FlowSource?: AddBridgeFlowSourceRequest;
+    NetworkSource?: AddBridgeNetworkSourceRequest;
+  }
+  export interface AddBridgeSourcesRequest {
+    /**
+     * The ARN of the bridge that you want to update.
+     */
+    BridgeArn: __string;
+    /**
+     * The sources that you want to add to this bridge.
+     */
+    Sources: __listOfAddBridgeSourceRequest;
+  }
+  export interface AddBridgeSourcesResponse {
+    /**
+     * The Amazon Resource Number (ARN) of the bridge.
+     */
+    BridgeArn?: __string;
+    /**
+     * The sources that you added to this bridge.
+     */
+    Sources?: __listOfBridgeSource;
+  }
+  export interface AddEgressGatewayBridgeRequest {
+    /**
+     * The maximum expected bitrate (in bps).
+     */
+    MaxBitrate: __integer;
+  }
+  export interface AddFlowMediaStreamsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the flow.
+     */
+    FlowArn: __string;
+    /**
+     * The media streams that you want to add to the flow.
+     */
+    MediaStreams: __listOfAddMediaStreamRequest;
+  }
+  export interface AddFlowMediaStreamsResponse {
+    /**
+     * The ARN of the flow that you added media streams to.
+     */
+    FlowArn?: __string;
+    /**
+     * The media streams that you added to the flow.
+     */
+    MediaStreams?: __listOfMediaStream;
+  }
   export interface AddFlowOutputsRequest {
     /**
      * The flow that you want to add outputs to.
@@ -289,6 +649,56 @@ declare namespace MediaConnect {
      */
     VpcInterfaces?: __listOfVpcInterface;
   }
+  export interface AddIngressGatewayBridgeRequest {
+    /**
+     * The maximum expected bitrate (in bps).
+     */
+    MaxBitrate: __integer;
+    /**
+     * The maximum number of expected outputs.
+     */
+    MaxOutputs: __integer;
+  }
+  export interface AddMaintenance {
+    /**
+     * A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+     */
+    MaintenanceDay: MaintenanceDay;
+    /**
+     * UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.
+     */
+    MaintenanceStartHour: __string;
+  }
+  export interface AddMediaStreamRequest {
+    /**
+     * The attributes that you want to assign to the new media stream.
+     */
+    Attributes?: MediaStreamAttributesRequest;
+    /**
+     * The sample rate (in Hz) for the stream. If the media stream type is video or ancillary data, set this value to 90000. If the media stream type is audio, set this value to either 48000 or 96000.
+     */
+    ClockRate?: __integer;
+    /**
+     * A description that can help you quickly identify what your media stream is used for.
+     */
+    Description?: __string;
+    /**
+     * A unique identifier for the media stream.
+     */
+    MediaStreamId: __integer;
+    /**
+     * A name that helps you distinguish one media stream from another.
+     */
+    MediaStreamName: __string;
+    /**
+     * The type of media stream.
+     */
+    MediaStreamType: MediaStreamType;
+    /**
+     * The resolution of the video.
+     */
+    VideoFormat?: __string;
+  }
   export interface AddOutputRequest {
     /**
      * The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
@@ -303,13 +713,21 @@ declare namespace MediaConnect {
      */
     Destination?: __string;
     /**
-     * The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key).
+     * The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key). Allowable encryption types: static-key.
      */
     Encryption?: Encryption;
     /**
-     * The maximum latency in milliseconds for Zixi-based streams.
+     * The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.
      */
     MaxLatency?: __integer;
+    /**
+     * The media streams that are associated with the output, and the parameters for those associations.
+     */
+    MediaStreamOutputConfigurations?: __listOfMediaStreamOutputConfigurationRequest;
+    /**
+     * The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.
+     */
+    MinLatency?: __integer;
     /**
      * The name of the output. This value must be unique within the current flow.
      */
@@ -327,19 +745,179 @@ declare namespace MediaConnect {
      */
     RemoteId?: __string;
     /**
+     * The port that the flow uses to send outbound requests to initiate connection with the sender.
+     */
+    SenderControlPort?: __integer;
+    /**
      * The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
      */
     SmoothingLatency?: __integer;
     /**
-     * The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+     * The stream ID that you want to use for this transport. This parameter applies only to Zixi and SRT caller-based streams.
      */
     StreamId?: __string;
     /**
      * The name of the VPC interface attachment to use for this output.
      */
     VpcInterfaceAttachment?: VpcInterfaceAttachment;
+    /**
+     * An indication of whether the new output should be enabled or disabled as soon as it is created. If you don't specify the outputStatus field in your request, MediaConnect sets it to ENABLED.
+     */
+    OutputStatus?: OutputStatus;
   }
   export type Algorithm = "aes128"|"aes192"|"aes256"|string;
+  export interface Bridge {
+    /**
+     * The Amazon Resource Number (ARN) of the bridge.
+     */
+    BridgeArn: __string;
+    BridgeMessages?: __listOfMessageDetail;
+    BridgeState: BridgeState;
+    EgressGatewayBridge?: EgressGatewayBridge;
+    IngressGatewayBridge?: IngressGatewayBridge;
+    /**
+     * The name of the bridge.
+     */
+    Name: __string;
+    /**
+     * The outputs on this bridge.
+     */
+    Outputs?: __listOfBridgeOutput;
+    /**
+     * The placement Amazon Resource Number (ARN) of the bridge.
+     */
+    PlacementArn: __string;
+    SourceFailoverConfig?: FailoverConfig;
+    /**
+     * The sources on this bridge.
+     */
+    Sources?: __listOfBridgeSource;
+  }
+  export interface BridgeFlowOutput {
+    /**
+     * The Amazon Resource Number (ARN) of the cloud flow.
+     */
+    FlowArn: __string;
+    /**
+     * The Amazon Resource Number (ARN) of the flow source.
+     */
+    FlowSourceArn: __string;
+    /**
+     * The name of the bridge's output.
+     */
+    Name: __string;
+  }
+  export interface BridgeFlowSource {
+    /**
+     * The ARN of the cloud flow used as a source of this bridge.
+     */
+    FlowArn: __string;
+    /**
+     * The name of the VPC interface attachment to use for this source.
+     */
+    FlowVpcInterfaceAttachment?: VpcInterfaceAttachment;
+    /**
+     * The name of the flow source.
+     */
+    Name: __string;
+    /**
+     * The Amazon Resource Number (ARN) of the output.
+     */
+    OutputArn?: __string;
+  }
+  export interface BridgeNetworkOutput {
+    /**
+     * The network output IP Address.
+     */
+    IpAddress: __string;
+    /**
+     * The network output name.
+     */
+    Name: __string;
+    /**
+     * The network output's gateway network name.
+     */
+    NetworkName: __string;
+    /**
+     * The network output port.
+     */
+    Port: __integer;
+    /**
+     * The network output protocol.
+     */
+    Protocol: Protocol;
+    /**
+     * The network output TTL.
+     */
+    Ttl: __integer;
+  }
+  export interface BridgeNetworkSource {
+    /**
+     * The network source multicast IP.
+     */
+    MulticastIp: __string;
+    /**
+     * The name of the network source.
+     */
+    Name: __string;
+    /**
+     * The network source's gateway network name.
+     */
+    NetworkName: __string;
+    /**
+     * The network source port.
+     */
+    Port: __integer;
+    /**
+     * The network source protocol.
+     */
+    Protocol: Protocol;
+  }
+  export interface BridgeOutput {
+    FlowOutput?: BridgeFlowOutput;
+    NetworkOutput?: BridgeNetworkOutput;
+  }
+  export type BridgePlacement = "AVAILABLE"|"LOCKED"|string;
+  export interface BridgeSource {
+    FlowSource?: BridgeFlowSource;
+    NetworkSource?: BridgeNetworkSource;
+  }
+  export type BridgeState = "CREATING"|"STANDBY"|"STARTING"|"DEPLOYING"|"ACTIVE"|"STOPPING"|"DELETING"|"DELETED"|"START_FAILED"|"START_PENDING"|"STOP_FAILED"|"UPDATING"|string;
+  export type Colorimetry = "BT601"|"BT709"|"BT2020"|"BT2100"|"ST2065-1"|"ST2065-3"|"XYZ"|string;
+  export type ConnectionStatus = "CONNECTED"|"DISCONNECTED"|string;
+  export interface CreateBridgeRequest {
+    /**
+     * Create a bridge with the egress bridge type. An egress bridge is a cloud-to-ground bridge. The content comes from an existing MediaConnect flow and is delivered to your premises.
+     */
+    EgressGatewayBridge?: AddEgressGatewayBridgeRequest;
+    /**
+     * Create a bridge with the ingress bridge type. An ingress bridge is a ground-to-cloud bridge. The content originates at your premises and is delivered to the cloud.
+     */
+    IngressGatewayBridge?: AddIngressGatewayBridgeRequest;
+    /**
+     * The name of the bridge. This name can not be modified after the bridge is created.
+     */
+    Name: __string;
+    /**
+     * The outputs that you want to add to this bridge.
+     */
+    Outputs?: __listOfAddBridgeOutputRequest;
+    /**
+     * The bridge placement Amazon Resource Number (ARN).
+     */
+    PlacementArn: __string;
+    /**
+     * The settings for source failover.
+     */
+    SourceFailoverConfig?: FailoverConfig;
+    /**
+     * The sources that you want to add to this bridge.
+     */
+    Sources: __listOfAddBridgeSourceRequest;
+  }
+  export interface CreateBridgeResponse {
+    Bridge?: Bridge;
+  }
   export interface CreateFlowRequest {
     /**
      * The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS Region.
@@ -349,6 +927,10 @@ declare namespace MediaConnect {
      * The entitlements that you want to grant on a flow.
      */
     Entitlements?: __listOfGrantEntitlementRequest;
+    /**
+     * The media streams that you want to add to the flow. You can associate these media streams with sources and outputs on the flow.
+     */
+    MediaStreams?: __listOfAddMediaStreamRequest;
     /**
      * The name of the flow.
      */
@@ -364,9 +946,40 @@ declare namespace MediaConnect {
      * The VPC interfaces you want on the flow.
      */
     VpcInterfaces?: __listOfVpcInterfaceRequest;
+    Maintenance?: AddMaintenance;
+    SourceMonitoringConfig?: MonitoringConfig;
   }
   export interface CreateFlowResponse {
     Flow?: Flow;
+  }
+  export interface CreateGatewayRequest {
+    /**
+     * The range of IP addresses that are allowed to contribute content or initiate output requests for flows communicating with this gateway. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+     */
+    EgressCidrBlocks: __listOf__string;
+    /**
+     * The name of the gateway. This name can not be modified after the gateway is created.
+     */
+    Name: __string;
+    /**
+     * The list of networks that you want to add.
+     */
+    Networks: __listOfGatewayNetwork;
+  }
+  export interface CreateGatewayResponse {
+    Gateway?: Gateway;
+  }
+  export interface DeleteBridgeRequest {
+    /**
+     * The ARN of the bridge that you want to delete.
+     */
+    BridgeArn: __string;
+  }
+  export interface DeleteBridgeResponse {
+    /**
+     * The Amazon Resource Number (ARN) of the deleted bridge.
+     */
+    BridgeArn?: __string;
   }
   export interface DeleteFlowRequest {
     /**
@@ -384,6 +997,47 @@ declare namespace MediaConnect {
      */
     Status?: Status;
   }
+  export interface DeleteGatewayRequest {
+    /**
+     * The ARN of the gateway that you want to delete.
+     */
+    GatewayArn: __string;
+  }
+  export interface DeleteGatewayResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the gateway that was deleted.
+     */
+    GatewayArn?: __string;
+  }
+  export interface DeregisterGatewayInstanceRequest {
+    /**
+     * Force the deregistration of an instance. Force will deregister an instance, even if there are bridges running on it.
+     */
+    Force?: __boolean;
+    /**
+     * The Amazon Resource Name (ARN) of the gateway that contains the instance that you want to deregister.
+     */
+    GatewayInstanceArn: __string;
+  }
+  export interface DeregisterGatewayInstanceResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the instance.
+     */
+    GatewayInstanceArn?: __string;
+    /**
+     * The status of the instance.
+     */
+    InstanceState?: InstanceState;
+  }
+  export interface DescribeBridgeRequest {
+    /**
+     * The ARN of the bridge that you want to describe.
+     */
+    BridgeArn: __string;
+  }
+  export interface DescribeBridgeResponse {
+    Bridge?: Bridge;
+  }
   export interface DescribeFlowRequest {
     /**
      * The ARN of the flow that you want to describe.
@@ -393,6 +1047,54 @@ declare namespace MediaConnect {
   export interface DescribeFlowResponse {
     Flow?: Flow;
     Messages?: Messages;
+  }
+  export interface DescribeFlowSourceMetadataRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the flow.
+     */
+    FlowArn: __string;
+  }
+  export interface DescribeFlowSourceMetadataResponse {
+    /**
+     * The ARN of the flow that DescribeFlowSourceMetadata was performed on.
+     */
+    FlowArn?: __string;
+    /**
+     * Provides a status code and message regarding issues found with the flow source metadata.
+     */
+    Messages?: __listOfMessageDetail;
+    /**
+     * The timestamp of the most recent change in metadata for this flow’s source.
+     */
+    Timestamp?: __timestampIso8601;
+    TransportMediaInfo?: TransportMediaInfo;
+  }
+  export interface DescribeFlowSourceThumbnailRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the flow.
+     */
+    FlowArn: __string;
+  }
+  export interface DescribeFlowSourceThumbnailResponse {
+    ThumbnailDetails?: ThumbnailDetails;
+  }
+  export interface DescribeGatewayInstanceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the gateway instance that you want to describe.
+     */
+    GatewayInstanceArn: __string;
+  }
+  export interface DescribeGatewayInstanceResponse {
+    GatewayInstance?: GatewayInstance;
+  }
+  export interface DescribeGatewayRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the gateway that you want to describe.
+     */
+    GatewayArn: __string;
+  }
+  export interface DescribeGatewayResponse {
+    Gateway?: Gateway;
   }
   export interface DescribeOfferingRequest {
     /**
@@ -412,12 +1114,77 @@ declare namespace MediaConnect {
   export interface DescribeReservationResponse {
     Reservation?: Reservation;
   }
+  export type DesiredState = "ACTIVE"|"STANDBY"|"DELETED"|string;
+  export interface DestinationConfiguration {
+    /**
+     * The IP address where contents of the media stream will be sent.
+     */
+    DestinationIp: __string;
+    /**
+     * The port to use when the content of the media stream is distributed to the output.
+     */
+    DestinationPort: __integer;
+    /**
+     * The VPC interface that is used for the media stream associated with the output.
+     */
+    Interface: Interface;
+    /**
+     * The IP address that the receiver requires in order to establish a connection with the flow. This value is represented by the elastic network interface IP address of the VPC. This field applies only to outputs that use the CDI or ST 2110 JPEG XS protocol.
+     */
+    OutboundIp: __string;
+  }
+  export interface DestinationConfigurationRequest {
+    /**
+     * The IP address where you want MediaConnect to send contents of the media stream.
+     */
+    DestinationIp: __string;
+    /**
+     * The port that you want MediaConnect to use when it distributes the media stream to the output.
+     */
+    DestinationPort: __integer;
+    /**
+     * The VPC interface that you want to use for the media stream associated with the output.
+     */
+    Interface: InterfaceRequest;
+  }
   export type DurationUnits = "MONTHS"|string;
+  export interface EgressGatewayBridge {
+    /**
+     * The ID of the instance running this bridge.
+     */
+    InstanceId?: __string;
+    /**
+     * The maximum expected bitrate (in bps) of the egress bridge.
+     */
+    MaxBitrate: __integer;
+  }
+  export type EncoderProfile = "main"|"high"|string;
+  export type EncodingName = "jxsv"|"raw"|"smpte291"|"pcm"|string;
+  export interface EncodingParameters {
+    /**
+     * A value that is used to calculate compression for an output. The bitrate of the output is calculated as follows: Output bitrate = (1 / compressionFactor) * (source bitrate) This property only applies to outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol. Valid values are floating point numbers in the range of 3.0 to 10.0, inclusive.
+     */
+    CompressionFactor: __double;
+    /**
+     * A setting on the encoder that drives compression settings. This property only applies to video media streams associated with outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol.
+     */
+    EncoderProfile: EncoderProfile;
+  }
+  export interface EncodingParametersRequest {
+    /**
+     * A value that is used to calculate compression for an output. The bitrate of the output is calculated as follows: Output bitrate = (1 / compressionFactor) * (source bitrate) This property only applies to outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol. Valid values are floating point numbers in the range of 3.0 to 10.0, inclusive.
+     */
+    CompressionFactor: __double;
+    /**
+     * A setting on the encoder that drives compression settings. This property only applies to video media streams associated with outputs that use the ST 2110 JPEG XS protocol, if at least one source on the flow uses the CDI protocol.
+     */
+    EncoderProfile: EncoderProfile;
+  }
   export interface Encryption {
     /**
      * The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).
      */
-    Algorithm: Algorithm;
+    Algorithm?: Algorithm;
     /**
      * A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.
      */
@@ -484,11 +1251,20 @@ declare namespace MediaConnect {
   export type EntitlementStatus = "ENABLED"|"DISABLED"|string;
   export interface FailoverConfig {
     /**
+     * The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.
+     */
+    FailoverMode?: FailoverMode;
+    /**
      * Search window time to look for dash-7 packets
      */
     RecoveryWindow?: __integer;
+    /**
+     * The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.
+     */
+    SourcePriority?: SourcePriority;
     State?: State;
   }
+  export type FailoverMode = "MERGE"|"FAILOVER"|string;
   export interface Flow {
     /**
      * The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.
@@ -507,9 +1283,13 @@ declare namespace MediaConnect {
      */
     Entitlements: __listOfEntitlement;
     /**
-     * The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.
+     * The Amazon Resource Name (ARN) of the flow.
      */
     FlowArn: __string;
+    /**
+     * The media streams that are associated with the flow. After you associate a media stream with a source, you can also associate it with outputs on the flow.
+     */
+    MediaStreams?: __listOfMediaStream;
     /**
      * The name of the flow.
      */
@@ -529,7 +1309,154 @@ declare namespace MediaConnect {
      * The VPC Interfaces for this flow.
      */
     VpcInterfaces?: __listOfVpcInterface;
+    Maintenance?: Maintenance;
+    SourceMonitoringConfig?: MonitoringConfig;
   }
+  export interface Fmtp {
+    /**
+     * The format of the audio channel.
+     */
+    ChannelOrder?: __string;
+    /**
+     * The format that is used for the representation of color.
+     */
+    Colorimetry?: Colorimetry;
+    /**
+     * The frame rate for the video stream, in frames/second. For example: 60000/1001. If you specify a whole number, MediaConnect uses a ratio of N/1. For example, if you specify 60, MediaConnect uses 60/1 as the exactFramerate.
+     */
+    ExactFramerate?: __string;
+    /**
+     * The pixel aspect ratio (PAR) of the video.
+     */
+    Par?: __string;
+    /**
+     * The encoding range of the video.
+     */
+    Range?: Range;
+    /**
+     * The type of compression that was used to smooth the video’s appearance
+     */
+    ScanMode?: ScanMode;
+    /**
+     * The transfer characteristic system (TCS) that is used in the video.
+     */
+    Tcs?: Tcs;
+  }
+  export interface FmtpRequest {
+    /**
+     * The format of the audio channel.
+     */
+    ChannelOrder?: __string;
+    /**
+     * The format that is used for the representation of color.
+     */
+    Colorimetry?: Colorimetry;
+    /**
+     * The frame rate for the video stream, in frames/second. For example: 60000/1001. If you specify a whole number, MediaConnect uses a ratio of N/1. For example, if you specify 60, MediaConnect uses 60/1 as the exactFramerate.
+     */
+    ExactFramerate?: __string;
+    /**
+     * The pixel aspect ratio (PAR) of the video.
+     */
+    Par?: __string;
+    /**
+     * The encoding range of the video.
+     */
+    Range?: Range;
+    /**
+     * The type of compression that was used to smooth the video’s appearance.
+     */
+    ScanMode?: ScanMode;
+    /**
+     * The transfer characteristic system (TCS) that is used in the video.
+     */
+    Tcs?: Tcs;
+  }
+  export interface FrameResolution {
+    /**
+     * The number of pixels in the height of the video frame.
+     */
+    FrameHeight: __integer;
+    /**
+     * The number of pixels in the width of the video frame.
+     */
+    FrameWidth: __integer;
+  }
+  export interface Gateway {
+    /**
+     * The range of IP addresses that contribute content or initiate output requests for flows communicating with this gateway. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+     */
+    EgressCidrBlocks: __listOf__string;
+    /**
+     * The Amazon Resource Name (ARN) of the gateway.
+     */
+    GatewayArn: __string;
+    GatewayMessages?: __listOfMessageDetail;
+    /**
+     * The current status of the gateway.
+     */
+    GatewayState?: GatewayState;
+    /**
+     * The name of the gateway. This name can not be modified after the gateway is created.
+     */
+    Name: __string;
+    /**
+     * The list of networks in the gateway.
+     */
+    Networks: __listOfGatewayNetwork;
+  }
+  export interface GatewayBridgeSource {
+    /**
+     * The ARN of the bridge feeding this flow.
+     */
+    BridgeArn: __string;
+    /**
+     * The name of the VPC interface attachment to use for this bridge source.
+     */
+    VpcInterfaceAttachment?: VpcInterfaceAttachment;
+  }
+  export interface GatewayInstance {
+    /**
+     * The availability of the instance to host new bridges. The bridgePlacement property can be LOCKED or AVAILABLE. If it is LOCKED, no new bridges can be deployed to this instance. If it is AVAILABLE, new bridges can be added to this instance.
+     */
+    BridgePlacement: BridgePlacement;
+    /**
+     * The connection state of the instance.
+     */
+    ConnectionStatus: ConnectionStatus;
+    /**
+     * The Amazon Resource Name (ARN) of the instance.
+     */
+    GatewayArn: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the gateway.
+     */
+    GatewayInstanceArn: __string;
+    /**
+     * The managed instance ID generated by the SSM install. This will begin with "mi-".
+     */
+    InstanceId: __string;
+    InstanceMessages?: __listOfMessageDetail;
+    /**
+     * The status of the instance.
+     */
+    InstanceState: InstanceState;
+    /**
+     * The running bridge count.
+     */
+    RunningBridgeCount: __integer;
+  }
+  export interface GatewayNetwork {
+    /**
+     * A unique IP address range to use for this network. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+     */
+    CidrBlock: __string;
+    /**
+     * The name of the network. This name is used to reference the network and must be unique among networks in this gateway.
+     */
+    Name: __string;
+  }
+  export type GatewayState = "CREATING"|"ACTIVE"|"UPDATING"|"ERROR"|"DELETING"|"DELETED"|string;
   export interface GrantEntitlementRequest {
     /**
      * Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
@@ -540,7 +1467,7 @@ declare namespace MediaConnect {
      */
     Description?: __string;
     /**
-     * The type of encryption that will be used on the output that is associated with this entitlement.
+     * The type of encryption that will be used on the output that is associated with this entitlement. Allowable encryption types: static-key, speke.
      */
     Encryption?: Encryption;
     /**
@@ -576,7 +1503,82 @@ declare namespace MediaConnect {
      */
     FlowArn?: __string;
   }
-  export type KeyType = "speke"|"static-key"|string;
+  export interface IngressGatewayBridge {
+    /**
+     * The ID of the instance running this bridge.
+     */
+    InstanceId?: __string;
+    /**
+     * The maximum expected bitrate (in bps) of the ingress bridge.
+     */
+    MaxBitrate: __integer;
+    /**
+     * The maximum number of outputs on the ingress bridge.
+     */
+    MaxOutputs: __integer;
+  }
+  export interface InputConfiguration {
+    /**
+     * The IP address that the flow listens on for incoming content for a media stream.
+     */
+    InputIp: __string;
+    /**
+     * The port that the flow listens on for an incoming media stream.
+     */
+    InputPort: __integer;
+    /**
+     * The VPC interface where the media stream comes in from.
+     */
+    Interface: Interface;
+  }
+  export interface InputConfigurationRequest {
+    /**
+     * The port that you want the flow to listen on for an incoming media stream.
+     */
+    InputPort: __integer;
+    /**
+     * The VPC interface that you want to use for the incoming media stream.
+     */
+    Interface: InterfaceRequest;
+  }
+  export type InstanceState = "REGISTERING"|"ACTIVE"|"DEREGISTERING"|"DEREGISTERED"|"REGISTRATION_ERROR"|"DEREGISTRATION_ERROR"|string;
+  export interface Interface {
+    /**
+     * The name of the VPC interface.
+     */
+    Name: __string;
+  }
+  export interface InterfaceRequest {
+    /**
+     * The name of the VPC interface.
+     */
+    Name: __string;
+  }
+  export type KeyType = "speke"|"static-key"|"srt-password"|string;
+  export interface ListBridgesRequest {
+    /**
+     * Filter the list results to display only the bridges associated with the selected Amazon Resource Name (ARN).
+     */
+    FilterArn?: __string;
+    /**
+     * The maximum number of results to return per API request. For example, you submit a ListBridges request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token that identifies which batch of results that you want to see. For example, you submit a ListBridges request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListBridges request a second time and specify the NextToken value.
+     */
+    NextToken?: __string;
+  }
+  export interface ListBridgesResponse {
+    /**
+     * A list of bridge summaries.
+     */
+    Bridges?: __listOfListedBridge;
+    /**
+     * The token that identifies which batch of results that you want to see. For example, you submit a ListBridges request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListBridges request a second time and specify the NextToken value.
+     */
+    NextToken?: __string;
+  }
   export interface ListEntitlementsRequest {
     /**
      * The maximum number of results to return per API request. For example, you submit a ListEntitlements request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 20 results per page.
@@ -614,6 +1616,50 @@ declare namespace MediaConnect {
     Flows?: __listOfListedFlow;
     /**
      * The token that identifies which batch of results that you want to see. For example, you submit a ListFlows request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListFlows request a second time and specify the NextToken value.
+     */
+    NextToken?: __string;
+  }
+  export interface ListGatewayInstancesRequest {
+    /**
+     * Filter the list results to display only the instances associated with the selected Gateway Amazon Resource Name (ARN).
+     */
+    FilterArn?: __string;
+    /**
+     * The maximum number of results to return per API request. For example, you submit a ListInstances request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token that identifies which batch of results that you want to see. For example, you submit a ListInstances request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListInstances request a second time and specify the NextToken value.
+     */
+    NextToken?: __string;
+  }
+  export interface ListGatewayInstancesResponse {
+    /**
+     * A list of instance summaries.
+     */
+    Instances?: __listOfListedGatewayInstance;
+    /**
+     * The token that identifies which batch of results that you want to see. For example, you submit a ListInstances request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListInstances request a second time and specify the NextToken value.
+     */
+    NextToken?: __string;
+  }
+  export interface ListGatewaysRequest {
+    /**
+     * The maximum number of results to return per API request. For example, you submit a ListGateways request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token that identifies which batch of results that you want to see. For example, you submit a ListGateways request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListGateways request a second time and specify the NextToken value.
+     */
+    NextToken?: __string;
+  }
+  export interface ListGatewaysResponse {
+    /**
+     * A list of gateway summaries.
+     */
+    Gateways?: __listOfListedGateway;
+    /**
+     * The token that identifies which batch of results that you want to see. For example, you submit a ListGateways request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListGateways request a second time and specify the NextToken value.
      */
     NextToken?: __string;
   }
@@ -669,6 +1715,25 @@ declare namespace MediaConnect {
      */
     Tags?: __mapOf__string;
   }
+  export interface ListedBridge {
+    /**
+     * The ARN of the bridge.
+     */
+    BridgeArn: __string;
+    BridgeState: BridgeState;
+    /**
+     * The type of the bridge.
+     */
+    BridgeType: __string;
+    /**
+     * The name of the bridge.
+     */
+    Name: __string;
+    /**
+     * The ARN of the gateway associated with the bridge.
+     */
+    PlacementArn: __string;
+  }
   export interface ListedEntitlement {
     /**
      * Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
@@ -708,14 +1773,203 @@ declare namespace MediaConnect {
      * The current status of the flow.
      */
     Status: Status;
+    Maintenance?: Maintenance;
   }
+  export interface ListedGateway {
+    /**
+     * The Amazon Resource Name (ARN) of the gateway.
+     */
+    GatewayArn: __string;
+    GatewayState: GatewayState;
+    /**
+     * The name of the gateway.
+     */
+    Name: __string;
+  }
+  export interface ListedGatewayInstance {
+    /**
+     * The Amazon Resource Name (ARN) of the gateway.
+     */
+    GatewayArn: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the instance.
+     */
+    GatewayInstanceArn: __string;
+    /**
+     * The managed instance ID generated by the SSM install. This will begin with "mi-".
+     */
+    InstanceId: __string;
+    /**
+     * The status of the instance.
+     */
+    InstanceState?: InstanceState;
+  }
+  export interface Maintenance {
+    /**
+     * A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+     */
+    MaintenanceDay?: MaintenanceDay;
+    /**
+     * The Maintenance has to be performed before this deadline in ISO UTC format. Example: 2021-01-30T08:30:00Z.
+     */
+    MaintenanceDeadline?: __string;
+    /**
+     * A scheduled date in ISO UTC format when the maintenance will happen. Use YYYY-MM-DD format. Example: 2021-01-30.
+     */
+    MaintenanceScheduledDate?: __string;
+    /**
+     * UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.
+     */
+    MaintenanceStartHour?: __string;
+  }
+  export type MaintenanceDay = "Monday"|"Tuesday"|"Wednesday"|"Thursday"|"Friday"|"Saturday"|"Sunday"|string;
   export type MaxResults = number;
+  export interface MediaStream {
+    /**
+     * Attributes that are related to the media stream.
+     */
+    Attributes?: MediaStreamAttributes;
+    /**
+     * The sample rate for the stream. This value is measured in Hz.
+     */
+    ClockRate?: __integer;
+    /**
+     * A description that can help you quickly identify what your media stream is used for.
+     */
+    Description?: __string;
+    /**
+     * The format type number (sometimes referred to as RTP payload type) of the media stream. MediaConnect assigns this value to the media stream. For ST 2110 JPEG XS outputs, you need to provide this value to the receiver.
+     */
+    Fmt: __integer;
+    /**
+     * A unique identifier for the media stream.
+     */
+    MediaStreamId: __integer;
+    /**
+     * A name that helps you distinguish one media stream from another.
+     */
+    MediaStreamName: __string;
+    /**
+     * The type of media stream.
+     */
+    MediaStreamType: MediaStreamType;
+    /**
+     * The resolution of the video.
+     */
+    VideoFormat?: __string;
+  }
+  export interface MediaStreamAttributes {
+    /**
+     * A set of parameters that define the media stream.
+     */
+    Fmtp: Fmtp;
+    /**
+     * The audio language, in a format that is recognized by the receiver.
+     */
+    Lang?: __string;
+  }
+  export interface MediaStreamAttributesRequest {
+    /**
+     * The settings that you want to use to define the media stream.
+     */
+    Fmtp?: FmtpRequest;
+    /**
+     * The audio language, in a format that is recognized by the receiver.
+     */
+    Lang?: __string;
+  }
+  export interface MediaStreamOutputConfiguration {
+    /**
+     * The transport parameters that are associated with each outbound media stream.
+     */
+    DestinationConfigurations?: __listOfDestinationConfiguration;
+    /**
+     * The format that was used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv.
+     */
+    EncodingName: EncodingName;
+    /**
+     * Encoding parameters
+     */
+    EncodingParameters?: EncodingParameters;
+    /**
+     * The name of the media stream.
+     */
+    MediaStreamName: __string;
+  }
+  export interface MediaStreamOutputConfigurationRequest {
+    /**
+     * The transport parameters that you want to associate with the media stream.
+     */
+    DestinationConfigurations?: __listOfDestinationConfigurationRequest;
+    /**
+     * The format that will be used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv.
+     */
+    EncodingName: EncodingName;
+    /**
+     * A collection of parameters that determine how MediaConnect will convert the content. These fields only apply to outputs on flows that have a CDI source.
+     */
+    EncodingParameters?: EncodingParametersRequest;
+    /**
+     * The name of the media stream that is associated with the output.
+     */
+    MediaStreamName: __string;
+  }
+  export interface MediaStreamSourceConfiguration {
+    /**
+     * The format that was used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv.
+     */
+    EncodingName: EncodingName;
+    /**
+     * The transport parameters that are associated with an incoming media stream.
+     */
+    InputConfigurations?: __listOfInputConfiguration;
+    /**
+     * The name of the media stream.
+     */
+    MediaStreamName: __string;
+  }
+  export interface MediaStreamSourceConfigurationRequest {
+    /**
+     * The format you want to use to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv.
+     */
+    EncodingName: EncodingName;
+    /**
+     * The transport parameters that you want to associate with the media stream.
+     */
+    InputConfigurations?: __listOfInputConfigurationRequest;
+    /**
+     * The name of the media stream.
+     */
+    MediaStreamName: __string;
+  }
+  export type MediaStreamType = "video"|"audio"|"ancillary-data"|string;
+  export interface MessageDetail {
+    /**
+     * The error code.
+     */
+    Code: __string;
+    /**
+     * The specific error message that MediaConnect returns to help you understand the reason that the request did not succeed.
+     */
+    Message: __string;
+    /**
+     * The name of the resource.
+     */
+    ResourceName?: __string;
+  }
   export interface Messages {
     /**
      * A list of errors that might have been generated from processes on this flow.
      */
     Errors: __listOf__string;
   }
+  export interface MonitoringConfig {
+    /**
+     * The state of thumbnail monitoring.
+     */
+    ThumbnailState?: ThumbnailState;
+  }
+  export type NetworkInterfaceType = "ena"|"efa"|string;
   export interface Offering {
     /**
      * The type of currency that is used for billing. The currencyCode used for all reservations is US dollars.
@@ -772,9 +2026,17 @@ declare namespace MediaConnect {
      */
     EntitlementArn?: __string;
     /**
+     * The IP address that the receiver requires in order to establish a connection with the flow. For public networking, the ListenerAddress is represented by the elastic IP address of the flow. For private networking, the ListenerAddress is represented by the elastic network interface IP address of the VPC. This field applies only to outputs that use the Zixi pull or SRT listener protocol.
+     */
+    ListenerAddress?: __string;
+    /**
      * The input ARN of the AWS Elemental MediaLive channel. This parameter is relevant only for outputs that were added by creating a MediaLive input.
      */
     MediaLiveInputArn?: __string;
+    /**
+     * The configuration for each media stream that is associated with the output.
+     */
+    MediaStreamOutputConfigurations?: __listOfMediaStreamOutputConfiguration;
     /**
      * The name of the output. This value must be unique within the current flow.
      */
@@ -795,9 +2057,22 @@ declare namespace MediaConnect {
      * The name of the VPC interface attachment to use for this output.
      */
     VpcInterfaceAttachment?: VpcInterfaceAttachment;
+    /**
+     * The ARN of the bridge that added this output.
+     */
+    BridgeArn?: __string;
+    /**
+     * The bridge output ports currently in use.
+     */
+    BridgePorts?: __listOf__integer;
+    /**
+     * An indication of whether the output is transmitting data or not.
+     */
+    OutputStatus?: OutputStatus;
   }
+  export type OutputStatus = "ENABLED"|"DISABLED"|string;
   export type PriceUnits = "HOURLY"|string;
-  export type Protocol = "zixi-push"|"rtp-fec"|"rtp"|"zixi-pull"|"rist"|string;
+  export type Protocol = "zixi-push"|"rtp-fec"|"rtp"|"zixi-pull"|"rist"|"st2110-jpegxs"|"cdi"|"srt-listener"|"srt-caller"|"fujitsu-qos"|"udp"|string;
   export interface PurchaseOfferingRequest {
     /**
      * The Amazon Resource Name (ARN) of the offering.
@@ -814,6 +2089,55 @@ declare namespace MediaConnect {
   }
   export interface PurchaseOfferingResponse {
     Reservation?: Reservation;
+  }
+  export type Range = "NARROW"|"FULL"|"FULLPROTECT"|string;
+  export interface RemoveBridgeOutputRequest {
+    /**
+     * The ARN of the bridge that you want to update.
+     */
+    BridgeArn: __string;
+    /**
+     * The name of the bridge output that you want to remove.
+     */
+    OutputName: __string;
+  }
+  export interface RemoveBridgeOutputResponse {
+    BridgeArn?: __string;
+    OutputName?: __string;
+  }
+  export interface RemoveBridgeSourceRequest {
+    /**
+     * The ARN of the bridge that you want to update.
+     */
+    BridgeArn: __string;
+    /**
+     * The name of the bridge source that you want to remove.
+     */
+    SourceName: __string;
+  }
+  export interface RemoveBridgeSourceResponse {
+    BridgeArn?: __string;
+    SourceName?: __string;
+  }
+  export interface RemoveFlowMediaStreamRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the flow.
+     */
+    FlowArn: __string;
+    /**
+     * The name of the media stream that you want to remove.
+     */
+    MediaStreamName: __string;
+  }
+  export interface RemoveFlowMediaStreamResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the flow.
+     */
+    FlowArn?: __string;
+    /**
+     * The name of the media stream that was removed.
+     */
+    MediaStreamName?: __string;
   }
   export interface RemoveFlowOutputRequest {
     /**
@@ -965,9 +2289,20 @@ declare namespace MediaConnect {
      */
     FlowArn?: __string;
   }
+  export type ScanMode = "progressive"|"interlace"|"progressive-segmented-frame"|string;
+  export interface SetGatewayBridgeSourceRequest {
+    /**
+     * The ARN of the bridge feeding this flow.
+     */
+    BridgeArn: __string;
+    /**
+     * The name of the VPC interface attachment to use for this bridge source.
+     */
+    VpcInterfaceAttachment?: VpcInterfaceAttachment;
+  }
   export interface SetSourceRequest {
     /**
-     * The type of encryption that is used on the content ingested from this source.
+     * The type of encryption that is used on the content ingested from this source. Allowable encryption types: static-key.
      */
     Decryption?: Encryption;
     /**
@@ -983,13 +2318,25 @@ declare namespace MediaConnect {
      */
     IngestPort?: __integer;
     /**
-     * The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
+     * The smoothing max bitrate (in bps) for RIST, RTP, and RTP-FEC streams.
      */
     MaxBitrate?: __integer;
     /**
-     * The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+     * The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.
      */
     MaxLatency?: __integer;
+    /**
+     * The size of the buffer (in milliseconds) to use to sync incoming source data.
+     */
+    MaxSyncBuffer?: __integer;
+    /**
+     * The media streams that are associated with the source, and the parameters for those associations.
+     */
+    MediaStreamSourceConfigurations?: __listOfMediaStreamSourceConfigurationRequest;
+    /**
+     * The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.
+     */
+    MinLatency?: __integer;
     /**
      * The name of the source.
      */
@@ -999,7 +2346,23 @@ declare namespace MediaConnect {
      */
     Protocol?: Protocol;
     /**
-     * The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+     * The port that the flow uses to send outbound requests to initiate connection with the sender.
+     */
+    SenderControlPort?: __integer;
+    /**
+     * The IP address that the flow communicates with to initiate connection with the sender.
+     */
+    SenderIpAddress?: __string;
+    /**
+     * Source IP or domain name for SRT-caller protocol.
+     */
+    SourceListenerAddress?: __string;
+    /**
+     * Source port for SRT-caller protocol.
+     */
+    SourceListenerPort?: __integer;
+    /**
+     * The stream ID that you want to use for this transport. This parameter applies only to Zixi and SRT caller-based streams.
      */
     StreamId?: __string;
     /**
@@ -1010,6 +2373,10 @@ declare namespace MediaConnect {
      * The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
      */
     WhitelistCidr?: __string;
+    /**
+     * The source configuration for cloud flows receiving a stream from a bridge.
+     */
+    GatewayBridgeSource?: SetGatewayBridgeSourceRequest;
   }
   export interface Source {
     /**
@@ -1037,9 +2404,21 @@ declare namespace MediaConnect {
      */
     IngestPort?: __integer;
     /**
+     * The media streams that are associated with the source, and the parameters for those associations.
+     */
+    MediaStreamSourceConfigurations?: __listOfMediaStreamSourceConfiguration;
+    /**
      * The name of the source.
      */
     Name: __string;
+    /**
+     * The port that the flow uses to send outbound requests to initiate connection with the sender.
+     */
+    SenderControlPort?: __integer;
+    /**
+     * The IP address that the flow communicates with to initiate connection with the sender.
+     */
+    SenderIpAddress?: __string;
     /**
      * The ARN of the source.
      */
@@ -1049,13 +2428,23 @@ declare namespace MediaConnect {
      */
     Transport?: Transport;
     /**
-     * The name of the VPC Interface this Source is configured with.
+     * The name of the VPC interface that is used for this source.
      */
     VpcInterfaceName?: __string;
     /**
      * The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
      */
     WhitelistCidr?: __string;
+    /**
+     * The source configuration for cloud flows receiving a stream from a bridge.
+     */
+    GatewayBridgeSource?: GatewayBridgeSource;
+  }
+  export interface SourcePriority {
+    /**
+     * The name of the source you choose as the primary source for this flow.
+     */
+    PrimarySource?: __string;
   }
   export type SourceType = "OWNED"|"ENTITLED"|string;
   export interface StartFlowRequest {
@@ -1102,19 +2491,51 @@ declare namespace MediaConnect {
      */
     Tags: __mapOf__string;
   }
+  export type Tcs = "SDR"|"PQ"|"HLG"|"LINEAR"|"BT2100LINPQ"|"BT2100LINHLG"|"ST2065-1"|"ST428-1"|"DENSITY"|string;
+  export interface ThumbnailDetails {
+    /**
+     * The ARN of the flow that DescribeFlowSourceThumbnail was performed on.
+     */
+    FlowArn: __string;
+    /**
+     * Thumbnail Base64 string.
+     */
+    Thumbnail?: __string;
+    /**
+     * Status code and messages about the flow source thumbnail.
+     */
+    ThumbnailMessages: __listOfMessageDetail;
+    /**
+     * Timecode of thumbnail.
+     */
+    Timecode?: __string;
+    /**
+     * The timestamp of when thumbnail was generated.
+     */
+    Timestamp?: __timestampIso8601;
+  }
+  export type ThumbnailState = "ENABLED"|"DISABLED"|string;
   export interface Transport {
     /**
      * The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
      */
     CidrAllowList?: __listOf__string;
     /**
-     * The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
+     * The smoothing max bitrate (in bps) for RIST, RTP, and RTP-FEC streams.
      */
     MaxBitrate?: __integer;
     /**
-     * The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+     * The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.
      */
     MaxLatency?: __integer;
+    /**
+     * The size of the buffer (in milliseconds) to use to sync incoming source data.
+     */
+    MaxSyncBuffer?: __integer;
+    /**
+     * The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.
+     */
+    MinLatency?: __integer;
     /**
      * The protocol that is used by the source or output.
      */
@@ -1124,13 +2545,88 @@ declare namespace MediaConnect {
      */
     RemoteId?: __string;
     /**
+     * The port that the flow uses to send outbound requests to initiate connection with the sender.
+     */
+    SenderControlPort?: __integer;
+    /**
+     * The IP address that the flow communicates with to initiate connection with the sender.
+     */
+    SenderIpAddress?: __string;
+    /**
      * The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
      */
     SmoothingLatency?: __integer;
     /**
-     * The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+     * Source IP or domain name for SRT-caller protocol.
+     */
+    SourceListenerAddress?: __string;
+    /**
+     * Source port for SRT-caller protocol.
+     */
+    SourceListenerPort?: __integer;
+    /**
+     * The stream ID that you want to use for this transport. This parameter applies only to Zixi and SRT caller-based streams.
      */
     StreamId?: __string;
+  }
+  export interface TransportMediaInfo {
+    /**
+     * The list of transport stream programs in the current flow's source.
+     */
+    Programs: __listOfTransportStreamProgram;
+  }
+  export interface TransportStream {
+    /**
+     * The number of channels in the audio stream.
+     */
+    Channels?: __integer;
+    /**
+     * The codec used by the stream.
+     */
+    Codec?: __string;
+    /**
+     * The frame rate used by the video stream.
+     */
+    FrameRate?: __string;
+    FrameResolution?: FrameResolution;
+    /**
+     * The Packet ID (PID) as it is reported in the Program Map Table.
+     */
+    Pid: __integer;
+    /**
+     * The sample rate used by the audio stream.
+     */
+    SampleRate?: __integer;
+    /**
+     * The sample bit size used by the audio stream.
+     */
+    SampleSize?: __integer;
+    /**
+     * The Stream Type as it is reported in the Program Map Table.
+     */
+    StreamType: __string;
+  }
+  export interface TransportStreamProgram {
+    /**
+     * The Program Clock Reference (PCR) Packet ID (PID) as it is reported in the Program Association Table.
+     */
+    PcrPid: __integer;
+    /**
+     * The program name as it is reported in the Program Association Table.
+     */
+    ProgramName?: __string;
+    /**
+     * The program number as it is reported in the Program Association Table.
+     */
+    ProgramNumber: __integer;
+    /**
+     * The program Packet ID (PID) as it is reported in the Program Association Table.
+     */
+    ProgramPid: __integer;
+    /**
+     * The list of elementary transport streams in the program. The list includes video, audio, and data streams.
+     */
+    Streams: __listOfTransportStream;
   }
   export interface UntagResourceRequest {
     /**
@@ -1141,6 +2637,131 @@ declare namespace MediaConnect {
      * The keys of the tags to be removed.
      */
     TagKeys: __listOf__string;
+  }
+  export interface UpdateBridgeFlowSourceRequest {
+    /**
+     * The ARN of the cloud flow to use as a source of this bridge.
+     */
+    FlowArn?: __string;
+    /**
+     * The name of the VPC interface attachment to use for this source.
+     */
+    FlowVpcInterfaceAttachment?: VpcInterfaceAttachment;
+  }
+  export interface UpdateBridgeNetworkOutputRequest {
+    /**
+     * The network output IP Address.
+     */
+    IpAddress?: __string;
+    /**
+     * The network output's gateway network name.
+     */
+    NetworkName?: __string;
+    /**
+     * The network output port.
+     */
+    Port?: __integer;
+    /**
+     * The network output protocol.
+     */
+    Protocol?: Protocol;
+    /**
+     * The network output TTL.
+     */
+    Ttl?: __integer;
+  }
+  export interface UpdateBridgeNetworkSourceRequest {
+    /**
+     * The network source multicast IP.
+     */
+    MulticastIp?: __string;
+    /**
+     * The network source's gateway network name.
+     */
+    NetworkName?: __string;
+    /**
+     * The network source port.
+     */
+    Port?: __integer;
+    /**
+     * The network source protocol.
+     */
+    Protocol?: Protocol;
+  }
+  export interface UpdateBridgeOutputRequest {
+    /**
+     * The ARN of the bridge that you want to update.
+     */
+    BridgeArn: __string;
+    NetworkOutput?: UpdateBridgeNetworkOutputRequest;
+    /**
+     * The name of the bridge output that you want to update.
+     */
+    OutputName: __string;
+  }
+  export interface UpdateBridgeOutputResponse {
+    /**
+     * The Amazon Resource Number (ARN) of the bridge.
+     */
+    BridgeArn?: __string;
+    /**
+     * The output that you updated.
+     */
+    Output?: BridgeOutput;
+  }
+  export interface UpdateBridgeRequest {
+    /**
+     * The Amazon Resource Number (ARN) of the bridge that you want to update.
+     */
+    BridgeArn: __string;
+    EgressGatewayBridge?: UpdateEgressGatewayBridgeRequest;
+    IngressGatewayBridge?: UpdateIngressGatewayBridgeRequest;
+    SourceFailoverConfig?: UpdateFailoverConfig;
+  }
+  export interface UpdateBridgeResponse {
+    Bridge?: Bridge;
+  }
+  export interface UpdateBridgeSourceRequest {
+    /**
+     * The ARN of the bridge that you want to update.
+     */
+    BridgeArn: __string;
+    FlowSource?: UpdateBridgeFlowSourceRequest;
+    NetworkSource?: UpdateBridgeNetworkSourceRequest;
+    /**
+     * The name of the source that you want to update.
+     */
+    SourceName: __string;
+  }
+  export interface UpdateBridgeSourceResponse {
+    /**
+     * The Amazon Resource Number (ARN) of the bridge.
+     */
+    BridgeArn?: __string;
+    Source?: BridgeSource;
+  }
+  export interface UpdateBridgeStateRequest {
+    /**
+     * The ARN of the bridge that you want to update.
+     */
+    BridgeArn: __string;
+    DesiredState: DesiredState;
+  }
+  export interface UpdateBridgeStateResponse {
+    /**
+     * The Amazon Resource Number (ARN) of the bridge.
+     */
+    BridgeArn?: __string;
+    /**
+     * The state of the bridge. ACTIVE or STANDBY.
+     */
+    DesiredState?: DesiredState;
+  }
+  export interface UpdateEgressGatewayBridgeRequest {
+    /**
+     * Update an existing egress-type bridge.
+     */
+    MaxBitrate?: __integer;
   }
   export interface UpdateEncryption {
     /**
@@ -1182,9 +2803,17 @@ declare namespace MediaConnect {
   }
   export interface UpdateFailoverConfig {
     /**
+     * The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.
+     */
+    FailoverMode?: FailoverMode;
+    /**
      * Recovery window time to look for dash-7 packets
      */
     RecoveryWindow?: __integer;
+    /**
+     * The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.
+     */
+    SourcePriority?: SourcePriority;
     State?: State;
   }
   export interface UpdateFlowEntitlementRequest {
@@ -1193,7 +2822,7 @@ declare namespace MediaConnect {
      */
     Description?: __string;
     /**
-     * The type of encryption that will be used on the output associated with this entitlement.
+     * The type of encryption that will be used on the output associated with this entitlement. Allowable encryption types: static-key, speke.
      */
     Encryption?: UpdateEncryption;
     /**
@@ -1223,6 +2852,46 @@ declare namespace MediaConnect {
      */
     FlowArn?: __string;
   }
+  export interface UpdateFlowMediaStreamRequest {
+    /**
+     * The attributes that you want to assign to the media stream.
+     */
+    Attributes?: MediaStreamAttributesRequest;
+    /**
+     * The sample rate (in Hz) for the stream. If the media stream type is video or ancillary data, set this value to 90000. If the media stream type is audio, set this value to either 48000 or 96000.
+     */
+    ClockRate?: __integer;
+    /**
+     * Description
+     */
+    Description?: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the flow.
+     */
+    FlowArn: __string;
+    /**
+     * The name of the media stream that you want to update.
+     */
+    MediaStreamName: __string;
+    /**
+     * The type of media stream.
+     */
+    MediaStreamType?: MediaStreamType;
+    /**
+     * The resolution of the video.
+     */
+    VideoFormat?: __string;
+  }
+  export interface UpdateFlowMediaStreamResponse {
+    /**
+     * The ARN of the flow that is associated with the media stream that you updated.
+     */
+    FlowArn?: __string;
+    /**
+     * The media stream that you updated.
+     */
+    MediaStream?: MediaStream;
+  }
   export interface UpdateFlowOutputRequest {
     /**
      * The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
@@ -1237,7 +2906,7 @@ declare namespace MediaConnect {
      */
     Destination?: __string;
     /**
-     * The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key).
+     * The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key). Allowable encryption types: static-key.
      */
     Encryption?: UpdateEncryption;
     /**
@@ -1245,9 +2914,17 @@ declare namespace MediaConnect {
      */
     FlowArn: __string;
     /**
-     * The maximum latency in milliseconds for Zixi-based streams.
+     * The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.
      */
     MaxLatency?: __integer;
+    /**
+     * The media streams that are associated with the output, and the parameters for those associations.
+     */
+    MediaStreamOutputConfigurations?: __listOfMediaStreamOutputConfigurationRequest;
+    /**
+     * The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.
+     */
+    MinLatency?: __integer;
     /**
      * The ARN of the output that you want to update.
      */
@@ -1265,17 +2942,29 @@ declare namespace MediaConnect {
      */
     RemoteId?: __string;
     /**
+     * The port that the flow uses to send outbound requests to initiate connection with the sender.
+     */
+    SenderControlPort?: __integer;
+    /**
+     * The IP address that the flow communicates with to initiate connection with the sender.
+     */
+    SenderIpAddress?: __string;
+    /**
      * The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
      */
     SmoothingLatency?: __integer;
     /**
-     * The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+     * The stream ID that you want to use for this transport. This parameter applies only to Zixi and SRT caller-based streams.
      */
     StreamId?: __string;
     /**
      * The name of the VPC interface attachment to use for this output.
      */
     VpcInterfaceAttachment?: VpcInterfaceAttachment;
+    /**
+     * An indication of whether the output should transmit data or not. If you don't specify the outputStatus field in your request, MediaConnect leaves the value unchanged.
+     */
+    OutputStatus?: OutputStatus;
   }
   export interface UpdateFlowOutputResponse {
     /**
@@ -1293,13 +2982,15 @@ declare namespace MediaConnect {
      */
     FlowArn: __string;
     SourceFailoverConfig?: UpdateFailoverConfig;
+    Maintenance?: UpdateMaintenance;
+    SourceMonitoringConfig?: MonitoringConfig;
   }
   export interface UpdateFlowResponse {
     Flow?: Flow;
   }
   export interface UpdateFlowSourceRequest {
     /**
-     * The type of encryption used on the content ingested from this source.
+     * The type of encryption used on the content ingested from this source. Allowable encryption types: static-key.
      */
     Decryption?: UpdateEncryption;
     /**
@@ -1319,33 +3010,65 @@ declare namespace MediaConnect {
      */
     IngestPort?: __integer;
     /**
-     * The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
+     * The smoothing max bitrate (in bps) for RIST, RTP, and RTP-FEC streams.
      */
     MaxBitrate?: __integer;
     /**
-     * The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+     * The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.
      */
     MaxLatency?: __integer;
+    /**
+     * The size of the buffer (in milliseconds) to use to sync incoming source data.
+     */
+    MaxSyncBuffer?: __integer;
+    /**
+     * The media streams that are associated with the source, and the parameters for those associations.
+     */
+    MediaStreamSourceConfigurations?: __listOfMediaStreamSourceConfigurationRequest;
+    /**
+     * The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.
+     */
+    MinLatency?: __integer;
     /**
      * The protocol that is used by the source.
      */
     Protocol?: Protocol;
     /**
+     * The port that the flow uses to send outbound requests to initiate connection with the sender.
+     */
+    SenderControlPort?: __integer;
+    /**
+     * The IP address that the flow communicates with to initiate connection with the sender.
+     */
+    SenderIpAddress?: __string;
+    /**
      * The ARN of the source that you want to update.
      */
     SourceArn: __string;
     /**
-     * The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+     * Source IP or domain name for SRT-caller protocol.
+     */
+    SourceListenerAddress?: __string;
+    /**
+     * Source port for SRT-caller protocol.
+     */
+    SourceListenerPort?: __integer;
+    /**
+     * The stream ID that you want to use for this transport. This parameter applies only to Zixi and SRT caller-based streams.
      */
     StreamId?: __string;
     /**
-     * The name of the VPC Interface to configure this Source with.
+     * The name of the VPC interface to use for this source.
      */
     VpcInterfaceName?: __string;
     /**
      * The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
      */
     WhitelistCidr?: __string;
+    /**
+     * The source configuration for cloud flows receiving a stream from a bridge.
+     */
+    GatewayBridgeSource?: UpdateGatewayBridgeSourceRequest;
   }
   export interface UpdateFlowSourceResponse {
     /**
@@ -1357,15 +3080,73 @@ declare namespace MediaConnect {
      */
     Source?: Source;
   }
+  export interface UpdateGatewayBridgeSourceRequest {
+    /**
+     * The ARN of the bridge feeding this flow.
+     */
+    BridgeArn?: __string;
+    /**
+     * The name of the VPC interface attachment to use for this bridge source.
+     */
+    VpcInterfaceAttachment?: VpcInterfaceAttachment;
+  }
+  export interface UpdateGatewayInstanceRequest {
+    /**
+     * The availability of the instance to host new bridges. The bridgePlacement property can be LOCKED or AVAILABLE. If it is LOCKED, no new bridges can be deployed to this instance. If it is AVAILABLE, new bridges can be added to this instance.
+     */
+    BridgePlacement?: BridgePlacement;
+    /**
+     * The Amazon Resource Name (ARN) of the instance that you want to update.
+     */
+    GatewayInstanceArn: __string;
+  }
+  export interface UpdateGatewayInstanceResponse {
+    /**
+     * The availability of the instance to host new bridges. The bridgePlacement property can be LOCKED or AVAILABLE. If it is LOCKED, no new bridges can be deployed to this instance. If it is AVAILABLE, new bridges can be added to this instance.
+     */
+    BridgePlacement?: BridgePlacement;
+    /**
+     * The Amazon Resource Name (ARN) of the instance.
+     */
+    GatewayInstanceArn?: __string;
+  }
+  export interface UpdateIngressGatewayBridgeRequest {
+    /**
+     * The maximum expected bitrate (in bps).
+     */
+    MaxBitrate?: __integer;
+    /**
+     * The maximum number of expected outputs.
+     */
+    MaxOutputs?: __integer;
+  }
+  export interface UpdateMaintenance {
+    /**
+     * A day of a week when the maintenance will happen. use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+     */
+    MaintenanceDay?: MaintenanceDay;
+    /**
+     * A scheduled date in ISO UTC format when the maintenance will happen. Use YYYY-MM-DD format. Example: 2021-01-30.
+     */
+    MaintenanceScheduledDate?: __string;
+    /**
+     * UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.
+     */
+    MaintenanceStartHour?: __string;
+  }
   export interface VpcInterface {
     /**
-     * Immutable and has to be a unique against other VpcInterfaces in this Flow
+     * Immutable and has to be a unique against other VpcInterfaces in this Flow.
      */
     Name: __string;
     /**
      * IDs of the network interfaces created in customer's account by MediaConnect.
      */
     NetworkInterfaceIds: __listOf__string;
+    /**
+     * The type of network interface.
+     */
+    NetworkInterfaceType: NetworkInterfaceType;
     /**
      * Role Arn MediaConnect can assumes to create ENIs in customer's account
      */
@@ -1381,7 +3162,7 @@ declare namespace MediaConnect {
   }
   export interface VpcInterfaceAttachment {
     /**
-     * The name of the VPC interface to use for this output.
+     * The name of the VPC interface to use for this resource.
      */
     VpcInterfaceName?: __string;
   }
@@ -1390,6 +3171,10 @@ declare namespace MediaConnect {
      * The name of the VPC Interface. This value must be unique within the current flow.
      */
     Name: __string;
+    /**
+     * The type of network interface. If this value is not included in the request, MediaConnect uses ENA as the networkInterfaceType.
+     */
+    NetworkInterfaceType?: NetworkInterfaceType;
     /**
      * Role Arn MediaConnect can assumes to create ENIs in customer's account
      */
@@ -1403,22 +3188,47 @@ declare namespace MediaConnect {
      */
     SubnetId: __string;
   }
+  export type __boolean = boolean;
+  export type __double = number;
   export type __integer = number;
+  export type __listOfAddBridgeOutputRequest = AddBridgeOutputRequest[];
+  export type __listOfAddBridgeSourceRequest = AddBridgeSourceRequest[];
+  export type __listOfAddMediaStreamRequest = AddMediaStreamRequest[];
   export type __listOfAddOutputRequest = AddOutputRequest[];
+  export type __listOfBridgeOutput = BridgeOutput[];
+  export type __listOfBridgeSource = BridgeSource[];
+  export type __listOfDestinationConfiguration = DestinationConfiguration[];
+  export type __listOfDestinationConfigurationRequest = DestinationConfigurationRequest[];
   export type __listOfEntitlement = Entitlement[];
+  export type __listOfGatewayNetwork = GatewayNetwork[];
   export type __listOfGrantEntitlementRequest = GrantEntitlementRequest[];
+  export type __listOfInputConfiguration = InputConfiguration[];
+  export type __listOfInputConfigurationRequest = InputConfigurationRequest[];
+  export type __listOfListedBridge = ListedBridge[];
   export type __listOfListedEntitlement = ListedEntitlement[];
   export type __listOfListedFlow = ListedFlow[];
+  export type __listOfListedGateway = ListedGateway[];
+  export type __listOfListedGatewayInstance = ListedGatewayInstance[];
+  export type __listOfMediaStream = MediaStream[];
+  export type __listOfMediaStreamOutputConfiguration = MediaStreamOutputConfiguration[];
+  export type __listOfMediaStreamOutputConfigurationRequest = MediaStreamOutputConfigurationRequest[];
+  export type __listOfMediaStreamSourceConfiguration = MediaStreamSourceConfiguration[];
+  export type __listOfMediaStreamSourceConfigurationRequest = MediaStreamSourceConfigurationRequest[];
+  export type __listOfMessageDetail = MessageDetail[];
   export type __listOfOffering = Offering[];
   export type __listOfOutput = Output[];
   export type __listOfReservation = Reservation[];
   export type __listOfSetSourceRequest = SetSourceRequest[];
   export type __listOfSource = Source[];
+  export type __listOfTransportStream = TransportStream[];
+  export type __listOfTransportStreamProgram = TransportStreamProgram[];
   export type __listOfVpcInterface = VpcInterface[];
   export type __listOfVpcInterfaceRequest = VpcInterfaceRequest[];
+  export type __listOf__integer = __integer[];
   export type __listOf__string = __string[];
   export type __mapOf__string = {[key: string]: __string};
   export type __string = string;
+  export type __timestampIso8601 = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

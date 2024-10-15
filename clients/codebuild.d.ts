@@ -36,6 +36,14 @@ declare class CodeBuild extends Service {
    */
   batchGetBuilds(callback?: (err: AWSError, data: CodeBuild.Types.BatchGetBuildsOutput) => void): Request<CodeBuild.Types.BatchGetBuildsOutput, AWSError>;
   /**
+   * Gets information about one or more compute fleets.
+   */
+  batchGetFleets(params: CodeBuild.Types.BatchGetFleetsInput, callback?: (err: AWSError, data: CodeBuild.Types.BatchGetFleetsOutput) => void): Request<CodeBuild.Types.BatchGetFleetsOutput, AWSError>;
+  /**
+   * Gets information about one or more compute fleets.
+   */
+  batchGetFleets(callback?: (err: AWSError, data: CodeBuild.Types.BatchGetFleetsOutput) => void): Request<CodeBuild.Types.BatchGetFleetsOutput, AWSError>;
+  /**
    * Gets information about one or more build projects.
    */
   batchGetProjects(params: CodeBuild.Types.BatchGetProjectsInput, callback?: (err: AWSError, data: CodeBuild.Types.BatchGetProjectsOutput) => void): Request<CodeBuild.Types.BatchGetProjectsOutput, AWSError>;
@@ -60,6 +68,14 @@ declare class CodeBuild extends Service {
    */
   batchGetReports(callback?: (err: AWSError, data: CodeBuild.Types.BatchGetReportsOutput) => void): Request<CodeBuild.Types.BatchGetReportsOutput, AWSError>;
   /**
+   * Creates a compute fleet.
+   */
+  createFleet(params: CodeBuild.Types.CreateFleetInput, callback?: (err: AWSError, data: CodeBuild.Types.CreateFleetOutput) => void): Request<CodeBuild.Types.CreateFleetOutput, AWSError>;
+  /**
+   * Creates a compute fleet.
+   */
+  createFleet(callback?: (err: AWSError, data: CodeBuild.Types.CreateFleetOutput) => void): Request<CodeBuild.Types.CreateFleetOutput, AWSError>;
+  /**
    * Creates a build project.
    */
   createProject(params: CodeBuild.Types.CreateProjectInput, callback?: (err: AWSError, data: CodeBuild.Types.CreateProjectOutput) => void): Request<CodeBuild.Types.CreateProjectOutput, AWSError>;
@@ -76,11 +92,11 @@ declare class CodeBuild extends Service {
    */
   createReportGroup(callback?: (err: AWSError, data: CodeBuild.Types.CreateReportGroupOutput) => void): Request<CodeBuild.Types.CreateReportGroupOutput, AWSError>;
   /**
-   * For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, enables AWS CodeBuild to start rebuilding the source code every time a code change is pushed to the repository.  If you enable webhooks for an AWS CodeBuild project, and the project is used as a build step in AWS CodePipeline, then two identical builds are created for each commit. One build is triggered through webhooks, and one through AWS CodePipeline. Because billing is on a per-build basis, you are billed for both builds. Therefore, if you are using AWS CodePipeline, we recommend that you disable webhooks in AWS CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For more information, see step 5 in Change a Build Project's Settings. 
+   * For an existing CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, enables CodeBuild to start rebuilding the source code every time a code change is pushed to the repository.  If you enable webhooks for an CodeBuild project, and the project is used as a build step in CodePipeline, then two identical builds are created for each commit. One build is triggered through webhooks, and one through CodePipeline. Because billing is on a per-build basis, you are billed for both builds. Therefore, if you are using CodePipeline, we recommend that you disable webhooks in CodeBuild. In the CodeBuild console, clear the Webhook box. For more information, see step 5 in Change a Build Project's Settings. 
    */
   createWebhook(params: CodeBuild.Types.CreateWebhookInput, callback?: (err: AWSError, data: CodeBuild.Types.CreateWebhookOutput) => void): Request<CodeBuild.Types.CreateWebhookOutput, AWSError>;
   /**
-   * For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, enables AWS CodeBuild to start rebuilding the source code every time a code change is pushed to the repository.  If you enable webhooks for an AWS CodeBuild project, and the project is used as a build step in AWS CodePipeline, then two identical builds are created for each commit. One build is triggered through webhooks, and one through AWS CodePipeline. Because billing is on a per-build basis, you are billed for both builds. Therefore, if you are using AWS CodePipeline, we recommend that you disable webhooks in AWS CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For more information, see step 5 in Change a Build Project's Settings. 
+   * For an existing CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, enables CodeBuild to start rebuilding the source code every time a code change is pushed to the repository.  If you enable webhooks for an CodeBuild project, and the project is used as a build step in CodePipeline, then two identical builds are created for each commit. One build is triggered through webhooks, and one through CodePipeline. Because billing is on a per-build basis, you are billed for both builds. Therefore, if you are using CodePipeline, we recommend that you disable webhooks in CodeBuild. In the CodeBuild console, clear the Webhook box. For more information, see step 5 in Change a Build Project's Settings. 
    */
   createWebhook(callback?: (err: AWSError, data: CodeBuild.Types.CreateWebhookOutput) => void): Request<CodeBuild.Types.CreateWebhookOutput, AWSError>;
   /**
@@ -91,6 +107,14 @@ declare class CodeBuild extends Service {
    * Deletes a batch build.
    */
   deleteBuildBatch(callback?: (err: AWSError, data: CodeBuild.Types.DeleteBuildBatchOutput) => void): Request<CodeBuild.Types.DeleteBuildBatchOutput, AWSError>;
+  /**
+   * Deletes a compute fleet. When you delete a compute fleet, its builds are not deleted.
+   */
+  deleteFleet(params: CodeBuild.Types.DeleteFleetInput, callback?: (err: AWSError, data: CodeBuild.Types.DeleteFleetOutput) => void): Request<CodeBuild.Types.DeleteFleetOutput, AWSError>;
+  /**
+   * Deletes a compute fleet. When you delete a compute fleet, its builds are not deleted.
+   */
+  deleteFleet(callback?: (err: AWSError, data: CodeBuild.Types.DeleteFleetOutput) => void): Request<CodeBuild.Types.DeleteFleetOutput, AWSError>;
   /**
    *  Deletes a build project. When you delete a project, its builds are not deleted. 
    */
@@ -132,11 +156,11 @@ declare class CodeBuild extends Service {
    */
   deleteSourceCredentials(callback?: (err: AWSError, data: CodeBuild.Types.DeleteSourceCredentialsOutput) => void): Request<CodeBuild.Types.DeleteSourceCredentialsOutput, AWSError>;
   /**
-   * For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, stops AWS CodeBuild from rebuilding the source code every time a code change is pushed to the repository.
+   * For an existing CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, stops CodeBuild from rebuilding the source code every time a code change is pushed to the repository.
    */
   deleteWebhook(params: CodeBuild.Types.DeleteWebhookInput, callback?: (err: AWSError, data: CodeBuild.Types.DeleteWebhookOutput) => void): Request<CodeBuild.Types.DeleteWebhookOutput, AWSError>;
   /**
-   * For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, stops AWS CodeBuild from rebuilding the source code every time a code change is pushed to the repository.
+   * For an existing CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, stops CodeBuild from rebuilding the source code every time a code change is pushed to the repository.
    */
   deleteWebhook(callback?: (err: AWSError, data: CodeBuild.Types.DeleteWebhookOutput) => void): Request<CodeBuild.Types.DeleteWebhookOutput, AWSError>;
   /**
@@ -156,11 +180,11 @@ declare class CodeBuild extends Service {
    */
   describeTestCases(callback?: (err: AWSError, data: CodeBuild.Types.DescribeTestCasesOutput) => void): Request<CodeBuild.Types.DescribeTestCasesOutput, AWSError>;
   /**
-   * 
+   * Analyzes and accumulates test report values for the specified test reports.
    */
   getReportGroupTrend(params: CodeBuild.Types.GetReportGroupTrendInput, callback?: (err: AWSError, data: CodeBuild.Types.GetReportGroupTrendOutput) => void): Request<CodeBuild.Types.GetReportGroupTrendOutput, AWSError>;
   /**
-   * 
+   * Analyzes and accumulates test report values for the specified test reports.
    */
   getReportGroupTrend(callback?: (err: AWSError, data: CodeBuild.Types.GetReportGroupTrendOutput) => void): Request<CodeBuild.Types.GetReportGroupTrendOutput, AWSError>;
   /**
@@ -172,11 +196,11 @@ declare class CodeBuild extends Service {
    */
   getResourcePolicy(callback?: (err: AWSError, data: CodeBuild.Types.GetResourcePolicyOutput) => void): Request<CodeBuild.Types.GetResourcePolicyOutput, AWSError>;
   /**
-   *  Imports the source repository credentials for an AWS CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository. 
+   *  Imports the source repository credentials for an CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, GitLab, GitLab Self Managed, or Bitbucket repository. 
    */
   importSourceCredentials(params: CodeBuild.Types.ImportSourceCredentialsInput, callback?: (err: AWSError, data: CodeBuild.Types.ImportSourceCredentialsOutput) => void): Request<CodeBuild.Types.ImportSourceCredentialsOutput, AWSError>;
   /**
-   *  Imports the source repository credentials for an AWS CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository. 
+   *  Imports the source repository credentials for an CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, GitLab, GitLab Self Managed, or Bitbucket repository. 
    */
   importSourceCredentials(callback?: (err: AWSError, data: CodeBuild.Types.ImportSourceCredentialsOutput) => void): Request<CodeBuild.Types.ImportSourceCredentialsOutput, AWSError>;
   /**
@@ -212,21 +236,29 @@ declare class CodeBuild extends Service {
    */
   listBuilds(callback?: (err: AWSError, data: CodeBuild.Types.ListBuildsOutput) => void): Request<CodeBuild.Types.ListBuildsOutput, AWSError>;
   /**
-   * Gets a list of build IDs for the specified build project, with each build ID representing a single build.
+   * Gets a list of build identifiers for the specified build project, with each build identifier representing a single build.
    */
   listBuildsForProject(params: CodeBuild.Types.ListBuildsForProjectInput, callback?: (err: AWSError, data: CodeBuild.Types.ListBuildsForProjectOutput) => void): Request<CodeBuild.Types.ListBuildsForProjectOutput, AWSError>;
   /**
-   * Gets a list of build IDs for the specified build project, with each build ID representing a single build.
+   * Gets a list of build identifiers for the specified build project, with each build identifier representing a single build.
    */
   listBuildsForProject(callback?: (err: AWSError, data: CodeBuild.Types.ListBuildsForProjectOutput) => void): Request<CodeBuild.Types.ListBuildsForProjectOutput, AWSError>;
   /**
-   * Gets information about Docker images that are managed by AWS CodeBuild.
+   * Gets information about Docker images that are managed by CodeBuild.
    */
   listCuratedEnvironmentImages(params: CodeBuild.Types.ListCuratedEnvironmentImagesInput, callback?: (err: AWSError, data: CodeBuild.Types.ListCuratedEnvironmentImagesOutput) => void): Request<CodeBuild.Types.ListCuratedEnvironmentImagesOutput, AWSError>;
   /**
-   * Gets information about Docker images that are managed by AWS CodeBuild.
+   * Gets information about Docker images that are managed by CodeBuild.
    */
   listCuratedEnvironmentImages(callback?: (err: AWSError, data: CodeBuild.Types.ListCuratedEnvironmentImagesOutput) => void): Request<CodeBuild.Types.ListCuratedEnvironmentImagesOutput, AWSError>;
+  /**
+   * Gets a list of compute fleet names with each compute fleet name representing a single compute fleet.
+   */
+  listFleets(params: CodeBuild.Types.ListFleetsInput, callback?: (err: AWSError, data: CodeBuild.Types.ListFleetsOutput) => void): Request<CodeBuild.Types.ListFleetsOutput, AWSError>;
+  /**
+   * Gets a list of compute fleet names with each compute fleet name representing a single compute fleet.
+   */
+  listFleets(callback?: (err: AWSError, data: CodeBuild.Types.ListFleetsOutput) => void): Request<CodeBuild.Types.ListFleetsOutput, AWSError>;
   /**
    * Gets a list of build project names, with each build project name representing a single build project.
    */
@@ -236,19 +268,19 @@ declare class CodeBuild extends Service {
    */
   listProjects(callback?: (err: AWSError, data: CodeBuild.Types.ListProjectsOutput) => void): Request<CodeBuild.Types.ListProjectsOutput, AWSError>;
   /**
-   *  Gets a list ARNs for the report groups in the current AWS account. 
+   *  Gets a list ARNs for the report groups in the current Amazon Web Services account. 
    */
   listReportGroups(params: CodeBuild.Types.ListReportGroupsInput, callback?: (err: AWSError, data: CodeBuild.Types.ListReportGroupsOutput) => void): Request<CodeBuild.Types.ListReportGroupsOutput, AWSError>;
   /**
-   *  Gets a list ARNs for the report groups in the current AWS account. 
+   *  Gets a list ARNs for the report groups in the current Amazon Web Services account. 
    */
   listReportGroups(callback?: (err: AWSError, data: CodeBuild.Types.ListReportGroupsOutput) => void): Request<CodeBuild.Types.ListReportGroupsOutput, AWSError>;
   /**
-   *  Returns a list of ARNs for the reports in the current AWS account. 
+   *  Returns a list of ARNs for the reports in the current Amazon Web Services account. 
    */
   listReports(params: CodeBuild.Types.ListReportsInput, callback?: (err: AWSError, data: CodeBuild.Types.ListReportsOutput) => void): Request<CodeBuild.Types.ListReportsOutput, AWSError>;
   /**
-   *  Returns a list of ARNs for the reports in the current AWS account. 
+   *  Returns a list of ARNs for the reports in the current Amazon Web Services account. 
    */
   listReports(callback?: (err: AWSError, data: CodeBuild.Types.ListReportsOutput) => void): Request<CodeBuild.Types.ListReportsOutput, AWSError>;
   /**
@@ -260,19 +292,19 @@ declare class CodeBuild extends Service {
    */
   listReportsForReportGroup(callback?: (err: AWSError, data: CodeBuild.Types.ListReportsForReportGroupOutput) => void): Request<CodeBuild.Types.ListReportsForReportGroupOutput, AWSError>;
   /**
-   *  Gets a list of projects that are shared with other AWS accounts or users. 
+   *  Gets a list of projects that are shared with other Amazon Web Services accounts or users. 
    */
   listSharedProjects(params: CodeBuild.Types.ListSharedProjectsInput, callback?: (err: AWSError, data: CodeBuild.Types.ListSharedProjectsOutput) => void): Request<CodeBuild.Types.ListSharedProjectsOutput, AWSError>;
   /**
-   *  Gets a list of projects that are shared with other AWS accounts or users. 
+   *  Gets a list of projects that are shared with other Amazon Web Services accounts or users. 
    */
   listSharedProjects(callback?: (err: AWSError, data: CodeBuild.Types.ListSharedProjectsOutput) => void): Request<CodeBuild.Types.ListSharedProjectsOutput, AWSError>;
   /**
-   *  Gets a list of report groups that are shared with other AWS accounts or users. 
+   *  Gets a list of report groups that are shared with other Amazon Web Services accounts or users. 
    */
   listSharedReportGroups(params: CodeBuild.Types.ListSharedReportGroupsInput, callback?: (err: AWSError, data: CodeBuild.Types.ListSharedReportGroupsOutput) => void): Request<CodeBuild.Types.ListSharedReportGroupsOutput, AWSError>;
   /**
-   *  Gets a list of report groups that are shared with other AWS accounts or users. 
+   *  Gets a list of report groups that are shared with other Amazon Web Services accounts or users. 
    */
   listSharedReportGroups(callback?: (err: AWSError, data: CodeBuild.Types.ListSharedReportGroupsOutput) => void): Request<CodeBuild.Types.ListSharedReportGroupsOutput, AWSError>;
   /**
@@ -308,11 +340,11 @@ declare class CodeBuild extends Service {
    */
   retryBuildBatch(callback?: (err: AWSError, data: CodeBuild.Types.RetryBuildBatchOutput) => void): Request<CodeBuild.Types.RetryBuildBatchOutput, AWSError>;
   /**
-   * Starts running a build.
+   * Starts running a build with the settings defined in the project. These setting include: how to run a build, where to get the source code, which build environment to use, which build commands to run, and where to store the build output. You can also start a build run by overriding some of the build settings in the project. The overrides only apply for that specific start build request. The settings in the project are unaltered.
    */
   startBuild(params: CodeBuild.Types.StartBuildInput, callback?: (err: AWSError, data: CodeBuild.Types.StartBuildOutput) => void): Request<CodeBuild.Types.StartBuildOutput, AWSError>;
   /**
-   * Starts running a build.
+   * Starts running a build with the settings defined in the project. These setting include: how to run a build, where to get the source code, which build environment to use, which build commands to run, and where to store the build output. You can also start a build run by overriding some of the build settings in the project. The overrides only apply for that specific start build request. The settings in the project are unaltered.
    */
   startBuild(callback?: (err: AWSError, data: CodeBuild.Types.StartBuildOutput) => void): Request<CodeBuild.Types.StartBuildOutput, AWSError>;
   /**
@@ -340,6 +372,14 @@ declare class CodeBuild extends Service {
    */
   stopBuildBatch(callback?: (err: AWSError, data: CodeBuild.Types.StopBuildBatchOutput) => void): Request<CodeBuild.Types.StopBuildBatchOutput, AWSError>;
   /**
+   * Updates a compute fleet.
+   */
+  updateFleet(params: CodeBuild.Types.UpdateFleetInput, callback?: (err: AWSError, data: CodeBuild.Types.UpdateFleetOutput) => void): Request<CodeBuild.Types.UpdateFleetOutput, AWSError>;
+  /**
+   * Updates a compute fleet.
+   */
+  updateFleet(callback?: (err: AWSError, data: CodeBuild.Types.UpdateFleetOutput) => void): Request<CodeBuild.Types.UpdateFleetOutput, AWSError>;
+  /**
    * Changes the settings of a build project.
    */
   updateProject(params: CodeBuild.Types.UpdateProjectInput, callback?: (err: AWSError, data: CodeBuild.Types.UpdateProjectOutput) => void): Request<CodeBuild.Types.UpdateProjectOutput, AWSError>;
@@ -347,6 +387,14 @@ declare class CodeBuild extends Service {
    * Changes the settings of a build project.
    */
   updateProject(callback?: (err: AWSError, data: CodeBuild.Types.UpdateProjectOutput) => void): Request<CodeBuild.Types.UpdateProjectOutput, AWSError>;
+  /**
+   * Changes the public visibility for a project. The project's build results, logs, and artifacts are available to the general public. For more information, see Public build projects in the CodeBuild User Guide.  The following should be kept in mind when making your projects public:   All of a project's build results, logs, and artifacts, including builds that were run when the project was private, are available to the general public.   All build logs and artifacts are available to the public. Environment variables, source code, and other sensitive information may have been output to the build logs and artifacts. You must be careful about what information is output to the build logs. Some best practice are:   Do not store sensitive values in environment variables. We recommend that you use an Amazon EC2 Systems Manager Parameter Store or Secrets Manager to store sensitive values.   Follow Best practices for using webhooks in the CodeBuild User Guide to limit which entities can trigger a build, and do not store the buildspec in the project itself, to ensure that your webhooks are as secure as possible.     A malicious user can use public builds to distribute malicious artifacts. We recommend that you review all pull requests to verify that the pull request is a legitimate change. We also recommend that you validate any artifacts with their checksums to make sure that the correct artifacts are being downloaded.   
+   */
+  updateProjectVisibility(params: CodeBuild.Types.UpdateProjectVisibilityInput, callback?: (err: AWSError, data: CodeBuild.Types.UpdateProjectVisibilityOutput) => void): Request<CodeBuild.Types.UpdateProjectVisibilityOutput, AWSError>;
+  /**
+   * Changes the public visibility for a project. The project's build results, logs, and artifacts are available to the general public. For more information, see Public build projects in the CodeBuild User Guide.  The following should be kept in mind when making your projects public:   All of a project's build results, logs, and artifacts, including builds that were run when the project was private, are available to the general public.   All build logs and artifacts are available to the public. Environment variables, source code, and other sensitive information may have been output to the build logs and artifacts. You must be careful about what information is output to the build logs. Some best practice are:   Do not store sensitive values in environment variables. We recommend that you use an Amazon EC2 Systems Manager Parameter Store or Secrets Manager to store sensitive values.   Follow Best practices for using webhooks in the CodeBuild User Guide to limit which entities can trigger a build, and do not store the buildspec in the project itself, to ensure that your webhooks are as secure as possible.     A malicious user can use public builds to distribute malicious artifacts. We recommend that you review all pull requests to verify that the pull request is a legitimate change. We also recommend that you validate any artifacts with their checksums to make sure that the correct artifacts are being downloaded.   
+   */
+  updateProjectVisibility(callback?: (err: AWSError, data: CodeBuild.Types.UpdateProjectVisibilityOutput) => void): Request<CodeBuild.Types.UpdateProjectVisibilityOutput, AWSError>;
   /**
    *  Updates a report group. 
    */
@@ -356,11 +404,11 @@ declare class CodeBuild extends Service {
    */
   updateReportGroup(callback?: (err: AWSError, data: CodeBuild.Types.UpdateReportGroupOutput) => void): Request<CodeBuild.Types.UpdateReportGroupOutput, AWSError>;
   /**
-   *  Updates the webhook associated with an AWS CodeBuild build project.    If you use Bitbucket for your repository, rotateSecret is ignored.  
+   *  Updates the webhook associated with an CodeBuild build project.    If you use Bitbucket for your repository, rotateSecret is ignored.  
    */
   updateWebhook(params: CodeBuild.Types.UpdateWebhookInput, callback?: (err: AWSError, data: CodeBuild.Types.UpdateWebhookOutput) => void): Request<CodeBuild.Types.UpdateWebhookOutput, AWSError>;
   /**
-   *  Updates the webhook associated with an AWS CodeBuild build project.    If you use Bitbucket for your repository, rotateSecret is ignored.  
+   *  Updates the webhook associated with an CodeBuild build project.    If you use Bitbucket for your repository, rotateSecret is ignored.  
    */
   updateWebhook(callback?: (err: AWSError, data: CodeBuild.Types.UpdateWebhookOutput) => void): Request<CodeBuild.Types.UpdateWebhookOutput, AWSError>;
 }
@@ -368,7 +416,7 @@ declare namespace CodeBuild {
   export type ArtifactNamespace = "NONE"|"BUILD_ID"|string;
   export type ArtifactPackaging = "NONE"|"ZIP"|string;
   export type ArtifactsType = "CODEPIPELINE"|"S3"|"NO_ARTIFACTS"|string;
-  export type AuthType = "OAUTH"|"BASIC_AUTH"|"PERSONAL_ACCESS_TOKEN"|string;
+  export type AuthType = "OAUTH"|"BASIC_AUTH"|"PERSONAL_ACCESS_TOKEN"|"CODECONNECTIONS"|"SECRETS_MANAGER"|string;
   export interface BatchDeleteBuildsInput {
     /**
      * The IDs of the builds to delete.
@@ -417,9 +465,25 @@ declare namespace CodeBuild {
      */
     buildsNotFound?: BuildIds;
   }
+  export interface BatchGetFleetsInput {
+    /**
+     * The names or ARNs of the compute fleets.
+     */
+    names: FleetNames;
+  }
+  export interface BatchGetFleetsOutput {
+    /**
+     * Information about the requested compute fleets.
+     */
+    fleets?: Fleets;
+    /**
+     * The names of compute fleets for which information could not be found.
+     */
+    fleetsNotFound?: FleetNames;
+  }
   export interface BatchGetProjectsInput {
     /**
-     * The names or ARNs of the build projects. To get information about a project shared with your AWS account, its ARN must be specified. You cannot specify a shared project using its name.
+     * The names or ARNs of the build projects. To get information about a project shared with your Amazon Web Services account, its ARN must be specified. You cannot specify a shared project using its name.
      */
     names: ProjectNames;
   }
@@ -465,17 +529,19 @@ declare namespace CodeBuild {
      */
     reportsNotFound?: ReportArns;
   }
+  export type BatchReportModeType = "REPORT_INDIVIDUAL_BUILDS"|"REPORT_AGGREGATED_BATCH"|string;
   export interface BatchRestrictions {
     /**
      * Specifies the maximum number of builds allowed.
      */
     maximumBuildsAllowed?: WrapperInt;
     /**
-     * An array of strings that specify the compute types that are allowed for the batch build. See Build environment compute types in the AWS CodeBuild User Guide for these values. 
+     * An array of strings that specify the compute types that are allowed for the batch build. See Build environment compute types in the CodeBuild User Guide for these values. 
      */
     computeTypesAllowed?: ComputeTypesAllowed;
   }
   export type Boolean = boolean;
+  export type BucketOwnerAccess = "NONE"|"READ_ONLY"|"FULL"|string;
   export interface Build {
     /**
      * The unique ID for the build.
@@ -506,15 +572,15 @@ declare namespace CodeBuild {
      */
     buildStatus?: StatusType;
     /**
-     * Any version identifier for the version of the source code to be built. If sourceVersion is specified at the project level, then this sourceVersion (at the build level) takes precedence.   For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
+     * Any version identifier for the version of the source code to be built. If sourceVersion is specified at the project level, then this sourceVersion (at the build level) takes precedence.   For more information, see Source Version Sample with CodeBuild in the CodeBuild User Guide. 
      */
     sourceVersion?: NonEmptyString;
     /**
-     *  An identifier for the version of this build's source code.     For AWS CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID.     For AWS CodePipeline, the source revision provided by AWS CodePipeline.     For Amazon Simple Storage Service (Amazon S3), this does not apply.   
+     *  An identifier for the version of this build's source code.     For CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID.     For CodePipeline, the source revision provided by CodePipeline.     For Amazon S3, this does not apply.   
      */
     resolvedSourceVersion?: NonEmptyString;
     /**
-     * The name of the AWS CodeBuild project.
+     * The name of the CodeBuild project.
      */
     projectName?: NonEmptyString;
     /**
@@ -530,7 +596,7 @@ declare namespace CodeBuild {
      */
     secondarySources?: ProjectSources;
     /**
-     *  An array of ProjectSourceVersion objects. Each ProjectSourceVersion must be one of:    For AWS CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example, pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.  
+     *  An array of ProjectSourceVersion objects. Each ProjectSourceVersion must be one of:    For CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example, pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon S3: the version ID of the object that represents the build input ZIP file to use.  
      */
     secondarySourceVersions?: ProjectSecondarySourceVersions;
     /**
@@ -554,11 +620,11 @@ declare namespace CodeBuild {
      */
     serviceRole?: NonEmptyString;
     /**
-     * Information about the build's logs in Amazon CloudWatch Logs.
+     * Information about the build's logs in CloudWatch Logs.
      */
     logs?: LogsLocation;
     /**
-     * How long, in minutes, for AWS CodeBuild to wait before timing out this build if it does not get marked as completed.
+     * How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait before timing out this build if it does not get marked as completed.
      */
     timeoutInMinutes?: WrapperInt;
     /**
@@ -570,11 +636,11 @@ declare namespace CodeBuild {
      */
     buildComplete?: Boolean;
     /**
-     * The entity that started the build. Valid values include:   If AWS CodePipeline started the build, the pipeline's name (for example, codepipeline/my-demo-pipeline).   If an AWS Identity and Access Management (IAM) user started the build, the user's name (for example, MyUserName).   If the Jenkins plugin for AWS CodeBuild started the build, the string CodeBuild-Jenkins-Plugin.  
+     * The entity that started the build. Valid values include:   If CodePipeline started the build, the pipeline's name (for example, codepipeline/my-demo-pipeline).   If a user started the build, the user's name (for example, MyUserName).   If the Jenkins plugin for CodeBuild started the build, the string CodeBuild-Jenkins-Plugin.  
      */
     initiator?: String;
     /**
-     * If your AWS CodeBuild project accesses resources in an Amazon VPC, you provide this parameter that identifies the VPC ID and the list of security group IDs and subnet IDs. The security groups and subnets must belong to the same VPC. You must provide at least one security group and one subnet ID.
+     * If your CodeBuild project accesses resources in an Amazon VPC, you provide this parameter that identifies the VPC ID and the list of security group IDs and subnet IDs. The security groups and subnets must belong to the same VPC. You must provide at least one security group and one subnet ID.
      */
     vpcConfig?: VpcConfig;
     /**
@@ -582,11 +648,11 @@ declare namespace CodeBuild {
      */
     networkInterface?: NetworkInterface;
     /**
-     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.   You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/&lt;alias-name&gt;).
+     * The Key Management Service customer master key (CMK) to be used for encrypting the build output artifacts.   You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/&lt;alias-name&gt;).
      */
     encryptionKey?: NonEmptyString;
     /**
-     *  A list of exported environment variables for this build. 
+     * A list of exported environment variables for this build. Exported environment variables are used in conjunction with CodePipeline to export environment variables from the current build stage to subsequent stages in the pipeline. For more information, see Working with variables in the CodePipeline User Guide.
      */
     exportedEnvironmentVariables?: ExportedEnvironmentVariables;
     /**
@@ -631,6 +697,7 @@ declare namespace CodeBuild {
      *  An identifier for this artifact definition. 
      */
     artifactIdentifier?: String;
+    bucketOwnerAccess?: BucketOwnerAccess;
   }
   export type BuildArtifactsList = BuildArtifacts[];
   export interface BuildBatch {
@@ -663,7 +730,7 @@ declare namespace CodeBuild {
      */
     sourceVersion?: NonEmptyString;
     /**
-     * The identifier of the resolved version of this batch build's source code.   For AWS CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID.   For AWS CodePipeline, the source revision provided by AWS CodePipeline.   For Amazon Simple Storage Service (Amazon S3), this does not apply.  
+     * The identifier of the resolved version of this batch build's source code.   For CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID.   For CodePipeline, the source revision provided by CodePipeline.   For Amazon S3, this does not apply.  
      */
     resolvedSourceVersion?: NonEmptyString;
     /**
@@ -680,7 +747,7 @@ declare namespace CodeBuild {
      */
     secondarySources?: ProjectSources;
     /**
-     * An array of ProjectSourceVersion objects. Each ProjectSourceVersion must be one of:    For AWS CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example, pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.  
+     * An array of ProjectSourceVersion objects. Each ProjectSourceVersion must be one of:    For CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example, pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon S3: the version ID of the object that represents the build input ZIP file to use.  
      */
     secondarySourceVersions?: ProjectSecondarySourceVersions;
     /**
@@ -711,12 +778,12 @@ declare namespace CodeBuild {
      */
     complete?: Boolean;
     /**
-     * The entity that started the batch build. Valid values include:   If AWS CodePipeline started the build, the pipeline's name (for example, codepipeline/my-demo-pipeline).   If an AWS Identity and Access Management (IAM) user started the build, the user's name.   If the Jenkins plugin for AWS CodeBuild started the build, the string CodeBuild-Jenkins-Plugin.  
+     * The entity that started the batch build. Valid values include:   If CodePipeline started the build, the pipeline's name (for example, codepipeline/my-demo-pipeline).   If a user started the build, the user's name.   If the Jenkins plugin for CodeBuild started the build, the string CodeBuild-Jenkins-Plugin.  
      */
     initiator?: String;
     vpcConfig?: VpcConfig;
     /**
-     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the batch build output artifacts.  You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/&lt;alias-name&gt;).
+     * The Key Management Service customer master key (CMK) to be used for encrypting the batch build output artifacts.  You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/&lt;alias-name&gt;).
      */
     encryptionKey?: NonEmptyString;
     /**
@@ -732,6 +799,10 @@ declare namespace CodeBuild {
      * An array of BuildGroup objects that define the build groups for the batch build.
      */
     buildGroups?: BuildGroups;
+    /**
+     * Specifies if session debugging is enabled for this batch build. For more information, see Viewing a running build in Session Manager. Batch session debugging is not supported for matrix batch builds.
+     */
+    debugSessionEnabled?: WrapperBoolean;
   }
   export interface BuildBatchFilter {
     /**
@@ -746,7 +817,7 @@ declare namespace CodeBuild {
      */
     phaseType?: BuildBatchPhaseType;
     /**
-     * The current status of the batch build phase. Valid values include:  FAILED  The build phase failed.  FAULT  The build phase faulted.  IN_PROGRESS  The build phase is still in progress.  QUEUED  The build has been submitted and is queued behind other submitted builds.  STOPPED  The build phase stopped.  SUCCEEDED  The build phase succeeded.  TIMED_OUT  The build phase timed out.  
+     * The current status of the batch build phase. Valid values include:  FAILED  The build phase failed.  FAULT  The build phase faulted.  IN_PROGRESS  The build phase is still in progress.  STOPPED  The build phase stopped.  SUCCEEDED  The build phase succeeded.  TIMED_OUT  The build phase timed out.  
      */
     phaseStatus?: StatusType;
     /**
@@ -762,7 +833,7 @@ declare namespace CodeBuild {
      */
     durationInSeconds?: WrapperLong;
     /**
-     * Additional information about the batch build phase. Especially to help troubleshoot a failed btach build.
+     * Additional information about the batch build phase. Especially to help troubleshoot a failed batch build.
      */
     contexts?: PhaseContexts;
   }
@@ -805,11 +876,11 @@ declare namespace CodeBuild {
   }
   export interface BuildPhase {
     /**
-     * The name of the build phase. Valid values include:    BUILD: Core build activities typically occur in this build phase.    COMPLETED: The build has been completed.    DOWNLOAD_SOURCE: Source code is being downloaded in this build phase.    FINALIZING: The build process is completing in this build phase.    INSTALL: Installation activities typically occur in this build phase.    POST_BUILD: Post-build activities typically occur in this build phase.    PRE_BUILD: Pre-build activities typically occur in this build phase.    PROVISIONING: The build environment is being set up.    QUEUED: The build has been submitted and is queued behind other submitted builds.    SUBMITTED: The build has been submitted.    UPLOAD_ARTIFACTS: Build output artifacts are being uploaded to the output location.  
+     * The name of the build phase. Valid values include:  BUILD  Core build activities typically occur in this build phase.  COMPLETED  The build has been completed.  DOWNLOAD_SOURCE  Source code is being downloaded in this build phase.  FINALIZING  The build process is completing in this build phase.  INSTALL  Installation activities typically occur in this build phase.  POST_BUILD  Post-build activities typically occur in this build phase.  PRE_BUILD  Pre-build activities typically occur in this build phase.  PROVISIONING  The build environment is being set up.  QUEUED  The build has been submitted and is queued behind other submitted builds.  SUBMITTED  The build has been submitted.  UPLOAD_ARTIFACTS  Build output artifacts are being uploaded to the output location.  
      */
     phaseType?: BuildPhaseType;
     /**
-     * The current status of the build phase. Valid values include:  FAILED  The build phase failed.  FAULT  The build phase faulted.  IN_PROGRESS  The build phase is still in progress.  QUEUED  The build has been submitted and is queued behind other submitted builds.  STOPPED  The build phase stopped.  SUCCEEDED  The build phase succeeded.  TIMED_OUT  The build phase timed out.  
+     * The current status of the build phase. Valid values include:  FAILED  The build phase failed.  FAULT  The build phase faulted.  IN_PROGRESS  The build phase is still in progress.  STOPPED  The build phase stopped.  SUCCEEDED  The build phase succeeded.  TIMED_OUT  The build phase timed out.  
      */
     phaseStatus?: StatusType;
     /**
@@ -865,21 +936,22 @@ declare namespace CodeBuild {
      */
     secondaryArtifacts?: ResolvedSecondaryArtifacts;
   }
+  export type BuildTimeOut = number;
   export type Builds = Build[];
   export type BuildsNotDeleted = BuildNotDeleted[];
   export type CacheMode = "LOCAL_DOCKER_LAYER_CACHE"|"LOCAL_SOURCE_CACHE"|"LOCAL_CUSTOM_CACHE"|string;
   export type CacheType = "NO_CACHE"|"S3"|"LOCAL"|string;
   export interface CloudWatchLogsConfig {
     /**
-     * The current status of the logs in Amazon CloudWatch Logs for a build project. Valid values are:    ENABLED: Amazon CloudWatch Logs are enabled for this build project.    DISABLED: Amazon CloudWatch Logs are not enabled for this build project.  
+     * The current status of the logs in CloudWatch Logs for a build project. Valid values are:    ENABLED: CloudWatch Logs are enabled for this build project.    DISABLED: CloudWatch Logs are not enabled for this build project.  
      */
     status: LogsConfigStatusType;
     /**
-     *  The group name of the logs in Amazon CloudWatch Logs. For more information, see Working with Log Groups and Log Streams. 
+     *  The group name of the logs in CloudWatch Logs. For more information, see Working with Log Groups and Log Streams. 
      */
     groupName?: String;
     /**
-     *  The prefix of the stream name of the Amazon CloudWatch Logs. For more information, see Working with Log Groups and Log Streams. 
+     *  The prefix of the stream name of the CloudWatch Logs. For more information, see Working with Log Groups and Log Streams. 
      */
     streamName?: String;
   }
@@ -952,8 +1024,53 @@ declare namespace CodeBuild {
     branchesMissed?: NonNegativeInt;
   }
   export type CodeCoverages = CodeCoverage[];
-  export type ComputeType = "BUILD_GENERAL1_SMALL"|"BUILD_GENERAL1_MEDIUM"|"BUILD_GENERAL1_LARGE"|"BUILD_GENERAL1_2XLARGE"|string;
+  export type ComputeType = "BUILD_GENERAL1_SMALL"|"BUILD_GENERAL1_MEDIUM"|"BUILD_GENERAL1_LARGE"|"BUILD_GENERAL1_XLARGE"|"BUILD_GENERAL1_2XLARGE"|"BUILD_LAMBDA_1GB"|"BUILD_LAMBDA_2GB"|"BUILD_LAMBDA_4GB"|"BUILD_LAMBDA_8GB"|"BUILD_LAMBDA_10GB"|string;
   export type ComputeTypesAllowed = NonEmptyString[];
+  export interface CreateFleetInput {
+    /**
+     * The name of the compute fleet.
+     */
+    name: FleetName;
+    /**
+     * The initial number of machines allocated to the ﬂeet, which deﬁnes the number of builds that can run in parallel.
+     */
+    baseCapacity: FleetCapacity;
+    /**
+     * The environment type of the compute fleet.   The environment type ARM_CONTAINER is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney), EU (Frankfurt), and South America (São Paulo).   The environment type LINUX_CONTAINER is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and Asia Pacific (Mumbai).   The environment type LINUX_GPU_CONTAINER is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), and Asia Pacific (Sydney).   The environment type MAC_ARM is available for Medium fleets only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney), and EU (Frankfurt)   The environment type MAC_ARM is available for Large fleets only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), and Asia Pacific (Sydney).   The environment type WINDOWS_SERVER_2019_CONTAINER is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney), Asia Pacific (Tokyo), Asia Pacific (Mumbai) and EU (Ireland).   The environment type WINDOWS_SERVER_2022_CONTAINER is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt), Asia Pacific (Sydney), Asia Pacific (Singapore), Asia Pacific (Tokyo), South America (São Paulo) and Asia Pacific (Mumbai).   For more information, see Build environment compute types in the CodeBuild user guide.
+     */
+    environmentType: EnvironmentType;
+    /**
+     * Information about the compute resources the compute fleet uses. Available values include:    BUILD_GENERAL1_SMALL: Use up to 3 GB memory and 2 vCPUs for builds.    BUILD_GENERAL1_MEDIUM: Use up to 7 GB memory and 4 vCPUs for builds.    BUILD_GENERAL1_LARGE: Use up to 16 GB memory and 8 vCPUs for builds, depending on your environment type.    BUILD_GENERAL1_XLARGE: Use up to 70 GB memory and 36 vCPUs for builds, depending on your environment type.    BUILD_GENERAL1_2XLARGE: Use up to 145 GB memory, 72 vCPUs, and 824 GB of SSD storage for builds. This compute type supports Docker images up to 100 GB uncompressed.    If you use BUILD_GENERAL1_SMALL:     For environment type LINUX_CONTAINER, you can use up to 3 GB memory and 2 vCPUs for builds.     For environment type LINUX_GPU_CONTAINER, you can use up to 16 GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.    For environment type ARM_CONTAINER, you can use up to 4 GB memory and 2 vCPUs on ARM-based processors for builds.    If you use BUILD_GENERAL1_LARGE:     For environment type LINUX_CONTAINER, you can use up to 15 GB memory and 8 vCPUs for builds.     For environment type LINUX_GPU_CONTAINER, you can use up to 255 GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.    For environment type ARM_CONTAINER, you can use up to 16 GB memory and 8 vCPUs on ARM-based processors for builds.   For more information, see Build environment compute types in the CodeBuild User Guide. 
+     */
+    computeType: ComputeType;
+    /**
+     * The scaling configuration of the compute fleet.
+     */
+    scalingConfiguration?: ScalingConfigurationInput;
+    /**
+     * The compute fleet overflow behavior.   For overflow behavior QUEUE, your overflow builds need to wait on the existing fleet instance to become available.   For overflow behavior ON_DEMAND, your overflow builds run on CodeBuild on-demand.  If you choose to set your overflow behavior to on-demand while creating a VPC-connected fleet, make sure that you add the required VPC permissions to your project service role. For more information, see Example policy statement to allow CodeBuild access to Amazon Web Services services required to create a VPC network interface.   
+     */
+    overflowBehavior?: FleetOverflowBehavior;
+    vpcConfig?: VpcConfig;
+    /**
+     * The Amazon Machine Image (AMI) of the compute fleet.
+     */
+    imageId?: NonEmptyString;
+    /**
+     * The service role associated with the compute fleet. For more information, see  Allow a user to add a permission policy for a fleet service role in the CodeBuild User Guide.
+     */
+    fleetServiceRole?: NonEmptyString;
+    /**
+     * A list of tag key and value pairs associated with this compute fleet. These tags are available for use by Amazon Web Services services that support CodeBuild build project tags.
+     */
+    tags?: TagList;
+  }
+  export interface CreateFleetOutput {
+    /**
+     * Information about the compute fleet
+     */
+    fleet?: Fleet;
+  }
   export interface CreateProjectInput {
     /**
      * The name of the build project.
@@ -972,7 +1089,7 @@ declare namespace CodeBuild {
      */
     secondarySources?: ProjectSources;
     /**
-     * A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:    For AWS CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.   If sourceVersion is specified at the build level, then that version takes precedence over this sourceVersion (at the project level).  For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
+     * A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:    For CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For GitLab: the commit ID, branch, or Git tag to use.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon S3: the version ID of the object that represents the build input ZIP file to use.   If sourceVersion is specified at the build level, then that version takes precedence over this sourceVersion (at the project level).  For more information, see Source Version Sample with CodeBuild in the CodeBuild User Guide. 
      */
     sourceVersion?: String;
     /**
@@ -996,27 +1113,27 @@ declare namespace CodeBuild {
      */
     environment: ProjectEnvironment;
     /**
-     * The ARN of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.
+     * The ARN of the IAM role that enables CodeBuild to interact with dependent Amazon Web Services services on behalf of the Amazon Web Services account.
      */
     serviceRole: NonEmptyString;
     /**
-     * How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait before it times out any build that has not been marked as completed. The default is 60 minutes.
+     * How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait before it times out any build that has not been marked as completed. The default is 60 minutes.
      */
-    timeoutInMinutes?: TimeOut;
+    timeoutInMinutes?: BuildTimeOut;
     /**
      * The number of minutes a build is allowed to be queued before it times out. 
      */
     queuedTimeoutInMinutes?: TimeOut;
     /**
-     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.  You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/&lt;alias-name&gt;).
+     * The Key Management Service customer master key (CMK) to be used for encrypting the build output artifacts.  You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/&lt;alias-name&gt;). 
      */
     encryptionKey?: NonEmptyString;
     /**
-     * A list of tag key and value pairs associated with this build project. These tags are available for use by AWS services that support AWS CodeBuild build project tags.
+     * A list of tag key and value pairs associated with this build project. These tags are available for use by Amazon Web Services services that support CodeBuild build project tags.
      */
     tags?: TagList;
     /**
-     * VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.
+     * VpcConfig enables CodeBuild to access resources in an Amazon VPC.  If you're using compute fleets during project creation, do not provide vpcConfig. 
      */
     vpcConfig?: VpcConfig;
     /**
@@ -1024,7 +1141,7 @@ declare namespace CodeBuild {
      */
     badgeEnabled?: WrapperBoolean;
     /**
-     * Information about logs for the build project. These can be logs in Amazon CloudWatch Logs, logs uploaded to a specified S3 bucket, or both. 
+     * Information about logs for the build project. These can be logs in CloudWatch Logs, logs uploaded to a specified S3 bucket, or both. 
      */
     logsConfig?: LogsConfig;
     /**
@@ -1035,6 +1152,10 @@ declare namespace CodeBuild {
      * A ProjectBuildBatchConfig object that defines the batch build options for the project.
      */
     buildBatchConfig?: ProjectBuildBatchConfig;
+    /**
+     * The maximum number of concurrent builds that are allowed for this project. New builds are only started if the current number of builds is less than or equal to this limit. If the current build count meets this limit, new builds are throttled and are not run.
+     */
+    concurrentBuildLimit?: WrapperInt;
   }
   export interface CreateProjectOutput {
     /**
@@ -1056,7 +1177,7 @@ declare namespace CodeBuild {
      */
     exportConfig: ReportExportConfig;
     /**
-     *  A list of tag key and value pairs associated with this report group.  These tags are available for use by AWS services that support AWS CodeBuild report group tags.
+     *  A list of tag key and value pairs associated with this report group.  These tags are available for use by Amazon Web Services services that support CodeBuild report group tags.
      */
     tags?: TagList;
   }
@@ -1068,7 +1189,7 @@ declare namespace CodeBuild {
   }
   export interface CreateWebhookInput {
     /**
-     * The name of the AWS CodeBuild project.
+     * The name of the CodeBuild project.
      */
     projectName: ProjectName;
     /**
@@ -1083,10 +1204,18 @@ declare namespace CodeBuild {
      * Specifies the type of build this webhook will trigger.
      */
     buildType?: WebhookBuildType;
+    /**
+     * If manualCreation is true, CodeBuild doesn't create a webhook in GitHub and instead returns payloadUrl and secret values for the webhook. The payloadUrl and secret values in the output can be used to manually create a webhook within GitHub.   manualCreation is only available for GitHub webhooks. 
+     */
+    manualCreation?: WrapperBoolean;
+    /**
+     * The scope configuration for global or organization webhooks.  Global or organization webhooks are only available for GitHub and Github Enterprise webhooks. 
+     */
+    scopeConfiguration?: ScopeConfiguration;
   }
   export interface CreateWebhookOutput {
     /**
-     * Information about a webhook that connects repository events to a build project in AWS CodeBuild.
+     * Information about a webhook that connects repository events to a build project in CodeBuild.
      */
     webhook?: Webhook;
   }
@@ -1120,6 +1249,14 @@ declare namespace CodeBuild {
      * An array of BuildNotDeleted objects that specify the builds that could not be deleted.
      */
     buildsNotDeleted?: BuildsNotDeleted;
+  }
+  export interface DeleteFleetInput {
+    /**
+     * The ARN of the compute fleet.
+     */
+    arn: NonEmptyString;
+  }
+  export interface DeleteFleetOutput {
   }
   export interface DeleteProjectInput {
     /**
@@ -1171,7 +1308,7 @@ declare namespace CodeBuild {
   }
   export interface DeleteWebhookInput {
     /**
-     * The name of the AWS CodeBuild project.
+     * The name of the CodeBuild project.
      */
     projectName: ProjectName;
   }
@@ -1282,18 +1419,18 @@ declare namespace CodeBuild {
     languages?: EnvironmentLanguages;
   }
   export type EnvironmentPlatforms = EnvironmentPlatform[];
-  export type EnvironmentType = "WINDOWS_CONTAINER"|"LINUX_CONTAINER"|"LINUX_GPU_CONTAINER"|"ARM_CONTAINER"|"WINDOWS_SERVER_2019_CONTAINER"|string;
+  export type EnvironmentType = "WINDOWS_CONTAINER"|"LINUX_CONTAINER"|"LINUX_GPU_CONTAINER"|"ARM_CONTAINER"|"WINDOWS_SERVER_2019_CONTAINER"|"LINUX_LAMBDA_CONTAINER"|"ARM_LAMBDA_CONTAINER"|"MAC_ARM"|string;
   export interface EnvironmentVariable {
     /**
      * The name or key of the environment variable.
      */
     name: NonEmptyString;
     /**
-     * The value of the environment variable.  We strongly discourage the use of PLAINTEXT environment variables to store sensitive values, especially AWS secret key IDs and secret access keys. PLAINTEXT environment variables can be displayed in plain text using the AWS CodeBuild console and the AWS Command Line Interface (AWS CLI). For sensitive values, we recommend you use an environment variable of type PARAMETER_STORE or SECRETS_MANAGER.  
+     * The value of the environment variable.  We strongly discourage the use of PLAINTEXT environment variables to store sensitive values, especially Amazon Web Services secret key IDs. PLAINTEXT environment variables can be displayed in plain text using the CodeBuild console and the CLI. For sensitive values, we recommend you use an environment variable of type PARAMETER_STORE or SECRETS_MANAGER.  
      */
     value: String;
     /**
-     * The type of environment variable. Valid values include:    PARAMETER_STORE: An environment variable stored in Amazon EC2 Systems Manager Parameter Store. To learn how to specify a parameter store environment variable, see env/parameter-store in the AWS CodeBuild User Guide.    PLAINTEXT: An environment variable in plain text format. This is the default value.    SECRETS_MANAGER: An environment variable stored in AWS Secrets Manager. To learn how to specify a secrets manager environment variable, see env/secrets-manager in the AWS CodeBuild User Guide.  
+     * The type of environment variable. Valid values include:    PARAMETER_STORE: An environment variable stored in Systems Manager Parameter Store. For environment variables of this type, specify the name of the parameter as the value of the EnvironmentVariable. The parameter value will be substituted for the name at runtime. You can also define Parameter Store environment variables in the buildspec. To learn how to do so, see env/parameter-store in the CodeBuild User Guide.    PLAINTEXT: An environment variable in plain text format. This is the default value.    SECRETS_MANAGER: An environment variable stored in Secrets Manager. For environment variables of this type, specify the name of the secret as the value of the EnvironmentVariable. The secret value will be substituted for the name at runtime. You can also define Secrets Manager environment variables in the buildspec. To learn how to do so, see env/secrets-manager in the CodeBuild User Guide.  
      */
     type?: EnvironmentVariableType;
   }
@@ -1301,11 +1438,11 @@ declare namespace CodeBuild {
   export type EnvironmentVariables = EnvironmentVariable[];
   export interface ExportedEnvironmentVariable {
     /**
-     *  The name of this exported environment variable. 
+     * The name of the exported environment variable.
      */
     name?: NonEmptyString;
     /**
-     *  The value assigned to this exported environment variable.    During a build, the value of a variable is available starting with the install phase. It can be updated between the start of the install phase and the end of the post_build phase. After the post_build phase ends, the value of exported variables cannot change. 
+     * The value assigned to the exported environment variable.
      */
     value?: String;
   }
@@ -1313,13 +1450,112 @@ declare namespace CodeBuild {
   export type FileSystemType = "EFS"|string;
   export type FilterGroup = WebhookFilter[];
   export type FilterGroups = FilterGroup[];
+  export interface Fleet {
+    /**
+     * The ARN of the compute fleet.
+     */
+    arn?: NonEmptyString;
+    /**
+     * The name of the compute fleet.
+     */
+    name?: FleetName;
+    /**
+     * The ID of the compute fleet.
+     */
+    id?: NonEmptyString;
+    /**
+     * The time at which the compute fleet was created.
+     */
+    created?: Timestamp;
+    /**
+     * The time at which the compute fleet was last modified.
+     */
+    lastModified?: Timestamp;
+    /**
+     * The status of the compute fleet.
+     */
+    status?: FleetStatus;
+    /**
+     * The initial number of machines allocated to the compute ﬂeet, which deﬁnes the number of builds that can run in parallel.
+     */
+    baseCapacity?: FleetCapacity;
+    /**
+     * The environment type of the compute fleet.   The environment type ARM_CONTAINER is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney), EU (Frankfurt), and South America (São Paulo).   The environment type LINUX_CONTAINER is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and Asia Pacific (Mumbai).   The environment type LINUX_GPU_CONTAINER is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), and Asia Pacific (Sydney).   The environment type MAC_ARM is available for Medium fleets only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney), and EU (Frankfurt)   The environment type MAC_ARM is available for Large fleets only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), and Asia Pacific (Sydney).   The environment type WINDOWS_SERVER_2019_CONTAINER is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney), Asia Pacific (Tokyo), Asia Pacific (Mumbai) and EU (Ireland).   The environment type WINDOWS_SERVER_2022_CONTAINER is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt), Asia Pacific (Sydney), Asia Pacific (Singapore), Asia Pacific (Tokyo), South America (São Paulo) and Asia Pacific (Mumbai).   For more information, see Build environment compute types in the CodeBuild user guide.
+     */
+    environmentType?: EnvironmentType;
+    /**
+     * Information about the compute resources the compute fleet uses. Available values include:    BUILD_GENERAL1_SMALL: Use up to 3 GB memory and 2 vCPUs for builds.    BUILD_GENERAL1_MEDIUM: Use up to 7 GB memory and 4 vCPUs for builds.    BUILD_GENERAL1_LARGE: Use up to 16 GB memory and 8 vCPUs for builds, depending on your environment type.    BUILD_GENERAL1_XLARGE: Use up to 70 GB memory and 36 vCPUs for builds, depending on your environment type.    BUILD_GENERAL1_2XLARGE: Use up to 145 GB memory, 72 vCPUs, and 824 GB of SSD storage for builds. This compute type supports Docker images up to 100 GB uncompressed.    If you use BUILD_GENERAL1_SMALL:     For environment type LINUX_CONTAINER, you can use up to 3 GB memory and 2 vCPUs for builds.     For environment type LINUX_GPU_CONTAINER, you can use up to 16 GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.    For environment type ARM_CONTAINER, you can use up to 4 GB memory and 2 vCPUs on ARM-based processors for builds.    If you use BUILD_GENERAL1_LARGE:     For environment type LINUX_CONTAINER, you can use up to 15 GB memory and 8 vCPUs for builds.     For environment type LINUX_GPU_CONTAINER, you can use up to 255 GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.    For environment type ARM_CONTAINER, you can use up to 16 GB memory and 8 vCPUs on ARM-based processors for builds.   For more information, see Build environment compute types in the CodeBuild User Guide. 
+     */
+    computeType?: ComputeType;
+    /**
+     * The scaling configuration of the compute fleet.
+     */
+    scalingConfiguration?: ScalingConfigurationOutput;
+    /**
+     * The compute fleet overflow behavior.   For overflow behavior QUEUE, your overflow builds need to wait on the existing fleet instance to become available.   For overflow behavior ON_DEMAND, your overflow builds run on CodeBuild on-demand.  If you choose to set your overflow behavior to on-demand while creating a VPC-connected fleet, make sure that you add the required VPC permissions to your project service role. For more information, see Example policy statement to allow CodeBuild access to Amazon Web Services services required to create a VPC network interface.   
+     */
+    overflowBehavior?: FleetOverflowBehavior;
+    vpcConfig?: VpcConfig;
+    /**
+     * The Amazon Machine Image (AMI) of the compute fleet.
+     */
+    imageId?: NonEmptyString;
+    /**
+     * The service role associated with the compute fleet. For more information, see  Allow a user to add a permission policy for a fleet service role in the CodeBuild User Guide.
+     */
+    fleetServiceRole?: NonEmptyString;
+    /**
+     * A list of tag key and value pairs associated with this compute fleet. These tags are available for use by Amazon Web Services services that support CodeBuild build project tags.
+     */
+    tags?: TagList;
+  }
+  export type FleetArns = NonEmptyString[];
+  export type FleetCapacity = number;
+  export type FleetContextCode = "CREATE_FAILED"|"UPDATE_FAILED"|"ACTION_REQUIRED"|"PENDING_DELETION"|"INSUFFICIENT_CAPACITY"|string;
+  export type FleetName = string;
+  export type FleetNames = NonEmptyString[];
+  export type FleetOverflowBehavior = "QUEUE"|"ON_DEMAND"|string;
+  export type FleetScalingMetricType = "FLEET_UTILIZATION_RATE"|string;
+  export type FleetScalingType = "TARGET_TRACKING_SCALING"|string;
+  export type FleetSortByType = "NAME"|"CREATED_TIME"|"LAST_MODIFIED_TIME"|string;
+  export interface FleetStatus {
+    /**
+     * The status code of the compute fleet. Valid values include:    CREATING: The compute fleet is being created.    UPDATING: The compute fleet is being updated.    ROTATING: The compute fleet is being rotated.    PENDING_DELETION: The compute fleet is pending deletion.    DELETING: The compute fleet is being deleted.    CREATE_FAILED: The compute fleet has failed to create.    UPDATE_ROLLBACK_FAILED: The compute fleet has failed to update and could not rollback to previous state.    ACTIVE: The compute fleet has succeeded and is active.  
+     */
+    statusCode?: FleetStatusCode;
+    /**
+     * Additional information about a compute fleet. Valid values include:    CREATE_FAILED: The compute fleet has failed to create.    UPDATE_FAILED: The compute fleet has failed to update.  
+     */
+    context?: FleetContextCode;
+    /**
+     * A message associated with the status of a compute fleet.
+     */
+    message?: String;
+  }
+  export type FleetStatusCode = "CREATING"|"UPDATING"|"ROTATING"|"PENDING_DELETION"|"DELETING"|"CREATE_FAILED"|"UPDATE_ROLLBACK_FAILED"|"ACTIVE"|string;
+  export type Fleets = Fleet[];
   export interface GetReportGroupTrendInput {
+    /**
+     * The ARN of the report group that contains the reports to analyze.
+     */
     reportGroupArn: NonEmptyString;
+    /**
+     * The number of reports to analyze. This operation always retrieves the most recent reports. If this parameter is omitted, the most recent 100 reports are analyzed.
+     */
     numOfReports?: PageSize;
+    /**
+     * The test report value to accumulate. This must be one of the following values:  Test reports:   DURATION  Accumulate the test run times for the specified reports.  PASS_RATE  Accumulate the percentage of tests that passed for the specified test reports.  TOTAL  Accumulate the total number of tests for the specified test reports.      Code coverage reports:   BRANCH_COVERAGE  Accumulate the branch coverage percentages for the specified test reports.  BRANCHES_COVERED  Accumulate the branches covered values for the specified test reports.  BRANCHES_MISSED  Accumulate the branches missed values for the specified test reports.  LINE_COVERAGE  Accumulate the line coverage percentages for the specified test reports.  LINES_COVERED  Accumulate the lines covered values for the specified test reports.  LINES_MISSED  Accumulate the lines not covered values for the specified test reports.    
+     */
     trendField: ReportGroupTrendFieldType;
   }
   export interface GetReportGroupTrendOutput {
+    /**
+     * Contains the accumulated trend data.
+     */
     stats?: ReportGroupTrendStats;
+    /**
+     * An array that contains the raw data for each report.
+     */
     rawData?: ReportGroupTrendRawDataList;
   }
   export interface GetResourcePolicyInput {
@@ -1337,7 +1573,7 @@ declare namespace CodeBuild {
   export type GitCloneDepth = number;
   export interface GitSubmodulesConfig {
     /**
-     *  Set to true to fetch Git submodules for your AWS CodeBuild build project. 
+     *  Set to true to fetch Git submodules for your CodeBuild build project. 
      */
     fetchSubmodules: WrapperBoolean;
   }
@@ -1350,7 +1586,7 @@ declare namespace CodeBuild {
      */
     username?: NonEmptyString;
     /**
-     *  For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket, this is the app password. 
+     *  For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket, this is either the access token or the app password. For the authType CODECONNECTIONS, this is the connectionArn. For the authType SECRETS_MANAGER, this is the secretArn.
      */
     token: SensitiveNonEmptyString;
     /**
@@ -1358,7 +1594,7 @@ declare namespace CodeBuild {
      */
     serverType: ServerType;
     /**
-     *  The type of authentication used to connect to a GitHub, GitHub Enterprise, or Bitbucket repository. An OAUTH connection is not supported by the API and must be created using the AWS CodeBuild console. 
+     *  The type of authentication used to connect to a GitHub, GitHub Enterprise, GitLab, GitLab Self Managed, or Bitbucket repository. An OAUTH connection is not supported by the API and must be created using the CodeBuild console.
      */
     authType: AuthType;
     /**
@@ -1374,7 +1610,7 @@ declare namespace CodeBuild {
   }
   export interface InvalidateProjectCacheInput {
     /**
-     * The name of the AWS CodeBuild build project that the cache is reset for.
+     * The name of the CodeBuild build project that the cache is reset for.
      */
     projectName: NonEmptyString;
   }
@@ -1444,11 +1680,11 @@ declare namespace CodeBuild {
   }
   export interface ListBuildsForProjectInput {
     /**
-     * The name of the AWS CodeBuild project.
+     * The name of the CodeBuild project.
      */
     projectName: NonEmptyString;
     /**
-     * The order to list build IDs. Valid values include:    ASCENDING: List the build IDs in ascending order by build ID.    DESCENDING: List the build IDs in descending order by build ID.  
+     * The order to sort the results in. The results are sorted by build number, not the build identifier. If this is not specified, the results are sorted in descending order. Valid values include:    ASCENDING: List the build identifiers in ascending order, by build number.    DESCENDING: List the build identifiers in descending order, by build number.   If the project has more than 100 builds, setting the sort order will result in an error. 
      */
     sortOrder?: SortOrderType;
     /**
@@ -1458,7 +1694,7 @@ declare namespace CodeBuild {
   }
   export interface ListBuildsForProjectOutput {
     /**
-     * A list of build IDs for the specified build project, with each build ID representing a single build.
+     * A list of build identifiers for the specified build project, with each build ID representing a single build.
      */
     ids?: BuildIds;
     /**
@@ -1490,9 +1726,37 @@ declare namespace CodeBuild {
   }
   export interface ListCuratedEnvironmentImagesOutput {
     /**
-     * Information about supported platforms for Docker images that are managed by AWS CodeBuild.
+     * Information about supported platforms for Docker images that are managed by CodeBuild.
      */
     platforms?: EnvironmentPlatforms;
+  }
+  export interface ListFleetsInput {
+    /**
+     * During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a nextToken. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned.
+     */
+    nextToken?: SensitiveString;
+    /**
+     * The maximum number of paginated compute fleets returned per response. Use nextToken to iterate pages in the list of returned compute fleets.
+     */
+    maxResults?: PageSize;
+    /**
+     * The order in which to list compute fleets. Valid values include:    ASCENDING: List in ascending order.    DESCENDING: List in descending order.   Use sortBy to specify the criterion to be used to list compute fleet names.
+     */
+    sortOrder?: SortOrderType;
+    /**
+     * The criterion to be used to list compute fleet names. Valid values include:    CREATED_TIME: List based on when each compute fleet was created.    LAST_MODIFIED_TIME: List based on when information about each compute fleet was last changed.    NAME: List based on each compute fleet's name.   Use sortOrder to specify in what order to list the compute fleet names based on the preceding criteria.
+     */
+    sortBy?: FleetSortByType;
+  }
+  export interface ListFleetsOutput {
+    /**
+     * If there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a nextToken. To get the next batch of items in the list, call this operation again, adding the next token to the call.
+     */
+    nextToken?: String;
+    /**
+     * The list of compute fleet names.
+     */
+    fleets?: FleetArns;
   }
   export interface ListProjectsInput {
     /**
@@ -1542,7 +1806,7 @@ declare namespace CodeBuild {
      */
     nextToken?: String;
     /**
-     *  The list of ARNs for the report groups in the current AWS account. 
+     *  The list of ARNs for the report groups in the current Amazon Web Services account. 
      */
     reportGroups?: ReportGroupArns;
   }
@@ -1602,13 +1866,13 @@ declare namespace CodeBuild {
      */
     nextToken?: String;
     /**
-     *  The list of returned ARNs for the reports in the current AWS account. 
+     *  The list of returned ARNs for the reports in the current Amazon Web Services account. 
      */
     reports?: ReportArns;
   }
   export interface ListSharedProjectsInput {
     /**
-     *  The criterion to be used to list build projects shared with the current AWS account or user. Valid values include:     ARN: List based on the ARN.     MODIFIED_TIME: List based on when information about the shared project was last changed.   
+     *  The criterion to be used to list build projects shared with the current Amazon Web Services account or user. Valid values include:     ARN: List based on the ARN.     MODIFIED_TIME: List based on when information about the shared project was last changed.   
      */
     sortBy?: SharedResourceSortByType;
     /**
@@ -1630,7 +1894,7 @@ declare namespace CodeBuild {
      */
     nextToken?: String;
     /**
-     *  The list of ARNs for the build projects shared with the current AWS account or user. 
+     *  The list of ARNs for the build projects shared with the current Amazon Web Services account or user. 
      */
     projects?: ProjectArns;
   }
@@ -1640,7 +1904,7 @@ declare namespace CodeBuild {
      */
     sortOrder?: SortOrderType;
     /**
-     *  The criterion to be used to list report groups shared with the current AWS account or user. Valid values include:     ARN: List based on the ARN.     MODIFIED_TIME: List based on when information about the shared report group was last changed.   
+     *  The criterion to be used to list report groups shared with the current Amazon Web Services account or user. Valid values include:     ARN: List based on the ARN.     MODIFIED_TIME: List based on when information about the shared report group was last changed.   
      */
     sortBy?: SharedResourceSortByType;
     /**
@@ -1658,7 +1922,7 @@ declare namespace CodeBuild {
      */
     nextToken?: String;
     /**
-     *  The list of ARNs for the report groups shared with the current AWS account or user. 
+     *  The list of ARNs for the report groups shared with the current Amazon Web Services account or user. 
      */
     reportGroups?: ReportGroupArns;
   }
@@ -1672,7 +1936,7 @@ declare namespace CodeBuild {
   }
   export interface LogsConfig {
     /**
-     *  Information about Amazon CloudWatch Logs for a build project. Amazon CloudWatch Logs are enabled by default. 
+     *  Information about CloudWatch Logs for a build project. CloudWatch Logs are enabled by default. 
      */
     cloudWatchLogs?: CloudWatchLogsConfig;
     /**
@@ -1683,15 +1947,15 @@ declare namespace CodeBuild {
   export type LogsConfigStatusType = "ENABLED"|"DISABLED"|string;
   export interface LogsLocation {
     /**
-     * The name of the Amazon CloudWatch Logs group for the build logs.
+     * The name of the CloudWatch Logs group for the build logs.
      */
     groupName?: String;
     /**
-     * The name of the Amazon CloudWatch Logs stream for the build logs.
+     * The name of the CloudWatch Logs stream for the build logs.
      */
     streamName?: String;
     /**
-     * The URL to an individual build log in Amazon CloudWatch Logs.
+     * The URL to an individual build log in CloudWatch Logs. The log stream is created during the PROVISIONING phase of a build and the deeplink will not be valid until it is created.
      */
     deepLink?: String;
     /**
@@ -1699,7 +1963,7 @@ declare namespace CodeBuild {
      */
     s3DeepLink?: String;
     /**
-     *  The ARN of Amazon CloudWatch Logs for a build project. Its format is arn:${Partition}:logs:${Region}:${Account}:log-group:${LogGroupName}:log-stream:${LogStreamName}. For more information, see Resources Defined by Amazon CloudWatch Logs. 
+     * The ARN of the CloudWatch Logs stream for a build execution. Its format is arn:${Partition}:logs:${Region}:${Account}:log-group:${LogGroupName}:log-stream:${LogStreamName}. The CloudWatch Logs stream is created during the PROVISIONING phase of a build and the ARN will not be valid until it is created. For more information, see Resources Defined by CloudWatch Logs.
      */
     cloudWatchLogsArn?: String;
     /**
@@ -1707,7 +1971,7 @@ declare namespace CodeBuild {
      */
     s3LogsArn?: String;
     /**
-     *  Information about Amazon CloudWatch Logs for a build project. 
+     *  Information about CloudWatch Logs for a build project. 
      */
     cloudWatchLogs?: CloudWatchLogsConfig;
     /**
@@ -1763,7 +2027,7 @@ declare namespace CodeBuild {
      */
     secondarySources?: ProjectSources;
     /**
-     * A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:   For AWS CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.   If sourceVersion is specified at the build level, then that version takes precedence over this sourceVersion (at the project level).  For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
+     * A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:   For CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For GitLab: the commit ID, branch, or Git tag to use.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon S3: the version ID of the object that represents the build input ZIP file to use.   If sourceVersion is specified at the build level, then that version takes precedence over this sourceVersion (at the project level).  For more information, see Source Version Sample with CodeBuild in the CodeBuild User Guide. 
      */
     sourceVersion?: String;
     /**
@@ -1787,23 +2051,23 @@ declare namespace CodeBuild {
      */
     environment?: ProjectEnvironment;
     /**
-     * The ARN of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.
+     * The ARN of the IAM role that enables CodeBuild to interact with dependent Amazon Web Services services on behalf of the Amazon Web Services account.
      */
     serviceRole?: NonEmptyString;
     /**
-     * How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait before timing out any related build that did not get marked as completed. The default is 60 minutes.
+     * How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait before timing out any related build that did not get marked as completed. The default is 60 minutes.
      */
-    timeoutInMinutes?: TimeOut;
+    timeoutInMinutes?: BuildTimeOut;
     /**
      * The number of minutes a build is allowed to be queued before it times out. 
      */
     queuedTimeoutInMinutes?: TimeOut;
     /**
-     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.  You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/&lt;alias-name&gt;).
+     * The Key Management Service customer master key (CMK) to be used for encrypting the build output artifacts.  You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/&lt;alias-name&gt;). If you don't specify a value, CodeBuild uses the managed CMK for Amazon Simple Storage Service (Amazon S3). 
      */
     encryptionKey?: NonEmptyString;
     /**
-     * A list of tag key and value pairs associated with this build project. These tags are available for use by AWS services that support AWS CodeBuild build project tags.
+     * A list of tag key and value pairs associated with this build project. These tags are available for use by Amazon Web Services services that support CodeBuild build project tags.
      */
     tags?: TagList;
     /**
@@ -1815,11 +2079,11 @@ declare namespace CodeBuild {
      */
     lastModified?: Timestamp;
     /**
-     * Information about a webhook that connects repository events to a build project in AWS CodeBuild.
+     * Information about a webhook that connects repository events to a build project in CodeBuild.
      */
     webhook?: Webhook;
     /**
-     * Information about the VPC configuration that AWS CodeBuild accesses.
+     * Information about the VPC configuration that CodeBuild accesses.
      */
     vpcConfig?: VpcConfig;
     /**
@@ -1827,7 +2091,7 @@ declare namespace CodeBuild {
      */
     badge?: ProjectBadge;
     /**
-     * Information about logs for the build project. A project can create logs in Amazon CloudWatch Logs, an S3 bucket, or both. 
+     * Information about logs for the build project. A project can create logs in CloudWatch Logs, an S3 bucket, or both. 
      */
     logsConfig?: LogsConfig;
     /**
@@ -1838,31 +2102,44 @@ declare namespace CodeBuild {
      * A ProjectBuildBatchConfig object that defines the batch build options for the project.
      */
     buildBatchConfig?: ProjectBuildBatchConfig;
+    /**
+     * The maximum number of concurrent builds that are allowed for this project. New builds are only started if the current number of builds is less than or equal to this limit. If the current build count meets this limit, new builds are throttled and are not run.
+     */
+    concurrentBuildLimit?: WrapperInt;
+    projectVisibility?: ProjectVisibilityType;
+    /**
+     * Contains the project identifier used with the public build APIs. 
+     */
+    publicProjectAlias?: NonEmptyString;
+    /**
+     * The ARN of the IAM role that enables CodeBuild to access the CloudWatch Logs and Amazon S3 artifacts for the project's builds.
+     */
+    resourceAccessRole?: NonEmptyString;
   }
   export type ProjectArns = NonEmptyString[];
   export interface ProjectArtifacts {
     /**
-     * The type of build output artifact. Valid values include:    CODEPIPELINE: The build project has build output generated through AWS CodePipeline.   The CODEPIPELINE type is not supported for secondaryArtifacts.     NO_ARTIFACTS: The build project does not produce any build output.    S3: The build project stores build output in Amazon Simple Storage Service (Amazon S3).  
+     * The type of build output artifact. Valid values include:    CODEPIPELINE: The build project has build output generated through CodePipeline.   The CODEPIPELINE type is not supported for secondaryArtifacts.     NO_ARTIFACTS: The build project does not produce any build output.    S3: The build project stores build output in Amazon S3.  
      */
     type: ArtifactsType;
     /**
-     * Information about the build output artifact location:   If type is set to CODEPIPELINE, AWS CodePipeline ignores this value if specified. This is because AWS CodePipeline manages its build output locations instead of AWS CodeBuild.   If type is set to NO_ARTIFACTS, this value is ignored if specified, because no build output is produced.   If type is set to S3, this is the name of the output bucket.  
+     * Information about the build output artifact location:   If type is set to CODEPIPELINE, CodePipeline ignores this value if specified. This is because CodePipeline manages its build output locations instead of CodeBuild.   If type is set to NO_ARTIFACTS, this value is ignored if specified, because no build output is produced.   If type is set to S3, this is the name of the output bucket.  
      */
     location?: String;
     /**
-     * Along with namespaceType and name, the pattern that AWS CodeBuild uses to name and store the output artifact:   If type is set to CODEPIPELINE, AWS CodePipeline ignores this value if specified. This is because AWS CodePipeline manages its build output names instead of AWS CodeBuild.   If type is set to NO_ARTIFACTS, this value is ignored if specified, because no build output is produced.   If type is set to S3, this is the path to the output artifact. If path is not specified, path is not used.   For example, if path is set to MyArtifacts, namespaceType is set to NONE, and name is set to MyArtifact.zip, the output artifact is stored in the output bucket at MyArtifacts/MyArtifact.zip.
+     * Along with namespaceType and name, the pattern that CodeBuild uses to name and store the output artifact:   If type is set to CODEPIPELINE, CodePipeline ignores this value if specified. This is because CodePipeline manages its build output names instead of CodeBuild.   If type is set to NO_ARTIFACTS, this value is ignored if specified, because no build output is produced.   If type is set to S3, this is the path to the output artifact. If path is not specified, path is not used.   For example, if path is set to MyArtifacts, namespaceType is set to NONE, and name is set to MyArtifact.zip, the output artifact is stored in the output bucket at MyArtifacts/MyArtifact.zip.
      */
     path?: String;
     /**
-     * Along with path and name, the pattern that AWS CodeBuild uses to determine the name and location to store the output artifact:   If type is set to CODEPIPELINE, AWS CodePipeline ignores this value if specified. This is because AWS CodePipeline manages its build output names instead of AWS CodeBuild.   If type is set to NO_ARTIFACTS, this value is ignored if specified, because no build output is produced.   If type is set to S3, valid values include:    BUILD_ID: Include the build ID in the location of the build output artifact.    NONE: Do not include the build ID. This is the default if namespaceType is not specified.     For example, if path is set to MyArtifacts, namespaceType is set to BUILD_ID, and name is set to MyArtifact.zip, the output artifact is stored in MyArtifacts/&lt;build-ID&gt;/MyArtifact.zip.
+     * Along with path and name, the pattern that CodeBuild uses to determine the name and location to store the output artifact:   If type is set to CODEPIPELINE, CodePipeline ignores this value if specified. This is because CodePipeline manages its build output names instead of CodeBuild.   If type is set to NO_ARTIFACTS, this value is ignored if specified, because no build output is produced.   If type is set to S3, valid values include:    BUILD_ID: Include the build ID in the location of the build output artifact.    NONE: Do not include the build ID. This is the default if namespaceType is not specified.     For example, if path is set to MyArtifacts, namespaceType is set to BUILD_ID, and name is set to MyArtifact.zip, the output artifact is stored in MyArtifacts/&lt;build-ID&gt;/MyArtifact.zip.
      */
     namespaceType?: ArtifactNamespace;
     /**
-     * Along with path and namespaceType, the pattern that AWS CodeBuild uses to name and store the output artifact:   If type is set to CODEPIPELINE, AWS CodePipeline ignores this value if specified. This is because AWS CodePipeline manages its build output names instead of AWS CodeBuild.   If type is set to NO_ARTIFACTS, this value is ignored if specified, because no build output is produced.   If type is set to S3, this is the name of the output artifact object. If you set the name to be a forward slash ("/"), the artifact is stored in the root of the output bucket.   For example:    If path is set to MyArtifacts, namespaceType is set to BUILD_ID, and name is set to MyArtifact.zip, then the output artifact is stored in MyArtifacts/&lt;build-ID&gt;/MyArtifact.zip.     If path is empty, namespaceType is set to NONE, and name is set to "/", the output artifact is stored in the root of the output bucket.     If path is set to MyArtifacts, namespaceType is set to BUILD_ID, and name is set to "/", the output artifact is stored in MyArtifacts/&lt;build-ID&gt;.   
+     * Along with path and namespaceType, the pattern that CodeBuild uses to name and store the output artifact:   If type is set to CODEPIPELINE, CodePipeline ignores this value if specified. This is because CodePipeline manages its build output names instead of CodeBuild.   If type is set to NO_ARTIFACTS, this value is ignored if specified, because no build output is produced.   If type is set to S3, this is the name of the output artifact object. If you set the name to be a forward slash ("/"), the artifact is stored in the root of the output bucket.   For example:    If path is set to MyArtifacts, namespaceType is set to BUILD_ID, and name is set to MyArtifact.zip, then the output artifact is stored in MyArtifacts/&lt;build-ID&gt;/MyArtifact.zip.     If path is empty, namespaceType is set to NONE, and name is set to "/", the output artifact is stored in the root of the output bucket.     If path is set to MyArtifacts, namespaceType is set to BUILD_ID, and name is set to "/", the output artifact is stored in MyArtifacts/&lt;build-ID&gt;.   
      */
     name?: String;
     /**
-     * The type of build output artifact to create:   If type is set to CODEPIPELINE, AWS CodePipeline ignores this value if specified. This is because AWS CodePipeline manages its build output artifacts instead of AWS CodeBuild.   If type is set to NO_ARTIFACTS, this value is ignored if specified, because no build output is produced.   If type is set to S3, valid values include:    NONE: AWS CodeBuild creates in the output bucket a folder that contains the build output. This is the default if packaging is not specified.    ZIP: AWS CodeBuild creates in the output bucket a ZIP file that contains the build output.    
+     * The type of build output artifact to create:   If type is set to CODEPIPELINE, CodePipeline ignores this value if specified. This is because CodePipeline manages its build output artifacts instead of CodeBuild.   If type is set to NO_ARTIFACTS, this value is ignored if specified, because no build output is produced.   If type is set to S3, valid values include:    NONE: CodeBuild creates in the output bucket a folder that contains the build output. This is the default if packaging is not specified.    ZIP: CodeBuild creates in the output bucket a ZIP file that contains the build output.    
      */
     packaging?: ArtifactPackaging;
     /**
@@ -1870,13 +2147,14 @@ declare namespace CodeBuild {
      */
     overrideArtifactName?: WrapperBoolean;
     /**
-     *  Set to true if you do not want your output artifacts encrypted. This option is valid only if your artifacts type is Amazon Simple Storage Service (Amazon S3). If this is set with another artifacts type, an invalidInputException is thrown. 
+     *  Set to true if you do not want your output artifacts encrypted. This option is valid only if your artifacts type is Amazon S3. If this is set with another artifacts type, an invalidInputException is thrown. 
      */
     encryptionDisabled?: WrapperBoolean;
     /**
      *  An identifier for this artifact definition. 
      */
     artifactIdentifier?: String;
+    bucketOwnerAccess?: BucketOwnerAccess;
   }
   export type ProjectArtifactsList = ProjectArtifacts[];
   export interface ProjectBadge {
@@ -1885,7 +2163,7 @@ declare namespace CodeBuild {
      */
     badgeEnabled?: Boolean;
     /**
-     * The publicly-accessible URL through which you can access the build badge for your project.  The publicly accessible URL through which you can access the build badge for your project. 
+     * The publicly-accessible URL through which you can access the build badge for your project. 
      */
     badgeRequestUrl?: String;
   }
@@ -1906,6 +2184,10 @@ declare namespace CodeBuild {
      * Specifies the maximum amount of time, in minutes, that the batch build must be completed in.
      */
     timeoutInMins?: WrapperInt;
+    /**
+     * Specifies how build status reports are sent to the source provider for the batch build. This property is only used when the source provider for your project is Bitbucket, GitHub, or GitHub Enterprise, and your project is configured to report build statuses to the source provider.  REPORT_AGGREGATED_BATCH  (Default) Aggregate all of the build statuses into a single status report.  REPORT_INDIVIDUAL_BUILDS  Send a separate status report for each individual build.  
+     */
+    batchReportMode?: BatchReportModeType;
   }
   export interface ProjectCache {
     /**
@@ -1925,17 +2207,21 @@ declare namespace CodeBuild {
   export type ProjectDescription = string;
   export interface ProjectEnvironment {
     /**
-     * The type of build environment to use for related builds.   The environment type ARM_CONTAINER is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Sydney), and EU (Frankfurt).   The environment type LINUX_CONTAINER with compute type build.general1.2xlarge is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), Canada (Central), EU (Ireland), EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney), China (Beijing), and China (Ningxia).   The environment type LINUX_GPU_CONTAINER is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), Canada (Central), EU (Ireland), EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney) , China (Beijing), and China (Ningxia).  
+     * The type of build environment to use for related builds.   The environment type ARM_CONTAINER is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Sydney), and EU (Frankfurt).   The environment type LINUX_CONTAINER is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), Canada (Central), EU (Ireland), EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney), China (Beijing), and China (Ningxia).   The environment type LINUX_GPU_CONTAINER is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), Canada (Central), EU (Ireland), EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney) , China (Beijing), and China (Ningxia).     The environment types ARM_LAMBDA_CONTAINER and LINUX_LAMBDA_CONTAINER are available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Mumbai), Asia Pacific (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo), EU (Frankfurt), EU (Ireland), and South America (São Paulo).     The environment types WINDOWS_CONTAINER and WINDOWS_SERVER_2019_CONTAINER are available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), and EU (Ireland).    If you're using compute fleets during project creation, type will be ignored.  For more information, see Build environment compute types in the CodeBuild user guide.
      */
     type: EnvironmentType;
     /**
-     * The image tag or image digest that identifies the Docker image to use for this build project. Use the following formats:   For an image tag: &lt;registry&gt;/&lt;repository&gt;:&lt;tag&gt;. For example, in the Docker repository that CodeBuild uses to manage its Docker images, this would be aws/codebuild/standard:4.0.    For an image digest: &lt;registry&gt;/&lt;repository&gt;@&lt;digest&gt;. For example, to specify an image with the digest "sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf," use &lt;registry&gt;/&lt;repository&gt;@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf.  
+     * The image tag or image digest that identifies the Docker image to use for this build project. Use the following formats:   For an image tag: &lt;registry&gt;/&lt;repository&gt;:&lt;tag&gt;. For example, in the Docker repository that CodeBuild uses to manage its Docker images, this would be aws/codebuild/standard:4.0.    For an image digest: &lt;registry&gt;/&lt;repository&gt;@&lt;digest&gt;. For example, to specify an image with the digest "sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf," use &lt;registry&gt;/&lt;repository&gt;@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf.   For more information, see Docker images provided by CodeBuild in the CodeBuild user guide.
      */
     image: NonEmptyString;
     /**
-     * Information about the compute resources the build project uses. Available values include:    BUILD_GENERAL1_SMALL: Use up to 3 GB memory and 2 vCPUs for builds.    BUILD_GENERAL1_MEDIUM: Use up to 7 GB memory and 4 vCPUs for builds.    BUILD_GENERAL1_LARGE: Use up to 16 GB memory and 8 vCPUs for builds, depending on your environment type.    BUILD_GENERAL1_2XLARGE: Use up to 145 GB memory, 72 vCPUs, and 824 GB of SSD storage for builds. This compute type supports Docker images up to 100 GB uncompressed.    If you use BUILD_GENERAL1_LARGE:     For environment type LINUX_CONTAINER, you can use up to 15 GB memory and 8 vCPUs for builds.     For environment type LINUX_GPU_CONTAINER, you can use up to 255 GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.    For environment type ARM_CONTAINER, you can use up to 16 GB memory and 8 vCPUs on ARM-based processors for builds.    For more information, see Build Environment Compute Types in the AWS CodeBuild User Guide. 
+     * Information about the compute resources the build project uses. Available values include:    BUILD_GENERAL1_SMALL: Use up to 3 GB memory and 2 vCPUs for builds.    BUILD_GENERAL1_MEDIUM: Use up to 7 GB memory and 4 vCPUs for builds.    BUILD_GENERAL1_LARGE: Use up to 16 GB memory and 8 vCPUs for builds, depending on your environment type.    BUILD_GENERAL1_XLARGE: Use up to 70 GB memory and 36 vCPUs for builds, depending on your environment type.    BUILD_GENERAL1_2XLARGE: Use up to 145 GB memory, 72 vCPUs, and 824 GB of SSD storage for builds. This compute type supports Docker images up to 100 GB uncompressed.    BUILD_LAMBDA_1GB: Use up to 1 GB memory for builds. Only available for environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER.    BUILD_LAMBDA_2GB: Use up to 2 GB memory for builds. Only available for environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER.    BUILD_LAMBDA_4GB: Use up to 4 GB memory for builds. Only available for environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER.    BUILD_LAMBDA_8GB: Use up to 8 GB memory for builds. Only available for environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER.    BUILD_LAMBDA_10GB: Use up to 10 GB memory for builds. Only available for environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER.    If you use BUILD_GENERAL1_SMALL:     For environment type LINUX_CONTAINER, you can use up to 3 GB memory and 2 vCPUs for builds.     For environment type LINUX_GPU_CONTAINER, you can use up to 16 GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.    For environment type ARM_CONTAINER, you can use up to 4 GB memory and 2 vCPUs on ARM-based processors for builds.    If you use BUILD_GENERAL1_LARGE:     For environment type LINUX_CONTAINER, you can use up to 15 GB memory and 8 vCPUs for builds.     For environment type LINUX_GPU_CONTAINER, you can use up to 255 GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.    For environment type ARM_CONTAINER, you can use up to 16 GB memory and 8 vCPUs on ARM-based processors for builds.    If you're using compute fleets during project creation, computeType will be ignored.  For more information, see Build Environment Compute Types in the CodeBuild User Guide. 
      */
     computeType: ComputeType;
+    /**
+     * A ProjectFleet object to use for this build project.
+     */
+    fleet?: ProjectFleet;
     /**
      * A set of environment variables to make available to builds for this build project.
      */
@@ -1945,7 +2231,7 @@ declare namespace CodeBuild {
      */
     privilegedMode?: WrapperBoolean;
     /**
-     * The ARN of the Amazon Simple Storage Service (Amazon S3) bucket, path prefix, and object key that contains the PEM-encoded certificate for the build project. For more information, see certificate in the AWS CodeBuild User Guide.
+     * The ARN of the Amazon S3 bucket, path prefix, and object key that contains the PEM-encoded certificate for the build project. For more information, see certificate in the CodeBuild User Guide.
      */
     certificate?: String;
     /**
@@ -1953,7 +2239,7 @@ declare namespace CodeBuild {
      */
     registryCredential?: RegistryCredential;
     /**
-     *  The type of credentials AWS CodeBuild uses to pull images in your build. There are two valid values:     CODEBUILD specifies that AWS CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust AWS CodeBuild's service principal.     SERVICE_ROLE specifies that AWS CodeBuild uses your build project's service role.     When you use a cross-account or private registry image, you must use SERVICE_ROLE credentials. When you use an AWS CodeBuild curated image, you must use CODEBUILD credentials. 
+     *  The type of credentials CodeBuild uses to pull images in your build. There are two valid values:     CODEBUILD specifies that CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust CodeBuild service principal.     SERVICE_ROLE specifies that CodeBuild uses your build project's service role.     When you use a cross-account or private registry image, you must use SERVICE_ROLE credentials. When you use an CodeBuild curated image, you must use CODEBUILD credentials. 
      */
     imagePullCredentialsType?: ImagePullCredentialsType;
   }
@@ -1963,7 +2249,7 @@ declare namespace CodeBuild {
      */
     type?: FileSystemType;
     /**
-     * A string that specifies the location of the file system created by Amazon EFS. Its format is efs-dns-name:/directory-path. You can find the DNS name of file system when you view it in the AWS EFS console. The directory path is a path to a directory in the file system that CodeBuild mounts. For example, if the DNS name of a file system is fs-abcd1234.efs.us-west-2.amazonaws.com, and its mount directory is my-efs-mount-directory, then the location is fs-abcd1234.efs.us-west-2.amazonaws.com:/my-efs-mount-directory.  The directory path in the format efs-dns-name:/directory-path is optional. If you do not specify a directory path, the location is only the DNS name and CodeBuild mounts the entire file system. 
+     * A string that specifies the location of the file system created by Amazon EFS. Its format is efs-dns-name:/directory-path. You can find the DNS name of file system when you view it in the Amazon EFS console. The directory path is a path to a directory in the file system that CodeBuild mounts. For example, if the DNS name of a file system is fs-abcd1234.efs.us-west-2.amazonaws.com, and its mount directory is my-efs-mount-directory, then the location is fs-abcd1234.efs.us-west-2.amazonaws.com:/my-efs-mount-directory.  The directory path in the format efs-dns-name:/directory-path is optional. If you do not specify a directory path, the location is only the DNS name and CodeBuild mounts the entire file system. 
      */
     location?: String;
     /**
@@ -1975,22 +2261,28 @@ declare namespace CodeBuild {
      */
     identifier?: String;
     /**
-     *  The mount options for a file system created by AWS EFS. The default mount options used by CodeBuild are nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2. For more information, see Recommended NFS Mount Options. 
+     *  The mount options for a file system created by Amazon EFS. The default mount options used by CodeBuild are nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2. For more information, see Recommended NFS Mount Options. 
      */
     mountOptions?: String;
   }
   export type ProjectFileSystemLocations = ProjectFileSystemLocation[];
+  export interface ProjectFleet {
+    /**
+     * Specifies the compute fleet ARN for the build project.
+     */
+    fleetArn?: String;
+  }
   export type ProjectName = string;
   export type ProjectNames = NonEmptyString[];
   export type ProjectSecondarySourceVersions = ProjectSourceVersion[];
   export type ProjectSortByType = "NAME"|"CREATED_TIME"|"LAST_MODIFIED_TIME"|string;
   export interface ProjectSource {
     /**
-     * The type of repository that contains the source code to be built. Valid values include:    BITBUCKET: The source code is in a Bitbucket repository.    CODECOMMIT: The source code is in an AWS CodeCommit repository.    CODEPIPELINE: The source code settings are specified in the source action of a pipeline in AWS CodePipeline.    GITHUB: The source code is in a GitHub or GitHub Enterprise Cloud repository.    GITHUB_ENTERPRISE: The source code is in a GitHub Enterprise Server repository.    NO_SOURCE: The project does not have input source code.    S3: The source code is in an Amazon Simple Storage Service (Amazon S3) input bucket.  
+     * The type of repository that contains the source code to be built. Valid values include:    BITBUCKET: The source code is in a Bitbucket repository.    CODECOMMIT: The source code is in an CodeCommit repository.    CODEPIPELINE: The source code settings are specified in the source action of a pipeline in CodePipeline.    GITHUB: The source code is in a GitHub repository.    GITHUB_ENTERPRISE: The source code is in a GitHub Enterprise Server repository.    GITLAB: The source code is in a GitLab repository.    GITLAB_SELF_MANAGED: The source code is in a self-managed GitLab repository.    NO_SOURCE: The project does not have input source code.    S3: The source code is in an Amazon S3 bucket.  
      */
     type: SourceType;
     /**
-     * Information about the location of the source code to be built. Valid values include:   For source code settings that are specified in the source action of a pipeline in AWS CodePipeline, location should not be specified. If it is specified, AWS CodePipeline ignores it. This is because AWS CodePipeline uses the settings in a pipeline's source action instead of this value.   For source code in an AWS CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the buildspec file (for example, https://git-codecommit.&lt;region-ID&gt;.amazonaws.com/v1/repos/&lt;repo-name&gt;).   For source code in an Amazon Simple Storage Service (Amazon S3) input bucket, one of the following.    The path to the ZIP file that contains the source code (for example, &lt;bucket-name&gt;/&lt;path&gt;/&lt;object-name&gt;.zip).    The path to the folder that contains the source code (for example, &lt;bucket-name&gt;/&lt;path-to-source-code&gt;/&lt;folder&gt;/).      For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the buildspec file. You must connect your AWS account to your GitHub account. Use the AWS CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with GitHub, on the GitHub Authorize application page, for Organization access, choose Request access next to each repository you want to allow AWS CodeBuild to have access to, and then choose Authorize application. (After you have connected to your GitHub account, you do not need to finish creating the build project. You can leave the AWS CodeBuild console.) To instruct AWS CodeBuild to use this connection, in the source object, set the auth object's type value to OAUTH.   For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the buildspec file. You must connect your AWS account to your Bitbucket account. Use the AWS CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with Bitbucket, on the Bitbucket Confirm access to your account page, choose Grant access. (After you have connected to your Bitbucket account, you do not need to finish creating the build project. You can leave the AWS CodeBuild console.) To instruct AWS CodeBuild to use this connection, in the source object, set the auth object's type value to OAUTH.  
+     * Information about the location of the source code to be built. Valid values include:   For source code settings that are specified in the source action of a pipeline in CodePipeline, location should not be specified. If it is specified, CodePipeline ignores it. This is because CodePipeline uses the settings in a pipeline's source action instead of this value.   For source code in an CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the buildspec file (for example, https://git-codecommit.&lt;region-ID&gt;.amazonaws.com/v1/repos/&lt;repo-name&gt;).   For source code in an Amazon S3 input bucket, one of the following.    The path to the ZIP file that contains the source code (for example, &lt;bucket-name&gt;/&lt;path&gt;/&lt;object-name&gt;.zip).    The path to the folder that contains the source code (for example, &lt;bucket-name&gt;/&lt;path-to-source-code&gt;/&lt;folder&gt;/).      For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the buildspec file. You must connect your Amazon Web Services account to your GitHub account. Use the CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with GitHub, on the GitHub Authorize application page, for Organization access, choose Request access next to each repository you want to allow CodeBuild to have access to, and then choose Authorize application. (After you have connected to your GitHub account, you do not need to finish creating the build project. You can leave the CodeBuild console.) To instruct CodeBuild to use this connection, in the source object, set the auth object's type value to OAUTH.   For source code in an GitLab or self-managed GitLab repository, the HTTPS clone URL to the repository that contains the source and the buildspec file. You must connect your Amazon Web Services account to your GitLab account. Use the CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with GitLab, on the Connections Authorize application page, choose Authorize. Then on the CodeConnections Create GitLab connection page, choose Connect to GitLab. (After you have connected to your GitLab account, you do not need to finish creating the build project. You can leave the CodeBuild console.) To instruct CodeBuild to override the default connection and use this connection instead, set the auth object's type value to CODECONNECTIONS in the source object.   For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the buildspec file. You must connect your Amazon Web Services account to your Bitbucket account. Use the CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with Bitbucket, on the Bitbucket Confirm access to your account page, choose Grant access. (After you have connected to your Bitbucket account, you do not need to finish creating the build project. You can leave the CodeBuild console.) To instruct CodeBuild to use this connection, in the source object, set the auth object's type value to OAUTH.    If you specify CODEPIPELINE for the Type property, don't specify this property. For all of the other types, you must specify Location. 
      */
     location?: String;
     /**
@@ -2002,15 +2294,15 @@ declare namespace CodeBuild {
      */
     gitSubmodulesConfig?: GitSubmodulesConfig;
     /**
-     * The buildspec file declaration to use for the builds in this build project.  If this value is set, it can be either an inline buildspec definition, the path to an alternate buildspec file relative to the value of the built-in CODEBUILD_SRC_DIR environment variable, or the path to an S3 bucket. The bucket must be in the same AWS Region as the build project. Specify the buildspec file using its ARN (for example, arn:aws:s3:::my-codebuild-sample2/buildspec.yml). If this value is not provided or is set to an empty string, the source code must contain a buildspec file in its root directory. For more information, see Buildspec File Name and Storage Location. 
+     * The buildspec file declaration to use for the builds in this build project.  If this value is set, it can be either an inline buildspec definition, the path to an alternate buildspec file relative to the value of the built-in CODEBUILD_SRC_DIR environment variable, or the path to an S3 bucket. The bucket must be in the same Amazon Web Services Region as the build project. Specify the buildspec file using its ARN (for example, arn:aws:s3:::my-codebuild-sample2/buildspec.yml). If this value is not provided or is set to an empty string, the source code must contain a buildspec file in its root directory. For more information, see Buildspec File Name and Storage Location. 
      */
     buildspec?: String;
     /**
-     * Information about the authorization settings for AWS CodeBuild to access the source code to be built. This information is for the AWS CodeBuild console's use only. Your code should not get or set this information directly.
+     * Information about the authorization settings for CodeBuild to access the source code to be built.
      */
     auth?: SourceAuth;
     /**
-     *  Set to true to report the status of a build's start and finish to your source provider. This option is valid only when your source provider is GitHub, GitHub Enterprise, or Bitbucket. If this is set and you use a different source provider, an invalidInputException is thrown.    The status of a build triggered by a webhook is always reported to your source provider.  
+     *  Set to true to report the status of a build's start and finish to your source provider. This option is valid only when your source provider is GitHub, GitHub Enterprise, GitLab, GitLab Self Managed, or Bitbucket. If this is set and you use a different source provider, an invalidInputException is thrown.  To be able to report the build status to the source provider, the user associated with the source provider must have write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see Source provider access in the CodeBuild User Guide. The status of a build triggered by a webhook is always reported to your source provider.  If your project's builds are triggered by a webhook, you must push a new commit to the repo for a change to this property to take effect.
      */
     reportBuildStatus?: WrapperBoolean;
     /**
@@ -2022,25 +2314,26 @@ declare namespace CodeBuild {
      */
     insecureSsl?: WrapperBoolean;
     /**
-     *  An identifier for this project source. 
+     * An identifier for this project source. The identifier can only contain alphanumeric characters and underscores, and must be less than 128 characters in length. 
      */
     sourceIdentifier?: String;
   }
   export interface ProjectSourceVersion {
     /**
-     * An identifier for a source in the build project.
+     * An identifier for a source in the build project. The identifier can only contain alphanumeric characters and underscores, and must be less than 128 characters in length. 
      */
     sourceIdentifier: String;
     /**
-     * The source version for the corresponding source identifier. If specified, must be one of:   For AWS CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example, pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.    For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
+     * The source version for the corresponding source identifier. If specified, must be one of:   For CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example, pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For GitLab: the commit ID, branch, or Git tag to use.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon S3: the version ID of the object that represents the build input ZIP file to use.    For more information, see Source Version Sample with CodeBuild in the CodeBuild User Guide. 
      */
     sourceVersion: String;
   }
   export type ProjectSources = ProjectSource[];
+  export type ProjectVisibilityType = "PUBLIC_READ"|"PRIVATE"|string;
   export type Projects = Project[];
   export interface PutResourcePolicyInput {
     /**
-     *  A JSON-formatted resource policy. For more information, see Sharing a Project and Sharing a Report Group in the AWS CodeBuild User Guide. 
+     *  A JSON-formatted resource policy. For more information, see Sharing a Project and Sharing a Report Group in the CodeBuild User Guide. 
      */
     policy: NonEmptyString;
     /**
@@ -2056,11 +2349,11 @@ declare namespace CodeBuild {
   }
   export interface RegistryCredential {
     /**
-     *  The Amazon Resource Name (ARN) or name of credentials created using AWS Secrets Manager.    The credential can use the name of the credentials only if they exist in your current AWS Region.  
+     *  The Amazon Resource Name (ARN) or name of credentials created using Secrets Manager.    The credential can use the name of the credentials only if they exist in your current Amazon Web Services Region.  
      */
     credential: NonEmptyString;
     /**
-     *  The service that created the credentials to access a private Docker registry. The valid value, SECRETS_MANAGER, is for AWS Secrets Manager. 
+     *  The service that created the credentials to access a private Docker registry. The valid value, SECRETS_MANAGER, is for Secrets Manager. 
      */
     credentialProvider: CredentialProviderType;
   }
@@ -2135,33 +2428,36 @@ declare namespace CodeBuild {
   }
   export interface ReportGroup {
     /**
-     *  The ARN of a ReportGroup. 
+     * The ARN of the ReportGroup. 
      */
     arn?: NonEmptyString;
     /**
-     *  The name of a ReportGroup. 
+     * The name of the ReportGroup. 
      */
     name?: ReportGroupName;
     /**
-     *  The type of the ReportGroup. The one valid value is TEST. 
+     * The type of the ReportGroup. This can be one of the following values:  CODE_COVERAGE  The report group contains code coverage reports.  TEST  The report group contains test reports.  
      */
     type?: ReportType;
     /**
-     *  Information about the destination where the raw data of this ReportGroup is exported. 
+     * Information about the destination where the raw data of this ReportGroup is exported. 
      */
     exportConfig?: ReportExportConfig;
     /**
-     *  The date and time this ReportGroup was created. 
+     * The date and time this ReportGroup was created. 
      */
     created?: Timestamp;
     /**
-     *  The date and time this ReportGroup was last modified. 
+     * The date and time this ReportGroup was last modified. 
      */
     lastModified?: Timestamp;
     /**
-     *  A list of tag key and value pairs associated with this report group.  These tags are available for use by AWS services that support AWS CodeBuild report group tags.
+     * A list of tag key and value pairs associated with this report group.  These tags are available for use by Amazon Web Services services that support CodeBuild report group tags.
      */
     tags?: TagList;
+    /**
+     * The status of the report group. This property is read-only. This can be one of the following values:  ACTIVE  The report group is active.  DELETING  The report group is in the process of being deleted.  
+     */
     status?: ReportGroupStatusType;
   }
   export type ReportGroupArns = NonEmptyString[];
@@ -2171,8 +2467,17 @@ declare namespace CodeBuild {
   export type ReportGroupTrendFieldType = "PASS_RATE"|"DURATION"|"TOTAL"|"LINE_COVERAGE"|"LINES_COVERED"|"LINES_MISSED"|"BRANCH_COVERAGE"|"BRANCHES_COVERED"|"BRANCHES_MISSED"|string;
   export type ReportGroupTrendRawDataList = ReportWithRawData[];
   export interface ReportGroupTrendStats {
+    /**
+     * Contains the average of all values analyzed.
+     */
     average?: String;
+    /**
+     * Contains the maximum value analyzed.
+     */
     max?: String;
+    /**
+     * Contains the minimum value analyzed.
+     */
     min?: String;
   }
   export type ReportGroups = ReportGroup[];
@@ -2181,7 +2486,13 @@ declare namespace CodeBuild {
   export type ReportStatusType = "GENERATING"|"SUCCEEDED"|"FAILED"|"INCOMPLETE"|"DELETING"|string;
   export type ReportType = "TEST"|"CODE_COVERAGE"|string;
   export interface ReportWithRawData {
+    /**
+     * The ARN of the report.
+     */
     reportArn?: NonEmptyString;
+    /**
+     * The value of the requested data field from the report.
+     */
     data?: String;
   }
   export type Reports = Report[];
@@ -2206,7 +2517,7 @@ declare namespace CodeBuild {
      */
     id?: NonEmptyString;
     /**
-     * A unique, case sensitive identifier you provide to ensure the idempotency of the RetryBuildBatch request. The token is included in the RetryBuildBatch request and is valid for five minutes. If you repeat the RetryBuildBatch request with the same token, but change a parameter, AWS CodeBuild returns a parameter mismatch error.
+     * A unique, case sensitive identifier you provide to ensure the idempotency of the RetryBuildBatch request. The token is included in the RetryBuildBatch request and is valid for five minutes. If you repeat the RetryBuildBatch request with the same token, but change a parameter, CodeBuild returns a parameter mismatch error.
      */
     idempotencyToken?: String;
     /**
@@ -2224,7 +2535,7 @@ declare namespace CodeBuild {
      */
     id?: NonEmptyString;
     /**
-     * A unique, case sensitive identifier you provide to ensure the idempotency of the RetryBuild request. The token is included in the RetryBuild request and is valid for five minutes. If you repeat the RetryBuild request with the same token, but change a parameter, AWS CodeBuild returns a parameter mismatch error.
+     * A unique, case sensitive identifier you provide to ensure the idempotency of the RetryBuild request. The token is included in the RetryBuild request and is valid for five minutes. If you repeat the RetryBuild request with the same token, but change a parameter, CodeBuild returns a parameter mismatch error.
      */
     idempotencyToken?: String;
   }
@@ -2244,6 +2555,7 @@ declare namespace CodeBuild {
      *  Set to true if you do not want your S3 build log output encrypted. By default S3 build logs are encrypted. 
      */
     encryptionDisabled?: WrapperBoolean;
+    bucketOwnerAccess?: BucketOwnerAccess;
   }
   export interface S3ReportExportConfig {
     /**
@@ -2251,11 +2563,15 @@ declare namespace CodeBuild {
      */
     bucket?: NonEmptyString;
     /**
+     * The Amazon Web Services account identifier of the owner of the Amazon S3 bucket. This allows report data to be exported to an Amazon S3 bucket that is owned by an account other than the account running the build.
+     */
+    bucketOwner?: String;
+    /**
      *  The path to the exported report's raw data results. 
      */
     path?: String;
     /**
-     *  The type of build output artifact to create. Valid values include:     NONE: AWS CodeBuild creates the raw data in the output bucket. This is the default if packaging is not specified.     ZIP: AWS CodeBuild creates a ZIP file with the raw data in the output bucket.   
+     *  The type of build output artifact to create. Valid values include:     NONE: CodeBuild creates the raw data in the output bucket. This is the default if packaging is not specified.     ZIP: CodeBuild creates a ZIP file with the raw data in the output bucket.   
      */
     packaging?: ReportPackagingType;
     /**
@@ -2267,14 +2583,61 @@ declare namespace CodeBuild {
      */
     encryptionDisabled?: WrapperBoolean;
   }
+  export interface ScalingConfigurationInput {
+    /**
+     * The scaling type for a compute fleet.
+     */
+    scalingType?: FleetScalingType;
+    /**
+     * A list of TargetTrackingScalingConfiguration objects.
+     */
+    targetTrackingScalingConfigs?: TargetTrackingScalingConfigurations;
+    /**
+     * The maximum number of instances in the ﬂeet when auto-scaling.
+     */
+    maxCapacity?: FleetCapacity;
+  }
+  export interface ScalingConfigurationOutput {
+    /**
+     * The scaling type for a compute fleet.
+     */
+    scalingType?: FleetScalingType;
+    /**
+     * A list of TargetTrackingScalingConfiguration objects.
+     */
+    targetTrackingScalingConfigs?: TargetTrackingScalingConfigurations;
+    /**
+     * The maximum number of instances in the ﬂeet when auto-scaling.
+     */
+    maxCapacity?: FleetCapacity;
+    /**
+     * The desired number of instances in the ﬂeet when auto-scaling.
+     */
+    desiredCapacity?: FleetCapacity;
+  }
+  export interface ScopeConfiguration {
+    /**
+     * The name of either the enterprise or organization that will send webhook events to CodeBuild, depending on if the webhook is a global or organization webhook respectively.
+     */
+    name: String;
+    /**
+     * The domain of the GitHub Enterprise organization. Note that this parameter is only required if your project's source type is GITHUB_ENTERPRISE
+     */
+    domain?: String;
+    /**
+     * The type of scope for a GitHub webhook.
+     */
+    scope: WebhookScopeType;
+  }
   export type SecurityGroupIds = NonEmptyString[];
   export type SensitiveNonEmptyString = string;
-  export type ServerType = "GITHUB"|"BITBUCKET"|"GITHUB_ENTERPRISE"|string;
+  export type SensitiveString = string;
+  export type ServerType = "GITHUB"|"BITBUCKET"|"GITHUB_ENTERPRISE"|"GITLAB"|"GITLAB_SELF_MANAGED"|string;
   export type SharedResourceSortByType = "ARN"|"MODIFIED_TIME"|string;
   export type SortOrderType = "ASCENDING"|"DESCENDING"|string;
   export interface SourceAuth {
     /**
-     *   This data type is deprecated and is no longer accurate or used.   The authorization type to use. The only valid value is OAUTH, which represents the OAuth authorization type.
+     * The authorization type to use. Valid options are OAUTH, CODECONNECTIONS, or SECRETS_MANAGER.
      */
     type: SourceAuthType;
     /**
@@ -2282,23 +2645,27 @@ declare namespace CodeBuild {
      */
     resource?: String;
   }
-  export type SourceAuthType = "OAUTH"|string;
+  export type SourceAuthType = "OAUTH"|"CODECONNECTIONS"|"SECRETS_MANAGER"|string;
   export interface SourceCredentialsInfo {
     /**
      *  The Amazon Resource Name (ARN) of the token. 
      */
     arn?: NonEmptyString;
     /**
-     *  The type of source provider. The valid options are GITHUB, GITHUB_ENTERPRISE, or BITBUCKET. 
+     *  The type of source provider. The valid options are GITHUB, GITHUB_ENTERPRISE, GITLAB, GITLAB_SELF_MANAGED, or BITBUCKET. 
      */
     serverType?: ServerType;
     /**
-     *  The type of authentication used by the credentials. Valid options are OAUTH, BASIC_AUTH, or PERSONAL_ACCESS_TOKEN. 
+     *  The type of authentication used by the credentials. Valid options are OAUTH, BASIC_AUTH, PERSONAL_ACCESS_TOKEN, CODECONNECTIONS, or SECRETS_MANAGER. 
      */
     authType?: AuthType;
+    /**
+     * The connection ARN if your authType is CODECONNECTIONS or SECRETS_MANAGER.
+     */
+    resource?: String;
   }
   export type SourceCredentialsInfos = SourceCredentialsInfo[];
-  export type SourceType = "CODECOMMIT"|"CODEPIPELINE"|"GITHUB"|"S3"|"BITBUCKET"|"GITHUB_ENTERPRISE"|"NO_SOURCE"|string;
+  export type SourceType = "CODECOMMIT"|"CODEPIPELINE"|"GITHUB"|"GITLAB"|"GITLAB_SELF_MANAGED"|"S3"|"BITBUCKET"|"GITHUB_ENTERPRISE"|"NO_SOURCE"|string;
   export interface StartBuildBatchInput {
     /**
      * The name of the project.
@@ -2313,7 +2680,7 @@ declare namespace CodeBuild {
      */
     secondarySourcesVersionOverride?: ProjectSecondarySourceVersions;
     /**
-     * The version of the batch build input to be built, for this build only. If not specified, the latest version is used. If specified, the contents depends on the source provider:  AWS CodeCommit  The commit ID, branch, or Git tag to use.  GitHub  The commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.  Bitbucket  The commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.  Amazon Simple Storage Service (Amazon S3)  The version ID of the object that represents the build input ZIP file to use.   If sourceVersion is specified at the project level, then this sourceVersion (at the build level) takes precedence.  For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
+     * The version of the batch build input to be built, for this build only. If not specified, the latest version is used. If specified, the contents depends on the source provider:  CodeCommit  The commit ID, branch, or Git tag to use.  GitHub  The commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.  Bitbucket  The commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.  Amazon S3  The version ID of the object that represents the build input ZIP file to use.   If sourceVersion is specified at the project level, then this sourceVersion (at the build level) takes precedence.  For more information, see Source Version Sample with CodeBuild in the CodeBuild User Guide. 
      */
     sourceVersion?: String;
     /**
@@ -2349,7 +2716,7 @@ declare namespace CodeBuild {
      */
     gitSubmodulesConfigOverride?: GitSubmodulesConfig;
     /**
-     * A buildspec file declaration that overrides, for this build only, the latest one already defined in the build project. If this value is set, it can be either an inline buildspec definition, the path to an alternate buildspec file relative to the value of the built-in CODEBUILD_SRC_DIR environment variable, or the path to an S3 bucket. The bucket must be in the same AWS Region as the build project. Specify the buildspec file using its ARN (for example, arn:aws:s3:::my-codebuild-sample2/buildspec.yml). If this value is not provided or is set to an empty string, the source code must contain a buildspec file in its root directory. For more information, see Buildspec File Name and Storage Location. 
+     * A buildspec file declaration that overrides, for this build only, the latest one already defined in the build project. If this value is set, it can be either an inline buildspec definition, the path to an alternate buildspec file relative to the value of the built-in CODEBUILD_SRC_DIR environment variable, or the path to an S3 bucket. The bucket must be in the same Amazon Web Services Region as the build project. Specify the buildspec file using its ARN (for example, arn:aws:s3:::my-codebuild-sample2/buildspec.yml). If this value is not provided or is set to an empty string, the source code must contain a buildspec file in its root directory. For more information, see Buildspec File Name and Storage Location. 
      */
     buildspecOverride?: String;
     /**
@@ -2391,17 +2758,17 @@ declare namespace CodeBuild {
     /**
      * Overrides the build timeout specified in the batch build project.
      */
-    buildTimeoutInMinutesOverride?: TimeOut;
+    buildTimeoutInMinutesOverride?: BuildTimeOut;
     /**
      * The number of minutes a batch build is allowed to be queued before it times out.
      */
     queuedTimeoutInMinutesOverride?: TimeOut;
     /**
-     * The AWS Key Management Service (AWS KMS) customer master key (CMK) that overrides the one specified in the batch build project. The CMK key encrypts the build output artifacts.  You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/&lt;alias-name&gt;).
+     * The Key Management Service customer master key (CMK) that overrides the one specified in the batch build project. The CMK key encrypts the build output artifacts.  You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/&lt;alias-name&gt;).
      */
     encryptionKeyOverride?: NonEmptyString;
     /**
-     * A unique, case sensitive identifier you provide to ensure the idempotency of the StartBuildBatch request. The token is included in the StartBuildBatch request and is valid for five minutes. If you repeat the StartBuildBatch request with the same token, but change a parameter, AWS CodeBuild returns a parameter mismatch error.
+     * A unique, case sensitive identifier you provide to ensure the idempotency of the StartBuildBatch request. The token is included in the StartBuildBatch request and is valid for five minutes. If you repeat the StartBuildBatch request with the same token, but change a parameter, CodeBuild returns a parameter mismatch error.
      */
     idempotencyToken?: String;
     /**
@@ -2413,13 +2780,17 @@ declare namespace CodeBuild {
      */
     registryCredentialOverride?: RegistryCredential;
     /**
-     * The type of credentials AWS CodeBuild uses to pull images in your batch build. There are two valid values:   CODEBUILD  Specifies that AWS CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust AWS CodeBuild's service principal.  SERVICE_ROLE  Specifies that AWS CodeBuild uses your build project's service role.    When using a cross-account or private registry image, you must use SERVICE_ROLE credentials. When using an AWS CodeBuild curated image, you must use CODEBUILD credentials. 
+     * The type of credentials CodeBuild uses to pull images in your batch build. There are two valid values:   CODEBUILD  Specifies that CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust CodeBuild's service principal.  SERVICE_ROLE  Specifies that CodeBuild uses your build project's service role.    When using a cross-account or private registry image, you must use SERVICE_ROLE credentials. When using an CodeBuild curated image, you must use CODEBUILD credentials. 
      */
     imagePullCredentialsTypeOverride?: ImagePullCredentialsType;
     /**
      * A BuildBatchConfigOverride object that contains batch build configuration overrides.
      */
     buildBatchConfigOverride?: ProjectBuildBatchConfig;
+    /**
+     * Specifies if session debugging is enabled for this batch build. For more information, see Viewing a running build in Session Manager. Batch session debugging is not supported for matrix batch builds.
+     */
+    debugSessionEnabled?: WrapperBoolean;
   }
   export interface StartBuildBatchOutput {
     /**
@@ -2429,7 +2800,7 @@ declare namespace CodeBuild {
   }
   export interface StartBuildInput {
     /**
-     * The name of the AWS CodeBuild build project to start running a build.
+     * The name of the CodeBuild build project to start running a build.
      */
     projectName: NonEmptyString;
     /**
@@ -2441,7 +2812,7 @@ declare namespace CodeBuild {
      */
     secondarySourcesVersionOverride?: ProjectSecondarySourceVersions;
     /**
-     * The version of the build input to be built, for this build only. If not specified, the latest version is used. If specified, the contents depends on the source provider:  AWS CodeCommit  The commit ID, branch, or Git tag to use.  GitHub  The commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.  Bitbucket  The commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.  Amazon Simple Storage Service (Amazon S3)  The version ID of the object that represents the build input ZIP file to use.   If sourceVersion is specified at the project level, then this sourceVersion (at the build level) takes precedence.  For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
+     * The version of the build input to be built, for this build only. If not specified, the latest version is used. If specified, the contents depends on the source provider:  CodeCommit  The commit ID, branch, or Git tag to use.  GitHub  The commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.  GitLab  The commit ID, branch, or Git tag to use.  Bitbucket  The commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.  Amazon S3  The version ID of the object that represents the build input ZIP file to use.   If sourceVersion is specified at the project level, then this sourceVersion (at the build level) takes precedence.  For more information, see Source Version Sample with CodeBuild in the CodeBuild User Guide. 
      */
     sourceVersion?: String;
     /**
@@ -2465,7 +2836,7 @@ declare namespace CodeBuild {
      */
     sourceLocationOverride?: String;
     /**
-     * An authorization type for this build that overrides the one defined in the build project. This override applies only if the build project's source is BitBucket or GitHub.
+     * An authorization type for this build that overrides the one defined in the build project. This override applies only if the build project's source is BitBucket, GitHub, GitLab, or GitLab Self Managed.
      */
     sourceAuthOverride?: SourceAuth;
     /**
@@ -2473,11 +2844,11 @@ declare namespace CodeBuild {
      */
     gitCloneDepthOverride?: GitCloneDepth;
     /**
-     *  Information about the Git submodules configuration for this build of an AWS CodeBuild build project. 
+     *  Information about the Git submodules configuration for this build of an CodeBuild build project. 
      */
     gitSubmodulesConfigOverride?: GitSubmodulesConfig;
     /**
-     * A buildspec file declaration that overrides, for this build only, the latest one already defined in the build project.  If this value is set, it can be either an inline buildspec definition, the path to an alternate buildspec file relative to the value of the built-in CODEBUILD_SRC_DIR environment variable, or the path to an S3 bucket. The bucket must be in the same AWS Region as the build project. Specify the buildspec file using its ARN (for example, arn:aws:s3:::my-codebuild-sample2/buildspec.yml). If this value is not provided or is set to an empty string, the source code must contain a buildspec file in its root directory. For more information, see Buildspec File Name and Storage Location. 
+     * A buildspec file declaration that overrides the latest one defined in the build project, for this build only. The buildspec defined on the project is not changed. If this value is set, it can be either an inline buildspec definition, the path to an alternate buildspec file relative to the value of the built-in CODEBUILD_SRC_DIR environment variable, or the path to an S3 bucket. The bucket must be in the same Amazon Web Services Region as the build project. Specify the buildspec file using its ARN (for example, arn:aws:s3:::my-codebuild-sample2/buildspec.yml). If this value is not provided or is set to an empty string, the source code must contain a buildspec file in its root directory. For more information, see Buildspec File Name and Storage Location.  Since this property allows you to change the build commands that will run in the container, you should note that an IAM principal with the ability to call this API and set this parameter can override the default settings. Moreover, we encourage that you use a trustworthy buildspec location like a file in your source repository or a Amazon S3 bucket. 
      */
     buildspecOverride?: String;
     /**
@@ -2485,7 +2856,7 @@ declare namespace CodeBuild {
      */
     insecureSslOverride?: WrapperBoolean;
     /**
-     *  Set to true to report to your source provider the status of a build's start and completion. If you use this option with a source provider other than GitHub, GitHub Enterprise, or Bitbucket, an invalidInputException is thrown.    The status of a build triggered by a webhook is always reported to your source provider.  
+     *  Set to true to report to your source provider the status of a build's start and completion. If you use this option with a source provider other than GitHub, GitHub Enterprise, or Bitbucket, an invalidInputException is thrown.  To be able to report the build status to the source provider, the user associated with the source provider must have write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see Source provider access in the CodeBuild User Guide.   The status of a build triggered by a webhook is always reported to your source provider.  
      */
     reportBuildStatusOverride?: WrapperBoolean;
     /**
@@ -2521,19 +2892,19 @@ declare namespace CodeBuild {
      */
     privilegedModeOverride?: WrapperBoolean;
     /**
-     * The number of build timeout minutes, from 5 to 480 (8 hours), that overrides, for this build only, the latest setting already defined in the build project.
+     * The number of build timeout minutes, from 5 to 2160 (36 hours), that overrides, for this build only, the latest setting already defined in the build project.
      */
-    timeoutInMinutesOverride?: TimeOut;
+    timeoutInMinutesOverride?: BuildTimeOut;
     /**
      *  The number of minutes a build is allowed to be queued before it times out. 
      */
     queuedTimeoutInMinutesOverride?: TimeOut;
     /**
-     * The AWS Key Management Service (AWS KMS) customer master key (CMK) that overrides the one specified in the build project. The CMK key encrypts the build output artifacts.   You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/&lt;alias-name&gt;).
+     * The Key Management Service customer master key (CMK) that overrides the one specified in the build project. The CMK key encrypts the build output artifacts.   You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/&lt;alias-name&gt;).
      */
     encryptionKeyOverride?: NonEmptyString;
     /**
-     * A unique, case sensitive identifier you provide to ensure the idempotency of the StartBuild request. The token is included in the StartBuild request and is valid for 5 minutes. If you repeat the StartBuild request with the same token, but change a parameter, AWS CodeBuild returns a parameter mismatch error. 
+     * A unique, case sensitive identifier you provide to ensure the idempotency of the StartBuild request. The token is included in the StartBuild request and is valid for 5 minutes. If you repeat the StartBuild request with the same token, but change a parameter, CodeBuild returns a parameter mismatch error. 
      */
     idempotencyToken?: String;
     /**
@@ -2545,13 +2916,17 @@ declare namespace CodeBuild {
      */
     registryCredentialOverride?: RegistryCredential;
     /**
-     * The type of credentials AWS CodeBuild uses to pull images in your build. There are two valid values:   CODEBUILD  Specifies that AWS CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust AWS CodeBuild's service principal.  SERVICE_ROLE  Specifies that AWS CodeBuild uses your build project's service role.    When using a cross-account or private registry image, you must use SERVICE_ROLE credentials. When using an AWS CodeBuild curated image, you must use CODEBUILD credentials. 
+     * The type of credentials CodeBuild uses to pull images in your build. There are two valid values:   CODEBUILD  Specifies that CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust CodeBuild's service principal.  SERVICE_ROLE  Specifies that CodeBuild uses your build project's service role.    When using a cross-account or private registry image, you must use SERVICE_ROLE credentials. When using an CodeBuild curated image, you must use CODEBUILD credentials. 
      */
     imagePullCredentialsTypeOverride?: ImagePullCredentialsType;
     /**
      * Specifies if session debugging is enabled for this build. For more information, see Viewing a running build in Session Manager.
      */
     debugSessionEnabled?: WrapperBoolean;
+    /**
+     * A ProjectFleet object specified for this build that overrides the one defined in the build project.
+     */
+    fleetOverride?: ProjectFleet;
   }
   export interface StartBuildOutput {
     /**
@@ -2594,6 +2969,17 @@ declare namespace CodeBuild {
     value?: ValueInput;
   }
   export type TagList = Tag[];
+  export interface TargetTrackingScalingConfiguration {
+    /**
+     * The metric type to determine auto-scaling.
+     */
+    metricType?: FleetScalingMetricType;
+    /**
+     * The value of metricType when to start scaling.
+     */
+    targetValue?: WrapperDouble;
+  }
+  export type TargetTrackingScalingConfigurations = TargetTrackingScalingConfiguration[];
   export interface TestCase {
     /**
      *  The ARN of the report to which the test case belongs. 
@@ -2655,6 +3041,51 @@ declare namespace CodeBuild {
   }
   export type TimeOut = number;
   export type Timestamp = Date;
+  export interface UpdateFleetInput {
+    /**
+     * The ARN of the compute fleet.
+     */
+    arn: NonEmptyString;
+    /**
+     * The initial number of machines allocated to the compute ﬂeet, which deﬁnes the number of builds that can run in parallel.
+     */
+    baseCapacity?: FleetCapacity;
+    /**
+     * The environment type of the compute fleet.   The environment type ARM_CONTAINER is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney), EU (Frankfurt), and South America (São Paulo).   The environment type LINUX_CONTAINER is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and Asia Pacific (Mumbai).   The environment type LINUX_GPU_CONTAINER is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), and Asia Pacific (Sydney).   The environment type MAC_ARM is available for Medium fleets only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney), and EU (Frankfurt)   The environment type MAC_ARM is available for Large fleets only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), and Asia Pacific (Sydney).   The environment type WINDOWS_SERVER_2019_CONTAINER is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney), Asia Pacific (Tokyo), Asia Pacific (Mumbai) and EU (Ireland).   The environment type WINDOWS_SERVER_2022_CONTAINER is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt), Asia Pacific (Sydney), Asia Pacific (Singapore), Asia Pacific (Tokyo), South America (São Paulo) and Asia Pacific (Mumbai).   For more information, see Build environment compute types in the CodeBuild user guide.
+     */
+    environmentType?: EnvironmentType;
+    /**
+     * Information about the compute resources the compute fleet uses. Available values include:    BUILD_GENERAL1_SMALL: Use up to 3 GB memory and 2 vCPUs for builds.    BUILD_GENERAL1_MEDIUM: Use up to 7 GB memory and 4 vCPUs for builds.    BUILD_GENERAL1_LARGE: Use up to 16 GB memory and 8 vCPUs for builds, depending on your environment type.    BUILD_GENERAL1_XLARGE: Use up to 70 GB memory and 36 vCPUs for builds, depending on your environment type.    BUILD_GENERAL1_2XLARGE: Use up to 145 GB memory, 72 vCPUs, and 824 GB of SSD storage for builds. This compute type supports Docker images up to 100 GB uncompressed.    If you use BUILD_GENERAL1_SMALL:     For environment type LINUX_CONTAINER, you can use up to 3 GB memory and 2 vCPUs for builds.     For environment type LINUX_GPU_CONTAINER, you can use up to 16 GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.    For environment type ARM_CONTAINER, you can use up to 4 GB memory and 2 vCPUs on ARM-based processors for builds.    If you use BUILD_GENERAL1_LARGE:     For environment type LINUX_CONTAINER, you can use up to 15 GB memory and 8 vCPUs for builds.     For environment type LINUX_GPU_CONTAINER, you can use up to 255 GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.    For environment type ARM_CONTAINER, you can use up to 16 GB memory and 8 vCPUs on ARM-based processors for builds.   For more information, see Build environment compute types in the CodeBuild User Guide. 
+     */
+    computeType?: ComputeType;
+    /**
+     * The scaling configuration of the compute fleet.
+     */
+    scalingConfiguration?: ScalingConfigurationInput;
+    /**
+     * The compute fleet overflow behavior.   For overflow behavior QUEUE, your overflow builds need to wait on the existing fleet instance to become available.   For overflow behavior ON_DEMAND, your overflow builds run on CodeBuild on-demand.  If you choose to set your overflow behavior to on-demand while creating a VPC-connected fleet, make sure that you add the required VPC permissions to your project service role. For more information, see Example policy statement to allow CodeBuild access to Amazon Web Services services required to create a VPC network interface.   
+     */
+    overflowBehavior?: FleetOverflowBehavior;
+    vpcConfig?: VpcConfig;
+    /**
+     * The Amazon Machine Image (AMI) of the compute fleet.
+     */
+    imageId?: NonEmptyString;
+    /**
+     * The service role associated with the compute fleet. For more information, see  Allow a user to add a permission policy for a fleet service role in the CodeBuild User Guide.
+     */
+    fleetServiceRole?: NonEmptyString;
+    /**
+     * A list of tag key and value pairs associated with this compute fleet. These tags are available for use by Amazon Web Services services that support CodeBuild build project tags.
+     */
+    tags?: TagList;
+  }
+  export interface UpdateFleetOutput {
+    /**
+     * A Fleet object.
+     */
+    fleet?: Fleet;
+  }
   export interface UpdateProjectInput {
     /**
      * The name of the build project.  You cannot change a build project's name. 
@@ -2673,7 +3104,7 @@ declare namespace CodeBuild {
      */
     secondarySources?: ProjectSources;
     /**
-     *  A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:    For AWS CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.    If sourceVersion is specified at the build level, then that version takes precedence over this sourceVersion (at the project level).   For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
+     *  A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:    For CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For GitLab: the commit ID, branch, or Git tag to use.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon S3: the version ID of the object that represents the build input ZIP file to use.    If sourceVersion is specified at the build level, then that version takes precedence over this sourceVersion (at the project level).   For more information, see Source Version Sample with CodeBuild in the CodeBuild User Guide. 
      */
     sourceVersion?: String;
     /**
@@ -2685,7 +3116,7 @@ declare namespace CodeBuild {
      */
     artifacts?: ProjectArtifacts;
     /**
-     *  An array of ProjectSource objects. 
+     *  An array of ProjectArtifact objects. 
      */
     secondaryArtifacts?: ProjectArtifactsList;
     /**
@@ -2697,27 +3128,27 @@ declare namespace CodeBuild {
      */
     environment?: ProjectEnvironment;
     /**
-     * The replacement ARN of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.
+     * The replacement ARN of the IAM role that enables CodeBuild to interact with dependent Amazon Web Services services on behalf of the Amazon Web Services account.
      */
     serviceRole?: NonEmptyString;
     /**
-     * The replacement value in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait before timing out any related build that did not get marked as completed.
+     * The replacement value in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait before timing out any related build that did not get marked as completed.
      */
-    timeoutInMinutes?: TimeOut;
+    timeoutInMinutes?: BuildTimeOut;
     /**
      *  The number of minutes a build is allowed to be queued before it times out. 
      */
     queuedTimeoutInMinutes?: TimeOut;
     /**
-     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.   You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/&lt;alias-name&gt;).
+     * The Key Management Service customer master key (CMK) to be used for encrypting the build output artifacts.   You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/&lt;alias-name&gt;). 
      */
     encryptionKey?: NonEmptyString;
     /**
-     * An updated list of tag key and value pairs associated with this build project. These tags are available for use by AWS services that support AWS CodeBuild build project tags.
+     * An updated list of tag key and value pairs associated with this build project. These tags are available for use by Amazon Web Services services that support CodeBuild build project tags.
      */
     tags?: TagList;
     /**
-     * VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.
+     * VpcConfig enables CodeBuild to access resources in an Amazon VPC.
      */
     vpcConfig?: VpcConfig;
     /**
@@ -2725,7 +3156,7 @@ declare namespace CodeBuild {
      */
     badgeEnabled?: WrapperBoolean;
     /**
-     *  Information about logs for the build project. A project can create logs in Amazon CloudWatch Logs, logs in an S3 bucket, or both. 
+     *  Information about logs for the build project. A project can create logs in CloudWatch Logs, logs in an S3 bucket, or both. 
      */
     logsConfig?: LogsConfig;
     /**
@@ -2733,12 +3164,38 @@ declare namespace CodeBuild {
      */
     fileSystemLocations?: ProjectFileSystemLocations;
     buildBatchConfig?: ProjectBuildBatchConfig;
+    /**
+     * The maximum number of concurrent builds that are allowed for this project. New builds are only started if the current number of builds is less than or equal to this limit. If the current build count meets this limit, new builds are throttled and are not run. To remove this limit, set this value to -1.
+     */
+    concurrentBuildLimit?: WrapperInt;
   }
   export interface UpdateProjectOutput {
     /**
      * Information about the build project that was changed.
      */
     project?: Project;
+  }
+  export interface UpdateProjectVisibilityInput {
+    /**
+     * The Amazon Resource Name (ARN) of the build project.
+     */
+    projectArn: NonEmptyString;
+    projectVisibility: ProjectVisibilityType;
+    /**
+     * The ARN of the IAM role that enables CodeBuild to access the CloudWatch Logs and Amazon S3 artifacts for the project's builds.
+     */
+    resourceAccessRole?: NonEmptyString;
+  }
+  export interface UpdateProjectVisibilityOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the build project.
+     */
+    projectArn?: NonEmptyString;
+    /**
+     * Contains the project identifier used with the public build APIs. 
+     */
+    publicProjectAlias?: NonEmptyString;
+    projectVisibility?: ProjectVisibilityType;
   }
   export interface UpdateReportGroupInput {
     /**
@@ -2750,7 +3207,7 @@ declare namespace CodeBuild {
      */
     exportConfig?: ReportExportConfig;
     /**
-     *  An updated list of tag key and value pairs associated with this report group.  These tags are available for use by AWS services that support AWS CodeBuild report group tags.
+     *  An updated list of tag key and value pairs associated with this report group.  These tags are available for use by Amazon Web Services services that support CodeBuild report group tags.
      */
     tags?: TagList;
   }
@@ -2762,7 +3219,7 @@ declare namespace CodeBuild {
   }
   export interface UpdateWebhookInput {
     /**
-     * The name of the AWS CodeBuild project.
+     * The name of the CodeBuild project.
      */
     projectName: ProjectName;
     /**
@@ -2784,7 +3241,7 @@ declare namespace CodeBuild {
   }
   export interface UpdateWebhookOutput {
     /**
-     *  Information about a repository's webhook that is associated with a project in AWS CodeBuild. 
+     *  Information about a repository's webhook that is associated with a project in CodeBuild. 
      */
     webhook?: Webhook;
   }
@@ -2809,7 +3266,7 @@ declare namespace CodeBuild {
      */
     url?: NonEmptyString;
     /**
-     * The AWS CodeBuild endpoint where webhook events are sent.
+     * The CodeBuild endpoint where webhook events are sent.
      */
     payloadUrl?: NonEmptyString;
     /**
@@ -2829,14 +3286,22 @@ declare namespace CodeBuild {
      */
     buildType?: WebhookBuildType;
     /**
+     * If manualCreation is true, CodeBuild doesn't create a webhook in GitHub and instead returns payloadUrl and secret values for the webhook. The payloadUrl and secret values in the output can be used to manually create a webhook within GitHub.  manualCreation is only available for GitHub webhooks. 
+     */
+    manualCreation?: WrapperBoolean;
+    /**
      * A timestamp that indicates the last time a repository's secret token was modified. 
      */
     lastModifiedSecret?: Timestamp;
+    /**
+     * The scope configuration for global or organization webhooks.  Global or organization webhooks are only available for GitHub and Github Enterprise webhooks. 
+     */
+    scopeConfiguration?: ScopeConfiguration;
   }
   export type WebhookBuildType = "BUILD"|"BUILD_BATCH"|string;
   export interface WebhookFilter {
     /**
-     *  The type of webhook filter. There are six webhook filter types: EVENT, ACTOR_ACCOUNT_ID, HEAD_REF, BASE_REF, FILE_PATH, and COMMIT_MESSAGE.    EVENT    A webhook event triggers a build when the provided pattern matches one of five event types: PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED, PULL_REQUEST_REOPENED, and PULL_REQUEST_MERGED. The EVENT patterns are specified as a comma-separated string. For example, PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED filters all push, pull request created, and pull request updated events.    The PULL_REQUEST_REOPENED works with GitHub and GitHub Enterprise only.     ACTOR_ACCOUNT_ID    A webhook event triggers a build when a GitHub, GitHub Enterprise, or Bitbucket account ID matches the regular expression pattern.    HEAD_REF    A webhook event triggers a build when the head reference matches the regular expression pattern. For example, refs/heads/branch-name and refs/tags/tag-name.   Works with GitHub and GitHub Enterprise push, GitHub and GitHub Enterprise pull request, Bitbucket push, and Bitbucket pull request events.    BASE_REF    A webhook event triggers a build when the base reference matches the regular expression pattern. For example, refs/heads/branch-name.    Works with pull request events only.     FILE_PATH    A webhook triggers a build when the path of a changed file matches the regular expression pattern.    Works with GitHub and Bitbucket events push and pull requests events. Also works with GitHub Enterprise push events, but does not work with GitHub Enterprise pull request events.    COMMIT_MESSAGE  A webhook triggers a build when the head commit message matches the regular expression pattern.   Works with GitHub and Bitbucket events push and pull requests events. Also works with GitHub Enterprise push events, but does not work with GitHub Enterprise pull request events.    
+     *  The type of webhook filter. There are nine webhook filter types: EVENT, ACTOR_ACCOUNT_ID, HEAD_REF, BASE_REF, FILE_PATH, COMMIT_MESSAGE, TAG_NAME, RELEASE_NAME, and WORKFLOW_NAME.     EVENT     A webhook event triggers a build when the provided pattern matches one of nine event types: PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED, PULL_REQUEST_CLOSED, PULL_REQUEST_REOPENED, PULL_REQUEST_MERGED, RELEASED, PRERELEASED, and WORKFLOW_JOB_QUEUED. The EVENT patterns are specified as a comma-separated string. For example, PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED filters all push, pull request created, and pull request updated events.    Types PULL_REQUEST_REOPENED and WORKFLOW_JOB_QUEUED work with GitHub and GitHub Enterprise only. Types RELEASED and PRERELEASED work with GitHub only.      ACTOR_ACCOUNT_ID    A webhook event triggers a build when a GitHub, GitHub Enterprise, or Bitbucket account ID matches the regular expression pattern.      HEAD_REF    A webhook event triggers a build when the head reference matches the regular expression pattern. For example, refs/heads/branch-name and refs/tags/tag-name.    Works with GitHub and GitHub Enterprise push, GitHub and GitHub Enterprise pull request, Bitbucket push, and Bitbucket pull request events.      BASE_REF    A webhook event triggers a build when the base reference matches the regular expression pattern. For example, refs/heads/branch-name.    Works with pull request events only.       FILE_PATH    A webhook triggers a build when the path of a changed file matches the regular expression pattern.    Works with GitHub and Bitbucket events push and pull requests events. Also works with GitHub Enterprise push events, but does not work with GitHub Enterprise pull request events.       COMMIT_MESSAGE   A webhook triggers a build when the head commit message matches the regular expression pattern.   Works with GitHub and Bitbucket events push and pull requests events. Also works with GitHub Enterprise push events, but does not work with GitHub Enterprise pull request events.       TAG_NAME   A webhook triggers a build when the tag name of the release matches the regular expression pattern.   Works with RELEASED and PRERELEASED events only.       RELEASE_NAME   A webhook triggers a build when the release name matches the regular expression pattern.   Works with RELEASED and PRERELEASED events only.       REPOSITORY_NAME   A webhook triggers a build when the repository name matches the regular expression pattern.   Works with GitHub global or organization webhooks only.       WORKFLOW_NAME   A webhook triggers a build when the workflow name matches the regular expression pattern.   Works with WORKFLOW_JOB_QUEUED events only.      
      */
     type: WebhookFilterType;
     /**
@@ -2848,8 +3313,10 @@ declare namespace CodeBuild {
      */
     excludeMatchedPattern?: WrapperBoolean;
   }
-  export type WebhookFilterType = "EVENT"|"BASE_REF"|"HEAD_REF"|"ACTOR_ACCOUNT_ID"|"FILE_PATH"|"COMMIT_MESSAGE"|string;
+  export type WebhookFilterType = "EVENT"|"BASE_REF"|"HEAD_REF"|"ACTOR_ACCOUNT_ID"|"FILE_PATH"|"COMMIT_MESSAGE"|"WORKFLOW_NAME"|"TAG_NAME"|"RELEASE_NAME"|string;
+  export type WebhookScopeType = "GITHUB_ORGANIZATION"|"GITHUB_GLOBAL"|string;
   export type WrapperBoolean = boolean;
+  export type WrapperDouble = number;
   export type WrapperInt = number;
   export type WrapperLong = number;
   /**

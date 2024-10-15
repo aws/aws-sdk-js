@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Neptunedata",
+        "description": "Minor changes to send unsigned requests to Neptune clusters"
+    },
+    {
+        "type": "feature",
+        "category": "SimSpaceWeaver",
+        "description": "BucketName and ObjectKey are now required for the S3Location data type. BucketName is now required for the S3Destination data type."
+    }
+]

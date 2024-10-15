@@ -1,0 +1,52 @@
+[
+    {
+        "type": "feature",
+        "category": "BackupGateway",
+        "description": "This release adds support for VMware vSphere tags, enabling customer to protect VMware virtual machines using tag-based policies for AWS tags mapped from vSphere tags. This release also adds support for customer-accessible gateway-hypervisor interaction log and upload bandwidth rate limit schedule."
+    },
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "Added support for \"English - New Zealand\" and \"English - South African\" to be used with Amazon Connect Custom Vocabulary APIs."
+    },
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "This release adds support for container port ranges in ECS, a new capability that allows customers to provide container port ranges to simplify use cases where multiple ports are in use in a container. This release updates TaskDefinition mutation APIs and the Task description APIs."
+    },
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Add support for Windows managed nodes groups."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "This release adds support for AWS Glue Crawler with native DeltaLake tables, allowing Crawlers to classify Delta Lake format tables and catalog them for query engines to query against."
+    },
+    {
+        "type": "feature",
+        "category": "Kinesis",
+        "description": "Updates API to latest version."
+    },
+    {
+        "type": "feature",
+        "category": "M2",
+        "description": "Adds an optional create-only `KmsKeyId` property to Environment and Application resources."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "SageMaker Inference Recommender now allows customers to load tests their models on various instance types using private VPC."
+    },
+    {
+        "type": "feature",
+        "category": "SecurityHub",
+        "description": "Added new resource details objects to ASFF, including resources for AwsEc2LaunchTemplate, AwsSageMakerNotebookInstance, AwsWafv2WebAcl and AwsWafv2RuleGroup."
+    },
+    {
+        "type": "feature",
+        "category": "Translate",
+        "description": "Raised the input byte size limit of the Text field in the TranslateText API to 10000 bytes."
+    }
+]

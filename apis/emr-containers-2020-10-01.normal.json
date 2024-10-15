@@ -5,11 +5,17 @@
     "endpointPrefix": "emr-containers",
     "jsonVersion": "1.1",
     "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
     "serviceFullName": "Amazon EMR Containers",
     "serviceId": "EMR containers",
     "signatureVersion": "v4",
     "signingName": "emr-containers",
-    "uid": "emr-containers-2020-10-01"
+    "uid": "emr-containers-2020-10-01",
+    "auth": [
+      "aws.auth#sigv4"
+    ]
   },
   "operations": {
     "CancelJobRun": {
@@ -34,6 +40,31 @@
       ],
       "documentation": "<p>Cancels a job run. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS.</p>"
     },
+    "CreateJobTemplate": {
+      "name": "CreateJobTemplate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/jobtemplates"
+      },
+      "input": {
+        "shape": "CreateJobTemplateRequest"
+      },
+      "output": {
+        "shape": "CreateJobTemplateResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Creates a job template. Job template stores values of StartJobRun API request in a template and can be used to start a job run. Job template allows two use cases: avoid repeating recurring StartJobRun API request values, enforcing certain values in StartJobRun API request.</p>"
+    },
     "CreateManagedEndpoint": {
       "name": "CreateManagedEndpoint",
       "http": {
@@ -57,7 +88,29 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Creates a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.</p>"
+      "documentation": "<p>Creates a managed endpoint. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.</p>"
+    },
+    "CreateSecurityConfiguration": {
+      "name": "CreateSecurityConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/securityconfigurations"
+      },
+      "input": {
+        "shape": "CreateSecurityConfigurationRequest"
+      },
+      "output": {
+        "shape": "CreateSecurityConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Creates a security configuration. Security configurations in Amazon EMR on EKS are templates for different security setups. You can use security configurations to configure the Lake Formation integration setup. You can also create a security configuration to re-use a security setup each time you create a virtual cluster.</p>"
     },
     "CreateVirtualCluster": {
       "name": "CreateVirtualCluster",
@@ -80,9 +133,34 @@
         },
         {
           "shape": "InternalServerException"
+        },
+        {
+          "shape": "EKSRequestThrottledException"
         }
       ],
       "documentation": "<p>Creates a virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any additional resource in your system. A single virtual cluster maps to a single Kubernetes namespace. Given this relationship, you can model virtual clusters the same way you model Kubernetes namespaces to meet your requirements.</p>"
+    },
+    "DeleteJobTemplate": {
+      "name": "DeleteJobTemplate",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/jobtemplates/{templateId}"
+      },
+      "input": {
+        "shape": "DeleteJobTemplateRequest"
+      },
+      "output": {
+        "shape": "DeleteJobTemplateResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Deletes a job template. Job template stores values of StartJobRun API request in a template and can be used to start a job run. Job template allows two use cases: avoid repeating recurring StartJobRun API request values, enforcing certain values in StartJobRun API request.</p>"
     },
     "DeleteManagedEndpoint": {
       "name": "DeleteManagedEndpoint",
@@ -104,7 +182,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Deletes a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.</p>"
+      "documentation": "<p>Deletes a managed endpoint. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.</p>"
     },
     "DeleteVirtualCluster": {
       "name": "DeleteVirtualCluster",
@@ -153,6 +231,31 @@
       ],
       "documentation": "<p>Displays detailed information about a job run. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS.</p>"
     },
+    "DescribeJobTemplate": {
+      "name": "DescribeJobTemplate",
+      "http": {
+        "method": "GET",
+        "requestUri": "/jobtemplates/{templateId}"
+      },
+      "input": {
+        "shape": "DescribeJobTemplateRequest"
+      },
+      "output": {
+        "shape": "DescribeJobTemplateResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Displays detailed information about a specified job template. Job template stores values of StartJobRun API request in a template and can be used to start a job run. Job template allows two use cases: avoid repeating recurring StartJobRun API request values, enforcing certain values in StartJobRun API request.</p>"
+    },
     "DescribeManagedEndpoint": {
       "name": "DescribeManagedEndpoint",
       "http": {
@@ -176,7 +279,32 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Displays detailed information about a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.</p>"
+      "documentation": "<p>Displays detailed information about a managed endpoint. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.</p>"
+    },
+    "DescribeSecurityConfiguration": {
+      "name": "DescribeSecurityConfiguration",
+      "http": {
+        "method": "GET",
+        "requestUri": "/securityconfigurations/{securityConfigurationId}"
+      },
+      "input": {
+        "shape": "DescribeSecurityConfigurationRequest"
+      },
+      "output": {
+        "shape": "DescribeSecurityConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Displays detailed information about a specified security configuration. Security configurations in Amazon EMR on EKS are templates for different security setups. You can use security configurations to configure the Lake Formation integration setup. You can also create a security configuration to re-use a security setup each time you create a virtual cluster.</p>"
     },
     "DescribeVirtualCluster": {
       "name": "DescribeVirtualCluster",
@@ -203,6 +331,34 @@
       ],
       "documentation": "<p>Displays detailed information about a specified virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any additional resource in your system. A single virtual cluster maps to a single Kubernetes namespace. Given this relationship, you can model virtual clusters the same way you model Kubernetes namespaces to meet your requirements.</p>"
     },
+    "GetManagedEndpointSessionCredentials": {
+      "name": "GetManagedEndpointSessionCredentials",
+      "http": {
+        "method": "POST",
+        "requestUri": "/virtualclusters/{virtualClusterId}/endpoints/{endpointId}/credentials"
+      },
+      "input": {
+        "shape": "GetManagedEndpointSessionCredentialsRequest"
+      },
+      "output": {
+        "shape": "GetManagedEndpointSessionCredentialsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "RequestThrottledException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Generate a session token to connect to a managed endpoint. </p>"
+    },
     "ListJobRuns": {
       "name": "ListJobRuns",
       "http": {
@@ -225,6 +381,28 @@
       ],
       "documentation": "<p>Lists job runs based on a set of parameters. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS.</p>"
     },
+    "ListJobTemplates": {
+      "name": "ListJobTemplates",
+      "http": {
+        "method": "GET",
+        "requestUri": "/jobtemplates"
+      },
+      "input": {
+        "shape": "ListJobTemplatesRequest"
+      },
+      "output": {
+        "shape": "ListJobTemplatesResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Lists job templates based on a set of parameters. Job template stores values of StartJobRun API request in a template and can be used to start a job run. Job template allows two use cases: avoid repeating recurring StartJobRun API request values, enforcing certain values in StartJobRun API request.</p>"
+    },
     "ListManagedEndpoints": {
       "name": "ListManagedEndpoints",
       "http": {
@@ -245,7 +423,29 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Lists managed endpoints based on a set of parameters. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.</p>"
+      "documentation": "<p>Lists managed endpoints based on a set of parameters. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.</p>"
+    },
+    "ListSecurityConfigurations": {
+      "name": "ListSecurityConfigurations",
+      "http": {
+        "method": "GET",
+        "requestUri": "/securityconfigurations"
+      },
+      "input": {
+        "shape": "ListSecurityConfigurationsRequest"
+      },
+      "output": {
+        "shape": "ListSecurityConfigurationsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Lists security configurations based on a set of parameters. Security configurations in Amazon EMR on EKS are templates for different security setups. You can use security configurations to configure the Lake Formation integration setup. You can also create a security configuration to re-use a security setup each time you create a virtual cluster.</p>"
     },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
@@ -342,7 +542,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Assigns tags to resources. A tag is a label that you assign to an AWS resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your AWS resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you've assigned to it. For example, you can define a set of tags for your Amazon EMR on EKS clusters to help you track each cluster's owner and stack level. We recommend that you devise a consistent set of tag keys for each resource type. You can then search and filter the resources based on the tags that you add.</p>"
+      "documentation": "<p>Assigns tags to resources. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your Amazon Web Services resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you've assigned to it. For example, you can define a set of tags for your Amazon EMR on EKS clusters to help you track each cluster's owner and stack level. We recommend that you devise a consistent set of tag keys for each resource type. You can then search and filter the resources based on the tags that you add.</p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -376,6 +576,28 @@
       "max": 2048,
       "min": 44,
       "pattern": "^arn:(aws[a-zA-Z0-9-]*):acm:.+:(\\d{12}):certificate/.+$"
+    },
+    "AuthorizationConfiguration": {
+      "type": "structure",
+      "members": {
+        "lakeFormationConfiguration": {
+          "shape": "LakeFormationConfiguration",
+          "documentation": "<p>Lake Formation related configuration inputs for the security configuration.</p>"
+        },
+        "encryptionConfiguration": {
+          "shape": "EncryptionConfiguration",
+          "documentation": "<p>Encryption-related configuration input for the security configuration.</p>"
+        }
+      },
+      "documentation": "<p>Authorization-related configuration inputs for the security configuration.</p>"
+    },
+    "Base64Encoded": {
+      "type": "string",
+      "max": 5000,
+      "pattern": "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$"
+    },
+    "Boolean": {
+      "type": "boolean"
     },
     "CancelJobRunRequest": {
       "type": "structure",
@@ -411,6 +633,26 @@
         }
       }
     },
+    "Certificate": {
+      "type": "structure",
+      "members": {
+        "certificateArn": {
+          "shape": "ACMCertArn",
+          "documentation": "<p>The ARN of the certificate generated for managed endpoint.</p>"
+        },
+        "certificateData": {
+          "shape": "Base64Encoded",
+          "documentation": "<p>The base64 encoded PEM certificate data generated for managed endpoint.</p>"
+        }
+      },
+      "documentation": "<p>The entity representing certificate data generated for managed endpoint.</p>"
+    },
+    "CertificateProviderType": {
+      "type": "string",
+      "enum": [
+        "PEM"
+      ]
+    },
     "ClientToken": {
       "type": "string",
       "max": 64,
@@ -433,6 +675,12 @@
         }
       },
       "documentation": "<p>A configuration for CloudWatch monitoring. You can configure your jobs to send log information to CloudWatch Logs.</p>"
+    },
+    "ClusterId": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": "^[0-9A-Za-z][A-Za-z0-9\\-_]*"
     },
     "Configuration": {
       "type": "structure",
@@ -481,11 +729,29 @@
       "members": {
         "eksInfo": {
           "shape": "EksInfo",
-          "documentation": "<p>The information about the EKS cluster.</p>"
+          "documentation": "<p>The information about the Amazon EKS cluster.</p>"
         }
       },
       "documentation": "<p>The information about the container used for a job run or a managed endpoint.</p>",
       "union": true
+    },
+    "ContainerLogRotationConfiguration": {
+      "type": "structure",
+      "required": [
+        "rotationSize",
+        "maxFilesToKeep"
+      ],
+      "members": {
+        "rotationSize": {
+          "shape": "RotationSize",
+          "documentation": "<p>The file size at which to rotate logs. Minimum of 2KB, Maximum of 2GB.</p>"
+        },
+        "maxFilesToKeep": {
+          "shape": "MaxFilesToKeep",
+          "documentation": "<p>The number of files to keep in container after rotation.</p>"
+        }
+      },
+      "documentation": "<p>The settings for container log rotation.</p>"
     },
     "ContainerProvider": {
       "type": "structure",
@@ -496,10 +762,10 @@
       "members": {
         "type": {
           "shape": "ContainerProviderType",
-          "documentation": "<p>The type of the container provider. EKS is the only supported type as of now.</p>"
+          "documentation": "<p>The type of the container provider. Amazon EKS is the only supported type as of now.</p>"
         },
         "id": {
-          "shape": "String256",
+          "shape": "ClusterId",
           "documentation": "<p>The ID of the container cluster.</p>"
         },
         "info": {
@@ -515,6 +781,58 @@
         "EKS"
       ]
     },
+    "CreateJobTemplateRequest": {
+      "type": "structure",
+      "required": [
+        "name",
+        "clientToken",
+        "jobTemplateData"
+      ],
+      "members": {
+        "name": {
+          "shape": "ResourceNameString",
+          "documentation": "<p>The specified name of the job template.</p>"
+        },
+        "clientToken": {
+          "shape": "ClientToken",
+          "documentation": "<p>The client token of the job template.</p>",
+          "idempotencyToken": true
+        },
+        "jobTemplateData": {
+          "shape": "JobTemplateData",
+          "documentation": "<p>The job template data which holds values of StartJobRun API request.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags that are associated with the job template.</p>"
+        },
+        "kmsKeyArn": {
+          "shape": "KmsKeyArn",
+          "documentation": "<p>The KMS key ARN used to encrypt the job template.</p>"
+        }
+      }
+    },
+    "CreateJobTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "shape": "ResourceIdString",
+          "documentation": "<p>This output display the created job template ID.</p>"
+        },
+        "name": {
+          "shape": "ResourceNameString",
+          "documentation": "<p>This output displays the name of the created job template.</p>"
+        },
+        "arn": {
+          "shape": "JobTemplateArn",
+          "documentation": "<p>This output display the ARN of the created job template.</p>"
+        },
+        "createdAt": {
+          "shape": "Date",
+          "documentation": "<p>This output displays the date and time when the job template was created.</p>"
+        }
+      }
+    },
     "CreateManagedEndpointRequest": {
       "type": "structure",
       "required": [
@@ -523,7 +841,6 @@
         "type",
         "releaseLabel",
         "executionRoleArn",
-        "certificateArn",
         "clientToken"
       ],
       "members": {
@@ -551,7 +868,9 @@
         },
         "certificateArn": {
           "shape": "ACMCertArn",
-          "documentation": "<p>The certificate ARN of the managed endpoint.</p>"
+          "documentation": "<p>The certificate ARN provided by users for the managed endpoint. This field is under deprecation and will be removed in future releases.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Customer provided certificate-arn is deprecated and would be removed in future."
         },
         "configurationOverrides": {
           "shape": "ConfigurationOverrides",
@@ -589,6 +908,50 @@
         }
       }
     },
+    "CreateSecurityConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "clientToken",
+        "name",
+        "securityConfigurationData"
+      ],
+      "members": {
+        "clientToken": {
+          "shape": "ClientToken",
+          "documentation": "<p>The client idempotency token to use when creating the security configuration.</p>",
+          "idempotencyToken": true
+        },
+        "name": {
+          "shape": "ResourceNameString",
+          "documentation": "<p>The name of the security configuration.</p>"
+        },
+        "securityConfigurationData": {
+          "shape": "SecurityConfigurationData",
+          "documentation": "<p>Security configuration input for the request.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags to add to the security configuration.</p>"
+        }
+      }
+    },
+    "CreateSecurityConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "shape": "ResourceIdString",
+          "documentation": "<p>The ID of the security configuration.</p>"
+        },
+        "name": {
+          "shape": "ResourceNameString",
+          "documentation": "<p>The name of the security configuration.</p>"
+        },
+        "arn": {
+          "shape": "SecurityConfigurationArn",
+          "documentation": "<p>The ARN (Amazon Resource Name) of the security configuration.</p>"
+        }
+      }
+    },
     "CreateVirtualClusterRequest": {
       "type": "structure",
       "required": [
@@ -613,6 +976,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags assigned to the virtual cluster.</p>"
+        },
+        "securityConfigurationId": {
+          "shape": "ResourceIdString",
+          "documentation": "<p>The ID of the security configuration.</p>"
         }
       }
     },
@@ -633,8 +1000,49 @@
         }
       }
     },
+    "CredentialType": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "^.*\\S.*$"
+    },
+    "Credentials": {
+      "type": "structure",
+      "members": {
+        "token": {
+          "shape": "Token",
+          "documentation": "<p>The actual session token being returned.</p>"
+        }
+      },
+      "documentation": "<p>The structure containing the session token being returned.</p>",
+      "union": true
+    },
     "Date": {
-      "type": "timestamp"
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
+    },
+    "DeleteJobTemplateRequest": {
+      "type": "structure",
+      "required": [
+        "id"
+      ],
+      "members": {
+        "id": {
+          "shape": "ResourceIdString",
+          "documentation": "<p>The ID of the job template that will be deleted.</p>",
+          "location": "uri",
+          "locationName": "templateId"
+        }
+      }
+    },
+    "DeleteJobTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "shape": "ResourceIdString",
+          "documentation": "<p>This output contains the ID of the job template that was deleted.</p>"
+        }
+      }
     },
     "DeleteManagedEndpointRequest": {
       "type": "structure",
@@ -723,6 +1131,29 @@
         }
       }
     },
+    "DescribeJobTemplateRequest": {
+      "type": "structure",
+      "required": [
+        "id"
+      ],
+      "members": {
+        "id": {
+          "shape": "ResourceIdString",
+          "documentation": "<p>The ID of the job template that will be described.</p>",
+          "location": "uri",
+          "locationName": "templateId"
+        }
+      }
+    },
+    "DescribeJobTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "jobTemplate": {
+          "shape": "JobTemplate",
+          "documentation": "<p>This output displays information about the specified job template.</p>"
+        }
+      }
+    },
     "DescribeManagedEndpointRequest": {
       "type": "structure",
       "required": [
@@ -753,6 +1184,29 @@
         }
       }
     },
+    "DescribeSecurityConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "id"
+      ],
+      "members": {
+        "id": {
+          "shape": "ResourceIdString",
+          "documentation": "<p>The ID of the security configuration.</p>",
+          "location": "uri",
+          "locationName": "securityConfigurationId"
+        }
+      }
+    },
+    "DescribeSecurityConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "securityConfiguration": {
+          "shape": "SecurityConfiguration",
+          "documentation": "<p>Details of the security configuration.</p>"
+        }
+      }
+    },
     "DescribeVirtualClusterRequest": {
       "type": "structure",
       "required": [
@@ -780,11 +1234,21 @@
       "type": "structure",
       "members": {
         "namespace": {
-          "shape": "String256",
-          "documentation": "<p>The namespaces of the EKS cluster.</p>"
+          "shape": "KubernetesNamespace",
+          "documentation": "<p>The namespaces of the Amazon EKS cluster.</p>"
         }
       },
-      "documentation": "<p>The information about the EKS cluster.</p>"
+      "documentation": "<p>The information about the Amazon EKS cluster.</p>"
+    },
+    "EncryptionConfiguration": {
+      "type": "structure",
+      "members": {
+        "inTransitEncryptionConfiguration": {
+          "shape": "InTransitEncryptionConfiguration",
+          "documentation": "<p>In-transit encryption-related input for the security configuration.</p>"
+        }
+      },
+      "documentation": "<p>Configurations related to encryption for the security configuration.</p>"
     },
     "Endpoint": {
       "type": "structure",
@@ -823,7 +1287,13 @@
         },
         "certificateArn": {
           "shape": "ACMCertArn",
-          "documentation": "<p>The certificate ARN of the endpoint.</p>"
+          "documentation": "<p>The certificate ARN of the endpoint. This field is under deprecation and will be removed in future.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Customer provided certificate-arn is deprecated and would be removed in future."
+        },
+        "certificateAuthority": {
+          "shape": "Certificate",
+          "documentation": "<p>The certificate generated by emr control plane on customer behalf to secure the managed endpoint.</p>"
         },
         "configurationOverrides": {
           "shape": "ConfigurationOverrides",
@@ -844,6 +1314,14 @@
         "subnetIds": {
           "shape": "SubnetIds",
           "documentation": "<p>The subnet IDs of the endpoint. </p>"
+        },
+        "stateDetails": {
+          "shape": "String256",
+          "documentation": "<p> Additional details of the endpoint state. </p>"
+        },
+        "failureReason": {
+          "shape": "FailureReason",
+          "documentation": "<p> The reasons why the endpoint has failed. </p>"
         },
         "tags": {
           "shape": "TagMap",
@@ -898,7 +1376,7 @@
       "type": "string",
       "max": 10280,
       "min": 1,
-      "pattern": "(?!\\s*$)(^[^';|\\u0026\\u003C\\u003E*?`$(){}\\[\\]!#\\\\]*$)",
+      "pattern": ".*\\S.*",
       "sensitive": true
     },
     "EntryPointArguments": {
@@ -911,7 +1389,7 @@
       "type": "string",
       "max": 256,
       "min": 1,
-      "pattern": "(?!\\s*$)(^[^';|\\u0026\\u003C\\u003E*?`$(){}\\[\\]!#\\\\]*$)",
+      "pattern": ".*\\S.*",
       "sensitive": true
     },
     "FailureReason": {
@@ -923,11 +1401,82 @@
         "CLUSTER_UNAVAILABLE"
       ]
     },
+    "GetManagedEndpointSessionCredentialsRequest": {
+      "type": "structure",
+      "required": [
+        "executionRoleArn",
+        "credentialType",
+        "endpointIdentifier",
+        "virtualClusterIdentifier"
+      ],
+      "members": {
+        "endpointIdentifier": {
+          "shape": "String2048",
+          "documentation": "<p>The ARN of the managed endpoint for which the request is submitted. </p>",
+          "location": "uri",
+          "locationName": "endpointId"
+        },
+        "virtualClusterIdentifier": {
+          "shape": "String2048",
+          "documentation": "<p>The ARN of the Virtual Cluster which the Managed Endpoint belongs to. </p>",
+          "location": "uri",
+          "locationName": "virtualClusterId"
+        },
+        "executionRoleArn": {
+          "shape": "IAMRoleArn",
+          "documentation": "<p>The IAM Execution Role ARN that will be used by the job run. </p>"
+        },
+        "credentialType": {
+          "shape": "CredentialType",
+          "documentation": "<p>Type of the token requested. Currently supported and default value of this field is “TOKEN.”</p>"
+        },
+        "durationInSeconds": {
+          "shape": "JavaInteger",
+          "documentation": "<p>Duration in seconds for which the session token is valid. The default duration is 15 minutes and the maximum is 12 hours.</p>"
+        },
+        "logContext": {
+          "shape": "LogContext",
+          "documentation": "<p>String identifier used to separate sections of the execution logs uploaded to S3.</p>"
+        },
+        "clientToken": {
+          "shape": "ClientToken",
+          "documentation": "<p>The client idempotency token of the job run request.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "GetManagedEndpointSessionCredentialsResponse": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "shape": "ResourceIdString",
+          "documentation": "<p>The identifier of the session token returned.</p>"
+        },
+        "credentials": {
+          "shape": "Credentials",
+          "documentation": "<p>The structure containing the session credentials.</p>"
+        },
+        "expiresAt": {
+          "shape": "Date",
+          "documentation": "<p>The date and time when the session token will expire.</p>"
+        }
+      }
+    },
     "IAMRoleArn": {
       "type": "string",
       "max": 2048,
       "min": 20,
       "pattern": "^arn:(aws[a-zA-Z0-9-]*):iam::(\\d{12})?:(role((\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F))[\\w+=,.@-]+)$"
+    },
+    "InTransitEncryptionConfiguration": {
+      "type": "structure",
+      "members": {
+        "tlsCertificateConfiguration": {
+          "shape": "TLSCertificateConfiguration",
+          "documentation": "<p>TLS certificate-related configuration input for the security configuration.</p>"
+        }
+      },
+      "documentation": "<p>Configurations related to in-transit encryption for the security configuration.</p>"
     },
     "JavaInteger": {
       "type": "integer"
@@ -944,9 +1493,13 @@
         "sparkSubmitJobDriver": {
           "shape": "SparkSubmitJobDriver",
           "documentation": "<p>The job driver parameters specified for spark submit.</p>"
+        },
+        "sparkSqlJobDriver": {
+          "shape": "SparkSqlJobDriver",
+          "documentation": "<p>The job driver for job type.</p>"
         }
       },
-      "documentation": "<p>Specify the driver that the job runs on.</p>"
+      "documentation": "<p>Specify the driver that the job runs on. Exactly one of the two available job drivers is required, either sparkSqlJobDriver or sparkSubmitJobDriver.</p>"
     },
     "JobRun": {
       "type": "structure",
@@ -1014,6 +1567,14 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>The assigned tags of the job run.</p>"
+        },
+        "retryPolicyConfiguration": {
+          "shape": "RetryPolicyConfiguration",
+          "documentation": "<p>The configuration of the retry policy that the job runs on.</p>"
+        },
+        "retryPolicyExecution": {
+          "shape": "RetryPolicyExecution",
+          "documentation": "<p>The current status of the retry policy executed on the job.</p>"
         }
       },
       "documentation": "<p>This entity describes a job run. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS. </p>"
@@ -1042,6 +1603,127 @@
       "member": {
         "shape": "JobRun"
       }
+    },
+    "JobTemplate": {
+      "type": "structure",
+      "required": [
+        "jobTemplateData"
+      ],
+      "members": {
+        "name": {
+          "shape": "ResourceNameString",
+          "documentation": "<p>The name of the job template.</p>"
+        },
+        "id": {
+          "shape": "ResourceIdString",
+          "documentation": "<p>The ID of the job template.</p>"
+        },
+        "arn": {
+          "shape": "JobTemplateArn",
+          "documentation": "<p>The ARN of the job template.</p>"
+        },
+        "createdAt": {
+          "shape": "Date",
+          "documentation": "<p> The date and time when the job template was created.</p>"
+        },
+        "createdBy": {
+          "shape": "RequestIdentityUserArn",
+          "documentation": "<p> The user who created the job template.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags assigned to the job template.</p>"
+        },
+        "jobTemplateData": {
+          "shape": "JobTemplateData",
+          "documentation": "<p>The job template data which holds values of StartJobRun API request.</p>"
+        },
+        "kmsKeyArn": {
+          "shape": "KmsKeyArn",
+          "documentation": "<p> The KMS key ARN used to encrypt the job template.</p>"
+        },
+        "decryptionError": {
+          "shape": "String2048",
+          "documentation": "<p>The error message in case the decryption of job template fails.</p>"
+        }
+      },
+      "documentation": "<p>This entity describes a job template. Job template stores values of StartJobRun API request in a template and can be used to start a job run. Job template allows two use cases: avoid repeating recurring StartJobRun API request values, enforcing certain values in StartJobRun API request.</p>"
+    },
+    "JobTemplateArn": {
+      "type": "string",
+      "max": 1024,
+      "min": 60,
+      "pattern": "^arn:(aws[a-zA-Z0-9-]*):emr-containers:.+:(\\d{12}):\\/jobtemplates\\/[0-9a-zA-Z]+$"
+    },
+    "JobTemplateData": {
+      "type": "structure",
+      "required": [
+        "executionRoleArn",
+        "releaseLabel",
+        "jobDriver"
+      ],
+      "members": {
+        "executionRoleArn": {
+          "shape": "ParametricIAMRoleArn",
+          "documentation": "<p>The execution role ARN of the job run.</p>"
+        },
+        "releaseLabel": {
+          "shape": "ParametricReleaseLabel",
+          "documentation": "<p> The release version of Amazon EMR.</p>"
+        },
+        "configurationOverrides": {
+          "shape": "ParametricConfigurationOverrides",
+          "documentation": "<p> The configuration settings that are used to override defaults configuration.</p>"
+        },
+        "jobDriver": {
+          "shape": "JobDriver"
+        },
+        "parameterConfiguration": {
+          "shape": "TemplateParameterConfigurationMap",
+          "documentation": "<p>The configuration of parameters existing in the job template.</p>"
+        },
+        "jobTags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags assigned to jobs started using the job template.</p>"
+        }
+      },
+      "documentation": "<p>The values of StartJobRun API requests used in job runs started using the job template.</p>"
+    },
+    "JobTemplates": {
+      "type": "list",
+      "member": {
+        "shape": "JobTemplate"
+      }
+    },
+    "KmsKeyArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 3,
+      "pattern": "^(arn:(aws[a-zA-Z0-9-]*):kms:.+:(\\d{12})?:key\\/[(0-9a-zA-Z)-?]+|\\$\\{[a-zA-Z]\\w*\\})$"
+    },
+    "KubernetesNamespace": {
+      "type": "string",
+      "max": 63,
+      "min": 1,
+      "pattern": "[a-z0-9]([-a-z0-9]*[a-z0-9])?"
+    },
+    "LakeFormationConfiguration": {
+      "type": "structure",
+      "members": {
+        "authorizedSessionTagValue": {
+          "shape": "SessionTagValue",
+          "documentation": "<p>The session tag to authorize Amazon EMR on EKS for API calls to Lake Formation.</p>"
+        },
+        "secureNamespaceInfo": {
+          "shape": "SecureNamespaceInfo",
+          "documentation": "<p>The namespace input of the system job.</p>"
+        },
+        "queryEngineRoleArn": {
+          "shape": "IAMRoleArn",
+          "documentation": "<p>The query engine IAM role ARN that is tied to the secure Spark job. The <code>QueryEngine</code> role assumes the <code>JobExecutionRole</code> to execute all the Lake Formation calls.</p>"
+        }
+      },
+      "documentation": "<p>Lake Formation related configuration inputs for the security configuration.</p>"
     },
     "ListJobRunsRequest": {
       "type": "structure",
@@ -1103,6 +1785,48 @@
         "nextToken": {
           "shape": "NextToken",
           "documentation": "<p>This output displays the token for the next set of job runs.</p>"
+        }
+      }
+    },
+    "ListJobTemplatesRequest": {
+      "type": "structure",
+      "members": {
+        "createdAfter": {
+          "shape": "Date",
+          "documentation": "<p>The date and time after which the job templates were created.</p>",
+          "location": "querystring",
+          "locationName": "createdAfter"
+        },
+        "createdBefore": {
+          "shape": "Date",
+          "documentation": "<p> The date and time before which the job templates were created.</p>",
+          "location": "querystring",
+          "locationName": "createdBefore"
+        },
+        "maxResults": {
+          "shape": "JavaInteger",
+          "documentation": "<p> The maximum number of job templates that can be listed.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p> The token for the next set of job templates to return.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "ListJobTemplatesResponse": {
+      "type": "structure",
+      "members": {
+        "templates": {
+          "shape": "JobTemplates",
+          "documentation": "<p>This output lists information about the specified job templates.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p> This output displays the token for the next set of job templates.</p>"
         }
       }
     },
@@ -1169,6 +1893,48 @@
         }
       }
     },
+    "ListSecurityConfigurationsRequest": {
+      "type": "structure",
+      "members": {
+        "createdAfter": {
+          "shape": "Date",
+          "documentation": "<p>The date and time after which the security configuration was created.</p>",
+          "location": "querystring",
+          "locationName": "createdAfter"
+        },
+        "createdBefore": {
+          "shape": "Date",
+          "documentation": "<p>The date and time before which the security configuration was created.</p>",
+          "location": "querystring",
+          "locationName": "createdBefore"
+        },
+        "maxResults": {
+          "shape": "JavaInteger",
+          "documentation": "<p>The maximum number of security configurations the operation can list.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next set of security configurations to return.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "ListSecurityConfigurationsResponse": {
+      "type": "structure",
+      "members": {
+        "securityConfigurations": {
+          "shape": "SecurityConfigurations",
+          "documentation": "<p>The list of returned security configurations.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next set of security configurations to return.</p>"
+        }
+      }
+    },
     "ListTagsForResourceRequest": {
       "type": "structure",
       "required": [
@@ -1203,7 +1969,7 @@
         },
         "containerProviderType": {
           "shape": "ContainerProviderType",
-          "documentation": "<p>The container provider type of the virtual cluster. EKS is the only supported type as of now.</p>",
+          "documentation": "<p>The container provider type of the virtual cluster. Amazon EKS is the only supported type as of now.</p>",
           "location": "querystring",
           "locationName": "containerProviderType"
         },
@@ -1236,6 +2002,12 @@
           "documentation": "<p>The token for the next set of virtual clusters to return. </p>",
           "location": "querystring",
           "locationName": "nextToken"
+        },
+        "eksAccessEntryIntegrated": {
+          "shape": "Boolean",
+          "documentation": "<p>Optional Boolean that specifies whether the operation should return the virtual clusters that have the access entry integration enabled or disabled. If not specified, the operation returns all applicable virtual clusters.</p>",
+          "location": "querystring",
+          "locationName": "eksAccessEntryIntegrated"
         }
       }
     },
@@ -1252,11 +2024,22 @@
         }
       }
     },
+    "LogContext": {
+      "type": "string",
+      "max": 63,
+      "min": 3,
+      "pattern": "^((?!.*-s3alias)(?!xn--.*)[a-z0-9][-a-z0-9.]*)?[a-z0-9]$"
+    },
     "LogGroupName": {
       "type": "string",
       "max": 512,
       "min": 1,
       "pattern": "[\\.\\-_/#A-Za-z0-9]+"
+    },
+    "MaxFilesToKeep": {
+      "type": "integer",
+      "max": 50,
+      "min": 1
     },
     "MonitoringConfiguration": {
       "type": "structure",
@@ -1272,6 +2055,10 @@
         "s3MonitoringConfiguration": {
           "shape": "S3MonitoringConfiguration",
           "documentation": "<p>Amazon S3 configuration for monitoring log publishing.</p>"
+        },
+        "containerLogRotationConfiguration": {
+          "shape": "ContainerLogRotationConfiguration",
+          "documentation": "<p>Enable or disable container log rotation.</p>"
         }
       },
       "documentation": "<p>Configuration setting for monitoring.</p>"
@@ -1281,6 +2068,74 @@
       "max": 1024,
       "min": 1,
       "pattern": ".*\\S.*"
+    },
+    "ParametricCloudWatchMonitoringConfiguration": {
+      "type": "structure",
+      "members": {
+        "logGroupName": {
+          "shape": "TemplateParameter",
+          "documentation": "<p> The name of the log group for log publishing.</p>"
+        },
+        "logStreamNamePrefix": {
+          "shape": "String256",
+          "documentation": "<p> The specified name prefix for log streams.</p>"
+        }
+      },
+      "documentation": "<p> A configuration for CloudWatch monitoring. You can configure your jobs to send log information to CloudWatch Logs. This data type allows job template parameters to be specified within.</p>"
+    },
+    "ParametricConfigurationOverrides": {
+      "type": "structure",
+      "members": {
+        "applicationConfiguration": {
+          "shape": "ConfigurationList",
+          "documentation": "<p> The configurations for the application running by the job run.</p>"
+        },
+        "monitoringConfiguration": {
+          "shape": "ParametricMonitoringConfiguration",
+          "documentation": "<p> The configurations for monitoring. </p>"
+        }
+      },
+      "documentation": "<p> A configuration specification to be used to override existing configurations. This data type allows job template parameters to be specified within.</p>"
+    },
+    "ParametricIAMRoleArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 4,
+      "pattern": "(^arn:(aws[a-zA-Z0-9-]*):iam::(\\d{12})?:(role((\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F))[\\w+=,.@-]+)$)|([\\.\\-_\\#A-Za-z0-9\\$\\{\\}]+)"
+    },
+    "ParametricMonitoringConfiguration": {
+      "type": "structure",
+      "members": {
+        "persistentAppUI": {
+          "shape": "TemplateParameter",
+          "documentation": "<p> Monitoring configurations for the persistent application UI.</p>"
+        },
+        "cloudWatchMonitoringConfiguration": {
+          "shape": "ParametricCloudWatchMonitoringConfiguration",
+          "documentation": "<p> Monitoring configurations for CloudWatch.</p>"
+        },
+        "s3MonitoringConfiguration": {
+          "shape": "ParametricS3MonitoringConfiguration",
+          "documentation": "<p> Amazon S3 configuration for monitoring log publishing.</p>"
+        }
+      },
+      "documentation": "<p> Configuration setting for monitoring. This data type allows job template parameters to be specified within.</p>"
+    },
+    "ParametricReleaseLabel": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "([\\.\\-_/A-Za-z0-9]+|\\$\\{[a-zA-Z]\\w*\\})"
+    },
+    "ParametricS3MonitoringConfiguration": {
+      "type": "structure",
+      "members": {
+        "logUri": {
+          "shape": "UriString",
+          "documentation": "<p>Amazon S3 destination URI for log publishing.</p>"
+        }
+      },
+      "documentation": "<p> Amazon S3 configuration for monitoring log publishing. You can configure your jobs to send log information to Amazon S3. This data type allows job template parameters to be specified within.</p>"
     },
     "PersistentAppUI": {
       "type": "string",
@@ -1313,6 +2168,38 @@
       "min": 1,
       "pattern": "[\\.\\-_/#A-Za-z0-9]+"
     },
+    "RetryPolicyConfiguration": {
+      "type": "structure",
+      "required": [
+        "maxAttempts"
+      ],
+      "members": {
+        "maxAttempts": {
+          "shape": "JavaInteger",
+          "documentation": "<p>The maximum number of attempts on the job's driver.</p>"
+        }
+      },
+      "documentation": "<p>The configuration of the retry policy that the job runs on.</p>"
+    },
+    "RetryPolicyExecution": {
+      "type": "structure",
+      "required": [
+        "currentAttemptCount"
+      ],
+      "members": {
+        "currentAttemptCount": {
+          "shape": "JavaInteger",
+          "documentation": "<p>The current number of attempts made on the driver of the job.</p>"
+        }
+      },
+      "documentation": "<p>The current status of the retry policy executed on the job.</p>"
+    },
+    "RotationSize": {
+      "type": "string",
+      "max": 12,
+      "min": 3,
+      "pattern": "^\\d+(\\.\\d+)?[KMG][Bb]?$"
+    },
     "RsiArn": {
       "type": "string",
       "max": 500,
@@ -1332,6 +2219,82 @@
       },
       "documentation": "<p> Amazon S3 configuration for monitoring log publishing. You can configure your jobs to send log information to Amazon S3.</p>"
     },
+    "SecretsManagerArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 3,
+      "pattern": "^arn:(aws[a-zA-Z0-9-]*):secretsmanager:.+:(\\d{12}):secret:[0-9a-zA-Z/_+=.@-]+$"
+    },
+    "SecureNamespaceInfo": {
+      "type": "structure",
+      "members": {
+        "clusterId": {
+          "shape": "ClusterId",
+          "documentation": "<p>The ID of the Amazon EKS cluster where Amazon EMR on EKS jobs run.</p>"
+        },
+        "namespace": {
+          "shape": "KubernetesNamespace",
+          "documentation": "<p>The namespace of the Amazon EKS cluster where the system jobs run.</p>"
+        }
+      },
+      "documentation": "<p>Namespace inputs for the system job.</p>"
+    },
+    "SecurityConfiguration": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "shape": "ResourceIdString",
+          "documentation": "<p>The ID of the security configuration.</p>"
+        },
+        "name": {
+          "shape": "ResourceNameString",
+          "documentation": "<p>The name of the security configuration.</p>"
+        },
+        "arn": {
+          "shape": "SecurityConfigurationArn",
+          "documentation": "<p>The ARN (Amazon Resource Name) of the security configuration.</p>"
+        },
+        "createdAt": {
+          "shape": "Date",
+          "documentation": "<p>The date and time that the job run was created.</p>"
+        },
+        "createdBy": {
+          "shape": "RequestIdentityUserArn",
+          "documentation": "<p>The user who created the job run.</p>"
+        },
+        "securityConfigurationData": {
+          "shape": "SecurityConfigurationData",
+          "documentation": "<p>Security configuration inputs for the request.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags to assign to the security configuration.</p>"
+        }
+      },
+      "documentation": "<p>Inputs related to the security configuration. Security configurations in Amazon EMR on EKS are templates for different security setups. You can use security configurations to configure the Lake Formation integration setup. You can also create a security configuration to re-use a security setup each time you create a virtual cluster.</p>"
+    },
+    "SecurityConfigurationArn": {
+      "type": "string",
+      "max": 1024,
+      "min": 60,
+      "pattern": "^arn:(aws[a-zA-Z0-9-]*):emr-containers:.+:(\\d{12}):\\/securityconfigurations\\/[0-9a-zA-Z]+$"
+    },
+    "SecurityConfigurationData": {
+      "type": "structure",
+      "members": {
+        "authorizationConfiguration": {
+          "shape": "AuthorizationConfiguration",
+          "documentation": "<p>Authorization-related configuration input for the security configuration.</p>"
+        }
+      },
+      "documentation": "<p>Configurations related to the security configuration for the request.</p>"
+    },
+    "SecurityConfigurations": {
+      "type": "list",
+      "member": {
+        "shape": "SecurityConfiguration"
+      }
+    },
     "SensitivePropertiesMap": {
       "type": "map",
       "key": {
@@ -1341,6 +2304,33 @@
         "shape": "String1024"
       },
       "max": 100,
+      "sensitive": true
+    },
+    "SessionTagValue": {
+      "type": "string",
+      "max": 512,
+      "min": 1,
+      "pattern": "[\\.\\-_/#A-Za-z0-9 ]+"
+    },
+    "SparkSqlJobDriver": {
+      "type": "structure",
+      "members": {
+        "entryPoint": {
+          "shape": "EntryPointPath",
+          "documentation": "<p>The SQL file to be executed.</p>"
+        },
+        "sparkSqlParameters": {
+          "shape": "SparkSqlParameters",
+          "documentation": "<p>The Spark parameters to be included in the Spark SQL command.</p>"
+        }
+      },
+      "documentation": "<p>The job driver for job type.</p>"
+    },
+    "SparkSqlParameters": {
+      "type": "string",
+      "max": 102400,
+      "min": 1,
+      "pattern": ".*\\S.*",
       "sensitive": true
     },
     "SparkSubmitJobDriver": {
@@ -1366,19 +2356,16 @@
     },
     "SparkSubmitParameters": {
       "type": "string",
-      "max": 1024,
+      "max": 102400,
       "min": 1,
-      "pattern": "(?!\\s*$)(^[^';|\\u0026\\u003C\\u003E*?`$(){}\\[\\]!#\\\\]*$)",
+      "pattern": ".*\\S.*",
       "sensitive": true
     },
     "StartJobRunRequest": {
       "type": "structure",
       "required": [
         "virtualClusterId",
-        "clientToken",
-        "executionRoleArn",
-        "releaseLabel",
-        "jobDriver"
+        "clientToken"
       ],
       "members": {
         "name": {
@@ -1415,6 +2402,18 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags assigned to job runs.</p>"
+        },
+        "jobTemplateId": {
+          "shape": "ResourceIdString",
+          "documentation": "<p>The job template ID to be used to start the job run.</p>"
+        },
+        "jobTemplateParameters": {
+          "shape": "TemplateParameterInputMap",
+          "documentation": "<p>The values of job template parameters to start a job run.</p>"
+        },
+        "retryPolicyConfiguration": {
+          "shape": "RetryPolicyConfiguration",
+          "documentation": "<p>The retry policy configuration for the job run.</p>"
         }
       }
     },
@@ -1451,6 +2450,12 @@
       "min": 1,
       "pattern": ".*\\S.*"
     },
+    "String2048": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": ".*\\S.*"
+    },
     "String256": {
       "type": "string",
       "max": 256,
@@ -1468,6 +2473,24 @@
       "member": {
         "shape": "String256"
       }
+    },
+    "TLSCertificateConfiguration": {
+      "type": "structure",
+      "members": {
+        "certificateProviderType": {
+          "shape": "CertificateProviderType",
+          "documentation": "<p>The TLS certificate type. Acceptable values: <code>PEM</code> or <code>Custom</code>.</p>"
+        },
+        "publicCertificateSecretArn": {
+          "shape": "SecretsManagerArn",
+          "documentation": "<p>Secrets Manager ARN that contains the public TLS certificate contents, used for communication between the user job and the system job.</p>"
+        },
+        "privateCertificateSecretArn": {
+          "shape": "SecretsManagerArn",
+          "documentation": "<p>Secrets Manager ARN that contains the private TLS certificate contents, used for communication between the user job and the system job.</p>"
+        }
+      },
+      "documentation": "<p>Configurations related to the TLS certificate for the security configuration.</p>"
     },
     "TagKeyList": {
       "type": "list",
@@ -1510,6 +2533,65 @@
     "TagResourceResponse": {
       "type": "structure",
       "members": {}
+    },
+    "TemplateParameter": {
+      "type": "string",
+      "max": 512,
+      "min": 1,
+      "pattern": "[\\.\\-_/#A-Za-z0-9\\$\\{\\}]+"
+    },
+    "TemplateParameterConfiguration": {
+      "type": "structure",
+      "members": {
+        "type": {
+          "shape": "TemplateParameterDataType",
+          "documentation": "<p>The type of the job template parameter. Allowed values are: ‘STRING’, ‘NUMBER’.</p>"
+        },
+        "defaultValue": {
+          "shape": "String1024",
+          "documentation": "<p>The default value for the job template parameter.</p>"
+        }
+      },
+      "documentation": "<p>The configuration of a job template parameter.</p>"
+    },
+    "TemplateParameterConfigurationMap": {
+      "type": "map",
+      "key": {
+        "shape": "TemplateParameterName"
+      },
+      "value": {
+        "shape": "TemplateParameterConfiguration"
+      },
+      "max": 100
+    },
+    "TemplateParameterDataType": {
+      "type": "string",
+      "enum": [
+        "NUMBER",
+        "STRING"
+      ]
+    },
+    "TemplateParameterInputMap": {
+      "type": "map",
+      "key": {
+        "shape": "TemplateParameterName"
+      },
+      "value": {
+        "shape": "String1024"
+      },
+      "max": 100
+    },
+    "TemplateParameterName": {
+      "type": "string",
+      "max": 512,
+      "min": 1,
+      "pattern": "[\\.\\-_\\#A-Za-z0-9]+"
+    },
+    "Token": {
+      "type": "string",
+      "min": 1,
+      "pattern": "^.*\\S.*$",
+      "sensitive": true
     },
     "UntagResourceRequest": {
       "type": "structure",
@@ -1572,9 +2654,13 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>The assigned tags of the virtual cluster.</p>"
+        },
+        "securityConfigurationId": {
+          "shape": "ResourceIdString",
+          "documentation": "<p>The ID of the security configuration.</p>"
         }
       },
-      "documentation": "<p>This entity describes a virtual cluster. A virtual cluster is a Kubernetes namespace that Amazon EMR is registered with. Amazon EMR uses virtual clusters to run jobs and host endpoints. Multiple virtual clusters can be backed by the same physical cluster. However, each virtual cluster maps to one namespace on an EKS cluster. Virtual clusters do not create any active resources that contribute to your bill or that require lifecycle management outside the service.</p>"
+      "documentation": "<p>This entity describes a virtual cluster. A virtual cluster is a Kubernetes namespace that Amazon EMR is registered with. Amazon EMR uses virtual clusters to run jobs and host endpoints. Multiple virtual clusters can be backed by the same physical cluster. However, each virtual cluster maps to one namespace on an Amazon EKS cluster. Virtual clusters do not create any active resources that contribute to your bill or that require lifecycle management outside the service.</p>"
     },
     "VirtualClusterArn": {
       "type": "string",
@@ -1605,5 +2691,5 @@
       }
     }
   },
-  "documentation": "<p>Amazon EMR on EKS provides a deployment option for Amazon EMR that allows you to run open-source big data frameworks on Amazon Elastic Kubernetes Service (Amazon EKS). With this deployment option, you can focus on running analytics workloads while Amazon EMR on EKS builds, configures, and manages containers for open-source applications. For more information about Amazon EMR on EKS concepts and tasks, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html\">What is Amazon EMR on EKS</a>.</p> <p> <i>Amazon EMR containers</i> is the API name for Amazon EMR on EKS. The <code>emr-containers</code> prefix is used in the following scenarios: </p> <ul> <li> <p>It is the prefix in the CLI commands for Amazon EMR on EKS. For example, <code>aws emr-containers start-job-run</code>.</p> </li> <li> <p>It is the prefix before IAM policy actions for Amazon EMR on EKS. For example, <code>\"Action\": [ \"emr-containers:StartJobRun\"]</code>. For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-actions\">Policy actions for Amazon EMR on EKS</a>.</p> </li> <li> <p>It is the prefix used in Amazon EMR on EKS service endpoints. For example, <code>emr-containers.us-east-2.amazonaws.com</code>. For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/service-quotas.html#service-endpoints\">Amazon EMR on EKS Service Endpoints</a>.</p> </li> </ul>"
+  "documentation": "<p>Amazon EMR on EKS provides a deployment option for Amazon EMR that allows you to run open-source big data frameworks on Amazon Elastic Kubernetes Service (Amazon EKS). With this deployment option, you can focus on running analytics workloads while Amazon EMR on EKS builds, configures, and manages containers for open-source applications. For more information about Amazon EMR on EKS concepts and tasks, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html\">What is Amazon EMR on EKS</a>.</p> <p> <i>Amazon EMR containers</i> is the API name for Amazon EMR on EKS. The <code>emr-containers</code> prefix is used in the following scenarios: </p> <ul> <li> <p>It is the prefix in the CLI commands for Amazon EMR on EKS. For example, <code>aws emr-containers start-job-run</code>.</p> </li> <li> <p>It is the prefix before IAM policy actions for Amazon EMR on EKS. For example, <code>\"Action\": [ \"emr-containers:StartJobRun\"]</code>. For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-actions\">Policy actions for Amazon EMR on EKS</a>.</p> </li> <li> <p>It is the prefix used in Amazon EMR on EKS service endpoints. For example, <code>emr-containers.us-east-2.amazonaws.com</code>. For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/service-quotas.html#service-endpoints\">Amazon EMR on EKSService Endpoints</a>.</p> </li> </ul>"
 }

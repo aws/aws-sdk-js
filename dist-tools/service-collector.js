@@ -143,9 +143,11 @@ function ServiceCollector(services) {
   }
 
   var invalidModules = [];
-  var stsIncluded = false;
   services.split(',').sort().forEach(function(name) {
-    if (name.match(/^sts\b/) || name === 'all') stsIncluded = true;
+    if (['cognitoidentity', 'sts'].indexOf(name) >= 0) {
+      // these service has been included via browser credentials already
+      return;
+    }
     try {
       serviceCode += buildService(name, usingDefaultServicesToggle) + '\n';
     } catch (e) {
@@ -153,10 +155,6 @@ function ServiceCollector(services) {
       else throw e;
     }
   });
-
-  if (!stsIncluded) {
-    serviceCode += buildService('sts') + '\n';
-  }
 
   if (invalidModules.length > 0) {
     throw new Error('Missing modules: ' + invalidModules.join(', '));

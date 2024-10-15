@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release removes resource ids and tagging support for VPC security group rules."
+    }
+]

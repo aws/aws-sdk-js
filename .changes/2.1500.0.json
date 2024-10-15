@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeStarconnections",
+        "description": "This release updates a few CodeStar Connections related APIs."
+    },
+    {
+        "type": "feature",
+        "category": "DocDB",
+        "description": "Amazon DocumentDB updates for new cluster storage configuration: Amazon DocumentDB I/O-Optimized."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds support for Security group referencing over Transit gateways, enabling you to simplify Security group management and control of instance-to-instance traffic across VPCs that are connected by Transit gateway."
+    }
+]

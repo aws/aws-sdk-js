@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "EMR",
+        "description": "adds fine grained control over Unhealthy Node Replacement to Amazon ElasticMapReduce"
+    },
+    {
+        "type": "feature",
+        "category": "Firehose",
+        "description": "This release adds support for Data Message Extraction for decompressed CloudWatch logs, and to use a custom file extension or time zone for S3 destinations."
+    },
+    {
+        "type": "feature",
+        "category": "SNS",
+        "description": "This release marks phone numbers as sensitive inputs."
+    }
+]

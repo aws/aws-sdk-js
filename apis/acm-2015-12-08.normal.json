@@ -5,12 +5,18 @@
     "endpointPrefix": "acm",
     "jsonVersion": "1.1",
     "protocol": "json",
+    "protocols": [
+      "json"
+    ],
     "serviceAbbreviation": "ACM",
     "serviceFullName": "AWS Certificate Manager",
     "serviceId": "ACM",
     "signatureVersion": "v4",
     "targetPrefix": "CertificateManager",
-    "uid": "acm-2015-12-08"
+    "uid": "acm-2015-12-08",
+    "auth": [
+      "aws.auth#sigv4"
+    ]
   },
   "operations": {
     "AddTagsToCertificate": {
@@ -40,9 +46,12 @@
         },
         {
           "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Adds one or more tags to an ACM certificate. Tags are labels that you can use to identify and organize your AWS resources. Each tag consists of a <code>key</code> and an optional <code>value</code>. You specify the certificate on input by its Amazon Resource Name (ARN). You specify the tag by using a key-value pair. </p> <p>You can apply a tag to just one certificate if you want to identify a specific characteristic of that certificate, or you can apply the same tag to multiple certificates if you want to filter for a common relationship among those certificates. Similarly, you can apply the same tag to multiple resources if you want to specify a relationship among those resources. For example, you can add the same tag to an ACM certificate and an Elastic Load Balancing load balancer to indicate that they are both used by the same website. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/tags.html\">Tagging ACM certificates</a>. </p> <p>To remove one or more tags, use the <a>RemoveTagsFromCertificate</a> action. To view all of the tags that have been applied to the certificate, use the <a>ListTagsForCertificate</a> action. </p>"
+      "documentation": "<p>Adds one or more tags to an ACM certificate. Tags are labels that you can use to identify and organize your Amazon Web Services resources. Each tag consists of a <code>key</code> and an optional <code>value</code>. You specify the certificate on input by its Amazon Resource Name (ARN). You specify the tag by using a key-value pair. </p> <p>You can apply a tag to just one certificate if you want to identify a specific characteristic of that certificate, or you can apply the same tag to multiple certificates if you want to filter for a common relationship among those certificates. Similarly, you can apply the same tag to multiple resources if you want to specify a relationship among those resources. For example, you can add the same tag to an ACM certificate and an Elastic Load Balancing load balancer to indicate that they are both used by the same website. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/tags.html\">Tagging ACM certificates</a>. </p> <p>To remove one or more tags, use the <a>RemoveTagsFromCertificate</a> action. To view all of the tags that have been applied to the certificate, use the <a>ListTagsForCertificate</a> action. </p>"
     },
     "DeleteCertificate": {
       "name": "DeleteCertificate",
@@ -61,10 +70,19 @@
           "shape": "ResourceInUseException"
         },
         {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
           "shape": "InvalidArnException"
         }
       ],
-      "documentation": "<p>Deletes a certificate and its associated private key. If this action succeeds, the certificate no longer appears in the list that can be displayed by calling the <a>ListCertificates</a> action or be retrieved by calling the <a>GetCertificate</a> action. The certificate will not be available for use by AWS services integrated with ACM. </p> <note> <p>You cannot delete an ACM certificate that is being used by another AWS service. To delete a certificate that is in use, the certificate association must first be removed.</p> </note>"
+      "documentation": "<p>Deletes a certificate and its associated private key. If this action succeeds, the certificate no longer appears in the list that can be displayed by calling the <a>ListCertificates</a> action or be retrieved by calling the <a>GetCertificate</a> action. The certificate will not be available for use by Amazon Web Services services integrated with ACM. </p> <note> <p>You cannot delete an ACM certificate that is being used by another Amazon Web Services service. To delete a certificate that is in use, the certificate association must first be removed.</p> </note>"
     },
     "DescribeCertificate": {
       "name": "DescribeCertificate",
@@ -86,7 +104,7 @@
           "shape": "InvalidArnException"
         }
       ],
-      "documentation": "<p>Returns detailed metadata about the specified ACM certificate.</p>"
+      "documentation": "<p>Returns detailed metadata about the specified ACM certificate.</p> <p>If you have just created a certificate using the <code>RequestCertificate</code> action, there is a delay of several seconds before you can retrieve information about it.</p>"
     },
     "ExportCertificate": {
       "name": "ExportCertificate",
@@ -113,6 +131,25 @@
       ],
       "documentation": "<p>Exports a private certificate issued by a private certificate authority (CA) for use anywhere. The exported file contains the certificate, the certificate chain, and the encrypted private 2048-bit RSA key associated with the public key that is embedded in the certificate. For security, you must assign a passphrase for the private key when exporting it. </p> <p>For information about exporting and formatting a certificate using the ACM console or CLI, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-export-private.html\">Export a Private Certificate</a>.</p>"
     },
+    "GetAccountConfiguration": {
+      "name": "GetAccountConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "output": {
+        "shape": "GetAccountConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Returns the account configuration options associated with an Amazon Web Services account.</p>"
+    },
     "GetCertificate": {
       "name": "GetCertificate",
       "http": {
@@ -136,7 +173,7 @@
           "shape": "InvalidArnException"
         }
       ],
-      "documentation": "<p>Retrieves an Amazon-issued certificate and its certificate chain. The chain consists of the certificate of the issuing CA and the intermediate certificates of any other subordinate CAs. All of the certificates are base64 encoded. You can use <a href=\"https://wiki.openssl.org/index.php/Command_Line_Utilities\">OpenSSL</a> to decode the certificates and inspect individual fields.</p>"
+      "documentation": "<p>Retrieves a certificate and its certificate chain. The certificate may be either a public or private certificate issued using the ACM <code>RequestCertificate</code> action, or a certificate imported into ACM using the <code>ImportCertificate</code> action. The chain consists of the certificate of the issuing CA and the intermediate certificates of any other subordinate CAs. All of the certificates are base64 encoded. You can use <a href=\"https://wiki.openssl.org/index.php/Command_Line_Utilities\">OpenSSL</a> to decode the certificates and inspect individual fields.</p>"
     },
     "ImportCertificate": {
       "name": "ImportCertificate",
@@ -168,9 +205,12 @@
         },
         {
           "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "InvalidArnException"
         }
       ],
-      "documentation": "<p>Imports a certificate into AWS Certificate Manager (ACM) to use with services that are integrated with ACM. Note that <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-services.html\">integrated services</a> allow only certificate types and keys they support to be associated with their resources. Further, their support differs depending on whether the certificate is imported into IAM or into ACM. For more information, see the documentation for each service. For more information about importing certificates into ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing Certificates</a> in the <i>AWS Certificate Manager User Guide</i>. </p> <note> <p>ACM does not provide <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html\">managed renewal</a> for certificates that you import.</p> </note> <p>Note the following guidelines when importing third party certificates:</p> <ul> <li> <p>You must enter the private key that matches the certificate you are importing.</p> </li> <li> <p>The private key must be unencrypted. You cannot import a private key that is protected by a password or a passphrase.</p> </li> <li> <p>If the certificate you are importing is not self-signed, you must enter its certificate chain.</p> </li> <li> <p>If a certificate chain is included, the issuer must be the subject of one of the certificates in the chain.</p> </li> <li> <p>The certificate, private key, and certificate chain must be PEM-encoded.</p> </li> <li> <p>The current time must be between the <code>Not Before</code> and <code>Not After</code> certificate fields.</p> </li> <li> <p>The <code>Issuer</code> field must not be empty.</p> </li> <li> <p>The OCSP authority URL, if present, must not exceed 1000 characters.</p> </li> <li> <p>To import a new certificate, omit the <code>CertificateArn</code> argument. Include this argument only when you want to replace a previously imported certifica</p> </li> <li> <p>When you import a certificate by using the CLI, you must specify the certificate, the certificate chain, and the private key by their file names preceded by <code>file://</code>. For example, you can specify a certificate saved in the <code>C:\\temp</code> folder as <code>file://C:\\temp\\certificate_to_import.pem</code>. If you are making an HTTP or HTTPS Query request, include these arguments as BLOBs. </p> </li> <li> <p>When you import a certificate by using an SDK, you must specify the certificate, the certificate chain, and the private key files in the manner required by the programming language you're using. </p> </li> <li> <p>The cryptographic algorithm of an imported certificate must match the algorithm of the signing CA. For example, if the signing CA key type is RSA, then the certificate key type must also be RSA.</p> </li> </ul> <p>This operation returns the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of the imported certificate.</p>"
+      "documentation": "<p>Imports a certificate into Certificate Manager (ACM) to use with services that are integrated with ACM. Note that <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-services.html\">integrated services</a> allow only certificate types and keys they support to be associated with their resources. Further, their support differs depending on whether the certificate is imported into IAM or into ACM. For more information, see the documentation for each service. For more information about importing certificates into ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing Certificates</a> in the <i>Certificate Manager User Guide</i>. </p> <note> <p>ACM does not provide <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html\">managed renewal</a> for certificates that you import.</p> </note> <p>Note the following guidelines when importing third party certificates:</p> <ul> <li> <p>You must enter the private key that matches the certificate you are importing.</p> </li> <li> <p>The private key must be unencrypted. You cannot import a private key that is protected by a password or a passphrase.</p> </li> <li> <p>The private key must be no larger than 5 KB (5,120 bytes).</p> </li> <li> <p>The certificate, private key, and certificate chain must be PEM-encoded.</p> </li> <li> <p>The current time must be between the <code>Not Before</code> and <code>Not After</code> certificate fields.</p> </li> <li> <p>The <code>Issuer</code> field must not be empty.</p> </li> <li> <p>The OCSP authority URL, if present, must not exceed 1000 characters.</p> </li> <li> <p>To import a new certificate, omit the <code>CertificateArn</code> argument. Include this argument only when you want to replace a previously imported certificate.</p> </li> <li> <p>When you import a certificate by using the CLI, you must specify the certificate, the certificate chain, and the private key by their file names preceded by <code>fileb://</code>. For example, you can specify a certificate saved in the <code>C:\\temp</code> folder as <code>fileb://C:\\temp\\certificate_to_import.pem</code>. If you are making an HTTP or HTTPS Query request, include these arguments as BLOBs. </p> </li> <li> <p>When you import a certificate by using an SDK, you must specify the certificate, the certificate chain, and the private key files in the manner required by the programming language you're using. </p> </li> <li> <p>The cryptographic algorithm of an imported certificate must match the algorithm of the signing CA. For example, if the signing CA key type is RSA, then the certificate key type must also be RSA.</p> </li> </ul> <p>This operation returns the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of the imported certificate.</p>"
     },
     "ListCertificates": {
       "name": "ListCertificates",
@@ -187,9 +227,12 @@
       "errors": [
         {
           "shape": "InvalidArgsException"
+        },
+        {
+          "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Retrieves a list of certificate ARNs and domain names. You can request that only certificates that match a specific status be listed. You can also filter by specific attributes of the certificate. Default filtering returns only <code>RSA_2048</code> certificates. For more information, see <a>Filters</a>.</p>"
+      "documentation": "<p>Retrieves a list of certificate ARNs and domain names. By default, the API returns RSA_2048 certificates. To return all certificates in the account, include the <code>keyType</code> filter with the values <code>[RSA_1024, RSA_2048, RSA_3072, RSA_4096, EC_prime256v1, EC_secp384r1, EC_secp521r1]</code>.</p> <p>In addition to <code>keyType</code>, you can also filter by the <code>CertificateStatuses</code>, <code>keyUsage</code>, and <code>extendedKeyUsage</code> attributes on the certificate. For more information, see <a>Filters</a>.</p>"
     },
     "ListTagsForCertificate": {
       "name": "ListTagsForCertificate",
@@ -212,6 +255,31 @@
         }
       ],
       "documentation": "<p>Lists the tags that have been applied to the ACM certificate. Use the certificate's Amazon Resource Name (ARN) to specify the certificate. To add a tag to an ACM certificate, use the <a>AddTagsToCertificate</a> action. To delete a tag, use the <a>RemoveTagsFromCertificate</a> action. </p>"
+    },
+    "PutAccountConfiguration": {
+      "name": "PutAccountConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutAccountConfigurationRequest"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Adds or modifies account-level configurations in ACM. </p> <p>The supported configuration option is <code>DaysBeforeExpiry</code>. This option specifies the number of days prior to certificate expiration when ACM starts generating <code>EventBridge</code> events. ACM sends one event per day per certificate until the certificate expires. By default, accounts receive events starting 45 days before certificate expiration.</p>"
     },
     "RemoveTagsFromCertificate": {
       "name": "RemoveTagsFromCertificate",
@@ -237,6 +305,9 @@
         },
         {
           "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ThrottlingException"
         }
       ],
       "documentation": "<p>Remove one or more tags from an ACM certificate. A tag consists of a key-value pair. If you do not specify the value portion of the tag when calling this function, the tag will be removed regardless of value. If you specify a value, the tag is removed only if it is associated with the specified value. </p> <p>To add tags to a certificate, use the <a>AddTagsToCertificate</a> action. To view all of the tags that have been applied to a specific ACM certificate, use the <a>ListTagsForCertificate</a> action. </p>"
@@ -258,7 +329,7 @@
           "shape": "InvalidArnException"
         }
       ],
-      "documentation": "<p>Renews an eligable ACM certificate. At this time, only exported private certificates can be renewed with this operation. In order to renew your ACM PCA certificates with ACM, you must first <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaPermissions.html\">grant the ACM service principal permission to do so</a>. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/manual-renewal.html\">Testing Managed Renewal</a> in the ACM User Guide.</p>"
+      "documentation": "<p>Renews an eligible ACM certificate. At this time, only exported private certificates can be renewed with this operation. In order to renew your Amazon Web Services Private CA certificates with ACM, you must first <a href=\"https://docs.aws.amazon.com/privateca/latest/userguide/PcaPermissions.html\">grant the ACM service principal permission to do so</a>. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/manual-renewal.html\">Testing Managed Renewal</a> in the ACM User Guide.</p>"
     },
     "RequestCertificate": {
       "name": "RequestCertificate",
@@ -295,7 +366,7 @@
           "shape": "InvalidParameterException"
         }
       ],
-      "documentation": "<p>Requests an ACM certificate for use with other AWS services. To request an ACM certificate, you must specify a fully qualified domain name (FQDN) in the <code>DomainName</code> parameter. You can also specify additional FQDNs in the <code>SubjectAlternativeNames</code> parameter. </p> <p>If you are requesting a private certificate, domain validation is not required. If you are requesting a public certificate, each domain name that you specify must be validated to verify that you own or control the domain. You can use <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html\">DNS validation</a> or <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html\">email validation</a>. We recommend that you use DNS validation. ACM issues public certificates after receiving approval from the domain owner. </p>"
+      "documentation": "<p>Requests an ACM certificate for use with other Amazon Web Services services. To request an ACM certificate, you must specify a fully qualified domain name (FQDN) in the <code>DomainName</code> parameter. You can also specify additional FQDNs in the <code>SubjectAlternativeNames</code> parameter. </p> <p>If you are requesting a private certificate, domain validation is not required. If you are requesting a public certificate, each domain name that you specify must be validated to verify that you own or control the domain. You can use <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html\">DNS validation</a> or <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html\">email validation</a>. We recommend that you use DNS validation. ACM issues public certificates after receiving approval from the domain owner. </p> <note> <p>ACM behavior differs from the <a href=\"https://datatracker.ietf.org/doc/html/rfc6125#appendix-B.2\">RFC 6125</a> specification of the certificate validation process. ACM first checks for a Subject Alternative Name, and, if it finds one, ignores the common name (CN).</p> </note> <p>After successful completion of the <code>RequestCertificate</code> action, there is a delay of several seconds before you can retrieve information about the new certificate.</p>"
     },
     "ResendValidationEmail": {
       "name": "ResendValidationEmail",
@@ -358,7 +429,7 @@
       "members": {
         "CertificateArn": {
           "shape": "Arn",
-          "documentation": "<p>String that contains the ARN of the ACM certificate to which the tag is to be applied. This must be of the form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>. </p>"
+          "documentation": "<p>String that contains the ARN of the ACM certificate to which the tag is to be applied. This must be of the form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>.</p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -370,7 +441,7 @@
       "type": "string",
       "max": 2048,
       "min": 20,
-      "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]+:[\\w+=,.@-]+(/[\\w+=,.@-]+)*"
+      "pattern": "arn:[\\w+=/,.@-]+:acm:[\\w+=/,.@-]*:[0-9]+:[\\w+=,.@-]+(/[\\w+=,.@-]+)*"
     },
     "CertificateBody": {
       "type": "string",
@@ -399,7 +470,7 @@
       "members": {
         "CertificateArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the certificate. For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the certificate. For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>"
         },
         "DomainName": {
           "shape": "DomainNameString",
@@ -427,7 +498,7 @@
         },
         "CreatedAt": {
           "shape": "TStamp",
-          "documentation": "<p>The time at which the certificate was requested. This value exists only when the certificate type is <code>AMAZON_ISSUED</code>. </p>"
+          "documentation": "<p>The time at which the certificate was requested.</p>"
         },
         "IssuedAt": {
           "shape": "TStamp",
@@ -435,11 +506,11 @@
         },
         "ImportedAt": {
           "shape": "TStamp",
-          "documentation": "<p>The date and time at which the certificate was imported. This value exists only when the certificate type is <code>IMPORTED</code>. </p>"
+          "documentation": "<p>The date and time when the certificate was imported. This value exists only when the certificate type is <code>IMPORTED</code>. </p>"
         },
         "Status": {
           "shape": "CertificateStatus",
-          "documentation": "<p>The status of the certificate.</p>"
+          "documentation": "<p>The status of the certificate.</p> <p>A certificate enters status PENDING_VALIDATION upon being requested, unless it fails for any of the reasons given in the troubleshooting topic <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting-failed.html\">Certificate request fails</a>. ACM makes repeated attempts to validate a certificate for 72 hours and then times out. If a certificate shows status FAILED or VALIDATION_TIMED_OUT, delete the request, correct the issue with <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/dns-validation.html\">DNS validation</a> or <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/email-validation.html\">Email validation</a>, and try again. If validation succeeds, the certificate enters status ISSUED. </p>"
         },
         "RevokedAt": {
           "shape": "TStamp",
@@ -467,15 +538,15 @@
         },
         "InUseBy": {
           "shape": "InUseList",
-          "documentation": "<p>A list of ARNs for the AWS resources that are using the certificate. A certificate can be used by multiple AWS resources. </p>"
+          "documentation": "<p>A list of ARNs for the Amazon Web Services resources that are using the certificate. A certificate can be used by multiple Amazon Web Services resources. </p>"
         },
         "FailureReason": {
           "shape": "FailureReason",
-          "documentation": "<p>The reason the certificate request failed. This value exists only when the certificate status is <code>FAILED</code>. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed\">Certificate Request Failed</a> in the <i>AWS Certificate Manager User Guide</i>. </p>"
+          "documentation": "<p>The reason the certificate request failed. This value exists only when the certificate status is <code>FAILED</code>. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed\">Certificate Request Failed</a> in the <i>Certificate Manager User Guide</i>. </p>"
         },
         "Type": {
           "shape": "CertificateType",
-          "documentation": "<p>The source of the certificate. For certificates provided by ACM, this value is <code>AMAZON_ISSUED</code>. For certificates that you imported with <a>ImportCertificate</a>, this value is <code>IMPORTED</code>. ACM does not provide <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html\">managed renewal</a> for imported certificates. For more information about the differences between certificates that you import and those that ACM provides, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing Certificates</a> in the <i>AWS Certificate Manager User Guide</i>. </p>"
+          "documentation": "<p>The source of the certificate. For certificates provided by ACM, this value is <code>AMAZON_ISSUED</code>. For certificates that you imported with <a>ImportCertificate</a>, this value is <code>IMPORTED</code>. ACM does not provide <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html\">managed renewal</a> for imported certificates. For more information about the differences between certificates that you import and those that ACM provides, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing Certificates</a> in the <i>Certificate Manager User Guide</i>. </p>"
         },
         "RenewalSummary": {
           "shape": "RenewalSummary",
@@ -491,7 +562,7 @@
         },
         "CertificateAuthorityArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the ACM PCA private certificate authority (CA) that issued the certificate. This has the following format: </p> <p> <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code> </p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the private certificate authority (CA) that issued the certificate. This has the following format: </p> <p> <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code> </p>"
         },
         "RenewalEligibility": {
           "shape": "RenewalEligibility",
@@ -537,11 +608,78 @@
       "members": {
         "CertificateArn": {
           "shape": "Arn",
-          "documentation": "<p>Amazon Resource Name (ARN) of the certificate. This is of the form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>. </p>"
+          "documentation": "<p>Amazon Resource Name (ARN) of the certificate. This is of the form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>.</p>"
         },
         "DomainName": {
           "shape": "DomainNameString",
           "documentation": "<p>Fully qualified domain name (FQDN), such as www.example.com or example.com, for the certificate.</p>"
+        },
+        "SubjectAlternativeNameSummaries": {
+          "shape": "DomainList",
+          "documentation": "<p>One or more domain names (subject alternative names) included in the certificate. This list contains the domain names that are bound to the public key that is contained in the certificate. The subject alternative names include the canonical domain name (CN) of the certificate and additional domain names that can be used to connect to the website. </p> <p>When called by <a>ListCertificates</a>, this parameter will only return the first 100 subject alternative names included in the certificate. To display the full list of subject alternative names, use <a>DescribeCertificate</a>.</p>"
+        },
+        "HasAdditionalSubjectAlternativeNames": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>When called by <a>ListCertificates</a>, indicates whether the full list of subject alternative names has been included in the response. If false, the response includes all of the subject alternative names included in the certificate. If true, the response only includes the first 100 subject alternative names included in the certificate. To display the full list of subject alternative names, use <a>DescribeCertificate</a>.</p>",
+          "box": true
+        },
+        "Status": {
+          "shape": "CertificateStatus",
+          "documentation": "<p>The status of the certificate.</p> <p>A certificate enters status PENDING_VALIDATION upon being requested, unless it fails for any of the reasons given in the troubleshooting topic <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting-failed.html\">Certificate request fails</a>. ACM makes repeated attempts to validate a certificate for 72 hours and then times out. If a certificate shows status FAILED or VALIDATION_TIMED_OUT, delete the request, correct the issue with <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/dns-validation.html\">DNS validation</a> or <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/email-validation.html\">Email validation</a>, and try again. If validation succeeds, the certificate enters status ISSUED. </p>"
+        },
+        "Type": {
+          "shape": "CertificateType",
+          "documentation": "<p>The source of the certificate. For certificates provided by ACM, this value is <code>AMAZON_ISSUED</code>. For certificates that you imported with <a>ImportCertificate</a>, this value is <code>IMPORTED</code>. ACM does not provide <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html\">managed renewal</a> for imported certificates. For more information about the differences between certificates that you import and those that ACM provides, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing Certificates</a> in the <i>Certificate Manager User Guide</i>. </p>"
+        },
+        "KeyAlgorithm": {
+          "shape": "KeyAlgorithm",
+          "documentation": "<p>The algorithm that was used to generate the public-private key pair.</p>"
+        },
+        "KeyUsages": {
+          "shape": "KeyUsageNames",
+          "documentation": "<p>A list of Key Usage X.509 v3 extension objects. Each object is a string value that identifies the purpose of the public key contained in the certificate. Possible extension values include DIGITAL_SIGNATURE, KEY_ENCHIPHERMENT, NON_REPUDIATION, and more.</p>"
+        },
+        "ExtendedKeyUsages": {
+          "shape": "ExtendedKeyUsageNames",
+          "documentation": "<p>Contains a list of Extended Key Usage X.509 v3 extension objects. Each object specifies a purpose for which the certificate public key can be used and consists of a name and an object identifier (OID). </p>"
+        },
+        "InUse": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>Indicates whether the certificate is currently in use by any Amazon Web Services resources.</p>",
+          "box": true
+        },
+        "Exported": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>Indicates whether the certificate has been exported. This value exists only when the certificate type is <code>PRIVATE</code>.</p>",
+          "box": true
+        },
+        "RenewalEligibility": {
+          "shape": "RenewalEligibility",
+          "documentation": "<p>Specifies whether the certificate is eligible for renewal. At this time, only exported private certificates can be renewed with the <a>RenewCertificate</a> command.</p>"
+        },
+        "NotBefore": {
+          "shape": "TStamp",
+          "documentation": "<p>The time before which the certificate is not valid.</p>"
+        },
+        "NotAfter": {
+          "shape": "TStamp",
+          "documentation": "<p>The time after which the certificate is not valid.</p>"
+        },
+        "CreatedAt": {
+          "shape": "TStamp",
+          "documentation": "<p>The time at which the certificate was requested.</p>"
+        },
+        "IssuedAt": {
+          "shape": "TStamp",
+          "documentation": "<p>The time at which the certificate was issued. This value exists only when the certificate type is <code>AMAZON_ISSUED</code>. </p>"
+        },
+        "ImportedAt": {
+          "shape": "TStamp",
+          "documentation": "<p>The date and time when the certificate was imported. This value exists only when the certificate type is <code>IMPORTED</code>. </p>"
+        },
+        "RevokedAt": {
+          "shape": "TStamp",
+          "documentation": "<p>The time at which the certificate was revoked. This value exists only when the certificate status is <code>REVOKED</code>. </p>"
         }
       },
       "documentation": "<p>This structure is returned in the response object of <a>ListCertificates</a> action. </p>"
@@ -575,7 +713,7 @@
       "members": {
         "CertificateArn": {
           "shape": "Arn",
-          "documentation": "<p>String that contains the ARN of the ACM certificate to be deleted. This must be of the form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>"
+          "documentation": "<p>String that contains the ARN of the ACM certificate to be deleted. This must be of the form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>.</p>"
         }
       }
     },
@@ -587,7 +725,7 @@
       "members": {
         "CertificateArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the ACM certificate. The ARN must have the following form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the ACM certificate. The ARN must have the following form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>.</p>"
         }
       }
     },
@@ -642,7 +780,7 @@
         },
         "ValidationStatus": {
           "shape": "DomainStatus",
-          "documentation": "<p>The validation status of the domain name. This can be one of the following values:</p> <ul> <li> <p> <code>PENDING_VALIDATION</code> </p> </li> <li> <p> <code/>SUCCESS</p> </li> <li> <p> <code/>FAILED</p> </li> </ul>"
+          "documentation": "<p>The validation status of the domain name. This can be one of the following values:</p> <ul> <li> <p> <code>PENDING_VALIDATION</code> </p> </li> <li> <p> <code>SUCCESS</code> </p> </li> <li> <p> <code>FAILED</code> </p> </li> </ul>"
         },
         "ResourceRecord": {
           "shape": "ResourceRecord",
@@ -689,6 +827,16 @@
       "max": 100,
       "min": 1
     },
+    "ExpiryEventsConfiguration": {
+      "type": "structure",
+      "members": {
+        "DaysBeforeExpiry": {
+          "shape": "PositiveInteger",
+          "documentation": "<p>Specifies the number of days prior to certificate expiration when ACM starts generating <code>EventBridge</code> events. ACM sends one event per day per certificate until the certificate expires. By default, accounts receive events starting 45 days before certificate expiration.</p>"
+        }
+      },
+      "documentation": "<p>Object containing expiration events options associated with an Amazon Web Services account.</p>"
+    },
     "ExportCertificateRequest": {
       "type": "structure",
       "required": [
@@ -702,7 +850,7 @@
         },
         "Passphrase": {
           "shape": "PassphraseBlob",
-          "documentation": "<p>Passphrase to associate with the encrypted exported private key. If you want to later decrypt the private key, you must have the passphrase. You can use the following OpenSSL command to decrypt a private key: </p> <p> <code>openssl rsa -in encrypted_key.pem -out decrypted_key.pem</code> </p>"
+          "documentation": "<p>Passphrase to associate with the encrypted exported private key. </p> <note> <p>When creating your passphrase, you can use any ASCII character except #, $, or %.</p> </note> <p>If you want to later decrypt the private key, you must have the passphrase. You can use the following OpenSSL command to decrypt a private key. After entering the command, you are prompted for the passphrase.</p> <p> <code>openssl rsa -in encrypted_key.pem -out decrypted_key.pem</code> </p>"
         }
       }
     },
@@ -766,6 +914,12 @@
         "CUSTOM"
       ]
     },
+    "ExtendedKeyUsageNames": {
+      "type": "list",
+      "member": {
+        "shape": "ExtendedKeyUsageName"
+      }
+    },
     "FailureReason": {
       "type": "string",
       "enum": [
@@ -801,10 +955,19 @@
         },
         "keyTypes": {
           "shape": "KeyAlgorithmList",
-          "documentation": "<p>Specify one or more algorithms that can be used to generate key pairs.</p> <p>Default filtering returns only <code>RSA_2048</code> certificates. To return other certificate types, provide the desired type signatures in a comma-separated list. For example, <code>\"keyTypes\": [\"RSA_2048,RSA_4096\"]</code> returns both <code>RSA_2048</code> and <code>RSA_4096</code> certificates.</p>"
+          "documentation": "<p>Specify one or more algorithms that can be used to generate key pairs.</p> <p>Default filtering returns only <code>RSA_1024</code> and <code>RSA_2048</code> certificates that have at least one domain. To return other certificate types, provide the desired type signatures in a comma-separated list. For example, <code>\"keyTypes\": [\"RSA_2048\",\"RSA_4096\"]</code> returns both <code>RSA_2048</code> and <code>RSA_4096</code> certificates.</p>"
         }
       },
       "documentation": "<p>This structure can be used in the <a>ListCertificates</a> action to filter the output of the certificate list. </p>"
+    },
+    "GetAccountConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "ExpiryEvents": {
+          "shape": "ExpiryEventsConfiguration",
+          "documentation": "<p>Expiration events configuration options associated with the Amazon Web Services account.</p>"
+        }
+      }
     },
     "GetCertificateRequest": {
       "type": "structure",
@@ -814,7 +977,7 @@
       "members": {
         "CertificateArn": {
           "shape": "Arn",
-          "documentation": "<p>String that contains a certificate ARN in the following format:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>"
+          "documentation": "<p>String that contains a certificate ARN in the following format:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>.</p>"
         }
       }
     },
@@ -884,8 +1047,9 @@
     "KeyAlgorithm": {
       "type": "string",
       "enum": [
-        "RSA_2048",
         "RSA_1024",
+        "RSA_2048",
+        "RSA_3072",
         "RSA_4096",
         "EC_prime256v1",
         "EC_secp384r1",
@@ -936,6 +1100,12 @@
         "CUSTOM"
       ]
     },
+    "KeyUsageNames": {
+      "type": "list",
+      "member": {
+        "shape": "KeyUsageName"
+      }
+    },
     "ListCertificatesRequest": {
       "type": "structure",
       "members": {
@@ -954,6 +1124,14 @@
         "MaxItems": {
           "shape": "MaxItems",
           "documentation": "<p>Use this parameter when paginating results to specify the maximum number of items to return in the response. If additional items exist beyond the number you specify, the <code>NextToken</code> element is sent in the response. Use this <code>NextToken</code> value in a subsequent request to retrieve additional items.</p>"
+        },
+        "SortBy": {
+          "shape": "SortBy",
+          "documentation": "<p>Specifies the field to sort results by. If you specify <code>SortBy</code>, you must also specify <code>SortOrder</code>.</p>"
+        },
+        "SortOrder": {
+          "shape": "SortOrder",
+          "documentation": "<p>Specifies the order of sorted results. If you specify <code>SortOrder</code>, you must also specify <code>SortBy</code>.</p>"
         }
       }
     },
@@ -978,7 +1156,7 @@
       "members": {
         "CertificateArn": {
           "shape": "Arn",
-          "documentation": "<p>String that contains the ARN of the ACM certificate for which you want to list the tags. This must have the following form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>. </p>"
+          "documentation": "<p>String that contains the ARN of the ACM certificate for which you want to list the tags. This must have the following form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>.</p>"
         }
       }
     },
@@ -1002,11 +1180,24 @@
       "min": 1,
       "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]*"
     },
+    "NullableBoolean": {
+      "type": "boolean"
+    },
     "PassphraseBlob": {
       "type": "blob",
       "max": 128,
       "min": 4,
       "sensitive": true
+    },
+    "PcaArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 20,
+      "pattern": "arn:[\\w+=/,.@-]+:acm-pca:[\\w+=/,.@-]*:[0-9]+:[\\w+=,.@-]+(/[\\w+=,.@-]+)*"
+    },
+    "PositiveInteger": {
+      "type": "integer",
+      "min": 1
     },
     "PrivateKey": {
       "type": "string",
@@ -1020,6 +1211,22 @@
       "max": 5120,
       "min": 1,
       "sensitive": true
+    },
+    "PutAccountConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "IdempotencyToken"
+      ],
+      "members": {
+        "ExpiryEvents": {
+          "shape": "ExpiryEventsConfiguration",
+          "documentation": "<p>Specifies expiration events associated with an account.</p>"
+        },
+        "IdempotencyToken": {
+          "shape": "IdempotencyToken",
+          "documentation": "<p>Customer-chosen string used to distinguish between calls to <code>PutAccountConfiguration</code>. Idempotency tokens time out after one hour. If you call <code>PutAccountConfiguration</code> multiple times with the same unexpired idempotency token, ACM treats it as the same request and returns the original result. If you change the idempotency token for each call, ACM treats each call as a new request.</p>"
+        }
+      }
     },
     "RecordType": {
       "type": "string",
@@ -1036,7 +1243,7 @@
       "members": {
         "CertificateArn": {
           "shape": "Arn",
-          "documentation": "<p>String that contains the ARN of the ACM Certificate with one or more tags that you want to remove. This must be of the form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>. </p>"
+          "documentation": "<p>String that contains the ARN of the ACM Certificate with one or more tags that you want to remove. This must be of the form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>.</p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -1052,7 +1259,7 @@
       "members": {
         "CertificateArn": {
           "shape": "Arn",
-          "documentation": "<p>String that contains the ARN of the ACM certificate to be renewed. This must be of the form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>"
+          "documentation": "<p>String that contains the ARN of the ACM certificate to be renewed. This must be of the form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>.</p>"
         }
       }
     },
@@ -1107,7 +1314,7 @@
       "members": {
         "DomainName": {
           "shape": "DomainNameString",
-          "documentation": "<p> Fully qualified domain name (FQDN), such as www.example.com, that you want to secure with an ACM certificate. Use an asterisk (*) to create a wildcard certificate that protects several sites in the same domain. For example, *.example.com protects www.example.com, site.example.com, and images.example.com. </p> <p> The first domain name you enter cannot exceed 64 octets, including periods. Each subsequent Subject Alternative Name (SAN), however, can be up to 253 octets in length. </p>"
+          "documentation": "<p>Fully qualified domain name (FQDN), such as www.example.com, that you want to secure with an ACM certificate. Use an asterisk (*) to create a wildcard certificate that protects several sites in the same domain. For example, *.example.com protects www.example.com, site.example.com, and images.example.com. </p> <p>In compliance with <a href=\"https://datatracker.ietf.org/doc/html/rfc5280\">RFC 5280</a>, the length of the domain name (technically, the Common Name) that you provide cannot exceed 64 octets (characters), including periods. To add a longer domain name, specify it in the Subject Alternative Name field, which supports names up to 253 octets in length. </p>"
         },
         "ValidationMethod": {
           "shape": "ValidationMethod",
@@ -1130,12 +1337,16 @@
           "documentation": "<p>Currently, you can use this parameter to specify whether to add the certificate to a certificate transparency log. Certificate transparency makes it possible to detect SSL/TLS certificates that have been mistakenly or maliciously issued. Certificates that have not been logged typically produce an error message in a browser. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency\">Opting Out of Certificate Transparency Logging</a>.</p>"
         },
         "CertificateAuthorityArn": {
-          "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the private certificate authority (CA) that will be used to issue the certificate. If you do not provide an ARN and you are trying to request a private certificate, ACM will attempt to issue a public certificate. For more information about private CAs, see the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html\">AWS Certificate Manager Private Certificate Authority (PCA)</a> user guide. The ARN must have the following form: </p> <p> <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code> </p>"
+          "shape": "PcaArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the private certificate authority (CA) that will be used to issue the certificate. If you do not provide an ARN and you are trying to request a private certificate, ACM will attempt to issue a public certificate. For more information about private CAs, see the <a href=\"https://docs.aws.amazon.com/privateca/latest/userguide/PcaWelcome.html\">Amazon Web Services Private Certificate Authority</a> user guide. The ARN must have the following form: </p> <p> <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code> </p>"
         },
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>One or more resource tags to associate with the certificate.</p>"
+        },
+        "KeyAlgorithm": {
+          "shape": "KeyAlgorithm",
+          "documentation": "<p>Specifies the algorithm of the public and private key pair that your certificate uses to encrypt data. RSA is the default key algorithm for ACM certificates. Elliptic Curve Digital Signature Algorithm (ECDSA) keys are smaller, offering security comparable to RSA keys but with greater computing efficiency. However, ECDSA is not supported by all network clients. Some Amazon Web Services services may require RSA keys, or only support ECDSA keys of a particular size, while others allow the use of either RSA and ECDSA keys to ensure that compatibility is not broken. Check the requirements for the Amazon Web Services service where you plan to deploy your certificate. For more information about selecting an algorithm, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-certificate.html#algorithms\">Key algorithms</a>.</p> <note> <p>Algorithms supported for an ACM certificate request include: </p> <ul> <li> <p> <code>RSA_2048</code> </p> </li> <li> <p> <code>EC_prime256v1</code> </p> </li> <li> <p> <code>EC_secp384r1</code> </p> </li> </ul> <p>Other listed algorithms are for imported certificates only. </p> </note> <note> <p>When you request a private PKI certificate signed by a CA from Amazon Web Services Private CA, the specified signing algorithm family (RSA or ECDSA) must match the algorithm family of the CA's secret key.</p> </note> <p>Default: RSA_2048</p>"
         }
       }
     },
@@ -1191,7 +1402,7 @@
           "documentation": "<p>The value of the CNAME record to add to your DNS database. This is supplied by ACM.</p>"
         }
       },
-      "documentation": "<p>Contains a DNS record value that you can use to can use to validate ownership or control of a domain. This is used by the <a>DescribeCertificate</a> action. </p>"
+      "documentation": "<p>Contains a DNS record value that you can use to validate ownership or control of a domain. This is used by the <a>DescribeCertificate</a> action. </p>"
     },
     "RevocationReason": {
       "type": "string",
@@ -1206,6 +1417,19 @@
         "REMOVE_FROM_CRL",
         "PRIVILEGE_WITHDRAWN",
         "A_A_COMPROMISE"
+      ]
+    },
+    "SortBy": {
+      "type": "string",
+      "enum": [
+        "CREATED_AT"
+      ]
+    },
+    "SortOrder": {
+      "type": "string",
+      "enum": [
+        "ASCENDING",
+        "DESCENDING"
       ]
     },
     "String": {
@@ -1282,5 +1506,5 @@
       ]
     }
   },
-  "documentation": "<fullname>AWS Certificate Manager</fullname> <p>Welcome to the AWS Certificate Manager (ACM) API documentation.</p> <p>You can use ACM to manage SSL/TLS certificates for your AWS-based websites and applications. For general information about using ACM, see the <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/\"> <i>AWS Certificate Manager User Guide</i> </a>.</p>"
+  "documentation": "<fullname>Certificate Manager</fullname> <p>You can use Certificate Manager (ACM) to manage SSL/TLS certificates for your Amazon Web Services-based websites and applications. For more information about using ACM, see the <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/\">Certificate Manager User Guide</a>.</p>"
 }

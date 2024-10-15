@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "BedrockAgent",
+        "description": "This release adds support for using Guardrails with Bedrock Agents."
+    },
+    {
+        "type": "feature",
+        "category": "BedrockAgentRuntime",
+        "description": "This release adds support for using Guardrails with Bedrock Agents."
+    },
+    {
+        "type": "feature",
+        "category": "ControlTower",
+        "description": "Added ListControlOperations API and filtering support for ListEnabledControls API. Updates also includes added metadata for enabled controls and control operations."
+    },
+    {
+        "type": "feature",
+        "category": "OSIS",
+        "description": "Add support for creating an OpenSearch Ingestion pipeline that is attached to a provided VPC. Add information about the destinations of an OpenSearch Ingestion pipeline to the GetPipeline and ListPipelines APIs."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This release adds support for EngineLifecycleSupport on DBInstances, DBClusters, and GlobalClusters."
+    },
+    {
+        "type": "feature",
+        "category": "SecretsManager",
+        "description": "add v2 smoke tests and smithy smokeTests trait for SDK testing"
+    }
+]

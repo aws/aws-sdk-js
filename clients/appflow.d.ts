@@ -12,11 +12,19 @@ declare class Appflow extends Service {
   constructor(options?: Appflow.Types.ClientConfiguration)
   config: Config & Appflow.Types.ClientConfiguration;
   /**
-   *  Creates a new connector profile associated with your AWS account. There is a soft quota of 100 connector profiles per AWS account. If you need more connector profiles than this quota allows, you can submit a request to the Amazon AppFlow team through the Amazon AppFlow support channel. 
+   * Cancels active runs for a flow. You can cancel all of the active runs for a flow, or you can cancel specific runs by providing their IDs. You can cancel a flow run only when the run is in progress. You can't cancel a run that has already completed or failed. You also can't cancel a run that's scheduled to occur but hasn't started yet. To prevent a scheduled run, you can deactivate the flow with the StopFlow action. You cannot resume a run after you cancel it. When you send your request, the status for each run becomes CancelStarted. When the cancellation completes, the status becomes Canceled.  When you cancel a run, you still incur charges for any data that the run already processed before the cancellation. If the run had already written some data to the flow destination, then that data remains in the destination. If you configured the flow to use a batch API (such as the Salesforce Bulk API 2.0), then the run will finish reading or writing its entire batch of data after the cancellation. For these operations, the data processing charges for Amazon AppFlow apply. For the pricing information, see Amazon AppFlow pricing. 
+   */
+  cancelFlowExecutions(params: Appflow.Types.CancelFlowExecutionsRequest, callback?: (err: AWSError, data: Appflow.Types.CancelFlowExecutionsResponse) => void): Request<Appflow.Types.CancelFlowExecutionsResponse, AWSError>;
+  /**
+   * Cancels active runs for a flow. You can cancel all of the active runs for a flow, or you can cancel specific runs by providing their IDs. You can cancel a flow run only when the run is in progress. You can't cancel a run that has already completed or failed. You also can't cancel a run that's scheduled to occur but hasn't started yet. To prevent a scheduled run, you can deactivate the flow with the StopFlow action. You cannot resume a run after you cancel it. When you send your request, the status for each run becomes CancelStarted. When the cancellation completes, the status becomes Canceled.  When you cancel a run, you still incur charges for any data that the run already processed before the cancellation. If the run had already written some data to the flow destination, then that data remains in the destination. If you configured the flow to use a batch API (such as the Salesforce Bulk API 2.0), then the run will finish reading or writing its entire batch of data after the cancellation. For these operations, the data processing charges for Amazon AppFlow apply. For the pricing information, see Amazon AppFlow pricing. 
+   */
+  cancelFlowExecutions(callback?: (err: AWSError, data: Appflow.Types.CancelFlowExecutionsResponse) => void): Request<Appflow.Types.CancelFlowExecutionsResponse, AWSError>;
+  /**
+   *  Creates a new connector profile associated with your Amazon Web Services account. There is a soft quota of 100 connector profiles per Amazon Web Services account. If you need more connector profiles than this quota allows, you can submit a request to the Amazon AppFlow team through the Amazon AppFlow support channel. In each connector profile that you create, you can provide the credentials and properties for only one connector.
    */
   createConnectorProfile(params: Appflow.Types.CreateConnectorProfileRequest, callback?: (err: AWSError, data: Appflow.Types.CreateConnectorProfileResponse) => void): Request<Appflow.Types.CreateConnectorProfileResponse, AWSError>;
   /**
-   *  Creates a new connector profile associated with your AWS account. There is a soft quota of 100 connector profiles per AWS account. If you need more connector profiles than this quota allows, you can submit a request to the Amazon AppFlow team through the Amazon AppFlow support channel. 
+   *  Creates a new connector profile associated with your Amazon Web Services account. There is a soft quota of 100 connector profiles per Amazon Web Services account. If you need more connector profiles than this quota allows, you can submit a request to the Amazon AppFlow team through the Amazon AppFlow support channel. In each connector profile that you create, you can provide the credentials and properties for only one connector.
    */
   createConnectorProfile(callback?: (err: AWSError, data: Appflow.Types.CreateConnectorProfileResponse) => void): Request<Appflow.Types.CreateConnectorProfileResponse, AWSError>;
   /**
@@ -44,11 +52,19 @@ declare class Appflow extends Service {
    */
   deleteFlow(callback?: (err: AWSError, data: Appflow.Types.DeleteFlowResponse) => void): Request<Appflow.Types.DeleteFlowResponse, AWSError>;
   /**
-   *  Provides details regarding the entity used with the connector, with a description of the data model for each entity. 
+   * Describes the given custom connector registered in your Amazon Web Services account. This API can be used for custom connectors that are registered in your account and also for Amazon authored connectors.
+   */
+  describeConnector(params: Appflow.Types.DescribeConnectorRequest, callback?: (err: AWSError, data: Appflow.Types.DescribeConnectorResponse) => void): Request<Appflow.Types.DescribeConnectorResponse, AWSError>;
+  /**
+   * Describes the given custom connector registered in your Amazon Web Services account. This API can be used for custom connectors that are registered in your account and also for Amazon authored connectors.
+   */
+  describeConnector(callback?: (err: AWSError, data: Appflow.Types.DescribeConnectorResponse) => void): Request<Appflow.Types.DescribeConnectorResponse, AWSError>;
+  /**
+   *  Provides details regarding the entity used with the connector, with a description of the data model for each field in that entity. 
    */
   describeConnectorEntity(params: Appflow.Types.DescribeConnectorEntityRequest, callback?: (err: AWSError, data: Appflow.Types.DescribeConnectorEntityResponse) => void): Request<Appflow.Types.DescribeConnectorEntityResponse, AWSError>;
   /**
-   *  Provides details regarding the entity used with the connector, with a description of the data model for each entity. 
+   *  Provides details regarding the entity used with the connector, with a description of the data model for each field in that entity. 
    */
   describeConnectorEntity(callback?: (err: AWSError, data: Appflow.Types.DescribeConnectorEntityResponse) => void): Request<Appflow.Types.DescribeConnectorEntityResponse, AWSError>;
   /**
@@ -92,6 +108,14 @@ declare class Appflow extends Service {
    */
   listConnectorEntities(callback?: (err: AWSError, data: Appflow.Types.ListConnectorEntitiesResponse) => void): Request<Appflow.Types.ListConnectorEntitiesResponse, AWSError>;
   /**
+   * Returns the list of all registered custom connectors in your Amazon Web Services account. This API lists only custom connectors registered in this account, not the Amazon Web Services authored connectors. 
+   */
+  listConnectors(params: Appflow.Types.ListConnectorsRequest, callback?: (err: AWSError, data: Appflow.Types.ListConnectorsResponse) => void): Request<Appflow.Types.ListConnectorsResponse, AWSError>;
+  /**
+   * Returns the list of all registered custom connectors in your Amazon Web Services account. This API lists only custom connectors registered in this account, not the Amazon Web Services authored connectors. 
+   */
+  listConnectors(callback?: (err: AWSError, data: Appflow.Types.ListConnectorsResponse) => void): Request<Appflow.Types.ListConnectorsResponse, AWSError>;
+  /**
    *  Lists all of the flows associated with your account. 
    */
   listFlows(params: Appflow.Types.ListFlowsRequest, callback?: (err: AWSError, data: Appflow.Types.ListFlowsResponse) => void): Request<Appflow.Types.ListFlowsResponse, AWSError>;
@@ -107,6 +131,22 @@ declare class Appflow extends Service {
    *  Retrieves the tags that are associated with a specified flow. 
    */
   listTagsForResource(callback?: (err: AWSError, data: Appflow.Types.ListTagsForResourceResponse) => void): Request<Appflow.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Registers a new custom connector with your Amazon Web Services account. Before you can register the connector, you must deploy the associated AWS lambda function in your account.
+   */
+  registerConnector(params: Appflow.Types.RegisterConnectorRequest, callback?: (err: AWSError, data: Appflow.Types.RegisterConnectorResponse) => void): Request<Appflow.Types.RegisterConnectorResponse, AWSError>;
+  /**
+   * Registers a new custom connector with your Amazon Web Services account. Before you can register the connector, you must deploy the associated AWS lambda function in your account.
+   */
+  registerConnector(callback?: (err: AWSError, data: Appflow.Types.RegisterConnectorResponse) => void): Request<Appflow.Types.RegisterConnectorResponse, AWSError>;
+  /**
+   * Resets metadata about your connector entities that Amazon AppFlow stored in its cache. Use this action when you want Amazon AppFlow to return the latest information about the data that you have in a source application. Amazon AppFlow returns metadata about your entities when you use the ListConnectorEntities or DescribeConnectorEntities actions. Following these actions, Amazon AppFlow caches the metadata to reduce the number of API requests that it must send to the source application. Amazon AppFlow automatically resets the cache once every hour, but you can use this action when you want to get the latest metadata right away.
+   */
+  resetConnectorMetadataCache(params: Appflow.Types.ResetConnectorMetadataCacheRequest, callback?: (err: AWSError, data: Appflow.Types.ResetConnectorMetadataCacheResponse) => void): Request<Appflow.Types.ResetConnectorMetadataCacheResponse, AWSError>;
+  /**
+   * Resets metadata about your connector entities that Amazon AppFlow stored in its cache. Use this action when you want Amazon AppFlow to return the latest information about the data that you have in a source application. Amazon AppFlow returns metadata about your entities when you use the ListConnectorEntities or DescribeConnectorEntities actions. Following these actions, Amazon AppFlow caches the metadata to reduce the number of API requests that it must send to the source application. Amazon AppFlow automatically resets the cache once every hour, but you can use this action when you want to get the latest metadata right away.
+   */
+  resetConnectorMetadataCache(callback?: (err: AWSError, data: Appflow.Types.ResetConnectorMetadataCacheResponse) => void): Request<Appflow.Types.ResetConnectorMetadataCacheResponse, AWSError>;
   /**
    *  Activates an existing flow. For on-demand flows, this operation runs the flow immediately. For schedule and event-triggered flows, this operation activates the flow. 
    */
@@ -132,6 +172,14 @@ declare class Appflow extends Service {
    */
   tagResource(callback?: (err: AWSError, data: Appflow.Types.TagResourceResponse) => void): Request<Appflow.Types.TagResourceResponse, AWSError>;
   /**
+   * Unregisters the custom connector registered in your account that matches the connector label provided in the request.
+   */
+  unregisterConnector(params: Appflow.Types.UnregisterConnectorRequest, callback?: (err: AWSError, data: Appflow.Types.UnregisterConnectorResponse) => void): Request<Appflow.Types.UnregisterConnectorResponse, AWSError>;
+  /**
+   * Unregisters the custom connector registered in your account that matches the connector label provided in the request.
+   */
+  unregisterConnector(callback?: (err: AWSError, data: Appflow.Types.UnregisterConnectorResponse) => void): Request<Appflow.Types.UnregisterConnectorResponse, AWSError>;
+  /**
    *  Removes a tag from the specified flow. 
    */
   untagResource(params: Appflow.Types.UntagResourceRequest, callback?: (err: AWSError, data: Appflow.Types.UntagResourceResponse) => void): Request<Appflow.Types.UntagResourceResponse, AWSError>;
@@ -147,6 +195,14 @@ declare class Appflow extends Service {
    *  Updates a given connector profile associated with your account. 
    */
   updateConnectorProfile(callback?: (err: AWSError, data: Appflow.Types.UpdateConnectorProfileResponse) => void): Request<Appflow.Types.UpdateConnectorProfileResponse, AWSError>;
+  /**
+   * Updates a custom connector that you've previously registered. This operation updates the connector with one of the following:   The latest version of the AWS Lambda function that's assigned to the connector   A new AWS Lambda function that you specify  
+   */
+  updateConnectorRegistration(params: Appflow.Types.UpdateConnectorRegistrationRequest, callback?: (err: AWSError, data: Appflow.Types.UpdateConnectorRegistrationResponse) => void): Request<Appflow.Types.UpdateConnectorRegistrationResponse, AWSError>;
+  /**
+   * Updates a custom connector that you've previously registered. This operation updates the connector with one of the following:   The latest version of the AWS Lambda function that's assigned to the connector   A new AWS Lambda function that you specify  
+   */
+  updateConnectorRegistration(callback?: (err: AWSError, data: Appflow.Types.UpdateConnectorRegistrationResponse) => void): Request<Appflow.Types.UpdateConnectorRegistrationResponse, AWSError>;
   /**
    *  Updates an existing flow. 
    */
@@ -166,6 +222,10 @@ declare namespace Appflow {
      *  Specifies whether Amazon AppFlow aggregates the flow records into a single file, or leave them unaggregated. 
      */
     aggregationType?: AggregationType;
+    /**
+     * The desired file size, in MB, for each output file that Amazon AppFlow writes to the flow destination. For each file, Amazon AppFlow attempts to achieve the size that you specify. The actual file sizes might differ from this target based on the number and size of the records that each file contains.
+     */
+    targetFileSize?: Long;
   }
   export type AggregationType = "None"|"SingleFile"|string;
   export type AmplitudeConnectorOperator = "BETWEEN"|string;
@@ -190,16 +250,117 @@ declare namespace Appflow {
     object: Object;
   }
   export type ApiKey = string;
+  export interface ApiKeyCredentials {
+    /**
+     * The API key required for API key authentication.
+     */
+    apiKey: ApiKey;
+    /**
+     * The API secret key required for API key authentication.
+     */
+    apiSecretKey?: ApiSecretKey;
+  }
   export type ApiSecretKey = string;
   export type ApiToken = string;
+  export type ApiVersion = string;
+  export type ApplicationHostUrl = string;
   export type ApplicationKey = string;
+  export type ApplicationServicePath = string;
+  export type ApplicationType = string;
   export type AuthCode = string;
+  export type AuthCodeUrl = string;
+  export type AuthCodeUrlList = AuthCodeUrl[];
+  export interface AuthParameter {
+    /**
+     * The authentication key required to authenticate with the connector.
+     */
+    key?: Key;
+    /**
+     * Indicates whether this authentication parameter is required.
+     */
+    isRequired?: Boolean;
+    /**
+     * Label used for authentication parameter.
+     */
+    label?: Label;
+    /**
+     * A description about the authentication parameter.
+     */
+    description?: Description;
+    /**
+     * Indicates whether this authentication parameter is a sensitive field.
+     */
+    isSensitiveField?: Boolean;
+    /**
+     * Contains default values for this authentication parameter that are supplied by the connector.
+     */
+    connectorSuppliedValues?: ConnectorSuppliedValueList;
+  }
+  export type AuthParameterList = AuthParameter[];
+  export interface AuthenticationConfig {
+    /**
+     * Indicates whether basic authentication is supported by the connector.
+     */
+    isBasicAuthSupported?: Boolean;
+    /**
+     * Indicates whether API key authentication is supported by the connector
+     */
+    isApiKeyAuthSupported?: Boolean;
+    /**
+     * Indicates whether OAuth 2.0 authentication is supported by the connector.
+     */
+    isOAuth2Supported?: Boolean;
+    /**
+     * Indicates whether custom authentication is supported by the connector
+     */
+    isCustomAuthSupported?: Boolean;
+    /**
+     * Contains the default values required for OAuth 2.0 authentication.
+     */
+    oAuth2Defaults?: OAuth2Defaults;
+    /**
+     * Contains information required for custom authentication.
+     */
+    customAuthConfigs?: CustomAuthConfigList;
+  }
+  export type AuthenticationType = "OAUTH2"|"APIKEY"|"BASIC"|"CUSTOM"|string;
+  export interface BasicAuthCredentials {
+    /**
+     *  The username to use to connect to a resource. 
+     */
+    username: Username;
+    /**
+     *  The password to use to connect to a resource.
+     */
+    password: Password;
+  }
   export type Boolean = boolean;
   export type BucketName = string;
   export type BucketPrefix = string;
+  export type BusinessUnitId = string;
+  export interface CancelFlowExecutionsRequest {
+    /**
+     * The name of a flow with active runs that you want to cancel.
+     */
+    flowName: FlowName;
+    /**
+     * The ID of each active run to cancel. These runs must belong to the flow you specify in your request. If you omit this parameter, your request ends all active runs that belong to the flow.
+     */
+    executionIds?: ExecutionIds;
+  }
+  export interface CancelFlowExecutionsResponse {
+    /**
+     * The IDs of runs that Amazon AppFlow couldn't cancel. These runs might be ineligible for canceling because they haven't started yet or have already completed.
+     */
+    invalidExecutions?: ExecutionIds;
+  }
+  export type CatalogType = "GLUE"|string;
   export type ClientCredentialsArn = string;
   export type ClientId = string;
+  export type ClientNumber = string;
   export type ClientSecret = string;
+  export type ClientToken = string;
+  export type ClusterIdentifier = string;
   export type ConnectionMode = "Public"|"Private"|string;
   export interface ConnectorConfiguration {
     /**
@@ -234,8 +395,139 @@ declare namespace Appflow {
      *  Specifies connector-specific metadata such as oAuthScopes, supportedRegions, privateLinkServiceUrl, and so on. 
      */
     connectorMetadata?: ConnectorMetadata;
+    /**
+     * The connector type.
+     */
+    connectorType?: ConnectorType;
+    /**
+     * The label used for registering the connector.
+     */
+    connectorLabel?: ConnectorLabel;
+    /**
+     * A description about the connector.
+     */
+    connectorDescription?: ConnectorDescription;
+    /**
+     * The owner who developed the connector.
+     */
+    connectorOwner?: ConnectorOwner;
+    /**
+     * The connector name.
+     */
+    connectorName?: ConnectorName;
+    /**
+     * The connector version.
+     */
+    connectorVersion?: ConnectorVersion;
+    /**
+     * The Amazon Resource Name (ARN) for the registered connector.
+     */
+    connectorArn?: ARN;
+    /**
+     * The connection modes that the connector supports.
+     */
+    connectorModes?: ConnectorModeList;
+    /**
+     * The authentication config required for the connector.
+     */
+    authenticationConfig?: AuthenticationConfig;
+    /**
+     * The required connector runtime settings.
+     */
+    connectorRuntimeSettings?: ConnectorRuntimeSettingList;
+    /**
+     * A list of API versions that are supported by the connector.
+     */
+    supportedApiVersions?: SupportedApiVersionList;
+    /**
+     * A list of operators supported by the connector.
+     */
+    supportedOperators?: SupportedOperatorList;
+    /**
+     * A list of write operations supported by the connector.
+     */
+    supportedWriteOperations?: SupportedWriteOperationList;
+    /**
+     * The provisioning type used to register the connector.
+     */
+    connectorProvisioningType?: ConnectorProvisioningType;
+    /**
+     * The configuration required for registering the connector.
+     */
+    connectorProvisioningConfig?: ConnectorProvisioningConfig;
+    /**
+     * Logo URL of the connector.
+     */
+    logoURL?: LogoURL;
+    /**
+     * The date on which the connector was registered.
+     */
+    registeredAt?: _Date;
+    /**
+     * Information about who registered the connector.
+     */
+    registeredBy?: RegisteredBy;
+    /**
+     * The data transfer types that the connector supports.  RECORD  Structured records.  FILE  Files or binary data.  
+     */
+    supportedDataTransferTypes?: SupportedDataTransferTypeList;
+    /**
+     * The APIs of the connector application that Amazon AppFlow can use to transfer your data.
+     */
+    supportedDataTransferApis?: SupportedDataTransferApis;
   }
   export type ConnectorConfigurationsMap = {[key: string]: ConnectorConfiguration};
+  export type ConnectorDescription = string;
+  export interface ConnectorDetail {
+    /**
+     * A description about the registered connector.
+     */
+    connectorDescription?: ConnectorDescription;
+    /**
+     * The name of the connector.
+     */
+    connectorName?: ConnectorName;
+    /**
+     * The owner of the connector.
+     */
+    connectorOwner?: ConnectorOwner;
+    /**
+     * The connector version.
+     */
+    connectorVersion?: ConnectorVersion;
+    /**
+     * The application type of the connector.
+     */
+    applicationType?: ApplicationType;
+    /**
+     * The connector type.
+     */
+    connectorType?: ConnectorType;
+    /**
+     * A label used for the connector.
+     */
+    connectorLabel?: ConnectorLabel;
+    /**
+     * The time at which the connector was registered.
+     */
+    registeredAt?: _Date;
+    /**
+     * The user who registered the connector.
+     */
+    registeredBy?: RegisteredBy;
+    /**
+     * The provisioning type that the connector uses.
+     */
+    connectorProvisioningType?: ConnectorProvisioningType;
+    /**
+     * The connection mode that the connector supports.
+     */
+    connectorModes?: ConnectorModeList;
+    /**
+     * The data transfer types that the connector supports.  RECORD  Structured records.  FILE  Files or binary data.  
+     */
+    supportedDataTransferTypes?: SupportedDataTransferTypeList;
+  }
   export interface ConnectorEntity {
     /**
      *  The name of the connector entity. 
@@ -256,9 +548,25 @@ declare namespace Appflow {
      */
     identifier: Identifier;
     /**
+     * The parent identifier of the connector field.
+     */
+    parentIdentifier?: Identifier;
+    /**
      *  The label applied to a connector entity field. 
      */
     label?: Label;
+    /**
+     * Booelan value that indicates whether this field can be used as a primary key.
+     */
+    isPrimaryKey?: Boolean;
+    /**
+     * Default value that can be assigned to this field.
+     */
+    defaultValue?: String;
+    /**
+     * Booelan value that indicates whether this field is deprecated or not.
+     */
+    isDeprecated?: Boolean;
     /**
      *  Contains details regarding the supported FieldType, including the corresponding filterOperators and supportedValues. 
      */
@@ -275,10 +583,16 @@ declare namespace Appflow {
      *  The properties applied to a field when the connector is being used as a destination. 
      */
     destinationProperties?: DestinationFieldProperties;
+    /**
+     * A map that has specific properties related to the ConnectorEntityField.
+     */
+    customProperties?: CustomProperties;
   }
   export type ConnectorEntityFieldList = ConnectorEntityField[];
   export type ConnectorEntityList = ConnectorEntity[];
   export type ConnectorEntityMap = {[key: string]: ConnectorEntityList};
+  export type ConnectorLabel = string;
+  export type ConnectorList = ConnectorDetail[];
   export interface ConnectorMetadata {
     /**
      *  The connector metadata specific to Amplitude. 
@@ -352,7 +666,23 @@ declare namespace Appflow {
      *  The connector metadata specific to Upsolver. 
      */
     Upsolver?: UpsolverMetadata;
+    /**
+     *  The connector metadata specific to Amazon Connect Customer Profiles. 
+     */
+    CustomerProfiles?: CustomerProfilesMetadata;
+    /**
+     *  The connector metadata specific to Amazon Honeycode. 
+     */
+    Honeycode?: HoneycodeMetadata;
+    SAPOData?: SAPODataMetadata;
+    /**
+     * The connector metadata specific to Salesforce Pardot.
+     */
+    Pardot?: PardotMetadata;
   }
+  export type ConnectorMode = string;
+  export type ConnectorModeList = ConnectorMode[];
+  export type ConnectorName = string;
   export interface ConnectorOAuthRequest {
     /**
      *  The code provided by the connector when it has been authenticated via the connected app. 
@@ -420,20 +750,37 @@ declare namespace Appflow {
      *  The operation to be performed on the provided Zendesk source fields. 
      */
     Zendesk?: ZendeskConnectorOperator;
+    /**
+     *  The operation to be performed on the provided SAPOData source fields. 
+     */
+    SAPOData?: SAPODataConnectorOperator;
+    /**
+     * Operators supported by the custom connector.
+     */
+    CustomConnector?: Operator;
+    /**
+     * The operation to be performed on the provided Salesforce Pardot source fields.
+     */
+    Pardot?: PardotConnectorOperator;
   }
+  export type ConnectorOwner = string;
   export interface ConnectorProfile {
     /**
      *  The Amazon Resource Name (ARN) of the connector profile. 
      */
     connectorProfileArn?: ConnectorProfileArn;
     /**
-     *  The name of the connector profile. The name is unique for each ConnectorProfile in the AWS account. 
+     *  The name of the connector profile. The name is unique for each ConnectorProfile in the Amazon Web Services account. 
      */
     connectorProfileName?: ConnectorProfileName;
     /**
      *  The type of connector, such as Salesforce, Amplitude, and so on. 
      */
     connectorType?: ConnectorType;
+    /**
+     * The label for the connector profile being created.
+     */
+    connectorLabel?: ConnectorLabel;
     /**
      *  Indicates the connection mode and if it is public or private. 
      */
@@ -454,6 +801,10 @@ declare namespace Appflow {
      *  Specifies when the connector profile was last updated. 
      */
     lastUpdatedAt?: _Date;
+    /**
+     *  Specifies the private connection provisioning state. 
+     */
+    privateConnectionProvisioningState?: PrivateConnectionProvisioningState;
   }
   export type ConnectorProfileArn = string;
   export interface ConnectorProfileConfig {
@@ -464,7 +815,7 @@ declare namespace Appflow {
     /**
      *  The connector-specific credentials required by each connector. 
      */
-    connectorProfileCredentials: ConnectorProfileCredentials;
+    connectorProfileCredentials?: ConnectorProfileCredentials;
   }
   export interface ConnectorProfileCredentials {
     /**
@@ -483,6 +834,10 @@ declare namespace Appflow {
      *  The connector-specific credentials required when using Google Analytics. 
      */
     GoogleAnalytics?: GoogleAnalyticsConnectorProfileCredentials;
+    /**
+     *  The connector-specific credentials required when using Amazon Honeycode. 
+     */
+    Honeycode?: HoneycodeConnectorProfileCredentials;
     /**
      *  The connector-specific credentials required when using Infor Nexus. 
      */
@@ -527,6 +882,12 @@ declare namespace Appflow {
      *  The connector-specific credentials required when using Zendesk. 
      */
     Zendesk?: ZendeskConnectorProfileCredentials;
+    SAPOData?: SAPODataConnectorProfileCredentials;
+    CustomConnector?: CustomConnectorProfileCredentials;
+    /**
+     * The connector-specific credentials required when using Salesforce Pardot.
+     */
+    Pardot?: PardotConnectorProfileCredentials;
   }
   export type ConnectorProfileDetailList = ConnectorProfile[];
   export type ConnectorProfileName = string;
@@ -548,6 +909,10 @@ declare namespace Appflow {
      *  The connector-specific properties required Google Analytics. 
      */
     GoogleAnalytics?: GoogleAnalyticsConnectorProfileProperties;
+    /**
+     *  The connector-specific properties required by Amazon Honeycode. 
+     */
+    Honeycode?: HoneycodeConnectorProfileProperties;
     /**
      *  The connector-specific properties required by Infor Nexus. 
      */
@@ -592,12 +957,65 @@ declare namespace Appflow {
      *  The connector-specific properties required by Zendesk. 
      */
     Zendesk?: ZendeskConnectorProfileProperties;
+    SAPOData?: SAPODataConnectorProfileProperties;
+    /**
+     * The properties required by the custom connector.
+     */
+    CustomConnector?: CustomConnectorProfileProperties;
+    /**
+     * The connector-specific properties required by Salesforce Pardot.
+     */
+    Pardot?: PardotConnectorProfileProperties;
   }
-  export type ConnectorType = "Salesforce"|"Singular"|"Slack"|"Redshift"|"S3"|"Marketo"|"Googleanalytics"|"Zendesk"|"Servicenow"|"Datadog"|"Trendmicro"|"Snowflake"|"Dynatrace"|"Infornexus"|"Amplitude"|"Veeva"|"EventBridge"|"Upsolver"|string;
+  export interface ConnectorProvisioningConfig {
+    /**
+     * Contains information about the configuration of the lambda which is being registered as the connector.
+     */
+    lambda?: LambdaConnectorProvisioningConfig;
+  }
+  export type ConnectorProvisioningType = "LAMBDA"|string;
+  export interface ConnectorRuntimeSetting {
+    /**
+     * Contains value information about the connector runtime setting.
+     */
+    key?: Key;
+    /**
+     * Data type of the connector runtime setting.
+     */
+    dataType?: ConnectorRuntimeSettingDataType;
+    /**
+     * Indicates whether this connector runtime setting is required.
+     */
+    isRequired?: Boolean;
+    /**
+     * A label used for connector runtime setting.
+     */
+    label?: Label;
+    /**
+     * A description about the connector runtime setting.
+     */
+    description?: Description;
+    /**
+     * Indicates the scope of the connector runtime setting.
+     */
+    scope?: ConnectorRuntimeSettingScope;
+    /**
+     * Contains default values for the connector runtime setting that are supplied by the connector.
+     */
+    connectorSuppliedValueOptions?: ConnectorSuppliedValueOptionList;
+  }
+  export type ConnectorRuntimeSettingDataType = string;
+  export type ConnectorRuntimeSettingList = ConnectorRuntimeSetting[];
+  export type ConnectorRuntimeSettingScope = string;
+  export type ConnectorSuppliedValue = string;
+  export type ConnectorSuppliedValueList = ConnectorSuppliedValue[];
+  export type ConnectorSuppliedValueOptionList = ConnectorSuppliedValue[];
+  export type ConnectorType = "Salesforce"|"Singular"|"Slack"|"Redshift"|"S3"|"Marketo"|"Googleanalytics"|"Zendesk"|"Servicenow"|"Datadog"|"Trendmicro"|"Snowflake"|"Dynatrace"|"Infornexus"|"Amplitude"|"Veeva"|"EventBridge"|"LookoutMetrics"|"Upsolver"|"Honeycode"|"CustomerProfiles"|"SAPOData"|"CustomConnector"|"Pardot"|string;
   export type ConnectorTypeList = ConnectorType[];
+  export type ConnectorVersion = string;
   export interface CreateConnectorProfileRequest {
     /**
-     *  The name of the connector profile. The name is unique for each ConnectorProfile in your AWS account. 
+     *  The name of the connector profile. The name is unique for each ConnectorProfile in your Amazon Web Services account. 
      */
     connectorProfileName: ConnectorProfileName;
     /**
@@ -609,13 +1027,21 @@ declare namespace Appflow {
      */
     connectorType: ConnectorType;
     /**
-     *  Indicates the connection mode and specifies whether it is public or private. Private flows use AWS PrivateLink to route data over AWS infrastructure without exposing it to the public internet. 
+     * The label of the connector. The label is unique for each ConnectorRegistration in your Amazon Web Services account. Only needed if calling for CUSTOMCONNECTOR connector type/.
+     */
+    connectorLabel?: ConnectorLabel;
+    /**
+     *  Indicates the connection mode and specifies whether it is public or private. Private flows use Amazon Web Services PrivateLink to route data over Amazon Web Services infrastructure without exposing it to the public internet. 
      */
     connectionMode: ConnectionMode;
     /**
      *  Defines the connector-specific configuration and credentials. 
      */
     connectorProfileConfig: ConnectorProfileConfig;
+    /**
+     * The clientToken parameter is an idempotency token. It ensures that your CreateConnectorProfile request completes only once. You choose the value to pass. For example, if you don't receive a response from your request, you can safely retry the request with the same clientToken parameter value. If you omit a clientToken value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases. If you specify input parameters that differ from your first request, an error occurs. If you use a different value for clientToken, Amazon AppFlow considers it a new call to CreateConnectorProfile. The token is active for 8 hours.
+     */
+    clientToken?: ClientToken;
   }
   export interface CreateConnectorProfileResponse {
     /**
@@ -656,6 +1082,14 @@ declare namespace Appflow {
      *  The tags used to organize, track, or control access for your flow. 
      */
     tags?: TagMap;
+    /**
+     * Specifies the configuration that Amazon AppFlow uses when it catalogs the data that's transferred by the associated flow. When Amazon AppFlow catalogs the data from a flow, it stores metadata in a data catalog.
+     */
+    metadataCatalogConfig?: MetadataCatalogConfig;
+    /**
+     * The clientToken parameter is an idempotency token. It ensures that your CreateFlow request completes only once. You choose the value to pass. For example, if you don't receive a response from your request, you can safely retry the request with the same clientToken parameter value. If you omit a clientToken value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases. If you specify input parameters that differ from your first request, an error occurs. If you use a different value for clientToken, Amazon AppFlow considers it a new call to CreateFlow. The token is active for 8 hours.
+     */
+    clientToken?: ClientToken;
   }
   export interface CreateFlowResponse {
     /**
@@ -668,7 +1102,126 @@ declare namespace Appflow {
     flowStatus?: FlowStatus;
   }
   export type CreatedBy = string;
+  export type CredentialsMap = {[key: string]: CredentialsMapValue};
+  export type CredentialsMapKey = string;
+  export type CredentialsMapValue = string;
+  export interface CustomAuthConfig {
+    /**
+     * The authentication type that the custom connector uses.
+     */
+    customAuthenticationType?: CustomAuthenticationType;
+    /**
+     * Information about authentication parameters required for authentication.
+     */
+    authParameters?: AuthParameterList;
+  }
+  export type CustomAuthConfigList = CustomAuthConfig[];
+  export interface CustomAuthCredentials {
+    /**
+     * The custom authentication type that the connector uses.
+     */
+    customAuthenticationType: CustomAuthenticationType;
+    /**
+     * A map that holds custom authentication credentials.
+     */
+    credentialsMap?: CredentialsMap;
+  }
+  export type CustomAuthenticationType = string;
+  export interface CustomConnectorDestinationProperties {
+    /**
+     * The entity specified in the custom connector as a destination in the flow.
+     */
+    entityName: EntityName;
+    /**
+     * The settings that determine how Amazon AppFlow handles an error when placing data in the custom connector as destination.
+     */
+    errorHandlingConfig?: ErrorHandlingConfig;
+    /**
+     * Specifies the type of write operation to be performed in the custom connector when it's used as destination.
+     */
+    writeOperationType?: WriteOperationType;
+    /**
+     * The name of the field that Amazon AppFlow uses as an ID when performing a write operation such as update, delete, or upsert.
+     */
+    idFieldNames?: IdFieldNameList;
+    /**
+     * The custom properties that are specific to the connector when it's used as a destination in the flow.
+     */
+    customProperties?: CustomProperties;
+  }
+  export interface CustomConnectorProfileCredentials {
+    /**
+     * The authentication type that the custom connector uses for authenticating while creating a connector profile.
+     */
+    authenticationType: AuthenticationType;
+    /**
+     * The basic credentials that are required for the authentication of the user.
+     */
+    basic?: BasicAuthCredentials;
+    /**
+     * The OAuth 2.0 credentials required for the authentication of the user.
+     */
+    oauth2?: OAuth2Credentials;
+    /**
+     * The API keys required for the authentication of the user.
+     */
+    apiKey?: ApiKeyCredentials;
+    /**
+     * If the connector uses the custom authentication mechanism, this holds the required credentials.
+     */
+    custom?: CustomAuthCredentials;
+  }
+  export interface CustomConnectorProfileProperties {
+    /**
+     * A map of properties that are required to create a profile for the custom connector.
+     */
+    profileProperties?: ProfilePropertiesMap;
+    oAuth2Properties?: OAuth2Properties;
+  }
+  export interface CustomConnectorSourceProperties {
+    /**
+     * The entity specified in the custom connector as a source in the flow.
+     */
+    entityName: EntityName;
+    /**
+     * Custom properties that are required to use the custom connector as a source.
+     */
+    customProperties?: CustomProperties;
+    /**
+     * The API of the connector application that Amazon AppFlow uses to transfer your data.
+     */
+    dataTransferApi?: DataTransferApi;
+  }
+  export type CustomProperties = {[key: string]: CustomPropertyValue};
+  export type CustomPropertyKey = string;
+  export type CustomPropertyValue = string;
+  export interface CustomerProfilesDestinationProperties {
+    /**
+     *  The unique name of the Amazon Connect Customer Profiles domain. 
+     */
+    domainName: DomainName;
+    /**
+     *  The object specified in the Amazon Connect Customer Profiles flow destination. 
+     */
+    objectTypeName?: ObjectTypeName;
+  }
+  export interface CustomerProfilesMetadata {
+  }
+  export type DataApiRoleArn = string;
   export type DataPullMode = "Incremental"|"Complete"|string;
+  export interface DataTransferApi {
+    /**
+     * The name of the connector application API.
+     */
+    Name?: DataTransferApiTypeName;
+    /**
+     * You can specify one of the following types:  AUTOMATIC  The default. Optimizes a flow for datasets that fluctuate in size from small to large. For each flow run, Amazon AppFlow chooses to use the SYNC or ASYNC API type based on the amount of data that the run transfers.  SYNC  A synchronous API. This type of API optimizes a flow for small to medium-sized datasets.  ASYNC  An asynchronous API. This type of API optimizes a flow for large datasets.  
+     */
+    Type?: DataTransferApiType;
+  }
+  export type DataTransferApiType = "SYNC"|"ASYNC"|"AUTOMATIC"|string;
+  export type DataTransferApiTypeName = string;
+  export type DatabaseName = string;
   export type DatabaseUrl = string;
   export type DatadogConnectorOperator = "PROJECTION"|"BETWEEN"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface DatadogConnectorProfileCredentials {
@@ -725,15 +1278,19 @@ declare namespace Appflow {
     /**
      *  The entity name for that connector. 
      */
-    connectorEntityName: Name;
+    connectorEntityName: EntityName;
     /**
      *  The type of connector application, such as Salesforce, Amplitude, and so on. 
      */
     connectorType?: ConnectorType;
     /**
-     *  The name of the connector profile. The name is unique for each ConnectorProfile in the AWS account. 
+     *  The name of the connector profile. The name is unique for each ConnectorProfile in the Amazon Web Services account. 
      */
     connectorProfileName?: ConnectorProfileName;
+    /**
+     * The version of the API that's used by the connector.
+     */
+    apiVersion?: ApiVersion;
   }
   export interface DescribeConnectorEntityResponse {
     /**
@@ -743,13 +1300,17 @@ declare namespace Appflow {
   }
   export interface DescribeConnectorProfilesRequest {
     /**
-     *  The name of the connector profile. The name is unique for each ConnectorProfile in the AWS account. 
+     *  The name of the connector profile. The name is unique for each ConnectorProfile in the Amazon Web Services account. 
      */
     connectorProfileNames?: ConnectorProfileNameList;
     /**
      *  The type of connector, such as Salesforce, Amplitude, and so on. 
      */
     connectorType?: ConnectorType;
+    /**
+     * The name of the connector. The name is unique for each ConnectorRegistration in your Amazon Web Services account. Only needed if calling for CUSTOMCONNECTOR connector type/.
+     */
+    connectorLabel?: ConnectorLabel;
     /**
      *  Specifies the maximum number of items that should be returned in the result set. The default for maxResults is 20 (for all paginated API operations). 
      */
@@ -769,11 +1330,31 @@ declare namespace Appflow {
      */
     nextToken?: NextToken;
   }
+  export interface DescribeConnectorRequest {
+    /**
+     * The connector type, such as CUSTOMCONNECTOR, Saleforce, Marketo. Please choose CUSTOMCONNECTOR for Lambda based custom connectors.
+     */
+    connectorType: ConnectorType;
+    /**
+     * The label of the connector. The label is unique for each ConnectorRegistration in your Amazon Web Services account. Only needed if calling for CUSTOMCONNECTOR connector type/.
+     */
+    connectorLabel?: ConnectorLabel;
+  }
+  export interface DescribeConnectorResponse {
+    /**
+     * Configuration info of all the connectors that the user requested.
+     */
+    connectorConfiguration?: ConnectorConfiguration;
+  }
   export interface DescribeConnectorsRequest {
     /**
      *  The type of connector, such as Salesforce, Amplitude, and so on. 
      */
     connectorTypes?: ConnectorTypeList;
+    /**
+     * The maximum number of items that should be returned in the result set. The default is 20.
+     */
+    maxResults?: MaxResults;
     /**
      *  The pagination token for the next page of data. 
      */
@@ -784,6 +1365,10 @@ declare namespace Appflow {
      *  The configuration that is applied to the connectors used in the flow. 
      */
     connectorConfigurations?: ConnectorConfigurationsMap;
+    /**
+     * Information about the connectors supported in Amazon AppFlow.
+     */
+    connectors?: ConnectorList;
     /**
      *  The pagination token for the next page of data. 
      */
@@ -884,6 +1469,18 @@ declare namespace Appflow {
      *  The tags used to organize, track, or control access for your flow. 
      */
     tags?: TagMap;
+    /**
+     * Specifies the configuration that Amazon AppFlow uses when it catalogs the data that's transferred by the associated flow. When Amazon AppFlow catalogs the data from a flow, it stores metadata in a data catalog.
+     */
+    metadataCatalogConfig?: MetadataCatalogConfig;
+    /**
+     * Describes the metadata catalog, metadata table, and data partitions that Amazon AppFlow used for the associated flow run.
+     */
+    lastRunMetadataCatalogDetails?: MetadataCatalogDetails;
+    /**
+     * The version number of your data schema. Amazon AppFlow assigns this version number. The version number increases by one when you change any of the following settings in your flow configuration:   Source-to-destination field mappings   Field data types   Partition keys  
+     */
+    schemaVersion?: Long;
   }
   export type Description = string;
   export interface DestinationConnectorProperties {
@@ -908,9 +1505,37 @@ declare namespace Appflow {
      */
     EventBridge?: EventBridgeDestinationProperties;
     /**
+     *  The properties required to query Amazon Lookout for Metrics. 
+     */
+    LookoutMetrics?: LookoutMetricsDestinationProperties;
+    /**
      *  The properties required to query Upsolver. 
      */
     Upsolver?: UpsolverDestinationProperties;
+    /**
+     *  The properties required to query Amazon Honeycode. 
+     */
+    Honeycode?: HoneycodeDestinationProperties;
+    /**
+     *  The properties required to query Amazon Connect Customer Profiles. 
+     */
+    CustomerProfiles?: CustomerProfilesDestinationProperties;
+    /**
+     * The properties required to query Zendesk.
+     */
+    Zendesk?: ZendeskDestinationProperties;
+    /**
+     * The properties required to query Marketo.
+     */
+    Marketo?: MarketoDestinationProperties;
+    /**
+     * The properties that are required to query the custom Connector.
+     */
+    CustomConnector?: CustomConnectorDestinationProperties;
+    /**
+     * The properties required to query SAPOData.
+     */
+    SAPOData?: SAPODataDestinationProperties;
   }
   export type DestinationField = string;
   export interface DestinationFieldProperties {
@@ -931,6 +1556,10 @@ declare namespace Appflow {
      */
     isUpdatable?: Boolean;
     /**
+     * Specifies whether the field can use the default value during a Create operation.
+     */
+    isDefaultedOnCreate?: Boolean;
+    /**
      *  A list of supported write operations. For each write operation listed, this field can be used in idFieldNames when that write operation is present as a destination option. 
      */
     supportedWriteOperations?: SupportedWriteOperationList;
@@ -941,7 +1570,11 @@ declare namespace Appflow {
      */
     connectorType: ConnectorType;
     /**
-     *  The name of the connector profile. This name must be unique for each connector profile in the AWS account. 
+     * The API version that the destination connector uses.
+     */
+    apiVersion?: ApiVersion;
+    /**
+     *  The name of the connector profile. This name must be unique for each connector profile in the Amazon Web Services account. 
      */
     connectorProfileName?: ConnectorProfileName;
     /**
@@ -950,6 +1583,9 @@ declare namespace Appflow {
     destinationConnectorProperties: DestinationConnectorProperties;
   }
   export type DestinationFlowConfigList = DestinationFlowConfig[];
+  export type DocumentType = string;
+  export type DomainName = string;
+  export type Double = number;
   export type DynatraceConnectorOperator = "PROJECTION"|"BETWEEN"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface DynatraceConnectorProfileCredentials {
     /**
@@ -972,6 +1608,7 @@ declare namespace Appflow {
     object: Object;
   }
   export type EntitiesPath = string;
+  export type EntityName = string;
   export interface ErrorHandlingConfig {
     /**
      *  Specifies if the flow should fail after the first instance of a failure when attempting to place data in the destination. 
@@ -1020,6 +1657,7 @@ declare namespace Appflow {
     mostRecentExecutionStatus?: ExecutionStatus;
   }
   export type ExecutionId = string;
+  export type ExecutionIds = ExecutionId[];
   export type ExecutionMessage = string;
   export interface ExecutionRecord {
     /**
@@ -1042,6 +1680,18 @@ declare namespace Appflow {
      *  Specifies the time of the most recent update. 
      */
     lastUpdatedAt?: _Date;
+    /**
+     *  The timestamp that determines the first new or updated record to be transferred in the flow run. 
+     */
+    dataPullStartTime?: _Date;
+    /**
+     *  The timestamp that indicates the last new or updated record to be transferred in the flow run. 
+     */
+    dataPullEndTime?: _Date;
+    /**
+     * Describes the metadata catalog, metadata table, and data partitions that Amazon AppFlow used for the associated flow run.
+     */
+    metadataCatalogDetails?: MetadataCatalogDetails;
   }
   export interface ExecutionResult {
     /**
@@ -1060,8 +1710,16 @@ declare namespace Appflow {
      *  The number of records processed in the flow run. 
      */
     recordsProcessed?: Long;
+    /**
+     * The number of processes that Amazon AppFlow ran at the same time when it retrieved your data.
+     */
+    numParallelProcesses?: Long;
+    /**
+     * The maximum number of records that Amazon AppFlow receives in each page of the response from your SAP application.
+     */
+    maxPageSize?: Long;
   }
-  export type ExecutionStatus = "InProgress"|"Successful"|"Error"|string;
+  export type ExecutionStatus = "InProgress"|"Successful"|"Error"|"CancelStarted"|"Canceled"|string;
   export type FieldType = string;
   export interface FieldTypeDetails {
     /**
@@ -1076,6 +1734,22 @@ declare namespace Appflow {
      *  The list of values that a field can contain. For example, a Boolean fieldType can have two values: "true" and "false". 
      */
     supportedValues?: SupportedValueList;
+    /**
+     * The regular expression pattern for the field name.
+     */
+    valueRegexPattern?: String;
+    /**
+     * The date format that the field supports.
+     */
+    supportedDateFormat?: String;
+    /**
+     * The range of values this field can hold.
+     */
+    fieldValueRange?: Range;
+    /**
+     * This is the allowable length range for this field's value.
+     */
+    fieldLengthRange?: Range;
   }
   export type FileType = "CSV"|"JSON"|"PARQUET"|string;
   export type FilterOperatorList = Operator[];
@@ -1102,9 +1776,17 @@ declare namespace Appflow {
      */
     sourceConnectorType?: ConnectorType;
     /**
+     * The label of the source connector in the flow.
+     */
+    sourceConnectorLabel?: ConnectorLabel;
+    /**
      *  Specifies the destination connector type, such as Salesforce, Amazon S3, Amplitude, and so on. 
      */
     destinationConnectorType?: ConnectorType;
+    /**
+     * The label of the destination connector in the flow.
+     */
+    destinationConnectorLabel?: ConnectorLabel;
     /**
      *  Specifies the type of flow trigger. This can be OnDemand, Scheduled, or Event. 
      */
@@ -1135,11 +1817,29 @@ declare namespace Appflow {
     lastRunExecutionDetails?: ExecutionDetails;
   }
   export type FlowDescription = string;
+  export type FlowErrorDeactivationThreshold = number;
   export type FlowExecutionList = ExecutionRecord[];
   export type FlowList = FlowDefinition[];
   export type FlowName = string;
   export type FlowStatus = "Active"|"Deprecated"|"Deleted"|"Draft"|"Errored"|"Suspended"|string;
   export type FlowStatusMessage = string;
+  export interface GlueDataCatalogConfig {
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role that grants Amazon AppFlow the permissions it needs to create Data Catalog tables, databases, and partitions. For an example IAM policy that has the required permissions, see Identity-based policy examples for Amazon AppFlow.
+     */
+    roleArn: GlueDataCatalogIAMRole;
+    /**
+     * The name of the Data Catalog database that stores the metadata tables that Amazon AppFlow creates in your Amazon Web Services account. These tables contain metadata for the data that's transferred by the flow that you configure with this parameter.  When you configure a new flow with this parameter, you must specify an existing database. 
+     */
+    databaseName: GlueDataCatalogDatabaseName;
+    /**
+     * A naming prefix for each Data Catalog table that Amazon AppFlow creates for the flow that you configure with this setting. Amazon AppFlow adds the prefix to the beginning of the each table name.
+     */
+    tablePrefix: GlueDataCatalogTablePrefix;
+  }
+  export type GlueDataCatalogDatabaseName = string;
+  export type GlueDataCatalogIAMRole = string;
+  export type GlueDataCatalogTablePrefix = string;
   export type GoogleAnalyticsConnectorOperator = "PROJECTION"|"BETWEEN"|string;
   export interface GoogleAnalyticsConnectorProfileCredentials {
     /**
@@ -1178,6 +1878,32 @@ declare namespace Appflow {
     object: Object;
   }
   export type Group = string;
+  export interface HoneycodeConnectorProfileCredentials {
+    /**
+     *  The credentials used to access protected Amazon Honeycode resources. 
+     */
+    accessToken?: AccessToken;
+    /**
+     *  The credentials used to acquire new access tokens. 
+     */
+    refreshToken?: RefreshToken;
+    oAuthRequest?: ConnectorOAuthRequest;
+  }
+  export interface HoneycodeConnectorProfileProperties {
+  }
+  export interface HoneycodeDestinationProperties {
+    /**
+     *  The object specified in the Amazon Honeycode flow destination. 
+     */
+    object: Object;
+    errorHandlingConfig?: ErrorHandlingConfig;
+  }
+  export interface HoneycodeMetadata {
+    /**
+     *  The desired authorization scope for the Amazon Honeycode account. 
+     */
+    oAuthScopes?: OAuthScopeList;
+  }
   export type IdFieldNameList = Name[];
   export type Identifier = string;
   export interface IncrementalPullConfig {
@@ -1220,12 +1946,20 @@ declare namespace Appflow {
     object: Object;
   }
   export type InstanceUrl = string;
+  export type JavaBoolean = boolean;
+  export type JwtToken = string;
   export type KMSArn = string;
   export type Key = string;
   export type Label = string;
+  export interface LambdaConnectorProvisioningConfig {
+    /**
+     * Lambda ARN of the connector being registered.
+     */
+    lambdaArn: ARN;
+  }
   export interface ListConnectorEntitiesRequest {
     /**
-     *  The name of the connector profile. The name is unique for each ConnectorProfile in the AWS account, and is used to query the downstream connector. 
+     *  The name of the connector profile. The name is unique for each ConnectorProfile in the Amazon Web Services account, and is used to query the downstream connector. 
      */
     connectorProfileName?: ConnectorProfileName;
     /**
@@ -1236,13 +1970,50 @@ declare namespace Appflow {
      *  This optional parameter is specific to connector implementation. Some connectors support multiple levels or categories of entities. You can find out the list of roots for such providers by sending a request without the entitiesPath parameter. If the connector supports entities at different roots, this initial request returns the list of roots. Otherwise, this request returns all entities supported by the provider. 
      */
     entitiesPath?: EntitiesPath;
+    /**
+     * The version of the API that's used by the connector.
+     */
+    apiVersion?: ApiVersion;
+    /**
+     * The maximum number of items that the operation returns in the response.
+     */
+    maxResults?: ListEntitiesMaxResults;
+    /**
+     * A token that was provided by your prior ListConnectorEntities operation if the response was too big for the page size. You specify this token to get the next page of results in paginated response.
+     */
+    nextToken?: NextToken;
   }
   export interface ListConnectorEntitiesResponse {
     /**
      *  The response of ListConnectorEntities lists entities grouped by category. This map's key represents the group name, and its value contains the list of entities belonging to that group. 
      */
     connectorEntityMap: ConnectorEntityMap;
+    /**
+     * A token that you specify in your next ListConnectorEntities operation to get the next page of results in paginated response. The ListConnectorEntities operation provides this token if the response is too big for the page size.
+     */
+    nextToken?: NextToken;
   }
+  export interface ListConnectorsRequest {
+    /**
+     * Specifies the maximum number of items that should be returned in the result set. The default for maxResults is 20 (for all paginated API operations).
+     */
+    maxResults?: MaxResults;
+    /**
+     * The pagination token for the next page of data.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListConnectorsResponse {
+    /**
+     * Contains information about the connectors supported by Amazon AppFlow.
+     */
+    connectors?: ConnectorList;
+    /**
+     * The pagination token for the next page of data. If nextToken=null, this means that all records have been fetched.
+     */
+    nextToken?: NextToken;
+  }
+  export type ListEntitiesMaxResults = number;
   export interface ListFlowsRequest {
     /**
      *  Specifies the maximum number of items that should be returned in the result set. 
@@ -1275,7 +2046,11 @@ declare namespace Appflow {
      */
     tags?: TagMap;
   }
+  export type LogoURL = string;
+  export type LogonLanguage = string;
   export type Long = number;
+  export interface LookoutMetricsDestinationProperties {
+  }
   export type MarketoConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface MarketoConnectorProfileCredentials {
     /**
@@ -1301,6 +2076,13 @@ declare namespace Appflow {
      */
     instanceUrl: InstanceUrl;
   }
+  export interface MarketoDestinationProperties {
+    /**
+     * The object specified in the Marketo flow destination.
+     */
+    object: Object;
+    errorHandlingConfig?: ErrorHandlingConfig;
+  }
   export interface MarketoMetadata {
   }
   export interface MarketoSourceProperties {
@@ -1310,45 +2092,272 @@ declare namespace Appflow {
     object: Object;
   }
   export type MaxResults = number;
+  export interface MetadataCatalogConfig {
+    /**
+     * Specifies the configuration that Amazon AppFlow uses when it catalogs your data with the Glue Data Catalog.
+     */
+    glueDataCatalog?: GlueDataCatalogConfig;
+  }
+  export interface MetadataCatalogDetail {
+    /**
+     * The type of metadata catalog that Amazon AppFlow used for the associated flow run. This parameter returns the following value:  GLUE  The metadata catalog is provided by the Glue Data Catalog. Glue includes the Glue Data Catalog as a component.  
+     */
+    catalogType?: CatalogType;
+    /**
+     * The name of the table that stores the metadata for the associated flow run. The table stores metadata that represents the data that the flow transferred. Amazon AppFlow stores the table in the metadata catalog.
+     */
+    tableName?: String;
+    /**
+     * Describes the status of the attempt from Amazon AppFlow to register the metadata table with the metadata catalog. Amazon AppFlow creates or updates this table for the associated flow run.
+     */
+    tableRegistrationOutput?: RegistrationOutput;
+    /**
+     * Describes the status of the attempt from Amazon AppFlow to register the data partitions with the metadata catalog. The data partitions organize the flow output into a hierarchical path, such as a folder path in an S3 bucket. Amazon AppFlow creates the partitions (if they don't already exist) based on your flow configuration.
+     */
+    partitionRegistrationOutput?: RegistrationOutput;
+  }
+  export type MetadataCatalogDetails = MetadataCatalogDetail[];
   export type MostRecentExecutionMessage = string;
   export type Name = string;
   export type NextToken = string;
+  export interface OAuth2Credentials {
+    /**
+     * The identifier for the desired client.
+     */
+    clientId?: ClientId;
+    /**
+     * The client secret used by the OAuth client to authenticate to the authorization server.
+     */
+    clientSecret?: ClientSecret;
+    /**
+     * The access token used to access the connector on your behalf.
+     */
+    accessToken?: AccessToken;
+    /**
+     * The refresh token used to refresh an expired access token.
+     */
+    refreshToken?: RefreshToken;
+    oAuthRequest?: ConnectorOAuthRequest;
+  }
+  export interface OAuth2CustomParameter {
+    /**
+     * The key of the custom parameter required for OAuth 2.0 authentication.
+     */
+    key?: Key;
+    /**
+     * Indicates whether the custom parameter for OAuth 2.0 authentication is required.
+     */
+    isRequired?: Boolean;
+    /**
+     * The label of the custom parameter used for OAuth 2.0 authentication.
+     */
+    label?: Label;
+    /**
+     * A description about the custom parameter used for OAuth 2.0 authentication.
+     */
+    description?: Description;
+    /**
+     * Indicates whether this authentication custom parameter is a sensitive field.
+     */
+    isSensitiveField?: Boolean;
+    /**
+     * Contains default values for this authentication parameter that are supplied by the connector.
+     */
+    connectorSuppliedValues?: ConnectorSuppliedValueList;
+    /**
+     * Indicates whether custom parameter is used with TokenUrl or AuthUrl.
+     */
+    type?: OAuth2CustomPropType;
+  }
+  export type OAuth2CustomPropType = "TOKEN_URL"|"AUTH_URL"|string;
+  export type OAuth2CustomPropertiesList = OAuth2CustomParameter[];
+  export interface OAuth2Defaults {
+    /**
+     * OAuth 2.0 scopes that the connector supports.
+     */
+    oauthScopes?: OAuthScopeList;
+    /**
+     * Token URLs that can be used for OAuth 2.0 authentication.
+     */
+    tokenUrls?: TokenUrlList;
+    /**
+     * Auth code URLs that can be used for OAuth 2.0 authentication.
+     */
+    authCodeUrls?: AuthCodeUrlList;
+    /**
+     * OAuth 2.0 grant types supported by the connector.
+     */
+    oauth2GrantTypesSupported?: OAuth2GrantTypeSupportedList;
+    /**
+     * List of custom parameters required for OAuth 2.0 authentication.
+     */
+    oauth2CustomProperties?: OAuth2CustomPropertiesList;
+  }
+  export type OAuth2GrantType = "CLIENT_CREDENTIALS"|"AUTHORIZATION_CODE"|"JWT_BEARER"|string;
+  export type OAuth2GrantTypeSupportedList = OAuth2GrantType[];
+  export interface OAuth2Properties {
+    /**
+     * The token URL required for OAuth 2.0 authentication.
+     */
+    tokenUrl: TokenUrl;
+    /**
+     * The OAuth 2.0 grant type used by connector for OAuth 2.0 authentication.
+     */
+    oAuth2GrantType: OAuth2GrantType;
+    /**
+     * Associates your token URL with a map of properties that you define. Use this parameter to provide any additional details that the connector requires to authenticate your request.
+     */
+    tokenUrlCustomProperties?: TokenUrlCustomProperties;
+  }
+  export interface OAuthCredentials {
+    /**
+     *  The identifier for the desired client. 
+     */
+    clientId: ClientId;
+    /**
+     *  The client secret used by the OAuth client to authenticate to the authorization server. 
+     */
+    clientSecret: ClientSecret;
+    /**
+     *  The access token used to access protected SAPOData resources. 
+     */
+    accessToken?: AccessToken;
+    /**
+     *  The refresh token used to refresh expired access token. 
+     */
+    refreshToken?: RefreshToken;
+    /**
+     *  The OAuth requirement needed to request security tokens from the connector endpoint. 
+     */
+    oAuthRequest?: ConnectorOAuthRequest;
+  }
+  export interface OAuthProperties {
+    /**
+     *  The token url required to fetch access/refresh tokens using authorization code and also to refresh expired access token using refresh token.
+     */
+    tokenUrl: TokenUrl;
+    /**
+     *  The authorization code url required to redirect to SAP Login Page to fetch authorization code for OAuth type authentication. 
+     */
+    authCodeUrl: AuthCodeUrl;
+    /**
+     *  The OAuth scopes required for OAuth type authentication. 
+     */
+    oAuthScopes: OAuthScopeList;
+  }
   export type OAuthScope = string;
   export type OAuthScopeList = OAuthScope[];
   export type Object = string;
+  export type ObjectTypeName = string;
   export type Operator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"CONTAINS"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
-  export type OperatorPropertiesKeys = "VALUE"|"VALUES"|"DATA_TYPE"|"UPPER_BOUND"|"LOWER_BOUND"|"SOURCE_DATA_TYPE"|"DESTINATION_DATA_TYPE"|"VALIDATION_ACTION"|"MASK_VALUE"|"MASK_LENGTH"|"TRUNCATE_LENGTH"|"MATH_OPERATION_FIELDS_ORDER"|"CONCAT_FORMAT"|"SUBFIELD_CATEGORY_MAP"|string;
+  export type OperatorPropertiesKeys = "VALUE"|"VALUES"|"DATA_TYPE"|"UPPER_BOUND"|"LOWER_BOUND"|"SOURCE_DATA_TYPE"|"DESTINATION_DATA_TYPE"|"VALIDATION_ACTION"|"MASK_VALUE"|"MASK_LENGTH"|"TRUNCATE_LENGTH"|"MATH_OPERATION_FIELDS_ORDER"|"CONCAT_FORMAT"|"SUBFIELD_CATEGORY_MAP"|"EXCLUDE_SOURCE_FIELDS_LIST"|"INCLUDE_NEW_FIELDS"|"ORDERED_PARTITION_KEYS_LIST"|string;
+  export type Operators = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"CONTAINS"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export type PardotConnectorOperator = "PROJECTION"|"EQUAL_TO"|"NO_OP"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|string;
+  export interface PardotConnectorProfileCredentials {
+    /**
+     * The credentials used to access protected Salesforce Pardot resources.
+     */
+    accessToken?: AccessToken;
+    /**
+     * The credentials used to acquire new access tokens.
+     */
+    refreshToken?: RefreshToken;
+    oAuthRequest?: ConnectorOAuthRequest;
+    /**
+     * The secret manager ARN, which contains the client ID and client secret of the connected app.
+     */
+    clientCredentialsArn?: ClientCredentialsArn;
+  }
+  export interface PardotConnectorProfileProperties {
+    /**
+     * The location of the Salesforce Pardot resource.
+     */
+    instanceUrl?: InstanceUrl;
+    /**
+     * Indicates whether the connector profile applies to a sandbox or production environment.
+     */
+    isSandboxEnvironment?: Boolean;
+    /**
+     * The business unit id of Salesforce Pardot instance.
+     */
+    businessUnitId?: BusinessUnitId;
+  }
+  export interface PardotMetadata {
+  }
+  export interface PardotSourceProperties {
+    /**
+     * The object specified in the Salesforce Pardot flow source.
+     */
+    object: Object;
+  }
   export type Password = string;
+  export type PathPrefix = "EXECUTION_ID"|"SCHEMA_VERSION"|string;
+  export type PathPrefixHierarchy = PathPrefix[];
+  export type PortNumber = number;
   export interface PrefixConfig {
     /**
-     *  Determines the level of granularity that's included in the prefix. 
+     * Determines the format of the prefix, and whether it applies to the file name, file path, or both. 
      */
     prefixType?: PrefixType;
     /**
-     *  Determines the format of the prefix, and whether it applies to the file name, file path, or both. 
+     * Determines the level of granularity for the date and time that's included in the prefix. 
      */
     prefixFormat?: PrefixFormat;
+    /**
+     * Specifies whether the destination file path includes either or both of the following elements:  EXECUTION_ID  The ID that Amazon AppFlow assigns to the flow run.  SCHEMA_VERSION  The version number of your data schema. Amazon AppFlow assigns this version number. The version number increases by one when you change any of the following settings in your flow configuration:   Source-to-destination field mappings   Field data types   Partition keys    
+     */
+    pathPrefixHierarchy?: PathPrefixHierarchy;
   }
   export type PrefixFormat = "YEAR"|"MONTH"|"DAY"|"HOUR"|"MINUTE"|string;
   export type PrefixType = "FILENAME"|"PATH"|"PATH_AND_FILENAME"|string;
+  export type PrivateConnectionProvisioningFailureCause = "CONNECTOR_AUTHENTICATION"|"CONNECTOR_SERVER"|"INTERNAL_SERVER"|"ACCESS_DENIED"|"VALIDATION"|string;
+  export type PrivateConnectionProvisioningFailureMessage = string;
+  export interface PrivateConnectionProvisioningState {
+    /**
+     *  Specifies the private connection provisioning status. 
+     */
+    status?: PrivateConnectionProvisioningStatus;
+    /**
+     *  Specifies the private connection provisioning failure reason. 
+     */
+    failureMessage?: PrivateConnectionProvisioningFailureMessage;
+    /**
+     *  Specifies the private connection provisioning failure cause. 
+     */
+    failureCause?: PrivateConnectionProvisioningFailureCause;
+  }
+  export type PrivateConnectionProvisioningStatus = "FAILED"|"PENDING"|"CREATED"|string;
   export type PrivateLinkServiceName = string;
+  export type ProfilePropertiesMap = {[key: string]: ProfilePropertyValue};
+  export type ProfilePropertyKey = string;
+  export type ProfilePropertyValue = string;
   export type Property = string;
+  export interface Range {
+    /**
+     * Maximum value supported by the field.
+     */
+    maximum?: Double;
+    /**
+     * Minimum value supported by the field.
+     */
+    minimum?: Double;
+  }
   export type RedirectUri = string;
   export interface RedshiftConnectorProfileCredentials {
     /**
      *  The name of the user. 
      */
-    username: Username;
+    username?: String;
     /**
      *  The password that corresponds to the user name. 
      */
-    password: Password;
+    password?: Password;
   }
   export interface RedshiftConnectorProfileProperties {
     /**
      *  The JDBC URL of the Amazon Redshift cluster. 
      */
-    databaseUrl: DatabaseUrl;
+    databaseUrl?: DatabaseUrl;
     /**
      *  A name for the associated Amazon S3 bucket. 
      */
@@ -1358,9 +2367,29 @@ declare namespace Appflow {
      */
     bucketPrefix?: BucketPrefix;
     /**
-     *  The Amazon Resource Name (ARN) of the IAM role. 
+     *  The Amazon Resource Name (ARN) of IAM role that grants Amazon Redshift read-only access to Amazon S3. For more information, and for the polices that you attach to this role, see Allow Amazon Redshift to access your Amazon AppFlow data in Amazon S3.
      */
     roleArn: RoleArn;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role that permits Amazon AppFlow to access your Amazon Redshift database through the Data API. For more information, and for the polices that you attach to this role, see Allow Amazon AppFlow to access Amazon Redshift databases with the Data API.
+     */
+    dataApiRoleArn?: DataApiRoleArn;
+    /**
+     * Indicates whether the connector profile defines a connection to an Amazon Redshift Serverless data warehouse.
+     */
+    isRedshiftServerless?: Boolean;
+    /**
+     * The unique ID that's assigned to an Amazon Redshift cluster.
+     */
+    clusterIdentifier?: ClusterIdentifier;
+    /**
+     * The name of an Amazon Redshift workgroup.
+     */
+    workgroupName?: WorkgroupName;
+    /**
+     * The name of an Amazon Redshift database.
+     */
+    databaseName?: DatabaseName;
   }
   export interface RedshiftDestinationProperties {
     /**
@@ -1385,6 +2414,73 @@ declare namespace Appflow {
   export type RefreshToken = string;
   export type Region = string;
   export type RegionList = Region[];
+  export interface RegisterConnectorRequest {
+    /**
+     *  The name of the connector. The name is unique for each ConnectorRegistration in your Amazon Web Services account.
+     */
+    connectorLabel?: ConnectorLabel;
+    /**
+     * A description about the connector that's being registered.
+     */
+    description?: Description;
+    /**
+     * The provisioning type of the connector. Currently the only supported value is LAMBDA. 
+     */
+    connectorProvisioningType?: ConnectorProvisioningType;
+    /**
+     * The provisioning type of the connector. Currently the only supported value is LAMBDA.
+     */
+    connectorProvisioningConfig?: ConnectorProvisioningConfig;
+    /**
+     * The clientToken parameter is an idempotency token. It ensures that your RegisterConnector request completes only once. You choose the value to pass. For example, if you don't receive a response from your request, you can safely retry the request with the same clientToken parameter value. If you omit a clientToken value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases. If you specify input parameters that differ from your first request, an error occurs. If you use a different value for clientToken, Amazon AppFlow considers it a new call to RegisterConnector. The token is active for 8 hours.
+     */
+    clientToken?: ClientToken;
+  }
+  export interface RegisterConnectorResponse {
+    /**
+     * The ARN of the connector being registered.
+     */
+    connectorArn?: ARN;
+  }
+  export type RegisteredBy = string;
+  export interface RegistrationOutput {
+    /**
+     * Explains the status of the registration attempt from Amazon AppFlow. If the attempt fails, the message explains why.
+     */
+    message?: String;
+    /**
+     * Indicates the number of resources that Amazon AppFlow created or updated. Possible resources include metadata tables and data partitions.
+     */
+    result?: String;
+    /**
+     * Indicates the status of the registration attempt from Amazon AppFlow.
+     */
+    status?: ExecutionStatus;
+  }
+  export interface ResetConnectorMetadataCacheRequest {
+    /**
+     * The name of the connector profile that you want to reset cached metadata for. You can omit this parameter if you're resetting the cache for any of the following connectors: Amazon Connect, Amazon EventBridge, Amazon Lookout for Metrics, Amazon S3, or Upsolver. If you're resetting the cache for any other connector, you must include this parameter in your request.
+     */
+    connectorProfileName?: ConnectorProfileName;
+    /**
+     * The type of connector to reset cached metadata for. You must include this parameter in your request if you're resetting the cache for any of the following connectors: Amazon Connect, Amazon EventBridge, Amazon Lookout for Metrics, Amazon S3, or Upsolver. If you're resetting the cache for any other connector, you can omit this parameter from your request. 
+     */
+    connectorType?: ConnectorType;
+    /**
+     * Use this parameter if you want to reset cached metadata about the details for an individual entity. If you don't include this parameter in your request, Amazon AppFlow only resets cached metadata about entity names, not entity details.
+     */
+    connectorEntityName?: EntityName;
+    /**
+     * Use this parameter only if you’re resetting the cached metadata about a nested entity. Only some connectors support nested entities. A nested entity is one that has another entity as a parent. To use this parameter, specify the name of the parent entity. To look up the parent-child relationship of entities, you can send a ListConnectorEntities request that omits the entitiesPath parameter. Amazon AppFlow will return a list of top-level entities. For each one, it indicates whether the entity has nested entities. Then, in a subsequent ListConnectorEntities request, you can specify a parent entity name for the entitiesPath parameter. Amazon AppFlow will return a list of the child entities for that parent.
+     */
+    entitiesPath?: EntitiesPath;
+    /**
+     * The API version that you specified in the connector profile that you’re resetting cached metadata for. You must use this parameter only if the connector supports multiple API versions or if the connector type is CustomConnector. To look up how many versions a connector supports, use the DescribeConnectors action. In the response, find the value that Amazon AppFlow returns for the connectorVersion parameter. To look up the connector type, use the DescribeConnectorProfiles action. In the response, find the value that Amazon AppFlow returns for the connectorType parameter. To look up the API version that you specified in a connector profile, use the DescribeConnectorProfiles action.
+     */
+    apiVersion?: ApiVersion;
+  }
+  export interface ResetConnectorMetadataCacheResponse {
+  }
   export type RoleArn = string;
   export type S3ConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface S3DestinationProperties {
@@ -1398,6 +2494,13 @@ declare namespace Appflow {
     bucketPrefix?: BucketPrefix;
     s3OutputFormatConfig?: S3OutputFormatConfig;
   }
+  export type S3InputFileType = "CSV"|"JSON"|string;
+  export interface S3InputFormatConfig {
+    /**
+     *  The file type that Amazon AppFlow gets from your Amazon S3 bucket. 
+     */
+    s3InputFileType?: S3InputFileType;
+  }
   export interface S3Metadata {
   }
   export interface S3OutputFormatConfig {
@@ -1410,6 +2513,10 @@ declare namespace Appflow {
      */
     prefixConfig?: PrefixConfig;
     aggregationConfig?: AggregationConfig;
+    /**
+     * If your file output format is Parquet, use this parameter to set whether Amazon AppFlow preserves the data types in your source data when it writes the output to Amazon S3.     true: Amazon AppFlow preserves the data types when it writes to Amazon S3. For example, an integer or 1 in your source data is still an integer in your output.    false: Amazon AppFlow converts all of the source data into strings when it writes to Amazon S3. For example, an integer of 1 in your source data becomes the string "1" in the output.  
+     */
+    preserveSourceDataTyping?: JavaBoolean;
   }
   export interface S3SourceProperties {
     /**
@@ -1420,6 +2527,95 @@ declare namespace Appflow {
      *  The object key for the Amazon S3 bucket in which the source files are stored. 
      */
     bucketPrefix?: BucketPrefix;
+    s3InputFormatConfig?: S3InputFormatConfig;
+  }
+  export type SAPODataConnectorOperator = "PROJECTION"|"LESS_THAN"|"CONTAINS"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export interface SAPODataConnectorProfileCredentials {
+    /**
+     *  The SAPOData basic authentication credentials. 
+     */
+    basicAuthCredentials?: BasicAuthCredentials;
+    /**
+     *  The SAPOData OAuth type authentication credentials. 
+     */
+    oAuthCredentials?: OAuthCredentials;
+  }
+  export interface SAPODataConnectorProfileProperties {
+    /**
+     *  The location of the SAPOData resource. 
+     */
+    applicationHostUrl: ApplicationHostUrl;
+    /**
+     *  The application path to catalog service. 
+     */
+    applicationServicePath: ApplicationServicePath;
+    /**
+     *  The port number of the SAPOData instance. 
+     */
+    portNumber: PortNumber;
+    /**
+     *  The client number for the client creating the connection. 
+     */
+    clientNumber: ClientNumber;
+    /**
+     *  The logon language of SAPOData instance. 
+     */
+    logonLanguage?: LogonLanguage;
+    /**
+     *  The SAPOData Private Link service name to be used for private data transfers. 
+     */
+    privateLinkServiceName?: PrivateLinkServiceName;
+    /**
+     *  The SAPOData OAuth properties required for OAuth type authentication. 
+     */
+    oAuthProperties?: OAuthProperties;
+    /**
+     * If you set this parameter to true, Amazon AppFlow bypasses the single sign-on (SSO) settings in your SAP account when it accesses your SAP OData instance. Whether you need this option depends on the types of credentials that you applied to your SAP OData connection profile. If your profile uses basic authentication credentials, SAP SSO can prevent Amazon AppFlow from connecting to your account with your username and password. In this case, bypassing SSO makes it possible for Amazon AppFlow to connect successfully. However, if your profile uses OAuth credentials, this parameter has no affect.
+     */
+    disableSSO?: Boolean;
+  }
+  export interface SAPODataDestinationProperties {
+    /**
+     * The object path specified in the SAPOData flow destination.
+     */
+    objectPath: Object;
+    /**
+     * Determines how Amazon AppFlow handles the success response that it gets from the connector after placing data. For example, this setting would determine where to write the response from a destination connector upon a successful insert operation.
+     */
+    successResponseHandlingConfig?: SuccessResponseHandlingConfig;
+    idFieldNames?: IdFieldNameList;
+    errorHandlingConfig?: ErrorHandlingConfig;
+    writeOperationType?: WriteOperationType;
+  }
+  export type SAPODataMaxPageSize = number;
+  export type SAPODataMaxParallelism = number;
+  export interface SAPODataMetadata {
+  }
+  export interface SAPODataPaginationConfig {
+    /**
+     * The maximum number of records that Amazon AppFlow receives in each page of the response from your SAP application. For transfers of OData records, the maximum page size is 3,000. For transfers of data that comes from an ODP provider, the maximum page size is 10,000.
+     */
+    maxPageSize: SAPODataMaxPageSize;
+  }
+  export interface SAPODataParallelismConfig {
+    /**
+     * The maximum number of processes that Amazon AppFlow runs at the same time when it retrieves your data from your SAP application.
+     */
+    maxParallelism: SAPODataMaxParallelism;
+  }
+  export interface SAPODataSourceProperties {
+    /**
+     *  The object path specified in the SAPOData flow source. 
+     */
+    objectPath?: Object;
+    /**
+     * Sets the number of concurrent processes that transfers OData records from your SAP instance.
+     */
+    parallelismConfig?: SAPODataParallelismConfig;
+    /**
+     * Sets the page size for each concurrent process that transfers OData records from your SAP instance.
+     */
+    paginationConfig?: SAPODataPaginationConfig;
   }
   export type SalesforceConnectorOperator = "PROJECTION"|"LESS_THAN"|"CONTAINS"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface SalesforceConnectorProfileCredentials {
@@ -1439,6 +2635,14 @@ declare namespace Appflow {
      *  The secret manager ARN, which contains the client ID and client secret of the connected app. 
      */
     clientCredentialsArn?: ClientCredentialsArn;
+    /**
+     * Specifies the OAuth 2.0 grant type that Amazon AppFlow uses when it requests an access token from Salesforce. Amazon AppFlow requires an access token each time it attempts to access your Salesforce records. You can specify one of the following values:  AUTHORIZATION_CODE  Amazon AppFlow passes an authorization code when it requests the access token from Salesforce. Amazon AppFlow receives the authorization code from Salesforce after you log in to your Salesforce account and authorize Amazon AppFlow to access your records.  CLIENT_CREDENTIALS  Amazon AppFlow passes client credentials (a client ID and client secret) when it requests the access token from Salesforce. You provide these credentials to Amazon AppFlow when you define the connection to your Salesforce account.  JWT_BEARER  Amazon AppFlow passes a JSON web token (JWT) when it requests the access token from Salesforce. You provide the JWT to Amazon AppFlow when you define the connection to your Salesforce account. When you use this grant type, you don't need to log in to your Salesforce account to authorize Amazon AppFlow to access your records.  
+     */
+    oAuth2GrantType?: OAuth2GrantType;
+    /**
+     * A JSON web token (JWT) that authorizes Amazon AppFlow to access your Salesforce records.
+     */
+    jwtToken?: JwtToken;
   }
   export interface SalesforceConnectorProfileProperties {
     /**
@@ -1449,7 +2653,13 @@ declare namespace Appflow {
      *  Indicates whether the connector profile applies to a sandbox or production environment. 
      */
     isSandboxEnvironment?: Boolean;
+    /**
+     * If the connection mode for the connector profile is private, this parameter sets whether Amazon AppFlow uses the private network to send metadata and authorization calls to Salesforce. Amazon AppFlow sends private calls through Amazon Web Services PrivateLink. These calls travel through Amazon Web Services infrastructure without being exposed to the public internet. Set either of the following values:  true  Amazon AppFlow sends all calls to Salesforce over the private network. These private calls are:   Calls to get metadata about your Salesforce records. This metadata describes your Salesforce objects and their fields.   Calls to get or refresh access tokens that allow Amazon AppFlow to access your Salesforce records.   Calls to transfer your Salesforce records as part of a flow run.    false  The default value. Amazon AppFlow sends some calls to Salesforce privately and other calls over the public internet. The public calls are:    Calls to get metadata about your Salesforce records.   Calls to get or refresh access tokens.   The private calls are:   Calls to transfer your Salesforce records as part of a flow run.    
+     */
+    usePrivateLinkForMetadataAndAuthorization?: Boolean;
   }
+  export type SalesforceDataTransferApi = "AUTOMATIC"|"BULKV2"|"REST_SYNC"|string;
+  export type SalesforceDataTransferApiList = SalesforceDataTransferApi[];
   export interface SalesforceDestinationProperties {
     /**
      *  The object specified in the Salesforce flow destination. 
@@ -1467,12 +2677,24 @@ declare namespace Appflow {
      *  This specifies the type of write operation to be performed in Salesforce. When the value is UPSERT, then idFieldNames is required. 
      */
     writeOperationType?: WriteOperationType;
+    /**
+     * Specifies which Salesforce API is used by Amazon AppFlow when your flow transfers data to Salesforce.  AUTOMATIC  The default. Amazon AppFlow selects which API to use based on the number of records that your flow transfers to Salesforce. If your flow transfers fewer than 1,000 records, Amazon AppFlow uses Salesforce REST API. If your flow transfers 1,000 records or more, Amazon AppFlow uses Salesforce Bulk API 2.0. Each of these Salesforce APIs structures data differently. If Amazon AppFlow selects the API automatically, be aware that, for recurring flows, the data output might vary from one flow run to the next. For example, if a flow runs daily, it might use REST API on one day to transfer 900 records, and it might use Bulk API 2.0 on the next day to transfer 1,100 records. For each of these flow runs, the respective Salesforce API formats the data differently. Some of the differences include how dates are formatted and null values are represented. Also, Bulk API 2.0 doesn't transfer Salesforce compound fields. By choosing this option, you optimize flow performance for both small and large data transfers, but the tradeoff is inconsistent formatting in the output.  BULKV2  Amazon AppFlow uses only Salesforce Bulk API 2.0. This API runs asynchronous data transfers, and it's optimal for large sets of data. By choosing this option, you ensure that your flow writes consistent output, but you optimize performance only for large data transfers. Note that Bulk API 2.0 does not transfer Salesforce compound fields.  REST_SYNC  Amazon AppFlow uses only Salesforce REST API. By choosing this option, you ensure that your flow writes consistent output, but you decrease performance for large data transfers that are better suited for Bulk API 2.0. In some cases, if your flow attempts to transfer a vary large set of data, it might fail with a timed out error.  
+     */
+    dataTransferApi?: SalesforceDataTransferApi;
   }
   export interface SalesforceMetadata {
     /**
      *  The desired authorization scope for the Salesforce account. 
      */
     oAuthScopes?: OAuthScopeList;
+    /**
+     * The Salesforce APIs that you can have Amazon AppFlow use when your flows transfers data to or from Salesforce.
+     */
+    dataTransferApis?: SalesforceDataTransferApiList;
+    /**
+     * The OAuth 2.0 grant types that Amazon AppFlow can use when it requests an access token from Salesforce. Amazon AppFlow requires an access token each time it attempts to access your Salesforce records.  AUTHORIZATION_CODE  Amazon AppFlow passes an authorization code when it requests the access token from Salesforce. Amazon AppFlow receives the authorization code from Salesforce after you log in to your Salesforce account and authorize Amazon AppFlow to access your records.  CLIENT_CREDENTIALS  Amazon AppFlow passes client credentials (a client ID and client secret) when it requests the access token from Salesforce. You provide these credentials to Amazon AppFlow when you define the connection to your Salesforce account.  JWT_BEARER  Amazon AppFlow passes a JSON web token (JWT) when it requests the access token from Salesforce. You provide the JWT to Amazon AppFlow when you define the connection to your Salesforce account. When you use this grant type, you don't need to log in to your Salesforce account to authorize Amazon AppFlow to access your records.  
+     */
+    oauth2GrantTypesSupported?: OAuth2GrantTypeSupportedList;
   }
   export interface SalesforceSourceProperties {
     /**
@@ -1487,9 +2709,14 @@ declare namespace Appflow {
      *  Indicates whether Amazon AppFlow includes deleted files in the flow run. 
      */
     includeDeletedRecords?: Boolean;
+    /**
+     * Specifies which Salesforce API is used by Amazon AppFlow when your flow transfers data from Salesforce.  AUTOMATIC  The default. Amazon AppFlow selects which API to use based on the number of records that your flow transfers from Salesforce. If your flow transfers fewer than 1,000,000 records, Amazon AppFlow uses Salesforce REST API. If your flow transfers 1,000,000 records or more, Amazon AppFlow uses Salesforce Bulk API 2.0. Each of these Salesforce APIs structures data differently. If Amazon AppFlow selects the API automatically, be aware that, for recurring flows, the data output might vary from one flow run to the next. For example, if a flow runs daily, it might use REST API on one day to transfer 900,000 records, and it might use Bulk API 2.0 on the next day to transfer 1,100,000 records. For each of these flow runs, the respective Salesforce API formats the data differently. Some of the differences include how dates are formatted and null values are represented. Also, Bulk API 2.0 doesn't transfer Salesforce compound fields. By choosing this option, you optimize flow performance for both small and large data transfers, but the tradeoff is inconsistent formatting in the output.  BULKV2  Amazon AppFlow uses only Salesforce Bulk API 2.0. This API runs asynchronous data transfers, and it's optimal for large sets of data. By choosing this option, you ensure that your flow writes consistent output, but you optimize performance only for large data transfers. Note that Bulk API 2.0 does not transfer Salesforce compound fields.  REST_SYNC  Amazon AppFlow uses only Salesforce REST API. By choosing this option, you ensure that your flow writes consistent output, but you decrease performance for large data transfers that are better suited for Bulk API 2.0. In some cases, if your flow attempts to transfer a vary large set of data, it might fail wituh a timed out error.  
+     */
+    dataTransferApi?: SalesforceDataTransferApi;
   }
   export type ScheduleExpression = string;
   export type ScheduleFrequencyType = "BYMINUTE"|"HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|"ONCE"|string;
+  export type ScheduleOffset = number;
   export interface ScheduledTriggerProperties {
     /**
      *  The scheduling expression that determines the rate at which the schedule will run, for example rate(5minutes). 
@@ -1500,17 +2727,29 @@ declare namespace Appflow {
      */
     dataPullMode?: DataPullMode;
     /**
-     *  Specifies the scheduled start time for a schedule-triggered flow. 
+     * The time at which the scheduled flow starts. The time is formatted as a timestamp that follows the ISO 8601 standard, such as 2022-04-26T13:00:00-07:00.
      */
     scheduleStartTime?: _Date;
     /**
-     *  Specifies the scheduled end time for a schedule-triggered flow. 
+     * The time at which the scheduled flow ends. The time is formatted as a timestamp that follows the ISO 8601 standard, such as 2022-04-27T13:00:00-07:00.
      */
     scheduleEndTime?: _Date;
     /**
-     *  Specifies the time zone used when referring to the date and time of a scheduled-triggered flow. 
+     * Specifies the time zone used when referring to the dates and times of a scheduled flow, such as America/New_York. This time zone is only a descriptive label. It doesn't affect how Amazon AppFlow interprets the timestamps that you specify to schedule the flow. If you want to schedule a flow by using times in a particular time zone, indicate the time zone as a UTC offset in your timestamps. For example, the UTC offsets for the America/New_York timezone are -04:00 EDT and -05:00 EST.
      */
     timezone?: Timezone;
+    /**
+     *  Specifies the optional offset that is added to the time interval for a schedule-triggered flow. 
+     */
+    scheduleOffset?: ScheduleOffset;
+    /**
+     *  Specifies the date range for the records to import from the connector in the first flow run. 
+     */
+    firstExecutionFrom?: _Date;
+    /**
+     * Defines how many times a scheduled flow fails consecutively before Amazon AppFlow deactivates it.
+     */
+    flowErrorDeactivationThreshold?: FlowErrorDeactivationThreshold;
   }
   export type SchedulingFrequencyTypeList = ScheduleFrequencyType[];
   export type SecretKey = string;
@@ -1519,11 +2758,15 @@ declare namespace Appflow {
     /**
      *  The name of the user. 
      */
-    username: Username;
+    username?: Username;
     /**
      *  The password that corresponds to the user name. 
      */
-    password: Password;
+    password?: Password;
+    /**
+     *  The OAuth 2.0 credentials required to authenticate the user. 
+     */
+    oAuth2Credentials?: OAuth2Credentials;
   }
   export interface ServiceNowConnectorProfileProperties {
     /**
@@ -1629,7 +2872,7 @@ declare namespace Appflow {
      */
     accountName?: AccountName;
     /**
-     *  The AWS Region of the Snowflake account. 
+     *  The Amazon Web Services Region of the Snowflake account. 
      */
     region?: Region;
   }
@@ -1653,7 +2896,7 @@ declare namespace Appflow {
   }
   export interface SnowflakeMetadata {
     /**
-     *  Specifies the supported AWS Regions when using Snowflake. 
+     *  Specifies the supported Amazon Web Services Regions when using Snowflake. 
      */
     supportedRegions?: RegionList;
   }
@@ -1714,6 +2957,12 @@ declare namespace Appflow {
      *  Specifies the information that is required for querying Zendesk. 
      */
     Zendesk?: ZendeskSourceProperties;
+    SAPOData?: SAPODataSourceProperties;
+    CustomConnector?: CustomConnectorSourceProperties;
+    /**
+     * Specifies the information that is required for querying Salesforce Pardot.
+     */
+    Pardot?: PardotSourceProperties;
   }
   export interface SourceFieldProperties {
     /**
@@ -1724,6 +2973,10 @@ declare namespace Appflow {
      *  Indicates if the field can be queried. 
      */
     isQueryable?: Boolean;
+    /**
+     * Indicates if this timestamp field can be used for incremental queries.
+     */
+    isTimestampFieldForIncrementalQueries?: Boolean;
   }
   export type SourceFields = String[];
   export interface SourceFlowConfig {
@@ -1732,7 +2985,11 @@ declare namespace Appflow {
      */
     connectorType: ConnectorType;
     /**
-     *  The name of the connector profile. This name must be unique for each connector profile in the AWS account. 
+     * The API version of the connector when it's used as a source in the flow.
+     */
+    apiVersion?: ApiVersion;
+    /**
+     *  The name of the connector profile. This name must be unique for each connector profile in the Amazon Web Services account. 
      */
     connectorProfileName?: ConnectorProfileName;
     /**
@@ -1750,6 +3007,10 @@ declare namespace Appflow {
      *  The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens (-) only. 
      */
     flowName: FlowName;
+    /**
+     * The clientToken parameter is an idempotency token. It ensures that your StartFlow request completes only once. You choose the value to pass. For example, if you don't receive a response from your request, you can safely retry the request with the same clientToken parameter value. If you omit a clientToken value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases. If you specify input parameters that differ from your first request, an error occurs for flows that run on a schedule or based on an event. However, the error doesn't occur for flows that run on demand. You set the conditions that initiate your flow for the triggerConfig parameter. If you use a different value for clientToken, Amazon AppFlow considers it a new call to StartFlow. The token is active for 8 hours.
+     */
+    clientToken?: ClientToken;
   }
   export interface StartFlowResponse {
     /**
@@ -1782,12 +3043,28 @@ declare namespace Appflow {
     flowStatus?: FlowStatus;
   }
   export type String = string;
+  export interface SuccessResponseHandlingConfig {
+    /**
+     * The Amazon S3 bucket prefix.
+     */
+    bucketPrefix?: BucketPrefix;
+    /**
+     * The name of the Amazon S3 bucket.
+     */
+    bucketName?: BucketName;
+  }
+  export type SupportedApiVersion = string;
+  export type SupportedApiVersionList = SupportedApiVersion[];
+  export type SupportedDataTransferApis = DataTransferApi[];
+  export type SupportedDataTransferType = "RECORD"|"FILE"|string;
+  export type SupportedDataTransferTypeList = SupportedDataTransferType[];
   export interface SupportedFieldTypeDetails {
     /**
      *  The initial supported version for fieldType. If this is later changed to a different version, v2 will be introduced. 
      */
     v1: FieldTypeDetails;
   }
+  export type SupportedOperatorList = Operators[];
   export type SupportedValueList = Value[];
   export type SupportedWriteOperationList = WriteOperationType[];
   export type TagKey = string;
@@ -1829,9 +3106,12 @@ declare namespace Appflow {
     taskProperties?: TaskPropertiesMap;
   }
   export type TaskPropertiesMap = {[key: string]: Property};
-  export type TaskType = "Arithmetic"|"Filter"|"Map"|"Mask"|"Merge"|"Truncate"|"Validate"|string;
+  export type TaskType = "Arithmetic"|"Filter"|"Map"|"Map_all"|"Mask"|"Merge"|"Passthrough"|"Truncate"|"Validate"|"Partition"|string;
   export type Tasks = Task[];
   export type Timezone = string;
+  export type TokenUrl = string;
+  export type TokenUrlCustomProperties = {[key: string]: CustomPropertyValue};
+  export type TokenUrlList = TokenUrl[];
   export type TrendmicroConnectorOperator = "PROJECTION"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface TrendmicroConnectorProfileCredentials {
     /**
@@ -1867,6 +3147,18 @@ declare namespace Appflow {
   }
   export type TriggerType = "Scheduled"|"Event"|"OnDemand"|string;
   export type TriggerTypeList = TriggerType[];
+  export interface UnregisterConnectorRequest {
+    /**
+     * The label of the connector. The label is unique for each ConnectorRegistration in your Amazon Web Services account.
+     */
+    connectorLabel: ConnectorLabel;
+    /**
+     * Indicates whether Amazon AppFlow should unregister the connector, even if it is currently in use in one or more connector profiles. The default value is false.
+     */
+    forceDelete?: Boolean;
+  }
+  export interface UnregisterConnectorResponse {
+  }
   export interface UntagResourceRequest {
     /**
      *  The Amazon Resource Name (ARN) of the flow that you want to untag. 
@@ -1881,7 +3173,7 @@ declare namespace Appflow {
   }
   export interface UpdateConnectorProfileRequest {
     /**
-     *  The name of the connector profile and is unique for each ConnectorProfile in the AWS Account. 
+     *  The name of the connector profile and is unique for each ConnectorProfile in the Amazon Web Services account. 
      */
     connectorProfileName: ConnectorProfileName;
     /**
@@ -1892,12 +3184,37 @@ declare namespace Appflow {
      *  Defines the connector-specific profile configuration and credentials. 
      */
     connectorProfileConfig: ConnectorProfileConfig;
+    /**
+     * The clientToken parameter is an idempotency token. It ensures that your UpdateConnectorProfile request completes only once. You choose the value to pass. For example, if you don't receive a response from your request, you can safely retry the request with the same clientToken parameter value. If you omit a clientToken value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases. If you specify input parameters that differ from your first request, an error occurs. If you use a different value for clientToken, Amazon AppFlow considers it a new call to UpdateConnectorProfile. The token is active for 8 hours.
+     */
+    clientToken?: ClientToken;
   }
   export interface UpdateConnectorProfileResponse {
     /**
      *  The Amazon Resource Name (ARN) of the connector profile. 
      */
     connectorProfileArn?: ConnectorProfileArn;
+  }
+  export interface UpdateConnectorRegistrationRequest {
+    /**
+     * The name of the connector. The name is unique for each connector registration in your AWS account.
+     */
+    connectorLabel: ConnectorLabel;
+    /**
+     * A description about the update that you're applying to the connector.
+     */
+    description?: Description;
+    connectorProvisioningConfig?: ConnectorProvisioningConfig;
+    /**
+     * The clientToken parameter is an idempotency token. It ensures that your UpdateConnectorRegistration request completes only once. You choose the value to pass. For example, if you don't receive a response from your request, you can safely retry the request with the same clientToken parameter value. If you omit a clientToken value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases. If you specify input parameters that differ from your first request, an error occurs. If you use a different value for clientToken, Amazon AppFlow considers it a new call to UpdateConnectorRegistration. The token is active for 8 hours.
+     */
+    clientToken?: ClientToken;
+  }
+  export interface UpdateConnectorRegistrationResponse {
+    /**
+     * The ARN of the connector being updated.
+     */
+    connectorArn?: ARN;
   }
   export interface UpdateFlowRequest {
     /**
@@ -1912,7 +3229,7 @@ declare namespace Appflow {
      *  The trigger settings that determine how and when the flow runs. 
      */
     triggerConfig: TriggerConfig;
-    sourceFlowConfig?: SourceFlowConfig;
+    sourceFlowConfig: SourceFlowConfig;
     /**
      *  The configuration that controls how Amazon AppFlow transfers data to the destination connector. 
      */
@@ -1921,6 +3238,14 @@ declare namespace Appflow {
      *  A list of tasks that Amazon AppFlow performs while transferring the data in the flow run. 
      */
     tasks: Tasks;
+    /**
+     * Specifies the configuration that Amazon AppFlow uses when it catalogs the data that's transferred by the associated flow. When Amazon AppFlow catalogs the data from a flow, it stores metadata in a data catalog.
+     */
+    metadataCatalogConfig?: MetadataCatalogConfig;
+    /**
+     * The clientToken parameter is an idempotency token. It ensures that your UpdateFlow request completes only once. You choose the value to pass. For example, if you don't receive a response from your request, you can safely retry the request with the same clientToken parameter value. If you omit a clientToken value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases. If you specify input parameters that differ from your first request, an error occurs. If you use a different value for clientToken, Amazon AppFlow considers it a new call to UpdateFlow. The token is active for 8 hours.
+     */
+    clientToken?: ClientToken;
   }
   export interface UpdateFlowResponse {
     /**
@@ -1980,9 +3305,26 @@ declare namespace Appflow {
      *  The object specified in the Veeva flow source. 
      */
     object: Object;
+    /**
+     * The document type specified in the Veeva document extract flow.
+     */
+    documentType?: DocumentType;
+    /**
+     * Boolean value to include source files in Veeva document extract flow.
+     */
+    includeSourceFiles?: Boolean;
+    /**
+     * Boolean value to include file renditions in Veeva document extract flow.
+     */
+    includeRenditions?: Boolean;
+    /**
+     * Boolean value to include All Versions of files in Veeva document extract flow.
+     */
+    includeAllVersions?: Boolean;
   }
   export type Warehouse = string;
-  export type WriteOperationType = "INSERT"|"UPSERT"|"UPDATE"|string;
+  export type WorkgroupName = string;
+  export type WriteOperationType = "INSERT"|"UPSERT"|"UPDATE"|"DELETE"|string;
   export type ZendeskConnectorOperator = "PROJECTION"|"GREATER_THAN"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface ZendeskConnectorProfileCredentials {
     /**
@@ -2007,6 +3349,15 @@ declare namespace Appflow {
      *  The location of the Zendesk resource. 
      */
     instanceUrl: InstanceUrl;
+  }
+  export interface ZendeskDestinationProperties {
+    /**
+     * The object specified in the Zendesk flow destination.
+     */
+    object: Object;
+    idFieldNames?: IdFieldNameList;
+    errorHandlingConfig?: ErrorHandlingConfig;
+    writeOperationType?: WriteOperationType;
   }
   export interface ZendeskMetadata {
     /**

@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "Appflow",
+        "description": "Launching Amazon AppFlow Custom Connector SDK."
+    },
+    {
+        "type": "feature",
+        "category": "Comprehend",
+        "description": "Amazon Comprehend now supports sharing and importing custom trained models from one AWS account to another within the same region."
+    },
+    {
+        "type": "feature",
+        "category": "ES",
+        "description": "Allows customers to get progress updates for blue/green deployments"
+    },
+    {
+        "type": "feature",
+        "category": "Fis",
+        "description": "Added GetTargetResourceType and ListTargetResourceTypesAPI actions. These actions return additional details about resource types and parameters that can be targeted by FIS actions. Added a parameters field for the targets that can be specified in experiment templates."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Launch Protobuf support for AWS Glue Schema Registry"
+    },
+    {
+        "type": "feature",
+        "category": "Iot",
+        "description": "This release adds support for configuring AWS IoT logging level per client ID, source IP, or principal ID."
+    },
+    {
+        "type": "feature",
+        "category": "Personalize",
+        "description": "Adding minRecommendationRequestsPerSecond attribute to recommender APIs."
+    }
+]

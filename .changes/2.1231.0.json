@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "GreengrassV2",
+        "description": "This release adds error status details for deployments and components that failed on a device and adds features to improve visibility into component installation."
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "Amazon QuickSight now supports SecretsManager Secret ARN in place of CredentialPair for DataSource creation and update. This release also has some minor documentation updates and removes CountryCode as a required parameter in GeoSpatialColumnGroup"
+    }
+]

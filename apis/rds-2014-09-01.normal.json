@@ -4,12 +4,18 @@
     "apiVersion": "2014-09-01",
     "endpointPrefix": "rds",
     "protocol": "query",
+    "protocols": [
+      "query"
+    ],
     "serviceAbbreviation": "Amazon RDS",
     "serviceFullName": "Amazon Relational Database Service",
     "serviceId": "RDS",
     "signatureVersion": "v4",
     "uid": "rds-2014-09-01",
-    "xmlNamespace": "http://rds.amazonaws.com/doc/2014-09-01/"
+    "xmlNamespace": "http://rds.amazonaws.com/doc/2014-09-01/",
+    "auth": [
+      "aws.auth#sigv4"
+    ]
   },
   "operations": {
     "AddSourceIdentifierToSubscription": {

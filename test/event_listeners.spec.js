@@ -241,7 +241,7 @@
         };
 
         describe('when using unsigned authtype', function() {
-          it('when paylaod is a buffer', function() {
+          it('when payload is a buffer', function() {
             var service = new FooService();
             var req = service.putStream({
               Body: AWS.util.buffer.toBuffer('test')
@@ -253,7 +253,7 @@
             });
           });
 
-          it('when paylaod is a string', function() {
+          it('when payload is a string', function() {
             var service = new FooService();
             var req = service.putStream({
               Body: 'test'
@@ -266,7 +266,7 @@
           });
 
           if (AWS.util.isNode()) {
-            it('when paylaod is a file stream', function() {
+            it('when payload is a file stream', function() {
               var service = new FooService();
               var req = service.putStream({
                 Body: require('fs').createReadStream(__filename)
@@ -375,6 +375,115 @@
               expect(err.message).to.equal('Non-file stream objects are not supported with SigV4');
               done();
             });
+          });
+        }
+      });
+
+      describe('adds Content-MD5 header', function() {
+        it('when payload is a string', function() {
+          var service = new FooService();
+          var req = service.putWithChecksum({
+            Body: 'test'
+          });
+
+          req.runTo('sign', function(err) {
+            expect(req.httpRequest.headers['Content-MD5']).to.equal('mi9mZPtVgELD8CntO010Rw==');
+            expect(!err).to.equal(true);
+          });
+        });
+
+        it('when using signature v2', function() {
+          var service = new FooService({ signatureVersion: 's3' });
+          var req = service.putWithChecksum({
+            Body: 'test'
+          });
+
+          req.runTo('sign', function(err) {
+            expect(req.httpRequest.headers['Content-MD5']).to.equal('mi9mZPtVgELD8CntO010Rw==');
+            expect(!err).to.equal(true);
+          });
+        });
+
+        it('should be disabled if computeChecksums set to false', function() {
+          var service = new FooService({
+            computeChecksums: false
+          });
+          var req = service.putWithChecksum({
+            Body: 'test'
+          });
+
+          req.runTo('sign', function(err) {
+            expect(req.httpRequest.headers['Content-MD5']).to.equal(undefined);
+            expect(!err).to.equal(true);
+          });
+        });
+
+        it('should not calculate checksum if provided', function() {
+          var service = new FooService({
+            computeChecksums: false
+          });
+          var req = service.putWithChecksum({
+            Body: 'test'
+          });
+          req.on('build', function(req) {
+            req.httpRequest.headers['Content-MD5'] = '000';
+          });
+
+          req.runTo('sign', function(err) {
+            expect(req.httpRequest.headers['Content-MD5']).to.equal('000');
+            expect(!err).to.equal(true);
+          });
+        });
+      });
+
+      describe('adds X-Amzn-Trace-Id header', function() {
+        if (AWS.util.isNode()) {
+          var originalEnv = process.env;
+          beforeEach(function() {
+            process.env = {};
+          });
+
+          afterEach(function() {
+            process.env = originalEnv;
+          });
+
+          it('when AWS_LAMBDA_FUNCTION_NAME and _X_AMZN_TRACE_ID env exists', function () {
+            helpers.mockHttpResponse(200, {}, '');
+            process.env = {
+              'AWS_LAMBDA_FUNCTION_NAME': 'some-function',
+              '_X_AMZN_TRACE_ID': 'Root=1-5759e988-bd862e3fe1be46a994272793;Parent=53995c3f42cd8ad8;Sampled=1;lineage=a87bd80c:0,68fd508a:5,c512fbe3:2',
+            };
+            var request = sendRequest();
+            request.send(function (err) {
+              expect(err).to.equal(null);
+              expect(request.httpRequest.headers['X-Amzn-Trace-Id']).to.equal('Root=1-5759e988-bd862e3fe1be46a994272793;Parent=53995c3f42cd8ad8;Sampled=1;lineage=a87bd80c:0,68fd508a:5,c512fbe3:2');
+            });
+          });
+
+          it('should not set trace id header when AWS_LAMBDA_FUNCTION_NAME is not set', function () {
+            helpers.mockHttpResponse(200, {}, '');
+            process.env = {
+              '_X_AMZN_TRACE_ID': 'Root=1-5759e988-bd862e3fe1be46a994272793;Parent=53995c3f42cd8ad8;Sampled=1;lineage=a87bd80c:0,68fd508a:5,c512fbe3:2',
+            };
+            var request = sendRequest();
+            request.send(function (err) {
+              expect(err).to.equal(null);
+              expect(request.httpRequest.headers['X-Amzn-Trace-Id']).to.equal(undefined);
+            });
+          });
+
+          it('should not set trace id header when the header is already set', function () {
+            helpers.mockHttpResponse(200, {}, '');
+            process.env = {
+              'AWS_LAMBDA_FUNCTION_NAME': 'some-function',
+              '_X_AMZN_TRACE_ID': 'EnvValue'
+            };
+            request = makeRequest();
+            request.on('build', function(req) {
+              req.httpRequest.headers['X-Amzn-Trace-Id'] = 'OriginalValue';
+            });
+            response = request.send(function() {});
+            expect(request.httpRequest.headers['X-Amzn-Trace-Id']).to.equal('OriginalValue');
           });
         }
       });

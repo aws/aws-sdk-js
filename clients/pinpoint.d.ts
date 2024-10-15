@@ -52,6 +52,14 @@ declare class Pinpoint extends Service {
    */
   createImportJob(callback?: (err: AWSError, data: Pinpoint.Types.CreateImportJobResponse) => void): Request<Pinpoint.Types.CreateImportJobResponse, AWSError>;
   /**
+   * Creates a new message template for messages using the in-app message channel.
+   */
+  createInAppTemplate(params: Pinpoint.Types.CreateInAppTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateInAppTemplateResponse) => void): Request<Pinpoint.Types.CreateInAppTemplateResponse, AWSError>;
+  /**
+   * Creates a new message template for messages using the in-app message channel.
+   */
+  createInAppTemplate(callback?: (err: AWSError, data: Pinpoint.Types.CreateInAppTemplateResponse) => void): Request<Pinpoint.Types.CreateInAppTemplateResponse, AWSError>;
+  /**
    * Creates a journey for an application.
    */
   createJourney(params: Pinpoint.Types.CreateJourneyRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateJourneyResponse) => void): Request<Pinpoint.Types.CreateJourneyResponse, AWSError>;
@@ -203,6 +211,14 @@ declare class Pinpoint extends Service {
    * Disables the GCM channel for an application and deletes any existing settings for the channel.
    */
   deleteGcmChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteGcmChannelResponse) => void): Request<Pinpoint.Types.DeleteGcmChannelResponse, AWSError>;
+  /**
+   * Deletes a message template for messages sent using the in-app message channel.
+   */
+  deleteInAppTemplate(params: Pinpoint.Types.DeleteInAppTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteInAppTemplateResponse) => void): Request<Pinpoint.Types.DeleteInAppTemplateResponse, AWSError>;
+  /**
+   * Deletes a message template for messages sent using the in-app message channel.
+   */
+  deleteInAppTemplate(callback?: (err: AWSError, data: Pinpoint.Types.DeleteInAppTemplateResponse) => void): Request<Pinpoint.Types.DeleteInAppTemplateResponse, AWSError>;
   /**
    * Deletes a journey from an application.
    */
@@ -484,6 +500,22 @@ declare class Pinpoint extends Service {
    */
   getImportJobs(callback?: (err: AWSError, data: Pinpoint.Types.GetImportJobsResponse) => void): Request<Pinpoint.Types.GetImportJobsResponse, AWSError>;
   /**
+   * Retrieves the in-app messages targeted for the provided endpoint ID.
+   */
+  getInAppMessages(params: Pinpoint.Types.GetInAppMessagesRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetInAppMessagesResponse) => void): Request<Pinpoint.Types.GetInAppMessagesResponse, AWSError>;
+  /**
+   * Retrieves the in-app messages targeted for the provided endpoint ID.
+   */
+  getInAppMessages(callback?: (err: AWSError, data: Pinpoint.Types.GetInAppMessagesResponse) => void): Request<Pinpoint.Types.GetInAppMessagesResponse, AWSError>;
+  /**
+   * Retrieves the content and settings of a message template for messages sent through the in-app channel.
+   */
+  getInAppTemplate(params: Pinpoint.Types.GetInAppTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetInAppTemplateResponse) => void): Request<Pinpoint.Types.GetInAppTemplateResponse, AWSError>;
+  /**
+   * Retrieves the content and settings of a message template for messages sent through the in-app channel.
+   */
+  getInAppTemplate(callback?: (err: AWSError, data: Pinpoint.Types.GetInAppTemplateResponse) => void): Request<Pinpoint.Types.GetInAppTemplateResponse, AWSError>;
+  /**
    * Retrieves information about the status, configuration, and other settings for a journey.
    */
   getJourney(params: Pinpoint.Types.GetJourneyRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetJourneyResponse) => void): Request<Pinpoint.Types.GetJourneyResponse, AWSError>;
@@ -515,6 +547,30 @@ declare class Pinpoint extends Service {
    * Retrieves (queries) pre-aggregated data for a standard execution metric that applies to a journey.
    */
   getJourneyExecutionMetrics(callback?: (err: AWSError, data: Pinpoint.Types.GetJourneyExecutionMetricsResponse) => void): Request<Pinpoint.Types.GetJourneyExecutionMetricsResponse, AWSError>;
+  /**
+   * Retrieves (queries) pre-aggregated data for a standard run execution metric that applies to a journey activity.
+   */
+  getJourneyRunExecutionActivityMetrics(params: Pinpoint.Types.GetJourneyRunExecutionActivityMetricsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetJourneyRunExecutionActivityMetricsResponse) => void): Request<Pinpoint.Types.GetJourneyRunExecutionActivityMetricsResponse, AWSError>;
+  /**
+   * Retrieves (queries) pre-aggregated data for a standard run execution metric that applies to a journey activity.
+   */
+  getJourneyRunExecutionActivityMetrics(callback?: (err: AWSError, data: Pinpoint.Types.GetJourneyRunExecutionActivityMetricsResponse) => void): Request<Pinpoint.Types.GetJourneyRunExecutionActivityMetricsResponse, AWSError>;
+  /**
+   * Retrieves (queries) pre-aggregated data for a standard run execution metric that applies to a journey.
+   */
+  getJourneyRunExecutionMetrics(params: Pinpoint.Types.GetJourneyRunExecutionMetricsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetJourneyRunExecutionMetricsResponse) => void): Request<Pinpoint.Types.GetJourneyRunExecutionMetricsResponse, AWSError>;
+  /**
+   * Retrieves (queries) pre-aggregated data for a standard run execution metric that applies to a journey.
+   */
+  getJourneyRunExecutionMetrics(callback?: (err: AWSError, data: Pinpoint.Types.GetJourneyRunExecutionMetricsResponse) => void): Request<Pinpoint.Types.GetJourneyRunExecutionMetricsResponse, AWSError>;
+  /**
+   * Provides information about the runs of a journey.
+   */
+  getJourneyRuns(params: Pinpoint.Types.GetJourneyRunsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetJourneyRunsResponse) => void): Request<Pinpoint.Types.GetJourneyRunsResponse, AWSError>;
+  /**
+   * Provides information about the runs of a journey.
+   */
+  getJourneyRuns(callback?: (err: AWSError, data: Pinpoint.Types.GetJourneyRunsResponse) => void): Request<Pinpoint.Types.GetJourneyRunsResponse, AWSError>;
   /**
    * Retrieves the content and settings of a message template for messages that are sent through a push notification channel.
    */
@@ -684,11 +740,11 @@ declare class Pinpoint extends Service {
    */
   putEvents(callback?: (err: AWSError, data: Pinpoint.Types.PutEventsResponse) => void): Request<Pinpoint.Types.PutEventsResponse, AWSError>;
   /**
-   * Removes one or more attributes, of the same attribute type, from all the endpoints that are associated with an application.
+   * Removes one or more custom attributes, of the same attribute type, from the application. Existing endpoints still have the attributes but Amazon Pinpoint will stop capturing new or changed values for these attributes.
    */
   removeAttributes(params: Pinpoint.Types.RemoveAttributesRequest, callback?: (err: AWSError, data: Pinpoint.Types.RemoveAttributesResponse) => void): Request<Pinpoint.Types.RemoveAttributesResponse, AWSError>;
   /**
-   * Removes one or more attributes, of the same attribute type, from all the endpoints that are associated with an application.
+   * Removes one or more custom attributes, of the same attribute type, from the application. Existing endpoints still have the attributes but Amazon Pinpoint will stop capturing new or changed values for these attributes.
    */
   removeAttributes(callback?: (err: AWSError, data: Pinpoint.Types.RemoveAttributesResponse) => void): Request<Pinpoint.Types.RemoveAttributesResponse, AWSError>;
   /**
@@ -699,6 +755,14 @@ declare class Pinpoint extends Service {
    * Creates and sends a direct message.
    */
   sendMessages(callback?: (err: AWSError, data: Pinpoint.Types.SendMessagesResponse) => void): Request<Pinpoint.Types.SendMessagesResponse, AWSError>;
+  /**
+   * Send an OTP message
+   */
+  sendOTPMessage(params: Pinpoint.Types.SendOTPMessageRequest, callback?: (err: AWSError, data: Pinpoint.Types.SendOTPMessageResponse) => void): Request<Pinpoint.Types.SendOTPMessageResponse, AWSError>;
+  /**
+   * Send an OTP message
+   */
+  sendOTPMessage(callback?: (err: AWSError, data: Pinpoint.Types.SendOTPMessageResponse) => void): Request<Pinpoint.Types.SendOTPMessageResponse, AWSError>;
   /**
    * Creates and sends a message to a list of users.
    */
@@ -828,6 +892,14 @@ declare class Pinpoint extends Service {
    */
   updateGcmChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateGcmChannelResponse) => void): Request<Pinpoint.Types.UpdateGcmChannelResponse, AWSError>;
   /**
+   * Updates an existing message template for messages sent through the in-app message channel.
+   */
+  updateInAppTemplate(params: Pinpoint.Types.UpdateInAppTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateInAppTemplateResponse) => void): Request<Pinpoint.Types.UpdateInAppTemplateResponse, AWSError>;
+  /**
+   * Updates an existing message template for messages sent through the in-app message channel.
+   */
+  updateInAppTemplate(callback?: (err: AWSError, data: Pinpoint.Types.UpdateInAppTemplateResponse) => void): Request<Pinpoint.Types.UpdateInAppTemplateResponse, AWSError>;
+  /**
    * Updates the configuration and other settings for a journey.
    */
   updateJourney(params: Pinpoint.Types.UpdateJourneyRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateJourneyResponse) => void): Request<Pinpoint.Types.UpdateJourneyResponse, AWSError>;
@@ -907,6 +979,14 @@ declare class Pinpoint extends Service {
    * Updates an existing message template for messages that are sent through the voice channel.
    */
   updateVoiceTemplate(callback?: (err: AWSError, data: Pinpoint.Types.UpdateVoiceTemplateResponse) => void): Request<Pinpoint.Types.UpdateVoiceTemplateResponse, AWSError>;
+  /**
+   * Verify an OTP
+   */
+  verifyOTPMessage(params: Pinpoint.Types.VerifyOTPMessageRequest, callback?: (err: AWSError, data: Pinpoint.Types.VerifyOTPMessageResponse) => void): Request<Pinpoint.Types.VerifyOTPMessageResponse, AWSError>;
+  /**
+   * Verify an OTP
+   */
+  verifyOTPMessage(callback?: (err: AWSError, data: Pinpoint.Types.VerifyOTPMessageResponse) => void): Request<Pinpoint.Types.VerifyOTPMessageResponse, AWSError>;
 }
 declare namespace Pinpoint {
   export interface ADMChannelRequest {
@@ -1523,6 +1603,10 @@ declare namespace Pinpoint {
      * The settings for a wait activity. This type of activity waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.
      */
     Wait?: WaitActivity;
+    /**
+     * The settings for a connect activity. This type of activity initiates a contact center call to participants.
+     */
+    ContactCenter?: ContactCenterActivity;
   }
   export interface ActivityResponse {
     /**
@@ -1577,6 +1661,10 @@ declare namespace Pinpoint {
      * The unique identifier for the campaign treatment that the activity applies to. A treatment is a variation of a campaign that's used for A/B testing of a campaign.
      */
     TreatmentId?: __string;
+    /**
+     * A JSON object that contains metrics relating to the campaign execution for this campaign activity. For information about the structure and contents of the results, see Standard Amazon Pinpoint analytics metrics in the Amazon Pinpoint Developer Guide.
+     */
+    ExecutionMetrics?: MapOf__string;
   }
   export interface AddressConfiguration {
     /**
@@ -1604,6 +1692,7 @@ declare namespace Pinpoint {
      */
     TitleOverride?: __string;
   }
+  export type Alignment = "LEFT"|"CENTER"|"RIGHT"|string;
   export interface AndroidPushNotificationTemplate {
     /**
      * The action to occur if a recipient taps a push notification that's based on the message template. Valid values are: OPEN_APP - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action. DEEP_LINK - Your app opens and displays a designated user interface in the app. This action uses the deep-linking features of the Android platform. URL - The default mobile browser on the recipient's device opens and loads the web page at a URL that you specify.
@@ -1685,6 +1774,24 @@ declare namespace Pinpoint {
      * A string-to-string map of key-value pairs that identifies the tags that are associated with the application. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
+    /**
+     * The date and time when the Application was created.
+     */
+    CreationDate?: __string;
+  }
+  export interface ApplicationSettingsJourneyLimits {
+    /**
+     * The daily number of messages that an endpoint can receive from all journeys. The maximum value is 100. If set to 0, this limit will not apply.
+     */
+    DailyCap?: __integer;
+    /**
+     * The default maximum number of messages that can be sent to an endpoint during the specified timeframe for all journeys.
+     */
+    TimeframeCap?: JourneyTimeframeCap;
+    /**
+     * The default maximum number of messages that a single journey can sent to a single endpoint. The maximum value is 100. If set to 0, this limit will not apply.
+     */
+    TotalCap?: __integer;
   }
   export interface ApplicationSettingsResource {
     /**
@@ -1707,6 +1814,10 @@ declare namespace Pinpoint {
      * The default quiet time for campaigns in the application. Quiet time is a specific time range when messages aren't sent to endpoints, if all the following conditions are met: The EndpointDemographic.Timezone property of the endpoint is set to a valid value. The current time in the endpoint's time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings). The current time in the endpoint's time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings). If any of the preceding conditions isn't met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled.
      */
     QuietTime?: QuietTime;
+    /**
+     * The default sending limits for journeys in the application. These limits apply to each journey for the application but can be overridden, on a per journey basis, with the JourneyLimits resource.
+     */
+    JourneyLimits?: ApplicationSettingsJourneyLimits;
   }
   export interface ApplicationsResponse {
     /**
@@ -1720,7 +1831,7 @@ declare namespace Pinpoint {
   }
   export interface AttributeDimension {
     /**
-     * The type of segment dimension to use. Valid values are: INCLUSIVE, endpoints that match the criteria are included in the segment; and, EXCLUSIVE, endpoints that match the criteria are excluded from the segment.
+     * The type of segment dimension to use. Valid values are: INCLUSIVE - endpoints that have attributes matching the values are included in the segment.EXCLUSIVE - endpoints that have attributes matching the values are excluded in the segment.CONTAINS - endpoints that have attributes' substrings match the values are included in the segment.BEFORE - endpoints with attributes read as ISO_INSTANT datetimes before the value are included in the segment.AFTER - endpoints with attributes read as ISO_INSTANT datetimes after the value are included in the segment.ON - endpoints with attributes read as ISO_INSTANT dates on the value are included in the segment. Time is ignored in this comparison.BETWEEN - endpoints with attributes read as ISO_INSTANT datetimes between the values are included in the segment.
      */
     AttributeType?: AttributeType;
     /**
@@ -1728,7 +1839,7 @@ declare namespace Pinpoint {
      */
     Values: ListOf__string;
   }
-  export type AttributeType = "INCLUSIVE"|"EXCLUSIVE"|string;
+  export type AttributeType = "INCLUSIVE"|"EXCLUSIVE"|"CONTAINS"|"BEFORE"|"AFTER"|"ON"|"BETWEEN"|string;
   export interface AttributesResource {
     /**
      * The unique identifier for the application.
@@ -1867,6 +1978,7 @@ declare namespace Pinpoint {
      */
     Rows: ListOfResultRow;
   }
+  export type ButtonAction = "LINK"|"DEEP_LINK"|"CLOSE"|string;
   export interface CampaignCustomMessage {
     /**
      * The raw, JSON-formatted string to use as the payload for the message. The maximum size is 5 KB.
@@ -1913,6 +2025,10 @@ declare namespace Pinpoint {
      */
     FromAddress?: __string;
     /**
+     * The list of MessageHeaders for the email. You can have up to 15 MessageHeaders for each email.
+     */
+    Headers?: ListOfMessageHeader;
+    /**
      * The body of the email, in HTML format, for recipients whose email clients render HTML content.
      */
     HtmlBody?: __string;
@@ -1945,6 +2061,24 @@ declare namespace Pinpoint {
      */
     WebUrl?: __string;
   }
+  export interface CampaignInAppMessage {
+    /**
+     * The message body of the notification, the email body or the text message.
+     */
+    Body?: __string;
+    /**
+     * In-app message content.
+     */
+    Content?: ListOfInAppMessageContent;
+    /**
+     * Custom config to be sent to client.
+     */
+    CustomConfig?: MapOf__string;
+    /**
+     * In-app message layout.
+     */
+    Layout?: Layout;
+  }
   export interface CampaignLimits {
     /**
      * The maximum number of messages that a campaign can send to a single endpoint during a 24-hour period. For an application, this value specifies the default limit for the number of messages that campaigns and journeys can send to a single endpoint during a 24-hour period. The maximum value is 100.
@@ -1955,13 +2089,17 @@ declare namespace Pinpoint {
      */
     MaximumDuration?: __integer;
     /**
-     * The maximum number of messages that a campaign can send each second. For an application, this value specifies the default limit for the number of messages that campaigns can send each second. The minimum value is 50. The maximum value is 20,000.
+     * The maximum number of messages that a campaign can send each second. For an application, this value specifies the default limit for the number of messages that campaigns can send each second. The minimum value is 1. The maximum value is 20,000.
      */
     MessagesPerSecond?: __integer;
     /**
      * The maximum number of messages that a campaign can send to a single endpoint during the course of the campaign. If a campaign recurs, this setting applies to all runs of the campaign. The maximum value is 100.
      */
     Total?: __integer;
+    /**
+     * The maximum total number of messages that the campaign can send per user session.
+     */
+    Session?: __integer;
   }
   export interface CampaignResponse {
     /**
@@ -2060,6 +2198,10 @@ declare namespace Pinpoint {
      * The version number of the campaign.
      */
     Version?: __integer;
+    /**
+     * Defines the priority of the campaign, used to decide the order of messages displayed to user if there are multiple messages scheduled to be displayed at the same moment.
+     */
+    Priority?: __integer;
   }
   export interface CampaignSmsMessage {
     /**
@@ -2071,9 +2213,21 @@ declare namespace Pinpoint {
      */
     MessageType?: MessageType;
     /**
+     * The long code to send the SMS message from. This value should be one of the dedicated long codes that's assigned to your AWS account. Although it isn't required, we recommend that you specify the long code using an E.164 format to ensure prompt and accurate delivery of the message. For example, +12065550100.
+     */
+    OriginationNumber?: __string;
+    /**
      * The sender ID to display on recipients' devices when they receive the SMS message.
      */
     SenderId?: __string;
+    /**
+     * The entity ID or Principal Entity (PE) id received from the regulatory body for sending SMS in your country.
+     */
+    EntityId?: __string;
+    /**
+     * The template ID received from the regulatory body for sending SMS in your country.
+     */
+    TemplateId?: __string;
   }
   export interface CampaignState {
     /**
@@ -2130,7 +2284,7 @@ declare namespace Pinpoint {
      */
     Version?: __integer;
   }
-  export type ChannelType = "PUSH"|"GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"VOICE"|"EMAIL"|"BAIDU"|"CUSTOM"|string;
+  export type ChannelType = "PUSH"|"GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"VOICE"|"EMAIL"|"BAIDU"|"CUSTOM"|"IN_APP"|string;
   export interface ChannelsResponse {
     /**
      * A map that contains a multipart response for each channel. For each item in this object, the ChannelType is the key and the Channel is the value.
@@ -2164,6 +2318,12 @@ declare namespace Pinpoint {
      * The unique identifier for the activity to perform if the conditions are met.
      */
     TrueActivity?: __string;
+  }
+  export interface ContactCenterActivity {
+    /**
+     * The unique identifier for the next activity to perform after the this activity.
+     */
+    NextActivity?: __string;
   }
   export interface CreateAppRequest {
     CreateApplicationRequest: CreateApplicationRequest;
@@ -2220,6 +2380,16 @@ declare namespace Pinpoint {
   }
   export interface CreateImportJobResponse {
     ImportJobResponse: ImportJobResponse;
+  }
+  export interface CreateInAppTemplateRequest {
+    InAppTemplateRequest: InAppTemplateRequest;
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+  }
+  export interface CreateInAppTemplateResponse {
+    TemplateCreateMessageBody: TemplateCreateMessageBody;
   }
   export interface CreateJourneyRequest {
     /**
@@ -2364,6 +2534,32 @@ declare namespace Pinpoint {
      * The unique identifier for the version of the message template to use for the message. If specified, this value must match the identifier for an existing template version. To retrieve a list of versions and version identifiers for a template, use the Template Versions resource. If you don't specify a value for this property, Amazon Pinpoint uses the active version of the template. The active version is typically the version of a template that's been most recently reviewed and approved for use, depending on your workflow. It isn't necessarily the latest version of a template.
      */
     TemplateVersion?: __string;
+  }
+  export interface DefaultButtonConfiguration {
+    /**
+     * The background color of the button.
+     */
+    BackgroundColor?: __string;
+    /**
+     * The border radius of the button.
+     */
+    BorderRadius?: __integer;
+    /**
+     * Action triggered by the button.
+     */
+    ButtonAction: ButtonAction;
+    /**
+     * Button destination.
+     */
+    Link?: __string;
+    /**
+     * Button text.
+     */
+    Text: __string;
+    /**
+     * The text color of the button.
+     */
+    TextColor?: __string;
   }
   export interface DefaultMessage {
     /**
@@ -2531,7 +2727,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The unique identifier for the endpoint.
+     * The case insensitive unique identifier for the endpoint. The identifier can't contain $, { or }.
      */
     EndpointId: __string;
   }
@@ -2555,6 +2751,19 @@ declare namespace Pinpoint {
   }
   export interface DeleteGcmChannelResponse {
     GCMChannelResponse: GCMChannelResponse;
+  }
+  export interface DeleteInAppTemplateRequest {
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+    /**
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     */
+    Version?: __string;
+  }
+  export interface DeleteInAppTemplateResponse {
+    MessageBody: MessageBody;
   }
   export interface DeleteJourneyRequest {
     /**
@@ -2723,6 +2932,10 @@ declare namespace Pinpoint {
      *  The ARN of the AWS Identity and Access Management (IAM) role that you want Amazon Pinpoint to use when it submits email-related event data for the channel.
      */
     RoleArn?: __string;
+    /**
+     * The ARN of an IAM role for Amazon Pinpoint to use to send email from your campaigns or journeys through Amazon SES.
+     */
+    OrchestrationSendingRoleArn?: __string;
   }
   export interface EmailChannelResponse {
     /**
@@ -2781,6 +2994,10 @@ declare namespace Pinpoint {
      *  The ARN of the AWS Identity and Access Management (IAM) role that Amazon Pinpoint uses to submit email-related event data for the channel.
      */
     RoleArn?: __string;
+    /**
+     * The ARN of an IAM role for Amazon Pinpoint to use to send email from your campaigns or journeys through Amazon SES.
+     */
+    OrchestrationSendingRoleArn?: __string;
     /**
      * The current version of the email channel.
      */
@@ -2852,7 +3069,11 @@ declare namespace Pinpoint {
      */
     Subject?: __string;
     /**
-     * A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+     * The list of MessageHeaders for the email. You can have up to 15 Headers.
+     */
+    Headers?: ListOfMessageHeader;
+    /**
+     * As of 22-05-2023 tags has been deprecated for update operations. After this date any value in tags is not processed and an error code is not returned. To manage tags we recommend using either Tags in the API Reference for Amazon Pinpoint, resourcegroupstaggingapi commands in the AWS Command Line Interface Documentation or resourcegroupstaggingapi in the AWS SDK. (Deprecated) A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
     /**
@@ -2893,6 +3114,10 @@ declare namespace Pinpoint {
      * The subject line, or title, that's used in email messages that are based on the message template.
      */
     Subject?: __string;
+    /**
+     * The list of MessageHeaders for the email. You can have up to 15 Headers.
+     */
+    Headers?: ListOfMessageHeader;
     /**
      * A string-to-string map of key-value pairs that identifies the tags that are associated with the message template. Each tag consists of a required tag key and an associated tag value.
      */
@@ -3050,7 +3275,7 @@ declare namespace Pinpoint {
      */
     Address?: __string;
     /**
-     * The delivery status of the message. Possible values are:  DUPLICATE - The endpoint address is a duplicate of another endpoint address. Amazon Pinpoint won't attempt to send the message again. OPT_OUT - The user who's associated with the endpoint has opted out of receiving messages from you. Amazon Pinpoint won't attempt to send the message again. PERMANENT_FAILURE - An error occurred when delivering the message to the endpoint. Amazon Pinpoint won't attempt to send the message again.    SUCCESSFUL - The message was successfully delivered to the endpoint. TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint won't attempt to send the message again. THROTTLED - Amazon Pinpoint throttled the operation to send the message to the endpoint. TIMEOUT - The message couldn't be sent within the timeout period. UNKNOWN_FAILURE - An unknown error occurred.
+     * The delivery status of the message. Possible values are:  DUPLICATE - The endpoint address is a duplicate of another endpoint address. Amazon Pinpoint won't attempt to send the message again. OPT_OUT - The user who's associated with the endpoint has opted out of receiving messages from you. Amazon Pinpoint won't attempt to send the message again. PERMANENT_FAILURE - An error occurred when delivering the message to the endpoint. Amazon Pinpoint won't attempt to send the message again.    SUCCESSFUL - The message was successfully delivered to the endpoint. TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint won't attempt to send the message again. THROTTLED - Amazon Pinpoint throttled the operation to send the message to the endpoint. UNKNOWN_FAILURE - An unknown error occurred.
      */
     DeliveryStatus: DeliveryStatus;
     /**
@@ -3458,16 +3683,24 @@ declare namespace Pinpoint {
   }
   export type FilterType = "SYSTEM"|"ENDPOINT"|string;
   export type Format = "CSV"|"JSON"|string;
-  export type Frequency = "ONCE"|"HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|"EVENT"|string;
+  export type Frequency = "ONCE"|"HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|"EVENT"|"IN_APP_EVENT"|string;
   export interface GCMChannelRequest {
     /**
      * The Web API Key, also referred to as an API_KEY or server key, that you received from Google to communicate with Google services.
      */
-    ApiKey: __string;
+    ApiKey?: __string;
+    /**
+     * The default authentication method used for GCM. Values are either "TOKEN" or "KEY". Defaults to "KEY".
+     */
+    DefaultAuthenticationMethod?: __string;
     /**
      * Specifies whether to enable the GCM channel for the application.
      */
     Enabled?: __boolean;
+    /**
+     * The contents of the JSON file provided by Google during registration in order to generate an access token for authentication. For more information see Migrate from legacy FCM APIs to HTTP v1.
+     */
+    ServiceJson?: __string;
   }
   export interface GCMChannelResponse {
     /**
@@ -3481,7 +3714,11 @@ declare namespace Pinpoint {
     /**
      * The Web API Key, also referred to as an API_KEY or server key, that you received from Google to communicate with Google services.
      */
-    Credential: __string;
+    Credential?: __string;
+    /**
+     * The default authentication method used for GCM. Values are either "TOKEN" or "KEY". Defaults to "KEY".
+     */
+    DefaultAuthenticationMethod?: __string;
     /**
      * Specifies whether the GCM channel is enabled for the application.
      */
@@ -3490,6 +3727,10 @@ declare namespace Pinpoint {
      * (Not used) This property is retained only for backward compatibility.
      */
     HasCredential?: __boolean;
+    /**
+     * Returns true if the JSON file provided by Google during registration process was used in the ServiceJson field of the request.
+     */
+    HasFcmServiceCredentials?: __boolean;
     /**
      * (Deprecated) An identifier for the GCM channel. This property is retained only for backward compatibility.
      */
@@ -3545,7 +3786,11 @@ declare namespace Pinpoint {
      */
     ImageUrl?: __string;
     /**
-     * para>normal - The notification might be delayed. Delivery is optimized for battery usage on the recipient's device. Use this value unless immediate delivery is required./listitem> high - The notification is sent immediately and might wake a sleeping device./para> Amazon Pinpoint specifies this value in the FCM priority parameter when it sends the notification message to FCM. The equivalent values for Apple Push Notification service (APNs) are 5, for normal, and 10, for high. If you specify an APNs value for this property, Amazon Pinpoint accepts and converts the value to the corresponding FCM value.
+     * The preferred authentication method, with valid values "KEY" or "TOKEN". If a value isn't provided then the DefaultAuthenticationMethod is used.
+     */
+    PreferredAuthenticationMethod?: __string;
+    /**
+     * para>normal – The notification might be delayed. Delivery is optimized for battery usage on the recipient's device. Use this value unless immediate delivery is required./listitem> high – The notification is sent immediately and might wake a sleeping device./para> Amazon Pinpoint specifies this value in the FCM priority parameter when it sends the notification message to FCM. The equivalent values for Apple Push Notification service (APNs) are 5, for normal, and 10, for high. If you specify an APNs value for this property, Amazon Pinpoint accepts and converts the value to the corresponding FCM value.
      */
     Priority?: __string;
     /**
@@ -3878,7 +4123,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The unique identifier for the endpoint.
+     * The case insensitive unique identifier for the endpoint. The identifier can't contain $, { or }.
      */
     EndpointId: __string;
   }
@@ -3962,6 +4207,32 @@ declare namespace Pinpoint {
   }
   export interface GetImportJobsResponse {
     ImportJobsResponse: ImportJobsResponse;
+  }
+  export interface GetInAppMessagesRequest {
+    /**
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
+     */
+    ApplicationId: __string;
+    /**
+     * The unique identifier for the endpoint.
+     */
+    EndpointId: __string;
+  }
+  export interface GetInAppMessagesResponse {
+    InAppMessagesResponse: InAppMessagesResponse;
+  }
+  export interface GetInAppTemplateRequest {
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+    /**
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     */
+    Version?: __string;
+  }
+  export interface GetInAppTemplateResponse {
+    InAppTemplateResponse: InAppTemplateResponse;
   }
   export interface GetJourneyDateRangeKpiRequest {
     /**
@@ -4054,6 +4325,81 @@ declare namespace Pinpoint {
   }
   export interface GetJourneyResponse {
     JourneyResponse: JourneyResponse;
+  }
+  export interface GetJourneyRunExecutionActivityMetricsRequest {
+    /**
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
+     */
+    ApplicationId: __string;
+    /**
+     * The unique identifier for the journey activity.
+     */
+    JourneyActivityId: __string;
+    /**
+     * The unique identifier for the journey.
+     */
+    JourneyId: __string;
+    /**
+     * The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.
+     */
+    NextToken?: __string;
+    /**
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
+     */
+    PageSize?: __string;
+    /**
+     * The unique identifier for the journey run.
+     */
+    RunId: __string;
+  }
+  export interface GetJourneyRunExecutionActivityMetricsResponse {
+    JourneyRunExecutionActivityMetricsResponse: JourneyRunExecutionActivityMetricsResponse;
+  }
+  export interface GetJourneyRunExecutionMetricsRequest {
+    /**
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
+     */
+    ApplicationId: __string;
+    /**
+     * The unique identifier for the journey.
+     */
+    JourneyId: __string;
+    /**
+     * The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.
+     */
+    NextToken?: __string;
+    /**
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
+     */
+    PageSize?: __string;
+    /**
+     * The unique identifier for the journey run.
+     */
+    RunId: __string;
+  }
+  export interface GetJourneyRunExecutionMetricsResponse {
+    JourneyRunExecutionMetricsResponse: JourneyRunExecutionMetricsResponse;
+  }
+  export interface GetJourneyRunsRequest {
+    /**
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
+     */
+    ApplicationId: __string;
+    /**
+     * The unique identifier for the journey.
+     */
+    JourneyId: __string;
+    /**
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
+     */
+    PageSize?: __string;
+    /**
+     * The NextToken string that specifies which page of results to return in a paginated response.
+     */
+    Token?: __string;
+  }
+  export interface GetJourneyRunsResponse {
+    JourneyRunsResponse: JourneyRunsResponse;
   }
   export interface GetPushTemplateRequest {
     /**
@@ -4399,6 +4745,214 @@ declare namespace Pinpoint {
      */
     NextToken?: __string;
   }
+  export interface InAppCampaignSchedule {
+    /**
+     * The scheduled time after which the in-app message should not be shown. Timestamp is in ISO 8601 format.
+     */
+    EndDate?: __string;
+    /**
+     * The event filter the SDK has to use to show the in-app message in the application.
+     */
+    EventFilter?: CampaignEventFilter;
+    /**
+     * Time during which the in-app message should not be shown to the user.
+     */
+    QuietTime?: QuietTime;
+  }
+  export interface InAppMessage {
+    /**
+     * In-app message content.
+     */
+    Content?: ListOfInAppMessageContent;
+    /**
+     * Custom config to be sent to SDK.
+     */
+    CustomConfig?: MapOf__string;
+    /**
+     * The layout of the message.
+     */
+    Layout?: Layout;
+  }
+  export interface InAppMessageBodyConfig {
+    /**
+     * The alignment of the text. Valid values: LEFT, CENTER, RIGHT.
+     */
+    Alignment: Alignment;
+    /**
+     * Message Body.
+     */
+    Body: __string;
+    /**
+     * The text color.
+     */
+    TextColor: __string;
+  }
+  export interface InAppMessageButton {
+    /**
+     * Default button content.
+     */
+    Android?: OverrideButtonConfiguration;
+    /**
+     * Default button content.
+     */
+    DefaultConfig?: DefaultButtonConfiguration;
+    /**
+     * Default button content.
+     */
+    IOS?: OverrideButtonConfiguration;
+    /**
+     * Default button content.
+     */
+    Web?: OverrideButtonConfiguration;
+  }
+  export interface InAppMessageCampaign {
+    /**
+     * Campaign id of the corresponding campaign.
+     */
+    CampaignId?: __string;
+    /**
+     * Daily cap which controls the number of times any in-app messages can be shown to the endpoint during a day.
+     */
+    DailyCap?: __integer;
+    /**
+     * In-app message content with all fields required for rendering an in-app message.
+     */
+    InAppMessage?: InAppMessage;
+    /**
+     * Priority of the in-app message.
+     */
+    Priority?: __integer;
+    /**
+     * Schedule of the campaign.
+     */
+    Schedule?: InAppCampaignSchedule;
+    /**
+     * Session cap which controls the number of times an in-app message can be shown to the endpoint during an application session.
+     */
+    SessionCap?: __integer;
+    /**
+     * Total cap which controls the number of times an in-app message can be shown to the endpoint.
+     */
+    TotalCap?: __integer;
+    /**
+     * Treatment id of the campaign.
+     */
+    TreatmentId?: __string;
+  }
+  export interface InAppMessageContent {
+    /**
+     * The background color for the message.
+     */
+    BackgroundColor?: __string;
+    /**
+     * The configuration for the message body.
+     */
+    BodyConfig?: InAppMessageBodyConfig;
+    /**
+     * The configuration for the message header.
+     */
+    HeaderConfig?: InAppMessageHeaderConfig;
+    /**
+     * The image url for the background of message.
+     */
+    ImageUrl?: __string;
+    /**
+     * The first button inside the message.
+     */
+    PrimaryBtn?: InAppMessageButton;
+    /**
+     * The second button inside message.
+     */
+    SecondaryBtn?: InAppMessageButton;
+  }
+  export interface InAppMessageHeaderConfig {
+    /**
+     * The alignment of the text. Valid values: LEFT, CENTER, RIGHT.
+     */
+    Alignment: Alignment;
+    /**
+     * Message Header.
+     */
+    Header: __string;
+    /**
+     * The text color.
+     */
+    TextColor: __string;
+  }
+  export interface InAppMessagesResponse {
+    /**
+     * List of targeted in-app message campaigns.
+     */
+    InAppMessageCampaigns?: ListOfInAppMessageCampaign;
+  }
+  export interface InAppTemplateRequest {
+    /**
+     * The content of the message, can include up to 5 modals. Each modal must contain a message, a header, and background color. ImageUrl and buttons are optional.
+     */
+    Content?: ListOfInAppMessageContent;
+    /**
+     * Custom config to be sent to client.
+     */
+    CustomConfig?: MapOf__string;
+    /**
+     * The layout of the message.
+     */
+    Layout?: Layout;
+    /**
+     * As of 22-05-2023 tags has been deprecated for update operations. After this date any value in tags is not processed and an error code is not returned. To manage tags we recommend using either Tags in the API Reference for Amazon Pinpoint, resourcegroupstaggingapi commands in the AWS Command Line Interface Documentation or resourcegroupstaggingapi in the AWS SDK. (Deprecated) A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+     */
+    tags?: MapOf__string;
+    /**
+     * The description of the template.
+     */
+    TemplateDescription?: __string;
+  }
+  export interface InAppTemplateResponse {
+    /**
+     * The resource arn of the template.
+     */
+    Arn?: __string;
+    /**
+     * The content of the message, can include up to 5 modals. Each modal must contain a message, a header, and background color. ImageUrl and buttons are optional.
+     */
+    Content?: ListOfInAppMessageContent;
+    /**
+     * The creation date of the template.
+     */
+    CreationDate: __string;
+    /**
+     * Custom config to be sent to client.
+     */
+    CustomConfig?: MapOf__string;
+    /**
+     * The last modified date of the template.
+     */
+    LastModifiedDate: __string;
+    /**
+     * The layout of the message.
+     */
+    Layout?: Layout;
+    /**
+     * A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+     */
+    tags?: MapOf__string;
+    /**
+     * The description of the template.
+     */
+    TemplateDescription?: __string;
+    /**
+     * The name of the template.
+     */
+    TemplateName: __string;
+    /**
+     * The type of the template.
+     */
+    TemplateType: TemplateType;
+    /**
+     * The version id of the template.
+     */
+    Version?: __string;
+  }
   export type Include = "ALL"|"ANY"|"NONE"|string;
   export interface ItemResponse {
     /**
@@ -4455,7 +5009,7 @@ declare namespace Pinpoint {
   }
   export interface JourneyExecutionActivityMetricsResponse {
     /**
-     * The type of activity that the metric applies to. Possible values are: CONDITIONAL_SPLIT - For a yes/no split activity, which is an activity that sends participants down one of two paths in a journey. HOLDOUT - For a holdout activity, which is an activity that stops a journey for a specified percentage of participants. MESSAGE - For an email activity, which is an activity that sends an email message to participants. MULTI_CONDITIONAL_SPLIT - For a multivariate split activity, which is an activity that sends participants down one of as many as five paths in a journey. RANDOM_SPLIT - For a random split activity, which is an activity that sends specified percentages of participants down one of as many as five paths in a journey. WAIT - For a wait activity, which is an activity that waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.
+     * The type of activity that the metric applies to. Possible values are: CONDITIONAL_SPLIT – For a yes/no split activity, which is an activity that sends participants down one of two paths in a journey. HOLDOUT – For a holdout activity, which is an activity that stops a journey for a specified percentage of participants. MESSAGE – For an email activity, which is an activity that sends an email message to participants. MULTI_CONDITIONAL_SPLIT – For a multivariate split activity, which is an activity that sends participants down one of as many as five paths in a journey. RANDOM_SPLIT – For a random split activity, which is an activity that sends specified percentages of participants down one of as many as five paths in a journey. WAIT – For a wait activity, which is an activity that waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.
      */
     ActivityType: __string;
     /**
@@ -4510,12 +5064,34 @@ declare namespace Pinpoint {
      * The maximum number of messages that the journey can send each second.
      */
     MessagesPerSecond?: __integer;
+    /**
+     * Minimum time that must pass before an endpoint can re-enter a given journey. The duration should use an ISO 8601 format, such as PT1H. 
+     */
+    EndpointReentryInterval?: __string;
+    /**
+     * The number of messages that an endpoint can receive during the specified timeframe.
+     */
+    TimeframeCap?: JourneyTimeframeCap;
+    /**
+     * The maximum number of messages a journey can sent to a single endpoint. The maximum value is 100. If set to 0, this limit will not apply.
+     */
+    TotalCap?: __integer;
   }
   export interface JourneyPushMessage {
     /**
      * The number of seconds that the push notification service should keep the message, if the service is unable to deliver the notification the first time. This value is converted to an expiration value when it's sent to a push-notification service. If this value is 0, the service treats the notification as if it expires immediately and the service doesn't store or try to deliver the notification again. This value doesn't apply to messages that are sent through the Amazon Device Messaging (ADM) service.
      */
     TimeToLive?: __string;
+  }
+  export interface JourneyChannelSettings {
+    /**
+     * Amazon Resource Name (ARN) of the Connect Campaign.
+     */
+    ConnectCampaignArn?: __string;
+    /**
+     * IAM role ARN to be assumed when invoking Connect campaign execution APIs for dialing.
+     */
+    ConnectCampaignExecutionRoleArn?: __string;
   }
   export interface JourneyResponse {
     /**
@@ -4578,16 +5154,137 @@ declare namespace Pinpoint {
      * This object is not used or supported.
      */
     tags?: MapOf__string;
+    /**
+     * Indicates whether endpoints in quiet hours should enter a wait activity until quiet hours have elapsed.
+     */
+    WaitForQuietTime?: __boolean;
+    /**
+     * Indicates whether the journey participants should be refreshed when a segment is updated.
+     */
+    RefreshOnSegmentUpdate?: __boolean;
+    /**
+     * The channel-specific configurations for the journey.
+     */
+    JourneyChannelSettings?: JourneyChannelSettings;
+    /**
+     * Indicates if journey has Advance Quiet Time enabled. This flag should be set to true in order to allow using OpenHours and ClosedDays.
+     */
+    SendingSchedule?: __boolean;
+    /**
+     * The time when a journey can send messages. QuietTime should be configured first and SendingSchedule should be set to true.
+     */
+    OpenHours?: OpenHours;
+    /**
+     * The time when a journey will not send messages. QuietTime should be configured first and SendingSchedule should be set to true.
+     */
+    ClosedDays?: ClosedDays;
+    /**
+     * An array of time zone estimation methods, if any, to use for determining an Endpoints time zone if the Endpoint does not have a value for the Demographic.Timezone attribute.  PHONE_NUMBER - A time zone is determined based on the Endpoint.Address and Endpoint.Location.Country. POSTAL_CODE - A time zone is determined based on the Endpoint.Location.PostalCode and Endpoint.Location.Country. POSTAL_CODE detection is only supported in the United States, United Kingdom, Australia, New Zealand, Canada, France, Italy, Spain, Germany and in regions where Amazon Pinpoint is available. 
+     */
+    TimezoneEstimationMethods?: ListOf__TimezoneEstimationMethodsElement;
   }
+  export interface JourneyRunExecutionActivityMetricsResponse {
+    /**
+     * The type of activity that the metric applies to. Possible values are: CONDITIONAL_SPLIT – For a yes/no split activity, which is an activity that sends participants down one of two paths in a journey. HOLDOUT – For a holdout activity, which is an activity that stops a journey for a specified percentage of participants. MESSAGE – For an email activity, which is an activity that sends an email message to participants. MULTI_CONDITIONAL_SPLIT – For a multivariate split activity, which is an activity that sends participants down one of as many as five paths in a journey. RANDOM_SPLIT – For a random split activity, which is an activity that sends specified percentages of participants down one of as many as five paths in a journey. WAIT – For a wait activity, which is an activity that waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.
+     */
+    ActivityType: __string;
+    /**
+     * The unique identifier for the application that the metric applies to.
+     */
+    ApplicationId: __string;
+    /**
+     * The unique identifier for the activity that the metric applies to.
+     */
+    JourneyActivityId: __string;
+    /**
+     * The unique identifier for the journey that the metric applies to.
+     */
+    JourneyId: __string;
+    /**
+     * The date and time, in ISO 8601 format, when Amazon Pinpoint last evaluated the execution status of the activity for this journey run and updated the data for the metric.
+     */
+    LastEvaluatedTime: __string;
+    /**
+     * A JSON object that contains the results of the query. For information about the structure and contents of the results, see see Standard Amazon Pinpoint analytics metrics in the Amazon Pinpoint Developer Guide.
+     */
+    Metrics: MapOf__string;
+    /**
+     * The unique identifier for the journey run that the metric applies to.
+     */
+    RunId: __string;
+  }
+  export interface JourneyRunExecutionMetricsResponse {
+    /**
+     * The unique identifier for the application that the metric applies to.
+     */
+    ApplicationId: __string;
+    /**
+     * The unique identifier for the journey that the metric applies to.
+     */
+    JourneyId: __string;
+    /**
+     * The date and time, in ISO 8601 format, when Amazon Pinpoint last evaluated the journey run and updated the data for the metric.
+     */
+    LastEvaluatedTime: __string;
+    /**
+     * A JSON object that contains the results of the query. For information about the structure and contents of the results, see the Standard Amazon Pinpoint analytics metrics in the Amazon Pinpoint Developer Guide.
+     */
+    Metrics: MapOf__string;
+    /**
+     * The unique identifier for the journey run that the metric applies to.
+     */
+    RunId: __string;
+  }
+  export interface JourneyRunResponse {
+    /**
+     * The time when the journey run was created or scheduled, in ISO 8601 format.
+     */
+    CreationTime: __string;
+    /**
+     * The last time the journey run was updated, in ISO 8601 format..
+     */
+    LastUpdateTime: __string;
+    /**
+     * The unique identifier for the run.
+     */
+    RunId: __string;
+    /**
+     * The current status of the journey run.
+     */
+    Status: JourneyRunStatus;
+  }
+  export interface JourneyRunsResponse {
+    /**
+     * An array of responses, one for each run of the journey
+     */
+    Item: ListOfJourneyRunResponse;
+    /**
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+     */
+    NextToken?: __string;
+  }
+  export type JourneyRunStatus = "SCHEDULED"|"RUNNING"|"COMPLETED"|"CANCELLED"|string;
   export interface JourneySMSMessage {
     /**
      * The SMS message type. Valid values are TRANSACTIONAL (for messages that are critical or time-sensitive, such as a one-time passwords) and PROMOTIONAL (for messsages that aren't critical or time-sensitive, such as marketing messages).
      */
     MessageType?: MessageType;
     /**
+     * The long code to send the SMS message from. This value should be one of the dedicated long codes that's assigned to your AWS account. Although it isn't required, we recommend that you specify the long code using an E.164 format to ensure prompt and accurate delivery of the message. For example, +12065550100.
+     */
+    OriginationNumber?: __string;
+    /**
      * The sender ID to display as the sender of the message on a recipient's device. Support for sender IDs varies by country or region. For more information, see Supported Countries and Regions in the Amazon Pinpoint User Guide.
      */
     SenderId?: __string;
+    /**
+     * The entity ID or Principal Entity (PE) id received from the regulatory body for sending SMS in your country.
+     */
+    EntityId?: __string;
+    /**
+     * The template ID received from the regulatory body for sending SMS in your country.
+     */
+    TemplateId?: __string;
   }
   export interface JourneySchedule {
     /**
@@ -4610,9 +5307,19 @@ declare namespace Pinpoint {
   }
   export interface JourneyStateRequest {
     /**
-     * The status of the journey. Currently, the only supported value is CANCELLED. If you cancel a journey, Amazon Pinpoint continues to perform activities that are currently in progress, until those activities are complete. Amazon Pinpoint also continues to collect and aggregate analytics data for those activities, until they are complete, and any activities that were complete when you cancelled the journey. After you cancel a journey, you can't add, change, or remove any activities from the journey. In addition, Amazon Pinpoint stops evaluating the journey and doesn't perform any activities that haven't started.
+     * The status of the journey. Currently, Supported values are ACTIVE, PAUSED, and CANCELLED If you cancel a journey, Amazon Pinpoint continues to perform activities that are currently in progress, until those activities are complete. Amazon Pinpoint also continues to collect and aggregate analytics data for those activities, until they are complete, and any activities that were complete when you cancelled the journey. After you cancel a journey, you can't add, change, or remove any activities from the journey. In addition, Amazon Pinpoint stops evaluating the journey and doesn't perform any activities that haven't started. When the journey is paused, Amazon Pinpoint continues to perform activities that are currently in progress, until those activities are complete. Endpoints will stop entering journeys when the journey is paused and will resume entering the journey after the journey is resumed. For wait activities, wait time is paused when the journey is paused. Currently, PAUSED only supports journeys with a segment refresh interval.
      */
     State?: State;
+  }
+  export interface JourneyTimeframeCap {
+    /**
+     * The maximum number of messages that all journeys can send to an endpoint during the specified timeframe. The maximum value is 100. If set to 0, this limit will not apply.
+     */
+    Cap?: __integer;
+    /**
+     * The length of the timeframe in days. The maximum value is 30. If set to 0, this limit will not apply.
+     */
+    Days?: __integer;
   }
   export interface JourneysResponse {
     /**
@@ -4624,6 +5331,7 @@ declare namespace Pinpoint {
      */
     NextToken?: __string;
   }
+  export type Layout = "BOTTOM_BANNER"|"TOP_BANNER"|"OVERLAYS"|"MOBILE_FEED"|"MIDDLE_BANNER"|"CAROUSEL"|string;
   export interface ListJourneysRequest {
     /**
      * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
@@ -4795,6 +5503,10 @@ declare namespace Pinpoint {
      * The message that the campaign sends through the SMS channel. If specified, this message overrides the default message.
      */
     SMSMessage?: CampaignSmsMessage;
+    /**
+     * The in-app message configuration.
+     */
+    InAppMessage?: CampaignInAppMessage;
   }
   export interface MessageRequest {
     /**
@@ -4842,7 +5554,7 @@ declare namespace Pinpoint {
   }
   export interface MessageResult {
     /**
-     * The delivery status of the message. Possible values are:  DUPLICATE - The endpoint address is a duplicate of another endpoint address. Amazon Pinpoint won't attempt to send the message again.   OPT_OUT - The user who's associated with the endpoint address has opted out of receiving messages from you. Amazon Pinpoint won't attempt to send the message again. PERMANENT_FAILURE - An error occurred when delivering the message to the endpoint address. Amazon Pinpoint won't attempt to send the message again.   SUCCESSFUL - The message was successfully delivered to the endpoint address. TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint won't attempt to send the message again. THROTTLED - Amazon Pinpoint throttled the operation to send the message to the endpoint address. TIMEOUT - The message couldn't be sent within the timeout period. UNKNOWN_FAILURE - An unknown error occurred.
+     * The delivery status of the message. Possible values are:  DUPLICATE - The endpoint address is a duplicate of another endpoint address. Amazon Pinpoint won't attempt to send the message again.   OPT_OUT - The user who's associated with the endpoint address has opted out of receiving messages from you. Amazon Pinpoint won't attempt to send the message again. PERMANENT_FAILURE - An error occurred when delivering the message to the endpoint address. Amazon Pinpoint won't attempt to send the message again.   SUCCESSFUL - The message was successfully delivered to the endpoint address. TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint won't attempt to send the message again. THROTTLED - Amazon Pinpoint throttled the operation to send the message to the endpoint address. UNKNOWN_FAILURE - An unknown error occurred.
      */
     DeliveryStatus: DeliveryStatus;
     /**
@@ -4968,6 +5680,16 @@ declare namespace Pinpoint {
     ZipCode?: __string;
   }
   export type Operator = "ALL"|"ANY"|string;
+  export interface OverrideButtonConfiguration {
+    /**
+     * Action triggered by the button.
+     */
+    ButtonAction: ButtonAction;
+    /**
+     * Button destination.
+     */
+    Link?: __string;
+  }
   export interface PhoneNumberValidateRequest {
     NumberValidateRequest: NumberValidateRequest;
   }
@@ -5068,7 +5790,7 @@ declare namespace Pinpoint {
      */
     RecommenderId?: __string;
     /**
-     * A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+     * As of 22-05-2023 tags has been deprecated for update operations. After this date any value in tags is not processed and an error code is not returned. To manage tags we recommend using either Tags in the API Reference for Amazon Pinpoint, resourcegroupstaggingapi commands in the AWS Command Line Interface Documentation or resourcegroupstaggingapi in the AWS SDK. (Deprecated) A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
     /**
@@ -5391,6 +6113,14 @@ declare namespace Pinpoint {
      * The message variables to use in the SMS message. You can override the default variables with individual address variables.
      */
     Substitutions?: MapOfListOf__string;
+    /**
+     * The entity ID or Principal Entity (PE) id received from the regulatory body for sending SMS in your country.
+     */
+    EntityId?: __string;
+    /**
+     * The template ID received from the regulatory body for sending SMS in your country.
+     */
+    TemplateId?: __string;
   }
   export interface SMSMessageActivity {
     /**
@@ -5424,7 +6154,7 @@ declare namespace Pinpoint {
      */
     RecommenderId?: __string;
     /**
-     * A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+     * As of 22-05-2023 tags has been deprecated for update operations. After this date any value in tags is not processed and an error code is not returned. To manage tags we recommend using either Tags in the API Reference for Amazon Pinpoint, resourcegroupstaggingapi commands in the AWS Command Line Interface Documentation or resourcegroupstaggingapi in the AWS SDK. (Deprecated) A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
     /**
@@ -5720,6 +6450,62 @@ declare namespace Pinpoint {
   export interface SendMessagesResponse {
     MessageResponse: MessageResponse;
   }
+  export interface SendOTPMessageRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
+    ApplicationId: __string;
+    SendOTPMessageRequestParameters: SendOTPMessageRequestParameters;
+  }
+  export interface SendOTPMessageRequestParameters {
+    /**
+     * The attempts allowed to validate an OTP.
+     */
+    AllowedAttempts?: __integer;
+    /**
+     * The brand name that will be substituted into the OTP message body. Should be owned by calling AWS account.
+     */
+    BrandName: __string;
+    /**
+     * Channel type for the OTP message. Supported values: [SMS].
+     */
+    Channel: __string;
+    /**
+     * The number of characters in the generated OTP.
+     */
+    CodeLength?: __integer;
+    /**
+     * The destination identity to send OTP to.
+     */
+    DestinationIdentity: __string;
+    /**
+     * A unique Entity ID received from DLT after entity registration is approved.
+     */
+    EntityId?: __string;
+    /**
+     * The language to be used for the outgoing message body containing the OTP.
+     */
+    Language?: __string;
+    /**
+     * The origination identity used to send OTP from.
+     */
+    OriginationIdentity: __string;
+    /**
+     * Developer-specified reference identifier. Required to match during OTP verification.
+     */
+    ReferenceId: __string;
+    /**
+     * A unique Template ID received from DLT after entity registration is approved.
+     */
+    TemplateId?: __string;
+    /**
+     * The time in minutes before the OTP is no longer valid.
+     */
+    ValidityPeriod?: __integer;
+  }
+  export interface SendOTPMessageResponse {
+    MessageResponse: MessageResponse;
+  }
   export interface SendUsersMessageRequest {
     /**
      * A map of custom attribute-value pairs. For a push notification, Amazon Pinpoint adds these attributes to the data.pinpoint object in the body of the notification payload. Amazon Pinpoint also provides these attributes in the events that it generates for users-messages deliveries.
@@ -5821,6 +6607,21 @@ declare namespace Pinpoint {
      * The body of the email message, in plain text format. We recommend using plain text format for email clients that don't render HTML content and clients that are connected to high-latency networks, such as mobile devices.
      */
     TextPart?: SimpleEmailPart;
+    /**
+     * The list of MessageHeaders for the email. You can have up to 15 Headers.
+     */
+    Headers?: ListOfMessageHeader;
+  }
+  export type ListOfMessageHeader = MessageHeader[];
+  export interface MessageHeader {
+    /**
+     * The name of the message header. The header name can contain up to 126 characters.
+     */
+    Name?: __string;
+    /**
+     * The value of the message header. The header value can contain up to 870 characters, including the length of any rendered attributes. For example if you add the {CreationDate} attribute, it renders as YYYY-MM-DDTHH:MM:SS.SSSZ and is 24 characters in length.
+     */
+    Value?: __string;
   }
   export interface SimpleEmailPart {
     /**
@@ -5844,7 +6645,7 @@ declare namespace Pinpoint {
      */
     SegmentStartCondition?: SegmentCondition;
   }
-  export type State = "DRAFT"|"ACTIVE"|"COMPLETED"|"CANCELLED"|"CLOSED"|string;
+  export type State = "DRAFT"|"ACTIVE"|"COMPLETED"|"CANCELLED"|"CLOSED"|"PAUSED"|string;
   export interface TagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -5891,6 +6692,24 @@ declare namespace Pinpoint {
      * The voice template to use for the message. This object isn't supported for campaigns.
      */
     VoiceTemplate?: Template;
+    /**
+     * The InApp template to use for the message. The InApp template object is not supported for SendMessages.
+     */
+    InAppTemplate?: Template;
+  }
+  export interface TemplateCreateMessageBody {
+    /**
+     * The Amazon Resource Name (ARN) of the message template that was created.
+     */
+    Arn?: __string;
+    /**
+     * The message that's returned from the API for the request to create the message template.
+     */
+    Message?: __string;
+    /**
+     * The unique identifier for the request to create the message template.
+     */
+    RequestID?: __string;
   }
   export interface TemplateResponse {
     /**
@@ -5922,7 +6741,7 @@ declare namespace Pinpoint {
      */
     TemplateName: __string;
     /**
-     * The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, and VOICE.
+     * The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, INAPP, and VOICE.
      */
     TemplateType: TemplateType;
     /**
@@ -5930,7 +6749,7 @@ declare namespace Pinpoint {
      */
     Version?: __string;
   }
-  export type TemplateType = "EMAIL"|"SMS"|"VOICE"|"PUSH"|string;
+  export type TemplateType = "EMAIL"|"SMS"|"VOICE"|"PUSH"|"INAPP"|string;
   export interface TemplateVersionResponse {
     /**
      * The date, in ISO 8601 format, when the version of the message template was created.
@@ -5953,7 +6772,7 @@ declare namespace Pinpoint {
      */
     TemplateName: __string;
     /**
-     * The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, and VOICE.
+     * The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, INAPP, and VOICE.
      */
     TemplateType: __string;
     /**
@@ -6162,7 +6981,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The unique identifier for the endpoint.
+     * The case insensitive unique identifier for the endpoint. The identifier can't contain $, { or }.
      */
     EndpointId: __string;
     EndpointRequest: EndpointRequest;
@@ -6189,6 +7008,24 @@ declare namespace Pinpoint {
   }
   export interface UpdateGcmChannelResponse {
     GCMChannelResponse: GCMChannelResponse;
+  }
+  export interface UpdateInAppTemplateRequest {
+    /**
+     * Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to (overwrite) the latest existing version of the template. If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to (overwrites) the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.
+     */
+    CreateNewVersion?: __boolean;
+    InAppTemplateRequest: InAppTemplateRequest;
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+    /**
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     */
+    Version?: __string;
+  }
+  export interface UpdateInAppTemplateResponse {
+    MessageBody: MessageBody;
   }
   export interface UpdateJourneyRequest {
     /**
@@ -6368,6 +7205,36 @@ declare namespace Pinpoint {
   export interface UpdateVoiceTemplateResponse {
     MessageBody: MessageBody;
   }
+  export interface VerificationResponse {
+    /**
+     * Specifies whether the OTP is valid or not.
+     */
+    Valid?: __boolean;
+  }
+  export interface VerifyOTPMessageRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
+    ApplicationId: __string;
+    VerifyOTPMessageRequestParameters: VerifyOTPMessageRequestParameters;
+  }
+  export interface VerifyOTPMessageRequestParameters {
+    /**
+     * The destination identity to send OTP to.
+     */
+    DestinationIdentity: __string;
+    /**
+     * The OTP the end user provided for verification.
+     */
+    Otp: __string;
+    /**
+     * The reference identifier provided when the OTP was previously sent.
+     */
+    ReferenceId: __string;
+  }
+  export interface VerifyOTPMessageResponse {
+    VerificationResponse: VerificationResponse;
+  }
   export interface VoiceChannelRequest {
     /**
      * Specifies whether to enable the voice channel for the application.
@@ -6452,7 +7319,7 @@ declare namespace Pinpoint {
      */
     LanguageCode?: __string;
     /**
-     * A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+     * As of 22-05-2023 tags has been deprecated for update operations. After this date any value in tags is not processed and an error code is not returned. To manage tags we recommend using either Tags in the API Reference for Amazon Pinpoint, resourcegroupstaggingapi commands in the AWS Command Line Interface Documentation or resourcegroupstaggingapi in the AWS SDK. (Deprecated) A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
     /**
@@ -6552,6 +7419,10 @@ declare namespace Pinpoint {
      * The default quiet time for campaigns in the application. Quiet time is a specific time range when messages aren't sent to endpoints, if all the following conditions are met: The EndpointDemographic.Timezone property of the endpoint is set to a valid value. The current time in the endpoint's time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings). The current time in the endpoint's time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings). If any of the preceding conditions isn't met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled. To override the default quiet time settings for a specific campaign or journey, use the Campaign resource or the Journey resource to define a custom quiet time for the campaign or journey.
      */
     QuietTime?: QuietTime;
+    /**
+     * The default sending limits for journeys in the application. These limits apply to each journey for the application but can be overridden, on a per journey basis, with the JourneyLimits resource.
+     */
+    JourneyLimits?: ApplicationSettingsJourneyLimits;
   }
   export interface WriteCampaignRequest {
     /**
@@ -6603,7 +7474,7 @@ declare namespace Pinpoint {
      */
     SegmentVersion?: __integer;
     /**
-     * A string-to-string map of key-value pairs that defines the tags to associate with the campaign. Each tag consists of a required tag key and an associated tag value.
+     * As of 22-05-2023 tags has been deprecated for update operations. After this date any value in tags is not processed and an error code is not returned. To manage tags we recommend using either Tags in the API Reference for Amazon Pinpoint, resourcegroupstaggingapi commands in the AWS Command Line Interface Documentation or resourcegroupstaggingapi in the AWS SDK. (Deprecated) A string-to-string map of key-value pairs that defines the tags to associate with the campaign. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
     /**
@@ -6618,6 +7489,10 @@ declare namespace Pinpoint {
      * A custom name of the default treatment for the campaign, if the campaign has multiple treatments. A treatment is a variation of a campaign that's used for A/B testing.
      */
     TreatmentName?: __string;
+    /**
+     * Defines the priority of the campaign, used to decide the order of messages displayed to user if there are multiple messages scheduled to be displayed at the same moment.
+     */
+    Priority?: __integer;
   }
   export interface WriteEventStream {
     /**
@@ -6677,9 +7552,37 @@ declare namespace Pinpoint {
      */
     StartCondition?: StartCondition;
     /**
-     * The status of the journey. Valid values are: DRAFT - Saves the journey and doesn't publish it. ACTIVE - Saves and publishes the journey. Depending on the journey's schedule, the journey starts running immediately or at the scheduled start time. If a journey's status is ACTIVE, you can't add, change, or remove activities from it. The CANCELLED, COMPLETED, and CLOSED values are not supported in requests to create or update a journey. To cancel a journey, use the Journey State resource.
+     * The status of the journey. Valid values are: DRAFT - Saves the journey and doesn't publish it. ACTIVE - Saves and publishes the journey. Depending on the journey's schedule, the journey starts running immediately or at the scheduled start time. If a journey's status is ACTIVE, you can't add, change, or remove activities from it. PAUSED, CANCELLED, COMPLETED, and CLOSED states are not supported in requests to create or update a journey. To cancel, pause, or resume a journey, use the Journey State resource.
      */
     State?: State;
+    /**
+     * Specifies whether endpoints in quiet hours should enter a wait till the end of their quiet hours.
+     */
+    WaitForQuietTime?: __boolean;
+    /**
+     * Indicates whether the journey participants should be refreshed when a segment is updated.
+     */
+    RefreshOnSegmentUpdate?: __boolean;
+    /**
+     * The channel-specific configurations for the journey.
+     */
+    JourneyChannelSettings?: JourneyChannelSettings;
+    /**
+     * Indicates if journey has Advance Quiet Time enabled. This flag should be set to true in order to allow using OpenHours and ClosedDays.
+     */
+    SendingSchedule?: __boolean;
+    /**
+     * The time when journey allow to send messages. QuietTime should be configured first and SendingSchedule should be set to true.
+     */
+    OpenHours?: OpenHours;
+    /**
+     * The time when journey will stop sending messages. QuietTime should be configured first and SendingSchedule should be set to true.
+     */
+    ClosedDays?: ClosedDays;
+    /**
+     * An array of time zone estimation methods, if any, to use for determining an Endpoints time zone if the Endpoint does not have a value for the Demographic.Timezone attribute.  PHONE_NUMBER - A time zone is determined based on the Endpoint.Address and Endpoint.Location.Country. POSTAL_CODE - A time zone is determined based on the Endpoint.Location.PostalCode and Endpoint.Location.Country. POSTAL_CODE detection is only supported in the United States, United Kingdom, Australia, New Zealand, Canada, France, Italy, Spain, Germany and in regions where Amazon Pinpoint is available. 
+     */
+    TimezoneEstimationMethods?: ListOf__TimezoneEstimationMethodsElement;
   }
   export interface WriteSegmentRequest {
     /**
@@ -6695,7 +7598,7 @@ declare namespace Pinpoint {
      */
     SegmentGroups?: SegmentGroupList;
     /**
-     * A string-to-string map of key-value pairs that defines the tags to associate with the segment. Each tag consists of a required tag key and an associated tag value.
+     * As of 22-05-2023 tags has been deprecated for update operations. After this date any value in tags is not processed and an error code is not returned. To manage tags we recommend using either Tags in the API Reference for Amazon Pinpoint, resourcegroupstaggingapi commands in the AWS Command Line Interface Documentation or resourcegroupstaggingapi in the AWS SDK. (Deprecated) A string-to-string map of key-value pairs that defines the tags to associate with the segment. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
   }
@@ -6729,7 +7632,8 @@ declare namespace Pinpoint {
      */
     TreatmentName?: __string;
   }
-  export type __EndpointTypesElement = "PUSH"|"GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"VOICE"|"EMAIL"|"BAIDU"|"CUSTOM"|string;
+  export type __EndpointTypesElement = "PUSH"|"GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"VOICE"|"EMAIL"|"BAIDU"|"CUSTOM"|"IN_APP"|string;
+  export type __TimezoneEstimationMethodsElement = "PHONE_NUMBER"|"POSTAL_CODE"|string;
   export type __boolean = boolean;
   export type __double = number;
   export type __integer = number;
@@ -6740,7 +7644,10 @@ declare namespace Pinpoint {
   export type ListOfEndpointResponse = EndpointResponse[];
   export type ListOfExportJobResponse = ExportJobResponse[];
   export type ListOfImportJobResponse = ImportJobResponse[];
+  export type ListOfInAppMessageCampaign = InAppMessageCampaign[];
+  export type ListOfInAppMessageContent = InAppMessageContent[];
   export type ListOfJourneyResponse = JourneyResponse[];
+  export type ListOfJourneyRunResponse = JourneyRunResponse[];
   export type ListOfMultiConditionalBranch = MultiConditionalBranch[];
   export type ListOfRandomSplitEntry = RandomSplitEntry[];
   export type ListOfRecommenderConfigurationResponse = RecommenderConfigurationResponse[];
@@ -6756,6 +7663,7 @@ declare namespace Pinpoint {
   export type ListOfTreatmentResource = TreatmentResource[];
   export type ListOfWriteTreatmentResource = WriteTreatmentResource[];
   export type ListOf__EndpointTypesElement = __EndpointTypesElement[];
+  export type ListOf__TimezoneEstimationMethodsElement = __TimezoneEstimationMethodsElement[];
   export type ListOf__string = __string[];
   export type MapOfActivity = {[key: string]: Activity};
   export type MapOfAddressConfiguration = {[key: string]: AddressConfiguration};
@@ -6776,6 +7684,78 @@ declare namespace Pinpoint {
   export type MapOf__string = {[key: string]: __string};
   export type __string = string;
   export type __timestampIso8601 = Date;
+  export type DayOfWeek = "MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|"SUNDAY"|string;
+  export interface OpenHoursRule {
+    /**
+     * The start of the scheduled time, in ISO 8601 format, when the channel can send messages.
+     */
+    StartTime?: __string;
+    /**
+     * The end of the scheduled time, in ISO 8601 format, when the channel can't send messages.
+     */
+    EndTime?: __string;
+  }
+  export type ListOfOpenHoursRules = OpenHoursRule[];
+  export type MapOfListOfOpenHoursRules = {[key: string]: ListOfOpenHoursRules};
+  export interface OpenHours {
+    /**
+     * Specifies the schedule settings for the email channel.
+     */
+    EMAIL?: MapOfListOfOpenHoursRules;
+    /**
+     * Specifies the schedule settings for the SMS channel.
+     */
+    SMS?: MapOfListOfOpenHoursRules;
+    /**
+     * Specifies the schedule settings for the push channel.
+     */
+    PUSH?: MapOfListOfOpenHoursRules;
+    /**
+     * Specifies the schedule settings for the voice channel.
+     */
+    VOICE?: MapOfListOfOpenHoursRules;
+    /**
+     * Specifies the schedule settings for the custom channel.
+     */
+    CUSTOM?: MapOfListOfOpenHoursRules;
+  }
+  export interface ClosedDaysRule {
+    /**
+     * The name of the closed day rule.
+     */
+    Name?: __string;
+    /**
+     * Start DateTime ISO 8601 format
+     */
+    StartDateTime?: __string;
+    /**
+     * End DateTime ISO 8601 format
+     */
+    EndDateTime?: __string;
+  }
+  export type ListOfClosedDaysRules = ClosedDaysRule[];
+  export interface ClosedDays {
+    /**
+     * Rules for the Email channel.
+     */
+    EMAIL?: ListOfClosedDaysRules;
+    /**
+     * Rules for the SMS channel.
+     */
+    SMS?: ListOfClosedDaysRules;
+    /**
+     * Rules for the Push channel.
+     */
+    PUSH?: ListOfClosedDaysRules;
+    /**
+     * Rules for the Voice channel.
+     */
+    VOICE?: ListOfClosedDaysRules;
+    /**
+     * Rules for the Custom channel.
+     */
+    CUSTOM?: ListOfClosedDaysRules;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

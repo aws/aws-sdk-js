@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "Added a new API UpdateRoutingProfileAgentAvailabilityTimer to update agent availability timer of a routing profile."
+    },
+    {
+        "type": "feature",
+        "category": "DataSync",
+        "description": "Display cloud storage used capacity at a cluster level."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Including DataCaptureConfig key in the Amazon Sagemaker Search's transform job object"
+    }
+]

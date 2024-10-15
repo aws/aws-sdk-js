@@ -13,11 +13,11 @@ declare class Neptune extends Service {
   constructor(options?: Neptune.Types.ClientConfiguration)
   config: Config & Neptune.Types.ClientConfiguration;
   /**
-   * Associates an Identity and Access Management (IAM) role from an Neptune DB cluster.
+   * Associates an Identity and Access Management (IAM) role with an Neptune DB cluster.
    */
   addRoleToDBCluster(params: Neptune.Types.AddRoleToDBClusterMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Associates an Identity and Access Management (IAM) role from an Neptune DB cluster.
+   * Associates an Identity and Access Management (IAM) role with an Neptune DB cluster.
    */
   addRoleToDBCluster(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -117,11 +117,11 @@ declare class Neptune extends Service {
    */
   createDBParameterGroup(callback?: (err: AWSError, data: Neptune.Types.CreateDBParameterGroupResult) => void): Request<Neptune.Types.CreateDBParameterGroupResult, AWSError>;
   /**
-   * Creates a new DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the AWS Region.
+   * Creates a new DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the Amazon Region.
    */
   createDBSubnetGroup(params: Neptune.Types.CreateDBSubnetGroupMessage, callback?: (err: AWSError, data: Neptune.Types.CreateDBSubnetGroupResult) => void): Request<Neptune.Types.CreateDBSubnetGroupResult, AWSError>;
   /**
-   * Creates a new DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the AWS Region.
+   * Creates a new DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the Amazon Region.
    */
   createDBSubnetGroup(callback?: (err: AWSError, data: Neptune.Types.CreateDBSubnetGroupResult) => void): Request<Neptune.Types.CreateDBSubnetGroupResult, AWSError>;
   /**
@@ -132,6 +132,14 @@ declare class Neptune extends Service {
    * Creates an event notification subscription. This action requires a topic ARN (Amazon Resource Name) created by either the Neptune console, the SNS console, or the SNS API. To obtain an ARN with SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console. You can specify the type of source (SourceType) you want to be notified of, provide a list of Neptune sources (SourceIds) that triggers the events, and provide a list of event categories (EventCategories) for events you want to be notified of. For example, you can specify SourceType = db-instance, SourceIds = mydbinstance1, mydbinstance2 and EventCategories = Availability, Backup. If you specify both the SourceType and SourceIds, such as SourceType = db-instance and SourceIdentifier = myDBInstance1, you are notified of all the db-instance events for the specified source. If you specify a SourceType but do not specify a SourceIdentifier, you receive notice of the events for that source type for all your Neptune sources. If you do not specify either the SourceType nor the SourceIdentifier, you are notified of events generated from all Neptune sources belonging to your customer account.
    */
   createEventSubscription(callback?: (err: AWSError, data: Neptune.Types.CreateEventSubscriptionResult) => void): Request<Neptune.Types.CreateEventSubscriptionResult, AWSError>;
+  /**
+   * Creates a Neptune global database spread across multiple Amazon Regions. The global database contains a single primary cluster with read-write capability, and read-only secondary clusters that receive data from the primary cluster through high-speed replication performed by the Neptune storage subsystem. You can create a global database that is initially empty, and then add a primary cluster and secondary clusters to it, or you can specify an existing Neptune cluster during the create operation to become the primary cluster of the global database.
+   */
+  createGlobalCluster(params: Neptune.Types.CreateGlobalClusterMessage, callback?: (err: AWSError, data: Neptune.Types.CreateGlobalClusterResult) => void): Request<Neptune.Types.CreateGlobalClusterResult, AWSError>;
+  /**
+   * Creates a Neptune global database spread across multiple Amazon Regions. The global database contains a single primary cluster with read-write capability, and read-only secondary clusters that receive data from the primary cluster through high-speed replication performed by the Neptune storage subsystem. You can create a global database that is initially empty, and then add a primary cluster and secondary clusters to it, or you can specify an existing Neptune cluster during the create operation to become the primary cluster of the global database.
+   */
+  createGlobalCluster(callback?: (err: AWSError, data: Neptune.Types.CreateGlobalClusterResult) => void): Request<Neptune.Types.CreateGlobalClusterResult, AWSError>;
   /**
    * The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted. Note that the DB Cluster cannot be deleted if deletion protection is enabled. To delete it, you must first set its DeletionProtection field to False.
    */
@@ -197,6 +205,14 @@ declare class Neptune extends Service {
    */
   deleteEventSubscription(callback?: (err: AWSError, data: Neptune.Types.DeleteEventSubscriptionResult) => void): Request<Neptune.Types.DeleteEventSubscriptionResult, AWSError>;
   /**
+   * Deletes a global database. The primary and all secondary clusters must already be detached or deleted first.
+   */
+  deleteGlobalCluster(params: Neptune.Types.DeleteGlobalClusterMessage, callback?: (err: AWSError, data: Neptune.Types.DeleteGlobalClusterResult) => void): Request<Neptune.Types.DeleteGlobalClusterResult, AWSError>;
+  /**
+   * Deletes a global database. The primary and all secondary clusters must already be detached or deleted first.
+   */
+  deleteGlobalCluster(callback?: (err: AWSError, data: Neptune.Types.DeleteGlobalClusterResult) => void): Request<Neptune.Types.DeleteGlobalClusterResult, AWSError>;
+  /**
    * Returns information about endpoints for an Amazon Neptune DB cluster.  This operation can also return information for Amazon RDS clusters and Amazon DocDB clusters. 
    */
   describeDBClusterEndpoints(params: Neptune.Types.DescribeDBClusterEndpointsMessage, callback?: (err: AWSError, data: Neptune.Types.DBClusterEndpointMessage) => void): Request<Neptune.Types.DBClusterEndpointMessage, AWSError>;
@@ -221,11 +237,11 @@ declare class Neptune extends Service {
    */
   describeDBClusterParameters(callback?: (err: AWSError, data: Neptune.Types.DBClusterParameterGroupDetails) => void): Request<Neptune.Types.DBClusterParameterGroupDetails, AWSError>;
   /**
-   * Returns a list of DB cluster snapshot attribute names and values for a manual DB cluster snapshot. When sharing snapshots with other AWS accounts, DescribeDBClusterSnapshotAttributes returns the restore attribute and a list of IDs for the AWS accounts that are authorized to copy or restore the manual DB cluster snapshot. If all is included in the list of values for the restore attribute, then the manual DB cluster snapshot is public and can be copied or restored by all AWS accounts. To add or remove access for an AWS account to copy or restore a manual DB cluster snapshot, or to make the manual DB cluster snapshot public or private, use the ModifyDBClusterSnapshotAttribute API action.
+   * Returns a list of DB cluster snapshot attribute names and values for a manual DB cluster snapshot. When sharing snapshots with other Amazon accounts, DescribeDBClusterSnapshotAttributes returns the restore attribute and a list of IDs for the Amazon accounts that are authorized to copy or restore the manual DB cluster snapshot. If all is included in the list of values for the restore attribute, then the manual DB cluster snapshot is public and can be copied or restored by all Amazon accounts. To add or remove access for an Amazon account to copy or restore a manual DB cluster snapshot, or to make the manual DB cluster snapshot public or private, use the ModifyDBClusterSnapshotAttribute API action.
    */
   describeDBClusterSnapshotAttributes(params: Neptune.Types.DescribeDBClusterSnapshotAttributesMessage, callback?: (err: AWSError, data: Neptune.Types.DescribeDBClusterSnapshotAttributesResult) => void): Request<Neptune.Types.DescribeDBClusterSnapshotAttributesResult, AWSError>;
   /**
-   * Returns a list of DB cluster snapshot attribute names and values for a manual DB cluster snapshot. When sharing snapshots with other AWS accounts, DescribeDBClusterSnapshotAttributes returns the restore attribute and a list of IDs for the AWS accounts that are authorized to copy or restore the manual DB cluster snapshot. If all is included in the list of values for the restore attribute, then the manual DB cluster snapshot is public and can be copied or restored by all AWS accounts. To add or remove access for an AWS account to copy or restore a manual DB cluster snapshot, or to make the manual DB cluster snapshot public or private, use the ModifyDBClusterSnapshotAttribute API action.
+   * Returns a list of DB cluster snapshot attribute names and values for a manual DB cluster snapshot. When sharing snapshots with other Amazon accounts, DescribeDBClusterSnapshotAttributes returns the restore attribute and a list of IDs for the Amazon accounts that are authorized to copy or restore the manual DB cluster snapshot. If all is included in the list of values for the restore attribute, then the manual DB cluster snapshot is public and can be copied or restored by all Amazon accounts. To add or remove access for an Amazon account to copy or restore a manual DB cluster snapshot, or to make the manual DB cluster snapshot public or private, use the ModifyDBClusterSnapshotAttribute API action.
    */
   describeDBClusterSnapshotAttributes(callback?: (err: AWSError, data: Neptune.Types.DescribeDBClusterSnapshotAttributesResult) => void): Request<Neptune.Types.DescribeDBClusterSnapshotAttributesResult, AWSError>;
   /**
@@ -325,6 +341,14 @@ declare class Neptune extends Service {
    */
   describeEvents(callback?: (err: AWSError, data: Neptune.Types.EventsMessage) => void): Request<Neptune.Types.EventsMessage, AWSError>;
   /**
+   * Returns information about Neptune global database clusters. This API supports pagination.
+   */
+  describeGlobalClusters(params: Neptune.Types.DescribeGlobalClustersMessage, callback?: (err: AWSError, data: Neptune.Types.GlobalClustersMessage) => void): Request<Neptune.Types.GlobalClustersMessage, AWSError>;
+  /**
+   * Returns information about Neptune global database clusters. This API supports pagination.
+   */
+  describeGlobalClusters(callback?: (err: AWSError, data: Neptune.Types.GlobalClustersMessage) => void): Request<Neptune.Types.GlobalClustersMessage, AWSError>;
+  /**
    * Returns a list of orderable DB instance options for the specified engine.
    */
   describeOrderableDBInstanceOptions(params: Neptune.Types.DescribeOrderableDBInstanceOptionsMessage, callback?: (err: AWSError, data: Neptune.Types.OrderableDBInstanceOptionsMessage) => void): Request<Neptune.Types.OrderableDBInstanceOptionsMessage, AWSError>;
@@ -356,6 +380,14 @@ declare class Neptune extends Service {
    * Forces a failover for a DB cluster. A failover for a DB cluster promotes one of the Read Replicas (read-only instances) in the DB cluster to be the primary instance (the cluster writer). Amazon Neptune will automatically fail over to a Read Replica, if one exists, when the primary instance fails. You can force a failover when you want to simulate a failure of a primary instance for testing. Because each instance in a DB cluster has its own endpoint address, you will need to clean up and re-establish any existing connections that use those endpoint addresses when the failover is complete.
    */
   failoverDBCluster(callback?: (err: AWSError, data: Neptune.Types.FailoverDBClusterResult) => void): Request<Neptune.Types.FailoverDBClusterResult, AWSError>;
+  /**
+   * Initiates the failover process for a Neptune global database. A failover for a Neptune global database promotes one of secondary read-only DB clusters to be the primary DB cluster and demotes the primary DB cluster to being a secondary (read-only) DB cluster. In other words, the role of the current primary DB cluster and the selected target secondary DB cluster are switched. The selected secondary DB cluster assumes full read/write capabilities for the Neptune global database.  This action applies only to Neptune global databases. This action is only intended for use on healthy Neptune global databases with healthy Neptune DB clusters and no region-wide outages, to test disaster recovery scenarios or to reconfigure the global database topology. 
+   */
+  failoverGlobalCluster(params: Neptune.Types.FailoverGlobalClusterMessage, callback?: (err: AWSError, data: Neptune.Types.FailoverGlobalClusterResult) => void): Request<Neptune.Types.FailoverGlobalClusterResult, AWSError>;
+  /**
+   * Initiates the failover process for a Neptune global database. A failover for a Neptune global database promotes one of secondary read-only DB clusters to be the primary DB cluster and demotes the primary DB cluster to being a secondary (read-only) DB cluster. In other words, the role of the current primary DB cluster and the selected target secondary DB cluster are switched. The selected secondary DB cluster assumes full read/write capabilities for the Neptune global database.  This action applies only to Neptune global databases. This action is only intended for use on healthy Neptune global databases with healthy Neptune DB clusters and no region-wide outages, to test disaster recovery scenarios or to reconfigure the global database topology. 
+   */
+  failoverGlobalCluster(callback?: (err: AWSError, data: Neptune.Types.FailoverGlobalClusterResult) => void): Request<Neptune.Types.FailoverGlobalClusterResult, AWSError>;
   /**
    * Lists all tags on an Amazon Neptune resource.
    */
@@ -389,11 +421,11 @@ declare class Neptune extends Service {
    */
   modifyDBClusterParameterGroup(callback?: (err: AWSError, data: Neptune.Types.DBClusterParameterGroupNameMessage) => void): Request<Neptune.Types.DBClusterParameterGroupNameMessage, AWSError>;
   /**
-   * Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot. To share a manual DB cluster snapshot with other AWS accounts, specify restore as the AttributeName and use the ValuesToAdd parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual DB cluster snapshot. Use the value all to make the manual DB cluster snapshot public, which means that it can be copied or restored by all AWS accounts. Do not add the all value for any manual DB cluster snapshots that contain private information that you don't want available to all AWS accounts. If a manual DB cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the ValuesToAdd parameter. You can't use all as a value for that parameter in this case. To view which AWS accounts have access to copy or restore a manual DB cluster snapshot, or whether a manual DB cluster snapshot public or private, use the DescribeDBClusterSnapshotAttributes API action.
+   * Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot. To share a manual DB cluster snapshot with other Amazon accounts, specify restore as the AttributeName and use the ValuesToAdd parameter to add a list of IDs of the Amazon accounts that are authorized to restore the manual DB cluster snapshot. Use the value all to make the manual DB cluster snapshot public, which means that it can be copied or restored by all Amazon accounts. Do not add the all value for any manual DB cluster snapshots that contain private information that you don't want available to all Amazon accounts. If a manual DB cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized Amazon account IDs for the ValuesToAdd parameter. You can't use all as a value for that parameter in this case. To view which Amazon accounts have access to copy or restore a manual DB cluster snapshot, or whether a manual DB cluster snapshot public or private, use the DescribeDBClusterSnapshotAttributes API action.
    */
   modifyDBClusterSnapshotAttribute(params: Neptune.Types.ModifyDBClusterSnapshotAttributeMessage, callback?: (err: AWSError, data: Neptune.Types.ModifyDBClusterSnapshotAttributeResult) => void): Request<Neptune.Types.ModifyDBClusterSnapshotAttributeResult, AWSError>;
   /**
-   * Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot. To share a manual DB cluster snapshot with other AWS accounts, specify restore as the AttributeName and use the ValuesToAdd parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual DB cluster snapshot. Use the value all to make the manual DB cluster snapshot public, which means that it can be copied or restored by all AWS accounts. Do not add the all value for any manual DB cluster snapshots that contain private information that you don't want available to all AWS accounts. If a manual DB cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the ValuesToAdd parameter. You can't use all as a value for that parameter in this case. To view which AWS accounts have access to copy or restore a manual DB cluster snapshot, or whether a manual DB cluster snapshot public or private, use the DescribeDBClusterSnapshotAttributes API action.
+   * Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot. To share a manual DB cluster snapshot with other Amazon accounts, specify restore as the AttributeName and use the ValuesToAdd parameter to add a list of IDs of the Amazon accounts that are authorized to restore the manual DB cluster snapshot. Use the value all to make the manual DB cluster snapshot public, which means that it can be copied or restored by all Amazon accounts. Do not add the all value for any manual DB cluster snapshots that contain private information that you don't want available to all Amazon accounts. If a manual DB cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized Amazon account IDs for the ValuesToAdd parameter. You can't use all as a value for that parameter in this case. To view which Amazon accounts have access to copy or restore a manual DB cluster snapshot, or whether a manual DB cluster snapshot public or private, use the DescribeDBClusterSnapshotAttributes API action.
    */
   modifyDBClusterSnapshotAttribute(callback?: (err: AWSError, data: Neptune.Types.ModifyDBClusterSnapshotAttributeResult) => void): Request<Neptune.Types.ModifyDBClusterSnapshotAttributeResult, AWSError>;
   /**
@@ -413,11 +445,11 @@ declare class Neptune extends Service {
    */
   modifyDBParameterGroup(callback?: (err: AWSError, data: Neptune.Types.DBParameterGroupNameMessage) => void): Request<Neptune.Types.DBParameterGroupNameMessage, AWSError>;
   /**
-   * Modifies an existing DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the AWS Region.
+   * Modifies an existing DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the Amazon Region.
    */
   modifyDBSubnetGroup(params: Neptune.Types.ModifyDBSubnetGroupMessage, callback?: (err: AWSError, data: Neptune.Types.ModifyDBSubnetGroupResult) => void): Request<Neptune.Types.ModifyDBSubnetGroupResult, AWSError>;
   /**
-   * Modifies an existing DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the AWS Region.
+   * Modifies an existing DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the Amazon Region.
    */
   modifyDBSubnetGroup(callback?: (err: AWSError, data: Neptune.Types.ModifyDBSubnetGroupResult) => void): Request<Neptune.Types.ModifyDBSubnetGroupResult, AWSError>;
   /**
@@ -428,6 +460,14 @@ declare class Neptune extends Service {
    * Modifies an existing event notification subscription. Note that you can't modify the source identifiers using this call; to change source identifiers for a subscription, use the AddSourceIdentifierToSubscription and RemoveSourceIdentifierFromSubscription calls. You can see a list of the event categories for a given SourceType by using the DescribeEventCategories action.
    */
   modifyEventSubscription(callback?: (err: AWSError, data: Neptune.Types.ModifyEventSubscriptionResult) => void): Request<Neptune.Types.ModifyEventSubscriptionResult, AWSError>;
+  /**
+   * Modify a setting for an Amazon Neptune global cluster. You can change one or more database configuration parameters by specifying these parameters and their new values in the request.
+   */
+  modifyGlobalCluster(params: Neptune.Types.ModifyGlobalClusterMessage, callback?: (err: AWSError, data: Neptune.Types.ModifyGlobalClusterResult) => void): Request<Neptune.Types.ModifyGlobalClusterResult, AWSError>;
+  /**
+   * Modify a setting for an Amazon Neptune global cluster. You can change one or more database configuration parameters by specifying these parameters and their new values in the request.
+   */
+  modifyGlobalCluster(callback?: (err: AWSError, data: Neptune.Types.ModifyGlobalClusterResult) => void): Request<Neptune.Types.ModifyGlobalClusterResult, AWSError>;
   /**
    * Not supported.
    */
@@ -444,6 +484,14 @@ declare class Neptune extends Service {
    * You might need to reboot your DB instance, usually for maintenance reasons. For example, if you make certain modifications, or if you change the DB parameter group associated with the DB instance, you must reboot the instance for the changes to take effect. Rebooting a DB instance restarts the database engine service. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to rebooting.
    */
   rebootDBInstance(callback?: (err: AWSError, data: Neptune.Types.RebootDBInstanceResult) => void): Request<Neptune.Types.RebootDBInstanceResult, AWSError>;
+  /**
+   * Detaches a Neptune DB cluster from a Neptune global database. A secondary cluster becomes a normal standalone cluster with read-write capability instead of being read-only, and no longer receives data from a the primary cluster.
+   */
+  removeFromGlobalCluster(params: Neptune.Types.RemoveFromGlobalClusterMessage, callback?: (err: AWSError, data: Neptune.Types.RemoveFromGlobalClusterResult) => void): Request<Neptune.Types.RemoveFromGlobalClusterResult, AWSError>;
+  /**
+   * Detaches a Neptune DB cluster from a Neptune global database. A secondary cluster becomes a normal standalone cluster with read-write capability instead of being read-only, and no longer receives data from a the primary cluster.
+   */
+  removeFromGlobalCluster(callback?: (err: AWSError, data: Neptune.Types.RemoveFromGlobalClusterResult) => void): Request<Neptune.Types.RemoveFromGlobalClusterResult, AWSError>;
   /**
    * Disassociates an Identity and Access Management (IAM) role from a DB cluster.
    */
@@ -501,11 +549,11 @@ declare class Neptune extends Service {
    */
   restoreDBClusterToPointInTime(callback?: (err: AWSError, data: Neptune.Types.RestoreDBClusterToPointInTimeResult) => void): Request<Neptune.Types.RestoreDBClusterToPointInTimeResult, AWSError>;
   /**
-   * Starts an Amazon Neptune DB cluster that was stopped using the AWS console, the AWS CLI stop-db-cluster command, or the StopDBCluster API.
+   * Starts an Amazon Neptune DB cluster that was stopped using the Amazon console, the Amazon CLI stop-db-cluster command, or the StopDBCluster API.
    */
   startDBCluster(params: Neptune.Types.StartDBClusterMessage, callback?: (err: AWSError, data: Neptune.Types.StartDBClusterResult) => void): Request<Neptune.Types.StartDBClusterResult, AWSError>;
   /**
-   * Starts an Amazon Neptune DB cluster that was stopped using the AWS console, the AWS CLI stop-db-cluster command, or the StopDBCluster API.
+   * Starts an Amazon Neptune DB cluster that was stopped using the Amazon console, the Amazon CLI stop-db-cluster command, or the StopDBCluster API.
    */
   startDBCluster(callback?: (err: AWSError, data: Neptune.Types.StartDBClusterResult) => void): Request<Neptune.Types.StartDBClusterResult, AWSError>;
   /**
@@ -620,9 +668,43 @@ declare namespace Neptune {
      */
     DisableLogTypes?: LogTypeList;
   }
+  export interface ClusterPendingModifiedValues {
+    /**
+     * This PendingCloudwatchLogsExports structure specifies pending changes to which CloudWatch logs are enabled and which are disabled.
+     */
+    PendingCloudwatchLogsExports?: PendingCloudwatchLogsExports;
+    /**
+     * The DBClusterIdentifier value for the DB cluster.
+     */
+    DBClusterIdentifier?: String;
+    /**
+     * A value that indicates whether mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts is enabled.
+     */
+    IAMDatabaseAuthenticationEnabled?: BooleanOptional;
+    /**
+     * The database engine version.
+     */
+    EngineVersion?: String;
+    /**
+     * The number of days for which automatic DB snapshots are retained.
+     */
+    BackupRetentionPeriod?: IntegerOptional;
+    /**
+     * The storage type for the DB cluster.
+     */
+    StorageType?: String;
+    /**
+     * The allocated storage size in gibibytes (GiB) for database engines. For Neptune, AllocatedStorage always returns 1, because Neptune DB cluster storage size isn't fixed, but instead automatically adjusts as needed.
+     */
+    AllocatedStorage?: IntegerOptional;
+    /**
+     * The Provisioned IOPS (I/O operations per second) value. This setting is only for non-Aurora Multi-AZ DB clusters.
+     */
+    Iops?: IntegerOptional;
+  }
   export interface CopyDBClusterParameterGroupMessage {
     /**
-     * The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter group. For information about creating an ARN, see  Constructing an Amazon Resource Name (ARN). Constraints:   Must specify a valid DB cluster parameter group.   If the source DB cluster parameter group is in the same AWS Region as the copy, specify a valid DB parameter group identifier, for example my-db-cluster-param-group, or a valid ARN.   If the source DB parameter group is in a different AWS Region than the copy, specify a valid DB cluster parameter group ARN, for example arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1.  
+     * The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter group. For information about creating an ARN, see  Constructing an Amazon Resource Name (ARN). Constraints:   Must specify a valid DB cluster parameter group.   If the source DB cluster parameter group is in the same Amazon Region as the copy, specify a valid DB parameter group identifier, for example my-db-cluster-param-group, or a valid ARN.   If the source DB parameter group is in a different Amazon Region than the copy, specify a valid DB cluster parameter group ARN, for example arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1.  
      */
     SourceDBClusterParameterGroupIdentifier: String;
     /**
@@ -643,7 +725,7 @@ declare namespace Neptune {
   }
   export interface CopyDBClusterSnapshotMessage {
     /**
-     * The identifier of the DB cluster snapshot to copy. This parameter is not case-sensitive. You can't copy from one AWS Region to another. Constraints:   Must specify a valid system snapshot in the "available" state.   Specify a valid DB snapshot identifier.   Example: my-cluster-snapshot1 
+     * The identifier of the DB cluster snapshot to copy. This parameter is not case-sensitive. Constraints:   Must specify a valid system snapshot in the "available" state.   Specify a valid DB snapshot identifier.   Example: my-cluster-snapshot1 
      */
     SourceDBClusterSnapshotIdentifier: String;
     /**
@@ -651,7 +733,7 @@ declare namespace Neptune {
      */
     TargetDBClusterSnapshotIdentifier: String;
     /**
-     * The AWS AWS KMS key ID for an encrypted DB cluster snapshot. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key. If you copy an encrypted DB cluster snapshot from your AWS account, you can specify a value for KmsKeyId to encrypt the copy with a new KMS encryption key. If you don't specify a value for KmsKeyId, then the copy of the DB cluster snapshot is encrypted with the same KMS key as the source DB cluster snapshot. If you copy an encrypted DB cluster snapshot that is shared from another AWS account, then you must specify a value for KmsKeyId.  KMS encryption keys are specific to the AWS Region that they are created in, and you can't use encryption keys from one AWS Region in another AWS Region. You cannot encrypt an unencrypted DB cluster snapshot when you copy it. If you try to copy an unencrypted DB cluster snapshot and specify a value for the KmsKeyId parameter, an error is returned.
+     * The Amazon Amazon KMS key ID for an encrypted DB cluster snapshot. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key. If you copy an encrypted DB cluster snapshot from your Amazon account, you can specify a value for KmsKeyId to encrypt the copy with a new KMS encryption key. If you don't specify a value for KmsKeyId, then the copy of the DB cluster snapshot is encrypted with the same KMS key as the source DB cluster snapshot. If you copy an encrypted DB cluster snapshot that is shared from another Amazon account, then you must specify a value for KmsKeyId.  KMS encryption keys are specific to the Amazon Region that they are created in, and you can't use encryption keys from one Amazon Region in another Amazon Region. You cannot encrypt an unencrypted DB cluster snapshot when you copy it. If you try to copy an unencrypted DB cluster snapshot and specify a value for the KmsKeyId parameter, an error is returned.
      */
     KmsKeyId?: String;
     /**
@@ -773,6 +855,10 @@ declare namespace Neptune {
      */
     CharacterSetName?: String;
     /**
+     *  If set to true, tags are copied to any snapshot of the DB cluster that is created. 
+     */
+    CopyTagsToSnapshot?: BooleanOptional;
+    /**
      * The name for your database of up to 64 alpha-numeric characters. If you do not provide a name, Amazon Neptune will not create a database in the DB cluster you are creating.
      */
     DatabaseName?: String;
@@ -805,11 +891,11 @@ declare namespace Neptune {
      */
     Port?: IntegerOptional;
     /**
-     * The name of the master user for the DB cluster. Constraints:   Must be 1 to 16 letters or numbers.   First character must be a letter.   Cannot be a reserved word for the chosen database engine.  
+     * Not supported by Neptune.
      */
     MasterUsername?: String;
     /**
-     * The password for the master database user. This password can contain any printable ASCII character except "/", """, or "@". Constraints: Must contain from 8 to 41 characters.
+     * Not supported by Neptune.
      */
     MasterUserPassword?: String;
     /**
@@ -817,11 +903,11 @@ declare namespace Neptune {
      */
     OptionGroupName?: String;
     /**
-     * The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter. The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. To see the time blocks available, see  Adjusting the Preferred Maintenance Window in the Amazon Neptune User Guide.  Constraints:   Must be in the format hh24:mi-hh24:mi.   Must be in Universal Coordinated Time (UTC).   Must not conflict with the preferred maintenance window.   Must be at least 30 minutes.  
+     * The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter. The default is a 30-minute window selected at random from an 8-hour block of time for each Amazon Region. To see the time blocks available, see Neptune Maintenance Window in the Amazon Neptune User Guide.  Constraints:   Must be in the format hh24:mi-hh24:mi.   Must be in Universal Coordinated Time (UTC).   Must not conflict with the preferred maintenance window.   Must be at least 30 minutes.  
      */
     PreferredBackupWindow?: String;
     /**
-     * The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi  The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. To see the time blocks available, see  Adjusting the Preferred Maintenance Window in the Amazon Neptune User Guide.  Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun. Constraints: Minimum 30-minute window.
+     * The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi  The default is a 30-minute window selected at random from an 8-hour block of time for each Amazon Region, occurring on a random day of the week. To see the time blocks available, see Neptune Maintenance Window in the Amazon Neptune User Guide.  Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun. Constraints: Minimum 30-minute window.
      */
     PreferredMaintenanceWindow?: String;
     /**
@@ -837,7 +923,7 @@ declare namespace Neptune {
      */
     StorageEncrypted?: BooleanOptional;
     /**
-     * The AWS KMS key identifier for an encrypted DB cluster. The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a DB cluster with the same AWS account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key. If an encryption key is not specified in KmsKeyId:   If ReplicationSourceIdentifier identifies an encrypted source, then Amazon Neptune will use the encryption key used to encrypt the source. Otherwise, Amazon Neptune will use your default encryption key.   If the StorageEncrypted parameter is true and ReplicationSourceIdentifier is not specified, then Amazon Neptune will use your default encryption key.   AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region. If you create a Read Replica of an encrypted DB cluster in another AWS Region, you must set KmsKeyId to a KMS key ID that is valid in the destination AWS Region. This key is used to encrypt the Read Replica in that AWS Region.
+     * The Amazon KMS key identifier for an encrypted DB cluster. The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a DB cluster with the same Amazon account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key. If an encryption key is not specified in KmsKeyId:   If ReplicationSourceIdentifier identifies an encrypted source, then Amazon Neptune will use the encryption key used to encrypt the source. Otherwise, Amazon Neptune will use your default encryption key.   If the StorageEncrypted parameter is true and ReplicationSourceIdentifier is not specified, then Amazon Neptune will use your default encryption key.   Amazon KMS creates the default encryption key for your Amazon account. Your Amazon account has a different default encryption key for each Amazon Region. If you create a Read Replica of an encrypted DB cluster in another Amazon Region, you must set KmsKeyId to a KMS key ID that is valid in the destination Amazon Region. This key is used to encrypt the Read Replica in that Amazon Region.
      */
     KmsKeyId?: String;
     /**
@@ -845,17 +931,29 @@ declare namespace Neptune {
      */
     PreSignedUrl?: String;
     /**
-     * Not supported by Neptune.
+     * If set to true, enables Amazon Identity and Access Management (IAM) authentication for the entire DB cluster (this cannot be set at an instance level). Default: false.
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
     /**
-     * The list of log types that need to be enabled for exporting to CloudWatch Logs.
+     * A list of the log types that this DB cluster should export to CloudWatch Logs. Valid log types are: audit (to publish audit logs) and slowquery (to publish slow-query logs). See Publishing Neptune logs to Amazon CloudWatch logs.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
     /**
      * A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is enabled.
      */
     DeletionProtection?: BooleanOptional;
+    /**
+     * Contains the scaling configuration of a Neptune Serverless DB cluster. For more information, see Using Amazon Neptune Serverless in the Amazon Neptune User Guide.
+     */
+    ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfiguration;
+    /**
+     * The ID of the Neptune global database to which this new DB cluster should be added.
+     */
+    GlobalClusterIdentifier?: GlobalClusterIdentifier;
+    /**
+     * The storage type to associate with the DB cluster. Valid Values:    standard | iopt1    Default:    standard     When you create a Neptune cluster with the storage type set to iopt1, the storage type is returned in the response. The storage type isn't returned when you set it to standard. 
+     */
+    StorageType?: String;
   }
   export interface CreateDBClusterParameterGroupMessage {
     /**
@@ -908,11 +1006,11 @@ declare namespace Neptune {
      */
     DBInstanceIdentifier: String;
     /**
-     * The amount of storage (in gibibytes) to allocate for the DB instance. Type: Integer Not applicable. Neptune cluster volumes automatically grow as the amount of data in your database increases, though you are only charged for the space that you use in a Neptune cluster volume.
+     * Not supported by Neptune.
      */
     AllocatedStorage?: IntegerOptional;
     /**
-     * The compute and memory capacity of the DB instance, for example, db.m4.large. Not all DB instance classes are available in all AWS Regions.
+     * The compute and memory capacity of the DB instance, for example, db.m4.large. Not all DB instance classes are available in all Amazon Regions.
      */
     DBInstanceClass: String;
     /**
@@ -920,11 +1018,11 @@ declare namespace Neptune {
      */
     Engine: String;
     /**
-     * The name for the master user. Not used.
+     * Not supported by Neptune.
      */
     MasterUsername?: String;
     /**
-     * The password for the master user. The password can include any printable ASCII character except "/", """, or "@".  Not used.
+     * Not supported by Neptune.
      */
     MasterUserPassword?: String;
     /**
@@ -936,7 +1034,7 @@ declare namespace Neptune {
      */
     VpcSecurityGroupIds?: VpcSecurityGroupIdList;
     /**
-     *  The EC2 Availability Zone that the DB instance is created in Default: A random, system-chosen Availability Zone in the endpoint's AWS Region.  Example: us-east-1d   Constraint: The AvailabilityZone parameter can't be specified if the MultiAZ parameter is set to true. The specified Availability Zone must be in the same AWS Region as the current endpoint.
+     *  The EC2 Availability Zone that the DB instance is created in Default: A random, system-chosen Availability Zone in the endpoint's Amazon Region.  Example: us-east-1d   Constraint: The AvailabilityZone parameter can't be specified if the MultiAZ parameter is set to true. The specified Availability Zone must be in the same Amazon Region as the current endpoint.
      */
     AvailabilityZone?: String;
     /**
@@ -944,7 +1042,7 @@ declare namespace Neptune {
      */
     DBSubnetGroupName?: String;
     /**
-     * The time range each week during which system maintenance can occur, in Universal Coordinated Time (UTC).  Format: ddd:hh24:mi-ddd:hh24:mi  The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun. Constraints: Minimum 30-minute window.
+     * The time range each week during which system maintenance can occur, in Universal Coordinated Time (UTC).  Format: ddd:hh24:mi-ddd:hh24:mi  The default is a 30-minute window selected at random from an 8-hour block of time for each Amazon Region, occurring on a random day of the week. Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun. Constraints: Minimum 30-minute window.
      */
     PreferredMaintenanceWindow?: String;
     /**
@@ -1002,7 +1100,7 @@ declare namespace Neptune {
     /**
      * The identifier of the DB cluster that the instance will belong to. For information on creating a DB cluster, see CreateDBCluster. Type: String
      */
-    DBClusterIdentifier?: String;
+    DBClusterIdentifier: String;
     /**
      * Specifies the storage type to be associated with the DB instance. Not applicable. Storage is managed by the DB Cluster.
      */
@@ -1014,13 +1112,13 @@ declare namespace Neptune {
     /**
      * The password for the given ARN from the key store in order to access the device.
      */
-    TdeCredentialPassword?: String;
+    TdeCredentialPassword?: SensitiveString;
     /**
      * Specifies whether the DB instance is encrypted. Not applicable. The encryption for DB instances is managed by the DB cluster. For more information, see CreateDBCluster. Default: false
      */
     StorageEncrypted?: BooleanOptional;
     /**
-     * The AWS KMS key identifier for an encrypted DB instance. The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a DB instance with the same AWS account that owns the KMS encryption key used to encrypt the new DB instance, then you can use the KMS key alias instead of the ARN for the KM encryption key. Not applicable. The KMS key identifier is managed by the DB cluster. For more information, see CreateDBCluster. If the StorageEncrypted parameter is true, and you do not specify a value for the KmsKeyId parameter, then Amazon Neptune will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.
+     * The Amazon KMS key identifier for an encrypted DB instance. The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a DB instance with the same Amazon account that owns the KMS encryption key used to encrypt the new DB instance, then you can use the KMS key alias instead of the ARN for the KM encryption key. Not applicable. The KMS key identifier is managed by the DB cluster. For more information, see CreateDBCluster. If the StorageEncrypted parameter is true, and you do not specify a value for the KmsKeyId parameter, then Amazon Neptune will use your default encryption key. Amazon KMS creates the default encryption key for your Amazon account. Your Amazon account has a different default encryption key for each Amazon Region.
      */
     KmsKeyId?: String;
     /**
@@ -1052,7 +1150,7 @@ declare namespace Neptune {
      */
     Timezone?: String;
     /**
-     * True to enable AWS Identity and Access Management (IAM) authentication for Neptune. Default: false 
+     * Not supported by Neptune (ignored).
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
     /**
@@ -1150,6 +1248,35 @@ declare namespace Neptune {
   export interface CreateEventSubscriptionResult {
     EventSubscription?: EventSubscription;
   }
+  export interface CreateGlobalClusterMessage {
+    /**
+     * The cluster identifier of the new global database cluster.
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+    /**
+     * (Optional) The Amazon Resource Name (ARN) of an existing Neptune DB cluster to use as the primary cluster of the new global database.
+     */
+    SourceDBClusterIdentifier?: String;
+    /**
+     * The name of the database engine to be used in the global database. Valid values: neptune 
+     */
+    Engine?: String;
+    /**
+     * The Neptune engine version to be used by the global database. Valid values: 1.2.0.0 or above.
+     */
+    EngineVersion?: String;
+    /**
+     * The deletion protection setting for the new global database. The global database can't be deleted when deletion protection is enabled.
+     */
+    DeletionProtection?: BooleanOptional;
+    /**
+     * The storage encryption setting for the new global database cluster.
+     */
+    StorageEncrypted?: BooleanOptional;
+  }
+  export interface CreateGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
+  }
   export interface DBCluster {
     /**
      *  AllocatedStorage always returns 1, because Neptune DB cluster storage size is not fixed, but instead automatically adjusts as needed.
@@ -1164,7 +1291,7 @@ declare namespace Neptune {
      */
     BackupRetentionPeriod?: IntegerOptional;
     /**
-     *  (Not supported by Neptune) 
+     * Not supported by Neptune.
      */
     CharacterSetName?: String;
     /**
@@ -1224,11 +1351,11 @@ declare namespace Neptune {
      */
     Port?: IntegerOptional;
     /**
-     * Contains the master username for the DB cluster.
+     * Not supported by Neptune.
      */
     MasterUsername?: String;
     /**
-     *  (Not supported by Neptune) 
+     * Not supported by Neptune.
      */
     DBClusterOptionGroupMemberships?: DBClusterOptionGroupMemberships;
     /**
@@ -1264,11 +1391,11 @@ declare namespace Neptune {
      */
     StorageEncrypted?: Boolean;
     /**
-     * If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB cluster.
+     * If StorageEncrypted is true, the Amazon KMS key identifier for the encrypted DB cluster.
      */
     KmsKeyId?: String;
     /**
-     * The AWS Region-unique, immutable identifier for the DB cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB cluster is accessed.
+     * The Amazon Region-unique, immutable identifier for the DB cluster. This identifier is found in Amazon CloudTrail log entries whenever the Amazon KMS key for the DB cluster is accessed.
      */
     DbClusterResourceId?: String;
     /**
@@ -1276,11 +1403,11 @@ declare namespace Neptune {
      */
     DBClusterArn?: String;
     /**
-     * Provides a list of the AWS Identity and Access Management (IAM) roles that are associated with the DB cluster. IAM roles that are associated with a DB cluster grant permission for the DB cluster to access other AWS services on your behalf.
+     * Provides a list of the Amazon Identity and Access Management (IAM) roles that are associated with the DB cluster. IAM roles that are associated with a DB cluster grant permission for the DB cluster to access other Amazon services on your behalf.
      */
     AssociatedRoles?: DBClusterRoles;
     /**
-     * True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.
+     * True if mapping of Amazon Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.
      */
     IAMDatabaseAuthenticationEnabled?: Boolean;
     /**
@@ -1292,13 +1419,45 @@ declare namespace Neptune {
      */
     ClusterCreateTime?: TStamp;
     /**
-     * A list of log types that this DB cluster is configured to export to CloudWatch Logs.
+     *  If set to true, tags are copied to any snapshot of the DB cluster that is created. 
+     */
+    CopyTagsToSnapshot?: BooleanOptional;
+    /**
+     * A list of the log types that this DB cluster is configured to export to CloudWatch Logs. Valid log types are: audit (to publish audit logs to CloudWatch) and slowquery (to publish slow-query logs to CloudWatch). See Publishing Neptune logs to Amazon CloudWatch logs.
      */
     EnabledCloudwatchLogsExports?: LogTypeList;
+    /**
+     * This data type is used as a response element in the ModifyDBCluster operation and contains changes that will be applied during the next maintenance window.
+     */
+    PendingModifiedValues?: ClusterPendingModifiedValues;
     /**
      * Indicates whether or not the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled.
      */
     DeletionProtection?: BooleanOptional;
+    /**
+     * If set to true, the DB cluster can be cloned across accounts.
+     */
+    CrossAccountClone?: BooleanOptional;
+    /**
+     * Time at which the DB cluster will be automatically restarted.
+     */
+    AutomaticRestartTime?: TStamp;
+    /**
+     * Shows the scaling configuration for a Neptune Serverless DB cluster. For more information, see Using Amazon Neptune Serverless in the Amazon Neptune User Guide.
+     */
+    ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfigurationInfo;
+    /**
+     * Contains a user-supplied global database cluster identifier. This identifier is the unique key that identifies a global database.
+     */
+    GlobalClusterIdentifier?: GlobalClusterIdentifier;
+    /**
+     * The next time you can modify the DB cluster to use the iopt1 storage type.
+     */
+    IOOptimizedNextAllowedModificationTime?: TStamp;
+    /**
+     * The storage type associated with the DB cluster.
+     */
+    StorageType?: String;
   }
   export interface DBClusterEndpoint {
     /**
@@ -1386,11 +1545,11 @@ declare namespace Neptune {
   export type DBClusterOptionGroupMemberships = DBClusterOptionGroupStatus[];
   export interface DBClusterOptionGroupStatus {
     /**
-     * Specifies the name of the DB cluster option group.
+     * Not supported by Neptune.
      */
     DBClusterOptionGroupName?: String;
     /**
-     * Specifies the status of the DB cluster option group.
+     * Not supported by Neptune.
      */
     Status?: String;
   }
@@ -1445,11 +1604,11 @@ declare namespace Neptune {
      */
     RoleArn?: String;
     /**
-     * Describes the state of association between the IAM role and the DB cluster. The Status property returns one of the following values:    ACTIVE - the IAM role ARN is associated with the DB cluster and can be used to access other AWS services on your behalf.    PENDING - the IAM role ARN is being associated with the DB cluster.    INVALID - the IAM role ARN is associated with the DB cluster, but the DB cluster is unable to assume the IAM role in order to access other AWS services on your behalf.  
+     * Describes the state of association between the IAM role and the DB cluster. The Status property returns one of the following values:    ACTIVE - the IAM role ARN is associated with the DB cluster and can be used to access other Amazon services on your behalf.    PENDING - the IAM role ARN is being associated with the DB cluster.    INVALID - the IAM role ARN is associated with the DB cluster, but the DB cluster is unable to assume the IAM role in order to access other Amazon services on your behalf.  
      */
     Status?: String;
     /**
-     * The name of the feature associated with the AWS Identity and Access Management (IAM) role. For the list of supported feature names, see DBEngineVersion. 
+     * The name of the feature associated with the Amazon Identity and Access Management (IAM) role. For the list of supported feature names, see DescribeDBEngineVersions. 
      */
     FeatureName?: String;
   }
@@ -1496,7 +1655,7 @@ declare namespace Neptune {
      */
     ClusterCreateTime?: TStamp;
     /**
-     * Provides the master username for the DB cluster snapshot.
+     * Not supported by Neptune.
      */
     MasterUsername?: String;
     /**
@@ -1520,7 +1679,7 @@ declare namespace Neptune {
      */
     StorageEncrypted?: Boolean;
     /**
-     * If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB cluster snapshot.
+     * If StorageEncrypted is true, the Amazon KMS key identifier for the encrypted DB cluster snapshot.
      */
     KmsKeyId?: String;
     /**
@@ -1532,17 +1691,21 @@ declare namespace Neptune {
      */
     SourceDBClusterSnapshotArn?: String;
     /**
-     * True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.
+     * True if mapping of Amazon Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.
      */
     IAMDatabaseAuthenticationEnabled?: Boolean;
+    /**
+     * The storage type associated with the DB cluster snapshot.
+     */
+    StorageType?: String;
   }
   export interface DBClusterSnapshotAttribute {
     /**
-     * The name of the manual DB cluster snapshot attribute. The attribute named restore refers to the list of AWS accounts that have permission to copy or restore the manual DB cluster snapshot. For more information, see the ModifyDBClusterSnapshotAttribute API action.
+     * The name of the manual DB cluster snapshot attribute. The attribute named restore refers to the list of Amazon accounts that have permission to copy or restore the manual DB cluster snapshot. For more information, see the ModifyDBClusterSnapshotAttribute API action.
      */
     AttributeName?: String;
     /**
-     * The value(s) for the manual DB cluster snapshot attribute. If the AttributeName field is set to restore, then this element returns a list of IDs of the AWS accounts that are authorized to copy or restore the manual DB cluster snapshot. If a value of all is in the list, then the manual DB cluster snapshot is public and available for any AWS account to copy or restore.
+     * The value(s) for the manual DB cluster snapshot attribute. If the AttributeName field is set to restore, then this element returns a list of IDs of the Amazon accounts that are authorized to copy or restore the manual DB cluster snapshot. If a value of all is in the list, then the manual DB cluster snapshot is public and available for any Amazon account to copy or restore.
      */
     AttributeValues?: AttributeValueList;
   }
@@ -1617,6 +1780,10 @@ declare namespace Neptune {
      * Indicates whether the database engine version supports read replicas.
      */
     SupportsReadReplica?: Boolean;
+    /**
+     * A value that indicates whether you can use Aurora global databases with a specific DB engine version.
+     */
+    SupportsGlobalDatabases?: Boolean;
   }
   export type DBEngineVersionList = DBEngineVersion[];
   export interface DBEngineVersionMessage {
@@ -1647,7 +1814,7 @@ declare namespace Neptune {
      */
     DBInstanceStatus?: String;
     /**
-     * Contains the master username for the DB instance.
+     * Not supported by Neptune.
      */
     MasterUsername?: String;
     /**
@@ -1659,7 +1826,7 @@ declare namespace Neptune {
      */
     Endpoint?: Endpoint;
     /**
-     * Specifies the allocated storage size specified in gibibytes.
+     * Not supported by Neptune.
      */
     AllocatedStorage?: Integer;
     /**
@@ -1783,7 +1950,7 @@ declare namespace Neptune {
      */
     KmsKeyId?: String;
     /**
-     * The AWS Region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB instance is accessed.
+     * The Amazon Region-unique, immutable identifier for the DB instance. This identifier is found in Amazon CloudTrail log entries whenever the Amazon KMS key for the DB instance is accessed.
      */
     DbiResourceId?: String;
     /**
@@ -1823,7 +1990,7 @@ declare namespace Neptune {
      */
     Timezone?: String;
     /**
-     * True if AWS Identity and Access Management (IAM) authentication is enabled, and otherwise false.
+     * True if Amazon Identity and Access Management (IAM) authentication is enabled, and otherwise false.
      */
     IAMDatabaseAuthenticationEnabled?: Boolean;
     /**
@@ -2096,6 +2263,15 @@ declare namespace Neptune {
   export interface DeleteEventSubscriptionResult {
     EventSubscription?: EventSubscription;
   }
+  export interface DeleteGlobalClusterMessage {
+    /**
+     * The cluster identifier of the global database cluster being deleted.
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+  }
+  export interface DeleteGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
+  }
   export interface DescribeDBClusterEndpointsMessage {
     /**
      * The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.
@@ -2177,7 +2353,7 @@ declare namespace Neptune {
      */
     DBClusterSnapshotIdentifier?: String;
     /**
-     * The type of DB cluster snapshots to be returned. You can specify one of the following values:    automated - Return all DB cluster snapshots that have been automatically taken by Amazon Neptune for my AWS account.    manual - Return all DB cluster snapshots that have been taken by my AWS account.    shared - Return all manual DB cluster snapshots that have been shared to my AWS account.    public - Return all DB cluster snapshots that have been marked as public.   If you don't specify a SnapshotType value, then both automated and manual DB cluster snapshots are returned. You can include shared DB cluster snapshots with these results by setting the IncludeShared parameter to true. You can include public DB cluster snapshots with these results by setting the IncludePublic parameter to true. The IncludeShared and IncludePublic parameters don't apply for SnapshotType values of manual or automated. The IncludePublic parameter doesn't apply when SnapshotType is set to shared. The IncludeShared parameter doesn't apply when SnapshotType is set to public.
+     * The type of DB cluster snapshots to be returned. You can specify one of the following values:    automated - Return all DB cluster snapshots that have been automatically taken by Amazon Neptune for my Amazon account.    manual - Return all DB cluster snapshots that have been taken by my Amazon account.    shared - Return all manual DB cluster snapshots that have been shared to my Amazon account.    public - Return all DB cluster snapshots that have been marked as public.   If you don't specify a SnapshotType value, then both automated and manual DB cluster snapshots are returned. You can include shared DB cluster snapshots with these results by setting the IncludeShared parameter to true. You can include public DB cluster snapshots with these results by setting the IncludePublic parameter to true. The IncludeShared and IncludePublic parameters don't apply for SnapshotType values of manual or automated. The IncludePublic parameter doesn't apply when SnapshotType is set to shared. The IncludeShared parameter doesn't apply when SnapshotType is set to public.
      */
     SnapshotType?: String;
     /**
@@ -2193,11 +2369,11 @@ declare namespace Neptune {
      */
     Marker?: String;
     /**
-     * True to include shared manual DB cluster snapshots from other AWS accounts that this AWS account has been given permission to copy or restore, and otherwise false. The default is false. You can give an AWS account permission to restore a manual DB cluster snapshot from another AWS account by the ModifyDBClusterSnapshotAttribute API action.
+     * True to include shared manual DB cluster snapshots from other Amazon accounts that this Amazon account has been given permission to copy or restore, and otherwise false. The default is false. You can give an Amazon account permission to restore a manual DB cluster snapshot from another Amazon account by the ModifyDBClusterSnapshotAttribute API action.
      */
     IncludeShared?: Boolean;
     /**
-     * True to include manual DB cluster snapshots that are public and can be copied or restored by any AWS account, and otherwise false. The default is false. The default is false. You can share a manual DB cluster snapshot as public by using the ModifyDBClusterSnapshotAttribute API action.
+     * True to include manual DB cluster snapshots that are public and can be copied or restored by any Amazon account, and otherwise false. The default is false. The default is false. You can share a manual DB cluster snapshot as public by using the ModifyDBClusterSnapshotAttribute API action.
      */
     IncludePublic?: Boolean;
   }
@@ -2207,7 +2383,7 @@ declare namespace Neptune {
      */
     DBClusterIdentifier?: String;
     /**
-     * A filter that specifies one or more DB clusters to describe. Supported filters:    db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.    engine - Accepts an engine name (such as neptune), and restricts the results list to DB clusters created by that engine.   For example, to invoke this API from the AWS CLI and filter so that only Neptune DB clusters are returned, you could use the following command:
+     * A filter that specifies one or more DB clusters to describe. Supported filters:    db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.    engine - Accepts an engine name (such as neptune), and restricts the results list to DB clusters created by that engine.   For example, to invoke this API from the Amazon CLI and filter so that only Neptune DB clusters are returned, you could use the following command:
      */
     Filters?: FilterList;
     /**
@@ -2263,7 +2439,7 @@ declare namespace Neptune {
      */
     DBInstanceIdentifier?: String;
     /**
-     * A filter that specifies one or more DB instances to describe. Supported filters:    db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB instances associated with the DB clusters identified by these ARNs.    engine - Accepts an engine name (such as neptune), and restricts the results list to DB instances created by that engine.   For example, to invoke this API from the AWS CLI and filter so that only Neptune DB instances are returned, you could use the following command:
+     * A filter that specifies one or more DB instances to describe. Supported filters:    db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB instances associated with the DB clusters identified by these ARNs.    engine - Accepts an engine name (such as neptune), and restricts the results list to DB instances created by that engine.   For example, to invoke this API from the Amazon CLI and filter so that only Neptune DB instances are returned, you could use the following command:
      */
     Filters?: FilterList;
     /**
@@ -2441,6 +2617,20 @@ declare namespace Neptune {
      */
     Marker?: String;
   }
+  export interface DescribeGlobalClustersMessage {
+    /**
+     * The user-supplied DB cluster identifier. If this parameter is specified, only information about the specified DB cluster is returned. This parameter is not case-sensitive. Constraints: If supplied, must match an existing DB cluster identifier.
+     */
+    GlobalClusterIdentifier?: GlobalClusterIdentifier;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination marker token is included in the response that you can use to retrieve the remaining results. Default: 100  Constraints: Minimum 20, maximum 100.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * (Optional) A pagination token returned by a previous call to DescribeGlobalClusters. If this parameter is specified, the response will only include records beyond the marker, up to the number specified by MaxRecords.
+     */
+    Marker?: String;
+  }
   export interface DescribeOrderableDBInstanceOptionsMessage {
     /**
      * The name of the engine to retrieve DB instance options for.
@@ -2609,7 +2799,7 @@ declare namespace Neptune {
   export type EventList = Event[];
   export interface EventSubscription {
     /**
-     * The AWS customer account associated with the event notification subscription.
+     * The Amazon customer account associated with the event notification subscription.
      */
     CustomerAwsId?: String;
     /**
@@ -2683,6 +2873,19 @@ declare namespace Neptune {
   export interface FailoverDBClusterResult {
     DBCluster?: DBCluster;
   }
+  export interface FailoverGlobalClusterMessage {
+    /**
+     * Identifier of the Neptune global database that should be failed over. The identifier is the unique key assigned by the user when the Neptune global database was created. In other words, it's the name of the global database that you want to fail over. Constraints: Must match the identifier of an existing Neptune global database.
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+    /**
+     * The Amazon Resource Name (ARN) of the secondary Neptune DB cluster that you want to promote to primary for the global database.
+     */
+    TargetDbClusterIdentifier: String;
+  }
+  export interface FailoverGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
+  }
   export interface Filter {
     /**
      * This parameter is not currently supported.
@@ -2695,6 +2898,71 @@ declare namespace Neptune {
   }
   export type FilterList = Filter[];
   export type FilterValueList = String[];
+  export interface GlobalCluster {
+    /**
+     * Contains a user-supplied global database cluster identifier. This identifier is the unique key that identifies a global database.
+     */
+    GlobalClusterIdentifier?: GlobalClusterIdentifier;
+    /**
+     * An immutable identifier for the global database that is unique within in all regions. This identifier is found in CloudTrail log entries whenever the KMS key for the DB cluster is accessed.
+     */
+    GlobalClusterResourceId?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the global database.
+     */
+    GlobalClusterArn?: String;
+    /**
+     * Specifies the current state of this global database.
+     */
+    Status?: String;
+    /**
+     * The Neptune database engine used by the global database ("neptune").
+     */
+    Engine?: String;
+    /**
+     * The Neptune engine version used by the global database.
+     */
+    EngineVersion?: String;
+    /**
+     * The storage encryption setting for the global database.
+     */
+    StorageEncrypted?: BooleanOptional;
+    /**
+     * The deletion protection setting for the global database.
+     */
+    DeletionProtection?: BooleanOptional;
+    /**
+     * A list of cluster ARNs and instance ARNs for all the DB clusters that are part of the global database.
+     */
+    GlobalClusterMembers?: GlobalClusterMemberList;
+  }
+  export type GlobalClusterIdentifier = string;
+  export type GlobalClusterList = GlobalCluster[];
+  export interface GlobalClusterMember {
+    /**
+     *  The Amazon Resource Name (ARN) for each Neptune cluster. 
+     */
+    DBClusterArn?: String;
+    /**
+     *  The Amazon Resource Name (ARN) for each read-only secondary cluster associated with the Neptune global database. 
+     */
+    Readers?: ReadersArnList;
+    /**
+     *  Specifies whether the Neptune cluster is the primary cluster (that is, has read-write capability) for the Neptune global database with which it is associated. 
+     */
+    IsWriter?: Boolean;
+  }
+  export type GlobalClusterMemberList = GlobalClusterMember[];
+  export interface GlobalClustersMessage {
+    /**
+     * A pagination token. If this parameter is returned in the response, more records are available, which can be retrieved by one or more additional calls to DescribeGlobalClusters.
+     */
+    Marker?: String;
+    /**
+     * The list of global clusters and instances returned by this request.
+     */
+    GlobalClusters?: GlobalClusterList;
+  }
   export type Integer = number;
   export type IntegerOptional = number;
   export type KeyList = String[];
@@ -2779,7 +3047,7 @@ declare namespace Neptune {
      */
     NewDBClusterIdentifier?: String;
     /**
-     * A value that specifies whether the modifications in this request and any pending modifications are asynchronously applied as soon as possible, regardless of the PreferredMaintenanceWindow setting for the DB cluster. If this parameter is set to false, changes to the DB cluster are applied during the next maintenance window. The ApplyImmediately parameter only affects the NewDBClusterIdentifier and MasterUserPassword values. If you set the ApplyImmediately parameter value to false, then changes to the NewDBClusterIdentifier and MasterUserPassword values are applied during the next maintenance window. All other changes are applied immediately, regardless of the value of the ApplyImmediately parameter. Default: false 
+     * A value that specifies whether the modifications in this request and any pending modifications are asynchronously applied as soon as possible, regardless of the PreferredMaintenanceWindow setting for the DB cluster. If this parameter is set to false, changes to the DB cluster are applied during the next maintenance window. The ApplyImmediately parameter only affects NewDBClusterIdentifier values. If you set the ApplyImmediately parameter value to false, then changes to NewDBClusterIdentifier values are applied during the next maintenance window. All other changes are applied immediately, regardless of the value of the ApplyImmediately parameter. Default: false 
      */
     ApplyImmediately?: Boolean;
     /**
@@ -2799,27 +3067,27 @@ declare namespace Neptune {
      */
     Port?: IntegerOptional;
     /**
-     * The new password for the master database user. This password can contain any printable ASCII character except "/", """, or "@". Constraints: Must contain from 8 to 41 characters.
+     * Not supported by Neptune.
      */
     MasterUserPassword?: String;
     /**
-     *  (Not supported by Neptune) 
+     *  Not supported by Neptune. 
      */
     OptionGroupName?: String;
     /**
-     * The daily time range during which automated backups are created if automated backups are enabled, using the BackupRetentionPeriod parameter. The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. Constraints:   Must be in the format hh24:mi-hh24:mi.   Must be in Universal Coordinated Time (UTC).   Must not conflict with the preferred maintenance window.   Must be at least 30 minutes.  
+     * The daily time range during which automated backups are created if automated backups are enabled, using the BackupRetentionPeriod parameter. The default is a 30-minute window selected at random from an 8-hour block of time for each Amazon Region. Constraints:   Must be in the format hh24:mi-hh24:mi.   Must be in Universal Coordinated Time (UTC).   Must not conflict with the preferred maintenance window.   Must be at least 30 minutes.  
      */
     PreferredBackupWindow?: String;
     /**
-     * The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi  The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun. Constraints: Minimum 30-minute window.
+     * The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi  The default is a 30-minute window selected at random from an 8-hour block of time for each Amazon Region, occurring on a random day of the week. Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun. Constraints: Minimum 30-minute window.
      */
     PreferredMaintenanceWindow?: String;
     /**
-     * True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false. Default: false 
+     * True to enable mapping of Amazon Identity and Access Management (IAM) accounts to database accounts, and otherwise false. Default: false 
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
     /**
-     * The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB cluster.
+     * The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB cluster. See Using the CLI to publish Neptune audit logs to CloudWatch Logs.
      */
     CloudwatchLogsExportConfiguration?: CloudwatchLogsExportConfiguration;
     /**
@@ -2827,9 +3095,29 @@ declare namespace Neptune {
      */
     EngineVersion?: String;
     /**
+     * A value that indicates whether upgrades between different major versions are allowed. Constraints: You must set the allow-major-version-upgrade flag when providing an EngineVersion parameter that uses a different major version than the DB cluster's current version.
+     */
+    AllowMajorVersionUpgrade?: Boolean;
+    /**
+     * The name of the DB parameter group to apply to all instances of the DB cluster.   When you apply a parameter group using DBInstanceParameterGroupName, parameter changes aren't applied during the next maintenance window but instead are applied immediately.  Default: The existing name setting Constraints:   The DB parameter group must be in the same DB parameter group family as the target DB cluster version.   The DBInstanceParameterGroupName parameter is only valid in combination with the AllowMajorVersionUpgrade parameter.  
+     */
+    DBInstanceParameterGroupName?: String;
+    /**
      * A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.
      */
     DeletionProtection?: BooleanOptional;
+    /**
+     *  If set to true, tags are copied to any snapshot of the DB cluster that is created. 
+     */
+    CopyTagsToSnapshot?: BooleanOptional;
+    /**
+     * Contains the scaling configuration of a Neptune Serverless DB cluster. For more information, see Using Amazon Neptune Serverless in the Amazon Neptune User Guide.
+     */
+    ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfiguration;
+    /**
+     * The storage type to associate with the DB cluster. Valid Values:    standard | iopt1    Default:    standard   
+     */
+    StorageType?: String;
   }
   export interface ModifyDBClusterParameterGroupMessage {
     /**
@@ -2850,15 +3138,15 @@ declare namespace Neptune {
      */
     DBClusterSnapshotIdentifier: String;
     /**
-     * The name of the DB cluster snapshot attribute to modify. To manage authorization for other AWS accounts to copy or restore a manual DB cluster snapshot, set this value to restore.
+     * The name of the DB cluster snapshot attribute to modify. To manage authorization for other Amazon accounts to copy or restore a manual DB cluster snapshot, set this value to restore.
      */
     AttributeName: String;
     /**
-     * A list of DB cluster snapshot attributes to add to the attribute specified by AttributeName. To authorize other AWS accounts to copy or restore a manual DB cluster snapshot, set this list to include one or more AWS account IDs, or all to make the manual DB cluster snapshot restorable by any AWS account. Do not add the all value for any manual DB cluster snapshots that contain private information that you don't want available to all AWS accounts.
+     * A list of DB cluster snapshot attributes to add to the attribute specified by AttributeName. To authorize other Amazon accounts to copy or restore a manual DB cluster snapshot, set this list to include one or more Amazon account IDs, or all to make the manual DB cluster snapshot restorable by any Amazon account. Do not add the all value for any manual DB cluster snapshots that contain private information that you don't want available to all Amazon accounts.
      */
     ValuesToAdd?: AttributeValueList;
     /**
-     * A list of DB cluster snapshot attributes to remove from the attribute specified by AttributeName. To remove authorization for other AWS accounts to copy or restore a manual DB cluster snapshot, set this list to include one or more AWS account identifiers, or all to remove authorization for any AWS account to copy or restore the DB cluster snapshot. If you specify all, an AWS account whose account ID is explicitly added to the restore attribute can still copy or restore a manual DB cluster snapshot.
+     * A list of DB cluster snapshot attributes to remove from the attribute specified by AttributeName. To remove authorization for other Amazon accounts to copy or restore a manual DB cluster snapshot, set this list to include one or more Amazon account identifiers, or all to remove authorization for any Amazon account to copy or restore the DB cluster snapshot. If you specify all, an Amazon account whose account ID is explicitly added to the restore attribute can still copy or restore a manual DB cluster snapshot.
      */
     ValuesToRemove?: AttributeValueList;
   }
@@ -2871,11 +3159,11 @@ declare namespace Neptune {
      */
     DBInstanceIdentifier: String;
     /**
-     * The new amount of storage (in gibibytes) to allocate for the DB instance. Not applicable. Storage is managed by the DB Cluster.
+     * Not supported by Neptune.
      */
     AllocatedStorage?: IntegerOptional;
     /**
-     * The new compute and memory capacity of the DB instance, for example, db.m4.large. Not all DB instance classes are available in all AWS Regions. If you modify the DB instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless ApplyImmediately is specified as true for this request. Default: Uses existing setting
+     * The new compute and memory capacity of the DB instance, for example, db.m4.large. Not all DB instance classes are available in all Amazon Regions. If you modify the DB instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless ApplyImmediately is specified as true for this request. Default: Uses existing setting
      */
     DBInstanceClass?: String;
     /**
@@ -2895,7 +3183,7 @@ declare namespace Neptune {
      */
     ApplyImmediately?: Boolean;
     /**
-     * Not applicable.
+     * Not supported by Neptune.
      */
     MasterUserPassword?: String;
     /**
@@ -2931,7 +3219,7 @@ declare namespace Neptune {
      */
     AutoMinorVersionUpgrade?: BooleanOptional;
     /**
-     * Not supported.
+     * Not supported by Neptune.
      */
     LicenseModel?: String;
     /**
@@ -2957,7 +3245,7 @@ declare namespace Neptune {
     /**
      * The password for the given ARN from the key store in order to access the device.
      */
-    TdeCredentialPassword?: String;
+    TdeCredentialPassword?: SensitiveString;
     /**
      * Indicates the certificate that needs to be associated with the instance.
      */
@@ -2995,7 +3283,7 @@ declare namespace Neptune {
      */
     PromotionTier?: IntegerOptional;
     /**
-     * True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false. You can enable IAM database authentication for the following database engines Not applicable. Mapping AWS IAM accounts to database accounts is managed by the DB cluster. For more information, see ModifyDBCluster. Default: false 
+     * True to enable mapping of Amazon Identity and Access Management (IAM) accounts to database accounts, and otherwise false. You can enable IAM database authentication for the following database engines Not applicable. Mapping Amazon IAM accounts to database accounts is managed by the DB cluster. For more information, see ModifyDBCluster. Default: false 
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
     /**
@@ -3070,13 +3358,38 @@ declare namespace Neptune {
   export interface ModifyEventSubscriptionResult {
     EventSubscription?: EventSubscription;
   }
+  export interface ModifyGlobalClusterMessage {
+    /**
+     * The DB cluster identifier for the global cluster being modified. This parameter is not case-sensitive. Constraints: Must match the identifier of an existing global database cluster.
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+    /**
+     * A new cluster identifier to assign to the global database. This value is stored as a lowercase string. Constraints:   Must contain from 1 to 63 letters, numbers, or hyphens.   The first character must be a letter.   Can't end with a hyphen or contain two consecutive hyphens   Example: my-cluster2 
+     */
+    NewGlobalClusterIdentifier?: GlobalClusterIdentifier;
+    /**
+     * Indicates whether the global database has deletion protection enabled. The global database cannot be deleted when deletion protection is enabled.
+     */
+    DeletionProtection?: BooleanOptional;
+    /**
+     * The version number of the database engine to which you want to upgrade. Changing this parameter will result in an outage. The change is applied during the next maintenance window unless ApplyImmediately is enabled. To list all of the available Neptune engine versions, use the following command:
+     */
+    EngineVersion?: String;
+    /**
+     * A value that indicates whether major version upgrades are allowed. Constraints: You must allow major version upgrades if you specify a value for the EngineVersion parameter that is a different major version than the DB cluster's current version. If you upgrade the major version of a global database, the cluster and DB instance parameter groups are set to the default parameter groups for the new version, so you will need to apply any custom parameter groups after completing the upgrade.
+     */
+    AllowMajorVersionUpgrade?: BooleanOptional;
+  }
+  export interface ModifyGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
+  }
   export interface OptionGroupMembership {
     /**
-     * The name of the option group that the instance belongs to.
+     * Not supported by Neptune.
      */
     OptionGroupName?: String;
     /**
-     * The status of the DB instance's option group membership. Valid values are: in-sync, pending-apply, pending-removal, pending-maintenance-apply, pending-maintenance-removal, applying, removing, and failed.
+     * Not supported by Neptune.
      */
     Status?: String;
   }
@@ -3162,6 +3475,10 @@ declare namespace Neptune {
      * Maximum provisioned IOPS per GiB for a DB instance.
      */
     MaxIopsPerGib?: DoubleOptional;
+    /**
+     * A value that indicates whether you can use Neptune global databases with a specific combination of other DB engine attributes.
+     */
+    SupportsGlobalDatabases?: Boolean;
   }
   export type OrderableDBInstanceOptionsList = OrderableDBInstanceOption[];
   export interface OrderableDBInstanceOptionsMessage {
@@ -3275,7 +3592,7 @@ declare namespace Neptune {
      */
     AllocatedStorage?: IntegerOptional;
     /**
-     * Contains the pending or currently-in-progress change of the master credentials for the DB instance.
+     * Not supported by Neptune.
      */
     MasterUserPassword?: String;
     /**
@@ -3295,7 +3612,7 @@ declare namespace Neptune {
      */
     EngineVersion?: String;
     /**
-     * The license model for the DB instance. Valid values: license-included | bring-your-own-license | general-public-license 
+     * Not supported by Neptune.
      */
     LicenseModel?: String;
     /**
@@ -3350,6 +3667,7 @@ declare namespace Neptune {
   export type ReadReplicaDBClusterIdentifierList = String[];
   export type ReadReplicaDBInstanceIdentifierList = String[];
   export type ReadReplicaIdentifierList = String[];
+  export type ReadersArnList = String[];
   export interface RebootDBInstanceMessage {
     /**
      * The DB instance identifier. This parameter is stored as a lowercase string. Constraints:   Must match the identifier of an existing DBInstance.  
@@ -3363,6 +3681,19 @@ declare namespace Neptune {
   export interface RebootDBInstanceResult {
     DBInstance?: DBInstance;
   }
+  export interface RemoveFromGlobalClusterMessage {
+    /**
+     * The identifier of the Neptune global database from which to detach the specified Neptune DB cluster.
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+    /**
+     * The Amazon Resource Name (ARN) identifying the cluster to be detached from the Neptune global database cluster.
+     */
+    DbClusterIdentifier: String;
+  }
+  export interface RemoveFromGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
+  }
   export interface RemoveRoleFromDBClusterMessage {
     /**
      * The name of the DB cluster to disassociate the IAM role from.
@@ -3373,7 +3704,7 @@ declare namespace Neptune {
      */
     RoleArn: String;
     /**
-     * The name of the feature for the DB cluster that the IAM role is to be disassociated from. For the list of supported feature names, see DBEngineVersion.
+     * The name of the feature for the DB cluster that the IAM role is to be disassociated from. For the list of supported feature names, see DescribeDBEngineVersions.
      */
     FeatureName?: String;
   }
@@ -3484,11 +3815,11 @@ declare namespace Neptune {
      */
     Tags?: TagList;
     /**
-     * The AWS KMS key identifier to use when restoring an encrypted DB cluster from a DB snapshot or DB cluster snapshot. The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a DB cluster with the same AWS account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key. If you do not specify a value for the KmsKeyId parameter, then the following will occur:   If the DB snapshot or DB cluster snapshot in SnapshotIdentifier is encrypted, then the restored DB cluster is encrypted using the KMS key that was used to encrypt the DB snapshot or DB cluster snapshot.   If the DB snapshot or DB cluster snapshot in SnapshotIdentifier is not encrypted, then the restored DB cluster is not encrypted.  
+     * The Amazon KMS key identifier to use when restoring an encrypted DB cluster from a DB snapshot or DB cluster snapshot. The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a DB cluster with the same Amazon account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key. If you do not specify a value for the KmsKeyId parameter, then the following will occur:   If the DB snapshot or DB cluster snapshot in SnapshotIdentifier is encrypted, then the restored DB cluster is encrypted using the KMS key that was used to encrypt the DB snapshot or DB cluster snapshot.   If the DB snapshot or DB cluster snapshot in SnapshotIdentifier is not encrypted, then the restored DB cluster is not encrypted.  
      */
     KmsKeyId?: String;
     /**
-     * True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false. Default: false 
+     * True to enable mapping of Amazon Identity and Access Management (IAM) accounts to database accounts, and otherwise false. Default: false 
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
     /**
@@ -3503,6 +3834,18 @@ declare namespace Neptune {
      * A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. 
      */
     DeletionProtection?: BooleanOptional;
+    /**
+     *  If set to true, tags are copied to any snapshot of the restored DB cluster that is created. 
+     */
+    CopyTagsToSnapshot?: BooleanOptional;
+    /**
+     * Contains the scaling configuration of a Neptune Serverless DB cluster. For more information, see Using Amazon Neptune Serverless in the Amazon Neptune User Guide.
+     */
+    ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfiguration;
+    /**
+     * Specifies the storage type to be associated with the DB cluster. Valid values: standard, iopt1  Default: standard 
+     */
+    StorageType?: String;
   }
   export interface RestoreDBClusterFromSnapshotResult {
     DBCluster?: DBCluster;
@@ -3549,11 +3892,11 @@ declare namespace Neptune {
      */
     Tags?: TagList;
     /**
-     * The AWS KMS key identifier to use when restoring an encrypted DB cluster from an encrypted DB cluster. The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a DB cluster with the same AWS account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key. You can restore to a new DB cluster and encrypt the new DB cluster with a KMS key that is different than the KMS key used to encrypt the source DB cluster. The new DB cluster is encrypted with the KMS key identified by the KmsKeyId parameter. If you do not specify a value for the KmsKeyId parameter, then the following will occur:   If the DB cluster is encrypted, then the restored DB cluster is encrypted using the KMS key that was used to encrypt the source DB cluster.   If the DB cluster is not encrypted, then the restored DB cluster is not encrypted.   If DBClusterIdentifier refers to a DB cluster that is not encrypted, then the restore request is rejected.
+     * The Amazon KMS key identifier to use when restoring an encrypted DB cluster from an encrypted DB cluster. The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a DB cluster with the same Amazon account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key. You can restore to a new DB cluster and encrypt the new DB cluster with a KMS key that is different than the KMS key used to encrypt the source DB cluster. The new DB cluster is encrypted with the KMS key identified by the KmsKeyId parameter. If you do not specify a value for the KmsKeyId parameter, then the following will occur:   If the DB cluster is encrypted, then the restored DB cluster is encrypted using the KMS key that was used to encrypt the source DB cluster.   If the DB cluster is not encrypted, then the restored DB cluster is not encrypted.   If DBClusterIdentifier refers to a DB cluster that is not encrypted, then the restore request is rejected.
      */
     KmsKeyId?: String;
     /**
-     * True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false. Default: false 
+     * True to enable mapping of Amazon Identity and Access Management (IAM) accounts to database accounts, and otherwise false. Default: false 
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
     /**
@@ -3568,9 +3911,38 @@ declare namespace Neptune {
      * A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. 
      */
     DeletionProtection?: BooleanOptional;
+    /**
+     * Contains the scaling configuration of a Neptune Serverless DB cluster. For more information, see Using Amazon Neptune Serverless in the Amazon Neptune User Guide.
+     */
+    ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfiguration;
+    /**
+     * Specifies the storage type to be associated with the DB cluster. Valid values: standard, iopt1  Default: standard 
+     */
+    StorageType?: String;
   }
   export interface RestoreDBClusterToPointInTimeResult {
     DBCluster?: DBCluster;
+  }
+  export type SensitiveString = string;
+  export interface ServerlessV2ScalingConfiguration {
+    /**
+     * The minimum number of Neptune capacity units (NCUs) for a DB instance in a Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 8, 8.5, 9, and so on.
+     */
+    MinCapacity?: DoubleOptional;
+    /**
+     * The maximum number of Neptune capacity units (NCUs) for a DB instance in a Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 40, 40.5, 41, and so on.
+     */
+    MaxCapacity?: DoubleOptional;
+  }
+  export interface ServerlessV2ScalingConfigurationInfo {
+    /**
+     * The minimum number of Neptune capacity units (NCUs) for a DB instance in a Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 8, 8.5, 9, and so on.
+     */
+    MinCapacity?: DoubleOptional;
+    /**
+     * The maximum number of Neptune capacity units (NCUs) for a DB instance in a Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 40, 40.5, 41, and so on.
+     */
+    MaxCapacity?: DoubleOptional;
   }
   export type SourceIdsList = String[];
   export type SourceType = "db-instance"|"db-parameter-group"|"db-security-group"|"db-snapshot"|"db-cluster"|"db-cluster-snapshot"|string;
@@ -3615,11 +3987,11 @@ declare namespace Neptune {
   export type TStamp = Date;
   export interface Tag {
     /**
-     * A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with "aws:" or "rds:". The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
+     * A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with aws: or rds:. The string can only contain the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
      */
     Key?: String;
     /**
-     * A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with "aws:" or "rds:". The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
+     * A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with aws: or rds:. The string can only contain the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
      */
     Value?: String;
   }
@@ -3657,6 +4029,10 @@ declare namespace Neptune {
      * A value that indicates whether a database engine is upgraded to a major version.
      */
     IsMajorVersionUpgrade?: Boolean;
+    /**
+     * A value that indicates whether you can use Neptune global databases with the target engine version.
+     */
+    SupportsGlobalDatabases?: BooleanOptional;
   }
   export interface ValidDBInstanceModificationsMessage {
     /**

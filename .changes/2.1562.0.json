@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Firehose",
+        "description": "This release updates a few Firehose related APIs."
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "Add .NET 8 (dotnet8) Runtime support to AWS Lambda."
+    }
+]

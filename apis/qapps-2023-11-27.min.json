@@ -1,0 +1,1351 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2023-11-27",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "data.qapps",
+    "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
+    "serviceFullName": "QApps",
+    "serviceId": "QApps",
+    "signatureVersion": "v4",
+    "signingName": "qapps",
+    "uid": "qapps-2023-11-27"
+  },
+  "operations": {
+    "AssociateLibraryItemReview": {
+      "http": {
+        "requestUri": "/catalog.associateItemRating",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "instanceId",
+          "libraryItemId"
+        ],
+        "members": {
+          "instanceId": {
+            "location": "header",
+            "locationName": "instance-id"
+          },
+          "libraryItemId": {}
+        }
+      }
+    },
+    "AssociateQAppWithUser": {
+      "http": {
+        "requestUri": "/apps.install",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "instanceId",
+          "appId"
+        ],
+        "members": {
+          "instanceId": {
+            "location": "header",
+            "locationName": "instance-id"
+          },
+          "appId": {}
+        }
+      }
+    },
+    "CreateLibraryItem": {
+      "http": {
+        "requestUri": "/catalog.createItem",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "instanceId",
+          "appId",
+          "appVersion",
+          "categories"
+        ],
+        "members": {
+          "instanceId": {
+            "location": "header",
+            "locationName": "instance-id"
+          },
+          "appId": {},
+          "appVersion": {
+            "type": "integer"
+          },
+          "categories": {
+            "shape": "S7"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "libraryItemId",
+          "status",
+          "createdAt",
+          "createdBy",
+          "ratingCount"
+        ],
+        "members": {
+          "libraryItemId": {},
+          "status": {},
+          "createdAt": {
+            "shape": "Sa"
+          },
+          "createdBy": {},
+          "updatedAt": {
+            "shape": "Sa"
+          },
+          "updatedBy": {},
+          "ratingCount": {
+            "type": "integer"
+          },
+          "isVerified": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "CreateQApp": {
+      "http": {
+        "requestUri": "/apps.create",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "instanceId",
+          "title",
+          "appDefinition"
+        ],
+        "members": {
+          "instanceId": {
+            "location": "header",
+            "locationName": "instance-id"
+          },
+          "title": {},
+          "description": {},
+          "appDefinition": {
+            "shape": "Sg"
+          },
+          "tags": {
+            "shape": "S15"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appId",
+          "appArn",
+          "title",
+          "appVersion",
+          "status",
+          "createdAt",
+          "createdBy",
+          "updatedAt",
+          "updatedBy"
+        ],
+        "members": {
+          "appId": {},
+          "appArn": {},
+          "title": {},
+          "description": {},
+          "initialPrompt": {},
+          "appVersion": {
+            "type": "integer"
+          },
+          "status": {},
+          "createdAt": {
+            "shape": "Sa"
+          },
+          "createdBy": {},
+          "updatedAt": {
+            "shape": "Sa"
+          },
+          "updatedBy": {},
+          "requiredCapabilities": {
+            "shape": "S19"
+          }
+        }
+      }
+    },
+    "DeleteLibraryItem": {
+      "http": {
+        "requestUri": "/catalog.deleteItem",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "instanceId",
+          "libraryItemId"
+        ],
+        "members": {
+          "instanceId": {
+            "location": "header",
+            "locationName": "instance-id"
+          },
+          "libraryItemId": {}
+        }
+      },
+      "idempotent": true
+    },
+    "DeleteQApp": {
+      "http": {
+        "requestUri": "/apps.delete",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "instanceId",
+          "appId"
+        ],
+        "members": {
+          "instanceId": {
+            "location": "header",
+            "locationName": "instance-id"
+          },
+          "appId": {}
+        }
+      },
+      "idempotent": true
+    },
+    "DisassociateLibraryItemReview": {
+      "http": {
+        "requestUri": "/catalog.disassociateItemRating",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "instanceId",
+          "libraryItemId"
+        ],
+        "members": {
+          "instanceId": {
+            "location": "header",
+            "locationName": "instance-id"
+          },
+          "libraryItemId": {}
+        }
+      }
+    },
+    "DisassociateQAppFromUser": {
+      "http": {
+        "requestUri": "/apps.uninstall",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "instanceId",
+          "appId"
+        ],
+        "members": {
+          "instanceId": {
+            "location": "header",
+            "locationName": "instance-id"
+          },
+          "appId": {}
+        }
+      }
+    },
+    "GetLibraryItem": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/catalog.getItem",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "instanceId",
+          "libraryItemId"
+        ],
+        "members": {
+          "instanceId": {
+            "location": "header",
+            "locationName": "instance-id"
+          },
+          "libraryItemId": {
+            "location": "querystring",
+            "locationName": "libraryItemId"
+          },
+          "appId": {
+            "location": "querystring",
+            "locationName": "appId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "libraryItemId",
+          "appId",
+          "appVersion",
+          "categories",
+          "status",
+          "createdAt",
+          "createdBy",
+          "ratingCount"
+        ],
+        "members": {
+          "libraryItemId": {},
+          "appId": {},
+          "appVersion": {
+            "type": "integer"
+          },
+          "categories": {
+            "shape": "S1h"
+          },
+          "status": {},
+          "createdAt": {
+            "shape": "Sa"
+          },
+          "createdBy": {},
+          "updatedAt": {
+            "shape": "Sa"
+          },
+          "updatedBy": {},
+          "ratingCount": {
+            "type": "integer"
+          },
+          "isRatedByUser": {
+            "type": "boolean"
+          },
+          "userCount": {
+            "type": "integer"
+          },
+          "isVerified": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "GetQApp": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/apps.get",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "instanceId",
+          "appId"
+        ],
+        "members": {
+          "instanceId": {
+            "location": "header",
+            "locationName": "instance-id"
+          },
+          "appId": {
+            "location": "querystring",
+            "locationName": "appId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appId",
+          "appArn",
+          "title",
+          "appVersion",
+          "status",
+          "createdAt",
+          "createdBy",
+          "updatedAt",
+          "updatedBy",
+          "appDefinition"
+        ],
+        "members": {
+          "appId": {},
+          "appArn": {},
+          "title": {},
+          "description": {},
+          "initialPrompt": {},
+          "appVersion": {
+            "type": "integer"
+          },
+          "status": {},
+          "createdAt": {
+            "shape": "Sa"
+          },
+          "createdBy": {},
+          "updatedAt": {
+            "shape": "Sa"
+          },
+          "updatedBy": {},
+          "requiredCapabilities": {
+            "shape": "S19"
+          },
+          "appDefinition": {
+            "type": "structure",
+            "required": [
+              "appDefinitionVersion",
+              "cards"
+            ],
+            "members": {
+              "appDefinitionVersion": {},
+              "cards": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "members": {
+                    "textInput": {
+                      "type": "structure",
+                      "required": [
+                        "id",
+                        "title",
+                        "dependencies",
+                        "type"
+                      ],
+                      "members": {
+                        "id": {},
+                        "title": {},
+                        "dependencies": {
+                          "shape": "S1p"
+                        },
+                        "type": {},
+                        "placeholder": {},
+                        "defaultValue": {}
+                      }
+                    },
+                    "qQuery": {
+                      "type": "structure",
+                      "required": [
+                        "id",
+                        "title",
+                        "dependencies",
+                        "type",
+                        "prompt",
+                        "outputSource"
+                      ],
+                      "members": {
+                        "id": {},
+                        "title": {},
+                        "dependencies": {
+                          "shape": "S1p"
+                        },
+                        "type": {},
+                        "prompt": {},
+                        "outputSource": {},
+                        "attributeFilter": {
+                          "shape": "Sq"
+                        }
+                      }
+                    },
+                    "qPlugin": {
+                      "type": "structure",
+                      "required": [
+                        "id",
+                        "title",
+                        "dependencies",
+                        "type",
+                        "prompt",
+                        "pluginType",
+                        "pluginId"
+                      ],
+                      "members": {
+                        "id": {},
+                        "title": {},
+                        "dependencies": {
+                          "shape": "S1p"
+                        },
+                        "type": {},
+                        "prompt": {},
+                        "pluginType": {},
+                        "pluginId": {}
+                      }
+                    },
+                    "fileUpload": {
+                      "type": "structure",
+                      "required": [
+                        "id",
+                        "title",
+                        "dependencies",
+                        "type"
+                      ],
+                      "members": {
+                        "id": {},
+                        "title": {},
+                        "dependencies": {
+                          "shape": "S1p"
+                        },
+                        "type": {},
+                        "filename": {},
+                        "fileId": {},
+                        "allowOverride": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  },
+                  "union": true
+                }
+              },
+              "canEdit": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    "GetQAppSession": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/runtime.getQAppSession",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "instanceId",
+          "sessionId"
+        ],
+        "members": {
+          "instanceId": {
+            "location": "header",
+            "locationName": "instance-id"
+          },
+          "sessionId": {
+            "location": "querystring",
+            "locationName": "sessionId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "sessionId",
+          "sessionArn",
+          "status",
+          "cardStatus"
+        ],
+        "members": {
+          "sessionId": {},
+          "sessionArn": {},
+          "status": {},
+          "cardStatus": {
+            "type": "map",
+            "key": {},
+            "value": {
+              "type": "structure",
+              "required": [
+                "currentState",
+                "currentValue"
+              ],
+              "members": {
+                "currentState": {},
+                "currentValue": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "ImportDocument": {
+      "http": {
+        "requestUri": "/apps.importDocument",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "instanceId",
+          "cardId",
+          "appId",
+          "fileContentsBase64",
+          "fileName",
+          "scope"
+        ],
+        "members": {
+          "instanceId": {
+            "location": "header",
+            "locationName": "instance-id"
+          },
+          "cardId": {},
+          "appId": {},
+          "fileContentsBase64": {},
+          "fileName": {},
+          "scope": {},
+          "sessionId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "fileId": {}
+        }
+      }
+    },
+    "ListLibraryItems": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/catalog.list",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "instanceId"
+        ],
+        "members": {
+          "instanceId": {
+            "location": "header",
+            "locationName": "instance-id"
+          },
+          "limit": {
+            "location": "querystring",
+            "locationName": "limit",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "categoryId": {
+            "location": "querystring",
+            "locationName": "categoryId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "libraryItems": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "libraryItemId",
+                "appId",
+                "appVersion",
+                "categories",
+                "status",
+                "createdAt",
+                "createdBy",
+                "ratingCount"
+              ],
+              "members": {
+                "libraryItemId": {},
+                "appId": {},
+                "appVersion": {
+                  "type": "integer"
+                },
+                "categories": {
+                  "shape": "S1h"
+                },
+                "status": {},
+                "createdAt": {
+                  "shape": "Sa"
+                },
+                "createdBy": {},
+                "updatedAt": {
+                  "shape": "Sa"
+                },
+                "updatedBy": {},
+                "ratingCount": {
+                  "type": "integer"
+                },
+                "isRatedByUser": {
+                  "type": "boolean"
+                },
+                "userCount": {
+                  "type": "integer"
+                },
+                "isVerified": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListQApps": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/apps.list",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "instanceId"
+        ],
+        "members": {
+          "instanceId": {
+            "location": "header",
+            "locationName": "instance-id"
+          },
+          "limit": {
+            "location": "querystring",
+            "locationName": "limit",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "apps"
+        ],
+        "members": {
+          "apps": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "appId",
+                "appArn",
+                "title",
+                "createdAt"
+              ],
+              "members": {
+                "appId": {},
+                "appArn": {},
+                "title": {},
+                "description": {},
+                "createdAt": {
+                  "shape": "Sa"
+                },
+                "canEdit": {
+                  "type": "boolean"
+                },
+                "status": {},
+                "isVerified": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListTagsForResource": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resourceARN}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceARN"
+        ],
+        "members": {
+          "resourceARN": {
+            "location": "uri",
+            "locationName": "resourceARN"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "tags": {
+            "shape": "S2f"
+          }
+        }
+      }
+    },
+    "PredictQApp": {
+      "http": {
+        "requestUri": "/apps.predictQApp",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "instanceId"
+        ],
+        "members": {
+          "instanceId": {
+            "location": "header",
+            "locationName": "instance-id"
+          },
+          "options": {
+            "type": "structure",
+            "members": {
+              "conversation": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "required": [
+                    "body",
+                    "type"
+                  ],
+                  "members": {
+                    "body": {},
+                    "type": {}
+                  }
+                }
+              },
+              "problemStatement": {}
+            },
+            "union": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "app",
+          "problemStatement"
+        ],
+        "members": {
+          "app": {
+            "type": "structure",
+            "required": [
+              "title",
+              "appDefinition"
+            ],
+            "members": {
+              "title": {},
+              "description": {},
+              "appDefinition": {
+                "shape": "Sg"
+              }
+            }
+          },
+          "problemStatement": {}
+        }
+      }
+    },
+    "StartQAppSession": {
+      "http": {
+        "requestUri": "/runtime.startQAppSession",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "instanceId",
+          "appId",
+          "appVersion"
+        ],
+        "members": {
+          "instanceId": {
+            "location": "header",
+            "locationName": "instance-id"
+          },
+          "appId": {},
+          "appVersion": {
+            "type": "integer"
+          },
+          "initialValues": {
+            "shape": "S2s"
+          },
+          "tags": {
+            "shape": "S15"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "sessionId",
+          "sessionArn"
+        ],
+        "members": {
+          "sessionId": {},
+          "sessionArn": {}
+        }
+      }
+    },
+    "StopQAppSession": {
+      "http": {
+        "requestUri": "/runtime.deleteMiniAppRun",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "instanceId",
+          "sessionId"
+        ],
+        "members": {
+          "instanceId": {
+            "location": "header",
+            "locationName": "instance-id"
+          },
+          "sessionId": {}
+        }
+      }
+    },
+    "TagResource": {
+      "http": {
+        "requestUri": "/tags/{resourceARN}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceARN",
+          "tags"
+        ],
+        "members": {
+          "resourceARN": {
+            "location": "uri",
+            "locationName": "resourceARN"
+          },
+          "tags": {
+            "shape": "S2f"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "UntagResource": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resourceARN}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceARN",
+          "tagKeys"
+        ],
+        "members": {
+          "resourceARN": {
+            "location": "uri",
+            "locationName": "resourceARN"
+          },
+          "tagKeys": {
+            "location": "querystring",
+            "locationName": "tagKeys",
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "UpdateLibraryItem": {
+      "http": {
+        "requestUri": "/catalog.updateItem",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "instanceId",
+          "libraryItemId"
+        ],
+        "members": {
+          "instanceId": {
+            "location": "header",
+            "locationName": "instance-id"
+          },
+          "libraryItemId": {},
+          "status": {},
+          "categories": {
+            "shape": "S7"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "libraryItemId",
+          "appId",
+          "appVersion",
+          "categories",
+          "status",
+          "createdAt",
+          "createdBy",
+          "ratingCount"
+        ],
+        "members": {
+          "libraryItemId": {},
+          "appId": {},
+          "appVersion": {
+            "type": "integer"
+          },
+          "categories": {
+            "shape": "S1h"
+          },
+          "status": {},
+          "createdAt": {
+            "shape": "Sa"
+          },
+          "createdBy": {},
+          "updatedAt": {
+            "shape": "Sa"
+          },
+          "updatedBy": {},
+          "ratingCount": {
+            "type": "integer"
+          },
+          "isRatedByUser": {
+            "type": "boolean"
+          },
+          "userCount": {
+            "type": "integer"
+          },
+          "isVerified": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "UpdateLibraryItemMetadata": {
+      "http": {
+        "requestUri": "/catalog.updateItemMetadata",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "instanceId",
+          "libraryItemId"
+        ],
+        "members": {
+          "instanceId": {
+            "location": "header",
+            "locationName": "instance-id"
+          },
+          "libraryItemId": {},
+          "isVerified": {
+            "type": "boolean"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "UpdateQApp": {
+      "http": {
+        "requestUri": "/apps.update",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "instanceId",
+          "appId"
+        ],
+        "members": {
+          "instanceId": {
+            "location": "header",
+            "locationName": "instance-id"
+          },
+          "appId": {},
+          "title": {},
+          "description": {},
+          "appDefinition": {
+            "shape": "Sg"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appId",
+          "appArn",
+          "title",
+          "appVersion",
+          "status",
+          "createdAt",
+          "createdBy",
+          "updatedAt",
+          "updatedBy"
+        ],
+        "members": {
+          "appId": {},
+          "appArn": {},
+          "title": {},
+          "description": {},
+          "initialPrompt": {},
+          "appVersion": {
+            "type": "integer"
+          },
+          "status": {},
+          "createdAt": {
+            "shape": "Sa"
+          },
+          "createdBy": {},
+          "updatedAt": {
+            "shape": "Sa"
+          },
+          "updatedBy": {},
+          "requiredCapabilities": {
+            "shape": "S19"
+          }
+        }
+      }
+    },
+    "UpdateQAppSession": {
+      "http": {
+        "requestUri": "/runtime.updateQAppSession",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "instanceId",
+          "sessionId"
+        ],
+        "members": {
+          "instanceId": {
+            "location": "header",
+            "locationName": "instance-id"
+          },
+          "sessionId": {},
+          "values": {
+            "shape": "S2s"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "sessionId",
+          "sessionArn"
+        ],
+        "members": {
+          "sessionId": {},
+          "sessionArn": {}
+        }
+      }
+    }
+  },
+  "shapes": {
+    "S7": {
+      "type": "list",
+      "member": {}
+    },
+    "Sa": {
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
+    },
+    "Sg": {
+      "type": "structure",
+      "required": [
+        "cards"
+      ],
+      "members": {
+        "cards": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "textInput": {
+                "type": "structure",
+                "required": [
+                  "title",
+                  "id",
+                  "type"
+                ],
+                "members": {
+                  "title": {},
+                  "id": {},
+                  "type": {},
+                  "placeholder": {},
+                  "defaultValue": {}
+                }
+              },
+              "qQuery": {
+                "type": "structure",
+                "required": [
+                  "title",
+                  "id",
+                  "type",
+                  "prompt"
+                ],
+                "members": {
+                  "title": {},
+                  "id": {},
+                  "type": {},
+                  "prompt": {},
+                  "outputSource": {},
+                  "attributeFilter": {
+                    "shape": "Sq"
+                  }
+                }
+              },
+              "qPlugin": {
+                "type": "structure",
+                "required": [
+                  "title",
+                  "id",
+                  "type",
+                  "prompt",
+                  "pluginId"
+                ],
+                "members": {
+                  "title": {},
+                  "id": {},
+                  "type": {},
+                  "prompt": {},
+                  "pluginId": {}
+                }
+              },
+              "fileUpload": {
+                "type": "structure",
+                "required": [
+                  "title",
+                  "id",
+                  "type"
+                ],
+                "members": {
+                  "title": {},
+                  "id": {},
+                  "type": {},
+                  "filename": {},
+                  "fileId": {},
+                  "allowOverride": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            },
+            "union": true
+          }
+        },
+        "initialPrompt": {}
+      }
+    },
+    "Sq": {
+      "type": "structure",
+      "members": {
+        "andAllFilters": {
+          "shape": "Sr"
+        },
+        "orAllFilters": {
+          "shape": "Sr"
+        },
+        "notFilter": {
+          "shape": "Sq"
+        },
+        "equalsTo": {
+          "shape": "Ss"
+        },
+        "containsAll": {
+          "shape": "Ss"
+        },
+        "containsAny": {
+          "shape": "Ss"
+        },
+        "greaterThan": {
+          "shape": "Ss"
+        },
+        "greaterThanOrEquals": {
+          "shape": "Ss"
+        },
+        "lessThan": {
+          "shape": "Ss"
+        },
+        "lessThanOrEquals": {
+          "shape": "Ss"
+        }
+      }
+    },
+    "Sr": {
+      "type": "list",
+      "member": {
+        "shape": "Sq"
+      }
+    },
+    "Ss": {
+      "type": "structure",
+      "required": [
+        "name",
+        "value"
+      ],
+      "members": {
+        "name": {},
+        "value": {
+          "type": "structure",
+          "members": {
+            "stringValue": {},
+            "stringListValue": {
+              "type": "list",
+              "member": {}
+            },
+            "longValue": {
+              "type": "long"
+            },
+            "dateValue": {
+              "type": "timestamp"
+            }
+          },
+          "union": true
+        }
+      }
+    },
+    "S15": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "S19": {
+      "type": "list",
+      "member": {}
+    },
+    "S1h": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "id",
+          "title"
+        ],
+        "members": {
+          "id": {},
+          "title": {}
+        }
+      }
+    },
+    "S1p": {
+      "type": "list",
+      "member": {}
+    },
+    "S2f": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "S2s": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "cardId",
+          "value"
+        ],
+        "members": {
+          "cardId": {},
+          "value": {}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "AuditManager",
+        "description": "This release introduces a ServiceQuotaExceededException to the UpdateAssessmentFrameworkShare API operation."
+    },
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "Reasons for failed diff has been approved by SDK Reviewer"
+    }
+]

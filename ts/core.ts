@@ -38,3 +38,5 @@ if (core.CognitoIdentityCredentials) {
 } else if (core.IniLoader) {
   
 }
+
+const document: core.DocumentType = {}

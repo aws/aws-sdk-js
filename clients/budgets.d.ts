@@ -116,6 +116,14 @@ declare class Budgets extends Service {
    */
   describeBudgetActionsForBudget(callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetActionsForBudgetResponse) => void): Request<Budgets.Types.DescribeBudgetActionsForBudgetResponse, AWSError>;
   /**
+   *  Lists the budget names and notifications that are associated with an account. 
+   */
+  describeBudgetNotificationsForAccount(params: Budgets.Types.DescribeBudgetNotificationsForAccountRequest, callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetNotificationsForAccountResponse) => void): Request<Budgets.Types.DescribeBudgetNotificationsForAccountResponse, AWSError>;
+  /**
+   *  Lists the budget names and notifications that are associated with an account. 
+   */
+  describeBudgetNotificationsForAccount(callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetNotificationsForAccountResponse) => void): Request<Budgets.Types.DescribeBudgetNotificationsForAccountResponse, AWSError>;
+  /**
    * Describes the history for DAILY, MONTHLY, and QUARTERLY budgets. Budget history isn't available for ANNUAL budgets.
    */
   describeBudgetPerformanceHistory(params: Budgets.Types.DescribeBudgetPerformanceHistoryRequest, callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetPerformanceHistoryResponse) => void): Request<Budgets.Types.DescribeBudgetPerformanceHistoryResponse, AWSError>;
@@ -156,11 +164,35 @@ declare class Budgets extends Service {
    */
   executeBudgetAction(callback?: (err: AWSError, data: Budgets.Types.ExecuteBudgetActionResponse) => void): Request<Budgets.Types.ExecuteBudgetActionResponse, AWSError>;
   /**
-   * Updates a budget. You can change every part of a budget except for the budgetName and the calculatedSpend. When you modify a budget, the calculatedSpend drops to zero until AWS has new usage data to use for forecasting.  Only one of BudgetLimit or PlannedBudgetLimits can be present in the syntax at one time. Use the syntax that matches your case. The Request Syntax section shows the BudgetLimit syntax. For PlannedBudgetLimits, see the Examples section.  
+   * Lists tags associated with a budget or budget action resource.
+   */
+  listTagsForResource(params: Budgets.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Budgets.Types.ListTagsForResourceResponse) => void): Request<Budgets.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists tags associated with a budget or budget action resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Budgets.Types.ListTagsForResourceResponse) => void): Request<Budgets.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Creates tags for a budget or budget action resource.
+   */
+  tagResource(params: Budgets.Types.TagResourceRequest, callback?: (err: AWSError, data: Budgets.Types.TagResourceResponse) => void): Request<Budgets.Types.TagResourceResponse, AWSError>;
+  /**
+   * Creates tags for a budget or budget action resource.
+   */
+  tagResource(callback?: (err: AWSError, data: Budgets.Types.TagResourceResponse) => void): Request<Budgets.Types.TagResourceResponse, AWSError>;
+  /**
+   * Deletes tags associated with a budget or budget action resource.
+   */
+  untagResource(params: Budgets.Types.UntagResourceRequest, callback?: (err: AWSError, data: Budgets.Types.UntagResourceResponse) => void): Request<Budgets.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Deletes tags associated with a budget or budget action resource.
+   */
+  untagResource(callback?: (err: AWSError, data: Budgets.Types.UntagResourceResponse) => void): Request<Budgets.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates a budget. You can change every part of a budget except for the budgetName and the calculatedSpend. When you modify a budget, the calculatedSpend drops to zero until Amazon Web Services has new usage data to use for forecasting.  Only one of BudgetLimit or PlannedBudgetLimits can be present in the syntax at one time. Use the syntax that matches your case. The Request Syntax section shows the BudgetLimit syntax. For PlannedBudgetLimits, see the Examples section.  
    */
   updateBudget(params: Budgets.Types.UpdateBudgetRequest, callback?: (err: AWSError, data: Budgets.Types.UpdateBudgetResponse) => void): Request<Budgets.Types.UpdateBudgetResponse, AWSError>;
   /**
-   * Updates a budget. You can change every part of a budget except for the budgetName and the calculatedSpend. When you modify a budget, the calculatedSpend drops to zero until AWS has new usage data to use for forecasting.  Only one of BudgetLimit or PlannedBudgetLimits can be present in the syntax at one time. Use the syntax that matches your case. The Request Syntax section shows the BudgetLimit syntax. For PlannedBudgetLimits, see the Examples section.  
+   * Updates a budget. You can change every part of a budget except for the budgetName and the calculatedSpend. When you modify a budget, the calculatedSpend drops to zero until Amazon Web Services has new usage data to use for forecasting.  Only one of BudgetLimit or PlannedBudgetLimits can be present in the syntax at one time. Use the syntax that matches your case. The Request Syntax section shows the BudgetLimit syntax. For PlannedBudgetLimits, see the Examples section.  
    */
   updateBudget(callback?: (err: AWSError, data: Budgets.Types.UpdateBudgetResponse) => void): Request<Budgets.Types.UpdateBudgetResponse, AWSError>;
   /**
@@ -192,33 +224,33 @@ declare namespace Budgets {
   export type AccountId = string;
   export interface Action {
     /**
-     *  A system-generated universally unique identifier (UUID) for the action. 
+     * A system-generated universally unique identifier (UUID) for the action. 
      */
     ActionId: ActionId;
     BudgetName: BudgetName;
     NotificationType: NotificationType;
     /**
-     *  The type of action. This defines the type of tasks that can be carried out by this action. This field also determines the format for definition. 
+     * The type of action. This defines the type of tasks that can be carried out by this action. This field also determines the format for definition. 
      */
     ActionType: ActionType;
     /**
-     *  The trigger threshold of the action. 
+     * The trigger threshold of the action. 
      */
     ActionThreshold: ActionThreshold;
     /**
-     *  Where you specify all of the type-specific parameters. 
+     * Where you specify all of the type-specific parameters. 
      */
     Definition: Definition;
     /**
-     *  The role passed for action execution and reversion. Roles and actions must be in the same account. 
+     * The role passed for action execution and reversion. Roles and actions must be in the same account. 
      */
     ExecutionRoleArn: RoleArn;
     /**
-     *  This specifies if the action needs manual or automatic approval. 
+     * This specifies if the action needs manual or automatic approval. 
      */
     ApprovalModel: ApprovalModel;
     /**
-     *  The status of action. 
+     * The status of the action. 
      */
     Status: ActionStatus;
     Subscribers: Subscribers;
@@ -227,22 +259,22 @@ declare namespace Budgets {
   export interface ActionHistory {
     Timestamp: GenericTimestamp;
     /**
-     *  The status of action at the time of the event. 
+     * The status of action at the time of the event. 
      */
     Status: ActionStatus;
     /**
-     *  This distinguishes between whether the events are triggered by the user or generated by the system. 
+     * This distinguishes between whether the events are triggered by the user or are generated by the system. 
      */
     EventType: EventType;
     /**
-     *  The description of details of the event. 
+     * The description of the details for the event. 
      */
     ActionHistoryDetails: ActionHistoryDetails;
   }
   export interface ActionHistoryDetails {
     Message: GenericString;
     /**
-     *  The budget action resource. 
+     * The budget action resource. 
      */
     Action: Action;
   }
@@ -255,22 +287,39 @@ declare namespace Budgets {
   }
   export type ActionType = "APPLY_IAM_POLICY"|"APPLY_SCP_POLICY"|"RUN_SSM_DOCUMENTS"|string;
   export type Actions = Action[];
+  export type AdjustmentPeriod = number;
+  export type AmazonResourceName = string;
   export type ApprovalModel = "AUTOMATIC"|"MANUAL"|string;
+  export interface AutoAdjustData {
+    /**
+     * The string that defines whether your budget auto-adjusts based on historical or forecasted data.
+     */
+    AutoAdjustType: AutoAdjustType;
+    /**
+     * The parameters that define or describe the historical data that your auto-adjusting budget is based on.
+     */
+    HistoricalOptions?: HistoricalOptions;
+    /**
+     * The last time that your budget was auto-adjusted.
+     */
+    LastAutoAdjustTime?: GenericTimestamp;
+  }
+  export type AutoAdjustType = "HISTORICAL"|"FORECAST"|string;
   export interface Budget {
     /**
-     * The name of a budget. The name must be unique within an account. The : and \ characters aren't allowed in BudgetName.
+     * The name of a budget. The name must be unique within an account. The : and \ characters, and the "/action/" substring, aren't allowed in BudgetName.
      */
     BudgetName: BudgetName;
     /**
-     * The total amount of cost, usage, RI utilization, RI coverage, Savings Plans utilization, or Savings Plans coverage that you want to track with your budget.  BudgetLimit is required for cost or usage budgets, but optional for RI or Savings Plans utilization or coverage budgets. RI and Savings Plans utilization or coverage budgets default to 100, which is the only valid value for RI or Savings Plans utilization or coverage budgets. You can't use BudgetLimit with PlannedBudgetLimits for CreateBudget and UpdateBudget actions. 
+     * The total amount of cost, usage, RI utilization, RI coverage, Savings Plans utilization, or Savings Plans coverage that you want to track with your budget.  BudgetLimit is required for cost or usage budgets, but optional for RI or Savings Plans utilization or coverage budgets. RI and Savings Plans utilization or coverage budgets default to 100. This is the only valid value for RI or Savings Plans utilization or coverage budgets. You can't use BudgetLimit with PlannedBudgetLimits for CreateBudget and UpdateBudget actions. 
      */
     BudgetLimit?: Spend;
     /**
-     * A map containing multiple BudgetLimit, including current or future limits.  PlannedBudgetLimits is available for cost or usage budget and supports monthly and quarterly TimeUnit.  For monthly budgets, provide 12 months of PlannedBudgetLimits values. This must start from the current month and include the next 11 months. The key is the start of the month, UTC in epoch seconds.  For quarterly budgets, provide 4 quarters of PlannedBudgetLimits value entries in standard calendar quarter increments. This must start from the current quarter and include the next 3 quarters. The key is the start of the quarter, UTC in epoch seconds.  If the planned budget expires before 12 months for monthly or 4 quarters for quarterly, provide the PlannedBudgetLimits values only for the remaining periods. If the budget begins at a date in the future, provide PlannedBudgetLimits values from the start date of the budget.  After all of the BudgetLimit values in PlannedBudgetLimits are used, the budget continues to use the last limit as the BudgetLimit. At that point, the planned budget provides the same experience as a fixed budget.   DescribeBudget and DescribeBudgets response along with PlannedBudgetLimits will also contain BudgetLimit representing the current month or quarter limit present in PlannedBudgetLimits. This only applies to budgets created with PlannedBudgetLimits. Budgets created without PlannedBudgetLimits will only contain BudgetLimit, and no PlannedBudgetLimits.
+     * A map containing multiple BudgetLimit, including current or future limits.  PlannedBudgetLimits is available for cost or usage budget and supports both monthly and quarterly TimeUnit.  For monthly budgets, provide 12 months of PlannedBudgetLimits values. This must start from the current month and include the next 11 months. The key is the start of the month, UTC in epoch seconds.  For quarterly budgets, provide four quarters of PlannedBudgetLimits value entries in standard calendar quarter increments. This must start from the current quarter and include the next three quarters. The key is the start of the quarter, UTC in epoch seconds.  If the planned budget expires before 12 months for monthly or four quarters for quarterly, provide the PlannedBudgetLimits values only for the remaining periods. If the budget begins at a date in the future, provide PlannedBudgetLimits values from the start date of the budget.  After all of the BudgetLimit values in PlannedBudgetLimits are used, the budget continues to use the last limit as the BudgetLimit. At that point, the planned budget provides the same experience as a fixed budget.   DescribeBudget and DescribeBudgets response along with PlannedBudgetLimits also contain BudgetLimit representing the current month or quarter limit present in PlannedBudgetLimits. This only applies to budgets that are created with PlannedBudgetLimits. Budgets that are created without PlannedBudgetLimits only contain BudgetLimit. They don't contain PlannedBudgetLimits.
      */
     PlannedBudgetLimits?: PlannedBudgetLimits;
     /**
-     * The cost filters, such as service or tag, that are applied to a budget. AWS Budgets supports the following services as a filter for RI budgets:   Amazon Elastic Compute Cloud - Compute   Amazon Redshift   Amazon Relational Database Service   Amazon ElastiCache   Amazon Elasticsearch Service  
+     * The cost filters, such as Region, Service, LinkedAccount, Tag, or CostCategory, that are applied to a budget. Amazon Web Services Budgets supports the following services as a Service filter for RI budgets:   Amazon EC2   Amazon Redshift   Amazon Relational Database Service   Amazon ElastiCache   Amazon OpenSearch Service  
      */
     CostFilters?: CostFilters;
     /**
@@ -282,7 +331,7 @@ declare namespace Budgets {
      */
     TimeUnit: TimeUnit;
     /**
-     * The period of time that is covered by a budget. The period has a start date and an end date. The start date must come before the end date. The end date must come before 06/15/87 00:00 UTC.  If you create your budget and don't specify a start date, AWS defaults to the start of your chosen time period (DAILY, MONTHLY, QUARTERLY, or ANNUALLY). For example, if you created your budget on January 24, 2018, chose DAILY, and didn't set a start date, AWS set your start date to 01/24/18 00:00 UTC. If you chose MONTHLY, AWS set your start date to 01/01/18 00:00 UTC. If you didn't specify an end date, AWS set your end date to 06/15/87 00:00 UTC. The defaults are the same for the AWS Billing and Cost Management console and the API.  You can change either date with the UpdateBudget operation. After the end date, AWS deletes the budget and all associated notifications and subscribers.
+     * The period of time that's covered by a budget. You setthe start date and end date. The start date must come before the end date. The end date must come before 06/15/87 00:00 UTC.  If you create your budget and don't specify a start date, Amazon Web Services defaults to the start of your chosen time period (DAILY, MONTHLY, QUARTERLY, or ANNUALLY). For example, if you created your budget on January 24, 2018, chose DAILY, and didn't set a start date, Amazon Web Services set your start date to 01/24/18 00:00 UTC. If you chose MONTHLY, Amazon Web Services set your start date to 01/01/18 00:00 UTC. If you didn't specify an end date, Amazon Web Services set your end date to 06/15/87 00:00 UTC. The defaults are the same for the Billing and Cost Management console and the API.  You can change either date with the UpdateBudget operation. After the end date, Amazon Web Services deletes the budget and all the associated notifications and subscribers.
      */
     TimePeriod?: TimePeriod;
     /**
@@ -290,15 +339,24 @@ declare namespace Budgets {
      */
     CalculatedSpend?: CalculatedSpend;
     /**
-     * Whether this budget tracks costs, usage, RI utilization, RI coverage, Savings Plans utilization, or Savings Plans coverage.
+     * Specifies whether this budget tracks costs, usage, RI utilization, RI coverage, Savings Plans utilization, or Savings Plans coverage.
      */
     BudgetType: BudgetType;
     /**
      * The last time that you updated this budget.
      */
     LastUpdatedTime?: GenericTimestamp;
+    /**
+     * The parameters that determine the budget amount for an auto-adjusting budget.
+     */
+    AutoAdjustData?: AutoAdjustData;
   }
   export type BudgetName = string;
+  export interface BudgetNotificationsForAccount {
+    Notifications?: Notifications;
+    BudgetName?: BudgetName;
+  }
+  export type BudgetNotificationsForAccountList = BudgetNotificationsForAccount[];
   export interface BudgetPerformanceHistory {
     BudgetName?: BudgetName;
     BudgetType?: BudgetType;
@@ -312,7 +370,7 @@ declare namespace Budgets {
     CostTypes?: CostTypes;
     TimeUnit?: TimeUnit;
     /**
-     * A list of amounts of cost or usage that you created budgets for, compared to your actual costs or usage.
+     * A list of amounts of cost or usage that you created budgets for, which are compared to your actual costs or usage.
      */
     BudgetedAndActualAmountsList?: BudgetedAndActualAmountsList;
   }
@@ -327,7 +385,7 @@ declare namespace Budgets {
      */
     ActualAmount?: Spend;
     /**
-     * The time period covered by this budget comparison.
+     * The time period that's covered by this budget comparison.
      */
     TimePeriod?: TimePeriod;
   }
@@ -335,11 +393,11 @@ declare namespace Budgets {
   export type Budgets = Budget[];
   export interface CalculatedSpend {
     /**
-     * The amount of cost, usage, RI units, or Savings Plans units that you have used.
+     * The amount of cost, usage, RI units, or Savings Plans units that you used.
      */
     ActualSpend: Spend;
     /**
-     * The amount of cost, usage, RI units, or Savings Plans units that you are forecasted to use.
+     * The amount of cost, usage, RI units, or Savings Plans units that you're forecasted to use.
      */
     ForecastedSpend?: Spend;
   }
@@ -410,6 +468,10 @@ declare namespace Budgets {
      */
     ApprovalModel: ApprovalModel;
     Subscribers: Subscribers;
+    /**
+     * An optional list of tags to associate with the specified budget action. Each tag consists of a key and a value, and each key must be unique for the resource.
+     */
+    ResourceTags?: ResourceTagList;
   }
   export interface CreateBudgetActionResponse {
     AccountId: AccountId;
@@ -429,9 +491,13 @@ declare namespace Budgets {
      */
     Budget: Budget;
     /**
-     * A notification that you want to associate with a budget. A budget can have up to five notifications, and each notification can have one SNS subscriber and up to 10 email subscribers. If you include notifications and subscribers in your CreateBudget call, AWS creates the notifications and subscribers for you.
+     * A notification that you want to associate with a budget. A budget can have up to five notifications, and each notification can have one SNS subscriber and up to 10 email subscribers. If you include notifications and subscribers in your CreateBudget call, Amazon Web Services creates the notifications and subscribers for you.
      */
     NotificationsWithSubscribers?: NotificationWithSubscribersList;
+    /**
+     * An optional list of tags to associate with the specified budget. Each tag consists of a key and a value, and each key must be unique for the resource.
+     */
+    ResourceTags?: ResourceTagList;
   }
   export interface CreateBudgetResponse {
   }
@@ -441,7 +507,7 @@ declare namespace Budgets {
      */
     AccountId: AccountId;
     /**
-     * The name of the budget that you want AWS to notify you about. Budget names must be unique within an account.
+     * The name of the budget that you want Amazon Web Services to notify you about. Budget names must be unique within an account.
      */
     BudgetName: BudgetName;
     /**
@@ -477,15 +543,15 @@ declare namespace Budgets {
   }
   export interface Definition {
     /**
-     *  The AWS Identity and Access Management (IAM) action definition details. 
+     * The Identity and Access Management (IAM) action definition details. 
      */
     IamActionDefinition?: IamActionDefinition;
     /**
-     *  The service control policies (SCPs) action definition details. 
+     * The service control policies (SCPs) action definition details. 
      */
     ScpActionDefinition?: ScpActionDefinition;
     /**
-     *  The AWS Systems Manager (SSM) action definition details. 
+     * The Amazon Web Services Systems Manager (SSM) action definition details. 
      */
     SsmActionDefinition?: SsmActionDefinition;
   }
@@ -609,6 +675,21 @@ declare namespace Budgets {
     Actions: Actions;
     NextToken?: GenericString;
   }
+  export interface DescribeBudgetNotificationsForAccountRequest {
+    AccountId: AccountId;
+    /**
+     *  An integer that represents how many budgets a paginated response contains. The default is 50. 
+     */
+    MaxResults?: MaxResultsBudgetNotifications;
+    NextToken?: GenericString;
+  }
+  export interface DescribeBudgetNotificationsForAccountResponse {
+    /**
+     *  A list of budget names and associated notifications for an account. 
+     */
+    BudgetNotificationsForAccount?: BudgetNotificationsForAccountList;
+    NextToken?: GenericString;
+  }
   export interface DescribeBudgetPerformanceHistoryRequest {
     AccountId: AccountId;
     BudgetName: BudgetName;
@@ -644,13 +725,13 @@ declare namespace Budgets {
   }
   export interface DescribeBudgetsRequest {
     /**
-     * The accountId that is associated with the budgets that you want descriptions of.
+     * The accountId that is associated with the budgets that you want to describe.
      */
     AccountId: AccountId;
     /**
-     * An optional integer that represents how many entries a paginated response contains. The maximum is 100.
+     * An integer that represents how many budgets a paginated response contains. The default is 100.
      */
-    MaxResults?: MaxResults;
+    MaxResults?: MaxResultsDescribeBudgets;
     /**
      * The pagination token that you include in your request to indicate the next set of results that you want to retrieve.
      */
@@ -676,7 +757,7 @@ declare namespace Budgets {
      */
     BudgetName: BudgetName;
     /**
-     * An optional integer that represents how many entries a paginated response contains. The maximum is 100.
+     * An optional integer that represents how many entries a paginated response contains.
      */
     MaxResults?: MaxResults;
     /**
@@ -708,7 +789,7 @@ declare namespace Budgets {
      */
     Notification: Notification;
     /**
-     * An optional integer that represents how many entries a paginated response contains. The maximum is 100.
+     * An optional integer that represents how many entries a paginated response contains.
      */
     MaxResults?: MaxResults;
     /**
@@ -726,7 +807,8 @@ declare namespace Budgets {
      */
     NextToken?: GenericString;
   }
-  export type DimensionValues = GenericString[];
+  export type DimensionValue = string;
+  export type DimensionValues = DimensionValue[];
   export type EventType = "SYSTEM"|"CREATE_ACTION"|"DELETE_ACTION"|"UPDATE_ACTION"|"EXECUTE_ACTION"|string;
   export interface ExecuteBudgetActionRequest {
     AccountId: AccountId;
@@ -757,46 +839,70 @@ declare namespace Budgets {
   export type GenericTimestamp = Date;
   export type Group = string;
   export type Groups = Group[];
+  export interface HistoricalOptions {
+    /**
+     * The number of budget periods included in the moving-average calculation that determines your auto-adjusted budget amount. The maximum value depends on the TimeUnit granularity of the budget:   For the DAILY granularity, the maximum value is 60.   For the MONTHLY granularity, the maximum value is 12.   For the QUARTERLY granularity, the maximum value is 4.   For the ANNUALLY granularity, the maximum value is 1.  
+     */
+    BudgetAdjustmentPeriod: AdjustmentPeriod;
+    /**
+     * The integer that describes how many budget periods in your BudgetAdjustmentPeriod are included in the calculation of your current BudgetLimit. If the first budget period in your BudgetAdjustmentPeriod has no cost data, then that budget period isn’t included in the average that determines your budget limit.  For example, if you set BudgetAdjustmentPeriod as 4 quarters, but your account had no cost data in the first quarter, then only the last three quarters are included in the calculation. In this scenario, LookBackAvailablePeriods returns 3.  You can’t set your own LookBackAvailablePeriods. The value is automatically calculated from the BudgetAdjustmentPeriod and your historical cost data.
+     */
+    LookBackAvailablePeriods?: AdjustmentPeriod;
+  }
   export interface IamActionDefinition {
     /**
-     *  The Amazon Resource Name (ARN) of the policy to be attached. 
+     * The Amazon Resource Name (ARN) of the policy to be attached. 
      */
     PolicyArn: PolicyArn;
     /**
-     *  A list of roles to be attached. There must be at least one role. 
+     * A list of roles to be attached. There must be at least one role. 
      */
     Roles?: Roles;
     /**
-     *  A list of groups to be attached. There must be at least one group. 
+     * A list of groups to be attached. There must be at least one group. 
      */
     Groups?: Groups;
     /**
-     *  A list of users to be attached. There must be at least one user. 
+     * A list of users to be attached. There must be at least one user. 
      */
     Users?: Users;
   }
   export type InstanceId = string;
   export type InstanceIds = InstanceId[];
+  export interface ListTagsForResourceRequest {
+    /**
+     * The unique identifier for the resource.
+     */
+    ResourceARN: AmazonResourceName;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tags associated with the resource.
+     */
+    ResourceTags?: ResourceTagList;
+  }
   export type MaxResults = number;
+  export type MaxResultsBudgetNotifications = number;
+  export type MaxResultsDescribeBudgets = number;
   export interface Notification {
     /**
-     * Whether the notification is for how much you have spent (ACTUAL) or for how much you're forecasted to spend (FORECASTED).
+     * Specifies whether the notification is for how much you have spent (ACTUAL) or for how much that you're forecasted to spend (FORECASTED).
      */
     NotificationType: NotificationType;
     /**
-     * The comparison that is used for this notification.
+     * The comparison that's used for this notification.
      */
     ComparisonOperator: ComparisonOperator;
     /**
-     * The threshold that is associated with a notification. Thresholds are always a percentage, and many customers find value being alerted between 50% - 200% of the budgeted amount. The maximum limit for your threshold is 1,000,000% above the budgeted amount.
+     * The threshold that's associated with a notification. Thresholds are always a percentage, and many customers find value being alerted between 50% - 200% of the budgeted amount. The maximum limit for your threshold is 1,000,000% above the budgeted amount.
      */
     Threshold: NotificationThreshold;
     /**
-     * The type of threshold for a notification. For ABSOLUTE_VALUE thresholds, AWS notifies you when you go over or are forecasted to go over your total cost threshold. For PERCENTAGE thresholds, AWS notifies you when you go over or are forecasted to go over a certain percentage of your forecasted spend. For example, if you have a budget for 200 dollars and you have a PERCENTAGE threshold of 80%, AWS notifies you when you go over 160 dollars.
+     * The type of threshold for a notification. For ABSOLUTE_VALUE thresholds, Amazon Web Services notifies you when you go over or are forecasted to go over your total cost threshold. For PERCENTAGE thresholds, Amazon Web Services notifies you when you go over or are forecasted to go over a certain percentage of your forecasted spend. For example, if you have a budget for 200 dollars and you have a PERCENTAGE threshold of 80%, Amazon Web Services notifies you when you go over 160 dollars.
      */
     ThresholdType?: ThresholdType;
     /**
-     * Whether this notification is in alarm. If a budget notification is in the ALARM state, you have passed the set threshold for the budget.
+     * Specifies whether this notification is in alarm. If a budget notification is in the ALARM state, you passed the set threshold for the budget.
      */
     NotificationState?: NotificationState;
   }
@@ -805,7 +911,7 @@ declare namespace Budgets {
   export type NotificationType = "ACTUAL"|"FORECASTED"|string;
   export interface NotificationWithSubscribers {
     /**
-     * The notification that is associated with a budget.
+     * The notification that's associated with a budget.
      */
     Notification: Notification;
     /**
@@ -821,71 +927,109 @@ declare namespace Budgets {
   export type PolicyArn = string;
   export type PolicyId = string;
   export type Region = string;
+  export interface ResourceTag {
+    /**
+     * The key that's associated with the tag.
+     */
+    Key: ResourceTagKey;
+    /**
+     * The value that's associated with the tag.
+     */
+    Value: ResourceTagValue;
+  }
+  export type ResourceTagKey = string;
+  export type ResourceTagKeyList = ResourceTagKey[];
+  export type ResourceTagList = ResourceTag[];
+  export type ResourceTagValue = string;
   export type Role = string;
   export type RoleArn = string;
   export type Roles = Role[];
   export interface ScpActionDefinition {
     /**
-     *  The policy ID attached. 
+     * The policy ID attached. 
      */
     PolicyId: PolicyId;
     /**
-     *  A list of target IDs. 
+     * A list of target IDs. 
      */
     TargetIds: TargetIds;
   }
   export interface Spend {
     /**
-     * The cost or usage amount that is associated with a budget forecast, actual spend, or budget threshold.
+     * The cost or usage amount that's associated with a budget forecast, actual spend, or budget threshold.
      */
     Amount: NumericValue;
     /**
-     * The unit of measurement that is used for the budget forecast, actual spend, or budget threshold, such as dollars or GB.
+     * The unit of measurement that's used for the budget forecast, actual spend, or budget threshold.
      */
     Unit: UnitValue;
   }
   export interface SsmActionDefinition {
     /**
-     *  The action subType. 
+     * The action subType. 
      */
     ActionSubType: ActionSubType;
     /**
-     *  The Region to run the SSM document. 
+     * The Region to run the SSM document. 
      */
     Region: Region;
     /**
-     *  The EC2 and RDS instance IDs. 
+     * The EC2 and RDS instance IDs. 
      */
     InstanceIds: InstanceIds;
   }
   export interface Subscriber {
     /**
-     * The type of notification that AWS sends to a subscriber.
+     * The type of notification that Amazon Web Services sends to a subscriber.
      */
     SubscriptionType: SubscriptionType;
     /**
-     * The address that AWS sends budget notifications to, either an SNS topic or an email. When you create a subscriber, the value of Address can't contain line breaks.
+     * The address that Amazon Web Services sends budget notifications to, either an SNS topic or an email. When you create a subscriber, the value of Address can't contain line breaks.
      */
     Address: SubscriberAddress;
   }
   export type SubscriberAddress = string;
   export type Subscribers = Subscriber[];
   export type SubscriptionType = "SNS"|"EMAIL"|string;
+  export interface TagResourceRequest {
+    /**
+     * The unique identifier for the resource.
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * The tags associated with the resource.
+     */
+    ResourceTags: ResourceTagList;
+  }
+  export interface TagResourceResponse {
+  }
   export type TargetId = string;
   export type TargetIds = TargetId[];
   export type ThresholdType = "PERCENTAGE"|"ABSOLUTE_VALUE"|string;
   export interface TimePeriod {
     /**
-     * The start date for a budget. If you created your budget and didn't specify a start date, AWS defaults to the start of your chosen time period (DAILY, MONTHLY, QUARTERLY, or ANNUALLY). For example, if you created your budget on January 24, 2018, chose DAILY, and didn't set a start date, AWS set your start date to 01/24/18 00:00 UTC. If you chose MONTHLY, AWS set your start date to 01/01/18 00:00 UTC. The defaults are the same for the AWS Billing and Cost Management console and the API. You can change your start date with the UpdateBudget operation.
+     * The start date for a budget. If you created your budget and didn't specify a start date, Amazon Web Services defaults to the start of your chosen time period (DAILY, MONTHLY, QUARTERLY, or ANNUALLY). For example, if you created your budget on January 24, 2018, chose DAILY, and didn't set a start date, Amazon Web Services set your start date to 01/24/18 00:00 UTC. If you chose MONTHLY, Amazon Web Services set your start date to 01/01/18 00:00 UTC. The defaults are the same for the Billing and Cost Management console and the API. You can change your start date with the UpdateBudget operation.
      */
     Start?: GenericTimestamp;
     /**
-     * The end date for a budget. If you didn't specify an end date, AWS set your end date to 06/15/87 00:00 UTC. The defaults are the same for the AWS Billing and Cost Management console and the API. After the end date, AWS deletes the budget and all associated notifications and subscribers. You can change your end date with the UpdateBudget operation.
+     * The end date for a budget. If you didn't specify an end date, Amazon Web Services set your end date to 06/15/87 00:00 UTC. The defaults are the same for the Billing and Cost Management console and the API. After the end date, Amazon Web Services deletes the budget and all the associated notifications and subscribers. You can change your end date with the UpdateBudget operation.
      */
     End?: GenericTimestamp;
   }
   export type TimeUnit = "DAILY"|"MONTHLY"|"QUARTERLY"|"ANNUALLY"|string;
   export type UnitValue = string;
+  export interface UntagResourceRequest {
+    /**
+     * The unique identifier for the resource.
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * The key that's associated with the tag.
+     */
+    ResourceTagKeys: ResourceTagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateBudgetActionRequest {
     AccountId: AccountId;
     BudgetName: BudgetName;

@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "ApplicationAutoScaling",
+        "description": "add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    },
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "Aws CodeBuild now supports 36 hours build timeout"
+    },
+    {
+        "type": "feature",
+        "category": "ELBv2",
+        "description": "This release adds dualstack-without-public-ipv4 IP address type for ALB."
+    },
+    {
+        "type": "feature",
+        "category": "LakeFormation",
+        "description": "Introduces a new API, GetDataLakePrincipal, that returns the identity of the invoking principal"
+    },
+    {
+        "type": "feature",
+        "category": "Transfer",
+        "description": "Enable use of CloudFormation traits in Smithy model to improve generated CloudFormation schema from the Smithy API model."
+    }
+]

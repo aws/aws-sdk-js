@@ -77,10 +77,12 @@ AWS Key Management Service | AWS.KMS | 2014-11-01 | :tada: |
 AWS Lambda | AWS.Lambda | 2015-03-31 | :tada: |
 AWS Lambda | AWS.Lambda | 2014-11-11 | :tada: |
 Amazon Lex Runtime Service | AWS.LexRuntime | 2016-11-28 | :tada: |
+Amazon Lex Runtime V2 | AWS.LexRuntimeV2 | 2020-08-07 | :tada: |
 Amazon Lightsail | AWS.Lightsail | 2016-11-28 |  |
 Amazon Machine Learning | AWS.MachineLearning | 2014-12-12 | :tada: |
 AWS Marketplace Commerce Analytics | AWS.MarketplaceCommerceAnalytics | 2015-07-01 | :tada: |
 AWSMarketplace Metering | AWS.MarketplaceMetering | 2016-01-14 |  |
+AWSMarketplace Catalog API | AWS.MarketplaceCatalogAPI | 2020-09-15 | :tada: |
 Amazon Mechanical Turk | AWS.MTurk | 2017-01-17 | :tada: |
 Amazon Mobile Analytics | AWS.MobileAnalytics | 2014-06-05 | :tada: |
 AWS OpsWorks | AWS.OpsWorks | 2013-02-18 | :tada: |
@@ -196,3 +198,4 @@ Amazon DocumentDB with MongoDB compatibility | AWS.DocDB | 2014-10-31 |  |
 AWS Backup | AWS.Backup | 2018-11-15 |  |
 Amazon WorkLink | AWS.WorkLink | 2018-09-25 |  |
 Amazon Textract | AWS.Textract | 2018-06-27 |  |
+Amazon Managed Service for Prometheus | AWS.Amp | 2020-08-01 | :tada: |

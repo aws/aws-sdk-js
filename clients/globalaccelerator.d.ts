@@ -20,11 +20,19 @@ declare class GlobalAccelerator extends Service {
    */
   addCustomRoutingEndpoints(callback?: (err: AWSError, data: GlobalAccelerator.Types.AddCustomRoutingEndpointsResponse) => void): Request<GlobalAccelerator.Types.AddCustomRoutingEndpointsResponse, AWSError>;
   /**
-   * Advertises an IPv4 address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP). It can take a few minutes before traffic to the specified addresses starts routing to AWS because of propagation delays.  To stop advertising the BYOIP address range, use  WithdrawByoipCidr. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   * Add endpoints to an endpoint group. The AddEndpoints API operation is the recommended option for adding endpoints. The alternative options are to add endpoints when you create an endpoint group (with the CreateEndpointGroup API) or when you update an endpoint group (with the UpdateEndpointGroup API).  There are two advantages to using AddEndpoints to add endpoints in Global Accelerator:   It's faster, because Global Accelerator only has to resolve the new endpoints that you're adding, rather than resolving new and existing endpoints.   It's more convenient, because you don't need to specify the current endpoints that are already in the endpoint group, in addition to the new endpoints that you want to add.   For information about endpoint types and requirements for endpoints that you can add to Global Accelerator, see  Endpoints for standard accelerators in the Global Accelerator Developer Guide.
+   */
+  addEndpoints(params: GlobalAccelerator.Types.AddEndpointsRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.AddEndpointsResponse) => void): Request<GlobalAccelerator.Types.AddEndpointsResponse, AWSError>;
+  /**
+   * Add endpoints to an endpoint group. The AddEndpoints API operation is the recommended option for adding endpoints. The alternative options are to add endpoints when you create an endpoint group (with the CreateEndpointGroup API) or when you update an endpoint group (with the UpdateEndpointGroup API).  There are two advantages to using AddEndpoints to add endpoints in Global Accelerator:   It's faster, because Global Accelerator only has to resolve the new endpoints that you're adding, rather than resolving new and existing endpoints.   It's more convenient, because you don't need to specify the current endpoints that are already in the endpoint group, in addition to the new endpoints that you want to add.   For information about endpoint types and requirements for endpoints that you can add to Global Accelerator, see  Endpoints for standard accelerators in the Global Accelerator Developer Guide.
+   */
+  addEndpoints(callback?: (err: AWSError, data: GlobalAccelerator.Types.AddEndpointsResponse) => void): Request<GlobalAccelerator.Types.AddEndpointsResponse, AWSError>;
+  /**
+   * Advertises an IPv4 address range that is provisioned for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP). It can take a few minutes before traffic to the specified addresses starts routing to Amazon Web Services because of propagation delays.  To stop advertising the BYOIP address range, use  WithdrawByoipCidr. For more information, see Bring your own IP addresses (BYOIP) in the Global Accelerator Developer Guide.
    */
   advertiseByoipCidr(params: GlobalAccelerator.Types.AdvertiseByoipCidrRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.AdvertiseByoipCidrResponse) => void): Request<GlobalAccelerator.Types.AdvertiseByoipCidrResponse, AWSError>;
   /**
-   * Advertises an IPv4 address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP). It can take a few minutes before traffic to the specified addresses starts routing to AWS because of propagation delays.  To stop advertising the BYOIP address range, use  WithdrawByoipCidr. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   * Advertises an IPv4 address range that is provisioned for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP). It can take a few minutes before traffic to the specified addresses starts routing to Amazon Web Services because of propagation delays.  To stop advertising the BYOIP address range, use  WithdrawByoipCidr. For more information, see Bring your own IP addresses (BYOIP) in the Global Accelerator Developer Guide.
    */
   advertiseByoipCidr(callback?: (err: AWSError, data: GlobalAccelerator.Types.AdvertiseByoipCidrResponse) => void): Request<GlobalAccelerator.Types.AdvertiseByoipCidrResponse, AWSError>;
   /**
@@ -36,27 +44,35 @@ declare class GlobalAccelerator extends Service {
    */
   allowCustomRoutingTraffic(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic to one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers.   Global Accelerator is a global service that supports endpoints in multiple AWS Regions but you must specify the US West (Oregon) Region to create or update accelerators. 
+   * Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic to one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers.   Global Accelerator is a global service that supports endpoints in multiple Amazon Web Services Regions but you must specify the US West (Oregon) Region to create, update, or otherwise work with accelerators. That is, for example, specify --region us-west-2 on Amazon Web Services CLI commands. 
    */
   createAccelerator(params: GlobalAccelerator.Types.CreateAcceleratorRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.CreateAcceleratorResponse, AWSError>;
   /**
-   * Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic to one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers.   Global Accelerator is a global service that supports endpoints in multiple AWS Regions but you must specify the US West (Oregon) Region to create or update accelerators. 
+   * Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic to one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers.   Global Accelerator is a global service that supports endpoints in multiple Amazon Web Services Regions but you must specify the US West (Oregon) Region to create, update, or otherwise work with accelerators. That is, for example, specify --region us-west-2 on Amazon Web Services CLI commands. 
    */
   createAccelerator(callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.CreateAcceleratorResponse, AWSError>;
   /**
-   * Create a custom routing accelerator. A custom routing accelerator directs traffic to one of possibly thousands of Amazon EC2 instance destinations running in a single or multiple virtual private clouds (VPC) subnet endpoints. Be aware that, by default, all destination EC2 instances in a VPC subnet endpoint cannot receive traffic. To enable all destinations to receive traffic, or to specify individual port mappings that can receive traffic, see the  AllowCustomRoutingTraffic operation.
+   * Create a cross-account attachment in Global Accelerator. You create a cross-account attachment to specify the principals who have permission to work with resources in accelerators in their own account. You specify, in the same attachment, the resources that are shared. A principal can be an Amazon Web Services account number or the Amazon Resource Name (ARN) for an accelerator. For account numbers that are listed as principals, to work with a resource listed in the attachment, you must sign in to an account specified as a principal. Then, you can work with resources that are listed, with any of your accelerators. If an accelerator ARN is listed in the cross-account attachment as a principal, anyone with permission to make updates to the accelerator can work with resources that are listed in the attachment.  Specify each principal and resource separately. To specify two CIDR address pools, list them individually under Resources, and so on. For a command line operation, for example, you might use a statement like the following:   "Resources": [{"Cidr": "169.254.60.0/24"},{"Cidr": "169.254.59.0/24"}]  For more information, see  Working with cross-account attachments and resources in Global Accelerator in the  Global Accelerator Developer Guide.
+   */
+  createCrossAccountAttachment(params: GlobalAccelerator.Types.CreateCrossAccountAttachmentRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateCrossAccountAttachmentResponse) => void): Request<GlobalAccelerator.Types.CreateCrossAccountAttachmentResponse, AWSError>;
+  /**
+   * Create a cross-account attachment in Global Accelerator. You create a cross-account attachment to specify the principals who have permission to work with resources in accelerators in their own account. You specify, in the same attachment, the resources that are shared. A principal can be an Amazon Web Services account number or the Amazon Resource Name (ARN) for an accelerator. For account numbers that are listed as principals, to work with a resource listed in the attachment, you must sign in to an account specified as a principal. Then, you can work with resources that are listed, with any of your accelerators. If an accelerator ARN is listed in the cross-account attachment as a principal, anyone with permission to make updates to the accelerator can work with resources that are listed in the attachment.  Specify each principal and resource separately. To specify two CIDR address pools, list them individually under Resources, and so on. For a command line operation, for example, you might use a statement like the following:   "Resources": [{"Cidr": "169.254.60.0/24"},{"Cidr": "169.254.59.0/24"}]  For more information, see  Working with cross-account attachments and resources in Global Accelerator in the  Global Accelerator Developer Guide.
+   */
+  createCrossAccountAttachment(callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateCrossAccountAttachmentResponse) => void): Request<GlobalAccelerator.Types.CreateCrossAccountAttachmentResponse, AWSError>;
+  /**
+   * Create a custom routing accelerator. A custom routing accelerator directs traffic to one of possibly thousands of Amazon EC2 instance destinations running in a single or multiple virtual private clouds (VPC) subnet endpoints. Be aware that, by default, all destination EC2 instances in a VPC subnet endpoint cannot receive traffic. To enable all destinations to receive traffic, or to specify individual port mappings that can receive traffic, see the  AllowCustomRoutingTraffic operation.  Global Accelerator is a global service that supports endpoints in multiple Amazon Web Services Regions but you must specify the US West (Oregon) Region to create, update, or otherwise work with accelerators. That is, for example, specify --region us-west-2 on Amazon Web Services CLI commands. 
    */
   createCustomRoutingAccelerator(params: GlobalAccelerator.Types.CreateCustomRoutingAcceleratorRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateCustomRoutingAcceleratorResponse) => void): Request<GlobalAccelerator.Types.CreateCustomRoutingAcceleratorResponse, AWSError>;
   /**
-   * Create a custom routing accelerator. A custom routing accelerator directs traffic to one of possibly thousands of Amazon EC2 instance destinations running in a single or multiple virtual private clouds (VPC) subnet endpoints. Be aware that, by default, all destination EC2 instances in a VPC subnet endpoint cannot receive traffic. To enable all destinations to receive traffic, or to specify individual port mappings that can receive traffic, see the  AllowCustomRoutingTraffic operation.
+   * Create a custom routing accelerator. A custom routing accelerator directs traffic to one of possibly thousands of Amazon EC2 instance destinations running in a single or multiple virtual private clouds (VPC) subnet endpoints. Be aware that, by default, all destination EC2 instances in a VPC subnet endpoint cannot receive traffic. To enable all destinations to receive traffic, or to specify individual port mappings that can receive traffic, see the  AllowCustomRoutingTraffic operation.  Global Accelerator is a global service that supports endpoints in multiple Amazon Web Services Regions but you must specify the US West (Oregon) Region to create, update, or otherwise work with accelerators. That is, for example, specify --region us-west-2 on Amazon Web Services CLI commands. 
    */
   createCustomRoutingAccelerator(callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateCustomRoutingAcceleratorResponse) => void): Request<GlobalAccelerator.Types.CreateCustomRoutingAcceleratorResponse, AWSError>;
   /**
-   * Create an endpoint group for the specified listener for a custom routing accelerator. An endpoint group is a collection of endpoints in one AWS Region. 
+   * Create an endpoint group for the specified listener for a custom routing accelerator. An endpoint group is a collection of endpoints in one Amazon Web Services Region. 
    */
   createCustomRoutingEndpointGroup(params: GlobalAccelerator.Types.CreateCustomRoutingEndpointGroupRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateCustomRoutingEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.CreateCustomRoutingEndpointGroupResponse, AWSError>;
   /**
-   * Create an endpoint group for the specified listener for a custom routing accelerator. An endpoint group is a collection of endpoints in one AWS Region. 
+   * Create an endpoint group for the specified listener for a custom routing accelerator. An endpoint group is a collection of endpoints in one Amazon Web Services Region. 
    */
   createCustomRoutingEndpointGroup(callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateCustomRoutingEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.CreateCustomRoutingEndpointGroupResponse, AWSError>;
   /**
@@ -68,11 +84,11 @@ declare class GlobalAccelerator extends Service {
    */
   createCustomRoutingListener(callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateCustomRoutingListenerResponse) => void): Request<GlobalAccelerator.Types.CreateCustomRoutingListenerResponse, AWSError>;
   /**
-   * Create an endpoint group for the specified listener. An endpoint group is a collection of endpoints in one AWS Region. A resource must be valid and active when you add it as an endpoint.
+   * Create an endpoint group for the specified listener. An endpoint group is a collection of endpoints in one Amazon Web Services Region. A resource must be valid and active when you add it as an endpoint. For more information about endpoint types and requirements for endpoints that you can add to Global Accelerator, see  Endpoints for standard accelerators in the Global Accelerator Developer Guide.
    */
   createEndpointGroup(params: GlobalAccelerator.Types.CreateEndpointGroupRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.CreateEndpointGroupResponse, AWSError>;
   /**
-   * Create an endpoint group for the specified listener. An endpoint group is a collection of endpoints in one AWS Region. A resource must be valid and active when you add it as an endpoint.
+   * Create an endpoint group for the specified listener. An endpoint group is a collection of endpoints in one Amazon Web Services Region. A resource must be valid and active when you add it as an endpoint. For more information about endpoint types and requirements for endpoints that you can add to Global Accelerator, see  Endpoints for standard accelerators in the Global Accelerator Developer Guide.
    */
   createEndpointGroup(callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.CreateEndpointGroupResponse, AWSError>;
   /**
@@ -84,19 +100,27 @@ declare class GlobalAccelerator extends Service {
    */
   createListener(callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateListenerResponse) => void): Request<GlobalAccelerator.Types.CreateListenerResponse, AWSError>;
   /**
-   * Delete an accelerator. Before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups). To disable the accelerator, update the accelerator to set Enabled to false.  When you create an accelerator, by default, Global Accelerator provides you with a set of two static IP addresses. Alternatively, you can bring your own IP address ranges to Global Accelerator and assign IP addresses from those ranges.  The IP addresses are assigned to your accelerator for as long as it exists, even if you disable the accelerator and it no longer accepts or routes traffic. However, when you delete an accelerator, you lose the static IP addresses that are assigned to the accelerator, so you can no longer route traffic by using them. As a best practice, ensure that you have permissions in place to avoid inadvertently deleting accelerators. You can use IAM policies with Global Accelerator to limit the users who have permissions to delete an accelerator. For more information, see Authentication and Access Control in the AWS Global Accelerator Developer Guide. 
+   * Delete an accelerator. Before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups). To disable the accelerator, update the accelerator to set Enabled to false.  When you create an accelerator, by default, Global Accelerator provides you with a set of two static IP addresses. Alternatively, you can bring your own IP address ranges to Global Accelerator and assign IP addresses from those ranges.  The IP addresses are assigned to your accelerator for as long as it exists, even if you disable the accelerator and it no longer accepts or routes traffic. However, when you delete an accelerator, you lose the static IP addresses that are assigned to the accelerator, so you can no longer route traffic by using them. As a best practice, ensure that you have permissions in place to avoid inadvertently deleting accelerators. You can use IAM policies with Global Accelerator to limit the users who have permissions to delete an accelerator. For more information, see Identity and access management in the Global Accelerator Developer Guide. 
    */
   deleteAccelerator(params: GlobalAccelerator.Types.DeleteAcceleratorRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete an accelerator. Before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups). To disable the accelerator, update the accelerator to set Enabled to false.  When you create an accelerator, by default, Global Accelerator provides you with a set of two static IP addresses. Alternatively, you can bring your own IP address ranges to Global Accelerator and assign IP addresses from those ranges.  The IP addresses are assigned to your accelerator for as long as it exists, even if you disable the accelerator and it no longer accepts or routes traffic. However, when you delete an accelerator, you lose the static IP addresses that are assigned to the accelerator, so you can no longer route traffic by using them. As a best practice, ensure that you have permissions in place to avoid inadvertently deleting accelerators. You can use IAM policies with Global Accelerator to limit the users who have permissions to delete an accelerator. For more information, see Authentication and Access Control in the AWS Global Accelerator Developer Guide. 
+   * Delete an accelerator. Before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups). To disable the accelerator, update the accelerator to set Enabled to false.  When you create an accelerator, by default, Global Accelerator provides you with a set of two static IP addresses. Alternatively, you can bring your own IP address ranges to Global Accelerator and assign IP addresses from those ranges.  The IP addresses are assigned to your accelerator for as long as it exists, even if you disable the accelerator and it no longer accepts or routes traffic. However, when you delete an accelerator, you lose the static IP addresses that are assigned to the accelerator, so you can no longer route traffic by using them. As a best practice, ensure that you have permissions in place to avoid inadvertently deleting accelerators. You can use IAM policies with Global Accelerator to limit the users who have permissions to delete an accelerator. For more information, see Identity and access management in the Global Accelerator Developer Guide. 
    */
   deleteAccelerator(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete a custom routing accelerator. Before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups). To disable the accelerator, update the accelerator to set Enabled to false.  When you create a custom routing accelerator, by default, Global Accelerator provides you with a set of two static IP addresses.  The IP addresses are assigned to your accelerator for as long as it exists, even if you disable the accelerator and it no longer accepts or routes traffic. However, when you delete an accelerator, you lose the static IP addresses that are assigned to the accelerator, so you can no longer route traffic by using them. As a best practice, ensure that you have permissions in place to avoid inadvertently deleting accelerators. You can use IAM policies with Global Accelerator to limit the users who have permissions to delete an accelerator. For more information, see Authentication and Access Control in the AWS Global Accelerator Developer Guide. 
+   * Delete a cross-account attachment. When you delete an attachment, Global Accelerator revokes the permission to use the resources in the attachment from all principals in the list of principals. Global Accelerator revokes the permission for specific resources. For more information, see  Working with cross-account attachments and resources in Global Accelerator in the  Global Accelerator Developer Guide.
+   */
+  deleteCrossAccountAttachment(params: GlobalAccelerator.Types.DeleteCrossAccountAttachmentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a cross-account attachment. When you delete an attachment, Global Accelerator revokes the permission to use the resources in the attachment from all principals in the list of principals. Global Accelerator revokes the permission for specific resources. For more information, see  Working with cross-account attachments and resources in Global Accelerator in the  Global Accelerator Developer Guide.
+   */
+  deleteCrossAccountAttachment(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a custom routing accelerator. Before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups). To disable the accelerator, update the accelerator to set Enabled to false.  When you create a custom routing accelerator, by default, Global Accelerator provides you with a set of two static IP addresses.  The IP addresses are assigned to your accelerator for as long as it exists, even if you disable the accelerator and it no longer accepts or routes traffic. However, when you delete an accelerator, you lose the static IP addresses that are assigned to the accelerator, so you can no longer route traffic by using them. As a best practice, ensure that you have permissions in place to avoid inadvertently deleting accelerators. You can use IAM policies with Global Accelerator to limit the users who have permissions to delete an accelerator. For more information, see Identity and access management in the Global Accelerator Developer Guide. 
    */
   deleteCustomRoutingAccelerator(params: GlobalAccelerator.Types.DeleteCustomRoutingAcceleratorRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete a custom routing accelerator. Before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups). To disable the accelerator, update the accelerator to set Enabled to false.  When you create a custom routing accelerator, by default, Global Accelerator provides you with a set of two static IP addresses.  The IP addresses are assigned to your accelerator for as long as it exists, even if you disable the accelerator and it no longer accepts or routes traffic. However, when you delete an accelerator, you lose the static IP addresses that are assigned to the accelerator, so you can no longer route traffic by using them. As a best practice, ensure that you have permissions in place to avoid inadvertently deleting accelerators. You can use IAM policies with Global Accelerator to limit the users who have permissions to delete an accelerator. For more information, see Authentication and Access Control in the AWS Global Accelerator Developer Guide. 
+   * Delete a custom routing accelerator. Before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups). To disable the accelerator, update the accelerator to set Enabled to false.  When you create a custom routing accelerator, by default, Global Accelerator provides you with a set of two static IP addresses.  The IP addresses are assigned to your accelerator for as long as it exists, even if you disable the accelerator and it no longer accepts or routes traffic. However, when you delete an accelerator, you lose the static IP addresses that are assigned to the accelerator, so you can no longer route traffic by using them. As a best practice, ensure that you have permissions in place to avoid inadvertently deleting accelerators. You can use IAM policies with Global Accelerator to limit the users who have permissions to delete an accelerator. For more information, see Identity and access management in the Global Accelerator Developer Guide. 
    */
   deleteCustomRoutingAccelerator(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -140,11 +164,11 @@ declare class GlobalAccelerator extends Service {
    */
   denyCustomRoutingTraffic(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Releases the specified address range that you provisioned to use with your AWS resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool.  Before you can release an address range, you must stop advertising it by using WithdrawByoipCidr and you must not have any accelerators that are using static IP addresses allocated from its address range.  For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   * Releases the specified address range that you provisioned to use with your Amazon Web Services resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool.  Before you can release an address range, you must stop advertising it by using WithdrawByoipCidr and you must not have any accelerators that are using static IP addresses allocated from its address range.  For more information, see Bring your own IP addresses (BYOIP) in the Global Accelerator Developer Guide.
    */
   deprovisionByoipCidr(params: GlobalAccelerator.Types.DeprovisionByoipCidrRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DeprovisionByoipCidrResponse) => void): Request<GlobalAccelerator.Types.DeprovisionByoipCidrResponse, AWSError>;
   /**
-   * Releases the specified address range that you provisioned to use with your AWS resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool.  Before you can release an address range, you must stop advertising it by using WithdrawByoipCidr and you must not have any accelerators that are using static IP addresses allocated from its address range.  For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   * Releases the specified address range that you provisioned to use with your Amazon Web Services resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool.  Before you can release an address range, you must stop advertising it by using WithdrawByoipCidr and you must not have any accelerators that are using static IP addresses allocated from its address range.  For more information, see Bring your own IP addresses (BYOIP) in the Global Accelerator Developer Guide.
    */
   deprovisionByoipCidr(callback?: (err: AWSError, data: GlobalAccelerator.Types.DeprovisionByoipCidrResponse) => void): Request<GlobalAccelerator.Types.DeprovisionByoipCidrResponse, AWSError>;
   /**
@@ -163,6 +187,14 @@ declare class GlobalAccelerator extends Service {
    * Describe the attributes of an accelerator. 
    */
   describeAcceleratorAttributes(callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeAcceleratorAttributesResponse) => void): Request<GlobalAccelerator.Types.DescribeAcceleratorAttributesResponse, AWSError>;
+  /**
+   * Gets configuration information about a cross-account attachment.
+   */
+  describeCrossAccountAttachment(params: GlobalAccelerator.Types.DescribeCrossAccountAttachmentRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeCrossAccountAttachmentResponse) => void): Request<GlobalAccelerator.Types.DescribeCrossAccountAttachmentResponse, AWSError>;
+  /**
+   * Gets configuration information about a cross-account attachment.
+   */
+  describeCrossAccountAttachment(callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeCrossAccountAttachmentResponse) => void): Request<GlobalAccelerator.Types.DescribeCrossAccountAttachmentResponse, AWSError>;
   /**
    * Describe a custom routing accelerator. 
    */
@@ -212,11 +244,11 @@ declare class GlobalAccelerator extends Service {
    */
   describeListener(callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeListenerResponse) => void): Request<GlobalAccelerator.Types.DescribeListenerResponse, AWSError>;
   /**
-   * List the accelerators for an AWS account. 
+   * List the accelerators for an Amazon Web Services account. 
    */
   listAccelerators(params: GlobalAccelerator.Types.ListAcceleratorsRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListAcceleratorsResponse) => void): Request<GlobalAccelerator.Types.ListAcceleratorsResponse, AWSError>;
   /**
-   * List the accelerators for an AWS account. 
+   * List the accelerators for an Amazon Web Services account. 
    */
   listAccelerators(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListAcceleratorsResponse) => void): Request<GlobalAccelerator.Types.ListAcceleratorsResponse, AWSError>;
   /**
@@ -228,11 +260,35 @@ declare class GlobalAccelerator extends Service {
    */
   listByoipCidrs(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListByoipCidrsResponse) => void): Request<GlobalAccelerator.Types.ListByoipCidrsResponse, AWSError>;
   /**
-   * List the custom routing accelerators for an AWS account. 
+   * List the cross-account attachments that have been created in Global Accelerator.
+   */
+  listCrossAccountAttachments(params: GlobalAccelerator.Types.ListCrossAccountAttachmentsRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCrossAccountAttachmentsResponse) => void): Request<GlobalAccelerator.Types.ListCrossAccountAttachmentsResponse, AWSError>;
+  /**
+   * List the cross-account attachments that have been created in Global Accelerator.
+   */
+  listCrossAccountAttachments(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCrossAccountAttachmentsResponse) => void): Request<GlobalAccelerator.Types.ListCrossAccountAttachmentsResponse, AWSError>;
+  /**
+   * List the accounts that have cross-account resources. For more information, see  Working with cross-account attachments and resources in Global Accelerator in the  Global Accelerator Developer Guide.
+   */
+  listCrossAccountResourceAccounts(params: GlobalAccelerator.Types.ListCrossAccountResourceAccountsRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCrossAccountResourceAccountsResponse) => void): Request<GlobalAccelerator.Types.ListCrossAccountResourceAccountsResponse, AWSError>;
+  /**
+   * List the accounts that have cross-account resources. For more information, see  Working with cross-account attachments and resources in Global Accelerator in the  Global Accelerator Developer Guide.
+   */
+  listCrossAccountResourceAccounts(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCrossAccountResourceAccountsResponse) => void): Request<GlobalAccelerator.Types.ListCrossAccountResourceAccountsResponse, AWSError>;
+  /**
+   * List the cross-account resources available to work with.
+   */
+  listCrossAccountResources(params: GlobalAccelerator.Types.ListCrossAccountResourcesRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCrossAccountResourcesResponse) => void): Request<GlobalAccelerator.Types.ListCrossAccountResourcesResponse, AWSError>;
+  /**
+   * List the cross-account resources available to work with.
+   */
+  listCrossAccountResources(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCrossAccountResourcesResponse) => void): Request<GlobalAccelerator.Types.ListCrossAccountResourcesResponse, AWSError>;
+  /**
+   * List the custom routing accelerators for an Amazon Web Services account. 
    */
   listCustomRoutingAccelerators(params: GlobalAccelerator.Types.ListCustomRoutingAcceleratorsRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCustomRoutingAcceleratorsResponse) => void): Request<GlobalAccelerator.Types.ListCustomRoutingAcceleratorsResponse, AWSError>;
   /**
-   * List the custom routing accelerators for an AWS account. 
+   * List the custom routing accelerators for an Amazon Web Services account. 
    */
   listCustomRoutingAccelerators(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCustomRoutingAcceleratorsResponse) => void): Request<GlobalAccelerator.Types.ListCustomRoutingAcceleratorsResponse, AWSError>;
   /**
@@ -284,19 +340,19 @@ declare class GlobalAccelerator extends Service {
    */
   listListeners(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListListenersResponse) => void): Request<GlobalAccelerator.Types.ListListenersResponse, AWSError>;
   /**
-   * List all tags for an accelerator.  For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide. 
+   * List all tags for an accelerator.  For more information, see Tagging in Global Accelerator in the Global Accelerator Developer Guide. 
    */
   listTagsForResource(params: GlobalAccelerator.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListTagsForResourceResponse) => void): Request<GlobalAccelerator.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * List all tags for an accelerator.  For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide. 
+   * List all tags for an accelerator.  For more information, see Tagging in Global Accelerator in the Global Accelerator Developer Guide. 
    */
   listTagsForResource(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListTagsForResourceResponse) => void): Request<GlobalAccelerator.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Provisions an IP address range to use with your AWS resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using  AdvertiseByoipCidr. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   * Provisions an IP address range to use with your Amazon Web Services resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using  AdvertiseByoipCidr. For more information, see Bring your own IP addresses (BYOIP) in the Global Accelerator Developer Guide.
    */
   provisionByoipCidr(params: GlobalAccelerator.Types.ProvisionByoipCidrRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ProvisionByoipCidrResponse) => void): Request<GlobalAccelerator.Types.ProvisionByoipCidrResponse, AWSError>;
   /**
-   * Provisions an IP address range to use with your AWS resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using  AdvertiseByoipCidr. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   * Provisions an IP address range to use with your Amazon Web Services resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using  AdvertiseByoipCidr. For more information, see Bring your own IP addresses (BYOIP) in the Global Accelerator Developer Guide.
    */
   provisionByoipCidr(callback?: (err: AWSError, data: GlobalAccelerator.Types.ProvisionByoipCidrResponse) => void): Request<GlobalAccelerator.Types.ProvisionByoipCidrResponse, AWSError>;
   /**
@@ -308,27 +364,35 @@ declare class GlobalAccelerator extends Service {
    */
   removeCustomRoutingEndpoints(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Add tags to an accelerator resource.  For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide. 
+   * Remove endpoints from an endpoint group.  The RemoveEndpoints API operation is the recommended option for removing endpoints. The alternative is to remove endpoints by updating an endpoint group by using the UpdateEndpointGroup API operation. There are two advantages to using AddEndpoints to remove endpoints instead:   It's more convenient, because you only need to specify the endpoints that you want to remove. With the UpdateEndpointGroup API operation, you must specify all of the endpoints in the endpoint group except the ones that you want to remove from the group.   It's faster, because Global Accelerator doesn't need to resolve any endpoints. With the UpdateEndpointGroup API operation, Global Accelerator must resolve all of the endpoints that remain in the group.  
+   */
+  removeEndpoints(params: GlobalAccelerator.Types.RemoveEndpointsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Remove endpoints from an endpoint group.  The RemoveEndpoints API operation is the recommended option for removing endpoints. The alternative is to remove endpoints by updating an endpoint group by using the UpdateEndpointGroup API operation. There are two advantages to using AddEndpoints to remove endpoints instead:   It's more convenient, because you only need to specify the endpoints that you want to remove. With the UpdateEndpointGroup API operation, you must specify all of the endpoints in the endpoint group except the ones that you want to remove from the group.   It's faster, because Global Accelerator doesn't need to resolve any endpoints. With the UpdateEndpointGroup API operation, Global Accelerator must resolve all of the endpoints that remain in the group.  
+   */
+  removeEndpoints(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Add tags to an accelerator resource.  For more information, see Tagging in Global Accelerator in the Global Accelerator Developer Guide. 
    */
   tagResource(params: GlobalAccelerator.Types.TagResourceRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.TagResourceResponse) => void): Request<GlobalAccelerator.Types.TagResourceResponse, AWSError>;
   /**
-   * Add tags to an accelerator resource.  For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide. 
+   * Add tags to an accelerator resource.  For more information, see Tagging in Global Accelerator in the Global Accelerator Developer Guide. 
    */
   tagResource(callback?: (err: AWSError, data: GlobalAccelerator.Types.TagResourceResponse) => void): Request<GlobalAccelerator.Types.TagResourceResponse, AWSError>;
   /**
-   * Remove tags from a Global Accelerator resource. When you specify a tag key, the action removes both that key and its associated value. The operation succeeds even if you attempt to remove tags from an accelerator that was already removed. For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide.
+   * Remove tags from a Global Accelerator resource. When you specify a tag key, the action removes both that key and its associated value. The operation succeeds even if you attempt to remove tags from an accelerator that was already removed. For more information, see Tagging in Global Accelerator in the Global Accelerator Developer Guide.
    */
   untagResource(params: GlobalAccelerator.Types.UntagResourceRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UntagResourceResponse) => void): Request<GlobalAccelerator.Types.UntagResourceResponse, AWSError>;
   /**
-   * Remove tags from a Global Accelerator resource. When you specify a tag key, the action removes both that key and its associated value. The operation succeeds even if you attempt to remove tags from an accelerator that was already removed. For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide.
+   * Remove tags from a Global Accelerator resource. When you specify a tag key, the action removes both that key and its associated value. The operation succeeds even if you attempt to remove tags from an accelerator that was already removed. For more information, see Tagging in Global Accelerator in the Global Accelerator Developer Guide.
    */
   untagResource(callback?: (err: AWSError, data: GlobalAccelerator.Types.UntagResourceResponse) => void): Request<GlobalAccelerator.Types.UntagResourceResponse, AWSError>;
   /**
-   * Update an accelerator.   Global Accelerator is a global service that supports endpoints in multiple AWS Regions but you must specify the US West (Oregon) Region to create or update accelerators. 
+   * Update an accelerator to make changes, such as the following:    Change the name of the accelerator.   Disable the accelerator so that it no longer accepts or routes traffic, or so that you can delete it.   Enable the accelerator, if it is disabled.   Change the IP address type to dual-stack if it is IPv4, or change the IP address type to IPv4 if it's dual-stack.   Be aware that static IP addresses remain assigned to your accelerator for as long as it exists, even if you disable the accelerator and it no longer accepts or routes traffic. However, when you delete the accelerator, you lose the static IP addresses that are assigned to it, so you can no longer route traffic by using them.  Global Accelerator is a global service that supports endpoints in multiple Amazon Web Services Regions but you must specify the US West (Oregon) Region to create, update, or otherwise work with accelerators. That is, for example, specify --region us-west-2 on Amazon Web Services CLI commands. 
    */
   updateAccelerator(params: GlobalAccelerator.Types.UpdateAcceleratorRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.UpdateAcceleratorResponse, AWSError>;
   /**
-   * Update an accelerator.   Global Accelerator is a global service that supports endpoints in multiple AWS Regions but you must specify the US West (Oregon) Region to create or update accelerators. 
+   * Update an accelerator to make changes, such as the following:    Change the name of the accelerator.   Disable the accelerator so that it no longer accepts or routes traffic, or so that you can delete it.   Enable the accelerator, if it is disabled.   Change the IP address type to dual-stack if it is IPv4, or change the IP address type to IPv4 if it's dual-stack.   Be aware that static IP addresses remain assigned to your accelerator for as long as it exists, even if you disable the accelerator and it no longer accepts or routes traffic. However, when you delete the accelerator, you lose the static IP addresses that are assigned to it, so you can no longer route traffic by using them.  Global Accelerator is a global service that supports endpoints in multiple Amazon Web Services Regions but you must specify the US West (Oregon) Region to create, update, or otherwise work with accelerators. That is, for example, specify --region us-west-2 on Amazon Web Services CLI commands. 
    */
   updateAccelerator(callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.UpdateAcceleratorResponse, AWSError>;
   /**
@@ -339,6 +403,14 @@ declare class GlobalAccelerator extends Service {
    * Update the attributes for an accelerator. 
    */
   updateAcceleratorAttributes(callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateAcceleratorAttributesResponse) => void): Request<GlobalAccelerator.Types.UpdateAcceleratorAttributesResponse, AWSError>;
+  /**
+   * Update a cross-account attachment to add or remove principals or resources. When you update an attachment to remove a principal (account ID or accelerator) or a resource, Global Accelerator revokes the permission for specific resources.  For more information, see  Working with cross-account attachments and resources in Global Accelerator in the  Global Accelerator Developer Guide.
+   */
+  updateCrossAccountAttachment(params: GlobalAccelerator.Types.UpdateCrossAccountAttachmentRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateCrossAccountAttachmentResponse) => void): Request<GlobalAccelerator.Types.UpdateCrossAccountAttachmentResponse, AWSError>;
+  /**
+   * Update a cross-account attachment to add or remove principals or resources. When you update an attachment to remove a principal (account ID or accelerator) or a resource, Global Accelerator revokes the permission for specific resources.  For more information, see  Working with cross-account attachments and resources in Global Accelerator in the  Global Accelerator Developer Guide.
+   */
+  updateCrossAccountAttachment(callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateCrossAccountAttachmentResponse) => void): Request<GlobalAccelerator.Types.UpdateCrossAccountAttachmentResponse, AWSError>;
   /**
    * Update a custom routing accelerator. 
    */
@@ -380,11 +452,11 @@ declare class GlobalAccelerator extends Service {
    */
   updateListener(callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateListenerResponse) => void): Request<GlobalAccelerator.Types.UpdateListenerResponse, AWSError>;
   /**
-   * Stops advertising an address range that is provisioned as an address pool. You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time. It can take a few minutes before traffic to the specified addresses stops routing to AWS because of propagation delays. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   * Stops advertising an address range that is provisioned as an address pool. You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time. It can take a few minutes before traffic to the specified addresses stops routing to Amazon Web Services because of propagation delays. For more information, see Bring your own IP addresses (BYOIP) in the Global Accelerator Developer Guide.
    */
   withdrawByoipCidr(params: GlobalAccelerator.Types.WithdrawByoipCidrRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.WithdrawByoipCidrResponse) => void): Request<GlobalAccelerator.Types.WithdrawByoipCidrResponse, AWSError>;
   /**
-   * Stops advertising an address range that is provisioned as an address pool. You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time. It can take a few minutes before traffic to the specified addresses stops routing to AWS because of propagation delays. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+   * Stops advertising an address range that is provisioned as an address pool. You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time. It can take a few minutes before traffic to the specified addresses stops routing to Amazon Web Services because of propagation delays. For more information, see Bring your own IP addresses (BYOIP) in the Global Accelerator Developer Guide.
    */
   withdrawByoipCidr(callback?: (err: AWSError, data: GlobalAccelerator.Types.WithdrawByoipCidrResponse) => void): Request<GlobalAccelerator.Types.WithdrawByoipCidrResponse, AWSError>;
 }
@@ -399,7 +471,7 @@ declare namespace GlobalAccelerator {
      */
     Name?: GenericString;
     /**
-     * The value for the address type must be IPv4. 
+     * The IP address type that an accelerator supports. For a standard accelerator, the value can be IPV4 or DUAL_STACK.
      */
     IpAddressType?: IpAddressType;
     /**
@@ -411,7 +483,7 @@ declare namespace GlobalAccelerator {
      */
     IpSets?: IpSets;
     /**
-     * The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IP addresses.  The naming convention for the DNS name is the following: A lowercase letter a, followed by a 16-bit random hex string, followed by .awsglobalaccelerator.com. For example: a1234567890abcdef.awsglobalaccelerator.com. For more information about the default DNS name, see  Support for DNS Addressing in Global Accelerator in the AWS Global Accelerator Developer Guide.
+     * The Domain Name System (DNS) name that Global Accelerator creates that points to an accelerator's static IPv4 addresses. The naming convention for the DNS name for an accelerator is the following: A lowercase letter a, followed by a 16-bit random hex string, followed by .awsglobalaccelerator.com. For example: a1234567890abcdef.awsglobalaccelerator.com. If you have a dual-stack accelerator, you also have a second DNS name, DualStackDnsName, that points to both the A record and the AAAA record for all four static addresses for the accelerator: two IPv4 addresses and two IPv6 addresses. For more information about the default DNS name, see  Support for DNS addressing in Global Accelerator in the Global Accelerator Developer Guide.
      */
     DnsName?: GenericString;
     /**
@@ -426,21 +498,40 @@ declare namespace GlobalAccelerator {
      * The date and time that the accelerator was last modified.
      */
     LastModifiedTime?: Timestamp;
+    /**
+     * The Domain Name System (DNS) name that Global Accelerator creates that points to a dual-stack accelerator's four static IP addresses: two IPv4 addresses and two IPv6 addresses. The naming convention for the dual-stack DNS name is the following: A lowercase letter a, followed by a 16-bit random hex string, followed by .dualstack.awsglobalaccelerator.com. For example: a1234567890abcdef.dualstack.awsglobalaccelerator.com. Note: Global Accelerator also assigns a default DNS name, DnsName, to your accelerator that points just to the static IPv4 addresses.  For more information, see  Support for DNS addressing in Global Accelerator in the Global Accelerator Developer Guide.
+     */
+    DualStackDnsName?: GenericString;
+    /**
+     * A history of changes that you make to an accelerator in Global Accelerator.
+     */
+    Events?: AcceleratorEvents;
   }
   export interface AcceleratorAttributes {
     /**
-     * Indicates whether flow logs are enabled. The default value is false. If the value is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified. For more information, see Flow Logs in the AWS Global Accelerator Developer Guide.
+     * Indicates whether flow logs are enabled. The default value is false. If the value is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified. For more information, see Flow logs in the Global Accelerator Developer Guide.
      */
     FlowLogsEnabled?: GenericBoolean;
     /**
-     * The name of the Amazon S3 bucket for the flow logs. Attribute is required if FlowLogsEnabled is true. The bucket must exist and have a bucket policy that grants AWS Global Accelerator permission to write to the bucket.
+     * The name of the Amazon S3 bucket for the flow logs. Attribute is required if FlowLogsEnabled is true. The bucket must exist and have a bucket policy that grants Global Accelerator permission to write to the bucket.
      */
     FlowLogsS3Bucket?: GenericString;
     /**
-     * The prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if FlowLogsEnabled is true. If you don’t specify a prefix, the flow logs are stored in the root of the bucket. If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), like the following: s3-bucket_name//AWSLogs/aws_account_id
+     * The prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if FlowLogsEnabled is true. If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), like the following: s3-bucket_name//AWSLogs/aws_account_id
      */
     FlowLogsS3Prefix?: GenericString;
   }
+  export interface AcceleratorEvent {
+    /**
+     * A string that contains an Event message describing changes or errors when you update an accelerator in Global Accelerator from IPv4 to dual-stack, or dual-stack to IPv4.
+     */
+    Message?: GenericString;
+    /**
+     * A timestamp for when you update an accelerator in Global Accelerator from IPv4 to dual-stack, or dual-stack to IPv4.
+     */
+    Timestamp?: Timestamp;
+  }
+  export type AcceleratorEvents = AcceleratorEvent[];
   export type AcceleratorStatus = "DEPLOYED"|"IN_PROGRESS"|string;
   export type Accelerators = Accelerator[];
   export interface AddCustomRoutingEndpointsRequest {
@@ -463,9 +554,29 @@ declare namespace GlobalAccelerator {
      */
     EndpointGroupArn?: GenericString;
   }
+  export interface AddEndpointsRequest {
+    /**
+     * The list of endpoint objects.
+     */
+    EndpointConfigurations: EndpointConfigurations;
+    /**
+     * The Amazon Resource Name (ARN) of the endpoint group.
+     */
+    EndpointGroupArn: GenericString;
+  }
+  export interface AddEndpointsResponse {
+    /**
+     * The list of endpoint objects.
+     */
+    EndpointDescriptions?: EndpointDescriptions;
+    /**
+     * The Amazon Resource Name (ARN) of the endpoint group.
+     */
+    EndpointGroupArn?: GenericString;
+  }
   export interface AdvertiseByoipCidrRequest {
     /**
-     * The address range, in CIDR notation. This must be the exact range that you provisioned. You can't advertise only a portion of the provisioned range.
+     * The address range, in CIDR notation. This must be the exact range that you provisioned. You can't advertise only a portion of the provisioned range.  For more information, see Bring your own IP addresses (BYOIP) in the Global Accelerator Developer Guide.
      */
     Cidr: GenericString;
   }
@@ -497,9 +608,39 @@ declare namespace GlobalAccelerator {
      */
     AllowAllTrafficToEndpoint?: GenericBoolean;
   }
+  export interface Attachment {
+    /**
+     * The Amazon Resource Name (ARN) of the cross-account attachment.
+     */
+    AttachmentArn?: GenericString;
+    /**
+     * The name of the cross-account attachment.
+     */
+    Name?: AttachmentName;
+    /**
+     * The principals included in the cross-account attachment.
+     */
+    Principals?: Principals;
+    /**
+     * The resources included in the cross-account attachment.
+     */
+    Resources?: Resources;
+    /**
+     * The date and time that the cross-account attachment was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The date and time that the cross-account attachment was created.
+     */
+    CreatedTime?: Timestamp;
+  }
+  export type AttachmentName = string;
+  export type Attachments = Attachment[];
+  export type AwsAccountId = string;
+  export type AwsAccountIds = AwsAccountId[];
   export interface ByoipCidr {
     /**
-     * The address range, in CIDR notation.
+     * The address range, in CIDR notation.  For more information, see Bring your own IP addresses (BYOIP) in the Global Accelerator Developer Guide.
      */
     Cidr?: GenericString;
     /**
@@ -507,17 +648,17 @@ declare namespace GlobalAccelerator {
      */
     State?: ByoipCidrState;
     /**
-     * A history of status changes for an IP address range that you bring to AWS Global Accelerator through bring your own IP address (BYOIP).
+     * A history of status changes for an IP address range that you bring to Global Accelerator through bring your own IP address (BYOIP).
      */
     Events?: ByoipCidrEvents;
   }
   export interface ByoipCidrEvent {
     /**
-     * A string that contains an Event message describing changes that you make in the status of an IP address range that you bring to AWS Global Accelerator through bring your own IP address (BYOIP).
+     * A string that contains an Event message describing changes that you make in the status of an IP address range that you bring to Global Accelerator through bring your own IP address (BYOIP).
      */
     Message?: GenericString;
     /**
-     * A timestamp when you make a status change for an IP address range that you bring to AWS Global Accelerator through bring your own IP address (BYOIP).
+     * A timestamp for when you make a status change for an IP address range that you bring to Global Accelerator through bring your own IP address (BYOIP).
      */
     Timestamp?: Timestamp;
   }
@@ -537,15 +678,15 @@ declare namespace GlobalAccelerator {
   export type ClientAffinity = "NONE"|"SOURCE_IP"|string;
   export interface CreateAcceleratorRequest {
     /**
-     * The name of an accelerator. The name can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens (-), and must not begin or end with a hyphen.
+     * The name of the accelerator. The name can have a maximum of 64 characters, must contain only alphanumeric characters, periods (.), or hyphens (-), and must not begin or end with a hyphen or period.
      */
     Name: GenericString;
     /**
-     * The value for the address type must be IPv4.
+     * The IP address type that an accelerator supports. For a standard accelerator, the value can be IPV4 or DUAL_STACK.
      */
     IpAddressType?: IpAddressType;
     /**
-     * Optionally, if you've added your own IP address pool to Global Accelerator (BYOIP), you can choose IP addresses from your own pool to use for the accelerator's static IP addresses when you create an accelerator. You can specify one or two addresses, separated by a comma. Do not include the /32 suffix. Only one IP address from each of your IP address ranges can be used for each accelerator. If you specify only one IP address from your IP address range, Global Accelerator assigns a second static IP address for the accelerator from the AWS IP address pool.  Note that you can't update IP addresses for an existing accelerator. To change them, you must create a new accelerator with the new addresses. For more information, see Bring Your Own IP Addresses (BYOIP) in the AWS Global Accelerator Developer Guide.
+     * Optionally, if you've added your own IP address pool to Global Accelerator (BYOIP), you can choose an IPv4 address from your own pool to use for the accelerator's static IPv4 address when you create an accelerator.  After you bring an address range to Amazon Web Services, it appears in your account as an address pool. When you create an accelerator, you can assign one IPv4 address from your range to it. Global Accelerator assigns you a second static IPv4 address from an Amazon IP address range. If you bring two IPv4 address ranges to Amazon Web Services, you can assign one IPv4 address from each range to your accelerator. This restriction is because Global Accelerator assigns each address range to a different network zone, for high availability. You can specify one or two addresses, separated by a space. Do not include the /32 suffix. Note that you can't update IP addresses for an existing accelerator. To change them, you must create a new accelerator with the new addresses. For more information, see Bring your own IP addresses (BYOIP) in the Global Accelerator Developer Guide.
      */
     IpAddresses?: IpAddresses;
     /**
@@ -557,7 +698,7 @@ declare namespace GlobalAccelerator {
      */
     IdempotencyToken: IdempotencyToken;
     /**
-     * Create tags for an accelerator. For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide.
+     * Create tags for an accelerator. For more information, see Tagging in Global Accelerator in the Global Accelerator Developer Guide.
      */
     Tags?: Tags;
   }
@@ -567,15 +708,47 @@ declare namespace GlobalAccelerator {
      */
     Accelerator?: Accelerator;
   }
+  export interface CreateCrossAccountAttachmentRequest {
+    /**
+     * The name of the cross-account attachment. 
+     */
+    Name: AttachmentName;
+    /**
+     * The principals to include in the cross-account attachment. A principal can be an Amazon Web Services account number or the Amazon Resource Name (ARN) for an accelerator. 
+     */
+    Principals?: Principals;
+    /**
+     * The Amazon Resource Names (ARNs) for the resources to include in the cross-account attachment. A resource can be any supported Amazon Web Services resource type for Global Accelerator or a CIDR range for a bring your own IP address (BYOIP) address pool. 
+     */
+    Resources?: Resources;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency—that is, the uniqueness—of the request.
+     */
+    IdempotencyToken: IdempotencyToken;
+    /**
+     * Add tags for a cross-account attachment. For more information, see Tagging in Global Accelerator in the Global Accelerator Developer Guide.
+     */
+    Tags?: Tags;
+  }
+  export interface CreateCrossAccountAttachmentResponse {
+    /**
+     * Information about the cross-account attachment.
+     */
+    CrossAccountAttachment?: Attachment;
+  }
   export interface CreateCustomRoutingAcceleratorRequest {
     /**
      * The name of a custom routing accelerator. The name can have a maximum of 64 characters, must contain only alphanumeric characters or hyphens (-), and must not begin or end with a hyphen.
      */
     Name: GenericString;
     /**
-     * The value for the address type must be IPv4.
+     * The IP address type that an accelerator supports. For a custom routing accelerator, the value must be IPV4.
      */
     IpAddressType?: IpAddressType;
+    /**
+     * Optionally, if you've added your own IP address pool to Global Accelerator (BYOIP), you can choose an IPv4 address from your own pool to use for the accelerator's static IPv4 address when you create an accelerator.  After you bring an address range to Amazon Web Services, it appears in your account as an address pool. When you create an accelerator, you can assign one IPv4 address from your range to it. Global Accelerator assigns you a second static IPv4 address from an Amazon IP address range. If you bring two IPv4 address ranges to Amazon Web Services, you can assign one IPv4 address from each range to your accelerator. This restriction is because Global Accelerator assigns each address range to a different network zone, for high availability. You can specify one or two addresses, separated by a space. Do not include the /32 suffix. Note that you can't update IP addresses for an existing accelerator. To change them, you must create a new accelerator with the new addresses. For more information, see Bring your own IP addresses (BYOIP) in the Global Accelerator Developer Guide.
+     */
+    IpAddresses?: IpAddresses;
     /**
      * Indicates whether an accelerator is enabled. The value is true or false. The default value is true.  If the value is set to true, an accelerator cannot be deleted. If set to false, the accelerator can be deleted.
      */
@@ -585,7 +758,7 @@ declare namespace GlobalAccelerator {
      */
     IdempotencyToken: IdempotencyToken;
     /**
-     * Create tags for an accelerator. For more information, see Tagging in AWS Global Accelerator in the AWS Global Accelerator Developer Guide.
+     * Create tags for an accelerator. For more information, see Tagging in Global Accelerator in the Global Accelerator Developer Guide.
      */
     Tags?: Tags;
   }
@@ -601,7 +774,7 @@ declare namespace GlobalAccelerator {
      */
     ListenerArn: GenericString;
     /**
-     * The AWS Region where the endpoint group is located. A listener can have only one endpoint group in a specific Region.
+     * The Amazon Web Services Region where the endpoint group is located. A listener can have only one endpoint group in a specific Region.
      */
     EndpointGroupRegion: GenericString;
     /**
@@ -645,7 +818,7 @@ declare namespace GlobalAccelerator {
      */
     ListenerArn: GenericString;
     /**
-     * The AWS Region where the endpoint group is located. A listener can have only one endpoint group in a specific Region.
+     * The Amazon Web Services Region where the endpoint group is located. A listener can have only one endpoint group in a specific Region.
      */
     EndpointGroupRegion: GenericString;
     /**
@@ -653,15 +826,15 @@ declare namespace GlobalAccelerator {
      */
     EndpointConfigurations?: EndpointConfigurations;
     /**
-     * The percentage of traffic to send to an AWS Region. Additional traffic is distributed to other endpoint groups for this listener.  Use this action to increase (dial up) or decrease (dial down) traffic to a specific Region. The percentage is applied to the traffic that would otherwise have been routed to the Region based on optimal routing. The default value is 100.
+     * The percentage of traffic to send to an Amazon Web Services Region. Additional traffic is distributed to other endpoint groups for this listener.  Use this action to increase (dial up) or decrease (dial down) traffic to a specific Region. The percentage is applied to the traffic that would otherwise have been routed to the Region based on optimal routing. The default value is 100.
      */
     TrafficDialPercentage?: TrafficDialPercentage;
     /**
-     * The port that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default port is the listener port that this endpoint group is associated with. If listener port is a list of ports, Global Accelerator uses the first port in the list.
+     * The port that Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default port is the listener port that this endpoint group is associated with. If listener port is a list of ports, Global Accelerator uses the first port in the list.
      */
     HealthCheckPort?: HealthCheckPort;
     /**
-     * The protocol that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default value is TCP.
+     * The protocol that Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default value is TCP.
      */
     HealthCheckProtocol?: HealthCheckProtocol;
     /**
@@ -681,7 +854,7 @@ declare namespace GlobalAccelerator {
      */
     IdempotencyToken: IdempotencyToken;
     /**
-     * Override specific listener ports used to route traffic to endpoints that are part of this endpoint group. For example, you can create a port override in which the listener receives user traffic on ports 80 and 443, but your accelerator routes that traffic to ports 1080 and 1443, respectively, on the endpoints. For more information, see  Port overrides in the AWS Global Accelerator Developer Guide.
+     * Override specific listener ports used to route traffic to endpoints that are part of this endpoint group. For example, you can create a port override in which the listener receives user traffic on ports 80 and 443, but your accelerator routes that traffic to ports 1080 and 1443, respectively, on the endpoints. For more information, see  Overriding listener ports in the Global Accelerator Developer Guide.
      */
     PortOverrides?: PortOverrides;
   }
@@ -705,7 +878,7 @@ declare namespace GlobalAccelerator {
      */
     Protocol: Protocol;
     /**
-     * Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications, regardless of the port and protocol of the client request. Client affinity gives you control over whether to always route each client to the same specific endpoint. AWS Global Accelerator uses a consistent-flow hashing algorithm to choose the optimal endpoint for a connection. If client affinity is NONE, Global Accelerator uses the "five-tuple" (5-tuple) properties—source IP address, source port, destination IP address, destination port, and protocol—to select the hash value, and then chooses the best endpoint. However, with this setting, if someone uses different ports to connect to Global Accelerator, their connections might not be always routed to the same endpoint because the hash value changes.  If you want a given client to always be routed to the same endpoint, set client affinity to SOURCE_IP instead. When you use the SOURCE_IP setting, Global Accelerator uses the "two-tuple" (2-tuple) properties— source (client) IP address and destination IP address—to select the hash value. The default value is NONE.
+     * Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications, regardless of the port and protocol of the client request. Client affinity gives you control over whether to always route each client to the same specific endpoint. Global Accelerator uses a consistent-flow hashing algorithm to choose the optimal endpoint for a connection. If client affinity is NONE, Global Accelerator uses the "five-tuple" (5-tuple) properties—source IP address, source port, destination IP address, destination port, and protocol—to select the hash value, and then chooses the best endpoint. However, with this setting, if someone uses different ports to connect to Global Accelerator, their connections might not be always routed to the same endpoint because the hash value changes.  If you want a given client to always be routed to the same endpoint, set client affinity to SOURCE_IP instead. When you use the SOURCE_IP setting, Global Accelerator uses the "two-tuple" (2-tuple) properties— source (client) IP address and destination IP address—to select the hash value. The default value is NONE.
      */
     ClientAffinity?: ClientAffinity;
     /**
@@ -719,6 +892,21 @@ declare namespace GlobalAccelerator {
      */
     Listener?: Listener;
   }
+  export interface CrossAccountResource {
+    /**
+     * The endpoint ID for the endpoint that is listed in a cross-account attachment and can be added to an accelerator by specified principals.
+     */
+    EndpointId?: GenericString;
+    /**
+     * An IP address range, in CIDR format, that is specified as an Amazon Web Services resource. The address must be provisioned and advertised in Global Accelerator by following the bring your own IP address (BYOIP) process for Global Accelerator.  For more information, see Bring your own IP addresses (BYOIP) in the Global Accelerator Developer Guide.
+     */
+    Cidr?: GenericString;
+    /**
+     * The Amazon Resource Name (ARN) of the cross-account attachment that specifies the resources (endpoints or CIDR range) that can be added to accelerators and principals that have permission to add them.
+     */
+    AttachmentArn?: GenericString;
+  }
+  export type CrossAccountResources = CrossAccountResource[];
   export interface CustomRoutingAccelerator {
     /**
      * The Amazon Resource Name (ARN) of the custom routing accelerator.
@@ -729,7 +917,7 @@ declare namespace GlobalAccelerator {
      */
     Name?: GenericString;
     /**
-     * The value for the address type must be IPv4.
+     * The IP address type that an accelerator supports. For a custom routing accelerator, the value must be IPV4.
      */
     IpAddressType?: IpAddressType;
     /**
@@ -741,7 +929,7 @@ declare namespace GlobalAccelerator {
      */
     IpSets?: IpSets;
     /**
-     * The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IP addresses.  The naming convention for the DNS name is the following: A lowercase letter a, followed by a 16-bit random hex string, followed by .awsglobalaccelerator.com. For example: a1234567890abcdef.awsglobalaccelerator.com. For more information about the default DNS name, see  Support for DNS Addressing in Global Accelerator in the AWS Global Accelerator Developer Guide.
+     * The Domain Name System (DNS) name that Global Accelerator creates that points to an accelerator's static IPv4 addresses.  The naming convention for the DNS name is the following: A lowercase letter a, followed by a 16-bit random hex string, followed by .awsglobalaccelerator.com. For example: a1234567890abcdef.awsglobalaccelerator.com. If you have a dual-stack accelerator, you also have a second DNS name, DualStackDnsName, that points to both the A record and the AAAA record for all four static addresses for the accelerator: two IPv4 addresses and two IPv6 addresses. For more information about the default DNS name, see  Support for DNS addressing in Global Accelerator in the Global Accelerator Developer Guide.
      */
     DnsName?: GenericString;
     /**
@@ -759,11 +947,11 @@ declare namespace GlobalAccelerator {
   }
   export interface CustomRoutingAcceleratorAttributes {
     /**
-     * Indicates whether flow logs are enabled. The default value is false. If the value is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified. For more information, see Flow Logs in the AWS Global Accelerator Developer Guide.
+     * Indicates whether flow logs are enabled. The default value is false. If the value is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified. For more information, see Flow logs in the Global Accelerator Developer Guide.
      */
     FlowLogsEnabled?: GenericBoolean;
     /**
-     * The name of the Amazon S3 bucket for the flow logs. Attribute is required if FlowLogsEnabled is true. The bucket must exist and have a bucket policy that grants AWS Global Accelerator permission to write to the bucket.
+     * The name of the Amazon S3 bucket for the flow logs. Attribute is required if FlowLogsEnabled is true. The bucket must exist and have a bucket policy that grants Global Accelerator permission to write to the bucket.
      */
     FlowLogsS3Bucket?: GenericString;
     /**
@@ -809,6 +997,10 @@ declare namespace GlobalAccelerator {
      * An ID for the endpoint. For custom routing accelerators, this is the virtual private cloud (VPC) subnet ID. 
      */
     EndpointId?: GenericString;
+    /**
+     * The Amazon Resource Name (ARN) of the cross-account attachment that specifies the endpoints (resources) that can be added to accelerators and principals that have permission to add the endpoints.
+     */
+    AttachmentArn?: GenericString;
   }
   export type CustomRoutingEndpointConfigurations = CustomRoutingEndpointConfiguration[];
   export interface CustomRoutingEndpointDescription {
@@ -824,7 +1016,7 @@ declare namespace GlobalAccelerator {
      */
     EndpointGroupArn?: GenericString;
     /**
-     * The AWS Region where the endpoint group is located.
+     * The Amazon Web Services Region where the endpoint group is located.
      */
     EndpointGroupRegion?: GenericString;
     /**
@@ -855,6 +1047,12 @@ declare namespace GlobalAccelerator {
      * The Amazon Resource Name (ARN) of an accelerator.
      */
     AcceleratorArn: GenericString;
+  }
+  export interface DeleteCrossAccountAttachmentRequest {
+    /**
+     * The Amazon Resource Name (ARN) for the cross-account attachment to delete.
+     */
+    AttachmentArn: GenericString;
   }
   export interface DeleteCustomRoutingAcceleratorRequest {
     /**
@@ -910,7 +1108,7 @@ declare namespace GlobalAccelerator {
   }
   export interface DeprovisionByoipCidrRequest {
     /**
-     * The address range, in CIDR notation. The prefix must be the same prefix that you specified when you provisioned the address range.
+     * The address range, in CIDR notation. The prefix must be the same prefix that you specified when you provisioned the address range.  For more information, see Bring your own IP addresses (BYOIP) in the Global Accelerator Developer Guide.
      */
     Cidr: GenericString;
   }
@@ -943,6 +1141,18 @@ declare namespace GlobalAccelerator {
      * The description of the accelerator.
      */
     Accelerator?: Accelerator;
+  }
+  export interface DescribeCrossAccountAttachmentRequest {
+    /**
+     * The Amazon Resource Name (ARN) for the cross-account attachment to describe.
+     */
+    AttachmentArn: GenericString;
+  }
+  export interface DescribeCrossAccountAttachmentResponse {
+    /**
+     * Information about the cross-account attachment.
+     */
+    CrossAccountAttachment?: Attachment;
   }
   export interface DescribeCustomRoutingAcceleratorAttributesRequest {
     /**
@@ -1035,7 +1245,7 @@ declare namespace GlobalAccelerator {
      */
     EndpointId?: GenericString;
     /**
-     * The AWS Region for the endpoint group.
+     * The Amazon Web Services Region for the endpoint group.
      */
     EndpointGroupRegion?: GenericString;
     /**
@@ -1043,7 +1253,7 @@ declare namespace GlobalAccelerator {
      */
     DestinationSocketAddress?: SocketAddress;
     /**
-     * The IP address type, which must be IPv4.
+     * The IP address type that an accelerator supports. For a custom routing accelerator, the value must be IPV4.
      */
     IpAddressType?: IpAddressType;
     /**
@@ -1055,17 +1265,21 @@ declare namespace GlobalAccelerator {
   export type DestinationPorts = PortNumber[];
   export interface EndpointConfiguration {
     /**
-     * An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID. For Amazon EC2 instances, this is the EC2 instance ID. A resource must be valid and active when you add it as an endpoint. An Application Load Balancer can be either internal or internet-facing.
+     * An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID. For Amazon EC2 instances, this is the EC2 instance ID. A resource must be valid and active when you add it as an endpoint. For cross-account endpoints, this must be the ARN of the resource.
      */
     EndpointId?: GenericString;
     /**
-     * The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic based on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The result is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20 is routed to the last endpoint. For more information, see Endpoint Weights in the AWS Global Accelerator Developer Guide.
+     * The weight associated with the endpoint. When you add weights to endpoints, you configure Global Accelerator to route traffic based on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The result is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20 is routed to the last endpoint. For more information, see Endpoint weights in the Global Accelerator Developer Guide.
      */
     Weight?: EndpointWeight;
     /**
-     * Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. The value is true or false. The default value is true for new accelerators.  If the value is set to true, the client's IP address is preserved in the X-Forwarded-For request header as traffic travels to applications on the Application Load Balancer endpoint fronted by the accelerator. For more information, see  Preserve Client IP Addresses in AWS Global Accelerator in the AWS Global Accelerator Developer Guide.
+     * Indicates whether client IP address preservation is enabled for an endpoint. The value is true or false. The default value is true for Application Load Balancer endpoints.  If the value is set to true, the client's IP address is preserved in the X-Forwarded-For request header as traffic travels to applications on the endpoint fronted by the accelerator. Client IP address preservation is supported, in specific Amazon Web Services Regions, for endpoints that are Application Load Balancers, Amazon EC2 instances, and Network Load Balancers with security groups. IMPORTANT: You cannot use client IP address preservation with Network Load Balancers with TLS listeners. For more information, see  Preserve client IP addresses in Global Accelerator in the Global Accelerator Developer Guide.
      */
     ClientIPPreservationEnabled?: GenericBoolean;
+    /**
+     * The Amazon Resource Name (ARN) of the cross-account attachment that specifies the endpoints (resources) that can be added to accelerators and principals that have permission to add the endpoints.
+     */
+    AttachmentArn?: GenericString;
   }
   export type EndpointConfigurations = EndpointConfiguration[];
   export interface EndpointDescription {
@@ -1074,7 +1288,7 @@ declare namespace GlobalAccelerator {
      */
     EndpointId?: GenericString;
     /**
-     * The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic based on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The result is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20 is routed to the last endpoint. For more information, see Endpoint Weights in the AWS Global Accelerator Developer Guide. 
+     * The weight associated with the endpoint. When you add weights to endpoints, you configure Global Accelerator to route traffic based on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The result is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20 is routed to the last endpoint. For more information, see Endpoint weights in the Global Accelerator Developer Guide. 
      */
     Weight?: EndpointWeight;
     /**
@@ -1086,7 +1300,7 @@ declare namespace GlobalAccelerator {
      */
     HealthReason?: GenericString;
     /**
-     * Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. The value is true or false. The default value is true for new accelerators.  If the value is set to true, the client's IP address is preserved in the X-Forwarded-For request header as traffic travels to applications on the Application Load Balancer endpoint fronted by the accelerator. For more information, see  Viewing Client IP Addresses in AWS Global Accelerator in the AWS Global Accelerator Developer Guide.
+     * Indicates whether client IP address preservation is enabled for an endpoint. The value is true or false. The default value is true for Application Load Balancers endpoints.  If the value is set to true, the client's IP address is preserved in the X-Forwarded-For request header as traffic travels to applications on the endpoint fronted by the accelerator. Client IP address preservation is supported, in specific Amazon Web Services Regions, for endpoints that are Application Load Balancers, Amazon EC2 instances, and Network Load Balancers with security groups. IMPORTANT: You cannot use client IP address preservation with Network Load Balancers with TLS listeners. For more information, see  Preserve client IP addresses in Global Accelerator in the Global Accelerator Developer Guide.
      */
     ClientIPPreservationEnabled?: GenericBoolean;
   }
@@ -1097,7 +1311,7 @@ declare namespace GlobalAccelerator {
      */
     EndpointGroupArn?: GenericString;
     /**
-     * The AWS Region where the endpoint group is located.
+     * The Amazon Web Services Region where the endpoint group is located.
      */
     EndpointGroupRegion?: GenericString;
     /**
@@ -1105,7 +1319,7 @@ declare namespace GlobalAccelerator {
      */
     EndpointDescriptions?: EndpointDescriptions;
     /**
-     * The percentage of traffic to send to an AWS Region. Additional traffic is distributed to other endpoint groups for this listener.  Use this action to increase (dial up) or decrease (dial down) traffic to a specific Region. The percentage is applied to the traffic that would otherwise have been routed to the Region based on optimal routing. The default value is 100.
+     * The percentage of traffic to send to an Amazon Web Services Region. Additional traffic is distributed to other endpoint groups for this listener.  Use this action to increase (dial up) or decrease (dial down) traffic to a specific Region. The percentage is applied to the traffic that would otherwise have been routed to the Region based on optimal routing. The default value is 100.
      */
     TrafficDialPercentage?: TrafficDialPercentage;
     /**
@@ -1129,11 +1343,22 @@ declare namespace GlobalAccelerator {
      */
     ThresholdCount?: ThresholdCount;
     /**
-     * Allows you to override the destination ports used to route traffic to an endpoint. Using a port override lets you to map a list of external destination ports (that your users send traffic to) to a list of internal destination ports that you want an application endpoint to receive traffic on. 
+     * Allows you to override the destination ports used to route traffic to an endpoint. Using a port override lets you map a list of external destination ports (that your users send traffic to) to a list of internal destination ports that you want an application endpoint to receive traffic on. 
      */
     PortOverrides?: PortOverrides;
   }
   export type EndpointGroups = EndpointGroup[];
+  export interface EndpointIdentifier {
+    /**
+     * An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID. For Amazon EC2 instances, this is the EC2 instance ID.  An Application Load Balancer can be either internal or internet-facing.
+     */
+    EndpointId: GenericString;
+    /**
+     * Indicates whether client IP address preservation is enabled for an endpoint. The value is true or false.  If the value is set to true, the client's IP address is preserved in the X-Forwarded-For request header as traffic travels to applications on the endpoint fronted by the accelerator.
+     */
+    ClientIPPreservationEnabled?: GenericBoolean;
+  }
+  export type EndpointIdentifiers = EndpointIdentifier[];
   export type EndpointIds = GenericString[];
   export type EndpointWeight = number;
   export type GenericBoolean = boolean;
@@ -1145,17 +1370,22 @@ declare namespace GlobalAccelerator {
   export type HealthState = "INITIAL"|"HEALTHY"|"UNHEALTHY"|string;
   export type IdempotencyToken = string;
   export type IpAddress = string;
-  export type IpAddressType = "IPV4"|string;
+  export type IpAddressFamily = "IPv4"|"IPv6"|string;
+  export type IpAddressType = "IPV4"|"DUAL_STACK"|string;
   export type IpAddresses = IpAddress[];
   export interface IpSet {
     /**
-     * The types of IP addresses included in this IP set.
+     * IpFamily is deprecated and has been replaced by IpAddressFamily.
      */
     IpFamily?: GenericString;
     /**
      * The array of IP addresses in the IP address set. An IP address set can have a maximum of two IP addresses.
      */
     IpAddresses?: IpAddresses;
+    /**
+     * The types of IP addresses included in this IP set. 
+     */
+    IpAddressFamily?: IpAddressFamily;
   }
   export type IpSets = IpSet[];
   export interface ListAcceleratorsRequest {
@@ -1195,6 +1425,62 @@ declare namespace GlobalAccelerator {
     ByoipCidrs?: ByoipCidrs;
     /**
      * The token for the next page of results.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListCrossAccountAttachmentsRequest {
+    /**
+     * The number of cross-account attachment objects that you want to return with this call. The default value is 10.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token for the next set of results. You receive this token from a previous call.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListCrossAccountAttachmentsResponse {
+    /**
+     * Information about the cross-account attachments.
+     */
+    CrossAccountAttachments?: Attachments;
+    /**
+     * The token for the next set of results. You receive this token from a previous call.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListCrossAccountResourceAccountsRequest {
+  }
+  export interface ListCrossAccountResourceAccountsResponse {
+    /**
+     * The account IDs of principals (resource owners) in a cross-account attachment who can work with resources listed in the same attachment.
+     */
+    ResourceOwnerAwsAccountIds?: AwsAccountIds;
+  }
+  export interface ListCrossAccountResourcesRequest {
+    /**
+     * The Amazon Resource Name (ARN) of an accelerator in a cross-account attachment.
+     */
+    AcceleratorArn?: GenericString;
+    /**
+     * The account ID of a resource owner in a cross-account attachment.
+     */
+    ResourceOwnerAwsAccountId: AwsAccountId;
+    /**
+     * The number of cross-account resource objects that you want to return with this call. The default value is 10.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token for the next set of results. You receive this token from a previous call.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListCrossAccountResourcesResponse {
+    /**
+     * The cross-account resources used with an accelerator.
+     */
+    CrossAccountResources?: CrossAccountResources;
+    /**
+     * The token for the next set of results. You receive this token from a previous call.
      */
     NextToken?: GenericString;
   }
@@ -1396,7 +1682,7 @@ declare namespace GlobalAccelerator {
      */
     Protocol?: Protocol;
     /**
-     * Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications, regardless of the port and protocol of the client request. Client affinity gives you control over whether to always route each client to the same specific endpoint. AWS Global Accelerator uses a consistent-flow hashing algorithm to choose the optimal endpoint for a connection. If client affinity is NONE, Global Accelerator uses the "five-tuple" (5-tuple) properties—source IP address, source port, destination IP address, destination port, and protocol—to select the hash value, and then chooses the best endpoint. However, with this setting, if someone uses different ports to connect to Global Accelerator, their connections might not be always routed to the same endpoint because the hash value changes.  If you want a given client to always be routed to the same endpoint, set client affinity to SOURCE_IP instead. When you use the SOURCE_IP setting, Global Accelerator uses the "two-tuple" (2-tuple) properties— source (client) IP address and destination IP address—to select the hash value. The default value is NONE.
+     * Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications, regardless of the port and protocol of the client request. Client affinity gives you control over whether to always route each client to the same specific endpoint. Global Accelerator uses a consistent-flow hashing algorithm to choose the optimal endpoint for a connection. If client affinity is NONE, Global Accelerator uses the "five-tuple" (5-tuple) properties—source IP address, source port, destination IP address, destination port, and protocol—to select the hash value, and then chooses the best endpoint. However, with this setting, if someone uses different ports to connect to Global Accelerator, their connections might not be always routed to the same endpoint because the hash value changes.  If you want a given client to always be routed to the same endpoint, set client affinity to SOURCE_IP instead. When you use the SOURCE_IP setting, Global Accelerator uses the "two-tuple" (2-tuple) properties— source (client) IP address and destination IP address—to select the hash value. The default value is NONE.
      */
     ClientAffinity?: ClientAffinity;
   }
@@ -1453,11 +1739,13 @@ declare namespace GlobalAccelerator {
     ToPort?: PortNumber;
   }
   export type PortRanges = PortRange[];
+  export type Principal = string;
+  export type Principals = Principal[];
   export type Protocol = "TCP"|"UDP"|string;
   export type Protocols = Protocol[];
   export interface ProvisionByoipCidrRequest {
     /**
-     * The public IPv4 address range, in CIDR notation. The most specific IP prefix that you can specify is /24. The address range cannot overlap with another address range that you've brought to this or another Region.
+     * The public IPv4 address range, in CIDR notation. The most specific IP prefix that you can specify is /24. The address range cannot overlap with another address range that you've brought to this Amazon Web Services Region or another Region.  For more information, see Bring your own IP addresses (BYOIP) in the Global Accelerator Developer Guide.
      */
     Cidr: GenericString;
     /**
@@ -1481,7 +1769,32 @@ declare namespace GlobalAccelerator {
      */
     EndpointGroupArn: GenericString;
   }
+  export interface RemoveEndpointsRequest {
+    /**
+     * The identifiers of the endpoints that you want to remove.
+     */
+    EndpointIdentifiers: EndpointIdentifiers;
+    /**
+     * The Amazon Resource Name (ARN) of the endpoint group.
+     */
+    EndpointGroupArn: GenericString;
+  }
+  export interface Resource {
+    /**
+     * The endpoint ID for the endpoint that is specified as a Amazon Web Services resource.  An endpoint ID for the cross-account feature is the ARN of an Amazon Web Services resource, such as a Network Load Balancer, that Global Accelerator supports as an endpoint for an accelerator.
+     */
+    EndpointId?: GenericString;
+    /**
+     * An IP address range, in CIDR format, that is specified as resource. The address must be provisioned and advertised in Global Accelerator by following the bring your own IP address (BYOIP) process for Global Accelerator  For more information, see Bring your own IP addresses (BYOIP) in the Global Accelerator Developer Guide.
+     */
+    Cidr?: GenericString;
+    /**
+     * The Amazon Web Services Region where a shared endpoint resource is located.
+     */
+    Region?: GenericString;
+  }
   export type ResourceArn = string;
+  export type Resources = Resource[];
   export interface SocketAddress {
     /**
      * The IP address for the socket address.
@@ -1540,15 +1853,15 @@ declare namespace GlobalAccelerator {
      */
     AcceleratorArn: GenericString;
     /**
-     * Update whether flow logs are enabled. The default value is false. If the value is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified. For more information, see Flow Logs in the AWS Global Accelerator Developer Guide.
+     * Update whether flow logs are enabled. The default value is false. If the value is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified. For more information, see Flow Logs in the Global Accelerator Developer Guide.
      */
     FlowLogsEnabled?: GenericBoolean;
     /**
-     * The name of the Amazon S3 bucket for the flow logs. Attribute is required if FlowLogsEnabled is true. The bucket must exist and have a bucket policy that grants AWS Global Accelerator permission to write to the bucket.
+     * The name of the Amazon S3 bucket for the flow logs. Attribute is required if FlowLogsEnabled is true. The bucket must exist and have a bucket policy that grants Global Accelerator permission to write to the bucket.
      */
     FlowLogsS3Bucket?: GenericString;
     /**
-     * Update the prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if FlowLogsEnabled is true.  If you don’t specify a prefix, the flow logs are stored in the root of the bucket. If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), like the following: s3-bucket_name//AWSLogs/aws_account_id
+     * Update the prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if FlowLogsEnabled is true.  If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), like the following: s3-bucket_name//AWSLogs/aws_account_id
      */
     FlowLogsS3Prefix?: GenericString;
   }
@@ -1564,13 +1877,17 @@ declare namespace GlobalAccelerator {
      */
     AcceleratorArn: GenericString;
     /**
-     * The name of the accelerator. The name can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens (-), and must not begin or end with a hyphen.
+     * The name of the accelerator. The name can have a maximum of 64 characters, must contain only alphanumeric characters, periods (.), or hyphens (-), and must not begin or end with a hyphen or period.
      */
     Name?: GenericString;
     /**
-     * The IP address type, which must be IPv4.
+     * The IP address type that an accelerator supports. For a standard accelerator, the value can be IPV4 or DUAL_STACK.
      */
     IpAddressType?: IpAddressType;
+    /**
+     * The IP addresses for an accelerator.
+     */
+    IpAddresses?: IpAddresses;
     /**
      * Indicates whether an accelerator is enabled. The value is true or false. The default value is true.  If the value is set to true, the accelerator cannot be deleted. If set to false, the accelerator can be deleted.
      */
@@ -1582,17 +1899,49 @@ declare namespace GlobalAccelerator {
      */
     Accelerator?: Accelerator;
   }
+  export interface UpdateCrossAccountAttachmentRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the cross-account attachment to update.
+     */
+    AttachmentArn: GenericString;
+    /**
+     * The name of the cross-account attachment. 
+     */
+    Name?: AttachmentName;
+    /**
+     * The principals to add to the cross-account attachment. A principal is an account or the Amazon Resource Name (ARN) of an accelerator that the attachment gives permission to work with resources from another account. The resources are also listed in the attachment. To add more than one principal, separate the account numbers or accelerator ARNs, or both, with commas.
+     */
+    AddPrincipals?: Principals;
+    /**
+     * The principals to remove from the cross-account attachment. A principal is an account or the Amazon Resource Name (ARN) of an accelerator that the attachment gives permission to work with resources from another account. The resources are also listed in the attachment. To remove more than one principal, separate the account numbers or accelerator ARNs, or both, with commas.
+     */
+    RemovePrincipals?: Principals;
+    /**
+     * The resources to add to the cross-account attachment. A resource listed in a cross-account attachment can be used with an accelerator by the principals that are listed in the attachment. To add more than one resource, separate the resource ARNs with commas.
+     */
+    AddResources?: Resources;
+    /**
+     * The resources to remove from the cross-account attachment. A resource listed in a cross-account attachment can be used with an accelerator by the principals that are listed in the attachment. To remove more than one resource, separate the resource ARNs with commas.
+     */
+    RemoveResources?: Resources;
+  }
+  export interface UpdateCrossAccountAttachmentResponse {
+    /**
+     * Information about the updated cross-account attachment.
+     */
+    CrossAccountAttachment?: Attachment;
+  }
   export interface UpdateCustomRoutingAcceleratorAttributesRequest {
     /**
      * The Amazon Resource Name (ARN) of the custom routing accelerator to update attributes for.
      */
     AcceleratorArn: GenericString;
     /**
-     * Update whether flow logs are enabled. The default value is false. If the value is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified. For more information, see Flow Logs in the AWS Global Accelerator Developer Guide.
+     * Update whether flow logs are enabled. The default value is false. If the value is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified. For more information, see Flow logs in the Global Accelerator Developer Guide.
      */
     FlowLogsEnabled?: GenericBoolean;
     /**
-     * The name of the Amazon S3 bucket for the flow logs. Attribute is required if FlowLogsEnabled is true. The bucket must exist and have a bucket policy that grants AWS Global Accelerator permission to write to the bucket.
+     * The name of the Amazon S3 bucket for the flow logs. Attribute is required if FlowLogsEnabled is true. The bucket must exist and have a bucket policy that grants Global Accelerator permission to write to the bucket.
      */
     FlowLogsS3Bucket?: GenericString;
     /**
@@ -1612,13 +1961,17 @@ declare namespace GlobalAccelerator {
      */
     AcceleratorArn: GenericString;
     /**
-     * The name of the accelerator. The name can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens (-), and must not begin or end with a hyphen.
+     * The name of the accelerator. The name can have a maximum of 64 characters, must contain only alphanumeric characters, periods (.), or hyphens (-), and must not begin or end with a hyphen or period.
      */
     Name?: GenericString;
     /**
-     * The value for the address type must be IPv4.
+     * The IP address type that an accelerator supports. For a custom routing accelerator, the value must be IPV4.
      */
     IpAddressType?: IpAddressType;
+    /**
+     * The IP addresses for an accelerator.
+     */
+    IpAddresses?: IpAddresses;
     /**
      * Indicates whether an accelerator is enabled. The value is true or false. The default value is true.  If the value is set to true, the accelerator cannot be deleted. If set to false, the accelerator can be deleted.
      */
@@ -1656,15 +2009,15 @@ declare namespace GlobalAccelerator {
      */
     EndpointConfigurations?: EndpointConfigurations;
     /**
-     * The percentage of traffic to send to an AWS Region. Additional traffic is distributed to other endpoint groups for this listener.  Use this action to increase (dial up) or decrease (dial down) traffic to a specific Region. The percentage is applied to the traffic that would otherwise have been routed to the Region based on optimal routing. The default value is 100.
+     * The percentage of traffic to send to an Amazon Web Services Region. Additional traffic is distributed to other endpoint groups for this listener.  Use this action to increase (dial up) or decrease (dial down) traffic to a specific Region. The percentage is applied to the traffic that would otherwise have been routed to the Region based on optimal routing. The default value is 100.
      */
     TrafficDialPercentage?: TrafficDialPercentage;
     /**
-     * The port that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default port is the listener port that this endpoint group is associated with. If the listener port is a list of ports, Global Accelerator uses the first port in the list.
+     * The port that Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default port is the listener port that this endpoint group is associated with. If the listener port is a list of ports, Global Accelerator uses the first port in the list.
      */
     HealthCheckPort?: HealthCheckPort;
     /**
-     * The protocol that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default value is TCP.
+     * The protocol that Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default value is TCP.
      */
     HealthCheckProtocol?: HealthCheckProtocol;
     /**
@@ -1680,7 +2033,7 @@ declare namespace GlobalAccelerator {
      */
     ThresholdCount?: ThresholdCount;
     /**
-     * Override specific listener ports used to route traffic to endpoints that are part of this endpoint group. For example, you can create a port override in which the listener receives user traffic on ports 80 and 443, but your accelerator routes that traffic to ports 1080 and 1443, respectively, on the endpoints. For more information, see  Port overrides in the AWS Global Accelerator Developer Guide.
+     * Override specific listener ports used to route traffic to endpoints that are part of this endpoint group. For example, you can create a port override in which the listener receives user traffic on ports 80 and 443, but your accelerator routes that traffic to ports 1080 and 1443, respectively, on the endpoints. For more information, see  Overriding listener ports in the Global Accelerator Developer Guide.
      */
     PortOverrides?: PortOverrides;
   }
@@ -1704,7 +2057,7 @@ declare namespace GlobalAccelerator {
      */
     Protocol?: Protocol;
     /**
-     * Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications, regardless of the port and protocol of the client request. Client affinity gives you control over whether to always route each client to the same specific endpoint. AWS Global Accelerator uses a consistent-flow hashing algorithm to choose the optimal endpoint for a connection. If client affinity is NONE, Global Accelerator uses the "five-tuple" (5-tuple) properties—source IP address, source port, destination IP address, destination port, and protocol—to select the hash value, and then chooses the best endpoint. However, with this setting, if someone uses different ports to connect to Global Accelerator, their connections might not be always routed to the same endpoint because the hash value changes.  If you want a given client to always be routed to the same endpoint, set client affinity to SOURCE_IP instead. When you use the SOURCE_IP setting, Global Accelerator uses the "two-tuple" (2-tuple) properties— source (client) IP address and destination IP address—to select the hash value. The default value is NONE.
+     * Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications, regardless of the port and protocol of the client request. Client affinity gives you control over whether to always route each client to the same specific endpoint. Global Accelerator uses a consistent-flow hashing algorithm to choose the optimal endpoint for a connection. If client affinity is NONE, Global Accelerator uses the "five-tuple" (5-tuple) properties—source IP address, source port, destination IP address, destination port, and protocol—to select the hash value, and then chooses the best endpoint. However, with this setting, if someone uses different ports to connect to Global Accelerator, their connections might not be always routed to the same endpoint because the hash value changes.  If you want a given client to always be routed to the same endpoint, set client affinity to SOURCE_IP instead. When you use the SOURCE_IP setting, Global Accelerator uses the "two-tuple" (2-tuple) properties— source (client) IP address and destination IP address—to select the hash value. The default value is NONE.
      */
     ClientAffinity?: ClientAffinity;
   }
@@ -1716,13 +2069,13 @@ declare namespace GlobalAccelerator {
   }
   export interface WithdrawByoipCidrRequest {
     /**
-     * The address range, in CIDR notation.
+     * The address range, in CIDR notation.  For more information, see Bring your own IP addresses (BYOIP) in the Global Accelerator Developer Guide.
      */
     Cidr: GenericString;
   }
   export interface WithdrawByoipCidrResponse {
     /**
-     * Information about the address pool.
+     * Information about the BYOIP address pool.
      */
     ByoipCidr?: ByoipCidr;
   }

@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "AppMesh",
+        "description": "AWS App Mesh release to support Multiple Listener and Access Log Format feature"
+    },
+    {
+        "type": "feature",
+        "category": "ConnectCampaigns",
+        "description": "Updated exceptions for Amazon Connect Outbound Campaign api's."
+    },
+    {
+        "type": "feature",
+        "category": "Kendra",
+        "description": "This release adds Zendesk connector (which allows you to specify Zendesk SAAS platform as data source), Proxy Support for Sharepoint and Confluence Server (which allows you to specify the proxy configuration if proxy is required to connect to your Sharepoint/Confluence Server as data source)."
+    },
+    {
+        "type": "feature",
+        "category": "LakeFormation",
+        "description": "This release adds a new API support \"AssumeDecoratedRoleWithSAML\" and also release updates the corresponding documentation."
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "Added support for customization of Consumer Group ID for MSK and Kafka Event Source Mappings."
+    },
+    {
+        "type": "feature",
+        "category": "LexModelsV2",
+        "description": "This release introduces support for enhanced conversation design with the ability to define custom conversation flows with conditional branching and new bot responses."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "Adds support for Internet Protocol Version 6 (IPv6) for RDS Aurora database clusters."
+    }
+]

@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Added support for using NitroTPM and UEFI Secure Boot on EC2 instances."
+    },
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Adds BOTTLEROCKET_ARM_64_NVIDIA and BOTTLEROCKET_x86_64_NVIDIA AMI types to EKS managed nodegroups"
+    },
+    {
+        "type": "feature",
+        "category": "EMR",
+        "description": "This release updates the Amazon EMR ModifyInstanceGroups API to support \"MERGE\" type cluster reconfiguration. Also, added the ability to specify a particular Amazon Linux release for all nodes in a cluster launch request."
+    }
+]

@@ -1,0 +1,23 @@
+<meta charset="<%= charset %>">
+<title>
+  <%= h @page_title %>
+  <% if options.title && @page_title != options.title %>
+    &mdash; <%= h options.title %>
+  <% end %>
+</title>
+<% stylesheets.each do |stylesheet| %>
+  <link rel="stylesheet" href="<%= url_for(stylesheet) %>" type="text/css" media="screen" charset="utf-8" />
+<% end %>
+<% javascripts.each do |javascript| %>
+  <% if url_for(javascript) == '../js/app.js' %>
+    <script
+      type="text/javascript"
+      charset="utf-8"
+      src="<%= url_for(javascript) %>"
+      id="app-script"
+      pathid=<%= @path ? @path.inspect : 'null' %>
+      relpath='<%= u = url_for(''); u + (u != '' ? '/' : '') %>'></script>
+  <% else %>
+    <script type="text/javascript" charset="utf-8" src="<%= url_for(javascript) %>"></script>
+  <% end %>
+<% end %>

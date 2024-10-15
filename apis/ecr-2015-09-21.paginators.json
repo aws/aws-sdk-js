@@ -11,7 +11,10 @@
         "imageScanFindings"
       ],
       "output_token": "nextToken",
-      "result_key": "imageScanFindings.findings"
+      "result_key": [
+        "imageScanFindings.findings",
+        "imageScanFindings.enhancedFindings"
+      ]
     },
     "DescribeImages": {
       "input_token": "nextToken",
@@ -19,11 +22,26 @@
       "output_token": "nextToken",
       "result_key": "imageDetails"
     },
+    "DescribePullThroughCacheRules": {
+      "input_token": "nextToken",
+      "limit_key": "maxResults",
+      "output_token": "nextToken",
+      "result_key": "pullThroughCacheRules"
+    },
     "DescribeRepositories": {
       "input_token": "nextToken",
       "limit_key": "maxResults",
       "output_token": "nextToken",
       "result_key": "repositories"
+    },
+    "DescribeRepositoryCreationTemplates": {
+      "input_token": "nextToken",
+      "limit_key": "maxResults",
+      "non_aggregate_keys": [
+        "registryId"
+      ],
+      "output_token": "nextToken",
+      "result_key": "repositoryCreationTemplates"
     },
     "GetLifecyclePolicyPreview": {
       "input_token": "nextToken",

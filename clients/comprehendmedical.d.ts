@@ -44,11 +44,19 @@ declare class ComprehendMedical extends Service {
    */
   describeRxNormInferenceJob(callback?: (err: AWSError, data: ComprehendMedical.Types.DescribeRxNormInferenceJobResponse) => void): Request<ComprehendMedical.Types.DescribeRxNormInferenceJobResponse, AWSError>;
   /**
-   * The DetectEntities operation is deprecated. You should use the DetectEntitiesV2 operation instead.  Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information .
+   *  Gets the properties associated with an InferSNOMEDCT job. Use this operation to get the status of an inference job. 
+   */
+  describeSNOMEDCTInferenceJob(params: ComprehendMedical.Types.DescribeSNOMEDCTInferenceJobRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.DescribeSNOMEDCTInferenceJobResponse) => void): Request<ComprehendMedical.Types.DescribeSNOMEDCTInferenceJobResponse, AWSError>;
+  /**
+   *  Gets the properties associated with an InferSNOMEDCT job. Use this operation to get the status of an inference job. 
+   */
+  describeSNOMEDCTInferenceJob(callback?: (err: AWSError, data: ComprehendMedical.Types.DescribeSNOMEDCTInferenceJobResponse) => void): Request<ComprehendMedical.Types.DescribeSNOMEDCTInferenceJobResponse, AWSError>;
+  /**
+   * The DetectEntities operation is deprecated. You should use the DetectEntitiesV2 operation instead. Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information.
    */
   detectEntities(params: ComprehendMedical.Types.DetectEntitiesRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.DetectEntitiesResponse) => void): Request<ComprehendMedical.Types.DetectEntitiesResponse, AWSError>;
   /**
-   * The DetectEntities operation is deprecated. You should use the DetectEntitiesV2 operation instead.  Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information .
+   * The DetectEntities operation is deprecated. You should use the DetectEntitiesV2 operation instead. Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information.
    */
   detectEntities(callback?: (err: AWSError, data: ComprehendMedical.Types.DetectEntitiesResponse) => void): Request<ComprehendMedical.Types.DetectEntitiesResponse, AWSError>;
   /**
@@ -60,29 +68,37 @@ declare class ComprehendMedical extends Service {
    */
   detectEntitiesV2(callback?: (err: AWSError, data: ComprehendMedical.Types.DetectEntitiesV2Response) => void): Request<ComprehendMedical.Types.DetectEntitiesV2Response, AWSError>;
   /**
-   *  Inspects the clinical text for protected health information (PHI) entities and returns the entity category, location, and confidence score for each entity. Amazon Comprehend Medical only detects entities in English language texts.
+   * Inspects the clinical text for protected health information (PHI) entities and returns the entity category, location, and confidence score for each entity. Amazon Comprehend Medical only detects entities in English language texts.
    */
   detectPHI(params: ComprehendMedical.Types.DetectPHIRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.DetectPHIResponse) => void): Request<ComprehendMedical.Types.DetectPHIResponse, AWSError>;
   /**
-   *  Inspects the clinical text for protected health information (PHI) entities and returns the entity category, location, and confidence score for each entity. Amazon Comprehend Medical only detects entities in English language texts.
+   * Inspects the clinical text for protected health information (PHI) entities and returns the entity category, location, and confidence score for each entity. Amazon Comprehend Medical only detects entities in English language texts.
    */
   detectPHI(callback?: (err: AWSError, data: ComprehendMedical.Types.DetectPHIResponse) => void): Request<ComprehendMedical.Types.DetectPHIResponse, AWSError>;
   /**
-   * InferICD10CM detects medical conditions as entities listed in a patient record and links those entities to normalized concept identifiers in the ICD-10-CM knowledge base from the Centers for Disease Control. Amazon Comprehend Medical only detects medical entities in English language texts.
+   * InferICD10CM detects medical conditions as entities listed in a patient record and links those entities to normalized concept identifiers in the ICD-10-CM knowledge base from the Centers for Disease Control. Amazon Comprehend Medical only detects medical entities in English language texts. 
    */
   inferICD10CM(params: ComprehendMedical.Types.InferICD10CMRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.InferICD10CMResponse) => void): Request<ComprehendMedical.Types.InferICD10CMResponse, AWSError>;
   /**
-   * InferICD10CM detects medical conditions as entities listed in a patient record and links those entities to normalized concept identifiers in the ICD-10-CM knowledge base from the Centers for Disease Control. Amazon Comprehend Medical only detects medical entities in English language texts.
+   * InferICD10CM detects medical conditions as entities listed in a patient record and links those entities to normalized concept identifiers in the ICD-10-CM knowledge base from the Centers for Disease Control. Amazon Comprehend Medical only detects medical entities in English language texts. 
    */
   inferICD10CM(callback?: (err: AWSError, data: ComprehendMedical.Types.InferICD10CMResponse) => void): Request<ComprehendMedical.Types.InferICD10CMResponse, AWSError>;
   /**
-   * InferRxNorm detects medications as entities listed in a patient record and links to the normalized concept identifiers in the RxNorm database from the National Library of Medicine. Amazon Comprehend Medical only detects medical entities in English language texts.
+   * InferRxNorm detects medications as entities listed in a patient record and links to the normalized concept identifiers in the RxNorm database from the National Library of Medicine. Amazon Comprehend Medical only detects medical entities in English language texts. 
    */
   inferRxNorm(params: ComprehendMedical.Types.InferRxNormRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.InferRxNormResponse) => void): Request<ComprehendMedical.Types.InferRxNormResponse, AWSError>;
   /**
-   * InferRxNorm detects medications as entities listed in a patient record and links to the normalized concept identifiers in the RxNorm database from the National Library of Medicine. Amazon Comprehend Medical only detects medical entities in English language texts.
+   * InferRxNorm detects medications as entities listed in a patient record and links to the normalized concept identifiers in the RxNorm database from the National Library of Medicine. Amazon Comprehend Medical only detects medical entities in English language texts. 
    */
   inferRxNorm(callback?: (err: AWSError, data: ComprehendMedical.Types.InferRxNormResponse) => void): Request<ComprehendMedical.Types.InferRxNormResponse, AWSError>;
+  /**
+   *  InferSNOMEDCT detects possible medical concepts as entities and links them to codes from the Systematized Nomenclature of Medicine, Clinical Terms (SNOMED-CT) ontology
+   */
+  inferSNOMEDCT(params: ComprehendMedical.Types.InferSNOMEDCTRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.InferSNOMEDCTResponse) => void): Request<ComprehendMedical.Types.InferSNOMEDCTResponse, AWSError>;
+  /**
+   *  InferSNOMEDCT detects possible medical concepts as entities and links them to codes from the Systematized Nomenclature of Medicine, Clinical Terms (SNOMED-CT) ontology
+   */
+  inferSNOMEDCT(callback?: (err: AWSError, data: ComprehendMedical.Types.InferSNOMEDCTResponse) => void): Request<ComprehendMedical.Types.InferSNOMEDCTResponse, AWSError>;
   /**
    * Gets a list of medical entity detection jobs that you have submitted.
    */
@@ -100,11 +116,11 @@ declare class ComprehendMedical extends Service {
    */
   listICD10CMInferenceJobs(callback?: (err: AWSError, data: ComprehendMedical.Types.ListICD10CMInferenceJobsResponse) => void): Request<ComprehendMedical.Types.ListICD10CMInferenceJobsResponse, AWSError>;
   /**
-   * Gets a list of protected health information (PHI) detection jobs that you have submitted.
+   * Gets a list of protected health information (PHI) detection jobs you have submitted.
    */
   listPHIDetectionJobs(params: ComprehendMedical.Types.ListPHIDetectionJobsRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.ListPHIDetectionJobsResponse) => void): Request<ComprehendMedical.Types.ListPHIDetectionJobsResponse, AWSError>;
   /**
-   * Gets a list of protected health information (PHI) detection jobs that you have submitted.
+   * Gets a list of protected health information (PHI) detection jobs you have submitted.
    */
   listPHIDetectionJobs(callback?: (err: AWSError, data: ComprehendMedical.Types.ListPHIDetectionJobsResponse) => void): Request<ComprehendMedical.Types.ListPHIDetectionJobsResponse, AWSError>;
   /**
@@ -115,6 +131,14 @@ declare class ComprehendMedical extends Service {
    * Gets a list of InferRxNorm jobs that you have submitted.
    */
   listRxNormInferenceJobs(callback?: (err: AWSError, data: ComprehendMedical.Types.ListRxNormInferenceJobsResponse) => void): Request<ComprehendMedical.Types.ListRxNormInferenceJobsResponse, AWSError>;
+  /**
+   *  Gets a list of InferSNOMEDCT jobs a user has submitted. 
+   */
+  listSNOMEDCTInferenceJobs(params: ComprehendMedical.Types.ListSNOMEDCTInferenceJobsRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.ListSNOMEDCTInferenceJobsResponse) => void): Request<ComprehendMedical.Types.ListSNOMEDCTInferenceJobsResponse, AWSError>;
+  /**
+   *  Gets a list of InferSNOMEDCT jobs a user has submitted. 
+   */
+  listSNOMEDCTInferenceJobs(callback?: (err: AWSError, data: ComprehendMedical.Types.ListSNOMEDCTInferenceJobsResponse) => void): Request<ComprehendMedical.Types.ListSNOMEDCTInferenceJobsResponse, AWSError>;
   /**
    * Starts an asynchronous medical entity detection job for a collection of documents. Use the DescribeEntitiesDetectionV2Job operation to track the status of a job.
    */
@@ -148,6 +172,14 @@ declare class ComprehendMedical extends Service {
    */
   startRxNormInferenceJob(callback?: (err: AWSError, data: ComprehendMedical.Types.StartRxNormInferenceJobResponse) => void): Request<ComprehendMedical.Types.StartRxNormInferenceJobResponse, AWSError>;
   /**
+   *  Starts an asynchronous job to detect medical concepts and link them to the SNOMED-CT ontology. Use the DescribeSNOMEDCTInferenceJob operation to track the status of a job. 
+   */
+  startSNOMEDCTInferenceJob(params: ComprehendMedical.Types.StartSNOMEDCTInferenceJobRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.StartSNOMEDCTInferenceJobResponse) => void): Request<ComprehendMedical.Types.StartSNOMEDCTInferenceJobResponse, AWSError>;
+  /**
+   *  Starts an asynchronous job to detect medical concepts and link them to the SNOMED-CT ontology. Use the DescribeSNOMEDCTInferenceJob operation to track the status of a job. 
+   */
+  startSNOMEDCTInferenceJob(callback?: (err: AWSError, data: ComprehendMedical.Types.StartSNOMEDCTInferenceJobResponse) => void): Request<ComprehendMedical.Types.StartSNOMEDCTInferenceJobResponse, AWSError>;
+  /**
    * Stops a medical entities detection job in progress.
    */
   stopEntitiesDetectionV2Job(params: ComprehendMedical.Types.StopEntitiesDetectionV2JobRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.StopEntitiesDetectionV2JobResponse) => void): Request<ComprehendMedical.Types.StopEntitiesDetectionV2JobResponse, AWSError>;
@@ -179,6 +211,14 @@ declare class ComprehendMedical extends Service {
    * Stops an InferRxNorm inference job in progress.
    */
   stopRxNormInferenceJob(callback?: (err: AWSError, data: ComprehendMedical.Types.StopRxNormInferenceJobResponse) => void): Request<ComprehendMedical.Types.StopRxNormInferenceJobResponse, AWSError>;
+  /**
+   *  Stops an InferSNOMEDCT inference job in progress. 
+   */
+  stopSNOMEDCTInferenceJob(params: ComprehendMedical.Types.StopSNOMEDCTInferenceJobRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.StopSNOMEDCTInferenceJobResponse) => void): Request<ComprehendMedical.Types.StopSNOMEDCTInferenceJobResponse, AWSError>;
+  /**
+   *  Stops an InferSNOMEDCT inference job in progress. 
+   */
+  stopSNOMEDCTInferenceJob(callback?: (err: AWSError, data: ComprehendMedical.Types.StopSNOMEDCTInferenceJobResponse) => void): Request<ComprehendMedical.Types.StopSNOMEDCTInferenceJobResponse, AWSError>;
 }
 declare namespace ComprehendMedical {
   export type AnyLengthString = string;
@@ -225,8 +265,14 @@ declare namespace ComprehendMedical {
     Traits?: TraitList;
   }
   export type AttributeList = Attribute[];
-  export type AttributeName = "SIGN"|"SYMPTOM"|"DIAGNOSIS"|"NEGATION"|string;
+  export type AttributeName = "SIGN"|"SYMPTOM"|"DIAGNOSIS"|"NEGATION"|"PERTAINS_TO_FAMILY"|"HYPOTHETICAL"|"LOW_CONFIDENCE"|"PAST_HISTORY"|"FUTURE"|string;
   export type BoundedLengthString = string;
+  export interface Characters {
+    /**
+     *  The number of characters present in the input text document as processed by Amazon Comprehend Medical. 
+     */
+    OriginalTextCharacters?: Integer;
+  }
   export type ClientRequestTokenString = string;
   export interface ComprehendMedicalAsyncJobFilter {
     /**
@@ -353,23 +399,32 @@ declare namespace ComprehendMedical {
      */
     ComprehendMedicalAsyncJobProperties?: ComprehendMedicalAsyncJobProperties;
   }
+  export interface DescribeSNOMEDCTInferenceJobRequest {
+    /**
+     *  The identifier that Amazon Comprehend Medical generated for the job. The StartSNOMEDCTInferenceJob operation returns this identifier in its response. 
+     */
+    JobId: JobId;
+  }
+  export interface DescribeSNOMEDCTInferenceJobResponse {
+    ComprehendMedicalAsyncJobProperties?: ComprehendMedicalAsyncJobProperties;
+  }
   export interface DetectEntitiesRequest {
     /**
-     *  A UTF-8 text string containing the clinical content being examined for entities. Each string must contain fewer than 20,000 bytes of characters.
+     *  A UTF-8 text string containing the clinical content being examined for entities.
      */
     Text: BoundedLengthString;
   }
   export interface DetectEntitiesResponse {
     /**
-     *  The collection of medical entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Amazon Comprehend Medical has in the detection and analysis. Attributes and traits of the entity are also returned.
+     * The collection of medical entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Amazon Comprehend Medical has in the detection and analysis. Attributes and traits of the entity are also returned.
      */
     Entities: EntityList;
     /**
-     *  Attributes extracted from the input text that we were unable to relate to an entity.
+     * Attributes extracted from the input text that we were unable to relate to an entity.
      */
     UnmappedAttributes?: UnmappedAttributeList;
     /**
-     *  If the result of the previous request to DetectEntities was truncated, include the PaginationToken to fetch the next page of entities.
+     * If the result of the previous request to DetectEntities was truncated, include the PaginationToken to fetch the next page of entities.
      */
     PaginationToken?: String;
     /**
@@ -379,7 +434,7 @@ declare namespace ComprehendMedical {
   }
   export interface DetectEntitiesV2Request {
     /**
-     * A UTF-8 string containing the clinical content being examined for entities. Each string must contain fewer than 20,000 bytes of characters.
+     * A UTF-8 string containing the clinical content being examined for entities.
      */
     Text: BoundedLengthString;
   }
@@ -403,17 +458,17 @@ declare namespace ComprehendMedical {
   }
   export interface DetectPHIRequest {
     /**
-     *  A UTF-8 text string containing the clinical content being examined for PHI entities. Each string must contain fewer than 20,000 bytes of characters.
+     * A UTF-8 text string containing the clinical content being examined for PHI entities.
      */
     Text: BoundedLengthString;
   }
   export interface DetectPHIResponse {
     /**
-     *  The collection of PHI entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Amazon Comprehend Medical has in its detection. 
+     * The collection of PHI entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Amazon Comprehend Medical has in its detection.
      */
     Entities: EntityList;
     /**
-     *  If the result of the previous request to DetectPHI was truncated, include the PaginationToken to fetch the next page of PHI entities. 
+     * If the result of the previous request to DetectPHI was truncated, include the PaginationToken to fetch the next page of PHI entities. 
      */
     PaginationToken?: String;
     /**
@@ -460,8 +515,8 @@ declare namespace ComprehendMedical {
     Attributes?: AttributeList;
   }
   export type EntityList = Entity[];
-  export type EntitySubType = "NAME"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"GENERIC_NAME"|"BRAND_NAME"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_NAME"|"TEST_VALUE"|"TEST_UNITS"|"PROCEDURE_NAME"|"TREATMENT_NAME"|"DATE"|"AGE"|"CONTACT_POINT"|"EMAIL"|"IDENTIFIER"|"URL"|"ADDRESS"|"PROFESSION"|"SYSTEM_ORGAN_SITE"|"DIRECTION"|"QUALITY"|"QUANTITY"|"TIME_EXPRESSION"|"TIME_TO_MEDICATION_NAME"|"TIME_TO_DX_NAME"|"TIME_TO_TEST_NAME"|"TIME_TO_PROCEDURE_NAME"|"TIME_TO_TREATMENT_NAME"|string;
-  export type EntityType = "MEDICATION"|"MEDICAL_CONDITION"|"PROTECTED_HEALTH_INFORMATION"|"TEST_TREATMENT_PROCEDURE"|"ANATOMY"|"TIME_EXPRESSION"|string;
+  export type EntitySubType = "NAME"|"DX_NAME"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"GENERIC_NAME"|"BRAND_NAME"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_NAME"|"TEST_VALUE"|"TEST_UNITS"|"TEST_UNIT"|"PROCEDURE_NAME"|"TREATMENT_NAME"|"DATE"|"AGE"|"CONTACT_POINT"|"PHONE_OR_FAX"|"EMAIL"|"IDENTIFIER"|"ID"|"URL"|"ADDRESS"|"PROFESSION"|"SYSTEM_ORGAN_SITE"|"DIRECTION"|"QUALITY"|"QUANTITY"|"TIME_EXPRESSION"|"TIME_TO_MEDICATION_NAME"|"TIME_TO_DX_NAME"|"TIME_TO_TEST_NAME"|"TIME_TO_PROCEDURE_NAME"|"TIME_TO_TREATMENT_NAME"|"AMOUNT"|"GENDER"|"RACE_ETHNICITY"|"ALLERGIES"|"TOBACCO_USE"|"ALCOHOL_CONSUMPTION"|"REC_DRUG_USE"|string;
+  export type EntityType = "MEDICATION"|"MEDICAL_CONDITION"|"PROTECTED_HEALTH_INFORMATION"|"TEST_TREATMENT_PROCEDURE"|"ANATOMY"|"TIME_EXPRESSION"|"BEHAVIORAL_ENVIRONMENTAL_SOCIAL"|string;
   export type Float = number;
   export interface ICD10CMAttribute {
     /**
@@ -496,9 +551,17 @@ declare namespace ComprehendMedical {
      * The contextual information for the attribute. The traits recognized by InferICD10CM are DIAGNOSIS, SIGN, SYMPTOM, and NEGATION.
      */
     Traits?: ICD10CMTraitList;
+    /**
+     * The category of attribute. Can be either of DX_NAME or TIME_EXPRESSION.
+     */
+    Category?: ICD10CMEntityType;
+    /**
+     * The type of relationship between the entity and attribute. Type for the relationship can be either of OVERLAP or SYSTEM_ORGAN_SITE.
+     */
+    RelationshipType?: ICD10CMRelationshipType;
   }
   export type ICD10CMAttributeList = ICD10CMAttribute[];
-  export type ICD10CMAttributeType = "ACUITY"|"DIRECTION"|"SYSTEM_ORGAN_SITE"|"QUALITY"|"QUANTITY"|string;
+  export type ICD10CMAttributeType = "ACUITY"|"DIRECTION"|"SYSTEM_ORGAN_SITE"|"QUALITY"|"QUANTITY"|"TIME_TO_DX_NAME"|"TIME_EXPRESSION"|string;
   export interface ICD10CMConcept {
     /**
      * The long description of the ICD-10-CM code in the ontology.
@@ -528,7 +591,7 @@ declare namespace ComprehendMedical {
      */
     Category?: ICD10CMEntityCategory;
     /**
-     * Describes the specific type of entity with category of entities. InferICD10CM detects entities of the type DX_NAME.
+     * Describes the specific type of entity with category of entities. InferICD10CM detects entities of the type DX_NAME and TIME_EXPRESSION.
      */
     Type?: ICD10CMEntityType;
     /**
@@ -558,7 +621,8 @@ declare namespace ComprehendMedical {
   }
   export type ICD10CMEntityCategory = "MEDICAL_CONDITION"|string;
   export type ICD10CMEntityList = ICD10CMEntity[];
-  export type ICD10CMEntityType = "DX_NAME"|string;
+  export type ICD10CMEntityType = "DX_NAME"|"TIME_EXPRESSION"|string;
+  export type ICD10CMRelationshipType = "OVERLAP"|"SYSTEM_ORGAN_SITE"|"QUALITY"|string;
   export interface ICD10CMTrait {
     /**
      * Provides a name or contextual description about the trait.
@@ -570,11 +634,11 @@ declare namespace ComprehendMedical {
     Score?: Float;
   }
   export type ICD10CMTraitList = ICD10CMTrait[];
-  export type ICD10CMTraitName = "NEGATION"|"DIAGNOSIS"|"SIGN"|"SYMPTOM"|string;
+  export type ICD10CMTraitName = "NEGATION"|"DIAGNOSIS"|"SIGN"|"SYMPTOM"|"PERTAINS_TO_FAMILY"|"HYPOTHETICAL"|"LOW_CONFIDENCE"|string;
   export type IamRoleArn = string;
   export interface InferICD10CMRequest {
     /**
-     * The input text used for analysis. The input for InferICD10CM is a string from 1 to 10000 characters.
+     * The input text used for analysis.
      */
     Text: OntologyLinkingBoundedLengthString;
   }
@@ -594,7 +658,7 @@ declare namespace ComprehendMedical {
   }
   export interface InferRxNormRequest {
     /**
-     * The input text used for analysis. The input for InferRxNorm is a string from 1 to 10000 characters.
+     * The input text used for analysis.
      */
     Text: OntologyLinkingBoundedLengthString;
   }
@@ -612,9 +676,37 @@ declare namespace ComprehendMedical {
      */
     ModelVersion?: String;
   }
+  export interface InferSNOMEDCTRequest {
+    /**
+     * The input text to be analyzed using InferSNOMEDCT.
+     */
+    Text: OntologyLinkingBoundedLengthString;
+  }
+  export interface InferSNOMEDCTResponse {
+    /**
+     *  The collection of medical concept entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Amazon Comprehend Medical has in the detection and analysis. Attributes and traits of the entity are also returned. 
+     */
+    Entities: SNOMEDCTEntityList;
+    /**
+     *  If the result of the request is truncated, the pagination token can be used to fetch the next page of entities. 
+     */
+    PaginationToken?: String;
+    /**
+     *  The version of the model used to analyze the documents, in the format n.n.n You can use this information to track the model used for a particular batch of documents. 
+     */
+    ModelVersion?: String;
+    /**
+     *  The details of the SNOMED-CT revision, including the edition, language, and version date. 
+     */
+    SNOMEDCTDetails?: SNOMEDCTDetails;
+    /**
+     *  The number of characters in the input request documentation. 
+     */
+    Characters?: Characters;
+  }
   export interface InputDataConfig {
     /**
-     * The URI of the S3 bucket that contains the input data. The bucket must be in the same region as the API endpoint that you are calling. Each file in the document collection must be less than 40 KB. You can store a maximum of 30 GB in the bucket.
+     * The URI of the S3 bucket that contains the input data. The bucket must be in the same region as the API endpoint that you are calling.
      */
     S3Bucket: S3Bucket;
     /**
@@ -724,6 +816,27 @@ declare namespace ComprehendMedical {
      */
     NextToken?: String;
   }
+  export interface ListSNOMEDCTInferenceJobsRequest {
+    Filter?: ComprehendMedicalAsyncJobFilter;
+    /**
+     *  Identifies the next page of InferSNOMEDCT results to return. 
+     */
+    NextToken?: String;
+    /**
+     *  The maximum number of results to return in each page. The default is 100. 
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListSNOMEDCTInferenceJobsResponse {
+    /**
+     *  A list containing the properties of each job that is returned. 
+     */
+    ComprehendMedicalAsyncJobPropertiesList?: ComprehendMedicalAsyncJobPropertiesList;
+    /**
+     *  Identifies the next page of results to return. 
+     */
+    NextToken?: String;
+  }
   export type ManifestFilePath = string;
   export type MaxResultsInteger = number;
   export type ModelVersion = string;
@@ -738,14 +851,14 @@ declare namespace ComprehendMedical {
      */
     S3Key?: S3Key;
   }
-  export type RelationshipType = "EVERY"|"WITH_DOSAGE"|"ADMINISTERED_VIA"|"FOR"|"NEGATIVE"|"OVERLAP"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_VALUE"|"TEST_UNITS"|"DIRECTION"|"SYSTEM_ORGAN_SITE"|string;
+  export type RelationshipType = "EVERY"|"WITH_DOSAGE"|"ADMINISTERED_VIA"|"FOR"|"NEGATIVE"|"OVERLAP"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_VALUE"|"TEST_UNITS"|"TEST_UNIT"|"DIRECTION"|"SYSTEM_ORGAN_SITE"|"AMOUNT"|"USAGE"|"QUALITY"|string;
   export interface RxNormAttribute {
     /**
      * The type of attribute. The types of attributes recognized by InferRxNorm are BRAND_NAME and GENERIC_NAME.
      */
     Type?: RxNormAttributeType;
     /**
-     * The level of confidence that Comprehend Medical has that the segment of text is correctly recognized as an attribute.
+     * The level of confidence that Amazon Comprehend Medical has that the segment of text is correctly recognized as an attribute.
      */
     Score?: Float;
     /**
@@ -824,11 +937,11 @@ declare namespace ComprehendMedical {
      */
     Attributes?: RxNormAttributeList;
     /**
-     *  Contextual information for the entity.
+     * Contextual information for the entity.
      */
     Traits?: RxNormTraitList;
     /**
-     *  The RxNorm concepts that the entity could refer to, along with a score indicating the likelihood of the match.
+     * The RxNorm concepts that the entity could refer to, along with a score indicating the likelihood of the match.
      */
     RxNormConcepts?: RxNormConceptList;
   }
@@ -846,20 +959,155 @@ declare namespace ComprehendMedical {
     Score?: Float;
   }
   export type RxNormTraitList = RxNormTrait[];
-  export type RxNormTraitName = "NEGATION"|string;
+  export type RxNormTraitName = "NEGATION"|"PAST_HISTORY"|string;
   export type S3Bucket = string;
   export type S3Key = string;
+  export interface SNOMEDCTAttribute {
+    /**
+     *  The category of the detected attribute. Possible categories include MEDICAL_CONDITION, ANATOMY, and TEST_TREATMENT_PROCEDURE. 
+     */
+    Category?: SNOMEDCTEntityCategory;
+    /**
+     *  The type of attribute. Possible types include DX_NAME, ACUITY, DIRECTION, SYSTEM_ORGAN_SITE,TEST_NAME, TEST_VALUE, TEST_UNIT, PROCEDURE_NAME, and TREATMENT_NAME. 
+     */
+    Type?: SNOMEDCTAttributeType;
+    /**
+     *  The level of confidence that Amazon Comprehend Medical has that the segment of text is correctly recognized as an attribute. 
+     */
+    Score?: Float;
+    /**
+     *  The level of confidence that Amazon Comprehend Medical has that this attribute is correctly related to this entity. 
+     */
+    RelationshipScore?: Float;
+    /**
+     *  The type of relationship that exists between the entity and the related attribute. 
+     */
+    RelationshipType?: SNOMEDCTRelationshipType;
+    /**
+     *  The numeric identifier for this attribute. This is a monotonically increasing id unique within this response rather than a global unique identifier. 
+     */
+    Id?: Integer;
+    /**
+     *  The 0-based character offset in the input text that shows where the attribute begins. The offset returns the UTF-8 code point in the string. 
+     */
+    BeginOffset?: Integer;
+    /**
+     *  The 0-based character offset in the input text that shows where the attribute ends. The offset returns the UTF-8 code point in the string. 
+     */
+    EndOffset?: Integer;
+    /**
+     *  The segment of input text extracted as this attribute. 
+     */
+    Text?: String;
+    /**
+     *  Contextual information for an attribute. Examples include signs, symptoms, diagnosis, and negation. 
+     */
+    Traits?: SNOMEDCTTraitList;
+    /**
+     *  The SNOMED-CT concepts specific to an attribute, along with a score indicating the likelihood of the match. 
+     */
+    SNOMEDCTConcepts?: SNOMEDCTConceptList;
+  }
+  export type SNOMEDCTAttributeList = SNOMEDCTAttribute[];
+  export type SNOMEDCTAttributeType = "ACUITY"|"QUALITY"|"DIRECTION"|"SYSTEM_ORGAN_SITE"|"TEST_VALUE"|"TEST_UNIT"|string;
+  export interface SNOMEDCTConcept {
+    /**
+     *  The description of the SNOMED-CT concept. 
+     */
+    Description?: String;
+    /**
+     *  The numeric ID for the SNOMED-CT concept. 
+     */
+    Code?: String;
+    /**
+     *  The level of confidence Amazon Comprehend Medical has that the entity should be linked to the identified SNOMED-CT concept. 
+     */
+    Score?: Float;
+  }
+  export type SNOMEDCTConceptList = SNOMEDCTConcept[];
+  export interface SNOMEDCTDetails {
+    /**
+     *  The edition of SNOMED-CT used. The edition used for the InferSNOMEDCT editions is the US edition. 
+     */
+    Edition?: String;
+    /**
+     *  The language used in the SNOMED-CT ontology. All Amazon Comprehend Medical operations are US English (en). 
+     */
+    Language?: String;
+    /**
+     *  The version date of the SNOMED-CT ontology used. 
+     */
+    VersionDate?: String;
+  }
+  export interface SNOMEDCTEntity {
+    /**
+     *  The numeric identifier for the entity. This is a monotonically increasing id unique within this response rather than a global unique identifier. 
+     */
+    Id?: Integer;
+    /**
+     *  The segment of input text extracted as this entity. 
+     */
+    Text?: OntologyLinkingBoundedLengthString;
+    /**
+     *  The category of the detected entity. Possible categories are MEDICAL_CONDITION, ANATOMY, or TEST_TREATMENT_PROCEDURE. 
+     */
+    Category?: SNOMEDCTEntityCategory;
+    /**
+     *  Describes the specific type of entity with category of entities. Possible types include DX_NAME, ACUITY, DIRECTION, SYSTEM_ORGAN_SITE, TEST_NAME, TEST_VALUE, TEST_UNIT, PROCEDURE_NAME, or TREATMENT_NAME. 
+     */
+    Type?: SNOMEDCTEntityType;
+    /**
+     *  The level of confidence that Amazon Comprehend Medical has in the accuracy of the detected entity. 
+     */
+    Score?: Float;
+    /**
+     *  The 0-based character offset in the input text that shows where the entity begins. The offset returns the UTF-8 code point in the string. 
+     */
+    BeginOffset?: Integer;
+    /**
+     *  The 0-based character offset in the input text that shows where the entity ends. The offset returns the UTF-8 code point in the string. 
+     */
+    EndOffset?: Integer;
+    /**
+     *  An extracted segment of the text that is an attribute of an entity, or otherwise related to an entity, such as the dosage of a medication taken. 
+     */
+    Attributes?: SNOMEDCTAttributeList;
+    /**
+     *  Contextual information for the entity. 
+     */
+    Traits?: SNOMEDCTTraitList;
+    /**
+     *  The SNOMED concepts that the entity could refer to, along with a score indicating the likelihood of the match. 
+     */
+    SNOMEDCTConcepts?: SNOMEDCTConceptList;
+  }
+  export type SNOMEDCTEntityCategory = "MEDICAL_CONDITION"|"ANATOMY"|"TEST_TREATMENT_PROCEDURE"|string;
+  export type SNOMEDCTEntityList = SNOMEDCTEntity[];
+  export type SNOMEDCTEntityType = "DX_NAME"|"TEST_NAME"|"PROCEDURE_NAME"|"TREATMENT_NAME"|string;
+  export type SNOMEDCTRelationshipType = "ACUITY"|"QUALITY"|"TEST_VALUE"|"TEST_UNITS"|"DIRECTION"|"SYSTEM_ORGAN_SITE"|"TEST_UNIT"|string;
+  export interface SNOMEDCTTrait {
+    /**
+     *  The name or contextual description of a detected trait. 
+     */
+    Name?: SNOMEDCTTraitName;
+    /**
+     *  The level of confidence that Amazon Comprehend Medical has in the accuracy of a detected trait. 
+     */
+    Score?: Float;
+  }
+  export type SNOMEDCTTraitList = SNOMEDCTTrait[];
+  export type SNOMEDCTTraitName = "NEGATION"|"DIAGNOSIS"|"SIGN"|"SYMPTOM"|"PERTAINS_TO_FAMILY"|"HYPOTHETICAL"|"LOW_CONFIDENCE"|"PAST_HISTORY"|"FUTURE"|string;
   export interface StartEntitiesDetectionV2JobRequest {
     /**
-     * Specifies the format and location of the input data for the job.
+     * The input configuration that specifies the format and location of the input data for the job.
      */
     InputDataConfig: InputDataConfig;
     /**
-     * Specifies where to send the output files.
+     * The output configuration that specifies where to send the output files.
      */
     OutputDataConfig: OutputDataConfig;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see  Role-Based Permissions Required for Asynchronous Operations.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see Role-Based Permissions Required for Asynchronous Operations.
      */
     DataAccessRoleArn: IamRoleArn;
     /**
@@ -867,7 +1115,7 @@ declare namespace ComprehendMedical {
      */
     JobName?: JobName;
     /**
-     * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend Medical generates one.
+     * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend Medical generates one for you.
      */
     ClientRequestToken?: ClientRequestTokenString;
     /**
@@ -875,7 +1123,7 @@ declare namespace ComprehendMedical {
      */
     KMSKey?: KMSKey;
     /**
-     * The language of the input documents. All documents must be in the same language.
+     * The language of the input documents. All documents must be in the same language. Amazon Comprehend Medical processes files in US English (en).
      */
     LanguageCode: LanguageCode;
   }
@@ -993,6 +1241,36 @@ declare namespace ComprehendMedical {
      */
     JobId?: JobId;
   }
+  export interface StartSNOMEDCTInferenceJobRequest {
+    InputDataConfig: InputDataConfig;
+    OutputDataConfig: OutputDataConfig;
+    /**
+     *  The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. 
+     */
+    DataAccessRoleArn: IamRoleArn;
+    /**
+     *  The user generated name the asynchronous InferSNOMEDCT job. 
+     */
+    JobName?: JobName;
+    /**
+     *  A unique identifier for the request. If you don't set the client request token, Amazon Comprehend Medical generates one. 
+     */
+    ClientRequestToken?: ClientRequestTokenString;
+    /**
+     *  An AWS Key Management Service key used to encrypt your output files. If you do not specify a key, the files are written in plain text. 
+     */
+    KMSKey?: KMSKey;
+    /**
+     *  The language of the input documents. All documents must be in the same language. 
+     */
+    LanguageCode: LanguageCode;
+  }
+  export interface StartSNOMEDCTInferenceJobResponse {
+    /**
+     *  The identifier generated for the job. To get the status of a job, use this identifier with the StartSNOMEDCTInferenceJob operation. 
+     */
+    JobId?: JobId;
+  }
   export interface StopEntitiesDetectionV2JobRequest {
     /**
      * The identifier of the medical entities job to stop.
@@ -1041,6 +1319,18 @@ declare namespace ComprehendMedical {
      */
     JobId?: JobId;
   }
+  export interface StopSNOMEDCTInferenceJobRequest {
+    /**
+     *  The job id of the asynchronous InferSNOMEDCT job to be stopped. 
+     */
+    JobId: JobId;
+  }
+  export interface StopSNOMEDCTInferenceJobResponse {
+    /**
+     *  The identifier generated for the job. To get the status of job, use this identifier with the DescribeSNOMEDCTInferenceJob operation. 
+     */
+    JobId?: JobId;
+  }
   export type String = string;
   export type Timestamp = Date;
   export interface Trait {
@@ -1056,7 +1346,7 @@ declare namespace ComprehendMedical {
   export type TraitList = Trait[];
   export interface UnmappedAttribute {
     /**
-     *  The type of the attribute, could be one of the following values: "MEDICATION", "MEDICAL_CONDITION", "ANATOMY", "TEST_AND_TREATMENT_PROCEDURE" or "PROTECTED_HEALTH_INFORMATION". 
+     *  The type of the unmapped attribute, could be one of the following values: "MEDICATION", "MEDICAL_CONDITION", "ANATOMY", "TEST_AND_TREATMENT_PROCEDURE" or "PROTECTED_HEALTH_INFORMATION". 
      */
     Type?: EntityType;
     /**

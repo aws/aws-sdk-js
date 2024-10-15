@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Adding RowFilter in the response for GetUnfilteredTableMetadata API"
+    },
+    {
+        "type": "feature",
+        "category": "InternetMonitor",
+        "description": "This update introduces the GetInternetEvent and ListInternetEvents APIs, which provide access to internet events displayed on the Amazon CloudWatch Internet Weather Map."
+    },
+    {
+        "type": "feature",
+        "category": "Personalize",
+        "description": "This releases auto training capability while creating a solution and automatically syncing latest solution versions when creating/updating a campaign"
+    }
+]

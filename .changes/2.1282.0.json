@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "Support for Routing Profile filter, SortCriteria, and grouping by Routing Profiles for GetCurrentMetricData API. Support for RoutingProfiles, UserHierarchyGroups, and Agents as filters, NextStatus and AgentStatusName for GetCurrentUserData. Adds ApproximateTotalCount to both APIs."
+    },
+    {
+        "type": "feature",
+        "category": "ConnectParticipant",
+        "description": "Amazon Connect Chat introduces the Message Receipts feature. This feature allows agents and customers to receive message delivered and read receipts after they send a chat message."
+    },
+    {
+        "type": "feature",
+        "category": "Detective",
+        "description": "This release adds a missed AccessDeniedException type to several endpoints."
+    },
+    {
+        "type": "feature",
+        "category": "FSx",
+        "description": "Fix a bug where a recent release might break certain existing SDKs."
+    },
+    {
+        "type": "feature",
+        "category": "Inspector2",
+        "description": "Amazon Inspector adds support for scanning NodeJS 18.x and Go 1.x AWS Lambda function runtimes."
+    }
+]

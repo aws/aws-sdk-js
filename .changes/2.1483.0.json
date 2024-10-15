@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "EMR",
+        "description": "Updated CreateCluster API request and DescribeCluster API responses to include EbsRootVolumeIops, and EbsRootVolumeThroughput attributes that specify the user configured root volume IOPS and throughput for Amazon EBS root device volume. This feature will be available from Amazon EMR releases 6.15.0"
+    },
+    {
+        "type": "feature",
+        "category": "Neptune",
+        "description": "Update TdeCredentialPassword type to SensitiveString"
+    },
+    {
+        "type": "feature",
+        "category": "Redshift",
+        "description": "added support to create a dual stack cluster"
+    }
+]

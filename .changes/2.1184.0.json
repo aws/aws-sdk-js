@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "ES",
+        "description": "This release adds support for gp3 EBS (Elastic Block Store) storage."
+    },
+    {
+        "type": "feature",
+        "category": "LookoutVision",
+        "description": "This release introduces support for image segmentation models and updates CPU accelerator options for models hosted on edge devices."
+    },
+    {
+        "type": "feature",
+        "category": "OpenSearch",
+        "description": "This release adds support for gp3 EBS (Elastic Block Store) storage."
+    }
+]

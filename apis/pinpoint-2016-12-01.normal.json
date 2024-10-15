@@ -8,7 +8,10 @@
     "protocol": "rest-json",
     "jsonVersion": "1.1",
     "uid": "pinpoint-2016-12-01",
-    "signatureVersion": "v4"
+    "signatureVersion": "v4",
+    "auth": [
+      "aws.auth#sigv4"
+    ]
   },
   "documentation": "<p>Doc Engage API - Amazon Pinpoint API</p>",
   "operations": {
@@ -233,6 +236,44 @@
         }
       ],
       "documentation": "<p>Creates an import job for an application.</p>"
+    },
+    "CreateInAppTemplate": {
+      "name": "CreateInAppTemplate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/templates/{template-name}/inapp",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateInAppTemplateRequest"
+      },
+      "output": {
+        "shape": "CreateInAppTemplateResponse",
+        "documentation": "<p>The request succeeded and the specified resource was created.</p>"
+      },
+      "errors": [
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        }
+      ],
+      "documentation": "<p>Creates a new message template for messages using the in-app message channel.</p>"
     },
     "CreateJourney": {
       "name": "CreateJourney",
@@ -1083,6 +1124,52 @@
         }
       ],
       "documentation": "<p>Disables the GCM channel for an application and deletes any existing settings for the channel.</p>"
+    },
+    "DeleteInAppTemplate": {
+      "name": "DeleteInAppTemplate",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/templates/{template-name}/inapp",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "DeleteInAppTemplateRequest"
+      },
+      "output": {
+        "shape": "DeleteInAppTemplateResponse",
+        "documentation": "<p>The request was accepted for processing. Processing may not be complete.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "PayloadTooLargeException",
+          "documentation": "<p>The request failed because the payload for the body of the request is too large (RequestEntityTooLargeException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Deletes a message template for messages sent using the in-app message channel.</p>"
     },
     "DeleteJourney": {
       "name": "DeleteJourney",
@@ -2694,6 +2781,98 @@
       ],
       "documentation": "<p>Retrieves information about the status and settings of all the import jobs for an application.</p>"
     },
+    "GetInAppMessages": {
+      "name": "GetInAppMessages",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/apps/{application-id}/endpoints/{endpoint-id}/inappmessages",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetInAppMessagesRequest"
+      },
+      "output": {
+        "shape": "GetInAppMessagesResponse",
+        "documentation": "<p>The request succeeded.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "PayloadTooLargeException",
+          "documentation": "<p>The request failed because the payload for the body of the request is too large (RequestEntityTooLargeException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Retrieves the in-app messages targeted for the provided endpoint ID.</p>"
+    },
+    "GetInAppTemplate": {
+      "name": "GetInAppTemplate",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/templates/{template-name}/inapp",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetInAppTemplateRequest"
+      },
+      "output": {
+        "shape": "GetInAppTemplateResponse",
+        "documentation": "<p>The request succeeded.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "PayloadTooLargeException",
+          "documentation": "<p>The request failed because the payload for the body of the request is too large (RequestEntityTooLargeException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Retrieves the content and settings of a message template for messages sent through the in-app channel.</p>"
+    },
     "GetJourney": {
       "name": "GetJourney",
       "http": {
@@ -2877,6 +3056,144 @@
         }
       ],
       "documentation": "<p>Retrieves (queries) pre-aggregated data for a standard execution metric that applies to a journey.</p>"
+    },
+    "GetJourneyRunExecutionActivityMetrics": {
+      "name": "GetJourneyRunExecutionActivityMetrics",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/apps/{application-id}/journeys/{journey-id}/runs/{run-id}/activities/{journey-activity-id}/execution-metrics",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetJourneyRunExecutionActivityMetricsRequest"
+      },
+      "output": {
+        "shape": "GetJourneyRunExecutionActivityMetricsResponse",
+        "documentation": "<p>The request succeeded.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "PayloadTooLargeException",
+          "documentation": "<p>The request failed because the payload for the body of the request is too large (RequestEntityTooLargeException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Retrieves (queries) pre-aggregated data for a standard run execution metric that applies to a journey activity.</p>"
+    },
+    "GetJourneyRunExecutionMetrics": {
+      "name": "GetJourneyRunExecutionMetrics",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/apps/{application-id}/journeys/{journey-id}/runs/{run-id}/execution-metrics",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetJourneyRunExecutionMetricsRequest"
+      },
+      "output": {
+        "shape": "GetJourneyRunExecutionMetricsResponse",
+        "documentation": "<p>The request succeeded.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "PayloadTooLargeException",
+          "documentation": "<p>The request failed because the payload for the body of the request is too large (RequestEntityTooLargeException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Retrieves (queries) pre-aggregated data for a standard run execution metric that applies to a journey.</p>"
+    },
+    "GetJourneyRuns": {
+      "name": "GetJourneyRuns",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/apps/{application-id}/journeys/{journey-id}/runs",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetJourneyRunsRequest"
+      },
+      "output": {
+        "shape": "GetJourneyRunsResponse",
+        "documentation": "<p>The request succeeded.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "PayloadTooLargeException",
+          "documentation": "<p>The request failed because the payload for the body of the request is too large (RequestEntityTooLargeException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Provides information about the runs of a journey.</p>"
     },
     "GetPushTemplate": {
       "name": "GetPushTemplate",
@@ -3851,7 +4168,7 @@
           "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
         }
       ],
-      "documentation": "<p>Removes one or more attributes, of the same attribute type, from all the endpoints that are associated with an application.</p>"
+      "documentation": "<p>Removes one or more custom attributes, of the same attribute type, from the application. Existing endpoints still have the attributes but Amazon Pinpoint will stop capturing new or changed values for these attributes.</p>"
     },
     "SendMessages": {
       "name": "SendMessages",
@@ -3898,6 +4215,52 @@
         }
       ],
       "documentation": "<p>Creates and sends a direct message.</p>"
+    },
+    "SendOTPMessage": {
+      "name": "SendOTPMessage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/apps/{application-id}/otp",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "SendOTPMessageRequest"
+      },
+      "output": {
+        "shape": "SendOTPMessageResponse",
+        "documentation": "<p>200 response</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>400 response</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>500 response</p>"
+        },
+        {
+          "shape": "PayloadTooLargeException",
+          "documentation": "<p>413 response</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>403 response</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>404 response</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>405 response</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>429 response</p>"
+        }
+      ],
+      "documentation": "<p>Send an OTP message</p>"
     },
     "SendUsersMessages": {
       "name": "SendUsersMessages",
@@ -4569,6 +4932,52 @@
       ],
       "documentation": "<p>Enables the GCM channel for an application or updates the status and settings of the GCM channel for an application.</p>"
     },
+    "UpdateInAppTemplate": {
+      "name": "UpdateInAppTemplate",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/templates/{template-name}/inapp",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "UpdateInAppTemplateRequest"
+      },
+      "output": {
+        "shape": "UpdateInAppTemplateResponse",
+        "documentation": "<p>The request was accepted for processing. Processing may not be complete.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "PayloadTooLargeException",
+          "documentation": "<p>The request failed because the payload for the body of the request is too large (RequestEntityTooLargeException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Updates an existing message template for messages sent through the in-app message channel.</p>"
+    },
     "UpdateJourney": {
       "name": "UpdateJourney",
       "http": {
@@ -5032,6 +5441,52 @@
         }
       ],
       "documentation": "<p>Updates an existing message template for messages that are sent through the voice channel.</p>"
+    },
+    "VerifyOTPMessage": {
+      "name": "VerifyOTPMessage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/apps/{application-id}/verify-otp",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "VerifyOTPMessageRequest"
+      },
+      "output": {
+        "shape": "VerifyOTPMessageResponse",
+        "documentation": "<p>200 response</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>400 response</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>500 response</p>"
+        },
+        {
+          "shape": "PayloadTooLargeException",
+          "documentation": "<p>413 response</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>403 response</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>404 response</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>405 response</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>429 response</p>"
+        }
+      ],
+      "documentation": "<p>Verify an OTP</p>"
     }
   },
   "shapes": {
@@ -5735,6 +6190,10 @@
         "Wait": {
           "shape": "WaitActivity",
           "documentation": "<p>The settings for a wait activity. This type of activity waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.</p>"
+        },
+        "ContactCenter": {
+          "shape": "ContactCenterActivity",
+          "documentation": "<p>The settings for a connect activity. This type of activity initiates a contact center call to participants.</p>"
         }
       },
       "documentation": "<p>Specifies the configuration and other settings for an activity in a journey.</p>"
@@ -5793,6 +6252,10 @@
         "TreatmentId": {
           "shape": "__string",
           "documentation": "<p>The unique identifier for the campaign treatment that the activity applies to. A treatment is a variation of a campaign that's used for A/B testing of a campaign.</p>"
+        },
+        "ExecutionMetrics": {
+          "shape": "MapOf__string",
+          "documentation": "<p>A JSON object that contains metrics relating to the campaign execution for this campaign activity. For information about the structure and contents of the results, see <a href=\"https://docs.aws.amazon.com//pinpoint/latest/developerguide/analytics-standard-metrics.html\">Standard Amazon Pinpoint analytics metrics</a> in the <i>Amazon Pinpoint Developer Guide</i>.</p>"
         }
       },
       "documentation": "<p>Provides information about an activity that was performed by a campaign.</p>",
@@ -5831,6 +6294,14 @@
         }
       },
       "documentation": "<p>Specifies address-based configuration settings for a message that's sent directly to an endpoint.</p>"
+    },
+    "Alignment": {
+      "type": "string",
+      "enum": [
+        "LEFT",
+        "CENTER",
+        "RIGHT"
+      ]
     },
     "AndroidPushNotificationTemplate": {
       "type": "structure",
@@ -5930,6 +6401,10 @@
           "shape": "MapOf__string",
           "locationName": "tags",
           "documentation": "<p>A string-to-string map of key-value pairs that identifies the tags that are associated with the application. Each tag consists of a required tag key and an associated tag value.</p>"
+        },
+        "CreationDate": {
+          "shape": "__string",
+          "documentation": "<p>The date and time when the Application was created.</p>"
         }
       },
       "documentation": "<p>Provides information about an application.</p>",
@@ -5938,6 +6413,24 @@
         "Arn",
         "Name"
       ]
+    },
+    "ApplicationSettingsJourneyLimits": {
+      "type": "structure",
+      "members": {
+        "DailyCap": {
+          "shape": "__integer",
+          "documentation": "<p>The daily number of messages that an endpoint can receive from all journeys. The maximum value is 100. If set to 0, this limit will not apply.</p>"
+        },
+        "TimeframeCap": {
+          "shape": "JourneyTimeframeCap",
+          "documentation": "<p>The default maximum number of messages that can be sent to an endpoint during the specified timeframe for all journeys.</p>"
+        },
+        "TotalCap": {
+          "shape": "__integer",
+          "documentation": "<p>The default maximum number of messages that a single journey can sent to a single endpoint. The maximum value is 100. If set to 0, this limit will not apply.</p>"
+        }
+      },
+      "documentation": "<p>The default sending limits for journeys in the application. To override these limits and define custom limits for a specific journey, use the Journey resource.</p>"
     },
     "ApplicationSettingsResource": {
       "type": "structure",
@@ -5961,6 +6454,10 @@
         "QuietTime": {
           "shape": "QuietTime",
           "documentation": "<p>The default quiet time for campaigns in the application. Quiet time is a specific time range when messages aren't sent to endpoints, if all the following conditions are met:</p> <ul><li><p>The EndpointDemographic.Timezone property of the endpoint is set to a valid value.</p></li> <li><p>The current time in the endpoint's time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings).</p></li> <li><p>The current time in the endpoint's time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings).</p></li></ul> <p>If any of the preceding conditions isn't met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled.</p>"
+        },
+        "JourneyLimits": {
+          "shape": "ApplicationSettingsJourneyLimits",
+          "documentation": "<p>The default sending limits for journeys in the application. These limits apply to each journey for the application but can be overridden, on a per journey basis, with the JourneyLimits resource.</p>"
         }
       },
       "documentation": "<p>Provides information about an application, including the default settings for an application.</p>",
@@ -5987,7 +6484,7 @@
       "members": {
         "AttributeType": {
           "shape": "AttributeType",
-          "documentation": "<p>The type of segment dimension to use. Valid values are: INCLUSIVE, endpoints that match the criteria are included in the segment; and, EXCLUSIVE, endpoints that match the criteria are excluded from the segment.</p>"
+          "documentation": "<p>The type of segment dimension to use. Valid values are: <ul><li>INCLUSIVE - endpoints that have attributes matching the values are included in the segment.</li><li>EXCLUSIVE - endpoints that have attributes matching the values are excluded in the segment.</li><li>CONTAINS - endpoints that have attributes' substrings match the values are included in the segment.</li><li>BEFORE - endpoints with attributes read as ISO_INSTANT datetimes before the value are included in the segment.</li><li>AFTER - endpoints with attributes read as ISO_INSTANT datetimes after the value are included in the segment.</li><li>ON - endpoints with attributes read as ISO_INSTANT dates on the value are included in the segment. Time is ignored in this comparison.</li><li>BETWEEN - endpoints with attributes read as ISO_INSTANT datetimes between the values are included in the segment.</li></p>"
         },
         "Values": {
           "shape": "ListOf__string",
@@ -6003,7 +6500,12 @@
       "type": "string",
       "enum": [
         "INCLUSIVE",
-        "EXCLUSIVE"
+        "EXCLUSIVE",
+        "CONTAINS",
+        "BEFORE",
+        "AFTER",
+        "ON",
+        "BETWEEN"
       ]
     },
     "AttributesResource": {
@@ -6179,6 +6681,14 @@
         "Rows"
       ]
     },
+    "ButtonAction": {
+      "type": "string",
+      "enum": [
+        "LINK",
+        "DEEP_LINK",
+        "CLOSE"
+      ]
+    },
     "CampaignCustomMessage": {
       "type": "structure",
       "members": {
@@ -6242,6 +6752,10 @@
           "shape": "__string",
           "documentation": "<p>The verified email address to send the email from. The default address is the FromAddress specified for the email channel for the application.</p>"
         },
+        "Headers": {
+          "shape": "ListOfMessageHeader",
+          "documentation": "<p>The list of <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-campaigns-campaign-id.html#apps-application-id-campaigns-campaign-id-model-messageheader\">MessageHeaders</a> for the email. You can have up to 15 MessageHeaders for each email.</p>"
+        },
         "HtmlBody": {
           "shape": "__string",
           "documentation": "<p>The body of the email, in HTML format, for recipients whose email clients render HTML content.</p>"
@@ -6289,6 +6803,28 @@
       },
       "documentation": "<p>Specifies settings for invoking an AWS Lambda function that customizes a segment for a campaign.</p>"
     },
+    "CampaignInAppMessage": {
+      "type": "structure",
+      "members": {
+        "Body": {
+          "shape": "__string",
+          "documentation": "<p>The message body of the notification, the email body or the text message.</p>"
+        },
+        "Content": {
+          "shape": "ListOfInAppMessageContent",
+          "documentation": "<p>In-app message content.</p>"
+        },
+        "CustomConfig": {
+          "shape": "MapOf__string",
+          "documentation": "<p>Custom config to be sent to client.</p>"
+        },
+        "Layout": {
+          "shape": "Layout",
+          "documentation": "<p>In-app message layout.</p>"
+        }
+      },
+      "documentation": "<p>In-app message configuration.</p>"
+    },
     "CampaignLimits": {
       "type": "structure",
       "members": {
@@ -6302,11 +6838,15 @@
         },
         "MessagesPerSecond": {
           "shape": "__integer",
-          "documentation": "<p>The maximum number of messages that a campaign can send each second. For an application, this value specifies the default limit for the number of messages that campaigns can send each second. The minimum value is 50. The maximum value is 20,000.</p>"
+          "documentation": "<p>The maximum number of messages that a campaign can send each second. For an application, this value specifies the default limit for the number of messages that campaigns can send each second. The minimum value is 1. The maximum value is 20,000.</p>"
         },
         "Total": {
           "shape": "__integer",
           "documentation": "<p>The maximum number of messages that a campaign can send to a single endpoint during the course of the campaign. If a campaign recurs, this setting applies to all runs of the campaign. The maximum value is 100.</p>"
+        },
+        "Session": {
+          "shape": "__integer",
+          "documentation": "<p>The maximum total number of messages that the campaign can send per user session.</p>"
         }
       },
       "documentation": "<p>For a campaign, specifies limits on the messages that the campaign can send. For an application, specifies the default limits for messages that campaigns in the application can send.</p>"
@@ -6410,6 +6950,10 @@
         "Version": {
           "shape": "__integer",
           "documentation": "<p>The version number of the campaign.</p>"
+        },
+        "Priority": {
+          "shape": "__integer",
+          "documentation": "<p>Defines the priority of the campaign, used to decide the order of messages displayed to user if there are multiple messages scheduled to be displayed at the same moment.</p>"
         }
       },
       "documentation": "<p>Provides information about the status, configuration, and other settings for a campaign.</p>",
@@ -6434,9 +6978,21 @@
           "shape": "MessageType",
           "documentation": "<p>The SMS message type. Valid values are TRANSACTIONAL (for messages that are critical or time-sensitive, such as a one-time passwords) and PROMOTIONAL (for messsages that aren't critical or time-sensitive, such as marketing messages).</p>"
         },
+        "OriginationNumber": {
+          "shape": "__string",
+          "documentation": "<p>The long code to send the SMS message from. This value should be one of the dedicated long codes that's assigned to your AWS account. Although it isn't required, we recommend that you specify the long code using an E.164 format to ensure prompt and accurate delivery of the message. For example, +12065550100.</p>"
+        },
         "SenderId": {
           "shape": "__string",
           "documentation": "<p>The sender ID to display on recipients' devices when they receive the SMS message.</p>"
+        },
+        "EntityId": {
+          "shape": "__string",
+          "documentation": "<p>The entity ID or Principal Entity (PE) id received from the regulatory body for sending SMS in your country.</p>"
+        },
+        "TemplateId": {
+          "shape": "__string",
+          "documentation": "<p>The template ID received from the regulatory body for sending SMS in your country.</p>"
         }
       },
       "documentation": "<p>Specifies the content and settings for an SMS message that's sent to recipients of a campaign.</p>"
@@ -6536,7 +7092,8 @@
         "VOICE",
         "EMAIL",
         "BAIDU",
-        "CUSTOM"
+        "CUSTOM",
+        "IN_APP"
       ]
     },
     "ChannelsResponse": {
@@ -6587,6 +7144,15 @@
         }
       },
       "documentation": "<p>Specifies the settings for a yes/no split activity in a journey. This type of activity sends participants down one of two paths in a journey, based on conditions that you specify.</p> <note><p>To create yes/no split activities that send participants down different paths based on push notification events (such as Open or Received events), your mobile app has to specify the User ID and Endpoint ID values. For more information, see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/integrate.html\">Integrating Amazon Pinpoint with your application</a> in the <i>Amazon Pinpoint Developer Guide</i>.</p></note>"
+    },
+    "ContactCenterActivity": {
+      "type": "structure",
+      "members": {
+        "NextActivity": {
+          "shape": "__string",
+          "documentation": "<p>The unique identifier for the next activity to perform after the this activity.</p>"
+        }
+      }
     },
     "CreateAppRequest": {
       "type": "structure",
@@ -6753,6 +7319,37 @@
         "ImportJobResponse"
       ],
       "payload": "ImportJobResponse"
+    },
+    "CreateInAppTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "InAppTemplateRequest": {
+          "shape": "InAppTemplateRequest"
+        },
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        }
+      },
+      "required": [
+        "TemplateName",
+        "InAppTemplateRequest"
+      ],
+      "payload": "InAppTemplateRequest"
+    },
+    "CreateInAppTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "TemplateCreateMessageBody": {
+          "shape": "TemplateCreateMessageBody"
+        }
+      },
+      "required": [
+        "TemplateCreateMessageBody"
+      ],
+      "payload": "TemplateCreateMessageBody"
     },
     "CreateJourneyRequest": {
       "type": "structure",
@@ -7043,6 +7640,40 @@
         }
       },
       "documentation": "<p>The settings for a custom message activity. This type of activity calls an AWS Lambda function or web hook that sends messages to participants.</p>"
+    },
+    "DefaultButtonConfiguration": {
+      "type": "structure",
+      "members": {
+        "BackgroundColor": {
+          "shape": "__string",
+          "documentation": "<p>The background color of the button.</p>"
+        },
+        "BorderRadius": {
+          "shape": "__integer",
+          "documentation": "<p>The border radius of the button.</p>"
+        },
+        "ButtonAction": {
+          "shape": "ButtonAction",
+          "documentation": "<p>Action triggered by the button.</p>"
+        },
+        "Link": {
+          "shape": "__string",
+          "documentation": "<p>Button destination.</p>"
+        },
+        "Text": {
+          "shape": "__string",
+          "documentation": "<p>Button text.</p>"
+        },
+        "TextColor": {
+          "shape": "__string",
+          "documentation": "<p>The text color of the button.</p>"
+        }
+      },
+      "documentation": "<p>Default button configuration.</p>",
+      "required": [
+        "ButtonAction",
+        "Text"
+      ]
     },
     "DefaultMessage": {
       "type": "structure",
@@ -7404,7 +8035,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "endpoint-id",
-          "documentation": "<p>The unique identifier for the endpoint.</p>"
+          "documentation": "<p>The case insensitive unique identifier for the endpoint. The identifier can't contain <code>$</code>, <code>{</code> or <code>}</code>.</p>"
         }
       },
       "required": [
@@ -7475,6 +8106,38 @@
         "GCMChannelResponse"
       ],
       "payload": "GCMChannelResponse"
+    },
+    "DeleteInAppTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        },
+        "Version": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "version",
+          "documentation": "<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend=\"templates-template-name-template-type-versions\">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>"
+        }
+      },
+      "required": [
+        "TemplateName"
+      ]
+    },
+    "DeleteInAppTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "MessageBody": {
+          "shape": "MessageBody"
+        }
+      },
+      "required": [
+        "MessageBody"
+      ],
+      "payload": "MessageBody"
     },
     "DeleteJourneyRequest": {
       "type": "structure",
@@ -7841,6 +8504,10 @@
         "RoleArn": {
           "shape": "__string",
           "documentation": " <p>The ARN of the AWS Identity and Access Management (IAM) role that you want Amazon Pinpoint to use when it submits email-related event data for the channel.</p>"
+        },
+        "OrchestrationSendingRoleArn": {
+          "shape": "__string",
+          "documentation": "<p>The ARN of an IAM role for Amazon Pinpoint to use to send email from your campaigns or journeys through Amazon SES.</p>"
         }
       },
       "documentation": "<p>Specifies the status and settings of the email channel for an application.</p>",
@@ -7907,6 +8574,10 @@
         "RoleArn": {
           "shape": "__string",
           "documentation": " <p>The ARN of the AWS Identity and Access Management (IAM) role that Amazon Pinpoint uses to submit email-related event data for the channel.</p>"
+        },
+        "OrchestrationSendingRoleArn": {
+          "shape": "__string",
+          "documentation": "<p>The ARN of an IAM role for Amazon Pinpoint to use to send email from your campaigns or journeys through Amazon SES.</p>"
         },
         "Version": {
           "shape": "__integer",
@@ -7993,10 +8664,14 @@
           "shape": "__string",
           "documentation": "<p>The subject line, or title, to use in email messages that are based on the message template.</p>"
         },
+        "Headers": {
+          "shape": "ListOfMessageHeader",
+          "documentation": "<p>The list of <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference/templates-template-name-email.html#templates-template-name-email-model-messageheader\">MessageHeaders</a> for the email. You can have up to 15 Headers.</p>"
+        },
         "tags": {
           "shape": "MapOf__string",
           "locationName": "tags",
-          "documentation": "<p>A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+          "documentation": "<note><p>As of <b>22-05-2023</b> tags has been deprecated for update operations. After this date any value in tags is not processed and an error code is not returned. To manage tags we recommend using either <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference/tags-resource-arn.html\">Tags</a> in the <i>API Reference for Amazon Pinpoint</i>, <a href=\"https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html\">resourcegroupstaggingapi</a> commands in the <i>AWS Command Line Interface Documentation</i> or <a href=\"https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/resourcegroupstaggingapi/package-summary.html\">resourcegroupstaggingapi</a> in the <i>AWS SDK</i>.</p></note> <p>(Deprecated) A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
         },
         "TemplateDescription": {
           "shape": "__string",
@@ -8039,6 +8714,10 @@
         "Subject": {
           "shape": "__string",
           "documentation": "<p>The subject line, or title, that's used in email messages that are based on the message template.</p>"
+        },
+        "Headers": {
+          "shape": "ListOfMessageHeader",
+          "documentation": "<p>The list of <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference/templates-template-name-email.html#templates-template-name-email-model-messageheader\">MessageHeaders</a> for the email. You can have up to 15 Headers.</p>"
         },
         "tags": {
           "shape": "MapOf__string",
@@ -8232,7 +8911,7 @@
         },
         "DeliveryStatus": {
           "shape": "DeliveryStatus",
-          "documentation": "<p>The delivery status of the message. Possible values are:</p> <ul> <li><p>DUPLICATE - The endpoint address is a duplicate of another endpoint address. Amazon Pinpoint won't attempt to send the message again.</p></li> <li><p>OPT_OUT - The user who's associated with the endpoint has opted out of receiving messages from you. Amazon Pinpoint won't attempt to send the message again.</p></li> <li><p>PERMANENT_FAILURE - An error occurred when delivering the message to the endpoint. Amazon Pinpoint won't attempt to send the message again.</p></li>    <li><p>SUCCESSFUL - The message was successfully delivered to the endpoint.</p></li> <li><p>TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint won't attempt to send the message again.</p></li> <li><p>THROTTLED - Amazon Pinpoint throttled the operation to send the message to the endpoint.</p></li> <li><p>TIMEOUT - The message couldn't be sent within the timeout period.</p></li> <li><p>UNKNOWN_FAILURE - An unknown error occurred.</p></li></ul>"
+          "documentation": "<p>The delivery status of the message. Possible values are:</p> <ul> <li><p>DUPLICATE - The endpoint address is a duplicate of another endpoint address. Amazon Pinpoint won't attempt to send the message again.</p></li> <li><p>OPT_OUT - The user who's associated with the endpoint has opted out of receiving messages from you. Amazon Pinpoint won't attempt to send the message again.</p></li> <li><p>PERMANENT_FAILURE - An error occurred when delivering the message to the endpoint. Amazon Pinpoint won't attempt to send the message again.</p></li>    <li><p>SUCCESSFUL - The message was successfully delivered to the endpoint.</p></li> <li><p>TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint won't attempt to send the message again.</p></li> <li><p>THROTTLED - Amazon Pinpoint throttled the operation to send the message to the endpoint.</p></li> <li><p>UNKNOWN_FAILURE - An unknown error occurred.</p></li></ul>"
         },
         "MessageId": {
           "shape": "__string",
@@ -8785,7 +9464,8 @@
         "DAILY",
         "WEEKLY",
         "MONTHLY",
-        "EVENT"
+        "EVENT",
+        "IN_APP_EVENT"
       ]
     },
     "GCMChannelRequest": {
@@ -8795,15 +9475,20 @@
           "shape": "__string",
           "documentation": "<p>The Web API Key, also referred to as an <i>API_KEY</i> or <i>server key</i>, that you received from Google to communicate with Google services.</p>"
         },
+        "DefaultAuthenticationMethod": {
+          "shape": "__string",
+          "documentation": "<p>The default authentication method used for GCM. Values are either \"TOKEN\" or \"KEY\". Defaults to \"KEY\".</p>"
+        },
         "Enabled": {
           "shape": "__boolean",
           "documentation": "<p>Specifies whether to enable the GCM channel for the application.</p>"
+        },
+        "ServiceJson": {
+          "shape": "__string",
+          "documentation": "<p>The contents of the JSON file provided by Google during registration in order to generate an access token for authentication. For more information see <a href=\"https://firebase.google.com/docs/cloud-messaging/migrate-v1\">Migrate from legacy FCM APIs to HTTP v1</a>.</p>"
         }
       },
-      "documentation": "<p>Specifies the status and settings of the GCM channel for an application. This channel enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.</p>",
-      "required": [
-        "ApiKey"
-      ]
+      "documentation": "<p>Specifies the status and settings of the GCM channel for an application. This channel enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.</p>"
     },
     "GCMChannelResponse": {
       "type": "structure",
@@ -8820,6 +9505,10 @@
           "shape": "__string",
           "documentation": "<p>The Web API Key, also referred to as an <i>API_KEY</i> or <i>server key</i>, that you received from Google to communicate with Google services.</p>"
         },
+        "DefaultAuthenticationMethod": {
+          "shape": "__string",
+          "documentation": "<p>The default authentication method used for GCM. Values are either \"TOKEN\" or \"KEY\". Defaults to \"KEY\".</p>"
+        },
         "Enabled": {
           "shape": "__boolean",
           "documentation": "<p>Specifies whether the GCM channel is enabled for the application.</p>"
@@ -8827,6 +9516,10 @@
         "HasCredential": {
           "shape": "__boolean",
           "documentation": "<p>(Not used) This property is retained only for backward compatibility.</p>"
+        },
+        "HasFcmServiceCredentials": {
+          "shape": "__boolean",
+          "documentation": "<p>Returns true if the JSON file provided by Google during registration process was used in the <b>ServiceJson</b> field of the request.</p>"
         },
         "Id": {
           "shape": "__string",
@@ -8855,7 +9548,6 @@
       },
       "documentation": "<p>Provides information about the status and settings of the GCM channel for an application. The GCM channel enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.</p>",
       "required": [
-        "Credential",
         "Platform"
       ]
     },
@@ -8890,9 +9582,13 @@
           "shape": "__string",
           "documentation": "<p>The URL of an image to display in the push notification.</p>"
         },
+        "PreferredAuthenticationMethod": {
+          "shape": "__string",
+          "documentation": "<p>The preferred authentication method, with valid values \"KEY\" or \"TOKEN\". If a value isn't provided then the <b>DefaultAuthenticationMethod</b> is used.</p>"
+        },
         "Priority": {
           "shape": "__string",
-          "documentation": "<p>para>normal - The notification might be delayed. Delivery is optimized for battery usage on the recipient's device. Use this value unless immediate delivery is required.</p>/listitem> <li><p>high - The notification is sent immediately and might wake a sleeping device.</p></li>/para> <p>Amazon Pinpoint specifies this value in the FCM priority parameter when it sends the notification message to FCM.</p> <p>The equivalent values for Apple Push Notification service (APNs) are 5, for normal, and 10, for high. If you specify an APNs value for this property, Amazon Pinpoint accepts and converts the value to the corresponding FCM value.</p>"
+          "documentation": "<p>para>normal – The notification might be delayed. Delivery is optimized for battery usage on the recipient's device. Use this value unless immediate delivery is required.</p>/listitem> <li><p>high – The notification is sent immediately and might wake a sleeping device.</p></li>/para> <p>Amazon Pinpoint specifies this value in the FCM priority parameter when it sends the notification message to FCM.</p> <p>The equivalent values for Apple Push Notification service (APNs) are 5, for normal, and 10, for high. If you specify an APNs value for this property, Amazon Pinpoint accepts and converts the value to the corresponding FCM value.</p>"
         },
         "RawContent": {
           "shape": "__string",
@@ -9624,7 +10320,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "endpoint-id",
-          "documentation": "<p>The unique identifier for the endpoint.</p>"
+          "documentation": "<p>The case insensitive unique identifier for the endpoint. The identifier can't contain <code>$</code>, <code>{</code> or <code>}</code>.</p>"
         }
       },
       "required": [
@@ -9838,6 +10534,71 @@
       ],
       "payload": "ImportJobsResponse"
     },
+    "GetInAppMessagesRequest": {
+      "type": "structure",
+      "members": {
+        "ApplicationId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "application-id",
+          "documentation": "<p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>"
+        },
+        "EndpointId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "endpoint-id",
+          "documentation": "<p>The unique identifier for the endpoint.</p>"
+        }
+      },
+      "required": [
+        "ApplicationId",
+        "EndpointId"
+      ]
+    },
+    "GetInAppMessagesResponse": {
+      "type": "structure",
+      "members": {
+        "InAppMessagesResponse": {
+          "shape": "InAppMessagesResponse"
+        }
+      },
+      "required": [
+        "InAppMessagesResponse"
+      ],
+      "payload": "InAppMessagesResponse"
+    },
+    "GetInAppTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        },
+        "Version": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "version",
+          "documentation": "<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend=\"templates-template-name-template-type-versions\">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>"
+        }
+      },
+      "required": [
+        "TemplateName"
+      ]
+    },
+    "GetInAppTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "InAppTemplateResponse": {
+          "shape": "InAppTemplateResponse"
+        }
+      },
+      "required": [
+        "InAppTemplateResponse"
+      ],
+      "payload": "InAppTemplateResponse"
+    },
     "GetJourneyDateRangeKpiRequest": {
       "type": "structure",
       "members": {
@@ -9927,7 +10688,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "next-token",
-          "documentation": "<p>The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The <code/> string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "PageSize": {
           "shape": "__string",
@@ -9973,7 +10734,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "next-token",
-          "documentation": "<p>The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The <code/> string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "PageSize": {
           "shape": "__string",
@@ -10031,6 +10792,162 @@
         "JourneyResponse"
       ],
       "payload": "JourneyResponse"
+    },
+    "GetJourneyRunExecutionActivityMetricsRequest": {
+      "type": "structure",
+      "members": {
+        "ApplicationId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "application-id",
+          "documentation": "<p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>"
+        },
+        "JourneyActivityId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "journey-activity-id",
+          "documentation": "<p>The unique identifier for the journey activity.</p>"
+        },
+        "JourneyId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "journey-id",
+          "documentation": "<p>The unique identifier for the journey.</p>"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "next-token",
+          "documentation": "<p>The <code/> string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
+        },
+        "PageSize": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "page-size",
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
+        },
+        "RunId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "run-id",
+          "documentation": "<p>The unique identifier for the journey run.</p>"
+        }
+      },
+      "required": [
+        "RunId",
+        "JourneyActivityId",
+        "JourneyId",
+        "ApplicationId"
+      ]
+    },
+    "GetJourneyRunExecutionActivityMetricsResponse": {
+      "type": "structure",
+      "members": {
+        "JourneyRunExecutionActivityMetricsResponse": {
+          "shape": "JourneyRunExecutionActivityMetricsResponse"
+        }
+      },
+      "required": [
+        "JourneyRunExecutionActivityMetricsResponse"
+      ],
+      "payload": "JourneyRunExecutionActivityMetricsResponse"
+    },
+    "GetJourneyRunExecutionMetricsRequest": {
+      "type": "structure",
+      "members": {
+        "ApplicationId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "application-id",
+          "documentation": "<p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>"
+        },
+        "JourneyId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "journey-id",
+          "documentation": "<p>The unique identifier for the journey.</p>"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "next-token",
+          "documentation": "<p>The <code/> string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
+        },
+        "PageSize": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "page-size",
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
+        },
+        "RunId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "run-id",
+          "documentation": "<p>The unique identifier for the journey run.</p>"
+        }
+      },
+      "required": [
+        "RunId",
+        "ApplicationId",
+        "JourneyId"
+      ]
+    },
+    "GetJourneyRunExecutionMetricsResponse": {
+      "type": "structure",
+      "members": {
+        "JourneyRunExecutionMetricsResponse": {
+          "shape": "JourneyRunExecutionMetricsResponse"
+        }
+      },
+      "required": [
+        "JourneyRunExecutionMetricsResponse"
+      ],
+      "payload": "JourneyRunExecutionMetricsResponse"
+    },
+    "GetJourneyRunsRequest": {
+      "type": "structure",
+      "members": {
+        "ApplicationId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "application-id",
+          "documentation": "<p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>"
+        },
+        "JourneyId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "journey-id",
+          "documentation": "<p>The unique identifier for the journey.</p>"
+        },
+        "PageSize": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "page-size",
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
+        },
+        "Token": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "token",
+          "documentation": "<p>The NextToken string that specifies which page of results to return in a paginated response.</p>"
+        }
+      },
+      "required": [
+        "ApplicationId",
+        "JourneyId"
+      ]
+    },
+    "GetJourneyRunsResponse": {
+      "type": "structure",
+      "members": {
+        "JourneyRunsResponse": {
+          "shape": "JourneyRunsResponse"
+        }
+      },
+      "required": [
+        "JourneyRunsResponse"
+      ],
+      "payload": "JourneyRunsResponse"
     },
     "GetPushTemplateRequest": {
       "type": "structure",
@@ -10700,6 +11617,272 @@
         "Item"
       ]
     },
+    "InAppCampaignSchedule": {
+      "type": "structure",
+      "members": {
+        "EndDate": {
+          "shape": "__string",
+          "documentation": "<p>The scheduled time after which the in-app message should not be shown. Timestamp is in ISO 8601 format.</p>"
+        },
+        "EventFilter": {
+          "shape": "CampaignEventFilter",
+          "documentation": "<p>The event filter the SDK has to use to show the in-app message in the application.</p>"
+        },
+        "QuietTime": {
+          "shape": "QuietTime",
+          "documentation": "<p>Time during which the in-app message should not be shown to the user.</p>"
+        }
+      },
+      "documentation": "<p>Schedule of the campaign.</p>"
+    },
+    "InAppMessage": {
+      "type": "structure",
+      "members": {
+        "Content": {
+          "shape": "ListOfInAppMessageContent",
+          "documentation": "<p>In-app message content.</p>"
+        },
+        "CustomConfig": {
+          "shape": "MapOf__string",
+          "documentation": "<p>Custom config to be sent to SDK.</p>"
+        },
+        "Layout": {
+          "shape": "Layout",
+          "documentation": "<p>The layout of the message.</p>"
+        }
+      },
+      "documentation": "<p>Provides all fields required for building an in-app message.</p>"
+    },
+    "InAppMessageBodyConfig": {
+      "type": "structure",
+      "members": {
+        "Alignment": {
+          "shape": "Alignment",
+          "documentation": "<p>The alignment of the text. Valid values: LEFT, CENTER, RIGHT.</p>"
+        },
+        "Body": {
+          "shape": "__string",
+          "documentation": "<p>Message Body.</p>"
+        },
+        "TextColor": {
+          "shape": "__string",
+          "documentation": "<p>The text color.</p>"
+        }
+      },
+      "documentation": "<p>Text config for Message Body.</p>",
+      "required": [
+        "Alignment",
+        "TextColor",
+        "Body"
+      ]
+    },
+    "InAppMessageButton": {
+      "type": "structure",
+      "members": {
+        "Android": {
+          "shape": "OverrideButtonConfiguration",
+          "documentation": "<p>Default button content.</p>"
+        },
+        "DefaultConfig": {
+          "shape": "DefaultButtonConfiguration",
+          "documentation": "<p>Default button content.</p>"
+        },
+        "IOS": {
+          "shape": "OverrideButtonConfiguration",
+          "documentation": "<p>Default button content.</p>"
+        },
+        "Web": {
+          "shape": "OverrideButtonConfiguration",
+          "documentation": "<p>Default button content.</p>"
+        }
+      },
+      "documentation": "<p>Button Config for an in-app message.</p>"
+    },
+    "InAppMessageCampaign": {
+      "type": "structure",
+      "members": {
+        "CampaignId": {
+          "shape": "__string",
+          "documentation": "<p>Campaign id of the corresponding campaign.</p>"
+        },
+        "DailyCap": {
+          "shape": "__integer",
+          "documentation": "<p>Daily cap which controls the number of times any in-app messages can be shown to the endpoint during a day.</p>"
+        },
+        "InAppMessage": {
+          "shape": "InAppMessage",
+          "documentation": "<p>In-app message content with all fields required for rendering an in-app message.</p>"
+        },
+        "Priority": {
+          "shape": "__integer",
+          "documentation": "<p>Priority of the in-app message.</p>"
+        },
+        "Schedule": {
+          "shape": "InAppCampaignSchedule",
+          "documentation": "<p>Schedule of the campaign.</p>"
+        },
+        "SessionCap": {
+          "shape": "__integer",
+          "documentation": "<p>Session cap which controls the number of times an in-app message can be shown to the endpoint during an application session.</p>"
+        },
+        "TotalCap": {
+          "shape": "__integer",
+          "documentation": "<p>Total cap which controls the number of times an in-app message can be shown to the endpoint.</p>"
+        },
+        "TreatmentId": {
+          "shape": "__string",
+          "documentation": "<p>Treatment id of the campaign.</p>"
+        }
+      },
+      "documentation": "<p>Targeted in-app message campaign.</p>"
+    },
+    "InAppMessageContent": {
+      "type": "structure",
+      "members": {
+        "BackgroundColor": {
+          "shape": "__string",
+          "documentation": "<p>The background color for the message.</p>"
+        },
+        "BodyConfig": {
+          "shape": "InAppMessageBodyConfig",
+          "documentation": "<p>The configuration for the message body.</p>"
+        },
+        "HeaderConfig": {
+          "shape": "InAppMessageHeaderConfig",
+          "documentation": "<p>The configuration for the message header.</p>"
+        },
+        "ImageUrl": {
+          "shape": "__string",
+          "documentation": "<p>The image url for the background of message.</p>"
+        },
+        "PrimaryBtn": {
+          "shape": "InAppMessageButton",
+          "documentation": "<p>The first button inside the message.</p>"
+        },
+        "SecondaryBtn": {
+          "shape": "InAppMessageButton",
+          "documentation": "<p>The second button inside message.</p>"
+        }
+      },
+      "documentation": "<p>The configuration for the message content.</p>"
+    },
+    "InAppMessageHeaderConfig": {
+      "type": "structure",
+      "members": {
+        "Alignment": {
+          "shape": "Alignment",
+          "documentation": "<p>The alignment of the text. Valid values: LEFT, CENTER, RIGHT.</p>"
+        },
+        "Header": {
+          "shape": "__string",
+          "documentation": "<p>Message Header.</p>"
+        },
+        "TextColor": {
+          "shape": "__string",
+          "documentation": "<p>The text color.</p>"
+        }
+      },
+      "documentation": "<p>Text config for Message Header.</p>",
+      "required": [
+        "Alignment",
+        "Header",
+        "TextColor"
+      ]
+    },
+    "InAppMessagesResponse": {
+      "type": "structure",
+      "members": {
+        "InAppMessageCampaigns": {
+          "shape": "ListOfInAppMessageCampaign",
+          "documentation": "<p>List of targeted in-app message campaigns.</p>"
+        }
+      },
+      "documentation": "<p>Get in-app messages response object.</p>"
+    },
+    "InAppTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "Content": {
+          "shape": "ListOfInAppMessageContent",
+          "documentation": "<p>The content of the message, can include up to 5 modals. Each modal must contain a message, a header, and background color. ImageUrl and buttons are optional.</p>"
+        },
+        "CustomConfig": {
+          "shape": "MapOf__string",
+          "documentation": "<p>Custom config to be sent to client.</p>"
+        },
+        "Layout": {
+          "shape": "Layout",
+          "documentation": "<p>The layout of the message.</p>"
+        },
+        "tags": {
+          "shape": "MapOf__string",
+          "locationName": "tags",
+          "documentation": "<note><p>As of <b>22-05-2023</b> tags has been deprecated for update operations. After this date any value in tags is not processed and an error code is not returned. To manage tags we recommend using either <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference/tags-resource-arn.html\">Tags</a> in the <i>API Reference for Amazon Pinpoint</i>, <a href=\"https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html\">resourcegroupstaggingapi</a> commands in the <i>AWS Command Line Interface Documentation</i> or <a href=\"https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/resourcegroupstaggingapi/package-summary.html\">resourcegroupstaggingapi</a> in the <i>AWS SDK</i>.</p></note> <p>(Deprecated) A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+        },
+        "TemplateDescription": {
+          "shape": "__string",
+          "documentation": "<p>The description of the template.</p>"
+        }
+      },
+      "documentation": "<p>InApp Template Request.</p>"
+    },
+    "InAppTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "__string",
+          "documentation": "<p>The resource arn of the template.</p>"
+        },
+        "Content": {
+          "shape": "ListOfInAppMessageContent",
+          "documentation": "<p>The content of the message, can include up to 5 modals. Each modal must contain a message, a header, and background color. ImageUrl and buttons are optional.</p>"
+        },
+        "CreationDate": {
+          "shape": "__string",
+          "documentation": "<p>The creation date of the template.</p>"
+        },
+        "CustomConfig": {
+          "shape": "MapOf__string",
+          "documentation": "<p>Custom config to be sent to client.</p>"
+        },
+        "LastModifiedDate": {
+          "shape": "__string",
+          "documentation": "<p>The last modified date of the template.</p>"
+        },
+        "Layout": {
+          "shape": "Layout",
+          "documentation": "<p>The layout of the message.</p>"
+        },
+        "tags": {
+          "shape": "MapOf__string",
+          "locationName": "tags",
+          "documentation": "<p>A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+        },
+        "TemplateDescription": {
+          "shape": "__string",
+          "documentation": "<p>The description of the template.</p>"
+        },
+        "TemplateName": {
+          "shape": "__string",
+          "documentation": "<p>The name of the template.</p>"
+        },
+        "TemplateType": {
+          "shape": "TemplateType",
+          "documentation": "<p>The type of the template.</p>"
+        },
+        "Version": {
+          "shape": "__string",
+          "documentation": "<p>The version id of the template.</p>"
+        }
+      },
+      "documentation": "<p>In-App Template Response.</p>",
+      "required": [
+        "LastModifiedDate",
+        "CreationDate",
+        "TemplateName",
+        "TemplateType"
+      ]
+    },
     "Include": {
       "type": "string",
       "enum": [
@@ -10803,7 +11986,7 @@
       "members": {
         "ActivityType": {
           "shape": "__string",
-          "documentation": "<p>The type of activity that the metric applies to. Possible values are:</p> <ul><li><p>CONDITIONAL_SPLIT - For a yes/no split activity, which is an activity that sends participants down one of two paths in a journey.</p></li> <li><p>HOLDOUT - For a holdout activity, which is an activity that stops a journey for a specified percentage of participants.</p></li> <li><p>MESSAGE - For an email activity, which is an activity that sends an email message to participants.</p></li> <li><p>MULTI_CONDITIONAL_SPLIT - For a multivariate split activity, which is an activity that sends participants down one of as many as five paths in a journey.</p></li> <li><p>RANDOM_SPLIT - For a random split activity, which is an activity that sends specified percentages of participants down one of as many as five paths in a journey.</p></li> <li><p>WAIT - For a wait activity, which is an activity that waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.</p></li></ul>"
+          "documentation": "<p>The type of activity that the metric applies to. Possible values are:</p> <ul><li><p>CONDITIONAL_SPLIT – For a yes/no split activity, which is an activity that sends participants down one of two paths in a journey.</p></li> <li><p>HOLDOUT – For a holdout activity, which is an activity that stops a journey for a specified percentage of participants.</p></li> <li><p>MESSAGE – For an email activity, which is an activity that sends an email message to participants.</p></li> <li><p>MULTI_CONDITIONAL_SPLIT – For a multivariate split activity, which is an activity that sends participants down one of as many as five paths in a journey.</p></li> <li><p>RANDOM_SPLIT – For a random split activity, which is an activity that sends specified percentages of participants down one of as many as five paths in a journey.</p></li> <li><p>WAIT – For a wait activity, which is an activity that waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.</p></li></ul>"
         },
         "ApplicationId": {
           "shape": "__string",
@@ -10878,6 +12061,18 @@
         "MessagesPerSecond": {
           "shape": "__integer",
           "documentation": "<p>The maximum number of messages that the journey can send each second.</p>"
+        },
+        "EndpointReentryInterval": {
+          "shape": "__string",
+          "documentation": "<p>Minimum time that must pass before an endpoint can re-enter a given journey. The duration should use an ISO 8601 format, such as PT1H. </p>"
+        },
+        "TimeframeCap": {
+          "shape": "JourneyTimeframeCap",
+          "documentation": "<p>The number of messages that an endpoint can receive during the specified timeframe.</p>"
+        },
+        "TotalCap": {
+          "shape": "__integer",
+          "documentation": "<p>The maximum number of messages a journey can sent to a single endpoint. The maximum value is 100. If set to 0, this limit will not apply.</p>"
         }
       },
       "documentation": "<p>Specifies limits on the messages that a journey can send and the number of times participants can enter a journey.</p>"
@@ -10891,6 +12086,20 @@
         }
       },
       "documentation": "<p>Specifies the message configuration for a push notification that's sent to participants in a journey.</p>"
+    },
+    "JourneyChannelSettings": {
+      "type": "structure",
+      "members": {
+        "ConnectCampaignArn": {
+          "shape": "__string",
+          "documentation": "<p>Amazon Resource Name (ARN) of the Connect Campaign.</p>"
+        },
+        "ConnectCampaignExecutionRoleArn": {
+          "shape": "__string",
+          "documentation": "<p>IAM role ARN to be assumed when invoking Connect campaign execution APIs for dialing.</p>"
+        }
+      },
+      "documentation": "<p>The channel-specific configurations for the journey.</p>"
     },
     "JourneyResponse": {
       "type": "structure",
@@ -10955,6 +12164,34 @@
           "shape": "MapOf__string",
           "locationName": "tags",
           "documentation": "<p>This object is not used or supported.</p>"
+        },
+        "WaitForQuietTime": {
+          "shape": "__boolean",
+          "documentation": "<p>Indicates whether endpoints in quiet hours should enter a wait activity until quiet hours have elapsed.</p>"
+        },
+        "RefreshOnSegmentUpdate": {
+          "shape": "__boolean",
+          "documentation": "<p>Indicates whether the journey participants should be refreshed when a segment is updated.</p>"
+        },
+        "JourneyChannelSettings": {
+          "shape": "JourneyChannelSettings",
+          "documentation": "<p>The channel-specific configurations for the journey.</p>"
+        },
+        "SendingSchedule": {
+          "shape": "__boolean",
+          "documentation": "<p>Indicates if journey has Advance Quiet Time enabled. This flag should be set to true in order to allow using OpenHours and ClosedDays.</p>"
+        },
+        "OpenHours": {
+          "shape": "OpenHours",
+          "documentation": "<p>The time when a journey can send messages. QuietTime should be configured first and SendingSchedule should be set to true.</p>"
+        },
+        "ClosedDays": {
+          "shape": "ClosedDays",
+          "documentation": "<p>The time when a journey will not send messages. QuietTime should be configured first and SendingSchedule should be set to true.</p>"
+        },
+        "TimezoneEstimationMethods": {
+          "shape": "ListOf__TimezoneEstimationMethodsElement",
+          "documentation": "<p>An array of time zone estimation methods, if any, to use for determining an <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-endpoints-endpoint-id.html\">Endpoints</a> time zone if the Endpoint does not have a value for the Demographic.Timezone attribute.</p> <ul> <li><p>PHONE_NUMBER - A time zone is determined based on the Endpoint.Address and Endpoint.Location.Country.</p></li> <li><p>POSTAL_CODE - A time zone is determined based on the Endpoint.Location.PostalCode and Endpoint.Location.Country.</p> <note><p>POSTAL_CODE detection is only supported in the United States, United Kingdom, Australia, New Zealand, Canada, France, Italy, Spain, Germany and in regions where Amazon Pinpoint is available.</p></note></li> </ul>"
         }
       },
       "documentation": "<p>Provides information about the status, configuration, and other settings for a journey.</p>",
@@ -10964,6 +12201,136 @@
         "ApplicationId"
       ]
     },
+    "JourneyRunExecutionActivityMetricsResponse": {
+      "type": "structure",
+      "members": {
+        "ActivityType": {
+          "shape": "__string",
+          "documentation": "<p>The type of activity that the metric applies to. Possible values are:</p> <ul><li><p>CONDITIONAL_SPLIT – For a yes/no split activity, which is an activity that sends participants down one of two paths in a journey.</p></li> <li><p>HOLDOUT – For a holdout activity, which is an activity that stops a journey for a specified percentage of participants.</p></li> <li><p>MESSAGE – For an email activity, which is an activity that sends an email message to participants.</p></li> <li><p>MULTI_CONDITIONAL_SPLIT – For a multivariate split activity, which is an activity that sends participants down one of as many as five paths in a journey.</p></li> <li><p>RANDOM_SPLIT – For a random split activity, which is an activity that sends specified percentages of participants down one of as many as five paths in a journey.</p></li> <li><p>WAIT – For a wait activity, which is an activity that waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.</p></li></ul>"
+        },
+        "ApplicationId": {
+          "shape": "__string",
+          "documentation": "<p>The unique identifier for the application that the metric applies to.</p>"
+        },
+        "JourneyActivityId": {
+          "shape": "__string",
+          "documentation": "<p>The unique identifier for the activity that the metric applies to.</p>"
+        },
+        "JourneyId": {
+          "shape": "__string",
+          "documentation": "<p>The unique identifier for the journey that the metric applies to.</p>"
+        },
+        "LastEvaluatedTime": {
+          "shape": "__string",
+          "documentation": "<p>The date and time, in ISO 8601 format, when Amazon Pinpoint last evaluated the execution status of the activity for this journey run and updated the data for the metric.</p>"
+        },
+        "Metrics": {
+          "shape": "MapOf__string",
+          "documentation": "<p>A JSON object that contains the results of the query. For information about the structure and contents of the results, see see <a href=\"https://docs.aws.amazon.com//pinpoint/latest/developerguide/analytics-standard-metrics.html\">Standard Amazon Pinpoint analytics metrics</a> in the <i>Amazon Pinpoint Developer Guide</i>.</p>"
+        },
+        "RunId": {
+          "shape": "__string",
+          "documentation": "<p>The unique identifier for the journey run that the metric applies to.</p>"
+        }
+      },
+      "documentation": "<p>Provides the results of a query that retrieved the data for a standard execution metric that applies to a journey activity for a particular journey run, and provides information about that query.</p>",
+      "required": [
+        "Metrics",
+        "JourneyId",
+        "LastEvaluatedTime",
+        "JourneyActivityId",
+        "ActivityType",
+        "RunId",
+        "ApplicationId"
+      ]
+    },
+    "JourneyRunExecutionMetricsResponse": {
+      "type": "structure",
+      "members": {
+        "ApplicationId": {
+          "shape": "__string",
+          "documentation": "<p>The unique identifier for the application that the metric applies to.</p>"
+        },
+        "JourneyId": {
+          "shape": "__string",
+          "documentation": "<p>The unique identifier for the journey that the metric applies to.</p>"
+        },
+        "LastEvaluatedTime": {
+          "shape": "__string",
+          "documentation": "<p>The date and time, in ISO 8601 format, when Amazon Pinpoint last evaluated the journey run and updated the data for the metric.</p>"
+        },
+        "Metrics": {
+          "shape": "MapOf__string",
+          "documentation": "<p>A JSON object that contains the results of the query. For information about the structure and contents of the results, see the <a href=\"https://docs.aws.amazon.com//pinpoint/latest/developerguide/analytics-standard-metrics.html\">Standard Amazon Pinpoint analytics metrics</a> in the <i>Amazon Pinpoint Developer Guide</i>.</p>"
+        },
+        "RunId": {
+          "shape": "__string",
+          "documentation": "<p>The unique identifier for the journey run that the metric applies to.</p>"
+        }
+      },
+      "documentation": "<p>Provides the results of a query that retrieved the data for a standard execution metric that applies to a journey run, and provides information about that query.</p>",
+      "required": [
+        "Metrics",
+        "JourneyId",
+        "LastEvaluatedTime",
+        "RunId",
+        "ApplicationId"
+      ]
+    },
+    "JourneyRunResponse": {
+      "type": "structure",
+      "members": {
+        "CreationTime": {
+          "shape": "__string",
+          "documentation": "<p>The time when the journey run was created or scheduled, in ISO 8601 format.</p>"
+        },
+        "LastUpdateTime": {
+          "shape": "__string",
+          "documentation": "<p>The last time the journey run was updated, in ISO 8601 format..</p>"
+        },
+        "RunId": {
+          "shape": "__string",
+          "documentation": "<p>The unique identifier for the run.</p>"
+        },
+        "Status": {
+          "shape": "JourneyRunStatus",
+          "documentation": "<p>The current status of the journey run.</p>"
+        }
+      },
+      "documentation": "<p>Provides information from a specified run of a journey.</p>",
+      "required": [
+        "Status",
+        "LastUpdateTime",
+        "CreationTime",
+        "RunId"
+      ]
+    },
+    "JourneyRunsResponse": {
+      "type": "structure",
+      "members": {
+        "Item": {
+          "shape": "ListOfJourneyRunResponse",
+          "documentation": "<p>An array of responses, one for each run of the journey</p>"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "documentation": "<p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>"
+        }
+      },
+      "documentation": "<p>Provides information from all runs of a journey.</p>",
+      "required": [
+        "Item"
+      ]
+    },
+    "JourneyRunStatus": {
+      "type": "string",
+      "enum": [
+        "SCHEDULED",
+        "RUNNING",
+        "COMPLETED",
+        "CANCELLED"
+      ]
+    },
     "JourneySMSMessage": {
       "type": "structure",
       "members": {
@@ -10971,9 +12338,21 @@
           "shape": "MessageType",
           "documentation": "<p>The SMS message type. Valid values are TRANSACTIONAL (for messages that are critical or time-sensitive, such as a one-time passwords) and PROMOTIONAL (for messsages that aren't critical or time-sensitive, such as marketing messages).</p>"
         },
+        "OriginationNumber": {
+          "shape": "__string",
+          "documentation": "<p>The long code to send the SMS message from. This value should be one of the dedicated long codes that's assigned to your AWS account. Although it isn't required, we recommend that you specify the long code using an E.164 format to ensure prompt and accurate delivery of the message. For example, +12065550100.</p>"
+        },
         "SenderId": {
           "shape": "__string",
           "documentation": "<p>The sender ID to display as the sender of the message on a recipient's device. Support for sender IDs varies by country or region. For more information, see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-countries.html\">Supported Countries and Regions</a> in the Amazon Pinpoint User Guide.</p>"
+        },
+        "EntityId": {
+          "shape": "__string",
+          "documentation": "<p>The entity ID or Principal Entity (PE) id received from the regulatory body for sending SMS in your country.</p>"
+        },
+        "TemplateId": {
+          "shape": "__string",
+          "documentation": "<p>The template ID received from the regulatory body for sending SMS in your country.</p>"
         }
       },
       "documentation": "<p>Specifies the sender ID and message type for an SMS message that's sent to participants in a journey.</p>"
@@ -11001,10 +12380,24 @@
       "members": {
         "State": {
           "shape": "State",
-          "documentation": "<p>The status of the journey. Currently, the only supported value is CANCELLED.</p> <p>If you cancel a journey, Amazon Pinpoint continues to perform activities that are currently in progress, until those activities are complete. Amazon Pinpoint also continues to collect and aggregate analytics data for those activities, until they are complete, and any activities that were complete when you cancelled the journey.</p> <p>After you cancel a journey, you can't add, change, or remove any activities from the journey. In addition, Amazon Pinpoint stops evaluating the journey and doesn't perform any activities that haven't started.</p>"
+          "documentation": "<p>The status of the journey. Currently, Supported values are ACTIVE, PAUSED, and CANCELLED</p> <p>If you cancel a journey, Amazon Pinpoint continues to perform activities that are currently in progress, until those activities are complete. Amazon Pinpoint also continues to collect and aggregate analytics data for those activities, until they are complete, and any activities that were complete when you cancelled the journey.</p> <p>After you cancel a journey, you can't add, change, or remove any activities from the journey. In addition, Amazon Pinpoint stops evaluating the journey and doesn't perform any activities that haven't started.</p> <p>When the journey is paused, Amazon Pinpoint continues to perform activities that are currently in progress, until those activities are complete. Endpoints will stop entering journeys when the journey is paused and will resume entering the journey after the journey is resumed. For wait activities, wait time is paused when the journey is paused. Currently, PAUSED only supports journeys with a segment refresh interval.</p>"
         }
       },
       "documentation": "<p>Changes the status of a journey.</p>"
+    },
+    "JourneyTimeframeCap": {
+      "type": "structure",
+      "members": {
+        "Cap": {
+          "shape": "__integer",
+          "documentation": "<p>The maximum number of messages that all journeys can send to an endpoint during the specified timeframe. The maximum value is 100. If set to 0, this limit will not apply.</p>"
+        },
+        "Days": {
+          "shape": "__integer",
+          "documentation": "<p>The length of the timeframe in days. The maximum value is 30. If set to 0, this limit will not apply.</p>"
+        }
+      },
+      "documentation": "<p>The number of messages that can be sent to an endpoint during the specified timeframe for all journeys.</p>"
     },
     "JourneysResponse": {
       "type": "structure",
@@ -11021,6 +12414,17 @@
       "documentation": "<p>Provides information about the status, configuration, and other settings for all the journeys that are associated with an application.</p>",
       "required": [
         "Item"
+      ]
+    },
+    "Layout": {
+      "type": "string",
+      "enum": [
+        "BOTTOM_BANNER",
+        "TOP_BANNER",
+        "OVERLAYS",
+        "MOBILE_FEED",
+        "MIDDLE_BANNER",
+        "CAROUSEL"
       ]
     },
     "ListJourneysRequest": {
@@ -11292,6 +12696,10 @@
         "SMSMessage": {
           "shape": "CampaignSmsMessage",
           "documentation": "<p>The message that the campaign sends through the SMS channel. If specified, this message overrides the default message.</p>"
+        },
+        "InAppMessage": {
+          "shape": "CampaignInAppMessage",
+          "documentation": "<p>The in-app message configuration.</p>"
         }
       },
       "documentation": "<p>Specifies the message configuration settings for a campaign.</p>"
@@ -11359,7 +12767,7 @@
       "members": {
         "DeliveryStatus": {
           "shape": "DeliveryStatus",
-          "documentation": "<p>The delivery status of the message. Possible values are:</p> <ul> <li><p>DUPLICATE - The endpoint address is a duplicate of another endpoint address. Amazon Pinpoint won't attempt to send the message again.</p></li>   <li><p>OPT_OUT - The user who's associated with the endpoint address has opted out of receiving messages from you. Amazon Pinpoint won't attempt to send the message again.</p></li> <li><p>PERMANENT_FAILURE - An error occurred when delivering the message to the endpoint address. Amazon Pinpoint won't attempt to send the message again.</p></li>   <li><p>SUCCESSFUL - The message was successfully delivered to the endpoint address.</p></li> <li><p>TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint won't attempt to send the message again.</p></li> <li><p>THROTTLED - Amazon Pinpoint throttled the operation to send the message to the endpoint address.</p></li> <li><p>TIMEOUT - The message couldn't be sent within the timeout period.</p></li> <li><p>UNKNOWN_FAILURE - An unknown error occurred.</p></li></ul>"
+          "documentation": "<p>The delivery status of the message. Possible values are:</p> <ul> <li><p>DUPLICATE - The endpoint address is a duplicate of another endpoint address. Amazon Pinpoint won't attempt to send the message again.</p></li>   <li><p>OPT_OUT - The user who's associated with the endpoint address has opted out of receiving messages from you. Amazon Pinpoint won't attempt to send the message again.</p></li> <li><p>PERMANENT_FAILURE - An error occurred when delivering the message to the endpoint address. Amazon Pinpoint won't attempt to send the message again.</p></li>   <li><p>SUCCESSFUL - The message was successfully delivered to the endpoint address.</p></li> <li><p>TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint won't attempt to send the message again.</p></li> <li><p>THROTTLED - Amazon Pinpoint throttled the operation to send the message to the endpoint address.</p></li> <li><p>UNKNOWN_FAILURE - An unknown error occurred.</p></li></ul>"
         },
         "MessageId": {
           "shape": "__string",
@@ -11531,6 +12939,23 @@
         "ANY"
       ]
     },
+    "OverrideButtonConfiguration": {
+      "type": "structure",
+      "members": {
+        "ButtonAction": {
+          "shape": "ButtonAction",
+          "documentation": "<p>Action triggered by the button.</p>"
+        },
+        "Link": {
+          "shape": "__string",
+          "documentation": "<p>Button destination.</p>"
+        }
+      },
+      "documentation": "<p>Override button configuration.</p>",
+      "required": [
+        "ButtonAction"
+      ]
+    },
     "PhoneNumberValidateRequest": {
       "type": "structure",
       "members": {
@@ -11661,7 +13086,7 @@
         "tags": {
           "shape": "MapOf__string",
           "locationName": "tags",
-          "documentation": "<p>A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+          "documentation": "<note><p>As of <b>22-05-2023</b> tags has been deprecated for update operations. After this date any value in tags is not processed and an error code is not returned. To manage tags we recommend using either <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference/tags-resource-arn.html\">Tags</a> in the <i>API Reference for Amazon Pinpoint</i>, <a href=\"https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html\">resourcegroupstaggingapi</a> commands in the <i>AWS Command Line Interface Documentation</i> or <a href=\"https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/resourcegroupstaggingapi/package-summary.html\">resourcegroupstaggingapi</a> in the <i>AWS SDK</i>.</p></note> <p>(Deprecated) A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
         },
         "TemplateDescription": {
           "shape": "__string",
@@ -12134,6 +13559,14 @@
         "Substitutions": {
           "shape": "MapOfListOf__string",
           "documentation": "<p>The message variables to use in the SMS message. You can override the default variables with individual address variables.</p>"
+        },
+        "EntityId": {
+          "shape": "__string",
+          "documentation": "<p>The entity ID or Principal Entity (PE) id received from the regulatory body for sending SMS in your country.</p>"
+        },
+        "TemplateId": {
+          "shape": "__string",
+          "documentation": "<p>The template ID received from the regulatory body for sending SMS in your country.</p>"
         }
       },
       "documentation": "<p>Specifies the default settings for a one-time SMS message that's sent directly to an endpoint.</p>"
@@ -12178,7 +13611,7 @@
         "tags": {
           "shape": "MapOf__string",
           "locationName": "tags",
-          "documentation": "<p>A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+          "documentation": "<note><p>As of <b>22-05-2023</b> tags has been deprecated for update operations. After this date any value in tags is not processed and an error code is not returned. To manage tags we recommend using either <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference/tags-resource-arn.html\">Tags</a> in the <i>API Reference for Amazon Pinpoint</i>, <a href=\"https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html\">resourcegroupstaggingapi</a> commands in the <i>AWS Command Line Interface Documentation</i> or <a href=\"https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/resourcegroupstaggingapi/package-summary.html\">resourcegroupstaggingapi</a> in the <i>AWS SDK</i>.</p></note> <p>(Deprecated) A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
         },
         "TemplateDescription": {
           "shape": "__string",
@@ -12585,6 +14018,94 @@
       ],
       "payload": "MessageResponse"
     },
+    "SendOTPMessageRequest": {
+      "type": "structure",
+      "members": {
+        "ApplicationId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "application-id",
+          "documentation": "<p>The unique ID of your Amazon Pinpoint application.</p>"
+        },
+        "SendOTPMessageRequestParameters": {
+          "shape": "SendOTPMessageRequestParameters"
+        }
+      },
+      "required": [
+        "ApplicationId",
+        "SendOTPMessageRequestParameters"
+      ],
+      "payload": "SendOTPMessageRequestParameters"
+    },
+    "SendOTPMessageRequestParameters": {
+      "type": "structure",
+      "members": {
+        "AllowedAttempts": {
+          "shape": "__integer",
+          "documentation": "<p>The attempts allowed to validate an OTP.</p>"
+        },
+        "BrandName": {
+          "shape": "__string",
+          "documentation": "<p>The brand name that will be substituted into the OTP message body. Should be owned by calling AWS account.</p>"
+        },
+        "Channel": {
+          "shape": "__string",
+          "documentation": "<p>Channel type for the OTP message. Supported values: [SMS].</p>"
+        },
+        "CodeLength": {
+          "shape": "__integer",
+          "documentation": "<p>The number of characters in the generated OTP.</p>"
+        },
+        "DestinationIdentity": {
+          "shape": "__string",
+          "documentation": "<p>The destination identity to send OTP to.</p>"
+        },
+        "EntityId": {
+          "shape": "__string",
+          "documentation": "<p>A unique Entity ID received from DLT after entity registration is approved.</p>"
+        },
+        "Language": {
+          "shape": "__string",
+          "documentation": "<p>The language to be used for the outgoing message body containing the OTP.</p>"
+        },
+        "OriginationIdentity": {
+          "shape": "__string",
+          "documentation": "<p>The origination identity used to send OTP from.</p>"
+        },
+        "ReferenceId": {
+          "shape": "__string",
+          "documentation": "<p>Developer-specified reference identifier. Required to match during OTP verification.</p>"
+        },
+        "TemplateId": {
+          "shape": "__string",
+          "documentation": "<p>A unique Template ID received from DLT after entity registration is approved.</p>"
+        },
+        "ValidityPeriod": {
+          "shape": "__integer",
+          "documentation": "<p>The time in minutes before the OTP is no longer valid.</p>"
+        }
+      },
+      "documentation": "<p>Send OTP message request parameters.</p>",
+      "required": [
+        "BrandName",
+        "ReferenceId",
+        "Channel",
+        "DestinationIdentity",
+        "OriginationIdentity"
+      ]
+    },
+    "SendOTPMessageResponse": {
+      "type": "structure",
+      "members": {
+        "MessageResponse": {
+          "shape": "MessageResponse"
+        }
+      },
+      "required": [
+        "MessageResponse"
+      ],
+      "payload": "MessageResponse"
+    },
     "SendUsersMessageRequest": {
       "type": "structure",
       "members": {
@@ -12743,9 +14264,33 @@
         "TextPart": {
           "shape": "SimpleEmailPart",
           "documentation": "<p>The body of the email message, in plain text format. We recommend using plain text format for email clients that don't render HTML content and clients that are connected to high-latency networks, such as mobile devices.</p>"
+        },
+        "Headers": {
+          "shape": "ListOfMessageHeader",
+          "documentation": "<p>The list of MessageHeaders for the email. You can have up to 15 Headers.</p>"
         }
       },
       "documentation": "<p>Specifies the contents of an email message, composed of a subject, a text part, and an HTML part.</p>"
+    },
+    "ListOfMessageHeader": {
+      "type": "list",
+      "member": {
+        "shape": "MessageHeader"
+      }
+    },
+    "MessageHeader": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "__string",
+          "documentation": "<p>The name of the message header. The header name can contain up to 126 characters.</p>"
+        },
+        "Value": {
+          "shape": "__string",
+          "documentation": "<p>The value of the message header. The header value can contain up to 870 characters, including the length of any rendered attributes. For example if you add the {CreationDate} attribute, it renders as YYYY-MM-DDTHH:MM:SS.SSSZ and is 24 characters in length.</p>"
+        }
+      },
+      "documentation": "<p>Contains the name and value pair of an email header to add to your email. You can have up to 15 MessageHeaders. A header can contain information such as the sender, receiver, route, or timestamp.</p>"
     },
     "SimpleEmailPart": {
       "type": "structure",
@@ -12793,7 +14338,8 @@
         "ACTIVE",
         "COMPLETED",
         "CANCELLED",
-        "CLOSED"
+        "CLOSED",
+        "PAUSED"
       ]
     },
     "TagResourceRequest": {
@@ -12871,9 +14417,31 @@
         "VoiceTemplate": {
           "shape": "Template",
           "documentation": "<p>The voice template to use for the message. This object isn't supported for campaigns.</p>"
+        },
+        "InAppTemplate": {
+          "shape": "Template",
+          "documentation": "<p>The InApp template to use for the message. The InApp template object is not supported for SendMessages.</p>"
         }
       },
       "documentation": "<p>Specifies the message template to use for the message, for each type of channel.</p>"
+    },
+    "TemplateCreateMessageBody": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "__string",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the message template that was created.</p>"
+        },
+        "Message": {
+          "shape": "__string",
+          "documentation": "<p>The message that's returned from the API for the request to create the message template.</p>"
+        },
+        "RequestID": {
+          "shape": "__string",
+          "documentation": "<p>The unique identifier for the request to create the message template.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about a request to create a message template.</p>"
     },
     "TemplateResponse": {
       "type": "structure",
@@ -12909,7 +14477,7 @@
         },
         "TemplateType": {
           "shape": "TemplateType",
-          "documentation": "<p>The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, and VOICE.</p>"
+          "documentation": "<p>The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, INAPP, and VOICE.</p>"
         },
         "Version": {
           "shape": "__string",
@@ -12930,7 +14498,8 @@
         "EMAIL",
         "SMS",
         "VOICE",
-        "PUSH"
+        "PUSH",
+        "INAPP"
       ]
     },
     "TemplateVersionResponse": {
@@ -12958,7 +14527,7 @@
         },
         "TemplateType": {
           "shape": "__string",
-          "documentation": "<p>The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, and VOICE.</p>"
+          "documentation": "<p>The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, INAPP, and VOICE.</p>"
         },
         "Version": {
           "shape": "__string",
@@ -13442,7 +15011,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "endpoint-id",
-          "documentation": "<p>The unique identifier for the endpoint.</p>"
+          "documentation": "<p>The case insensitive unique identifier for the endpoint. The identifier can't contain <code>$</code>, <code>{</code> or <code>}</code>.</p>"
         },
         "EndpointRequest": {
           "shape": "EndpointRequest"
@@ -13528,6 +15097,49 @@
         "GCMChannelResponse"
       ],
       "payload": "GCMChannelResponse"
+    },
+    "UpdateInAppTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "CreateNewVersion": {
+          "shape": "__boolean",
+          "location": "querystring",
+          "locationName": "create-new-version",
+          "documentation": "<p>Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to (overwrite) the latest existing version of the template.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to (overwrites) the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.</p>"
+        },
+        "InAppTemplateRequest": {
+          "shape": "InAppTemplateRequest"
+        },
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        },
+        "Version": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "version",
+          "documentation": "<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend=\"templates-template-name-template-type-versions\">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>"
+        }
+      },
+      "required": [
+        "TemplateName",
+        "InAppTemplateRequest"
+      ],
+      "payload": "InAppTemplateRequest"
+    },
+    "UpdateInAppTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "MessageBody": {
+          "shape": "MessageBody"
+        }
+      },
+      "required": [
+        "MessageBody"
+      ],
+      "payload": "MessageBody"
     },
     "UpdateJourneyRequest": {
       "type": "structure",
@@ -13949,6 +15561,70 @@
       ],
       "payload": "MessageBody"
     },
+    "VerificationResponse": {
+      "type": "structure",
+      "members": {
+        "Valid": {
+          "shape": "__boolean",
+          "documentation": "<p>Specifies whether the OTP is valid or not.</p>"
+        }
+      },
+      "documentation": "<p>Verify OTP Message Response.</p>"
+    },
+    "VerifyOTPMessageRequest": {
+      "type": "structure",
+      "members": {
+        "ApplicationId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "application-id",
+          "documentation": "<p>The unique ID of your Amazon Pinpoint application.</p>"
+        },
+        "VerifyOTPMessageRequestParameters": {
+          "shape": "VerifyOTPMessageRequestParameters"
+        }
+      },
+      "required": [
+        "ApplicationId",
+        "VerifyOTPMessageRequestParameters"
+      ],
+      "payload": "VerifyOTPMessageRequestParameters"
+    },
+    "VerifyOTPMessageRequestParameters": {
+      "type": "structure",
+      "members": {
+        "DestinationIdentity": {
+          "shape": "__string",
+          "documentation": "<p>The destination identity to send OTP to.</p>"
+        },
+        "Otp": {
+          "shape": "__string",
+          "documentation": "<p>The OTP the end user provided for verification.</p>"
+        },
+        "ReferenceId": {
+          "shape": "__string",
+          "documentation": "<p>The reference identifier provided when the OTP was previously sent.</p>"
+        }
+      },
+      "documentation": "<p>Verify OTP message request.</p>",
+      "required": [
+        "ReferenceId",
+        "Otp",
+        "DestinationIdentity"
+      ]
+    },
+    "VerifyOTPMessageResponse": {
+      "type": "structure",
+      "members": {
+        "VerificationResponse": {
+          "shape": "VerificationResponse"
+        }
+      },
+      "required": [
+        "VerificationResponse"
+      ],
+      "payload": "VerificationResponse"
+    },
     "VoiceChannelRequest": {
       "type": "structure",
       "members": {
@@ -14052,7 +15728,7 @@
         "tags": {
           "shape": "MapOf__string",
           "locationName": "tags",
-          "documentation": "<p>A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+          "documentation": "<note><p>As of <b>22-05-2023</b> tags has been deprecated for update operations. After this date any value in tags is not processed and an error code is not returned. To manage tags we recommend using either <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference/tags-resource-arn.html\">Tags</a> in the <i>API Reference for Amazon Pinpoint</i>, <a href=\"https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html\">resourcegroupstaggingapi</a> commands in the <i>AWS Command Line Interface Documentation</i> or <a href=\"https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/resourcegroupstaggingapi/package-summary.html\">resourcegroupstaggingapi</a> in the <i>AWS SDK</i>.</p></note> <p>(Deprecated) A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
         },
         "TemplateDescription": {
           "shape": "__string",
@@ -14175,6 +15851,10 @@
         "QuietTime": {
           "shape": "QuietTime",
           "documentation": "<p>The default quiet time for campaigns in the application. Quiet time is a specific time range when messages aren't sent to endpoints, if all the following conditions are met:</p> <ul><li><p>The EndpointDemographic.Timezone property of the endpoint is set to a valid value.</p></li> <li><p>The current time in the endpoint's time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings).</p></li> <li><p>The current time in the endpoint's time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings).</p></li></ul> <p>If any of the preceding conditions isn't met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled.</p> <p>To override the default quiet time settings for a specific campaign or journey, use the <link  linkend=\"apps-application-id-campaigns-campaign-id\">Campaign</link> resource or the <link  linkend=\"apps-application-id-journeys-journey-id\">Journey</link> resource to define a custom quiet time for the campaign or journey.</p>"
+        },
+        "JourneyLimits": {
+          "shape": "ApplicationSettingsJourneyLimits",
+          "documentation": "<p>The default sending limits for journeys in the application. These limits apply to each journey for the application but can be overridden, on a per journey basis, with the JourneyLimits resource.</p>"
         }
       },
       "documentation": "<p>Specifies the default settings for an application.</p>"
@@ -14233,7 +15913,7 @@
         "tags": {
           "shape": "MapOf__string",
           "locationName": "tags",
-          "documentation": "<p>A string-to-string map of key-value pairs that defines the tags to associate with the campaign. Each tag consists of a required tag key and an associated tag value.</p>"
+          "documentation": "<note><p>As of <b>22-05-2023</b> tags has been deprecated for update operations. After this date any value in tags is not processed and an error code is not returned. To manage tags we recommend using either <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference/tags-resource-arn.html\">Tags</a> in the <i>API Reference for Amazon Pinpoint</i>, <a href=\"https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html\">resourcegroupstaggingapi</a> commands in the <i>AWS Command Line Interface Documentation</i> or <a href=\"https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/resourcegroupstaggingapi/package-summary.html\">resourcegroupstaggingapi</a> in the <i>AWS SDK</i>.</p></note> <p>(Deprecated) A string-to-string map of key-value pairs that defines the tags to associate with the campaign. Each tag consists of a required tag key and an associated tag value.</p>"
         },
         "TemplateConfiguration": {
           "shape": "TemplateConfiguration",
@@ -14246,6 +15926,10 @@
         "TreatmentName": {
           "shape": "__string",
           "documentation": "<p>A custom name of the default treatment for the campaign, if the campaign has multiple treatments. A <i>treatment</i> is a variation of a campaign that's used for A/B testing.</p>"
+        },
+        "Priority": {
+          "shape": "__integer",
+          "documentation": "<p>Defines the priority of the campaign, used to decide the order of messages displayed to user if there are multiple messages scheduled to be displayed at the same moment.</p>"
         }
       },
       "documentation": "<p>Specifies the configuration and other settings for a campaign.</p>"
@@ -14317,7 +16001,35 @@
         },
         "State": {
           "shape": "State",
-          "documentation": "<p>The status of the journey. Valid values are:</p> <ul><li><p>DRAFT - Saves the journey and doesn't publish it.</p></li> <li><p>ACTIVE - Saves and publishes the journey. Depending on the journey's schedule, the journey starts running immediately or at the scheduled start time. If a journey's status is ACTIVE, you can't add, change, or remove activities from it.</p></li></ul> <p>The CANCELLED, COMPLETED, and CLOSED values are not supported in requests to create or update a journey. To cancel a journey, use the <link  linkend=\"apps-application-id-journeys-journey-id-state\">Journey State</link> resource.</p>"
+          "documentation": "<p>The status of the journey. Valid values are:</p> <ul><li><p>DRAFT - Saves the journey and doesn't publish it.</p></li> <li><p>ACTIVE - Saves and publishes the journey. Depending on the journey's schedule, the journey starts running immediately or at the scheduled start time. If a journey's status is ACTIVE, you can't add, change, or remove activities from it.</p></li></ul> <p>PAUSED, CANCELLED, COMPLETED, and CLOSED states are not supported in requests to create or update a journey. To cancel, pause, or resume a journey, use the <link  linkend=\"apps-application-id-journeys-journey-id-state\">Journey State</link> resource.</p>"
+        },
+        "WaitForQuietTime": {
+          "shape": "__boolean",
+          "documentation": "<p>Specifies whether endpoints in quiet hours should enter a wait till the end of their quiet hours.</p>"
+        },
+        "RefreshOnSegmentUpdate": {
+          "shape": "__boolean",
+          "documentation": "<p>Indicates whether the journey participants should be refreshed when a segment is updated.</p>"
+        },
+        "JourneyChannelSettings": {
+          "shape": "JourneyChannelSettings",
+          "documentation": "<p>The channel-specific configurations for the journey.</p>"
+        },
+        "SendingSchedule": {
+          "shape": "__boolean",
+          "documentation": "<p>Indicates if journey has Advance Quiet Time enabled. This flag should be set to true in order to allow using OpenHours and ClosedDays.</p>"
+        },
+        "OpenHours": {
+          "shape": "OpenHours",
+          "documentation": "<p>The time when journey allow to send messages. QuietTime should be configured first and SendingSchedule should be set to true.</p>"
+        },
+        "ClosedDays": {
+          "shape": "ClosedDays",
+          "documentation": "<p>The time when journey will stop sending messages. QuietTime should be configured first and SendingSchedule should be set to true.</p>"
+        },
+        "TimezoneEstimationMethods": {
+          "shape": "ListOf__TimezoneEstimationMethodsElement",
+          "documentation": "<p>An array of time zone estimation methods, if any, to use for determining an <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-endpoints-endpoint-id.html\">Endpoints</a> time zone if the Endpoint does not have a value for the Demographic.Timezone attribute.</p> <ul> <li><p>PHONE_NUMBER - A time zone is determined based on the Endpoint.Address and Endpoint.Location.Country.</p></li> <li><p>POSTAL_CODE - A time zone is determined based on the Endpoint.Location.PostalCode and Endpoint.Location.Country.</p> <note><p>POSTAL_CODE detection is only supported in the United States, United Kingdom, Australia, New Zealand, Canada, France, Italy, Spain, Germany and in regions where Amazon Pinpoint is available.</p></note></li> </ul>"
         }
       },
       "documentation": "<p>Specifies the configuration and other settings for a journey.</p>",
@@ -14343,7 +16055,7 @@
         "tags": {
           "shape": "MapOf__string",
           "locationName": "tags",
-          "documentation": "<p>A string-to-string map of key-value pairs that defines the tags to associate with the segment. Each tag consists of a required tag key and an associated tag value.</p>"
+          "documentation": "<note><p>As of <b>22-05-2023</b> tags has been deprecated for update operations. After this date any value in tags is not processed and an error code is not returned. To manage tags we recommend using either <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference/tags-resource-arn.html\">Tags</a> in the <i>API Reference for Amazon Pinpoint</i>, <a href=\"https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html\">resourcegroupstaggingapi</a> commands in the <i>AWS Command Line Interface Documentation</i> or <a href=\"https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/resourcegroupstaggingapi/package-summary.html\">resourcegroupstaggingapi</a> in the <i>AWS SDK</i>.</p></note> <p>(Deprecated) A string-to-string map of key-value pairs that defines the tags to associate with the segment. Each tag consists of a required tag key and an associated tag value.</p>"
         }
       },
       "documentation": "<p>Specifies the configuration, dimension, and other settings for a segment. A WriteSegmentRequest object can include a Dimensions object or a SegmentGroups object, but not both.</p>"
@@ -14399,7 +16111,15 @@
         "VOICE",
         "EMAIL",
         "BAIDU",
-        "CUSTOM"
+        "CUSTOM",
+        "IN_APP"
+      ]
+    },
+    "__TimezoneEstimationMethodsElement": {
+      "type": "string",
+      "enum": [
+        "PHONE_NUMBER",
+        "POSTAL_CODE"
       ]
     },
     "__boolean": {
@@ -14453,10 +16173,28 @@
         "shape": "ImportJobResponse"
       }
     },
+    "ListOfInAppMessageCampaign": {
+      "type": "list",
+      "member": {
+        "shape": "InAppMessageCampaign"
+      }
+    },
+    "ListOfInAppMessageContent": {
+      "type": "list",
+      "member": {
+        "shape": "InAppMessageContent"
+      }
+    },
     "ListOfJourneyResponse": {
       "type": "list",
       "member": {
         "shape": "JourneyResponse"
+      }
+    },
+    "ListOfJourneyRunResponse": {
+      "type": "list",
+      "member": {
+        "shape": "JourneyRunResponse"
       }
     },
     "ListOfMultiConditionalBranch": {
@@ -14547,6 +16285,12 @@
       "type": "list",
       "member": {
         "shape": "__EndpointTypesElement"
+      }
+    },
+    "ListOf__TimezoneEstimationMethodsElement": {
+      "type": "list",
+      "member": {
+        "shape": "__TimezoneEstimationMethodsElement"
       }
     },
     "ListOf__string": {
@@ -14714,6 +16458,127 @@
     "__timestampIso8601": {
       "type": "timestamp",
       "timestampFormat": "iso8601"
+    },
+    "DayOfWeek": {
+      "type": "string",
+      "enum": [
+        "MONDAY",
+        "TUESDAY",
+        "WEDNESDAY",
+        "THURSDAY",
+        "FRIDAY",
+        "SATURDAY",
+        "SUNDAY"
+      ]
+    },
+    "OpenHoursRule": {
+      "type": "structure",
+      "documentation": "<p>Specifies the start and end time for OpenHours.</p>",
+      "members": {
+        "StartTime": {
+          "shape": "__string",
+          "documentation": "<p>The start of the scheduled time, in ISO 8601 format, when the channel can send messages.</p>"
+        },
+        "EndTime": {
+          "shape": "__string",
+          "documentation": "<p>The end of the scheduled time, in ISO 8601 format, when the channel can't send messages.</p>"
+        }
+      }
+    },
+    "ListOfOpenHoursRules": {
+      "type": "list",
+      "member": {
+        "shape": "OpenHoursRule",
+        "documentation": "<p>Open Hour Rule Details.</p>"
+      }
+    },
+    "MapOfListOfOpenHoursRules": {
+      "type": "map",
+      "key": {
+        "shape": "DayOfWeek",
+        "documentation": "<p>Day of a week when the rule will be applied. Valid values are [MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY]</p>"
+      },
+      "value": {
+        "shape": "ListOfOpenHoursRules",
+        "documentation": "<p>Open Hour Rules.</p>"
+      }
+    },
+    "OpenHours": {
+      "type": "structure",
+      "documentation": "<p>Specifies the times when message are allowed to be sent to endpoints.</p>",
+      "members": {
+        "EMAIL": {
+          "shape": "MapOfListOfOpenHoursRules",
+          "documentation": "<p>Specifies the schedule settings for the email channel.</p>"
+        },
+        "SMS": {
+          "shape": "MapOfListOfOpenHoursRules",
+          "documentation": "<p>Specifies the schedule settings for the SMS channel.</p>"
+        },
+        "PUSH": {
+          "shape": "MapOfListOfOpenHoursRules",
+          "documentation": "<p>Specifies the schedule settings for the push channel.</p>"
+        },
+        "VOICE": {
+          "shape": "MapOfListOfOpenHoursRules",
+          "documentation": "<p>Specifies the schedule settings for the voice channel.</p>"
+        },
+        "CUSTOM": {
+          "shape": "MapOfListOfOpenHoursRules",
+          "documentation": "<p>Specifies the schedule settings for the custom channel.</p>"
+        }
+      }
+    },
+    "ClosedDaysRule": {
+      "type": "structure",
+      "documentation": "<p>Specifies the rule settings for when messages can't be sent.</p>",
+      "members": {
+        "Name": {
+          "shape": "__string",
+          "documentation": "<p>The name of the closed day rule.</p>"
+        },
+        "StartDateTime": {
+          "shape": "__string",
+          "documentation": "<p>Start DateTime ISO 8601 format</p>"
+        },
+        "EndDateTime": {
+          "shape": "__string",
+          "documentation": "<p>End DateTime ISO 8601 format</p>"
+        }
+      }
+    },
+    "ListOfClosedDaysRules": {
+      "type": "list",
+      "member": {
+        "shape": "ClosedDaysRule",
+        "documentation": "<p>ClosedDays rule details.</p>"
+      }
+    },
+    "ClosedDays": {
+      "type": "structure",
+      "documentation": "<p>The time when a journey will not send messages. QuietTime should be configured first and SendingSchedule should be set to true.</p>",
+      "members": {
+        "EMAIL": {
+          "shape": "ListOfClosedDaysRules",
+          "documentation": "<p>Rules for the Email channel.</p>"
+        },
+        "SMS": {
+          "shape": "ListOfClosedDaysRules",
+          "documentation": "<p>Rules for the SMS channel.</p>"
+        },
+        "PUSH": {
+          "shape": "ListOfClosedDaysRules",
+          "documentation": "<p>Rules for the Push channel.</p>"
+        },
+        "VOICE": {
+          "shape": "ListOfClosedDaysRules",
+          "documentation": "<p>Rules for the Voice channel.</p>"
+        },
+        "CUSTOM": {
+          "shape": "ListOfClosedDaysRules",
+          "documentation": "<p>Rules for the Custom channel.</p>"
+        }
+      }
     }
   }
 }

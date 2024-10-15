@@ -1,0 +1,12 @@
+[
+    {
+        "type": "bugfix",
+        "category": "s3",
+        "description": "omit locationConstraint in createBucket to us-east-1"
+    },
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "AWS CodeBuild now supports using Secrets Manager to store git credentials and using multiple source credentials in a single project."
+    }
+]

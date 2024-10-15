@@ -1,0 +1,1080 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2024-04-15",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "application-signals",
+    "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
+    "serviceFullName": "Amazon CloudWatch Application Signals",
+    "serviceId": "Application Signals",
+    "signatureVersion": "v4",
+    "signingName": "application-signals",
+    "uid": "application-signals-2024-04-15"
+  },
+  "operations": {
+    "BatchGetServiceLevelObjectiveBudgetReport": {
+      "http": {
+        "requestUri": "/budget-report",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Timestamp",
+          "SloIds"
+        ],
+        "members": {
+          "Timestamp": {
+            "type": "timestamp"
+          },
+          "SloIds": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Timestamp",
+          "Reports",
+          "Errors"
+        ],
+        "members": {
+          "Timestamp": {
+            "type": "timestamp"
+          },
+          "Reports": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "Arn",
+                "Name",
+                "BudgetStatus"
+              ],
+              "members": {
+                "Arn": {},
+                "Name": {},
+                "EvaluationType": {},
+                "BudgetStatus": {},
+                "Attainment": {
+                  "type": "double"
+                },
+                "TotalBudgetSeconds": {
+                  "type": "integer"
+                },
+                "BudgetSecondsRemaining": {
+                  "type": "integer"
+                },
+                "TotalBudgetRequests": {
+                  "type": "integer"
+                },
+                "BudgetRequestsRemaining": {
+                  "type": "integer"
+                },
+                "Sli": {
+                  "shape": "Sh"
+                },
+                "RequestBasedSli": {
+                  "shape": "S18"
+                },
+                "Goal": {
+                  "shape": "S1b"
+                }
+              }
+            }
+          },
+          "Errors": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "Name",
+                "Arn",
+                "ErrorCode",
+                "ErrorMessage"
+              ],
+              "members": {
+                "Name": {},
+                "Arn": {},
+                "ErrorCode": {},
+                "ErrorMessage": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "CreateServiceLevelObjective": {
+      "http": {
+        "requestUri": "/slo",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Name"
+        ],
+        "members": {
+          "Name": {},
+          "Description": {},
+          "SliConfig": {
+            "shape": "S1q"
+          },
+          "RequestBasedSliConfig": {
+            "shape": "S1u"
+          },
+          "Goal": {
+            "shape": "S1b"
+          },
+          "Tags": {
+            "shape": "S1w"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Slo"
+        ],
+        "members": {
+          "Slo": {
+            "shape": "S21"
+          }
+        }
+      }
+    },
+    "DeleteServiceLevelObjective": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/slo/{Id}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "GetService": {
+      "http": {
+        "requestUri": "/service",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "StartTime",
+          "EndTime",
+          "KeyAttributes"
+        ],
+        "members": {
+          "StartTime": {
+            "location": "querystring",
+            "locationName": "StartTime",
+            "type": "timestamp"
+          },
+          "EndTime": {
+            "location": "querystring",
+            "locationName": "EndTime",
+            "type": "timestamp"
+          },
+          "KeyAttributes": {
+            "shape": "Sj"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Service",
+          "StartTime",
+          "EndTime"
+        ],
+        "members": {
+          "Service": {
+            "type": "structure",
+            "required": [
+              "KeyAttributes",
+              "MetricReferences"
+            ],
+            "members": {
+              "KeyAttributes": {
+                "shape": "Sj"
+              },
+              "AttributeMaps": {
+                "shape": "S28"
+              },
+              "MetricReferences": {
+                "shape": "S2a"
+              },
+              "LogGroupReferences": {
+                "shape": "S2d"
+              }
+            }
+          },
+          "StartTime": {
+            "type": "timestamp"
+          },
+          "EndTime": {
+            "type": "timestamp"
+          },
+          "LogGroupReferences": {
+            "shape": "S2d"
+          }
+        }
+      }
+    },
+    "GetServiceLevelObjective": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/slo/{Id}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Slo"
+        ],
+        "members": {
+          "Slo": {
+            "shape": "S21"
+          }
+        }
+      }
+    },
+    "ListServiceDependencies": {
+      "http": {
+        "requestUri": "/service-dependencies",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "StartTime",
+          "EndTime",
+          "KeyAttributes"
+        ],
+        "members": {
+          "StartTime": {
+            "location": "querystring",
+            "locationName": "StartTime",
+            "type": "timestamp"
+          },
+          "EndTime": {
+            "location": "querystring",
+            "locationName": "EndTime",
+            "type": "timestamp"
+          },
+          "KeyAttributes": {
+            "shape": "Sj"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "NextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "StartTime",
+          "EndTime",
+          "ServiceDependencies"
+        ],
+        "members": {
+          "StartTime": {
+            "type": "timestamp"
+          },
+          "EndTime": {
+            "type": "timestamp"
+          },
+          "ServiceDependencies": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "OperationName",
+                "DependencyKeyAttributes",
+                "DependencyOperationName",
+                "MetricReferences"
+              ],
+              "members": {
+                "OperationName": {},
+                "DependencyKeyAttributes": {
+                  "shape": "Sj"
+                },
+                "DependencyOperationName": {},
+                "MetricReferences": {
+                  "shape": "S2a"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListServiceDependents": {
+      "http": {
+        "requestUri": "/service-dependents",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "StartTime",
+          "EndTime",
+          "KeyAttributes"
+        ],
+        "members": {
+          "StartTime": {
+            "location": "querystring",
+            "locationName": "StartTime",
+            "type": "timestamp"
+          },
+          "EndTime": {
+            "location": "querystring",
+            "locationName": "EndTime",
+            "type": "timestamp"
+          },
+          "KeyAttributes": {
+            "shape": "Sj"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "NextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "StartTime",
+          "EndTime",
+          "ServiceDependents"
+        ],
+        "members": {
+          "StartTime": {
+            "type": "timestamp"
+          },
+          "EndTime": {
+            "type": "timestamp"
+          },
+          "ServiceDependents": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "DependentKeyAttributes",
+                "MetricReferences"
+              ],
+              "members": {
+                "OperationName": {},
+                "DependentKeyAttributes": {
+                  "shape": "Sj"
+                },
+                "DependentOperationName": {},
+                "MetricReferences": {
+                  "shape": "S2a"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListServiceLevelObjectives": {
+      "http": {
+        "requestUri": "/slos",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "KeyAttributes": {
+            "shape": "Sj"
+          },
+          "OperationName": {
+            "location": "querystring",
+            "locationName": "OperationName"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "NextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "SloSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "Arn",
+                "Name"
+              ],
+              "members": {
+                "Arn": {},
+                "Name": {},
+                "KeyAttributes": {
+                  "shape": "Sj"
+                },
+                "OperationName": {},
+                "CreatedTime": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListServiceOperations": {
+      "http": {
+        "requestUri": "/service-operations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "StartTime",
+          "EndTime",
+          "KeyAttributes"
+        ],
+        "members": {
+          "StartTime": {
+            "location": "querystring",
+            "locationName": "StartTime",
+            "type": "timestamp"
+          },
+          "EndTime": {
+            "location": "querystring",
+            "locationName": "EndTime",
+            "type": "timestamp"
+          },
+          "KeyAttributes": {
+            "shape": "Sj"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "NextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "StartTime",
+          "EndTime",
+          "ServiceOperations"
+        ],
+        "members": {
+          "StartTime": {
+            "type": "timestamp"
+          },
+          "EndTime": {
+            "type": "timestamp"
+          },
+          "ServiceOperations": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "Name",
+                "MetricReferences"
+              ],
+              "members": {
+                "Name": {},
+                "MetricReferences": {
+                  "shape": "S2a"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListServices": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/services",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "StartTime",
+          "EndTime"
+        ],
+        "members": {
+          "StartTime": {
+            "location": "querystring",
+            "locationName": "StartTime",
+            "type": "timestamp"
+          },
+          "EndTime": {
+            "location": "querystring",
+            "locationName": "EndTime",
+            "type": "timestamp"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "NextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "StartTime",
+          "EndTime",
+          "ServiceSummaries"
+        ],
+        "members": {
+          "StartTime": {
+            "type": "timestamp"
+          },
+          "EndTime": {
+            "type": "timestamp"
+          },
+          "ServiceSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "KeyAttributes",
+                "MetricReferences"
+              ],
+              "members": {
+                "KeyAttributes": {
+                  "shape": "Sj"
+                },
+                "AttributeMaps": {
+                  "shape": "S28"
+                },
+                "MetricReferences": {
+                  "shape": "S2a"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListTagsForResource": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn"
+        ],
+        "members": {
+          "ResourceArn": {
+            "location": "querystring",
+            "locationName": "ResourceArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Tags": {
+            "shape": "S1w"
+          }
+        }
+      }
+    },
+    "StartDiscovery": {
+      "http": {
+        "requestUri": "/start-discovery",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {}
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "TagResource": {
+      "http": {
+        "requestUri": "/tag-resource",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn",
+          "Tags"
+        ],
+        "members": {
+          "ResourceArn": {},
+          "Tags": {
+            "shape": "S1w"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UntagResource": {
+      "http": {
+        "requestUri": "/untag-resource",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn",
+          "TagKeys"
+        ],
+        "members": {
+          "ResourceArn": {},
+          "TagKeys": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UpdateServiceLevelObjective": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/slo/{Id}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          },
+          "Description": {},
+          "SliConfig": {
+            "shape": "S1q"
+          },
+          "RequestBasedSliConfig": {
+            "shape": "S1u"
+          },
+          "Goal": {
+            "shape": "S1b"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Slo"
+        ],
+        "members": {
+          "Slo": {
+            "shape": "S21"
+          }
+        }
+      }
+    }
+  },
+  "shapes": {
+    "Sh": {
+      "type": "structure",
+      "required": [
+        "SliMetric",
+        "MetricThreshold",
+        "ComparisonOperator"
+      ],
+      "members": {
+        "SliMetric": {
+          "type": "structure",
+          "required": [
+            "MetricDataQueries"
+          ],
+          "members": {
+            "KeyAttributes": {
+              "shape": "Sj"
+            },
+            "OperationName": {},
+            "MetricType": {},
+            "MetricDataQueries": {
+              "shape": "So"
+            }
+          }
+        },
+        "MetricThreshold": {
+          "type": "double"
+        },
+        "ComparisonOperator": {}
+      }
+    },
+    "Sj": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "So": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {},
+          "MetricStat": {
+            "type": "structure",
+            "required": [
+              "Metric",
+              "Period",
+              "Stat"
+            ],
+            "members": {
+              "Metric": {
+                "type": "structure",
+                "members": {
+                  "Namespace": {},
+                  "MetricName": {},
+                  "Dimensions": {
+                    "shape": "Sv"
+                  }
+                }
+              },
+              "Period": {
+                "type": "integer"
+              },
+              "Stat": {},
+              "Unit": {}
+            }
+          },
+          "Expression": {},
+          "Label": {},
+          "ReturnData": {
+            "type": "boolean"
+          },
+          "Period": {
+            "type": "integer"
+          },
+          "AccountId": {}
+        }
+      }
+    },
+    "Sv": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "Name",
+          "Value"
+        ],
+        "members": {
+          "Name": {},
+          "Value": {}
+        }
+      }
+    },
+    "S18": {
+      "type": "structure",
+      "required": [
+        "RequestBasedSliMetric"
+      ],
+      "members": {
+        "RequestBasedSliMetric": {
+          "type": "structure",
+          "required": [
+            "TotalRequestCountMetric",
+            "MonitoredRequestCountMetric"
+          ],
+          "members": {
+            "KeyAttributes": {
+              "shape": "Sj"
+            },
+            "OperationName": {},
+            "MetricType": {},
+            "TotalRequestCountMetric": {
+              "shape": "So"
+            },
+            "MonitoredRequestCountMetric": {
+              "shape": "S1a"
+            }
+          }
+        },
+        "MetricThreshold": {
+          "type": "double"
+        },
+        "ComparisonOperator": {}
+      }
+    },
+    "S1a": {
+      "type": "structure",
+      "members": {
+        "GoodCountMetric": {
+          "shape": "So"
+        },
+        "BadCountMetric": {
+          "shape": "So"
+        }
+      },
+      "union": true
+    },
+    "S1b": {
+      "type": "structure",
+      "members": {
+        "Interval": {
+          "type": "structure",
+          "members": {
+            "RollingInterval": {
+              "type": "structure",
+              "required": [
+                "DurationUnit",
+                "Duration"
+              ],
+              "members": {
+                "DurationUnit": {},
+                "Duration": {
+                  "type": "integer"
+                }
+              }
+            },
+            "CalendarInterval": {
+              "type": "structure",
+              "required": [
+                "StartTime",
+                "DurationUnit",
+                "Duration"
+              ],
+              "members": {
+                "StartTime": {
+                  "type": "timestamp"
+                },
+                "DurationUnit": {},
+                "Duration": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "union": true
+        },
+        "AttainmentGoal": {
+          "type": "double"
+        },
+        "WarningThreshold": {
+          "type": "double"
+        }
+      }
+    },
+    "S1q": {
+      "type": "structure",
+      "required": [
+        "SliMetricConfig",
+        "MetricThreshold",
+        "ComparisonOperator"
+      ],
+      "members": {
+        "SliMetricConfig": {
+          "type": "structure",
+          "members": {
+            "KeyAttributes": {
+              "shape": "Sj"
+            },
+            "OperationName": {},
+            "MetricType": {},
+            "Statistic": {},
+            "PeriodSeconds": {
+              "type": "integer"
+            },
+            "MetricDataQueries": {
+              "shape": "So"
+            }
+          }
+        },
+        "MetricThreshold": {
+          "type": "double"
+        },
+        "ComparisonOperator": {}
+      }
+    },
+    "S1u": {
+      "type": "structure",
+      "required": [
+        "RequestBasedSliMetricConfig"
+      ],
+      "members": {
+        "RequestBasedSliMetricConfig": {
+          "type": "structure",
+          "members": {
+            "KeyAttributes": {
+              "shape": "Sj"
+            },
+            "OperationName": {},
+            "MetricType": {},
+            "TotalRequestCountMetric": {
+              "shape": "So"
+            },
+            "MonitoredRequestCountMetric": {
+              "shape": "S1a"
+            }
+          }
+        },
+        "MetricThreshold": {
+          "type": "double"
+        },
+        "ComparisonOperator": {}
+      }
+    },
+    "S1w": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "Key",
+          "Value"
+        ],
+        "members": {
+          "Key": {},
+          "Value": {}
+        }
+      }
+    },
+    "S21": {
+      "type": "structure",
+      "required": [
+        "Arn",
+        "Name",
+        "CreatedTime",
+        "LastUpdatedTime",
+        "Goal"
+      ],
+      "members": {
+        "Arn": {},
+        "Name": {},
+        "Description": {},
+        "CreatedTime": {
+          "type": "timestamp"
+        },
+        "LastUpdatedTime": {
+          "type": "timestamp"
+        },
+        "Sli": {
+          "shape": "Sh"
+        },
+        "RequestBasedSli": {
+          "shape": "S18"
+        },
+        "EvaluationType": {},
+        "Goal": {
+          "shape": "S1b"
+        }
+      }
+    },
+    "S28": {
+      "type": "list",
+      "member": {
+        "type": "map",
+        "key": {},
+        "value": {}
+      }
+    },
+    "S2a": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "Namespace",
+          "MetricType",
+          "MetricName"
+        ],
+        "members": {
+          "Namespace": {},
+          "MetricType": {},
+          "Dimensions": {
+            "shape": "Sv"
+          },
+          "MetricName": {}
+        }
+      }
+    },
+    "S2d": {
+      "type": "list",
+      "member": {
+        "shape": "Sj"
+      }
+    }
+  }
+}

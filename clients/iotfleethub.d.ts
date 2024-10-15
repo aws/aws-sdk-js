@@ -12,67 +12,67 @@ declare class IoTFleetHub extends Service {
   constructor(options?: IoTFleetHub.Types.ClientConfiguration)
   config: Config & IoTFleetHub.Types.ClientConfiguration;
   /**
-   * Creates a Fleet Hub for AWS IoT Device Management web application.  Fleet Hub for AWS IoT Device Management is in public preview and is subject to change. 
+   * Creates a Fleet Hub for IoT Device Management web application. When creating a Fleet Hub application, you must create an organization instance of IAM Identity Center if you don't already have one. The Fleet Hub application you create must also be in the same Amazon Web Services Region of the organization instance of IAM Identity Center. For more information see Enabling IAM Identity Center and Organization instances of IAM Identity Center.
    */
   createApplication(params: IoTFleetHub.Types.CreateApplicationRequest, callback?: (err: AWSError, data: IoTFleetHub.Types.CreateApplicationResponse) => void): Request<IoTFleetHub.Types.CreateApplicationResponse, AWSError>;
   /**
-   * Creates a Fleet Hub for AWS IoT Device Management web application.  Fleet Hub for AWS IoT Device Management is in public preview and is subject to change. 
+   * Creates a Fleet Hub for IoT Device Management web application. When creating a Fleet Hub application, you must create an organization instance of IAM Identity Center if you don't already have one. The Fleet Hub application you create must also be in the same Amazon Web Services Region of the organization instance of IAM Identity Center. For more information see Enabling IAM Identity Center and Organization instances of IAM Identity Center.
    */
   createApplication(callback?: (err: AWSError, data: IoTFleetHub.Types.CreateApplicationResponse) => void): Request<IoTFleetHub.Types.CreateApplicationResponse, AWSError>;
   /**
-   * Deletes a Fleet Hub for AWS IoT Device Management web application.  Fleet Hub for AWS IoT Device Management is in public preview and is subject to change. 
+   * Deletes a Fleet Hub for IoT Device Management web application.
    */
   deleteApplication(params: IoTFleetHub.Types.DeleteApplicationRequest, callback?: (err: AWSError, data: IoTFleetHub.Types.DeleteApplicationResponse) => void): Request<IoTFleetHub.Types.DeleteApplicationResponse, AWSError>;
   /**
-   * Deletes a Fleet Hub for AWS IoT Device Management web application.  Fleet Hub for AWS IoT Device Management is in public preview and is subject to change. 
+   * Deletes a Fleet Hub for IoT Device Management web application.
    */
   deleteApplication(callback?: (err: AWSError, data: IoTFleetHub.Types.DeleteApplicationResponse) => void): Request<IoTFleetHub.Types.DeleteApplicationResponse, AWSError>;
   /**
-   * Gets information about a Fleet Hub for AWS IoT Device Management web application.  Fleet Hub for AWS IoT Device Management is in public preview and is subject to change. 
+   * Gets information about a Fleet Hub for IoT Device Management web application.
    */
   describeApplication(params: IoTFleetHub.Types.DescribeApplicationRequest, callback?: (err: AWSError, data: IoTFleetHub.Types.DescribeApplicationResponse) => void): Request<IoTFleetHub.Types.DescribeApplicationResponse, AWSError>;
   /**
-   * Gets information about a Fleet Hub for AWS IoT Device Management web application.  Fleet Hub for AWS IoT Device Management is in public preview and is subject to change. 
+   * Gets information about a Fleet Hub for IoT Device Management web application.
    */
   describeApplication(callback?: (err: AWSError, data: IoTFleetHub.Types.DescribeApplicationResponse) => void): Request<IoTFleetHub.Types.DescribeApplicationResponse, AWSError>;
   /**
-   * Gets a list of Fleet Hub for AWS IoT Device Management web applications for the current account.  Fleet Hub for AWS IoT Device Management is in public preview and is subject to change. 
+   * Gets a list of Fleet Hub for IoT Device Management web applications for the current account.
    */
   listApplications(params: IoTFleetHub.Types.ListApplicationsRequest, callback?: (err: AWSError, data: IoTFleetHub.Types.ListApplicationsResponse) => void): Request<IoTFleetHub.Types.ListApplicationsResponse, AWSError>;
   /**
-   * Gets a list of Fleet Hub for AWS IoT Device Management web applications for the current account.  Fleet Hub for AWS IoT Device Management is in public preview and is subject to change. 
+   * Gets a list of Fleet Hub for IoT Device Management web applications for the current account.
    */
   listApplications(callback?: (err: AWSError, data: IoTFleetHub.Types.ListApplicationsResponse) => void): Request<IoTFleetHub.Types.ListApplicationsResponse, AWSError>;
   /**
-   * Lists the tags for the specified resource.  Fleet Hub for AWS IoT Device Management is in public preview and is subject to change. 
+   * Lists the tags for the specified resource.
    */
   listTagsForResource(params: IoTFleetHub.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: IoTFleetHub.Types.ListTagsForResourceResponse) => void): Request<IoTFleetHub.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists the tags for the specified resource.  Fleet Hub for AWS IoT Device Management is in public preview and is subject to change. 
+   * Lists the tags for the specified resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: IoTFleetHub.Types.ListTagsForResourceResponse) => void): Request<IoTFleetHub.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Adds to or modifies the tags of the specified resource. Tags are metadata which can be used to manage a resource.  Fleet Hub for AWS IoT Device Management is in public preview and is subject to change. 
+   * Adds to or modifies the tags of the specified resource. Tags are metadata which can be used to manage a resource.
    */
   tagResource(params: IoTFleetHub.Types.TagResourceRequest, callback?: (err: AWSError, data: IoTFleetHub.Types.TagResourceResponse) => void): Request<IoTFleetHub.Types.TagResourceResponse, AWSError>;
   /**
-   * Adds to or modifies the tags of the specified resource. Tags are metadata which can be used to manage a resource.  Fleet Hub for AWS IoT Device Management is in public preview and is subject to change. 
+   * Adds to or modifies the tags of the specified resource. Tags are metadata which can be used to manage a resource.
    */
   tagResource(callback?: (err: AWSError, data: IoTFleetHub.Types.TagResourceResponse) => void): Request<IoTFleetHub.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes the specified tags (metadata) from the resource.  Fleet Hub for AWS IoT Device Management is in public preview and is subject to change. 
+   * Removes the specified tags (metadata) from the resource.
    */
   untagResource(params: IoTFleetHub.Types.UntagResourceRequest, callback?: (err: AWSError, data: IoTFleetHub.Types.UntagResourceResponse) => void): Request<IoTFleetHub.Types.UntagResourceResponse, AWSError>;
   /**
-   * Removes the specified tags (metadata) from the resource.  Fleet Hub for AWS IoT Device Management is in public preview and is subject to change. 
+   * Removes the specified tags (metadata) from the resource.
    */
   untagResource(callback?: (err: AWSError, data: IoTFleetHub.Types.UntagResourceResponse) => void): Request<IoTFleetHub.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates information about a Fleet Hub for a AWS IoT Device Management web application.  Fleet Hub for AWS IoT Device Management is in public preview and is subject to change. 
+   * Updates information about a Fleet Hub for IoT Device Management web application.
    */
   updateApplication(params: IoTFleetHub.Types.UpdateApplicationRequest, callback?: (err: AWSError, data: IoTFleetHub.Types.UpdateApplicationResponse) => void): Request<IoTFleetHub.Types.UpdateApplicationResponse, AWSError>;
   /**
-   * Updates information about a Fleet Hub for a AWS IoT Device Management web application.  Fleet Hub for AWS IoT Device Management is in public preview and is subject to change. 
+   * Updates information about a Fleet Hub for IoT Device Management web application.
    */
   updateApplication(callback?: (err: AWSError, data: IoTFleetHub.Types.UpdateApplicationResponse) => void): Request<IoTFleetHub.Types.UpdateApplicationResponse, AWSError>;
 }
@@ -125,7 +125,7 @@ declare namespace IoTFleetHub {
      */
     clientToken?: ClientRequestToken;
     /**
-     * The ARN of the role that the web application assumes when it interacts with AWS IoT Core.  The name of the role must be in the form AWSIotFleetHub_random_string . 
+     * The ARN of the role that the web application assumes when it interacts with Amazon Web Services IoT Core.  The name of the role must be in the form AWSIotFleetHub_random_string . 
      */
     roleArn: Arn;
     /**
@@ -195,7 +195,7 @@ declare namespace IoTFleetHub {
      */
     applicationLastUpdateDate: Timestamp;
     /**
-     * The ARN of the role that the web application assumes when it interacts with AWS IoT Core.
+     * The ARN of the role that the web application assumes when it interacts with Amazon Web Services IoT Core.
      */
     roleArn: Arn;
     /**
@@ -203,7 +203,7 @@ declare namespace IoTFleetHub {
      */
     ssoClientId?: SsoClientId;
     /**
-     * A message indicating why the DescribeApplication API failed.
+     * A message that explains any failures included in the applicationState response field. This message explains failures in the CreateApplication and DeleteApplication actions.
      */
     errorMessage?: ErrorMessage;
     /**

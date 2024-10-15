@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "BedrockAgentRuntime",
+        "description": "This release adds support to customize prompts sent through the RetrieveAndGenerate API in Agents for Amazon Bedrock."
+    },
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "Adds support for backfill of cost allocation tags, with new StartCostAllocationTagBackfill and ListCostAllocationTagBackfillHistory API."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Documentation updates for Elastic Compute Cloud (EC2)."
+    },
+    {
+        "type": "feature",
+        "category": "Finspace",
+        "description": "Add new operation delete-kx-cluster-node and add status parameter to list-kx-cluster-node operation."
+    }
+]

@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Support large worker types G.4x and G.8x for Glue Spark"
+    },
+    {
+        "type": "feature",
+        "category": "GuardDuty",
+        "description": "Add AccessDeniedException 403 Error message code to support 3 Tagging related APIs"
+    },
+    {
+        "type": "feature",
+        "category": "IoTSiteWise",
+        "description": "Provide support for 20,000 max results for GetAssetPropertyValueHistory/BatchGetAssetPropertyValueHistory and 15 minute aggregate resolution for GetAssetPropertyAggregates/BatchGetAssetPropertyAggregates"
+    },
+    {
+        "type": "feature",
+        "category": "STS",
+        "description": "Documentation updates for AWS Security Token Service."
+    }
+]

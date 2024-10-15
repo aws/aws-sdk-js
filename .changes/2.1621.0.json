@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "BedrockAgentRuntime",
+        "description": "Updating Bedrock Knowledge Base Metadata & Filters feature with two new filters listContains and stringContains"
+    },
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "CodeBuild Reserved Capacity VPC Support"
+    },
+    {
+        "type": "feature",
+        "category": "DataSync",
+        "description": "Task executions now display a CANCELLING status when an execution is in the process of being cancelled."
+    },
+    {
+        "type": "feature",
+        "category": "Grafana",
+        "description": "This release adds new ServiceAccount and ServiceAccountToken APIs."
+    },
+    {
+        "type": "feature",
+        "category": "MedicalImaging",
+        "description": "Added support for importing medical imaging data from Amazon S3 buckets across accounts and regions."
+    }
+]

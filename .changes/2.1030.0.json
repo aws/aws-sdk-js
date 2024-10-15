@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudTrail",
+        "description": "CloudTrail Insights now supports ApiErrorRateInsight, which enables customers to identify unusual activity in their AWS account based on API error codes and their rate."
+    },
+    {
+        "type": "feature",
+        "category": "Location",
+        "description": "This release adds the support for Relevance, Distance, Time Zone, Language and Interpolated Address for Geocoding and Reverse Geocoding."
+    },
+    {
+        "type": "feature",
+        "category": "S3Control",
+        "description": "Support FIPS for S3 Outposts"
+    },
+    {
+        "type": "feature",
+        "category": "s3util",
+        "description": "Add allowFipsEndpoint option in validateArnRegion"
+    }
+]

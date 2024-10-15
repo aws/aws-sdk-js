@@ -12,19 +12,19 @@ declare class AugmentedAIRuntime extends Service {
   constructor(options?: AugmentedAIRuntime.Types.ClientConfiguration)
   config: Config & AugmentedAIRuntime.Types.ClientConfiguration;
   /**
-   * Deletes the specified human loop for a flow definition.
+   * Deletes the specified human loop for a flow definition. If the human loop was deleted, this operation will return a ResourceNotFoundException. 
    */
   deleteHumanLoop(params: AugmentedAIRuntime.Types.DeleteHumanLoopRequest, callback?: (err: AWSError, data: AugmentedAIRuntime.Types.DeleteHumanLoopResponse) => void): Request<AugmentedAIRuntime.Types.DeleteHumanLoopResponse, AWSError>;
   /**
-   * Deletes the specified human loop for a flow definition.
+   * Deletes the specified human loop for a flow definition. If the human loop was deleted, this operation will return a ResourceNotFoundException. 
    */
   deleteHumanLoop(callback?: (err: AWSError, data: AugmentedAIRuntime.Types.DeleteHumanLoopResponse) => void): Request<AugmentedAIRuntime.Types.DeleteHumanLoopResponse, AWSError>;
   /**
-   * Returns information about the specified human loop.
+   * Returns information about the specified human loop. If the human loop was deleted, this operation will return a ResourceNotFoundException error. 
    */
   describeHumanLoop(params: AugmentedAIRuntime.Types.DescribeHumanLoopRequest, callback?: (err: AWSError, data: AugmentedAIRuntime.Types.DescribeHumanLoopResponse) => void): Request<AugmentedAIRuntime.Types.DescribeHumanLoopResponse, AWSError>;
   /**
-   * Returns information about the specified human loop.
+   * Returns information about the specified human loop. If the human loop was deleted, this operation will return a ResourceNotFoundException error. 
    */
   describeHumanLoop(callback?: (err: AWSError, data: AugmentedAIRuntime.Types.DescribeHumanLoopResponse) => void): Request<AugmentedAIRuntime.Types.DescribeHumanLoopResponse, AWSError>;
   /**
@@ -79,7 +79,7 @@ declare namespace AugmentedAIRuntime {
      */
     FailureReason?: String;
     /**
-     * A failure code that identifies the type of failure.
+     * A failure code that identifies the type of failure. Possible values: ValidationError, Expired, InternalError 
      */
     FailureCode?: String;
     /**

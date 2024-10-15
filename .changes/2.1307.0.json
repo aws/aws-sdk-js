@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "DevOpsGuru",
+        "description": "This release adds filter support ListAnomalyForInsight API."
+    },
+    {
+        "type": "feature",
+        "category": "ForecastService",
+        "description": "This release will enable customer select INCREMENTAL as ImportModel in Forecast's CreateDatasetImportJob API. Verified latest SDK containing required attribute, following https://w.amazon.com/bin/view/AWS-Seer/Launch/Trebuchet/"
+    },
+    {
+        "type": "feature",
+        "category": "MediaTailor",
+        "description": "The AWS Elemental MediaTailor SDK for Channel Assembly has added support for program updates, and the ability to clip the end of VOD sources in programs."
+    },
+    {
+        "type": "feature",
+        "category": "SNS",
+        "description": "Additional attributes added for set-topic-attributes."
+    }
+]

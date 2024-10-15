@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "BackupGateway",
+        "description": "Changes include: new GetVirtualMachineApi to fetch a single user's VM, improving ListVirtualMachines to fetch filtered VMs as well as all VMs, and improving GetGatewayApi to now also return the gateway's MaintenanceStartTime."
+    },
+    {
+        "type": "feature",
+        "category": "DeviceFarm",
+        "description": "This release adds the support for VPC-ENI based connectivity for private devices on AWS Device Farm."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Documentation updates for Amazon EC2."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Added support for S3 Event Notifications for Catalog Target Crawlers."
+    }
+]

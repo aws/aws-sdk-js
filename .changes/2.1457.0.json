@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "Drs",
+        "description": "Updated existing APIs and added new ones to support using AWS Elastic Disaster Recovery post-launch actions. Added support for new regions."
+    },
+    {
+        "type": "feature",
+        "category": "Firehose",
+        "description": "DocumentIdOptions has been added for the Amazon OpenSearch destination."
+    },
+    {
+        "type": "feature",
+        "category": "GuardDuty",
+        "description": "Add `managementType` field to ListCoverage API response."
+    },
+    {
+        "type": "feature",
+        "category": "InternetMonitor",
+        "description": "This release updates the Amazon CloudWatch Internet Monitor API domain name."
+    },
+    {
+        "type": "feature",
+        "category": "XRay",
+        "description": "Add StartTime field in GetTraceSummaries API response for each TraceSummary."
+    }
+]

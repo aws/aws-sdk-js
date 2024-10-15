@@ -12,19 +12,19 @@ declare class Amplify extends Service {
   constructor(options?: Amplify.Types.ClientConfiguration)
   config: Config & Amplify.Types.ClientConfiguration;
   /**
-   *  Creates a new Amplify app. 
+   * Creates a new Amplify app. 
    */
   createApp(params: Amplify.Types.CreateAppRequest, callback?: (err: AWSError, data: Amplify.Types.CreateAppResult) => void): Request<Amplify.Types.CreateAppResult, AWSError>;
   /**
-   *  Creates a new Amplify app. 
+   * Creates a new Amplify app. 
    */
   createApp(callback?: (err: AWSError, data: Amplify.Types.CreateAppResult) => void): Request<Amplify.Types.CreateAppResult, AWSError>;
   /**
-   *  Creates a new backend environment for an Amplify app. 
+   * Creates a new backend environment for an Amplify app.  This API is available only to Amplify Gen 1 applications where the backend is created using Amplify Studio or the Amplify command line interface (CLI). This API isn’t available to Amplify Gen 2 applications. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
    */
   createBackendEnvironment(params: Amplify.Types.CreateBackendEnvironmentRequest, callback?: (err: AWSError, data: Amplify.Types.CreateBackendEnvironmentResult) => void): Request<Amplify.Types.CreateBackendEnvironmentResult, AWSError>;
   /**
-   *  Creates a new backend environment for an Amplify app. 
+   * Creates a new backend environment for an Amplify app.  This API is available only to Amplify Gen 1 applications where the backend is created using Amplify Studio or the Amplify command line interface (CLI). This API isn’t available to Amplify Gen 2 applications. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
    */
   createBackendEnvironment(callback?: (err: AWSError, data: Amplify.Types.CreateBackendEnvironmentResult) => void): Request<Amplify.Types.CreateBackendEnvironmentResult, AWSError>;
   /**
@@ -36,43 +36,43 @@ declare class Amplify extends Service {
    */
   createBranch(callback?: (err: AWSError, data: Amplify.Types.CreateBranchResult) => void): Request<Amplify.Types.CreateBranchResult, AWSError>;
   /**
-   *  Creates a deployment for a manually deployed Amplify app. Manually deployed apps are not connected to a repository. 
+   * Creates a deployment for a manually deployed Amplify app. Manually deployed apps are not connected to a repository.  The maximum duration between the CreateDeployment call and the StartDeployment call cannot exceed 8 hours. If the duration exceeds 8 hours, the StartDeployment call and the associated Job will fail.
    */
   createDeployment(params: Amplify.Types.CreateDeploymentRequest, callback?: (err: AWSError, data: Amplify.Types.CreateDeploymentResult) => void): Request<Amplify.Types.CreateDeploymentResult, AWSError>;
   /**
-   *  Creates a deployment for a manually deployed Amplify app. Manually deployed apps are not connected to a repository. 
+   * Creates a deployment for a manually deployed Amplify app. Manually deployed apps are not connected to a repository.  The maximum duration between the CreateDeployment call and the StartDeployment call cannot exceed 8 hours. If the duration exceeds 8 hours, the StartDeployment call and the associated Job will fail.
    */
   createDeployment(callback?: (err: AWSError, data: Amplify.Types.CreateDeploymentResult) => void): Request<Amplify.Types.CreateDeploymentResult, AWSError>;
   /**
-   *  Creates a new domain association for an Amplify app. This action associates a custom domain with the Amplify app 
+   * Creates a new domain association for an Amplify app. This action associates a custom domain with the Amplify app 
    */
   createDomainAssociation(params: Amplify.Types.CreateDomainAssociationRequest, callback?: (err: AWSError, data: Amplify.Types.CreateDomainAssociationResult) => void): Request<Amplify.Types.CreateDomainAssociationResult, AWSError>;
   /**
-   *  Creates a new domain association for an Amplify app. This action associates a custom domain with the Amplify app 
+   * Creates a new domain association for an Amplify app. This action associates a custom domain with the Amplify app 
    */
   createDomainAssociation(callback?: (err: AWSError, data: Amplify.Types.CreateDomainAssociationResult) => void): Request<Amplify.Types.CreateDomainAssociationResult, AWSError>;
   /**
-   *  Creates a new webhook on an Amplify app. 
+   * Creates a new webhook on an Amplify app. 
    */
   createWebhook(params: Amplify.Types.CreateWebhookRequest, callback?: (err: AWSError, data: Amplify.Types.CreateWebhookResult) => void): Request<Amplify.Types.CreateWebhookResult, AWSError>;
   /**
-   *  Creates a new webhook on an Amplify app. 
+   * Creates a new webhook on an Amplify app. 
    */
   createWebhook(callback?: (err: AWSError, data: Amplify.Types.CreateWebhookResult) => void): Request<Amplify.Types.CreateWebhookResult, AWSError>;
   /**
-   *  Deletes an existing Amplify app specified by an app ID. 
+   * Deletes an existing Amplify app specified by an app ID. 
    */
   deleteApp(params: Amplify.Types.DeleteAppRequest, callback?: (err: AWSError, data: Amplify.Types.DeleteAppResult) => void): Request<Amplify.Types.DeleteAppResult, AWSError>;
   /**
-   *  Deletes an existing Amplify app specified by an app ID. 
+   * Deletes an existing Amplify app specified by an app ID. 
    */
   deleteApp(callback?: (err: AWSError, data: Amplify.Types.DeleteAppResult) => void): Request<Amplify.Types.DeleteAppResult, AWSError>;
   /**
-   *  Deletes a backend environment for an Amplify app. 
+   * Deletes a backend environment for an Amplify app.  This API is available only to Amplify Gen 1 applications where the backend is created using Amplify Studio or the Amplify command line interface (CLI). This API isn’t available to Amplify Gen 2 applications. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
    */
   deleteBackendEnvironment(params: Amplify.Types.DeleteBackendEnvironmentRequest, callback?: (err: AWSError, data: Amplify.Types.DeleteBackendEnvironmentResult) => void): Request<Amplify.Types.DeleteBackendEnvironmentResult, AWSError>;
   /**
-   *  Deletes a backend environment for an Amplify app. 
+   * Deletes a backend environment for an Amplify app.  This API is available only to Amplify Gen 1 applications where the backend is created using Amplify Studio or the Amplify command line interface (CLI). This API isn’t available to Amplify Gen 2 applications. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
    */
   deleteBackendEnvironment(callback?: (err: AWSError, data: Amplify.Types.DeleteBackendEnvironmentResult) => void): Request<Amplify.Types.DeleteBackendEnvironmentResult, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class Amplify extends Service {
    */
   deleteBranch(callback?: (err: AWSError, data: Amplify.Types.DeleteBranchResult) => void): Request<Amplify.Types.DeleteBranchResult, AWSError>;
   /**
-   *  Deletes a domain association for an Amplify app. 
+   * Deletes a domain association for an Amplify app. 
    */
   deleteDomainAssociation(params: Amplify.Types.DeleteDomainAssociationRequest, callback?: (err: AWSError, data: Amplify.Types.DeleteDomainAssociationResult) => void): Request<Amplify.Types.DeleteDomainAssociationResult, AWSError>;
   /**
-   *  Deletes a domain association for an Amplify app. 
+   * Deletes a domain association for an Amplify app. 
    */
   deleteDomainAssociation(callback?: (err: AWSError, data: Amplify.Types.DeleteDomainAssociationResult) => void): Request<Amplify.Types.DeleteDomainAssociationResult, AWSError>;
   /**
@@ -100,43 +100,43 @@ declare class Amplify extends Service {
    */
   deleteJob(callback?: (err: AWSError, data: Amplify.Types.DeleteJobResult) => void): Request<Amplify.Types.DeleteJobResult, AWSError>;
   /**
-   *  Deletes a webhook. 
+   * Deletes a webhook. 
    */
   deleteWebhook(params: Amplify.Types.DeleteWebhookRequest, callback?: (err: AWSError, data: Amplify.Types.DeleteWebhookResult) => void): Request<Amplify.Types.DeleteWebhookResult, AWSError>;
   /**
-   *  Deletes a webhook. 
+   * Deletes a webhook. 
    */
   deleteWebhook(callback?: (err: AWSError, data: Amplify.Types.DeleteWebhookResult) => void): Request<Amplify.Types.DeleteWebhookResult, AWSError>;
   /**
-   *  Returns the website access logs for a specific time range using a presigned URL. 
+   * Returns the website access logs for a specific time range using a presigned URL. 
    */
   generateAccessLogs(params: Amplify.Types.GenerateAccessLogsRequest, callback?: (err: AWSError, data: Amplify.Types.GenerateAccessLogsResult) => void): Request<Amplify.Types.GenerateAccessLogsResult, AWSError>;
   /**
-   *  Returns the website access logs for a specific time range using a presigned URL. 
+   * Returns the website access logs for a specific time range using a presigned URL. 
    */
   generateAccessLogs(callback?: (err: AWSError, data: Amplify.Types.GenerateAccessLogsResult) => void): Request<Amplify.Types.GenerateAccessLogsResult, AWSError>;
   /**
-   *  Returns an existing Amplify app by appID. 
+   * Returns an existing Amplify app specified by an app ID.
    */
   getApp(params: Amplify.Types.GetAppRequest, callback?: (err: AWSError, data: Amplify.Types.GetAppResult) => void): Request<Amplify.Types.GetAppResult, AWSError>;
   /**
-   *  Returns an existing Amplify app by appID. 
+   * Returns an existing Amplify app specified by an app ID.
    */
   getApp(callback?: (err: AWSError, data: Amplify.Types.GetAppResult) => void): Request<Amplify.Types.GetAppResult, AWSError>;
   /**
-   *  Returns the artifact info that corresponds to an artifact id. 
+   * Returns the artifact info that corresponds to an artifact id. 
    */
   getArtifactUrl(params: Amplify.Types.GetArtifactUrlRequest, callback?: (err: AWSError, data: Amplify.Types.GetArtifactUrlResult) => void): Request<Amplify.Types.GetArtifactUrlResult, AWSError>;
   /**
-   *  Returns the artifact info that corresponds to an artifact id. 
+   * Returns the artifact info that corresponds to an artifact id. 
    */
   getArtifactUrl(callback?: (err: AWSError, data: Amplify.Types.GetArtifactUrlResult) => void): Request<Amplify.Types.GetArtifactUrlResult, AWSError>;
   /**
-   *  Returns a backend environment for an Amplify app. 
+   * Returns a backend environment for an Amplify app.  This API is available only to Amplify Gen 1 applications where the backend is created using Amplify Studio or the Amplify command line interface (CLI). This API isn’t available to Amplify Gen 2 applications. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
    */
   getBackendEnvironment(params: Amplify.Types.GetBackendEnvironmentRequest, callback?: (err: AWSError, data: Amplify.Types.GetBackendEnvironmentResult) => void): Request<Amplify.Types.GetBackendEnvironmentResult, AWSError>;
   /**
-   *  Returns a backend environment for an Amplify app. 
+   * Returns a backend environment for an Amplify app.  This API is available only to Amplify Gen 1 applications where the backend is created using Amplify Studio or the Amplify command line interface (CLI). This API isn’t available to Amplify Gen 2 applications. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
    */
   getBackendEnvironment(callback?: (err: AWSError, data: Amplify.Types.GetBackendEnvironmentResult) => void): Request<Amplify.Types.GetBackendEnvironmentResult, AWSError>;
   /**
@@ -148,11 +148,11 @@ declare class Amplify extends Service {
    */
   getBranch(callback?: (err: AWSError, data: Amplify.Types.GetBranchResult) => void): Request<Amplify.Types.GetBranchResult, AWSError>;
   /**
-   *  Returns the domain information for an Amplify app. 
+   * Returns the domain information for an Amplify app. 
    */
   getDomainAssociation(params: Amplify.Types.GetDomainAssociationRequest, callback?: (err: AWSError, data: Amplify.Types.GetDomainAssociationResult) => void): Request<Amplify.Types.GetDomainAssociationResult, AWSError>;
   /**
-   *  Returns the domain information for an Amplify app. 
+   * Returns the domain information for an Amplify app. 
    */
   getDomainAssociation(callback?: (err: AWSError, data: Amplify.Types.GetDomainAssociationResult) => void): Request<Amplify.Types.GetDomainAssociationResult, AWSError>;
   /**
@@ -164,35 +164,35 @@ declare class Amplify extends Service {
    */
   getJob(callback?: (err: AWSError, data: Amplify.Types.GetJobResult) => void): Request<Amplify.Types.GetJobResult, AWSError>;
   /**
-   *  Returns the webhook information that corresponds to a specified webhook ID. 
+   * Returns the webhook information that corresponds to a specified webhook ID. 
    */
   getWebhook(params: Amplify.Types.GetWebhookRequest, callback?: (err: AWSError, data: Amplify.Types.GetWebhookResult) => void): Request<Amplify.Types.GetWebhookResult, AWSError>;
   /**
-   *  Returns the webhook information that corresponds to a specified webhook ID. 
+   * Returns the webhook information that corresponds to a specified webhook ID. 
    */
   getWebhook(callback?: (err: AWSError, data: Amplify.Types.GetWebhookResult) => void): Request<Amplify.Types.GetWebhookResult, AWSError>;
   /**
-   *  Returns a list of the existing Amplify apps. 
+   * Returns a list of the existing Amplify apps. 
    */
   listApps(params: Amplify.Types.ListAppsRequest, callback?: (err: AWSError, data: Amplify.Types.ListAppsResult) => void): Request<Amplify.Types.ListAppsResult, AWSError>;
   /**
-   *  Returns a list of the existing Amplify apps. 
+   * Returns a list of the existing Amplify apps. 
    */
   listApps(callback?: (err: AWSError, data: Amplify.Types.ListAppsResult) => void): Request<Amplify.Types.ListAppsResult, AWSError>;
   /**
-   *  Returns a list of artifacts for a specified app, branch, and job. 
+   * Returns a list of artifacts for a specified app, branch, and job. 
    */
   listArtifacts(params: Amplify.Types.ListArtifactsRequest, callback?: (err: AWSError, data: Amplify.Types.ListArtifactsResult) => void): Request<Amplify.Types.ListArtifactsResult, AWSError>;
   /**
-   *  Returns a list of artifacts for a specified app, branch, and job. 
+   * Returns a list of artifacts for a specified app, branch, and job. 
    */
   listArtifacts(callback?: (err: AWSError, data: Amplify.Types.ListArtifactsResult) => void): Request<Amplify.Types.ListArtifactsResult, AWSError>;
   /**
-   *  Lists the backend environments for an Amplify app. 
+   * Lists the backend environments for an Amplify app.  This API is available only to Amplify Gen 1 applications where the backend is created using Amplify Studio or the Amplify command line interface (CLI). This API isn’t available to Amplify Gen 2 applications. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
    */
   listBackendEnvironments(params: Amplify.Types.ListBackendEnvironmentsRequest, callback?: (err: AWSError, data: Amplify.Types.ListBackendEnvironmentsResult) => void): Request<Amplify.Types.ListBackendEnvironmentsResult, AWSError>;
   /**
-   *  Lists the backend environments for an Amplify app. 
+   * Lists the backend environments for an Amplify app.  This API is available only to Amplify Gen 1 applications where the backend is created using Amplify Studio or the Amplify command line interface (CLI). This API isn’t available to Amplify Gen 2 applications. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
    */
   listBackendEnvironments(callback?: (err: AWSError, data: Amplify.Types.ListBackendEnvironmentsResult) => void): Request<Amplify.Types.ListBackendEnvironmentsResult, AWSError>;
   /**
@@ -204,11 +204,11 @@ declare class Amplify extends Service {
    */
   listBranches(callback?: (err: AWSError, data: Amplify.Types.ListBranchesResult) => void): Request<Amplify.Types.ListBranchesResult, AWSError>;
   /**
-   *  Returns the domain associations for an Amplify app. 
+   * Returns the domain associations for an Amplify app. 
    */
   listDomainAssociations(params: Amplify.Types.ListDomainAssociationsRequest, callback?: (err: AWSError, data: Amplify.Types.ListDomainAssociationsResult) => void): Request<Amplify.Types.ListDomainAssociationsResult, AWSError>;
   /**
-   *  Returns the domain associations for an Amplify app. 
+   * Returns the domain associations for an Amplify app. 
    */
   listDomainAssociations(callback?: (err: AWSError, data: Amplify.Types.ListDomainAssociationsResult) => void): Request<Amplify.Types.ListDomainAssociationsResult, AWSError>;
   /**
@@ -220,27 +220,27 @@ declare class Amplify extends Service {
    */
   listJobs(callback?: (err: AWSError, data: Amplify.Types.ListJobsResult) => void): Request<Amplify.Types.ListJobsResult, AWSError>;
   /**
-   *  Returns a list of tags for a specified Amazon Resource Name (ARN). 
+   * Returns a list of tags for a specified Amazon Resource Name (ARN).
    */
   listTagsForResource(params: Amplify.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Amplify.Types.ListTagsForResourceResponse) => void): Request<Amplify.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   *  Returns a list of tags for a specified Amazon Resource Name (ARN). 
+   * Returns a list of tags for a specified Amazon Resource Name (ARN).
    */
   listTagsForResource(callback?: (err: AWSError, data: Amplify.Types.ListTagsForResourceResponse) => void): Request<Amplify.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   *  Returns a list of webhooks for an Amplify app. 
+   * Returns a list of webhooks for an Amplify app. 
    */
   listWebhooks(params: Amplify.Types.ListWebhooksRequest, callback?: (err: AWSError, data: Amplify.Types.ListWebhooksResult) => void): Request<Amplify.Types.ListWebhooksResult, AWSError>;
   /**
-   *  Returns a list of webhooks for an Amplify app. 
+   * Returns a list of webhooks for an Amplify app. 
    */
   listWebhooks(callback?: (err: AWSError, data: Amplify.Types.ListWebhooksResult) => void): Request<Amplify.Types.ListWebhooksResult, AWSError>;
   /**
-   *  Starts a deployment for a manually deployed app. Manually deployed apps are not connected to a repository. 
+   * Starts a deployment for a manually deployed app. Manually deployed apps are not connected to a repository.  The maximum duration between the CreateDeployment call and the StartDeployment call cannot exceed 8 hours. If the duration exceeds 8 hours, the StartDeployment call and the associated Job will fail.
    */
   startDeployment(params: Amplify.Types.StartDeploymentRequest, callback?: (err: AWSError, data: Amplify.Types.StartDeploymentResult) => void): Request<Amplify.Types.StartDeploymentResult, AWSError>;
   /**
-   *  Starts a deployment for a manually deployed app. Manually deployed apps are not connected to a repository. 
+   * Starts a deployment for a manually deployed app. Manually deployed apps are not connected to a repository.  The maximum duration between the CreateDeployment call and the StartDeployment call cannot exceed 8 hours. If the duration exceeds 8 hours, the StartDeployment call and the associated Job will fail.
    */
   startDeployment(callback?: (err: AWSError, data: Amplify.Types.StartDeploymentResult) => void): Request<Amplify.Types.StartDeploymentResult, AWSError>;
   /**
@@ -260,27 +260,27 @@ declare class Amplify extends Service {
    */
   stopJob(callback?: (err: AWSError, data: Amplify.Types.StopJobResult) => void): Request<Amplify.Types.StopJobResult, AWSError>;
   /**
-   *  Tags the resource with a tag key and value. 
+   * Tags the resource with a tag key and value.
    */
   tagResource(params: Amplify.Types.TagResourceRequest, callback?: (err: AWSError, data: Amplify.Types.TagResourceResponse) => void): Request<Amplify.Types.TagResourceResponse, AWSError>;
   /**
-   *  Tags the resource with a tag key and value. 
+   * Tags the resource with a tag key and value.
    */
   tagResource(callback?: (err: AWSError, data: Amplify.Types.TagResourceResponse) => void): Request<Amplify.Types.TagResourceResponse, AWSError>;
   /**
-   *  Untags a resource with a specified Amazon Resource Name (ARN). 
+   * Untags a resource with a specified Amazon Resource Name (ARN).
    */
   untagResource(params: Amplify.Types.UntagResourceRequest, callback?: (err: AWSError, data: Amplify.Types.UntagResourceResponse) => void): Request<Amplify.Types.UntagResourceResponse, AWSError>;
   /**
-   *  Untags a resource with a specified Amazon Resource Name (ARN). 
+   * Untags a resource with a specified Amazon Resource Name (ARN).
    */
   untagResource(callback?: (err: AWSError, data: Amplify.Types.UntagResourceResponse) => void): Request<Amplify.Types.UntagResourceResponse, AWSError>;
   /**
-   *  Updates an existing Amplify app. 
+   * Updates an existing Amplify app. 
    */
   updateApp(params: Amplify.Types.UpdateAppRequest, callback?: (err: AWSError, data: Amplify.Types.UpdateAppResult) => void): Request<Amplify.Types.UpdateAppResult, AWSError>;
   /**
-   *  Updates an existing Amplify app. 
+   * Updates an existing Amplify app. 
    */
   updateApp(callback?: (err: AWSError, data: Amplify.Types.UpdateAppResult) => void): Request<Amplify.Types.UpdateAppResult, AWSError>;
   /**
@@ -292,19 +292,19 @@ declare class Amplify extends Service {
    */
   updateBranch(callback?: (err: AWSError, data: Amplify.Types.UpdateBranchResult) => void): Request<Amplify.Types.UpdateBranchResult, AWSError>;
   /**
-   *  Creates a new domain association for an Amplify app.
+   * Creates a new domain association for an Amplify app.
    */
   updateDomainAssociation(params: Amplify.Types.UpdateDomainAssociationRequest, callback?: (err: AWSError, data: Amplify.Types.UpdateDomainAssociationResult) => void): Request<Amplify.Types.UpdateDomainAssociationResult, AWSError>;
   /**
-   *  Creates a new domain association for an Amplify app.
+   * Creates a new domain association for an Amplify app.
    */
   updateDomainAssociation(callback?: (err: AWSError, data: Amplify.Types.UpdateDomainAssociationResult) => void): Request<Amplify.Types.UpdateDomainAssociationResult, AWSError>;
   /**
-   *  Updates a webhook. 
+   * Updates a webhook. 
    */
   updateWebhook(params: Amplify.Types.UpdateWebhookRequest, callback?: (err: AWSError, data: Amplify.Types.UpdateWebhookResult) => void): Request<Amplify.Types.UpdateWebhookResult, AWSError>;
   /**
-   *  Updates a webhook. 
+   * Updates a webhook. 
    */
   updateWebhook(callback?: (err: AWSError, data: Amplify.Types.UpdateWebhookResult) => void): Request<Amplify.Types.UpdateWebhookResult, AWSError>;
 }
@@ -313,79 +313,79 @@ declare namespace Amplify {
   export type ActiveJobId = string;
   export interface App {
     /**
-     *  The unique ID of the Amplify app. 
+     * The unique ID of the Amplify app. 
      */
     appId: AppId;
     /**
-     *  The Amazon Resource Name (ARN) of the Amplify app. 
+     * The Amazon Resource Name (ARN) of the Amplify app. 
      */
     appArn: AppArn;
     /**
-     *  The name for the Amplify app. 
+     * The name for the Amplify app. 
      */
     name: Name;
     /**
-     *  The tag for the Amplify app. 
+     * The tag for the Amplify app. 
      */
     tags?: TagMap;
     /**
-     *  The description for the Amplify app. 
+     * The description for the Amplify app. 
      */
     description: Description;
     /**
-     *  The repository for the Amplify app. 
+     * The Git repository for the Amplify app. 
      */
     repository: Repository;
     /**
-     *  The platform for the Amplify app. 
+     * The platform for the Amplify app. For a static app, set the platform type to WEB. For a dynamic server-side rendered (SSR) app, set the platform type to WEB_COMPUTE. For an app requiring Amplify Hosting's original SSR support only, set the platform type to WEB_DYNAMIC.
      */
     platform: Platform;
     /**
-     *  Creates a date and time for the Amplify app. 
+     * Creates a date and time for the Amplify app. 
      */
     createTime: CreateTime;
     /**
-     *  Updates the date and time for the Amplify app. 
+     * Updates the date and time for the Amplify app. 
      */
     updateTime: UpdateTime;
     /**
-     *  The AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) of the Amplify app. 
+     * The AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) of the Amplify app. 
      */
     iamServiceRoleArn?: ServiceRoleArn;
     /**
-     *  The environment variables for the Amplify app. 
+     * The environment variables for the Amplify app.  For a list of the environment variables that are accessible to Amplify by default, see Amplify Environment variables in the Amplify Hosting User Guide.
      */
     environmentVariables: EnvironmentVariables;
     /**
-     *  The default domain for the Amplify app. 
+     * The default domain for the Amplify app. 
      */
     defaultDomain: DefaultDomain;
     /**
-     *  Enables the auto-building of branches for the Amplify app. 
+     * Enables the auto-building of branches for the Amplify app. 
      */
     enableBranchAutoBuild: EnableBranchAutoBuild;
     /**
-     *  Automatically disconnect a branch in the Amplify Console when you delete a branch from your Git repository. 
+     * Automatically disconnect a branch in the Amplify console when you delete a branch from your Git repository.
      */
     enableBranchAutoDeletion?: EnableBranchAutoDeletion;
     /**
-     *  Enables basic authorization for the Amplify app's branches. 
+     * Enables basic authorization for the Amplify app's branches. 
      */
     enableBasicAuth: EnableBasicAuth;
     /**
-     *  The basic authorization credentials for branches for the Amplify app. 
+     * The basic authorization credentials for branches for the Amplify app. You must base64-encode the authorization credentials and provide them in the format user:password.
      */
     basicAuthCredentials?: BasicAuthCredentials;
     /**
-     *  Describes the custom redirect and rewrite rules for the Amplify app. 
+     * Describes the custom redirect and rewrite rules for the Amplify app. 
      */
     customRules?: CustomRules;
     /**
-     *  Describes the information about a production branch of the Amplify app. 
+     * Describes the information about a production branch of the Amplify app. 
      */
     productionBranch?: ProductionBranch;
     /**
-     *  Describes the content of the build specification (build spec) for the Amplify app. 
+     * Describes the content of the build specification (build spec) for the Amplify app. 
      */
     buildSpec?: BuildSpec;
     /**
@@ -393,28 +393,36 @@ declare namespace Amplify {
      */
     customHeaders?: CustomHeaders;
     /**
-     *  Enables automated branch creation for the Amplify app. 
+     * Enables automated branch creation for the Amplify app. 
      */
     enableAutoBranchCreation?: EnableAutoBranchCreation;
     /**
-     *  Describes the automated branch creation glob patterns for the Amplify app. 
+     * Describes the automated branch creation glob patterns for the Amplify app. 
      */
     autoBranchCreationPatterns?: AutoBranchCreationPatterns;
     /**
-     *  Describes the automated branch creation configuration for the Amplify app. 
+     * Describes the automated branch creation configuration for the Amplify app. 
      */
     autoBranchCreationConfig?: AutoBranchCreationConfig;
+    /**
+     *  This is for internal use.  The Amplify service uses this parameter to specify the authentication protocol to use to access the Git repository for an Amplify app. Amplify specifies TOKEN for a GitHub repository, SIGV4 for an Amazon Web Services CodeCommit repository, and SSH for GitLab and Bitbucket repositories.
+     */
+    repositoryCloneMethod?: RepositoryCloneMethod;
+    /**
+     * The cache configuration for the Amplify app. If you don't specify the cache configuration type, Amplify uses the default AMPLIFY_MANAGED setting.
+     */
+    cacheConfig?: CacheConfig;
   }
   export type AppArn = string;
   export type AppId = string;
   export type Apps = App[];
   export interface Artifact {
     /**
-     *  The file name for the artifact. 
+     * The file name for the artifact. 
      */
     artifactFileName: ArtifactFileName;
     /**
-     *  The unique ID for the artifact. 
+     * The unique ID for the artifact. 
      */
     artifactId: ArtifactId;
   }
@@ -427,27 +435,27 @@ declare namespace Amplify {
   export type AssociatedResources = AssociatedResource[];
   export interface AutoBranchCreationConfig {
     /**
-     *  Describes the current stage for the autocreated branch. 
+     * Describes the current stage for the autocreated branch. 
      */
     stage?: Stage;
     /**
-     *  The framework for the autocreated branch. 
+     * The framework for the autocreated branch. 
      */
     framework?: Framework;
     /**
-     *  Enables auto building for the autocreated branch. 
+     * Enables auto building for the autocreated branch. 
      */
     enableAutoBuild?: EnableAutoBuild;
     /**
-     *  The environment variables for the autocreated branch. 
+     * The environment variables for the autocreated branch. 
      */
     environmentVariables?: EnvironmentVariables;
     /**
-     *  The basic authorization credentials for the autocreated branch. 
+     * The basic authorization credentials for the autocreated branch. You must base64-encode the authorization credentials and provide them in the format user:password.
      */
     basicAuthCredentials?: BasicAuthCredentials;
     /**
-     *  Enables basic authorization for the autocreated branch. 
+     * Enables basic authorization for the autocreated branch. 
      */
     enableBasicAuth?: EnableBasicAuth;
     /**
@@ -455,15 +463,15 @@ declare namespace Amplify {
      */
     enablePerformanceMode?: EnablePerformanceMode;
     /**
-     *  The build specification (build spec) for the autocreated branch. 
+     * The build specification (build spec) for the autocreated branch. 
      */
     buildSpec?: BuildSpec;
     /**
-     *  Enables pull request previews for the autocreated branch. 
+     * Enables pull request previews for the autocreated branch. 
      */
     enablePullRequestPreview?: EnablePullRequestPreview;
     /**
-     *  The Amplify environment name for the pull request. 
+     * The Amplify environment name for the pull request. 
      */
     pullRequestEnvironmentName?: PullRequestEnvironmentName;
   }
@@ -472,29 +480,35 @@ declare namespace Amplify {
   export type AutoSubDomainCreationPattern = string;
   export type AutoSubDomainCreationPatterns = AutoSubDomainCreationPattern[];
   export type AutoSubDomainIAMRole = string;
+  export interface Backend {
+    /**
+     * The Amazon Resource Name (ARN) for the CloudFormation stack.
+     */
+    stackArn?: StackArn;
+  }
   export interface BackendEnvironment {
     /**
-     *  The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. 
+     * The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. 
      */
     backendEnvironmentArn: BackendEnvironmentArn;
     /**
-     *  The name for a backend environment that is part of an Amplify app. 
+     * The name for a backend environment that is part of an Amplify app. 
      */
     environmentName: EnvironmentName;
     /**
-     *  The AWS CloudFormation stack name of a backend environment. 
+     * The AWS CloudFormation stack name of a backend environment. 
      */
     stackName?: StackName;
     /**
-     *  The name of deployment artifacts. 
+     * The name of deployment artifacts. 
      */
     deploymentArtifacts?: DeploymentArtifacts;
     /**
-     *  The creation date and time for a backend environment that is part of an Amplify app. 
+     * The creation date and time for a backend environment that is part of an Amplify app. 
      */
     createTime: CreateTime;
     /**
-     *  The last updated date and time for a backend environment that is part of an Amplify app. 
+     * The last updated date and time for a backend environment that is part of an Amplify app. 
      */
     updateTime: UpdateTime;
   }
@@ -575,7 +589,7 @@ declare namespace Amplify {
      */
     thumbnailUrl?: ThumbnailUrl;
     /**
-     *  The basic authorization credentials for a branch of an Amplify app. 
+     *  The basic authorization credentials for a branch of an Amplify app. You must base64-encode the authorization credentials and provide them in the format user:password.
      */
     basicAuthCredentials?: BasicAuthCredentials;
     /**
@@ -607,14 +621,48 @@ declare namespace Amplify {
      */
     sourceBranch?: BranchName;
     /**
-     *  The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. 
+     *  The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app.  This property is available to Amplify Gen 1 apps only. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
      */
     backendEnvironmentArn?: BackendEnvironmentArn;
+    backend?: Backend;
   }
   export type BranchArn = string;
   export type BranchName = string;
   export type Branches = Branch[];
   export type BuildSpec = string;
+  export interface CacheConfig {
+    /**
+     * The type of cache configuration to use for an Amplify app. The AMPLIFY_MANAGED cache configuration automatically applies an optimized cache configuration for your app based on its platform, routing rules, and rewrite rules. This is the default setting. The AMPLIFY_MANAGED_NO_COOKIES cache configuration type is the same as AMPLIFY_MANAGED, except that it excludes all cookies from the cache key.
+     */
+    type: CacheConfigType;
+  }
+  export type CacheConfigType = "AMPLIFY_MANAGED"|"AMPLIFY_MANAGED_NO_COOKIES"|string;
+  export interface Certificate {
+    /**
+     * The type of SSL/TLS certificate that you want to use. Specify AMPLIFY_MANAGED to use the default certificate that Amplify provisions for you. Specify CUSTOM to use your own certificate that you have already added to Certificate Manager in your Amazon Web Services account. Make sure you request (or import) the certificate in the US East (N. Virginia) Region (us-east-1). For more information about using ACM, see Importing certificates into Certificate Manager in the ACM User guide.
+     */
+    type: CertificateType;
+    /**
+     * The Amazon resource name (ARN) for a custom certificate that you have already added to Certificate Manager in your Amazon Web Services account.  This field is required only when the certificate type is CUSTOM.
+     */
+    customCertificateArn?: CertificateArn;
+    /**
+     * The DNS record for certificate verification.
+     */
+    certificateVerificationDNSRecord?: CertificateVerificationDNSRecord;
+  }
+  export type CertificateArn = string;
+  export interface CertificateSettings {
+    /**
+     * The certificate type. Specify AMPLIFY_MANAGED to use the default certificate that Amplify provisions for you. Specify CUSTOM to use your own certificate that you have already added to Certificate Manager in your Amazon Web Services account. Make sure you request (or import) the certificate in the US East (N. Virginia) Region (us-east-1). For more information about using ACM, see Importing certificates into Certificate Manager in the ACM User guide.
+     */
+    type: CertificateType;
+    /**
+     * The Amazon resource name (ARN) for the custom certificate that you have already added to Certificate Manager in your Amazon Web Services account. This field is required only when the certificate type is CUSTOM.
+     */
+    customCertificateArn?: CertificateArn;
+  }
+  export type CertificateType = "AMPLIFY_MANAGED"|"CUSTOM"|string;
   export type CertificateVerificationDNSRecord = string;
   export type CommitId = string;
   export type CommitMessage = string;
@@ -623,63 +671,63 @@ declare namespace Amplify {
   export type Context = string;
   export interface CreateAppRequest {
     /**
-     *  The name for an Amplify app. 
+     * The name of the Amplify app. 
      */
     name: Name;
     /**
-     *  The description for an Amplify app. 
+     * The description of the Amplify app. 
      */
     description?: Description;
     /**
-     *  The repository for an Amplify app. 
+     * The Git repository for the Amplify app. 
      */
     repository?: Repository;
     /**
-     *  The platform or framework for an Amplify app. 
+     * The platform for the Amplify app. For a static app, set the platform type to WEB. For a dynamic server-side rendered (SSR) app, set the platform type to WEB_COMPUTE. For an app requiring Amplify Hosting's original SSR support only, set the platform type to WEB_DYNAMIC.
      */
     platform?: Platform;
     /**
-     *  The AWS Identity and Access Management (IAM) service role for an Amplify app. 
+     * The AWS Identity and Access Management (IAM) service role for an Amplify app. 
      */
     iamServiceRoleArn?: ServiceRoleArn;
     /**
-     *  The OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key. The OAuth token is not stored. 
+     * The OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key using SSH cloning. The OAuth token is not stored. Use oauthToken for repository providers other than GitHub, such as Bitbucket or CodeCommit. To authorize access to GitHub as your repository provider, use accessToken. You must specify either oauthToken or accessToken when you create a new app. Existing Amplify apps deployed from a GitHub repository using OAuth continue to work with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub App. For more information, see Migrating an existing OAuth app to the Amplify GitHub App in the Amplify User Guide .
      */
     oauthToken?: OauthToken;
     /**
-     *  The personal access token for a third-party source control system for an Amplify app. The personal access token is used to create a webhook and a read-only deploy key. The token is not stored. 
+     * The personal access token for a GitHub repository for an Amplify app. The personal access token is used to authorize access to a GitHub repository using the Amplify GitHub App. The token is not stored. Use accessToken for GitHub repositories only. To authorize access to a repository provider such as Bitbucket or CodeCommit, use oauthToken. You must specify either accessToken or oauthToken when you create a new app. Existing Amplify apps deployed from a GitHub repository using OAuth continue to work with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub App. For more information, see Migrating an existing OAuth app to the Amplify GitHub App in the Amplify User Guide .
      */
     accessToken?: AccessToken;
     /**
-     *  The environment variables map for an Amplify app. 
+     * The environment variables map for an Amplify app.  For a list of the environment variables that are accessible to Amplify by default, see Amplify Environment variables in the Amplify Hosting User Guide.
      */
     environmentVariables?: EnvironmentVariables;
     /**
-     *  Enables the auto building of branches for an Amplify app. 
+     * Enables the auto building of branches for an Amplify app. 
      */
     enableBranchAutoBuild?: EnableBranchAutoBuild;
     /**
-     *  Automatically disconnects a branch in the Amplify Console when you delete a branch from your Git repository. 
+     * Automatically disconnects a branch in the Amplify console when you delete a branch from your Git repository. 
      */
     enableBranchAutoDeletion?: EnableBranchAutoDeletion;
     /**
-     *  Enables basic authorization for an Amplify app. This will apply to all branches that are part of this app. 
+     * Enables basic authorization for an Amplify app. This will apply to all branches that are part of this app. 
      */
     enableBasicAuth?: EnableBasicAuth;
     /**
-     *  The credentials for basic authorization for an Amplify app. 
+     * The credentials for basic authorization for an Amplify app. You must base64-encode the authorization credentials and provide them in the format user:password.
      */
     basicAuthCredentials?: BasicAuthCredentials;
     /**
-     *  The custom rewrite and redirect rules for an Amplify app. 
+     * The custom rewrite and redirect rules for an Amplify app. 
      */
     customRules?: CustomRules;
     /**
-     *  The tag for an Amplify app. 
+     * The tag for an Amplify app. 
      */
     tags?: TagMap;
     /**
-     *  The build specification (build spec) for an Amplify app. 
+     * The build specification (build spec) for an Amplify app. 
      */
     buildSpec?: BuildSpec;
     /**
@@ -687,42 +735,46 @@ declare namespace Amplify {
      */
     customHeaders?: CustomHeaders;
     /**
-     *  Enables automated branch creation for an Amplify app. 
+     * Enables automated branch creation for an Amplify app. 
      */
     enableAutoBranchCreation?: EnableAutoBranchCreation;
     /**
-     *  The automated branch creation glob patterns for an Amplify app. 
+     * The automated branch creation glob patterns for an Amplify app. 
      */
     autoBranchCreationPatterns?: AutoBranchCreationPatterns;
     /**
-     *  The automated branch creation configuration for an Amplify app. 
+     * The automated branch creation configuration for an Amplify app. 
      */
     autoBranchCreationConfig?: AutoBranchCreationConfig;
+    /**
+     * The cache configuration for the Amplify app.
+     */
+    cacheConfig?: CacheConfig;
   }
   export interface CreateAppResult {
     app: App;
   }
   export interface CreateBackendEnvironmentRequest {
     /**
-     *  The unique ID for an Amplify app. 
+     * The unique ID for an Amplify app. 
      */
     appId: AppId;
     /**
-     *  The name for the backend environment. 
+     * The name for the backend environment. 
      */
     environmentName: EnvironmentName;
     /**
-     *  The AWS CloudFormation stack name of a backend environment. 
+     * The AWS CloudFormation stack name of a backend environment. 
      */
     stackName?: StackName;
     /**
-     *  The name of deployment artifacts. 
+     * The name of deployment artifacts. 
      */
     deploymentArtifacts?: DeploymentArtifacts;
   }
   export interface CreateBackendEnvironmentResult {
     /**
-     *  Describes the backend environment for an Amplify app. 
+     * Describes the backend environment for an Amplify app. 
      */
     backendEnvironment: BackendEnvironment;
   }
@@ -732,15 +784,15 @@ declare namespace Amplify {
      */
     appId: AppId;
     /**
-     *  The name for the branch. 
+     * The name for the branch. 
      */
     branchName: BranchName;
     /**
-     *  The description for the branch. 
+     * The description for the branch. 
      */
     description?: Description;
     /**
-     *  Describes the current stage for the branch. 
+     * Describes the current stage for the branch. 
      */
     stage?: Stage;
     /**
@@ -760,7 +812,7 @@ declare namespace Amplify {
      */
     environmentVariables?: EnvironmentVariables;
     /**
-     *  The basic authorization credentials for the branch. 
+     *  The basic authorization credentials for the branch. You must base64-encode the authorization credentials and provide them in the format user:password.
      */
     basicAuthCredentials?: BasicAuthCredentials;
     /**
@@ -796,9 +848,13 @@ declare namespace Amplify {
      */
     pullRequestEnvironmentName?: PullRequestEnvironmentName;
     /**
-     *  The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. 
+     * The Amazon Resource Name (ARN) for a backend environment that is part of a Gen 1 Amplify app.  This field is available to Amplify Gen 1 apps only where the backend is created using Amplify Studio or the Amplify command line interface (CLI).
      */
     backendEnvironmentArn?: BackendEnvironmentArn;
+    /**
+     * The backend for a Branch of an Amplify app. Use for a backend created from an CloudFormation stack. This field is available to Amplify Gen 2 apps only. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
+     */
+    backend?: Backend;
   }
   export interface CreateBranchResult {
     /**
@@ -812,7 +868,7 @@ declare namespace Amplify {
      */
     appId: AppId;
     /**
-     *  The name for the branch, for the job. 
+     *  The name of the branch to use for the job. 
      */
     branchName: BranchName;
     /**
@@ -859,6 +915,10 @@ declare namespace Amplify {
      *  The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains. 
      */
     autoSubDomainIAMRole?: AutoSubDomainIAMRole;
+    /**
+     * The type of SSL/TLS certificate to use for your custom domain. If you don't specify a certificate type, Amplify uses the default certificate that it provisions and manages for you.
+     */
+    certificateSettings?: CertificateSettings;
   }
   export interface CreateDomainAssociationResult {
     /**
@@ -869,21 +929,21 @@ declare namespace Amplify {
   export type CreateTime = Date;
   export interface CreateWebhookRequest {
     /**
-     *  The unique ID for an Amplify app. 
+     * The unique ID for an Amplify app. 
      */
     appId: AppId;
     /**
-     *  The name for a branch that is part of an Amplify app. 
+     * The name for a branch that is part of an Amplify app. 
      */
     branchName: BranchName;
     /**
-     *  The description for a webhook. 
+     * The description for a webhook. 
      */
     description?: Description;
   }
   export interface CreateWebhookResult {
     /**
-     *  Describes a webhook that connects repository events to an Amplify app. 
+     * Describes a webhook that connects repository events to an Amplify app. 
      */
     webhook: Webhook;
   }
@@ -892,19 +952,19 @@ declare namespace Amplify {
   export type CustomHeaders = string;
   export interface CustomRule {
     /**
-     *  The source pattern for a URL rewrite or redirect rule. 
+     * The source pattern for a URL rewrite or redirect rule. 
      */
     source: Source;
     /**
-     *  The target pattern for a URL rewrite or redirect rule. 
+     * The target pattern for a URL rewrite or redirect rule. 
      */
     target: Target;
     /**
-     *  The status code for a URL rewrite or redirect rule.   200  Represents a 200 rewrite rule.  301  Represents a 301 (moved pemanently) redirect rule. This and all future requests should be directed to the target URL.   302  Represents a 302 temporary redirect rule.  404  Represents a 404 redirect rule.  404-200  Represents a 404 rewrite rule.  
+     * The status code for a URL rewrite or redirect rule.   200  Represents a 200 rewrite rule.  301  Represents a 301 (moved permanently) redirect rule. This and all future requests should be directed to the target URL.   302  Represents a 302 temporary redirect rule.  404  Represents a 404 redirect rule.  404-200  Represents a 404 rewrite rule.  
      */
     status?: Status;
     /**
-     *  The condition for a URL rewrite or redirect rule, such as a country code. 
+     * The condition for a URL rewrite or redirect rule, such as a country code. 
      */
     condition?: Condition;
   }
@@ -913,7 +973,7 @@ declare namespace Amplify {
   export type DefaultDomain = string;
   export interface DeleteAppRequest {
     /**
-     *  The unique ID for an Amplify app. 
+     * The unique ID for an Amplify app. 
      */
     appId: AppId;
   }
@@ -922,17 +982,17 @@ declare namespace Amplify {
   }
   export interface DeleteBackendEnvironmentRequest {
     /**
-     *  The unique ID of an Amplify app. 
+     * The unique ID of an Amplify app. 
      */
     appId: AppId;
     /**
-     *  The name of a backend environment of an Amplify app. 
+     * The name of a backend environment of an Amplify app. 
      */
     environmentName: EnvironmentName;
   }
   export interface DeleteBackendEnvironmentResult {
     /**
-     *  Describes the backend environment for an Amplify app. 
+     * Describes the backend environment for an Amplify app. 
      */
     backendEnvironment: BackendEnvironment;
   }
@@ -942,13 +1002,13 @@ declare namespace Amplify {
      */
     appId: AppId;
     /**
-     *  The name for the branch. 
+     * The name of the branch. 
      */
     branchName: BranchName;
   }
   export interface DeleteBranchResult {
     /**
-     *  The branch for an Amplify app, which maps to a third-party repository branch. 
+     * The branch for an Amplify app, which maps to a third-party repository branch. 
      */
     branch: Branch;
   }
@@ -971,7 +1031,7 @@ declare namespace Amplify {
      */
     appId: AppId;
     /**
-     *  The name for the branch, for the job. 
+     * The name of the branch to use for the job. 
      */
     branchName: BranchName;
     /**
@@ -984,13 +1044,13 @@ declare namespace Amplify {
   }
   export interface DeleteWebhookRequest {
     /**
-     *  The unique ID for a webhook. 
+     * The unique ID for a webhook. 
      */
     webhookId: WebhookId;
   }
   export interface DeleteWebhookResult {
     /**
-     *  Describes a webhook that connects repository events to an Amplify app. 
+     * Describes a webhook that connects repository events to an Amplify app. 
      */
     webhook: Webhook;
   }
@@ -1023,7 +1083,11 @@ declare namespace Amplify {
      */
     domainStatus: DomainStatus;
     /**
-     *  The reason for the current status of the domain association. 
+     * The status of the domain update operation that is currently in progress. The following list describes the valid update states.  REQUESTING_CERTIFICATE  The certificate is in the process of being updated.  PENDING_VERIFICATION  Indicates that an Amplify managed certificate is in the process of being verified. This occurs during the creation of a custom domain or when a custom domain is updated to use a managed certificate.  IMPORTING_CUSTOM_CERTIFICATE  Indicates that an Amplify custom certificate is in the process of being imported. This occurs during the creation of a custom domain or when a custom domain is updated to use a custom certificate.  PENDING_DEPLOYMENT  Indicates that the subdomain or certificate changes are being propagated.  AWAITING_APP_CNAME  Amplify is waiting for CNAME records corresponding to subdomains to be propagated. If your custom domain is on Route 53, Amplify handles this for you automatically. For more information about custom domains, see Setting up custom domains in the Amplify Hosting User Guide.   UPDATE_COMPLETE  The certificate has been associated with a domain.  UPDATE_FAILED  The certificate has failed to be provisioned or associated, and there is no existing active certificate to roll back to.  
+     */
+    updateStatus?: UpdateStatus;
+    /**
+     *  Additional information that describes why the domain association is in the current state.
      */
     statusReason: StatusReason;
     /**
@@ -1034,12 +1098,16 @@ declare namespace Amplify {
      *  The subdomains for the domain association. 
      */
     subDomains: SubDomains;
+    /**
+     * Describes the SSL/TLS certificate for the domain association. This can be your own custom certificate or the default certificate that Amplify provisions for you. If you are updating your domain to use a different certificate, certificate points to the new certificate that is being created instead of the current active certificate. Otherwise, certificate points to the current active certificate.
+     */
+    certificate?: Certificate;
   }
   export type DomainAssociationArn = string;
   export type DomainAssociations = DomainAssociation[];
   export type DomainName = string;
   export type DomainPrefix = string;
-  export type DomainStatus = "PENDING_VERIFICATION"|"IN_PROGRESS"|"AVAILABLE"|"PENDING_DEPLOYMENT"|"FAILED"|"CREATING"|"REQUESTING_CERTIFICATE"|"UPDATING"|string;
+  export type DomainStatus = "PENDING_VERIFICATION"|"IN_PROGRESS"|"AVAILABLE"|"IMPORTING_CUSTOM_CERTIFICATE"|"PENDING_DEPLOYMENT"|"AWAITING_APP_CNAME"|"FAILED"|"CREATING"|"REQUESTING_CERTIFICATE"|"UPDATING"|string;
   export type EnableAutoBranchCreation = boolean;
   export type EnableAutoBuild = boolean;
   export type EnableAutoSubDomain = boolean;
@@ -1060,31 +1128,31 @@ declare namespace Amplify {
   export type Framework = string;
   export interface GenerateAccessLogsRequest {
     /**
-     *  The time at which the logs should start. The time range specified is inclusive of the start time. 
+     * The time at which the logs should start. The time range specified is inclusive of the start time. 
      */
     startTime?: StartTime;
     /**
-     *  The time at which the logs should end. The time range specified is inclusive of the end time. 
+     * The time at which the logs should end. The time range specified is inclusive of the end time. 
      */
     endTime?: EndTime;
     /**
-     *  The name of the domain. 
+     * The name of the domain. 
      */
     domainName: DomainName;
     /**
-     *  The unique ID for an Amplify app. 
+     * The unique ID for an Amplify app. 
      */
     appId: AppId;
   }
   export interface GenerateAccessLogsResult {
     /**
-     *  The pre-signed URL for the requested access logs. 
+     * The pre-signed URL for the requested access logs. 
      */
     logUrl?: LogUrl;
   }
   export interface GetAppRequest {
     /**
-     *  The unique ID for an Amplify app. 
+     * The unique ID for an Amplify app. 
      */
     appId: AppId;
   }
@@ -1093,33 +1161,33 @@ declare namespace Amplify {
   }
   export interface GetArtifactUrlRequest {
     /**
-     *  The unique ID for an artifact. 
+     * The unique ID for an artifact. 
      */
     artifactId: ArtifactId;
   }
   export interface GetArtifactUrlResult {
     /**
-     *  The unique ID for an artifact. 
+     * The unique ID for an artifact. 
      */
     artifactId: ArtifactId;
     /**
-     *  The presigned URL for the artifact. 
+     * The presigned URL for the artifact. 
      */
     artifactUrl: ArtifactUrl;
   }
   export interface GetBackendEnvironmentRequest {
     /**
-     *  The unique id for an Amplify app. 
+     * The unique id for an Amplify app. 
      */
     appId: AppId;
     /**
-     *  The name for the backend environment. 
+     * The name for the backend environment. 
      */
     environmentName: EnvironmentName;
   }
   export interface GetBackendEnvironmentResult {
     /**
-     *  Describes the backend environment for an Amplify app. 
+     * Describes the backend environment for an Amplify app. 
      */
     backendEnvironment: BackendEnvironment;
   }
@@ -1129,7 +1197,7 @@ declare namespace Amplify {
      */
     appId: AppId;
     /**
-     *  The name for the branch. 
+     * The name of the branch. 
      */
     branchName: BranchName;
   }
@@ -1154,15 +1222,15 @@ declare namespace Amplify {
   }
   export interface GetJobRequest {
     /**
-     *  The unique ID for an Amplify app. 
+     * The unique ID for an Amplify app. 
      */
     appId: AppId;
     /**
-     *  The branch name for the job. 
+     * The name of the branch to use for the job. 
      */
     branchName: BranchName;
     /**
-     *  The unique ID for the job. 
+     * The unique ID for the job. 
      */
     jobId: JobId;
   }
@@ -1171,13 +1239,13 @@ declare namespace Amplify {
   }
   export interface GetWebhookRequest {
     /**
-     *  The unique ID for a webhook. 
+     * The unique ID for a webhook. 
      */
     webhookId: WebhookId;
   }
   export interface GetWebhookResult {
     /**
-     *  Describes the structure of a webhook. 
+     * Describes the structure of a webhook. 
      */
     webhook: Webhook;
   }
@@ -1238,91 +1306,91 @@ declare namespace Amplify {
   export type LastDeployTime = Date;
   export interface ListAppsRequest {
     /**
-     *  A pagination token. If non-null, the pagination token is returned in a result. Pass its value in another request to retrieve more entries. 
+     * A pagination token. If non-null, the pagination token is returned in a result. Pass its value in another request to retrieve more entries. 
      */
     nextToken?: NextToken;
     /**
-     *  The maximum number of records to list in a single response. 
+     * The maximum number of records to list in a single response. 
      */
-    maxResults?: MaxResults;
+    maxResults?: MaxResultsForListApps;
   }
   export interface ListAppsResult {
     /**
-     *  A list of Amplify apps. 
+     * A list of Amplify apps. 
      */
     apps: Apps;
     /**
-     *  A pagination token. Set to null to start listing apps from start. If non-null, the pagination token is returned in a result. Pass its value in here to list more projects. 
+     * A pagination token. Set to null to start listing apps from start. If non-null, the pagination token is returned in a result. Pass its value in here to list more projects. 
      */
     nextToken?: NextToken;
   }
   export interface ListArtifactsRequest {
     /**
-     *  The unique ID for an Amplify app. 
+     * The unique ID for an Amplify app. 
      */
     appId: AppId;
     /**
-     *  The name of a branch that is part of an Amplify app. 
+     * The name of a branch that is part of an Amplify app. 
      */
     branchName: BranchName;
     /**
-     *  The unique ID for a job. 
+     * The unique ID for a job. 
      */
     jobId: JobId;
     /**
-     *  A pagination token. Set to null to start listing artifacts from start. If a non-null pagination token is returned in a result, pass its value in here to list more artifacts. 
+     * A pagination token. Set to null to start listing artifacts from start. If a non-null pagination token is returned in a result, pass its value in here to list more artifacts. 
      */
     nextToken?: NextToken;
     /**
-     *  The maximum number of records to list in a single response. 
+     * The maximum number of records to list in a single response. 
      */
     maxResults?: MaxResults;
   }
   export interface ListArtifactsResult {
     /**
-     *  A list of artifacts. 
+     * A list of artifacts. 
      */
     artifacts: Artifacts;
     /**
-     *  A pagination token. If a non-null pagination token is returned in a result, pass its value in another request to retrieve more entries. 
+     * A pagination token. If a non-null pagination token is returned in a result, pass its value in another request to retrieve more entries. 
      */
     nextToken?: NextToken;
   }
   export interface ListBackendEnvironmentsRequest {
     /**
-     *  The unique ID for an Amplify app. 
+     * The unique ID for an Amplify app. 
      */
     appId: AppId;
     /**
-     *  The name of the backend environment 
+     * The name of the backend environment 
      */
     environmentName?: EnvironmentName;
     /**
-     *  A pagination token. Set to null to start listing backend environments from the start. If a non-null pagination token is returned in a result, pass its value in here to list more backend environments. 
+     * A pagination token. Set to null to start listing backend environments from the start. If a non-null pagination token is returned in a result, pass its value in here to list more backend environments. 
      */
     nextToken?: NextToken;
     /**
-     *  The maximum number of records to list in a single response. 
+     * The maximum number of records to list in a single response. 
      */
     maxResults?: MaxResults;
   }
   export interface ListBackendEnvironmentsResult {
     /**
-     *  The list of backend environments for an Amplify app. 
+     * The list of backend environments for an Amplify app. 
      */
     backendEnvironments: BackendEnvironments;
     /**
-     *  A pagination token. If a non-null pagination token is returned in a result, pass its value in another request to retrieve more entries. 
+     * A pagination token. If a non-null pagination token is returned in a result, pass its value in another request to retrieve more entries. 
      */
     nextToken?: NextToken;
   }
   export interface ListBranchesRequest {
     /**
-     *  The unique ID for an Amplify app. 
+     * The unique ID for an Amplify app. 
      */
     appId: AppId;
     /**
-     *  A pagination token. Set to null to start listing branches from the start. If a non-null pagination token is returned in a result, pass its value in here to list more branches. 
+     * A pagination token. Set to null to start listing branches from the start. If a non-null pagination token is returned in a result, pass its value in here to list more branches. 
      */
     nextToken?: NextToken;
     /**
@@ -1370,141 +1438,144 @@ declare namespace Amplify {
      */
     appId: AppId;
     /**
-     *  The name for a branch. 
+     * The name of the branch to use for the request. 
      */
     branchName: BranchName;
     /**
-     *  A pagination token. Set to null to start listing steps from the start. If a non-null pagination token is returned in a result, pass its value in here to list more steps. 
+     * A pagination token. Set to null to start listing steps from the start. If a non-null pagination token is returned in a result, pass its value in here to list more steps. 
      */
     nextToken?: NextToken;
     /**
-     *  The maximum number of records to list in a single response. 
+     * The maximum number of records to list in a single response. 
      */
     maxResults?: MaxResults;
   }
   export interface ListJobsResult {
     /**
-     *  The result structure for the list job result request. 
+     * The result structure for the list job result request. 
      */
     jobSummaries: JobSummaries;
     /**
-     *  A pagination token. If non-null the pagination token is returned in a result. Pass its value in another request to retrieve more entries. 
+     * A pagination token. If non-null the pagination token is returned in a result. Pass its value in another request to retrieve more entries. 
      */
     nextToken?: NextToken;
   }
   export interface ListTagsForResourceRequest {
     /**
-     *  The Amazon Resource Name (ARN) to use to list tags. 
+     * The Amazon Resource Name (ARN) to use to list tags. 
      */
     resourceArn: ResourceArn;
   }
   export interface ListTagsForResourceResponse {
     /**
-     *  A list of tags for the specified The Amazon Resource Name (ARN). 
+     * A list of tags for the specified The Amazon Resource Name (ARN). 
      */
     tags?: TagMap;
   }
   export interface ListWebhooksRequest {
     /**
-     *  The unique ID for an Amplify app. 
+     * The unique ID for an Amplify app. 
      */
     appId: AppId;
     /**
-     *  A pagination token. Set to null to start listing webhooks from the start. If non-null,the pagination token is returned in a result. Pass its value in here to list more webhooks. 
+     * A pagination token. Set to null to start listing webhooks from the start. If non-null,the pagination token is returned in a result. Pass its value in here to list more webhooks. 
      */
     nextToken?: NextToken;
     /**
-     *  The maximum number of records to list in a single response. 
+     * The maximum number of records to list in a single response. 
      */
     maxResults?: MaxResults;
   }
   export interface ListWebhooksResult {
     /**
-     *  A list of webhooks. 
+     * A list of webhooks. 
      */
     webhooks: Webhooks;
     /**
-     *  A pagination token. If non-null, the pagination token is returned in a result. Pass its value in another request to retrieve more entries. 
+     * A pagination token. If non-null, the pagination token is returned in a result. Pass its value in another request to retrieve more entries. 
      */
     nextToken?: NextToken;
   }
   export type LogUrl = string;
   export type MD5Hash = string;
   export type MaxResults = number;
+  export type MaxResultsForListApps = number;
   export type Name = string;
   export type NextToken = string;
   export type OauthToken = string;
-  export type Platform = "WEB"|string;
+  export type Platform = "WEB"|"WEB_DYNAMIC"|"WEB_COMPUTE"|string;
   export interface ProductionBranch {
     /**
-     *  The last deploy time of the production branch. 
+     * The last deploy time of the production branch. 
      */
     lastDeployTime?: LastDeployTime;
     /**
-     *  The status of the production branch. 
+     * The status of the production branch. 
      */
     status?: Status;
     /**
-     *  The thumbnail URL for the production branch. 
+     * The thumbnail URL for the production branch. 
      */
     thumbnailUrl?: ThumbnailUrl;
     /**
-     *  The branch name for the production branch. 
+     * The branch name for the production branch. 
      */
     branchName?: BranchName;
   }
   export type PullRequestEnvironmentName = string;
   export type Repository = string;
+  export type RepositoryCloneMethod = "SSH"|"TOKEN"|"SIGV4"|string;
   export type ResourceArn = string;
   export type Screenshots = {[key: string]: ThumbnailUrl};
   export type ServiceRoleArn = string;
   export type Source = string;
   export type SourceUrl = string;
+  export type StackArn = string;
   export type StackName = string;
   export type Stage = "PRODUCTION"|"BETA"|"DEVELOPMENT"|"EXPERIMENTAL"|"PULL_REQUEST"|string;
   export interface StartDeploymentRequest {
     /**
-     *  The unique ID for an Amplify app. 
+     * The unique ID for an Amplify app. 
      */
     appId: AppId;
     /**
-     *  The name for the branch, for the job. 
+     * The name of the branch to use for the job. 
      */
     branchName: BranchName;
     /**
-     *  The job ID for this deployment, generated by the create deployment request. 
+     * The job ID for this deployment, generated by the create deployment request. 
      */
     jobId?: JobId;
     /**
-     *  The source URL for this deployment, used when calling start deployment without create deployment. The source URL can be any HTTP GET URL that is publicly accessible and downloads a single .zip file. 
+     * The source URL for this deployment, used when calling start deployment without create deployment. The source URL can be any HTTP GET URL that is publicly accessible and downloads a single .zip file. 
      */
     sourceUrl?: SourceUrl;
   }
   export interface StartDeploymentResult {
     /**
-     *  The summary for the job. 
+     * The summary for the job. 
      */
     jobSummary: JobSummary;
   }
   export interface StartJobRequest {
     /**
-     *  The unique ID for an Amplify app. 
+     * The unique ID for an Amplify app. 
      */
     appId: AppId;
     /**
-     *  The branch name for the job. 
+     * The name of the branch to use for the job. 
      */
     branchName: BranchName;
     /**
-     *  The unique ID for an existing job. This is required if the value of jobType is RETRY. 
+     * The unique ID for an existing job. This is required if the value of jobType is RETRY. 
      */
     jobId?: JobId;
     /**
-     *  Describes the type for the job. The job type RELEASE starts a new job with the latest change from the specified branch. This value is available only for apps that are connected to a repository. The job type RETRY retries an existing job. If the job type value is RETRY, the jobId is also required. 
+     * Describes the type for the job. The job type RELEASE starts a new job with the latest change from the specified branch. This value is available only for apps that are connected to a repository.  The job type RETRY retries an existing job. If the job type value is RETRY, the jobId is also required. 
      */
     jobType: JobType;
     /**
-     *  A descriptive reason for starting this job. 
+     * A descriptive reason for starting the job.
      */
     jobReason?: JobReason;
     /**
@@ -1583,7 +1654,7 @@ declare namespace Amplify {
      */
     appId: AppId;
     /**
-     *  The name for the branch, for the job. 
+     * The name of the branch to use for the stop job request. 
      */
     branchName: BranchName;
     /**
@@ -1633,7 +1704,7 @@ declare namespace Amplify {
      */
     resourceArn: ResourceArn;
     /**
-     *  The tags used to tag the resource. 
+     * The tags used to tag the resource. 
      */
     tags: TagMap;
   }
@@ -1648,11 +1719,11 @@ declare namespace Amplify {
   export type TotalNumberOfJobs = string;
   export interface UntagResourceRequest {
     /**
-     *  The Amazon Resource Name (ARN) to use to untag a resource. 
+     * The Amazon Resource Name (ARN) to use to untag a resource. 
      */
     resourceArn: ResourceArn;
     /**
-     *  The tag keys to use to untag a resource. 
+     * The tag keys to use to untag a resource. 
      */
     tagKeys: TagKeyList;
   }
@@ -1660,51 +1731,51 @@ declare namespace Amplify {
   }
   export interface UpdateAppRequest {
     /**
-     *  The unique ID for an Amplify app. 
+     * The unique ID for an Amplify app. 
      */
     appId: AppId;
     /**
-     *  The name for an Amplify app. 
+     * The name for an Amplify app. 
      */
     name?: Name;
     /**
-     *  The description for an Amplify app. 
+     * The description for an Amplify app. 
      */
     description?: Description;
     /**
-     *  The platform for an Amplify app. 
+     * The platform for the Amplify app. For a static app, set the platform type to WEB. For a dynamic server-side rendered (SSR) app, set the platform type to WEB_COMPUTE. For an app requiring Amplify Hosting's original SSR support only, set the platform type to WEB_DYNAMIC.
      */
     platform?: Platform;
     /**
-     *  The AWS Identity and Access Management (IAM) service role for an Amplify app. 
+     * The AWS Identity and Access Management (IAM) service role for an Amplify app. 
      */
     iamServiceRoleArn?: ServiceRoleArn;
     /**
-     *  The environment variables for an Amplify app. 
+     * The environment variables for an Amplify app. 
      */
     environmentVariables?: EnvironmentVariables;
     /**
-     *  Enables branch auto-building for an Amplify app. 
+     * Enables branch auto-building for an Amplify app. 
      */
     enableBranchAutoBuild?: EnableAutoBuild;
     /**
-     *  Automatically disconnects a branch in the Amplify Console when you delete a branch from your Git repository. 
+     * Automatically disconnects a branch in the Amplify console when you delete a branch from your Git repository. 
      */
     enableBranchAutoDeletion?: EnableBranchAutoDeletion;
     /**
-     *  Enables basic authorization for an Amplify app. 
+     * Enables basic authorization for an Amplify app. 
      */
     enableBasicAuth?: EnableBasicAuth;
     /**
-     *  The basic authorization credentials for an Amplify app. 
+     * The basic authorization credentials for an Amplify app. You must base64-encode the authorization credentials and provide them in the format user:password.
      */
     basicAuthCredentials?: BasicAuthCredentials;
     /**
-     *  The custom redirect and rewrite rules for an Amplify app. 
+     * The custom redirect and rewrite rules for an Amplify app. 
      */
     customRules?: CustomRules;
     /**
-     *  The build specification (build spec) for an Amplify app. 
+     * The build specification (build spec) for an Amplify app. 
      */
     buildSpec?: BuildSpec;
     /**
@@ -1712,33 +1783,37 @@ declare namespace Amplify {
      */
     customHeaders?: CustomHeaders;
     /**
-     *  Enables automated branch creation for an Amplify app. 
+     * Enables automated branch creation for an Amplify app. 
      */
     enableAutoBranchCreation?: EnableAutoBranchCreation;
     /**
-     *  Describes the automated branch creation glob patterns for an Amplify app. 
+     * Describes the automated branch creation glob patterns for an Amplify app. 
      */
     autoBranchCreationPatterns?: AutoBranchCreationPatterns;
     /**
-     *  The automated branch creation configuration for an Amplify app. 
+     * The automated branch creation configuration for an Amplify app. 
      */
     autoBranchCreationConfig?: AutoBranchCreationConfig;
     /**
-     *  The name of the repository for an Amplify app 
+     * The name of the Git repository for an Amplify app.
      */
     repository?: Repository;
     /**
-     *  The OAuth token for a third-party source control system for an Amplify app. The token is used to create a webhook and a read-only deploy key. The OAuth token is not stored. 
+     * The OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key using SSH cloning. The OAuth token is not stored. Use oauthToken for repository providers other than GitHub, such as Bitbucket or CodeCommit. To authorize access to GitHub as your repository provider, use accessToken. You must specify either oauthToken or accessToken when you update an app. Existing Amplify apps deployed from a GitHub repository using OAuth continue to work with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub App. For more information, see Migrating an existing OAuth app to the Amplify GitHub App in the Amplify User Guide .
      */
     oauthToken?: OauthToken;
     /**
-     *  The personal access token for a third-party source control system for an Amplify app. The token is used to create webhook and a read-only deploy key. The token is not stored. 
+     * The personal access token for a GitHub repository for an Amplify app. The personal access token is used to authorize access to a GitHub repository using the Amplify GitHub App. The token is not stored. Use accessToken for GitHub repositories only. To authorize access to a repository provider such as Bitbucket or CodeCommit, use oauthToken. You must specify either accessToken or oauthToken when you update an app. Existing Amplify apps deployed from a GitHub repository using OAuth continue to work with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub App. For more information, see Migrating an existing OAuth app to the Amplify GitHub App in the Amplify User Guide .
      */
     accessToken?: AccessToken;
+    /**
+     * The cache configuration for the Amplify app.
+     */
+    cacheConfig?: CacheConfig;
   }
   export interface UpdateAppResult {
     /**
-     *  Represents the updated Amplify app. 
+     * Represents the updated Amplify app. 
      */
     app: App;
   }
@@ -1748,7 +1823,7 @@ declare namespace Amplify {
      */
     appId: AppId;
     /**
-     *  The name for the branch. 
+     * The name of the branch. 
      */
     branchName: BranchName;
     /**
@@ -1776,7 +1851,7 @@ declare namespace Amplify {
      */
     environmentVariables?: EnvironmentVariables;
     /**
-     *  The basic authorization credentials for the branch. 
+     *  The basic authorization credentials for the branch. You must base64-encode the authorization credentials and provide them in the format user:password.
      */
     basicAuthCredentials?: BasicAuthCredentials;
     /**
@@ -1808,9 +1883,13 @@ declare namespace Amplify {
      */
     pullRequestEnvironmentName?: PullRequestEnvironmentName;
     /**
-     *  The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. 
+     * The Amazon Resource Name (ARN) for a backend environment that is part of a Gen 1 Amplify app.  This field is available to Amplify Gen 1 apps only where the backend is created using Amplify Studio or the Amplify command line interface (CLI).
      */
     backendEnvironmentArn?: BackendEnvironmentArn;
+    /**
+     * The backend for a Branch of an Amplify app. Use for a backend created from an CloudFormation stack. This field is available to Amplify Gen 2 apps only. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
+     */
+    backend?: Backend;
   }
   export interface UpdateBranchResult {
     /**
@@ -1834,7 +1913,7 @@ declare namespace Amplify {
     /**
      *  Describes the settings for the subdomain. 
      */
-    subDomainSettings: SubDomainSettings;
+    subDomainSettings?: SubDomainSettings;
     /**
      *  Sets the branch patterns for automatic subdomain creation. 
      */
@@ -1843,6 +1922,10 @@ declare namespace Amplify {
      *  The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains. 
      */
     autoSubDomainIAMRole?: AutoSubDomainIAMRole;
+    /**
+     * The type of SSL/TLS certificate to use for your custom domain.
+     */
+    certificateSettings?: CertificateSettings;
   }
   export interface UpdateDomainAssociationResult {
     /**
@@ -1850,24 +1933,25 @@ declare namespace Amplify {
      */
     domainAssociation: DomainAssociation;
   }
+  export type UpdateStatus = "REQUESTING_CERTIFICATE"|"PENDING_VERIFICATION"|"IMPORTING_CUSTOM_CERTIFICATE"|"PENDING_DEPLOYMENT"|"AWAITING_APP_CNAME"|"UPDATE_COMPLETE"|"UPDATE_FAILED"|string;
   export type UpdateTime = Date;
   export interface UpdateWebhookRequest {
     /**
-     *  The unique ID for a webhook. 
+     * The unique ID for a webhook. 
      */
     webhookId: WebhookId;
     /**
-     *  The name for a branch that is part of an Amplify app. 
+     * The name for a branch that is part of an Amplify app. 
      */
     branchName?: BranchName;
     /**
-     *  The description for a webhook. 
+     * The description for a webhook. 
      */
     description?: Description;
   }
   export interface UpdateWebhookResult {
     /**
-     *  Describes a webhook that connects repository events to an Amplify app. 
+     * Describes a webhook that connects repository events to an Amplify app. 
      */
     webhook: Webhook;
   }
@@ -1875,31 +1959,31 @@ declare namespace Amplify {
   export type Verified = boolean;
   export interface Webhook {
     /**
-     *  The Amazon Resource Name (ARN) for the webhook. 
+     * The Amazon Resource Name (ARN) for the webhook. 
      */
     webhookArn: WebhookArn;
     /**
-     *  The ID of the webhook. 
+     * The ID of the webhook. 
      */
     webhookId: WebhookId;
     /**
-     *  The URL of the webhook. 
+     * The URL of the webhook. 
      */
     webhookUrl: WebhookUrl;
     /**
-     *  The name for a branch that is part of an Amplify app. 
+     * The name for a branch that is part of an Amplify app. 
      */
     branchName: BranchName;
     /**
-     *  The description for a webhook. 
+     * The description for a webhook. 
      */
     description: Description;
     /**
-     *  The create date and time for a webhook. 
+     * The create date and time for a webhook. 
      */
     createTime: CreateTime;
     /**
-     *  Updates the date and time for a webhook. 
+     * Updates the date and time for a webhook. 
      */
     updateTime: UpdateTime;
   }

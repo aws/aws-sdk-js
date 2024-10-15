@@ -12,6 +12,22 @@ declare class SESV2 extends Service {
   constructor(options?: SESV2.Types.ClientConfiguration)
   config: Config & SESV2.Types.ClientConfiguration;
   /**
+   * Retrieves batches of metric data collected based on your sending activity. You can execute this operation no more than 16 times per second, and with at most 160 queries from the batches per second (cumulative).
+   */
+  batchGetMetricData(params: SESV2.Types.BatchGetMetricDataRequest, callback?: (err: AWSError, data: SESV2.Types.BatchGetMetricDataResponse) => void): Request<SESV2.Types.BatchGetMetricDataResponse, AWSError>;
+  /**
+   * Retrieves batches of metric data collected based on your sending activity. You can execute this operation no more than 16 times per second, and with at most 160 queries from the batches per second (cumulative).
+   */
+  batchGetMetricData(callback?: (err: AWSError, data: SESV2.Types.BatchGetMetricDataResponse) => void): Request<SESV2.Types.BatchGetMetricDataResponse, AWSError>;
+  /**
+   * Cancels an export job.
+   */
+  cancelExportJob(params: SESV2.Types.CancelExportJobRequest, callback?: (err: AWSError, data: SESV2.Types.CancelExportJobResponse) => void): Request<SESV2.Types.CancelExportJobResponse, AWSError>;
+  /**
+   * Cancels an export job.
+   */
+  cancelExportJob(callback?: (err: AWSError, data: SESV2.Types.CancelExportJobResponse) => void): Request<SESV2.Types.CancelExportJobResponse, AWSError>;
+  /**
    * Create a configuration set. Configuration sets are groups of rules that you can apply to the emails that you send. You apply a configuration set to an email by specifying the name of the configuration set when you call the Amazon SES API v2. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email. 
    */
   createConfigurationSet(params: SESV2.Types.CreateConfigurationSetRequest, callback?: (err: AWSError, data: SESV2.Types.CreateConfigurationSetResponse) => void): Request<SESV2.Types.CreateConfigurationSetResponse, AWSError>;
@@ -20,11 +36,11 @@ declare class SESV2 extends Service {
    */
   createConfigurationSet(callback?: (err: AWSError, data: SESV2.Types.CreateConfigurationSetResponse) => void): Request<SESV2.Types.CreateConfigurationSetResponse, AWSError>;
   /**
-   * Create an event destination. Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage. A single configuration set can include more than one event destination.
+   * Create an event destination. Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon EventBridge and associate a rule to send the event to the specified target. A single configuration set can include more than one event destination.
    */
   createConfigurationSetEventDestination(params: SESV2.Types.CreateConfigurationSetEventDestinationRequest, callback?: (err: AWSError, data: SESV2.Types.CreateConfigurationSetEventDestinationResponse) => void): Request<SESV2.Types.CreateConfigurationSetEventDestinationResponse, AWSError>;
   /**
-   * Create an event destination. Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage. A single configuration set can include more than one event destination.
+   * Create an event destination. Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon EventBridge and associate a rule to send the event to the specified target. A single configuration set can include more than one event destination.
    */
   createConfigurationSetEventDestination(callback?: (err: AWSError, data: SESV2.Types.CreateConfigurationSetEventDestinationResponse) => void): Request<SESV2.Types.CreateConfigurationSetEventDestinationResponse, AWSError>;
   /**
@@ -44,19 +60,19 @@ declare class SESV2 extends Service {
    */
   createContactList(callback?: (err: AWSError, data: SESV2.Types.CreateContactListResponse) => void): Request<SESV2.Types.CreateContactListResponse, AWSError>;
   /**
-   * Creates a new custom verification email template. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Creates a new custom verification email template. For more information about custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   createCustomVerificationEmailTemplate(params: SESV2.Types.CreateCustomVerificationEmailTemplateRequest, callback?: (err: AWSError, data: SESV2.Types.CreateCustomVerificationEmailTemplateResponse) => void): Request<SESV2.Types.CreateCustomVerificationEmailTemplateResponse, AWSError>;
   /**
-   * Creates a new custom verification email template. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Creates a new custom verification email template. For more information about custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   createCustomVerificationEmailTemplate(callback?: (err: AWSError, data: SESV2.Types.CreateCustomVerificationEmailTemplateResponse) => void): Request<SESV2.Types.CreateCustomVerificationEmailTemplateResponse, AWSError>;
   /**
-   * Create a new pool of dedicated IP addresses. A pool can include one or more dedicated IP addresses that are associated with your AWS account. You can associate a pool with a configuration set. When you send an email that uses that configuration set, the message is sent from one of the addresses in the associated pool.
+   * Create a new pool of dedicated IP addresses. A pool can include one or more dedicated IP addresses that are associated with your Amazon Web Services account. You can associate a pool with a configuration set. When you send an email that uses that configuration set, the message is sent from one of the addresses in the associated pool.
    */
   createDedicatedIpPool(params: SESV2.Types.CreateDedicatedIpPoolRequest, callback?: (err: AWSError, data: SESV2.Types.CreateDedicatedIpPoolResponse) => void): Request<SESV2.Types.CreateDedicatedIpPoolResponse, AWSError>;
   /**
-   * Create a new pool of dedicated IP addresses. A pool can include one or more dedicated IP addresses that are associated with your AWS account. You can associate a pool with a configuration set. When you send an email that uses that configuration set, the message is sent from one of the addresses in the associated pool.
+   * Create a new pool of dedicated IP addresses. A pool can include one or more dedicated IP addresses that are associated with your Amazon Web Services account. You can associate a pool with a configuration set. When you send an email that uses that configuration set, the message is sent from one of the addresses in the associated pool.
    */
   createDedicatedIpPool(callback?: (err: AWSError, data: SESV2.Types.CreateDedicatedIpPoolResponse) => void): Request<SESV2.Types.CreateDedicatedIpPoolResponse, AWSError>;
   /**
@@ -68,11 +84,11 @@ declare class SESV2 extends Service {
    */
   createDeliverabilityTestReport(callback?: (err: AWSError, data: SESV2.Types.CreateDeliverabilityTestReportResponse) => void): Request<SESV2.Types.CreateDeliverabilityTestReportResponse, AWSError>;
   /**
-   * Starts the process of verifying an email identity. An identity is an email address or domain that you use when you send email. Before you can use an identity to send email, you first have to verify it. By verifying an identity, you demonstrate that you're the owner of the identity, and that you've given Amazon SES API v2 permission to send email from the identity. When you verify an email address, Amazon SES sends an email to the address. Your email address is verified as soon as you follow the link in the verification email.  When you verify a domain without specifying the DkimSigningAttributes object, this operation provides a set of DKIM tokens. You can convert these tokens into CNAME records, which you then add to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. This verification method is known as Easy DKIM. Alternatively, you can perform the verification process by providing your own public-private key pair. This verification method is known as Bring Your Own DKIM (BYODKIM). To use BYODKIM, your call to the CreateEmailIdentity operation has to include the DkimSigningAttributes object. When you specify this object, you provide a selector (a component of the DNS record name that identifies the public key that you want to use for DKIM authentication) and a private key.
+   * Starts the process of verifying an email identity. An identity is an email address or domain that you use when you send email. Before you can use an identity to send email, you first have to verify it. By verifying an identity, you demonstrate that you're the owner of the identity, and that you've given Amazon SES API v2 permission to send email from the identity. When you verify an email address, Amazon SES sends an email to the address. Your email address is verified as soon as you follow the link in the verification email.  When you verify a domain without specifying the DkimSigningAttributes object, this operation provides a set of DKIM tokens. You can convert these tokens into CNAME records, which you then add to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. This verification method is known as Easy DKIM. Alternatively, you can perform the verification process by providing your own public-private key pair. This verification method is known as Bring Your Own DKIM (BYODKIM). To use BYODKIM, your call to the CreateEmailIdentity operation has to include the DkimSigningAttributes object. When you specify this object, you provide a selector (a component of the DNS record name that identifies the public key to use for DKIM authentication) and a private key. When you verify a domain, this operation provides a set of DKIM tokens, which you can convert into CNAME tokens. You add these CNAME tokens to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. For some DNS providers, it can take 72 hours or more to complete the domain verification process. Additionally, you can associate an existing configuration set with the email identity that you're verifying.
    */
   createEmailIdentity(params: SESV2.Types.CreateEmailIdentityRequest, callback?: (err: AWSError, data: SESV2.Types.CreateEmailIdentityResponse) => void): Request<SESV2.Types.CreateEmailIdentityResponse, AWSError>;
   /**
-   * Starts the process of verifying an email identity. An identity is an email address or domain that you use when you send email. Before you can use an identity to send email, you first have to verify it. By verifying an identity, you demonstrate that you're the owner of the identity, and that you've given Amazon SES API v2 permission to send email from the identity. When you verify an email address, Amazon SES sends an email to the address. Your email address is verified as soon as you follow the link in the verification email.  When you verify a domain without specifying the DkimSigningAttributes object, this operation provides a set of DKIM tokens. You can convert these tokens into CNAME records, which you then add to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. This verification method is known as Easy DKIM. Alternatively, you can perform the verification process by providing your own public-private key pair. This verification method is known as Bring Your Own DKIM (BYODKIM). To use BYODKIM, your call to the CreateEmailIdentity operation has to include the DkimSigningAttributes object. When you specify this object, you provide a selector (a component of the DNS record name that identifies the public key that you want to use for DKIM authentication) and a private key.
+   * Starts the process of verifying an email identity. An identity is an email address or domain that you use when you send email. Before you can use an identity to send email, you first have to verify it. By verifying an identity, you demonstrate that you're the owner of the identity, and that you've given Amazon SES API v2 permission to send email from the identity. When you verify an email address, Amazon SES sends an email to the address. Your email address is verified as soon as you follow the link in the verification email.  When you verify a domain without specifying the DkimSigningAttributes object, this operation provides a set of DKIM tokens. You can convert these tokens into CNAME records, which you then add to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. This verification method is known as Easy DKIM. Alternatively, you can perform the verification process by providing your own public-private key pair. This verification method is known as Bring Your Own DKIM (BYODKIM). To use BYODKIM, your call to the CreateEmailIdentity operation has to include the DkimSigningAttributes object. When you specify this object, you provide a selector (a component of the DNS record name that identifies the public key to use for DKIM authentication) and a private key. When you verify a domain, this operation provides a set of DKIM tokens, which you can convert into CNAME tokens. You add these CNAME tokens to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. For some DNS providers, it can take 72 hours or more to complete the domain verification process. Additionally, you can associate an existing configuration set with the email identity that you're verifying.
    */
   createEmailIdentity(callback?: (err: AWSError, data: SESV2.Types.CreateEmailIdentityResponse) => void): Request<SESV2.Types.CreateEmailIdentityResponse, AWSError>;
   /**
@@ -92,6 +108,14 @@ declare class SESV2 extends Service {
    */
   createEmailTemplate(callback?: (err: AWSError, data: SESV2.Types.CreateEmailTemplateResponse) => void): Request<SESV2.Types.CreateEmailTemplateResponse, AWSError>;
   /**
+   * Creates an export job for a data source and destination. You can execute this operation no more than once per second.
+   */
+  createExportJob(params: SESV2.Types.CreateExportJobRequest, callback?: (err: AWSError, data: SESV2.Types.CreateExportJobResponse) => void): Request<SESV2.Types.CreateExportJobResponse, AWSError>;
+  /**
+   * Creates an export job for a data source and destination. You can execute this operation no more than once per second.
+   */
+  createExportJob(callback?: (err: AWSError, data: SESV2.Types.CreateExportJobResponse) => void): Request<SESV2.Types.CreateExportJobResponse, AWSError>;
+  /**
    * Creates an import job for a data destination.
    */
   createImportJob(params: SESV2.Types.CreateImportJobRequest, callback?: (err: AWSError, data: SESV2.Types.CreateImportJobResponse) => void): Request<SESV2.Types.CreateImportJobResponse, AWSError>;
@@ -108,11 +132,11 @@ declare class SESV2 extends Service {
    */
   deleteConfigurationSet(callback?: (err: AWSError, data: SESV2.Types.DeleteConfigurationSetResponse) => void): Request<SESV2.Types.DeleteConfigurationSetResponse, AWSError>;
   /**
-   * Delete an event destination.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.
+   * Delete an event destination.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon EventBridge and associate a rule to send the event to the specified target.
    */
   deleteConfigurationSetEventDestination(params: SESV2.Types.DeleteConfigurationSetEventDestinationRequest, callback?: (err: AWSError, data: SESV2.Types.DeleteConfigurationSetEventDestinationResponse) => void): Request<SESV2.Types.DeleteConfigurationSetEventDestinationResponse, AWSError>;
   /**
-   * Delete an event destination.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.
+   * Delete an event destination.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon EventBridge and associate a rule to send the event to the specified target.
    */
   deleteConfigurationSetEventDestination(callback?: (err: AWSError, data: SESV2.Types.DeleteConfigurationSetEventDestinationResponse) => void): Request<SESV2.Types.DeleteConfigurationSetEventDestinationResponse, AWSError>;
   /**
@@ -132,11 +156,11 @@ declare class SESV2 extends Service {
    */
   deleteContactList(callback?: (err: AWSError, data: SESV2.Types.DeleteContactListResponse) => void): Request<SESV2.Types.DeleteContactListResponse, AWSError>;
   /**
-   * Deletes an existing custom verification email template. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Deletes an existing custom verification email template. For more information about custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   deleteCustomVerificationEmailTemplate(params: SESV2.Types.DeleteCustomVerificationEmailTemplateRequest, callback?: (err: AWSError, data: SESV2.Types.DeleteCustomVerificationEmailTemplateResponse) => void): Request<SESV2.Types.DeleteCustomVerificationEmailTemplateResponse, AWSError>;
   /**
-   * Deletes an existing custom verification email template. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Deletes an existing custom verification email template. For more information about custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   deleteCustomVerificationEmailTemplate(callback?: (err: AWSError, data: SESV2.Types.DeleteCustomVerificationEmailTemplateResponse) => void): Request<SESV2.Types.DeleteCustomVerificationEmailTemplateResponse, AWSError>;
   /**
@@ -180,11 +204,11 @@ declare class SESV2 extends Service {
    */
   deleteSuppressedDestination(callback?: (err: AWSError, data: SESV2.Types.DeleteSuppressedDestinationResponse) => void): Request<SESV2.Types.DeleteSuppressedDestinationResponse, AWSError>;
   /**
-   * Obtain information about the email-sending status and capabilities of your Amazon SES account in the current AWS Region.
+   * Obtain information about the email-sending status and capabilities of your Amazon SES account in the current Amazon Web Services Region.
    */
   getAccount(params: SESV2.Types.GetAccountRequest, callback?: (err: AWSError, data: SESV2.Types.GetAccountResponse) => void): Request<SESV2.Types.GetAccountResponse, AWSError>;
   /**
-   * Obtain information about the email-sending status and capabilities of your Amazon SES account in the current AWS Region.
+   * Obtain information about the email-sending status and capabilities of your Amazon SES account in the current Amazon Web Services Region.
    */
   getAccount(callback?: (err: AWSError, data: SESV2.Types.GetAccountResponse) => void): Request<SESV2.Types.GetAccountResponse, AWSError>;
   /**
@@ -204,11 +228,11 @@ declare class SESV2 extends Service {
    */
   getConfigurationSet(callback?: (err: AWSError, data: SESV2.Types.GetConfigurationSetResponse) => void): Request<SESV2.Types.GetConfigurationSetResponse, AWSError>;
   /**
-   * Retrieve a list of event destinations that are associated with a configuration set.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.
+   * Retrieve a list of event destinations that are associated with a configuration set.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon EventBridge and associate a rule to send the event to the specified target.
    */
   getConfigurationSetEventDestinations(params: SESV2.Types.GetConfigurationSetEventDestinationsRequest, callback?: (err: AWSError, data: SESV2.Types.GetConfigurationSetEventDestinationsResponse) => void): Request<SESV2.Types.GetConfigurationSetEventDestinationsResponse, AWSError>;
   /**
-   * Retrieve a list of event destinations that are associated with a configuration set.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.
+   * Retrieve a list of event destinations that are associated with a configuration set.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon EventBridge and associate a rule to send the event to the specified target.
    */
   getConfigurationSetEventDestinations(callback?: (err: AWSError, data: SESV2.Types.GetConfigurationSetEventDestinationsResponse) => void): Request<SESV2.Types.GetConfigurationSetEventDestinationsResponse, AWSError>;
   /**
@@ -228,11 +252,11 @@ declare class SESV2 extends Service {
    */
   getContactList(callback?: (err: AWSError, data: SESV2.Types.GetContactListResponse) => void): Request<SESV2.Types.GetContactListResponse, AWSError>;
   /**
-   * Returns the custom email verification template for the template name you specify. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Returns the custom email verification template for the template name you specify. For more information about custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   getCustomVerificationEmailTemplate(params: SESV2.Types.GetCustomVerificationEmailTemplateRequest, callback?: (err: AWSError, data: SESV2.Types.GetCustomVerificationEmailTemplateResponse) => void): Request<SESV2.Types.GetCustomVerificationEmailTemplateResponse, AWSError>;
   /**
-   * Returns the custom email verification template for the template name you specify. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Returns the custom email verification template for the template name you specify. For more information about custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   getCustomVerificationEmailTemplate(callback?: (err: AWSError, data: SESV2.Types.GetCustomVerificationEmailTemplateResponse) => void): Request<SESV2.Types.GetCustomVerificationEmailTemplateResponse, AWSError>;
   /**
@@ -244,19 +268,27 @@ declare class SESV2 extends Service {
    */
   getDedicatedIp(callback?: (err: AWSError, data: SESV2.Types.GetDedicatedIpResponse) => void): Request<SESV2.Types.GetDedicatedIpResponse, AWSError>;
   /**
-   * List the dedicated IP addresses that are associated with your AWS account.
+   * Retrieve information about the dedicated pool.
+   */
+  getDedicatedIpPool(params: SESV2.Types.GetDedicatedIpPoolRequest, callback?: (err: AWSError, data: SESV2.Types.GetDedicatedIpPoolResponse) => void): Request<SESV2.Types.GetDedicatedIpPoolResponse, AWSError>;
+  /**
+   * Retrieve information about the dedicated pool.
+   */
+  getDedicatedIpPool(callback?: (err: AWSError, data: SESV2.Types.GetDedicatedIpPoolResponse) => void): Request<SESV2.Types.GetDedicatedIpPoolResponse, AWSError>;
+  /**
+   * List the dedicated IP addresses that are associated with your Amazon Web Services account.
    */
   getDedicatedIps(params: SESV2.Types.GetDedicatedIpsRequest, callback?: (err: AWSError, data: SESV2.Types.GetDedicatedIpsResponse) => void): Request<SESV2.Types.GetDedicatedIpsResponse, AWSError>;
   /**
-   * List the dedicated IP addresses that are associated with your AWS account.
+   * List the dedicated IP addresses that are associated with your Amazon Web Services account.
    */
   getDedicatedIps(callback?: (err: AWSError, data: SESV2.Types.GetDedicatedIpsResponse) => void): Request<SESV2.Types.GetDedicatedIpsResponse, AWSError>;
   /**
-   * Retrieve information about the status of the Deliverability dashboard for your account. When the Deliverability dashboard is enabled, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon SES and other AWS services. For more information about the features and cost of a Deliverability dashboard subscription, see Amazon SES Pricing.
+   * Retrieve information about the status of the Deliverability dashboard for your account. When the Deliverability dashboard is enabled, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon SES and other Amazon Web Services services. For more information about the features and cost of a Deliverability dashboard subscription, see Amazon SES Pricing.
    */
   getDeliverabilityDashboardOptions(params: SESV2.Types.GetDeliverabilityDashboardOptionsRequest, callback?: (err: AWSError, data: SESV2.Types.GetDeliverabilityDashboardOptionsResponse) => void): Request<SESV2.Types.GetDeliverabilityDashboardOptionsResponse, AWSError>;
   /**
-   * Retrieve information about the status of the Deliverability dashboard for your account. When the Deliverability dashboard is enabled, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon SES and other AWS services. For more information about the features and cost of a Deliverability dashboard subscription, see Amazon SES Pricing.
+   * Retrieve information about the status of the Deliverability dashboard for your account. When the Deliverability dashboard is enabled, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon SES and other Amazon Web Services services. For more information about the features and cost of a Deliverability dashboard subscription, see Amazon SES Pricing.
    */
   getDeliverabilityDashboardOptions(callback?: (err: AWSError, data: SESV2.Types.GetDeliverabilityDashboardOptionsResponse) => void): Request<SESV2.Types.GetDeliverabilityDashboardOptionsResponse, AWSError>;
   /**
@@ -308,6 +340,14 @@ declare class SESV2 extends Service {
    */
   getEmailTemplate(callback?: (err: AWSError, data: SESV2.Types.GetEmailTemplateResponse) => void): Request<SESV2.Types.GetEmailTemplateResponse, AWSError>;
   /**
+   * Provides information about an export job.
+   */
+  getExportJob(params: SESV2.Types.GetExportJobRequest, callback?: (err: AWSError, data: SESV2.Types.GetExportJobResponse) => void): Request<SESV2.Types.GetExportJobResponse, AWSError>;
+  /**
+   * Provides information about an export job.
+   */
+  getExportJob(callback?: (err: AWSError, data: SESV2.Types.GetExportJobResponse) => void): Request<SESV2.Types.GetExportJobResponse, AWSError>;
+  /**
    * Provides information about an import job.
    */
   getImportJob(params: SESV2.Types.GetImportJobRequest, callback?: (err: AWSError, data: SESV2.Types.GetImportJobResponse) => void): Request<SESV2.Types.GetImportJobResponse, AWSError>;
@@ -315,6 +355,14 @@ declare class SESV2 extends Service {
    * Provides information about an import job.
    */
   getImportJob(callback?: (err: AWSError, data: SESV2.Types.GetImportJobResponse) => void): Request<SESV2.Types.GetImportJobResponse, AWSError>;
+  /**
+   * Provides information about a specific message, including the from address, the subject, the recipient address, email tags, as well as events associated with the message. You can execute this operation no more than once per second.
+   */
+  getMessageInsights(params: SESV2.Types.GetMessageInsightsRequest, callback?: (err: AWSError, data: SESV2.Types.GetMessageInsightsResponse) => void): Request<SESV2.Types.GetMessageInsightsResponse, AWSError>;
+  /**
+   * Provides information about a specific message, including the from address, the subject, the recipient address, email tags, as well as events associated with the message. You can execute this operation no more than once per second.
+   */
+  getMessageInsights(callback?: (err: AWSError, data: SESV2.Types.GetMessageInsightsResponse) => void): Request<SESV2.Types.GetMessageInsightsResponse, AWSError>;
   /**
    * Retrieves information about a specific email address that's on the suppression list for your account.
    */
@@ -348,19 +396,19 @@ declare class SESV2 extends Service {
    */
   listContacts(callback?: (err: AWSError, data: SESV2.Types.ListContactsResponse) => void): Request<SESV2.Types.ListContactsResponse, AWSError>;
   /**
-   * Lists the existing custom verification email templates for your account in the current AWS Region. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Lists the existing custom verification email templates for your account in the current Amazon Web Services Region. For more information about custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   listCustomVerificationEmailTemplates(params: SESV2.Types.ListCustomVerificationEmailTemplatesRequest, callback?: (err: AWSError, data: SESV2.Types.ListCustomVerificationEmailTemplatesResponse) => void): Request<SESV2.Types.ListCustomVerificationEmailTemplatesResponse, AWSError>;
   /**
-   * Lists the existing custom verification email templates for your account in the current AWS Region. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Lists the existing custom verification email templates for your account in the current Amazon Web Services Region. For more information about custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   listCustomVerificationEmailTemplates(callback?: (err: AWSError, data: SESV2.Types.ListCustomVerificationEmailTemplatesResponse) => void): Request<SESV2.Types.ListCustomVerificationEmailTemplatesResponse, AWSError>;
   /**
-   * List all of the dedicated IP pools that exist in your AWS account in the current Region.
+   * List all of the dedicated IP pools that exist in your Amazon Web Services account in the current Region.
    */
   listDedicatedIpPools(params: SESV2.Types.ListDedicatedIpPoolsRequest, callback?: (err: AWSError, data: SESV2.Types.ListDedicatedIpPoolsResponse) => void): Request<SESV2.Types.ListDedicatedIpPoolsResponse, AWSError>;
   /**
-   * List all of the dedicated IP pools that exist in your AWS account in the current Region.
+   * List all of the dedicated IP pools that exist in your Amazon Web Services account in the current Region.
    */
   listDedicatedIpPools(callback?: (err: AWSError, data: SESV2.Types.ListDedicatedIpPoolsResponse) => void): Request<SESV2.Types.ListDedicatedIpPoolsResponse, AWSError>;
   /**
@@ -380,21 +428,29 @@ declare class SESV2 extends Service {
    */
   listDomainDeliverabilityCampaigns(callback?: (err: AWSError, data: SESV2.Types.ListDomainDeliverabilityCampaignsResponse) => void): Request<SESV2.Types.ListDomainDeliverabilityCampaignsResponse, AWSError>;
   /**
-   * Returns a list of all of the email identities that are associated with your AWS account. An identity can be either an email address or a domain. This operation returns identities that are verified as well as those that aren't. This operation returns identities that are associated with Amazon SES and Amazon Pinpoint.
+   * Returns a list of all of the email identities that are associated with your Amazon Web Services account. An identity can be either an email address or a domain. This operation returns identities that are verified as well as those that aren't. This operation returns identities that are associated with Amazon SES and Amazon Pinpoint.
    */
   listEmailIdentities(params: SESV2.Types.ListEmailIdentitiesRequest, callback?: (err: AWSError, data: SESV2.Types.ListEmailIdentitiesResponse) => void): Request<SESV2.Types.ListEmailIdentitiesResponse, AWSError>;
   /**
-   * Returns a list of all of the email identities that are associated with your AWS account. An identity can be either an email address or a domain. This operation returns identities that are verified as well as those that aren't. This operation returns identities that are associated with Amazon SES and Amazon Pinpoint.
+   * Returns a list of all of the email identities that are associated with your Amazon Web Services account. An identity can be either an email address or a domain. This operation returns identities that are verified as well as those that aren't. This operation returns identities that are associated with Amazon SES and Amazon Pinpoint.
    */
   listEmailIdentities(callback?: (err: AWSError, data: SESV2.Types.ListEmailIdentitiesResponse) => void): Request<SESV2.Types.ListEmailIdentitiesResponse, AWSError>;
   /**
-   * Lists the email templates present in your Amazon SES account in the current AWS Region. You can execute this operation no more than once per second.
+   * Lists the email templates present in your Amazon SES account in the current Amazon Web Services Region. You can execute this operation no more than once per second.
    */
   listEmailTemplates(params: SESV2.Types.ListEmailTemplatesRequest, callback?: (err: AWSError, data: SESV2.Types.ListEmailTemplatesResponse) => void): Request<SESV2.Types.ListEmailTemplatesResponse, AWSError>;
   /**
-   * Lists the email templates present in your Amazon SES account in the current AWS Region. You can execute this operation no more than once per second.
+   * Lists the email templates present in your Amazon SES account in the current Amazon Web Services Region. You can execute this operation no more than once per second.
    */
   listEmailTemplates(callback?: (err: AWSError, data: SESV2.Types.ListEmailTemplatesResponse) => void): Request<SESV2.Types.ListEmailTemplatesResponse, AWSError>;
+  /**
+   * Lists all of the export jobs.
+   */
+  listExportJobs(params: SESV2.Types.ListExportJobsRequest, callback?: (err: AWSError, data: SESV2.Types.ListExportJobsResponse) => void): Request<SESV2.Types.ListExportJobsResponse, AWSError>;
+  /**
+   * Lists all of the export jobs.
+   */
+  listExportJobs(callback?: (err: AWSError, data: SESV2.Types.ListExportJobsResponse) => void): Request<SESV2.Types.ListExportJobsResponse, AWSError>;
   /**
    * Lists all of the import jobs.
    */
@@ -403,6 +459,14 @@ declare class SESV2 extends Service {
    * Lists all of the import jobs.
    */
   listImportJobs(callback?: (err: AWSError, data: SESV2.Types.ListImportJobsResponse) => void): Request<SESV2.Types.ListImportJobsResponse, AWSError>;
+  /**
+   * Lists the recommendations present in your Amazon SES account in the current Amazon Web Services Region. You can execute this operation no more than once per second.
+   */
+  listRecommendations(params: SESV2.Types.ListRecommendationsRequest, callback?: (err: AWSError, data: SESV2.Types.ListRecommendationsResponse) => void): Request<SESV2.Types.ListRecommendationsResponse, AWSError>;
+  /**
+   * Lists the recommendations present in your Amazon SES account in the current Amazon Web Services Region. You can execute this operation no more than once per second.
+   */
+  listRecommendations(callback?: (err: AWSError, data: SESV2.Types.ListRecommendationsResponse) => void): Request<SESV2.Types.ListRecommendationsResponse, AWSError>;
   /**
    * Retrieves a list of email addresses that are on the suppression list for your account.
    */
@@ -452,6 +516,14 @@ declare class SESV2 extends Service {
    */
   putAccountSuppressionAttributes(callback?: (err: AWSError, data: SESV2.Types.PutAccountSuppressionAttributesResponse) => void): Request<SESV2.Types.PutAccountSuppressionAttributesResponse, AWSError>;
   /**
+   * Update your Amazon SES account VDM attributes. You can execute this operation no more than once per second.
+   */
+  putAccountVdmAttributes(params: SESV2.Types.PutAccountVdmAttributesRequest, callback?: (err: AWSError, data: SESV2.Types.PutAccountVdmAttributesResponse) => void): Request<SESV2.Types.PutAccountVdmAttributesResponse, AWSError>;
+  /**
+   * Update your Amazon SES account VDM attributes. You can execute this operation no more than once per second.
+   */
+  putAccountVdmAttributes(callback?: (err: AWSError, data: SESV2.Types.PutAccountVdmAttributesResponse) => void): Request<SESV2.Types.PutAccountVdmAttributesResponse, AWSError>;
+  /**
    * Associate a configuration set with a dedicated IP pool. You can use dedicated IP pools to create groups of dedicated IP addresses for sending specific types of email.
    */
   putConfigurationSetDeliveryOptions(params: SESV2.Types.PutConfigurationSetDeliveryOptionsRequest, callback?: (err: AWSError, data: SESV2.Types.PutConfigurationSetDeliveryOptionsResponse) => void): Request<SESV2.Types.PutConfigurationSetDeliveryOptionsResponse, AWSError>;
@@ -460,19 +532,19 @@ declare class SESV2 extends Service {
    */
   putConfigurationSetDeliveryOptions(callback?: (err: AWSError, data: SESV2.Types.PutConfigurationSetDeliveryOptionsResponse) => void): Request<SESV2.Types.PutConfigurationSetDeliveryOptionsResponse, AWSError>;
   /**
-   * Enable or disable collection of reputation metrics for emails that you send using a particular configuration set in a specific AWS Region.
+   * Enable or disable collection of reputation metrics for emails that you send using a particular configuration set in a specific Amazon Web Services Region.
    */
   putConfigurationSetReputationOptions(params: SESV2.Types.PutConfigurationSetReputationOptionsRequest, callback?: (err: AWSError, data: SESV2.Types.PutConfigurationSetReputationOptionsResponse) => void): Request<SESV2.Types.PutConfigurationSetReputationOptionsResponse, AWSError>;
   /**
-   * Enable or disable collection of reputation metrics for emails that you send using a particular configuration set in a specific AWS Region.
+   * Enable or disable collection of reputation metrics for emails that you send using a particular configuration set in a specific Amazon Web Services Region.
    */
   putConfigurationSetReputationOptions(callback?: (err: AWSError, data: SESV2.Types.PutConfigurationSetReputationOptionsResponse) => void): Request<SESV2.Types.PutConfigurationSetReputationOptionsResponse, AWSError>;
   /**
-   * Enable or disable email sending for messages that use a particular configuration set in a specific AWS Region.
+   * Enable or disable email sending for messages that use a particular configuration set in a specific Amazon Web Services Region.
    */
   putConfigurationSetSendingOptions(params: SESV2.Types.PutConfigurationSetSendingOptionsRequest, callback?: (err: AWSError, data: SESV2.Types.PutConfigurationSetSendingOptionsResponse) => void): Request<SESV2.Types.PutConfigurationSetSendingOptionsResponse, AWSError>;
   /**
-   * Enable or disable email sending for messages that use a particular configuration set in a specific AWS Region.
+   * Enable or disable email sending for messages that use a particular configuration set in a specific Amazon Web Services Region.
    */
   putConfigurationSetSendingOptions(callback?: (err: AWSError, data: SESV2.Types.PutConfigurationSetSendingOptionsResponse) => void): Request<SESV2.Types.PutConfigurationSetSendingOptionsResponse, AWSError>;
   /**
@@ -492,13 +564,29 @@ declare class SESV2 extends Service {
    */
   putConfigurationSetTrackingOptions(callback?: (err: AWSError, data: SESV2.Types.PutConfigurationSetTrackingOptionsResponse) => void): Request<SESV2.Types.PutConfigurationSetTrackingOptionsResponse, AWSError>;
   /**
-   * Move a dedicated IP address to an existing dedicated IP pool.  The dedicated IP address that you specify must already exist, and must be associated with your AWS account.  The dedicated IP pool you specify must already exist. You can create a new pool by using the CreateDedicatedIpPool operation. 
+   * Specify VDM preferences for email that you send using the configuration set. You can execute this operation no more than once per second.
+   */
+  putConfigurationSetVdmOptions(params: SESV2.Types.PutConfigurationSetVdmOptionsRequest, callback?: (err: AWSError, data: SESV2.Types.PutConfigurationSetVdmOptionsResponse) => void): Request<SESV2.Types.PutConfigurationSetVdmOptionsResponse, AWSError>;
+  /**
+   * Specify VDM preferences for email that you send using the configuration set. You can execute this operation no more than once per second.
+   */
+  putConfigurationSetVdmOptions(callback?: (err: AWSError, data: SESV2.Types.PutConfigurationSetVdmOptionsResponse) => void): Request<SESV2.Types.PutConfigurationSetVdmOptionsResponse, AWSError>;
+  /**
+   * Move a dedicated IP address to an existing dedicated IP pool.  The dedicated IP address that you specify must already exist, and must be associated with your Amazon Web Services account.  The dedicated IP pool you specify must already exist. You can create a new pool by using the CreateDedicatedIpPool operation. 
    */
   putDedicatedIpInPool(params: SESV2.Types.PutDedicatedIpInPoolRequest, callback?: (err: AWSError, data: SESV2.Types.PutDedicatedIpInPoolResponse) => void): Request<SESV2.Types.PutDedicatedIpInPoolResponse, AWSError>;
   /**
-   * Move a dedicated IP address to an existing dedicated IP pool.  The dedicated IP address that you specify must already exist, and must be associated with your AWS account.  The dedicated IP pool you specify must already exist. You can create a new pool by using the CreateDedicatedIpPool operation. 
+   * Move a dedicated IP address to an existing dedicated IP pool.  The dedicated IP address that you specify must already exist, and must be associated with your Amazon Web Services account.  The dedicated IP pool you specify must already exist. You can create a new pool by using the CreateDedicatedIpPool operation. 
    */
   putDedicatedIpInPool(callback?: (err: AWSError, data: SESV2.Types.PutDedicatedIpInPoolResponse) => void): Request<SESV2.Types.PutDedicatedIpInPoolResponse, AWSError>;
+  /**
+   * Used to convert a dedicated IP pool to a different scaling mode.   MANAGED pools cannot be converted to STANDARD scaling mode. 
+   */
+  putDedicatedIpPoolScalingAttributes(params: SESV2.Types.PutDedicatedIpPoolScalingAttributesRequest, callback?: (err: AWSError, data: SESV2.Types.PutDedicatedIpPoolScalingAttributesResponse) => void): Request<SESV2.Types.PutDedicatedIpPoolScalingAttributesResponse, AWSError>;
+  /**
+   * Used to convert a dedicated IP pool to a different scaling mode.   MANAGED pools cannot be converted to STANDARD scaling mode. 
+   */
+  putDedicatedIpPoolScalingAttributes(callback?: (err: AWSError, data: SESV2.Types.PutDedicatedIpPoolScalingAttributesResponse) => void): Request<SESV2.Types.PutDedicatedIpPoolScalingAttributesResponse, AWSError>;
   /**
    * 
    */
@@ -508,13 +596,21 @@ declare class SESV2 extends Service {
    */
   putDedicatedIpWarmupAttributes(callback?: (err: AWSError, data: SESV2.Types.PutDedicatedIpWarmupAttributesResponse) => void): Request<SESV2.Types.PutDedicatedIpWarmupAttributesResponse, AWSError>;
   /**
-   * Enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon SES and other AWS services. For more information about the features and cost of a Deliverability dashboard subscription, see Amazon SES Pricing.
+   * Enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon SES and other Amazon Web Services services. For more information about the features and cost of a Deliverability dashboard subscription, see Amazon SES Pricing.
    */
   putDeliverabilityDashboardOption(params: SESV2.Types.PutDeliverabilityDashboardOptionRequest, callback?: (err: AWSError, data: SESV2.Types.PutDeliverabilityDashboardOptionResponse) => void): Request<SESV2.Types.PutDeliverabilityDashboardOptionResponse, AWSError>;
   /**
-   * Enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon SES and other AWS services. For more information about the features and cost of a Deliverability dashboard subscription, see Amazon SES Pricing.
+   * Enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon SES and other Amazon Web Services services. For more information about the features and cost of a Deliverability dashboard subscription, see Amazon SES Pricing.
    */
   putDeliverabilityDashboardOption(callback?: (err: AWSError, data: SESV2.Types.PutDeliverabilityDashboardOptionResponse) => void): Request<SESV2.Types.PutDeliverabilityDashboardOptionResponse, AWSError>;
+  /**
+   * Used to associate a configuration set with an email identity.
+   */
+  putEmailIdentityConfigurationSetAttributes(params: SESV2.Types.PutEmailIdentityConfigurationSetAttributesRequest, callback?: (err: AWSError, data: SESV2.Types.PutEmailIdentityConfigurationSetAttributesResponse) => void): Request<SESV2.Types.PutEmailIdentityConfigurationSetAttributesResponse, AWSError>;
+  /**
+   * Used to associate a configuration set with an email identity.
+   */
+  putEmailIdentityConfigurationSetAttributes(callback?: (err: AWSError, data: SESV2.Types.PutEmailIdentityConfigurationSetAttributesResponse) => void): Request<SESV2.Types.PutEmailIdentityConfigurationSetAttributesResponse, AWSError>;
   /**
    * Used to enable or disable DKIM authentication for an email identity.
    */
@@ -524,11 +620,11 @@ declare class SESV2 extends Service {
    */
   putEmailIdentityDkimAttributes(callback?: (err: AWSError, data: SESV2.Types.PutEmailIdentityDkimAttributesResponse) => void): Request<SESV2.Types.PutEmailIdentityDkimAttributesResponse, AWSError>;
   /**
-   * Used to configure or change the DKIM authentication settings for an email domain identity. You can use this operation to do any of the following:   Update the signing attributes for an identity that uses Bring Your Own DKIM (BYODKIM).   Change from using no DKIM authentication to using Easy DKIM.   Change from using no DKIM authentication to using BYODKIM.   Change from using Easy DKIM to using BYODKIM.   Change from using BYODKIM to using Easy DKIM.  
+   * Used to configure or change the DKIM authentication settings for an email domain identity. You can use this operation to do any of the following:   Update the signing attributes for an identity that uses Bring Your Own DKIM (BYODKIM).   Update the key length that should be used for Easy DKIM.   Change from using no DKIM authentication to using Easy DKIM.   Change from using no DKIM authentication to using BYODKIM.   Change from using Easy DKIM to using BYODKIM.   Change from using BYODKIM to using Easy DKIM.  
    */
   putEmailIdentityDkimSigningAttributes(params: SESV2.Types.PutEmailIdentityDkimSigningAttributesRequest, callback?: (err: AWSError, data: SESV2.Types.PutEmailIdentityDkimSigningAttributesResponse) => void): Request<SESV2.Types.PutEmailIdentityDkimSigningAttributesResponse, AWSError>;
   /**
-   * Used to configure or change the DKIM authentication settings for an email domain identity. You can use this operation to do any of the following:   Update the signing attributes for an identity that uses Bring Your Own DKIM (BYODKIM).   Change from using no DKIM authentication to using Easy DKIM.   Change from using no DKIM authentication to using BYODKIM.   Change from using Easy DKIM to using BYODKIM.   Change from using BYODKIM to using Easy DKIM.  
+   * Used to configure or change the DKIM authentication settings for an email domain identity. You can use this operation to do any of the following:   Update the signing attributes for an identity that uses Bring Your Own DKIM (BYODKIM).   Update the key length that should be used for Easy DKIM.   Change from using no DKIM authentication to using Easy DKIM.   Change from using no DKIM authentication to using BYODKIM.   Change from using Easy DKIM to using BYODKIM.   Change from using BYODKIM to using Easy DKIM.  
    */
   putEmailIdentityDkimSigningAttributes(callback?: (err: AWSError, data: SESV2.Types.PutEmailIdentityDkimSigningAttributesResponse) => void): Request<SESV2.Types.PutEmailIdentityDkimSigningAttributesResponse, AWSError>;
   /**
@@ -564,19 +660,19 @@ declare class SESV2 extends Service {
    */
   sendBulkEmail(callback?: (err: AWSError, data: SESV2.Types.SendBulkEmailResponse) => void): Request<SESV2.Types.SendBulkEmailResponse, AWSError>;
   /**
-   * Adds an email address to the list of identities for your Amazon SES account in the current AWS Region and attempts to verify it. As a result of executing this operation, a customized verification email is sent to the specified address. To use this operation, you must first create a custom verification email template. For more information about creating and using custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Adds an email address to the list of identities for your Amazon SES account in the current Amazon Web Services Region and attempts to verify it. As a result of executing this operation, a customized verification email is sent to the specified address. To use this operation, you must first create a custom verification email template. For more information about creating and using custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   sendCustomVerificationEmail(params: SESV2.Types.SendCustomVerificationEmailRequest, callback?: (err: AWSError, data: SESV2.Types.SendCustomVerificationEmailResponse) => void): Request<SESV2.Types.SendCustomVerificationEmailResponse, AWSError>;
   /**
-   * Adds an email address to the list of identities for your Amazon SES account in the current AWS Region and attempts to verify it. As a result of executing this operation, a customized verification email is sent to the specified address. To use this operation, you must first create a custom verification email template. For more information about creating and using custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Adds an email address to the list of identities for your Amazon SES account in the current Amazon Web Services Region and attempts to verify it. As a result of executing this operation, a customized verification email is sent to the specified address. To use this operation, you must first create a custom verification email template. For more information about creating and using custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   sendCustomVerificationEmail(callback?: (err: AWSError, data: SESV2.Types.SendCustomVerificationEmailResponse) => void): Request<SESV2.Types.SendCustomVerificationEmailResponse, AWSError>;
   /**
-   * Sends an email message. You can use the Amazon SES API v2 to send two types of messages:    Simple – A standard email message. When you create this type of message, you specify the sender, the recipient, and the message body, and Amazon SES assembles the message for you.    Raw – A raw, MIME-formatted email message. When you send this type of email, you have to specify all of the message headers, as well as the message body. You can use this message type to send messages that contain attachments. The message that you specify has to be a valid MIME message.    Templated – A message that contains personalization tags. When you send this type of email, Amazon SES API v2 automatically replaces the tags with values that you specify.  
+   * Sends an email message. You can use the Amazon SES API v2 to send the following types of messages:    Simple – A standard email message. When you create this type of message, you specify the sender, the recipient, and the message body, and Amazon SES assembles the message for you.    Raw – A raw, MIME-formatted email message. When you send this type of email, you have to specify all of the message headers, as well as the message body. You can use this message type to send messages that contain attachments. The message that you specify has to be a valid MIME message.    Templated – A message that contains personalization tags. When you send this type of email, Amazon SES API v2 automatically replaces the tags with values that you specify.  
    */
   sendEmail(params: SESV2.Types.SendEmailRequest, callback?: (err: AWSError, data: SESV2.Types.SendEmailResponse) => void): Request<SESV2.Types.SendEmailResponse, AWSError>;
   /**
-   * Sends an email message. You can use the Amazon SES API v2 to send two types of messages:    Simple – A standard email message. When you create this type of message, you specify the sender, the recipient, and the message body, and Amazon SES assembles the message for you.    Raw – A raw, MIME-formatted email message. When you send this type of email, you have to specify all of the message headers, as well as the message body. You can use this message type to send messages that contain attachments. The message that you specify has to be a valid MIME message.    Templated – A message that contains personalization tags. When you send this type of email, Amazon SES API v2 automatically replaces the tags with values that you specify.  
+   * Sends an email message. You can use the Amazon SES API v2 to send the following types of messages:    Simple – A standard email message. When you create this type of message, you specify the sender, the recipient, and the message body, and Amazon SES assembles the message for you.    Raw – A raw, MIME-formatted email message. When you send this type of email, you have to specify all of the message headers, as well as the message body. You can use this message type to send messages that contain attachments. The message that you specify has to be a valid MIME message.    Templated – A message that contains personalization tags. When you send this type of email, Amazon SES API v2 automatically replaces the tags with values that you specify.  
    */
   sendEmail(callback?: (err: AWSError, data: SESV2.Types.SendEmailResponse) => void): Request<SESV2.Types.SendEmailResponse, AWSError>;
   /**
@@ -604,19 +700,19 @@ declare class SESV2 extends Service {
    */
   untagResource(callback?: (err: AWSError, data: SESV2.Types.UntagResourceResponse) => void): Request<SESV2.Types.UntagResourceResponse, AWSError>;
   /**
-   * Update the configuration of an event destination for a configuration set.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.
+   * Update the configuration of an event destination for a configuration set.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon EventBridge and associate a rule to send the event to the specified target.
    */
   updateConfigurationSetEventDestination(params: SESV2.Types.UpdateConfigurationSetEventDestinationRequest, callback?: (err: AWSError, data: SESV2.Types.UpdateConfigurationSetEventDestinationResponse) => void): Request<SESV2.Types.UpdateConfigurationSetEventDestinationResponse, AWSError>;
   /**
-   * Update the configuration of an event destination for a configuration set.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.
+   * Update the configuration of an event destination for a configuration set.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon EventBridge and associate a rule to send the event to the specified target.
    */
   updateConfigurationSetEventDestination(callback?: (err: AWSError, data: SESV2.Types.UpdateConfigurationSetEventDestinationResponse) => void): Request<SESV2.Types.UpdateConfigurationSetEventDestinationResponse, AWSError>;
   /**
-   * Updates a contact's preferences for a list. It is not necessary to specify all existing topic preferences in the TopicPreferences object, just the ones that need updating.
+   * Updates a contact's preferences for a list.  You must specify all existing topic preferences in the TopicPreferences object, not just the ones that need updating; otherwise, all your existing preferences will be removed. 
    */
   updateContact(params: SESV2.Types.UpdateContactRequest, callback?: (err: AWSError, data: SESV2.Types.UpdateContactResponse) => void): Request<SESV2.Types.UpdateContactResponse, AWSError>;
   /**
-   * Updates a contact's preferences for a list. It is not necessary to specify all existing topic preferences in the TopicPreferences object, just the ones that need updating.
+   * Updates a contact's preferences for a list.  You must specify all existing topic preferences in the TopicPreferences object, not just the ones that need updating; otherwise, all your existing preferences will be removed. 
    */
   updateContact(callback?: (err: AWSError, data: SESV2.Types.UpdateContactResponse) => void): Request<SESV2.Types.UpdateContactResponse, AWSError>;
   /**
@@ -628,11 +724,11 @@ declare class SESV2 extends Service {
    */
   updateContactList(callback?: (err: AWSError, data: SESV2.Types.UpdateContactListResponse) => void): Request<SESV2.Types.UpdateContactListResponse, AWSError>;
   /**
-   * Updates an existing custom verification email template. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Updates an existing custom verification email template. For more information about custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   updateCustomVerificationEmailTemplate(params: SESV2.Types.UpdateCustomVerificationEmailTemplateRequest, callback?: (err: AWSError, data: SESV2.Types.UpdateCustomVerificationEmailTemplateResponse) => void): Request<SESV2.Types.UpdateCustomVerificationEmailTemplateResponse, AWSError>;
   /**
-   * Updates an existing custom verification email template. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Updates an existing custom verification email template. For more information about custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   updateCustomVerificationEmailTemplate(callback?: (err: AWSError, data: SESV2.Types.UpdateCustomVerificationEmailTemplateResponse) => void): Request<SESV2.Types.UpdateCustomVerificationEmailTemplateResponse, AWSError>;
   /**
@@ -681,8 +777,52 @@ declare namespace SESV2 {
   }
   export type AdditionalContactEmailAddress = string;
   export type AdditionalContactEmailAddresses = AdditionalContactEmailAddress[];
+  export type AdminEmail = string;
   export type AmazonResourceName = string;
   export type AttributesData = string;
+  export type BatchGetMetricDataQueries = BatchGetMetricDataQuery[];
+  export interface BatchGetMetricDataQuery {
+    /**
+     * The query identifier.
+     */
+    Id: QueryIdentifier;
+    /**
+     * The query namespace - e.g. VDM 
+     */
+    Namespace: MetricNamespace;
+    /**
+     * The queried metric. This can be one of the following:    SEND – Emails sent eligible for tracking in the VDM dashboard. This excludes emails sent to the mailbox simulator and emails addressed to more than one recipient.    COMPLAINT – Complaints received for your account. This excludes complaints from the mailbox simulator, those originating from your account-level suppression list (if enabled), and those for emails addressed to more than one recipient    PERMANENT_BOUNCE – Permanent bounces - i.e. feedback received for emails sent to non-existent mailboxes. Excludes bounces from the mailbox simulator, those originating from your account-level suppression list (if enabled), and those for emails addressed to more than one recipient.    TRANSIENT_BOUNCE – Transient bounces - i.e. feedback received for delivery failures excluding issues with non-existent mailboxes. Excludes bounces from the mailbox simulator, and those for emails addressed to more than one recipient.    OPEN – Unique open events for emails including open trackers. Excludes opens for emails addressed to more than one recipient.    CLICK – Unique click events for emails including wrapped links. Excludes clicks for emails addressed to more than one recipient.    DELIVERY – Successful deliveries for email sending attempts. Excludes deliveries to the mailbox simulator and for emails addressed to more than one recipient.    DELIVERY_OPEN – Successful deliveries for email sending attempts. Excludes deliveries to the mailbox simulator, for emails addressed to more than one recipient, and emails without open trackers.    DELIVERY_CLICK – Successful deliveries for email sending attempts. Excludes deliveries to the mailbox simulator, for emails addressed to more than one recipient, and emails without click trackers.    DELIVERY_COMPLAINT – Successful deliveries for email sending attempts. Excludes deliveries to the mailbox simulator, for emails addressed to more than one recipient, and emails addressed to recipients hosted by ISPs with which Amazon SES does not have a feedback loop agreement.  
+     */
+    Metric: Metric;
+    /**
+     * An object that contains mapping between MetricDimensionName and MetricDimensionValue to filter metrics by.
+     */
+    Dimensions?: Dimensions;
+    /**
+     * Represents the start date for the query interval.
+     */
+    StartDate: Timestamp;
+    /**
+     * Represents the end date for the query interval.
+     */
+    EndDate: Timestamp;
+  }
+  export interface BatchGetMetricDataRequest {
+    /**
+     * A list of queries for metrics to be retrieved.
+     */
+    Queries: BatchGetMetricDataQueries;
+  }
+  export interface BatchGetMetricDataResponse {
+    /**
+     * A list of successfully retrieved MetricDataResult.
+     */
+    Results?: MetricDataResultList;
+    /**
+     * A list of MetricDataError encountered while processing your metric data batch request.
+     */
+    Errors?: MetricDataErrorList;
+  }
   export type BehaviorOnMxFailure = "USE_DEFAULT_VALUE"|"REJECT_MESSAGE"|string;
   export type BlacklistEntries = BlacklistEntry[];
   export interface BlacklistEntry {
@@ -691,7 +831,7 @@ declare namespace SESV2 {
      */
     RblName?: RblName;
     /**
-     * The time when the blacklisting event occurred, shown in Unix time format.
+     * The time when the blacklisting event occurred.
      */
     ListingTime?: Timestamp;
     /**
@@ -713,6 +853,22 @@ declare namespace SESV2 {
      */
     Html?: Content;
   }
+  export interface Bounce {
+    /**
+     * The type of the bounce, as determined by SES. Can be one of UNDETERMINED, TRANSIENT, or PERMANENT 
+     */
+    BounceType?: BounceType;
+    /**
+     * The subtype of the bounce, as determined by SES.
+     */
+    BounceSubType?: BounceSubType;
+    /**
+     * The status code issued by the reporting Message Transfer Authority (MTA). This field only appears if a delivery status notification (DSN) was attached to the bounce and the Diagnostic-Code was provided in the DSN. 
+     */
+    DiagnosticCode?: DiagnosticCode;
+  }
+  export type BounceSubType = string;
+  export type BounceType = "UNDETERMINED"|"TRANSIENT"|"PERMANENT"|string;
   export interface BulkEmailContent {
     /**
      * The template to use for the bulk email message.
@@ -732,6 +888,10 @@ declare namespace SESV2 {
      * The ReplacementEmailContent associated with a BulkEmailEntry.
      */
     ReplacementEmailContent?: ReplacementEmailContent;
+    /**
+     * The list of message headers associated with the BulkEmailEntry data type.   Headers Not Present in BulkEmailEntry: If a header is specified in  Template  but not in BulkEmailEntry, the header from Template will be added to the outgoing email.   Headers Present in BulkEmailEntry: If a header is specified in BulkEmailEntry, it takes precedence over any header of the same name specified in  Template :   If the header is also defined within Template, the value from BulkEmailEntry will replace the header's value in the email.   If the header is not defined within Template, it will simply be added to the email as specified in BulkEmailEntry.    
+     */
+    ReplacementHeaders?: MessageHeaderList;
   }
   export type BulkEmailEntryList = BulkEmailEntry[];
   export interface BulkEmailEntryResult {
@@ -751,6 +911,14 @@ declare namespace SESV2 {
   export type BulkEmailEntryResultList = BulkEmailEntryResult[];
   export type BulkEmailStatus = "SUCCESS"|"MESSAGE_REJECTED"|"MAIL_FROM_DOMAIN_NOT_VERIFIED"|"CONFIGURATION_SET_NOT_FOUND"|"TEMPLATE_NOT_FOUND"|"ACCOUNT_SUSPENDED"|"ACCOUNT_THROTTLED"|"ACCOUNT_DAILY_QUOTA_EXCEEDED"|"INVALID_SENDING_POOL_NAME"|"ACCOUNT_SENDING_PAUSED"|"CONFIGURATION_SET_SENDING_PAUSED"|"INVALID_PARAMETER"|"TRANSIENT_FAILURE"|"FAILED"|string;
   export type CampaignId = string;
+  export interface CancelExportJobRequest {
+    /**
+     * The export job ID.
+     */
+    JobId: JobId;
+  }
+  export interface CancelExportJobResponse {
+  }
   export type CaseId = string;
   export type Charset = string;
   export interface CloudWatchDestination {
@@ -765,15 +933,27 @@ declare namespace SESV2 {
      */
     DimensionName: DimensionName;
     /**
-     * The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. If you want to use the message tags that you specify using an X-SES-MESSAGE-TAGS header or a parameter to the SendEmail or SendRawEmail API, choose messageTag. If you want to use your own email headers, choose emailHeader. If you want to use link tags, choose linkTags.
+     * The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. To use the message tags that you specify using an X-SES-MESSAGE-TAGS header or a parameter to the SendEmail or SendRawEmail API, choose messageTag. To use your own email headers, choose emailHeader. To use link tags, choose linkTags.
      */
     DimensionValueSource: DimensionValueSource;
     /**
-     * The default value of the dimension that is published to Amazon CloudWatch if you don't provide the value of the dimension when you send an email. This value has to meet the following criteria:   It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores (_), or dashes (-).   It can contain no more than 256 characters.  
+     * The default value of the dimension that is published to Amazon CloudWatch if you don't provide the value of the dimension when you send an email. This value has to meet the following criteria:   Can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores (_), or dashes (-), at signs (@), and periods (.).   It can contain no more than 256 characters.  
      */
     DefaultDimensionValue: DefaultDimensionValue;
   }
   export type CloudWatchDimensionConfigurations = CloudWatchDimensionConfiguration[];
+  export interface Complaint {
+    /**
+     *  Can either be null or OnAccountSuppressionList. If the value is OnAccountSuppressionList, SES accepted the message, but didn't attempt to send it because it was on the account-level suppression list. 
+     */
+    ComplaintSubType?: ComplaintSubType;
+    /**
+     *  The value of the Feedback-Type field from the feedback report received from the ISP. 
+     */
+    ComplaintFeedbackType?: ComplaintFeedbackType;
+  }
+  export type ComplaintFeedbackType = string;
+  export type ComplaintSubType = string;
   export type ConfigurationSetName = string;
   export type ConfigurationSetNameList = ConfigurationSetName[];
   export interface Contact {
@@ -815,7 +995,7 @@ declare namespace SESV2 {
      */
     ContactListName: ContactListName;
     /**
-     * &gt;The type of action that you want to perform on the addresses. Acceptable values:   PUT: add the addresses to the contact list. If the record already exists, it will override it with the new value.   DELETE: remove the addresses from the contact list.  
+     * &gt;The type of action to perform on the addresses. The following are the possible values:   PUT: add the addresses to the contact list. If the record already exists, it will override it with the new value.   DELETE: remove the addresses from the contact list.  
      */
     ContactListImportAction: ContactListImportAction;
   }
@@ -831,9 +1011,10 @@ declare namespace SESV2 {
      */
     Charset?: Charset;
   }
+  export type Counter = number;
   export interface CreateConfigurationSetEventDestinationRequest {
     /**
-     * The name of the configuration set that you want to add an event destination to.
+     * The name of the configuration set .
      */
     ConfigurationSetName: ConfigurationSetName;
     /**
@@ -849,7 +1030,7 @@ declare namespace SESV2 {
   }
   export interface CreateConfigurationSetRequest {
     /**
-     * The name of the configuration set.
+     * The name of the configuration set. The name can contain up to 64 alphanumeric characters, including letters, numbers, hyphens (-) and underscores (_) only.
      */
     ConfigurationSetName: ConfigurationSetName;
     /**
@@ -869,10 +1050,14 @@ declare namespace SESV2 {
      */
     SendingOptions?: SendingOptions;
     /**
-     * An array of objects that define the tags (keys and values) that you want to associate with the configuration set.
+     * An array of objects that define the tags (keys and values) to associate with the configuration set.
      */
     Tags?: TagList;
     SuppressionOptions?: SuppressionOptions;
+    /**
+     * An object that defines the VDM options for emails that you send using the configuration set.
+     */
+    VdmOptions?: VdmOptions;
   }
   export interface CreateConfigurationSetResponse {
   }
@@ -934,7 +1119,7 @@ declare namespace SESV2 {
      */
     TemplateSubject: EmailTemplateSubject;
     /**
-     * The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations. For more information, see Custom Verification Email Frequently Asked Questions in the Amazon SES Developer Guide.
+     * The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations. For more information, see Custom verification email frequently asked questions in the Amazon SES Developer Guide.
      */
     TemplateContent: TemplateContent;
     /**
@@ -957,6 +1142,10 @@ declare namespace SESV2 {
      * An object that defines the tags (keys and values) that you want to associate with the pool.
      */
     Tags?: TagList;
+    /**
+     * The type of scaling mode.
+     */
+    ScalingMode?: ScalingMode;
   }
   export interface CreateDedicatedIpPoolResponse {
   }
@@ -990,7 +1179,7 @@ declare namespace SESV2 {
   }
   export interface CreateEmailIdentityPolicyRequest {
     /**
-     * The email identity for which you want to create a policy.
+     * The email identity.
      */
     EmailIdentity: Identity;
     /**
@@ -1006,21 +1195,25 @@ declare namespace SESV2 {
   }
   export interface CreateEmailIdentityRequest {
     /**
-     * The email address or domain that you want to verify.
+     * The email address or domain to verify.
      */
     EmailIdentity: Identity;
     /**
-     * An array of objects that define the tags (keys and values) that you want to associate with the email identity.
+     * An array of objects that define the tags (keys and values) to associate with the email identity.
      */
     Tags?: TagList;
     /**
-     * If your request includes this object, Amazon SES configures the identity to use Bring Your Own DKIM (BYODKIM) for DKIM authentication purposes, as opposed to the default method, Easy DKIM. You can only specify this object if the email identity is a domain, as opposed to an address.
+     * If your request includes this object, Amazon SES configures the identity to use Bring Your Own DKIM (BYODKIM) for DKIM authentication purposes, or, configures the key length to be used for Easy DKIM. You can only specify this object if the email identity is a domain, as opposed to an address.
      */
     DkimSigningAttributes?: DkimSigningAttributes;
+    /**
+     * The configuration set to use by default when sending from this identity. Note that any configuration set defined in the email sending request takes precedence. 
+     */
+    ConfigurationSetName?: ConfigurationSetName;
   }
   export interface CreateEmailIdentityResponse {
     /**
-     * The email identity type.
+     * The email identity type. Note: the MANAGED_DOMAIN identity type is not supported.
      */
     IdentityType?: IdentityType;
     /**
@@ -1034,7 +1227,7 @@ declare namespace SESV2 {
   }
   export interface CreateEmailTemplateRequest {
     /**
-     * The name of the template you want to create.
+     * The name of the template.
      */
     TemplateName: EmailTemplateName;
     /**
@@ -1043,6 +1236,22 @@ declare namespace SESV2 {
     TemplateContent: EmailTemplateContent;
   }
   export interface CreateEmailTemplateResponse {
+  }
+  export interface CreateExportJobRequest {
+    /**
+     * The data source for the export job.
+     */
+    ExportDataSource: ExportDataSource;
+    /**
+     * The destination for the export job.
+     */
+    ExportDestination: ExportDestination;
+  }
+  export interface CreateExportJobResponse {
+    /**
+     * A string that represents the export job ID.
+     */
+    JobId?: JobId;
   }
   export interface CreateImportJobRequest {
     /**
@@ -1099,6 +1308,18 @@ declare namespace SESV2 {
     DomainIspPlacements?: DomainIspPlacements;
   }
   export type DailyVolumes = DailyVolume[];
+  export interface DashboardAttributes {
+    /**
+     * Specifies the status of your VDM engagement metrics collection. Can be one of the following:    ENABLED – Amazon SES enables engagement metrics for your account.    DISABLED – Amazon SES disables engagement metrics for your account.  
+     */
+    EngagementMetrics?: FeatureStatus;
+  }
+  export interface DashboardOptions {
+    /**
+     * Specifies the status of your VDM engagement metrics collection. Can be one of the following:    ENABLED – Amazon SES enables engagement metrics for the configuration set.    DISABLED – Amazon SES disables engagement metrics for the configuration set.  
+     */
+    EngagementMetrics?: FeatureStatus;
+  }
   export type DataFormat = "CSV"|"JSON"|string;
   export interface DedicatedIp {
     /**
@@ -1119,14 +1340,24 @@ declare namespace SESV2 {
     PoolName?: PoolName;
   }
   export type DedicatedIpList = DedicatedIp[];
+  export interface DedicatedIpPool {
+    /**
+     * The name of the dedicated IP pool.
+     */
+    PoolName: PoolName;
+    /**
+     * The type of the dedicated IP pool.    STANDARD – A dedicated IP pool where you can control which IPs are part of the pool.    MANAGED – A dedicated IP pool where the reputation and number of IPs are automatically managed by Amazon SES.  
+     */
+    ScalingMode: ScalingMode;
+  }
   export type DefaultDimensionValue = string;
   export interface DeleteConfigurationSetEventDestinationRequest {
     /**
-     * The name of the configuration set that contains the event destination that you want to delete.
+     * The name of the configuration set that contains the event destination to delete.
      */
     ConfigurationSetName: ConfigurationSetName;
     /**
-     * The name of the event destination that you want to delete.
+     * The name of the event destination to delete.
      */
     EventDestinationName: EventDestinationName;
   }
@@ -1134,7 +1365,7 @@ declare namespace SESV2 {
   }
   export interface DeleteConfigurationSetRequest {
     /**
-     * The name of the configuration set that you want to delete.
+     * The name of the configuration set.
      */
     ConfigurationSetName: ConfigurationSetName;
   }
@@ -1178,7 +1409,7 @@ declare namespace SESV2 {
   }
   export interface DeleteEmailIdentityPolicyRequest {
     /**
-     * The email identity for which you want to delete a policy.
+     * The email identity.
      */
     EmailIdentity: Identity;
     /**
@@ -1190,7 +1421,7 @@ declare namespace SESV2 {
   }
   export interface DeleteEmailIdentityRequest {
     /**
-     * The identity (that is, the email address or domain) that you want to delete.
+     * The identity (that is, the email address or domain) to delete.
      */
     EmailIdentity: Identity;
   }
@@ -1231,7 +1462,7 @@ declare namespace SESV2 {
      */
     FromEmailAddress?: EmailAddress;
     /**
-     * The date and time when the predictive inbox placement test was created, in Unix time format.
+     * The date and time when the predictive inbox placement test was created.
      */
     CreateDate?: Timestamp;
     /**
@@ -1242,13 +1473,14 @@ declare namespace SESV2 {
   export type DeliverabilityTestReports = DeliverabilityTestReport[];
   export type DeliverabilityTestStatus = "IN_PROGRESS"|"COMPLETED"|string;
   export type DeliverabilityTestSubject = string;
+  export type DeliveryEventType = "SEND"|"DELIVERY"|"TRANSIENT_BOUNCE"|"PERMANENT_BOUNCE"|"UNDETERMINED_BOUNCE"|"COMPLAINT"|string;
   export interface DeliveryOptions {
     /**
      * Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is Require, messages are only delivered if a TLS connection can be established. If the value is Optional, messages can be delivered in plain text if a TLS connection can't be established.
      */
     TlsPolicy?: TlsPolicy;
     /**
-     * The name of the dedicated IP pool that you want to associate with the configuration set.
+     * The name of the dedicated IP pool to associate with the configuration set.
      */
     SendingPoolName?: PoolName;
   }
@@ -1267,8 +1499,10 @@ declare namespace SESV2 {
      */
     BccAddresses?: EmailAddressList;
   }
+  export type DiagnosticCode = string;
   export type DimensionName = string;
   export type DimensionValueSource = "MESSAGE_TAG"|"EMAIL_HEADER"|"LINK_TAG"|string;
+  export type Dimensions = {[key: string]: MetricDimensionValue};
   export type DisplayName = string;
   export interface DkimAttributes {
     /**
@@ -1284,21 +1518,38 @@ declare namespace SESV2 {
      */
     Tokens?: DnsTokenList;
     /**
-     * A string that indicates how DKIM was configured for the identity. There are two possible values:    AWS_SES – Indicates that DKIM was configured for the identity by using Easy DKIM.    EXTERNAL – Indicates that DKIM was configured for the identity by using Bring Your Own DKIM (BYODKIM).  
+     * A string that indicates how DKIM was configured for the identity. These are the possible values:    AWS_SES – Indicates that DKIM was configured for the identity by using Easy DKIM.    EXTERNAL – Indicates that DKIM was configured for the identity by using Bring Your Own DKIM (BYODKIM).  
      */
     SigningAttributesOrigin?: DkimSigningAttributesOrigin;
+    /**
+     * [Easy DKIM] The key length of the future DKIM key pair to be generated. This can be changed at most once per day.
+     */
+    NextSigningKeyLength?: DkimSigningKeyLength;
+    /**
+     * [Easy DKIM] The key length of the DKIM key pair in use.
+     */
+    CurrentSigningKeyLength?: DkimSigningKeyLength;
+    /**
+     * [Easy DKIM] The last time a key pair was generated for this identity.
+     */
+    LastKeyGenerationTimestamp?: Timestamp;
   }
   export interface DkimSigningAttributes {
     /**
-     * A string that's used to identify a public key in the DNS configuration for a domain.
+     * [Bring Your Own DKIM] A string that's used to identify a public key in the DNS configuration for a domain.
      */
-    DomainSigningSelector: Selector;
+    DomainSigningSelector?: Selector;
     /**
-     * A private key that's used to generate a DKIM signature. The private key must use 1024-bit RSA encryption, and must be encoded using base64 encoding.
+     * [Bring Your Own DKIM] A private key that's used to generate a DKIM signature. The private key must use 1024 or 2048-bit RSA encryption, and must be encoded using base64 encoding.
      */
-    DomainSigningPrivateKey: PrivateKey;
+    DomainSigningPrivateKey?: PrivateKey;
+    /**
+     * [Easy DKIM] The key length of the future DKIM key pair to be generated. This can be changed at most once per day.
+     */
+    NextSigningKeyLength?: DkimSigningKeyLength;
   }
   export type DkimSigningAttributesOrigin = "AWS_SES"|"EXTERNAL"|string;
+  export type DkimSigningKeyLength = "RSA_1024_BIT"|"RSA_2048_BIT"|string;
   export type DkimStatus = "PENDING"|"SUCCESS"|"FAILED"|"TEMPORARY_FAILURE"|"NOT_STARTED"|string;
   export type DnsToken = string;
   export type DnsTokenList = DnsToken[];
@@ -1325,11 +1576,11 @@ declare namespace SESV2 {
      */
     SendingIps?: IpList;
     /**
-     * The first time, in Unix time format, when the email message was delivered to any recipient's inbox. This value can help you determine how long it took for a campaign to deliver an email message.
+     * The first time when the email message was delivered to any recipient's inbox. This value can help you determine how long it took for a campaign to deliver an email message.
      */
     FirstSeenDateTime?: Timestamp;
     /**
-     * The last time, in Unix time format, when the email message was delivered to any recipient's inbox. This value can help you determine how long it took for a campaign to deliver an email message.
+     * The last time when the email message was delivered to any recipient's inbox. This value can help you determine how long it took for a campaign to deliver an email message.
      */
     LastSeenDateTime?: Timestamp;
     /**
@@ -1364,11 +1615,11 @@ declare namespace SESV2 {
   export type DomainDeliverabilityCampaignList = DomainDeliverabilityCampaign[];
   export interface DomainDeliverabilityTrackingOption {
     /**
-     * A verified domain that’s associated with your AWS account and currently has an active Deliverability dashboard subscription.
+     * A verified domain that’s associated with your Amazon Web Services account and currently has an active Deliverability dashboard subscription.
      */
     Domain?: Domain;
     /**
-     * The date, in Unix time format, when you enabled the Deliverability dashboard for the domain.
+     * The date when you enabled the Deliverability dashboard for the domain.
      */
     SubscriptionStartDate?: Timestamp;
     /**
@@ -1401,6 +1652,7 @@ declare namespace SESV2 {
   }
   export type DomainIspPlacements = DomainIspPlacement[];
   export type EmailAddress = string;
+  export type EmailAddressFilterList = InsightsEmailAddress[];
   export type EmailAddressList = EmailAddress[];
   export interface EmailContent {
     /**
@@ -1408,7 +1660,7 @@ declare namespace SESV2 {
      */
     Simple?: Message;
     /**
-     * The raw email message. The message has to meet the following criteria:   The message has to contain a header and a body, separated by one blank line.   All of the required header fields must be present in the message.   Each part of a multipart MIME message must be formatted properly.   If you include attachments, they must be in a file format that the Amazon SES API v2 supports.    The entire message must be Base64 encoded.   If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients' email clients render the message properly.   The length of any single line of text in the message can't exceed 1,000 characters. This restriction is defined in RFC 5321.  
+     * The raw email message. The message has to meet the following criteria:   The message has to contain a header and a body, separated by one blank line.   All of the required header fields must be present in the message.   Each part of a multipart MIME message must be formatted properly.   If you include attachments, they must be in a file format that the Amazon SES API v2 supports.    The raw data of the message needs to base64-encoded if you are accessing Amazon SES directly through the HTTPS interface. If you are accessing Amazon SES using an Amazon Web Services SDK, the SDK takes care of the base 64-encoding for you.   If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients' email clients render the message properly.   The length of any single line of text in the message can't exceed 1,000 characters. This restriction is defined in RFC 5321.  
      */
     Raw?: RawMessage;
     /**
@@ -1416,6 +1668,23 @@ declare namespace SESV2 {
      */
     Template?: Template;
   }
+  export interface EmailInsights {
+    /**
+     * The recipient of the email.
+     */
+    Destination?: InsightsEmailAddress;
+    /**
+     * The recipient's ISP (e.g., Gmail, Yahoo, etc.).
+     */
+    Isp?: Isp;
+    /**
+     * A list of events associated with the sent email.
+     */
+    Events?: InsightsEvents;
+  }
+  export type EmailInsightsList = EmailInsights[];
+  export type EmailSubject = string;
+  export type EmailSubjectFilterList = EmailSubject[];
   export interface EmailTemplateContent {
     /**
      * The subject line of the email.
@@ -1448,9 +1717,16 @@ declare namespace SESV2 {
   export type EmailTemplateText = string;
   export type Enabled = boolean;
   export type EnabledWrapper = boolean;
+  export type EngagementEventType = "OPEN"|"CLICK"|string;
   export type ErrorMessage = string;
   export type Esp = string;
   export type Esps = Esp[];
+  export interface EventBridgeDestination {
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon EventBridge bus to publish email events to. Only the default bus is supported. 
+     */
+    EventBusArn: AmazonResourceName;
+  }
   export interface EventDestination {
     /**
      * A name that identifies the event destination.
@@ -1461,7 +1737,7 @@ declare namespace SESV2 {
      */
     Enabled?: Enabled;
     /**
-     * The types of events that Amazon SES sends to the specified event destinations.
+     * The types of events that Amazon SES sends to the specified event destinations.    SEND - The send request was successful and SES will attempt to deliver the message to the recipient’s mail server. (If account-level or global suppression is being used, SES will still count it as a send, but delivery is suppressed.)    REJECT - SES accepted the email, but determined that it contained a virus and didn’t attempt to deliver it to the recipient’s mail server.    BOUNCE - (Hard bounce) The recipient's mail server permanently rejected the email. (Soft bounces are only included when SES fails to deliver the email after retrying for a period of time.)    COMPLAINT - The email was successfully delivered to the recipient’s mail server, but the recipient marked it as spam.    DELIVERY - SES successfully delivered the email to the recipient's mail server.    OPEN - The recipient received the message and opened it in their email client.    CLICK - The recipient clicked one or more links in the email.    RENDERING_FAILURE - The email wasn't sent because of a template rendering issue. This event type can occur when template data is missing, or when there is a mismatch between template parameters and data. (This event type only occurs when you send email using the  SendTemplatedEmail  or  SendBulkTemplatedEmail  API operations.)     DELIVERY_DELAY - The email couldn't be delivered to the recipient’s mail server because a temporary issue occurred. Delivery delays can occur, for example, when the recipient's inbox is full, or when the receiving email server experiences a transient issue.    SUBSCRIPTION - The email was successfully delivered, but the recipient updated their subscription preferences by clicking on an unsubscribe link as part of your subscription management.  
      */
     MatchingEventTypes: EventTypes;
     /**
@@ -1473,9 +1749,13 @@ declare namespace SESV2 {
      */
     CloudWatchDestination?: CloudWatchDestination;
     /**
-     * An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to send notification when certain email events occur.
+     * An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to send notifications when certain email events occur.
      */
     SnsDestination?: SnsDestination;
+    /**
+     * An object that defines an Amazon EventBridge destination for email events. You can use Amazon EventBridge to send notifications when certain email events occur.
+     */
+    EventBridgeDestination?: EventBridgeDestination;
     /**
      * An object that defines an Amazon Pinpoint project destination for email events. You can send email event data to a Amazon Pinpoint project to view metrics using the Transactional Messaging dashboards that are built in to Amazon Pinpoint. For more information, see Transactional Messaging Charts in the Amazon Pinpoint User Guide.
      */
@@ -1499,9 +1779,13 @@ declare namespace SESV2 {
      */
     CloudWatchDestination?: CloudWatchDestination;
     /**
-     * An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to send notification when certain email events occur.
+     * An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to send notifications when certain email events occur.
      */
     SnsDestination?: SnsDestination;
+    /**
+     * An object that defines an Amazon EventBridge destination for email events. You can use Amazon EventBridge to send notifications when certain email events occur.
+     */
+    EventBridgeDestination?: EventBridgeDestination;
     /**
      * An object that defines an Amazon Pinpoint project destination for email events. You can send email event data to a Amazon Pinpoint project to view metrics using the Transactional Messaging dashboards that are built in to Amazon Pinpoint. For more information, see Transactional Messaging Charts in the Amazon Pinpoint User Guide.
      */
@@ -1509,21 +1793,88 @@ declare namespace SESV2 {
   }
   export type EventDestinationName = string;
   export type EventDestinations = EventDestination[];
+  export interface EventDetails {
+    /**
+     * Information about a Bounce event.
+     */
+    Bounce?: Bounce;
+    /**
+     * Information about a Complaint event.
+     */
+    Complaint?: Complaint;
+  }
   export type EventType = "SEND"|"REJECT"|"BOUNCE"|"COMPLAINT"|"DELIVERY"|"OPEN"|"CLICK"|"RENDERING_FAILURE"|"DELIVERY_DELAY"|"SUBSCRIPTION"|string;
   export type EventTypes = EventType[];
+  export interface ExportDataSource {
+    MetricsDataSource?: MetricsDataSource;
+    MessageInsightsDataSource?: MessageInsightsDataSource;
+  }
+  export interface ExportDestination {
+    /**
+     * The data format of the final export job file, can be one of the following:    CSV - A comma-separated values file.    JSON - A Json file.  
+     */
+    DataFormat: DataFormat;
+    /**
+     * An Amazon S3 pre-signed URL that points to the generated export file.
+     */
+    S3Url?: S3Url;
+  }
+  export type ExportDimensionValue = MetricDimensionValue[];
+  export type ExportDimensions = {[key: string]: ExportDimensionValue};
+  export interface ExportJobSummary {
+    /**
+     * The export job ID.
+     */
+    JobId?: JobId;
+    /**
+     * The source type of the export job.
+     */
+    ExportSourceType?: ExportSourceType;
+    /**
+     * The status of the export job.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * The timestamp of when the export job was created.
+     */
+    CreatedTimestamp?: Timestamp;
+    /**
+     * The timestamp of when the export job was completed.
+     */
+    CompletedTimestamp?: Timestamp;
+  }
+  export type ExportJobSummaryList = ExportJobSummary[];
+  export interface ExportMetric {
+    Name?: Metric;
+    Aggregation?: MetricAggregation;
+  }
+  export type ExportMetrics = ExportMetric[];
+  export type ExportSourceType = "METRICS_DATA"|"MESSAGE_INSIGHTS"|string;
+  export interface ExportStatistics {
+    /**
+     * The number of records that were processed to generate the final export file.
+     */
+    ProcessedRecordsCount?: ProcessedRecordsCount;
+    /**
+     * The number of records that were exported to the final export file. This value might not be available for all export source types
+     */
+    ExportedRecordsCount?: ExportedRecordsCount;
+  }
+  export type ExportedRecordsCount = number;
   export type FailedRecordsCount = number;
   export type FailedRecordsS3Url = string;
   export interface FailureInfo {
     /**
-     * An Amazon S3 presigned URL that contains all the failed records and related information.
+     * An Amazon S3 pre-signed URL that contains all the failed records and related information.
      */
     FailedRecordsS3Url?: FailedRecordsS3Url;
     /**
-     * A message about why the import job failed.
+     * A message about why the job failed.
      */
     ErrorMessage?: ErrorMessage;
   }
   export type FailureRedirectionURL = string;
+  export type FeatureStatus = "ENABLED"|"DISABLED"|string;
   export type FeedbackId = string;
   export type GeneralEnforcementStatus = string;
   export interface GetAccountRequest {
@@ -1538,25 +1889,29 @@ declare namespace SESV2 {
      */
     EnforcementStatus?: GeneralEnforcementStatus;
     /**
-     * Indicates whether or not your account has production access in the current AWS Region. If the value is false, then your account is in the sandbox. When your account is in the sandbox, you can only send email to verified identities. Additionally, the maximum number of emails you can send in a 24-hour period (your sending quota) is 200, and the maximum number of emails you can send per second (your maximum sending rate) is 1. If the value is true, then your account has production access. When your account has production access, you can send email to any address. The sending quota and maximum sending rate for your account vary based on your specific use case.
+     * Indicates whether or not your account has production access in the current Amazon Web Services Region. If the value is false, then your account is in the sandbox. When your account is in the sandbox, you can only send email to verified identities.  If the value is true, then your account has production access. When your account has production access, you can send email to any address. The sending quota and maximum sending rate for your account vary based on your specific use case.
      */
     ProductionAccessEnabled?: Enabled;
     /**
-     * An object that contains information about the per-day and per-second sending limits for your Amazon SES account in the current AWS Region.
+     * An object that contains information about the per-day and per-second sending limits for your Amazon SES account in the current Amazon Web Services Region.
      */
     SendQuota?: SendQuota;
     /**
-     * Indicates whether or not email sending is enabled for your Amazon SES account in the current AWS Region.
+     * Indicates whether or not email sending is enabled for your Amazon SES account in the current Amazon Web Services Region.
      */
     SendingEnabled?: Enabled;
     /**
-     * An object that contains information about the email address suppression preferences for your account in the current AWS Region.
+     * An object that contains information about the email address suppression preferences for your account in the current Amazon Web Services Region.
      */
     SuppressionAttributes?: SuppressionAttributes;
     /**
      * An object that defines your account details.
      */
     Details?: AccountDetails;
+    /**
+     * The VDM attributes that apply to your Amazon SES account.
+     */
+    VdmAttributes?: VdmAttributes;
   }
   export interface GetBlacklistReportsRequest {
     /**
@@ -1584,7 +1939,7 @@ declare namespace SESV2 {
   }
   export interface GetConfigurationSetRequest {
     /**
-     * The name of the configuration set that you want to obtain more information about.
+     * The name of the configuration set.
      */
     ConfigurationSetName: ConfigurationSetName;
   }
@@ -1617,6 +1972,10 @@ declare namespace SESV2 {
      * An object that contains information about the suppression list preferences for your account.
      */
     SuppressionOptions?: SuppressionOptions;
+    /**
+     * An object that contains information about the VDM preferences for your configuration set.
+     */
+    VdmOptions?: VdmOptions;
   }
   export interface GetContactListRequest {
     /**
@@ -1656,7 +2015,7 @@ declare namespace SESV2 {
      */
     ContactListName: ContactListName;
     /**
-     * The contact's email addres.
+     * The contact's email address.
      */
     EmailAddress: EmailAddress;
   }
@@ -1666,7 +2025,7 @@ declare namespace SESV2 {
      */
     ContactListName?: ContactListName;
     /**
-     * The contact's email addres.
+     * The contact's email address.
      */
     EmailAddress?: EmailAddress;
     /**
@@ -1726,9 +2085,21 @@ declare namespace SESV2 {
      */
     FailureRedirectionURL?: FailureRedirectionURL;
   }
+  export interface GetDedicatedIpPoolRequest {
+    /**
+     * The name of the dedicated IP pool to retrieve.
+     */
+    PoolName: PoolName;
+  }
+  export interface GetDedicatedIpPoolResponse {
+    /**
+     * An object that contains information about a dedicated IP pool.
+     */
+    DedicatedIpPool?: DedicatedIpPool;
+  }
   export interface GetDedicatedIpRequest {
     /**
-     * The IP address that you want to obtain more information about. The value you specify has to be a dedicated IP address that's assocaited with your AWS account.
+     * The IP address that you want to obtain more information about. The value you specify has to be a dedicated IP address that's assocaited with your Amazon Web Services account.
      */
     Ip: Ip;
   }
@@ -1754,7 +2125,7 @@ declare namespace SESV2 {
   }
   export interface GetDedicatedIpsResponse {
     /**
-     * A list of dedicated IP addresses that are associated with your AWS account.
+     * A list of dedicated IP addresses that are associated with your Amazon Web Services account.
      */
     DedicatedIps?: DedicatedIpList;
     /**
@@ -1770,7 +2141,7 @@ declare namespace SESV2 {
      */
     DashboardEnabled: Enabled;
     /**
-     * The date, in Unix time format, when your current subscription to the Deliverability dashboard is scheduled to expire, if your subscription is scheduled to expire at the end of the current calendar month. This value is null if you have an active subscription that isn’t due to expire at the end of the month.
+     * The date when your current subscription to the Deliverability dashboard is scheduled to expire, if your subscription is scheduled to expire at the end of the current calendar month. This value is null if you have an active subscription that isn’t due to expire at the end of the month.
      */
     SubscriptionExpiryDate?: Timestamp;
     /**
@@ -1852,7 +2223,7 @@ declare namespace SESV2 {
   }
   export interface GetEmailIdentityPoliciesRequest {
     /**
-     * The email identity that you want to retrieve policies for.
+     * The email identity.
      */
     EmailIdentity: Identity;
   }
@@ -1864,13 +2235,13 @@ declare namespace SESV2 {
   }
   export interface GetEmailIdentityRequest {
     /**
-     * The email identity that you want to retrieve details for.
+     * The email identity.
      */
     EmailIdentity: Identity;
   }
   export interface GetEmailIdentityResponse {
     /**
-     * The email identity type.
+     * The email identity type. Note: the MANAGED_DOMAIN identity type is not supported.
      */
     IdentityType?: IdentityType;
     /**
@@ -1897,22 +2268,78 @@ declare namespace SESV2 {
      * An array of objects that define the tags (keys and values) that are associated with the email identity.
      */
     Tags?: TagList;
+    /**
+     * The configuration set used by default when sending from this identity.
+     */
+    ConfigurationSetName?: ConfigurationSetName;
+    /**
+     * The verification status of the identity. The status can be one of the following:    PENDING – The verification process was initiated, but Amazon SES hasn't yet been able to verify the identity.    SUCCESS – The verification process completed successfully.    FAILED – The verification process failed.    TEMPORARY_FAILURE – A temporary issue is preventing Amazon SES from determining the verification status of the identity.    NOT_STARTED – The verification process hasn't been initiated for the identity.  
+     */
+    VerificationStatus?: VerificationStatus;
+    /**
+     * An object that contains additional information about the verification status for the identity.
+     */
+    VerificationInfo?: VerificationInfo;
   }
   export interface GetEmailTemplateRequest {
     /**
-     * The name of the template you want to retrieve.
+     * The name of the template.
      */
     TemplateName: EmailTemplateName;
   }
   export interface GetEmailTemplateResponse {
     /**
-     * The name of the template you want to retrieve.
+     * The name of the template.
      */
     TemplateName: EmailTemplateName;
     /**
      * The content of the email template, composed of a subject line, an HTML part, and a text-only part.
      */
     TemplateContent: EmailTemplateContent;
+  }
+  export interface GetExportJobRequest {
+    /**
+     * The export job ID.
+     */
+    JobId: JobId;
+  }
+  export interface GetExportJobResponse {
+    /**
+     * The export job ID.
+     */
+    JobId?: JobId;
+    /**
+     * The type of source of the export job.
+     */
+    ExportSourceType?: ExportSourceType;
+    /**
+     * The status of the export job.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * The destination of the export job.
+     */
+    ExportDestination?: ExportDestination;
+    /**
+     * The data source of the export job.
+     */
+    ExportDataSource?: ExportDataSource;
+    /**
+     * The timestamp of when the export job was created.
+     */
+    CreatedTimestamp?: Timestamp;
+    /**
+     * The timestamp of when the export job was completed.
+     */
+    CompletedTimestamp?: Timestamp;
+    /**
+     * The failure details about an export job.
+     */
+    FailureInfo?: FailureInfo;
+    /**
+     * The statistics about the export job.
+     */
+    Statistics?: ExportStatistics;
   }
   export interface GetImportJobRequest {
     /**
@@ -1958,6 +2385,34 @@ declare namespace SESV2 {
      */
     FailedRecordsCount?: FailedRecordsCount;
   }
+  export interface GetMessageInsightsRequest {
+    /**
+     *  A MessageId is a unique identifier for a message, and is returned when sending emails through Amazon SES. 
+     */
+    MessageId: OutboundMessageId;
+  }
+  export interface GetMessageInsightsResponse {
+    /**
+     * A unique identifier for the message.
+     */
+    MessageId?: OutboundMessageId;
+    /**
+     * The from address used to send the message.
+     */
+    FromEmailAddress?: InsightsEmailAddress;
+    /**
+     * The subject line of the message.
+     */
+    Subject?: EmailSubject;
+    /**
+     *  A list of tags, in the form of name/value pairs, that were applied to the email you sent, along with Amazon SES Auto-Tags. 
+     */
+    EmailTags?: MessageTagList;
+    /**
+     * A set of insights associated with the message.
+     */
+    Insights?: EmailInsightsList;
+  }
   export interface GetSuppressedDestinationRequest {
     /**
      * The email address that's on the account suppression list.
@@ -1970,10 +2425,22 @@ declare namespace SESV2 {
      */
     SuppressedDestination: SuppressedDestination;
   }
+  export interface GuardianAttributes {
+    /**
+     * Specifies the status of your VDM optimized shared delivery. Can be one of the following:    ENABLED – Amazon SES enables optimized shared delivery for your account.    DISABLED – Amazon SES disables optimized shared delivery for your account.  
+     */
+    OptimizedSharedDelivery?: FeatureStatus;
+  }
+  export interface GuardianOptions {
+    /**
+     * Specifies the status of your VDM optimized shared delivery. Can be one of the following:    ENABLED – Amazon SES enables optimized shared delivery for the configuration set.    DISABLED – Amazon SES disables optimized shared delivery for the configuration set.  
+     */
+    OptimizedSharedDelivery?: FeatureStatus;
+  }
   export type Identity = string;
   export interface IdentityInfo {
     /**
-     * The email identity type. The identity type can be one of the following:    EMAIL_ADDRESS – The identity is an email address.    DOMAIN – The identity is a domain.    MANAGED_DOMAIN – The identity is a domain that is managed by AWS.  
+     * The email identity type. Note: the MANAGED_DOMAIN type is not supported for email identity types.
      */
     IdentityType?: IdentityType;
     /**
@@ -1984,6 +2451,10 @@ declare namespace SESV2 {
      * Indicates whether or not you can send email from the identity. An identity is an email address or domain that you send email from. Before you can send email from an identity, you have to demostrate that you own the identity, and that you authorize Amazon SES to send email from that identity.
      */
     SendingEnabled?: Enabled;
+    /**
+     * The verification status of the identity. The status can be one of the following:    PENDING – The verification process was initiated, but Amazon SES hasn't yet been able to verify the identity.    SUCCESS – The verification process completed successfully.    FAILED – The verification process failed.    TEMPORARY_FAILURE – A temporary issue is preventing Amazon SES from determining the verification status of the identity.    NOT_STARTED – The verification process hasn't been initiated for the identity.  
+     */
+    VerificationStatus?: VerificationStatus;
   }
   export type IdentityInfoList = IdentityInfo[];
   export type IdentityType = "EMAIL_ADDRESS"|"DOMAIN"|"MANAGED_DOMAIN"|string;
@@ -2017,6 +2488,14 @@ declare namespace SESV2 {
      * The date and time when the import job was created.
      */
     CreatedTimestamp?: Timestamp;
+    /**
+     * The current number of records processed.
+     */
+    ProcessedRecordsCount?: ProcessedRecordsCount;
+    /**
+     * The number of records that failed processing because of invalid input or other reasons.
+     */
+    FailedRecordsCount?: FailedRecordsCount;
   }
   export type ImportJobSummaryList = ImportJobSummary[];
   export interface InboxPlacementTrackingOption {
@@ -2029,8 +2508,26 @@ declare namespace SESV2 {
      */
     TrackedIsps?: IspNameList;
   }
+  export type InsightsEmailAddress = string;
+  export interface InsightsEvent {
+    /**
+     * The timestamp of the event.
+     */
+    Timestamp?: Timestamp;
+    /**
+     * The type of event:    SEND - The send request was successful and SES will attempt to deliver the message to the recipient’s mail server. (If account-level or global suppression is being used, SES will still count it as a send, but delivery is suppressed.)     DELIVERY - SES successfully delivered the email to the recipient's mail server. Excludes deliveries to the mailbox simulator, and those from emails addressed to more than one recipient.     BOUNCE - Feedback received for delivery failures. Additional details about the bounce are provided in the Details object. Excludes bounces from the mailbox simulator, and those from emails addressed to more than one recipient.     COMPLAINT - Complaint received for the email. Additional details about the complaint are provided in the Details object. This excludes complaints from the mailbox simulator, those originating from your account-level suppression list (if enabled), and those from emails addressed to more than one recipient.     OPEN - Open event for emails including open trackers. Excludes opens for emails addressed to more than one recipient.    CLICK - Click event for emails including wrapped links. Excludes clicks for emails addressed to more than one recipient.  
+     */
+    Type?: EventType;
+    /**
+     * Details about bounce or complaint events.
+     */
+    Details?: EventDetails;
+  }
+  export type InsightsEvents = InsightsEvent[];
   export type Ip = string;
   export type IpList = Ip[];
+  export type Isp = string;
+  export type IspFilterList = Isp[];
   export type IspName = string;
   export type IspNameList = IspName[];
   export interface IspPlacement {
@@ -2045,7 +2542,7 @@ declare namespace SESV2 {
   }
   export type IspPlacements = IspPlacement[];
   export type JobId = string;
-  export type JobStatus = "CREATED"|"PROCESSING"|"COMPLETED"|"FAILED"|string;
+  export type JobStatus = "CREATED"|"PROCESSING"|"COMPLETED"|"FAILED"|"CANCELLED"|string;
   export interface KinesisFirehoseDestination {
     /**
      * The Amazon Resource Name (ARN) of the IAM role that the Amazon SES API v2 uses to send email events to the Amazon Kinesis Data Firehose stream.
@@ -2056,6 +2553,8 @@ declare namespace SESV2 {
      */
     DeliveryStreamArn: AmazonResourceName;
   }
+  export type LastDeliveryEventList = DeliveryEventType[];
+  export type LastEngagementEventList = EngagementEventType[];
   export type LastFreshStart = Date;
   export interface ListConfigurationSetsRequest {
     /**
@@ -2069,7 +2568,7 @@ declare namespace SESV2 {
   }
   export interface ListConfigurationSetsResponse {
     /**
-     * An array that contains all of the configuration sets in your Amazon SES account in the current AWS Region.
+     * An array that contains all of the configuration sets in your Amazon SES account in the current Amazon Web Services Region.
      */
     ConfigurationSets?: ConfigurationSetNameList;
     /**
@@ -2167,7 +2666,7 @@ declare namespace SESV2 {
   }
   export interface ListDedicatedIpPoolsResponse {
     /**
-     * A list of all of the dedicated IP pools that are associated with your AWS account in the current Region.
+     * A list of all of the dedicated IP pools that are associated with your Amazon Web Services account in the current Region.
      */
     DedicatedIpPools?: ListOfDedicatedIpPools;
     /**
@@ -2197,11 +2696,11 @@ declare namespace SESV2 {
   }
   export interface ListDomainDeliverabilityCampaignsRequest {
     /**
-     * The first day, in Unix time format, that you want to obtain deliverability data for.
+     * The first day that you want to obtain deliverability data for.
      */
     StartDate: Timestamp;
     /**
-     * The last day, in Unix time format, that you want to obtain deliverability data for. This value has to be less than or equal to 30 days after the value of the StartDate parameter.
+     * The last day that you want to obtain deliverability data for. This value has to be less than or equal to 30 days after the value of the StartDate parameter.
      */
     EndDate: Timestamp;
     /**
@@ -2239,7 +2738,7 @@ declare namespace SESV2 {
   }
   export interface ListEmailIdentitiesResponse {
     /**
-     * An array that includes all of the email identities associated with your AWS account.
+     * An array that includes all of the email identities associated with your Amazon Web Services account.
      */
     EmailIdentities?: IdentityInfoList;
     /**
@@ -2253,7 +2752,7 @@ declare namespace SESV2 {
      */
     NextToken?: NextToken;
     /**
-     * The number of results to show in a single call to ListEmailTemplates. If the number of results is larger than the number you specified in this parameter, then the response includes a NextToken element, which you can use to obtain additional results. The value you specify has to be at least 1, and can be no more than 10.
+     * The number of results to show in a single call to ListEmailTemplates. If the number of results is larger than the number you specified in this parameter, then the response includes a NextToken element, which you can use to obtain additional results. The value you specify has to be at least 1, and can be no more than 100.
      */
     PageSize?: MaxItems;
   }
@@ -2264,6 +2763,34 @@ declare namespace SESV2 {
     TemplatesMetadata?: EmailTemplateMetadataList;
     /**
      * A token indicating that there are additional email templates available to be listed. Pass this token to a subsequent ListEmailTemplates call to retrieve the next 10 email templates.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListExportJobsRequest {
+    /**
+     * The pagination token returned from a previous call to ListExportJobs to indicate the position in the list of export jobs.
+     */
+    NextToken?: NextToken;
+    /**
+     * Maximum number of export jobs to return at once. Use this parameter to paginate results. If additional export jobs exist beyond the specified limit, the NextToken element is sent in the response. Use the NextToken value in subsequent calls to ListExportJobs to retrieve additional export jobs.
+     */
+    PageSize?: MaxItems;
+    /**
+     * A value used to list export jobs that have a certain ExportSourceType.
+     */
+    ExportSourceType?: ExportSourceType;
+    /**
+     * A value used to list export jobs that have a certain JobStatus.
+     */
+    JobStatus?: JobStatus;
+  }
+  export interface ListExportJobsResponse {
+    /**
+     * A list of the export job summaries.
+     */
+    ExportJobs?: ExportJobSummaryList;
+    /**
+     * A string token indicating that there might be additional export jobs available to be listed. Use this token to a subsequent call to ListExportJobs with the same parameters to retrieve the next page of export jobs.
      */
     NextToken?: NextToken;
   }
@@ -2304,17 +2831,44 @@ declare namespace SESV2 {
   export type ListOfContactLists = ContactList[];
   export type ListOfContacts = Contact[];
   export type ListOfDedicatedIpPools = PoolName[];
+  export type ListRecommendationFilterValue = string;
+  export type ListRecommendationsFilter = {[key: string]: ListRecommendationFilterValue};
+  export type ListRecommendationsFilterKey = "TYPE"|"IMPACT"|"STATUS"|"RESOURCE_ARN"|string;
+  export interface ListRecommendationsRequest {
+    /**
+     * Filters applied when retrieving recommendations. Can eiter be an individual filter, or combinations of STATUS and IMPACT or STATUS and TYPE 
+     */
+    Filter?: ListRecommendationsFilter;
+    /**
+     * A token returned from a previous call to ListRecommendations to indicate the position in the list of recommendations.
+     */
+    NextToken?: NextToken;
+    /**
+     * The number of results to show in a single call to ListRecommendations. If the number of results is larger than the number you specified in this parameter, then the response includes a NextToken element, which you can use to obtain additional results. The value you specify has to be at least 1, and can be no more than 100.
+     */
+    PageSize?: MaxItems;
+  }
+  export interface ListRecommendationsResponse {
+    /**
+     * The recommendations applicable to your account.
+     */
+    Recommendations?: RecommendationsList;
+    /**
+     * A string token indicating that there might be additional recommendations available to be listed. Use the token provided in the ListRecommendationsResponse to use in the subsequent call to ListRecommendations with the same parameters to retrieve the next page of recommendations.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListSuppressedDestinationsRequest {
     /**
      * The factors that caused the email address to be added to .
      */
     Reasons?: SuppressionListReasons;
     /**
-     * Used to filter the list of suppressed email destinations so that it only includes addresses that were added to the list after a specific date. The date that you specify should be in Unix time format.
+     * Used to filter the list of suppressed email destinations so that it only includes addresses that were added to the list after a specific date.
      */
     StartDate?: Timestamp;
     /**
-     * Used to filter the list of suppressed email destinations so that it only includes addresses that were added to the list before a specific date. The date that you specify should be in Unix time format.
+     * Used to filter the list of suppressed email destinations so that it only includes addresses that were added to the list before a specific date.
      */
     EndDate?: Timestamp;
     /**
@@ -2358,7 +2912,7 @@ declare namespace SESV2 {
      */
     MailFromDomainStatus: MailFromDomainStatus;
     /**
-     * The action that you want to take if the required MX record can't be found when you send an email. When you set this value to UseDefaultValue, the mail is sent using amazonses.com as the MAIL FROM domain. When you set this value to RejectMessage, the Amazon SES API v2 returns a MailFromDomainNotVerified error, and doesn't attempt to deliver the email. These behaviors are taken when the custom MAIL FROM domain configuration is in the Pending, Failed, and TemporaryFailure states.
+     * The action to take if the required MX record can't be found when you send an email. When you set this value to USE_DEFAULT_VALUE, the mail is sent using amazonses.com as the MAIL FROM domain. When you set this value to REJECT_MESSAGE, the Amazon SES API v2 returns a MailFromDomainNotVerified error, and doesn't attempt to deliver the email. These behaviors are taken when the custom MAIL FROM domain configuration is in the Pending, Failed, and TemporaryFailure states.
      */
     BehaviorOnMxFailure: BehaviorOnMxFailure;
   }
@@ -2377,9 +2931,75 @@ declare namespace SESV2 {
      * The body of the message. You can specify an HTML version of the message, a text-only version of the message, or both.
      */
     Body: Body;
+    /**
+     * The list of message headers that will be added to the email message.
+     */
+    Headers?: MessageHeaderList;
   }
   export type MessageContent = string;
   export type MessageData = string;
+  export interface MessageHeader {
+    /**
+     * The name of the message header. The message header name has to meet the following criteria:   Can contain any printable ASCII character (33 - 126) except for colon (:).   Can contain no more than 126 characters.  
+     */
+    Name: MessageHeaderName;
+    /**
+     * The value of the message header. The message header value has to meet the following criteria:   Can contain any printable ASCII character.   Can contain no more than 870 characters.  
+     */
+    Value: MessageHeaderValue;
+  }
+  export type MessageHeaderList = MessageHeader[];
+  export type MessageHeaderName = string;
+  export type MessageHeaderValue = string;
+  export interface MessageInsightsDataSource {
+    /**
+     * Represents the start date for the export interval as a timestamp. The start date is inclusive.
+     */
+    StartDate: Timestamp;
+    /**
+     * Represents the end date for the export interval as a timestamp. The end date is inclusive.
+     */
+    EndDate: Timestamp;
+    /**
+     * Filters for results to be included in the export file.
+     */
+    Include?: MessageInsightsFilters;
+    /**
+     * Filters for results to be excluded from the export file.
+     */
+    Exclude?: MessageInsightsFilters;
+    /**
+     * The maximum number of results.
+     */
+    MaxResults?: MessageInsightsExportMaxResults;
+  }
+  export type MessageInsightsExportMaxResults = number;
+  export interface MessageInsightsFilters {
+    /**
+     * The from address used to send the message.
+     */
+    FromEmailAddress?: EmailAddressFilterList;
+    /**
+     * The recipient's email address.
+     */
+    Destination?: EmailAddressFilterList;
+    /**
+     * The subject line of the message.
+     */
+    Subject?: EmailSubjectFilterList;
+    /**
+     * The recipient's ISP (e.g., Gmail, Yahoo, etc.).
+     */
+    Isp?: IspFilterList;
+    /**
+     *  The last delivery-related event for the email, where the ordering is as follows: SEND &lt; BOUNCE &lt; DELIVERY &lt; COMPLAINT. 
+     */
+    LastDeliveryEvent?: LastDeliveryEventList;
+    /**
+     *  The last engagement-related event for the email, where the ordering is as follows: OPEN &lt; CLICK.   Engagement events are only available if Engagement tracking is enabled. 
+     */
+    LastEngagementEvent?: LastEngagementEventList;
+  }
   export interface MessageTag {
     /**
      * The name of the message tag. The message tag name has to meet the following criteria:   It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores (_), or dashes (-).   It can contain no more than 256 characters.  
@@ -2393,6 +3013,64 @@ declare namespace SESV2 {
   export type MessageTagList = MessageTag[];
   export type MessageTagName = string;
   export type MessageTagValue = string;
+  export type Metric = "SEND"|"COMPLAINT"|"PERMANENT_BOUNCE"|"TRANSIENT_BOUNCE"|"OPEN"|"CLICK"|"DELIVERY"|"DELIVERY_OPEN"|"DELIVERY_CLICK"|"DELIVERY_COMPLAINT"|string;
+  export type MetricAggregation = "RATE"|"VOLUME"|string;
+  export interface MetricDataError {
+    /**
+     * The query identifier.
+     */
+    Id?: QueryIdentifier;
+    /**
+     * The query error code. Can be one of:    INTERNAL_FAILURE – Amazon SES has failed to process one of the queries.    ACCESS_DENIED – You have insufficient access to retrieve metrics based on the given query.  
+     */
+    Code?: QueryErrorCode;
+    /**
+     * The error message associated with the current query error.
+     */
+    Message?: QueryErrorMessage;
+  }
+  export type MetricDataErrorList = MetricDataError[];
+  export interface MetricDataResult {
+    /**
+     * The query identifier.
+     */
+    Id?: QueryIdentifier;
+    /**
+     * A list of timestamps for the metric data results.
+     */
+    Timestamps?: TimestampList;
+    /**
+     * A list of values (cumulative / sum) for the metric data results.
+     */
+    Values?: MetricValueList;
+  }
+  export type MetricDataResultList = MetricDataResult[];
+  export type MetricDimensionName = "EMAIL_IDENTITY"|"CONFIGURATION_SET"|"ISP"|string;
+  export type MetricDimensionValue = string;
+  export type MetricNamespace = "VDM"|string;
+  export type MetricValueList = Counter[];
+  export interface MetricsDataSource {
+    /**
+     * An object that contains a mapping between a MetricDimensionName and MetricDimensionValue to filter metrics by. Must contain a least 1 dimension but no more than 3 unique ones.
+     */
+    Dimensions: ExportDimensions;
+    /**
+     * The metrics namespace - e.g., VDM.
+     */
+    Namespace: MetricNamespace;
+    /**
+     * A list of ExportMetric objects to export.
+     */
+    Metrics: ExportMetrics;
+    /**
+     * Represents the start date for the export interval as a timestamp.
+     */
+    StartDate: Timestamp;
+    /**
+     * Represents the end date for the export interval as a timestamp.
+     */
+    EndDate: Timestamp;
+  }
   export type NextToken = string;
   export type OutboundMessageId = string;
   export interface OverallVolume {
@@ -2413,7 +3091,7 @@ declare namespace SESV2 {
   export type Percentage100Wrapper = number;
   export interface PinpointDestination {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Pinpoint project that you want to send email events to.
+     * The Amazon Resource Name (ARN) of the Amazon Pinpoint project to send email events to.
      */
     ApplicationArn?: AmazonResourceName;
   }
@@ -2443,11 +3121,12 @@ declare namespace SESV2 {
   export type PolicyMap = {[key: string]: Policy};
   export type PolicyName = string;
   export type PoolName = string;
+  export type PrimaryNameServer = string;
   export type PrivateKey = string;
   export type ProcessedRecordsCount = number;
   export interface PutAccountDedicatedIpWarmupAttributesRequest {
     /**
-     * Enables or disables the automatic warm-up feature for dedicated IP addresses that are associated with your Amazon SES account in the current AWS Region. Set to true to enable the automatic warm-up feature, or set to false to disable it.
+     * Enables or disables the automatic warm-up feature for dedicated IP addresses that are associated with your Amazon SES account in the current Amazon Web Services Region. Set to true to enable the automatic warm-up feature, or set to false to disable it.
      */
     AutoWarmupEnabled?: Enabled;
   }
@@ -2469,13 +3148,13 @@ declare namespace SESV2 {
     /**
      * A description of the types of email that you plan to send.
      */
-    UseCaseDescription: UseCaseDescription;
+    UseCaseDescription?: UseCaseDescription;
     /**
      * Additional email addresses that you would like to be notified regarding Amazon SES matters.
      */
     AdditionalContactEmailAddresses?: AdditionalContactEmailAddresses;
     /**
-     * Indicates whether or not your account should have production access in the current AWS Region. If the value is false, then your account is in the sandbox. When your account is in the sandbox, you can only send email to verified identities. Additionally, the maximum number of emails you can send in a 24-hour period (your sending quota) is 200, and the maximum number of emails you can send per second (your maximum sending rate) is 1. If the value is true, then your account has production access. When your account has production access, you can send email to any address. The sending quota and maximum sending rate for your account vary based on your specific use case.
+     * Indicates whether or not your account should have production access in the current Amazon Web Services Region. If the value is false, then your account is in the sandbox. When your account is in the sandbox, you can only send email to verified identities.  If the value is true, then your account has production access. When your account has production access, you can send email to any address. The sending quota and maximum sending rate for your account vary based on your specific use case.
      */
     ProductionAccessEnabled?: EnabledWrapper;
   }
@@ -2483,7 +3162,7 @@ declare namespace SESV2 {
   }
   export interface PutAccountSendingAttributesRequest {
     /**
-     * Enables or disables your account's ability to send email. Set to true to enable email sending, or set to false to disable email sending.  If AWS paused your account's ability to send email, you can't use this operation to resume your account's ability to send email. 
+     * Enables or disables your account's ability to send email. Set to true to enable email sending, or set to false to disable email sending.  If Amazon Web Services paused your account's ability to send email, you can't use this operation to resume your account's ability to send email. 
      */
     SendingEnabled?: Enabled;
   }
@@ -2497,9 +3176,17 @@ declare namespace SESV2 {
   }
   export interface PutAccountSuppressionAttributesResponse {
   }
+  export interface PutAccountVdmAttributesRequest {
+    /**
+     * The VDM attributes that you wish to apply to your Amazon SES account.
+     */
+    VdmAttributes: VdmAttributes;
+  }
+  export interface PutAccountVdmAttributesResponse {
+  }
   export interface PutConfigurationSetDeliveryOptionsRequest {
     /**
-     * The name of the configuration set that you want to associate with a dedicated IP pool.
+     * The name of the configuration set to associate with a dedicated IP pool.
      */
     ConfigurationSetName: ConfigurationSetName;
     /**
@@ -2507,7 +3194,7 @@ declare namespace SESV2 {
      */
     TlsPolicy?: TlsPolicy;
     /**
-     * The name of the dedicated IP pool that you want to associate with the configuration set.
+     * The name of the dedicated IP pool to associate with the configuration set.
      */
     SendingPoolName?: SendingPoolName;
   }
@@ -2515,7 +3202,7 @@ declare namespace SESV2 {
   }
   export interface PutConfigurationSetReputationOptionsRequest {
     /**
-     * The name of the configuration set that you want to enable or disable reputation metric tracking for.
+     * The name of the configuration set.
      */
     ConfigurationSetName: ConfigurationSetName;
     /**
@@ -2527,7 +3214,7 @@ declare namespace SESV2 {
   }
   export interface PutConfigurationSetSendingOptionsRequest {
     /**
-     * The name of the configuration set that you want to enable or disable email sending for.
+     * The name of the configuration set to enable or disable email sending for.
      */
     ConfigurationSetName: ConfigurationSetName;
     /**
@@ -2539,7 +3226,7 @@ declare namespace SESV2 {
   }
   export interface PutConfigurationSetSuppressionOptionsRequest {
     /**
-     * The name of the configuration set that you want to change the suppression list preferences for.
+     * The name of the configuration set to change the suppression list preferences for.
      */
     ConfigurationSetName: ConfigurationSetName;
     /**
@@ -2551,19 +3238,31 @@ declare namespace SESV2 {
   }
   export interface PutConfigurationSetTrackingOptionsRequest {
     /**
-     * The name of the configuration set that you want to add a custom tracking domain to.
+     * The name of the configuration set.
      */
     ConfigurationSetName: ConfigurationSetName;
     /**
-     * The domain that you want to use to track open and click events.
+     * The domain to use to track open and click events.
      */
     CustomRedirectDomain?: CustomRedirectDomain;
   }
   export interface PutConfigurationSetTrackingOptionsResponse {
   }
+  export interface PutConfigurationSetVdmOptionsRequest {
+    /**
+     * The name of the configuration set.
+     */
+    ConfigurationSetName: ConfigurationSetName;
+    /**
+     * The VDM options to apply to the configuration set.
+     */
+    VdmOptions?: VdmOptions;
+  }
+  export interface PutConfigurationSetVdmOptionsResponse {
+  }
   export interface PutDedicatedIpInPoolRequest {
     /**
-     * The IP address that you want to move to the dedicated IP pool. The value you specify has to be a dedicated IP address that's associated with your AWS account.
+     * The IP address that you want to move to the dedicated IP pool. The value you specify has to be a dedicated IP address that's associated with your Amazon Web Services account.
      */
     Ip: Ip;
     /**
@@ -2572,6 +3271,18 @@ declare namespace SESV2 {
     DestinationPoolName: PoolName;
   }
   export interface PutDedicatedIpInPoolResponse {
+  }
+  export interface PutDedicatedIpPoolScalingAttributesRequest {
+    /**
+     * The name of the dedicated IP pool.
+     */
+    PoolName: PoolName;
+    /**
+     * The scaling mode to apply to the dedicated IP pool.  Changing the scaling mode from MANAGED to STANDARD is not supported. 
+     */
+    ScalingMode: ScalingMode;
+  }
+  export interface PutDedicatedIpPoolScalingAttributesResponse {
   }
   export interface PutDedicatedIpWarmupAttributesRequest {
     /**
@@ -2597,9 +3308,21 @@ declare namespace SESV2 {
   }
   export interface PutDeliverabilityDashboardOptionResponse {
   }
+  export interface PutEmailIdentityConfigurationSetAttributesRequest {
+    /**
+     * The email address or domain to associate with a configuration set.
+     */
+    EmailIdentity: Identity;
+    /**
+     * The configuration set to associate with an email identity.
+     */
+    ConfigurationSetName?: ConfigurationSetName;
+  }
+  export interface PutEmailIdentityConfigurationSetAttributesResponse {
+  }
   export interface PutEmailIdentityDkimAttributesRequest {
     /**
-     * The email identity that you want to change the DKIM settings for.
+     * The email identity.
      */
     EmailIdentity: Identity;
     /**
@@ -2611,15 +3334,15 @@ declare namespace SESV2 {
   }
   export interface PutEmailIdentityDkimSigningAttributesRequest {
     /**
-     * The email identity that you want to configure DKIM for.
+     * The email identity.
      */
     EmailIdentity: Identity;
     /**
-     * The method that you want to use to configure DKIM for the identity. There are two possible values:    AWS_SES – Configure DKIM for the identity by using Easy DKIM.    EXTERNAL – Configure DKIM for the identity by using Bring Your Own DKIM (BYODKIM).  
+     * The method to use to configure DKIM for the identity. There are the following possible values:    AWS_SES – Configure DKIM for the identity by using Easy DKIM.    EXTERNAL – Configure DKIM for the identity by using Bring Your Own DKIM (BYODKIM).  
      */
     SigningAttributesOrigin: DkimSigningAttributesOrigin;
     /**
-     * An object that contains information about the private key and selector that you want to use to configure DKIM for the identity. This object is only required if you want to configure Bring Your Own DKIM (BYODKIM) for the identity.
+     * An object that contains information about the private key and selector that you want to use to configure DKIM for the identity for Bring Your Own DKIM (BYODKIM) for the identity, or, configures the key length to be used for Easy DKIM.
      */
     SigningAttributes?: DkimSigningAttributes;
   }
@@ -2635,7 +3358,7 @@ declare namespace SESV2 {
   }
   export interface PutEmailIdentityFeedbackAttributesRequest {
     /**
-     * The email identity that you want to configure bounce and complaint feedback forwarding for.
+     * The email identity.
      */
     EmailIdentity: Identity;
     /**
@@ -2647,7 +3370,7 @@ declare namespace SESV2 {
   }
   export interface PutEmailIdentityMailFromAttributesRequest {
     /**
-     * The verified email identity that you want to set up the custom MAIL FROM domain for.
+     * The verified email identity.
      */
     EmailIdentity: Identity;
     /**
@@ -2655,7 +3378,7 @@ declare namespace SESV2 {
      */
     MailFromDomain?: MailFromDomainName;
     /**
-     * The action that you want to take if the required MX record isn't found when you send an email. When you set this value to UseDefaultValue, the mail is sent using amazonses.com as the MAIL FROM domain. When you set this value to RejectMessage, the Amazon SES API v2 returns a MailFromDomainNotVerified error, and doesn't attempt to deliver the email. These behaviors are taken when the custom MAIL FROM domain configuration is in the Pending, Failed, and TemporaryFailure states.
+     * The action to take if the required MX record isn't found when you send an email. When you set this value to UseDefaultValue, the mail is sent using amazonses.com as the MAIL FROM domain. When you set this value to RejectMessage, the Amazon SES API v2 returns a MailFromDomainNotVerified error, and doesn't attempt to deliver the email. These behaviors are taken when the custom MAIL FROM domain configuration is in the Pending, Failed, and TemporaryFailure states.
      */
     BehaviorOnMxFailure?: BehaviorOnMxFailure;
   }
@@ -2673,14 +3396,52 @@ declare namespace SESV2 {
   }
   export interface PutSuppressedDestinationResponse {
   }
+  export type QueryErrorCode = "INTERNAL_FAILURE"|"ACCESS_DENIED"|string;
+  export type QueryErrorMessage = string;
+  export type QueryIdentifier = string;
   export interface RawMessage {
     /**
-     * The raw email message. The message has to meet the following criteria:   The message has to contain a header and a body, separated by one blank line.   All of the required header fields must be present in the message.   Each part of a multipart MIME message must be formatted properly.   Attachments must be in a file format that the Amazon SES supports.   The entire message must be Base64 encoded.   If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients' email clients render the message properly.   The length of any single line of text in the message can't exceed 1,000 characters. This restriction is defined in RFC 5321.  
+     * The raw email message. The message has to meet the following criteria:   The message has to contain a header and a body, separated by one blank line.   All of the required header fields must be present in the message.   Each part of a multipart MIME message must be formatted properly.   Attachments must be in a file format that the Amazon SES supports.   The raw data of the message needs to base64-encoded if you are accessing Amazon SES directly through the HTTPS interface. If you are accessing Amazon SES using an Amazon Web Services SDK, the SDK takes care of the base 64-encoding for you.   If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients' email clients render the message properly.   The length of any single line of text in the message can't exceed 1,000 characters. This restriction is defined in RFC 5321.  
      */
     Data: RawMessageData;
   }
   export type RawMessageData = Buffer|Uint8Array|Blob|string;
   export type RblName = string;
+  export interface Recommendation {
+    /**
+     * The resource affected by the recommendation, with values like arn:aws:ses:us-east-1:123456789012:identity/example.com.
+     */
+    ResourceArn?: AmazonResourceName;
+    /**
+     * The recommendation type, with values like DKIM, SPF, DMARC or BIMI.
+     */
+    Type?: RecommendationType;
+    /**
+     * The recommendation description / disambiguator - e.g. DKIM1 and DKIM2 are different recommendations about your DKIM setup.
+     */
+    Description?: RecommendationDescription;
+    /**
+     * The recommendation status, with values like OPEN or FIXED.
+     */
+    Status?: RecommendationStatus;
+    /**
+     * The first time this issue was encountered and the recommendation was generated.
+     */
+    CreatedTimestamp?: Timestamp;
+    /**
+     * The last time the recommendation was updated.
+     */
+    LastUpdatedTimestamp?: Timestamp;
+    /**
+     * The recommendation impact, with values like HIGH or LOW.
+     */
+    Impact?: RecommendationImpact;
+  }
+  export type RecommendationDescription = string;
+  export type RecommendationImpact = "LOW"|"HIGH"|string;
+  export type RecommendationStatus = "OPEN"|"FIXED"|string;
+  export type RecommendationType = "DKIM"|"DMARC"|"SPF"|"BIMI"|string;
+  export type RecommendationsList = Recommendation[];
   export type RenderedEmailTemplate = string;
   export interface ReplacementEmailContent {
     /**
@@ -2718,10 +3479,25 @@ declare namespace SESV2 {
   }
   export type ReviewStatus = "PENDING"|"FAILED"|"GRANTED"|"DENIED"|string;
   export type S3Url = string;
+  export interface SOARecord {
+    /**
+     * Primary name server specified in the SOA record.
+     */
+    PrimaryNameServer?: PrimaryNameServer;
+    /**
+     * Administrative contact email from the SOA record.
+     */
+    AdminEmail?: AdminEmail;
+    /**
+     * Serial number from the SOA record.
+     */
+    SerialNumber?: SerialNumber;
+  }
+  export type ScalingMode = "STANDARD"|"MANAGED"|string;
   export type Selector = string;
   export interface SendBulkEmailRequest {
     /**
-     * The email address that you want to use as the "From" address for the email. The address that you specify has to be verified.
+     * The email address to use as the "From" address for the email. The address that you specify has to be verified.
      */
     FromEmailAddress?: EmailAddress;
     /**
@@ -2753,11 +3529,14 @@ declare namespace SESV2 {
      */
     BulkEmailEntries: BulkEmailEntryList;
     /**
-     * The name of the configuration set that you want to use when sending the email.
+     * The name of the configuration set to use when sending the email.
      */
     ConfigurationSetName?: ConfigurationSetName;
   }
   export interface SendBulkEmailResponse {
+    /**
+     * One object per intended recipient. Check each response object and retry any messages with a failure status.
+     */
     BulkEmailEntryResults: BulkEmailEntryResultList;
   }
   export interface SendCustomVerificationEmailRequest {
@@ -2782,7 +3561,7 @@ declare namespace SESV2 {
   }
   export interface SendEmailRequest {
     /**
-     * The email address that you want to use as the "From" address for the email. The address that you specify has to be verified. 
+     * The email address to use as the "From" address for the email. The address that you specify has to be verified. 
      */
     FromEmailAddress?: EmailAddress;
     /**
@@ -2806,7 +3585,7 @@ declare namespace SESV2 {
      */
     FeedbackForwardingEmailAddressIdentityArn?: AmazonResourceName;
     /**
-     * An object that contains the body of the message. You can send either a Simple message Raw message or a template Message.
+     * An object that contains the body of the message. You can send either a Simple message, Raw message, or a Templated message.
      */
     Content: EmailContent;
     /**
@@ -2814,7 +3593,7 @@ declare namespace SESV2 {
      */
     EmailTags?: MessageTagList;
     /**
-     * The name of the configuration set that you want to use when sending the email.
+     * The name of the configuration set to use when sending the email.
      */
     ConfigurationSetName?: ConfigurationSetName;
     /**
@@ -2824,21 +3603,21 @@ declare namespace SESV2 {
   }
   export interface SendEmailResponse {
     /**
-     * A unique identifier for the message that is generated when the message is accepted.  It's possible for Amazon SES to accept a message without sending it. This can happen when the message that you're trying to send has an attachment contains a virus, or when you send a templated email that contains invalid personalization content, for example. 
+     * A unique identifier for the message that is generated when the message is accepted.  It's possible for Amazon SES to accept a message without sending it. For example, this can happen when the message that you're trying to send has an attachment that contains a virus, or when you send a templated email that contains invalid personalization content. 
      */
     MessageId?: OutboundMessageId;
   }
   export interface SendQuota {
     /**
-     * The maximum number of emails that you can send in the current AWS Region over a 24-hour period. This value is also called your sending quota.
+     * The maximum number of emails that you can send in the current Amazon Web Services Region over a 24-hour period. A value of -1 signifies an unlimited quota. (This value is also referred to as your sending quota.)
      */
     Max24HourSend?: Max24HourSend;
     /**
-     * The maximum number of emails that you can send per second in the current AWS Region. This value is also called your maximum sending rate or your maximum TPS (transactions per second) rate.
+     * The maximum number of emails that you can send per second in the current Amazon Web Services Region. This value is also called your maximum sending rate or your maximum TPS (transactions per second) rate.
      */
     MaxSendRate?: MaxSendRate;
     /**
-     * The number of emails sent from your Amazon SES account in the current AWS Region over the past 24 hours.
+     * The number of emails sent from your Amazon SES account in the current Amazon Web Services Region over the past 24 hours.
      */
     SentLast24Hours?: SentLast24Hours;
   }
@@ -2850,9 +3629,10 @@ declare namespace SESV2 {
   }
   export type SendingPoolName = string;
   export type SentLast24Hours = number;
+  export type SerialNumber = number;
   export interface SnsDestination {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish email events to. For more information about Amazon SNS topics, see the Amazon SNS Developer Guide.
+     * The Amazon Resource Name (ARN) of the Amazon SNS topic to publish email events to. For more information about Amazon SNS topics, see the Amazon SNS Developer Guide.
      */
     TopicArn: AmazonResourceName;
   }
@@ -2910,7 +3690,7 @@ declare namespace SESV2 {
   }
   export interface SuppressionListDestination {
     /**
-     * The type of action that you want to perform on the address. Acceptable values:   PUT: add the addresses to the suppression list. If the record already exists, it will override it with the new value.   DELETE: remove the addresses from the suppression list.  
+     * The type of action to perform on the address. The following are possible values:   PUT: add the addresses to the suppression list. If the record already exists, it will override it with the new value.   DELETE: remove the addresses from the suppression list.  
      */
     SuppressionListImportAction: SuppressionListImportAction;
   }
@@ -2962,11 +3742,15 @@ declare namespace SESV2 {
      * An object that defines the values to use for message variables in the template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the value to use for that variable.
      */
     TemplateData?: EmailTemplateData;
+    /**
+     * The list of message headers that will be added to the email message.
+     */
+    Headers?: MessageHeaderList;
   }
   export type TemplateContent = string;
   export interface TestRenderEmailTemplateRequest {
     /**
-     * The name of the template that you want to render.
+     * The name of the template.
      */
     TemplateName: EmailTemplateName;
     /**
@@ -2981,6 +3765,7 @@ declare namespace SESV2 {
     RenderedTemplate: RenderedEmailTemplate;
   }
   export type Timestamp = Date;
+  export type TimestampList = Timestamp[];
   export type TlsPolicy = "REQUIRE"|"OPTIONAL"|string;
   export interface Topic {
     /**
@@ -3025,7 +3810,7 @@ declare namespace SESV2 {
   export type Topics = Topic[];
   export interface TrackingOptions {
     /**
-     * The domain that you want to use for tracking open and click events.
+     * The domain to use for tracking open and click events.
      */
     CustomRedirectDomain: CustomRedirectDomain;
   }
@@ -3044,11 +3829,11 @@ declare namespace SESV2 {
   }
   export interface UpdateConfigurationSetEventDestinationRequest {
     /**
-     * The name of the configuration set that contains the event destination that you want to modify.
+     * The name of the configuration set that contains the event destination to modify.
      */
     ConfigurationSetName: ConfigurationSetName;
     /**
-     * The name of the event destination that you want to modify.
+     * The name of the event destination.
      */
     EventDestinationName: EventDestinationName;
     /**
@@ -3080,7 +3865,7 @@ declare namespace SESV2 {
      */
     ContactListName: ContactListName;
     /**
-     * The contact's email addres.
+     * The contact's email address.
      */
     EmailAddress: EmailAddress;
     /**
@@ -3112,7 +3897,7 @@ declare namespace SESV2 {
      */
     TemplateSubject: EmailTemplateSubject;
     /**
-     * The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations. For more information, see Custom Verification Email Frequently Asked Questions in the Amazon SES Developer Guide.
+     * The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations. For more information, see Custom verification email frequently asked questions in the Amazon SES Developer Guide.
      */
     TemplateContent: TemplateContent;
     /**
@@ -3128,7 +3913,7 @@ declare namespace SESV2 {
   }
   export interface UpdateEmailIdentityPolicyRequest {
     /**
-     * The email identity for which you want to update policy.
+     * The email identity.
      */
     EmailIdentity: Identity;
     /**
@@ -3144,7 +3929,7 @@ declare namespace SESV2 {
   }
   export interface UpdateEmailTemplateRequest {
     /**
-     * The name of the template you want to update.
+     * The name of the template.
      */
     TemplateName: EmailTemplateName;
     /**
@@ -3156,6 +3941,50 @@ declare namespace SESV2 {
   }
   export type UseCaseDescription = string;
   export type UseDefaultIfPreferenceUnavailable = boolean;
+  export interface VdmAttributes {
+    /**
+     * Specifies the status of your VDM configuration. Can be one of the following:    ENABLED – Amazon SES enables VDM for your account.    DISABLED – Amazon SES disables VDM for your account.  
+     */
+    VdmEnabled: FeatureStatus;
+    /**
+     * Specifies additional settings for your VDM configuration as applicable to the Dashboard.
+     */
+    DashboardAttributes?: DashboardAttributes;
+    /**
+     * Specifies additional settings for your VDM configuration as applicable to the Guardian.
+     */
+    GuardianAttributes?: GuardianAttributes;
+  }
+  export interface VdmOptions {
+    /**
+     * Specifies additional settings for your VDM configuration as applicable to the Dashboard.
+     */
+    DashboardOptions?: DashboardOptions;
+    /**
+     * Specifies additional settings for your VDM configuration as applicable to the Guardian.
+     */
+    GuardianOptions?: GuardianOptions;
+  }
+  export type VerificationError = "SERVICE_ERROR"|"DNS_SERVER_ERROR"|"HOST_NOT_FOUND"|"TYPE_NOT_FOUND"|"INVALID_VALUE"|string;
+  export interface VerificationInfo {
+    /**
+     * The last time a verification attempt was made for this identity.
+     */
+    LastCheckedTimestamp?: Timestamp;
+    /**
+     * The last time a successful verification was made for this identity.
+     */
+    LastSuccessTimestamp?: Timestamp;
+    /**
+     * Provides the reason for the failure describing why Amazon SES was not able to successfully verify the identity. Below are the possible values:     INVALID_VALUE – Amazon SES was able to find the record, but the value contained within the record was invalid. Ensure you have published the correct values for the record.    TYPE_NOT_FOUND – The queried hostname exists but does not have the requested type of DNS record. Ensure that you have published the correct type of DNS record.    HOST_NOT_FOUND – The queried hostname does not exist or was not reachable at the time of the request. Ensure that you have published the required DNS record(s).     SERVICE_ERROR – A temporary issue is preventing Amazon SES from determining the verification status of the domain.    DNS_SERVER_ERROR – The DNS server encountered an issue and was unable to complete the request.  
+     */
+    ErrorType?: VerificationError;
+    /**
+     * An object that contains information about the start of authority (SOA) record associated with the identity.
+     */
+    SOARecord?: SOARecord;
+  }
+  export type VerificationStatus = "PENDING"|"SUCCESS"|"FAILED"|"TEMPORARY_FAILURE"|"NOT_STARTED"|string;
   export type Volume = number;
   export interface VolumeStatistics {
     /**

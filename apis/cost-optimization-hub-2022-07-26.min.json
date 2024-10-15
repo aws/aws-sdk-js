@@ -1,0 +1,818 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2022-07-26",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "cost-optimization-hub",
+    "jsonVersion": "1.0",
+    "protocol": "json",
+    "protocols": [
+      "json"
+    ],
+    "serviceFullName": "Cost Optimization Hub",
+    "serviceId": "Cost Optimization Hub",
+    "signatureVersion": "v4",
+    "signingName": "cost-optimization-hub",
+    "targetPrefix": "CostOptimizationHubService",
+    "uid": "cost-optimization-hub-2022-07-26"
+  },
+  "operations": {
+    "GetPreferences": {
+      "input": {
+        "type": "structure",
+        "members": {}
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "savingsEstimationMode": {},
+          "memberAccountDiscountVisibility": {}
+        }
+      }
+    },
+    "GetRecommendation": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "recommendationId"
+        ],
+        "members": {
+          "recommendationId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "recommendationId": {},
+          "resourceId": {},
+          "resourceArn": {},
+          "accountId": {},
+          "currencyCode": {},
+          "recommendationLookbackPeriodInDays": {
+            "type": "integer"
+          },
+          "costCalculationLookbackPeriodInDays": {
+            "type": "integer"
+          },
+          "estimatedSavingsPercentage": {
+            "type": "double"
+          },
+          "estimatedSavingsOverCostCalculationLookbackPeriod": {
+            "type": "double"
+          },
+          "currentResourceType": {},
+          "recommendedResourceType": {},
+          "region": {},
+          "source": {},
+          "lastRefreshTimestamp": {
+            "type": "timestamp"
+          },
+          "estimatedMonthlySavings": {
+            "type": "double"
+          },
+          "estimatedMonthlyCost": {
+            "type": "double"
+          },
+          "implementationEffort": {},
+          "restartNeeded": {
+            "type": "boolean"
+          },
+          "actionType": {},
+          "rollbackPossible": {
+            "type": "boolean"
+          },
+          "currentResourceDetails": {
+            "shape": "Sg"
+          },
+          "recommendedResourceDetails": {
+            "shape": "Sg"
+          },
+          "tags": {
+            "shape": "S1p"
+          }
+        }
+      }
+    },
+    "ListEnrollmentStatuses": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "includeOrganizationInfo": {
+            "type": "boolean"
+          },
+          "accountId": {},
+          "nextToken": {},
+          "maxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "items": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "accountId": {},
+                "status": {},
+                "lastUpdatedTimestamp": {
+                  "type": "timestamp"
+                },
+                "createdTimestamp": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          },
+          "includeMemberAccounts": {
+            "type": "boolean"
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListRecommendationSummaries": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "groupBy"
+        ],
+        "members": {
+          "filter": {
+            "shape": "S21"
+          },
+          "groupBy": {},
+          "maxResults": {
+            "type": "integer"
+          },
+          "metrics": {
+            "type": "list",
+            "member": {}
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "estimatedTotalDedupedSavings": {
+            "type": "double"
+          },
+          "items": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "group": {},
+                "estimatedMonthlySavings": {
+                  "type": "double"
+                },
+                "recommendationCount": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "groupBy": {},
+          "currencyCode": {},
+          "metrics": {
+            "type": "structure",
+            "members": {
+              "savingsPercentage": {}
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListRecommendations": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "filter": {
+            "shape": "S21"
+          },
+          "orderBy": {
+            "type": "structure",
+            "members": {
+              "dimension": {},
+              "order": {}
+            }
+          },
+          "includeAllRecommendations": {
+            "type": "boolean"
+          },
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "items": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "recommendationId": {},
+                "accountId": {},
+                "region": {},
+                "resourceId": {},
+                "resourceArn": {},
+                "currentResourceType": {},
+                "recommendedResourceType": {},
+                "estimatedMonthlySavings": {
+                  "type": "double"
+                },
+                "estimatedSavingsPercentage": {
+                  "type": "double"
+                },
+                "estimatedMonthlyCost": {
+                  "type": "double"
+                },
+                "currencyCode": {},
+                "implementationEffort": {},
+                "restartNeeded": {
+                  "type": "boolean"
+                },
+                "actionType": {},
+                "rollbackPossible": {
+                  "type": "boolean"
+                },
+                "currentResourceSummary": {},
+                "recommendedResourceSummary": {},
+                "lastRefreshTimestamp": {
+                  "type": "timestamp"
+                },
+                "recommendationLookbackPeriodInDays": {
+                  "type": "integer"
+                },
+                "source": {},
+                "tags": {
+                  "shape": "S1p"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "UpdateEnrollmentStatus": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "status"
+        ],
+        "members": {
+          "status": {},
+          "includeMemberAccounts": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "status": {}
+        }
+      }
+    },
+    "UpdatePreferences": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "savingsEstimationMode": {},
+          "memberAccountDiscountVisibility": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "savingsEstimationMode": {},
+          "memberAccountDiscountVisibility": {}
+        }
+      }
+    }
+  },
+  "shapes": {
+    "Sg": {
+      "type": "structure",
+      "members": {
+        "lambdaFunction": {
+          "type": "structure",
+          "members": {
+            "configuration": {
+              "type": "structure",
+              "members": {
+                "compute": {
+                  "shape": "Sj"
+                }
+              }
+            },
+            "costCalculation": {
+              "shape": "Sk"
+            }
+          }
+        },
+        "ecsService": {
+          "type": "structure",
+          "members": {
+            "configuration": {
+              "type": "structure",
+              "members": {
+                "compute": {
+                  "shape": "Sj"
+                }
+              }
+            },
+            "costCalculation": {
+              "shape": "Sk"
+            }
+          }
+        },
+        "ec2Instance": {
+          "type": "structure",
+          "members": {
+            "configuration": {
+              "type": "structure",
+              "members": {
+                "instance": {
+                  "shape": "St"
+                }
+              }
+            },
+            "costCalculation": {
+              "shape": "Sk"
+            }
+          }
+        },
+        "ebsVolume": {
+          "type": "structure",
+          "members": {
+            "configuration": {
+              "type": "structure",
+              "members": {
+                "storage": {
+                  "type": "structure",
+                  "members": {
+                    "type": {},
+                    "sizeInGb": {
+                      "type": "double"
+                    }
+                  }
+                },
+                "performance": {
+                  "type": "structure",
+                  "members": {
+                    "iops": {
+                      "type": "double"
+                    },
+                    "throughput": {
+                      "type": "double"
+                    }
+                  }
+                },
+                "attachmentState": {}
+              }
+            },
+            "costCalculation": {
+              "shape": "Sk"
+            }
+          }
+        },
+        "ec2AutoScalingGroup": {
+          "type": "structure",
+          "members": {
+            "configuration": {
+              "type": "structure",
+              "members": {
+                "instance": {
+                  "shape": "St"
+                }
+              }
+            },
+            "costCalculation": {
+              "shape": "Sk"
+            }
+          }
+        },
+        "ec2ReservedInstances": {
+          "type": "structure",
+          "members": {
+            "configuration": {
+              "type": "structure",
+              "members": {
+                "accountScope": {},
+                "service": {},
+                "normalizedUnitsToPurchase": {},
+                "term": {},
+                "paymentOption": {},
+                "numberOfInstancesToPurchase": {},
+                "offeringClass": {},
+                "instanceFamily": {},
+                "instanceType": {},
+                "reservedInstancesRegion": {},
+                "currentGeneration": {},
+                "platform": {},
+                "tenancy": {},
+                "sizeFlexEligible": {
+                  "type": "boolean"
+                },
+                "upfrontCost": {},
+                "monthlyRecurringCost": {}
+              }
+            },
+            "costCalculation": {
+              "shape": "S12"
+            }
+          }
+        },
+        "rdsReservedInstances": {
+          "type": "structure",
+          "members": {
+            "configuration": {
+              "type": "structure",
+              "members": {
+                "accountScope": {},
+                "service": {},
+                "normalizedUnitsToPurchase": {},
+                "term": {},
+                "paymentOption": {},
+                "numberOfInstancesToPurchase": {},
+                "instanceFamily": {},
+                "instanceType": {},
+                "reservedInstancesRegion": {},
+                "sizeFlexEligible": {
+                  "type": "boolean"
+                },
+                "currentGeneration": {},
+                "upfrontCost": {},
+                "monthlyRecurringCost": {},
+                "licenseModel": {},
+                "databaseEdition": {},
+                "databaseEngine": {},
+                "deploymentOption": {}
+              }
+            },
+            "costCalculation": {
+              "shape": "S12"
+            }
+          }
+        },
+        "elastiCacheReservedInstances": {
+          "type": "structure",
+          "members": {
+            "configuration": {
+              "type": "structure",
+              "members": {
+                "accountScope": {},
+                "service": {},
+                "normalizedUnitsToPurchase": {},
+                "term": {},
+                "paymentOption": {},
+                "numberOfInstancesToPurchase": {},
+                "instanceFamily": {},
+                "instanceType": {},
+                "reservedInstancesRegion": {},
+                "currentGeneration": {},
+                "sizeFlexEligible": {
+                  "type": "boolean"
+                },
+                "upfrontCost": {},
+                "monthlyRecurringCost": {}
+              }
+            },
+            "costCalculation": {
+              "shape": "S12"
+            }
+          }
+        },
+        "openSearchReservedInstances": {
+          "type": "structure",
+          "members": {
+            "configuration": {
+              "type": "structure",
+              "members": {
+                "accountScope": {},
+                "service": {},
+                "normalizedUnitsToPurchase": {},
+                "term": {},
+                "paymentOption": {},
+                "numberOfInstancesToPurchase": {},
+                "instanceType": {},
+                "reservedInstancesRegion": {},
+                "currentGeneration": {},
+                "sizeFlexEligible": {
+                  "type": "boolean"
+                },
+                "upfrontCost": {},
+                "monthlyRecurringCost": {}
+              }
+            },
+            "costCalculation": {
+              "shape": "S12"
+            }
+          }
+        },
+        "redshiftReservedInstances": {
+          "type": "structure",
+          "members": {
+            "configuration": {
+              "type": "structure",
+              "members": {
+                "accountScope": {},
+                "service": {},
+                "normalizedUnitsToPurchase": {},
+                "term": {},
+                "paymentOption": {},
+                "numberOfInstancesToPurchase": {},
+                "instanceFamily": {},
+                "instanceType": {},
+                "reservedInstancesRegion": {},
+                "sizeFlexEligible": {
+                  "type": "boolean"
+                },
+                "currentGeneration": {},
+                "upfrontCost": {},
+                "monthlyRecurringCost": {}
+              }
+            },
+            "costCalculation": {
+              "shape": "S12"
+            }
+          }
+        },
+        "ec2InstanceSavingsPlans": {
+          "type": "structure",
+          "members": {
+            "configuration": {
+              "type": "structure",
+              "members": {
+                "accountScope": {},
+                "term": {},
+                "paymentOption": {},
+                "hourlyCommitment": {},
+                "instanceFamily": {},
+                "savingsPlansRegion": {}
+              }
+            },
+            "costCalculation": {
+              "shape": "S1e"
+            }
+          }
+        },
+        "computeSavingsPlans": {
+          "type": "structure",
+          "members": {
+            "configuration": {
+              "type": "structure",
+              "members": {
+                "accountScope": {},
+                "term": {},
+                "paymentOption": {},
+                "hourlyCommitment": {}
+              }
+            },
+            "costCalculation": {
+              "shape": "S1e"
+            }
+          }
+        },
+        "sageMakerSavingsPlans": {
+          "type": "structure",
+          "members": {
+            "configuration": {
+              "type": "structure",
+              "members": {
+                "accountScope": {},
+                "term": {},
+                "paymentOption": {},
+                "hourlyCommitment": {}
+              }
+            },
+            "costCalculation": {
+              "shape": "S1e"
+            }
+          }
+        },
+        "rdsDbInstance": {
+          "type": "structure",
+          "members": {
+            "configuration": {
+              "type": "structure",
+              "members": {
+                "instance": {
+                  "type": "structure",
+                  "members": {
+                    "dbInstanceClass": {}
+                  }
+                }
+              }
+            },
+            "costCalculation": {
+              "shape": "Sk"
+            }
+          }
+        },
+        "rdsDbInstanceStorage": {
+          "type": "structure",
+          "members": {
+            "configuration": {
+              "type": "structure",
+              "members": {
+                "storageType": {},
+                "allocatedStorageInGb": {
+                  "type": "double"
+                },
+                "iops": {
+                  "type": "double"
+                },
+                "storageThroughput": {
+                  "type": "double"
+                }
+              }
+            },
+            "costCalculation": {
+              "shape": "Sk"
+            }
+          }
+        }
+      },
+      "union": true
+    },
+    "Sj": {
+      "type": "structure",
+      "members": {
+        "vCpu": {
+          "type": "double"
+        },
+        "memorySizeInMB": {
+          "type": "integer"
+        },
+        "architecture": {},
+        "platform": {}
+      }
+    },
+    "Sk": {
+      "type": "structure",
+      "members": {
+        "usages": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "usageType": {},
+              "usageAmount": {
+                "type": "double"
+              },
+              "operation": {},
+              "productCode": {},
+              "unit": {}
+            }
+          }
+        },
+        "pricing": {
+          "type": "structure",
+          "members": {
+            "estimatedCostBeforeDiscounts": {
+              "type": "double"
+            },
+            "estimatedNetUnusedAmortizedCommitments": {
+              "type": "double"
+            },
+            "estimatedDiscounts": {
+              "type": "structure",
+              "members": {
+                "savingsPlansDiscount": {
+                  "type": "double"
+                },
+                "reservedInstancesDiscount": {
+                  "type": "double"
+                },
+                "otherDiscount": {
+                  "type": "double"
+                }
+              }
+            },
+            "estimatedCostAfterDiscounts": {
+              "type": "double"
+            }
+          }
+        }
+      }
+    },
+    "St": {
+      "type": "structure",
+      "members": {
+        "type": {}
+      }
+    },
+    "S12": {
+      "type": "structure",
+      "members": {
+        "pricing": {
+          "type": "structure",
+          "members": {
+            "estimatedOnDemandCost": {
+              "type": "double"
+            },
+            "monthlyReservationEligibleCost": {
+              "type": "double"
+            },
+            "savingsPercentage": {
+              "type": "double"
+            },
+            "estimatedMonthlyAmortizedReservationCost": {
+              "type": "double"
+            }
+          }
+        }
+      }
+    },
+    "S1e": {
+      "type": "structure",
+      "members": {
+        "pricing": {
+          "type": "structure",
+          "members": {
+            "monthlySavingsPlansEligibleCost": {
+              "type": "double"
+            },
+            "estimatedMonthlyCommitment": {
+              "type": "double"
+            },
+            "savingsPercentage": {
+              "type": "double"
+            },
+            "estimatedOnDemandCost": {
+              "type": "double"
+            }
+          }
+        }
+      }
+    },
+    "S1p": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "key": {},
+          "value": {}
+        }
+      }
+    },
+    "S21": {
+      "type": "structure",
+      "members": {
+        "restartNeeded": {
+          "type": "boolean"
+        },
+        "rollbackPossible": {
+          "type": "boolean"
+        },
+        "implementationEfforts": {
+          "type": "list",
+          "member": {}
+        },
+        "accountIds": {
+          "type": "list",
+          "member": {}
+        },
+        "regions": {
+          "type": "list",
+          "member": {}
+        },
+        "resourceTypes": {
+          "type": "list",
+          "member": {}
+        },
+        "actionTypes": {
+          "type": "list",
+          "member": {}
+        },
+        "tags": {
+          "shape": "S1p"
+        },
+        "resourceIds": {
+          "type": "list",
+          "member": {}
+        },
+        "resourceArns": {
+          "type": "list",
+          "member": {}
+        },
+        "recommendationIds": {
+          "type": "list",
+          "member": {}
+        }
+      }
+    }
+  }
+}

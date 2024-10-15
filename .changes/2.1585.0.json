@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "Supporting GitLab and GitLab Self Managed as source types in AWS CodeBuild."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Added support for ModifyInstanceMetadataDefaults and GetInstanceMetadataDefaults to set Instance Metadata Service account defaults"
+    },
+    {
+        "type": "feature",
+        "category": "EMRcontainers",
+        "description": "This release increases the number of supported job template parameters from 20 to 100."
+    },
+    {
+        "type": "feature",
+        "category": "GlobalAccelerator",
+        "description": "AWS Global Accelerator now supports cross-account sharing for bring your own IP addresses."
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "Exposing TileMedia H265 options"
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Introduced support for the following new instance types on SageMaker Studio for JupyterLab and CodeEditor applications: m6i, m6id, m7i, c6i, c6id, c7i, r6i, r6id, r7i, and p5"
+    }
+]

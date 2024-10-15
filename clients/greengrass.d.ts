@@ -1289,7 +1289,7 @@ declare namespace Greengrass {
     /**
      * The name of the group.
      */
-    Name?: __string;
+    Name: __string;
     /**
      * Tag(s) to add to the new resource.
      */
@@ -1868,6 +1868,10 @@ declare namespace Greengrass {
      * The allowed function execution time, after which Lambda should terminate the function. This timeout still applies to pinned Lambda functions for each request.
      */
     Timeout?: __integer;
+    /**
+     * The Lambda runtime supported by Greengrass which is to be used instead of the one specified in the Lambda function.
+     */
+    FunctionRuntimeOverride?: __string;
   }
   export interface FunctionConfigurationEnvironment {
     /**

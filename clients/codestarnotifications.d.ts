@@ -12,11 +12,11 @@ declare class CodeStarNotifications extends Service {
   constructor(options?: CodeStarNotifications.Types.ClientConfiguration)
   config: Config & CodeStarNotifications.Types.ClientConfiguration;
   /**
-   * Creates a notification rule for a resource. The rule specifies the events you want notifications about and the targets (such as SNS topics) where you want to receive them.
+   * Creates a notification rule for a resource. The rule specifies the events you want notifications about and the targets (such as Chatbot topics or Chatbot clients configured for Slack) where you want to receive them.
    */
   createNotificationRule(params: CodeStarNotifications.Types.CreateNotificationRuleRequest, callback?: (err: AWSError, data: CodeStarNotifications.Types.CreateNotificationRuleResult) => void): Request<CodeStarNotifications.Types.CreateNotificationRuleResult, AWSError>;
   /**
-   * Creates a notification rule for a resource. The rule specifies the events you want notifications about and the targets (such as SNS topics) where you want to receive them.
+   * Creates a notification rule for a resource. The rule specifies the events you want notifications about and the targets (such as Chatbot topics or Chatbot clients configured for Slack) where you want to receive them.
    */
   createNotificationRule(callback?: (err: AWSError, data: CodeStarNotifications.Types.CreateNotificationRuleResult) => void): Request<CodeStarNotifications.Types.CreateNotificationRuleResult, AWSError>;
   /**
@@ -52,11 +52,11 @@ declare class CodeStarNotifications extends Service {
    */
   listEventTypes(callback?: (err: AWSError, data: CodeStarNotifications.Types.ListEventTypesResult) => void): Request<CodeStarNotifications.Types.ListEventTypesResult, AWSError>;
   /**
-   * Returns a list of the notification rules for an AWS account.
+   * Returns a list of the notification rules for an Amazon Web Services account.
    */
   listNotificationRules(params: CodeStarNotifications.Types.ListNotificationRulesRequest, callback?: (err: AWSError, data: CodeStarNotifications.Types.ListNotificationRulesResult) => void): Request<CodeStarNotifications.Types.ListNotificationRulesResult, AWSError>;
   /**
-   * Returns a list of the notification rules for an AWS account.
+   * Returns a list of the notification rules for an Amazon Web Services account.
    */
   listNotificationRules(callback?: (err: AWSError, data: CodeStarNotifications.Types.ListNotificationRulesResult) => void): Request<CodeStarNotifications.Types.ListNotificationRulesResult, AWSError>;
   /**
@@ -68,19 +68,19 @@ declare class CodeStarNotifications extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: CodeStarNotifications.Types.ListTagsForResourceResult) => void): Request<CodeStarNotifications.Types.ListTagsForResourceResult, AWSError>;
   /**
-   * Returns a list of the notification rule targets for an AWS account.
+   * Returns a list of the notification rule targets for an Amazon Web Services account.
    */
   listTargets(params: CodeStarNotifications.Types.ListTargetsRequest, callback?: (err: AWSError, data: CodeStarNotifications.Types.ListTargetsResult) => void): Request<CodeStarNotifications.Types.ListTargetsResult, AWSError>;
   /**
-   * Returns a list of the notification rule targets for an AWS account.
+   * Returns a list of the notification rule targets for an Amazon Web Services account.
    */
   listTargets(callback?: (err: AWSError, data: CodeStarNotifications.Types.ListTargetsResult) => void): Request<CodeStarNotifications.Types.ListTargetsResult, AWSError>;
   /**
-   * Creates an association between a notification rule and an SNS topic so that the associated target can receive notifications when the events described in the rule are triggered.
+   * Creates an association between a notification rule and an Chatbot topic or Chatbot client so that the associated target can receive notifications when the events described in the rule are triggered.
    */
   subscribe(params: CodeStarNotifications.Types.SubscribeRequest, callback?: (err: AWSError, data: CodeStarNotifications.Types.SubscribeResult) => void): Request<CodeStarNotifications.Types.SubscribeResult, AWSError>;
   /**
-   * Creates an association between a notification rule and an SNS topic so that the associated target can receive notifications when the events described in the rule are triggered.
+   * Creates an association between a notification rule and an Chatbot topic or Chatbot client so that the associated target can receive notifications when the events described in the rule are triggered.
    */
   subscribe(callback?: (err: AWSError, data: CodeStarNotifications.Types.SubscribeResult) => void): Request<CodeStarNotifications.Types.SubscribeResult, AWSError>;
   /**
@@ -92,11 +92,11 @@ declare class CodeStarNotifications extends Service {
    */
   tagResource(callback?: (err: AWSError, data: CodeStarNotifications.Types.TagResourceResult) => void): Request<CodeStarNotifications.Types.TagResourceResult, AWSError>;
   /**
-   * Removes an association between a notification rule and an Amazon SNS topic so that subscribers to that topic stop receiving notifications when the events described in the rule are triggered.
+   * Removes an association between a notification rule and an Chatbot topic so that subscribers to that topic stop receiving notifications when the events described in the rule are triggered.
    */
   unsubscribe(params: CodeStarNotifications.Types.UnsubscribeRequest, callback?: (err: AWSError, data: CodeStarNotifications.Types.UnsubscribeResult) => void): Request<CodeStarNotifications.Types.UnsubscribeResult, AWSError>;
   /**
-   * Removes an association between a notification rule and an Amazon SNS topic so that subscribers to that topic stop receiving notifications when the events described in the rule are triggered.
+   * Removes an association between a notification rule and an Chatbot topic so that subscribers to that topic stop receiving notifications when the events described in the rule are triggered.
    */
   unsubscribe(callback?: (err: AWSError, data: CodeStarNotifications.Types.UnsubscribeResult) => void): Request<CodeStarNotifications.Types.UnsubscribeResult, AWSError>;
   /**
@@ -120,7 +120,7 @@ declare namespace CodeStarNotifications {
   export type ClientRequestToken = string;
   export interface CreateNotificationRuleRequest {
     /**
-     * The name for the notification rule. Notifictaion rule names must be unique in your AWS account.
+     * The name for the notification rule. Notification rule names must be unique in your Amazon Web Services account.
      */
     Name: NotificationRuleName;
     /**
@@ -128,19 +128,19 @@ declare namespace CodeStarNotifications {
      */
     EventTypeIds: EventTypeIds;
     /**
-     * The Amazon Resource Name (ARN) of the resource to associate with the notification rule. Supported resources include pipelines in AWS CodePipeline, repositories in AWS CodeCommit, and build projects in AWS CodeBuild.
+     * The Amazon Resource Name (ARN) of the resource to associate with the notification rule. Supported resources include pipelines in CodePipeline, repositories in CodeCommit, and build projects in CodeBuild.
      */
     Resource: NotificationRuleResource;
     /**
-     * A list of Amazon Resource Names (ARNs) of SNS topics to associate with the notification rule.
+     * A list of Amazon Resource Names (ARNs) of Amazon Simple Notification Service topics and Chatbot clients to associate with the notification rule.
      */
     Targets: Targets;
     /**
-     * The level of detail to include in the notifications for this resource. BASIC will include only the contents of the event as it would appear in AWS CloudWatch. FULL will include any supplemental information provided by AWS CodeStar Notifications and/or the service for the resource for which the notification is created.
+     * The level of detail to include in the notifications for this resource. BASIC will include only the contents of the event as it would appear in Amazon CloudWatch. FULL will include any supplemental information provided by AWS CodeStar Notifications and/or the service for the resource for which the notification is created.
      */
     DetailType: DetailType;
     /**
-     * A unique, client-generated idempotency token that, when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request with the same parameters is received and a token is included, the request returns information about the initial request that used that token.  The AWS SDKs prepopulate client request tokens. If you are using an AWS SDK, an idempotency token is created for you. 
+     * A unique, client-generated idempotency token that, when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request with the same parameters is received and a token is included, the request returns information about the initial request that used that token.  The Amazon Web Services SDKs prepopulate client request tokens. If you are using an Amazon Web Services SDK, an idempotency token is created for you. 
      */
     ClientRequestToken?: ClientRequestToken;
     /**
@@ -173,11 +173,11 @@ declare namespace CodeStarNotifications {
   }
   export interface DeleteTargetRequest {
     /**
-     * The Amazon Resource Name (ARN) of the SNS topic to delete.
+     * The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client to delete.
      */
     TargetAddress: TargetAddress;
     /**
-     * A Boolean value that can be used to delete all associations with this SNS topic. The default value is FALSE. If set to TRUE, all associations between that target and every notification rule in your AWS account are deleted.
+     * A Boolean value that can be used to delete all associations with this Chatbot topic. The default value is FALSE. If set to TRUE, all associations between that target and every notification rule in your Amazon Web Services account are deleted.
      */
     ForceUnsubscribeAll?: ForceUnsubscribeAll;
   }
@@ -207,11 +207,11 @@ declare namespace CodeStarNotifications {
      */
     Resource?: NotificationRuleResource;
     /**
-     * A list of the SNS topics associated with the notification rule.
+     * A list of the Chatbot topics and Chatbot clients associated with the notification rule.
      */
     Targets?: TargetsBatch;
     /**
-     * The level of detail included in the notifications for this resource. BASIC will include only the contents of the event as it would appear in AWS CloudWatch. FULL will include any supplemental information provided by AWS CodeStar Notifications and/or the service for the resource for which the notification is created.
+     * The level of detail included in the notifications for this resource. BASIC will include only the contents of the event as it would appear in Amazon CloudWatch. FULL will include any supplemental information provided by AWS CodeStar Notifications and/or the service for the resource for which the notification is created.
      */
     DetailType?: DetailType;
     /**
@@ -242,7 +242,7 @@ declare namespace CodeStarNotifications {
   export type EventTypeName = string;
   export interface EventTypeSummary {
     /**
-     * The system-generated ID of the event.
+     * The system-generated ID of the event. For a complete list of event types and IDs, see Notification concepts in the Developer Tools Console User Guide.
      */
     EventTypeId?: EventTypeId;
     /**
@@ -303,7 +303,7 @@ declare namespace CodeStarNotifications {
      */
     Name: ListNotificationRulesFilterName;
     /**
-     * The value of the attribute you want to use to filter the returned notification rules. For example, if you specify filtering by RESOURCE in Name, you might specify the ARN of a pipeline in AWS CodePipeline for the value.
+     * The value of the attribute you want to use to filter the returned notification rules. For example, if you specify filtering by RESOURCE in Name, you might specify the ARN of a pipeline in CodePipeline for the value.
      */
     Value: ListNotificationRulesFilterValue;
   }
@@ -330,7 +330,7 @@ declare namespace CodeStarNotifications {
      */
     NextToken?: NextToken;
     /**
-     * The list of notification rules for the AWS account, by Amazon Resource Name (ARN) and ID. 
+     * The list of notification rules for the Amazon Web Services account, by Amazon Resource Name (ARN) and ID. 
      */
     NotificationRules?: NotificationRuleBatch;
   }
@@ -443,11 +443,11 @@ declare namespace CodeStarNotifications {
   export type Tags = {[key: string]: TagValue};
   export interface Target {
     /**
-     * The target type. Can be an Amazon SNS topic.
+     * The target type. Can be an Chatbot topic or Chatbot client.   Chatbot topics are specified as SNS.   Chatbot clients are specified as AWSChatbotSlack.  
      */
     TargetType?: TargetType;
     /**
-     * The Amazon Resource Name (ARN) of the SNS topic.
+     * The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client.
      */
     TargetAddress?: TargetAddress;
   }
@@ -455,11 +455,11 @@ declare namespace CodeStarNotifications {
   export type TargetStatus = "PENDING"|"ACTIVE"|"UNREACHABLE"|"INACTIVE"|"DEACTIVATED"|string;
   export interface TargetSummary {
     /**
-     * The Amazon Resource Name (ARN) of the SNS topic.
+     * The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client.
      */
     TargetAddress?: TargetAddress;
     /**
-     * The type of the target (for example, SNS).
+     * The type of the target (for example, SNS).   Chatbot topics are specified as SNS.   Chatbot clients are specified as AWSChatbotSlack.  
      */
     TargetType?: TargetType;
     /**
@@ -476,7 +476,7 @@ declare namespace CodeStarNotifications {
      */
     Arn: NotificationRuleArn;
     /**
-     * The ARN of the SNS topic to unsubscribe from the notification rule.
+     * The ARN of the Chatbot topic to unsubscribe from the notification rule.
      */
     TargetAddress: TargetAddress;
   }
@@ -512,7 +512,7 @@ declare namespace CodeStarNotifications {
      */
     Status?: NotificationRuleStatus;
     /**
-     * A list of event types associated with this notification rule.
+     * A list of event types associated with this notification rule. For a complete list of event types and IDs, see Notification concepts in the Developer Tools Console User Guide.
      */
     EventTypeIds?: EventTypeIds;
     /**
@@ -520,7 +520,7 @@ declare namespace CodeStarNotifications {
      */
     Targets?: Targets;
     /**
-     * The level of detail to include in the notifications for this resource. BASIC will include only the contents of the event as it would appear in AWS CloudWatch. FULL will include any supplemental information provided by AWS CodeStar Notifications and/or the service for the resource for which the notification is created.
+     * The level of detail to include in the notifications for this resource. BASIC will include only the contents of the event as it would appear in Amazon CloudWatch. FULL will include any supplemental information provided by AWS CodeStar Notifications and/or the service for the resource for which the notification is created.
      */
     DetailType?: DetailType;
   }

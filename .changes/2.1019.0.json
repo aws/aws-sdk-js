@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "Lightsail",
+        "description": "This release adds support to enable access logging for buckets in the Lightsail object storage service."
+    },
+    {
+        "type": "feature",
+        "category": "Neptune",
+        "description": "Adds support for major version upgrades to ModifyDbCluster API"
+    },
+    {
+        "type": "feature",
+        "category": "NetworkManager",
+        "description": "This release adds API support to aggregate resources, routes, and telemetry data across a Global Network."
+    },
+    {
+        "type": "feature",
+        "category": "Node.js",
+        "description": "Remove postinstall script warning end-of-support for Node.js <10.x"
+    },
+    {
+        "type": "feature",
+        "category": "Node.js",
+        "description": "Update engines field to support node >= 10.0.0"
+    },
+    {
+        "type": "feature",
+        "category": "Rekognition",
+        "description": "This Amazon Rekognition Custom Labels release introduces the management of datasets with  projects"
+    }
+]

@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "Chime",
+        "description": "Added new BatchCreateChannelMembership API to support multiple membership creation for channels"
+    },
+    {
+        "type": "feature",
+        "category": "Finspace",
+        "description": "This is the initial SDK release for the management APIs for Amazon FinSpace. Amazon FinSpace is a data management and analytics service for the financial services industry (FSI)."
+    },
+    {
+        "type": "feature",
+        "category": "Finspacedata",
+        "description": "This is the initial SDK release for the data APIs for Amazon FinSpace. Amazon FinSpace is a data management and analytics application for the financial services industry (FSI)."
+    },
+    {
+        "type": "feature",
+        "category": "SecurityHub",
+        "description": "Updated ASFF to add the following new resource details objects: AwsEc2NetworkAcl, AwsEc2Subnet, and AwsElasticBeanstalkEnvironment."
+    }
+]

@@ -181,6 +181,40 @@
       ],
       "documentation": "<p>Creates a config object for a backend.</p>"
     },
+    "CreateBackendStorage": {
+      "name": "CreateBackendStorage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/backend/{appId}/storage",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "CreateBackendStorageRequest"
+      },
+      "output": {
+        "shape": "CreateBackendStorageResponse",
+        "documentation": "<p>200 response</p>"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>404 response</p>"
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "<p>504 response</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>429 response</p>"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>400 response</p>"
+        }
+      ],
+      "documentation": "<p>Creates a backend storage resource.</p>"
+    },
     "CreateToken": {
       "name": "CreateToken",
       "http": {
@@ -316,6 +350,40 @@
         }
       ],
       "documentation": "<p>Deletes an existing backend authentication resource.</p>"
+    },
+    "DeleteBackendStorage": {
+      "name": "DeleteBackendStorage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/backend/{appId}/storage/{backendEnvironmentName}/remove",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DeleteBackendStorageRequest"
+      },
+      "output": {
+        "shape": "DeleteBackendStorageResponse",
+        "documentation": "<p>200 response</p>"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>404 response</p>"
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "<p>504 response</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>429 response</p>"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>400 response</p>"
+        }
+      ],
+      "documentation": "<p>Removes the specified backend storage resource.</p>"
     },
     "DeleteToken": {
       "name": "DeleteToken",
@@ -485,7 +553,7 @@
           "documentation": "<p>400 response</p>"
         }
       ],
-      "documentation": "<p>Generates a model schema for existing backend API resource.</p>"
+      "documentation": "<p>Gets a model introspection schema for an existing backend API resource.</p>"
     },
     "GetBackendAuth": {
       "name": "GetBackendAuth",
@@ -519,7 +587,7 @@
           "documentation": "<p>400 response</p>"
         }
       ],
-      "documentation": "<p>Gets backend auth details.</p>"
+      "documentation": "<p>Gets a backend auth details.</p>"
     },
     "GetBackendJob": {
       "name": "GetBackendJob",
@@ -555,6 +623,40 @@
       ],
       "documentation": "<p>Returns information about a specific job.</p>"
     },
+    "GetBackendStorage": {
+      "name": "GetBackendStorage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/backend/{appId}/storage/{backendEnvironmentName}/details",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetBackendStorageRequest"
+      },
+      "output": {
+        "shape": "GetBackendStorageResponse",
+        "documentation": "<p>200 response</p>"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>404 response</p>"
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "<p>504 response</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>429 response</p>"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>400 response</p>"
+        }
+      ],
+      "documentation": "<p>Gets details for a backend storage resource.</p>"
+    },
     "GetToken": {
       "name": "GetToken",
       "http": {
@@ -589,6 +691,74 @@
       ],
       "documentation": "<p>Gets the challenge token based on the given appId and sessionId.</p>"
     },
+    "ImportBackendAuth": {
+      "name": "ImportBackendAuth",
+      "http": {
+        "method": "POST",
+        "requestUri": "/backend/{appId}/auth/{backendEnvironmentName}/import",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ImportBackendAuthRequest"
+      },
+      "output": {
+        "shape": "ImportBackendAuthResponse",
+        "documentation": "<p>200 response</p>"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>404 response</p>"
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "<p>504 response</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>429 response</p>"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>400 response</p>"
+        }
+      ],
+      "documentation": "<p>Imports an existing backend authentication resource.</p>"
+    },
+    "ImportBackendStorage": {
+      "name": "ImportBackendStorage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/backend/{appId}/storage/{backendEnvironmentName}/import",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ImportBackendStorageRequest"
+      },
+      "output": {
+        "shape": "ImportBackendStorageResponse",
+        "documentation": "<p>200 response</p>"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>404 response</p>"
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "<p>504 response</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>429 response</p>"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>400 response</p>"
+        }
+      ],
+      "documentation": "<p>Imports an existing backend storage resource.</p>"
+    },
     "ListBackendJobs": {
       "name": "ListBackendJobs",
       "http": {
@@ -622,6 +792,40 @@
         }
       ],
       "documentation": "<p>Lists the jobs for the backend of an Amplify app.</p>"
+    },
+    "ListS3Buckets": {
+      "name": "ListS3Buckets",
+      "http": {
+        "method": "POST",
+        "requestUri": "/s3Buckets",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListS3BucketsRequest"
+      },
+      "output": {
+        "shape": "ListS3BucketsResponse",
+        "documentation": "<p>200 response</p>"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>404 response</p>"
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "<p>504 response</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>429 response</p>"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>400 response</p>"
+        }
+      ],
+      "documentation": "<p>The list of S3 buckets in your account.</p>"
     },
     "RemoveAllBackends": {
       "name": "RemoveAllBackends",
@@ -689,7 +893,7 @@
           "documentation": "<p>400 response</p>"
         }
       ],
-      "documentation": "<p>Removes the AWS resources that are required to access the Amplify Admin UI.</p>"
+      "documentation": "<p>Removes the AWS resources required to access the Amplify Admin UI.</p>"
     },
     "UpdateBackendAPI": {
       "name": "UpdateBackendAPI",
@@ -791,7 +995,7 @@
           "documentation": "<p>400 response</p>"
         }
       ],
-      "documentation": "<p>Updates the AWS resources that are required to access the Amplify Admin UI.</p>"
+      "documentation": "<p>Updates the AWS resources required to access the Amplify Admin UI.</p>"
     },
     "UpdateBackendJob": {
       "name": "UpdateBackendJob",
@@ -826,6 +1030,40 @@
         }
       ],
       "documentation": "<p>Updates a specific job.</p>"
+    },
+    "UpdateBackendStorage": {
+      "name": "UpdateBackendStorage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/backend/{appId}/storage/{backendEnvironmentName}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateBackendStorageRequest"
+      },
+      "output": {
+        "shape": "UpdateBackendStorageResponse",
+        "documentation": "<p>200 response</p>"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>404 response</p>"
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "<p>504 response</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>429 response</p>"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>400 response</p>"
+        }
+      ],
+      "documentation": "<p>Updates an existing backend storage resource.</p>"
     }
   },
   "shapes": {
@@ -842,17 +1080,17 @@
         "CognitoUserPoolId": {
           "shape": "__string",
           "locationName": "cognitoUserPoolId",
-          "documentation": "<p>The Amazon Cognito user pool ID, if Amazon Cognito is used as an authentication setting to access your data models.</p>"
+          "documentation": "<p>The Amazon Cognito user pool ID, if Amazon Cognito was used as an authentication setting to access your data models.</p>"
         },
         "Description": {
           "shape": "__string",
           "locationName": "description",
-          "documentation": "<p>The API key description for API_KEY, if it is used as an authentication mechanism to access your data models.</p>"
+          "documentation": "<p>The API key description for API_KEY, if it was used as an authentication mechanism to access your data models.</p>"
         },
         "ExpirationTime": {
           "shape": "__double",
           "locationName": "expirationTime",
-          "documentation": "<p>The API key expiration time for API_KEY, if it is used as an authentication mechanism to access your data models.</p>"
+          "documentation": "<p>The API key expiration time for API_KEY, if it was used as an authentication mechanism to access your data models.</p>"
         },
         "OpenIDAuthTTL": {
           "shape": "__string",
@@ -862,7 +1100,7 @@
         "OpenIDClientId": {
           "shape": "__string",
           "locationName": "openIDClientId",
-          "documentation": "<p>The clientID for openID, if openID is used as an authentication setting to access your data models.</p>"
+          "documentation": "<p>The clientID for openID, if openID was used as an authentication setting to access your data models.</p>"
         },
         "OpenIDIatTTL": {
           "shape": "__string",
@@ -872,12 +1110,12 @@
         "OpenIDIssueURL": {
           "shape": "__string",
           "locationName": "openIDIssueURL",
-          "documentation": "<p>The openID issuer URL, if openID is used as an authentication setting to access your data models.</p>"
+          "documentation": "<p>The openID issuer URL, if openID was used as an authentication setting to access your data models.</p>"
         },
         "OpenIDProviderName": {
           "shape": "__string",
           "locationName": "openIDProviderName",
-          "documentation": "<p>The openID provider name, if openID is used as an authentication mechanism to access your data models.</p>"
+          "documentation": "<p>The OpenID provider name, if OpenID was used as an authentication mechanism to access your data models.</p>"
         }
       },
       "documentation": "<p>The authentication settings for accessing provisioned data models in your Amplify project.</p>"
@@ -907,7 +1145,7 @@
           "documentation": "<p>The strategy for conflict resolution.</p>"
         }
       },
-      "documentation": "<p>Describes the conflict resolution configuration for the data model configured in your Amplify project.</p>"
+      "documentation": "<p>Describes the conflict resolution configuration for your data model configured in your Amplify project.</p>"
     },
     "BackendAPIResourceConfig": {
       "type": "structure",
@@ -920,7 +1158,7 @@
         "ApiName": {
           "shape": "__string",
           "locationName": "apiName",
-          "documentation": "<p>The API name used to interact with the data model, configured as a part of the Amplify project.</p>"
+          "documentation": "<p>The API name used to interact with the data model, configured as a part of your Amplify project.</p>"
         },
         "ConflictResolution": {
           "shape": "BackendAPIConflictResolution",
@@ -943,20 +1181,48 @@
           "documentation": "<p>The definition of the data model in the annotated transform of the GraphQL schema.</p>"
         }
       },
-      "documentation": "<p>The resource configuration for the data model, configured as a part of the Amplify project.</p>"
+      "documentation": "<p>The resource config for the data model, configured as a part of the Amplify project.</p>"
     },
-    "BackendAuthSocialProviderConfig": {
+    "BackendAuthAppleProviderConfig": {
       "type": "structure",
+      "sensitive": true,
       "members": {
         "ClientId": {
           "shape": "__string",
           "locationName": "client_id",
-          "documentation": "<p>Describes the client_id that can be obtained from the third-party social federation provider.</p>"
+          "documentation": "<p>Describes the client_id (also called Services ID) that comes from Apple.</p>"
+        },
+        "KeyId": {
+          "shape": "__string",
+          "locationName": "key_id",
+          "documentation": "<p>Describes the key_id that comes from Apple.</p>"
+        },
+        "PrivateKey": {
+          "shape": "__string",
+          "locationName": "private_key",
+          "documentation": "<p>Describes the private_key that comes from Apple.</p>"
+        },
+        "TeamId": {
+          "shape": "__string",
+          "locationName": "team_id",
+          "documentation": "<p>Describes the team_id that comes from Apple.</p>"
+        }
+      },
+      "documentation": "<p>Describes Apple social federation configurations for allowing your app users to sign in using OAuth.</p>"
+    },
+    "BackendAuthSocialProviderConfig": {
+      "type": "structure",
+      "sensitive": true,
+      "members": {
+        "ClientId": {
+          "shape": "__string",
+          "locationName": "client_id",
+          "documentation": "<p>Describes the client_id, which can be obtained from the third-party social federation provider.</p>"
         },
         "ClientSecret": {
           "shape": "__string",
           "locationName": "client_secret",
-          "documentation": "<p>Describes the client_secret that can be obtained from third-party social federation providers.</p>"
+          "documentation": "<p>Describes the client_secret, which can be obtained from third-party social federation providers.</p>"
         }
       },
       "documentation": "<p>Describes third-party social federation configurations for allowing your app users to sign in using OAuth.</p>"
@@ -982,7 +1248,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -1009,6 +1275,25 @@
       "required": [
         "AppId",
         "BackendEnvironmentName"
+      ]
+    },
+    "BackendStoragePermissions": {
+      "type": "structure",
+      "members": {
+        "Authenticated": {
+          "shape": "ListOfAuthenticatedElement",
+          "locationName": "authenticated",
+          "documentation": "<p>Lists all authenticated user read, write, and delete permissions for your S3 bucket.</p>"
+        },
+        "UnAuthenticated": {
+          "shape": "ListOfUnAuthenticatedElement",
+          "locationName": "unAuthenticated",
+          "documentation": "<p>Lists all unauthenticated user read, write, and delete permissions for your S3 bucket.</p>"
+        }
+      },
+      "documentation": "<p>Describes the read, write, and delete permissions users have against your storage S3 bucket.</p>",
+      "required": [
+        "Authenticated"
       ]
     },
     "CloneBackendRequest": {
@@ -1055,7 +1340,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -1123,7 +1408,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -1148,20 +1433,20 @@
         "DeliveryMethod": {
           "shape": "DeliveryMethod",
           "locationName": "deliveryMethod",
-          "documentation": "<p>Describes which method to use (either SMS or email) to deliver messages to app users that want to recover their password.</p>"
+          "documentation": "<p><b>(DEPRECATED)</b> Describes which mode to use (either SMS or email) to deliver messages to app users who want to recover their password.</p>"
         },
         "EmailSettings": {
           "shape": "EmailSettings",
           "locationName": "emailSettings",
-          "documentation": "<p>The configuration for the email sent when an app user forgets their password.</p>"
+          "documentation": "<p><b>(DEPRECATED)</b> The configuration for the email sent when an app user forgets their password.</p>"
         },
         "SmsSettings": {
           "shape": "SmsSettings",
           "locationName": "smsSettings",
-          "documentation": "<p>The configuration for the SMS message sent when an app user forgets their password.</p>"
+          "documentation": "<p><b>(DEPRECATED)</b> The configuration for the SMS message sent when an app user forgets their password.</p>"
         }
       },
-      "documentation": "<p>Describes the forgot password policy for authenticating into the Amplify app.</p>",
+      "documentation": "<p><b>(DEPRECATED)</b> Describes the forgot password policy for authenticating into the Amplify app.</p>",
       "required": [
         "DeliveryMethod"
       ]
@@ -1172,7 +1457,7 @@
         "IdentityPoolName": {
           "shape": "__string",
           "locationName": "identityPoolName",
-          "documentation": "<p>Name of the identity pool used for authorization.</p>"
+          "documentation": "<p>Name of the Amazon Cognito identity pool used for authorization.</p>"
         },
         "UnauthenticatedLogin": {
           "shape": "__boolean",
@@ -1199,7 +1484,7 @@
           "documentation": "<p>Describes the configuration settings and methods for your Amplify app users to use MFA.</p>"
         }
       },
-      "documentation": "<p>Describes whether to apply multi-factor authentication (MFA) policies for your Amazon Cognito user pool that's configured as a part of your Amplify project.</p>",
+      "documentation": "<p>Describes whether to apply multi-factor authentication policies for your Amazon Cognito user pool configured as a part of your Amplify project.</p>",
       "required": [
         "MFAMode"
       ]
@@ -1220,7 +1505,7 @@
         "OAuthScopes": {
           "shape": "ListOfOAuthScopesElement",
           "locationName": "oAuthScopes",
-          "documentation": "<p>List of OAuth-related flows that allow your app users to authenticate from your Amplify app.</p>"
+          "documentation": "<p>List of OAuth-related flows used to allow your app users to authenticate from your Amplify app.</p>"
         },
         "RedirectSignInURIs": {
           "shape": "ListOf__string",
@@ -1235,7 +1520,7 @@
         "SocialProviderSettings": {
           "shape": "SocialProviderSettings",
           "locationName": "socialProviderSettings",
-          "documentation": "<p>The settings for using social identity providers for access to your Amplify app.</p>"
+          "documentation": "<p>The settings for using social providers to access your Amplify app.</p>"
         }
       },
       "documentation": "<p>Creates the OAuth configuration for your Amplify project.</p>",
@@ -1260,7 +1545,7 @@
           "documentation": "<p>The minimum length of the password used to access the backend of your Amplify project.</p>"
         }
       },
-      "documentation": "<p>The password policy configuration for the backend of your Amplify project.</p>",
+      "documentation": "<p>The password policy configuration for the backend to your Amplify project.</p>",
       "required": [
         "MinimumLength"
       ]
@@ -1309,7 +1594,7 @@
         "IdentityPoolConfigs": {
           "shape": "CreateBackendAuthIdentityPoolConfig",
           "locationName": "identityPoolConfigs",
-          "documentation": "<p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of the auth resource in your Amplify project.</p>"
+          "documentation": "<p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.</p>"
         },
         "Service": {
           "shape": "Service",
@@ -1319,7 +1604,7 @@
         "UserPoolConfigs": {
           "shape": "CreateBackendAuthUserPoolConfig",
           "locationName": "userPoolConfigs",
-          "documentation": "<p>Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of the auth resource in your Amplify project.</p>"
+          "documentation": "<p>Describes authentication configuration for the Amazon Cognito user pool, provisioned as a part of your auth resource in the Amplify project.</p>"
         }
       },
       "documentation": "<p>Defines the resource configuration when creating an auth resource in your Amplify project.</p>",
@@ -1345,7 +1630,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -1370,12 +1655,12 @@
         "ForgotPassword": {
           "shape": "CreateBackendAuthForgotPasswordConfig",
           "locationName": "forgotPassword",
-          "documentation": "<p>Describes the forgotten password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
+          "documentation": "<p><b>(DEPRECATED)</b> Describes the forgotten password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
         },
         "Mfa": {
           "shape": "CreateBackendAuthMFAConfig",
           "locationName": "mfa",
-          "documentation": "<p>Describes whether to apply multi-factor authentication (MFA) policies for your Amazon Cognito user pool that's configured as a part of your Amplify project.</p>"
+          "documentation": "<p>Describes whether to apply multi-factor authentication policies for your Amazon Cognito user pool configured as a part of your Amplify project.</p>"
         },
         "OAuth": {
           "shape": "CreateBackendAuthOAuthConfig",
@@ -1390,17 +1675,22 @@
         "RequiredSignUpAttributes": {
           "shape": "ListOfRequiredSignUpAttributesElement",
           "locationName": "requiredSignUpAttributes",
-          "documentation": "<p>The required attributes to sign up new users in the Amazon Cognito user pool.</p>"
+          "documentation": "<p>The required attributes to sign up new users in the user pool.</p>"
         },
         "SignInMethod": {
           "shape": "SignInMethod",
           "locationName": "signInMethod",
-          "documentation": "<p>Describes the sign-in methods that your Amplify app users to log in using the Amazon Cognito user pool that's configured as a part of your Amplify project.</p>"
+          "documentation": "<p>Describes the sign-in methods that your Amplify app users use to log in using the Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
         },
         "UserPoolName": {
           "shape": "__string",
           "locationName": "userPoolName",
           "documentation": "<p>The Amazon Cognito user pool name.</p>"
+        },
+        "VerificationMessage": {
+          "shape": "CreateBackendAuthVerificationMessageConfig",
+          "locationName": "verificationMessage",
+          "documentation": "<p>Describes the email or SMS verification message for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
         }
       },
       "documentation": "<p>Describes the Amazon Cognito user pool configuration for the auth resource to be configured for your Amplify project.</p>",
@@ -1408,6 +1698,30 @@
         "RequiredSignUpAttributes",
         "SignInMethod",
         "UserPoolName"
+      ]
+    },
+    "CreateBackendAuthVerificationMessageConfig": {
+      "type": "structure",
+      "members": {
+        "DeliveryMethod": {
+          "shape": "DeliveryMethod",
+          "locationName": "deliveryMethod",
+          "documentation": "<p>The type of verification message to send.</p>"
+        },
+        "EmailSettings": {
+          "shape": "EmailSettings",
+          "locationName": "emailSettings",
+          "documentation": "<p>The settings for the email message.</p>"
+        },
+        "SmsSettings": {
+          "shape": "SmsSettings",
+          "locationName": "smsSettings",
+          "documentation": "<p>The settings for the SMS message.</p>"
+        }
+      },
+      "documentation": "<p>Creates an email or SMS verification message for the auth resource configured for your Amplify project.</p>",
+      "required": [
+        "DeliveryMethod"
       ]
     },
     "CreateBackendConfigRequest": {
@@ -1476,7 +1790,7 @@
         "ResourceConfig": {
           "shape": "ResourceConfig",
           "locationName": "resourceConfig",
-          "documentation": "<p>The resource configuration for the backend creation request.</p>"
+          "documentation": "<p>The resource configuration for creating a backend.</p>"
         },
         "ResourceName": {
           "shape": "__string",
@@ -1507,7 +1821,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -1518,6 +1832,89 @@
           "shape": "__string",
           "locationName": "operation",
           "documentation": "<p>The name of the operation.</p>"
+        },
+        "Status": {
+          "shape": "__string",
+          "locationName": "status",
+          "documentation": "<p>The current status of the request.</p>"
+        }
+      }
+    },
+    "CreateBackendStorageRequest": {
+      "type": "structure",
+      "members": {
+        "AppId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "appId",
+          "documentation": "<p>The app ID.</p>"
+        },
+        "BackendEnvironmentName": {
+          "shape": "__string",
+          "locationName": "backendEnvironmentName",
+          "documentation": "<p>The name of the backend environment.</p>"
+        },
+        "ResourceConfig": {
+          "shape": "CreateBackendStorageResourceConfig",
+          "locationName": "resourceConfig",
+          "documentation": "<p>The resource configuration for creating backend storage.</p>"
+        },
+        "ResourceName": {
+          "shape": "__string",
+          "locationName": "resourceName",
+          "documentation": "<p>The name of the storage resource.</p>"
+        }
+      },
+      "documentation": "<p>The request body for CreateBackendStorage.</p>",
+      "required": [
+        "AppId",
+        "ResourceName",
+        "BackendEnvironmentName",
+        "ResourceConfig"
+      ]
+    },
+    "CreateBackendStorageResourceConfig": {
+      "type": "structure",
+      "members": {
+        "BucketName": {
+          "shape": "__string",
+          "locationName": "bucketName",
+          "documentation": "<p>The name of the S3 bucket.</p>"
+        },
+        "Permissions": {
+          "shape": "BackendStoragePermissions",
+          "locationName": "permissions",
+          "documentation": "<p>The authorization configuration for the storage S3 bucket.</p>"
+        },
+        "ServiceName": {
+          "shape": "ServiceName",
+          "locationName": "serviceName",
+          "documentation": "<p>The name of the storage service.</p>"
+        }
+      },
+      "documentation": "<p>The resource configuration for creating backend storage.</p>",
+      "required": [
+        "ServiceName",
+        "Permissions"
+      ]
+    },
+    "CreateBackendStorageResponse": {
+      "type": "structure",
+      "members": {
+        "AppId": {
+          "shape": "__string",
+          "locationName": "appId",
+          "documentation": "<p>The app ID.</p>"
+        },
+        "BackendEnvironmentName": {
+          "shape": "__string",
+          "locationName": "backendEnvironmentName",
+          "documentation": "<p>The name of the backend environment.</p>"
+        },
+        "JobId": {
+          "shape": "__string",
+          "locationName": "jobId",
+          "documentation": "<p>The ID for the job.</p>"
         },
         "Status": {
           "shape": "__string",
@@ -1614,7 +2011,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -1677,7 +2074,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -1733,7 +2130,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -1744,6 +2141,65 @@
           "shape": "__string",
           "locationName": "operation",
           "documentation": "<p>The name of the operation.</p>"
+        },
+        "Status": {
+          "shape": "__string",
+          "locationName": "status",
+          "documentation": "<p>The current status of the request.</p>"
+        }
+      }
+    },
+    "DeleteBackendStorageRequest": {
+      "type": "structure",
+      "members": {
+        "AppId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "appId",
+          "documentation": "<p>The app ID.</p>"
+        },
+        "BackendEnvironmentName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "backendEnvironmentName",
+          "documentation": "<p>The name of the backend environment.</p>"
+        },
+        "ResourceName": {
+          "shape": "__string",
+          "locationName": "resourceName",
+          "documentation": "<p>The name of the storage resource.</p>"
+        },
+        "ServiceName": {
+          "shape": "ServiceName",
+          "locationName": "serviceName",
+          "documentation": "<p>The name of the storage service.</p>"
+        }
+      },
+      "documentation": "<p>The request body for DeleteBackendStorage.</p>",
+      "required": [
+        "AppId",
+        "BackendEnvironmentName",
+        "ServiceName",
+        "ResourceName"
+      ]
+    },
+    "DeleteBackendStorageResponse": {
+      "type": "structure",
+      "members": {
+        "AppId": {
+          "shape": "__string",
+          "locationName": "appId",
+          "documentation": "<p>The app ID.</p>"
+        },
+        "BackendEnvironmentName": {
+          "shape": "__string",
+          "locationName": "backendEnvironmentName",
+          "documentation": "<p>The name of the backend environment.</p>"
+        },
+        "JobId": {
+          "shape": "__string",
+          "locationName": "jobId",
+          "documentation": "<p>The ID for the job.</p>"
         },
         "Status": {
           "shape": "__string",
@@ -1785,6 +2241,7 @@
     },
     "DeliveryMethod": {
       "type": "string",
+      "documentation": "<p>The type of verification message to send.</p>",
       "enum": [
         "EMAIL",
         "SMS"
@@ -1792,16 +2249,17 @@
     },
     "EmailSettings": {
       "type": "structure",
+      "sensitive": true,
       "members": {
         "EmailMessage": {
           "shape": "__string",
           "locationName": "emailMessage",
-          "documentation": "<p>The body of the email.</p>"
+          "documentation": "<p>The contents of the email message.</p>"
         },
         "EmailSubject": {
           "shape": "__string",
           "locationName": "emailSubject",
-          "documentation": "<p>The subject of the email.</p>"
+          "documentation": "<p>The contents of the subject line of the email message.</p>"
         }
       },
       "documentation": "<p>The configuration for the email sent when an app user forgets their password.</p>"
@@ -1850,7 +2308,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -1903,12 +2361,17 @@
         "Models": {
           "shape": "__string",
           "locationName": "models",
-          "documentation": "<p>Stringified JSON of the DataStore model.</p>"
+          "documentation": "<p>Stringified JSON of the datastore model.</p>"
         },
         "Status": {
           "shape": "Status",
           "locationName": "status",
           "documentation": "<p>The current status of the request.</p>"
+        },
+        "ModelIntrospectionSchema": {
+          "shape": "__string",
+          "locationName": "modelIntrospectionSchema",
+          "documentation": "<p>Stringified JSON of the model introspection schema for an existing backend API resource.</p>"
         }
       }
     },
@@ -1961,7 +2424,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "ResourceConfig": {
           "shape": "BackendAPIResourceConfig",
@@ -2019,7 +2482,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "ResourceConfig": {
           "shape": "CreateBackendAuthResourceConfig",
@@ -2082,7 +2545,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -2129,10 +2592,15 @@
     "GetBackendResponse": {
       "type": "structure",
       "members": {
+        "AmplifyFeatureFlags": {
+          "shape": "__string",
+          "locationName": "amplifyFeatureFlags",
+          "documentation": "<p>A stringified version of the cli.json file for your Amplify project.</p>"
+        },
         "AmplifyMetaConfig": {
           "shape": "__string",
           "locationName": "amplifyMetaConfig",
-          "documentation": "<p>A stringified version of the current configurations for your Amplify project.</p>"
+          "documentation": "<p>A stringified version of the current configs for your Amplify project.</p>"
         },
         "AppId": {
           "shape": "__string",
@@ -2158,6 +2626,89 @@
           "shape": "__string",
           "locationName": "error",
           "documentation": "<p>If the request failed, this is the returned error.</p>"
+        }
+      }
+    },
+    "GetBackendStorageRequest": {
+      "type": "structure",
+      "members": {
+        "AppId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "appId",
+          "documentation": "<p>The app ID.</p>"
+        },
+        "BackendEnvironmentName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "backendEnvironmentName",
+          "documentation": "<p>The name of the backend environment.</p>"
+        },
+        "ResourceName": {
+          "shape": "__string",
+          "locationName": "resourceName",
+          "documentation": "<p>The name of the storage resource.</p>"
+        }
+      },
+      "documentation": "<p>The request body for GetBackendStorage.</p>",
+      "required": [
+        "AppId",
+        "BackendEnvironmentName",
+        "ResourceName"
+      ]
+    },
+    "GetBackendStorageResourceConfig": {
+      "type": "structure",
+      "members": {
+        "BucketName": {
+          "shape": "__string",
+          "locationName": "bucketName",
+          "documentation": "<p>The name of the S3 bucket.</p>"
+        },
+        "Imported": {
+          "shape": "__boolean",
+          "locationName": "imported",
+          "documentation": "<p>Returns True if the storage resource has been imported.</p>"
+        },
+        "Permissions": {
+          "shape": "BackendStoragePermissions",
+          "locationName": "permissions",
+          "documentation": "<p>The authorization configuration for the storage S3 bucket.</p>"
+        },
+        "ServiceName": {
+          "shape": "ServiceName",
+          "locationName": "serviceName",
+          "documentation": "<p>The name of the storage service.</p>"
+        }
+      },
+      "documentation": "<p>The details for a backend storage resource.</p>",
+      "required": [
+        "ServiceName",
+        "Imported"
+      ]
+    },
+    "GetBackendStorageResponse": {
+      "type": "structure",
+      "members": {
+        "AppId": {
+          "shape": "__string",
+          "locationName": "appId",
+          "documentation": "<p>The app ID.</p>"
+        },
+        "BackendEnvironmentName": {
+          "shape": "__string",
+          "locationName": "backendEnvironmentName",
+          "documentation": "<p>The name of the backend environment.</p>"
+        },
+        "ResourceConfig": {
+          "shape": "GetBackendStorageResourceConfig",
+          "locationName": "resourceConfig",
+          "documentation": "<p>The resource configuration for the backend storage resource.</p>"
+        },
+        "ResourceName": {
+          "shape": "__string",
+          "locationName": "resourceName",
+          "documentation": "<p>The name of the storage resource.</p>"
         }
       }
     },
@@ -2204,6 +2755,144 @@
           "shape": "__string",
           "locationName": "ttl",
           "documentation": "<p>The expiry time for the one-time generated token code.</p>"
+        }
+      }
+    },
+    "ImportBackendAuthRequest": {
+      "type": "structure",
+      "members": {
+        "AppId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "appId",
+          "documentation": "<p>The app ID.</p>"
+        },
+        "BackendEnvironmentName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "backendEnvironmentName",
+          "documentation": "<p>The name of the backend environment.</p>"
+        },
+        "IdentityPoolId": {
+          "shape": "__string",
+          "locationName": "identityPoolId",
+          "documentation": "<p>The ID of the Amazon Cognito identity pool.</p>"
+        },
+        "NativeClientId": {
+          "shape": "__string",
+          "locationName": "nativeClientId",
+          "documentation": "<p>The ID of the Amazon Cognito native client.</p>"
+        },
+        "UserPoolId": {
+          "shape": "__string",
+          "locationName": "userPoolId",
+          "documentation": "<p>The ID of the Amazon Cognito user pool.</p>"
+        },
+        "WebClientId": {
+          "shape": "__string",
+          "locationName": "webClientId",
+          "documentation": "<p>The ID of the Amazon Cognito web client.</p>"
+        }
+      },
+      "documentation": "<p>The request body for ImportBackendAuth.</p>",
+      "required": [
+        "AppId",
+        "BackendEnvironmentName",
+        "UserPoolId",
+        "NativeClientId",
+        "WebClientId"
+      ]
+    },
+    "ImportBackendAuthResponse": {
+      "type": "structure",
+      "members": {
+        "AppId": {
+          "shape": "__string",
+          "locationName": "appId",
+          "documentation": "<p>The app ID.</p>"
+        },
+        "BackendEnvironmentName": {
+          "shape": "__string",
+          "locationName": "backendEnvironmentName",
+          "documentation": "<p>The name of the backend environment.</p>"
+        },
+        "Error": {
+          "shape": "__string",
+          "locationName": "error",
+          "documentation": "<p>If the request fails, this error is returned.</p>"
+        },
+        "JobId": {
+          "shape": "__string",
+          "locationName": "jobId",
+          "documentation": "<p>The ID for the job.</p>"
+        },
+        "Operation": {
+          "shape": "__string",
+          "locationName": "operation",
+          "documentation": "<p>The name of the operation.</p>"
+        },
+        "Status": {
+          "shape": "__string",
+          "locationName": "status",
+          "documentation": "<p>The current status of the request.</p>"
+        }
+      }
+    },
+    "ImportBackendStorageRequest": {
+      "type": "structure",
+      "members": {
+        "AppId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "appId",
+          "documentation": "<p>The app ID.</p>"
+        },
+        "BackendEnvironmentName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "backendEnvironmentName",
+          "documentation": "<p>The name of the backend environment.</p>"
+        },
+        "BucketName": {
+          "shape": "__string",
+          "locationName": "bucketName",
+          "documentation": "<p>The name of the S3 bucket.</p>"
+        },
+        "ServiceName": {
+          "shape": "ServiceName",
+          "locationName": "serviceName",
+          "documentation": "<p>The name of the storage service.</p>"
+        }
+      },
+      "documentation": "<p>The request body for ImportBackendStorage.</p>",
+      "required": [
+        "AppId",
+        "BackendEnvironmentName",
+        "ServiceName"
+      ]
+    },
+    "ImportBackendStorageResponse": {
+      "type": "structure",
+      "members": {
+        "AppId": {
+          "shape": "__string",
+          "locationName": "appId",
+          "documentation": "<p>The app ID.</p>"
+        },
+        "BackendEnvironmentName": {
+          "shape": "__string",
+          "locationName": "backendEnvironmentName",
+          "documentation": "<p>The name of the backend environment.</p>"
+        },
+        "JobId": {
+          "shape": "__string",
+          "locationName": "jobId",
+          "documentation": "<p>The ID for the job.</p>"
+        },
+        "Status": {
+          "shape": "__string",
+          "locationName": "status",
+          "documentation": "<p>The current status of the request.</p>"
         }
       }
     },
@@ -2269,13 +2958,39 @@
         }
       }
     },
+    "ListS3BucketsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "__string",
+          "locationName": "nextToken",
+          "documentation": "<p>Reserved for future use.</p>"
+        }
+      },
+      "documentation": "<p>The request body for S3Buckets.</p>"
+    },
+    "ListS3BucketsResponse": {
+      "type": "structure",
+      "members": {
+        "Buckets": {
+          "shape": "ListOfS3BucketInfo",
+          "locationName": "buckets",
+          "documentation": "<p>The list of S3 buckets.</p>"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "locationName": "nextToken",
+          "documentation": "<p>Reserved for future use.</p>"
+        }
+      }
+    },
     "LoginAuthConfigReqObj": {
       "type": "structure",
       "members": {
         "AwsCognitoIdentityPoolId": {
           "shape": "__string",
           "locationName": "aws_cognito_identity_pool_id",
-          "documentation": "<p>The Amazon Cognito identity pool ID used for Amplify Admin UI login authorization.</p>"
+          "documentation": "<p>The Amazon Cognito identity pool ID used for the Amplify Admin UI login authorization.</p>"
         },
         "AwsCognitoRegion": {
           "shape": "__string",
@@ -2350,7 +3065,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -2389,7 +3104,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         }
       }
     },
@@ -2407,10 +3122,32 @@
       "members": {},
       "documentation": "<p>Defines the resource configuration for the data model in your Amplify project.</p>"
     },
+    "S3BucketInfo": {
+      "type": "structure",
+      "members": {
+        "CreationDate": {
+          "shape": "__string",
+          "locationName": "creationDate",
+          "documentation": "<p>The creation date of the S3 bucket.</p>"
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "<p>The name of the S3 bucket.</p>"
+        }
+      },
+      "documentation": "<p>Describes the metadata of the S3 bucket.</p>"
+    },
     "Service": {
       "type": "string",
       "enum": [
         "COGNITO"
+      ]
+    },
+    "ServiceName": {
+      "type": "string",
+      "enum": [
+        "S3"
       ]
     },
     "Settings": {
@@ -2440,11 +3177,12 @@
     },
     "SmsSettings": {
       "type": "structure",
+      "sensitive": true,
       "members": {
         "SmsMessage": {
           "shape": "__string",
           "locationName": "smsMessage",
-          "documentation": "<p>The body of the SMS message.</p>"
+          "documentation": "<p>The contents of the SMS message.</p>"
         }
       },
       "documentation": "<p>SMS settings for authentication.</p>"
@@ -2460,6 +3198,9 @@
         },
         "LoginWithAmazon": {
           "shape": "BackendAuthSocialProviderConfig"
+        },
+        "SignInWithApple": {
+          "shape": "BackendAuthAppleProviderConfig"
         }
       },
       "documentation": "<p>The settings for using the social identity providers for access to your Amplify app.</p>"
@@ -2520,7 +3261,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -2545,20 +3286,20 @@
         "DeliveryMethod": {
           "shape": "DeliveryMethod",
           "locationName": "deliveryMethod",
-          "documentation": "<p>Describes which method to use (either SMS or email) to deliver messages to app users that want to recover their password.</p>"
+          "documentation": "<p><b>(DEPRECATED)</b> Describes which mode to use (either SMS or email) to deliver messages to app users that want to recover their password.</p>"
         },
         "EmailSettings": {
           "shape": "EmailSettings",
           "locationName": "emailSettings",
-          "documentation": "<p>The configuration for the email sent when an app user forgets their password.</p>"
+          "documentation": "<p><b>(DEPRECATED)</b> The configuration for the email sent when an app user forgets their password.</p>"
         },
         "SmsSettings": {
           "shape": "SmsSettings",
           "locationName": "smsSettings",
-          "documentation": "<p>The configuration for the SMS message sent when an Amplify app user forgets their password.</p>"
+          "documentation": "<p><b>(DEPRECATED)</b> The configuration for the SMS message sent when an Amplify app user forgets their password.</p>"
         }
       },
-      "documentation": "<p>Describes the forgot password policy for authenticating into the Amplify app.</p>"
+      "documentation": "<p><b>(DEPRECATED)</b> Describes the forgot password policy for authenticating into the Amplify app.</p>"
     },
     "UpdateBackendAuthIdentityPoolConfig": {
       "type": "structure",
@@ -2566,7 +3307,7 @@
         "UnauthenticatedLogin": {
           "shape": "__boolean",
           "locationName": "unauthenticatedLogin",
-          "documentation": "<p>A Boolean value that you can set to allow or disallow guest-level authorization into your Amplify app.</p>"
+          "documentation": "<p>A boolean value that can be set to allow or disallow guest-level authorization into your Amplify app.</p>"
         }
       },
       "documentation": "<p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.</p>"
@@ -2628,7 +3369,7 @@
         "AdditionalConstraints": {
           "shape": "ListOfAdditionalConstraintsElement",
           "locationName": "additionalConstraints",
-          "documentation": "<p>Describes additional constrains on the password requirements to sign in to the auth resource, configured as a part of your Amplify project.</p>"
+          "documentation": "<p>Describes additional constraints on password requirements to sign in to the auth resource, configured as a part of your Amplify project.</p>"
         },
         "MinimumLength": {
           "shape": "__double",
@@ -2636,7 +3377,7 @@
           "documentation": "<p>Describes the minimum length of the password required to sign in to the auth resource, configured as a part of your Amplify project.</p>"
         }
       },
-      "documentation": "<p>Describes the password policy for your Amazon Cognito user pool that's configured as a part of your Amplify project.</p>"
+      "documentation": "<p>Describes the password policy for your Amazon Cognito user pool configured as a part of your Amplify project.</p>"
     },
     "UpdateBackendAuthRequest": {
       "type": "structure",
@@ -2683,7 +3424,7 @@
         "IdentityPoolConfigs": {
           "shape": "UpdateBackendAuthIdentityPoolConfig",
           "locationName": "identityPoolConfigs",
-          "documentation": "<p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of the auth resource in your Amplify project.</p>"
+          "documentation": "<p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.</p>"
         },
         "Service": {
           "shape": "Service",
@@ -2693,7 +3434,7 @@
         "UserPoolConfigs": {
           "shape": "UpdateBackendAuthUserPoolConfig",
           "locationName": "userPoolConfigs",
-          "documentation": "<p>Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of the auth resource in your Amplify project.</p>"
+          "documentation": "<p>Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of your auth resource in the Amplify project.</p>"
         }
       },
       "documentation": "<p>Defines the resource configuration when updating an authentication resource in your Amplify project.</p>",
@@ -2719,7 +3460,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -2744,12 +3485,12 @@
         "ForgotPassword": {
           "shape": "UpdateBackendAuthForgotPasswordConfig",
           "locationName": "forgotPassword",
-          "documentation": "<p>Describes the forgot password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
+          "documentation": "<p><b>(DEPRECATED)</b> Describes the forgot password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
         },
         "Mfa": {
           "shape": "UpdateBackendAuthMFAConfig",
           "locationName": "mfa",
-          "documentation": "<p>Describes whether to apply multi-factor authentication (MFA) policies for your Amazon Cognito user pool that's configured as a part of your Amplify project.</p>"
+          "documentation": "<p>Describes whether to apply multi-factor authentication policies for your Amazon Cognito user pool configured as a part of your Amplify project.</p>"
         },
         "OAuth": {
           "shape": "UpdateBackendAuthOAuthConfig",
@@ -2760,9 +3501,38 @@
           "shape": "UpdateBackendAuthPasswordPolicyConfig",
           "locationName": "passwordPolicy",
           "documentation": "<p>Describes the password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
+        },
+        "VerificationMessage": {
+          "shape": "UpdateBackendAuthVerificationMessageConfig",
+          "locationName": "verificationMessage",
+          "documentation": "<p>Describes the email or SMS verification message for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
         }
       },
-      "documentation": "<p>Describes the Amazon Cognito user pool configuration to configure the authorization resource for your Amplify project on an update.</p>"
+      "documentation": "<p>Describes the Amazon Cognito user pool configuration for the authorization resource to be configured for your Amplify project on an update.</p>"
+    },
+    "UpdateBackendAuthVerificationMessageConfig": {
+      "type": "structure",
+      "members": {
+        "DeliveryMethod": {
+          "shape": "DeliveryMethod",
+          "locationName": "deliveryMethod",
+          "documentation": "<p>The type of verification message to send.</p>"
+        },
+        "EmailSettings": {
+          "shape": "EmailSettings",
+          "locationName": "emailSettings",
+          "documentation": "<p>The settings for the email message.</p>"
+        },
+        "SmsSettings": {
+          "shape": "SmsSettings",
+          "locationName": "smsSettings",
+          "documentation": "<p>The settings for the SMS message.</p>"
+        }
+      },
+      "documentation": "<p>Updates the configuration of the email or SMS message for the auth resource configured for your Amplify project.</p>",
+      "required": [
+        "DeliveryMethod"
+      ]
     },
     "UpdateBackendConfigRequest": {
       "type": "structure",
@@ -2800,7 +3570,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "LoginAuthConfig": {
           "shape": "LoginAuthConfigReqObj",
@@ -2869,7 +3639,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -2893,6 +3663,85 @@
         }
       }
     },
+    "UpdateBackendStorageRequest": {
+      "type": "structure",
+      "members": {
+        "AppId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "appId",
+          "documentation": "<p>The app ID.</p>"
+        },
+        "BackendEnvironmentName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "backendEnvironmentName",
+          "documentation": "<p>The name of the backend environment.</p>"
+        },
+        "ResourceConfig": {
+          "shape": "UpdateBackendStorageResourceConfig",
+          "locationName": "resourceConfig",
+          "documentation": "<p>The resource configuration for updating backend storage.</p>"
+        },
+        "ResourceName": {
+          "shape": "__string",
+          "locationName": "resourceName",
+          "documentation": "<p>The name of the storage resource.</p>"
+        }
+      },
+      "documentation": "<p>The request body for UpdateBackendStorage.</p>",
+      "required": [
+        "AppId",
+        "BackendEnvironmentName",
+        "ResourceName",
+        "ResourceConfig"
+      ]
+    },
+    "UpdateBackendStorageResourceConfig": {
+      "type": "structure",
+      "members": {
+        "Permissions": {
+          "shape": "BackendStoragePermissions",
+          "locationName": "permissions",
+          "documentation": "<p>The authorization configuration for the storage S3 bucket.</p>"
+        },
+        "ServiceName": {
+          "shape": "ServiceName",
+          "locationName": "serviceName",
+          "documentation": "<p>The name of the storage service.</p>"
+        }
+      },
+      "documentation": "<p>The resource configuration for updating backend storage.</p>",
+      "required": [
+        "ServiceName",
+        "Permissions"
+      ]
+    },
+    "UpdateBackendStorageResponse": {
+      "type": "structure",
+      "members": {
+        "AppId": {
+          "shape": "__string",
+          "locationName": "appId",
+          "documentation": "<p>The app ID.</p>"
+        },
+        "BackendEnvironmentName": {
+          "shape": "__string",
+          "locationName": "backendEnvironmentName",
+          "documentation": "<p>The name of the backend environment.</p>"
+        },
+        "JobId": {
+          "shape": "__string",
+          "locationName": "jobId",
+          "documentation": "<p>The ID for the job.</p>"
+        },
+        "Status": {
+          "shape": "__string",
+          "locationName": "status",
+          "documentation": "<p>The current status of the request.</p>"
+        }
+      }
+    },
     "AdditionalConstraintsElement": {
       "type": "string",
       "enum": [
@@ -2900,6 +3749,14 @@
         "REQUIRE_LOWERCASE",
         "REQUIRE_SYMBOL",
         "REQUIRE_UPPERCASE"
+      ]
+    },
+    "AuthenticatedElement": {
+      "type": "string",
+      "enum": [
+        "READ",
+        "CREATE_AND_UPDATE",
+        "DELETE"
       ]
     },
     "MfaTypesElement": {
@@ -2941,6 +3798,14 @@
         "ZONE_INFO"
       ]
     },
+    "UnAuthenticatedElement": {
+      "type": "string",
+      "enum": [
+        "READ",
+        "CREATE_AND_UPDATE",
+        "DELETE"
+      ]
+    },
     "__boolean": {
       "type": "boolean"
     },
@@ -2964,10 +3829,22 @@
         "shape": "BackendJobRespObj"
       }
     },
+    "ListOfS3BucketInfo": {
+      "type": "list",
+      "member": {
+        "shape": "S3BucketInfo"
+      }
+    },
     "ListOfAdditionalConstraintsElement": {
       "type": "list",
       "member": {
         "shape": "AdditionalConstraintsElement"
+      }
+    },
+    "ListOfAuthenticatedElement": {
+      "type": "list",
+      "member": {
+        "shape": "AuthenticatedElement"
       }
     },
     "ListOfMfaTypesElement": {
@@ -2986,6 +3863,12 @@
       "type": "list",
       "member": {
         "shape": "RequiredSignUpAttributesElement"
+      }
+    },
+    "ListOfUnAuthenticatedElement": {
+      "type": "list",
+      "member": {
+        "shape": "UnAuthenticatedElement"
       }
     },
     "ListOf__string": {

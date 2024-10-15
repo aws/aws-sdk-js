@@ -12,51 +12,51 @@ declare class ElasticInference extends Service {
   constructor(options?: ElasticInference.Types.ClientConfiguration)
   config: Config & ElasticInference.Types.ClientConfiguration;
   /**
-   *  Describes the locations in which a given accelerator type or set of types is present in a given region. 
+   *  Describes the locations in which a given accelerator type or set of types is present in a given region.   February 15, 2023: Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. 
    */
   describeAcceleratorOfferings(params: ElasticInference.Types.DescribeAcceleratorOfferingsRequest, callback?: (err: AWSError, data: ElasticInference.Types.DescribeAcceleratorOfferingsResponse) => void): Request<ElasticInference.Types.DescribeAcceleratorOfferingsResponse, AWSError>;
   /**
-   *  Describes the locations in which a given accelerator type or set of types is present in a given region. 
+   *  Describes the locations in which a given accelerator type or set of types is present in a given region.   February 15, 2023: Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. 
    */
   describeAcceleratorOfferings(callback?: (err: AWSError, data: ElasticInference.Types.DescribeAcceleratorOfferingsResponse) => void): Request<ElasticInference.Types.DescribeAcceleratorOfferingsResponse, AWSError>;
   /**
-   *  Describes the accelerator types available in a given region, as well as their characteristics, such as memory and throughput. 
+   *  Describes the accelerator types available in a given region, as well as their characteristics, such as memory and throughput.   February 15, 2023: Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. 
    */
   describeAcceleratorTypes(params: ElasticInference.Types.DescribeAcceleratorTypesRequest, callback?: (err: AWSError, data: ElasticInference.Types.DescribeAcceleratorTypesResponse) => void): Request<ElasticInference.Types.DescribeAcceleratorTypesResponse, AWSError>;
   /**
-   *  Describes the accelerator types available in a given region, as well as their characteristics, such as memory and throughput. 
+   *  Describes the accelerator types available in a given region, as well as their characteristics, such as memory and throughput.   February 15, 2023: Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. 
    */
   describeAcceleratorTypes(callback?: (err: AWSError, data: ElasticInference.Types.DescribeAcceleratorTypesResponse) => void): Request<ElasticInference.Types.DescribeAcceleratorTypesResponse, AWSError>;
   /**
-   *  Describes information over a provided set of accelerators belonging to an account. 
+   *  Describes information over a provided set of accelerators belonging to an account.   February 15, 2023: Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. 
    */
   describeAccelerators(params: ElasticInference.Types.DescribeAcceleratorsRequest, callback?: (err: AWSError, data: ElasticInference.Types.DescribeAcceleratorsResponse) => void): Request<ElasticInference.Types.DescribeAcceleratorsResponse, AWSError>;
   /**
-   *  Describes information over a provided set of accelerators belonging to an account. 
+   *  Describes information over a provided set of accelerators belonging to an account.   February 15, 2023: Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. 
    */
   describeAccelerators(callback?: (err: AWSError, data: ElasticInference.Types.DescribeAcceleratorsResponse) => void): Request<ElasticInference.Types.DescribeAcceleratorsResponse, AWSError>;
   /**
-   *  Returns all tags of an Elastic Inference Accelerator. 
+   *  Returns all tags of an Elastic Inference Accelerator.   February 15, 2023: Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. 
    */
   listTagsForResource(params: ElasticInference.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: ElasticInference.Types.ListTagsForResourceResult) => void): Request<ElasticInference.Types.ListTagsForResourceResult, AWSError>;
   /**
-   *  Returns all tags of an Elastic Inference Accelerator. 
+   *  Returns all tags of an Elastic Inference Accelerator.   February 15, 2023: Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. 
    */
   listTagsForResource(callback?: (err: AWSError, data: ElasticInference.Types.ListTagsForResourceResult) => void): Request<ElasticInference.Types.ListTagsForResourceResult, AWSError>;
   /**
-   *  Adds the specified tags to an Elastic Inference Accelerator. 
+   *  Adds the specified tags to an Elastic Inference Accelerator.   February 15, 2023: Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. 
    */
   tagResource(params: ElasticInference.Types.TagResourceRequest, callback?: (err: AWSError, data: ElasticInference.Types.TagResourceResult) => void): Request<ElasticInference.Types.TagResourceResult, AWSError>;
   /**
-   *  Adds the specified tags to an Elastic Inference Accelerator. 
+   *  Adds the specified tags to an Elastic Inference Accelerator.   February 15, 2023: Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. 
    */
   tagResource(callback?: (err: AWSError, data: ElasticInference.Types.TagResourceResult) => void): Request<ElasticInference.Types.TagResourceResult, AWSError>;
   /**
-   *  Removes the specified tags from an Elastic Inference Accelerator. 
+   *  Removes the specified tags from an Elastic Inference Accelerator.   February 15, 2023: Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. 
    */
   untagResource(params: ElasticInference.Types.UntagResourceRequest, callback?: (err: AWSError, data: ElasticInference.Types.UntagResourceResult) => void): Request<ElasticInference.Types.UntagResourceResult, AWSError>;
   /**
-   *  Removes the specified tags from an Elastic Inference Accelerator. 
+   *  Removes the specified tags from an Elastic Inference Accelerator.   February 15, 2023: Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. 
    */
   untagResource(callback?: (err: AWSError, data: ElasticInference.Types.UntagResourceResult) => void): Request<ElasticInference.Types.UntagResourceResult, AWSError>;
 }

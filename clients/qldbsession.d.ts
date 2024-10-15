@@ -120,11 +120,11 @@ declare namespace QLDBSession {
   }
   export interface IOUsage {
     /**
-     * The number of read I/O requests that the command performed.
+     * The number of read I/O requests that the command made.
      */
     ReadIOs?: ReadIOs;
     /**
-     * The number of write I/O requests that the command performed.
+     * The number of write I/O requests that the command made.
      */
     WriteIOs?: WriteIOs;
   }
@@ -241,7 +241,7 @@ declare namespace QLDBSession {
   export type StatementParameters = ValueHolder[];
   export interface TimingInformation {
     /**
-     * The amount of time that was taken for the command to finish processing, measured in milliseconds.
+     * The amount of time that QLDB spent on processing the command, measured in milliseconds.
      */
     ProcessingTimeMilliseconds?: ProcessingTimeMilliseconds;
   }

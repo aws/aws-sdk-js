@@ -20,19 +20,19 @@ declare class SMS extends Service {
    */
   createApp(callback?: (err: AWSError, data: SMS.Types.CreateAppResponse) => void): Request<SMS.Types.CreateAppResponse, AWSError>;
   /**
-   * Creates a replication job. The replication job schedules periodic replication runs to replicate your server to AWS. Each replication run creates an Amazon Machine Image (AMI).
+   * Creates a replication job. The replication job schedules periodic replication runs to replicate your server to Amazon Web Services. Each replication run creates an Amazon Machine Image (AMI).
    */
   createReplicationJob(params: SMS.Types.CreateReplicationJobRequest, callback?: (err: AWSError, data: SMS.Types.CreateReplicationJobResponse) => void): Request<SMS.Types.CreateReplicationJobResponse, AWSError>;
   /**
-   * Creates a replication job. The replication job schedules periodic replication runs to replicate your server to AWS. Each replication run creates an Amazon Machine Image (AMI).
+   * Creates a replication job. The replication job schedules periodic replication runs to replicate your server to Amazon Web Services. Each replication run creates an Amazon Machine Image (AMI).
    */
   createReplicationJob(callback?: (err: AWSError, data: SMS.Types.CreateReplicationJobResponse) => void): Request<SMS.Types.CreateReplicationJobResponse, AWSError>;
   /**
-   * Deletes the specified application. Optionally deletes the launched stack associated with the application and all AWS SMS replication jobs for servers in the application.
+   * Deletes the specified application. Optionally deletes the launched stack associated with the application and all Server Migration Service replication jobs for servers in the application.
    */
   deleteApp(params: SMS.Types.DeleteAppRequest, callback?: (err: AWSError, data: SMS.Types.DeleteAppResponse) => void): Request<SMS.Types.DeleteAppResponse, AWSError>;
   /**
-   * Deletes the specified application. Optionally deletes the launched stack associated with the application and all AWS SMS replication jobs for servers in the application.
+   * Deletes the specified application. Optionally deletes the launched stack associated with the application and all Server Migration Service replication jobs for servers in the application.
    */
   deleteApp(callback?: (err: AWSError, data: SMS.Types.DeleteAppResponse) => void): Request<SMS.Types.DeleteAppResponse, AWSError>;
   /**
@@ -60,11 +60,11 @@ declare class SMS extends Service {
    */
   deleteAppValidationConfiguration(callback?: (err: AWSError, data: SMS.Types.DeleteAppValidationConfigurationResponse) => void): Request<SMS.Types.DeleteAppValidationConfigurationResponse, AWSError>;
   /**
-   * Deletes the specified replication job. After you delete a replication job, there are no further replication runs. AWS deletes the contents of the Amazon S3 bucket used to store AWS SMS artifacts. The AMIs created by the replication runs are not deleted.
+   * Deletes the specified replication job. After you delete a replication job, there are no further replication runs. Amazon Web Services deletes the contents of the Amazon S3 bucket used to store Server Migration Service artifacts. The AMIs created by the replication runs are not deleted.
    */
   deleteReplicationJob(params: SMS.Types.DeleteReplicationJobRequest, callback?: (err: AWSError, data: SMS.Types.DeleteReplicationJobResponse) => void): Request<SMS.Types.DeleteReplicationJobResponse, AWSError>;
   /**
-   * Deletes the specified replication job. After you delete a replication job, there are no further replication runs. AWS deletes the contents of the Amazon S3 bucket used to store AWS SMS artifacts. The AMIs created by the replication runs are not deleted.
+   * Deletes the specified replication job. After you delete a replication job, there are no further replication runs. Amazon Web Services deletes the contents of the Amazon S3 bucket used to store Server Migration Service artifacts. The AMIs created by the replication runs are not deleted.
    */
   deleteReplicationJob(callback?: (err: AWSError, data: SMS.Types.DeleteReplicationJobResponse) => void): Request<SMS.Types.DeleteReplicationJobResponse, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class SMS extends Service {
    */
   deleteServerCatalog(callback?: (err: AWSError, data: SMS.Types.DeleteServerCatalogResponse) => void): Request<SMS.Types.DeleteServerCatalogResponse, AWSError>;
   /**
-   * Disassociates the specified connector from AWS SMS. After you disassociate a connector, it is no longer available to support replication jobs.
+   * Disassociates the specified connector from Server Migration Service. After you disassociate a connector, it is no longer available to support replication jobs.
    */
   disassociateConnector(params: SMS.Types.DisassociateConnectorRequest, callback?: (err: AWSError, data: SMS.Types.DisassociateConnectorResponse) => void): Request<SMS.Types.DisassociateConnectorResponse, AWSError>;
   /**
-   * Disassociates the specified connector from AWS SMS. After you disassociate a connector, it is no longer available to support replication jobs.
+   * Disassociates the specified connector from Server Migration Service. After you disassociate a connector, it is no longer available to support replication jobs.
    */
   disassociateConnector(callback?: (err: AWSError, data: SMS.Types.DisassociateConnectorResponse) => void): Request<SMS.Types.DisassociateConnectorResponse, AWSError>;
   /**
@@ -92,11 +92,11 @@ declare class SMS extends Service {
    */
   generateChangeSet(callback?: (err: AWSError, data: SMS.Types.GenerateChangeSetResponse) => void): Request<SMS.Types.GenerateChangeSetResponse, AWSError>;
   /**
-   * Generates an AWS CloudFormation template based on the current launch configuration and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
+   * Generates an CloudFormation template based on the current launch configuration and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
    */
   generateTemplate(params: SMS.Types.GenerateTemplateRequest, callback?: (err: AWSError, data: SMS.Types.GenerateTemplateResponse) => void): Request<SMS.Types.GenerateTemplateResponse, AWSError>;
   /**
-   * Generates an AWS CloudFormation template based on the current launch configuration and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
+   * Generates an CloudFormation template based on the current launch configuration and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
    */
   generateTemplate(callback?: (err: AWSError, data: SMS.Types.GenerateTemplateResponse) => void): Request<SMS.Types.GenerateTemplateResponse, AWSError>;
   /**
@@ -140,11 +140,11 @@ declare class SMS extends Service {
    */
   getAppValidationOutput(callback?: (err: AWSError, data: SMS.Types.GetAppValidationOutputResponse) => void): Request<SMS.Types.GetAppValidationOutputResponse, AWSError>;
   /**
-   * Describes the connectors registered with the AWS SMS.
+   * Describes the connectors registered with the Server Migration Service.
    */
   getConnectors(params: SMS.Types.GetConnectorsRequest, callback?: (err: AWSError, data: SMS.Types.GetConnectorsResponse) => void): Request<SMS.Types.GetConnectorsResponse, AWSError>;
   /**
-   * Describes the connectors registered with the AWS SMS.
+   * Describes the connectors registered with the Server Migration Service.
    */
   getConnectors(callback?: (err: AWSError, data: SMS.Types.GetConnectorsResponse) => void): Request<SMS.Types.GetConnectorsResponse, AWSError>;
   /**
@@ -172,11 +172,11 @@ declare class SMS extends Service {
    */
   getServers(callback?: (err: AWSError, data: SMS.Types.GetServersResponse) => void): Request<SMS.Types.GetServersResponse, AWSError>;
   /**
-   * Allows application import from AWS Migration Hub.
+   * Allows application import from Migration Hub.
    */
   importAppCatalog(params: SMS.Types.ImportAppCatalogRequest, callback?: (err: AWSError, data: SMS.Types.ImportAppCatalogResponse) => void): Request<SMS.Types.ImportAppCatalogResponse, AWSError>;
   /**
-   * Allows application import from AWS Migration Hub.
+   * Allows application import from Migration Hub.
    */
   importAppCatalog(callback?: (err: AWSError, data: SMS.Types.ImportAppCatalogResponse) => void): Request<SMS.Types.ImportAppCatalogResponse, AWSError>;
   /**
@@ -188,11 +188,11 @@ declare class SMS extends Service {
    */
   importServerCatalog(callback?: (err: AWSError, data: SMS.Types.ImportServerCatalogResponse) => void): Request<SMS.Types.ImportServerCatalogResponse, AWSError>;
   /**
-   * Launches the specified application as a stack in AWS CloudFormation.
+   * Launches the specified application as a stack in CloudFormation.
    */
   launchApp(params: SMS.Types.LaunchAppRequest, callback?: (err: AWSError, data: SMS.Types.LaunchAppResponse) => void): Request<SMS.Types.LaunchAppResponse, AWSError>;
   /**
-   * Launches the specified application as a stack in AWS CloudFormation.
+   * Launches the specified application as a stack in CloudFormation.
    */
   launchApp(callback?: (err: AWSError, data: SMS.Types.LaunchAppResponse) => void): Request<SMS.Types.LaunchAppResponse, AWSError>;
   /**
@@ -204,11 +204,11 @@ declare class SMS extends Service {
    */
   listApps(callback?: (err: AWSError, data: SMS.Types.ListAppsResponse) => void): Request<SMS.Types.ListAppsResponse, AWSError>;
   /**
-   * Provides information to AWS SMS about whether application validation is successful.
+   * Provides information to Server Migration Service about whether application validation is successful.
    */
   notifyAppValidationOutput(params: SMS.Types.NotifyAppValidationOutputRequest, callback?: (err: AWSError, data: SMS.Types.NotifyAppValidationOutputResponse) => void): Request<SMS.Types.NotifyAppValidationOutputResponse, AWSError>;
   /**
-   * Provides information to AWS SMS about whether application validation is successful.
+   * Provides information to Server Migration Service about whether application validation is successful.
    */
   notifyAppValidationOutput(callback?: (err: AWSError, data: SMS.Types.NotifyAppValidationOutputResponse) => void): Request<SMS.Types.NotifyAppValidationOutputResponse, AWSError>;
   /**
@@ -373,7 +373,7 @@ declare namespace SMS {
      */
     lastModified?: Timestamp;
     /**
-     * The name of the service role in the customer's account used by AWS SMS.
+     * The name of the service role in the customer's account used by Server Migration Service.
      */
     roleName?: RoleName;
     /**
@@ -475,7 +475,7 @@ declare namespace SMS {
      */
     description?: AppDescription;
     /**
-     * The name of the service role in the customer's account to be used by AWS SMS.
+     * The name of the service role in the customer's account to be used by Server Migration Service.
      */
     roleName?: RoleName;
     /**
@@ -527,7 +527,7 @@ declare namespace SMS {
      */
     licenseType?: LicenseType;
     /**
-     * The name of the IAM role to be used by the AWS SMS.
+     * The name of the IAM role to be used by the Server Migration Service.
      */
     roleName?: RoleName;
     /**
@@ -638,11 +638,11 @@ declare namespace SMS {
   }
   export interface GenerateTemplateRequest {
     /**
-     * The ID of the application associated with the AWS CloudFormation template.
+     * The ID of the application associated with the CloudFormation template.
      */
     appId?: AppId;
     /**
-     * The format for generating the AWS CloudFormation template.
+     * The format for generating the CloudFormation template.
      */
     templateFormat?: OutputFormat;
   }
@@ -664,7 +664,7 @@ declare namespace SMS {
      */
     appId?: AppId;
     /**
-     * The name of the service role in the customer's account that AWS CloudFormation uses to launch the application.
+     * The name of the service role in the customer's account that CloudFormation uses to launch the application.
      */
     roleName?: RoleName;
     /**
@@ -842,7 +842,7 @@ declare namespace SMS {
   }
   export interface ImportAppCatalogRequest {
     /**
-     * The name of the service role. If you omit this parameter, we create a service-linked role for AWS Migration Hub in your account. Otherwise, the role that you provide must have the policy and trust policy described in the AWS Migration Hub User Guide.
+     * The name of the service role. If you omit this parameter, we create a service-linked role for Migration Hub in your account. Otherwise, the role that you provide must have the policy and trust policy described in the Migration Hub User Guide.
      */
     roleName?: RoleName;
   }
@@ -944,7 +944,7 @@ declare namespace SMS {
      */
     appId?: AppId;
     /**
-     * The name of service role in the customer's account that AWS CloudFormation uses to launch the application.
+     * The name of service role in the customer's account that CloudFormation uses to launch the application.
      */
     roleName?: RoleName;
     /**
@@ -1024,7 +1024,7 @@ declare namespace SMS {
      */
     licenseType?: LicenseType;
     /**
-     * The name of the IAM role to be used by AWS SMS.
+     * The name of the IAM role to be used by Server Migration Service.
      */
     roleName?: RoleName;
     /**
@@ -1159,7 +1159,7 @@ declare namespace SMS {
      */
     scriptType?: ScriptType;
     /**
-     * The command to run the validation script
+     * The command to run the validation script.
      */
     command?: Command;
     /**
@@ -1257,7 +1257,7 @@ declare namespace SMS {
      */
     server?: Server;
     /**
-     * The logical ID of the server in the AWS CloudFormation template.
+     * The logical ID of the server in the CloudFormation template.
      */
     logicalId?: LogicalId;
     /**
@@ -1454,7 +1454,7 @@ declare namespace SMS {
      */
     description?: AppDescription;
     /**
-     * The name of the service role in the customer's account used by AWS SMS.
+     * The name of the service role in the customer's account used by Server Migration Service.
      */
     roleName?: RoleName;
     /**
@@ -1498,7 +1498,7 @@ declare namespace SMS {
      */
     licenseType?: LicenseType;
     /**
-     * The name of the IAM role to be used by AWS SMS.
+     * The name of the IAM role to be used by Server Migration Service.
      */
     roleName?: RoleName;
     /**

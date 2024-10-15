@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "B2bi",
+        "description": "Supporting new EDI X12 transaction sets for X12 versions 4010, 4030, and 5010."
+    },
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "Add new fleet status code for Reserved Capacity."
+    },
+    {
+        "type": "feature",
+        "category": "CodeConnections",
+        "description": "Duplicating the CodeStar Connections service into the new, rebranded AWS CodeConnections service."
+    },
+    {
+        "type": "feature",
+        "category": "InternetMonitor",
+        "description": "This release adds support to allow customers to track cross account monitors through ListMonitor, GetMonitor, ListHealthEvents, GetHealthEvent, StartQuery APIs."
+    },
+    {
+        "type": "feature",
+        "category": "IoTWireless",
+        "description": "Add support for retrieving key historical and live metrics for LoRaWAN devices and gateways"
+    },
+    {
+        "type": "feature",
+        "category": "MarketplaceCatalog",
+        "description": "This release enhances the ListEntities API to support ResaleAuthorizationId filter and sort for OfferEntity in the request and the addition of a ResaleAuthorizationId field in the response of OfferSummary."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "This release adds support for custom images for the CodeEditor App on SageMaker Studio"
+    }
+]

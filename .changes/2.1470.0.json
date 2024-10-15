@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "AppConfig",
+        "description": "AWS AppConfig introduces KMS customer-managed key (CMK) encryption support for data saved to AppConfig's hosted configuration store."
+    },
+    {
+        "type": "feature",
+        "category": "DataZone",
+        "description": "Initial release of Amazon DataZone"
+    },
+    {
+        "type": "feature",
+        "category": "MediaTailor",
+        "description": "Updates DescribeVodSource to include a list of ad break opportunities in the response"
+    },
+    {
+        "type": "feature",
+        "category": "Mgn",
+        "description": "This release includes the following new APIs: ListConnectors, CreateConnector,  UpdateConnector, DeleteConnector and UpdateSourceServer to support the source action framework feature."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Adding support for AdditionalS3DataSource, a data source used for training or inference that is in addition to the input dataset or model data."
+    }
+]

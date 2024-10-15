@@ -1,0 +1,27 @@
+[
+    {
+        "type": "bugfix",
+        "category": "AWSQueryCompatible",
+        "description": "Read trait from metadata"
+    },
+    {
+        "type": "feature",
+        "category": "AccessAnalyzer",
+        "description": "This release adds support for six new resource types in IAM Access Analyzer to help you easily identify public and cross-account access to your AWS resources. Updated service API, documentation, and paginators."
+    },
+    {
+        "type": "feature",
+        "category": "MediaTailor",
+        "description": "This release is a documentation update"
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "Relational Database Service - This release adds support for exporting DB cluster data to Amazon S3."
+    },
+    {
+        "type": "feature",
+        "category": "WorkSpaces",
+        "description": "This release adds new enums for supporting Workspaces Core features, including creating Manual running mode workspaces, importing regular Workspaces Core images and importing g4dn Workspaces Core images."
+    }
+]

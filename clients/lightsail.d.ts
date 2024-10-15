@@ -20,35 +20,35 @@ declare class Lightsail extends Service {
    */
   allocateStaticIp(callback?: (err: AWSError, data: Lightsail.Types.AllocateStaticIpResult) => void): Request<Lightsail.Types.AllocateStaticIpResult, AWSError>;
   /**
-   * Attaches an SSL/TLS certificate to your Amazon Lightsail content delivery network (CDN) distribution. After the certificate is attached, your distribution accepts HTTPS traffic for all of the domains that are associated with the certificate. Use the CreateCertificate action to create a certificate that you can attach to your distribution.  Only certificates created in the us-east-1 AWS Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any AWS Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
+   * Attaches an SSL/TLS certificate to your Amazon Lightsail content delivery network (CDN) distribution. After the certificate is attached, your distribution accepts HTTPS traffic for all of the domains that are associated with the certificate. Use the CreateCertificate action to create a certificate that you can attach to your distribution.  Only certificates created in the us-east-1 Amazon Web Services Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any Amazon Web Services Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
    */
   attachCertificateToDistribution(params: Lightsail.Types.AttachCertificateToDistributionRequest, callback?: (err: AWSError, data: Lightsail.Types.AttachCertificateToDistributionResult) => void): Request<Lightsail.Types.AttachCertificateToDistributionResult, AWSError>;
   /**
-   * Attaches an SSL/TLS certificate to your Amazon Lightsail content delivery network (CDN) distribution. After the certificate is attached, your distribution accepts HTTPS traffic for all of the domains that are associated with the certificate. Use the CreateCertificate action to create a certificate that you can attach to your distribution.  Only certificates created in the us-east-1 AWS Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any AWS Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
+   * Attaches an SSL/TLS certificate to your Amazon Lightsail content delivery network (CDN) distribution. After the certificate is attached, your distribution accepts HTTPS traffic for all of the domains that are associated with the certificate. Use the CreateCertificate action to create a certificate that you can attach to your distribution.  Only certificates created in the us-east-1 Amazon Web Services Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any Amazon Web Services Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
    */
   attachCertificateToDistribution(callback?: (err: AWSError, data: Lightsail.Types.AttachCertificateToDistributionResult) => void): Request<Lightsail.Types.AttachCertificateToDistributionResult, AWSError>;
   /**
-   * Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name. The attach disk operation supports tag-based access control via resource tags applied to the resource identified by disk name. For more information, see the Lightsail Dev Guide.
+   * Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name. The attach disk operation supports tag-based access control via resource tags applied to the resource identified by disk name. For more information, see the Amazon Lightsail Developer Guide.
    */
   attachDisk(params: Lightsail.Types.AttachDiskRequest, callback?: (err: AWSError, data: Lightsail.Types.AttachDiskResult) => void): Request<Lightsail.Types.AttachDiskResult, AWSError>;
   /**
-   * Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name. The attach disk operation supports tag-based access control via resource tags applied to the resource identified by disk name. For more information, see the Lightsail Dev Guide.
+   * Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name. The attach disk operation supports tag-based access control via resource tags applied to the resource identified by disk name. For more information, see the Amazon Lightsail Developer Guide.
    */
   attachDisk(callback?: (err: AWSError, data: Lightsail.Types.AttachDiskResult) => void): Request<Lightsail.Types.AttachDiskResult, AWSError>;
   /**
-   * Attaches one or more Lightsail instances to a load balancer. After some time, the instances are attached to the load balancer and the health check status is available. The attach instances to load balancer operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
+   * Attaches one or more Lightsail instances to a load balancer. After some time, the instances are attached to the load balancer and the health check status is available. The attach instances to load balancer operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Developer Guide.
    */
   attachInstancesToLoadBalancer(params: Lightsail.Types.AttachInstancesToLoadBalancerRequest, callback?: (err: AWSError, data: Lightsail.Types.AttachInstancesToLoadBalancerResult) => void): Request<Lightsail.Types.AttachInstancesToLoadBalancerResult, AWSError>;
   /**
-   * Attaches one or more Lightsail instances to a load balancer. After some time, the instances are attached to the load balancer and the health check status is available. The attach instances to load balancer operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
+   * Attaches one or more Lightsail instances to a load balancer. After some time, the instances are attached to the load balancer and the health check status is available. The attach instances to load balancer operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Developer Guide.
    */
   attachInstancesToLoadBalancer(callback?: (err: AWSError, data: Lightsail.Types.AttachInstancesToLoadBalancerResult) => void): Request<Lightsail.Types.AttachInstancesToLoadBalancerResult, AWSError>;
   /**
-   * Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL). Once you create and validate your certificate, you can attach it to your load balancer. You can also use this API to rotate the certificates on your account. Use the AttachLoadBalancerTlsCertificate action with the non-attached certificate, and it will replace the existing one and become the attached certificate. The AttachLoadBalancerTlsCertificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
+   * Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL). Once you create and validate your certificate, you can attach it to your load balancer. You can also use this API to rotate the certificates on your account. Use the AttachLoadBalancerTlsCertificate action with the non-attached certificate, and it will replace the existing one and become the attached certificate. The AttachLoadBalancerTlsCertificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Amazon Lightsail Developer Guide.
    */
   attachLoadBalancerTlsCertificate(params: Lightsail.Types.AttachLoadBalancerTlsCertificateRequest, callback?: (err: AWSError, data: Lightsail.Types.AttachLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.AttachLoadBalancerTlsCertificateResult, AWSError>;
   /**
-   * Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL). Once you create and validate your certificate, you can attach it to your load balancer. You can also use this API to rotate the certificates on your account. Use the AttachLoadBalancerTlsCertificate action with the non-attached certificate, and it will replace the existing one and become the attached certificate. The AttachLoadBalancerTlsCertificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
+   * Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL). Once you create and validate your certificate, you can attach it to your load balancer. You can also use this API to rotate the certificates on your account. Use the AttachLoadBalancerTlsCertificate action with the non-attached certificate, and it will replace the existing one and become the attached certificate. The AttachLoadBalancerTlsCertificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Amazon Lightsail Developer Guide.
    */
   attachLoadBalancerTlsCertificate(callback?: (err: AWSError, data: Lightsail.Types.AttachLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.AttachLoadBalancerTlsCertificateResult, AWSError>;
   /**
@@ -60,27 +60,43 @@ declare class Lightsail extends Service {
    */
   attachStaticIp(callback?: (err: AWSError, data: Lightsail.Types.AttachStaticIpResult) => void): Request<Lightsail.Types.AttachStaticIpResult, AWSError>;
   /**
-   * Closes ports for a specific Amazon Lightsail instance. The CloseInstancePublicPorts action supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
+   * Closes ports for a specific Amazon Lightsail instance. The CloseInstancePublicPorts action supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Amazon Lightsail Developer Guide.
    */
   closeInstancePublicPorts(params: Lightsail.Types.CloseInstancePublicPortsRequest, callback?: (err: AWSError, data: Lightsail.Types.CloseInstancePublicPortsResult) => void): Request<Lightsail.Types.CloseInstancePublicPortsResult, AWSError>;
   /**
-   * Closes ports for a specific Amazon Lightsail instance. The CloseInstancePublicPorts action supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
+   * Closes ports for a specific Amazon Lightsail instance. The CloseInstancePublicPorts action supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Amazon Lightsail Developer Guide.
    */
   closeInstancePublicPorts(callback?: (err: AWSError, data: Lightsail.Types.CloseInstancePublicPortsResult) => void): Request<Lightsail.Types.CloseInstancePublicPortsResult, AWSError>;
   /**
-   * Copies a manual snapshot of an instance or disk as another manual snapshot, or copies an automatic snapshot of an instance or disk as a manual snapshot. This operation can also be used to copy a manual or automatic snapshot of an instance or a disk from one AWS Region to another in Amazon Lightsail. When copying a manual snapshot, be sure to define the source region, source snapshot name, and target snapshot name parameters. When copying an automatic snapshot, be sure to define the source region, source resource name, target snapshot name, and either the restore date or the use latest restorable auto snapshot parameters.
+   * Copies a manual snapshot of an instance or disk as another manual snapshot, or copies an automatic snapshot of an instance or disk as a manual snapshot. This operation can also be used to copy a manual or automatic snapshot of an instance or a disk from one Amazon Web Services Region to another in Amazon Lightsail. When copying a manual snapshot, be sure to define the source region, source snapshot name, and target snapshot name parameters. When copying an automatic snapshot, be sure to define the source region, source resource name, target snapshot name, and either the restore date or the use latest restorable auto snapshot parameters.
    */
   copySnapshot(params: Lightsail.Types.CopySnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.CopySnapshotResult) => void): Request<Lightsail.Types.CopySnapshotResult, AWSError>;
   /**
-   * Copies a manual snapshot of an instance or disk as another manual snapshot, or copies an automatic snapshot of an instance or disk as a manual snapshot. This operation can also be used to copy a manual or automatic snapshot of an instance or a disk from one AWS Region to another in Amazon Lightsail. When copying a manual snapshot, be sure to define the source region, source snapshot name, and target snapshot name parameters. When copying an automatic snapshot, be sure to define the source region, source resource name, target snapshot name, and either the restore date or the use latest restorable auto snapshot parameters.
+   * Copies a manual snapshot of an instance or disk as another manual snapshot, or copies an automatic snapshot of an instance or disk as a manual snapshot. This operation can also be used to copy a manual or automatic snapshot of an instance or a disk from one Amazon Web Services Region to another in Amazon Lightsail. When copying a manual snapshot, be sure to define the source region, source snapshot name, and target snapshot name parameters. When copying an automatic snapshot, be sure to define the source region, source resource name, target snapshot name, and either the restore date or the use latest restorable auto snapshot parameters.
    */
   copySnapshot(callback?: (err: AWSError, data: Lightsail.Types.CopySnapshotResult) => void): Request<Lightsail.Types.CopySnapshotResult, AWSError>;
   /**
-   * Creates an SSL/TLS certificate for a Amazon Lightsail content delivery network (CDN) distribution. After the certificate is created, use the AttachCertificateToDistribution action to attach the certificate to your distribution.  Only certificates created in the us-east-1 AWS Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any AWS Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
+   * Creates an Amazon Lightsail bucket. A bucket is a cloud storage resource available in the Lightsail object storage service. Use buckets to store objects such as data and its descriptive metadata. For more information about buckets, see Buckets in Amazon Lightsail in the Amazon Lightsail Developer Guide.
+   */
+  createBucket(params: Lightsail.Types.CreateBucketRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateBucketResult) => void): Request<Lightsail.Types.CreateBucketResult, AWSError>;
+  /**
+   * Creates an Amazon Lightsail bucket. A bucket is a cloud storage resource available in the Lightsail object storage service. Use buckets to store objects such as data and its descriptive metadata. For more information about buckets, see Buckets in Amazon Lightsail in the Amazon Lightsail Developer Guide.
+   */
+  createBucket(callback?: (err: AWSError, data: Lightsail.Types.CreateBucketResult) => void): Request<Lightsail.Types.CreateBucketResult, AWSError>;
+  /**
+   * Creates a new access key for the specified Amazon Lightsail bucket. Access keys consist of an access key ID and corresponding secret access key. Access keys grant full programmatic access to the specified bucket and its objects. You can have a maximum of two access keys per bucket. Use the GetBucketAccessKeys action to get a list of current access keys for a specific bucket. For more information about access keys, see Creating access keys for a bucket in Amazon Lightsail in the Amazon Lightsail Developer Guide.  The secretAccessKey value is returned only in response to the CreateBucketAccessKey action. You can get a secret access key only when you first create an access key; you cannot get the secret access key later. If you lose the secret access key, you must create a new access key. 
+   */
+  createBucketAccessKey(params: Lightsail.Types.CreateBucketAccessKeyRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateBucketAccessKeyResult) => void): Request<Lightsail.Types.CreateBucketAccessKeyResult, AWSError>;
+  /**
+   * Creates a new access key for the specified Amazon Lightsail bucket. Access keys consist of an access key ID and corresponding secret access key. Access keys grant full programmatic access to the specified bucket and its objects. You can have a maximum of two access keys per bucket. Use the GetBucketAccessKeys action to get a list of current access keys for a specific bucket. For more information about access keys, see Creating access keys for a bucket in Amazon Lightsail in the Amazon Lightsail Developer Guide.  The secretAccessKey value is returned only in response to the CreateBucketAccessKey action. You can get a secret access key only when you first create an access key; you cannot get the secret access key later. If you lose the secret access key, you must create a new access key. 
+   */
+  createBucketAccessKey(callback?: (err: AWSError, data: Lightsail.Types.CreateBucketAccessKeyResult) => void): Request<Lightsail.Types.CreateBucketAccessKeyResult, AWSError>;
+  /**
+   * Creates an SSL/TLS certificate for an Amazon Lightsail content delivery network (CDN) distribution and a container service. After the certificate is valid, use the AttachCertificateToDistribution action to use the certificate and its domains with your distribution. Or use the UpdateContainerService action to use the certificate and its domains with your container service.  Only certificates created in the us-east-1 Amazon Web Services Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any Amazon Web Services Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
    */
   createCertificate(params: Lightsail.Types.CreateCertificateRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateCertificateResult) => void): Request<Lightsail.Types.CreateCertificateResult, AWSError>;
   /**
-   * Creates an SSL/TLS certificate for a Amazon Lightsail content delivery network (CDN) distribution. After the certificate is created, use the AttachCertificateToDistribution action to attach the certificate to your distribution.  Only certificates created in the us-east-1 AWS Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any AWS Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
+   * Creates an SSL/TLS certificate for an Amazon Lightsail content delivery network (CDN) distribution and a container service. After the certificate is valid, use the AttachCertificateToDistribution action to use the certificate and its domains with your distribution. Or use the UpdateContainerService action to use the certificate and its domains with your container service.  Only certificates created in the us-east-1 Amazon Web Services Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any Amazon Web Services Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
    */
   createCertificate(callback?: (err: AWSError, data: Lightsail.Types.CreateCertificateResult) => void): Request<Lightsail.Types.CreateCertificateResult, AWSError>;
   /**
@@ -92,11 +108,11 @@ declare class Lightsail extends Service {
    */
   createCloudFormationStack(callback?: (err: AWSError, data: Lightsail.Types.CreateCloudFormationStackResult) => void): Request<Lightsail.Types.CreateCloudFormationStackResult, AWSError>;
   /**
-   * Creates an email or SMS text message contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
+   * Creates an email or SMS text message contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
    */
   createContactMethod(params: Lightsail.Types.CreateContactMethodRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateContactMethodResult) => void): Request<Lightsail.Types.CreateContactMethodResult, AWSError>;
   /**
-   * Creates an email or SMS text message contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
+   * Creates an email or SMS text message contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
    */
   createContactMethod(callback?: (err: AWSError, data: Lightsail.Types.CreateContactMethodResult) => void): Request<Lightsail.Types.CreateContactMethodResult, AWSError>;
   /**
@@ -108,43 +124,43 @@ declare class Lightsail extends Service {
    */
   createContainerService(callback?: (err: AWSError, data: Lightsail.Types.CreateContainerServiceResult) => void): Request<Lightsail.Types.CreateContainerServiceResult, AWSError>;
   /**
-   * Creates a deployment for your Amazon Lightsail container service. A deployment specifies the containers that will be launched on the container service and their settings, such as the ports to open, the environment variables to apply, and the launch command to run. It also specifies the container that will serve as the public endpoint of the deployment and its settings, such as the HTTP or HTTPS port to use, and the health check configuration. You can deploy containers to your container service using container images from a public registry like Docker Hub, or from your local machine. For more information, see Creating container images for your Amazon Lightsail container services in the Lightsail Dev Guide.
+   * Creates a deployment for your Amazon Lightsail container service. A deployment specifies the containers that will be launched on the container service and their settings, such as the ports to open, the environment variables to apply, and the launch command to run. It also specifies the container that will serve as the public endpoint of the deployment and its settings, such as the HTTP or HTTPS port to use, and the health check configuration. You can deploy containers to your container service using container images from a public registry such as Amazon ECR Public, or from your local machine. For more information, see Creating container images for your Amazon Lightsail container services in the Amazon Lightsail Developer Guide.
    */
   createContainerServiceDeployment(params: Lightsail.Types.CreateContainerServiceDeploymentRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateContainerServiceDeploymentResult) => void): Request<Lightsail.Types.CreateContainerServiceDeploymentResult, AWSError>;
   /**
-   * Creates a deployment for your Amazon Lightsail container service. A deployment specifies the containers that will be launched on the container service and their settings, such as the ports to open, the environment variables to apply, and the launch command to run. It also specifies the container that will serve as the public endpoint of the deployment and its settings, such as the HTTP or HTTPS port to use, and the health check configuration. You can deploy containers to your container service using container images from a public registry like Docker Hub, or from your local machine. For more information, see Creating container images for your Amazon Lightsail container services in the Lightsail Dev Guide.
+   * Creates a deployment for your Amazon Lightsail container service. A deployment specifies the containers that will be launched on the container service and their settings, such as the ports to open, the environment variables to apply, and the launch command to run. It also specifies the container that will serve as the public endpoint of the deployment and its settings, such as the HTTP or HTTPS port to use, and the health check configuration. You can deploy containers to your container service using container images from a public registry such as Amazon ECR Public, or from your local machine. For more information, see Creating container images for your Amazon Lightsail container services in the Amazon Lightsail Developer Guide.
    */
   createContainerServiceDeployment(callback?: (err: AWSError, data: Lightsail.Types.CreateContainerServiceDeploymentResult) => void): Request<Lightsail.Types.CreateContainerServiceDeploymentResult, AWSError>;
   /**
-   * Creates a temporary set of log in credentials that you can use to log in to the Docker process on your local machine. After you're logged in, you can use the native Docker commands to push your local container images to the container image registry of your Amazon Lightsail account so that you can use them with your Lightsail container service. The log in credentials expire 12 hours after they are created, at which point you will need to create a new set of log in credentials.  You can only push container images to the container service registry of your Lightsail account. You cannot pull container images perform any other container image management actions on the container service registry of your Lightsail account.  After you push your container images to the container image registry of your Lightsail account, use the RegisterContainerImage action to register the pushed images to a specific Lightsail container service.  This action is not required if you install and use the Lightsail Control (lightsailctl) plugin to push container images to your Lightsail container service. For more information, see Pushing and managing container images on your Amazon Lightsail container services in the Lightsail Dev Guide. 
+   * Creates a temporary set of log in credentials that you can use to log in to the Docker process on your local machine. After you're logged in, you can use the native Docker commands to push your local container images to the container image registry of your Amazon Lightsail account so that you can use them with your Lightsail container service. The log in credentials expire 12 hours after they are created, at which point you will need to create a new set of log in credentials.  You can only push container images to the container service registry of your Lightsail account. You cannot pull container images or perform any other container image management actions on the container service registry.  After you push your container images to the container image registry of your Lightsail account, use the RegisterContainerImage action to register the pushed images to a specific Lightsail container service.  This action is not required if you install and use the Lightsail Control (lightsailctl) plugin to push container images to your Lightsail container service. For more information, see Pushing and managing container images on your Amazon Lightsail container services in the Amazon Lightsail Developer Guide. 
    */
   createContainerServiceRegistryLogin(params: Lightsail.Types.CreateContainerServiceRegistryLoginRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateContainerServiceRegistryLoginResult) => void): Request<Lightsail.Types.CreateContainerServiceRegistryLoginResult, AWSError>;
   /**
-   * Creates a temporary set of log in credentials that you can use to log in to the Docker process on your local machine. After you're logged in, you can use the native Docker commands to push your local container images to the container image registry of your Amazon Lightsail account so that you can use them with your Lightsail container service. The log in credentials expire 12 hours after they are created, at which point you will need to create a new set of log in credentials.  You can only push container images to the container service registry of your Lightsail account. You cannot pull container images perform any other container image management actions on the container service registry of your Lightsail account.  After you push your container images to the container image registry of your Lightsail account, use the RegisterContainerImage action to register the pushed images to a specific Lightsail container service.  This action is not required if you install and use the Lightsail Control (lightsailctl) plugin to push container images to your Lightsail container service. For more information, see Pushing and managing container images on your Amazon Lightsail container services in the Lightsail Dev Guide. 
+   * Creates a temporary set of log in credentials that you can use to log in to the Docker process on your local machine. After you're logged in, you can use the native Docker commands to push your local container images to the container image registry of your Amazon Lightsail account so that you can use them with your Lightsail container service. The log in credentials expire 12 hours after they are created, at which point you will need to create a new set of log in credentials.  You can only push container images to the container service registry of your Lightsail account. You cannot pull container images or perform any other container image management actions on the container service registry.  After you push your container images to the container image registry of your Lightsail account, use the RegisterContainerImage action to register the pushed images to a specific Lightsail container service.  This action is not required if you install and use the Lightsail Control (lightsailctl) plugin to push container images to your Lightsail container service. For more information, see Pushing and managing container images on your Amazon Lightsail container services in the Amazon Lightsail Developer Guide. 
    */
   createContainerServiceRegistryLogin(callback?: (err: AWSError, data: Lightsail.Types.CreateContainerServiceRegistryLoginResult) => void): Request<Lightsail.Types.CreateContainerServiceRegistryLoginResult, AWSError>;
   /**
-   * Creates a block storage disk that can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g., us-east-2a). The create disk operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
+   * Creates a block storage disk that can be attached to an Amazon Lightsail instance in the same Availability Zone (us-east-2a). The create disk operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
    */
   createDisk(params: Lightsail.Types.CreateDiskRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateDiskResult) => void): Request<Lightsail.Types.CreateDiskResult, AWSError>;
   /**
-   * Creates a block storage disk that can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g., us-east-2a). The create disk operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
+   * Creates a block storage disk that can be attached to an Amazon Lightsail instance in the same Availability Zone (us-east-2a). The create disk operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
    */
   createDisk(callback?: (err: AWSError, data: Lightsail.Types.CreateDiskResult) => void): Request<Lightsail.Types.CreateDiskResult, AWSError>;
   /**
-   * Creates a block storage disk from a manual or automatic snapshot of a disk. The resulting disk can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g., us-east-2a). The create disk from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by disk snapshot name. For more information, see the Lightsail Dev Guide.
+   * Creates a block storage disk from a manual or automatic snapshot of a disk. The resulting disk can be attached to an Amazon Lightsail instance in the same Availability Zone (us-east-2a). The create disk from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by disk snapshot name. For more information, see the Amazon Lightsail Developer Guide.
    */
   createDiskFromSnapshot(params: Lightsail.Types.CreateDiskFromSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateDiskFromSnapshotResult) => void): Request<Lightsail.Types.CreateDiskFromSnapshotResult, AWSError>;
   /**
-   * Creates a block storage disk from a manual or automatic snapshot of a disk. The resulting disk can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g., us-east-2a). The create disk from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by disk snapshot name. For more information, see the Lightsail Dev Guide.
+   * Creates a block storage disk from a manual or automatic snapshot of a disk. The resulting disk can be attached to an Amazon Lightsail instance in the same Availability Zone (us-east-2a). The create disk from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by disk snapshot name. For more information, see the Amazon Lightsail Developer Guide.
    */
   createDiskFromSnapshot(callback?: (err: AWSError, data: Lightsail.Types.CreateDiskFromSnapshotResult) => void): Request<Lightsail.Types.CreateDiskFromSnapshotResult, AWSError>;
   /**
-   * Creates a snapshot of a block storage disk. You can use snapshots for backups, to make copies of disks, and to save data before shutting down a Lightsail instance. You can take a snapshot of an attached disk that is in use; however, snapshots only capture data that has been written to your disk at the time the snapshot command is issued. This may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the disk long enough to take a snapshot, your snapshot should be complete. Nevertheless, if you cannot pause all file writes to the disk, you should unmount the disk from within the Lightsail instance, issue the create disk snapshot command, and then remount the disk to ensure a consistent and complete snapshot. You may remount and use your disk while the snapshot status is pending. You can also use this operation to create a snapshot of an instance's system volume. You might want to do this, for example, to recover data from the system volume of a botched instance or to create a backup of the system volume like you would for a block storage disk. To create a snapshot of a system volume, just define the instance name parameter when issuing the snapshot command, and a snapshot of the defined instance's system volume will be created. After the snapshot is available, you can create a block storage disk from the snapshot and attach it to a running instance to access the data on the disk. The create disk snapshot operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
+   * Creates a snapshot of a block storage disk. You can use snapshots for backups, to make copies of disks, and to save data before shutting down a Lightsail instance. You can take a snapshot of an attached disk that is in use; however, snapshots only capture data that has been written to your disk at the time the snapshot command is issued. This may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the disk long enough to take a snapshot, your snapshot should be complete. Nevertheless, if you cannot pause all file writes to the disk, you should unmount the disk from within the Lightsail instance, issue the create disk snapshot command, and then remount the disk to ensure a consistent and complete snapshot. You may remount and use your disk while the snapshot status is pending. You can also use this operation to create a snapshot of an instance's system volume. You might want to do this, for example, to recover data from the system volume of a botched instance or to create a backup of the system volume like you would for a block storage disk. To create a snapshot of a system volume, just define the instance name parameter when issuing the snapshot command, and a snapshot of the defined instance's system volume will be created. After the snapshot is available, you can create a block storage disk from the snapshot and attach it to a running instance to access the data on the disk. The create disk snapshot operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
    */
   createDiskSnapshot(params: Lightsail.Types.CreateDiskSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateDiskSnapshotResult) => void): Request<Lightsail.Types.CreateDiskSnapshotResult, AWSError>;
   /**
-   * Creates a snapshot of a block storage disk. You can use snapshots for backups, to make copies of disks, and to save data before shutting down a Lightsail instance. You can take a snapshot of an attached disk that is in use; however, snapshots only capture data that has been written to your disk at the time the snapshot command is issued. This may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the disk long enough to take a snapshot, your snapshot should be complete. Nevertheless, if you cannot pause all file writes to the disk, you should unmount the disk from within the Lightsail instance, issue the create disk snapshot command, and then remount the disk to ensure a consistent and complete snapshot. You may remount and use your disk while the snapshot status is pending. You can also use this operation to create a snapshot of an instance's system volume. You might want to do this, for example, to recover data from the system volume of a botched instance or to create a backup of the system volume like you would for a block storage disk. To create a snapshot of a system volume, just define the instance name parameter when issuing the snapshot command, and a snapshot of the defined instance's system volume will be created. After the snapshot is available, you can create a block storage disk from the snapshot and attach it to a running instance to access the data on the disk. The create disk snapshot operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
+   * Creates a snapshot of a block storage disk. You can use snapshots for backups, to make copies of disks, and to save data before shutting down a Lightsail instance. You can take a snapshot of an attached disk that is in use; however, snapshots only capture data that has been written to your disk at the time the snapshot command is issued. This may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the disk long enough to take a snapshot, your snapshot should be complete. Nevertheless, if you cannot pause all file writes to the disk, you should unmount the disk from within the Lightsail instance, issue the create disk snapshot command, and then remount the disk to ensure a consistent and complete snapshot. You may remount and use your disk while the snapshot status is pending. You can also use this operation to create a snapshot of an instance's system volume. You might want to do this, for example, to recover data from the system volume of a botched instance or to create a backup of the system volume like you would for a block storage disk. To create a snapshot of a system volume, just define the instance name parameter when issuing the snapshot command, and a snapshot of the defined instance's system volume will be created. After the snapshot is available, you can create a block storage disk from the snapshot and attach it to a running instance to access the data on the disk. The create disk snapshot operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
    */
   createDiskSnapshot(callback?: (err: AWSError, data: Lightsail.Types.CreateDiskSnapshotResult) => void): Request<Lightsail.Types.CreateDiskSnapshotResult, AWSError>;
   /**
@@ -156,91 +172,99 @@ declare class Lightsail extends Service {
    */
   createDistribution(callback?: (err: AWSError, data: Lightsail.Types.CreateDistributionResult) => void): Request<Lightsail.Types.CreateDistributionResult, AWSError>;
   /**
-   * Creates a domain resource for the specified domain (e.g., example.com). The create domain operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
+   * Creates a domain resource for the specified domain (example.com). The create domain operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
    */
   createDomain(params: Lightsail.Types.CreateDomainRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateDomainResult) => void): Request<Lightsail.Types.CreateDomainResult, AWSError>;
   /**
-   * Creates a domain resource for the specified domain (e.g., example.com). The create domain operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
+   * Creates a domain resource for the specified domain (example.com). The create domain operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
    */
   createDomain(callback?: (err: AWSError, data: Lightsail.Types.CreateDomainResult) => void): Request<Lightsail.Types.CreateDomainResult, AWSError>;
   /**
-   * Creates one of the following domain name system (DNS) records in a domain DNS zone: Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT). The create domain entry operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Lightsail Dev Guide.
+   * Creates one of the following domain name system (DNS) records in a domain DNS zone: Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT). The create domain entry operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Amazon Lightsail Developer Guide.
    */
   createDomainEntry(params: Lightsail.Types.CreateDomainEntryRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateDomainEntryResult) => void): Request<Lightsail.Types.CreateDomainEntryResult, AWSError>;
   /**
-   * Creates one of the following domain name system (DNS) records in a domain DNS zone: Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT). The create domain entry operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Lightsail Dev Guide.
+   * Creates one of the following domain name system (DNS) records in a domain DNS zone: Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT). The create domain entry operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Amazon Lightsail Developer Guide.
    */
   createDomainEntry(callback?: (err: AWSError, data: Lightsail.Types.CreateDomainEntryResult) => void): Request<Lightsail.Types.CreateDomainEntryResult, AWSError>;
   /**
-   * Creates a snapshot of a specific virtual private server, or instance. You can use a snapshot to create a new instance that is based on that snapshot. The create instance snapshot operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
+   * Creates two URLs that are used to access a virtual computer’s graphical user interface (GUI) session. The primary URL initiates a web-based NICE DCV session to the virtual computer's application. The secondary URL initiates a web-based NICE DCV session to the virtual computer's operating session.  Use StartGUISession to open the session.
+   */
+  createGUISessionAccessDetails(params: Lightsail.Types.CreateGUISessionAccessDetailsRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateGUISessionAccessDetailsResult) => void): Request<Lightsail.Types.CreateGUISessionAccessDetailsResult, AWSError>;
+  /**
+   * Creates two URLs that are used to access a virtual computer’s graphical user interface (GUI) session. The primary URL initiates a web-based NICE DCV session to the virtual computer's application. The secondary URL initiates a web-based NICE DCV session to the virtual computer's operating session.  Use StartGUISession to open the session.
+   */
+  createGUISessionAccessDetails(callback?: (err: AWSError, data: Lightsail.Types.CreateGUISessionAccessDetailsResult) => void): Request<Lightsail.Types.CreateGUISessionAccessDetailsResult, AWSError>;
+  /**
+   * Creates a snapshot of a specific virtual private server, or instance. You can use a snapshot to create a new instance that is based on that snapshot. The create instance snapshot operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
    */
   createInstanceSnapshot(params: Lightsail.Types.CreateInstanceSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateInstanceSnapshotResult) => void): Request<Lightsail.Types.CreateInstanceSnapshotResult, AWSError>;
   /**
-   * Creates a snapshot of a specific virtual private server, or instance. You can use a snapshot to create a new instance that is based on that snapshot. The create instance snapshot operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
+   * Creates a snapshot of a specific virtual private server, or instance. You can use a snapshot to create a new instance that is based on that snapshot. The create instance snapshot operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
    */
   createInstanceSnapshot(callback?: (err: AWSError, data: Lightsail.Types.CreateInstanceSnapshotResult) => void): Request<Lightsail.Types.CreateInstanceSnapshotResult, AWSError>;
   /**
-   * Creates one or more Amazon Lightsail instances. The create instances operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
+   * Creates one or more Amazon Lightsail instances. The create instances operation supports tag-based access control via request tags. For more information, see the Lightsail Developer Guide.
    */
   createInstances(params: Lightsail.Types.CreateInstancesRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateInstancesResult) => void): Request<Lightsail.Types.CreateInstancesResult, AWSError>;
   /**
-   * Creates one or more Amazon Lightsail instances. The create instances operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
+   * Creates one or more Amazon Lightsail instances. The create instances operation supports tag-based access control via request tags. For more information, see the Lightsail Developer Guide.
    */
   createInstances(callback?: (err: AWSError, data: Lightsail.Types.CreateInstancesResult) => void): Request<Lightsail.Types.CreateInstancesResult, AWSError>;
   /**
-   * Creates one or more new instances from a manual or automatic snapshot of an instance. The create instances from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by instance snapshot name. For more information, see the Lightsail Dev Guide.
+   * Creates one or more new instances from a manual or automatic snapshot of an instance. The create instances from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by instance snapshot name. For more information, see the Amazon Lightsail Developer Guide.
    */
   createInstancesFromSnapshot(params: Lightsail.Types.CreateInstancesFromSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateInstancesFromSnapshotResult) => void): Request<Lightsail.Types.CreateInstancesFromSnapshotResult, AWSError>;
   /**
-   * Creates one or more new instances from a manual or automatic snapshot of an instance. The create instances from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by instance snapshot name. For more information, see the Lightsail Dev Guide.
+   * Creates one or more new instances from a manual or automatic snapshot of an instance. The create instances from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by instance snapshot name. For more information, see the Amazon Lightsail Developer Guide.
    */
   createInstancesFromSnapshot(callback?: (err: AWSError, data: Lightsail.Types.CreateInstancesFromSnapshotResult) => void): Request<Lightsail.Types.CreateInstancesFromSnapshotResult, AWSError>;
   /**
-   * Creates an SSH key pair. The create key pair operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
+   * Creates a custom SSH key pair that you can use with an Amazon Lightsail instance.  Use the DownloadDefaultKeyPair action to create a Lightsail default key pair in an Amazon Web Services Region where a default key pair does not currently exist.  The create key pair operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
    */
   createKeyPair(params: Lightsail.Types.CreateKeyPairRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateKeyPairResult) => void): Request<Lightsail.Types.CreateKeyPairResult, AWSError>;
   /**
-   * Creates an SSH key pair. The create key pair operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
+   * Creates a custom SSH key pair that you can use with an Amazon Lightsail instance.  Use the DownloadDefaultKeyPair action to create a Lightsail default key pair in an Amazon Web Services Region where a default key pair does not currently exist.  The create key pair operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
    */
   createKeyPair(callback?: (err: AWSError, data: Lightsail.Types.CreateKeyPairResult) => void): Request<Lightsail.Types.CreateKeyPairResult, AWSError>;
   /**
-   * Creates a Lightsail load balancer. To learn more about deciding whether to load balance your application, see Configure your Lightsail instances for load balancing. You can create up to 5 load balancers per AWS Region in your account. When you create a load balancer, you can specify a unique name and port settings. To change additional load balancer settings, use the UpdateLoadBalancerAttribute operation. The create load balancer operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
+   * Creates a Lightsail load balancer. To learn more about deciding whether to load balance your application, see Configure your Lightsail instances for load balancing. You can create up to 5 load balancers per AWS Region in your account. When you create a load balancer, you can specify a unique name and port settings. To change additional load balancer settings, use the UpdateLoadBalancerAttribute operation. The create load balancer operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
    */
   createLoadBalancer(params: Lightsail.Types.CreateLoadBalancerRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateLoadBalancerResult) => void): Request<Lightsail.Types.CreateLoadBalancerResult, AWSError>;
   /**
-   * Creates a Lightsail load balancer. To learn more about deciding whether to load balance your application, see Configure your Lightsail instances for load balancing. You can create up to 5 load balancers per AWS Region in your account. When you create a load balancer, you can specify a unique name and port settings. To change additional load balancer settings, use the UpdateLoadBalancerAttribute operation. The create load balancer operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
+   * Creates a Lightsail load balancer. To learn more about deciding whether to load balance your application, see Configure your Lightsail instances for load balancing. You can create up to 5 load balancers per AWS Region in your account. When you create a load balancer, you can specify a unique name and port settings. To change additional load balancer settings, use the UpdateLoadBalancerAttribute operation. The create load balancer operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
    */
   createLoadBalancer(callback?: (err: AWSError, data: Lightsail.Types.CreateLoadBalancerResult) => void): Request<Lightsail.Types.CreateLoadBalancerResult, AWSError>;
   /**
-   * Creates a Lightsail load balancer TLS certificate. TLS is just an updated, more secure version of Secure Socket Layer (SSL). The CreateLoadBalancerTlsCertificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
+   * Creates an SSL/TLS certificate for an Amazon Lightsail load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL). The CreateLoadBalancerTlsCertificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Amazon Lightsail Developer Guide.
    */
   createLoadBalancerTlsCertificate(params: Lightsail.Types.CreateLoadBalancerTlsCertificateRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.CreateLoadBalancerTlsCertificateResult, AWSError>;
   /**
-   * Creates a Lightsail load balancer TLS certificate. TLS is just an updated, more secure version of Secure Socket Layer (SSL). The CreateLoadBalancerTlsCertificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
+   * Creates an SSL/TLS certificate for an Amazon Lightsail load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL). The CreateLoadBalancerTlsCertificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Amazon Lightsail Developer Guide.
    */
   createLoadBalancerTlsCertificate(callback?: (err: AWSError, data: Lightsail.Types.CreateLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.CreateLoadBalancerTlsCertificateResult, AWSError>;
   /**
-   * Creates a new database in Amazon Lightsail. The create relational database operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
+   * Creates a new database in Amazon Lightsail. The create relational database operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
    */
   createRelationalDatabase(params: Lightsail.Types.CreateRelationalDatabaseRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateRelationalDatabaseResult) => void): Request<Lightsail.Types.CreateRelationalDatabaseResult, AWSError>;
   /**
-   * Creates a new database in Amazon Lightsail. The create relational database operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
+   * Creates a new database in Amazon Lightsail. The create relational database operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
    */
   createRelationalDatabase(callback?: (err: AWSError, data: Lightsail.Types.CreateRelationalDatabaseResult) => void): Request<Lightsail.Types.CreateRelationalDatabaseResult, AWSError>;
   /**
-   * Creates a new database from an existing database snapshot in Amazon Lightsail. You can create a new database from a snapshot in if something goes wrong with your original database, or to change it to a different plan, such as a high availability or standard plan. The create relational database from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by relationalDatabaseSnapshotName. For more information, see the Lightsail Dev Guide.
+   * Creates a new database from an existing database snapshot in Amazon Lightsail. You can create a new database from a snapshot in if something goes wrong with your original database, or to change it to a different plan, such as a high availability or standard plan. The create relational database from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by relationalDatabaseSnapshotName. For more information, see the Amazon Lightsail Developer Guide.
    */
   createRelationalDatabaseFromSnapshot(params: Lightsail.Types.CreateRelationalDatabaseFromSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateRelationalDatabaseFromSnapshotResult) => void): Request<Lightsail.Types.CreateRelationalDatabaseFromSnapshotResult, AWSError>;
   /**
-   * Creates a new database from an existing database snapshot in Amazon Lightsail. You can create a new database from a snapshot in if something goes wrong with your original database, or to change it to a different plan, such as a high availability or standard plan. The create relational database from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by relationalDatabaseSnapshotName. For more information, see the Lightsail Dev Guide.
+   * Creates a new database from an existing database snapshot in Amazon Lightsail. You can create a new database from a snapshot in if something goes wrong with your original database, or to change it to a different plan, such as a high availability or standard plan. The create relational database from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by relationalDatabaseSnapshotName. For more information, see the Amazon Lightsail Developer Guide.
    */
   createRelationalDatabaseFromSnapshot(callback?: (err: AWSError, data: Lightsail.Types.CreateRelationalDatabaseFromSnapshotResult) => void): Request<Lightsail.Types.CreateRelationalDatabaseFromSnapshotResult, AWSError>;
   /**
-   * Creates a snapshot of your database in Amazon Lightsail. You can use snapshots for backups, to make copies of a database, and to save data before deleting a database. The create relational database snapshot operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
+   * Creates a snapshot of your database in Amazon Lightsail. You can use snapshots for backups, to make copies of a database, and to save data before deleting a database. The create relational database snapshot operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
    */
   createRelationalDatabaseSnapshot(params: Lightsail.Types.CreateRelationalDatabaseSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateRelationalDatabaseSnapshotResult) => void): Request<Lightsail.Types.CreateRelationalDatabaseSnapshotResult, AWSError>;
   /**
-   * Creates a snapshot of your database in Amazon Lightsail. You can use snapshots for backups, to make copies of a database, and to save data before deleting a database. The create relational database snapshot operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
+   * Creates a snapshot of your database in Amazon Lightsail. You can use snapshots for backups, to make copies of a database, and to save data before deleting a database. The create relational database snapshot operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
    */
   createRelationalDatabaseSnapshot(callback?: (err: AWSError, data: Lightsail.Types.CreateRelationalDatabaseSnapshotResult) => void): Request<Lightsail.Types.CreateRelationalDatabaseSnapshotResult, AWSError>;
   /**
@@ -252,13 +276,29 @@ declare class Lightsail extends Service {
    */
   deleteAlarm(callback?: (err: AWSError, data: Lightsail.Types.DeleteAlarmResult) => void): Request<Lightsail.Types.DeleteAlarmResult, AWSError>;
   /**
-   * Deletes an automatic snapshot of an instance or disk. For more information, see the Lightsail Dev Guide.
+   * Deletes an automatic snapshot of an instance or disk. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteAutoSnapshot(params: Lightsail.Types.DeleteAutoSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteAutoSnapshotResult) => void): Request<Lightsail.Types.DeleteAutoSnapshotResult, AWSError>;
   /**
-   * Deletes an automatic snapshot of an instance or disk. For more information, see the Lightsail Dev Guide.
+   * Deletes an automatic snapshot of an instance or disk. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteAutoSnapshot(callback?: (err: AWSError, data: Lightsail.Types.DeleteAutoSnapshotResult) => void): Request<Lightsail.Types.DeleteAutoSnapshotResult, AWSError>;
+  /**
+   * Deletes a Amazon Lightsail bucket.  When you delete your bucket, the bucket name is released and can be reused for a new bucket in your account or another Amazon Web Services account. 
+   */
+  deleteBucket(params: Lightsail.Types.DeleteBucketRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteBucketResult) => void): Request<Lightsail.Types.DeleteBucketResult, AWSError>;
+  /**
+   * Deletes a Amazon Lightsail bucket.  When you delete your bucket, the bucket name is released and can be reused for a new bucket in your account or another Amazon Web Services account. 
+   */
+  deleteBucket(callback?: (err: AWSError, data: Lightsail.Types.DeleteBucketResult) => void): Request<Lightsail.Types.DeleteBucketResult, AWSError>;
+  /**
+   * Deletes an access key for the specified Amazon Lightsail bucket. We recommend that you delete an access key if the secret access key is compromised. For more information about access keys, see Creating access keys for a bucket in Amazon Lightsail in the Amazon Lightsail Developer Guide.
+   */
+  deleteBucketAccessKey(params: Lightsail.Types.DeleteBucketAccessKeyRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteBucketAccessKeyResult) => void): Request<Lightsail.Types.DeleteBucketAccessKeyResult, AWSError>;
+  /**
+   * Deletes an access key for the specified Amazon Lightsail bucket. We recommend that you delete an access key if the secret access key is compromised. For more information about access keys, see Creating access keys for a bucket in Amazon Lightsail in the Amazon Lightsail Developer Guide.
+   */
+  deleteBucketAccessKey(callback?: (err: AWSError, data: Lightsail.Types.DeleteBucketAccessKeyResult) => void): Request<Lightsail.Types.DeleteBucketAccessKeyResult, AWSError>;
   /**
    * Deletes an SSL/TLS certificate for your Amazon Lightsail content delivery network (CDN) distribution. Certificates that are currently attached to a distribution cannot be deleted. Use the DetachCertificateFromDistribution action to detach a certificate from a distribution.
    */
@@ -268,11 +308,11 @@ declare class Lightsail extends Service {
    */
   deleteCertificate(callback?: (err: AWSError, data: Lightsail.Types.DeleteCertificateResult) => void): Request<Lightsail.Types.DeleteCertificateResult, AWSError>;
   /**
-   * Deletes a contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
+   * Deletes a contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
    */
   deleteContactMethod(params: Lightsail.Types.DeleteContactMethodRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteContactMethodResult) => void): Request<Lightsail.Types.DeleteContactMethodResult, AWSError>;
   /**
-   * Deletes a contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
+   * Deletes a contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
    */
   deleteContactMethod(callback?: (err: AWSError, data: Lightsail.Types.DeleteContactMethodResult) => void): Request<Lightsail.Types.DeleteContactMethodResult, AWSError>;
   /**
@@ -292,19 +332,19 @@ declare class Lightsail extends Service {
    */
   deleteContainerService(callback?: (err: AWSError, data: Lightsail.Types.DeleteContainerServiceResult) => void): Request<Lightsail.Types.DeleteContainerServiceResult, AWSError>;
   /**
-   * Deletes the specified block storage disk. The disk must be in the available state (not attached to a Lightsail instance).  The disk may remain in the deleting state for several minutes.  The delete disk operation supports tag-based access control via resource tags applied to the resource identified by disk name. For more information, see the Lightsail Dev Guide.
+   * Deletes the specified block storage disk. The disk must be in the available state (not attached to a Lightsail instance).  The disk may remain in the deleting state for several minutes.  The delete disk operation supports tag-based access control via resource tags applied to the resource identified by disk name. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteDisk(params: Lightsail.Types.DeleteDiskRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteDiskResult) => void): Request<Lightsail.Types.DeleteDiskResult, AWSError>;
   /**
-   * Deletes the specified block storage disk. The disk must be in the available state (not attached to a Lightsail instance).  The disk may remain in the deleting state for several minutes.  The delete disk operation supports tag-based access control via resource tags applied to the resource identified by disk name. For more information, see the Lightsail Dev Guide.
+   * Deletes the specified block storage disk. The disk must be in the available state (not attached to a Lightsail instance).  The disk may remain in the deleting state for several minutes.  The delete disk operation supports tag-based access control via resource tags applied to the resource identified by disk name. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteDisk(callback?: (err: AWSError, data: Lightsail.Types.DeleteDiskResult) => void): Request<Lightsail.Types.DeleteDiskResult, AWSError>;
   /**
-   * Deletes the specified disk snapshot. When you make periodic snapshots of a disk, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the disk. The delete disk snapshot operation supports tag-based access control via resource tags applied to the resource identified by disk snapshot name. For more information, see the Lightsail Dev Guide.
+   * Deletes the specified disk snapshot. When you make periodic snapshots of a disk, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the disk. The delete disk snapshot operation supports tag-based access control via resource tags applied to the resource identified by disk snapshot name. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteDiskSnapshot(params: Lightsail.Types.DeleteDiskSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteDiskSnapshotResult) => void): Request<Lightsail.Types.DeleteDiskSnapshotResult, AWSError>;
   /**
-   * Deletes the specified disk snapshot. When you make periodic snapshots of a disk, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the disk. The delete disk snapshot operation supports tag-based access control via resource tags applied to the resource identified by disk snapshot name. For more information, see the Lightsail Dev Guide.
+   * Deletes the specified disk snapshot. When you make periodic snapshots of a disk, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the disk. The delete disk snapshot operation supports tag-based access control via resource tags applied to the resource identified by disk snapshot name. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteDiskSnapshot(callback?: (err: AWSError, data: Lightsail.Types.DeleteDiskSnapshotResult) => void): Request<Lightsail.Types.DeleteDiskSnapshotResult, AWSError>;
   /**
@@ -316,43 +356,43 @@ declare class Lightsail extends Service {
    */
   deleteDistribution(callback?: (err: AWSError, data: Lightsail.Types.DeleteDistributionResult) => void): Request<Lightsail.Types.DeleteDistributionResult, AWSError>;
   /**
-   * Deletes the specified domain recordset and all of its domain records. The delete domain operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Lightsail Dev Guide.
+   * Deletes the specified domain recordset and all of its domain records. The delete domain operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteDomain(params: Lightsail.Types.DeleteDomainRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteDomainResult) => void): Request<Lightsail.Types.DeleteDomainResult, AWSError>;
   /**
-   * Deletes the specified domain recordset and all of its domain records. The delete domain operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Lightsail Dev Guide.
+   * Deletes the specified domain recordset and all of its domain records. The delete domain operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteDomain(callback?: (err: AWSError, data: Lightsail.Types.DeleteDomainResult) => void): Request<Lightsail.Types.DeleteDomainResult, AWSError>;
   /**
-   * Deletes a specific domain entry. The delete domain entry operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Lightsail Dev Guide.
+   * Deletes a specific domain entry. The delete domain entry operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteDomainEntry(params: Lightsail.Types.DeleteDomainEntryRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteDomainEntryResult) => void): Request<Lightsail.Types.DeleteDomainEntryResult, AWSError>;
   /**
-   * Deletes a specific domain entry. The delete domain entry operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Lightsail Dev Guide.
+   * Deletes a specific domain entry. The delete domain entry operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteDomainEntry(callback?: (err: AWSError, data: Lightsail.Types.DeleteDomainEntryResult) => void): Request<Lightsail.Types.DeleteDomainEntryResult, AWSError>;
   /**
-   * Deletes an Amazon Lightsail instance. The delete instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
+   * Deletes an Amazon Lightsail instance. The delete instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteInstance(params: Lightsail.Types.DeleteInstanceRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteInstanceResult) => void): Request<Lightsail.Types.DeleteInstanceResult, AWSError>;
   /**
-   * Deletes an Amazon Lightsail instance. The delete instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
+   * Deletes an Amazon Lightsail instance. The delete instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteInstance(callback?: (err: AWSError, data: Lightsail.Types.DeleteInstanceResult) => void): Request<Lightsail.Types.DeleteInstanceResult, AWSError>;
   /**
-   * Deletes a specific snapshot of a virtual private server (or instance). The delete instance snapshot operation supports tag-based access control via resource tags applied to the resource identified by instance snapshot name. For more information, see the Lightsail Dev Guide.
+   * Deletes a specific snapshot of a virtual private server (or instance). The delete instance snapshot operation supports tag-based access control via resource tags applied to the resource identified by instance snapshot name. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteInstanceSnapshot(params: Lightsail.Types.DeleteInstanceSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteInstanceSnapshotResult) => void): Request<Lightsail.Types.DeleteInstanceSnapshotResult, AWSError>;
   /**
-   * Deletes a specific snapshot of a virtual private server (or instance). The delete instance snapshot operation supports tag-based access control via resource tags applied to the resource identified by instance snapshot name. For more information, see the Lightsail Dev Guide.
+   * Deletes a specific snapshot of a virtual private server (or instance). The delete instance snapshot operation supports tag-based access control via resource tags applied to the resource identified by instance snapshot name. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteInstanceSnapshot(callback?: (err: AWSError, data: Lightsail.Types.DeleteInstanceSnapshotResult) => void): Request<Lightsail.Types.DeleteInstanceSnapshotResult, AWSError>;
   /**
-   * Deletes a specific SSH key pair. The delete key pair operation supports tag-based access control via resource tags applied to the resource identified by key pair name. For more information, see the Lightsail Dev Guide.
+   * Deletes the specified key pair by removing the public key from Amazon Lightsail. You can delete key pairs that were created using the ImportKeyPair and CreateKeyPair actions, as well as the Lightsail default key pair. A new default key pair will not be created unless you launch an instance without specifying a custom key pair, or you call the DownloadDefaultKeyPair API.  The delete key pair operation supports tag-based access control via resource tags applied to the resource identified by key pair name. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteKeyPair(params: Lightsail.Types.DeleteKeyPairRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteKeyPairResult) => void): Request<Lightsail.Types.DeleteKeyPairResult, AWSError>;
   /**
-   * Deletes a specific SSH key pair. The delete key pair operation supports tag-based access control via resource tags applied to the resource identified by key pair name. For more information, see the Lightsail Dev Guide.
+   * Deletes the specified key pair by removing the public key from Amazon Lightsail. You can delete key pairs that were created using the ImportKeyPair and CreateKeyPair actions, as well as the Lightsail default key pair. A new default key pair will not be created unless you launch an instance without specifying a custom key pair, or you call the DownloadDefaultKeyPair API.  The delete key pair operation supports tag-based access control via resource tags applied to the resource identified by key pair name. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteKeyPair(callback?: (err: AWSError, data: Lightsail.Types.DeleteKeyPairResult) => void): Request<Lightsail.Types.DeleteKeyPairResult, AWSError>;
   /**
@@ -364,35 +404,35 @@ declare class Lightsail extends Service {
    */
   deleteKnownHostKeys(callback?: (err: AWSError, data: Lightsail.Types.DeleteKnownHostKeysResult) => void): Request<Lightsail.Types.DeleteKnownHostKeysResult, AWSError>;
   /**
-   * Deletes a Lightsail load balancer and all its associated SSL/TLS certificates. Once the load balancer is deleted, you will need to create a new load balancer, create a new certificate, and verify domain ownership again. The delete load balancer operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
+   * Deletes a Lightsail load balancer and all its associated SSL/TLS certificates. Once the load balancer is deleted, you will need to create a new load balancer, create a new certificate, and verify domain ownership again. The delete load balancer operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteLoadBalancer(params: Lightsail.Types.DeleteLoadBalancerRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteLoadBalancerResult) => void): Request<Lightsail.Types.DeleteLoadBalancerResult, AWSError>;
   /**
-   * Deletes a Lightsail load balancer and all its associated SSL/TLS certificates. Once the load balancer is deleted, you will need to create a new load balancer, create a new certificate, and verify domain ownership again. The delete load balancer operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
+   * Deletes a Lightsail load balancer and all its associated SSL/TLS certificates. Once the load balancer is deleted, you will need to create a new load balancer, create a new certificate, and verify domain ownership again. The delete load balancer operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteLoadBalancer(callback?: (err: AWSError, data: Lightsail.Types.DeleteLoadBalancerResult) => void): Request<Lightsail.Types.DeleteLoadBalancerResult, AWSError>;
   /**
-   * Deletes an SSL/TLS certificate associated with a Lightsail load balancer. The DeleteLoadBalancerTlsCertificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
+   * Deletes an SSL/TLS certificate associated with a Lightsail load balancer. The DeleteLoadBalancerTlsCertificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteLoadBalancerTlsCertificate(params: Lightsail.Types.DeleteLoadBalancerTlsCertificateRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.DeleteLoadBalancerTlsCertificateResult, AWSError>;
   /**
-   * Deletes an SSL/TLS certificate associated with a Lightsail load balancer. The DeleteLoadBalancerTlsCertificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
+   * Deletes an SSL/TLS certificate associated with a Lightsail load balancer. The DeleteLoadBalancerTlsCertificate operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteLoadBalancerTlsCertificate(callback?: (err: AWSError, data: Lightsail.Types.DeleteLoadBalancerTlsCertificateResult) => void): Request<Lightsail.Types.DeleteLoadBalancerTlsCertificateResult, AWSError>;
   /**
-   * Deletes a database in Amazon Lightsail. The delete relational database operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Lightsail Dev Guide.
+   * Deletes a database in Amazon Lightsail. The delete relational database operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteRelationalDatabase(params: Lightsail.Types.DeleteRelationalDatabaseRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteRelationalDatabaseResult) => void): Request<Lightsail.Types.DeleteRelationalDatabaseResult, AWSError>;
   /**
-   * Deletes a database in Amazon Lightsail. The delete relational database operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Lightsail Dev Guide.
+   * Deletes a database in Amazon Lightsail. The delete relational database operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteRelationalDatabase(callback?: (err: AWSError, data: Lightsail.Types.DeleteRelationalDatabaseResult) => void): Request<Lightsail.Types.DeleteRelationalDatabaseResult, AWSError>;
   /**
-   * Deletes a database snapshot in Amazon Lightsail. The delete relational database snapshot operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Lightsail Dev Guide.
+   * Deletes a database snapshot in Amazon Lightsail. The delete relational database snapshot operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteRelationalDatabaseSnapshot(params: Lightsail.Types.DeleteRelationalDatabaseSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteRelationalDatabaseSnapshotResult) => void): Request<Lightsail.Types.DeleteRelationalDatabaseSnapshotResult, AWSError>;
   /**
-   * Deletes a database snapshot in Amazon Lightsail. The delete relational database snapshot operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Lightsail Dev Guide.
+   * Deletes a database snapshot in Amazon Lightsail. The delete relational database snapshot operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteRelationalDatabaseSnapshot(callback?: (err: AWSError, data: Lightsail.Types.DeleteRelationalDatabaseSnapshotResult) => void): Request<Lightsail.Types.DeleteRelationalDatabaseSnapshotResult, AWSError>;
   /**
@@ -404,19 +444,19 @@ declare class Lightsail extends Service {
    */
   detachCertificateFromDistribution(callback?: (err: AWSError, data: Lightsail.Types.DetachCertificateFromDistributionResult) => void): Request<Lightsail.Types.DetachCertificateFromDistributionResult, AWSError>;
   /**
-   * Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount any file systems on the device within your operating system before stopping the instance and detaching the disk. The detach disk operation supports tag-based access control via resource tags applied to the resource identified by disk name. For more information, see the Lightsail Dev Guide.
+   * Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount any file systems on the device within your operating system before stopping the instance and detaching the disk. The detach disk operation supports tag-based access control via resource tags applied to the resource identified by disk name. For more information, see the Amazon Lightsail Developer Guide.
    */
   detachDisk(params: Lightsail.Types.DetachDiskRequest, callback?: (err: AWSError, data: Lightsail.Types.DetachDiskResult) => void): Request<Lightsail.Types.DetachDiskResult, AWSError>;
   /**
-   * Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount any file systems on the device within your operating system before stopping the instance and detaching the disk. The detach disk operation supports tag-based access control via resource tags applied to the resource identified by disk name. For more information, see the Lightsail Dev Guide.
+   * Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount any file systems on the device within your operating system before stopping the instance and detaching the disk. The detach disk operation supports tag-based access control via resource tags applied to the resource identified by disk name. For more information, see the Amazon Lightsail Developer Guide.
    */
   detachDisk(callback?: (err: AWSError, data: Lightsail.Types.DetachDiskResult) => void): Request<Lightsail.Types.DetachDiskResult, AWSError>;
   /**
-   * Detaches the specified instances from a Lightsail load balancer. This operation waits until the instances are no longer needed before they are detached from the load balancer. The detach instances from load balancer operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
+   * Detaches the specified instances from a Lightsail load balancer. This operation waits until the instances are no longer needed before they are detached from the load balancer. The detach instances from load balancer operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Amazon Lightsail Developer Guide.
    */
   detachInstancesFromLoadBalancer(params: Lightsail.Types.DetachInstancesFromLoadBalancerRequest, callback?: (err: AWSError, data: Lightsail.Types.DetachInstancesFromLoadBalancerResult) => void): Request<Lightsail.Types.DetachInstancesFromLoadBalancerResult, AWSError>;
   /**
-   * Detaches the specified instances from a Lightsail load balancer. This operation waits until the instances are no longer needed before they are detached from the load balancer. The detach instances from load balancer operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
+   * Detaches the specified instances from a Lightsail load balancer. This operation waits until the instances are no longer needed before they are detached from the load balancer. The detach instances from load balancer operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Amazon Lightsail Developer Guide.
    */
   detachInstancesFromLoadBalancer(callback?: (err: AWSError, data: Lightsail.Types.DetachInstancesFromLoadBalancerResult) => void): Request<Lightsail.Types.DetachInstancesFromLoadBalancerResult, AWSError>;
   /**
@@ -428,35 +468,35 @@ declare class Lightsail extends Service {
    */
   detachStaticIp(callback?: (err: AWSError, data: Lightsail.Types.DetachStaticIpResult) => void): Request<Lightsail.Types.DetachStaticIpResult, AWSError>;
   /**
-   * Disables an add-on for an Amazon Lightsail resource. For more information, see the Lightsail Dev Guide.
+   * Disables an add-on for an Amazon Lightsail resource. For more information, see the Amazon Lightsail Developer Guide.
    */
   disableAddOn(params: Lightsail.Types.DisableAddOnRequest, callback?: (err: AWSError, data: Lightsail.Types.DisableAddOnResult) => void): Request<Lightsail.Types.DisableAddOnResult, AWSError>;
   /**
-   * Disables an add-on for an Amazon Lightsail resource. For more information, see the Lightsail Dev Guide.
+   * Disables an add-on for an Amazon Lightsail resource. For more information, see the Amazon Lightsail Developer Guide.
    */
   disableAddOn(callback?: (err: AWSError, data: Lightsail.Types.DisableAddOnResult) => void): Request<Lightsail.Types.DisableAddOnResult, AWSError>;
   /**
-   * Downloads the default SSH key pair from the user's account.
+   * Downloads the regional Amazon Lightsail default key pair. This action also creates a Lightsail default key pair if a default key pair does not currently exist in the Amazon Web Services Region.
    */
   downloadDefaultKeyPair(params: Lightsail.Types.DownloadDefaultKeyPairRequest, callback?: (err: AWSError, data: Lightsail.Types.DownloadDefaultKeyPairResult) => void): Request<Lightsail.Types.DownloadDefaultKeyPairResult, AWSError>;
   /**
-   * Downloads the default SSH key pair from the user's account.
+   * Downloads the regional Amazon Lightsail default key pair. This action also creates a Lightsail default key pair if a default key pair does not currently exist in the Amazon Web Services Region.
    */
   downloadDefaultKeyPair(callback?: (err: AWSError, data: Lightsail.Types.DownloadDefaultKeyPairResult) => void): Request<Lightsail.Types.DownloadDefaultKeyPairResult, AWSError>;
   /**
-   * Enables or modifies an add-on for an Amazon Lightsail resource. For more information, see the Lightsail Dev Guide.
+   * Enables or modifies an add-on for an Amazon Lightsail resource. For more information, see the Amazon Lightsail Developer Guide.
    */
   enableAddOn(params: Lightsail.Types.EnableAddOnRequest, callback?: (err: AWSError, data: Lightsail.Types.EnableAddOnResult) => void): Request<Lightsail.Types.EnableAddOnResult, AWSError>;
   /**
-   * Enables or modifies an add-on for an Amazon Lightsail resource. For more information, see the Lightsail Dev Guide.
+   * Enables or modifies an add-on for an Amazon Lightsail resource. For more information, see the Amazon Lightsail Developer Guide.
    */
   enableAddOn(callback?: (err: AWSError, data: Lightsail.Types.EnableAddOnResult) => void): Request<Lightsail.Types.EnableAddOnResult, AWSError>;
   /**
-   * Exports an Amazon Lightsail instance or block storage disk snapshot to Amazon Elastic Compute Cloud (Amazon EC2). This operation results in an export snapshot record that can be used with the create cloud formation stack operation to create new Amazon EC2 instances. Exported instance snapshots appear in Amazon EC2 as Amazon Machine Images (AMIs), and the instance system disk appears as an Amazon Elastic Block Store (Amazon EBS) volume. Exported disk snapshots appear in Amazon EC2 as Amazon EBS volumes. Snapshots are exported to the same Amazon Web Services Region in Amazon EC2 as the source Lightsail snapshot.  The export snapshot operation supports tag-based access control via resource tags applied to the resource identified by source snapshot name. For more information, see the Lightsail Dev Guide.  Use the get instance snapshots or get disk snapshots operations to get a list of snapshots that you can export to Amazon EC2. 
+   * Exports an Amazon Lightsail instance or block storage disk snapshot to Amazon Elastic Compute Cloud (Amazon EC2). This operation results in an export snapshot record that can be used with the create cloud formation stack operation to create new Amazon EC2 instances. Exported instance snapshots appear in Amazon EC2 as Amazon Machine Images (AMIs), and the instance system disk appears as an Amazon Elastic Block Store (Amazon EBS) volume. Exported disk snapshots appear in Amazon EC2 as Amazon EBS volumes. Snapshots are exported to the same Amazon Web Services Region in Amazon EC2 as the source Lightsail snapshot.  The export snapshot operation supports tag-based access control via resource tags applied to the resource identified by source snapshot name. For more information, see the Amazon Lightsail Developer Guide.  Use the get instance snapshots or get disk snapshots operations to get a list of snapshots that you can export to Amazon EC2. 
    */
   exportSnapshot(params: Lightsail.Types.ExportSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.ExportSnapshotResult) => void): Request<Lightsail.Types.ExportSnapshotResult, AWSError>;
   /**
-   * Exports an Amazon Lightsail instance or block storage disk snapshot to Amazon Elastic Compute Cloud (Amazon EC2). This operation results in an export snapshot record that can be used with the create cloud formation stack operation to create new Amazon EC2 instances. Exported instance snapshots appear in Amazon EC2 as Amazon Machine Images (AMIs), and the instance system disk appears as an Amazon Elastic Block Store (Amazon EBS) volume. Exported disk snapshots appear in Amazon EC2 as Amazon EBS volumes. Snapshots are exported to the same Amazon Web Services Region in Amazon EC2 as the source Lightsail snapshot.  The export snapshot operation supports tag-based access control via resource tags applied to the resource identified by source snapshot name. For more information, see the Lightsail Dev Guide.  Use the get instance snapshots or get disk snapshots operations to get a list of snapshots that you can export to Amazon EC2. 
+   * Exports an Amazon Lightsail instance or block storage disk snapshot to Amazon Elastic Compute Cloud (Amazon EC2). This operation results in an export snapshot record that can be used with the create cloud formation stack operation to create new Amazon EC2 instances. Exported instance snapshots appear in Amazon EC2 as Amazon Machine Images (AMIs), and the instance system disk appears as an Amazon Elastic Block Store (Amazon EBS) volume. Exported disk snapshots appear in Amazon EC2 as Amazon EBS volumes. Snapshots are exported to the same Amazon Web Services Region in Amazon EC2 as the source Lightsail snapshot.  The export snapshot operation supports tag-based access control via resource tags applied to the resource identified by source snapshot name. For more information, see the Amazon Lightsail Developer Guide.  Use the get instance snapshots or get disk snapshots operations to get a list of snapshots that you can export to Amazon EC2. 
    */
   exportSnapshot(callback?: (err: AWSError, data: Lightsail.Types.ExportSnapshotResult) => void): Request<Lightsail.Types.ExportSnapshotResult, AWSError>;
   /**
@@ -476,11 +516,11 @@ declare class Lightsail extends Service {
    */
   getAlarms(callback?: (err: AWSError, data: Lightsail.Types.GetAlarmsResult) => void): Request<Lightsail.Types.GetAlarmsResult, AWSError>;
   /**
-   * Returns the available automatic snapshots for an instance or disk. For more information, see the Lightsail Dev Guide.
+   * Returns the available automatic snapshots for an instance or disk. For more information, see the Amazon Lightsail Developer Guide.
    */
   getAutoSnapshots(params: Lightsail.Types.GetAutoSnapshotsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetAutoSnapshotsResult) => void): Request<Lightsail.Types.GetAutoSnapshotsResult, AWSError>;
   /**
-   * Returns the available automatic snapshots for an instance or disk. For more information, see the Lightsail Dev Guide.
+   * Returns the available automatic snapshots for an instance or disk. For more information, see the Amazon Lightsail Developer Guide.
    */
   getAutoSnapshots(callback?: (err: AWSError, data: Lightsail.Types.GetAutoSnapshotsResult) => void): Request<Lightsail.Types.GetAutoSnapshotsResult, AWSError>;
   /**
@@ -492,19 +532,51 @@ declare class Lightsail extends Service {
    */
   getBlueprints(callback?: (err: AWSError, data: Lightsail.Types.GetBlueprintsResult) => void): Request<Lightsail.Types.GetBlueprintsResult, AWSError>;
   /**
-   * Returns the list of bundles that are available for purchase. A bundle describes the specs for your virtual private server (or instance).
+   * Returns the existing access key IDs for the specified Amazon Lightsail bucket.  This action does not return the secret access key value of an access key. You can get a secret access key only when you create it from the response of the CreateBucketAccessKey action. If you lose the secret access key, you must create a new access key. 
+   */
+  getBucketAccessKeys(params: Lightsail.Types.GetBucketAccessKeysRequest, callback?: (err: AWSError, data: Lightsail.Types.GetBucketAccessKeysResult) => void): Request<Lightsail.Types.GetBucketAccessKeysResult, AWSError>;
+  /**
+   * Returns the existing access key IDs for the specified Amazon Lightsail bucket.  This action does not return the secret access key value of an access key. You can get a secret access key only when you create it from the response of the CreateBucketAccessKey action. If you lose the secret access key, you must create a new access key. 
+   */
+  getBucketAccessKeys(callback?: (err: AWSError, data: Lightsail.Types.GetBucketAccessKeysResult) => void): Request<Lightsail.Types.GetBucketAccessKeysResult, AWSError>;
+  /**
+   * Returns the bundles that you can apply to a Amazon Lightsail bucket. The bucket bundle specifies the monthly cost, storage quota, and data transfer quota for a bucket. Use the UpdateBucketBundle action to update the bundle for a bucket.
+   */
+  getBucketBundles(params: Lightsail.Types.GetBucketBundlesRequest, callback?: (err: AWSError, data: Lightsail.Types.GetBucketBundlesResult) => void): Request<Lightsail.Types.GetBucketBundlesResult, AWSError>;
+  /**
+   * Returns the bundles that you can apply to a Amazon Lightsail bucket. The bucket bundle specifies the monthly cost, storage quota, and data transfer quota for a bucket. Use the UpdateBucketBundle action to update the bundle for a bucket.
+   */
+  getBucketBundles(callback?: (err: AWSError, data: Lightsail.Types.GetBucketBundlesResult) => void): Request<Lightsail.Types.GetBucketBundlesResult, AWSError>;
+  /**
+   * Returns the data points of a specific metric for an Amazon Lightsail bucket. Metrics report the utilization of a bucket. View and collect metric data regularly to monitor the number of objects stored in a bucket (including object versions) and the storage space used by those objects.
+   */
+  getBucketMetricData(params: Lightsail.Types.GetBucketMetricDataRequest, callback?: (err: AWSError, data: Lightsail.Types.GetBucketMetricDataResult) => void): Request<Lightsail.Types.GetBucketMetricDataResult, AWSError>;
+  /**
+   * Returns the data points of a specific metric for an Amazon Lightsail bucket. Metrics report the utilization of a bucket. View and collect metric data regularly to monitor the number of objects stored in a bucket (including object versions) and the storage space used by those objects.
+   */
+  getBucketMetricData(callback?: (err: AWSError, data: Lightsail.Types.GetBucketMetricDataResult) => void): Request<Lightsail.Types.GetBucketMetricDataResult, AWSError>;
+  /**
+   * Returns information about one or more Amazon Lightsail buckets. The information returned includes the synchronization status of the Amazon Simple Storage Service (Amazon S3) account-level block public access feature for your Lightsail buckets. For more information about buckets, see Buckets in Amazon Lightsail in the Amazon Lightsail Developer Guide.
+   */
+  getBuckets(params: Lightsail.Types.GetBucketsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetBucketsResult) => void): Request<Lightsail.Types.GetBucketsResult, AWSError>;
+  /**
+   * Returns information about one or more Amazon Lightsail buckets. The information returned includes the synchronization status of the Amazon Simple Storage Service (Amazon S3) account-level block public access feature for your Lightsail buckets. For more information about buckets, see Buckets in Amazon Lightsail in the Amazon Lightsail Developer Guide.
+   */
+  getBuckets(callback?: (err: AWSError, data: Lightsail.Types.GetBucketsResult) => void): Request<Lightsail.Types.GetBucketsResult, AWSError>;
+  /**
+   * Returns the bundles that you can apply to an Amazon Lightsail instance when you create it. A bundle describes the specifications of an instance, such as the monthly cost, amount of memory, the number of vCPUs, amount of storage space, and monthly network data transfer quota.  Bundles are referred to as instance plans in the Lightsail console. 
    */
   getBundles(params: Lightsail.Types.GetBundlesRequest, callback?: (err: AWSError, data: Lightsail.Types.GetBundlesResult) => void): Request<Lightsail.Types.GetBundlesResult, AWSError>;
   /**
-   * Returns the list of bundles that are available for purchase. A bundle describes the specs for your virtual private server (or instance).
+   * Returns the bundles that you can apply to an Amazon Lightsail instance when you create it. A bundle describes the specifications of an instance, such as the monthly cost, amount of memory, the number of vCPUs, amount of storage space, and monthly network data transfer quota.  Bundles are referred to as instance plans in the Lightsail console. 
    */
   getBundles(callback?: (err: AWSError, data: Lightsail.Types.GetBundlesResult) => void): Request<Lightsail.Types.GetBundlesResult, AWSError>;
   /**
-   * Returns information about one or more Amazon Lightsail SSL/TLS certificates.  To get a summary of a certificate, ommit includeCertificateDetails from your request. The response will include only the certificate Amazon Resource Name (ARN), certificate name, domain name, and tags. 
+   * Returns information about one or more Amazon Lightsail SSL/TLS certificates.  To get a summary of a certificate, omit includeCertificateDetails from your request. The response will include only the certificate Amazon Resource Name (ARN), certificate name, domain name, and tags. 
    */
   getCertificates(params: Lightsail.Types.GetCertificatesRequest, callback?: (err: AWSError, data: Lightsail.Types.GetCertificatesResult) => void): Request<Lightsail.Types.GetCertificatesResult, AWSError>;
   /**
-   * Returns information about one or more Amazon Lightsail SSL/TLS certificates.  To get a summary of a certificate, ommit includeCertificateDetails from your request. The response will include only the certificate Amazon Resource Name (ARN), certificate name, domain name, and tags. 
+   * Returns information about one or more Amazon Lightsail SSL/TLS certificates.  To get a summary of a certificate, omit includeCertificateDetails from your request. The response will include only the certificate Amazon Resource Name (ARN), certificate name, domain name, and tags. 
    */
   getCertificates(callback?: (err: AWSError, data: Lightsail.Types.GetCertificatesResult) => void): Request<Lightsail.Types.GetCertificatesResult, AWSError>;
   /**
@@ -516,11 +588,11 @@ declare class Lightsail extends Service {
    */
   getCloudFormationStackRecords(callback?: (err: AWSError, data: Lightsail.Types.GetCloudFormationStackRecordsResult) => void): Request<Lightsail.Types.GetCloudFormationStackRecordsResult, AWSError>;
   /**
-   * Returns information about the configured contact methods. Specify a protocol in your request to return information about a specific contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
+   * Returns information about the configured contact methods. Specify a protocol in your request to return information about a specific contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
    */
   getContactMethods(params: Lightsail.Types.GetContactMethodsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetContactMethodsResult) => void): Request<Lightsail.Types.GetContactMethodsResult, AWSError>;
   /**
-   * Returns information about the configured contact methods. Specify a protocol in your request to return information about a specific contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
+   * Returns information about the configured contact methods. Specify a protocol in your request to return information about a specific contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
    */
   getContactMethods(callback?: (err: AWSError, data: Lightsail.Types.GetContactMethodsResult) => void): Request<Lightsail.Types.GetContactMethodsResult, AWSError>;
   /**
@@ -540,19 +612,19 @@ declare class Lightsail extends Service {
    */
   getContainerImages(callback?: (err: AWSError, data: Lightsail.Types.GetContainerImagesResult) => void): Request<Lightsail.Types.GetContainerImagesResult, AWSError>;
   /**
-   * Returns the log events of a container of your Amazon Lightsail container service. If your container service has more than one node (i.e., a scale greater than 1), then the log events that are returned for the specified container are merged from all nodes on your container service.  Container logs are retained for a certain amount of time. For more information, see Amazon Lightsail endpoints and quotas in the AWS General Reference. 
+   * Returns the log events of a container of your Amazon Lightsail container service. If your container service has more than one node (i.e., a scale greater than 1), then the log events that are returned for the specified container are merged from all nodes on your container service.  Container logs are retained for a certain amount of time. For more information, see Amazon Lightsail endpoints and quotas in the Amazon Web Services General Reference. 
    */
   getContainerLog(params: Lightsail.Types.GetContainerLogRequest, callback?: (err: AWSError, data: Lightsail.Types.GetContainerLogResult) => void): Request<Lightsail.Types.GetContainerLogResult, AWSError>;
   /**
-   * Returns the log events of a container of your Amazon Lightsail container service. If your container service has more than one node (i.e., a scale greater than 1), then the log events that are returned for the specified container are merged from all nodes on your container service.  Container logs are retained for a certain amount of time. For more information, see Amazon Lightsail endpoints and quotas in the AWS General Reference. 
+   * Returns the log events of a container of your Amazon Lightsail container service. If your container service has more than one node (i.e., a scale greater than 1), then the log events that are returned for the specified container are merged from all nodes on your container service.  Container logs are retained for a certain amount of time. For more information, see Amazon Lightsail endpoints and quotas in the Amazon Web Services General Reference. 
    */
   getContainerLog(callback?: (err: AWSError, data: Lightsail.Types.GetContainerLogResult) => void): Request<Lightsail.Types.GetContainerLogResult, AWSError>;
   /**
-   * Returns the deployments for your Amazon Lightsail container service A deployment specifies the settings, such as the ports and launch command, of containers that are deployed to your container service. The deployments are ordered by version in ascending order. The newest version is listed at the top of the response.  A set number of deployments are kept before the oldest one is replaced with the newest one. For more information, see Amazon Lightsail endpoints and quotas in the AWS General Reference. 
+   * Returns the deployments for your Amazon Lightsail container service A deployment specifies the settings, such as the ports and launch command, of containers that are deployed to your container service. The deployments are ordered by version in ascending order. The newest version is listed at the top of the response.  A set number of deployments are kept before the oldest one is replaced with the newest one. For more information, see Amazon Lightsail endpoints and quotas in the Amazon Web Services General Reference. 
    */
   getContainerServiceDeployments(params: Lightsail.Types.GetContainerServiceDeploymentsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetContainerServiceDeploymentsResult) => void): Request<Lightsail.Types.GetContainerServiceDeploymentsResult, AWSError>;
   /**
-   * Returns the deployments for your Amazon Lightsail container service A deployment specifies the settings, such as the ports and launch command, of containers that are deployed to your container service. The deployments are ordered by version in ascending order. The newest version is listed at the top of the response.  A set number of deployments are kept before the oldest one is replaced with the newest one. For more information, see Amazon Lightsail endpoints and quotas in the AWS General Reference. 
+   * Returns the deployments for your Amazon Lightsail container service A deployment specifies the settings, such as the ports and launch command, of containers that are deployed to your container service. The deployments are ordered by version in ascending order. The newest version is listed at the top of the response.  A set number of deployments are kept before the oldest one is replaced with the newest one. For more information, see Amazon Lightsail endpoints and quotas in the Amazon Web Services General Reference. 
    */
   getContainerServiceDeployments(callback?: (err: AWSError, data: Lightsail.Types.GetContainerServiceDeploymentsResult) => void): Request<Lightsail.Types.GetContainerServiceDeploymentsResult, AWSError>;
   /**
@@ -579,6 +651,14 @@ declare class Lightsail extends Service {
    * Returns information about one or more of your Amazon Lightsail container services.
    */
   getContainerServices(callback?: (err: AWSError, data: Lightsail.Types.ContainerServicesListResult) => void): Request<Lightsail.Types.ContainerServicesListResult, AWSError>;
+  /**
+   * Retrieves information about the cost estimate for a specified resource. A cost estimate will not generate for a resource that has been deleted.
+   */
+  getCostEstimate(params: Lightsail.Types.GetCostEstimateRequest, callback?: (err: AWSError, data: Lightsail.Types.GetCostEstimateResult) => void): Request<Lightsail.Types.GetCostEstimateResult, AWSError>;
+  /**
+   * Retrieves information about the cost estimate for a specified resource. A cost estimate will not generate for a resource that has been deleted.
+   */
+  getCostEstimate(callback?: (err: AWSError, data: Lightsail.Types.GetCostEstimateResult) => void): Request<Lightsail.Types.GetCostEstimateResult, AWSError>;
   /**
    * Returns information about a specific block storage disk.
    */
@@ -612,11 +692,11 @@ declare class Lightsail extends Service {
    */
   getDisks(callback?: (err: AWSError, data: Lightsail.Types.GetDisksResult) => void): Request<Lightsail.Types.GetDisksResult, AWSError>;
   /**
-   * Returns the list bundles that can be applied to you Amazon Lightsail content delivery network (CDN) distributions. A distribution bundle specifies the monthly network transfer quota and monthly cost of your dsitribution.
+   * Returns the bundles that can be applied to your Amazon Lightsail content delivery network (CDN) distributions. A distribution bundle specifies the monthly network transfer quota and monthly cost of your distribution.
    */
   getDistributionBundles(params: Lightsail.Types.GetDistributionBundlesRequest, callback?: (err: AWSError, data: Lightsail.Types.GetDistributionBundlesResult) => void): Request<Lightsail.Types.GetDistributionBundlesResult, AWSError>;
   /**
-   * Returns the list bundles that can be applied to you Amazon Lightsail content delivery network (CDN) distributions. A distribution bundle specifies the monthly network transfer quota and monthly cost of your dsitribution.
+   * Returns the bundles that can be applied to your Amazon Lightsail content delivery network (CDN) distributions. A distribution bundle specifies the monthly network transfer quota and monthly cost of your distribution.
    */
   getDistributionBundles(callback?: (err: AWSError, data: Lightsail.Types.GetDistributionBundlesResult) => void): Request<Lightsail.Types.GetDistributionBundlesResult, AWSError>;
   /**
@@ -660,11 +740,11 @@ declare class Lightsail extends Service {
    */
   getDomains(callback?: (err: AWSError, data: Lightsail.Types.GetDomainsResult) => void): Request<Lightsail.Types.GetDomainsResult, AWSError>;
   /**
-   * Returns the export snapshot record created as a result of the export snapshot operation. An export snapshot record can be used to create a new Amazon EC2 instance and its related resources with the create cloud formation stack operation.
+   * Returns all export snapshot records created as a result of the export snapshot operation. An export snapshot record can be used to create a new Amazon EC2 instance and its related resources with the CreateCloudFormationStack action.
    */
   getExportSnapshotRecords(params: Lightsail.Types.GetExportSnapshotRecordsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetExportSnapshotRecordsResult) => void): Request<Lightsail.Types.GetExportSnapshotRecordsResult, AWSError>;
   /**
-   * Returns the export snapshot record created as a result of the export snapshot operation. An export snapshot record can be used to create a new Amazon EC2 instance and its related resources with the create cloud formation stack operation.
+   * Returns all export snapshot records created as a result of the export snapshot operation. An export snapshot record can be used to create a new Amazon EC2 instance and its related resources with the CreateCloudFormationStack action.
    */
   getExportSnapshotRecords(callback?: (err: AWSError, data: Lightsail.Types.GetExportSnapshotRecordsResult) => void): Request<Lightsail.Types.GetExportSnapshotRecordsResult, AWSError>;
   /**
@@ -676,11 +756,11 @@ declare class Lightsail extends Service {
    */
   getInstance(callback?: (err: AWSError, data: Lightsail.Types.GetInstanceResult) => void): Request<Lightsail.Types.GetInstanceResult, AWSError>;
   /**
-   * Returns temporary SSH keys you can use to connect to a specific virtual private server, or instance. The get instance access details operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
+   * Returns temporary SSH keys you can use to connect to a specific virtual private server, or instance. The get instance access details operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Amazon Lightsail Developer Guide.
    */
   getInstanceAccessDetails(params: Lightsail.Types.GetInstanceAccessDetailsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetInstanceAccessDetailsResult) => void): Request<Lightsail.Types.GetInstanceAccessDetailsResult, AWSError>;
   /**
-   * Returns temporary SSH keys you can use to connect to a specific virtual private server, or instance. The get instance access details operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
+   * Returns temporary SSH keys you can use to connect to a specific virtual private server, or instance. The get instance access details operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Amazon Lightsail Developer Guide.
    */
   getInstanceAccessDetails(callback?: (err: AWSError, data: Lightsail.Types.GetInstanceAccessDetailsResult) => void): Request<Lightsail.Types.GetInstanceAccessDetailsResult, AWSError>;
   /**
@@ -772,6 +852,14 @@ declare class Lightsail extends Service {
    */
   getLoadBalancerTlsCertificates(callback?: (err: AWSError, data: Lightsail.Types.GetLoadBalancerTlsCertificatesResult) => void): Request<Lightsail.Types.GetLoadBalancerTlsCertificatesResult, AWSError>;
   /**
+   * Returns a list of TLS security policies that you can apply to Lightsail load balancers. For more information about load balancer TLS security policies, see Configuring TLS security policies on your Amazon Lightsail load balancers in the Amazon Lightsail Developer Guide.
+   */
+  getLoadBalancerTlsPolicies(params: Lightsail.Types.GetLoadBalancerTlsPoliciesRequest, callback?: (err: AWSError, data: Lightsail.Types.GetLoadBalancerTlsPoliciesResult) => void): Request<Lightsail.Types.GetLoadBalancerTlsPoliciesResult, AWSError>;
+  /**
+   * Returns a list of TLS security policies that you can apply to Lightsail load balancers. For more information about load balancer TLS security policies, see Configuring TLS security policies on your Amazon Lightsail load balancers in the Amazon Lightsail Developer Guide.
+   */
+  getLoadBalancerTlsPolicies(callback?: (err: AWSError, data: Lightsail.Types.GetLoadBalancerTlsPoliciesResult) => void): Request<Lightsail.Types.GetLoadBalancerTlsPoliciesResult, AWSError>;
+  /**
    * Returns information about all load balancers in an account.
    */
   getLoadBalancers(params: Lightsail.Types.GetLoadBalancersRequest, callback?: (err: AWSError, data: Lightsail.Types.GetLoadBalancersResult) => void): Request<Lightsail.Types.GetLoadBalancersResult, AWSError>;
@@ -796,11 +884,11 @@ declare class Lightsail extends Service {
    */
   getOperations(callback?: (err: AWSError, data: Lightsail.Types.GetOperationsResult) => void): Request<Lightsail.Types.GetOperationsResult, AWSError>;
   /**
-   * Gets operations for a specific resource (e.g., an instance or a static IP).
+   * Gets operations for a specific resource (an instance or a static IP).
    */
   getOperationsForResource(params: Lightsail.Types.GetOperationsForResourceRequest, callback?: (err: AWSError, data: Lightsail.Types.GetOperationsForResourceResult) => void): Request<Lightsail.Types.GetOperationsForResourceResult, AWSError>;
   /**
-   * Gets operations for a specific resource (e.g., an instance or a static IP).
+   * Gets operations for a specific resource (an instance or a static IP).
    */
   getOperationsForResource(callback?: (err: AWSError, data: Lightsail.Types.GetOperationsForResourceResult) => void): Request<Lightsail.Types.GetOperationsForResourceResult, AWSError>;
   /**
@@ -908,11 +996,19 @@ declare class Lightsail extends Service {
    */
   getRelationalDatabases(callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabasesResult) => void): Request<Lightsail.Types.GetRelationalDatabasesResult, AWSError>;
   /**
-   * Returns information about a specific static IP.
+   * Returns detailed information for five of the most recent SetupInstanceHttps requests that were ran on the target instance.
+   */
+  getSetupHistory(params: Lightsail.Types.GetSetupHistoryRequest, callback?: (err: AWSError, data: Lightsail.Types.GetSetupHistoryResult) => void): Request<Lightsail.Types.GetSetupHistoryResult, AWSError>;
+  /**
+   * Returns detailed information for five of the most recent SetupInstanceHttps requests that were ran on the target instance.
+   */
+  getSetupHistory(callback?: (err: AWSError, data: Lightsail.Types.GetSetupHistoryResult) => void): Request<Lightsail.Types.GetSetupHistoryResult, AWSError>;
+  /**
+   * Returns information about an Amazon Lightsail static IP.
    */
   getStaticIp(params: Lightsail.Types.GetStaticIpRequest, callback?: (err: AWSError, data: Lightsail.Types.GetStaticIpResult) => void): Request<Lightsail.Types.GetStaticIpResult, AWSError>;
   /**
-   * Returns information about a specific static IP.
+   * Returns information about an Amazon Lightsail static IP.
    */
   getStaticIp(callback?: (err: AWSError, data: Lightsail.Types.GetStaticIpResult) => void): Request<Lightsail.Types.GetStaticIpResult, AWSError>;
   /**
@@ -940,19 +1036,19 @@ declare class Lightsail extends Service {
    */
   isVpcPeered(callback?: (err: AWSError, data: Lightsail.Types.IsVpcPeeredResult) => void): Request<Lightsail.Types.IsVpcPeeredResult, AWSError>;
   /**
-   * Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses allowed to connect to the instance through the ports, and the protocol. The OpenInstancePublicPorts action supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
+   * Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses allowed to connect to the instance through the ports, and the protocol. The OpenInstancePublicPorts action supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Amazon Lightsail Developer Guide.
    */
   openInstancePublicPorts(params: Lightsail.Types.OpenInstancePublicPortsRequest, callback?: (err: AWSError, data: Lightsail.Types.OpenInstancePublicPortsResult) => void): Request<Lightsail.Types.OpenInstancePublicPortsResult, AWSError>;
   /**
-   * Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses allowed to connect to the instance through the ports, and the protocol. The OpenInstancePublicPorts action supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
+   * Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses allowed to connect to the instance through the ports, and the protocol. The OpenInstancePublicPorts action supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Amazon Lightsail Developer Guide.
    */
   openInstancePublicPorts(callback?: (err: AWSError, data: Lightsail.Types.OpenInstancePublicPortsResult) => void): Request<Lightsail.Types.OpenInstancePublicPortsResult, AWSError>;
   /**
-   * Tries to peer the Lightsail VPC with the user's default VPC.
+   * Peers the Lightsail VPC with the user's default VPC.
    */
   peerVpc(params: Lightsail.Types.PeerVpcRequest, callback?: (err: AWSError, data: Lightsail.Types.PeerVpcResult) => void): Request<Lightsail.Types.PeerVpcResult, AWSError>;
   /**
-   * Tries to peer the Lightsail VPC with the user's default VPC.
+   * Peers the Lightsail VPC with the user's default VPC.
    */
   peerVpc(callback?: (err: AWSError, data: Lightsail.Types.PeerVpcResult) => void): Request<Lightsail.Types.PeerVpcResult, AWSError>;
   /**
@@ -964,35 +1060,35 @@ declare class Lightsail extends Service {
    */
   putAlarm(callback?: (err: AWSError, data: Lightsail.Types.PutAlarmResult) => void): Request<Lightsail.Types.PutAlarmResult, AWSError>;
   /**
-   * Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses allowed to connect to the instance through the ports, and the protocol. This action also closes all currently open ports that are not included in the request. Include all of the ports and the protocols you want to open in your PutInstancePublicPortsrequest. Or use the OpenInstancePublicPorts action to open ports without closing currently open ports. The PutInstancePublicPorts action supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
+   * Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses allowed to connect to the instance through the ports, and the protocol. This action also closes all currently open ports that are not included in the request. Include all of the ports and the protocols you want to open in your PutInstancePublicPortsrequest. Or use the OpenInstancePublicPorts action to open ports without closing currently open ports. The PutInstancePublicPorts action supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Amazon Lightsail Developer Guide.
    */
   putInstancePublicPorts(params: Lightsail.Types.PutInstancePublicPortsRequest, callback?: (err: AWSError, data: Lightsail.Types.PutInstancePublicPortsResult) => void): Request<Lightsail.Types.PutInstancePublicPortsResult, AWSError>;
   /**
-   * Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses allowed to connect to the instance through the ports, and the protocol. This action also closes all currently open ports that are not included in the request. Include all of the ports and the protocols you want to open in your PutInstancePublicPortsrequest. Or use the OpenInstancePublicPorts action to open ports without closing currently open ports. The PutInstancePublicPorts action supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
+   * Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses allowed to connect to the instance through the ports, and the protocol. This action also closes all currently open ports that are not included in the request. Include all of the ports and the protocols you want to open in your PutInstancePublicPortsrequest. Or use the OpenInstancePublicPorts action to open ports without closing currently open ports. The PutInstancePublicPorts action supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Amazon Lightsail Developer Guide.
    */
   putInstancePublicPorts(callback?: (err: AWSError, data: Lightsail.Types.PutInstancePublicPortsResult) => void): Request<Lightsail.Types.PutInstancePublicPortsResult, AWSError>;
   /**
-   * Restarts a specific instance. The reboot instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
+   * Restarts a specific instance. The reboot instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Amazon Lightsail Developer Guide.
    */
   rebootInstance(params: Lightsail.Types.RebootInstanceRequest, callback?: (err: AWSError, data: Lightsail.Types.RebootInstanceResult) => void): Request<Lightsail.Types.RebootInstanceResult, AWSError>;
   /**
-   * Restarts a specific instance. The reboot instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
+   * Restarts a specific instance. The reboot instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Amazon Lightsail Developer Guide.
    */
   rebootInstance(callback?: (err: AWSError, data: Lightsail.Types.RebootInstanceResult) => void): Request<Lightsail.Types.RebootInstanceResult, AWSError>;
   /**
-   * Restarts a specific database in Amazon Lightsail. The reboot relational database operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Lightsail Dev Guide.
+   * Restarts a specific database in Amazon Lightsail. The reboot relational database operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Amazon Lightsail Developer Guide.
    */
   rebootRelationalDatabase(params: Lightsail.Types.RebootRelationalDatabaseRequest, callback?: (err: AWSError, data: Lightsail.Types.RebootRelationalDatabaseResult) => void): Request<Lightsail.Types.RebootRelationalDatabaseResult, AWSError>;
   /**
-   * Restarts a specific database in Amazon Lightsail. The reboot relational database operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Lightsail Dev Guide.
+   * Restarts a specific database in Amazon Lightsail. The reboot relational database operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Amazon Lightsail Developer Guide.
    */
   rebootRelationalDatabase(callback?: (err: AWSError, data: Lightsail.Types.RebootRelationalDatabaseResult) => void): Request<Lightsail.Types.RebootRelationalDatabaseResult, AWSError>;
   /**
-   * Registers a container image to your Amazon Lightsail container service.  This action is not required if you install and use the Lightsail Control (lightsailctl) plugin to push container images to your Lightsail container service. For more information, see Pushing and managing container images on your Amazon Lightsail container services in the Lightsail Dev Guide. 
+   * Registers a container image to your Amazon Lightsail container service.  This action is not required if you install and use the Lightsail Control (lightsailctl) plugin to push container images to your Lightsail container service. For more information, see Pushing and managing container images on your Amazon Lightsail container services in the Amazon Lightsail Developer Guide. 
    */
   registerContainerImage(params: Lightsail.Types.RegisterContainerImageRequest, callback?: (err: AWSError, data: Lightsail.Types.RegisterContainerImageResult) => void): Request<Lightsail.Types.RegisterContainerImageResult, AWSError>;
   /**
-   * Registers a container image to your Amazon Lightsail container service.  This action is not required if you install and use the Lightsail Control (lightsailctl) plugin to push container images to your Lightsail container service. For more information, see Pushing and managing container images on your Amazon Lightsail container services in the Lightsail Dev Guide. 
+   * Registers a container image to your Amazon Lightsail container service.  This action is not required if you install and use the Lightsail Control (lightsailctl) plugin to push container images to your Lightsail container service. For more information, see Pushing and managing container images on your Amazon Lightsail container services in the Amazon Lightsail Developer Guide. 
    */
   registerContainerImage(callback?: (err: AWSError, data: Lightsail.Types.RegisterContainerImageResult) => void): Request<Lightsail.Types.RegisterContainerImageResult, AWSError>;
   /**
@@ -1012,51 +1108,91 @@ declare class Lightsail extends Service {
    */
   resetDistributionCache(callback?: (err: AWSError, data: Lightsail.Types.ResetDistributionCacheResult) => void): Request<Lightsail.Types.ResetDistributionCacheResult, AWSError>;
   /**
-   * Sends a verification request to an email contact method to ensure it's owned by the requester. SMS contact methods don't need to be verified. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail. A verification request is sent to the contact method when you initially create it. Use this action to send another verification request if a previous verification request was deleted, or has expired.  Notifications are not sent to an email contact method until after it is verified, and confirmed as valid. 
+   * Sends a verification request to an email contact method to ensure it's owned by the requester. SMS contact methods don't need to be verified. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail. A verification request is sent to the contact method when you initially create it. Use this action to send another verification request if a previous verification request was deleted, or has expired.  Notifications are not sent to an email contact method until after it is verified, and confirmed as valid. 
    */
   sendContactMethodVerification(params: Lightsail.Types.SendContactMethodVerificationRequest, callback?: (err: AWSError, data: Lightsail.Types.SendContactMethodVerificationResult) => void): Request<Lightsail.Types.SendContactMethodVerificationResult, AWSError>;
   /**
-   * Sends a verification request to an email contact method to ensure it's owned by the requester. SMS contact methods don't need to be verified. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail. A verification request is sent to the contact method when you initially create it. Use this action to send another verification request if a previous verification request was deleted, or has expired.  Notifications are not sent to an email contact method until after it is verified, and confirmed as valid. 
+   * Sends a verification request to an email contact method to ensure it's owned by the requester. SMS contact methods don't need to be verified. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail. A verification request is sent to the contact method when you initially create it. Use this action to send another verification request if a previous verification request was deleted, or has expired.  Notifications are not sent to an email contact method until after it is verified, and confirmed as valid. 
    */
   sendContactMethodVerification(callback?: (err: AWSError, data: Lightsail.Types.SendContactMethodVerificationResult) => void): Request<Lightsail.Types.SendContactMethodVerificationResult, AWSError>;
   /**
-   * Starts a specific Amazon Lightsail instance from a stopped state. To restart an instance, use the reboot instance operation.  When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the Lightsail Dev Guide.  The start instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
+   * Sets the IP address type for an Amazon Lightsail resource. Use this action to enable dual-stack for a resource, which enables IPv4 and IPv6 for the specified resource. Alternately, you can use this action to disable dual-stack, and enable IPv4 only.
+   */
+  setIpAddressType(params: Lightsail.Types.SetIpAddressTypeRequest, callback?: (err: AWSError, data: Lightsail.Types.SetIpAddressTypeResult) => void): Request<Lightsail.Types.SetIpAddressTypeResult, AWSError>;
+  /**
+   * Sets the IP address type for an Amazon Lightsail resource. Use this action to enable dual-stack for a resource, which enables IPv4 and IPv6 for the specified resource. Alternately, you can use this action to disable dual-stack, and enable IPv4 only.
+   */
+  setIpAddressType(callback?: (err: AWSError, data: Lightsail.Types.SetIpAddressTypeResult) => void): Request<Lightsail.Types.SetIpAddressTypeResult, AWSError>;
+  /**
+   * Sets the Amazon Lightsail resources that can access the specified Lightsail bucket. Lightsail buckets currently support setting access for Lightsail instances in the same Amazon Web Services Region.
+   */
+  setResourceAccessForBucket(params: Lightsail.Types.SetResourceAccessForBucketRequest, callback?: (err: AWSError, data: Lightsail.Types.SetResourceAccessForBucketResult) => void): Request<Lightsail.Types.SetResourceAccessForBucketResult, AWSError>;
+  /**
+   * Sets the Amazon Lightsail resources that can access the specified Lightsail bucket. Lightsail buckets currently support setting access for Lightsail instances in the same Amazon Web Services Region.
+   */
+  setResourceAccessForBucket(callback?: (err: AWSError, data: Lightsail.Types.SetResourceAccessForBucketResult) => void): Request<Lightsail.Types.SetResourceAccessForBucketResult, AWSError>;
+  /**
+   * Creates an SSL/TLS certificate that secures traffic for your website. After the certificate is created, it is installed on the specified Lightsail instance. If you provide more than one domain name in the request, at least one name must be less than or equal to 63 characters in length.
+   */
+  setupInstanceHttps(params: Lightsail.Types.SetupInstanceHttpsRequest, callback?: (err: AWSError, data: Lightsail.Types.SetupInstanceHttpsResult) => void): Request<Lightsail.Types.SetupInstanceHttpsResult, AWSError>;
+  /**
+   * Creates an SSL/TLS certificate that secures traffic for your website. After the certificate is created, it is installed on the specified Lightsail instance. If you provide more than one domain name in the request, at least one name must be less than or equal to 63 characters in length.
+   */
+  setupInstanceHttps(callback?: (err: AWSError, data: Lightsail.Types.SetupInstanceHttpsResult) => void): Request<Lightsail.Types.SetupInstanceHttpsResult, AWSError>;
+  /**
+   * Initiates a graphical user interface (GUI) session that’s used to access a virtual computer’s operating system and application. The session will be active for 1 hour. Use this action to resume the session after it expires. 
+   */
+  startGUISession(params: Lightsail.Types.StartGUISessionRequest, callback?: (err: AWSError, data: Lightsail.Types.StartGUISessionResult) => void): Request<Lightsail.Types.StartGUISessionResult, AWSError>;
+  /**
+   * Initiates a graphical user interface (GUI) session that’s used to access a virtual computer’s operating system and application. The session will be active for 1 hour. Use this action to resume the session after it expires. 
+   */
+  startGUISession(callback?: (err: AWSError, data: Lightsail.Types.StartGUISessionResult) => void): Request<Lightsail.Types.StartGUISessionResult, AWSError>;
+  /**
+   * Starts a specific Amazon Lightsail instance from a stopped state. To restart an instance, use the reboot instance operation.  When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the Amazon Lightsail Developer Guide.  The start instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Amazon Lightsail Developer Guide.
    */
   startInstance(params: Lightsail.Types.StartInstanceRequest, callback?: (err: AWSError, data: Lightsail.Types.StartInstanceResult) => void): Request<Lightsail.Types.StartInstanceResult, AWSError>;
   /**
-   * Starts a specific Amazon Lightsail instance from a stopped state. To restart an instance, use the reboot instance operation.  When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the Lightsail Dev Guide.  The start instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
+   * Starts a specific Amazon Lightsail instance from a stopped state. To restart an instance, use the reboot instance operation.  When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the Amazon Lightsail Developer Guide.  The start instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Amazon Lightsail Developer Guide.
    */
   startInstance(callback?: (err: AWSError, data: Lightsail.Types.StartInstanceResult) => void): Request<Lightsail.Types.StartInstanceResult, AWSError>;
   /**
-   * Starts a specific database from a stopped state in Amazon Lightsail. To restart a database, use the reboot relational database operation. The start relational database operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Lightsail Dev Guide.
+   * Starts a specific database from a stopped state in Amazon Lightsail. To restart a database, use the reboot relational database operation. The start relational database operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Amazon Lightsail Developer Guide.
    */
   startRelationalDatabase(params: Lightsail.Types.StartRelationalDatabaseRequest, callback?: (err: AWSError, data: Lightsail.Types.StartRelationalDatabaseResult) => void): Request<Lightsail.Types.StartRelationalDatabaseResult, AWSError>;
   /**
-   * Starts a specific database from a stopped state in Amazon Lightsail. To restart a database, use the reboot relational database operation. The start relational database operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Lightsail Dev Guide.
+   * Starts a specific database from a stopped state in Amazon Lightsail. To restart a database, use the reboot relational database operation. The start relational database operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Amazon Lightsail Developer Guide.
    */
   startRelationalDatabase(callback?: (err: AWSError, data: Lightsail.Types.StartRelationalDatabaseResult) => void): Request<Lightsail.Types.StartRelationalDatabaseResult, AWSError>;
   /**
-   * Stops a specific Amazon Lightsail instance that is currently running.  When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the Lightsail Dev Guide.  The stop instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
+   * Terminates a web-based NICE DCV session that’s used to access a virtual computer’s operating system or application. The session will close and any unsaved data will be lost.
+   */
+  stopGUISession(params: Lightsail.Types.StopGUISessionRequest, callback?: (err: AWSError, data: Lightsail.Types.StopGUISessionResult) => void): Request<Lightsail.Types.StopGUISessionResult, AWSError>;
+  /**
+   * Terminates a web-based NICE DCV session that’s used to access a virtual computer’s operating system or application. The session will close and any unsaved data will be lost.
+   */
+  stopGUISession(callback?: (err: AWSError, data: Lightsail.Types.StopGUISessionResult) => void): Request<Lightsail.Types.StopGUISessionResult, AWSError>;
+  /**
+   * Stops a specific Amazon Lightsail instance that is currently running.  When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the Amazon Lightsail Developer Guide.  The stop instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Amazon Lightsail Developer Guide.
    */
   stopInstance(params: Lightsail.Types.StopInstanceRequest, callback?: (err: AWSError, data: Lightsail.Types.StopInstanceResult) => void): Request<Lightsail.Types.StopInstanceResult, AWSError>;
   /**
-   * Stops a specific Amazon Lightsail instance that is currently running.  When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the Lightsail Dev Guide.  The stop instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
+   * Stops a specific Amazon Lightsail instance that is currently running.  When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the Amazon Lightsail Developer Guide.  The stop instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Amazon Lightsail Developer Guide.
    */
   stopInstance(callback?: (err: AWSError, data: Lightsail.Types.StopInstanceResult) => void): Request<Lightsail.Types.StopInstanceResult, AWSError>;
   /**
-   * Stops a specific database that is currently running in Amazon Lightsail. The stop relational database operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Lightsail Dev Guide.
+   * Stops a specific database that is currently running in Amazon Lightsail. The stop relational database operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Amazon Lightsail Developer Guide.
    */
   stopRelationalDatabase(params: Lightsail.Types.StopRelationalDatabaseRequest, callback?: (err: AWSError, data: Lightsail.Types.StopRelationalDatabaseResult) => void): Request<Lightsail.Types.StopRelationalDatabaseResult, AWSError>;
   /**
-   * Stops a specific database that is currently running in Amazon Lightsail. The stop relational database operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Lightsail Dev Guide.
+   * Stops a specific database that is currently running in Amazon Lightsail. The stop relational database operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Amazon Lightsail Developer Guide.
    */
   stopRelationalDatabase(callback?: (err: AWSError, data: Lightsail.Types.StopRelationalDatabaseResult) => void): Request<Lightsail.Types.StopRelationalDatabaseResult, AWSError>;
   /**
-   * Adds one or more tags to the specified Amazon Lightsail resource. Each resource can have a maximum of 50 tags. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see the Lightsail Dev Guide. The tag resource operation supports tag-based access control via request tags and resource tags applied to the resource identified by resource name. For more information, see the Lightsail Dev Guide.
+   * Adds one or more tags to the specified Amazon Lightsail resource. Each resource can have a maximum of 50 tags. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see the Amazon Lightsail Developer Guide. The tag resource operation supports tag-based access control via request tags and resource tags applied to the resource identified by resource name. For more information, see the Amazon Lightsail Developer Guide.
    */
   tagResource(params: Lightsail.Types.TagResourceRequest, callback?: (err: AWSError, data: Lightsail.Types.TagResourceResult) => void): Request<Lightsail.Types.TagResourceResult, AWSError>;
   /**
-   * Adds one or more tags to the specified Amazon Lightsail resource. Each resource can have a maximum of 50 tags. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see the Lightsail Dev Guide. The tag resource operation supports tag-based access control via request tags and resource tags applied to the resource identified by resource name. For more information, see the Lightsail Dev Guide.
+   * Adds one or more tags to the specified Amazon Lightsail resource. Each resource can have a maximum of 50 tags. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see the Amazon Lightsail Developer Guide. The tag resource operation supports tag-based access control via request tags and resource tags applied to the resource identified by resource name. For more information, see the Amazon Lightsail Developer Guide.
    */
   tagResource(callback?: (err: AWSError, data: Lightsail.Types.TagResourceResult) => void): Request<Lightsail.Types.TagResourceResult, AWSError>;
   /**
@@ -1068,21 +1204,37 @@ declare class Lightsail extends Service {
    */
   testAlarm(callback?: (err: AWSError, data: Lightsail.Types.TestAlarmResult) => void): Request<Lightsail.Types.TestAlarmResult, AWSError>;
   /**
-   * Attempts to unpeer the Lightsail VPC from the user's default VPC.
+   * Unpeers the Lightsail VPC from the user's default VPC.
    */
   unpeerVpc(params: Lightsail.Types.UnpeerVpcRequest, callback?: (err: AWSError, data: Lightsail.Types.UnpeerVpcResult) => void): Request<Lightsail.Types.UnpeerVpcResult, AWSError>;
   /**
-   * Attempts to unpeer the Lightsail VPC from the user's default VPC.
+   * Unpeers the Lightsail VPC from the user's default VPC.
    */
   unpeerVpc(callback?: (err: AWSError, data: Lightsail.Types.UnpeerVpcResult) => void): Request<Lightsail.Types.UnpeerVpcResult, AWSError>;
   /**
-   * Deletes the specified set of tag keys and their values from the specified Amazon Lightsail resource. The untag resource operation supports tag-based access control via request tags and resource tags applied to the resource identified by resource name. For more information, see the Lightsail Dev Guide.
+   * Deletes the specified set of tag keys and their values from the specified Amazon Lightsail resource. The untag resource operation supports tag-based access control via request tags and resource tags applied to the resource identified by resource name. For more information, see the Amazon Lightsail Developer Guide.
    */
   untagResource(params: Lightsail.Types.UntagResourceRequest, callback?: (err: AWSError, data: Lightsail.Types.UntagResourceResult) => void): Request<Lightsail.Types.UntagResourceResult, AWSError>;
   /**
-   * Deletes the specified set of tag keys and their values from the specified Amazon Lightsail resource. The untag resource operation supports tag-based access control via request tags and resource tags applied to the resource identified by resource name. For more information, see the Lightsail Dev Guide.
+   * Deletes the specified set of tag keys and their values from the specified Amazon Lightsail resource. The untag resource operation supports tag-based access control via request tags and resource tags applied to the resource identified by resource name. For more information, see the Amazon Lightsail Developer Guide.
    */
   untagResource(callback?: (err: AWSError, data: Lightsail.Types.UntagResourceResult) => void): Request<Lightsail.Types.UntagResourceResult, AWSError>;
+  /**
+   * Updates an existing Amazon Lightsail bucket. Use this action to update the configuration of an existing bucket, such as versioning, public accessibility, and the Amazon Web Services accounts that can access the bucket.
+   */
+  updateBucket(params: Lightsail.Types.UpdateBucketRequest, callback?: (err: AWSError, data: Lightsail.Types.UpdateBucketResult) => void): Request<Lightsail.Types.UpdateBucketResult, AWSError>;
+  /**
+   * Updates an existing Amazon Lightsail bucket. Use this action to update the configuration of an existing bucket, such as versioning, public accessibility, and the Amazon Web Services accounts that can access the bucket.
+   */
+  updateBucket(callback?: (err: AWSError, data: Lightsail.Types.UpdateBucketResult) => void): Request<Lightsail.Types.UpdateBucketResult, AWSError>;
+  /**
+   * Updates the bundle, or storage plan, of an existing Amazon Lightsail bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. You can update a bucket's bundle only one time within a monthly Amazon Web Services billing cycle. To determine if you can update a bucket's bundle, use the GetBuckets action. The ableToUpdateBundle parameter in the response will indicate whether you can currently update a bucket's bundle. Update a bucket's bundle if it's consistently going over its storage space or data transfer quota, or if a bucket's usage is consistently in the lower range of its storage space or data transfer quota. Due to the unpredictable usage fluctuations that a bucket might experience, we strongly recommend that you update a bucket's bundle only as a long-term strategy, instead of as a short-term, monthly cost-cutting measure. Choose a bucket bundle that will provide the bucket with ample storage space and data transfer for a long time to come.
+   */
+  updateBucketBundle(params: Lightsail.Types.UpdateBucketBundleRequest, callback?: (err: AWSError, data: Lightsail.Types.UpdateBucketBundleResult) => void): Request<Lightsail.Types.UpdateBucketBundleResult, AWSError>;
+  /**
+   * Updates the bundle, or storage plan, of an existing Amazon Lightsail bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. You can update a bucket's bundle only one time within a monthly Amazon Web Services billing cycle. To determine if you can update a bucket's bundle, use the GetBuckets action. The ableToUpdateBundle parameter in the response will indicate whether you can currently update a bucket's bundle. Update a bucket's bundle if it's consistently going over its storage space or data transfer quota, or if a bucket's usage is consistently in the lower range of its storage space or data transfer quota. Due to the unpredictable usage fluctuations that a bucket might experience, we strongly recommend that you update a bucket's bundle only as a long-term strategy, instead of as a short-term, monthly cost-cutting measure. Choose a bucket bundle that will provide the bucket with ample storage space and data transfer for a long time to come.
+   */
+  updateBucketBundle(callback?: (err: AWSError, data: Lightsail.Types.UpdateBucketBundleResult) => void): Request<Lightsail.Types.UpdateBucketBundleResult, AWSError>;
   /**
    * Updates the configuration of your Amazon Lightsail container service, such as its power, scale, and public domain names.
    */
@@ -1092,56 +1244,132 @@ declare class Lightsail extends Service {
    */
   updateContainerService(callback?: (err: AWSError, data: Lightsail.Types.UpdateContainerServiceResult) => void): Request<Lightsail.Types.UpdateContainerServiceResult, AWSError>;
   /**
-   * Updates an existing Amazon Lightsail content delivery network (CDN) distribution. Use this action to update the configuration of your existing distribution
+   * Updates an existing Amazon Lightsail content delivery network (CDN) distribution. Use this action to update the configuration of your existing distribution.
    */
   updateDistribution(params: Lightsail.Types.UpdateDistributionRequest, callback?: (err: AWSError, data: Lightsail.Types.UpdateDistributionResult) => void): Request<Lightsail.Types.UpdateDistributionResult, AWSError>;
   /**
-   * Updates an existing Amazon Lightsail content delivery network (CDN) distribution. Use this action to update the configuration of your existing distribution
+   * Updates an existing Amazon Lightsail content delivery network (CDN) distribution. Use this action to update the configuration of your existing distribution.
    */
   updateDistribution(callback?: (err: AWSError, data: Lightsail.Types.UpdateDistributionResult) => void): Request<Lightsail.Types.UpdateDistributionResult, AWSError>;
   /**
-   * Updates the bundle of your Amazon Lightsail content delivery network (CDN) distribution. A distribution bundle specifies the monthly network transfer quota and monthly cost of your dsitribution. Update your distribution's bundle if your distribution is going over its monthly network transfer quota and is incurring an overage fee. You can update your distribution's bundle only one time within your monthly AWS billing cycle. To determine if you can update your distribution's bundle, use the GetDistributions action. The ableToUpdateBundle parameter in the result will indicate whether you can currently update your distribution's bundle.
+   * Updates the bundle of your Amazon Lightsail content delivery network (CDN) distribution. A distribution bundle specifies the monthly network transfer quota and monthly cost of your distribution. Update your distribution's bundle if your distribution is going over its monthly network transfer quota and is incurring an overage fee. You can update your distribution's bundle only one time within your monthly Amazon Web Services billing cycle. To determine if you can update your distribution's bundle, use the GetDistributions action. The ableToUpdateBundle parameter in the result will indicate whether you can currently update your distribution's bundle.
    */
   updateDistributionBundle(params: Lightsail.Types.UpdateDistributionBundleRequest, callback?: (err: AWSError, data: Lightsail.Types.UpdateDistributionBundleResult) => void): Request<Lightsail.Types.UpdateDistributionBundleResult, AWSError>;
   /**
-   * Updates the bundle of your Amazon Lightsail content delivery network (CDN) distribution. A distribution bundle specifies the monthly network transfer quota and monthly cost of your dsitribution. Update your distribution's bundle if your distribution is going over its monthly network transfer quota and is incurring an overage fee. You can update your distribution's bundle only one time within your monthly AWS billing cycle. To determine if you can update your distribution's bundle, use the GetDistributions action. The ableToUpdateBundle parameter in the result will indicate whether you can currently update your distribution's bundle.
+   * Updates the bundle of your Amazon Lightsail content delivery network (CDN) distribution. A distribution bundle specifies the monthly network transfer quota and monthly cost of your distribution. Update your distribution's bundle if your distribution is going over its monthly network transfer quota and is incurring an overage fee. You can update your distribution's bundle only one time within your monthly Amazon Web Services billing cycle. To determine if you can update your distribution's bundle, use the GetDistributions action. The ableToUpdateBundle parameter in the result will indicate whether you can currently update your distribution's bundle.
    */
   updateDistributionBundle(callback?: (err: AWSError, data: Lightsail.Types.UpdateDistributionBundleResult) => void): Request<Lightsail.Types.UpdateDistributionBundleResult, AWSError>;
   /**
-   * Updates a domain recordset after it is created. The update domain entry operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Lightsail Dev Guide.
+   * Updates a domain recordset after it is created. The update domain entry operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Amazon Lightsail Developer Guide.
    */
   updateDomainEntry(params: Lightsail.Types.UpdateDomainEntryRequest, callback?: (err: AWSError, data: Lightsail.Types.UpdateDomainEntryResult) => void): Request<Lightsail.Types.UpdateDomainEntryResult, AWSError>;
   /**
-   * Updates a domain recordset after it is created. The update domain entry operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Lightsail Dev Guide.
+   * Updates a domain recordset after it is created. The update domain entry operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Amazon Lightsail Developer Guide.
    */
   updateDomainEntry(callback?: (err: AWSError, data: Lightsail.Types.UpdateDomainEntryResult) => void): Request<Lightsail.Types.UpdateDomainEntryResult, AWSError>;
   /**
-   * Updates the specified attribute for a load balancer. You can only update one attribute at a time. The update load balancer attribute operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
+   * Modifies the Amazon Lightsail instance metadata parameters on a running or stopped instance. When you modify the parameters on a running instance, the GetInstance or GetInstances API operation initially responds with a state of pending. After the parameter modifications are successfully applied, the state changes to applied in subsequent GetInstance or GetInstances API calls. For more information, see Use IMDSv2 with an Amazon Lightsail instance in the Amazon Lightsail Developer Guide.
+   */
+  updateInstanceMetadataOptions(params: Lightsail.Types.UpdateInstanceMetadataOptionsRequest, callback?: (err: AWSError, data: Lightsail.Types.UpdateInstanceMetadataOptionsResult) => void): Request<Lightsail.Types.UpdateInstanceMetadataOptionsResult, AWSError>;
+  /**
+   * Modifies the Amazon Lightsail instance metadata parameters on a running or stopped instance. When you modify the parameters on a running instance, the GetInstance or GetInstances API operation initially responds with a state of pending. After the parameter modifications are successfully applied, the state changes to applied in subsequent GetInstance or GetInstances API calls. For more information, see Use IMDSv2 with an Amazon Lightsail instance in the Amazon Lightsail Developer Guide.
+   */
+  updateInstanceMetadataOptions(callback?: (err: AWSError, data: Lightsail.Types.UpdateInstanceMetadataOptionsResult) => void): Request<Lightsail.Types.UpdateInstanceMetadataOptionsResult, AWSError>;
+  /**
+   * Updates the specified attribute for a load balancer. You can only update one attribute at a time. The update load balancer attribute operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Amazon Lightsail Developer Guide.
    */
   updateLoadBalancerAttribute(params: Lightsail.Types.UpdateLoadBalancerAttributeRequest, callback?: (err: AWSError, data: Lightsail.Types.UpdateLoadBalancerAttributeResult) => void): Request<Lightsail.Types.UpdateLoadBalancerAttributeResult, AWSError>;
   /**
-   * Updates the specified attribute for a load balancer. You can only update one attribute at a time. The update load balancer attribute operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Lightsail Dev Guide.
+   * Updates the specified attribute for a load balancer. You can only update one attribute at a time. The update load balancer attribute operation supports tag-based access control via resource tags applied to the resource identified by load balancer name. For more information, see the Amazon Lightsail Developer Guide.
    */
   updateLoadBalancerAttribute(callback?: (err: AWSError, data: Lightsail.Types.UpdateLoadBalancerAttributeResult) => void): Request<Lightsail.Types.UpdateLoadBalancerAttributeResult, AWSError>;
   /**
-   * Allows the update of one or more attributes of a database in Amazon Lightsail. Updates are applied immediately, or in cases where the updates could result in an outage, are applied during the database's predefined maintenance window. The update relational database operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Lightsail Dev Guide.
+   * Allows the update of one or more attributes of a database in Amazon Lightsail. Updates are applied immediately, or in cases where the updates could result in an outage, are applied during the database's predefined maintenance window. The update relational database operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Amazon Lightsail Developer Guide.
    */
   updateRelationalDatabase(params: Lightsail.Types.UpdateRelationalDatabaseRequest, callback?: (err: AWSError, data: Lightsail.Types.UpdateRelationalDatabaseResult) => void): Request<Lightsail.Types.UpdateRelationalDatabaseResult, AWSError>;
   /**
-   * Allows the update of one or more attributes of a database in Amazon Lightsail. Updates are applied immediately, or in cases where the updates could result in an outage, are applied during the database's predefined maintenance window. The update relational database operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Lightsail Dev Guide.
+   * Allows the update of one or more attributes of a database in Amazon Lightsail. Updates are applied immediately, or in cases where the updates could result in an outage, are applied during the database's predefined maintenance window. The update relational database operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Amazon Lightsail Developer Guide.
    */
   updateRelationalDatabase(callback?: (err: AWSError, data: Lightsail.Types.UpdateRelationalDatabaseResult) => void): Request<Lightsail.Types.UpdateRelationalDatabaseResult, AWSError>;
   /**
-   * Allows the update of one or more parameters of a database in Amazon Lightsail. Parameter updates don't cause outages; therefore, their application is not subject to the preferred maintenance window. However, there are two ways in which parameter updates are applied: dynamic or pending-reboot. Parameters marked with a dynamic apply type are applied immediately. Parameters marked with a pending-reboot apply type are applied only after the database is rebooted using the reboot relational database operation. The update relational database parameters operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Lightsail Dev Guide.
+   * Allows the update of one or more parameters of a database in Amazon Lightsail. Parameter updates don't cause outages; therefore, their application is not subject to the preferred maintenance window. However, there are two ways in which parameter updates are applied: dynamic or pending-reboot. Parameters marked with a dynamic apply type are applied immediately. Parameters marked with a pending-reboot apply type are applied only after the database is rebooted using the reboot relational database operation. The update relational database parameters operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Amazon Lightsail Developer Guide.
    */
   updateRelationalDatabaseParameters(params: Lightsail.Types.UpdateRelationalDatabaseParametersRequest, callback?: (err: AWSError, data: Lightsail.Types.UpdateRelationalDatabaseParametersResult) => void): Request<Lightsail.Types.UpdateRelationalDatabaseParametersResult, AWSError>;
   /**
-   * Allows the update of one or more parameters of a database in Amazon Lightsail. Parameter updates don't cause outages; therefore, their application is not subject to the preferred maintenance window. However, there are two ways in which parameter updates are applied: dynamic or pending-reboot. Parameters marked with a dynamic apply type are applied immediately. Parameters marked with a pending-reboot apply type are applied only after the database is rebooted using the reboot relational database operation. The update relational database parameters operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Lightsail Dev Guide.
+   * Allows the update of one or more parameters of a database in Amazon Lightsail. Parameter updates don't cause outages; therefore, their application is not subject to the preferred maintenance window. However, there are two ways in which parameter updates are applied: dynamic or pending-reboot. Parameters marked with a dynamic apply type are applied immediately. Parameters marked with a pending-reboot apply type are applied only after the database is rebooted using the reboot relational database operation. The update relational database parameters operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Amazon Lightsail Developer Guide.
    */
   updateRelationalDatabaseParameters(callback?: (err: AWSError, data: Lightsail.Types.UpdateRelationalDatabaseParametersResult) => void): Request<Lightsail.Types.UpdateRelationalDatabaseParametersResult, AWSError>;
 }
 declare namespace Lightsail {
   export type AccessDirection = "inbound"|"outbound"|string;
+  export interface AccessKey {
+    /**
+     * The ID of the access key.
+     */
+    accessKeyId?: IAMAccessKeyId;
+    /**
+     * The secret access key used to sign requests. You should store the secret access key in a safe location. We recommend that you delete the access key if the secret access key is compromised.
+     */
+    secretAccessKey?: NonEmptyString;
+    /**
+     * The status of the access key. A status of Active means that the key is valid, while Inactive means it is not.
+     */
+    status?: StatusType;
+    /**
+     * The timestamp when the access key was created.
+     */
+    createdAt?: IsoDate;
+    /**
+     * An object that describes the last time the access key was used.  This object does not include data in the response of a CreateBucketAccessKey action. If the access key has not been used, the region and serviceName values are N/A, and the lastUsedDate value is null. 
+     */
+    lastUsed?: AccessKeyLastUsed;
+  }
+  export interface AccessKeyLastUsed {
+    /**
+     * The date and time when the access key was most recently used. This value is null if the access key has not been used.
+     */
+    lastUsedDate?: IsoDate;
+    /**
+     * The Amazon Web Services Region where this access key was most recently used. This value is N/A if the access key has not been used.
+     */
+    region?: string;
+    /**
+     * The name of the Amazon Web Services service with which this access key was most recently used. This value is N/A if the access key has not been used.
+     */
+    serviceName?: string;
+  }
+  export type AccessKeyList = AccessKey[];
+  export type AccessReceiverList = ResourceReceivingAccess[];
+  export interface AccessRules {
+    /**
+     * Specifies the anonymous access to all objects in a bucket. The following options can be specified:    public - Sets all objects in the bucket to public (read-only), making them readable by anyone in the world. If the getObject value is set to public, then all objects in the bucket default to public regardless of the allowPublicOverrides value.    private - Sets all objects in the bucket to private, making them readable only by you or anyone you give access to. If the getObject value is set to private, and the allowPublicOverrides value is set to true, then all objects in the bucket default to private unless they are configured with a public-read ACL. Individual objects with a public-read ACL are readable by anyone in the world.  
+     */
+    getObject?: AccessType;
+    /**
+     * A Boolean value that indicates whether the access control list (ACL) permissions that are applied to individual objects override the getObject option that is currently specified. When this is true, you can use the PutObjectAcl Amazon S3 API action to set individual objects to public (read-only) using the public-read ACL, or to private using the private ACL.
+     */
+    allowPublicOverrides?: boolean;
+  }
+  export type AccessType = "public"|"private"|string;
+  export interface AccountLevelBpaSync {
+    /**
+     * The status of the account-level BPA synchronization. The following statuses are possible:    InSync - Account-level BPA is synchronized. The Amazon S3 account-level BPA configuration applies to your Lightsail buckets.    NeverSynced - Synchronization has not yet happened. The Amazon S3 account-level BPA configuration does not apply to your Lightsail buckets.    Failed - Synchronization failed. The Amazon S3 account-level BPA configuration does not apply to your Lightsail buckets.    Defaulted - Synchronization failed and account-level BPA for your Lightsail buckets is defaulted to active.    You might need to complete further actions if the status is Failed or Defaulted. The message parameter provides more information for those statuses. 
+     */
+    status?: AccountLevelBpaSyncStatus;
+    /**
+     * The timestamp of when the account-level BPA configuration was last synchronized. This value is null when the account-level BPA configuration has not been synchronized.
+     */
+    lastSyncedAt?: IsoDate;
+    /**
+     * A message that provides a reason for a Failed or Defaulted synchronization status. The following messages are possible:    SYNC_ON_HOLD - The synchronization has not yet happened. This status message occurs immediately after you create your first Lightsail bucket. This status message should change after the first synchronization happens, approximately 1 hour after the first bucket is created.    DEFAULTED_FOR_SLR_MISSING - The synchronization failed because the required service-linked role is missing from your Amazon Web Services account. The account-level BPA configuration for your Lightsail buckets is defaulted to active until the synchronization can occur. This means that all your buckets are private and not publicly accessible. For more information about how to create the required service-linked role to allow synchronization, see Using Service-Linked Roles for Amazon Lightsail in the Amazon Lightsail Developer Guide.    DEFAULTED_FOR_SLR_MISSING_ON_HOLD - The synchronization failed because the required service-linked role is missing from your Amazon Web Services account. Account-level BPA is not yet configured for your Lightsail buckets. Therefore, only the bucket access permissions and individual object access permissions apply to your Lightsail buckets. For more information about how to create the required service-linked role to allow synchronization, see Using Service-Linked Roles for Amazon Lightsail in the Amazon Lightsail Developer Guide.    Unknown - The reason that synchronization failed is unknown. Contact Amazon Web Services Support for more information.  
+     */
+    message?: BPAStatusMessage;
+    /**
+     * A Boolean value that indicates whether account-level block public access is affecting your Lightsail buckets.
+     */
+    bpaImpactsLightsail?: boolean;
+  }
+  export type AccountLevelBpaSyncStatus = "InSync"|"Failed"|"NeverSynced"|"Defaulted"|string;
   export interface AddOn {
     /**
      * The name of the add-on.
@@ -1159,6 +1387,14 @@ declare namespace Lightsail {
      * The next daily time an automatic snapshot will be created. The time shown is in HH:00 format, and in Coordinated Universal Time (UTC). The snapshot is automatically created between the time shown and up to 45 minutes after.
      */
     nextSnapshotTimeOfDay?: TimeOfDay;
+    /**
+     * The trigger threshold of the action.  This add-on only applies to Lightsail for Research resources. 
+     */
+    threshold?: string;
+    /**
+     * The amount of idle time in minutes after which your virtual computer will automatically stop.  This add-on only applies to Lightsail for Research resources. 
+     */
+    duration?: string;
   }
   export type AddOnList = AddOn[];
   export interface AddOnRequest {
@@ -1170,9 +1406,13 @@ declare namespace Lightsail {
      * An object that represents additional parameters when enabling or modifying the automatic snapshot add-on.
      */
     autoSnapshotAddOnRequest?: AutoSnapshotAddOnRequest;
+    /**
+     * An object that represents additional parameters when enabling or modifying the StopInstanceOnIdle add-on.  This object only applies to Lightsail for Research resources. 
+     */
+    stopInstanceOnIdleRequest?: StopInstanceOnIdleRequest;
   }
   export type AddOnRequestList = AddOnRequest[];
-  export type AddOnType = "AutoSnapshot"|string;
+  export type AddOnType = "AutoSnapshot"|"StopInstanceOnIdle"|string;
   export interface Alarm {
     /**
      * The name of the alarm.
@@ -1191,7 +1431,7 @@ declare namespace Lightsail {
      */
     location?: ResourceLocation;
     /**
-     * The Lightsail resource type (e.g., Alarm).
+     * The Lightsail resource type of the alarm.
      */
     resourceType?: ResourceType;
     /**
@@ -1269,6 +1509,8 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export type AppCategory = "LfR"|string;
+  export type AppCategoryList = AppCategory[];
   export interface AttachCertificateToDistributionRequest {
     /**
      * The name of the distribution that the certificate will be attached to. Use the GetDistributions action to get a list of distribution names that you can specify.
@@ -1287,7 +1529,7 @@ declare namespace Lightsail {
   }
   export interface AttachDiskRequest {
     /**
-     * The unique Lightsail disk name (e.g., my-disk).
+     * The unique Lightsail disk name (my-disk).
      */
     diskName: ResourceName;
     /**
@@ -1295,9 +1537,13 @@ declare namespace Lightsail {
      */
     instanceName: ResourceName;
     /**
-     * The disk path to expose to the instance (e.g., /dev/xvdf).
+     * The disk path to expose to the instance (/dev/xvdf).
      */
     diskPath: NonEmptyString;
+    /**
+     * A Boolean value used to determine the automatic mounting of a storage volume to a virtual computer. The default value is False.  This value only applies to Lightsail for Research resources. 
+     */
+    autoMounting?: boolean;
   }
   export interface AttachDiskResult {
     /**
@@ -1355,7 +1601,7 @@ declare namespace Lightsail {
   }
   export interface AttachedDisk {
     /**
-     * The path of the disk (e.g., /dev/xvdf).
+     * The path of the disk (/dev/xvdf).
      */
     path?: string;
     /**
@@ -1365,6 +1611,7 @@ declare namespace Lightsail {
   }
   export type AttachedDiskList = AttachedDisk[];
   export type AttachedDiskMap = {[key: string]: DiskMapList};
+  export type AutoMountStatus = "Failed"|"Pending"|"Mounted"|"NotMounted"|string;
   export interface AutoSnapshotAddOnRequest {
     /**
      * The daily time when an automatic snapshot will be created. Constraints:   Must be in HH:00 format, and in an hourly increment.   Specified in Coordinated Universal Time (UTC).   The snapshot will be automatically created between the time specified and up to 45 minutes after.  
@@ -1403,23 +1650,24 @@ declare namespace Lightsail {
     state?: NonEmptyString;
   }
   export type AvailabilityZoneList = AvailabilityZone[];
+  export type BPAStatusMessage = "DEFAULTED_FOR_SLR_MISSING"|"SYNC_ON_HOLD"|"DEFAULTED_FOR_SLR_MISSING_ON_HOLD"|"Unknown"|string;
   export type Base64 = string;
   export type BehaviorEnum = "dont-cache"|"cache"|string;
   export interface Blueprint {
     /**
-     * The ID for the virtual private server image (e.g., app_wordpress_4_4 or app_lamp_7_0).
+     * The ID for the virtual private server image (app_wordpress_x_x or app_lamp_x_x).
      */
     blueprintId?: NonEmptyString;
     /**
-     * The friendly name of the blueprint (e.g., Amazon Linux).
+     * The friendly name of the blueprint (Amazon Linux).
      */
     name?: ResourceName;
     /**
-     * The group name of the blueprint (e.g., amazon-linux).
+     * The group name of the blueprint (amazon-linux).
      */
     group?: NonEmptyString;
     /**
-     * The type of the blueprint (e.g., os or app).
+     * The type of the blueprint (os or app).
      */
     type?: BlueprintType;
     /**
@@ -1435,7 +1683,7 @@ declare namespace Lightsail {
      */
     minPower?: integer;
     /**
-     * The version number of the operating system, application, or stack (e.g., 2016.03.0).
+     * The version number of the operating system, application, or stack ( 2016.03.0).
      */
     version?: string;
     /**
@@ -1454,28 +1702,153 @@ declare namespace Lightsail {
      * The operating system platform (either Linux/Unix-based or Windows Server-based) of the blueprint.
      */
     platform?: InstancePlatform;
+    /**
+     * Virtual computer blueprints that are supported by Lightsail for Research.  This parameter only applies to Lightsail for Research resources. 
+     */
+    appCategory?: AppCategory;
   }
   export type BlueprintList = Blueprint[];
   export type BlueprintType = "os"|"app"|string;
-  export interface Bundle {
+  export interface Bucket {
     /**
-     * The price in US dollars (e.g., 5.0) of the bundle.
+     * The Lightsail resource type of the bucket.
      */
-    price?: float;
+    resourceType?: NonEmptyString;
     /**
-     * The number of vCPUs included in the bundle (e.g., 2).
+     * An object that describes the access rules of the bucket.
      */
-    cpuCount?: integer;
+    accessRules?: AccessRules;
     /**
-     * The size of the SSD (e.g., 30).
+     * The Amazon Resource Name (ARN) of the bucket.
      */
-    diskSizeInGb?: integer;
+    arn?: NonEmptyString;
     /**
-     * The bundle ID (e.g., micro_1_0).
+     * The ID of the bundle currently applied to the bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. Use the UpdateBucketBundle action to change the bundle of a bucket.
      */
     bundleId?: NonEmptyString;
     /**
-     * The Amazon EC2 instance type (e.g., t2.micro).
+     * The timestamp when the distribution was created.
+     */
+    createdAt?: IsoDate;
+    /**
+     * The URL of the bucket.
+     */
+    url?: NonEmptyString;
+    /**
+     * An object that describes the location of the bucket, such as the Amazon Web Services Region and Availability Zone.
+     */
+    location?: ResourceLocation;
+    /**
+     * The name of the bucket.
+     */
+    name?: BucketName;
+    /**
+     * The support code for a bucket. Include this code in your email to support when you have questions about a Lightsail bucket. This code enables our support team to look up your Lightsail information more easily.
+     */
+    supportCode?: NonEmptyString;
+    /**
+     * The tag keys and optional values for the bucket. For more information, see Tags in Amazon Lightsail in the Amazon Lightsail Developer Guide.
+     */
+    tags?: TagList;
+    /**
+     * Indicates whether object versioning is enabled for the bucket. The following options can be configured:    Enabled - Object versioning is enabled.    Suspended - Object versioning was previously enabled but is currently suspended. Existing object versions are retained.    NeverEnabled - Object versioning has never been enabled.  
+     */
+    objectVersioning?: NonEmptyString;
+    /**
+     * Indicates whether the bundle that is currently applied to a bucket can be changed to another bundle. You can update a bucket's bundle only one time within a monthly Amazon Web Services billing cycle. Use the UpdateBucketBundle action to change a bucket's bundle.
+     */
+    ableToUpdateBundle?: boolean;
+    /**
+     * An array of strings that specify the Amazon Web Services account IDs that have read-only access to the bucket.
+     */
+    readonlyAccessAccounts?: PartnerIdList;
+    /**
+     * An array of objects that describe Lightsail instances that have access to the bucket. Use the SetResourceAccessForBucket action to update the instances that have access to a bucket.
+     */
+    resourcesReceivingAccess?: AccessReceiverList;
+    /**
+     * An object that describes the state of the bucket.
+     */
+    state?: BucketState;
+    /**
+     * An object that describes the access log configuration for the bucket.
+     */
+    accessLogConfig?: BucketAccessLogConfig;
+  }
+  export interface BucketAccessLogConfig {
+    /**
+     * A Boolean value that indicates whether bucket access logging is enabled for the bucket.
+     */
+    enabled: boolean;
+    /**
+     * The name of the bucket where the access logs are saved. The destination can be a Lightsail bucket in the same account, and in the same Amazon Web Services Region as the source bucket.  This parameter is required when enabling the access log for a bucket, and should be omitted when disabling the access log. 
+     */
+    destination?: BucketName;
+    /**
+     * The optional object prefix for the bucket access log. The prefix is an optional addition to the object key that organizes your access log files in the destination bucket. For example, if you specify a logs/ prefix, then each log object will begin with the logs/ prefix in its key (for example, logs/2021-11-01-21-32-16-E568B2907131C0C0).  This parameter can be optionally specified when enabling the access log for a bucket, and should be omitted when disabling the access log. 
+     */
+    prefix?: BucketAccessLogPrefix;
+  }
+  export type BucketAccessLogPrefix = string;
+  export interface BucketBundle {
+    /**
+     * The ID of the bundle.
+     */
+    bundleId?: NonEmptyString;
+    /**
+     * The name of the bundle.
+     */
+    name?: NonEmptyString;
+    /**
+     * The monthly price of the bundle, in US dollars.
+     */
+    price?: float;
+    /**
+     * The storage size of the bundle, in GB.
+     */
+    storagePerMonthInGb?: integer;
+    /**
+     * The monthly network transfer quota of the bundle.
+     */
+    transferPerMonthInGb?: integer;
+    /**
+     * Indicates whether the bundle is active. Use for a new or existing bucket.
+     */
+    isActive?: boolean;
+  }
+  export type BucketBundleList = BucketBundle[];
+  export type BucketList = Bucket[];
+  export type BucketMetricName = "BucketSizeBytes"|"NumberOfObjects"|string;
+  export type BucketName = string;
+  export interface BucketState {
+    /**
+     * The state code of the bucket. The following codes are possible:    OK - The bucket is in a running state.    Unknown - Creation of the bucket might have timed-out. You might want to delete the bucket and create a new one.  
+     */
+    code?: NonEmptyString;
+    /**
+     * A message that describes the state of the bucket.
+     */
+    message?: string;
+  }
+  export interface Bundle {
+    /**
+     * The price in US dollars (5.0) of the bundle.
+     */
+    price?: float;
+    /**
+     * The number of vCPUs included in the bundle (2).
+     */
+    cpuCount?: integer;
+    /**
+     * The size of the SSD (30).
+     */
+    diskSizeInGb?: integer;
+    /**
+     * The bundle ID (micro_x_x).
+     */
+    bundleId?: NonEmptyString;
+    /**
+     * The instance type (micro).
      */
     instanceType?: string;
     /**
@@ -1483,25 +1856,33 @@ declare namespace Lightsail {
      */
     isActive?: boolean;
     /**
-     * A friendly name for the bundle (e.g., Micro).
+     * A friendly name for the bundle (Micro).
      */
     name?: string;
     /**
-     * A numeric value that represents the power of the bundle (e.g., 500). You can use the bundle's power value in conjunction with a blueprint's minimum power value to determine whether the blueprint will run on the bundle. For example, you need a bundle with a power value of 500 or more to create an instance that uses a blueprint with a minimum power value of 500.
+     * A numeric value that represents the power of the bundle (500). You can use the bundle's power value in conjunction with a blueprint's minimum power value to determine whether the blueprint will run on the bundle. For example, you need a bundle with a power value of 500 or more to create an instance that uses a blueprint with a minimum power value of 500.
      */
     power?: integer;
     /**
-     * The amount of RAM in GB (e.g., 2.0).
+     * The amount of RAM in GB (2.0).
      */
     ramSizeInGb?: float;
     /**
-     * The data transfer rate per month in GB (e.g., 2000).
+     * The data transfer rate per month in GB (2000).
      */
     transferPerMonthInGb?: integer;
     /**
      * The operating system platform (Linux/Unix-based or Windows Server-based) that the bundle supports. You can only launch a WINDOWS bundle on a blueprint that supports the WINDOWS platform. LINUX_UNIX blueprints require a LINUX_UNIX bundle.
      */
     supportedPlatforms?: InstancePlatformList;
+    /**
+     * Virtual computer blueprints that are supported by a Lightsail for Research bundle.  This parameter only applies to Lightsail for Research resources. 
+     */
+    supportedAppCategories?: AppCategoryList;
+    /**
+     * An integer that indicates the public ipv4 address count included in the bundle, the value is either 0 or 1.
+     */
+    publicIpv4AddressCount?: integer;
   }
   export type BundleList = Bundle[];
   export interface CacheBehavior {
@@ -1561,7 +1942,7 @@ declare namespace Lightsail {
      */
     arn?: NonEmptyString;
     /**
-     * The name of the certificate (e.g., my-certificate).
+     * The name of the certificate (my-certificate).
      */
     name?: CertificateName;
     /**
@@ -1577,7 +1958,7 @@ declare namespace Lightsail {
      */
     serialNumber?: SerialNumber;
     /**
-     * An array of strings that specify the alternate domains (e.g., example2.com) and subdomains (e.g., blog.example.com) of the certificate.
+     * An array of strings that specify the alternate domains (example2.com) and subdomains (blog.example.com) of the certificate.
      */
     subjectAlternativeNames?: SubjectAlternativeNameList;
     /**
@@ -1585,7 +1966,7 @@ declare namespace Lightsail {
      */
     domainValidationRecords?: DomainValidationRecordList;
     /**
-     * The validation failure reason, if any, of the certificate. The following failure reasons are possible:     NO_AVAILABLE_CONTACTS  - This failure applies to email validation, which is not available for Lightsail certificates.     ADDITIONAL_VERIFICATION_REQUIRED  - Lightsail requires additional information to process this certificate request. This can happen as a fraud-protection measure, such as when the domain ranks within the Alexa top 1000 websites. To provide the required information, use the AWS Support Center to contact AWS Support.  You cannot request a certificate for Amazon-owned domain names such as those ending in amazonaws.com, cloudfront.net, or elasticbeanstalk.com.      DOMAIN_NOT_ALLOWED  - One or more of the domain names in the certificate request was reported as an unsafe domain by VirusTotal. To correct the problem, search for your domain name on the VirusTotal website. If your domain is reported as suspicious, see Google Help for Hacked Websites to learn what you can do. If you believe that the result is a false positive, notify the organization that is reporting the domain. VirusTotal is an aggregate of several antivirus and URL scanners and cannot remove your domain from a block list itself. After you correct the problem and the VirusTotal registry has been updated, request a new certificate. If you see this error and your domain is not included in the VirusTotal list, visit the AWS Support Center and create a case.     INVALID_PUBLIC_DOMAIN  - One or more of the domain names in the certificate request is not valid. Typically, this is because a domain name in the request is not a valid top-level domain. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request, and ensure that all domain names in the request are for valid top-level domains. For example, you cannot request a certificate for example.invalidpublicdomain because invalidpublicdomain is not a valid top-level domain.     OTHER  - Typically, this failure occurs when there is a typographical error in one or more of the domain names in the certificate request. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request.   
+     * The validation failure reason, if any, of the certificate. The following failure reasons are possible:     NO_AVAILABLE_CONTACTS  - This failure applies to email validation, which is not available for Lightsail certificates.     ADDITIONAL_VERIFICATION_REQUIRED  - Lightsail requires additional information to process this certificate request. This can happen as a fraud-protection measure, such as when the domain ranks within the Alexa top 1000 websites. To provide the required information, use the Amazon Web Services Support Center to contact Amazon Web Services Support.  You cannot request a certificate for Amazon-owned domain names such as those ending in amazonaws.com, cloudfront.net, or elasticbeanstalk.com.      DOMAIN_NOT_ALLOWED  - One or more of the domain names in the certificate request was reported as an unsafe domain by VirusTotal. To correct the problem, search for your domain name on the VirusTotal website. If your domain is reported as suspicious, see Google Help for Hacked Websites to learn what you can do. If you believe that the result is a false positive, notify the organization that is reporting the domain. VirusTotal is an aggregate of several antivirus and URL scanners and cannot remove your domain from a block list itself. After you correct the problem and the VirusTotal registry has been updated, request a new certificate. If you see this error and your domain is not included in the VirusTotal list, visit the Amazon Web Services Support Center and create a case.     INVALID_PUBLIC_DOMAIN  - One or more of the domain names in the certificate request is not valid. Typically, this is because a domain name in the request is not a valid top-level domain. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request, and ensure that all domain names in the request are for valid top-level domains. For example, you cannot request a certificate for example.invalidpublicdomain because invalidpublicdomain is not a valid top-level domain.     OTHER  - Typically, this failure occurs when there is a typographical error in one or more of the domain names in the certificate request. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request.   
      */
     requestFailureReason?: RequestFailureReason;
     /**
@@ -1633,7 +2014,7 @@ declare namespace Lightsail {
      */
     revocationReason?: RevocationReason;
     /**
-     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Lightsail Dev Guide.
+     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Amazon Lightsail Developer Guide.
      */
     tags?: TagList;
     /**
@@ -1641,7 +2022,9 @@ declare namespace Lightsail {
      */
     supportCode?: string;
   }
+  export type CertificateDomainValidationStatus = "PENDING_VALIDATION"|"FAILED"|"SUCCESS"|string;
   export type CertificateName = string;
+  export type CertificateProvider = "LetsEncrypt"|string;
   export type CertificateStatus = "PENDING_VALIDATION"|"ISSUED"|"INACTIVE"|"EXPIRED"|"VALIDATION_TIMED_OUT"|"REVOKED"|"FAILED"|string;
   export type CertificateStatusList = CertificateStatus[];
   export interface CertificateSummary {
@@ -1662,7 +2045,7 @@ declare namespace Lightsail {
      */
     certificateDetail?: Certificate;
     /**
-     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Lightsail Dev Guide.
+     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Amazon Lightsail Developer Guide.
      */
     tags?: TagList;
   }
@@ -1697,11 +2080,11 @@ declare namespace Lightsail {
      */
     createdAt?: IsoDate;
     /**
-     * A list of objects describing the Availability Zone and AWS Region of the CloudFormation stack record.
+     * A list of objects describing the Availability Zone and Amazon Web Services Region of the CloudFormation stack record.
      */
     location?: ResourceLocation;
     /**
-     * The Lightsail resource type (e.g., CloudFormationStackRecord).
+     * The Lightsail resource type (CloudFormationStackRecord).
      */
     resourceType?: ResourceType;
     /**
@@ -1720,7 +2103,7 @@ declare namespace Lightsail {
   export type CloudFormationStackRecordList = CloudFormationStackRecord[];
   export interface CloudFormationStackRecordSourceInfo {
     /**
-     * The Lightsail resource type (e.g., ExportSnapshotRecord).
+     * The Lightsail resource type (ExportSnapshotRecord).
      */
     resourceType?: CloudFormationStackRecordSourceType;
     /**
@@ -1760,9 +2143,12 @@ declare namespace Lightsail {
      * The timestamp when the contact method was created.
      */
     createdAt?: IsoDate;
+    /**
+     * An object that describes the location of the contact method, such as the Amazon Web Services Region and Availability Zone.
+     */
     location?: ResourceLocation;
     /**
-     * The Lightsail resource type (e.g., ContactMethod).
+     * The Lightsail resource type of the contact method.
      */
     resourceType?: ResourceType;
     /**
@@ -1777,7 +2163,7 @@ declare namespace Lightsail {
   export type ContactProtocolsList = ContactProtocol[];
   export interface Container {
     /**
-     * The name of the image used for the container. Container images sourced from your Lightsail container service, that are registered and stored on your service, start with a colon (:). For example, :container-service-1.mystaticwebsite.1. Container images sourced from a public registry like Docker Hub don't start with a colon. For example, nginx:latest or nginx.
+     * The name of the image used for the container. Container images sourced from your Lightsail container service, that are registered and stored on your service, start with a colon (:). For example, if your container service name is container-service-1, the container image label is mystaticsite, and you want to use the third (3) version of the registered container image, then you should specify :container-service-1.mystaticsite.3. To use the latest version of a container image, specify latest instead of a version number (for example, :container-service-1.mystaticsite.latest). Lightsail will automatically use the highest numbered version of the registered container image. Container images sourced from a public registry like Docker Hub don't start with a colon. For example, nginx:latest or nginx.
      */
     image?: string;
     /**
@@ -1825,15 +2211,15 @@ declare namespace Lightsail {
      */
     createdAt?: IsoDate;
     /**
-     * An object that describes the location of the container service, such as the AWS Region and Availability Zone.
+     * An object that describes the location of the container service, such as the Amazon Web Services Region and Availability Zone.
      */
     location?: ResourceLocation;
     /**
-     * The Lightsail resource type of the container service (i.e., ContainerService).
+     * The Lightsail resource type of the container service.
      */
     resourceType?: ResourceType;
     /**
-     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Lightsail Dev Guide.
+     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Amazon Lightsail Developer Guide.
      */
     tags?: TagList;
     /**
@@ -1845,9 +2231,13 @@ declare namespace Lightsail {
      */
     powerId?: string;
     /**
-     * The current state of the container service. The state can be:    Pending - The container service is being created.    Ready - The container service is created but does not have a container deployment.    Disabled - The container service is disabled.    Updating - The container service capacity or other setting is being updated.    Deploying - The container service is launching a container deployment.    Running - The container service is created and it has a container deployment.  
+     * The current state of the container service. The following container service states are possible:    PENDING - The container service is being created.    READY - The container service is running but it does not have an active container deployment.    DEPLOYING - The container service is launching a container deployment.    RUNNING - The container service is running and it has an active container deployment.    UPDATING - The container service capacity or its custom domains are being updated.    DELETING - The container service is being deleted.    DISABLED - The container service is disabled, and its active deployment and containers, if any, are shut down.  
      */
     state?: ContainerServiceState;
+    /**
+     * An object that describes the current state of the container service.  The state detail is populated only when a container service is in a PENDING, DEPLOYING, or UPDATING state. 
+     */
+    stateDetail?: ContainerServiceStateDetail;
     /**
      * The scale specification of the container service. The scale specifies the allocated compute nodes of the container service.
      */
@@ -1865,7 +2255,7 @@ declare namespace Lightsail {
      */
     isDisabled?: boolean;
     /**
-     * The principal ARN of the container service. The principal ARN can be used to create a trust relationship between your standard AWS account and your Lightsail container service. This allows you to give your service permission to access resources in your standard AWS account.
+     * The principal ARN of the container service. The principal ARN can be used to create a trust relationship between your standard Amazon Web Services account and your Lightsail container service. This allows you to give your service permission to access resources in your standard Amazon Web Services account.
      */
     principalArn?: string;
     /**
@@ -1880,6 +2270,10 @@ declare namespace Lightsail {
      * The publicly accessible URL of the container service. If no public endpoint is specified in the currentDeployment, this URL returns a 404 response.
      */
     url?: string;
+    /**
+     * An object that describes the configuration for the container service to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. For more information, see Configuring access to an Amazon ECR private repository for an Amazon Lightsail container service in the Amazon Lightsail Developer Guide.
+     */
+    privateRegistryAccess?: PrivateRegistryAccess;
   }
   export interface ContainerServiceDeployment {
     /**
@@ -1887,7 +2281,7 @@ declare namespace Lightsail {
      */
     version?: integer;
     /**
-     * The state of the deployment. A deployment can be in one of the following states:    Activating - The deployment is being created.    Active - The deployment was successfully created, and it's currently running on the container service. The container service can have only one deployment in an active state at a time.    Inactive - The deployment was previously successfully created, but it is not currently running on the container service.    Failed - The deployment failed. Use the GetContainerLog action to view the log events for the containers in the deployment to try to determine the reason for the failure.  
+     * The state of the deployment. A deployment can be in one of the following states:    ACTIVATING - The deployment is being created.    ACTIVE - The deployment was successfully created, and it's currently running on the container service. The container service can have only one deployment in an active state at a time.    INACTIVE - The deployment was previously successfully created, but it is not currently running on the container service.    FAILED - The deployment failed. Use the GetContainerLog action to view the log events for the containers in the deployment to try to determine the reason for the failure.  
      */
     state?: ContainerServiceDeploymentState;
     /**
@@ -1915,6 +2309,22 @@ declare namespace Lightsail {
     publicEndpoint?: EndpointRequest;
   }
   export type ContainerServiceDeploymentState = "ACTIVATING"|"ACTIVE"|"INACTIVE"|"FAILED"|string;
+  export interface ContainerServiceECRImagePullerRole {
+    /**
+     * A Boolean value that indicates whether the role is activated.
+     */
+    isActive?: boolean;
+    /**
+     * The Amazon Resource Name (ARN) of the role, if it is activated.
+     */
+    principalArn?: string;
+  }
+  export interface ContainerServiceECRImagePullerRoleRequest {
+    /**
+     * A Boolean value that indicates whether to activate the role.
+     */
+    isActive?: boolean;
+  }
   export interface ContainerServiceEndpoint {
     /**
      * The name of the container entry of the deployment that the endpoint configuration applies to.
@@ -1931,27 +2341,27 @@ declare namespace Lightsail {
   }
   export interface ContainerServiceHealthCheckConfig {
     /**
-     * The number of consecutive health checks successes required before moving the container to the Healthy state.
+     * The number of consecutive health checks successes required before moving the container to the Healthy state. The default value is 2.
      */
     healthyThreshold?: integer;
     /**
-     * The number of consecutive health check failures required before moving the container to the Unhealthy state.
+     * The number of consecutive health check failures required before moving the container to the Unhealthy state. The default value is 2.
      */
     unhealthyThreshold?: integer;
     /**
-     * The amount of time, in seconds, during which no response means a failed health check. You may specify between 2 and 60 seconds.
+     * The amount of time, in seconds, during which no response means a failed health check. You can specify between 2 and 60 seconds. The default value is 2.
      */
     timeoutSeconds?: integer;
     /**
-     * The approximate interval, in seconds, between health checks of an individual container. You may specify between 5 and 300 seconds.
+     * The approximate interval, in seconds, between health checks of an individual container. You can specify between 5 and 300 seconds. The default value is 5.
      */
     intervalSeconds?: integer;
     /**
-     * The path on the container on which to perform the health check.
+     * The path on the container on which to perform the health check. The default value is /.
      */
     path?: string;
     /**
-     * The HTTP codes to use when checking for a successful response from a container. You can specify values between 200 and 499.
+     * The HTTP codes to use when checking for a successful response from a container. You can specify values between 200 and 499. You can specify multiple values (for example, 200,202) or a range of values (for example, 200-299).
      */
     successCodes?: string;
   }
@@ -1973,7 +2383,7 @@ declare namespace Lightsail {
   export type ContainerServiceName = string;
   export interface ContainerServicePower {
     /**
-     * The ID of the power (e.g., nano-1).
+     * The ID of the power (nano-1).
      */
     powerId?: string;
     /**
@@ -1989,7 +2399,7 @@ declare namespace Lightsail {
      */
     ramSizeInGb?: float;
     /**
-     * The friendly name of the power (e.g., nano).
+     * The friendly name of the power (nano).
      */
     name?: string;
     /**
@@ -2012,7 +2422,7 @@ declare namespace Lightsail {
      */
     password?: string;
     /**
-     * The timestamp of when the container image registry username and password expire. The log in credentials expire 12 hours after they are created, at which point you will need to create a new set of log in credentials using the CreateContainerServiceRegistryLogin action.
+     * The timestamp of when the container image registry sign-in credentials expire. The log in credentials expire 12 hours after they are created, at which point you will need to create a new set of log in credentials using the CreateContainerServiceRegistryLogin action.
      */
     expiresAt?: IsoDate;
     /**
@@ -2021,7 +2431,18 @@ declare namespace Lightsail {
     registry?: string;
   }
   export type ContainerServiceScale = number;
-  export type ContainerServiceState = "PENDING"|"READY"|"RUNNING"|"UPDATING"|"DELETING"|"DISABLED"|string;
+  export type ContainerServiceState = "PENDING"|"READY"|"RUNNING"|"UPDATING"|"DELETING"|"DISABLED"|"DEPLOYING"|string;
+  export interface ContainerServiceStateDetail {
+    /**
+     * The state code of the container service. The following state codes are possible:   The following state codes are possible if your container service is in a DEPLOYING or UPDATING state:    CREATING_SYSTEM_RESOURCES - The system resources for your container service are being created.    CREATING_NETWORK_INFRASTRUCTURE - The network infrastructure for your container service are being created.    PROVISIONING_CERTIFICATE - The SSL/TLS certificate for your container service is being created.    PROVISIONING_SERVICE - Your container service is being provisioned.    CREATING_DEPLOYMENT - Your deployment is being created on your container service.    EVALUATING_HEALTH_CHECK - The health of your deployment is being evaluated.    ACTIVATING_DEPLOYMENT - Your deployment is being activated.     The following state codes are possible if your container service is in a PENDING state:    CERTIFICATE_LIMIT_EXCEEDED - The SSL/TLS certificate required for your container service exceeds the maximum number of certificates allowed for your account.    UNKNOWN_ERROR - An error was experienced when your container service was being created.    
+     */
+    code?: ContainerServiceStateDetailCode;
+    /**
+     * A message that provides more information for the state code.  The state detail is populated only when a container service is in a PENDING, DEPLOYING, or UPDATING state. 
+     */
+    message?: string;
+  }
+  export type ContainerServiceStateDetailCode = "CREATING_SYSTEM_RESOURCES"|"CREATING_NETWORK_INFRASTRUCTURE"|"PROVISIONING_CERTIFICATE"|"PROVISIONING_SERVICE"|"CREATING_DEPLOYMENT"|"EVALUATING_HEALTH_CHECK"|"ACTIVATING_DEPLOYMENT"|"CERTIFICATE_LIMIT_EXCEEDED"|"UNKNOWN_ERROR"|string;
   export interface ContainerServicesListResult {
     /**
      * An array of objects that describe one or more container services.
@@ -2044,15 +2465,15 @@ declare namespace Lightsail {
      */
     sourceSnapshotName?: ResourceName;
     /**
-     * The name of the source instance or disk from which the source automatic snapshot was created. Constraint:   Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the Lightsail Dev Guide.  
+     * The name of the source instance or disk from which the source automatic snapshot was created. Constraint:   Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the Amazon Lightsail Developer Guide.  
      */
     sourceResourceName?: string;
     /**
-     * The date of the source automatic snapshot to copy. Use the get auto snapshots operation to identify the dates of the available automatic snapshots. Constraints:   Must be specified in YYYY-MM-DD format.   This parameter cannot be defined together with the use latest restorable auto snapshot parameter. The restore date and use latest restorable auto snapshot parameters are mutually exclusive.   Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the Lightsail Dev Guide.  
+     * The date of the source automatic snapshot to copy. Use the get auto snapshots operation to identify the dates of the available automatic snapshots. Constraints:   Must be specified in YYYY-MM-DD format.   This parameter cannot be defined together with the use latest restorable auto snapshot parameter. The restore date and use latest restorable auto snapshot parameters are mutually exclusive.   Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the Amazon Lightsail Developer Guide.  
      */
     restoreDate?: string;
     /**
-     * A Boolean value to indicate whether to use the latest available automatic snapshot of the specified source instance or disk. Constraints:   This parameter cannot be defined together with the restore date parameter. The use latest restorable auto snapshot and restore date parameters are mutually exclusive.   Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the Lightsail Dev Guide.  
+     * A Boolean value to indicate whether to use the latest available automatic snapshot of the specified source instance or disk. Constraints:   This parameter cannot be defined together with the restore date parameter. The use latest restorable auto snapshot and restore date parameters are mutually exclusive.   Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the Amazon Lightsail Developer Guide.  
      */
     useLatestRestorableAutoSnapshot?: boolean;
     /**
@@ -2060,11 +2481,66 @@ declare namespace Lightsail {
      */
     targetSnapshotName: ResourceName;
     /**
-     * The AWS Region where the source manual or automatic snapshot is located.
+     * The Amazon Web Services Region where the source manual or automatic snapshot is located.
      */
     sourceRegion: RegionName;
   }
   export interface CopySnapshotResult {
+    /**
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
+     */
+    operations?: OperationList;
+  }
+  export interface CostEstimate {
+    /**
+     * The types of usage that are included in the estimate, such as costs, usage, or data transfer.
+     */
+    usageType?: NonEmptyString;
+    /**
+     * The cost estimate result that's associated with a time period.
+     */
+    resultsByTime?: EstimatesByTime;
+  }
+  export type CostEstimates = CostEstimate[];
+  export interface CreateBucketAccessKeyRequest {
+    /**
+     * The name of the bucket that the new access key will belong to, and grant access to.
+     */
+    bucketName: BucketName;
+  }
+  export interface CreateBucketAccessKeyResult {
+    /**
+     * An object that describes the access key that is created.
+     */
+    accessKey?: AccessKey;
+    /**
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
+     */
+    operations?: OperationList;
+  }
+  export interface CreateBucketRequest {
+    /**
+     * The name for the bucket. For more information about bucket names, see Bucket naming rules in Amazon Lightsail in the Amazon Lightsail Developer Guide.
+     */
+    bucketName: BucketName;
+    /**
+     * The ID of the bundle to use for the bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. Use the GetBucketBundles action to get a list of bundle IDs that you can specify. Use the UpdateBucketBundle action to change the bundle after the bucket is created.
+     */
+    bundleId: NonEmptyString;
+    /**
+     * The tag keys and optional values to add to the bucket during creation. Use the TagResource action to tag the bucket after it's created.
+     */
+    tags?: TagList;
+    /**
+     * A Boolean value that indicates whether to enable versioning of objects in the bucket. For more information about versioning, see Enabling and suspending object versioning in a bucket in Amazon Lightsail in the Amazon Lightsail Developer Guide.
+     */
+    enableObjectVersioning?: boolean;
+  }
+  export interface CreateBucketResult {
+    /**
+     * An object that describes the bucket that is created.
+     */
+    bucket?: Bucket;
     /**
      * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
@@ -2076,11 +2552,11 @@ declare namespace Lightsail {
      */
     certificateName: CertificateName;
     /**
-     * The domain name (e.g., example.com) for the certificate.
+     * The domain name (example.com) for the certificate.
      */
     domainName: DomainName;
     /**
-     * An array of strings that specify the alternate domains (e.g., example2.com) and subdomains (e.g., blog.example.com) for the certificate. You can specify a maximum of nine alternate domains (in addition to the primary domain name). Wildcard domain entries (e.g., *.example.com) are not supported.
+     * An array of strings that specify the alternate domains (example2.com) and subdomains (blog.example.com) for the certificate. You can specify a maximum of nine alternate domains (in addition to the primary domain name). Wildcard domain entries (*.example.com) are not supported.
      */
     subjectAlternativeNames?: SubjectAlternativeNameList;
     /**
@@ -2112,7 +2588,7 @@ declare namespace Lightsail {
   }
   export interface CreateContactMethodRequest {
     /**
-     * The protocol of the contact method, such as Email or SMS (text messaging). The SMS protocol is supported only in the following AWS Regions.   US East (N. Virginia) (us-east-1)   US West (Oregon) (us-west-2)   Europe (Ireland) (eu-west-1)   Asia Pacific (Tokyo) (ap-northeast-1)   Asia Pacific (Singapore) (ap-southeast-1)   Asia Pacific (Sydney) (ap-southeast-2)   For a list of countries/regions where SMS text messages can be sent, and the latest AWS Regions where SMS text messaging is supported, see Supported Regions and Countries in the Amazon SNS Developer Guide. For more information about notifications in Amazon Lightsail, see Notifications in Amazon Lightsail.
+     * The protocol of the contact method, such as Email or SMS (text messaging). The SMS protocol is supported only in the following Amazon Web Services Regions.   US East (N. Virginia) (us-east-1)   US West (Oregon) (us-west-2)   Europe (Ireland) (eu-west-1)   Asia Pacific (Tokyo) (ap-northeast-1)   Asia Pacific (Singapore) (ap-southeast-1)   Asia Pacific (Sydney) (ap-southeast-2)   For a list of countries/regions where SMS text messages can be sent, and the latest Amazon Web Services Regions where SMS text messaging is supported, see Supported Regions and Countries in the Amazon SNS Developer Guide. For more information about notifications in Amazon Lightsail, see Notifications in Amazon Lightsail.
      */
     protocol: ContactProtocol;
     /**
@@ -2156,7 +2632,7 @@ declare namespace Lightsail {
   }
   export interface CreateContainerServiceRequest {
     /**
-     * The name for the container service. The name that you specify for your container service will make up part of its default domain. The default domain of a container service is typically https://&lt;ServiceName&gt;.&lt;RandomGUID&gt;.&lt;AWSRegion&gt;.cs.amazonlightsail.com. If the name of your container service is container-service-1, and it's located in the US East (Ohio) AWS region (us-east-2), then the domain for your container service will be like the following example: https://container-service-1.ur4EXAMPLE2uq.us-east-2.cs.amazonlightsail.com  The following are the requirements for container service names:   Must be unique within each AWS Region in your Lightsail account.   Must contain 1 to 63 characters.   Must contain only alphanumeric characters and hyphens.   A hyphen (-) can separate words but cannot be at the start or end of the name.  
+     * The name for the container service. The name that you specify for your container service will make up part of its default domain. The default domain of a container service is typically https://&lt;ServiceName&gt;.&lt;RandomGUID&gt;.&lt;AWSRegion&gt;.cs.amazonlightsail.com. If the name of your container service is container-service-1, and it's located in the US East (Ohio) Amazon Web Services Region (us-east-2), then the domain for your container service will be like the following example: https://container-service-1.ur4EXAMPLE2uq.us-east-2.cs.amazonlightsail.com  The following are the requirements for container service names:   Must be unique within each Amazon Web Services Region in your Lightsail account.   Must contain 1 to 63 characters.   Must contain only alphanumeric characters and hyphens.   A hyphen (-) can separate words but cannot be at the start or end of the name.  
      */
     serviceName: ContainerServiceName;
     /**
@@ -2168,7 +2644,7 @@ declare namespace Lightsail {
      */
     scale: ContainerServiceScale;
     /**
-     * The tag keys and optional values for the container service. For more information about tags in Lightsail, see the Lightsail Dev Guide.
+     * The tag keys and optional values to add to the container service during create. Use the TagResource action to tag a resource after it's created. For more information about tags in Lightsail, see the Amazon Lightsail Developer Guide.
      */
     tags?: TagList;
     /**
@@ -2179,6 +2655,10 @@ declare namespace Lightsail {
      * An object that describes a deployment for the container service. A deployment specifies the containers that will be launched on the container service and their settings, such as the ports to open, the environment variables to apply, and the launch command to run. It also specifies the container that will serve as the public endpoint of the deployment and its settings, such as the HTTP or HTTPS port to use, and the health check configuration.
      */
     deployment?: ContainerServiceDeploymentRequest;
+    /**
+     * An object to describe the configuration for the container service to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. For more information, see Configuring access to an Amazon ECR private repository for an Amazon Lightsail container service in the Amazon Lightsail Developer Guide.
+     */
+    privateRegistryAccess?: PrivateRegistryAccessRequest;
   }
   export interface CreateContainerServiceResult {
     /**
@@ -2188,19 +2668,19 @@ declare namespace Lightsail {
   }
   export interface CreateDiskFromSnapshotRequest {
     /**
-     * The unique Lightsail disk name (e.g., my-disk).
+     * The unique Lightsail disk name (my-disk).
      */
     diskName: ResourceName;
     /**
-     * The name of the disk snapshot (e.g., my-snapshot) from which to create the new storage disk. Constraint:   This parameter cannot be defined together with the source disk name parameter. The disk snapshot name and source disk name parameters are mutually exclusive.  
+     * The name of the disk snapshot (my-snapshot) from which to create the new storage disk. Constraint:   This parameter cannot be defined together with the source disk name parameter. The disk snapshot name and source disk name parameters are mutually exclusive.  
      */
     diskSnapshotName?: ResourceName;
     /**
-     * The Availability Zone where you want to create the disk (e.g., us-east-2a). Choose the same Availability Zone as the Lightsail instance where you want to create the disk. Use the GetRegions operation to list the Availability Zones where Lightsail is currently available.
+     * The Availability Zone where you want to create the disk (us-east-2a). Choose the same Availability Zone as the Lightsail instance where you want to create the disk. Use the GetRegions operation to list the Availability Zones where Lightsail is currently available.
      */
     availabilityZone: NonEmptyString;
     /**
-     * The size of the disk in GB (e.g., 32).
+     * The size of the disk in GB (32).
      */
     sizeInGb: integer;
     /**
@@ -2212,15 +2692,15 @@ declare namespace Lightsail {
      */
     addOns?: AddOnRequestList;
     /**
-     * The name of the source disk from which the source automatic snapshot was created. Constraints:   This parameter cannot be defined together with the disk snapshot name parameter. The source disk name and disk snapshot name parameters are mutually exclusive.   Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the Lightsail Dev Guide.  
+     * The name of the source disk from which the source automatic snapshot was created. Constraints:   This parameter cannot be defined together with the disk snapshot name parameter. The source disk name and disk snapshot name parameters are mutually exclusive.   Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the Amazon Lightsail Developer Guide.  
      */
     sourceDiskName?: string;
     /**
-     * The date of the automatic snapshot to use for the new disk. Use the get auto snapshots operation to identify the dates of the available automatic snapshots. Constraints:   Must be specified in YYYY-MM-DD format.   This parameter cannot be defined together with the use latest restorable auto snapshot parameter. The restore date and use latest restorable auto snapshot parameters are mutually exclusive.   Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the Lightsail Dev Guide.  
+     * The date of the automatic snapshot to use for the new disk. Use the get auto snapshots operation to identify the dates of the available automatic snapshots. Constraints:   Must be specified in YYYY-MM-DD format.   This parameter cannot be defined together with the use latest restorable auto snapshot parameter. The restore date and use latest restorable auto snapshot parameters are mutually exclusive.   Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the Amazon Lightsail Developer Guide.  
      */
     restoreDate?: string;
     /**
-     * A Boolean value to indicate whether to use the latest available automatic snapshot. Constraints:   This parameter cannot be defined together with the restore date parameter. The use latest restorable auto snapshot and restore date parameters are mutually exclusive.   Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the Lightsail Dev Guide.  
+     * A Boolean value to indicate whether to use the latest available automatic snapshot. Constraints:   This parameter cannot be defined together with the restore date parameter. The use latest restorable auto snapshot and restore date parameters are mutually exclusive.   Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the Amazon Lightsail Developer Guide.  
      */
     useLatestRestorableAutoSnapshot?: boolean;
   }
@@ -2232,15 +2712,15 @@ declare namespace Lightsail {
   }
   export interface CreateDiskRequest {
     /**
-     * The unique Lightsail disk name (e.g., my-disk).
+     * The unique Lightsail disk name (my-disk).
      */
     diskName: ResourceName;
     /**
-     * The Availability Zone where you want to create the disk (e.g., us-east-2a). Use the same Availability Zone as the Lightsail instance to which you want to attach the disk. Use the get regions operation to list the Availability Zones where Lightsail is currently available.
+     * The Availability Zone where you want to create the disk (us-east-2a). Use the same Availability Zone as the Lightsail instance to which you want to attach the disk. Use the get regions operation to list the Availability Zones where Lightsail is currently available.
      */
     availabilityZone: NonEmptyString;
     /**
-     * The size of the disk in GB (e.g., 32).
+     * The size of the disk in GB (32).
      */
     sizeInGb: integer;
     /**
@@ -2260,15 +2740,15 @@ declare namespace Lightsail {
   }
   export interface CreateDiskSnapshotRequest {
     /**
-     * The unique name of the source disk (e.g., Disk-Virginia-1).  This parameter cannot be defined together with the instance name parameter. The disk name and instance name parameters are mutually exclusive. 
+     * The unique name of the source disk (Disk-Virginia-1).  This parameter cannot be defined together with the instance name parameter. The disk name and instance name parameters are mutually exclusive. 
      */
     diskName?: ResourceName;
     /**
-     * The name of the destination disk snapshot (e.g., my-disk-snapshot) based on the source disk.
+     * The name of the destination disk snapshot (my-disk-snapshot) based on the source disk.
      */
     diskSnapshotName: ResourceName;
     /**
-     * The unique name of the source instance (e.g., Amazon_Linux-512MB-Virginia-1). When this is defined, a snapshot of the instance's system volume is created.  This parameter cannot be defined together with the disk name parameter. The instance name and disk name parameters are mutually exclusive. 
+     * The unique name of the source instance (Amazon_Linux-512MB-Virginia-1). When this is defined, a snapshot of the instance's system volume is created.  This parameter cannot be defined together with the disk name parameter. The instance name and disk name parameters are mutually exclusive. 
      */
     instanceName?: ResourceName;
     /**
@@ -2288,7 +2768,7 @@ declare namespace Lightsail {
      */
     distributionName: ResourceName;
     /**
-     * An object that describes the origin resource for the distribution, such as a Lightsail instance or load balancer. The distribution pulls, caches, and serves content from the origin.
+     * An object that describes the origin resource for the distribution, such as a Lightsail instance, bucket, or load balancer. The distribution pulls, caches, and serves content from the origin.
      */
     origin: InputOrigin;
     /**
@@ -2308,9 +2788,21 @@ declare namespace Lightsail {
      */
     bundleId: string;
     /**
+     * The IP address type for the distribution. The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6. The default value is dualstack.
+     */
+    ipAddressType?: IpAddressType;
+    /**
      * The tag keys and optional values to add to the distribution during create. Use the TagResource action to tag a resource after it's created.
      */
     tags?: TagList;
+    /**
+     * The name of the SSL/TLS certificate that you want to attach to the distribution. Use the GetCertificates action to get a list of certificate names that you can specify.
+     */
+    certificateName?: ResourceName;
+    /**
+     * The minimum TLS protocol version for the SSL/TLS certificate.
+     */
+    viewerMinimumTlsProtocolVersion?: ViewerMinimumTlsProtocolVersionEnum;
   }
   export interface CreateDistributionResult {
     /**
@@ -2324,7 +2816,7 @@ declare namespace Lightsail {
   }
   export interface CreateDomainEntryRequest {
     /**
-     * The domain name (e.g., example.com) for which you want to create the domain entry.
+     * The domain name (example.com) for which you want to create the domain entry.
      */
     domainName: DomainName;
     /**
@@ -2340,7 +2832,7 @@ declare namespace Lightsail {
   }
   export interface CreateDomainRequest {
     /**
-     * The domain name to manage (e.g., example.com).  You cannot register a new domain name using Lightsail. You must register a domain name using Amazon Route 53 or another domain name registrar. If you have already registered your domain, you can enter its name in this parameter to manage the DNS records for that domain. 
+     * The domain name to manage (example.com).
      */
     domainName: DomainName;
     /**
@@ -2353,6 +2845,34 @@ declare namespace Lightsail {
      * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
+  }
+  export interface CreateGUISessionAccessDetailsRequest {
+    /**
+     * The resource name.
+     */
+    resourceName: ResourceName;
+  }
+  export interface CreateGUISessionAccessDetailsResult {
+    /**
+     * The resource name.
+     */
+    resourceName?: ResourceName;
+    /**
+     * The status of the operation.
+     */
+    status?: Status;
+    /**
+     * The percentage of completion for the operation.
+     */
+    percentageComplete?: integer;
+    /**
+     * The reason the operation failed.
+     */
+    failureReason?: string;
+    /**
+     * Returns information about the specified NICE DCV GUI session.
+     */
+    sessions?: Sessions;
   }
   export interface CreateInstanceSnapshotRequest {
     /**
@@ -2392,11 +2912,11 @@ declare namespace Lightsail {
      */
     instanceSnapshotName?: ResourceName;
     /**
-     * The bundle of specification information for your virtual private server (or instance), including the pricing plan (e.g., micro_1_0).
+     * The bundle of specification information for your virtual private server (or instance), including the pricing plan (micro_x_x).
      */
     bundleId: NonEmptyString;
     /**
-     * You can create a launch script that configures a server with additional user data. For example, apt-get -y update.  Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use yum, Debian and Ubuntu use apt-get, and FreeBSD uses pkg. For a complete list, see the Dev Guide. 
+     * You can create a launch script that configures a server with additional user data. For example, apt-get -y update.  Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use yum, Debian and Ubuntu use apt-get, and FreeBSD uses pkg. For a complete list, see the Amazon Lightsail Developer Guide. 
      */
     userData?: string;
     /**
@@ -2412,15 +2932,19 @@ declare namespace Lightsail {
      */
     addOns?: AddOnRequestList;
     /**
-     * The name of the source instance from which the source automatic snapshot was created. Constraints:   This parameter cannot be defined together with the instance snapshot name parameter. The source instance name and instance snapshot name parameters are mutually exclusive.   Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the Lightsail Dev Guide.  
+     * The IP address type for the instance. The possible values are ipv4 for IPv4 only, ipv6 for IPv6 only, and dualstack for IPv4 and IPv6. The default value is dualstack.
+     */
+    ipAddressType?: IpAddressType;
+    /**
+     * The name of the source instance from which the source automatic snapshot was created. Constraints:   This parameter cannot be defined together with the instance snapshot name parameter. The source instance name and instance snapshot name parameters are mutually exclusive.   Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the Amazon Lightsail Developer Guide.  
      */
     sourceInstanceName?: string;
     /**
-     * The date of the automatic snapshot to use for the new instance. Use the get auto snapshots operation to identify the dates of the available automatic snapshots. Constraints:   Must be specified in YYYY-MM-DD format.   This parameter cannot be defined together with the use latest restorable auto snapshot parameter. The restore date and use latest restorable auto snapshot parameters are mutually exclusive.   Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the Lightsail Dev Guide.  
+     * The date of the automatic snapshot to use for the new instance. Use the get auto snapshots operation to identify the dates of the available automatic snapshots. Constraints:   Must be specified in YYYY-MM-DD format.   This parameter cannot be defined together with the use latest restorable auto snapshot parameter. The restore date and use latest restorable auto snapshot parameters are mutually exclusive.   Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the Amazon Lightsail Developer Guide.  
      */
     restoreDate?: string;
     /**
-     * A Boolean value to indicate whether to use the latest available automatic snapshot. Constraints:   This parameter cannot be defined together with the restore date parameter. The use latest restorable auto snapshot and restore date parameters are mutually exclusive.   Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the Lightsail Dev Guide.  
+     * A Boolean value to indicate whether to use the latest available automatic snapshot. Constraints:   This parameter cannot be defined together with the restore date parameter. The use latest restorable auto snapshot and restore date parameters are mutually exclusive.   Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the Amazon Lightsail Developer Guide.  
      */
     useLatestRestorableAutoSnapshot?: boolean;
   }
@@ -2440,19 +2964,19 @@ declare namespace Lightsail {
      */
     availabilityZone: string;
     /**
-     * (Deprecated) The name for your custom image.  In releases prior to June 12, 2017, this parameter was ignored by the API. It is now deprecated. 
+     * (Discontinued) The name for your custom image.  In releases prior to June 12, 2017, this parameter was ignored by the API. It is now discontinued. 
      */
     customImageName?: ResourceName;
     /**
-     * The ID for a virtual private server image (e.g., app_wordpress_4_4 or app_lamp_7_0). Use the get blueprints operation to return a list of available images (or blueprints).  Use active blueprints when creating new instances. Inactive blueprints are listed to support customers with existing instances and are not necessarily available to create new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases. 
+     * The ID for a virtual private server image (app_wordpress_x_x or app_lamp_x_x). Use the get blueprints operation to return a list of available images (or blueprints).  Use active blueprints when creating new instances. Inactive blueprints are listed to support customers with existing instances and are not necessarily available to create new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases. 
      */
     blueprintId: NonEmptyString;
     /**
-     * The bundle of specification information for your virtual private server (or instance), including the pricing plan (e.g., micro_1_0).
+     * The bundle of specification information for your virtual private server (or instance), including the pricing plan (medium_x_x).
      */
     bundleId: NonEmptyString;
     /**
-     * A launch script you can create that configures a server with additional user data. For example, you might want to run apt-get -y update.  Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use yum, Debian and Ubuntu use apt-get, and FreeBSD uses pkg. For a complete list, see the Dev Guide. 
+     * A launch script you can create that configures a server with additional user data. For example, you might want to run apt-get -y update.  Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use yum, Debian and Ubuntu use apt-get, and FreeBSD uses pkg. For a complete list, see the Amazon Lightsail Developer Guide. 
      */
     userData?: string;
     /**
@@ -2467,6 +2991,10 @@ declare namespace Lightsail {
      * An array of objects representing the add-ons to enable for the new instance.
      */
     addOns?: AddOnRequestList;
+    /**
+     * The IP address type for the instance. The possible values are ipv4 for IPv4 only, ipv6 for IPv6 only, and dualstack for IPv4 and IPv6. The default value is dualstack.
+     */
+    ipAddressType?: IpAddressType;
   }
   export interface CreateInstancesResult {
     /**
@@ -2512,7 +3040,7 @@ declare namespace Lightsail {
      */
     instancePort: Port;
     /**
-     * The path you provided to perform the load balancer health check. If you didn't specify a health check path, Lightsail uses the root path of your website (e.g., "/"). You may want to specify a custom health check path other than the root of your application if your home page loads slowly or has a lot of media or scripting on it.
+     * The path you provided to perform the load balancer health check. If you didn't specify a health check path, Lightsail uses the root path of your website ("/"). You may want to specify a custom health check path other than the root of your application if your home page loads slowly or has a lot of media or scripting on it.
      */
     healthCheckPath?: string;
     /**
@@ -2520,17 +3048,25 @@ declare namespace Lightsail {
      */
     certificateName?: ResourceName;
     /**
-     * The domain name with which your certificate is associated (e.g., example.com). If you specify certificateDomainName, then certificateName is required (and vice-versa).
+     * The domain name with which your certificate is associated (example.com). If you specify certificateDomainName, then certificateName is required (and vice-versa).
      */
     certificateDomainName?: DomainName;
     /**
-     * The optional alternative domains and subdomains to use with your SSL/TLS certificate (e.g., www.example.com, example.com, m.example.com, blog.example.com).
+     * The optional alternative domains and subdomains to use with your SSL/TLS certificate (www.example.com, example.com, m.example.com, blog.example.com).
      */
     certificateAlternativeNames?: DomainNameList;
     /**
      * The tag keys and optional values to add to the resource during create. Use the TagResource action to tag a resource after it's created.
      */
     tags?: TagList;
+    /**
+     * The IP address type for the load balancer. The possible values are ipv4 for IPv4 only, ipv6 for IPv6 only, and dualstack for IPv4 and IPv6. The default value is dualstack.
+     */
+    ipAddressType?: IpAddressType;
+    /**
+     * The name of the TLS policy to apply to the load balancer. Use the GetLoadBalancerTlsPolicies action to get a list of TLS policy names that you can specify. For more information about load balancer TLS policies, see Configuring TLS security policies on your Amazon Lightsail load balancers in the Amazon Lightsail Developer Guide.
+     */
+    tlsPolicyName?: string;
   }
   export interface CreateLoadBalancerResult {
     /**
@@ -2548,11 +3084,11 @@ declare namespace Lightsail {
      */
     certificateName: ResourceName;
     /**
-     * The domain name (e.g., example.com) for your SSL/TLS certificate.
+     * The domain name (example.com) for your SSL/TLS certificate.
      */
     certificateDomainName: DomainName;
     /**
-     * An array of strings listing alternative domains and subdomains for your SSL/TLS certificate. Lightsail will de-dupe the names for you. You can have a maximum of 9 alternative names (in addition to the 1 primary domain). We do not support wildcards (e.g., *.example.com).
+     * An array of strings listing alternative domains and subdomains for your SSL/TLS certificate. Lightsail will de-dupe the names for you. You can have a maximum of 9 alternative names (in addition to the 1 primary domain). We do not support wildcards (*.example.com).
      */
     certificateAlternativeNames?: DomainNameList;
     /**
@@ -2568,7 +3104,7 @@ declare namespace Lightsail {
   }
   export interface CreateRelationalDatabaseFromSnapshotRequest {
     /**
-     * The name to use for your new database. Constraints:   Must contain from 2 to 255 alphanumeric characters, or hyphens.   The first and last character must be a letter or number.  
+     * The name to use for your new Lightsail database resource. Constraints:   Must contain from 2 to 255 alphanumeric characters, or hyphens.   The first and last character must be a letter or number.  
      */
     relationalDatabaseName: ResourceName;
     /**
@@ -2612,7 +3148,7 @@ declare namespace Lightsail {
   }
   export interface CreateRelationalDatabaseRequest {
     /**
-     * The name to use for your new database. Constraints:   Must contain from 2 to 255 alphanumeric characters, or hyphens.   The first and last character must be a letter or number.  
+     * The name to use for your new Lightsail database resource. Constraints:   Must contain from 2 to 255 alphanumeric characters, or hyphens.   The first and last character must be a letter or number.  
      */
     relationalDatabaseName: ResourceName;
     /**
@@ -2628,19 +3164,19 @@ declare namespace Lightsail {
      */
     relationalDatabaseBundleId: string;
     /**
-     * The name of the master database created when the Lightsail database resource is created. Constraints:   Must contain from 1 to 64 alphanumeric characters.   Cannot be a word reserved by the specified database engine  
+     * The meaning of this parameter differs according to the database engine you use.  MySQL  The name of the database to create when the Lightsail database resource is created. If this parameter isn't specified, no database is created in the database resource. Constraints:   Must contain 1 to 64 letters or numbers.   Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0- 9).   Can't be a word reserved by the specified database engine. For more information about reserved words in MySQL, see the Keywords and Reserved Words articles for MySQL 5.6, MySQL 5.7, and MySQL 8.0.    PostgreSQL  The name of the database to create when the Lightsail database resource is created. If this parameter isn't specified, a database named postgres is created in the database resource. Constraints:   Must contain 1 to 63 letters or numbers.   Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0- 9).   Can't be a word reserved by the specified database engine. For more information about reserved words in PostgreSQL, see the SQL Key Words articles for PostgreSQL 9.6, PostgreSQL 10, PostgreSQL 11, and PostgreSQL 12.  
      */
     masterDatabaseName: string;
     /**
-     * The master user name for your new database. Constraints:   Master user name is required.   Must contain from 1 to 16 alphanumeric characters.   The first character must be a letter.   Cannot be a reserved word for the database engine you choose. For more information about reserved words in MySQL 5.6 or 5.7, see the Keywords and Reserved Words articles for MySQL 5.6 or MySQL 5.7 respectively.  
+     * The name for the master user.  MySQL  Constraints:   Required for MySQL.   Must be 1 to 16 letters or numbers. Can contain underscores.   First character must be a letter.   Can't be a reserved word for the chosen database engine. For more information about reserved words in MySQL 5.6 or 5.7, see the Keywords and Reserved Words articles for MySQL 5.6, MySQL 5.7, or MySQL 8.0.    PostgreSQL  Constraints:   Required for PostgreSQL.   Must be 1 to 63 letters or numbers. Can contain underscores.   First character must be a letter.   Can't be a reserved word for the chosen database engine. For more information about reserved words in MySQL 5.6 or 5.7, see the Keywords and Reserved Words articles for PostgreSQL 9.6, PostgreSQL 10, PostgreSQL 11, and PostgreSQL 12.  
      */
     masterUsername: string;
     /**
-     * The password for the master user of your new database. The password can include any printable ASCII character except "/", """, or "@". Constraints: Must contain 8 to 41 characters.
+     * The password for the master user. The password can include any printable ASCII character except "/", """, or "@". It cannot contain spaces.  MySQL  Constraints: Must contain from 8 to 41 characters.  PostgreSQL  Constraints: Must contain from 8 to 128 characters.
      */
     masterUserPassword?: SensitiveString;
     /**
-     * The daily time range during which automated backups are created for your new database if automated backups are enabled. The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. For more information about the preferred backup window time blocks for each region, see the Working With Backups guide in the Amazon Relational Database Service (Amazon RDS) documentation. Constraints:   Must be in the hh24:mi-hh24:mi format. Example: 16:00-16:30    Specified in Coordinated Universal Time (UTC).   Must not conflict with the preferred maintenance window.   Must be at least 30 minutes.  
+     * The daily time range during which automated backups are created for your new database if automated backups are enabled. The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. For more information about the preferred backup window time blocks for each region, see the Working With Backups guide in the Amazon Relational Database Service documentation. Constraints:   Must be in the hh24:mi-hh24:mi format. Example: 16:00-16:30    Specified in Coordinated Universal Time (UTC).   Must not conflict with the preferred maintenance window.   Must be at least 30 minutes.  
      */
     preferredBackupWindow?: string;
     /**
@@ -2682,6 +3218,7 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export type Currency = "USD"|string;
   export interface DeleteAlarmRequest {
     /**
      * The name of the alarm to delete.
@@ -2705,6 +3242,38 @@ declare namespace Lightsail {
     date: AutoSnapshotDate;
   }
   export interface DeleteAutoSnapshotResult {
+    /**
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
+     */
+    operations?: OperationList;
+  }
+  export interface DeleteBucketAccessKeyRequest {
+    /**
+     * The name of the bucket that the access key belongs to.
+     */
+    bucketName: BucketName;
+    /**
+     * The ID of the access key to delete. Use the GetBucketAccessKeys action to get a list of access key IDs that you can specify.
+     */
+    accessKeyId: NonEmptyString;
+  }
+  export interface DeleteBucketAccessKeyResult {
+    /**
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
+     */
+    operations?: OperationList;
+  }
+  export interface DeleteBucketRequest {
+    /**
+     * The name of the bucket to delete. Use the GetBuckets action to get a list of bucket names that you can specify.
+     */
+    bucketName: BucketName;
+    /**
+     * A Boolean value that indicates whether to force delete the bucket. You must force delete the bucket if it has one of the following conditions:   The bucket is the origin of a distribution.   The bucket has instances that were granted access to it using the SetResourceAccessForBucket action.   The bucket has objects.   The bucket has access keys.    Force deleting a bucket might impact other resources that rely on the bucket, such as instances, distributions, or software that use the issued access keys. 
+     */
+    forceDelete?: boolean;
+  }
+  export interface DeleteBucketResult {
     /**
      * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
@@ -2756,11 +3325,11 @@ declare namespace Lightsail {
   }
   export interface DeleteDiskRequest {
     /**
-     * The unique name of the disk you want to delete (e.g., my-disk).
+     * The unique name of the disk you want to delete (my-disk).
      */
     diskName: ResourceName;
     /**
-     * A Boolean value to indicate whether to delete the enabled add-ons for the disk.
+     * A Boolean value to indicate whether to delete all add-ons for the disk.
      */
     forceDeleteAddOns?: boolean;
   }
@@ -2772,7 +3341,7 @@ declare namespace Lightsail {
   }
   export interface DeleteDiskSnapshotRequest {
     /**
-     * The name of the disk snapshot you want to delete (e.g., my-disk-snapshot).
+     * The name of the disk snapshot you want to delete (my-disk-snapshot).
      */
     diskSnapshotName: ResourceName;
   }
@@ -2828,7 +3397,7 @@ declare namespace Lightsail {
      */
     instanceName: ResourceName;
     /**
-     * A Boolean value to indicate whether to delete the enabled add-ons for the disk.
+     * A Boolean value to indicate whether to delete all add-ons for the instance.
      */
     forceDeleteAddOns?: boolean;
   }
@@ -2855,6 +3424,10 @@ declare namespace Lightsail {
      * The name of the key pair to delete.
      */
     keyPairName: ResourceName;
+    /**
+     * The RSA fingerprint of the Lightsail default key pair to delete.  The expectedFingerprint parameter is required only when specifying to delete a Lightsail default key pair. 
+     */
+    expectedFingerprint?: string;
   }
   export interface DeleteKeyPairResult {
     /**
@@ -2962,7 +3535,7 @@ declare namespace Lightsail {
   }
   export interface DetachDiskRequest {
     /**
-     * The unique name of the disk you want to detach from your instance (e.g., my-disk).
+     * The unique name of the disk you want to detach from your instance (my-disk).
      */
     diskName: ResourceName;
   }
@@ -3038,11 +3611,11 @@ declare namespace Lightsail {
      */
     location?: ResourceLocation;
     /**
-     * The Lightsail resource type (e.g., Disk).
+     * The Lightsail resource type (Disk).
      */
     resourceType?: ResourceType;
     /**
-     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Lightsail Dev Guide.
+     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Amazon Lightsail Developer Guide.
      */
     tags?: TagList;
     /**
@@ -3078,13 +3651,17 @@ declare namespace Lightsail {
      */
     isAttached?: boolean;
     /**
-     * (Deprecated) The attachment state of the disk.  In releases prior to November 14, 2017, this parameter returned attached for system disks in the API response. It is now deprecated, but still included in the response. Use isAttached instead. 
+     * (Discontinued) The attachment state of the disk.  In releases prior to November 14, 2017, this parameter returned attached for system disks in the API response. It is now discontinued, but still included in the response. Use isAttached instead. 
      */
     attachmentState?: string;
     /**
-     * (Deprecated) The number of GB in use by the disk.  In releases prior to November 14, 2017, this parameter was not included in the API response. It is now deprecated. 
+     * (Discontinued) The number of GB in use by the disk.  In releases prior to November 14, 2017, this parameter was not included in the API response. It is now discontinued. 
      */
     gbInUse?: integer;
+    /**
+     * The status of automatically mounting a storage disk to a virtual computer.  This parameter only applies to Lightsail for Research resources. 
+     */
+    autoMountStatus?: AutoMountStatus;
   }
   export interface DiskInfo {
     /**
@@ -3096,7 +3673,7 @@ declare namespace Lightsail {
      */
     path?: NonEmptyString;
     /**
-     * The size of the disk in GB (e.g., 32).
+     * The size of the disk in GB (32).
      */
     sizeInGb?: integer;
     /**
@@ -3112,14 +3689,14 @@ declare namespace Lightsail {
      */
     originalDiskPath?: NonEmptyString;
     /**
-     * The new disk name (e.g., my-new-disk).
+     * The new disk name (my-new-disk).
      */
     newDiskName?: ResourceName;
   }
   export type DiskMapList = DiskMap[];
   export interface DiskSnapshot {
     /**
-     * The name of the disk snapshot (e.g., my-disk-snapshot).
+     * The name of the disk snapshot (my-disk-snapshot).
      */
     name?: ResourceName;
     /**
@@ -3139,11 +3716,11 @@ declare namespace Lightsail {
      */
     location?: ResourceLocation;
     /**
-     * The Lightsail resource type (e.g., DiskSnapshot).
+     * The Lightsail resource type (DiskSnapshot).
      */
     resourceType?: ResourceType;
     /**
-     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Lightsail Dev Guide.
+     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Amazon Lightsail Developer Guide.
      */
     tags?: TagList;
     /**
@@ -3155,7 +3732,7 @@ declare namespace Lightsail {
      */
     state?: DiskSnapshotState;
     /**
-     * The progress of the disk snapshot operation.
+     * The progress of the snapshot.
      */
     progress?: string;
     /**
@@ -3181,7 +3758,7 @@ declare namespace Lightsail {
   }
   export interface DiskSnapshotInfo {
     /**
-     * The size of the disk in GB (e.g., 32).
+     * The size of the disk in GB (32).
      */
     sizeInGb?: integer;
   }
@@ -3206,20 +3783,31 @@ declare namespace Lightsail {
      */
     transferPerMonthInGb?: integer;
     /**
-     * Indicates whether the bundle is active, and can be specified for a new distribution.
+     * Indicates whether the bundle is active, and can be specified for a new or existing distribution.
      */
     isActive?: boolean;
   }
   export type DistributionBundleList = DistributionBundle[];
   export type DistributionList = LightsailDistribution[];
   export type DistributionMetricName = "Requests"|"BytesDownloaded"|"BytesUploaded"|"TotalErrorRate"|"Http4xxErrorRate"|"Http5xxErrorRate"|string;
+  export interface DnsRecordCreationState {
+    /**
+     * The status code for the automated DNS record creation. Following are the possible values:    SUCCEEDED - The validation records were successfully added to the domain.    STARTED - The automatic DNS record creation has started.    FAILED - The validation records failed to be added to the domain.  
+     */
+    code?: DnsRecordCreationStateCode;
+    /**
+     * The message that describes the reason for the status code.
+     */
+    message?: string;
+  }
+  export type DnsRecordCreationStateCode = "SUCCEEDED"|"STARTED"|"FAILED"|string;
   export interface Domain {
     /**
      * The name of the domain.
      */
     name?: ResourceName;
     /**
-     * The Amazon Resource Name (ARN) of the domain recordset (e.g., arn:aws:lightsail:global:123456789101:Domain/824cede0-abc7-4f84-8dbc-12345EXAMPLE).
+     * The Amazon Resource Name (ARN) of the domain recordset (arn:aws:lightsail:global:123456789101:Domain/824cede0-abc7-4f84-8dbc-12345EXAMPLE).
      */
     arn?: NonEmptyString;
     /**
@@ -3239,13 +3827,17 @@ declare namespace Lightsail {
      */
     resourceType?: ResourceType;
     /**
-     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Lightsail Dev Guide.
+     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Amazon Lightsail Developer Guide.
      */
     tags?: TagList;
     /**
      * An array of key-value pairs containing information about the domain entries.
      */
     domainEntries?: DomainEntryList;
+    /**
+     * An object that describes the state of the Route 53 domain delegation to a Lightsail DNS zone.
+     */
+    registeredDomainDelegationInfo?: RegisteredDomainDelegationInfo;
   }
   export interface DomainEntry {
     /**
@@ -3257,19 +3849,19 @@ declare namespace Lightsail {
      */
     name?: DomainName;
     /**
-     * The target AWS name server (e.g., ns-111.awsdns-22.com.). For Lightsail load balancers, the value looks like ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com. Be sure to also set isAlias to true when setting up an A record for a load balancer.
+     * The target IP address (192.0.2.0), or AWS name server (ns-111.awsdns-22.com.). For Lightsail load balancers, the value looks like ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com. For Lightsail distributions, the value looks like exampled1182ne.cloudfront.net. For Lightsail container services, the value looks like container-service-1.example23scljs.us-west-2.cs.amazonlightsail.com. Be sure to also set isAlias to true when setting up an A record for a Lightsail load balancer, distribution, or container service.
      */
     target?: string;
     /**
-     * When true, specifies whether the domain entry is an alias used by the Lightsail load balancer. You can include an alias (A type) record in your request, which points to a load balancer DNS name and routes traffic to your load balancer.
+     * When true, specifies whether the domain entry is an alias used by the Lightsail load balancer, Lightsail container service, Lightsail content delivery network (CDN) distribution, or another Amazon Web Services resource. You can include an alias (A type) record in your request, which points to the DNS name of a load balancer, container service, CDN distribution, or other Amazon Web Services resource and routes traffic to that resource.
      */
     isAlias?: boolean;
     /**
-     * The type of domain entry, such as address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT). The following domain entry types can be used:    A     CNAME     MX     NS     SOA     SRV     TXT   
+     * The type of domain entry, such as address for IPv4 (A), address for IPv6 (AAAA), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT). The following domain entry types can be used:    A     AAAA     CNAME     MX     NS     SOA     SRV     TXT   
      */
     type?: DomainEntryType;
     /**
-     * (Deprecated) The options for the domain entry.  In releases prior to November 29, 2017, this parameter was not included in the API response. It is now deprecated. 
+     * (Discontinued) The options for the domain entry.  In releases prior to November 29, 2017, this parameter was not included in the API response. It is now discontinued. 
      */
     options?: DomainEntryOptions;
   }
@@ -3289,6 +3881,14 @@ declare namespace Lightsail {
      * An object that describes the DNS records to add to your domain's DNS to validate it for the certificate.
      */
     resourceRecord?: ResourceRecord;
+    /**
+     * An object that describes the state of the canonical name (CNAME) records that are automatically added by Lightsail to the DNS of the domain to validate domain ownership.
+     */
+    dnsRecordCreationState?: DnsRecordCreationState;
+    /**
+     * The validation status of the record.
+     */
+    validationStatus?: CertificateDomainValidationStatus;
   }
   export type DomainValidationRecordList = DomainValidationRecord[];
   export interface DownloadDefaultKeyPairRequest {
@@ -3302,8 +3902,13 @@ declare namespace Lightsail {
      * A base64-encoded RSA private key.
      */
     privateKeyBase64?: Base64;
+    /**
+     * The timestamp when the default key pair was created.
+     */
+    createdAt?: IsoDate;
   }
   export type EligibleToRenew = string;
+  export type EmailAddress = string;
   export interface EnableAddOnRequest {
     /**
      * The name of the source resource for which to enable or modify the add-on.
@@ -3335,6 +3940,29 @@ declare namespace Lightsail {
     healthCheck?: ContainerServiceHealthCheckConfig;
   }
   export type Environment = {[key: string]: string};
+  export interface EstimateByTime {
+    /**
+     * The amount of cost or usage that's measured for the cost estimate.
+     */
+    usageCost?: double;
+    /**
+     * The unit of measurement that's used for the cost estimate.
+     */
+    pricingUnit?: PricingUnit;
+    /**
+     * The number of pricing units used to calculate the total number of hours. For example, 1 unit equals 1 hour.
+     */
+    unit?: double;
+    /**
+     * The currency of the estimate in USD.
+     */
+    currency?: Currency;
+    /**
+     * The period of time, in days, that an estimate covers. The period has a start date and an end date. The start date must come before the end date.
+     */
+    timePeriod?: TimePeriod;
+  }
+  export type EstimatesByTime = EstimateByTime[];
   export interface ExportSnapshotRecord {
     /**
      * The export snapshot record name.
@@ -3353,7 +3981,7 @@ declare namespace Lightsail {
      */
     location?: ResourceLocation;
     /**
-     * The Lightsail resource type (e.g., ExportSnapshotRecord).
+     * The Lightsail resource type (ExportSnapshotRecord).
      */
     resourceType?: ResourceType;
     /**
@@ -3372,7 +4000,7 @@ declare namespace Lightsail {
   export type ExportSnapshotRecordList = ExportSnapshotRecord[];
   export interface ExportSnapshotRecordSourceInfo {
     /**
-     * The Lightsail resource type (e.g., InstanceSnapshot or DiskSnapshot).
+     * The Lightsail resource type (InstanceSnapshot or DiskSnapshot).
      */
     resourceType?: ExportSnapshotRecordSourceType;
     /**
@@ -3470,7 +4098,7 @@ declare namespace Lightsail {
      */
     resourceName?: ResourceName;
     /**
-     * The resource type (e.g., Instance or Disk).
+     * The resource type of the automatic snapshot. The possible values are Instance, and Disk.
      */
     resourceType?: ResourceType;
     /**
@@ -3480,13 +4108,17 @@ declare namespace Lightsail {
   }
   export interface GetBlueprintsRequest {
     /**
-     * A Boolean value indicating whether to include inactive results in your request.
+     * A Boolean value that indicates whether to include inactive (unavailable) blueprints in the response of your request.
      */
     includeInactive?: boolean;
     /**
      * The token to advance to the next page of results from your request. To get a page token, perform an initial GetBlueprints request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
+    /**
+     * Returns a list of blueprints that are specific to Lightsail for Research.  You must use this parameter to view Lightsail for Research blueprints. 
+     */
+    appCategory?: AppCategory;
   }
   export interface GetBlueprintsResult {
     /**
@@ -3498,15 +4130,111 @@ declare namespace Lightsail {
      */
     nextPageToken?: string;
   }
+  export interface GetBucketAccessKeysRequest {
+    /**
+     * The name of the bucket for which to return access keys.
+     */
+    bucketName: BucketName;
+  }
+  export interface GetBucketAccessKeysResult {
+    /**
+     * An object that describes the access keys for the specified bucket.
+     */
+    accessKeys?: AccessKeyList;
+  }
+  export interface GetBucketBundlesRequest {
+    /**
+     * A Boolean value that indicates whether to include inactive (unavailable) bundles in the response of your request.
+     */
+    includeInactive?: boolean;
+  }
+  export interface GetBucketBundlesResult {
+    /**
+     * An object that describes bucket bundles.
+     */
+    bundles?: BucketBundleList;
+  }
+  export interface GetBucketMetricDataRequest {
+    /**
+     * The name of the bucket for which to get metric data.
+     */
+    bucketName: BucketName;
+    /**
+     * The metric for which you want to return information. Valid bucket metric names are listed below, along with the most useful statistics to include in your request, and the published unit value.  These bucket metrics are reported once per day.      BucketSizeBytes  - The amount of data in bytes stored in a bucket. This value is calculated by summing the size of all objects in the bucket (including object versions), including the size of all parts for all incomplete multipart uploads to the bucket. Statistics: The most useful statistic is Maximum. Unit: The published unit is Bytes.     NumberOfObjects  - The total number of objects stored in a bucket. This value is calculated by counting all objects in the bucket (including object versions) and the total number of parts for all incomplete multipart uploads to the bucket. Statistics: The most useful statistic is Average. Unit: The published unit is Count.  
+     */
+    metricName: BucketMetricName;
+    /**
+     * The timestamp indicating the earliest data to be returned.
+     */
+    startTime: IsoDate;
+    /**
+     * The timestamp indicating the latest data to be returned.
+     */
+    endTime: IsoDate;
+    /**
+     * The granularity, in seconds, of the returned data points.  Bucket storage metrics are reported once per day. Therefore, you should specify a period of 86400 seconds, which is the number of seconds in a day. 
+     */
+    period: MetricPeriod;
+    /**
+     * The statistic for the metric. The following statistics are available:    Minimum - The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.    Maximum - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.    Sum - The sum of all values submitted for the matching metric. You can use this statistic to determine the total volume of a metric.    Average - The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.    SampleCount - The count, or number, of data points used for the statistical calculation.  
+     */
+    statistics: MetricStatisticList;
+    /**
+     * The unit for the metric data request. Valid units depend on the metric data being requested. For the valid units with each available metric, see the metricName parameter.
+     */
+    unit: MetricUnit;
+  }
+  export interface GetBucketMetricDataResult {
+    /**
+     * The name of the metric returned.
+     */
+    metricName?: BucketMetricName;
+    /**
+     * An array of objects that describe the metric data returned.
+     */
+    metricData?: MetricDatapointList;
+  }
+  export interface GetBucketsRequest {
+    /**
+     * The name of the bucket for which to return information. When omitted, the response includes all of your buckets in the Amazon Web Services Region where the request is made.
+     */
+    bucketName?: BucketName;
+    /**
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetBuckets request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
+     */
+    pageToken?: string;
+    /**
+     * A Boolean value that indicates whether to include Lightsail instances that were given access to the bucket using the SetResourceAccessForBucket action.
+     */
+    includeConnectedResources?: boolean;
+  }
+  export interface GetBucketsResult {
+    /**
+     * An array of objects that describe buckets.
+     */
+    buckets?: BucketList;
+    /**
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetBuckets request and specify the next page token using the pageToken parameter.
+     */
+    nextPageToken?: string;
+    /**
+     * An object that describes the synchronization status of the Amazon S3 account-level block public access feature for your Lightsail buckets. For more information about this feature and how it affects Lightsail buckets, see Block public access for buckets in Amazon Lightsail.
+     */
+    accountLevelBpaSync?: AccountLevelBpaSync;
+  }
   export interface GetBundlesRequest {
     /**
-     * A Boolean value that indicates whether to include inactive bundle results in your request.
+     * A Boolean value that indicates whether to include inactive (unavailable) bundles in the response of your request.
      */
     includeInactive?: boolean;
     /**
      * The token to advance to the next page of results from your request. To get a page token, perform an initial GetBundles request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
+    /**
+     * Returns a list of bundles that are specific to Lightsail for Research.  You must use this parameter to view Lightsail for Research bundles. 
+     */
+    appCategory?: AppCategory;
   }
   export interface GetBundlesResult {
     /**
@@ -3520,7 +4248,7 @@ declare namespace Lightsail {
   }
   export interface GetCertificatesRequest {
     /**
-     * The status of the certificates for which to return information. For example, specify ISSUED to return only certificates with an ISSUED status. When omitted, the response includes all of your certificates in the AWS Region where the request is made, regardless of their current status.
+     * The status of the certificates for which to return information. For example, specify ISSUED to return only certificates with an ISSUED status. When omitted, the response includes all of your certificates in the Amazon Web Services Region where the request is made, regardless of their current status.
      */
     certificateStatuses?: CertificateStatusList;
     /**
@@ -3528,15 +4256,23 @@ declare namespace Lightsail {
      */
     includeCertificateDetails?: IncludeCertificateDetails;
     /**
-     * The name for the certificate for which to return information. When omitted, the response includes all of your certificates in the AWS Region where the request is made.
+     * The name for the certificate for which to return information. When omitted, the response includes all of your certificates in the Amazon Web Services Region where the request is made.
      */
     certificateName?: CertificateName;
+    /**
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetCertificates request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
+     */
+    pageToken?: string;
   }
   export interface GetCertificatesResult {
     /**
      * An object that describes certificates.
      */
     certificates?: CertificateSummaryList;
+    /**
+     * If NextPageToken is returned there are more results available. The value of NextPageToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged.
+     */
+    nextPageToken?: string;
   }
   export interface GetCloudFormationStackRecordsRequest {
     /**
@@ -3680,13 +4416,33 @@ declare namespace Lightsail {
   }
   export interface GetContainerServicesRequest {
     /**
-     * The name of the container service for which to return information. When omitted, the response includes all of your container services in the AWS Region where the request is made.
+     * The name of the container service for which to return information. When omitted, the response includes all of your container services in the Amazon Web Services Region where the request is made.
      */
     serviceName?: ContainerServiceName;
   }
+  export interface GetCostEstimateRequest {
+    /**
+     * The resource name.
+     */
+    resourceName: ResourceName;
+    /**
+     * The cost estimate start time. Constraints:   Specified in Coordinated Universal Time (UTC).   Specified in the Unix time format. For example, if you want to use a start time of October 1, 2018, at 8 PM UTC, specify 1538424000 as the start time.   You can convert a human-friendly time to Unix time format using a converter like Epoch converter.
+     */
+    startTime: IsoDate;
+    /**
+     * The cost estimate end time. Constraints:   Specified in Coordinated Universal Time (UTC).   Specified in the Unix time format. For example, if you want to use an end time of October 1, 2018, at 9 PM UTC, specify 1538427600 as the end time.   You can convert a human-friendly time to Unix time format using a converter like Epoch converter.
+     */
+    endTime: IsoDate;
+  }
+  export interface GetCostEstimateResult {
+    /**
+     * Returns the estimate's forecasted cost or usage.
+     */
+    resourcesBudgetEstimate?: ResourcesBudgetEstimate;
+  }
   export interface GetDiskRequest {
     /**
-     * The name of the disk (e.g., my-disk).
+     * The name of the disk (my-disk).
      */
     diskName: ResourceName;
   }
@@ -3698,7 +4454,7 @@ declare namespace Lightsail {
   }
   export interface GetDiskSnapshotRequest {
     /**
-     * The name of the disk snapshot (e.g., my-disk-snapshot).
+     * The name of the disk snapshot (my-disk-snapshot).
      */
     diskSnapshotName: ResourceName;
   }
@@ -3760,7 +4516,7 @@ declare namespace Lightsail {
      */
     status?: string;
     /**
-     * The timestamp of the last cache reset (e.g., 1479734909.17) in Unix time format.
+     * The timestamp of the last cache reset (1479734909.17) in Unix time format.
      */
     createTime?: IsoDate;
   }
@@ -3806,7 +4562,7 @@ declare namespace Lightsail {
   }
   export interface GetDistributionsRequest {
     /**
-     * The name of the distribution for which to return information. Use the GetDistributions action to get a list of distribution names that you can specify. When omitted, the response includes all of your distributions in the AWS Region where the request is made.
+     * The name of the distribution for which to return information. When omitted, the response includes all of your distributions in the Amazon Web Services Region where the request is made.
      */
     distributionName?: ResourceName;
     /**
@@ -3890,7 +4646,7 @@ declare namespace Lightsail {
      */
     instanceName: ResourceName;
     /**
-     * The metric for which you want to return information. Valid instance metric names are listed below, along with the most useful statistics to include in your request, and the published unit value.     BurstCapacityPercentage  - The percentage of CPU performance available for your instance to burst above its baseline. Your instance continuously accrues and consumes burst capacity. Burst capacity stops accruing when your instance's BurstCapacityPercentage reaches 100%. For more information, see Viewing instance burst capacity in Amazon Lightsail.  Statistics: The most useful statistics are Maximum and Average.  Unit: The published unit is Percent.     BurstCapacityTime  - The available amount of time for your instance to burst at 100% CPU utilization. Your instance continuously accrues and consumes burst capacity. Burst capacity time stops accruing when your instance's BurstCapacityPercentage metric reaches 100%. Burst capacity time is consumed at the full rate only when your instance operates at 100% CPU utilization. For example, if your instance operates at 50% CPU utilization in the burstable zone for a 5-minute period, then it consumes CPU burst capacity minutes at a 50% rate in that period. Your instance consumed 2 minutes and 30 seconds of CPU burst capacity minutes in the 5-minute period. For more information, see Viewing instance burst capacity in Amazon Lightsail.  Statistics: The most useful statistics are Maximum and Average.  Unit: The published unit is Seconds.     CPUUtilization  - The percentage of allocated compute units that are currently in use on the instance. This metric identifies the processing power to run the applications on the instance. Tools in your operating system can show a lower percentage than Lightsail when the instance is not allocated a full processor core.  Statistics: The most useful statistics are Maximum and Average.  Unit: The published unit is Percent.     NetworkIn  - The number of bytes received on all network interfaces by the instance. This metric identifies the volume of incoming network traffic to the instance. The number reported is the number of bytes received during the period. Because this metric is reported in 5-minute intervals, divide the reported number by 300 to find Bytes/second.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Bytes.     NetworkOut  - The number of bytes sent out on all network interfaces by the instance. This metric identifies the volume of outgoing network traffic from the instance. The number reported is the number of bytes sent during the period. Because this metric is reported in 5-minute intervals, divide the reported number by 300 to find Bytes/second.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Bytes.     StatusCheckFailed  - Reports whether the instance passed or failed both the instance status check and the system status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.     StatusCheckFailed_Instance  - Reports whether the instance passed or failed the instance status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.     StatusCheckFailed_System  - Reports whether the instance passed or failed the system status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.  
+     * The metric for which you want to return information. Valid instance metric names are listed below, along with the most useful statistics to include in your request, and the published unit value.     BurstCapacityPercentage  - The percentage of CPU performance available for your instance to burst above its baseline. Your instance continuously accrues and consumes burst capacity. Burst capacity stops accruing when your instance's BurstCapacityPercentage reaches 100%. For more information, see Viewing instance burst capacity in Amazon Lightsail.  Statistics: The most useful statistics are Maximum and Average.  Unit: The published unit is Percent.     BurstCapacityTime  - The available amount of time for your instance to burst at 100% CPU utilization. Your instance continuously accrues and consumes burst capacity. Burst capacity time stops accruing when your instance's BurstCapacityPercentage metric reaches 100%. Burst capacity time is consumed at the full rate only when your instance operates at 100% CPU utilization. For example, if your instance operates at 50% CPU utilization in the burstable zone for a 5-minute period, then it consumes CPU burst capacity minutes at a 50% rate in that period. Your instance consumed 2 minutes and 30 seconds of CPU burst capacity minutes in the 5-minute period. For more information, see Viewing instance burst capacity in Amazon Lightsail.  Statistics: The most useful statistics are Maximum and Average.  Unit: The published unit is Seconds.     CPUUtilization  - The percentage of allocated compute units that are currently in use on the instance. This metric identifies the processing power to run the applications on the instance. Tools in your operating system can show a lower percentage than Lightsail when the instance is not allocated a full processor core.  Statistics: The most useful statistics are Maximum and Average.  Unit: The published unit is Percent.     NetworkIn  - The number of bytes received on all network interfaces by the instance. This metric identifies the volume of incoming network traffic to the instance. The number reported is the number of bytes received during the period. Because this metric is reported in 5-minute intervals, divide the reported number by 300 to find Bytes/second.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Bytes.     NetworkOut  - The number of bytes sent out on all network interfaces by the instance. This metric identifies the volume of outgoing network traffic from the instance. The number reported is the number of bytes sent during the period. Because this metric is reported in 5-minute intervals, divide the reported number by 300 to find Bytes/second.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Bytes.     StatusCheckFailed  - Reports whether the instance passed or failed both the instance status check and the system status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.     StatusCheckFailed_Instance  - Reports whether the instance passed or failed the instance status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.     StatusCheckFailed_System  - Reports whether the instance passed or failed the system status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.     MetadataNoToken  - Reports the number of times that the instance metadata service was successfully accessed without a token. This metric determines if there are any processes accessing instance metadata by using Instance Metadata Service Version 1, which doesn't use a token. If all requests use token-backed sessions, such as Instance Metadata Service Version 2, then the value is 0.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.  
      */
     metricName: InstanceMetricName;
     /**
@@ -4021,6 +4777,10 @@ declare namespace Lightsail {
      * The token to advance to the next page of results from your request. To get a page token, perform an initial GetKeyPairs request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
+    /**
+     * A Boolean value that indicates whether to include the default key pair in the response of your request.
+     */
+    includeDefaultKeyPair?: boolean;
   }
   export interface GetKeyPairsResult {
     /**
@@ -4096,6 +4856,22 @@ declare namespace Lightsail {
      */
     tlsCertificates?: LoadBalancerTlsCertificateList;
   }
+  export interface GetLoadBalancerTlsPoliciesRequest {
+    /**
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetLoadBalancerTlsPolicies request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
+     */
+    pageToken?: string;
+  }
+  export interface GetLoadBalancerTlsPoliciesResult {
+    /**
+     * An array of objects that describe the TLS security policies that are available.
+     */
+    tlsPolicies?: LoadBalancerTlsPolicyList;
+    /**
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetLoadBalancerTlsPolicies request and specify the next page token using the pageToken parameter.
+     */
+    nextPageToken?: string;
+  }
   export interface GetLoadBalancersRequest {
     /**
      * The token to advance to the next page of results from your request. To get a page token, perform an initial GetLoadBalancers request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
@@ -4140,7 +4916,7 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
     /**
-     * (Deprecated) Returns the number of pages of results that remain.  In releases prior to June 12, 2017, this parameter returned null by the API. It is now deprecated, and the API returns the next page token parameter instead. 
+     * (Discontinued) Returns the number of pages of results that remain.  In releases prior to June 12, 2017, this parameter returned null by the API. It is now discontinued, and the API returns the next page token parameter instead. 
      */
     nextPageCount?: string;
     /**
@@ -4166,11 +4942,11 @@ declare namespace Lightsail {
   }
   export interface GetRegionsRequest {
     /**
-     * A Boolean value indicating whether to also include Availability Zones in your get regions request. Availability Zones are indicated with a letter: e.g., us-east-2a.
+     * A Boolean value indicating whether to also include Availability Zones in your get regions request. Availability Zones are indicated with a letter: us-east-2a.
      */
     includeAvailabilityZones?: boolean;
     /**
-     * A Boolean value indicating whether to also include Availability Zones for databases in your get regions request. Availability Zones are indicated with a letter (e.g., us-east-2a).
+     * A Boolean value indicating whether to also include Availability Zones for databases in your get regions request. Availability Zones are indicated with a letter (us-east-2a).
      */
     includeRelationalDatabaseAvailabilityZones?: boolean;
   }
@@ -4201,6 +4977,10 @@ declare namespace Lightsail {
      * The token to advance to the next page of results from your request. To get a page token, perform an initial GetRelationalDatabaseBundles request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
+    /**
+     * A Boolean value that indicates whether to include inactive (unavailable) bundles in the response of your request.
+     */
+    includeInactive?: boolean;
   }
   export interface GetRelationalDatabaseBundlesResult {
     /**
@@ -4424,6 +5204,26 @@ declare namespace Lightsail {
      */
     nextPageToken?: string;
   }
+  export interface GetSetupHistoryRequest {
+    /**
+     * The name of the resource for which you are requesting information.
+     */
+    resourceName: ResourceName;
+    /**
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetSetupHistory request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
+     */
+    pageToken?: SetupHistoryPageToken;
+  }
+  export interface GetSetupHistoryResult {
+    /**
+     * The historical information that's returned.
+     */
+    setupHistory?: setupHistoryList;
+    /**
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetSetupHistory request and specify the next page token using the pageToken parameter.
+     */
+    nextPageToken?: SetupHistoryPageToken;
+  }
   export interface GetStaticIpRequest {
     /**
      * The name of the static IP in Lightsail.
@@ -4495,6 +5295,10 @@ declare namespace Lightsail {
     notValidAfter?: IsoDate;
   }
   export type HostKeysList = HostKeyAttributes[];
+  export type HttpEndpoint = "disabled"|"enabled"|string;
+  export type HttpProtocolIpv6 = "disabled"|"enabled"|string;
+  export type HttpTokens = "optional"|"required"|string;
+  export type IAMAccessKeyId = string;
   export interface ImportKeyPairRequest {
     /**
      * The name of the key pair for which you want to import the public key.
@@ -4526,14 +5330,18 @@ declare namespace Lightsail {
      * The protocol that your Amazon Lightsail distribution uses when establishing a connection with your origin to pull content.
      */
     protocolPolicy?: OriginProtocolPolicyEnum;
+    /**
+     * The amount of time, in seconds, that the distribution waits for a response after forwarding a request to the origin. The minimum timeout is 1 second, the maximum is 60 seconds, and the default (if you don't specify otherwise) is 30 seconds.
+     */
+    responseTimeout?: integer;
   }
   export interface Instance {
     /**
-     * The name the user gave the instance (e.g., Amazon_Linux-1GB-Ohio-1).
+     * The name the user gave the instance (Amazon_Linux_2023-1).
      */
     name?: ResourceName;
     /**
-     * The Amazon Resource Name (ARN) of the instance (e.g., arn:aws:lightsail:us-east-2:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE).
+     * The Amazon Resource Name (ARN) of the instance (arn:aws:lightsail:us-east-2:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE).
      */
     arn?: NonEmptyString;
     /**
@@ -4541,7 +5349,7 @@ declare namespace Lightsail {
      */
     supportCode?: string;
     /**
-     * The timestamp when the instance was created (e.g., 1479734909.17) in Unix time format.
+     * The timestamp when the instance was created (1479734909.17) in Unix time format.
      */
     createdAt?: IsoDate;
     /**
@@ -4553,19 +5361,19 @@ declare namespace Lightsail {
      */
     resourceType?: ResourceType;
     /**
-     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Lightsail Dev Guide.
+     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Amazon Lightsail Developer Guide.
      */
     tags?: TagList;
     /**
-     * The blueprint ID (e.g., os_amlinux_2016_03).
+     * The blueprint ID (amazon_linux_2023).
      */
     blueprintId?: NonEmptyString;
     /**
-     * The friendly name of the blueprint (e.g., Amazon Linux).
+     * The friendly name of the blueprint (Amazon Linux 2023).
      */
     blueprintName?: NonEmptyString;
     /**
-     * The bundle for the instance (e.g., micro_1_0).
+     * The bundle for the instance (micro_x_x).
      */
     bundleId?: NonEmptyString;
     /**
@@ -4585,9 +5393,13 @@ declare namespace Lightsail {
      */
     publicIpAddress?: IpAddress;
     /**
-     * The IPv6 address of the instance.
+     * The IPv6 addresses of the instance.
      */
-    ipv6Address?: IpV6Address;
+    ipv6Addresses?: Ipv6AddressList;
+    /**
+     * The IP address type of the instance. The possible values are ipv4 for IPv4 only, ipv6 for IPv6 only, and dualstack for IPv4 and IPv6.
+     */
+    ipAddressType?: IpAddressType;
     /**
      * The size of the vCPU and the amount of RAM for the instance.
      */
@@ -4597,21 +5409,25 @@ declare namespace Lightsail {
      */
     networking?: InstanceNetworking;
     /**
-     * The status code and the state (e.g., running) for the instance.
+     * The status code and the state (running) for the instance.
      */
     state?: InstanceState;
     /**
-     * The user name for connecting to the instance (e.g., ec2-user).
+     * The user name for connecting to the instance (ec2-user).
      */
     username?: NonEmptyString;
     /**
-     * The name of the SSH key being used to connect to the instance (e.g., LightsailDefaultKeyPair).
+     * The name of the SSH key being used to connect to the instance (LightsailDefaultKeyPair).
      */
     sshKeyName?: ResourceName;
+    /**
+     * The metadata options for the Amazon Lightsail instance.
+     */
+    metadataOptions?: InstanceMetadataOptions;
   }
   export interface InstanceAccessDetails {
     /**
-     * For SSH access, the public key to use when accessing your instance For OpenSSH clients (e.g., command line SSH), you should save this value to tempkey-cert.pub.
+     * For SSH access, the public key to use when accessing your instance For OpenSSH clients (command line SSH), you should save this value to tempkey-cert.pub.
      */
     certKey?: string;
     /**
@@ -4623,6 +5439,10 @@ declare namespace Lightsail {
      */
     ipAddress?: IpAddress;
     /**
+     * The IPv6 address of the Amazon Lightsail instance.
+     */
+    ipv6Addresses?: Ipv6AddressList;
+    /**
      * For RDP access, the password for your Amazon Lightsail instance. Password will be an empty string if the password for your new instance is not ready yet. When you create an instance, it can take up to 15 minutes for the instance to be ready.  If you create an instance using any key pair other than the default (LightsailDefaultKeyPair), password will always be an empty string. If you change the Administrator password on the instance, Lightsail will continue to return the original password value. When accessing the instance using RDP, you need to manually enter the Administrator password after changing it from the default. 
      */
     password?: string;
@@ -4631,7 +5451,7 @@ declare namespace Lightsail {
      */
     passwordData?: PasswordData;
     /**
-     * For SSH access, the temporary private key. For OpenSSH clients (e.g., command line SSH), you should save this value to tempkey).
+     * For SSH access, the temporary private key. For OpenSSH clients (command line SSH), you should save this value to tempkey).
      */
     privateKey?: string;
     /**
@@ -4658,11 +5478,11 @@ declare namespace Lightsail {
      */
     sourceName: ResourceName;
     /**
-     * The instance type (e.g., t2.micro) to use for the new Amazon EC2 instance.
+     * The instance type (t2.micro) to use for the new Amazon EC2 instance.
      */
     instanceType: NonEmptyString;
     /**
-     * The port configuration to use for the new Amazon EC2 instance. The following configuration options are available:    DEFAULT - Use the default firewall settings from the Lightsail instance blueprint.    INSTANCE - Use the configured firewall settings from the source Lightsail instance.    NONE - Use the default Amazon EC2 security group.    CLOSED - All ports closed.    If you configured lightsail-connect as a cidrListAliases on your instance, or if you chose to allow the Lightsail browser-based SSH or RDP clients to connect to your instance, that configuration is not carried over to your new Amazon EC2 instance. 
+     * The port configuration to use for the new Amazon EC2 instance. The following configuration options are available:    DEFAULT - Use the default firewall settings from the Lightsail instance blueprint. If this is specified, then IPv4 and IPv6 will be configured for the new instance that is created in Amazon EC2.    INSTANCE - Use the configured firewall settings from the source Lightsail instance. If this is specified, the new instance that is created in Amazon EC2 will be configured to match the configuration of the source Lightsail instance. For example, if the source instance is configured for dual-stack (IPv4 and IPv6), then IPv4 and IPv6 will be configured for the new instance that is created in Amazon EC2. If the source instance is configured for IPv4 only, then only IPv4 will be configured for the new instance that is created in Amazon EC2.    NONE - Use the default Amazon EC2 security group. If this is specified, then only IPv4 will be configured for the new instance that is created in Amazon EC2.    CLOSED - All ports closed. If this is specified, then only IPv4 will be configured for the new instance that is created in Amazon EC2.    If you configured lightsail-connect as a cidrListAliases on your instance, or if you chose to allow the Lightsail browser-based SSH or RDP clients to connect to your instance, that configuration is not carried over to your new Amazon EC2 instance. 
      */
     portInfoSource: PortInfoSourceType;
     /**
@@ -4685,7 +5505,7 @@ declare namespace Lightsail {
      */
     disks?: DiskList;
     /**
-     * The amount of RAM in GB on the instance (e.g., 1.0).
+     * The amount of RAM in GB on the instance (1.0).
      */
     ramSizeInGb?: float;
   }
@@ -4707,7 +5527,30 @@ declare namespace Lightsail {
   }
   export type InstanceHealthSummaryList = InstanceHealthSummary[];
   export type InstanceList = Instance[];
-  export type InstanceMetricName = "CPUUtilization"|"NetworkIn"|"NetworkOut"|"StatusCheckFailed"|"StatusCheckFailed_Instance"|"StatusCheckFailed_System"|"BurstCapacityTime"|"BurstCapacityPercentage"|string;
+  export interface InstanceMetadataOptions {
+    /**
+     * The state of the metadata option changes. The following states are possible:    pending - The metadata options are being updated. The instance is not yet ready to process metadata traffic with the new selection.    applied - The metadata options have been successfully applied to the instance.  
+     */
+    state?: InstanceMetadataState;
+    /**
+     * The state of token usage for your instance metadata requests. If the state is optional, you can choose whether to retrieve instance metadata with a signed token header on your request. If you retrieve the IAM role credentials without a token, the version 1.0 role credentials are returned. If you retrieve the IAM role credentials by using a valid signed token, the version 2.0 role credentials are returned. If the state is required, you must send a signed token header with all instance metadata retrieval requests. In this state, retrieving the IAM role credential always returns the version 2.0 credentials. The version 1.0 credentials are not available.  Not all instance blueprints in Lightsail support version 2.0 credentials. Use the MetadataNoToken instance metric to track the number of calls to the instance metadata service that are using version 1.0 credentials. For more information, see Viewing instance metrics in Amazon Lightsail in the Amazon Lightsail Developer Guide. 
+     */
+    httpTokens?: HttpTokens;
+    /**
+     * Indicates whether the HTTP metadata endpoint on your instances is enabled or disabled. If the value is disabled, you cannot access your instance metadata.
+     */
+    httpEndpoint?: HttpEndpoint;
+    /**
+     * The desired HTTP PUT response hop limit for instance metadata requests. A larger number means that the instance metadata requests can travel farther.
+     */
+    httpPutResponseHopLimit?: integer;
+    /**
+     * Indicates whether the IPv6 endpoint for the instance metadata service is enabled or disabled.
+     */
+    httpProtocolIpv6?: HttpProtocolIpv6;
+  }
+  export type InstanceMetadataState = "pending"|"applied"|string;
+  export type InstanceMetricName = "CPUUtilization"|"NetworkIn"|"NetworkOut"|"StatusCheckFailed"|"StatusCheckFailed_Instance"|"StatusCheckFailed_System"|"BurstCapacityTime"|"BurstCapacityPercentage"|"MetadataNoToken"|string;
   export interface InstanceNetworking {
     /**
      * The amount of data in GB allocated for monthly data transfers.
@@ -4722,15 +5565,15 @@ declare namespace Lightsail {
   export type InstancePlatformList = InstancePlatform[];
   export interface InstancePortInfo {
     /**
-     * The first port in a range of open ports on an instance. Allowed ports:   TCP and UDP - 0 to 65535    ICMP - The ICMP type. For example, specify 8 as the fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For more information, see Control Messages on Wikipedia.  
+     * The first port in a range of open ports on an instance. Allowed ports:   TCP and UDP - 0 to 65535    ICMP - The ICMP type for IPv4 addresses. For example, specify 8 as the fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For more information, see Control Messages on Wikipedia.   ICMPv6 - The ICMP type for IPv6 addresses. For example, specify 128 as the fromPort (ICMPv6 type), and 0 as toPort (ICMPv6 code). For more information, see Internet Control Message Protocol for IPv6.  
      */
     fromPort?: Port;
     /**
-     * The last port in a range of open ports on an instance. Allowed ports:   TCP and UDP - 0 to 65535    ICMP - The ICMP code. For example, specify 8 as the fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For more information, see Control Messages on Wikipedia.  
+     * The last port in a range of open ports on an instance. Allowed ports:   TCP and UDP - 0 to 65535    ICMP - The ICMP code for IPv4 addresses. For example, specify 8 as the fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For more information, see Control Messages on Wikipedia.   ICMPv6 - The ICMP code for IPv6 addresses. For example, specify 128 as the fromPort (ICMPv6 type), and 0 as toPort (ICMPv6 code). For more information, see Internet Control Message Protocol for IPv6.  
      */
     toPort?: Port;
     /**
-     * The IP protocol name. The name can be one of the following:    tcp - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.    all - All transport layer protocol types. For more general information, see Transport layer on Wikipedia.    udp - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.    icmp - Internet Control Message Protocol (ICMP) is used to send error messages and operational information indicating success or failure when communicating with an instance. For example, an error is indicated when an instance could not be reached. When you specify icmp as the protocol, you must specify the ICMP type using the fromPort parameter, and ICMP code using the toPort parameter.  
+     * The IP protocol name. The name can be one of the following:    tcp - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.    all - All transport layer protocol types. For more general information, see Transport layer on Wikipedia.    udp - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.    icmp - Internet Control Message Protocol (ICMP) is used to send error messages and operational information indicating success or failure when communicating with an instance. For example, an error is indicated when an instance could not be reached. When you specify icmp as the protocol, you must specify the ICMP type using the fromPort parameter, and ICMP code using the toPort parameter.    icmp6 - Internet Control Message Protocol (ICMP) for IPv6. When you specify icmp6 as the protocol, you must specify the ICMP type using the fromPort parameter, and ICMP code using the toPort parameter.  
      */
     protocol?: NetworkProtocol;
     /**
@@ -4750,9 +5593,13 @@ declare namespace Lightsail {
      */
     accessDirection?: AccessDirection;
     /**
-     * The IP address, or range of IP addresses in CIDR notation, that are allowed to connect to an instance through the ports, and the protocol. Lightsail supports IPv4 addresses. For more information about CIDR block notation, see Classless Inter-Domain Routing on Wikipedia.
+     * The IPv4 address, or range of IPv4 addresses (in CIDR notation) that are allowed to connect to an instance through the ports, and the protocol.  The ipv6Cidrs parameter lists the IPv6 addresses that are allowed to connect to an instance.  For more information about CIDR block notation, see Classless Inter-Domain Routing on Wikipedia.
      */
     cidrs?: StringList;
+    /**
+     * The IPv6 address, or range of IPv6 addresses (in CIDR notation) that are allowed to connect to an instance through the ports, and the protocol. Only devices with an IPv6 address can connect to an instance through IPv6; otherwise, IPv4 should be used.  The cidrs parameter lists the IPv4 addresses that are allowed to connect to an instance.  For more information about CIDR block notation, see Classless Inter-Domain Routing on Wikipedia.
+     */
+    ipv6Cidrs?: StringList;
     /**
      * An alias that defines access for a preconfigured range of IP addresses. The only alias currently supported is lightsail-connect, which allows IP addresses of the browser-based RDP/SSH client in the Lightsail console to connect to your instance.
      */
@@ -4761,15 +5608,15 @@ declare namespace Lightsail {
   export type InstancePortInfoList = InstancePortInfo[];
   export interface InstancePortState {
     /**
-     * The first port in a range of open ports on an instance. Allowed ports:   TCP and UDP - 0 to 65535    ICMP - The ICMP type. For example, specify 8 as the fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For more information, see Control Messages on Wikipedia.  
+     * The first port in a range of open ports on an instance. Allowed ports:   TCP and UDP - 0 to 65535    ICMP - The ICMP type for IPv4 addresses. For example, specify 8 as the fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For more information, see Control Messages on Wikipedia.   ICMPv6 - The ICMP type for IPv6 addresses. For example, specify 128 as the fromPort (ICMPv6 type), and 0 as toPort (ICMPv6 code). For more information, see Internet Control Message Protocol for IPv6.  
      */
     fromPort?: Port;
     /**
-     * The last port in a range of open ports on an instance. Allowed ports:   TCP and UDP - 0 to 65535    ICMP - The ICMP code. For example, specify 8 as the fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For more information, see Control Messages on Wikipedia.  
+     * The last port in a range of open ports on an instance. Allowed ports:   TCP and UDP - 0 to 65535    ICMP - The ICMP code for IPv4 addresses. For example, specify 8 as the fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For more information, see Control Messages on Wikipedia.   ICMPv6 - The ICMP code for IPv6 addresses. For example, specify 128 as the fromPort (ICMPv6 type), and 0 as toPort (ICMPv6 code). For more information, see Internet Control Message Protocol for IPv6.  
      */
     toPort?: Port;
     /**
-     * The IP protocol name. The name can be one of the following:    tcp - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.    all - All transport layer protocol types. For more general information, see Transport layer on Wikipedia.    udp - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.    icmp - Internet Control Message Protocol (ICMP) is used to send error messages and operational information indicating success or failure when communicating with an instance. For example, an error is indicated when an instance could not be reached. When you specify icmp as the protocol, you must specify the ICMP type using the fromPort parameter, and ICMP code using the toPort parameter.  
+     * The IP protocol name. The name can be one of the following:    tcp - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.    all - All transport layer protocol types. For more general information, see Transport layer on Wikipedia.    udp - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.    icmp - Internet Control Message Protocol (ICMP) is used to send error messages and operational information indicating success or failure when communicating with an instance. For example, an error is indicated when an instance could not be reached. When you specify icmp as the protocol, you must specify the ICMP type using the fromPort parameter, and ICMP code using the toPort parameter.    icmp6 - Internet Control Message Protocol (ICMP) for IPv6. When you specify icmp6 as the protocol, you must specify the ICMP type using the fromPort parameter, and ICMP code using the toPort parameter.  
      */
     protocol?: NetworkProtocol;
     /**
@@ -4777,9 +5624,13 @@ declare namespace Lightsail {
      */
     state?: PortState;
     /**
-     * The IP address, or range of IP addresses in CIDR notation, that are allowed to connect to an instance through the ports, and the protocol. Lightsail supports IPv4 addresses. For more information about CIDR block notation, see Classless Inter-Domain Routing on Wikipedia.
+     * The IPv4 address, or range of IPv4 addresses (in CIDR notation) that are allowed to connect to an instance through the ports, and the protocol.  The ipv6Cidrs parameter lists the IPv6 addresses that are allowed to connect to an instance.  For more information about CIDR block notation, see Classless Inter-Domain Routing on Wikipedia.
      */
     cidrs?: StringList;
+    /**
+     * The IPv6 address, or range of IPv6 addresses (in CIDR notation) that are allowed to connect to an instance through the ports, and the protocol. Only devices with an IPv6 address can connect to an instance through IPv6; otherwise, IPv4 should be used.  The cidrs parameter lists the IPv4 addresses that are allowed to connect to an instance.  For more information about CIDR block notation, see Classless Inter-Domain Routing on Wikipedia.
+     */
+    ipv6Cidrs?: StringList;
     /**
      * An alias that defines access for a preconfigured range of IP addresses. The only alias currently supported is lightsail-connect, which allows IP addresses of the browser-based RDP/SSH client in the Lightsail console to connect to your instance.
      */
@@ -4792,7 +5643,7 @@ declare namespace Lightsail {
      */
     name?: ResourceName;
     /**
-     * The Amazon Resource Name (ARN) of the snapshot (e.g., arn:aws:lightsail:us-east-2:123456789101:InstanceSnapshot/d23b5706-3322-4d83-81e5-12345EXAMPLE).
+     * The Amazon Resource Name (ARN) of the snapshot (arn:aws:lightsail:us-east-2:123456789101:InstanceSnapshot/d23b5706-3322-4d83-81e5-12345EXAMPLE).
      */
     arn?: NonEmptyString;
     /**
@@ -4800,7 +5651,7 @@ declare namespace Lightsail {
      */
     supportCode?: string;
     /**
-     * The timestamp when the snapshot was created (e.g., 1479907467.024).
+     * The timestamp when the snapshot was created (1479907467.024).
      */
     createdAt?: IsoDate;
     /**
@@ -4812,7 +5663,7 @@ declare namespace Lightsail {
      */
     resourceType?: ResourceType;
     /**
-     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Lightsail Dev Guide.
+     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Amazon Lightsail Developer Guide.
      */
     tags?: TagList;
     /**
@@ -4820,7 +5671,7 @@ declare namespace Lightsail {
      */
     state?: InstanceSnapshotState;
     /**
-     * The progress of the snapshot.
+     * The progress of the snapshot.  This is populated only for disk snapshots, and is null for instance snapshots. 
      */
     progress?: string;
     /**
@@ -4832,15 +5683,15 @@ declare namespace Lightsail {
      */
     fromInstanceName?: ResourceName;
     /**
-     * The Amazon Resource Name (ARN) of the instance from which the snapshot was created (e.g., arn:aws:lightsail:us-east-2:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE).
+     * The Amazon Resource Name (ARN) of the instance from which the snapshot was created (arn:aws:lightsail:us-east-2:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE).
      */
     fromInstanceArn?: NonEmptyString;
     /**
-     * The blueprint ID from which you created the snapshot (e.g., os_debian_8_3). A blueprint is a virtual private server (or instance) image used to create instances quickly.
+     * The blueprint ID from which you created the snapshot (amazon_linux_2023). A blueprint is a virtual private server (or instance) image used to create instances quickly.
      */
     fromBlueprintId?: string;
     /**
-     * The bundle ID from which you created the snapshot (e.g., micro_1_0).
+     * The bundle ID from which you created the snapshot (micro_x_x).
      */
     fromBundleId?: string;
     /**
@@ -4854,11 +5705,11 @@ declare namespace Lightsail {
   }
   export interface InstanceSnapshotInfo {
     /**
-     * The bundle ID from which the source instance was created (e.g., micro_1_0).
+     * The bundle ID from which the source instance was created (micro_x_x).
      */
     fromBundleId?: NonEmptyString;
     /**
-     * The blueprint ID from which the source instance (e.g., os_debian_8_3).
+     * The blueprint ID from which the source instance (amazon_linux_2023).
      */
     fromBlueprintId?: NonEmptyString;
     /**
@@ -4874,12 +5725,14 @@ declare namespace Lightsail {
      */
     code?: integer;
     /**
-     * The state of the instance (e.g., running or pending).
+     * The state of the instance (running or pending).
      */
     name?: string;
   }
   export type IpAddress = string;
-  export type IpV6Address = string;
+  export type IpAddressType = "dualstack"|"ipv4"|"ipv6"|string;
+  export type Ipv6Address = string;
+  export type Ipv6AddressList = Ipv6Address[];
   export interface IsVpcPeeredRequest {
   }
   export interface IsVpcPeeredResult {
@@ -4897,7 +5750,7 @@ declare namespace Lightsail {
      */
     name?: ResourceName;
     /**
-     * The Amazon Resource Name (ARN) of the key pair (e.g., arn:aws:lightsail:us-east-2:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE).
+     * The Amazon Resource Name (ARN) of the key pair (arn:aws:lightsail:us-east-2:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE).
      */
     arn?: NonEmptyString;
     /**
@@ -4905,7 +5758,7 @@ declare namespace Lightsail {
      */
     supportCode?: string;
     /**
-     * The timestamp when the key pair was created (e.g., 1479816991.349).
+     * The timestamp when the key pair was created (1479816991.349).
      */
     createdAt?: IsoDate;
     /**
@@ -4917,7 +5770,7 @@ declare namespace Lightsail {
      */
     resourceType?: ResourceType;
     /**
-     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Lightsail Dev Guide.
+     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Amazon Lightsail Developer Guide.
      */
     tags?: TagList;
     /**
@@ -4944,11 +5797,11 @@ declare namespace Lightsail {
      */
     createdAt?: IsoDate;
     /**
-     * An object that describes the location of the distribution, such as the AWS Region and Availability Zone.  Lightsail distributions are global resources that can reference an origin in any AWS Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
+     * An object that describes the location of the distribution, such as the Amazon Web Services Region and Availability Zone.  Lightsail distributions are global resources that can reference an origin in any Amazon Web Services Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
      */
     location?: ResourceLocation;
     /**
-     * The Lightsail resource type (e.g., Distribution).
+     * The Lightsail resource type (Distribution).
      */
     resourceType?: ResourceType;
     /**
@@ -4976,7 +5829,7 @@ declare namespace Lightsail {
      */
     certificateName?: ResourceName;
     /**
-     * An object that describes the origin resource of the distribution, such as a Lightsail instance or load balancer. The distribution pulls, caches, and serves content from the origin.
+     * An object that describes the origin resource of the distribution, such as a Lightsail instance, bucket, or load balancer. The distribution pulls, caches, and serves content from the origin.
      */
     origin?: Origin;
     /**
@@ -5000,13 +5853,21 @@ declare namespace Lightsail {
      */
     ableToUpdateBundle?: boolean;
     /**
-     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Lightsail Dev Guide.
+     * The IP address type of the distribution. The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6.
+     */
+    ipAddressType?: IpAddressType;
+    /**
+     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Amazon Lightsail Developer Guide.
      */
     tags?: TagList;
+    /**
+     * The minimum TLS protocol version that the distribution can use to communicate with viewers.
+     */
+    viewerMinimumTlsProtocolVersion?: string;
   }
   export interface LoadBalancer {
     /**
-     * The name of the load balancer (e.g., my-load-balancer).
+     * The name of the load balancer (my-load-balancer).
      */
     name?: ResourceName;
     /**
@@ -5022,15 +5883,15 @@ declare namespace Lightsail {
      */
     createdAt?: IsoDate;
     /**
-     * The AWS Region where your load balancer was created (e.g., us-east-2a). Lightsail automatically creates your load balancer across Availability Zones.
+     * The AWS Region where your load balancer was created (us-east-2a). Lightsail automatically creates your load balancer across Availability Zones.
      */
     location?: ResourceLocation;
     /**
-     * The resource type (e.g., LoadBalancer.
+     * The resource type (LoadBalancer.
      */
     resourceType?: ResourceType;
     /**
-     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Lightsail Dev Guide.
+     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Amazon Lightsail Developer Guide.
      */
     tags?: TagList;
     /**
@@ -5069,8 +5930,20 @@ declare namespace Lightsail {
      * A string to string map of the configuration options for your load balancer. Valid values are listed below.
      */
     configurationOptions?: LoadBalancerConfigurationOptions;
+    /**
+     * The IP address type of the load balancer. The possible values are ipv4 for IPv4 only, ipv6 for IPv6 only, and dualstack for IPv4 and IPv6.
+     */
+    ipAddressType?: IpAddressType;
+    /**
+     * A Boolean value that indicates whether HTTPS redirection is enabled for the load balancer.
+     */
+    httpsRedirectionEnabled?: boolean;
+    /**
+     * The name of the TLS security policy for the load balancer.
+     */
+    tlsPolicyName?: ResourceName;
   }
-  export type LoadBalancerAttributeName = "HealthCheckPath"|"SessionStickinessEnabled"|"SessionStickiness_LB_CookieDurationSeconds"|string;
+  export type LoadBalancerAttributeName = "HealthCheckPath"|"SessionStickinessEnabled"|"SessionStickiness_LB_CookieDurationSeconds"|"HttpsRedirectionEnabled"|"TlsPolicyName"|string;
   export type LoadBalancerConfigurationOptions = {[key: string]: string};
   export type LoadBalancerList = LoadBalancer[];
   export type LoadBalancerMetricName = "ClientTLSNegotiationErrorCount"|"HealthyHostCount"|"UnhealthyHostCount"|"HTTPCode_LB_4XX_Count"|"HTTPCode_LB_5XX_Count"|"HTTPCode_Instance_2XX_Count"|"HTTPCode_Instance_3XX_Count"|"HTTPCode_Instance_4XX_Count"|"HTTPCode_Instance_5XX_Count"|"InstanceResponseTime"|"RejectedConnectionCount"|"RequestCount"|string;
@@ -5078,7 +5951,7 @@ declare namespace Lightsail {
   export type LoadBalancerState = "active"|"provisioning"|"active_impaired"|"failed"|"unknown"|string;
   export interface LoadBalancerTlsCertificate {
     /**
-     * The name of the SSL/TLS certificate (e.g., my-certificate).
+     * The name of the SSL/TLS certificate (my-certificate).
      */
     name?: ResourceName;
     /**
@@ -5094,15 +5967,15 @@ declare namespace Lightsail {
      */
     createdAt?: IsoDate;
     /**
-     * The AWS Region and Availability Zone where you created your certificate.
+     * The Amazon Web Services Region and Availability Zone where you created your certificate.
      */
     location?: ResourceLocation;
     /**
-     * The resource type (e.g., LoadBalancerTlsCertificate).     Instance  - A Lightsail instance (a virtual private server)     StaticIp  - A static IP address     KeyPair  - The key pair used to connect to a Lightsail instance     InstanceSnapshot  - A Lightsail instance snapshot     Domain  - A DNS zone     PeeredVpc  - A peered VPC     LoadBalancer  - A Lightsail load balancer     LoadBalancerTlsCertificate  - An SSL/TLS certificate associated with a Lightsail load balancer     Disk  - A Lightsail block storage disk     DiskSnapshot  - A block storage disk snapshot  
+     * The resource type (LoadBalancerTlsCertificate).     Instance  - A Lightsail instance (a virtual private server)     StaticIp  - A static IP address     KeyPair  - The key pair used to connect to a Lightsail instance     InstanceSnapshot  - A Lightsail instance snapshot     Domain  - A DNS zone     PeeredVpc  - A peered VPC     LoadBalancer  - A Lightsail load balancer     LoadBalancerTlsCertificate  - An SSL/TLS certificate associated with a Lightsail load balancer     Disk  - A Lightsail block storage disk     DiskSnapshot  - A block storage disk snapshot  
      */
     resourceType?: ResourceType;
     /**
-     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Lightsail Dev Guide.
+     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Amazon Lightsail Developer Guide.
      */
     tags?: TagList;
     /**
@@ -5174,10 +6047,21 @@ declare namespace Lightsail {
      */
     subject?: NonEmptyString;
     /**
-     * An array of strings that specify the alternate domains (e.g., example2.com) and subdomains (e.g., blog.example.com) for the certificate.
+     * An array of strings that specify the alternate domains (example2.com) and subdomains (blog.example.com) for the certificate.
      */
     subjectAlternativeNames?: StringList;
   }
+  export interface LoadBalancerTlsCertificateDnsRecordCreationState {
+    /**
+     * The status code for the automated DNS record creation. Following are the possible values:    SUCCEEDED - The validation records were successfully added.    STARTED - The automatic DNS record creation has started.    FAILED - The validation record addition failed.  
+     */
+    code?: LoadBalancerTlsCertificateDnsRecordCreationStateCode;
+    /**
+     * The message that describes the reason for the status code.
+     */
+    message?: string;
+  }
+  export type LoadBalancerTlsCertificateDnsRecordCreationStateCode = "SUCCEEDED"|"STARTED"|"FAILED"|string;
   export type LoadBalancerTlsCertificateDomainStatus = "PENDING_VALIDATION"|"FAILED"|"SUCCESS"|string;
   export interface LoadBalancerTlsCertificateDomainValidationOption {
     /**
@@ -5211,6 +6095,10 @@ declare namespace Lightsail {
      * The domain name against which your SSL/TLS certificate was validated.
      */
     domainName?: DomainName;
+    /**
+     * An object that describes the state of the canonical name (CNAME) records that are automatically added by Lightsail to the DNS of a domain to validate domain ownership.
+     */
+    dnsRecordCreationState?: LoadBalancerTlsCertificateDnsRecordCreationState;
   }
   export type LoadBalancerTlsCertificateDomainValidationRecordList = LoadBalancerTlsCertificateDomainValidationRecord[];
   export type LoadBalancerTlsCertificateFailureReason = "NO_AVAILABLE_CONTACTS"|"ADDITIONAL_VERIFICATION_REQUIRED"|"DOMAIN_NOT_ALLOWED"|"INVALID_PUBLIC_DOMAIN"|"OTHER"|string;
@@ -5239,6 +6127,29 @@ declare namespace Lightsail {
     isAttached?: boolean;
   }
   export type LoadBalancerTlsCertificateSummaryList = LoadBalancerTlsCertificateSummary[];
+  export interface LoadBalancerTlsPolicy {
+    /**
+     * The name of the TLS security policy.
+     */
+    name?: ResourceName;
+    /**
+     * A Boolean value that indicates whether the TLS security policy is the default.
+     */
+    isDefault?: boolean;
+    /**
+     * The description of the TLS security policy.
+     */
+    description?: string;
+    /**
+     * The protocols used in a given TLS security policy.
+     */
+    protocols?: StringList;
+    /**
+     * The ciphers used by the TLS security policy. The ciphers are listed in order of preference.
+     */
+    ciphers?: StringList;
+  }
+  export type LoadBalancerTlsPolicyList = LoadBalancerTlsPolicy[];
   export interface LogEvent {
     /**
      * The timestamp when the database log event was created.
@@ -5272,7 +6183,7 @@ declare namespace Lightsail {
      */
     sum?: double;
     /**
-     * The timestamp (e.g., 1479816991.349).
+     * The timestamp (1479816991.349).
      */
     timestamp?: timestamp;
     /**
@@ -5306,7 +6217,18 @@ declare namespace Lightsail {
      */
     gbPerMonthAllocated?: integer;
   }
-  export type NetworkProtocol = "tcp"|"all"|"udp"|"icmp"|string;
+  export interface NameServersUpdateState {
+    /**
+     * The status code for the name servers update. Following are the possible values:    SUCCEEDED - The name server records were successfully updated.    PENDING - The name server record update is in progress.    FAILED - The name server record update failed.    STARTED - The automatic name server record update started.  
+     */
+    code?: NameServersUpdateStateCode;
+    /**
+     * The message that describes the reason for the status code.
+     */
+    message?: string;
+  }
+  export type NameServersUpdateStateCode = "SUCCEEDED"|"PENDING"|"FAILED"|"STARTED"|string;
+  export type NetworkProtocol = "tcp"|"all"|"udp"|"icmp"|"icmpv6"|string;
   export type NonEmptyString = string;
   export type NotificationTriggerList = AlarmState[];
   export interface OpenInstancePublicPortsRequest {
@@ -5339,11 +6261,11 @@ declare namespace Lightsail {
      */
     resourceType?: ResourceType;
     /**
-     * The timestamp when the operation was initialized (e.g., 1479816991.349).
+     * The timestamp when the operation was initialized (1479816991.349).
      */
     createdAt?: IsoDate;
     /**
-     * The AWS Region and Availability Zone.
+     * The Amazon Web Services Region and Availability Zone.
      */
     location?: ResourceLocation;
     /**
@@ -5351,7 +6273,7 @@ declare namespace Lightsail {
      */
     isTerminal?: boolean;
     /**
-     * Details about the operation (e.g., Debian-1GB-Ohio-1).
+     * Details about the operation (Debian-1GB-Ohio-1).
      */
     operationDetails?: string;
     /**
@@ -5363,7 +6285,7 @@ declare namespace Lightsail {
      */
     status?: OperationStatus;
     /**
-     * The timestamp when the status was changed (e.g., 1479816991.349).
+     * The timestamp when the status was changed (1479816991.349).
      */
     statusChangedAt?: IsoDate;
     /**
@@ -5377,14 +6299,14 @@ declare namespace Lightsail {
   }
   export type OperationList = Operation[];
   export type OperationStatus = "NotStarted"|"Started"|"Failed"|"Completed"|"Succeeded"|string;
-  export type OperationType = "DeleteKnownHostKeys"|"DeleteInstance"|"CreateInstance"|"StopInstance"|"StartInstance"|"RebootInstance"|"OpenInstancePublicPorts"|"PutInstancePublicPorts"|"CloseInstancePublicPorts"|"AllocateStaticIp"|"ReleaseStaticIp"|"AttachStaticIp"|"DetachStaticIp"|"UpdateDomainEntry"|"DeleteDomainEntry"|"CreateDomain"|"DeleteDomain"|"CreateInstanceSnapshot"|"DeleteInstanceSnapshot"|"CreateInstancesFromSnapshot"|"CreateLoadBalancer"|"DeleteLoadBalancer"|"AttachInstancesToLoadBalancer"|"DetachInstancesFromLoadBalancer"|"UpdateLoadBalancerAttribute"|"CreateLoadBalancerTlsCertificate"|"DeleteLoadBalancerTlsCertificate"|"AttachLoadBalancerTlsCertificate"|"CreateDisk"|"DeleteDisk"|"AttachDisk"|"DetachDisk"|"CreateDiskSnapshot"|"DeleteDiskSnapshot"|"CreateDiskFromSnapshot"|"CreateRelationalDatabase"|"UpdateRelationalDatabase"|"DeleteRelationalDatabase"|"CreateRelationalDatabaseFromSnapshot"|"CreateRelationalDatabaseSnapshot"|"DeleteRelationalDatabaseSnapshot"|"UpdateRelationalDatabaseParameters"|"StartRelationalDatabase"|"RebootRelationalDatabase"|"StopRelationalDatabase"|"EnableAddOn"|"DisableAddOn"|"PutAlarm"|"GetAlarms"|"DeleteAlarm"|"TestAlarm"|"CreateContactMethod"|"GetContactMethods"|"SendContactMethodVerification"|"DeleteContactMethod"|"CreateDistribution"|"UpdateDistribution"|"DeleteDistribution"|"ResetDistributionCache"|"AttachCertificateToDistribution"|"DetachCertificateFromDistribution"|"UpdateDistributionBundle"|"CreateCertificate"|"DeleteCertificate"|"CreateContainerService"|"UpdateContainerService"|"DeleteContainerService"|"CreateContainerServiceDeployment"|"CreateContainerServiceRegistryLogin"|"RegisterContainerImage"|"DeleteContainerImage"|string;
+  export type OperationType = "DeleteKnownHostKeys"|"DeleteInstance"|"CreateInstance"|"StopInstance"|"StartInstance"|"RebootInstance"|"OpenInstancePublicPorts"|"PutInstancePublicPorts"|"CloseInstancePublicPorts"|"AllocateStaticIp"|"ReleaseStaticIp"|"AttachStaticIp"|"DetachStaticIp"|"UpdateDomainEntry"|"DeleteDomainEntry"|"CreateDomain"|"DeleteDomain"|"CreateInstanceSnapshot"|"DeleteInstanceSnapshot"|"CreateInstancesFromSnapshot"|"CreateLoadBalancer"|"DeleteLoadBalancer"|"AttachInstancesToLoadBalancer"|"DetachInstancesFromLoadBalancer"|"UpdateLoadBalancerAttribute"|"CreateLoadBalancerTlsCertificate"|"DeleteLoadBalancerTlsCertificate"|"AttachLoadBalancerTlsCertificate"|"CreateDisk"|"DeleteDisk"|"AttachDisk"|"DetachDisk"|"CreateDiskSnapshot"|"DeleteDiskSnapshot"|"CreateDiskFromSnapshot"|"CreateRelationalDatabase"|"UpdateRelationalDatabase"|"DeleteRelationalDatabase"|"CreateRelationalDatabaseFromSnapshot"|"CreateRelationalDatabaseSnapshot"|"DeleteRelationalDatabaseSnapshot"|"UpdateRelationalDatabaseParameters"|"StartRelationalDatabase"|"RebootRelationalDatabase"|"StopRelationalDatabase"|"EnableAddOn"|"DisableAddOn"|"PutAlarm"|"GetAlarms"|"DeleteAlarm"|"TestAlarm"|"CreateContactMethod"|"GetContactMethods"|"SendContactMethodVerification"|"DeleteContactMethod"|"CreateDistribution"|"UpdateDistribution"|"DeleteDistribution"|"ResetDistributionCache"|"AttachCertificateToDistribution"|"DetachCertificateFromDistribution"|"UpdateDistributionBundle"|"SetIpAddressType"|"CreateCertificate"|"DeleteCertificate"|"CreateContainerService"|"UpdateContainerService"|"DeleteContainerService"|"CreateContainerServiceDeployment"|"CreateContainerServiceRegistryLogin"|"RegisterContainerImage"|"DeleteContainerImage"|"CreateBucket"|"DeleteBucket"|"CreateBucketAccessKey"|"DeleteBucketAccessKey"|"UpdateBucketBundle"|"UpdateBucket"|"SetResourceAccessForBucket"|"UpdateInstanceMetadataOptions"|"StartGUISession"|"StopGUISession"|"SetupInstanceHttps"|string;
   export interface Origin {
     /**
      * The name of the origin resource.
      */
     name?: ResourceName;
     /**
-     * The resource type of the origin resource (e.g., Instance).
+     * The resource type of the origin resource (Instance).
      */
     resourceType?: ResourceType;
     /**
@@ -5395,8 +6317,13 @@ declare namespace Lightsail {
      * The protocol that your Amazon Lightsail distribution uses when establishing a connection with your origin to pull content.
      */
     protocolPolicy?: OriginProtocolPolicyEnum;
+    /**
+     * The amount of time, in seconds, that the distribution waits for a response after forwarding a request to the origin. The minimum timeout is 1 second, the maximum is 60 seconds, and the default (if you don't specify otherwise) is 30 seconds.
+     */
+    responseTimeout?: integer;
   }
   export type OriginProtocolPolicyEnum = "http-only"|"https-only"|string;
+  export type PartnerIdList = NonEmptyString[];
   export interface PasswordData {
     /**
      * The encrypted password. Ciphertext will be an empty string if access to your new instance is not ready yet. When you create an instance, it can take up to 15 minutes for the instance to be ready.  If you use the default key pair (LightsailDefaultKeyPair), the decrypted password will be available in the password field. If you are using a custom key pair, you need to use your own means of decryption. If you change the Administrator password on the instance, Lightsail will continue to return the original ciphertext value. When accessing the instance using RDP, you need to manually enter the Administrator password after changing it from the default. 
@@ -5448,21 +6375,25 @@ declare namespace Lightsail {
   export type PortAccessType = "Public"|"Private"|string;
   export interface PortInfo {
     /**
-     * The first port in a range of open ports on an instance. Allowed ports:   TCP and UDP - 0 to 65535    ICMP - The ICMP type. For example, specify 8 as the fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For more information, see Control Messages on Wikipedia.  
+     * The first port in a range of open ports on an instance. Allowed ports:   TCP and UDP - 0 to 65535    ICMP - The ICMP type for IPv4 addresses. For example, specify 8 as the fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For more information, see Control Messages on Wikipedia.   ICMPv6 - The ICMP type for IPv6 addresses. For example, specify 128 as the fromPort (ICMPv6 type), and 0 as toPort (ICMPv6 code). For more information, see Internet Control Message Protocol for IPv6.  
      */
     fromPort?: Port;
     /**
-     * The last port in a range of open ports on an instance. Allowed ports:   TCP and UDP - 0 to 65535    ICMP - The ICMP code. For example, specify 8 as the fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For more information, see Control Messages on Wikipedia.  
+     * The last port in a range of open ports on an instance. Allowed ports:   TCP and UDP - 0 to 65535    ICMP - The ICMP code for IPv4 addresses. For example, specify 8 as the fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For more information, see Control Messages on Wikipedia.   ICMPv6 - The ICMP code for IPv6 addresses. For example, specify 128 as the fromPort (ICMPv6 type), and 0 as toPort (ICMPv6 code). For more information, see Internet Control Message Protocol for IPv6.  
      */
     toPort?: Port;
     /**
-     * The IP protocol name. The name can be one of the following:    tcp - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.    all - All transport layer protocol types. For more general information, see Transport layer on Wikipedia.    udp - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.    icmp - Internet Control Message Protocol (ICMP) is used to send error messages and operational information indicating success or failure when communicating with an instance. For example, an error is indicated when an instance could not be reached. When you specify icmp as the protocol, you must specify the ICMP type using the fromPort parameter, and ICMP code using the toPort parameter.  
+     * The IP protocol name. The name can be one of the following:    tcp - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.    all - All transport layer protocol types. For more general information, see Transport layer on Wikipedia.    udp - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.    icmp - Internet Control Message Protocol (ICMP) is used to send error messages and operational information indicating success or failure when communicating with an instance. For example, an error is indicated when an instance could not be reached. When you specify icmp as the protocol, you must specify the ICMP type using the fromPort parameter, and ICMP code using the toPort parameter.    icmp6 - Internet Control Message Protocol (ICMP) for IPv6. When you specify icmp6 as the protocol, you must specify the ICMP type using the fromPort parameter, and ICMP code using the toPort parameter.  
      */
     protocol?: NetworkProtocol;
     /**
-     * The IP address, or range of IP addresses in CIDR notation, that are allowed to connect to an instance through the ports, and the protocol. Lightsail supports IPv4 addresses. Examples:   To allow the IP address 192.0.2.44, specify 192.0.2.44 or 192.0.2.44/32.    To allow the IP addresses 192.0.2.0 to 192.0.2.255, specify 192.0.2.0/24.   For more information about CIDR block notation, see Classless Inter-Domain Routing on Wikipedia.
+     * The IPv4 address, or range of IPv4 addresses (in CIDR notation) that are allowed to connect to an instance through the ports, and the protocol.  The ipv6Cidrs parameter lists the IPv6 addresses that are allowed to connect to an instance.  Examples:   To allow the IP address 192.0.2.44, specify 192.0.2.44 or 192.0.2.44/32.    To allow the IP addresses 192.0.2.0 to 192.0.2.255, specify 192.0.2.0/24.   For more information about CIDR block notation, see Classless Inter-Domain Routing on Wikipedia.
      */
     cidrs?: StringList;
+    /**
+     * The IPv6 address, or range of IPv6 addresses (in CIDR notation) that are allowed to connect to an instance through the ports, and the protocol. Only devices with an IPv6 address can connect to an instance through IPv6; otherwise, IPv4 should be used.  The cidrs parameter lists the IPv4 addresses that are allowed to connect to an instance.  For more information about CIDR block notation, see Classless Inter-Domain Routing on Wikipedia.
+     */
+    ipv6Cidrs?: StringList;
     /**
      * An alias that defines access for a preconfigured range of IP addresses. The only alias currently supported is lightsail-connect, which allows IP addresses of the browser-based RDP/SSH client in the Lightsail console to connect to your instance.
      */
@@ -5473,6 +6404,19 @@ declare namespace Lightsail {
   export type PortList = Port[];
   export type PortMap = {[key: string]: ContainerServiceProtocol};
   export type PortState = "open"|"closed"|string;
+  export type PricingUnit = "GB"|"Hrs"|"GB-Mo"|"Bundles"|"Queries"|string;
+  export interface PrivateRegistryAccess {
+    /**
+     * An object that describes the activation status of the role that you can use to grant a Lightsail container service access to Amazon ECR private repositories. If the role is activated, the Amazon Resource Name (ARN) of the role is also listed.
+     */
+    ecrImagePullerRole?: ContainerServiceECRImagePullerRole;
+  }
+  export interface PrivateRegistryAccessRequest {
+    /**
+     * An object to describe a request to activate or deactivate the role that you can use to grant an Amazon Lightsail container service access to Amazon Elastic Container Registry (Amazon ECR) private repositories.
+     */
+    ecrImagePullerRole?: ContainerServiceECRImagePullerRoleRequest;
+  }
   export interface PutAlarmRequest {
     /**
      * The name for the alarm. Specify the name of an existing alarm to update, and overwrite the previous configuration of the alarm.
@@ -5507,7 +6451,7 @@ declare namespace Lightsail {
      */
     treatMissingData?: TreatMissingData;
     /**
-     * The contact protocols to use for the alarm, such as Email, SMS (text messaging), or both. A notification is sent via the specified contact protocol if notifications are enabled for the alarm, and when the alarm is triggered. A notification is not sent if a contact protocol is not specified, if the specified contact protocol is not configured in the AWS Region, or if notifications are not enabled for the alarm using the notificationEnabled paramater. Use the CreateContactMethod action to configure a contact protocol in an AWS Region.
+     * The contact protocols to use for the alarm, such as Email, SMS (text messaging), or both. A notification is sent via the specified contact protocol if notifications are enabled for the alarm, and when the alarm is triggered. A notification is not sent if a contact protocol is not specified, if the specified contact protocol is not configured in the Amazon Web Services Region, or if notifications are not enabled for the alarm using the notificationEnabled paramater. Use the CreateContactMethod action to configure a contact protocol in an Amazon Web Services Region.
      */
     contactProtocols?: ContactProtocolsList;
     /**
@@ -5551,6 +6495,17 @@ declare namespace Lightsail {
      */
     queryStringsAllowList?: StringList;
   }
+  export interface R53HostedZoneDeletionState {
+    /**
+     * The status code for the deletion state. Following are the possible values:    SUCCEEDED - The hosted zone was successfully deleted.    PENDING - The hosted zone deletion is in progress.    FAILED - The hosted zone deletion failed.    STARTED - The hosted zone deletion started.  
+     */
+    code?: R53HostedZoneDeletionStateCode;
+    /**
+     * The message that describes the reason for the status code.
+     */
+    message?: string;
+  }
+  export type R53HostedZoneDeletionStateCode = "SUCCEEDED"|"PENDING"|"FAILED"|"STARTED"|string;
   export interface RebootInstanceRequest {
     /**
      * The name of the instance to reboot.
@@ -5578,19 +6533,19 @@ declare namespace Lightsail {
   export type RecordState = "Started"|"Succeeded"|"Failed"|string;
   export interface Region {
     /**
-     * The continent code (e.g., NA, meaning North America).
+     * The continent code (NA, meaning North America).
      */
     continentCode?: string;
     /**
-     * The description of the AWS Region (e.g., This region is recommended to serve users in the eastern United States and eastern Canada).
+     * The description of the Amazon Web Services Region (This region is recommended to serve users in the eastern United States and eastern Canada).
      */
     description?: string;
     /**
-     * The display name (e.g., Ohio).
+     * The display name (Ohio).
      */
     displayName?: string;
     /**
-     * The region name (e.g., us-east-2).
+     * The region name (us-east-2).
      */
     name?: RegionName;
     /**
@@ -5603,7 +6558,7 @@ declare namespace Lightsail {
     relationalDatabaseAvailabilityZones?: AvailabilityZoneList;
   }
   export type RegionList = Region[];
-  export type RegionName = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"eu-west-1"|"eu-west-2"|"eu-west-3"|"eu-central-1"|"ca-central-1"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"ap-northeast-2"|string;
+  export type RegionName = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"eu-west-1"|"eu-west-2"|"eu-west-3"|"eu-central-1"|"ca-central-1"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"ap-northeast-2"|"eu-north-1"|string;
   export interface RegisterContainerImageRequest {
     /**
      * The name of the container service for which to register a container image.
@@ -5619,7 +6574,20 @@ declare namespace Lightsail {
     digest: string;
   }
   export interface RegisterContainerImageResult {
+    /**
+     * An object that describes a container image that is registered to a Lightsail container service
+     */
     containerImage?: ContainerImage;
+  }
+  export interface RegisteredDomainDelegationInfo {
+    /**
+     * An object that describes the state of the name server records that are automatically added to the Route 53 domain by Lightsail.
+     */
+    nameServersUpdateState?: NameServersUpdateState;
+    /**
+     * Describes the deletion state of an Amazon Route 53 hosted zone for a domain that is being automatically delegated to an Amazon Lightsail DNS zone.
+     */
+    r53HostedZoneDeletionState?: R53HostedZoneDeletionState;
   }
   export interface RelationalDatabase {
     /**
@@ -5647,7 +6615,7 @@ declare namespace Lightsail {
      */
     resourceType?: ResourceType;
     /**
-     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Lightsail Dev Guide.
+     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Amazon Lightsail Developer Guide.
      */
     tags?: TagList;
     /**
@@ -5901,7 +6869,7 @@ declare namespace Lightsail {
      */
     resourceType?: ResourceType;
     /**
-     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Lightsail Dev Guide.
+     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Amazon Lightsail Developer Guide.
      */
     tags?: TagList;
     /**
@@ -5983,7 +6951,7 @@ declare namespace Lightsail {
      */
     status?: string;
     /**
-     * The timestamp of the reset cache request (e.g., 1479734909.17) in Unix time format.
+     * The timestamp of the reset cache request (1479734909.17) in Unix time format.
      */
     createTime?: IsoDate;
     /**
@@ -5992,18 +6960,51 @@ declare namespace Lightsail {
     operation?: Operation;
   }
   export type ResourceArn = string;
+  export type ResourceBucketAccess = "allow"|"deny"|string;
+  export interface ResourceBudgetEstimate {
+    /**
+     * The resource name.
+     */
+    resourceName?: ResourceName;
+    /**
+     * The type of resource the budget will track.
+     */
+    resourceType?: ResourceType;
+    /**
+     * The cost estimate for the specified budget.
+     */
+    costEstimates?: CostEstimates;
+    /**
+     * The estimate start time.
+     */
+    startTime?: IsoDate;
+    /**
+     * The estimate end time.
+     */
+    endTime?: IsoDate;
+  }
   export interface ResourceLocation {
     /**
      * The Availability Zone. Follows the format us-east-2a (case-sensitive).
      */
     availabilityZone?: string;
     /**
-     * The AWS Region name.
+     * The Amazon Web Services Region name.
      */
     regionName?: RegionName;
   }
   export type ResourceName = string;
   export type ResourceNameList = ResourceName[];
+  export interface ResourceReceivingAccess {
+    /**
+     * The name of the Lightsail instance.
+     */
+    name?: NonEmptyString;
+    /**
+     * The Lightsail resource type (for example, Instance).
+     */
+    resourceType?: NonEmptyString;
+  }
   export interface ResourceRecord {
     /**
      * The name of the record.
@@ -6018,7 +7019,8 @@ declare namespace Lightsail {
      */
     value?: string;
   }
-  export type ResourceType = "ContainerService"|"Instance"|"StaticIp"|"KeyPair"|"InstanceSnapshot"|"Domain"|"PeeredVpc"|"LoadBalancer"|"LoadBalancerTlsCertificate"|"Disk"|"DiskSnapshot"|"RelationalDatabase"|"RelationalDatabaseSnapshot"|"ExportSnapshotRecord"|"CloudFormationStackRecord"|"Alarm"|"ContactMethod"|"Distribution"|"Certificate"|string;
+  export type ResourceType = "ContainerService"|"Instance"|"StaticIp"|"KeyPair"|"InstanceSnapshot"|"Domain"|"PeeredVpc"|"LoadBalancer"|"LoadBalancerTlsCertificate"|"Disk"|"DiskSnapshot"|"RelationalDatabase"|"RelationalDatabaseSnapshot"|"ExportSnapshotRecord"|"CloudFormationStackRecord"|"Alarm"|"ContactMethod"|"Distribution"|"Certificate"|"Bucket"|string;
+  export type ResourcesBudgetEstimate = ResourceBudgetEstimate[];
   export type RevocationReason = string;
   export interface SendContactMethodVerificationRequest {
     /**
@@ -6032,8 +7034,194 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export type SensitiveNonEmptyString = string;
   export type SensitiveString = string;
   export type SerialNumber = string;
+  export interface Session {
+    /**
+     * The session name.
+     */
+    name?: NonEmptyString;
+    /**
+     * The session URL.
+     */
+    url?: SensitiveNonEmptyString;
+    /**
+     * When true, this Boolean value indicates the primary session for the specified resource.
+     */
+    isPrimary?: boolean;
+  }
+  export type Sessions = Session[];
+  export interface SetIpAddressTypeRequest {
+    /**
+     * The resource type. The resource values are Distribution, Instance, and LoadBalancer.  Distribution-related APIs are available only in the N. Virginia (us-east-1) Amazon Web Services Region. Set your Amazon Web Services Region configuration to us-east-1 to create, view, or edit distributions. 
+     */
+    resourceType: ResourceType;
+    /**
+     * The name of the resource for which to set the IP address type.
+     */
+    resourceName: ResourceName;
+    /**
+     * The IP address type to set for the specified resource. The possible values are ipv4 for IPv4 only, ipv6 for IPv6 only, and dualstack for IPv4 and IPv6.
+     */
+    ipAddressType: IpAddressType;
+    /**
+     * Required parameter to accept the instance bundle update when changing to, and from, IPv6-only.  An instance bundle will change when switching from dual-stack or ipv4, to ipv6. It also changes when switching from ipv6, to dual-stack or ipv4. You must include this parameter in the command to update the bundle. For example, if you switch from dual-stack to ipv6, the bundle will be updated, and billing for the IPv6-only instance bundle begins immediately. 
+     */
+    acceptBundleUpdate?: boolean;
+  }
+  export interface SetIpAddressTypeResult {
+    /**
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
+     */
+    operations?: OperationList;
+  }
+  export interface SetResourceAccessForBucketRequest {
+    /**
+     * The name of the Lightsail instance for which to set bucket access. The instance must be in a running or stopped state.
+     */
+    resourceName: ResourceName;
+    /**
+     * The name of the bucket for which to set access to another Lightsail resource.
+     */
+    bucketName: BucketName;
+    /**
+     * The access setting. The following access settings are available:    allow - Allows access to the bucket and its objects.    deny - Denies access to the bucket and its objects. Use this setting to remove access for a resource previously set to allow.  
+     */
+    access: ResourceBucketAccess;
+  }
+  export interface SetResourceAccessForBucketResult {
+    /**
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
+     */
+    operations?: OperationList;
+  }
+  export type SetupDomainName = string;
+  export type SetupDomainNameList = SetupDomainName[];
+  export interface SetupExecutionDetails {
+    /**
+     * The command that was executed.
+     */
+    command?: string;
+    /**
+     * The timestamp for when the request was run.
+     */
+    dateTime?: IsoDate;
+    /**
+     * The name of the target resource.
+     */
+    name?: NonEmptyString;
+    /**
+     * The status of the SetupInstanceHttps request.
+     */
+    status?: SetupStatus;
+    /**
+     * The text written by the command to stderr.
+     */
+    standardError?: string;
+    /**
+     * The text written by the command to stdout.
+     */
+    standardOutput?: string;
+    /**
+     * The current version of the script..
+     */
+    version?: string;
+  }
+  export type SetupExecutionDetailsList = SetupExecutionDetails[];
+  export interface SetupHistory {
+    /**
+     * A GUID that's used to identify the operation.
+     */
+    operationId?: NonEmptyString;
+    /**
+     * Information about the specified request.
+     */
+    request?: SetupRequest;
+    /**
+     * The target resource name for the request.
+     */
+    resource?: SetupHistoryResource;
+    /**
+     * Describes the full details of the request.
+     */
+    executionDetails?: SetupExecutionDetailsList;
+    /**
+     * The status of the request.
+     */
+    status?: SetupStatus;
+  }
+  export type SetupHistoryPageToken = string;
+  export interface SetupHistoryResource {
+    /**
+     * The name of the Lightsail resource.
+     */
+    name?: ResourceName;
+    /**
+     * The Amazon Resource Name (ARN) of the Lightsail resource.
+     */
+    arn?: NonEmptyString;
+    /**
+     * The timestamp for when the resource was created.
+     */
+    createdAt?: IsoDate;
+    location?: ResourceLocation;
+    /**
+     * The Lightsail resource type. For example, Instance.
+     */
+    resourceType?: ResourceType;
+  }
+  export interface SetupInstanceHttpsRequest {
+    /**
+     * The name of the Lightsail instance.
+     */
+    instanceName: ResourceName;
+    /**
+     * The contact method for SSL/TLS certificate renewal alerts. You can enter one email address. 
+     */
+    emailAddress: EmailAddress;
+    /**
+     * The name of the domain and subdomains that were specified for the SSL/TLS certificate.
+     */
+    domainNames: SetupDomainNameList;
+    /**
+     * The certificate authority that issues the SSL/TLS certificate.
+     */
+    certificateProvider: CertificateProvider;
+  }
+  export interface SetupInstanceHttpsResult {
+    /**
+     * The available API operations for SetupInstanceHttps.
+     */
+    operations?: OperationList;
+  }
+  export interface SetupRequest {
+    /**
+     * The name of the Lightsail instance.
+     */
+    instanceName?: ResourceName;
+    /**
+     * The name of the domain and subdomains that the SSL/TLS certificate secures.
+     */
+    domainNames?: SetupDomainNameList;
+    /**
+     * The Certificate Authority (CA) that issues the SSL/TLS certificate.
+     */
+    certificateProvider?: CertificateProvider;
+  }
+  export type SetupStatus = "succeeded"|"failed"|"inProgress"|string;
+  export interface StartGUISessionRequest {
+    /**
+     * The resource name.
+     */
+    resourceName: ResourceName;
+  }
+  export interface StartGUISessionResult {
+    /**
+     * The available API operations.
+     */
+    operations?: OperationList;
+  }
   export interface StartInstanceRequest {
     /**
      * The name of the instance (a virtual private server) to start.
@@ -6060,11 +7248,11 @@ declare namespace Lightsail {
   }
   export interface StaticIp {
     /**
-     * The name of the static IP (e.g., StaticIP-Ohio-EXAMPLE).
+     * The name of the static IP (StaticIP-Ohio-EXAMPLE).
      */
     name?: ResourceName;
     /**
-     * The Amazon Resource Name (ARN) of the static IP (e.g., arn:aws:lightsail:us-east-2:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE).
+     * The Amazon Resource Name (ARN) of the static IP (arn:aws:lightsail:us-east-2:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE).
      */
     arn?: NonEmptyString;
     /**
@@ -6072,7 +7260,7 @@ declare namespace Lightsail {
      */
     supportCode?: string;
     /**
-     * The timestamp when the static IP was created (e.g., 1479735304.222).
+     * The timestamp when the static IP was created (1479735304.222).
      */
     createdAt?: IsoDate;
     /**
@@ -6088,7 +7276,7 @@ declare namespace Lightsail {
      */
     ipAddress?: IpAddress;
     /**
-     * The instance where the static IP is attached (e.g., Amazon_Linux-1GB-Ohio-1).
+     * The instance where the static IP is attached (Amazon_Linux-1GB-Ohio-1).
      */
     attachedTo?: ResourceName;
     /**
@@ -6097,6 +7285,30 @@ declare namespace Lightsail {
     isAttached?: boolean;
   }
   export type StaticIpList = StaticIp[];
+  export type Status = "startExpired"|"notStarted"|"started"|"starting"|"stopped"|"stopping"|"settingUpInstance"|"failedInstanceCreation"|"failedStartingGUISession"|"failedStoppingGUISession"|string;
+  export type StatusType = "Active"|"Inactive"|string;
+  export interface StopGUISessionRequest {
+    /**
+     * The resource name.
+     */
+    resourceName: ResourceName;
+  }
+  export interface StopGUISessionResult {
+    /**
+     * The available API operations.
+     */
+    operations?: OperationList;
+  }
+  export interface StopInstanceOnIdleRequest {
+    /**
+     * The value to compare with the duration.
+     */
+    threshold?: string;
+    /**
+     * The amount of idle time in minutes after which your virtual computer will automatically stop.
+     */
+    duration?: string;
+  }
   export interface StopInstanceRequest {
     /**
      * The name of the instance (a virtual private server) to stop.
@@ -6183,6 +7395,16 @@ declare namespace Lightsail {
     operations?: OperationList;
   }
   export type TimeOfDay = string;
+  export interface TimePeriod {
+    /**
+     * The beginning of the time period. The start date is inclusive. For example, if start is 2017-01-01, Lightsail for Research retrieves cost and usage data starting at 2017-01-01 up to the end date. The start date must be equal to or no later than the current date to avoid a validation error.
+     */
+    start?: IsoDate;
+    /**
+     * The end of the time period. The end date is exclusive. For example, if end is 2017-05-01, Lightsail for Research retrieves cost and usage data from the start date up to, but not including, 2017-05-01.
+     */
+    end?: IsoDate;
+  }
   export type TreatMissingData = "breaching"|"notBreaching"|"ignore"|"missing"|string;
   export interface UnpeerVpcRequest {
   }
@@ -6212,6 +7434,54 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export interface UpdateBucketBundleRequest {
+    /**
+     * The name of the bucket for which to update the bundle.
+     */
+    bucketName: BucketName;
+    /**
+     * The ID of the new bundle to apply to the bucket. Use the GetBucketBundles action to get a list of bundle IDs that you can specify.
+     */
+    bundleId: NonEmptyString;
+  }
+  export interface UpdateBucketBundleResult {
+    /**
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
+     */
+    operations?: OperationList;
+  }
+  export interface UpdateBucketRequest {
+    /**
+     * The name of the bucket to update.
+     */
+    bucketName: BucketName;
+    /**
+     * An object that sets the public accessibility of objects in the specified bucket.
+     */
+    accessRules?: AccessRules;
+    /**
+     * Specifies whether to enable or suspend versioning of objects in the bucket. The following options can be specified:    Enabled - Enables versioning of objects in the specified bucket.    Suspended - Suspends versioning of objects in the specified bucket. Existing object versions are retained.  
+     */
+    versioning?: NonEmptyString;
+    /**
+     * An array of strings to specify the Amazon Web Services account IDs that can access the bucket. You can give a maximum of 10 Amazon Web Services accounts access to a bucket.
+     */
+    readonlyAccessAccounts?: PartnerIdList;
+    /**
+     * An object that describes the access log configuration for the bucket.
+     */
+    accessLogConfig?: BucketAccessLogConfig;
+  }
+  export interface UpdateBucketResult {
+    /**
+     * An object that describes the bucket that is updated.
+     */
+    bucket?: Bucket;
+    /**
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
+     */
+    operations?: OperationList;
+  }
   export interface UpdateContainerServiceRequest {
     /**
      * The name of the container service to update.
@@ -6233,6 +7503,10 @@ declare namespace Lightsail {
      * The public domain names to use with the container service, such as example.com and www.example.com. You can specify up to four public domain names for a container service. The domain names that you specify are used when you create a deployment with a container configured as the public endpoint of your container service. If you don't specify public domain names, then you can use the default domain of the container service.  You must create and validate an SSL/TLS certificate before you can use public domain names with your container service. Use the CreateCertificate action to create a certificate for the public domain names you want to use with your container service.  You can specify public domain names using a string to array map as shown in the example later on this page.
      */
     publicDomainNames?: ContainerServicePublicDomains;
+    /**
+     * An object to describe the configuration for the container service to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. For more information, see Configuring access to an Amazon ECR private repository for an Amazon Lightsail container service in the Amazon Lightsail Developer Guide.
+     */
+    privateRegistryAccess?: PrivateRegistryAccessRequest;
   }
   export interface UpdateContainerServiceResult {
     /**
@@ -6251,6 +7525,9 @@ declare namespace Lightsail {
     bundleId?: string;
   }
   export interface UpdateDistributionBundleResult {
+    /**
+     * An object that describes the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
+     */
     operation?: Operation;
   }
   export interface UpdateDistributionRequest {
@@ -6259,7 +7536,7 @@ declare namespace Lightsail {
      */
     distributionName: ResourceName;
     /**
-     * An object that describes the origin resource for the distribution, such as a Lightsail instance or load balancer. The distribution pulls, caches, and serves content from the origin.
+     * An object that describes the origin resource for the distribution, such as a Lightsail instance, bucket, or load balancer. The distribution pulls, caches, and serves content from the origin.
      */
     origin?: InputOrigin;
     /**
@@ -6278,6 +7555,18 @@ declare namespace Lightsail {
      * Indicates whether to enable the distribution.
      */
     isEnabled?: boolean;
+    /**
+     * Use this parameter to update the minimum TLS protocol version for the SSL/TLS certificate that's attached to the distribution.
+     */
+    viewerMinimumTlsProtocolVersion?: ViewerMinimumTlsProtocolVersionEnum;
+    /**
+     * The name of the SSL/TLS certificate that you want to attach to the distribution. Only certificates with a status of ISSUED can be attached to a distribution. Use the GetCertificates action to get a list of certificate names that you can specify.
+     */
+    certificateName?: ResourceName;
+    /**
+     * Indicates whether the default SSL/TLS certificate is attached to the distribution. The default value is true. When true, the distribution uses the default domain name such as d111111abcdef8.cloudfront.net.  Set this value to false to attach a new certificate to the distribution.
+     */
+    useDefaultCertificate?: boolean;
   }
   export interface UpdateDistributionResult {
     /**
@@ -6301,17 +7590,45 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export interface UpdateInstanceMetadataOptionsRequest {
+    /**
+     * The name of the instance for which to update metadata parameters.
+     */
+    instanceName: ResourceName;
+    /**
+     * The state of token usage for your instance metadata requests. If the parameter is not specified in the request, the default state is optional. If the state is optional, you can choose whether to retrieve instance metadata with a signed token header on your request. If you retrieve the IAM role credentials without a token, the version 1.0 role credentials are returned. If you retrieve the IAM role credentials by using a valid signed token, the version 2.0 role credentials are returned. If the state is required, you must send a signed token header with all instance metadata retrieval requests. In this state, retrieving the IAM role credential always returns the version 2.0 credentials. The version 1.0 credentials are not available.
+     */
+    httpTokens?: HttpTokens;
+    /**
+     * Enables or disables the HTTP metadata endpoint on your instances. If this parameter is not specified, the existing state is maintained. If you specify a value of disabled, you cannot access your instance metadata.
+     */
+    httpEndpoint?: HttpEndpoint;
+    /**
+     * The desired HTTP PUT response hop limit for instance metadata requests. A larger number means that the instance metadata requests can travel farther. If no parameter is specified, the existing state is maintained.
+     */
+    httpPutResponseHopLimit?: integer;
+    /**
+     * Enables or disables the IPv6 endpoint for the instance metadata service. This setting applies only when the HTTP metadata endpoint is enabled.  This parameter is available only for instances in the Europe (Stockholm) Amazon Web Services Region (eu-north-1). 
+     */
+    httpProtocolIpv6?: HttpProtocolIpv6;
+  }
+  export interface UpdateInstanceMetadataOptionsResult {
+    /**
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
+     */
+    operation?: Operation;
+  }
   export interface UpdateLoadBalancerAttributeRequest {
     /**
-     * The name of the load balancer that you want to modify (e.g., my-load-balancer.
+     * The name of the load balancer that you want to modify (my-load-balancer.
      */
     loadBalancerName: ResourceName;
     /**
-     * The name of the attribute you want to update. Valid values are below.
+     * The name of the attribute you want to update.
      */
     attributeName: LoadBalancerAttributeName;
     /**
-     * The value that you want to specify for the attribute name.
+     * The value that you want to specify for the attribute name. The following values are supported depending on what you specify for the attributeName request parameter:   If you specify HealthCheckPath for the attributeName request parameter, then the attributeValue request parameter must be the path to ping on the target (for example, /weather/us/wa/seattle).   If you specify SessionStickinessEnabled for the attributeName request parameter, then the attributeValue request parameter must be true to activate session stickiness or false to deactivate session stickiness.   If you specify SessionStickiness_LB_CookieDurationSeconds for the attributeName request parameter, then the attributeValue request parameter must be an interger that represents the cookie duration in seconds.   If you specify HttpsRedirectionEnabled for the attributeName request parameter, then the attributeValue request parameter must be true to activate HTTP to HTTPS redirection or false to deactivate HTTP to HTTPS redirection.   If you specify TlsPolicyName for the attributeName request parameter, then the attributeValue request parameter must be the name of the TLS policy. Use the GetLoadBalancerTlsPolicies action to get a list of TLS policy names that you can specify.  
      */
     attributeValue: StringMax256;
   }
@@ -6339,11 +7656,11 @@ declare namespace Lightsail {
   }
   export interface UpdateRelationalDatabaseRequest {
     /**
-     * The name of your database to update.
+     * The name of your Lightsail database resource to update.
      */
     relationalDatabaseName: ResourceName;
     /**
-     * The password for the master user of your database. The password can include any printable ASCII character except "/", """, or "@". Constraints: Must contain 8 to 41 characters.
+     * The password for the master user. The password can include any printable ASCII character except "/", """, or "@". MySQL  Constraints: Must contain from 8 to 41 characters.  PostgreSQL  Constraints: Must contain from 8 to 128 characters.
      */
     masterUserPassword?: SensitiveString;
     /**
@@ -6355,7 +7672,7 @@ declare namespace Lightsail {
      */
     preferredBackupWindow?: string;
     /**
-     * The weekly time range during which system maintenance can occur on your database. The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. Constraints:   Must be in the ddd:hh24:mi-ddd:hh24:mi format.   Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.   Must be at least 30 minutes.   Specified in Coordinated Universal Time (UTC).   Example: Tue:17:00-Tue:17:30   
+     * The weekly time range during which system maintenance can occur on your database. The default is a 30-minute window selected at random from an 8-hour block of time for each Amazon Web Services Region, occurring on a random day of the week. Constraints:   Must be in the ddd:hh24:mi-ddd:hh24:mi format.   Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.   Must be at least 30 minutes.   Specified in Coordinated Universal Time (UTC).   Example: Tue:17:00-Tue:17:30   
      */
     preferredMaintenanceWindow?: string;
     /**
@@ -6378,6 +7695,10 @@ declare namespace Lightsail {
      * Indicates the certificate that needs to be associated with the database.
      */
     caCertificateIdentifier?: string;
+    /**
+     * This parameter is used to update the major version of the database. Enter the blueprintId for the major version that you want to update to. Use the GetRelationalDatabaseBlueprints action to get a list of available blueprint IDs.
+     */
+    relationalDatabaseBlueprintId?: string;
   }
   export interface UpdateRelationalDatabaseResult {
     /**
@@ -6385,10 +7706,12 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export type ViewerMinimumTlsProtocolVersionEnum = "TLSv1.1_2016"|"TLSv1.2_2018"|"TLSv1.2_2019"|"TLSv1.2_2021"|string;
   export type double = number;
   export type float = number;
   export type integer = number;
   export type long = number;
+  export type setupHistoryList = SetupHistory[];
   export type timestamp = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

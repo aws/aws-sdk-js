@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "This release adds a new API CreateParticipant. For Amazon Connect Chat, you can use this new API to customize chat flow experiences."
+    },
+    {
+        "type": "feature",
+        "category": "FMS",
+        "description": "AWS Firewall Manager adds support for multiple administrators. You can now delegate more than one administrator per organization."
+    }
+]

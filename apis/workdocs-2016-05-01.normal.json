@@ -39,6 +39,9 @@
         },
         {
           "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
         }
       ],
       "documentation": "<p>Aborts the upload of the specified document version that was previously initiated by <a>InitiateDocumentVersionUpload</a>. The client should make this call only when it no longer intends to upload the document version, or fails to do so.</p>"
@@ -100,6 +103,9 @@
         },
         {
           "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ProhibitedStateException"
         }
       ],
       "documentation": "<p>Creates a set of permissions for the specified folder or document. The resource permissions are overwritten if the principals already have different permissions.</p>"
@@ -210,6 +216,9 @@
           "shape": "ConflictingOperationException"
         },
         {
+          "shape": "ConcurrentModificationException"
+        },
+        {
           "shape": "LimitExceededException"
         },
         {
@@ -284,9 +293,12 @@
         },
         {
           "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "InvalidArgumentException"
         }
       ],
-      "documentation": "<p>Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a confirmation message, and must confirm the subscription.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/workdocs/latest/developerguide/subscribe-notifications.html\">Subscribe to Notifications</a> in the <i>Amazon WorkDocs Developer Guide</i>.</p>"
+      "documentation": "<p>Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a confirmation message, and must confirm the subscription.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/workdocs/latest/developerguide/manage-notifications.html\">Setting up notifications for an IAM user or role</a> in the <i>Amazon WorkDocs Developer Guide</i>.</p>"
     },
     "CreateUser": {
       "name": "CreateUser",
@@ -434,6 +446,9 @@
           "shape": "EntityNotExistsException"
         },
         {
+          "shape": "LimitExceededException"
+        },
+        {
           "shape": "ProhibitedStateException"
         },
         {
@@ -457,6 +472,44 @@
       ],
       "documentation": "<p>Permanently deletes the specified document and its associated metadata.</p>"
     },
+    "DeleteDocumentVersion": {
+      "name": "DeleteDocumentVersion",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/api/v1/documentVersions/{DocumentId}/versions/{VersionId}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteDocumentVersionRequest"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotExistsException"
+        },
+        {
+          "shape": "ProhibitedStateException"
+        },
+        {
+          "shape": "ConflictingOperationException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "UnauthorizedResourceAccessException"
+        },
+        {
+          "shape": "FailedDependencyException"
+        },
+        {
+          "shape": "InvalidOperationException"
+        },
+        {
+          "shape": "UnauthorizedOperationException"
+        }
+      ],
+      "documentation": "<p>Deletes a specific version of a document.</p>"
+    },
     "DeleteFolder": {
       "name": "DeleteFolder",
       "http": {
@@ -470,6 +523,9 @@
       "errors": [
         {
           "shape": "EntityNotExistsException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "ProhibitedStateException"
@@ -558,6 +614,9 @@
         },
         {
           "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ProhibitedStateException"
         }
       ],
       "documentation": "<p>Deletes the specified list of labels from a resource.</p>"
@@ -615,7 +674,7 @@
           "shape": "ServiceUnavailableException"
         }
       ],
-      "documentation": "<p>Deletes the specified user from a Simple AD or Microsoft AD directory.</p>"
+      "documentation": "<p>Deletes the specified user from a Simple AD or Microsoft AD directory.</p> <important> <p>Deleting a user immediately and permanently deletes all content in that user's folder structure. Site retention policies do NOT apply to this type of deletion.</p> </important>"
     },
     "DescribeActivities": {
       "name": "DescribeActivities",
@@ -718,6 +777,9 @@
         },
         {
           "shape": "ProhibitedStateException"
+        },
+        {
+          "shape": "InvalidPasswordException"
         }
       ],
       "documentation": "<p>Retrieves the document versions for the specified document.</p> <p>By default, only active versions are returned.</p>"
@@ -826,6 +888,9 @@
         "shape": "DescribeResourcePermissionsResponse"
       },
       "errors": [
+        {
+          "shape": "InvalidArgumentException"
+        },
         {
           "shape": "UnauthorizedOperationException"
         },
@@ -1180,6 +1245,9 @@
           "shape": "StorageLimitWillExceedException"
         },
         {
+          "shape": "LimitExceededException"
+        },
+        {
           "shape": "ProhibitedStateException"
         },
         {
@@ -1199,6 +1267,12 @@
         },
         {
           "shape": "ResourceAlreadyCheckedOutException"
+        },
+        {
+          "shape": "InvalidPasswordException"
+        },
+        {
+          "shape": "InvalidArgumentException"
         }
       ],
       "documentation": "<p>Creates a new document object and version object.</p> <p>The client specifies the parent folder ID and name of the document to upload. The ID is optionally specified when creating a new version of an existing document. This is the first step to upload a document. Next, upload the document to the URL returned from the call, and then call <a>UpdateDocumentVersion</a>.</p> <p>To cancel the document upload, call <a>AbortDocumentVersionUpload</a>.</p>"
@@ -1254,6 +1328,73 @@
         }
       ],
       "documentation": "<p>Removes the permission for the specified principal from the specified resource.</p>"
+    },
+    "RestoreDocumentVersions": {
+      "name": "RestoreDocumentVersions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/api/v1/documentVersions/restore/{DocumentId}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "RestoreDocumentVersionsRequest"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotExistsException"
+        },
+        {
+          "shape": "ProhibitedStateException"
+        },
+        {
+          "shape": "ConflictingOperationException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "UnauthorizedResourceAccessException"
+        },
+        {
+          "shape": "FailedDependencyException"
+        },
+        {
+          "shape": "InvalidOperationException"
+        },
+        {
+          "shape": "UnauthorizedOperationException"
+        }
+      ],
+      "documentation": "<p>Recovers a deleted version of an Amazon WorkDocs document.</p>"
+    },
+    "SearchResources": {
+      "name": "SearchResources",
+      "http": {
+        "method": "POST",
+        "requestUri": "/api/v1/search",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "SearchResourcesRequest"
+      },
+      "output": {
+        "shape": "SearchResourcesResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidArgumentException"
+        },
+        {
+          "shape": "UnauthorizedResourceAccessException"
+        },
+        {
+          "shape": "UnauthorizedOperationException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Searches metadata and the content of folders, documents, document versions, and comments.</p>"
     },
     "UpdateDocument": {
       "name": "UpdateDocument",
@@ -1408,6 +1549,9 @@
           "shape": "IllegalUserStateException"
         },
         {
+          "shape": "ProhibitedStateException"
+        },
+        {
           "shape": "FailedDependencyException"
         },
         {
@@ -1433,7 +1577,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -1465,7 +1609,7 @@
         },
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         }
@@ -1575,7 +1719,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -1602,6 +1746,18 @@
           "shape": "ShareResultsList",
           "documentation": "<p>The share results.</p>"
         }
+      }
+    },
+    "AdditionalResponseFieldType": {
+      "type": "string",
+      "enum": [
+        "WEBURL"
+      ]
+    },
+    "AdditionalResponseFieldsList": {
+      "type": "list",
+      "member": {
+        "shape": "AdditionalResponseFieldType"
       }
     },
     "AuthenticationHeaderType": {
@@ -1699,6 +1855,10 @@
         "RecipientId": {
           "shape": "IdType",
           "documentation": "<p>The ID of the user being replied to.</p>"
+        },
+        "ContributorId": {
+          "shape": "IdType",
+          "documentation": "<p>The ID of the user who made the comment.</p>"
         }
       },
       "documentation": "<p>Describes the metadata of a comment.</p>"
@@ -1724,6 +1884,20 @@
         "PRIVATE"
       ]
     },
+    "ContentCategoryType": {
+      "type": "string",
+      "enum": [
+        "IMAGE",
+        "DOCUMENT",
+        "PDF",
+        "SPREADSHEET",
+        "PRESENTATION",
+        "AUDIO",
+        "VIDEO",
+        "SOURCE_CODE",
+        "OTHER"
+      ]
+    },
     "CreateCommentRequest": {
       "type": "structure",
       "required": [
@@ -1734,7 +1908,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -1790,7 +1964,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -1824,7 +1998,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -1866,7 +2040,7 @@
         },
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         }
@@ -1957,7 +2131,7 @@
         },
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         }
@@ -2002,6 +2176,20 @@
       "min": 1,
       "pattern": "[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*"
     },
+    "DateRangeType": {
+      "type": "structure",
+      "members": {
+        "StartValue": {
+          "shape": "TimestampType",
+          "documentation": "<p>Timestamp range start value (in epochs)</p>"
+        },
+        "EndValue": {
+          "shape": "TimestampType",
+          "documentation": "<p>Timestamp range end value (in epochs).</p>"
+        }
+      },
+      "documentation": "<p>Filters results based on timestamp range (in epochs).</p>"
+    },
     "DeactivateUserRequest": {
       "type": "structure",
       "required": [
@@ -2016,7 +2204,7 @@
         },
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         }
@@ -2032,7 +2220,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2064,7 +2252,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2106,7 +2294,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2118,6 +2306,40 @@
         }
       }
     },
+    "DeleteDocumentVersionRequest": {
+      "type": "structure",
+      "required": [
+        "DocumentId",
+        "VersionId",
+        "DeletePriorVersions"
+      ],
+      "members": {
+        "AuthenticationToken": {
+          "shape": "AuthenticationHeaderType",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
+          "location": "header",
+          "locationName": "Authentication"
+        },
+        "DocumentId": {
+          "shape": "ResourceIdType",
+          "documentation": "<p>The ID of the document associated with the version being deleted.</p>",
+          "location": "uri",
+          "locationName": "DocumentId"
+        },
+        "VersionId": {
+          "shape": "DocumentVersionIdType",
+          "documentation": "<p>The ID of the version being deleted.</p>",
+          "location": "uri",
+          "locationName": "VersionId"
+        },
+        "DeletePriorVersions": {
+          "shape": "BooleanType",
+          "documentation": "<p>Deletes all versions of a document prior to the current version.</p>",
+          "location": "querystring",
+          "locationName": "deletePriorVersions"
+        }
+      }
+    },
     "DeleteFolderContentsRequest": {
       "type": "structure",
       "required": [
@@ -2126,7 +2348,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2146,7 +2368,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2172,7 +2394,7 @@
         },
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2223,7 +2445,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using Amazon Web Services credentials.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2240,7 +2462,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2293,7 +2515,7 @@
           "locationName": "limit"
         },
         "Marker": {
-          "shape": "MarkerType",
+          "shape": "SearchMarkerType",
           "documentation": "<p>The marker for the next set of results.</p>",
           "location": "querystring",
           "locationName": "marker"
@@ -2308,7 +2530,7 @@
           "documentation": "<p>The list of activities for the specified user and time period.</p>"
         },
         "Marker": {
-          "shape": "MarkerType",
+          "shape": "SearchMarkerType",
           "documentation": "<p>The marker for the next set of results.</p>"
         }
       }
@@ -2322,7 +2544,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2373,7 +2595,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2430,7 +2652,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2503,7 +2725,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2593,7 +2815,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2680,7 +2902,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -2698,7 +2920,7 @@
         },
         "Query": {
           "shape": "SearchQueryType",
-          "documentation": "<p>A query to filter users by user name.</p>",
+          "documentation": "<p>A query to filter users by user name. Remember the following about the <code>Userids</code> and <code>Query</code> parameters:</p> <ul> <li> <p>If you don't use either parameter, the API returns a paginated list of all users on the site.</p> </li> <li> <p>If you use both parameters, the API ignores the <code>Query</code> parameter.</p> </li> <li> <p>The <code>Userid</code> parameter only returns user names that match a corresponding user ID.</p> </li> <li> <p>The <code>Query</code> parameter runs a \"prefix\" search for users by the <code>GivenName</code>, <code>SurName</code>, or <code>UserName</code> fields included in a <a href=\"https://docs.aws.amazon.com/workdocs/latest/APIReference/API_CreateUser.html\">CreateUser</a> API call. For example, querying on <code>Ma</code> returns Márcia Oliveira, María García, and Mateo Jackson. If you use multiple characters, the API only returns data that matches all characters. For example, querying on <code>Ma J</code> only returns Mateo Jackson.</p> </li> </ul>",
           "location": "querystring",
           "locationName": "query"
         },
@@ -2927,13 +3149,60 @@
       "type": "string",
       "max": 256,
       "min": 1,
-      "pattern": "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"
+      "pattern": "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}",
+      "sensitive": true
     },
     "FieldNamesType": {
       "type": "string",
       "max": 256,
       "min": 1,
       "pattern": "[\\w,]+"
+    },
+    "Filters": {
+      "type": "structure",
+      "members": {
+        "TextLocales": {
+          "shape": "TextLocaleTypeList",
+          "documentation": "<p>Filters by the locale of the content or comment.</p>"
+        },
+        "ContentCategories": {
+          "shape": "SearchContentCategoryTypeList",
+          "documentation": "<p>Filters by content category.</p>"
+        },
+        "ResourceTypes": {
+          "shape": "SearchResourceTypeList",
+          "documentation": "<p>Filters based on entity type.</p>"
+        },
+        "Labels": {
+          "shape": "SearchLabelList",
+          "documentation": "<p>Filter by labels using exact match.</p>"
+        },
+        "Principals": {
+          "shape": "SearchPrincipalTypeList",
+          "documentation": "<p>Filter based on UserIds or GroupIds.</p>"
+        },
+        "AncestorIds": {
+          "shape": "SearchAncestorIdList",
+          "documentation": "<p>Filter based on resource’s path.</p>"
+        },
+        "SearchCollectionTypes": {
+          "shape": "SearchCollectionTypeList",
+          "documentation": "<p>Filter based on file groupings.</p>"
+        },
+        "SizeRange": {
+          "shape": "LongRangeType",
+          "documentation": "<p>Filter based on size (in bytes).</p>"
+        },
+        "CreatedRange": {
+          "shape": "DateRangeType",
+          "documentation": "<p>Filter based on resource’s creation timestamp.</p>"
+        },
+        "ModifiedRange": {
+          "shape": "DateRangeType",
+          "documentation": "<p>Filter based on resource’s modified timestamp.</p>"
+        }
+      },
+      "documentation": "<p>Filters results based on entity metadata.</p>"
     },
     "FolderContentType": {
       "type": "string",
@@ -3030,7 +3299,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3077,7 +3346,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3117,7 +3386,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3168,7 +3437,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3215,7 +3484,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3251,7 +3520,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>The Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>The Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3346,13 +3615,10 @@
     },
     "InitiateDocumentVersionUploadRequest": {
       "type": "structure",
-      "required": [
-        "ParentFolderId"
-      ],
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3399,6 +3665,42 @@
         }
       }
     },
+    "LanguageCodeType": {
+      "type": "string",
+      "enum": [
+        "AR",
+        "BG",
+        "BN",
+        "DA",
+        "DE",
+        "CS",
+        "EL",
+        "EN",
+        "ES",
+        "FA",
+        "FI",
+        "FR",
+        "HI",
+        "HU",
+        "ID",
+        "IT",
+        "JA",
+        "KO",
+        "LT",
+        "LV",
+        "NL",
+        "NO",
+        "PT",
+        "RO",
+        "RU",
+        "SV",
+        "SW",
+        "TH",
+        "TR",
+        "ZH",
+        "DEFAULT"
+      ]
+    },
     "LimitType": {
       "type": "integer",
       "max": 999,
@@ -3420,6 +3722,23 @@
         "default"
       ]
     },
+    "LongRangeType": {
+      "type": "structure",
+      "members": {
+        "StartValue": {
+          "shape": "LongType",
+          "documentation": "<p>The size start range (in bytes).</p>"
+        },
+        "EndValue": {
+          "shape": "LongType",
+          "documentation": "<p>The size end range (in bytes).</p>"
+        }
+      },
+      "documentation": "<p>Filter based on size (in bytes).</p>"
+    },
+    "LongType": {
+      "type": "long"
+    },
     "MarkerType": {
       "type": "string",
       "max": 2048,
@@ -3432,12 +3751,18 @@
       "min": 0,
       "sensitive": true
     },
+    "NextMarkerType": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "[\\d]+"
+    },
     "NotificationOptions": {
       "type": "structure",
       "members": {
         "SendEmail": {
           "shape": "BooleanType",
-          "documentation": "<p>Boolean value to indicate an email notification should be sent to the receipients.</p>"
+          "documentation": "<p>Boolean value to indicate an email notification should be sent to the recipients.</p>"
         },
         "EmailMessage": {
           "shape": "MessageType",
@@ -3445,6 +3770,16 @@
         }
       },
       "documentation": "<p>Set of options which defines notification preferences of given action.</p>"
+    },
+    "OrderByFieldType": {
+      "type": "string",
+      "enum": [
+        "RELEVANCE",
+        "NAME",
+        "SIZE",
+        "CREATED_TIMESTAMP",
+        "MODIFIED_TIMESTAMP"
+      ]
     },
     "OrderType": {
       "type": "string",
@@ -3537,6 +3872,15 @@
         "shape": "Principal"
       }
     },
+    "PrincipalRoleType": {
+      "type": "string",
+      "enum": [
+        "VIEWER",
+        "CONTRIBUTOR",
+        "OWNER",
+        "COOWNER"
+      ]
+    },
     "PrincipalType": {
       "type": "string",
       "enum": [
@@ -3555,7 +3899,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3576,7 +3920,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3650,7 +3994,8 @@
       "type": "string",
       "max": 255,
       "min": 1,
-      "pattern": "[\\u0020-\\u202D\\u202F-\\uFFFF]+"
+      "pattern": "[\\u0020-\\u202D\\u202F-\\uFFFF]+",
+      "sensitive": true
     },
     "ResourcePath": {
       "type": "structure",
@@ -3705,6 +4050,79 @@
         "DOCUMENT"
       ]
     },
+    "ResponseItem": {
+      "type": "structure",
+      "members": {
+        "ResourceType": {
+          "shape": "ResponseItemType",
+          "documentation": "<p>The type of item being returned.</p>"
+        },
+        "WebUrl": {
+          "shape": "ResponseItemWebUrl",
+          "documentation": "<p>The webUrl of the item being returned.</p>"
+        },
+        "DocumentMetadata": {
+          "shape": "DocumentMetadata",
+          "documentation": "<p>The document that matches the query.</p>"
+        },
+        "FolderMetadata": {
+          "shape": "FolderMetadata",
+          "documentation": "<p>The folder that matches the query.</p>"
+        },
+        "CommentMetadata": {
+          "shape": "CommentMetadata",
+          "documentation": "<p>The comment that matches the query.</p>"
+        },
+        "DocumentVersionMetadata": {
+          "shape": "DocumentVersionMetadata",
+          "documentation": "<p>The document version that matches the metadata.</p>"
+        }
+      },
+      "documentation": "<p>List of Documents, Folders, Comments, and Document Versions matching the query.</p>"
+    },
+    "ResponseItemType": {
+      "type": "string",
+      "enum": [
+        "DOCUMENT",
+        "FOLDER",
+        "COMMENT",
+        "DOCUMENT_VERSION"
+      ]
+    },
+    "ResponseItemWebUrl": {
+      "type": "string",
+      "max": 512,
+      "min": 1,
+      "pattern": "[\\u0020-\\uFFFF]+",
+      "sensitive": true
+    },
+    "ResponseItemsList": {
+      "type": "list",
+      "member": {
+        "shape": "ResponseItem"
+      },
+      "max": 100
+    },
+    "RestoreDocumentVersionsRequest": {
+      "type": "structure",
+      "required": [
+        "DocumentId"
+      ],
+      "members": {
+        "AuthenticationToken": {
+          "shape": "AuthenticationHeaderType",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
+          "location": "header",
+          "locationName": "Authentication"
+        },
+        "DocumentId": {
+          "shape": "ResourceIdType",
+          "documentation": "<p>The ID of the document.</p>",
+          "location": "uri",
+          "locationName": "DocumentId"
+        }
+      }
+    },
     "RolePermissionType": {
       "type": "string",
       "enum": [
@@ -3721,12 +4139,206 @@
         "COOWNER"
       ]
     },
+    "SearchAncestorId": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "SearchAncestorIdList": {
+      "type": "list",
+      "member": {
+        "shape": "SearchAncestorId"
+      },
+      "max": 10
+    },
+    "SearchCollectionType": {
+      "type": "string",
+      "enum": [
+        "OWNED",
+        "SHARED_WITH_ME"
+      ]
+    },
+    "SearchCollectionTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "SearchCollectionType"
+      },
+      "max": 2
+    },
+    "SearchContentCategoryTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "ContentCategoryType"
+      },
+      "max": 9
+    },
+    "SearchLabel": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "SearchLabelList": {
+      "type": "list",
+      "member": {
+        "shape": "SearchLabel"
+      },
+      "max": 10
+    },
+    "SearchMarkerType": {
+      "type": "string",
+      "max": 12288,
+      "min": 1,
+      "pattern": "[\\u0000-\\u00FF]+"
+    },
+    "SearchPrincipalRoleList": {
+      "type": "list",
+      "member": {
+        "shape": "PrincipalRoleType"
+      },
+      "max": 4
+    },
+    "SearchPrincipalType": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "IdType",
+          "documentation": "<p>UserIds or GroupIds.</p>"
+        },
+        "Roles": {
+          "shape": "SearchPrincipalRoleList",
+          "documentation": "<p>The Role of a User or Group.</p>"
+        }
+      },
+      "documentation": "<p>Filter based on UserIds or GroupIds.</p>"
+    },
+    "SearchPrincipalTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "SearchPrincipalType"
+      },
+      "max": 10
+    },
+    "SearchQueryScopeType": {
+      "type": "string",
+      "enum": [
+        "NAME",
+        "CONTENT"
+      ]
+    },
+    "SearchQueryScopeTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "SearchQueryScopeType"
+      },
+      "max": 2
+    },
     "SearchQueryType": {
       "type": "string",
       "max": 512,
       "min": 1,
       "pattern": "[\\u0020-\\uFFFF]+",
       "sensitive": true
+    },
+    "SearchResourceType": {
+      "type": "string",
+      "enum": [
+        "FOLDER",
+        "DOCUMENT",
+        "COMMENT",
+        "DOCUMENT_VERSION"
+      ]
+    },
+    "SearchResourceTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "SearchResourceType"
+      },
+      "max": 4
+    },
+    "SearchResourcesRequest": {
+      "type": "structure",
+      "members": {
+        "AuthenticationToken": {
+          "shape": "AuthenticationHeaderType",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
+          "location": "header",
+          "locationName": "Authentication"
+        },
+        "QueryText": {
+          "shape": "SearchQueryType",
+          "documentation": "<p>The String to search for. Searches across different text fields based on request parameters. Use double quotes around the query string for exact phrase matches.</p>"
+        },
+        "QueryScopes": {
+          "shape": "SearchQueryScopeTypeList",
+          "documentation": "<p>Filter based on the text field type. A Folder has only a name and no content. A Comment has only content and no name. A Document or Document Version has a name and content</p>"
+        },
+        "OrganizationId": {
+          "shape": "IdType",
+          "documentation": "<p>Filters based on the resource owner OrgId. This is a mandatory parameter when using Admin SigV4 credentials.</p>"
+        },
+        "AdditionalResponseFields": {
+          "shape": "AdditionalResponseFieldsList",
+          "documentation": "<p>A list of attributes to include in the response. Used to request fields that are not normally returned in a standard response.</p>"
+        },
+        "Filters": {
+          "shape": "Filters",
+          "documentation": "<p>Filters results based on entity metadata.</p>"
+        },
+        "OrderBy": {
+          "shape": "SearchResultSortList",
+          "documentation": "<p>Order by results in one or more categories.</p>"
+        },
+        "Limit": {
+          "shape": "SearchResultsLimitType",
+          "documentation": "<p>Max results count per page.</p>"
+        },
+        "Marker": {
+          "shape": "NextMarkerType",
+          "documentation": "<p>The marker for the next set of results.</p>"
+        }
+      }
+    },
+    "SearchResourcesResponse": {
+      "type": "structure",
+      "members": {
+        "Items": {
+          "shape": "ResponseItemsList",
+          "documentation": "<p>List of Documents, Folders, Comments, and Document Versions matching the query.</p>"
+        },
+        "Marker": {
+          "shape": "NextMarkerType",
+          "documentation": "<p>The marker to use when requesting the next set of results. If there are no additional results, the string is empty.</p>"
+        }
+      }
+    },
+    "SearchResultSortList": {
+      "type": "list",
+      "member": {
+        "shape": "SearchSortResult"
+      },
+      "max": 1
+    },
+    "SearchResultsLimitType": {
+      "type": "integer",
+      "max": 100,
+      "min": 1
+    },
+    "SearchSortResult": {
+      "type": "structure",
+      "members": {
+        "Field": {
+          "shape": "OrderByFieldType",
+          "documentation": "<p>Sort search results based on this field name.</p>"
+        },
+        "Order": {
+          "shape": "SortOrder",
+          "documentation": "<p>Sort direction.</p>"
+        }
+      },
+      "documentation": "<p>The result of the sort operation.</p>"
     },
     "SharePrincipal": {
       "type": "structure",
@@ -3825,6 +4437,13 @@
     "SizeType": {
       "type": "long"
     },
+    "SortOrder": {
+      "type": "string",
+      "enum": [
+        "ASC",
+        "DESC"
+      ]
+    },
     "StorageRuleType": {
       "type": "structure",
       "members": {
@@ -3879,7 +4498,8 @@
     "SubscriptionProtocolType": {
       "type": "string",
       "enum": [
-        "HTTPS"
+        "HTTPS",
+        "SQS"
       ]
     },
     "SubscriptionType": {
@@ -3887,6 +4507,13 @@
       "enum": [
         "ALL"
       ]
+    },
+    "TextLocaleTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "LanguageCodeType"
+      },
+      "max": 1
     },
     "TimeZoneIdType": {
       "type": "string",
@@ -3904,7 +4531,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3937,7 +4564,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3967,7 +4594,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -3999,7 +4626,7 @@
       "members": {
         "AuthenticationToken": {
           "shape": "AuthenticationHeaderType",
-          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+          "documentation": "<p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>",
           "location": "header",
           "locationName": "Authentication"
         },
@@ -4035,7 +4662,7 @@
         },
         "GrantPoweruserPrivileges": {
           "shape": "BooleanEnumType",
-          "documentation": "<p>Boolean value to determine whether the user is granted Poweruser privileges.</p>"
+          "documentation": "<p>Boolean value to determine whether the user is granted Power user privileges.</p>"
         }
       }
     },
@@ -4143,7 +4770,8 @@
     "UserAttributeValueType": {
       "type": "string",
       "max": 64,
-      "min": 1
+      "min": 1,
+      "sensitive": true
     },
     "UserFilterType": {
       "type": "string",
@@ -4236,8 +4864,9 @@
       "type": "string",
       "max": 256,
       "min": 1,
-      "pattern": "[\\w\\-+.]+(@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]+)?"
+      "pattern": "[\\w\\-+.]+(@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]+)?",
+      "sensitive": true
     }
   },
-  "documentation": "<p>The WorkDocs API is designed for the following use cases:</p> <ul> <li> <p>File Migration: File migration applications are supported for users who want to migrate their files from an on-premises or off-premises file system or service. Users can insert files into a user directory structure, as well as allow for basic metadata changes, such as modifications to the permissions of files.</p> </li> <li> <p>Security: Support security applications are supported for users who have additional security needs, such as antivirus or data loss prevention. The API actions, along with AWS CloudTrail, allow these applications to detect when changes occur in Amazon WorkDocs. Then, the application can take the necessary actions and replace the target file. If the target file violates the policy, the application can also choose to email the user.</p> </li> <li> <p>eDiscovery/Analytics: General administrative applications are supported, such as eDiscovery and analytics. These applications can choose to mimic or record the actions in an Amazon WorkDocs site, along with AWS CloudTrail, to replicate data for eDiscovery, backup, or analytical applications.</p> </li> </ul> <p>All Amazon WorkDocs API actions are Amazon authenticated and certificate-signed. They not only require the use of the AWS SDK, but also allow for the exclusive use of IAM users and roles to help facilitate access, trust, and permission policies. By creating a role and allowing an IAM user to access the Amazon WorkDocs site, the IAM user gains full administrative visibility into the entire Amazon WorkDocs site (or as set in the IAM policy). This includes, but is not limited to, the ability to modify file permissions and upload any file to any user. This allows developers to perform the three use cases above, as well as give users the ability to grant access on a selective basis using the IAM model.</p>"
+  "documentation": "<p>The Amazon WorkDocs API is designed for the following use cases:</p> <ul> <li> <p>File Migration: File migration applications are supported for users who want to migrate their files from an on-premises or off-premises file system or service. Users can insert files into a user directory structure, as well as allow for basic metadata changes, such as modifications to the permissions of files.</p> </li> <li> <p>Security: Support security applications are supported for users who have additional security needs, such as antivirus or data loss prevention. The API actions, along with CloudTrail, allow these applications to detect when changes occur in Amazon WorkDocs. Then, the application can take the necessary actions and replace the target file. If the target file violates the policy, the application can also choose to email the user.</p> </li> <li> <p>eDiscovery/Analytics: General administrative applications are supported, such as eDiscovery and analytics. These applications can choose to mimic or record the actions in an Amazon WorkDocs site, along with CloudTrail, to replicate data for eDiscovery, backup, or analytical applications.</p> </li> </ul> <p>All Amazon WorkDocs API actions are Amazon authenticated and certificate-signed. They not only require the use of the Amazon Web Services SDK, but also allow for the exclusive use of IAM users and roles to help facilitate access, trust, and permission policies. By creating a role and allowing an IAM user to access the Amazon WorkDocs site, the IAM user gains full administrative visibility into the entire Amazon WorkDocs site (or as set in the IAM policy). This includes, but is not limited to, the ability to modify file permissions and upload any file to any user. This allows developers to perform the three use cases above, as well as give users the ability to grant access on a selective basis using the IAM model.</p> <note> <p>The pricing for Amazon WorkDocs APIs varies depending on the API call type for these actions:</p> <ul> <li> <p> <code>READ (Get*)</code> </p> </li> <li> <p> <code>WRITE (Activate*, Add*, Create*, Deactivate*, Initiate*, Update*)</code> </p> </li> <li> <p> <code>LIST (Describe*)</code> </p> </li> <li> <p> <code>DELETE*, CANCEL</code> </p> </li> </ul> <p>For information about Amazon WorkDocs API pricing, see <a href=\"https://aws.amazon.com/workdocs/pricing/\">Amazon WorkDocs Pricing</a>.</p> </note>"
 }

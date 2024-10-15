@@ -687,6 +687,11 @@
           "locationName": "arn",
           "shape": "__string"
         },
+        "CreatedAt": {
+          "documentation": "The date and time the Channel was created.",
+          "locationName": "createdAt",
+          "shape": "__string"
+        },
         "Description": {
           "documentation": "A short text description of the Channel.",
           "locationName": "description",
@@ -719,6 +724,15 @@
     "CmafEncryption": {
       "documentation": "A Common Media Application Format (CMAF) encryption configuration.",
       "members": {
+        "ConstantInitializationVector": {
+          "documentation": "An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).",
+          "locationName": "constantInitializationVector",
+          "shape": "__string"
+        },
+        "EncryptionMethod": {
+          "locationName": "encryptionMethod",
+          "shape": "CmafEncryptionMethod"
+        },
         "KeyRotationIntervalSeconds": {
           "documentation": "Time (in seconds) between each encryption key rotation.",
           "locationName": "keyRotationIntervalSeconds",
@@ -733,6 +747,14 @@
         "SpekeKeyProvider"
       ],
       "type": "structure"
+    },
+    "CmafEncryptionMethod": {
+      "documentation": "The encryption method to use.",
+      "enum": [
+        "SAMPLE_AES",
+        "AES_CTR"
+      ],
+      "type": "string"
     },
     "CmafPackage": {
       "documentation": "A Common Media Application Format (CMAF) packaging configuration.",
@@ -822,6 +844,11 @@
           "locationName": "arn",
           "shape": "__string"
         },
+        "CreatedAt": {
+          "documentation": "The date and time the Channel was created.",
+          "locationName": "createdAt",
+          "shape": "__string"
+        },
         "Description": {
           "documentation": "A short text description of the Channel.",
           "locationName": "description",
@@ -879,6 +906,11 @@
         "Arn": {
           "documentation": "The Amazon Resource Name (ARN) assigned to the Channel.",
           "locationName": "arn",
+          "shape": "__string"
+        },
+        "CreatedAt": {
+          "documentation": "The date and time the Channel was created.",
+          "locationName": "createdAt",
           "shape": "__string"
         },
         "Description": {
@@ -960,7 +992,7 @@
           "shape": "__string"
         },
         "CreatedAt": {
-          "documentation": "The time the HarvestJob was submitted\n",
+          "documentation": "The date and time the HarvestJob was submitted.\n",
           "locationName": "createdAt",
           "shape": "__string"
         },
@@ -1090,6 +1122,11 @@
           "locationName": "cmafPackage",
           "shape": "CmafPackage"
         },
+        "CreatedAt": {
+          "documentation": "The date and time the OriginEndpoint was created.",
+          "locationName": "createdAt",
+          "shape": "__string"
+        },
         "DashPackage": {
           "locationName": "dashPackage",
           "shape": "DashPackage"
@@ -1182,8 +1219,13 @@
           "locationName": "encryption",
           "shape": "DashEncryption"
         },
+        "IncludeIframeOnlyStream": {
+          "documentation": "When enabled, an I-Frame only stream will be included in the output.",
+          "locationName": "includeIframeOnlyStream",
+          "shape": "__boolean"
+        },
         "ManifestLayout": {
-          "documentation": "Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.",
+          "documentation": "Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level. When set to DRM_TOP_LEVEL_COMPACT, content protection elements are placed the MPD level and referenced at the AdaptationSet level.",
           "locationName": "manifestLayout",
           "shape": "ManifestLayout"
         },
@@ -1208,7 +1250,7 @@
           "shape": "__listOf__PeriodTriggersElement"
         },
         "Profile": {
-          "documentation": "The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to \"HBBTV_1_5\", HbbTV 1.5 compliant output is enabled.",
+          "documentation": "The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to \"HBBTV_1_5\", HbbTV 1.5 compliant output is enabled. When set to \"DVB-DASH_2014\", DVB-DASH 2014 compliant output is enabled.",
           "locationName": "profile",
           "shape": "Profile"
         },
@@ -1237,7 +1279,7 @@
           "shape": "UtcTiming"
         },
         "UtcTimingUri": {
-          "documentation": "Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO or HTTP-HEAD",
+          "documentation": "Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO, HTTP-HEAD or HTTP-XSDATE",
           "locationName": "utcTimingUri",
           "shape": "__string"
         }
@@ -1301,6 +1343,11 @@
           "locationName": "arn",
           "shape": "__string"
         },
+        "CreatedAt": {
+          "documentation": "The date and time the Channel was created.",
+          "locationName": "createdAt",
+          "shape": "__string"
+        },
         "Description": {
           "documentation": "A short text description of the Channel.",
           "locationName": "description",
@@ -1357,7 +1404,7 @@
           "shape": "__string"
         },
         "CreatedAt": {
-          "documentation": "The time the HarvestJob was submitted\n",
+          "documentation": "The date and time the HarvestJob was submitted.\n",
           "locationName": "createdAt",
           "shape": "__string"
         },
@@ -1426,6 +1473,11 @@
         "CmafPackage": {
           "locationName": "cmafPackage",
           "shape": "CmafPackage"
+        },
+        "CreatedAt": {
+          "documentation": "The date and time the OriginEndpoint was created.",
+          "locationName": "createdAt",
+          "shape": "__string"
         },
         "DashPackage": {
           "locationName": "dashPackage",
@@ -1497,6 +1549,26 @@
       },
       "type": "structure"
     },
+    "EncryptionContractConfiguration": {
+      "documentation": "Use encryptionContractConfiguration to configure one or more content encryption keys for your endpoints that use SPEKE 2.0. \nThe encryption contract defines which content keys are used to encrypt the audio and video tracks in your stream. \nTo configure the encryption contract, specify which audio and video encryption presets to use.\nNote the following considerations when using encryptionContractConfiguration:\nencryptionContractConfiguration can be used for DASH or CMAF endpoints that use SPEKE 2.0. SPEKE 2.0 relies on the CPIX 2.3 specification.\nYou must disable key rotation for this endpoint by setting keyRotationIntervalSeconds to 0.\n",
+      "members": {
+        "PresetSpeke20Audio": {
+          "documentation": "A collection of audio encryption presets.",
+          "locationName": "presetSpeke20Audio",
+          "shape": "PresetSpeke20Audio"
+        },
+        "PresetSpeke20Video": {
+          "documentation": "A collection of video encryption presets.",
+          "locationName": "presetSpeke20Video",
+          "shape": "PresetSpeke20Video"
+        }
+      },
+      "required": [
+        "PresetSpeke20Audio",
+        "PresetSpeke20Video"
+      ],
+      "type": "structure"
+    },
     "EncryptionMethod": {
       "enum": [
         "AES_128",
@@ -1518,7 +1590,7 @@
           "shape": "__string"
         },
         "CreatedAt": {
-          "documentation": "The time the HarvestJob was submitted\n",
+          "documentation": "The date and time the HarvestJob was submitted.\n",
           "locationName": "createdAt",
           "shape": "__string"
         },
@@ -1640,6 +1712,14 @@
           "documentation": "The URL of the packaged OriginEndpoint for consumption.",
           "locationName": "url",
           "shape": "__string"
+        },
+        "AdTriggers": {
+          "locationName": "adTriggers",
+          "shape": "AdTriggers"
+        },
+        "AdsOnDeliveryRestrictions": {
+          "locationName": "adsOnDeliveryRestrictions",
+          "shape": "AdsOnDeliveryRestrictions"
         }
       },
       "required": [
@@ -1719,6 +1799,11 @@
           "locationName": "encryption",
           "shape": "HlsEncryption"
         },
+        "IncludeDvbSubtitles": {
+          "documentation": "When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.",
+          "locationName": "includeDvbSubtitles",
+          "shape": "__boolean"
+        },
         "IncludeIframeOnlyStream": {
           "documentation": "When enabled, an I-Frame only stream will be included in the output.",
           "locationName": "includeIframeOnlyStream",
@@ -1767,7 +1852,7 @@
         "Password": {
           "documentation": "The system generated password for ingest authentication.",
           "locationName": "password",
-          "shape": "__string"
+          "shape": "SensitiveString"
         },
         "Url": {
           "documentation": "The ingest URL to which the source stream should be sent.",
@@ -1777,7 +1862,7 @@
         "Username": {
           "documentation": "The system generated username for ingest authentication.",
           "locationName": "username",
-          "shape": "__string"
+          "shape": "SensitiveString"
         }
       },
       "type": "structure"
@@ -1932,7 +2017,8 @@
     "ManifestLayout": {
       "enum": [
         "FULL",
-        "COMPACT"
+        "COMPACT",
+        "DRM_TOP_LEVEL_COMPACT"
       ],
       "type": "string"
     },
@@ -1998,6 +2084,11 @@
         "CmafPackage": {
           "locationName": "cmafPackage",
           "shape": "CmafPackage"
+        },
+        "CreatedAt": {
+          "documentation": "The date and time the OriginEndpoint was created.",
+          "locationName": "createdAt",
+          "shape": "__string"
         },
         "DashPackage": {
           "locationName": "dashPackage",
@@ -2073,10 +2164,37 @@
       ],
       "type": "string"
     },
+    "PresetSpeke20Audio": {
+      "enum": [
+        "PRESET-AUDIO-1",
+        "PRESET-AUDIO-2",
+        "PRESET-AUDIO-3",
+        "SHARED",
+        "UNENCRYPTED"
+      ],
+      "type": "string"
+    },
+    "PresetSpeke20Video": {
+      "enum": [
+        "PRESET-VIDEO-1",
+        "PRESET-VIDEO-2",
+        "PRESET-VIDEO-3",
+        "PRESET-VIDEO-4",
+        "PRESET-VIDEO-5",
+        "PRESET-VIDEO-6",
+        "PRESET-VIDEO-7",
+        "PRESET-VIDEO-8",
+        "SHARED",
+        "UNENCRYPTED"
+      ],
+      "type": "string"
+    },
     "Profile": {
       "enum": [
         "NONE",
-        "HBBTV_1_5"
+        "HBBTV_1_5",
+        "HYBRIDCAST",
+        "DVB_DASH_2014"
       ],
       "type": "string"
     },
@@ -2101,6 +2219,11 @@
         "Arn": {
           "documentation": "The Amazon Resource Name (ARN) assigned to the Channel.",
           "locationName": "arn",
+          "shape": "__string"
+        },
+        "CreatedAt": {
+          "documentation": "The date and time the Channel was created.",
+          "locationName": "createdAt",
           "shape": "__string"
         },
         "Description": {
@@ -2158,6 +2281,11 @@
         "Arn": {
           "documentation": "The Amazon Resource Name (ARN) assigned to the Channel.",
           "locationName": "arn",
+          "shape": "__string"
+        },
+        "CreatedAt": {
+          "documentation": "The date and time the Channel was created.",
+          "locationName": "createdAt",
           "shape": "__string"
         },
         "Description": {
@@ -2223,6 +2351,10 @@
       ],
       "type": "string"
     },
+    "SensitiveString": {
+      "sensitive": true,
+      "type": "string"
+    },
     "SpekeKeyProvider": {
       "documentation": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
       "members": {
@@ -2230,6 +2362,10 @@
           "documentation": "An Amazon Resource Name (ARN) of a Certificate Manager certificate\nthat MediaPackage will use for enforcing secure end-to-end data\ntransfer with the key provider service.\n",
           "locationName": "certificateArn",
           "shape": "__string"
+        },
+        "EncryptionContractConfiguration": {
+          "locationName": "encryptionContractConfiguration",
+          "shape": "EncryptionContractConfiguration"
         },
         "ResourceId": {
           "documentation": "The resource ID to include in key requests.",
@@ -2372,6 +2508,11 @@
           "locationName": "arn",
           "shape": "__string"
         },
+        "CreatedAt": {
+          "documentation": "The date and time the Channel was created.",
+          "locationName": "createdAt",
+          "shape": "__string"
+        },
         "Description": {
           "documentation": "A short text description of the Channel.",
           "locationName": "description",
@@ -2486,6 +2627,11 @@
           "locationName": "cmafPackage",
           "shape": "CmafPackage"
         },
+        "CreatedAt": {
+          "documentation": "The date and time the OriginEndpoint was created.",
+          "locationName": "createdAt",
+          "shape": "__string"
+        },
         "DashPackage": {
           "locationName": "dashPackage",
           "shape": "DashPackage"
@@ -2549,7 +2695,8 @@
       "enum": [
         "NONE",
         "HTTP-HEAD",
-        "HTTP-ISO"
+        "HTTP-ISO",
+        "HTTP-XSDATE"
       ],
       "type": "string"
     },

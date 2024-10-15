@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "This release supports adding RoutingCriteria via UpdateContactRoutingData public API."
+    }
+]

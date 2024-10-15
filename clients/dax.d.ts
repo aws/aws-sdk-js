@@ -213,7 +213,7 @@ declare namespace DAX {
      */
     Status?: String;
     /**
-     * The configuration endpoint for this DAX cluster, consisting of a DNS name and a port number. Client applications can specify this endpoint, rather than an individual node endpoint, and allow the DAX client software to intelligently route requests and responses to nodes in the DAX cluster.
+     * The endpoint for this DAX cluster, consisting of a DNS name, a port number, and a URL. Applications should use the URL to configure the DAX client to find their cluster.
      */
     ClusterDiscoveryEndpoint?: Endpoint;
     /**
@@ -252,7 +252,12 @@ declare namespace DAX {
      * The description of the server-side encryption status on the specified DAX cluster.
      */
     SSEDescription?: SSEDescription;
+    /**
+     * The type of encryption supported by the cluster's endpoint. Values are:    NONE for no encryption  TLS for Transport Layer Security  
+     */
+    ClusterEndpointEncryptionType?: ClusterEndpointEncryptionType;
   }
+  export type ClusterEndpointEncryptionType = "NONE"|"TLS"|string;
   export type ClusterList = Cluster[];
   export type ClusterNameList = String[];
   export interface CreateClusterRequest {
@@ -308,6 +313,10 @@ declare namespace DAX {
      * Represents the settings used to enable server-side encryption on the cluster.
      */
     SSESpecification?: SSESpecification;
+    /**
+     * The type of encryption the cluster's endpoint should support. Values are:    NONE for no encryption    TLS for Transport Layer Security  
+     */
+    ClusterEndpointEncryptionType?: ClusterEndpointEncryptionType;
   }
   export interface CreateClusterResponse {
     /**
@@ -580,6 +589,10 @@ declare namespace DAX {
      * The port number that applications should use to connect to the endpoint.
      */
     Port?: Integer;
+    /**
+     * The URL that applications should use to connect to the endpoint. The default ports are 8111 for the "dax" protocol and 9111 for the "daxs" protocol.
+     */
+    URL?: String;
   }
   export interface Event {
     /**
@@ -689,7 +702,7 @@ declare namespace DAX {
      */
     TopicArn?: String;
     /**
-     * The current state of the topic.
+     * The current state of the topic. A value of “active” means that notifications will be sent to the topic. A value of “inactive” means that notifications will not be sent to the topic.
      */
     TopicStatus?: String;
   }
@@ -912,7 +925,7 @@ declare namespace DAX {
      */
     NotificationTopicArn?: String;
     /**
-     * The current state of the topic.
+     * The current state of the topic. A value of “active” means that notifications will be sent to the topic. A value of “inactive” means that notifications will not be sent to the topic.
      */
     NotificationTopicStatus?: String;
     /**
@@ -936,7 +949,7 @@ declare namespace DAX {
      */
     ParameterGroupName: String;
     /**
-     * An array of name-value pairs for the parameters in the group. Each element in the array represents a single parameter.
+     * An array of name-value pairs for the parameters in the group. Each element in the array represents a single parameter.   record-ttl-millis and query-ttl-millis are the only supported parameter names. For more details, see Configuring TTL Settings. 
      */
     ParameterNameValues: ParameterNameValueList;
   }

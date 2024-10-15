@@ -1,0 +1,659 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2018-05-10",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "artifact",
+    "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
+    "serviceFullName": "AWS Artifact",
+    "serviceId": "Artifact",
+    "signatureVersion": "v4",
+    "signingName": "artifact",
+    "uid": "artifact-2018-05-10"
+  },
+  "operations": {
+    "GetAccountSettings": {
+      "name": "GetAccountSettings",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/account-settings/get",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetAccountSettingsRequest"
+      },
+      "output": {
+        "shape": "GetAccountSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        }
+      ],
+      "documentation": "<p>Get the account settings for Artifact.</p>"
+    },
+    "GetReport": {
+      "name": "GetReport",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/report/get",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetReportRequest"
+      },
+      "output": {
+        "shape": "GetReportResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        }
+      ],
+      "documentation": "<p>Get the content for a single report.</p>"
+    },
+    "GetReportMetadata": {
+      "name": "GetReportMetadata",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/report/getMetadata",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetReportMetadataRequest"
+      },
+      "output": {
+        "shape": "GetReportMetadataResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        }
+      ],
+      "documentation": "<p>Get the metadata for a single report.</p>"
+    },
+    "GetTermForReport": {
+      "name": "GetTermForReport",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/report/getTermForReport",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetTermForReportRequest"
+      },
+      "output": {
+        "shape": "GetTermForReportResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        }
+      ],
+      "documentation": "<p>Get the Term content associated with a single report.</p>"
+    },
+    "ListReports": {
+      "name": "ListReports",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/report/list",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListReportsRequest"
+      },
+      "output": {
+        "shape": "ListReportsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        }
+      ],
+      "documentation": "<p>List available reports.</p>"
+    },
+    "PutAccountSettings": {
+      "name": "PutAccountSettings",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/account-settings/put",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "PutAccountSettingsRequest"
+      },
+      "output": {
+        "shape": "PutAccountSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        }
+      ],
+      "documentation": "<p>Put the account settings for Artifact.</p>",
+      "idempotent": true
+    }
+  },
+  "shapes": {
+    "AcceptanceType": {
+      "type": "string",
+      "enum": [
+        "PASSTHROUGH",
+        "EXPLICIT"
+      ]
+    },
+    "AccountSettings": {
+      "type": "structure",
+      "members": {
+        "notificationSubscriptionStatus": {
+          "shape": "NotificationSubscriptionStatus",
+          "documentation": "<p>Notification subscription status of the customer.</p>"
+        }
+      },
+      "documentation": "<p>Account settings for the customer.</p>"
+    },
+    "GetAccountSettingsRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "GetAccountSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "accountSettings": {
+          "shape": "AccountSettings"
+        }
+      }
+    },
+    "GetReportMetadataRequest": {
+      "type": "structure",
+      "required": [
+        "reportId"
+      ],
+      "members": {
+        "reportId": {
+          "shape": "ReportId",
+          "documentation": "<p>Unique resource ID for the report resource.</p>",
+          "location": "querystring",
+          "locationName": "reportId"
+        },
+        "reportVersion": {
+          "shape": "VersionAttribute",
+          "documentation": "<p>Version for the report resource.</p>",
+          "location": "querystring",
+          "locationName": "reportVersion"
+        }
+      }
+    },
+    "GetReportMetadataResponse": {
+      "type": "structure",
+      "members": {
+        "reportDetails": {
+          "shape": "ReportDetail",
+          "documentation": "<p>Report resource detail.</p>"
+        }
+      }
+    },
+    "GetReportRequest": {
+      "type": "structure",
+      "required": [
+        "reportId",
+        "termToken"
+      ],
+      "members": {
+        "reportId": {
+          "shape": "ReportId",
+          "documentation": "<p>Unique resource ID for the report resource.</p>",
+          "location": "querystring",
+          "locationName": "reportId"
+        },
+        "reportVersion": {
+          "shape": "VersionAttribute",
+          "documentation": "<p>Version for the report resource.</p>",
+          "location": "querystring",
+          "locationName": "reportVersion"
+        },
+        "termToken": {
+          "shape": "ShortStringAttribute",
+          "documentation": "<p>Unique download token provided by GetTermForReport API.</p>",
+          "location": "querystring",
+          "locationName": "termToken"
+        }
+      }
+    },
+    "GetReportResponse": {
+      "type": "structure",
+      "members": {
+        "documentPresignedUrl": {
+          "shape": "GetReportResponseDocumentPresignedUrlString",
+          "documentation": "<p>Presigned S3 url to access the report content.</p>"
+        }
+      }
+    },
+    "GetReportResponseDocumentPresignedUrlString": {
+      "type": "string",
+      "max": 10240,
+      "min": 1
+    },
+    "GetTermForReportRequest": {
+      "type": "structure",
+      "required": [
+        "reportId"
+      ],
+      "members": {
+        "reportId": {
+          "shape": "ReportId",
+          "documentation": "<p>Unique resource ID for the report resource.</p>",
+          "location": "querystring",
+          "locationName": "reportId"
+        },
+        "reportVersion": {
+          "shape": "VersionAttribute",
+          "documentation": "<p>Version for the report resource.</p>",
+          "location": "querystring",
+          "locationName": "reportVersion"
+        }
+      }
+    },
+    "GetTermForReportResponse": {
+      "type": "structure",
+      "members": {
+        "documentPresignedUrl": {
+          "shape": "GetTermForReportResponseDocumentPresignedUrlString",
+          "documentation": "<p>Presigned S3 url to access the term content.</p>"
+        },
+        "termToken": {
+          "shape": "String",
+          "documentation": "<p>Unique token representing this request event.</p>"
+        }
+      }
+    },
+    "GetTermForReportResponseDocumentPresignedUrlString": {
+      "type": "string",
+      "max": 10240,
+      "min": 1
+    },
+    "ListReportsRequest": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "shape": "MaxResultsAttribute",
+          "documentation": "<p>Maximum number of resources to return in the paginated response.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "nextToken": {
+          "shape": "NextTokenAttribute",
+          "documentation": "<p>Pagination token to request the next page of resources.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "ListReportsResponse": {
+      "type": "structure",
+      "members": {
+        "reports": {
+          "shape": "ReportsList",
+          "documentation": "<p>List of report resources.</p>"
+        },
+        "nextToken": {
+          "shape": "NextTokenAttribute",
+          "documentation": "<p>Pagination token to request the next page of resources.</p>"
+        }
+      }
+    },
+    "LongStringAttribute": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": "[^<>]*"
+    },
+    "MaxResultsAttribute": {
+      "type": "integer",
+      "box": true,
+      "max": 300,
+      "min": 1
+    },
+    "NextTokenAttribute": {
+      "type": "string",
+      "max": 2048,
+      "min": 1
+    },
+    "NotificationSubscriptionStatus": {
+      "type": "string",
+      "enum": [
+        "SUBSCRIBED",
+        "NOT_SUBSCRIBED"
+      ]
+    },
+    "PublishedState": {
+      "type": "string",
+      "enum": [
+        "PUBLISHED",
+        "UNPUBLISHED"
+      ]
+    },
+    "PutAccountSettingsRequest": {
+      "type": "structure",
+      "members": {
+        "notificationSubscriptionStatus": {
+          "shape": "NotificationSubscriptionStatus",
+          "documentation": "<p>Desired notification subscription status.</p>"
+        }
+      }
+    },
+    "PutAccountSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "accountSettings": {
+          "shape": "AccountSettings"
+        }
+      }
+    },
+    "ReportDetail": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "shape": "ReportId",
+          "documentation": "<p>Unique resource ID for the report resource.</p>"
+        },
+        "name": {
+          "shape": "ShortStringAttribute",
+          "documentation": "<p>Name for the report resource.</p>"
+        },
+        "description": {
+          "shape": "LongStringAttribute",
+          "documentation": "<p>Description for the report resource.</p>"
+        },
+        "periodStart": {
+          "shape": "TimestampAttribute",
+          "documentation": "<p>Timestamp indicating the report resource effective start.</p>"
+        },
+        "periodEnd": {
+          "shape": "TimestampAttribute",
+          "documentation": "<p>Timestamp indicating the report resource effective end.</p>"
+        },
+        "createdAt": {
+          "shape": "TimestampAttribute",
+          "documentation": "<p>Timestamp indicating when the report resource was created.</p>"
+        },
+        "lastModifiedAt": {
+          "shape": "TimestampAttribute",
+          "documentation": "<p>Timestamp indicating when the report resource was last modified.</p>"
+        },
+        "deletedAt": {
+          "shape": "TimestampAttribute",
+          "documentation": "<p>Timestamp indicating when the report resource was deleted.</p>"
+        },
+        "state": {
+          "shape": "PublishedState",
+          "documentation": "<p>Current state of the report resource</p>"
+        },
+        "arn": {
+          "shape": "LongStringAttribute",
+          "documentation": "<p>ARN for the report resource.</p>"
+        },
+        "series": {
+          "shape": "ShortStringAttribute",
+          "documentation": "<p>Series for the report resource.</p>"
+        },
+        "category": {
+          "shape": "ShortStringAttribute",
+          "documentation": "<p>Category for the report resource.</p>"
+        },
+        "companyName": {
+          "shape": "ShortStringAttribute",
+          "documentation": "<p>Associated company name for the report resource.</p>"
+        },
+        "productName": {
+          "shape": "ShortStringAttribute",
+          "documentation": "<p>Associated product name for the report resource.</p>"
+        },
+        "termArn": {
+          "shape": "LongStringAttribute",
+          "documentation": "<p>Unique resource ARN for term resource.</p>"
+        },
+        "version": {
+          "shape": "VersionAttribute",
+          "documentation": "<p>Version for the report resource.</p>"
+        },
+        "acceptanceType": {
+          "shape": "AcceptanceType",
+          "documentation": "<p>Acceptance type for report.</p>"
+        },
+        "sequenceNumber": {
+          "shape": "SequenceNumberAttribute",
+          "documentation": "<p>Sequence number to enforce optimistic locking.</p>"
+        },
+        "uploadState": {
+          "shape": "UploadState",
+          "documentation": "<p>The current state of the document upload.</p>"
+        },
+        "statusMessage": {
+          "shape": "StatusMessage",
+          "documentation": "<p>The message associated with the current upload state.</p>"
+        }
+      },
+      "documentation": "<p>Full detail for report resource metadata.</p>"
+    },
+    "ReportId": {
+      "type": "string",
+      "pattern": "report-[a-zA-Z0-9]{16}"
+    },
+    "ReportSummary": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "shape": "ReportId",
+          "documentation": "<p>Unique resource ID for the report resource.</p>"
+        },
+        "name": {
+          "shape": "ShortStringAttribute",
+          "documentation": "<p>Name for the report resource.</p>"
+        },
+        "state": {
+          "shape": "PublishedState",
+          "documentation": "<p>Current state of the report resource.</p>"
+        },
+        "arn": {
+          "shape": "LongStringAttribute",
+          "documentation": "<p>ARN for the report resource.</p>"
+        },
+        "version": {
+          "shape": "VersionAttribute",
+          "documentation": "<p>Version for the report resource.</p>"
+        },
+        "uploadState": {
+          "shape": "UploadState",
+          "documentation": "<p>The current state of the document upload.</p>"
+        },
+        "description": {
+          "shape": "LongStringAttribute",
+          "documentation": "<p>Description for the report resource.</p>"
+        },
+        "periodStart": {
+          "shape": "TimestampAttribute",
+          "documentation": "<p>Timestamp indicating the report resource effective start.</p>"
+        },
+        "periodEnd": {
+          "shape": "TimestampAttribute",
+          "documentation": "<p>Timestamp indicating the report resource effective end.</p>"
+        },
+        "series": {
+          "shape": "ShortStringAttribute",
+          "documentation": "<p>Series for the report resource.</p>"
+        },
+        "category": {
+          "shape": "ShortStringAttribute",
+          "documentation": "<p>Category for the report resource.</p>"
+        },
+        "companyName": {
+          "shape": "ShortStringAttribute",
+          "documentation": "<p>Associated company name for the report resource.</p>"
+        },
+        "productName": {
+          "shape": "ShortStringAttribute",
+          "documentation": "<p>Associated product name for the report resource.</p>"
+        },
+        "statusMessage": {
+          "shape": "StatusMessage",
+          "documentation": "<p>The message associated with the current upload state.</p>"
+        },
+        "acceptanceType": {
+          "shape": "AcceptanceType",
+          "documentation": "<p>Acceptance type for report.</p>"
+        }
+      },
+      "documentation": "<p>Summary for report resource.</p>"
+    },
+    "ReportsList": {
+      "type": "list",
+      "member": {
+        "shape": "ReportSummary"
+      }
+    },
+    "SequenceNumberAttribute": {
+      "type": "long",
+      "box": true,
+      "min": 1
+    },
+    "ShortStringAttribute": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9_\\-\\s]*"
+    },
+    "StatusMessage": {
+      "type": "string"
+    },
+    "String": {
+      "type": "string"
+    },
+    "TimestampAttribute": {
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
+    },
+    "UploadState": {
+      "type": "string",
+      "enum": [
+        "PROCESSING",
+        "COMPLETE",
+        "FAILED",
+        "FAULT"
+      ]
+    },
+    "VersionAttribute": {
+      "type": "long",
+      "box": true,
+      "min": 1
+    }
+  },
+  "documentation": "<p>This reference provides descriptions of the low-level AWS Artifact Service API.</p>"
+}

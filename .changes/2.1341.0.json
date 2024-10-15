@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "IoTTwinMaker",
+        "description": "This release adds support of adding metadata when creating a new scene or updating an existing scene."
+    },
+    {
+        "type": "feature",
+        "category": "Pipes",
+        "description": "This release improves validation on the ARNs in the API model"
+    },
+    {
+        "type": "feature",
+        "category": "Resiliencehub",
+        "description": "This release provides customers with the ability to import resources from within an EKS cluster and assess the resiliency of EKS cluster workloads."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "This Patch Manager release supports creating, updating, and deleting Patch Baselines for AmazonLinux2023, AlmaLinux."
+    }
+]

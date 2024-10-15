@@ -18,6 +18,10 @@ export class MetadataService {
         callback: (err: AWSError, data: string) => void
     ): void;
     /**
+     * Fetches metadata token used for authenticating against the instance metadata service.
+     */
+    fetchMetadataToken(callback: (err: AWSError, token: string) => void): void;
+    /**
      * 169.254.169.254
      */
     static host: string
@@ -54,4 +58,19 @@ interface MetadataServiceOptions {
      * A set of options to configure the retry delay on retryable errors. See AWS.Config for details.
      */
     retryDelayOptions?: any
+
+    /**
+     * Prevent IMDSv1 fallback.
+     */
+    ec2MetadataV1Disabled?: boolean
+
+    /**
+     * profile name to check for IMDSv1 settings.
+     */
+    profile?: string
+
+    /**
+     * optional file from which to to get config.
+     */
+    filename?: string
 }

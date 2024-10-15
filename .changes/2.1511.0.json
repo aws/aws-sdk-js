@@ -1,0 +1,37 @@
+[
+    {
+        "type": "bugfix",
+        "category": "awsQueryCompatible",
+        "description": "set default list member value for awsQueryCompatible"
+    },
+    {
+        "type": "feature",
+        "category": "Billingconductor",
+        "description": "This release adds the ability to specify a linked account of the billing group for the custom line item resource."
+    },
+    {
+        "type": "feature",
+        "category": "Braket",
+        "description": "This release enhances service support to create quantum tasks and hybrid jobs associated with Braket Direct Reservations."
+    },
+    {
+        "type": "feature",
+        "category": "Cloud9",
+        "description": "This release adds the requirement to include the imageId parameter in the CreateEnvironmentEC2 API call."
+    },
+    {
+        "type": "feature",
+        "category": "CloudFormation",
+        "description": "Including UPDATE_* states as a success status for CreateStack waiter."
+    },
+    {
+        "type": "feature",
+        "category": "Finspace",
+        "description": "Release General Purpose type clusters"
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "Adds support for custom color correction on channels using 3D LUT files."
+    }
+]

@@ -146,7 +146,7 @@
     return expect(results[0]).to.eql(results[1]);
   };
 
-  MockService = AWS.Service.defineService('mock', {
+  let mockServiceParams = {
     serviceIdentifier: 'mock',
     initialize: function(config) {
       AWS.Service.prototype.initialize.call(this, config);
@@ -166,7 +166,11 @@
           message: null
         };
       });
-    },
+    }
+  };
+
+  MockService = AWS.Service.defineService('mock', {
+    ...mockServiceParams,
     api: new AWS.Model.Api({
       metadata: {
         endpointPrefix: 'mockservice',
@@ -182,6 +186,7 @@
       customApi.metadata.signatureVersion = 'v4';
     }
     return AWS.Service.defineService('mock', {
+      ...mockServiceParams,
       serviceIdentifier: 'mock',
       initialize: function(config) {
         AWS.Service.prototype.initialize.call(this, config);

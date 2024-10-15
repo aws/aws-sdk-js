@@ -186,6 +186,10 @@ declare namespace MediaPackage {
      */
     Arn?: __string;
     /**
+     * The date and time the Channel was created.
+     */
+    CreatedAt?: __string;
+    /**
      * A short text description of the Channel.
      */
     Description?: __string;
@@ -200,11 +204,17 @@ declare namespace MediaPackage {
   }
   export interface CmafEncryption {
     /**
+     * An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).
+     */
+    ConstantInitializationVector?: __string;
+    EncryptionMethod?: CmafEncryptionMethod;
+    /**
      * Time (in seconds) between each encryption key rotation.
      */
     KeyRotationIntervalSeconds?: __integer;
     SpekeKeyProvider: SpekeKeyProvider;
   }
+  export type CmafEncryptionMethod = "SAMPLE_AES"|"AES_CTR"|string;
   export interface CmafPackage {
     Encryption?: CmafEncryption;
     /**
@@ -255,6 +265,10 @@ rounded to the nearest multiple of the source segment duration.
      */
     Arn?: __string;
     /**
+     * The date and time the Channel was created.
+     */
+    CreatedAt?: __string;
+    /**
      * A short text description of the Channel.
      */
     Description?: __string;
@@ -285,6 +299,10 @@ cannot be changed after a Channel is created.
      * The Amazon Resource Name (ARN) assigned to the Channel.
      */
     Arn?: __string;
+    /**
+     * The date and time the Channel was created.
+     */
+    CreatedAt?: __string;
     /**
      * A short text description of the Channel.
      */
@@ -335,7 +353,7 @@ This cannot be changed after the HarvestJob is submitted.
      */
     ChannelId?: __string;
     /**
-     * The time the HarvestJob was submitted
+     * The date and time the HarvestJob was submitted.
 
      */
     CreatedAt?: __string;
@@ -432,6 +450,10 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     ChannelId?: __string;
     CmafPackage?: CmafPackage;
+    /**
+     * The date and time the OriginEndpoint was created.
+     */
+    CreatedAt?: __string;
     DashPackage?: DashPackage;
     /**
      * A short text description of the OriginEndpoint.
@@ -488,7 +510,11 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
     AdsOnDeliveryRestrictions?: AdsOnDeliveryRestrictions;
     Encryption?: DashEncryption;
     /**
-     * Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.
+     * When enabled, an I-Frame only stream will be included in the output.
+     */
+    IncludeIframeOnlyStream?: __boolean;
+    /**
+     * Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level. When set to DRM_TOP_LEVEL_COMPACT, content protection elements are placed the MPD level and referenced at the AdaptationSet level.
      */
     ManifestLayout?: ManifestLayout;
     /**
@@ -512,7 +538,7 @@ the Channel source contains SCTE-35 ad markers.
      */
     PeriodTriggers?: __listOf__PeriodTriggersElement;
     /**
-     * The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.
+     * The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled. When set to "DVB-DASH_2014", DVB-DASH 2014 compliant output is enabled.
      */
     Profile?: Profile;
     /**
@@ -535,7 +561,7 @@ rounded to the nearest multiple of the source segment duration.
      */
     UtcTiming?: UtcTiming;
     /**
-     * Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO or HTTP-HEAD
+     * Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO, HTTP-HEAD or HTTP-XSDATE
      */
     UtcTimingUri?: __string;
   }
@@ -567,6 +593,10 @@ rounded to the nearest multiple of the source segment duration.
      */
     Arn?: __string;
     /**
+     * The date and time the Channel was created.
+     */
+    CreatedAt?: __string;
+    /**
      * A short text description of the Channel.
      */
     Description?: __string;
@@ -597,7 +627,7 @@ rounded to the nearest multiple of the source segment duration.
      */
     ChannelId?: __string;
     /**
-     * The time the HarvestJob was submitted
+     * The date and time the HarvestJob was submitted.
 
      */
     CreatedAt?: __string;
@@ -649,6 +679,10 @@ include an explanation of why the HarvestJob failed.
      */
     ChannelId?: __string;
     CmafPackage?: CmafPackage;
+    /**
+     * The date and time the OriginEndpoint was created.
+     */
+    CreatedAt?: __string;
     DashPackage?: DashPackage;
     /**
      * A short text description of the OriginEndpoint.
@@ -699,6 +733,16 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     LogGroupName?: __string;
   }
+  export interface EncryptionContractConfiguration {
+    /**
+     * A collection of audio encryption presets.
+     */
+    PresetSpeke20Audio: PresetSpeke20Audio;
+    /**
+     * A collection of video encryption presets.
+     */
+    PresetSpeke20Video: PresetSpeke20Video;
+  }
   export type EncryptionMethod = "AES_128"|"SAMPLE_AES"|string;
   export interface HarvestJob {
     /**
@@ -712,7 +756,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     ChannelId?: __string;
     /**
-     * The time the HarvestJob was submitted
+     * The date and time the HarvestJob was submitted.
 
      */
     CreatedAt?: __string;
@@ -828,6 +872,8 @@ it will be passed through to HLS output.
      * The URL of the packaged OriginEndpoint for consumption.
      */
     Url?: __string;
+    AdTriggers?: AdTriggers;
+    AdsOnDeliveryRestrictions?: AdsOnDeliveryRestrictions;
   }
   export interface HlsManifestCreateOrUpdateParameters {
     /**
@@ -900,6 +946,10 @@ that is greater than 0.
     AdsOnDeliveryRestrictions?: AdsOnDeliveryRestrictions;
     Encryption?: HlsEncryption;
     /**
+     * When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.
+     */
+    IncludeDvbSubtitles?: __boolean;
+    /**
      * When enabled, an I-Frame only stream will be included in the output.
      */
     IncludeIframeOnlyStream?: __boolean;
@@ -947,7 +997,7 @@ rounded to the nearest multiple of the source fragment duration.
     /**
      * The system generated password for ingest authentication.
      */
-    Password?: __string;
+    Password?: SensitiveString;
     /**
      * The ingest URL to which the source stream should be sent.
      */
@@ -955,7 +1005,7 @@ rounded to the nearest multiple of the source fragment duration.
     /**
      * The system generated username for ingest authentication.
      */
-    Username?: __string;
+    Username?: SensitiveString;
   }
   export interface IngressAccessLogs {
     /**
@@ -1041,7 +1091,7 @@ rounded to the nearest multiple of the source fragment duration.
   export interface ListTagsForResourceResponse {
     Tags?: __mapOf__string;
   }
-  export type ManifestLayout = "FULL"|"COMPACT"|string;
+  export type ManifestLayout = "FULL"|"COMPACT"|"DRM_TOP_LEVEL_COMPACT"|string;
   export type MaxResults = number;
   export interface MssEncryption {
     SpekeKeyProvider: SpekeKeyProvider;
@@ -1069,6 +1119,10 @@ rounded to the nearest multiple of the source fragment duration.
      */
     ChannelId?: __string;
     CmafPackage?: CmafPackage;
+    /**
+     * The date and time the OriginEndpoint was created.
+     */
+    CreatedAt?: __string;
     DashPackage?: DashPackage;
     /**
      * A short text description of the OriginEndpoint.
@@ -1115,7 +1169,9 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
   }
   export type Origination = "ALLOW"|"DENY"|string;
   export type PlaylistType = "NONE"|"EVENT"|"VOD"|string;
-  export type Profile = "NONE"|"HBBTV_1_5"|string;
+  export type PresetSpeke20Audio = "PRESET-AUDIO-1"|"PRESET-AUDIO-2"|"PRESET-AUDIO-3"|"SHARED"|"UNENCRYPTED"|string;
+  export type PresetSpeke20Video = "PRESET-VIDEO-1"|"PRESET-VIDEO-2"|"PRESET-VIDEO-3"|"PRESET-VIDEO-4"|"PRESET-VIDEO-5"|"PRESET-VIDEO-6"|"PRESET-VIDEO-7"|"PRESET-VIDEO-8"|"SHARED"|"UNENCRYPTED"|string;
+  export type Profile = "NONE"|"HBBTV_1_5"|"HYBRIDCAST"|"DVB_DASH_2014"|string;
   export interface RotateChannelCredentialsRequest {
     /**
      * The ID of the channel to update.
@@ -1127,6 +1183,10 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      * The Amazon Resource Name (ARN) assigned to the Channel.
      */
     Arn?: __string;
+    /**
+     * The date and time the Channel was created.
+     */
+    CreatedAt?: __string;
     /**
      * A short text description of the Channel.
      */
@@ -1155,6 +1215,10 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      * The Amazon Resource Name (ARN) assigned to the Channel.
      */
     Arn?: __string;
+    /**
+     * The date and time the Channel was created.
+     */
+    CreatedAt?: __string;
     /**
      * A short text description of the Channel.
      */
@@ -1186,6 +1250,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
     RoleArn: __string;
   }
   export type SegmentTemplateFormat = "NUMBER_WITH_TIMELINE"|"TIME_WITH_TIMELINE"|"NUMBER_WITH_DURATION"|string;
+  export type SensitiveString = string;
   export interface SpekeKeyProvider {
     /**
      * An Amazon Resource Name (ARN) of a Certificate Manager certificate
@@ -1194,6 +1259,7 @@ transfer with the key provider service.
 
      */
     CertificateArn?: __string;
+    EncryptionContractConfiguration?: EncryptionContractConfiguration;
     /**
      * The resource ID to include in key requests.
      */
@@ -1256,6 +1322,10 @@ MediaPackage will assume when accessing the key provider service.
      * The Amazon Resource Name (ARN) assigned to the Channel.
      */
     Arn?: __string;
+    /**
+     * The date and time the Channel was created.
+     */
+    CreatedAt?: __string;
     /**
      * A short text description of the Channel.
      */
@@ -1322,6 +1392,10 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     ChannelId?: __string;
     CmafPackage?: CmafPackage;
+    /**
+     * The date and time the OriginEndpoint was created.
+     */
+    CreatedAt?: __string;
     DashPackage?: DashPackage;
     /**
      * A short text description of the OriginEndpoint.
@@ -1366,7 +1440,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     Whitelist?: __listOf__string;
   }
-  export type UtcTiming = "NONE"|"HTTP-HEAD"|"HTTP-ISO"|string;
+  export type UtcTiming = "NONE"|"HTTP-HEAD"|"HTTP-ISO"|"HTTP-XSDATE"|string;
   export type __AdTriggersElement = "SPLICE_INSERT"|"BREAK"|"PROVIDER_ADVERTISEMENT"|"DISTRIBUTOR_ADVERTISEMENT"|"PROVIDER_PLACEMENT_OPPORTUNITY"|"DISTRIBUTOR_PLACEMENT_OPPORTUNITY"|"PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY"|"DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"|string;
   export type __PeriodTriggersElement = "ADS"|string;
   export type __boolean = boolean;

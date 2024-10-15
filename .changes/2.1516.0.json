@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Neptune",
+        "description": "This release adds a new parameter configuration setting to the Neptune cluster related APIs that can be leveraged to switch between the underlying supported storage modes."
+    },
+    {
+        "type": "feature",
+        "category": "SecurityHub",
+        "description": "Added new resource detail objects to ASFF, including resources for AwsDynamoDbTable, AwsEc2ClientVpnEndpoint, AwsMskCluster, AwsS3AccessPoint, AwsS3Bucket"
+    }
+]

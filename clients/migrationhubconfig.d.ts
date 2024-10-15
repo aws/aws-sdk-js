@@ -20,6 +20,14 @@ declare class MigrationHubConfig extends Service {
    */
   createHomeRegionControl(callback?: (err: AWSError, data: MigrationHubConfig.Types.CreateHomeRegionControlResult) => void): Request<MigrationHubConfig.Types.CreateHomeRegionControlResult, AWSError>;
   /**
+   * This operation deletes the home region configuration for the calling account. The operation does not delete discovery or migration tracking data in the home region.
+   */
+  deleteHomeRegionControl(params: MigrationHubConfig.Types.DeleteHomeRegionControlRequest, callback?: (err: AWSError, data: MigrationHubConfig.Types.DeleteHomeRegionControlResult) => void): Request<MigrationHubConfig.Types.DeleteHomeRegionControlResult, AWSError>;
+  /**
+   * This operation deletes the home region configuration for the calling account. The operation does not delete discovery or migration tracking data in the home region.
+   */
+  deleteHomeRegionControl(callback?: (err: AWSError, data: MigrationHubConfig.Types.DeleteHomeRegionControlResult) => void): Request<MigrationHubConfig.Types.DeleteHomeRegionControlResult, AWSError>;
+  /**
    * This API permits filtering on the ControlId and HomeRegion fields.
    */
   describeHomeRegionControls(params: MigrationHubConfig.Types.DescribeHomeRegionControlsRequest, callback?: (err: AWSError, data: MigrationHubConfig.Types.DescribeHomeRegionControlsResult) => void): Request<MigrationHubConfig.Types.DescribeHomeRegionControlsResult, AWSError>;
@@ -57,6 +65,14 @@ declare namespace MigrationHubConfig {
      * This object is the HomeRegionControl object that's returned by a successful call to CreateHomeRegionControl.
      */
     HomeRegionControl?: HomeRegionControl;
+  }
+  export interface DeleteHomeRegionControlRequest {
+    /**
+     * A unique identifier that's generated for each home region control. It's always a string that begins with "hrc-" followed by 12 lowercase letters and numbers.
+     */
+    ControlId: ControlId;
+  }
+  export interface DeleteHomeRegionControlResult {
   }
   export type DescribeHomeRegionControlsMaxResults = number;
   export interface DescribeHomeRegionControlsRequest {

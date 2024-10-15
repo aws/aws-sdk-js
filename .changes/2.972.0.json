@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "Appflow",
+        "description": "This release adds support for SAPOData connector and extends Veeva connector for document extraction."
+    },
+    {
+        "type": "feature",
+        "category": "ApplicationAutoScaling",
+        "description": "This release extends Application Auto Scaling support for replication group of Amazon ElastiCache Redis clusters. Auto Scaling monitors and automatically expands node group count and number of replicas per node group when a critical usage threshold is met or according to customer-defined schedule."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "The ImportImage API now supports the ability to create AMIs with AWS-managed licenses for Microsoft SQL Server for both Windows and Linux."
+    },
+    {
+        "type": "feature",
+        "category": "MemoryDB",
+        "description": "AWS MemoryDB  SDK now supports all APIs for newly launched MemoryDB service."
+    }
+]

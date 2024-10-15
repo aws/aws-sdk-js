@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "AppSync",
+        "description": "Fixes the URI for the evaluatecode endpoint to include the /v1 prefix (ie. \"/v1/dataplane-evaluatecode\")."
+    },
+    {
+        "type": "feature",
+        "category": "FMS",
+        "description": "AWS Firewall Manager now supports Fortigate Cloud Native Firewall as a Service as a third-party policy type."
+    },
+    {
+        "type": "feature",
+        "category": "MediaConvert",
+        "description": "The AWS Elemental MediaConvert SDK has added support for configurable ID3 eMSG box attributes and the ability to signal them with InbandEventStream tags in DASH and CMAF outputs."
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "Updates to Event Signaling and Management (ESAM) API and documentation."
+    },
+    {
+        "type": "feature",
+        "category": "Polly",
+        "description": "Add language code for Finnish (fi-FI)"
+    },
+    {
+        "type": "feature",
+        "category": "Proton",
+        "description": "CreateEnvironmentAccountConnection RoleArn input is now optional"
+    },
+    {
+        "type": "feature",
+        "category": "RedshiftServerless",
+        "description": "Add Table Level Restore operations for Amazon Redshift Serverless. Add multi-port support for Amazon Redshift Serverless endpoints. Add Tagging support to Snapshots and Recovery Points in Amazon Redshift Serverless."
+    }
+]

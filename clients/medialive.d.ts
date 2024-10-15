@@ -62,6 +62,14 @@ declare class MediaLive extends Service {
    */
   cancelInputDeviceTransfer(callback?: (err: AWSError, data: MediaLive.Types.CancelInputDeviceTransferResponse) => void): Request<MediaLive.Types.CancelInputDeviceTransferResponse, AWSError>;
   /**
+   * Send a request to claim an AWS Elemental device that you have purchased from a third-party vendor. After the request succeeds, you will own the device.
+   */
+  claimDevice(params: MediaLive.Types.ClaimDeviceRequest, callback?: (err: AWSError, data: MediaLive.Types.ClaimDeviceResponse) => void): Request<MediaLive.Types.ClaimDeviceResponse, AWSError>;
+  /**
+   * Send a request to claim an AWS Elemental device that you have purchased from a third-party vendor. After the request succeeds, you will own the device.
+   */
+  claimDevice(callback?: (err: AWSError, data: MediaLive.Types.ClaimDeviceResponse) => void): Request<MediaLive.Types.ClaimDeviceResponse, AWSError>;
+  /**
    * Creates a new channel
    */
   createChannel(params: MediaLive.Types.CreateChannelRequest, callback?: (err: AWSError, data: MediaLive.Types.CreateChannelResponse) => void): Request<MediaLive.Types.CreateChannelResponse, AWSError>;
@@ -101,6 +109,14 @@ declare class MediaLive extends Service {
    * Create a new program in the multiplex.
    */
   createMultiplexProgram(callback?: (err: AWSError, data: MediaLive.Types.CreateMultiplexProgramResponse) => void): Request<MediaLive.Types.CreateMultiplexProgramResponse, AWSError>;
+  /**
+   * Create a partner input
+   */
+  createPartnerInput(params: MediaLive.Types.CreatePartnerInputRequest, callback?: (err: AWSError, data: MediaLive.Types.CreatePartnerInputResponse) => void): Request<MediaLive.Types.CreatePartnerInputResponse, AWSError>;
+  /**
+   * Create a partner input
+   */
+  createPartnerInput(callback?: (err: AWSError, data: MediaLive.Types.CreatePartnerInputResponse) => void): Request<MediaLive.Types.CreatePartnerInputResponse, AWSError>;
   /**
    * Create tags for a resource
    */
@@ -173,6 +189,14 @@ declare class MediaLive extends Service {
    * Removes tags for a resource
    */
   deleteTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Describe account configuration
+   */
+  describeAccountConfiguration(params: MediaLive.Types.DescribeAccountConfigurationRequest, callback?: (err: AWSError, data: MediaLive.Types.DescribeAccountConfigurationResponse) => void): Request<MediaLive.Types.DescribeAccountConfigurationResponse, AWSError>;
+  /**
+   * Describe account configuration
+   */
+  describeAccountConfiguration(callback?: (err: AWSError, data: MediaLive.Types.DescribeAccountConfigurationResponse) => void): Request<MediaLive.Types.DescribeAccountConfigurationResponse, AWSError>;
   /**
    * Gets details about a channel
    */
@@ -253,6 +277,14 @@ declare class MediaLive extends Service {
    * Get a channel schedule
    */
   describeSchedule(callback?: (err: AWSError, data: MediaLive.Types.DescribeScheduleResponse) => void): Request<MediaLive.Types.DescribeScheduleResponse, AWSError>;
+  /**
+   * Describe the latest thumbnails data.
+   */
+  describeThumbnails(params: MediaLive.Types.DescribeThumbnailsRequest, callback?: (err: AWSError, data: MediaLive.Types.DescribeThumbnailsResponse) => void): Request<MediaLive.Types.DescribeThumbnailsResponse, AWSError>;
+  /**
+   * Describe the latest thumbnails data.
+   */
+  describeThumbnails(callback?: (err: AWSError, data: MediaLive.Types.DescribeThumbnailsResponse) => void): Request<MediaLive.Types.DescribeThumbnailsResponse, AWSError>;
   /**
    * Produces list of channels that have been created
    */
@@ -342,6 +374,14 @@ declare class MediaLive extends Service {
    */
   purchaseOffering(callback?: (err: AWSError, data: MediaLive.Types.PurchaseOfferingResponse) => void): Request<MediaLive.Types.PurchaseOfferingResponse, AWSError>;
   /**
+   * Send a reboot command to the specified input device. The device will begin rebooting within a few seconds of sending the command. When the reboot is complete, the device’s connection status will change to connected.
+   */
+  rebootInputDevice(params: MediaLive.Types.RebootInputDeviceRequest, callback?: (err: AWSError, data: MediaLive.Types.RebootInputDeviceResponse) => void): Request<MediaLive.Types.RebootInputDeviceResponse, AWSError>;
+  /**
+   * Send a reboot command to the specified input device. The device will begin rebooting within a few seconds of sending the command. When the reboot is complete, the device’s connection status will change to connected.
+   */
+  rebootInputDevice(callback?: (err: AWSError, data: MediaLive.Types.RebootInputDeviceResponse) => void): Request<MediaLive.Types.RebootInputDeviceResponse, AWSError>;
+  /**
    * Reject the transfer of the specified input device to your AWS account.
    */
   rejectInputDeviceTransfer(params: MediaLive.Types.RejectInputDeviceTransferRequest, callback?: (err: AWSError, data: MediaLive.Types.RejectInputDeviceTransferResponse) => void): Request<MediaLive.Types.RejectInputDeviceTransferResponse, AWSError>;
@@ -357,6 +397,22 @@ declare class MediaLive extends Service {
    * Starts an existing channel
    */
   startChannel(callback?: (err: AWSError, data: MediaLive.Types.StartChannelResponse) => void): Request<MediaLive.Types.StartChannelResponse, AWSError>;
+  /**
+   * Start an input device that is attached to a MediaConnect flow. (There is no need to start a device that is attached to a MediaLive input; MediaLive starts the device when the channel starts.)
+   */
+  startInputDevice(params: MediaLive.Types.StartInputDeviceRequest, callback?: (err: AWSError, data: MediaLive.Types.StartInputDeviceResponse) => void): Request<MediaLive.Types.StartInputDeviceResponse, AWSError>;
+  /**
+   * Start an input device that is attached to a MediaConnect flow. (There is no need to start a device that is attached to a MediaLive input; MediaLive starts the device when the channel starts.)
+   */
+  startInputDevice(callback?: (err: AWSError, data: MediaLive.Types.StartInputDeviceResponse) => void): Request<MediaLive.Types.StartInputDeviceResponse, AWSError>;
+  /**
+   * Start a maintenance window for the specified input device. Starting a maintenance window will give the device up to two hours to install software. If the device was streaming prior to the maintenance, it will resume streaming when the software is fully installed. Devices automatically install updates while they are powered on and their MediaLive channels are stopped. A maintenance window allows you to update a device without having to stop MediaLive channels that use the device. The device must remain powered on and connected to the internet for the duration of the maintenance.
+   */
+  startInputDeviceMaintenanceWindow(params: MediaLive.Types.StartInputDeviceMaintenanceWindowRequest, callback?: (err: AWSError, data: MediaLive.Types.StartInputDeviceMaintenanceWindowResponse) => void): Request<MediaLive.Types.StartInputDeviceMaintenanceWindowResponse, AWSError>;
+  /**
+   * Start a maintenance window for the specified input device. Starting a maintenance window will give the device up to two hours to install software. If the device was streaming prior to the maintenance, it will resume streaming when the software is fully installed. Devices automatically install updates while they are powered on and their MediaLive channels are stopped. A maintenance window allows you to update a device without having to stop MediaLive channels that use the device. The device must remain powered on and connected to the internet for the duration of the maintenance.
+   */
+  startInputDeviceMaintenanceWindow(callback?: (err: AWSError, data: MediaLive.Types.StartInputDeviceMaintenanceWindowResponse) => void): Request<MediaLive.Types.StartInputDeviceMaintenanceWindowResponse, AWSError>;
   /**
    * Start (run) the multiplex. Starting the multiplex does not start the channels. You must explicitly start each channel.
    */
@@ -374,6 +430,14 @@ declare class MediaLive extends Service {
    */
   stopChannel(callback?: (err: AWSError, data: MediaLive.Types.StopChannelResponse) => void): Request<MediaLive.Types.StopChannelResponse, AWSError>;
   /**
+   * Stop an input device that is attached to a MediaConnect flow. (There is no need to stop a device that is attached to a MediaLive input; MediaLive automatically stops the device when the channel stops.)
+   */
+  stopInputDevice(params: MediaLive.Types.StopInputDeviceRequest, callback?: (err: AWSError, data: MediaLive.Types.StopInputDeviceResponse) => void): Request<MediaLive.Types.StopInputDeviceResponse, AWSError>;
+  /**
+   * Stop an input device that is attached to a MediaConnect flow. (There is no need to stop a device that is attached to a MediaLive input; MediaLive automatically stops the device when the channel stops.)
+   */
+  stopInputDevice(callback?: (err: AWSError, data: MediaLive.Types.StopInputDeviceResponse) => void): Request<MediaLive.Types.StopInputDeviceResponse, AWSError>;
+  /**
    * Stops a running multiplex. If the multiplex isn't running, this action has no effect.
    */
   stopMultiplex(params: MediaLive.Types.StopMultiplexRequest, callback?: (err: AWSError, data: MediaLive.Types.StopMultiplexResponse) => void): Request<MediaLive.Types.StopMultiplexResponse, AWSError>;
@@ -389,6 +453,14 @@ declare class MediaLive extends Service {
    * Start an input device transfer to another AWS account. After you make the request, the other account must accept or reject the transfer.
    */
   transferInputDevice(callback?: (err: AWSError, data: MediaLive.Types.TransferInputDeviceResponse) => void): Request<MediaLive.Types.TransferInputDeviceResponse, AWSError>;
+  /**
+   * Update account configuration
+   */
+  updateAccountConfiguration(params: MediaLive.Types.UpdateAccountConfigurationRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateAccountConfigurationResponse) => void): Request<MediaLive.Types.UpdateAccountConfigurationResponse, AWSError>;
+  /**
+   * Update account configuration
+   */
+  updateAccountConfiguration(callback?: (err: AWSError, data: MediaLive.Types.UpdateAccountConfigurationResponse) => void): Request<MediaLive.Types.UpdateAccountConfigurationResponse, AWSError>;
   /**
    * Updates a channel.
    */
@@ -453,6 +525,230 @@ declare class MediaLive extends Service {
    * Update reservation.
    */
   updateReservation(callback?: (err: AWSError, data: MediaLive.Types.UpdateReservationResponse) => void): Request<MediaLive.Types.UpdateReservationResponse, AWSError>;
+  /**
+   * Restart pipelines in one channel that is currently running.
+   */
+  restartChannelPipelines(params: MediaLive.Types.RestartChannelPipelinesRequest, callback?: (err: AWSError, data: MediaLive.Types.RestartChannelPipelinesResponse) => void): Request<MediaLive.Types.RestartChannelPipelinesResponse, AWSError>;
+  /**
+   * Restart pipelines in one channel that is currently running.
+   */
+  restartChannelPipelines(callback?: (err: AWSError, data: MediaLive.Types.RestartChannelPipelinesResponse) => void): Request<MediaLive.Types.RestartChannelPipelinesResponse, AWSError>;
+  /**
+   * Creates a cloudwatch alarm template to dynamically generate cloudwatch metric alarms on targeted resource types.
+   */
+  createCloudWatchAlarmTemplate(params: MediaLive.Types.CreateCloudWatchAlarmTemplateRequest, callback?: (err: AWSError, data: MediaLive.Types.CreateCloudWatchAlarmTemplateResponse) => void): Request<MediaLive.Types.CreateCloudWatchAlarmTemplateResponse, AWSError>;
+  /**
+   * Creates a cloudwatch alarm template to dynamically generate cloudwatch metric alarms on targeted resource types.
+   */
+  createCloudWatchAlarmTemplate(callback?: (err: AWSError, data: MediaLive.Types.CreateCloudWatchAlarmTemplateResponse) => void): Request<MediaLive.Types.CreateCloudWatchAlarmTemplateResponse, AWSError>;
+  /**
+   * Creates a cloudwatch alarm template group to group your cloudwatch alarm templates and to attach to signal maps for dynamically creating alarms.
+   */
+  createCloudWatchAlarmTemplateGroup(params: MediaLive.Types.CreateCloudWatchAlarmTemplateGroupRequest, callback?: (err: AWSError, data: MediaLive.Types.CreateCloudWatchAlarmTemplateGroupResponse) => void): Request<MediaLive.Types.CreateCloudWatchAlarmTemplateGroupResponse, AWSError>;
+  /**
+   * Creates a cloudwatch alarm template group to group your cloudwatch alarm templates and to attach to signal maps for dynamically creating alarms.
+   */
+  createCloudWatchAlarmTemplateGroup(callback?: (err: AWSError, data: MediaLive.Types.CreateCloudWatchAlarmTemplateGroupResponse) => void): Request<MediaLive.Types.CreateCloudWatchAlarmTemplateGroupResponse, AWSError>;
+  /**
+   * Creates an eventbridge rule template to monitor events and send notifications to your targeted resources.
+   */
+  createEventBridgeRuleTemplate(params: MediaLive.Types.CreateEventBridgeRuleTemplateRequest, callback?: (err: AWSError, data: MediaLive.Types.CreateEventBridgeRuleTemplateResponse) => void): Request<MediaLive.Types.CreateEventBridgeRuleTemplateResponse, AWSError>;
+  /**
+   * Creates an eventbridge rule template to monitor events and send notifications to your targeted resources.
+   */
+  createEventBridgeRuleTemplate(callback?: (err: AWSError, data: MediaLive.Types.CreateEventBridgeRuleTemplateResponse) => void): Request<MediaLive.Types.CreateEventBridgeRuleTemplateResponse, AWSError>;
+  /**
+   * Creates an eventbridge rule template group to group your eventbridge rule templates and to attach to signal maps for dynamically creating notification rules.
+   */
+  createEventBridgeRuleTemplateGroup(params: MediaLive.Types.CreateEventBridgeRuleTemplateGroupRequest, callback?: (err: AWSError, data: MediaLive.Types.CreateEventBridgeRuleTemplateGroupResponse) => void): Request<MediaLive.Types.CreateEventBridgeRuleTemplateGroupResponse, AWSError>;
+  /**
+   * Creates an eventbridge rule template group to group your eventbridge rule templates and to attach to signal maps for dynamically creating notification rules.
+   */
+  createEventBridgeRuleTemplateGroup(callback?: (err: AWSError, data: MediaLive.Types.CreateEventBridgeRuleTemplateGroupResponse) => void): Request<MediaLive.Types.CreateEventBridgeRuleTemplateGroupResponse, AWSError>;
+  /**
+   * Initiates the creation of a new signal map. Will discover a new mediaResourceMap based on the provided discoveryEntryPointArn.
+   */
+  createSignalMap(params: MediaLive.Types.CreateSignalMapRequest, callback?: (err: AWSError, data: MediaLive.Types.CreateSignalMapResponse) => void): Request<MediaLive.Types.CreateSignalMapResponse, AWSError>;
+  /**
+   * Initiates the creation of a new signal map. Will discover a new mediaResourceMap based on the provided discoveryEntryPointArn.
+   */
+  createSignalMap(callback?: (err: AWSError, data: MediaLive.Types.CreateSignalMapResponse) => void): Request<MediaLive.Types.CreateSignalMapResponse, AWSError>;
+  /**
+   * Deletes a cloudwatch alarm template.
+   */
+  deleteCloudWatchAlarmTemplate(params: MediaLive.Types.DeleteCloudWatchAlarmTemplateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a cloudwatch alarm template.
+   */
+  deleteCloudWatchAlarmTemplate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a cloudwatch alarm template group. You must detach this group from all signal maps and ensure its existing templates are moved to another group or deleted.
+   */
+  deleteCloudWatchAlarmTemplateGroup(params: MediaLive.Types.DeleteCloudWatchAlarmTemplateGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a cloudwatch alarm template group. You must detach this group from all signal maps and ensure its existing templates are moved to another group or deleted.
+   */
+  deleteCloudWatchAlarmTemplateGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an eventbridge rule template.
+   */
+  deleteEventBridgeRuleTemplate(params: MediaLive.Types.DeleteEventBridgeRuleTemplateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an eventbridge rule template.
+   */
+  deleteEventBridgeRuleTemplate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an eventbridge rule template group. You must detach this group from all signal maps and ensure its existing templates are moved to another group or deleted.
+   */
+  deleteEventBridgeRuleTemplateGroup(params: MediaLive.Types.DeleteEventBridgeRuleTemplateGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an eventbridge rule template group. You must detach this group from all signal maps and ensure its existing templates are moved to another group or deleted.
+   */
+  deleteEventBridgeRuleTemplateGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified signal map.
+   */
+  deleteSignalMap(params: MediaLive.Types.DeleteSignalMapRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified signal map.
+   */
+  deleteSignalMap(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Retrieves the specified cloudwatch alarm template.
+   */
+  getCloudWatchAlarmTemplate(params: MediaLive.Types.GetCloudWatchAlarmTemplateRequest, callback?: (err: AWSError, data: MediaLive.Types.GetCloudWatchAlarmTemplateResponse) => void): Request<MediaLive.Types.GetCloudWatchAlarmTemplateResponse, AWSError>;
+  /**
+   * Retrieves the specified cloudwatch alarm template.
+   */
+  getCloudWatchAlarmTemplate(callback?: (err: AWSError, data: MediaLive.Types.GetCloudWatchAlarmTemplateResponse) => void): Request<MediaLive.Types.GetCloudWatchAlarmTemplateResponse, AWSError>;
+  /**
+   * Retrieves the specified cloudwatch alarm template group.
+   */
+  getCloudWatchAlarmTemplateGroup(params: MediaLive.Types.GetCloudWatchAlarmTemplateGroupRequest, callback?: (err: AWSError, data: MediaLive.Types.GetCloudWatchAlarmTemplateGroupResponse) => void): Request<MediaLive.Types.GetCloudWatchAlarmTemplateGroupResponse, AWSError>;
+  /**
+   * Retrieves the specified cloudwatch alarm template group.
+   */
+  getCloudWatchAlarmTemplateGroup(callback?: (err: AWSError, data: MediaLive.Types.GetCloudWatchAlarmTemplateGroupResponse) => void): Request<MediaLive.Types.GetCloudWatchAlarmTemplateGroupResponse, AWSError>;
+  /**
+   * Retrieves the specified eventbridge rule template.
+   */
+  getEventBridgeRuleTemplate(params: MediaLive.Types.GetEventBridgeRuleTemplateRequest, callback?: (err: AWSError, data: MediaLive.Types.GetEventBridgeRuleTemplateResponse) => void): Request<MediaLive.Types.GetEventBridgeRuleTemplateResponse, AWSError>;
+  /**
+   * Retrieves the specified eventbridge rule template.
+   */
+  getEventBridgeRuleTemplate(callback?: (err: AWSError, data: MediaLive.Types.GetEventBridgeRuleTemplateResponse) => void): Request<MediaLive.Types.GetEventBridgeRuleTemplateResponse, AWSError>;
+  /**
+   * Retrieves the specified eventbridge rule template group.
+   */
+  getEventBridgeRuleTemplateGroup(params: MediaLive.Types.GetEventBridgeRuleTemplateGroupRequest, callback?: (err: AWSError, data: MediaLive.Types.GetEventBridgeRuleTemplateGroupResponse) => void): Request<MediaLive.Types.GetEventBridgeRuleTemplateGroupResponse, AWSError>;
+  /**
+   * Retrieves the specified eventbridge rule template group.
+   */
+  getEventBridgeRuleTemplateGroup(callback?: (err: AWSError, data: MediaLive.Types.GetEventBridgeRuleTemplateGroupResponse) => void): Request<MediaLive.Types.GetEventBridgeRuleTemplateGroupResponse, AWSError>;
+  /**
+   * Retrieves the specified signal map.
+   */
+  getSignalMap(params: MediaLive.Types.GetSignalMapRequest, callback?: (err: AWSError, data: MediaLive.Types.GetSignalMapResponse) => void): Request<MediaLive.Types.GetSignalMapResponse, AWSError>;
+  /**
+   * Retrieves the specified signal map.
+   */
+  getSignalMap(callback?: (err: AWSError, data: MediaLive.Types.GetSignalMapResponse) => void): Request<MediaLive.Types.GetSignalMapResponse, AWSError>;
+  /**
+   * Lists cloudwatch alarm template groups.
+   */
+  listCloudWatchAlarmTemplateGroups(params: MediaLive.Types.ListCloudWatchAlarmTemplateGroupsRequest, callback?: (err: AWSError, data: MediaLive.Types.ListCloudWatchAlarmTemplateGroupsResponse) => void): Request<MediaLive.Types.ListCloudWatchAlarmTemplateGroupsResponse, AWSError>;
+  /**
+   * Lists cloudwatch alarm template groups.
+   */
+  listCloudWatchAlarmTemplateGroups(callback?: (err: AWSError, data: MediaLive.Types.ListCloudWatchAlarmTemplateGroupsResponse) => void): Request<MediaLive.Types.ListCloudWatchAlarmTemplateGroupsResponse, AWSError>;
+  /**
+   * Lists cloudwatch alarm templates.
+   */
+  listCloudWatchAlarmTemplates(params: MediaLive.Types.ListCloudWatchAlarmTemplatesRequest, callback?: (err: AWSError, data: MediaLive.Types.ListCloudWatchAlarmTemplatesResponse) => void): Request<MediaLive.Types.ListCloudWatchAlarmTemplatesResponse, AWSError>;
+  /**
+   * Lists cloudwatch alarm templates.
+   */
+  listCloudWatchAlarmTemplates(callback?: (err: AWSError, data: MediaLive.Types.ListCloudWatchAlarmTemplatesResponse) => void): Request<MediaLive.Types.ListCloudWatchAlarmTemplatesResponse, AWSError>;
+  /**
+   * Lists eventbridge rule template groups.
+   */
+  listEventBridgeRuleTemplateGroups(params: MediaLive.Types.ListEventBridgeRuleTemplateGroupsRequest, callback?: (err: AWSError, data: MediaLive.Types.ListEventBridgeRuleTemplateGroupsResponse) => void): Request<MediaLive.Types.ListEventBridgeRuleTemplateGroupsResponse, AWSError>;
+  /**
+   * Lists eventbridge rule template groups.
+   */
+  listEventBridgeRuleTemplateGroups(callback?: (err: AWSError, data: MediaLive.Types.ListEventBridgeRuleTemplateGroupsResponse) => void): Request<MediaLive.Types.ListEventBridgeRuleTemplateGroupsResponse, AWSError>;
+  /**
+   * Lists eventbridge rule templates.
+   */
+  listEventBridgeRuleTemplates(params: MediaLive.Types.ListEventBridgeRuleTemplatesRequest, callback?: (err: AWSError, data: MediaLive.Types.ListEventBridgeRuleTemplatesResponse) => void): Request<MediaLive.Types.ListEventBridgeRuleTemplatesResponse, AWSError>;
+  /**
+   * Lists eventbridge rule templates.
+   */
+  listEventBridgeRuleTemplates(callback?: (err: AWSError, data: MediaLive.Types.ListEventBridgeRuleTemplatesResponse) => void): Request<MediaLive.Types.ListEventBridgeRuleTemplatesResponse, AWSError>;
+  /**
+   * Lists signal maps.
+   */
+  listSignalMaps(params: MediaLive.Types.ListSignalMapsRequest, callback?: (err: AWSError, data: MediaLive.Types.ListSignalMapsResponse) => void): Request<MediaLive.Types.ListSignalMapsResponse, AWSError>;
+  /**
+   * Lists signal maps.
+   */
+  listSignalMaps(callback?: (err: AWSError, data: MediaLive.Types.ListSignalMapsResponse) => void): Request<MediaLive.Types.ListSignalMapsResponse, AWSError>;
+  /**
+   * Initiates a deployment to delete the monitor of the specified signal map.
+   */
+  startDeleteMonitorDeployment(params: MediaLive.Types.StartDeleteMonitorDeploymentRequest, callback?: (err: AWSError, data: MediaLive.Types.StartDeleteMonitorDeploymentResponse) => void): Request<MediaLive.Types.StartDeleteMonitorDeploymentResponse, AWSError>;
+  /**
+   * Initiates a deployment to delete the monitor of the specified signal map.
+   */
+  startDeleteMonitorDeployment(callback?: (err: AWSError, data: MediaLive.Types.StartDeleteMonitorDeploymentResponse) => void): Request<MediaLive.Types.StartDeleteMonitorDeploymentResponse, AWSError>;
+  /**
+   * Initiates a deployment to deploy the latest monitor of the specified signal map.
+   */
+  startMonitorDeployment(params: MediaLive.Types.StartMonitorDeploymentRequest, callback?: (err: AWSError, data: MediaLive.Types.StartMonitorDeploymentResponse) => void): Request<MediaLive.Types.StartMonitorDeploymentResponse, AWSError>;
+  /**
+   * Initiates a deployment to deploy the latest monitor of the specified signal map.
+   */
+  startMonitorDeployment(callback?: (err: AWSError, data: MediaLive.Types.StartMonitorDeploymentResponse) => void): Request<MediaLive.Types.StartMonitorDeploymentResponse, AWSError>;
+  /**
+   * Initiates an update for the specified signal map. Will discover a new signal map if a changed discoveryEntryPointArn is provided.
+   */
+  startUpdateSignalMap(params: MediaLive.Types.StartUpdateSignalMapRequest, callback?: (err: AWSError, data: MediaLive.Types.StartUpdateSignalMapResponse) => void): Request<MediaLive.Types.StartUpdateSignalMapResponse, AWSError>;
+  /**
+   * Initiates an update for the specified signal map. Will discover a new signal map if a changed discoveryEntryPointArn is provided.
+   */
+  startUpdateSignalMap(callback?: (err: AWSError, data: MediaLive.Types.StartUpdateSignalMapResponse) => void): Request<MediaLive.Types.StartUpdateSignalMapResponse, AWSError>;
+  /**
+   * Updates the specified cloudwatch alarm template.
+   */
+  updateCloudWatchAlarmTemplate(params: MediaLive.Types.UpdateCloudWatchAlarmTemplateRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateCloudWatchAlarmTemplateResponse) => void): Request<MediaLive.Types.UpdateCloudWatchAlarmTemplateResponse, AWSError>;
+  /**
+   * Updates the specified cloudwatch alarm template.
+   */
+  updateCloudWatchAlarmTemplate(callback?: (err: AWSError, data: MediaLive.Types.UpdateCloudWatchAlarmTemplateResponse) => void): Request<MediaLive.Types.UpdateCloudWatchAlarmTemplateResponse, AWSError>;
+  /**
+   * Updates the specified cloudwatch alarm template group.
+   */
+  updateCloudWatchAlarmTemplateGroup(params: MediaLive.Types.UpdateCloudWatchAlarmTemplateGroupRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateCloudWatchAlarmTemplateGroupResponse) => void): Request<MediaLive.Types.UpdateCloudWatchAlarmTemplateGroupResponse, AWSError>;
+  /**
+   * Updates the specified cloudwatch alarm template group.
+   */
+  updateCloudWatchAlarmTemplateGroup(callback?: (err: AWSError, data: MediaLive.Types.UpdateCloudWatchAlarmTemplateGroupResponse) => void): Request<MediaLive.Types.UpdateCloudWatchAlarmTemplateGroupResponse, AWSError>;
+  /**
+   * Updates the specified eventbridge rule template.
+   */
+  updateEventBridgeRuleTemplate(params: MediaLive.Types.UpdateEventBridgeRuleTemplateRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateEventBridgeRuleTemplateResponse) => void): Request<MediaLive.Types.UpdateEventBridgeRuleTemplateResponse, AWSError>;
+  /**
+   * Updates the specified eventbridge rule template.
+   */
+  updateEventBridgeRuleTemplate(callback?: (err: AWSError, data: MediaLive.Types.UpdateEventBridgeRuleTemplateResponse) => void): Request<MediaLive.Types.UpdateEventBridgeRuleTemplateResponse, AWSError>;
+  /**
+   * Updates the specified eventbridge rule template group.
+   */
+  updateEventBridgeRuleTemplateGroup(params: MediaLive.Types.UpdateEventBridgeRuleTemplateGroupRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateEventBridgeRuleTemplateGroupResponse) => void): Request<MediaLive.Types.UpdateEventBridgeRuleTemplateGroupResponse, AWSError>;
+  /**
+   * Updates the specified eventbridge rule template group.
+   */
+  updateEventBridgeRuleTemplateGroup(callback?: (err: AWSError, data: MediaLive.Types.UpdateEventBridgeRuleTemplateGroupResponse) => void): Request<MediaLive.Types.UpdateEventBridgeRuleTemplateGroupResponse, AWSError>;
   /**
    * Waits for the channelCreated state by periodically calling the underlying MediaLive.describeChanneloperation every 3 seconds (at most 5 times). Wait until a channel has been created
    */
@@ -541,6 +837,38 @@ declare class MediaLive extends Service {
    * Waits for the multiplexDeleted state by periodically calling the underlying MediaLive.describeMultiplexoperation every 5 seconds (at most 20 times). Wait until a multiplex has been deleted
    */
   waitFor(state: "multiplexDeleted", callback?: (err: AWSError, data: MediaLive.Types.DescribeMultiplexResponse) => void): Request<MediaLive.Types.DescribeMultiplexResponse, AWSError>;
+  /**
+   * Waits for the signalMapCreated state by periodically calling the underlying MediaLive.getSignalMapoperation every 5 seconds (at most 60 times). Wait until a signal map has been created
+   */
+  waitFor(state: "signalMapCreated", params: MediaLive.Types.GetSignalMapRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaLive.Types.GetSignalMapResponse) => void): Request<MediaLive.Types.GetSignalMapResponse, AWSError>;
+  /**
+   * Waits for the signalMapCreated state by periodically calling the underlying MediaLive.getSignalMapoperation every 5 seconds (at most 60 times). Wait until a signal map has been created
+   */
+  waitFor(state: "signalMapCreated", callback?: (err: AWSError, data: MediaLive.Types.GetSignalMapResponse) => void): Request<MediaLive.Types.GetSignalMapResponse, AWSError>;
+  /**
+   * Waits for the signalMapMonitorDeleted state by periodically calling the underlying MediaLive.getSignalMapoperation every 5 seconds (at most 120 times). Wait until a signal map's monitor has been deleted
+   */
+  waitFor(state: "signalMapMonitorDeleted", params: MediaLive.Types.GetSignalMapRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaLive.Types.GetSignalMapResponse) => void): Request<MediaLive.Types.GetSignalMapResponse, AWSError>;
+  /**
+   * Waits for the signalMapMonitorDeleted state by periodically calling the underlying MediaLive.getSignalMapoperation every 5 seconds (at most 120 times). Wait until a signal map's monitor has been deleted
+   */
+  waitFor(state: "signalMapMonitorDeleted", callback?: (err: AWSError, data: MediaLive.Types.GetSignalMapResponse) => void): Request<MediaLive.Types.GetSignalMapResponse, AWSError>;
+  /**
+   * Waits for the signalMapMonitorDeployed state by periodically calling the underlying MediaLive.getSignalMapoperation every 5 seconds (at most 120 times). Wait until a signal map's monitor has been deployed
+   */
+  waitFor(state: "signalMapMonitorDeployed", params: MediaLive.Types.GetSignalMapRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaLive.Types.GetSignalMapResponse) => void): Request<MediaLive.Types.GetSignalMapResponse, AWSError>;
+  /**
+   * Waits for the signalMapMonitorDeployed state by periodically calling the underlying MediaLive.getSignalMapoperation every 5 seconds (at most 120 times). Wait until a signal map's monitor has been deployed
+   */
+  waitFor(state: "signalMapMonitorDeployed", callback?: (err: AWSError, data: MediaLive.Types.GetSignalMapResponse) => void): Request<MediaLive.Types.GetSignalMapResponse, AWSError>;
+  /**
+   * Waits for the signalMapUpdated state by periodically calling the underlying MediaLive.getSignalMapoperation every 5 seconds (at most 60 times). Wait until a signal map has been updated
+   */
+  waitFor(state: "signalMapUpdated", params: MediaLive.Types.GetSignalMapRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaLive.Types.GetSignalMapResponse) => void): Request<MediaLive.Types.GetSignalMapResponse, AWSError>;
+  /**
+   * Waits for the signalMapUpdated state by periodically calling the underlying MediaLive.getSignalMapoperation every 5 seconds (at most 60 times). Wait until a signal map has been updated
+   */
+  waitFor(state: "signalMapUpdated", callback?: (err: AWSError, data: MediaLive.Types.GetSignalMapResponse) => void): Request<MediaLive.Types.GetSignalMapResponse, AWSError>;
 }
 declare namespace MediaLive {
   export type AacCodingMode = "AD_RECEIVER_MIX"|"CODING_MODE_1_0"|"CODING_MODE_1_1"|"CODING_MODE_2_0"|"CODING_MODE_5_1"|string;
@@ -590,6 +918,7 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
   }
   export type AacSpec = "MPEG2"|"MPEG4"|string;
   export type AacVbrQuality = "HIGH"|"LOW"|"MEDIUM_HIGH"|"MEDIUM_LOW"|string;
+  export type Ac3AttenuationControl = "ATTENUATE_3_DB"|"NONE"|string;
   export type Ac3BitstreamMode = "COMMENTARY"|"COMPLETE_MAIN"|"DIALOGUE"|"EMERGENCY"|"HEARING_IMPAIRED"|"MUSIC_AND_EFFECTS"|"VISUALLY_IMPAIRED"|"VOICE_OVER"|string;
   export type Ac3CodingMode = "CODING_MODE_1_0"|"CODING_MODE_1_1"|"CODING_MODE_2_0"|"CODING_MODE_3_2_LFE"|string;
   export type Ac3DrcProfile = "FILM_STANDARD"|"NONE"|string;
@@ -624,6 +953,10 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
      * When set to "followInput", encoder metadata will be sourced from the DD, DD+, or DolbyE decoder that supplied this audio data. If audio was not supplied from one of these streams, then the static metadata settings will be used.
      */
     MetadataControl?: Ac3MetadataControl;
+    /**
+     * Applies a 3 dB attenuation to the surround channels. Applies only when the coding mode parameter is CODING_MODE_3_2_LFE.
+     */
+    AttenuationControl?: Ac3AttenuationControl;
   }
   export interface AcceptInputDeviceTransferRequest {
     /**
@@ -633,6 +966,13 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
   }
   export interface AcceptInputDeviceTransferResponse {
   }
+  export type AccessibilityType = "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES"|"IMPLEMENTS_ACCESSIBILITY_FEATURES"|string;
+  export interface AccountConfiguration {
+    /**
+     * Specifies the KMS key to use for all features that use key encryption. Specify the ARN of a KMS key that you have created. Or leave blank to use the key that MediaLive creates and manages for you.
+     */
+    KmsKeyId?: __string;
+  }
   export type AfdSignaling = "AUTO"|"FIXED"|"NONE"|string;
   export interface AncillarySourceSettings {
     /**
@@ -640,11 +980,18 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
      */
     SourceAncillaryChannelNumber?: __integerMin1Max4;
   }
+  export interface ArchiveCdnSettings {
+    ArchiveS3Settings?: ArchiveS3Settings;
+  }
   export interface ArchiveContainerSettings {
     M2tsSettings?: M2tsSettings;
     RawSettings?: RawSettings;
   }
   export interface ArchiveGroupSettings {
+    /**
+     * Parameters that control interactions with the CDN.
+     */
+    ArchiveCdnSettings?: ArchiveCdnSettings;
     /**
      * A directory and base filename where archive files should be written.
      */
@@ -668,6 +1015,12 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
      */
     NameModifier?: __string;
   }
+  export interface ArchiveS3Settings {
+    /**
+     * Specify the canned ACL to apply to each S3 request. Defaults to none.
+     */
+    CannedAcl?: S3CannedAcl;
+  }
   export interface AribDestinationSettings {
   }
   export interface AribSourceSettings {
@@ -685,6 +1038,7 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
   export interface AudioCodecSettings {
     AacSettings?: AacSettings;
     Ac3Settings?: Ac3Settings;
+    Eac3AtmosSettings?: Eac3AtmosSettings;
     Eac3Settings?: Eac3Settings;
     Mp2Settings?: Mp2Settings;
     PassThroughSettings?: PassThroughSettings;
@@ -711,6 +1065,10 @@ Note that this field and audioType are both ignored if inputType is broadcasterM
      */
     AudioTypeControl?: AudioDescriptionAudioTypeControl;
     /**
+     * Settings to configure one or more solutions that insert audio watermarks in the audio encode
+     */
+    AudioWatermarkingSettings?: AudioWatermarkSettings;
+    /**
      * Audio codec settings.
      */
     CodecSettings?: AudioCodecSettings;
@@ -725,7 +1083,7 @@ Note that this field and audioType are both ignored if inputType is broadcasterM
     /**
      * The name of this AudioDescription. Outputs will use this name to uniquely identify this AudioDescription.  Description names should be unique within this Live Event.
      */
-    Name: __string;
+    Name: __stringMax255;
     /**
      * Settings that control how input audio channels are remixed into the output audio channels.
      */
@@ -734,9 +1092,33 @@ Note that this field and audioType are both ignored if inputType is broadcasterM
      * Used for MS Smooth and Apple HLS outputs. Indicates the name displayed by the player (eg. English, or Director Commentary).
      */
     StreamName?: __string;
+    /**
+     * Identifies the DASH roles to assign to this audio output. Applies only when the audio output is configured for DVB DASH accessibility signaling.
+     */
+    AudioDashRoles?: __listOfDashRoleAudio;
+    /**
+     * Identifies DVB DASH accessibility signaling in this audio output. Used in Microsoft Smooth Streaming outputs to signal accessibility information to packagers.
+     */
+    DvbDashAccessibility?: DvbDashAccessibility;
   }
   export type AudioDescriptionAudioTypeControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
   export type AudioDescriptionLanguageCodeControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
+  export interface AudioDolbyEDecode {
+    /**
+     * Applies only to Dolby E. Enter the program ID (according to the metadata in the audio) of the Dolby E program to extract from the specified track. One program extracted per audio selector. To select multiple programs, create multiple selectors with the same Track and different Program numbers. “All channels” means to ignore the program IDs and include all the channels in this selector; useful if metadata is known to be incorrect.
+     */
+    ProgramSelection: DolbyEProgramSelection;
+  }
+  export interface AudioHlsRenditionSelection {
+    /**
+     * Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio rendition.
+     */
+    GroupId: __stringMin1;
+    /**
+     * Specifies the NAME in the #EXT-X-MEDIA tag of the target HLS audio rendition.
+     */
+    Name: __stringMin1;
+  }
   export interface AudioLanguageSelection {
     /**
      * Selects a specific three-letter language code from within an audio source.
@@ -815,6 +1197,7 @@ Alternate rendition that the client will not try to play back by default. Repres
     SelectorSettings?: AudioSelectorSettings;
   }
   export interface AudioSelectorSettings {
+    AudioHlsRenditionSelection?: AudioHlsRenditionSelection;
     AudioLanguageSelection?: AudioLanguageSelection;
     AudioPidSelection?: AudioPidSelection;
     AudioTrackSelection?: AudioTrackSelection;
@@ -840,8 +1223,18 @@ Alternate rendition that the client will not try to play back by default. Repres
      * Selects one or more unique audio tracks from within a source.
      */
     Tracks: __listOfAudioTrack;
+    /**
+     * Configure decoding options for Dolby E streams - these should be Dolby E frames carried in PCM streams tagged with SMPTE-337
+     */
+    DolbyEDecode?: AudioDolbyEDecode;
   }
   export type AudioType = "CLEAN_EFFECTS"|"HEARING_IMPAIRED"|"UNDEFINED"|"VISUAL_IMPAIRED_COMMENTARY"|string;
+  export interface AudioWatermarkSettings {
+    /**
+     * Settings to configure Nielsen Watermarks in the audio encode
+     */
+    NielsenWatermarksSettings?: NielsenWatermarksSettings;
+  }
   export type AuthenticationScheme = "AKAMAI"|"COMMON"|string;
   export interface AutomaticInputFailoverSettings {
     /**
@@ -874,11 +1267,19 @@ Alternate rendition that the client will not try to play back by default. Repres
   export type AvailBlankingState = "DISABLED"|"ENABLED"|string;
   export interface AvailConfiguration {
     /**
-     * Ad avail settings.
+     * Controls how SCTE-35 messages create cues. Splice Insert mode treats all segmentation signals traditionally. With Time Signal APOS mode only Time Signal Placement Opportunity and Break messages create segment breaks. With ESAM mode, signals are forwarded to an ESAM server for possible update.
      */
     AvailSettings?: AvailSettings;
+    /**
+     * Configures whether SCTE 35 passthrough triggers segment breaks in all output groups that use segmented outputs. Insertion of a SCTE 35 message typically results in a segment break, in addition to the regular cadence of breaks. The segment breaks appear in video outputs, audio outputs, and captions outputs (if any).
+
+ALL_OUTPUT_GROUPS: Default. Insert the segment break in in all output groups that have segmented outputs. This is the legacy behavior.
+SCTE35_ENABLED_OUTPUT_GROUPS: Insert the segment break only in output groups that have SCTE 35 passthrough enabled. This is the recommended value, because it reduces unnecessary segment breaks.
+     */
+    Scte35SegmentationScope?: Scte35SegmentationScope;
   }
   export interface AvailSettings {
+    Esam?: Esam;
     Scte35SpliceInsert?: Scte35SpliceInsert;
     Scte35TimeSignalApos?: Scte35TimeSignalApos;
   }
@@ -1140,6 +1541,10 @@ Alternate rendition that the client will not try to play back by default. Repres
   }
   export interface CaptionDescription {
     /**
+     * Indicates whether the caption track implements accessibility features such as written descriptions of spoken dialog, music, and sounds. This signaling is added to HLS output group and MediaPackage output group.
+     */
+    Accessibility?: AccessibilityType;
+    /**
      * Specifies which input caption selector to use as a caption source when generating output captions. This field should match a captionSelector name.
      */
     CaptionSelectorName: __string;
@@ -1159,6 +1564,14 @@ Alternate rendition that the client will not try to play back by default. Repres
      * Name of the caption description.  Used to associate a caption description with an output.  Names must be unique within an event.
      */
     Name: __string;
+    /**
+     * Identifies the DASH roles to assign to this captions output. Applies only when the captions output is configured for DVB DASH accessibility signaling.
+     */
+    CaptionDashRoles?: __listOfDashRoleCaption;
+    /**
+     * Identifies DVB DASH accessibility signaling in this captions output. Used in Microsoft Smooth Streaming outputs to signal accessibility information to packagers.
+     */
+    DvbDashAccessibility?: DvbDashAccessibility;
   }
   export interface CaptionDestinationSettings {
     AribDestinationSettings?: AribDestinationSettings;
@@ -1188,6 +1601,33 @@ Alternate rendition that the client will not try to play back by default. Repres
      * Textual description of language
      */
     LanguageDescription: __stringMin1;
+  }
+  export interface CaptionRectangle {
+    /**
+     * See the description in leftOffset.
+For height, specify the entire height of the rectangle as a percentage of the underlying frame height. For example, \"80\" means the rectangle height is 80% of the underlying frame height. The topOffset and rectangleHeight must add up to 100% or less.
+This field corresponds to tts:extent - Y in the TTML standard.
+     */
+    Height: __doubleMin0Max100;
+    /**
+     * Applies only if you plan to convert these source captions to EBU-TT-D or TTML in an output. (Make sure to leave the default if you don't have either of these formats in the output.) You can define a display rectangle for the captions that is smaller than the underlying video frame. You define the rectangle by specifying the position of the left edge, top edge, bottom edge, and right edge of the rectangle, all within the underlying video frame. The units for the measurements are percentages.
+If you specify a value for one of these fields, you must specify a value for all of them.
+For leftOffset, specify the position of the left edge of the rectangle, as a percentage of the underlying frame width, and relative to the left edge of the frame. For example, \"10\" means the measurement is 10% of the underlying frame width. The rectangle left edge starts at that position from the left edge of the frame.
+This field corresponds to tts:origin - X in the TTML standard.
+     */
+    LeftOffset: __doubleMin0Max100;
+    /**
+     * See the description in leftOffset.
+For topOffset, specify the position of the top edge of the rectangle, as a percentage of the underlying frame height, and relative to the top edge of the frame. For example, \"10\" means the measurement is 10% of the underlying frame height. The rectangle top edge starts at that position from the top edge of the frame.
+This field corresponds to tts:origin - Y in the TTML standard.
+     */
+    TopOffset: __doubleMin0Max100;
+    /**
+     * See the description in leftOffset.
+For width, specify the entire width of the rectangle as a percentage of the underlying frame width. For example, \"80\" means the rectangle width is 80% of the underlying frame width. The leftOffset and rectangleWidth must add up to 100% or less.
+This field corresponds to tts:extent - X in the TTML standard.
+     */
+    Width: __doubleMin0Max100;
   }
   export interface CaptionSelector {
     /**
@@ -1236,7 +1676,6 @@ Alternate rendition that the client will not try to play back by default. Repres
      * A list of destinations of the channel. For UDP outputs, there is one
 destination per output. For other types (HLS, for example), there is
 one destination per packager.
-
      */
     Destinations?: __listOfOutputDestination;
     /**
@@ -1261,6 +1700,10 @@ one destination per packager.
      */
     LogLevel?: LogLevel;
     /**
+     * Maintenance settings for this channel.
+     */
+    Maintenance?: MaintenanceStatus;
+    /**
      * The name of the channel. (user-mutable)
      */
     Name?: __string;
@@ -1281,6 +1724,10 @@ one destination per packager.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * Settings for VPC output
+     */
+    Vpc?: VpcOutputSettingsDescription;
   }
   export type ChannelClass = "STANDARD"|"SINGLE_PIPELINE"|string;
   export interface ChannelEgressEndpoint {
@@ -1307,7 +1754,6 @@ one destination per packager.
      * A list of destinations of the channel. For UDP outputs, there is one
 destination per output. For other types (HLS, for example), there is
 one destination per packager.
-
      */
     Destinations?: __listOfOutputDestination;
     /**
@@ -1331,6 +1777,10 @@ one destination per packager.
      */
     LogLevel?: LogLevel;
     /**
+     * Maintenance settings for this channel.
+     */
+    Maintenance?: MaintenanceStatus;
+    /**
      * The name of the channel. (user-mutable)
      */
     Name?: __string;
@@ -1347,7 +1797,40 @@ one destination per packager.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * Settings for any VPC outputs.
+     */
+    Vpc?: VpcOutputSettingsDescription;
   }
+  export interface ClaimDeviceRequest {
+    /**
+     * The id of the device you want to claim.
+     */
+    Id?: __string;
+  }
+  export interface ClaimDeviceResponse {
+  }
+  export interface ColorCorrection {
+    /**
+     * The color space of the input.
+     */
+    InputColorSpace: ColorSpace;
+    /**
+     * The color space of the output.
+     */
+    OutputColorSpace: ColorSpace;
+    /**
+     * The URI of the 3D LUT file. The protocol must be 's3:' or 's3ssl:':.
+     */
+    Uri: __string;
+  }
+  export interface ColorCorrectionSettings {
+    /**
+     * An array of colorCorrections that applies when you are using 3D LUT files to perform color conversion on video. Each colorCorrection contains one 3D LUT file (that defines the color mapping for converting an input color space to an output color space), and the input/output combination that this 3D LUT file applies to. MediaLive reads the color space in the input metadata, determines the color space that you have specified for the output, and finds and uses the LUT file that applies to this combination.
+     */
+    GlobalColorCorrections: __listOfColorCorrection;
+  }
+  export type ColorSpace = "HDR10"|"HLG_2020"|"REC_601"|"REC_709"|string;
   export interface ColorSpacePassthroughSettings {
   }
   export interface CreateChannelRequest {
@@ -1374,13 +1857,16 @@ one destination per packager.
      */
     LogLevel?: LogLevel;
     /**
+     * Maintenance settings for this channel.
+     */
+    Maintenance?: MaintenanceCreateSettings;
+    /**
      * Name of channel.
      */
     Name?: __string;
     /**
      * Unique request ID to be specified. This is needed to prevent retries from
 creating multiple resources.
-
      */
     RequestId?: __string;
     /**
@@ -1395,6 +1881,10 @@ creating multiple resources.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * Settings for the VPC outputs
+     */
+    Vpc?: VpcOutputSettings;
   }
   export interface CreateChannelResponse {
     Channel?: Channel;
@@ -1416,7 +1906,6 @@ creating multiple resources.
      * A list of the MediaConnect Flows that you want to use in this input. You can specify as few as one
 Flow and presently, as many as two. The only requirement is when you have more than one is that each Flow is in a
 separate Availability Zone as this ensures your EML input is redundant to AZ issues.
-
      */
     MediaConnectFlows?: __listOfMediaConnectFlowRequest;
     /**
@@ -1426,7 +1915,6 @@ separate Availability Zone as this ensures your EML input is redundant to AZ iss
     /**
      * Unique identifier of the request to ensure the request is handled
 exactly once in case of retries.
-
      */
     RequestId?: __string;
     /**
@@ -1437,7 +1925,6 @@ exactly once in case of retries.
      * The source URLs for a PULL-type input. Every PULL type input needs
 exactly two source URLs for redundancy.
 Only specify sources for PULL type Inputs. Leave Destinations empty.
-
      */
     Sources?: __listOfInputSourceRequest;
     /**
@@ -1446,6 +1933,10 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
     Tags?: Tags;
     Type?: InputType;
     Vpc?: InputVpcRequest;
+    /**
+     * The settings associated with an SRT input.
+     */
+    SrtSettings?: SrtSettingsRequest;
   }
   export interface CreateInputResponse {
     Input?: Input;
@@ -1479,7 +1970,6 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
     /**
      * Unique request ID. This prevents retries from creating multiple
 resources.
-
      */
     RequestId: __string;
   }
@@ -1505,7 +1995,6 @@ resources.
     /**
      * Unique request ID. This prevents retries from creating multiple
 resources.
-
      */
     RequestId: __string;
     /**
@@ -1518,6 +2007,24 @@ resources.
      * The newly created multiplex.
      */
     Multiplex?: Multiplex;
+  }
+  export interface CreatePartnerInputRequest {
+    /**
+     * Unique ID of the input.
+     */
+    InputId: __string;
+    /**
+     * Unique identifier of the request to ensure the request is handled
+exactly once in case of retries.
+     */
+    RequestId?: __string;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
+  }
+  export interface CreatePartnerInputResponse {
+    Input?: Input;
   }
   export interface CreateTagsRequest {
     ResourceArn: __string;
@@ -1546,7 +2053,6 @@ resources.
      * A list of destinations of the channel. For UDP outputs, there is one
 destination per output. For other types (HLS, for example), there is
 one destination per packager.
-
      */
     Destinations?: __listOfOutputDestination;
     /**
@@ -1571,6 +2077,10 @@ one destination per packager.
      */
     LogLevel?: LogLevel;
     /**
+     * Maintenance settings for this channel.
+     */
+    Maintenance?: MaintenanceStatus;
+    /**
      * The name of the channel. (user-mutable)
      */
     Name?: __string;
@@ -1591,6 +2101,10 @@ one destination per packager.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * Settings for VPC output
+     */
+    Vpc?: VpcOutputSettingsDescription;
   }
   export interface DeleteInputRequest {
     /**
@@ -1744,6 +2258,10 @@ one destination per packager.
      */
     Region?: __string;
     /**
+     * Renewal settings for the reservation
+     */
+    RenewalSettings?: RenewalSettings;
+    /**
      * Unique reservation ID, e.g. '1234567'
      */
     ReservationId?: __string;
@@ -1783,6 +2301,11 @@ one destination per packager.
      */
     TagKeys: __listOf__string;
   }
+  export interface DescribeAccountConfigurationRequest {
+  }
+  export interface DescribeAccountConfigurationResponse {
+    AccountConfiguration?: AccountConfiguration;
+  }
   export interface DescribeChannelRequest {
     /**
      * channel ID
@@ -1806,7 +2329,6 @@ one destination per packager.
      * A list of destinations of the channel. For UDP outputs, there is one
 destination per output. For other types (HLS, for example), there is
 one destination per packager.
-
      */
     Destinations?: __listOfOutputDestination;
     /**
@@ -1831,6 +2353,10 @@ one destination per packager.
      */
     LogLevel?: LogLevel;
     /**
+     * Maintenance settings for this channel.
+     */
+    Maintenance?: MaintenanceStatus;
+    /**
      * The name of the channel. (user-mutable)
      */
     Name?: __string;
@@ -1851,6 +2377,10 @@ one destination per packager.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * Settings for VPC output
+     */
+    Vpc?: VpcOutputSettingsDescription;
   }
   export interface DescribeInputDeviceRequest {
     /**
@@ -1907,6 +2437,22 @@ one destination per packager.
      * Settings that describe an input device that is type UHD.
      */
     UhdDeviceSettings?: InputDeviceUhdSettings;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
+    /**
+     * The Availability Zone associated with this input device.
+     */
+    AvailabilityZone?: __string;
+    /**
+     * An array of the ARNs for the MediaLive inputs attached to the device. Returned only if the outputType is MEDIALIVE_INPUT.
+     */
+    MedialiveInputArns?: __listOf__string;
+    /**
+     * The output attachment type of the input device. Specifies MEDIACONNECT_FLOW if this device is the source for a MediaConnect flow. Specifies MEDIALIVE_INPUT if this device is the source for a MediaLive input.
+     */
+    OutputType?: InputDeviceOutputType;
   }
   export interface DescribeInputDeviceThumbnailRequest {
     /**
@@ -1966,7 +2512,6 @@ one destination per packager.
     /**
      * STANDARD - MediaLive expects two sources to be connected to this input. If the channel is also STANDARD, both sources will be ingested. If the channel is SINGLE_PIPELINE, only the first source will be ingested; the second source will always be ignored, even if the first source fails.
 SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelClass is also  SINGLE_PIPELINE, this value is valid. If the ChannelClass is STANDARD, this value is not valid because the channel requires two sources in the input.
-
      */
     InputClass?: InputClass;
     /**
@@ -1974,9 +2519,12 @@ SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelC
      */
     InputDevices?: __listOfInputDeviceSettings;
     /**
+     * A list of IDs for all Inputs which are partners of this one.
+     */
+    InputPartnerIds?: __listOf__string;
+    /**
      * Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
-during input switch actions. Presently, this functionality only works with MP4_FILE inputs.
-
+during input switch actions. Presently, this functionality only works with MP4_FILE and TS_FILE inputs.
      */
     InputSourceType?: InputSourceType;
     /**
@@ -2005,6 +2553,10 @@ during input switch actions. Presently, this functionality only works with MP4_F
      */
     Tags?: Tags;
     Type?: InputType;
+    /**
+     * The settings associated with an SRT input.
+     */
+    SrtSettings?: SrtSettings;
   }
   export interface DescribeInputSecurityGroupRequest {
     /**
@@ -2226,6 +2778,10 @@ during input switch actions. Presently, this functionality only works with MP4_F
      */
     Region?: __string;
     /**
+     * Renewal settings for the reservation
+     */
+    RenewalSettings?: RenewalSettings;
+    /**
      * Unique reservation ID, e.g. '1234567'
      */
     ReservationId?: __string;
@@ -2268,8 +2824,28 @@ during input switch actions. Presently, this functionality only works with MP4_F
      */
     ScheduleActions?: __listOfScheduleAction;
   }
+  export interface DescribeThumbnailsRequest {
+    /**
+     * Unique ID of the channel
+     */
+    ChannelId: __string;
+    /**
+     * Pipeline ID ("0" or "1")
+     */
+    PipelineId: __string;
+    /**
+     * thumbnail type
+     */
+    ThumbnailType: __string;
+  }
+  export interface DescribeThumbnailsResponse {
+    ThumbnailDetails?: __listOfThumbnailDetail;
+  }
   export type DeviceSettingsSyncState = "SYNCED"|"SYNCING"|string;
-  export type DeviceUpdateStatus = "UP_TO_DATE"|"NOT_UP_TO_DATE"|string;
+  export type DeviceUpdateStatus = "UP_TO_DATE"|"NOT_UP_TO_DATE"|"UPDATING"|string;
+  export type DolbyEProgramSelection = "ALL_CHANNELS"|"PROGRAM_1"|"PROGRAM_2"|"PROGRAM_3"|"PROGRAM_4"|"PROGRAM_5"|"PROGRAM_6"|"PROGRAM_7"|"PROGRAM_8"|string;
+  export interface DolbyVision81Settings {
+  }
   export interface DvbNitSettings {
     /**
      * The numeric value placed in the Network Information Table (NIT).
@@ -2379,7 +2955,13 @@ during input switch actions. Presently, this functionality only works with MP4_F
   }
   export type DvbSubDestinationShadowColor = "BLACK"|"NONE"|"WHITE"|string;
   export type DvbSubDestinationTeletextGridControl = "FIXED"|"SCALED"|string;
+  export type DvbSubOcrLanguage = "DEU"|"ENG"|"FRA"|"NLD"|"POR"|"SPA"|string;
   export interface DvbSubSourceSettings {
+    /**
+     * If you will configure a WebVTT caption description that references this caption selector, use this field to
+provide the language to consider when translating the image-based source to text.
+     */
+    OcrLanguage?: DvbSubOcrLanguage;
     /**
      * When using DVB-Sub with Burn-In or SMPTE-TT, use this PID for the source content. Unused for DVB-Sub passthrough. All DVB-Sub content is passed through, regardless of selectors.
      */
@@ -2390,6 +2972,39 @@ during input switch actions. Presently, this functionality only works with MP4_F
      * The number of milliseconds between instances of this table in the output transport stream.
      */
     RepInterval?: __integerMin1000Max30000;
+  }
+  export type Eac3AtmosCodingMode = "CODING_MODE_5_1_4"|"CODING_MODE_7_1_4"|"CODING_MODE_9_1_6"|string;
+  export type Eac3AtmosDrcLine = "FILM_LIGHT"|"FILM_STANDARD"|"MUSIC_LIGHT"|"MUSIC_STANDARD"|"NONE"|"SPEECH"|string;
+  export type Eac3AtmosDrcRf = "FILM_LIGHT"|"FILM_STANDARD"|"MUSIC_LIGHT"|"MUSIC_STANDARD"|"NONE"|"SPEECH"|string;
+  export interface Eac3AtmosSettings {
+    /**
+     * Average bitrate in bits/second. Valid bitrates depend on the coding mode.
+     */
+    Bitrate?: __double;
+    /**
+     * Dolby Digital Plus with Dolby Atmos coding mode. Determines number of channels.
+     */
+    CodingMode?: Eac3AtmosCodingMode;
+    /**
+     * Sets the dialnorm for the output. Default 23.
+     */
+    Dialnorm?: __integerMin1Max31;
+    /**
+     * Sets the Dolby dynamic range compression profile.
+     */
+    DrcLine?: Eac3AtmosDrcLine;
+    /**
+     * Sets the profile for heavy Dolby dynamic range compression, ensures that the instantaneous signal peaks do not exceed specified levels.
+     */
+    DrcRf?: Eac3AtmosDrcRf;
+    /**
+     * Height dimensional trim. Sets the maximum amount to attenuate the height channels when the downstream player isn??t configured to handle Dolby Digital Plus with Dolby Atmos and must remix the channels.
+     */
+    HeightTrim?: __double;
+    /**
+     * Surround dimensional trim. Sets the maximum amount to attenuate the surround channels when the downstream player isn't configured to handle Dolby Digital Plus with Dolby Atmos and must remix the channels.
+     */
+    SurroundTrim?: __double;
   }
   export type Eac3AttenuationControl = "ATTENUATE_3_DB"|"NONE"|string;
   export type Eac3BitstreamMode = "COMMENTARY"|"COMPLETE_MAIN"|"EMERGENCY"|"HEARING_IMPAIRED"|"VISUALLY_IMPAIRED"|string;
@@ -2489,6 +3104,10 @@ during input switch actions. Presently, this functionality only works with MP4_F
   export type Eac3SurroundMode = "DISABLED"|"ENABLED"|"NOT_INDICATED"|string;
   export interface EbuTtDDestinationSettings {
     /**
+     * Complete this field if you want to include the name of the copyright holder in the copyright tag in the captions metadata.
+     */
+    CopyrightHolder?: __stringMax1000;
+    /**
      * Specifies how to handle the gap between the lines (in multi-line captions).
 
 - enabled: Fill with the captions background color (as specified in the input captions).
@@ -2565,6 +3184,10 @@ You specify only the font family. All other style information (color, bold, posi
      */
     GlobalConfiguration?: GlobalConfiguration;
     /**
+     * Settings for motion graphics.
+     */
+    MotionGraphicsConfiguration?: MotionGraphicsConfiguration;
+    /**
      * Nielsen configuration settings.
      */
     NielsenConfiguration?: NielsenConfiguration;
@@ -2574,6 +3197,50 @@ You specify only the font family. All other style information (color, bold, posi
      */
     TimecodeConfig: TimecodeConfig;
     VideoDescriptions: __listOfVideoDescription;
+    /**
+     * Thumbnail configuration settings.
+     */
+    ThumbnailConfiguration?: ThumbnailConfiguration;
+    /**
+     * Color Correction Settings
+     */
+    ColorCorrectionSettings?: ColorCorrectionSettings;
+  }
+  export interface EpochLockingSettings {
+    /**
+     * Optional. Enter a value here to use a custom epoch, instead of the standard epoch (which started at 1970-01-01T00:00:00 UTC). Specify the start time of the custom epoch, in YYYY-MM-DDTHH:MM:SS in UTC. The time must be 2000-01-01T00:00:00 or later. Always set the MM:SS portion to 00:00.
+     */
+    CustomEpoch?: __string;
+    /**
+     * Optional. Enter a time for the jam sync. The default is midnight UTC. When epoch locking is enabled, MediaLive performs a daily jam sync on every output encode to ensure timecodes don’t diverge from the wall clock. The jam sync applies only to encodes with frame rate of 29.97 or 59.94 FPS. To override, enter a time in HH:MM:SS in UTC. Always set the MM:SS portion to 00:00.
+     */
+    JamSyncTime?: __string;
+  }
+  export interface Esam {
+    /**
+     * Sent as acquisitionPointIdentity to identify the MediaLive channel to the POIS.
+     */
+    AcquisitionPointId: __stringMax256;
+    /**
+     * When specified, this offset (in milliseconds) is added to the input Ad Avail PTS time. This only applies to embedded SCTE 104/35 messages and does not apply to OOB messages.
+     */
+    AdAvailOffset?: __integerMinNegative1000Max1000;
+    /**
+     * Documentation update needed
+     */
+    PasswordParam?: __string;
+    /**
+     * The URL of the signal conditioner endpoint on the Placement Opportunity Information System (POIS). MediaLive sends SignalProcessingEvents here when SCTE-35 messages are read.
+     */
+    PoisEndpoint: __stringMax2048;
+    /**
+     * Documentation update needed
+     */
+    Username?: __string;
+    /**
+     * Optional data sent as zoneIdentity to identify the MediaLive channel to the POIS.
+     */
+    ZoneIdentity?: __stringMax256;
   }
   export interface FailoverCondition {
     /**
@@ -2601,8 +3268,14 @@ You specify only the font family. All other style information (color, bold, posi
 If you disable the feature on an existing schedule, make sure that you first delete all input prepare actions from the schedule.
      */
     InputPrepareScheduleActions?: FeatureActivationsInputPrepareScheduleActions;
+    /**
+     * Enables the output static image overlay feature. Enabling this feature allows you to send channel schedule updates
+to display/clear/modify image overlays on an output-by-output bases.
+     */
+    OutputStaticImageOverlayScheduleActions?: FeatureActivationsOutputStaticImageOverlayScheduleActions;
   }
   export type FeatureActivationsInputPrepareScheduleActions = "DISABLED"|"ENABLED"|string;
+  export type FeatureActivationsOutputStaticImageOverlayScheduleActions = "DISABLED"|"ENABLED"|string;
   export type FecOutputIncludeFec = "COLUMN"|"COLUMN_AND_ROW"|string;
   export interface FecOutputSettings {
     /**
@@ -2652,11 +3325,20 @@ If you disable the feature on an existing schedule, make sure that you first del
     ReferenceActionName: __string;
   }
   export type FollowPoint = "END"|"START"|string;
+  export interface FrameCaptureCdnSettings {
+    FrameCaptureS3Settings?: FrameCaptureS3Settings;
+  }
   export interface FrameCaptureGroupSettings {
     /**
      * The destination for the frame capture files. Either the URI for an Amazon S3 bucket and object, plus a file name prefix (for example, s3ssl://sportsDelivery/highlights/20180820/curling-) or the URI for a MediaStore container, plus a file name prefix (for example, mediastoressl://sportsDelivery/20180820/curling-). The final file names consist of the prefix from the destination field (for example, "curling-") + name modifier + the counter (5 digits, starting from 00001) + extension (which is always .jpg).  For example, curling-low.00001.jpg
      */
     Destination: OutputLocationRef;
+    /**
+     * Parameters that control interactions with the CDN.
+     */
+    FrameCaptureCdnSettings?: FrameCaptureCdnSettings;
+  }
+  export interface FrameCaptureHlsSettings {
   }
   export type FrameCaptureIntervalUnit = "MILLISECONDS"|"SECONDS"|string;
   export interface FrameCaptureOutputSettings {
@@ -2665,15 +3347,25 @@ If you disable the feature on an existing schedule, make sure that you first del
      */
     NameModifier?: __string;
   }
+  export interface FrameCaptureS3Settings {
+    /**
+     * Specify the canned ACL to apply to each S3 request. Defaults to none.
+     */
+    CannedAcl?: S3CannedAcl;
+  }
   export interface FrameCaptureSettings {
     /**
      * The frequency at which to capture frames for inclusion in the output. May be specified in either seconds or milliseconds, as specified by captureIntervalUnits.
      */
-    CaptureInterval: __integerMin1Max3600000;
+    CaptureInterval?: __integerMin1Max3600000;
     /**
      * Unit for the frame capture interval.
      */
     CaptureIntervalUnits?: FrameCaptureIntervalUnit;
+    /**
+     * Timecode burn-in settings
+     */
+    TimecodeBurninSettings?: TimecodeBurninSettings;
   }
   export interface GlobalConfiguration {
     /**
@@ -2703,12 +3395,16 @@ EPOCH_LOCKING - MediaLive will attempt to synchronize the output of each pipelin
      * Adjusts video input buffer for streams with very low video framerates. This is commonly set to enabled for music channels with less than one video frame per second.
      */
     SupportLowFramerateInputs?: GlobalConfigurationLowFramerateInputs;
+    /**
+     * Advanced output locking settings
+     */
+    OutputLockingSettings?: OutputLockingSettings;
   }
   export type GlobalConfigurationInputEndAction = "NONE"|"SWITCH_AND_LOOP_INPUTS"|string;
   export type GlobalConfigurationLowFramerateInputs = "DISABLED"|"ENABLED"|string;
   export type GlobalConfigurationOutputLockingMode = "EPOCH_LOCKING"|"PIPELINE_LOCKING"|string;
   export type GlobalConfigurationOutputTimingSource = "INPUT_CLOCK"|"SYSTEM_CLOCK"|string;
-  export type H264AdaptiveQuantization = "HIGH"|"HIGHER"|"LOW"|"MAX"|"MEDIUM"|"OFF"|string;
+  export type H264AdaptiveQuantization = "AUTO"|"HIGH"|"HIGHER"|"LOW"|"MAX"|"MEDIUM"|"OFF"|string;
   export type H264ColorMetadata = "IGNORE"|"INSERT"|string;
   export interface H264ColorSpaceSettings {
     ColorSpacePassthroughSettings?: ColorSpacePassthroughSettings;
@@ -2734,7 +3430,7 @@ EPOCH_LOCKING - MediaLive will attempt to synchronize the output of each pipelin
   export type H264SceneChangeDetect = "DISABLED"|"ENABLED"|string;
   export interface H264Settings {
     /**
-     * Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality.
+     * Enables or disables adaptive quantization, which is a technique MediaLive can apply to video on a frame-by-frame basis to produce more compression without losing quality. There are three types of adaptive quantization: flicker, spatial, and temporal. Set the field in one of these ways: Set to Auto. Recommended. For each type of AQ, MediaLive will determine if AQ is needed, and if so, the appropriate strength. Set a strength (a value other than Auto or Disable). This strength will apply to any of the AQ fields that you choose to enable. Set to Disabled to disable all types of adaptive quantization.
      */
     AdaptiveQuantization?: H264AdaptiveQuantization;
     /**
@@ -2766,7 +3462,14 @@ EPOCH_LOCKING - MediaLive will attempt to synchronize the output of each pipelin
      */
     EntropyEncoding?: H264EntropyEncoding;
     /**
-     * Optional filters that you can apply to an encode.
+     * Optional. Both filters reduce bandwidth by removing imperceptible details. You can enable one of the filters. We
+recommend that you try both filters and observe the results to decide which one to use.
+
+The Temporal Filter reduces bandwidth by removing imperceptible details in the content. It combines perceptual
+filtering and motion compensated temporal filtering (MCTF). It operates independently of the compression level.
+
+The Bandwidth Reduction filter is a perceptual filter located within the encoding loop. It adapts to the current
+compression level to filter imperceptible signals. This filter works only when the resolution is 1080p or lower.
      */
     FilterSettings?: H264FilterSettings;
     /**
@@ -2774,7 +3477,7 @@ EPOCH_LOCKING - MediaLive will attempt to synchronize the output of each pipelin
      */
     FixedAfd?: FixedAfd;
     /**
-     * If set to enabled, adjust quantization within each frame to reduce flicker or 'pop' on I-frames.
+     * Flicker AQ makes adjustments within each frame to reduce flicker or 'pop' on I-frames. The value to enter in this field depends on the value in the Adaptive quantization field: If you have set the Adaptive quantization field to Auto, MediaLive ignores any value in this field. MediaLive will determine if flicker AQ is appropriate and will apply the appropriate strength. If you have set the Adaptive quantization field to a strength, you can set this field to Enabled or Disabled. Enabled: MediaLive will apply flicker AQ using the specified strength. Disabled: MediaLive won't apply flicker AQ. If you have set the Adaptive quantization to Disabled, MediaLive ignores any value in this field and doesn't apply flicker AQ.
      */
     FlickerAq?: H264FlickerAq;
     /**
@@ -2862,10 +3565,11 @@ For VBR: Set the maximum bitrate in order to accommodate expected spikes in the 
      */
     QualityLevel?: H264QualityLevel;
     /**
-     * Controls the target quality for the video encode. Applies only when the rate control mode is QVBR. Set values for the QVBR quality level field and Max bitrate field that suit your most important viewing devices. Recommended values are:
+     * Controls the target quality for the video encode. Applies only when the rate control mode is QVBR. You can set a target quality or you can let MediaLive determine the best quality. To set a target quality, enter values in the QVBR quality level field and the Max bitrate field. Enter values that suit your most important viewing devices. Recommended values are:
 - Primary screen: Quality level: 8 to 10. Max bitrate: 4M
 - PC or tablet: Quality level: 7. Max bitrate: 1.5M to 3M
 - Smartphone: Quality level: 6. Max bitrate: 1M to 1.5M
+To let MediaLive decide, leave the QVBR quality level field empty, and in Max bitrate enter the maximum rate you want in the video. For more information, see the section called "Video - rate control mode" in the MediaLive user guide
      */
     QvbrQualityLevel?: __integerMin1Max10;
     /**
@@ -2902,11 +3606,11 @@ This field is optional; when no value is specified the encoder will choose the n
      */
     Slices?: __integerMin1Max32;
     /**
-     * Softness. Selects quantizer matrix, larger values reduce high-frequency content in the encoded image.
+     * Softness. Selects quantizer matrix, larger values reduce high-frequency content in the encoded image.  If not set to zero, must be greater than 15.
      */
     Softness?: __integerMin0Max128;
     /**
-     * If set to enabled, adjust quantization within each frame based on spatial variation of content complexity.
+     * Spatial AQ makes adjustments within each frame based on spatial variation of content complexity. The value to enter in this field depends on the value in the Adaptive quantization field: If you have set the Adaptive quantization field to Auto, MediaLive ignores any value in this field. MediaLive will determine if spatial AQ is appropriate and will apply the appropriate strength. If you have set the Adaptive quantization field to a strength, you can set this field to Enabled or Disabled. Enabled: MediaLive will apply spatial AQ using the specified strength. Disabled: MediaLive won't apply spatial AQ. If you have set the Adaptive quantization to Disabled, MediaLive ignores any value in this field and doesn't apply spatial AQ.
      */
     SpatialAq?: H264SpatialAq;
     /**
@@ -2918,7 +3622,7 @@ This field is optional; when no value is specified the encoder will choose the n
      */
     Syntax?: H264Syntax;
     /**
-     * If set to enabled, adjust quantization within each frame based on temporal variation of content complexity.
+     * Temporal makes adjustments within each frame based on temporal variation of content complexity. The value to enter in this field depends on the value in the Adaptive quantization field: If you have set the Adaptive quantization field to Auto, MediaLive ignores any value in this field. MediaLive will determine if temporal AQ is appropriate and will apply the appropriate strength. If you have set the Adaptive quantization field to a strength, you can set this field to Enabled or Disabled. Enabled: MediaLive will apply temporal AQ using the specified strength. Disabled: MediaLive won't apply temporal AQ. If you have set the Adaptive quantization to Disabled, MediaLive ignores any value in this field and doesn't apply temporal AQ.
      */
     TemporalAq?: H264TemporalAq;
     /**
@@ -2927,17 +3631,27 @@ This field is optional; when no value is specified the encoder will choose the n
 - 'picTimingSei': Pass through picture timing SEI messages from the source specified in Timecode Config
      */
     TimecodeInsertion?: H264TimecodeInsertionBehavior;
+    /**
+     * Timecode burn-in settings
+     */
+    TimecodeBurninSettings?: TimecodeBurninSettings;
+    /**
+     * Sets the minimum QP. If you aren't familiar with quantization adjustment, leave the field empty. MediaLive will
+apply an appropriate value.
+     */
+    MinQp?: __integerMin1Max51;
   }
   export type H264SpatialAq = "DISABLED"|"ENABLED"|string;
   export type H264SubGopLength = "DYNAMIC"|"FIXED"|string;
   export type H264Syntax = "DEFAULT"|"RP2027"|string;
   export type H264TemporalAq = "DISABLED"|"ENABLED"|string;
   export type H264TimecodeInsertionBehavior = "DISABLED"|"PIC_TIMING_SEI"|string;
-  export type H265AdaptiveQuantization = "HIGH"|"HIGHER"|"LOW"|"MAX"|"MEDIUM"|"OFF"|string;
+  export type H265AdaptiveQuantization = "AUTO"|"HIGH"|"HIGHER"|"LOW"|"MAX"|"MEDIUM"|"OFF"|string;
   export type H265AlternativeTransferFunction = "INSERT"|"OMIT"|string;
   export type H265ColorMetadata = "IGNORE"|"INSERT"|string;
   export interface H265ColorSpaceSettings {
     ColorSpacePassthroughSettings?: ColorSpacePassthroughSettings;
+    DolbyVision81Settings?: DolbyVision81Settings;
     Hdr10Settings?: Hdr10Settings;
     Rec601Settings?: Rec601Settings;
     Rec709Settings?: Rec709Settings;
@@ -2983,7 +3697,14 @@ This field is optional; when no value is specified the encoder will choose the n
      */
     ColorSpaceSettings?: H265ColorSpaceSettings;
     /**
-     * Optional filters that you can apply to an encode.
+     * Optional. Both filters reduce bandwidth by removing imperceptible details. You can enable one of the filters. We
+recommend that you try both filters and observe the results to decide which one to use.
+
+The Temporal Filter reduces bandwidth by removing imperceptible details in the content. It combines perceptual
+filtering and motion compensated temporal filtering (MCTF). It operates independently of the compression level.
+
+The Bandwidth Reduction filter is a perceptual filter located within the encoding loop. It adapts to the current
+compression level to filter imperceptible signals. This filter works only when the resolution is 1080p or lower.
      */
     FilterSettings?: H265FilterSettings;
     /**
@@ -3088,6 +3809,46 @@ This field is optional; when no value is specified the encoder will choose the n
 - 'picTimingSei': Pass through picture timing SEI messages from the source specified in Timecode Config
      */
     TimecodeInsertion?: H265TimecodeInsertionBehavior;
+    /**
+     * Timecode burn-in settings
+     */
+    TimecodeBurninSettings?: TimecodeBurninSettings;
+    /**
+     * If you are setting up the picture as a tile, you must set this to "disabled". In all other configurations, you typically enter "enabled".
+     */
+    MvOverPictureBoundaries?: H265MvOverPictureBoundaries;
+    /**
+     * If you are setting up the picture as a tile, you must set this to "disabled". In other configurations, you typically enter "enabled".
+     */
+    MvTemporalPredictor?: H265MvTemporalPredictor;
+    /**
+     * Set this field to set up the picture as a tile. You must also set tileWidth.
+The tile height must result in 22 or fewer rows in the frame. The tile width
+must result in 20 or fewer columns in the frame. And finally, the product of the
+column count and row count must be 64 of less.
+If the tile width and height are specified, MediaLive will override the video
+codec slices field with a value that MediaLive calculates
+     */
+    TileHeight?: __integerMin64Max2160;
+    /**
+     * Set to "padded" to force MediaLive to add padding to the frame, to obtain a frame that is a whole multiple of the tile size.
+If you are setting up the picture as a tile, you must enter "padded".
+In all other configurations, you typically enter "none".
+     */
+    TilePadding?: H265TilePadding;
+    /**
+     * Set this field to set up the picture as a tile. See tileHeight for more information.
+     */
+    TileWidth?: __integerMin256Max3840;
+    /**
+     * Select the tree block size used for encoding. If you enter "auto", the encoder will pick the best size. If you are setting up the picture as a tile, you must set this to 32x32. In all other configurations, you typically enter "auto".
+     */
+    TreeblockSize?: H265TreeblockSize;
+    /**
+     * Sets the minimum QP. If you aren't familiar with quantization adjustment, leave the field empty. MediaLive will
+apply an appropriate value.
+     */
+    MinQp?: __integerMin1Max51;
   }
   export type H265Tier = "HIGH"|"MAIN"|string;
   export type H265TimecodeInsertionBehavior = "DISABLED"|"PIC_TIMING_SEI"|string;
@@ -3121,7 +3882,7 @@ for any single frame within an encoded HDR video stream or file.
      */
     HttpTransferMode?: HlsAkamaiHttpTransferMode;
     /**
-     * Number of retry attempts that will be made before the Live Event is put into an error state.
+     * Number of retry attempts that will be made before the Live Event is put into an error state. Applies only if the CDN destination URI begins with "s3" or "mediastore". For other URIs, the value is always 3.
      */
     NumRetries?: __integerMin0;
     /**
@@ -3147,7 +3908,7 @@ for any single frame within an encoded HDR video stream or file.
      */
     FilecacheDuration?: __integerMin0Max600;
     /**
-     * Number of retry attempts that will be made before the Live Event is put into an error state.
+     * Number of retry attempts that will be made before the Live Event is put into an error state. Applies only if the CDN destination URI begins with "s3" or "mediastore". For other URIs, the value is always 3.
      */
     NumRetries?: __integerMin0;
     /**
@@ -3160,6 +3921,7 @@ for any single frame within an encoded HDR video stream or file.
     HlsAkamaiSettings?: HlsAkamaiSettings;
     HlsBasicPutSettings?: HlsBasicPutSettings;
     HlsMediaStoreSettings?: HlsMediaStoreSettings;
+    HlsS3Settings?: HlsS3Settings;
     HlsWebdavSettings?: HlsWebdavSettings;
   }
   export type HlsClientCache = "DISABLED"|"ENABLED"|string;
@@ -3300,7 +4062,7 @@ If this "keep segments" number is too low, the following might happen: the playe
      */
     ManifestDurationFormat?: HlsManifestDurationFormat;
     /**
-     * When set, minimumSegmentLength is enforced by looking ahead and back within the specified range for a nearby avail and extending the segment size if needed.
+     * Minimum length of MPEG-2 Transport Stream segments in seconds. When set, minimum segment length is enforced by looking ahead and back within the specified range for a nearby avail and extending the segment size if needed.
      */
     MinSegmentLength?: __integerMin0;
     /**
@@ -3318,9 +4080,17 @@ SEGMENTS_ONLY: Does not generate any manifests for this output group.
      */
     OutputSelection?: HlsOutputSelection;
     /**
-     * Includes or excludes EXT-X-PROGRAM-DATE-TIME tag in .m3u8 manifest files. The value is calculated as follows: either the program date and time are initialized using the input timecode source, or the time is initialized using the input timecode source and the date is initialized using the timestampOffset.
+     * Includes or excludes EXT-X-PROGRAM-DATE-TIME tag in .m3u8 manifest files. The value is calculated using the program date time clock.
      */
     ProgramDateTime?: HlsProgramDateTime;
+    /**
+     * Specifies the algorithm used to drive the HLS EXT-X-PROGRAM-DATE-TIME clock. Options include:
+
+INITIALIZE_FROM_OUTPUT_TIMECODE: The PDT clock is initialized as a function of the first output timecode, then incremented by the EXTINF duration of each encoded segment.
+
+SYSTEM_CLOCK: The PDT clock is initialized as a function of the UTC wall clock, then incremented by the EXTINF duration of each encoded segment. If the PDT clock diverges from the wall clock by more than 500ms, it is resynchronized to the wall clock.
+     */
+    ProgramDateTimeClock?: HlsProgramDateTimeClock;
     /**
      * Period of insertion of EXT-X-PROGRAM-DATE-TIME entry, in seconds.
      */
@@ -3334,7 +4104,7 @@ For an HLS output group with MediaPackage as the destination, the DISABLED behav
      */
     RedundantManifest?: HlsRedundantManifest;
     /**
-     * Length of MPEG-2 Transport Stream segments to create (in seconds). Note that segments will end on the next keyframe after this number of seconds, so actual segment length may be longer.
+     * Length of MPEG-2 Transport Stream segments to create in seconds. Note that segments will end on the next keyframe after this duration, so actual segment length may be longer.
      */
     SegmentLength?: __integerMin1;
     /**
@@ -3373,7 +4143,11 @@ SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts
     /**
      * ID3 tag to insert into each segment. Supports special keyword identifiers to substitute in segment-related values.\nSupported keyword identifiers: https://docs.aws.amazon.com/medialive/latest/ug/variable-data-identifiers.html
      */
-    Tag: __string;
+    Tag?: __string;
+    /**
+     * Base64 string formatted according to the ID3 specification: http://id3.org/id3v2.4.0-structure
+     */
+    Id3?: __string;
   }
   export type HlsId3SegmentTaggingState = "DISABLED"|"ENABLED"|string;
   export type HlsIncompleteSegmentBehavior = "AUTO"|"SUPPRESS"|string;
@@ -3394,6 +4168,10 @@ SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts
      * The number of seconds between retries when an attempt to read a manifest or segment fails.
      */
     RetryInterval?: __integerMin0;
+    /**
+     * Identifies the source for the SCTE-35 messages that MediaLive will ingest. Messages can be ingested from the content segments (in the stream) or from tags in the playlist (the HLS manifest). MediaLive ignores SCTE-35 information in the source that is not selected.
+     */
+    Scte35Source?: HlsScte35SourceType;
   }
   export type HlsIvInManifest = "EXCLUDE"|"INCLUDE"|string;
   export type HlsIvSource = "EXPLICIT"|"FOLLOWS_SEGMENT_NUMBER"|string;
@@ -3413,7 +4191,7 @@ SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts
      */
     MediaStoreStorageClass?: HlsMediaStoreStorageClass;
     /**
-     * Number of retry attempts that will be made before the Live Event is put into an error state.
+     * Number of retry attempts that will be made before the Live Event is put into an error state. Applies only if the CDN destination URI begins with "s3" or "mediastore". For other URIs, the value is always 3.
      */
     NumRetries?: __integerMin0;
     /**
@@ -3444,11 +4222,20 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
     SegmentModifier?: __string;
   }
   export type HlsProgramDateTime = "EXCLUDE"|"INCLUDE"|string;
+  export type HlsProgramDateTimeClock = "INITIALIZE_FROM_OUTPUT_TIMECODE"|"SYSTEM_CLOCK"|string;
   export type HlsRedundantManifest = "DISABLED"|"ENABLED"|string;
+  export interface HlsS3Settings {
+    /**
+     * Specify the canned ACL to apply to each S3 request. Defaults to none.
+     */
+    CannedAcl?: S3CannedAcl;
+  }
+  export type HlsScte35SourceType = "MANIFEST"|"SEGMENTS"|string;
   export type HlsSegmentationMode = "USE_INPUT_SEGMENTATION"|"USE_SEGMENT_DURATION"|string;
   export interface HlsSettings {
     AudioOnlyHlsSettings?: AudioOnlyHlsSettings;
     Fmp4HlsSettings?: Fmp4HlsSettings;
+    FrameCaptureHlsSettings?: FrameCaptureHlsSettings;
     StandardHlsSettings?: StandardHlsSettings;
   }
   export type HlsStreamInfResolution = "EXCLUDE"|"INCLUDE"|string;
@@ -3475,7 +4262,7 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
      */
     HttpTransferMode?: HlsWebdavHttpTransferMode;
     /**
-     * Number of retry attempts that will be made before the Live Event is put into an error state.
+     * Number of retry attempts that will be made before the Live Event is put into an error state. Applies only if the CDN destination URI begins with "s3" or "mediastore". For other URIs, the value is always 3.
      */
     NumRetries?: __integerMin0;
     /**
@@ -3483,9 +4270,12 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
      */
     RestartDelay?: __integerMin0Max15;
   }
+  export interface HtmlMotionGraphicsSettings {
+  }
   export type IFrameOnlyPlaylistType = "DISABLED"|"STANDARD"|string;
   export interface ImmediateModeScheduleActionStartSettings {
   }
+  export type IncludeFillerNalUnits = "AUTO"|"DROP"|"INCLUDE"|string;
   export interface Input {
     /**
      * The Unique ARN of the input (generated, immutable).
@@ -3506,7 +4296,6 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
     /**
      * STANDARD - MediaLive expects two sources to be connected to this input. If the channel is also STANDARD, both sources will be ingested. If the channel is SINGLE_PIPELINE, only the first source will be ingested; the second source will always be ignored, even if the first source fails.
 SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelClass is also  SINGLE_PIPELINE, this value is valid. If the ChannelClass is STANDARD, this value is not valid because the channel requires two sources in the input.
-
      */
     InputClass?: InputClass;
     /**
@@ -3514,9 +4303,12 @@ SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelC
      */
     InputDevices?: __listOfInputDeviceSettings;
     /**
+     * A list of IDs for all Inputs which are partners of this one.
+     */
+    InputPartnerIds?: __listOf__string;
+    /**
      * Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
-during input switch actions. Presently, this functionality only works with MP4_FILE inputs.
-
+during input switch actions. Presently, this functionality only works with MP4_FILE and TS_FILE inputs.
      */
     InputSourceType?: InputSourceType;
     /**
@@ -3545,6 +4337,10 @@ during input switch actions. Presently, this functionality only works with MP4_F
      */
     Tags?: Tags;
     Type?: InputType;
+    /**
+     * The settings associated with an SRT input.
+     */
+    SrtSettings?: SrtSettings;
   }
   export interface InputAttachment {
     /**
@@ -3596,7 +4392,6 @@ during input switch actions. Presently, this functionality only works with MP4_F
     /**
      * The system-generated static IP address of endpoint.
 It remains fixed for the lifetime of the input.
-
      */
     Ip?: __string;
     /**
@@ -3606,7 +4401,6 @@ It remains fixed for the lifetime of the input.
     /**
      * This represents the endpoint that the customer stream will be
 pushed to.
-
      */
     Url?: __string;
     Vpc?: InputDestinationVpc;
@@ -3615,23 +4409,21 @@ pushed to.
     /**
      * A unique name for the location the RTMP stream is being pushed
 to.
-
      */
     StreamName?: __string;
   }
   export interface InputDestinationVpc {
     /**
      * The availability zone of the Input destination.
-
      */
     AvailabilityZone?: __string;
     /**
      * The network interface ID of the Input destination in the VPC.
-
      */
     NetworkInterfaceId?: __string;
   }
   export type InputDeviceActiveInput = "HDMI"|"SDI"|string;
+  export type InputDeviceCodec = "HEVC"|"AVC"|string;
   export interface InputDeviceConfigurableSettings {
     /**
      * The input source that you want to use. If the device has a source connected to only one of its input ports, or if you don't care which source the device sends, specify Auto. If the device has sources connected to both its input ports, and you want to use a specific source, specify the source.
@@ -3641,6 +4433,22 @@ to.
      * The maximum bitrate in bits per second. Set a value here to throttle the bitrate of the source video.
      */
     MaxBitrate?: __integer;
+    /**
+     * The Link device's buffer size (latency) in milliseconds (ms).
+     */
+    LatencyMs?: __integer;
+    /**
+     * Choose the codec for the video that the device produces. Only UHD devices can specify this parameter.
+     */
+    Codec?: InputDeviceCodec;
+    /**
+     * To attach this device to a MediaConnect flow, specify these parameters. To detach an existing flow, enter {} for the value of mediaconnectSettings. Only UHD devices can specify this parameter.
+     */
+    MediaconnectSettings?: InputDeviceMediaConnectConfigurableSettings;
+    /**
+     * An array of eight audio configurations, one for each audio pair in the source. Set up each audio configuration either to exclude the pair, or to format it and include it in the output from the device. This parameter applies only to UHD devices, and only when the device is configured as the source for a MediaConnect flow. For an HD device, you configure the audio by setting up audio selectors in the channel configuration.
+     */
+    AudioChannelPairs?: __listOfInputDeviceConfigurableAudioChannelPairConfig;
   }
   export type InputDeviceConfiguredInput = "AUTO"|"HDMI"|"SDI"|string;
   export type InputDeviceConnectionState = "DISCONNECTED"|"CONNECTED"|string;
@@ -3677,8 +4485,48 @@ to.
      * The width of the video source, in pixels.
      */
     Width?: __integer;
+    /**
+     * The Link device's buffer size (latency) in milliseconds (ms). You can specify this value.
+     */
+    LatencyMs?: __integer;
   }
   export type InputDeviceIpScheme = "STATIC"|"DHCP"|string;
+  export interface InputDeviceMediaConnectConfigurableSettings {
+    /**
+     * The ARN of the MediaConnect flow to attach this device to.
+     */
+    FlowArn?: __string;
+    /**
+     * The ARN for the role that MediaLive assumes to access the attached flow and secret. For more information about how to create this role, see the MediaLive user guide.
+     */
+    RoleArn?: __string;
+    /**
+     * The ARN for the secret that holds the encryption key to encrypt the content output by the device.
+     */
+    SecretArn?: __string;
+    /**
+     * The name of the MediaConnect Flow source to stream to.
+     */
+    SourceName?: __string;
+  }
+  export interface InputDeviceMediaConnectSettings {
+    /**
+     * The ARN of the MediaConnect flow.
+     */
+    FlowArn?: __string;
+    /**
+     * The ARN for the role that MediaLive assumes to access the attached flow and secret.
+     */
+    RoleArn?: __string;
+    /**
+     * The ARN of the secret used to encrypt the stream.
+     */
+    SecretArn?: __string;
+    /**
+     * The name of the MediaConnect flow source.
+     */
+    SourceName?: __string;
+  }
   export interface InputDeviceNetworkSettings {
     /**
      * The DNS addresses of the input device.
@@ -3701,6 +4549,7 @@ to.
      */
     SubnetMask?: __string;
   }
+  export type InputDeviceOutputType = "NONE"|"MEDIALIVE_INPUT"|"MEDIACONNECT_FLOW"|string;
   export interface InputDeviceRequest {
     /**
      * The unique ID for the device.
@@ -3764,9 +4613,25 @@ to.
      * Settings that describe an input device that is type UHD.
      */
     UhdDeviceSettings?: InputDeviceUhdSettings;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
+    /**
+     * The Availability Zone associated with this input device.
+     */
+    AvailabilityZone?: __string;
+    /**
+     * An array of the ARNs for the MediaLive inputs attached to the device. Returned only if the outputType is MEDIALIVE_INPUT.
+     */
+    MedialiveInputArns?: __listOf__string;
+    /**
+     * The output attachment type of the input device. Specifies MEDIACONNECT_FLOW if this device is the source for a MediaConnect flow. Specifies MEDIALIVE_INPUT if this device is the source for a MediaLive input.
+     */
+    OutputType?: InputDeviceOutputType;
   }
   export type InputDeviceTransferType = "OUTGOING"|"INCOMING"|string;
-  export type InputDeviceType = "HD"|string;
+  export type InputDeviceType = "HD"|"UHD"|string;
   export interface InputDeviceUhdSettings {
     /**
      * If you specified Auto as the configured input, specifies which of the sources is currently active (SDI or HDMI).
@@ -3800,6 +4665,22 @@ to.
      * The width of the video source, in pixels.
      */
     Width?: __integer;
+    /**
+     * The Link device's buffer size (latency) in milliseconds (ms). You can specify this value.
+     */
+    LatencyMs?: __integer;
+    /**
+     * The codec for the video that the device produces.
+     */
+    Codec?: InputDeviceCodec;
+    /**
+     * Information about the MediaConnect flow attached to the device. Returned only if the outputType is MEDIACONNECT_FLOW.
+     */
+    MediaconnectSettings?: InputDeviceMediaConnectSettings;
+    /**
+     * An array of eight audio configurations, one for each audio pair in the source. Each audio configuration specifies either to exclude the pair, or to format it and include it in the output from the UHD device. Applies only when the device is configured as the source for a MediaConnect flow.
+     */
+    AudioChannelPairs?: __listOfInputDeviceUhdAudioChannelPairConfig;
   }
   export type InputFilter = "AUTO"|"DISABLED"|"FORCED"|string;
   export interface InputLocation {
@@ -3810,7 +4691,7 @@ to.
     /**
      * Uniform Resource Identifier - This should be a path to a file accessible to the Live system (eg. a http:// URI) depending on the output type. For example, a RTMP destination should have a uri simliar to: "rtmp://fmsserver/live".
      */
-    Uri: __string;
+    Uri: __stringMax2048;
     /**
      * Documentation update needed
      */
@@ -3926,6 +4807,10 @@ to.
      */
     NetworkInputSettings?: NetworkInputSettings;
     /**
+     * PID from which to read SCTE-35 messages. If left undefined, EML will select the first SCTE-35 PID found in the input.
+     */
+    Scte35Pid?: __integerMin32Max8191;
+    /**
      * Specifies whether to extract applicable ancillary data from a SMPTE-2038 source in this input. Applicable data types are captions, timecode, AFD, and SCTE-104 messages.
 - PREFER: Extract from SMPTE-2038 if present in this input, otherwise extract from another source (if any).
 - IGNORE: Never extract any ancillary data from SMPTE-2038.
@@ -3948,7 +4833,6 @@ to.
     /**
      * This represents the customer's source URL where stream is
 pulled from.
-
      */
     Url?: __string;
     /**
@@ -3965,7 +4849,6 @@ pulled from.
     /**
      * This represents the customer's source URL where stream is
 pulled from.
-
      */
     Url?: __string;
     /**
@@ -4004,18 +4887,16 @@ pulled from.
     UrlPath?: __listOf__string;
   }
   export type InputTimecodeSource = "ZEROBASED"|"EMBEDDED"|string;
-  export type InputType = "UDP_PUSH"|"RTP_PUSH"|"RTMP_PUSH"|"RTMP_PULL"|"URL_PULL"|"MP4_FILE"|"MEDIACONNECT"|"INPUT_DEVICE"|"AWS_CDI"|string;
+  export type InputType = "UDP_PUSH"|"RTP_PUSH"|"RTMP_PUSH"|"RTMP_PULL"|"URL_PULL"|"MP4_FILE"|"MEDIACONNECT"|"INPUT_DEVICE"|"AWS_CDI"|"TS_FILE"|"SRT_CALLER"|string;
   export interface InputVpcRequest {
     /**
      * A list of up to 5 EC2 VPC security group IDs to attach to the Input VPC network interfaces.
 Requires subnetIds. If none are specified then the VPC default security group will be used.
-
      */
     SecurityGroupIds?: __listOf__string;
     /**
      * A list of 2 VPC subnet IDs from the same VPC.
 Subnet IDs must be mapped to two unique availability zones (AZ).
-
      */
     SubnetIds: __listOf__string;
   }
@@ -4138,12 +5019,10 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
   export interface ListOfferingsRequest {
     /**
      * Filter by channel class, 'STANDARD' or 'SINGLE_PIPELINE'
-
      */
     ChannelClass?: __string;
     /**
      * Filter to offerings that match the configuration of an existing channel, e.g. '2345678' (a channel ID)
-
      */
     ChannelConfiguration?: __string;
     /**
@@ -4157,7 +5036,6 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
     MaxResults?: MaxResults;
     /**
      * Filter by bitrate, 'MAX_10_MBPS', 'MAX_20_MBPS', or 'MAX_50_MBPS'
-
      */
     MaximumBitrate?: __string;
     /**
@@ -4175,12 +5053,10 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
     ResourceType?: __string;
     /**
      * Filter by special feature, 'ADVANCED_AUDIO' or 'AUDIO_NORMALIZATION'
-
      */
     SpecialFeature?: __string;
     /**
      * Filter by video quality, 'STANDARD', 'ENHANCED', or 'PREMIUM'
-
      */
     VideoQuality?: __string;
   }
@@ -4197,7 +5073,6 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
   export interface ListReservationsRequest {
     /**
      * Filter by channel class, 'STANDARD' or 'SINGLE_PIPELINE'
-
      */
     ChannelClass?: __string;
     /**
@@ -4207,7 +5082,6 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
     MaxResults?: MaxResults;
     /**
      * Filter by bitrate, 'MAX_10_MBPS', 'MAX_20_MBPS', or 'MAX_50_MBPS'
-
      */
     MaximumBitrate?: __string;
     /**
@@ -4225,12 +5099,10 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
     ResourceType?: __string;
     /**
      * Filter by special feature, 'ADVANCED_AUDIO' or 'AUDIO_NORMALIZATION'
-
      */
     SpecialFeature?: __string;
     /**
      * Filter by video quality, 'STANDARD', 'ENHANCED', or 'PREMIUM'
-
      */
     VideoQuality?: __string;
   }
@@ -4462,8 +5334,13 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
      * Packet Identifier (PID) of the elementary video stream in the transport stream. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
      */
     VideoPid?: __string;
+    /**
+     * Defines the amount SCTE-35 preroll will be increased (in milliseconds) on the output. Preroll is the amount of time between the presence of a SCTE-35 indication in a transport stream and the PTS of the video frame it references. Zero means don't add pullup (it doesn't mean set the preroll to zero). Negative pullup is not supported, which means that you can't make the preroll shorter. Be aware that latency in the output will increase by the pullup amount.
+     */
+    Scte35PrerollPullupMilliseconds?: __doubleMin0Max5000;
   }
   export type M2tsTimedMetadataBehavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
+  export type M3u8KlvBehavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
   export type M3u8NielsenId3Behavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
   export type M3u8PcrControl = "CONFIGURED_PCR_PERIOD"|"PCR_EVERY_PES_PACKET"|string;
   export type M3u8Scte35Behavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
@@ -4536,8 +5413,59 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
      * Packet Identifier (PID) of the elementary video stream in the transport stream. Can be entered as a decimal or hexadecimal value.
      */
     VideoPid?: __string;
+    /**
+     * If set to passthrough, passes any KLV data from the input source to this output.
+     */
+    KlvBehavior?: M3u8KlvBehavior;
+    /**
+     * Packet Identifier (PID) for input source KLV data to this output. Multiple values are accepted, and can be entered in ranges and/or by comma separation. Can be entered as decimal or hexadecimal values.  Each PID specified must be in the range of 32 (or 0x20)..8182 (or 0x1ff6).
+     */
+    KlvDataPids?: __string;
   }
   export type M3u8TimedMetadataBehavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
+  export interface MaintenanceCreateSettings {
+    /**
+     * Choose one day of the week for maintenance. The chosen day is used for all future maintenance windows.
+     */
+    MaintenanceDay?: MaintenanceDay;
+    /**
+     * Choose the hour that maintenance will start. The chosen time is used for all future maintenance windows.
+     */
+    MaintenanceStartTime?: __stringPattern010920300;
+  }
+  export type MaintenanceDay = "MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|"SUNDAY"|string;
+  export interface MaintenanceStatus {
+    /**
+     * The currently selected maintenance day.
+     */
+    MaintenanceDay?: MaintenanceDay;
+    /**
+     * Maintenance is required by the displayed date and time. Date and time is in ISO.
+     */
+    MaintenanceDeadline?: __string;
+    /**
+     * The currently scheduled maintenance date and time. Date and time is in ISO.
+     */
+    MaintenanceScheduledDate?: __string;
+    /**
+     * The currently selected maintenance start time. Time is in UTC.
+     */
+    MaintenanceStartTime?: __string;
+  }
+  export interface MaintenanceUpdateSettings {
+    /**
+     * Choose one day of the week for maintenance. The chosen day is used for all future maintenance windows.
+     */
+    MaintenanceDay?: MaintenanceDay;
+    /**
+     * Choose a specific date for maintenance to occur. The chosen date is used for the next maintenance window only.
+     */
+    MaintenanceScheduledDate?: __string;
+    /**
+     * Choose the hour that maintenance will start. The chosen time is used for all future maintenance windows.
+     */
+    MaintenanceStartTime?: __stringPattern010920300;
+  }
   export type MaxResults = number;
   export interface MediaConnectFlow {
     /**
@@ -4564,6 +5492,37 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
     ChannelId?: __stringMin1;
   }
   export interface MediaPackageOutputSettings {
+  }
+  export interface MotionGraphicsActivateScheduleActionSettings {
+    /**
+     * Duration (in milliseconds) that motion graphics should render on to the video stream. Leaving out this property or setting to 0 will result in rendering continuing until a deactivate action is processed.
+     */
+    Duration?: __longMin0Max86400000;
+    /**
+     * Key used to extract the password from EC2 Parameter store
+     */
+    PasswordParam?: __string;
+    /**
+     * URI of the HTML5 content to be rendered into the live stream.
+     */
+    Url?: __string;
+    /**
+     * Documentation update needed
+     */
+    Username?: __string;
+  }
+  export interface MotionGraphicsConfiguration {
+    MotionGraphicsInsertion?: MotionGraphicsInsertion;
+    /**
+     * Motion Graphics Settings
+     */
+    MotionGraphicsSettings: MotionGraphicsSettings;
+  }
+  export interface MotionGraphicsDeactivateScheduleActionSettings {
+  }
+  export type MotionGraphicsInsertion = "DISABLED"|"ENABLED"|string;
+  export interface MotionGraphicsSettings {
+    HtmlMotionGraphicsSettings?: HtmlMotionGraphicsSettings;
   }
   export type Mp2CodingMode = "CODING_MODE_1_0"|"CODING_MODE_2_0"|string;
   export interface Mp2Settings {
@@ -4667,6 +5626,10 @@ DISABLED: do not include timecodes.
 GOP_TIMECODE: Include timecode metadata in the GOP header.
      */
     TimecodeInsertion?: Mpeg2TimecodeInsertionBehavior;
+    /**
+     * Timecode burn-in settings
+     */
+    TimecodeBurninSettings?: TimecodeBurninSettings;
   }
   export type Mpeg2SubGopLength = "DYNAMIC"|"FIXED"|string;
   export type Mpeg2TimecodeInsertionBehavior = "DISABLED"|"GOP_TIMECODE"|string;
@@ -4881,6 +5844,10 @@ The Multiplex must be in the same region as the Channel.
     Scte35Pid?: __integer;
     TimedMetadataPid?: __integer;
     VideoPid?: __integer;
+    AribCaptionsPid?: __integer;
+    DvbTeletextPids?: __listOf__integer;
+    EcmPid?: __integer;
+    Smpte2038Pid?: __integer;
   }
   export interface MultiplexProgramPipelineDetail {
     /**
@@ -5030,6 +5997,20 @@ When this field is defined, ConstantBitrate must be undefined.
      */
     ServerValidation?: NetworkInputServerValidation;
   }
+  export interface NielsenCBET {
+    /**
+     * Enter the CBET check digits to use in the watermark.
+     */
+    CbetCheckDigitString: __stringMin2Max2;
+    /**
+     * Determines the method of CBET insertion mode when prior encoding is detected on the same layer.
+     */
+    CbetStepaside: NielsenWatermarksCbetStepaside;
+    /**
+     * Enter the CBET Source ID (CSID) to use in the watermark
+     */
+    Csid: __stringMin1Max7;
+  }
   export interface NielsenConfiguration {
     /**
      * Enter the Distributor ID assigned to your organization by Nielsen.
@@ -5040,7 +6021,41 @@ When this field is defined, ConstantBitrate must be undefined.
      */
     NielsenPcmToId3Tagging?: NielsenPcmToId3TaggingState;
   }
+  export interface NielsenNaesIiNw {
+    /**
+     * Enter the check digit string for the watermark
+     */
+    CheckDigitString: __stringMin2Max2;
+    /**
+     * Enter the Nielsen Source ID (SID) to include in the watermark
+     */
+    Sid: __doubleMin1Max65535;
+    /**
+     * Choose the timezone for the time stamps in the watermark. If not provided,
+the timestamps will be in Coordinated Universal Time (UTC)
+     */
+    Timezone?: NielsenWatermarkTimezones;
+  }
   export type NielsenPcmToId3TaggingState = "DISABLED"|"ENABLED"|string;
+  export type NielsenWatermarkTimezones = "AMERICA_PUERTO_RICO"|"US_ALASKA"|"US_ARIZONA"|"US_CENTRAL"|"US_EASTERN"|"US_HAWAII"|"US_MOUNTAIN"|"US_PACIFIC"|"US_SAMOA"|"UTC"|string;
+  export type NielsenWatermarksCbetStepaside = "DISABLED"|"ENABLED"|string;
+  export type NielsenWatermarksDistributionTypes = "FINAL_DISTRIBUTOR"|"PROGRAM_CONTENT"|string;
+  export interface NielsenWatermarksSettings {
+    /**
+     * Complete these fields only if you want to insert watermarks of type Nielsen CBET
+     */
+    NielsenCbetSettings?: NielsenCBET;
+    /**
+     * Choose the distribution types that you want to assign to the watermarks:
+- PROGRAM_CONTENT
+- FINAL_DISTRIBUTOR
+     */
+    NielsenDistributionType?: NielsenWatermarksDistributionTypes;
+    /**
+     * Complete these fields only if you want to insert watermarks of type Nielsen NAES II (N2) and Nielsen NAES VI (NW).
+     */
+    NielsenNaesIiNwSettings?: NielsenNaesIiNw;
+  }
   export interface Offering {
     /**
      * Unique offering ARN, e.g. 'arn:aws:medialive:us-west-2:123456789012:offering:87654321'
@@ -5149,7 +6164,7 @@ When this field is defined, ConstantBitrate must be undefined.
   }
   export interface OutputGroup {
     /**
-     * Custom output group name optionally defined by the user.  Only letters, numbers, and the underscore character allowed; only 32 characters allowed.
+     * Custom output group name optionally defined by the user.
      */
     Name?: __stringMax32;
     /**
@@ -5167,9 +6182,14 @@ When this field is defined, ConstantBitrate must be undefined.
     MultiplexGroupSettings?: MultiplexGroupSettings;
     RtmpGroupSettings?: RtmpGroupSettings;
     UdpGroupSettings?: UdpGroupSettings;
+    CmafIngestGroupSettings?: CmafIngestGroupSettings;
   }
   export interface OutputLocationRef {
     DestinationRefId?: __string;
+  }
+  export interface OutputLockingSettings {
+    EpochLockingSettings?: EpochLockingSettings;
+    PipelineLockingSettings?: PipelineLockingSettings;
   }
   export interface OutputSettings {
     ArchiveOutputSettings?: ArchiveOutputSettings;
@@ -5180,6 +6200,7 @@ When this field is defined, ConstantBitrate must be undefined.
     MultiplexOutputSettings?: MultiplexOutputSettings;
     RtmpOutputSettings?: RtmpOutputSettings;
     UdpOutputSettings?: UdpOutputSettings;
+    CmafIngestOutputSettings?: CmafIngestOutputSettings;
   }
   export interface PassThroughSettings {
   }
@@ -5196,11 +6217,21 @@ When this field is defined, ConstantBitrate must be undefined.
      */
     ActiveInputSwitchActionName?: __string;
     /**
+     * The name of the motion graphics activate action that occurred most recently and that resulted in the current graphics URI for this pipeline.
+     */
+    ActiveMotionGraphicsActionName?: __string;
+    /**
+     * The current URI being used for HTML5 motion graphics for this pipeline.
+     */
+    ActiveMotionGraphicsUri?: __string;
+    /**
      * Pipeline ID
      */
     PipelineId?: __string;
   }
   export type PipelineId = "PIPELINE_0"|"PIPELINE_1"|string;
+  export interface PipelineLockingSettings {
+  }
   export interface PipelinePauseStateSettings {
     /**
      * Pipeline ID to pause ("PIPELINE_0" or "PIPELINE_1").
@@ -5222,6 +6253,10 @@ When this field is defined, ConstantBitrate must be undefined.
      */
     OfferingId: __string;
     /**
+     * Renewal settings for the reservation
+     */
+    RenewalSettings?: RenewalSettings;
+    /**
      * Unique request ID to be specified. This is needed to prevent retries from creating multiple resources.
      */
     RequestId?: __string;
@@ -5238,6 +6273,19 @@ When this field is defined, ConstantBitrate must be undefined.
     Reservation?: Reservation;
   }
   export interface RawSettings {
+  }
+  export type RebootInputDeviceForce = "NO"|"YES"|string;
+  export interface RebootInputDeviceRequest {
+    /**
+     * Force a reboot of an input device. If the device is streaming, it will stop streaming and begin rebooting within a few seconds of sending the command. If the device was streaming prior to the reboot, the device will resume streaming when the reboot completes.
+     */
+    Force?: RebootInputDeviceForce;
+    /**
+     * The unique ID of the input device to reboot. For example, hd-123456789abcdef.
+     */
+    InputDeviceId: __string;
+  }
+  export interface RebootInputDeviceResponse {
   }
   export interface Rec601Settings {
   }
@@ -5265,6 +6313,16 @@ When this field is defined, ConstantBitrate must be undefined.
 Valid values: 1, 2, 4, 6, 8
      */
     ChannelsOut?: __integerMin1Max8;
+  }
+  export interface RenewalSettings {
+    /**
+     * Automatic renewal status for the reservation
+     */
+    AutomaticRenewal?: ReservationAutomaticRenewal;
+    /**
+     * Count for the reservation renewal
+     */
+    RenewalCount?: __integerMin1;
   }
   export interface Reservation {
     /**
@@ -5316,6 +6374,10 @@ Valid values: 1, 2, 4, 6, 8
      */
     Region?: __string;
     /**
+     * Renewal settings for the reservation
+     */
+    RenewalSettings?: RenewalSettings;
+    /**
      * Unique reservation ID, e.g. '1234567'
      */
     ReservationId?: __string;
@@ -5340,6 +6402,7 @@ Valid values: 1, 2, 4, 6, 8
      */
     UsagePrice?: __double;
   }
+  export type ReservationAutomaticRenewal = "DISABLED"|"ENABLED"|"UNAVAILABLE"|string;
   export type ReservationCodec = "MPEG2"|"AVC"|"HEVC"|"AUDIO"|"LINK"|string;
   export type ReservationMaximumBitrate = "MAX_10_MBPS"|"MAX_20_MBPS"|"MAX_50_MBPS"|string;
   export type ReservationMaximumFramerate = "MAX_30_FPS"|"MAX_60_FPS"|string;
@@ -5379,7 +6442,7 @@ Valid values: 1, 2, 4, 6, 8
     VideoQuality?: ReservationVideoQuality;
   }
   export type ReservationResourceType = "INPUT"|"OUTPUT"|"MULTIPLEX"|"CHANNEL"|string;
-  export type ReservationSpecialFeature = "ADVANCED_AUDIO"|"AUDIO_NORMALIZATION"|string;
+  export type ReservationSpecialFeature = "ADVANCED_AUDIO"|"AUDIO_NORMALIZATION"|"MGHD"|"MGUHD"|string;
   export type ReservationState = "ACTIVE"|"EXPIRED"|"CANCELED"|"DELETED"|string;
   export type ReservationVideoQuality = "STANDARD"|"ENHANCED"|"PREMIUM"|string;
   export type RtmpAdMarkers = "ON_CUE_POINT_SCTE35"|string;
@@ -5419,6 +6482,10 @@ Valid values: 1, 2, 4, 6, 8
      * If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.
      */
     RestartDelay?: __integerMin0;
+    /**
+     * Applies only when the rate control mode (in the codec settings) is CBR (constant bit rate). Controls whether the RTMP output stream is padded (with FILL NAL units) in order to achieve a constant bit rate that is truly constant. When there is no padding, the bandwidth varies (up to the bitrate value in the codec settings). We recommend that you choose Auto.
+     */
+    IncludeFillerNalUnits?: IncludeFillerNalUnits;
   }
   export type RtmpOutputCertificateMode = "SELF_SIGNED"|"VERIFY_AUTHENTICITY"|string;
   export interface RtmpOutputSettings {
@@ -5439,6 +6506,7 @@ Valid values: 1, 2, 4, 6, 8
      */
     NumRetries?: __integerMin0;
   }
+  export type S3CannedAcl = "AUTHENTICATED_READ"|"BUCKET_OWNER_FULL_CONTROL"|"BUCKET_OWNER_READ"|"PUBLIC_READ"|string;
   export interface ScheduleAction {
     /**
      * The name of the action, must be unique within the schedule. This name provides the main reference to an action once it is added to the schedule. A name is unique if it is no longer in the schedule. The schedule is automatically cleaned up to remove actions with a start time of more than 1 hour ago (approximately) so at that point a name can be reused.
@@ -5471,9 +6539,21 @@ Valid values: 1, 2, 4, 6, 8
      */
     InputSwitchSettings?: InputSwitchScheduleActionSettings;
     /**
+     * Action to activate a motion graphics image overlay
+     */
+    MotionGraphicsImageActivateSettings?: MotionGraphicsActivateScheduleActionSettings;
+    /**
+     * Action to deactivate a motion graphics image overlay
+     */
+    MotionGraphicsImageDeactivateSettings?: MotionGraphicsDeactivateScheduleActionSettings;
+    /**
      * Action to pause or unpause one or both channel pipelines
      */
     PauseStateSettings?: PauseStateScheduleActionSettings;
+    /**
+     * Action to specify scte35 input
+     */
+    Scte35InputSettings?: Scte35InputScheduleActionSettings;
     /**
      * Action to insert SCTE-35 return_to_network message
      */
@@ -5494,6 +6574,14 @@ Valid values: 1, 2, 4, 6, 8
      * Action to deactivate a static image overlay
      */
     StaticImageDeactivateSettings?: StaticImageDeactivateScheduleActionSettings;
+    /**
+     * Action to activate a static image overlay in one or more specified outputs
+     */
+    StaticImageOutputActivateSettings?: StaticImageOutputActivateScheduleActionSettings;
+    /**
+     * Action to deactivate a static image overlay in one or more specified outputs
+     */
+    StaticImageOutputDeactivateSettings?: StaticImageOutputDeactivateScheduleActionSettings;
   }
   export interface ScheduleActionStartSettings {
     /**
@@ -5524,7 +6612,13 @@ Valid values: 1, 2, 4, 6, 8
   }
   export interface Scte27DestinationSettings {
   }
+  export type Scte27OcrLanguage = "DEU"|"ENG"|"FRA"|"NLD"|"POR"|"SPA"|string;
   export interface Scte27SourceSettings {
+    /**
+     * If you will configure a WebVTT caption description that references this caption selector, use this field to
+provide the language to consider when translating the image-based source to text.
+     */
+    OcrLanguage?: Scte27OcrLanguage;
     /**
      * The pid field is used in conjunction with the caption selector languageCode field as follows:
   - Specify PID and Language: Extracts captions from that PID; the language is "informational".
@@ -5568,6 +6662,17 @@ Valid values: 1, 2, 4, 6, 8
     SegmentationDescriptorScte35DescriptorSettings: Scte35SegmentationDescriptor;
   }
   export type Scte35DeviceRestrictions = "NONE"|"RESTRICT_GROUP0"|"RESTRICT_GROUP1"|"RESTRICT_GROUP2"|string;
+  export type Scte35InputMode = "FIXED"|"FOLLOW_ACTIVE"|string;
+  export interface Scte35InputScheduleActionSettings {
+    /**
+     * In fixed mode, enter the name of the input attachment that you want to use as a SCTE-35 input. (Don't enter the ID of the input.)"
+     */
+    InputAttachmentNameReference?: __string;
+    /**
+     * Whether the SCTE-35 input should be the active input or a fixed input.
+     */
+    Mode: Scte35InputMode;
+  }
   export type Scte35NoRegionalBlackoutFlag = "REGIONAL_BLACKOUT"|"NO_REGIONAL_BLACKOUT"|string;
   export interface Scte35ReturnToNetworkScheduleActionSettings {
     /**
@@ -5710,7 +6815,6 @@ Valid values: 1, 2, 4, 6, 8
      * A list of destinations of the channel. For UDP outputs, there is one
 destination per output. For other types (HLS, for example), there is
 one destination per packager.
-
      */
     Destinations?: __listOfOutputDestination;
     /**
@@ -5735,6 +6839,10 @@ one destination per packager.
      */
     LogLevel?: LogLevel;
     /**
+     * Maintenance settings for this channel.
+     */
+    Maintenance?: MaintenanceStatus;
+    /**
      * The name of the channel. (user-mutable)
      */
     Name?: __string;
@@ -5755,6 +6863,26 @@ one destination per packager.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * Settings for VPC output
+     */
+    Vpc?: VpcOutputSettingsDescription;
+  }
+  export interface StartInputDeviceMaintenanceWindowRequest {
+    /**
+     * The unique ID of the input device to start a maintenance window for. For example, hd-123456789abcdef.
+     */
+    InputDeviceId: __string;
+  }
+  export interface StartInputDeviceMaintenanceWindowResponse {
+  }
+  export interface StartInputDeviceRequest {
+    /**
+     * The unique ID of the input device to start. For example, hd-123456789abcdef.
+     */
+    InputDeviceId: __string;
+  }
+  export interface StartInputDeviceResponse {
   }
   export interface StartMultiplexRequest {
     /**
@@ -5862,6 +6990,66 @@ one destination per packager.
      */
     Layer?: __integerMin0Max7;
   }
+  export interface StaticImageOutputActivateScheduleActionSettings {
+    /**
+     * The duration in milliseconds for the image to remain on the video. If omitted or set to 0 the duration is unlimited and the image will remain until it is explicitly deactivated.
+     */
+    Duration?: __integerMin0;
+    /**
+     * The time in milliseconds for the image to fade in. The fade-in starts at the start time of the overlay. Default is 0 (no fade-in).
+     */
+    FadeIn?: __integerMin0;
+    /**
+     * Applies only if a duration is specified. The time in milliseconds for the image to fade out. The fade-out starts when the duration time is hit, so it effectively extends the duration. Default is 0 (no fade-out).
+     */
+    FadeOut?: __integerMin0;
+    /**
+     * The height of the image when inserted into the video, in pixels. The overlay will be scaled up or down to the specified height. Leave blank to use the native height of the overlay.
+     */
+    Height?: __integerMin1;
+    /**
+     * The location and filename of the image file to overlay on the video. The file must be a 32-bit BMP, PNG, or TGA file, and must not be larger (in pixels) than the input video.
+     */
+    Image: InputLocation;
+    /**
+     * Placement of the left edge of the overlay relative to the left edge of the video frame, in pixels. 0 (the default) is the left edge of the frame. If the placement causes the overlay to extend beyond the right edge of the underlying video, then the overlay is cropped on the right.
+     */
+    ImageX?: __integerMin0;
+    /**
+     * Placement of the top edge of the overlay relative to the top edge of the video frame, in pixels. 0 (the default) is the top edge of the frame. If the placement causes the overlay to extend beyond the bottom edge of the underlying video, then the overlay is cropped on the bottom.
+     */
+    ImageY?: __integerMin0;
+    /**
+     * The number of the layer, 0 to 7. There are 8 layers that can be overlaid on the video, each layer with a different image. The layers are in Z order, which means that overlays with higher values of layer are inserted on top of overlays with lower values of layer. Default is 0.
+     */
+    Layer?: __integerMin0Max7;
+    /**
+     * Opacity of image where 0 is transparent and 100 is fully opaque. Default is 100.
+     */
+    Opacity?: __integerMin0Max100;
+    /**
+     * The name(s) of the output(s) the activation should apply to.
+     */
+    OutputNames: __listOf__string;
+    /**
+     * The width of the image when inserted into the video, in pixels. The overlay will be scaled up or down to the specified width. Leave blank to use the native width of the overlay.
+     */
+    Width?: __integerMin1;
+  }
+  export interface StaticImageOutputDeactivateScheduleActionSettings {
+    /**
+     * The time in milliseconds for the image to fade out. Default is 0 (no fade-out).
+     */
+    FadeOut?: __integerMin0;
+    /**
+     * The image overlay layer to deactivate, 0 to 7. Default is 0.
+     */
+    Layer?: __integerMin0Max7;
+    /**
+     * The name(s) of the output(s) the deactivation should apply to.
+     */
+    OutputNames: __listOf__string;
+  }
   export interface StaticKeySettings {
     /**
      * The URL of the license server used for protecting content.
@@ -5895,7 +7083,6 @@ one destination per packager.
      * A list of destinations of the channel. For UDP outputs, there is one
 destination per output. For other types (HLS, for example), there is
 one destination per packager.
-
      */
     Destinations?: __listOfOutputDestination;
     /**
@@ -5920,6 +7107,10 @@ one destination per packager.
      */
     LogLevel?: LogLevel;
     /**
+     * Maintenance settings for this channel.
+     */
+    Maintenance?: MaintenanceStatus;
+    /**
      * The name of the channel. (user-mutable)
      */
     Name?: __string;
@@ -5940,6 +7131,18 @@ one destination per packager.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * Settings for VPC output
+     */
+    Vpc?: VpcOutputSettingsDescription;
+  }
+  export interface StopInputDeviceRequest {
+    /**
+     * The unique ID of the input device to stop. For example, hd-123456789abcdef.
+     */
+    InputDeviceId: __string;
+  }
+  export interface StopInputDeviceResponse {
   }
   export interface StopMultiplexRequest {
     /**
@@ -6004,6 +7207,10 @@ one destination per packager.
   }
   export interface TeletextSourceSettings {
     /**
+     * Optionally defines a region where TTML style captions will be displayed
+     */
+    OutputRectangle?: CaptionRectangle;
+    /**
      * Specifies the teletext page number within the data stream from which to extract captions. Range of 0x100 (256) to 0x8FF (2303). Unused for passthrough. Should be specified as a hexadecimal string with no "0x" prefix.
      */
     PageNumber?: __string;
@@ -6022,6 +7229,58 @@ one destination per packager.
     Strength?: TemporalFilterStrength;
   }
   export type TemporalFilterStrength = "AUTO"|"STRENGTH_1"|"STRENGTH_2"|"STRENGTH_3"|"STRENGTH_4"|"STRENGTH_5"|"STRENGTH_6"|"STRENGTH_7"|"STRENGTH_8"|"STRENGTH_9"|"STRENGTH_10"|"STRENGTH_11"|"STRENGTH_12"|"STRENGTH_13"|"STRENGTH_14"|"STRENGTH_15"|"STRENGTH_16"|string;
+  export interface Thumbnail {
+    /**
+     * The binary data for the latest thumbnail.
+     */
+    Body?: __string;
+    /**
+     * The content type for the latest thumbnail.
+     */
+    ContentType?: __string;
+    /**
+     * Thumbnail Type
+     */
+    ThumbnailType?: ThumbnailType;
+    /**
+     * Time stamp for the latest thumbnail.
+     */
+    TimeStamp?: __timestampIso8601;
+  }
+  export interface ThumbnailConfiguration {
+    /**
+     * Enables the thumbnail feature. The feature generates thumbnails of the incoming video in each pipeline in the channel. AUTO turns the feature on, DISABLE turns the feature off.
+     */
+    State: ThumbnailState;
+  }
+  export interface ThumbnailDetail {
+    /**
+     * Pipeline ID
+     */
+    PipelineId?: __string;
+    /**
+     * thumbnails of a single pipeline
+     */
+    Thumbnails?: __listOfThumbnail;
+  }
+  export type ThumbnailState = "AUTO"|"DISABLED"|string;
+  export type ThumbnailType = "UNSPECIFIED"|"CURRENT_ACTIVE"|string;
+  export type TimecodeBurninFontSize = "EXTRA_SMALL_10"|"LARGE_48"|"MEDIUM_32"|"SMALL_16"|string;
+  export type TimecodeBurninPosition = "BOTTOM_CENTER"|"BOTTOM_LEFT"|"BOTTOM_RIGHT"|"MIDDLE_CENTER"|"MIDDLE_LEFT"|"MIDDLE_RIGHT"|"TOP_CENTER"|"TOP_LEFT"|"TOP_RIGHT"|string;
+  export interface TimecodeBurninSettings {
+    /**
+     * Choose a timecode burn-in font size
+     */
+    FontSize: TimecodeBurninFontSize;
+    /**
+     * Choose a timecode burn-in output position
+     */
+    Position: TimecodeBurninPosition;
+    /**
+     * Create a timecode burn-in prefix (optional)
+     */
+    Prefix?: __stringMax255;
+  }
   export interface TimecodeConfig {
     /**
      * Identifies the source for the timecode that will be associated with the events outputs.
@@ -6045,6 +7304,10 @@ one destination per packager.
      * The AWS account ID (12 digits) for the recipient of the device transfer.
      */
     TargetCustomerId?: __string;
+    /**
+     * The target AWS region to transfer the device.
+     */
+    TargetRegion?: __string;
     /**
      * An optional message for the recipient. Maximum 280 characters.
      */
@@ -6072,7 +7335,7 @@ one destination per packager.
   }
   export interface TtmlDestinationSettings {
     /**
-     * When set to passthrough, passes through style and position information from a TTML-like input source (TTML, SMPTE-TT, CFF-TT) to the CFF-TT output or TTML output.
+     * This field is not currently supported and will not affect the output styling. Leave the default value.
      */
     StyleControl?: TtmlDestinationStyleControl;
   }
@@ -6110,6 +7373,12 @@ one destination per packager.
     FecOutputSettings?: FecOutputSettings;
   }
   export type UdpTimedMetadataId3Frame = "NONE"|"PRIV"|"TDRL"|string;
+  export interface UpdateAccountConfigurationRequest {
+    AccountConfiguration?: AccountConfiguration;
+  }
+  export interface UpdateAccountConfigurationResponse {
+    AccountConfiguration?: AccountConfiguration;
+  }
   export interface UpdateChannelClassRequest {
     /**
      * The channel class that you wish to update this channel to use.
@@ -6154,6 +7423,10 @@ one destination per packager.
      */
     LogLevel?: LogLevel;
     /**
+     * Maintenance settings for this channel.
+     */
+    Maintenance?: MaintenanceUpdateSettings;
+    /**
      * The name of the channel.
      */
     Name?: __string;
@@ -6182,6 +7455,10 @@ one destination per packager.
      * The settings that you want to apply to the UHD input device.
      */
     UhdDeviceSettings?: InputDeviceConfigurableSettings;
+    /**
+     * The Availability Zone you want associated with this input device.
+     */
+    AvailabilityZone?: __string;
   }
   export interface UpdateInputDeviceResponse {
     /**
@@ -6232,6 +7509,22 @@ one destination per packager.
      * Settings that describe an input device that is type UHD.
      */
     UhdDeviceSettings?: InputDeviceUhdSettings;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
+    /**
+     * The Availability Zone associated with this input device.
+     */
+    AvailabilityZone?: __string;
+    /**
+     * An array of the ARNs for the MediaLive inputs attached to the device. Returned only if the outputType is MEDIALIVE_INPUT.
+     */
+    MedialiveInputArns?: __listOf__string;
+    /**
+     * The output attachment type of the input device. Specifies MEDIACONNECT_FLOW if this device is the source for a MediaConnect flow. Specifies MEDIALIVE_INPUT if this device is the source for a MediaLive input.
+     */
+    OutputType?: InputDeviceOutputType;
   }
   export interface UpdateInputRequest {
     /**
@@ -6254,7 +7547,6 @@ one destination per packager.
      * A list of the MediaConnect Flow ARNs that you want to use as the source of the input. You can specify as few as one
 Flow and presently, as many as two. The only requirement is when you have more than one is that each Flow is in a
 separate Availability Zone as this ensures your EML input is redundant to AZ issues.
-
      */
     MediaConnectFlows?: __listOfMediaConnectFlowRequest;
     /**
@@ -6269,9 +7561,12 @@ separate Availability Zone as this ensures your EML input is redundant to AZ iss
      * The source URLs for a PULL-type input. Every PULL type input needs
 exactly two source URLs for redundancy.
 Only specify sources for PULL type Inputs. Leave Destinations empty.
-
      */
     Sources?: __listOfInputSourceRequest;
+    /**
+     * The settings associated with an SRT input.
+     */
+    SrtSettings?: SrtSettingsRequest;
   }
   export interface UpdateInputResponse {
     Input?: Input;
@@ -6326,6 +7621,7 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
      * Name of the multiplex.
      */
     Name?: __string;
+    PacketIdentifiersMapping?: MultiplexPacketIdentifiersMapping;
   }
   export interface UpdateMultiplexResponse {
     /**
@@ -6338,6 +7634,10 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
      * Name of the reservation
      */
     Name?: __string;
+    /**
+     * Renewal settings for the reservation
+     */
+    RenewalSettings?: RenewalSettings;
     /**
      * Unique reservation ID, e.g. '1234567'
      */
@@ -6403,6 +7703,10 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
      */
     ColorSpace?: VideoSelectorColorSpace;
     /**
+     * Color space settings
+     */
+    ColorSpaceSettings?: VideoSelectorColorSpaceSettings;
+    /**
      * Applies only if colorSpace is a value other than follow. This field controls how the value in the colorSpace field will be used. fallback means that when the input does include color space data, that data will be used, but when the input has no color space data, the value in colorSpace will be used. Choose fallback if your input is sometimes missing color space data, but when it does have color space data, that data is correct. force means to always use the value in colorSpace. Choose force if your input usually has no color space data or might have unreliable color space data.
      */
     ColorSpaceUsage?: VideoSelectorColorSpaceUsage;
@@ -6411,7 +7715,10 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
      */
     SelectorSettings?: VideoSelectorSettings;
   }
-  export type VideoSelectorColorSpace = "FOLLOW"|"REC_601"|"REC_709"|string;
+  export type VideoSelectorColorSpace = "FOLLOW"|"HDR10"|"HLG_2020"|"REC_601"|"REC_709"|string;
+  export interface VideoSelectorColorSpaceSettings {
+    Hdr10Settings?: Hdr10Settings;
+  }
   export type VideoSelectorColorSpaceUsage = "FALLBACK"|"FORCE"|string;
   export interface VideoSelectorPid {
     /**
@@ -6429,6 +7736,44 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
     VideoSelectorPid?: VideoSelectorPid;
     VideoSelectorProgramId?: VideoSelectorProgramId;
   }
+  export interface VpcOutputSettings {
+    /**
+     * List of public address allocation ids to associate with ENIs that will be created in Output VPC.
+Must specify one for SINGLE_PIPELINE, two for STANDARD channels
+     */
+    PublicAddressAllocationIds?: __listOf__string;
+    /**
+     * A list of up to 5 EC2 VPC security group IDs to attach to the Output VPC network interfaces.
+If none are specified then the VPC default security group will be used
+     */
+    SecurityGroupIds?: __listOf__string;
+    /**
+     * A list of VPC subnet IDs from the same VPC.
+If STANDARD channel, subnet IDs must be mapped to two unique availability zones (AZ).
+     */
+    SubnetIds: __listOf__string;
+  }
+  export interface VpcOutputSettingsDescription {
+    /**
+     * The Availability Zones where the vpc subnets are located.
+The first Availability Zone applies to the first subnet in the list of subnets.
+The second Availability Zone applies to the second subnet.
+     */
+    AvailabilityZones?: __listOf__string;
+    /**
+     * A list of Elastic Network Interfaces created by MediaLive in the customer's VPC
+     */
+    NetworkInterfaceIds?: __listOf__string;
+    /**
+     * A list of up EC2 VPC security group IDs attached to the Output VPC network interfaces.
+     */
+    SecurityGroupIds?: __listOf__string;
+    /**
+     * A list of VPC subnet IDs from the same VPC.
+If STANDARD channel, subnet IDs must be mapped to two unique availability zones (AZ).
+     */
+    SubnetIds?: __listOf__string;
+  }
   export type WavCodingMode = "CODING_MODE_1_0"|"CODING_MODE_2_0"|"CODING_MODE_4_0"|"CODING_MODE_8_0"|string;
   export interface WavSettings {
     /**
@@ -6445,11 +7790,20 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
     SampleRate?: __double;
   }
   export interface WebvttDestinationSettings {
+    /**
+     * Controls whether the color and position of the source captions is passed through to the WebVTT output captions.  PASSTHROUGH - Valid only if the source captions are EMBEDDED or TELETEXT.  NO_STYLE_DATA - Don't pass through the style. The output captions will not contain any font styling information.
+     */
+    StyleControl?: WebvttDestinationStyleControl;
   }
+  export type WebvttDestinationStyleControl = "NO_STYLE_DATA"|"PASSTHROUGH"|string;
+  export type __boolean = boolean;
   export type __double = number;
   export type __doubleMin0 = number;
   export type __doubleMin0Max1 = number;
+  export type __doubleMin0Max100 = number;
+  export type __doubleMin0Max5000 = number;
   export type __doubleMin1 = number;
+  export type __doubleMin1Max65535 = number;
   export type __doubleMinNegative59Max0 = number;
   export type __integer = number;
   export type __integerMin0 = number;
@@ -6461,6 +7815,7 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
   export type __integerMin0Max100000000 = number;
   export type __integerMin0Max128 = number;
   export type __integerMin0Max15 = number;
+  export type __integerMin0Max2000 = number;
   export type __integerMin0Max255 = number;
   export type __integerMin0Max30 = number;
   export type __integerMin0Max32768 = number;
@@ -6495,6 +7850,7 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
   export type __integerMin25Max2000 = number;
   export type __integerMin3 = number;
   export type __integerMin30 = number;
+  export type __integerMin32Max8191 = number;
   export type __integerMin4Max20 = number;
   export type __integerMin800Max3000 = number;
   export type __integerMin96Max600 = number;
@@ -6513,6 +7869,7 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
   export type __listOfCaptionSelector = CaptionSelector[];
   export type __listOfChannelEgressEndpoint = ChannelEgressEndpoint[];
   export type __listOfChannelSummary = ChannelSummary[];
+  export type __listOfColorCorrection = ColorCorrection[];
   export type __listOfFailoverCondition = FailoverCondition[];
   export type __listOfHlsAdMarkers = HlsAdMarkers[];
   export type __listOfInput = Input[];
@@ -6546,6 +7903,8 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
   export type __listOfRtmpAdMarkers = RtmpAdMarkers[];
   export type __listOfScheduleAction = ScheduleAction[];
   export type __listOfScte35Descriptor = Scte35Descriptor[];
+  export type __listOfThumbnail = Thumbnail[];
+  export type __listOfThumbnailDetail = ThumbnailDetail[];
   export type __listOfTransferringInputDeviceSummary = TransferringInputDeviceSummary[];
   export type __listOfVideoDescription = VideoDescription[];
   export type __listOf__integer = __integer[];
@@ -6554,21 +7913,1425 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
   export type __longMin0Max1099511627775 = number;
   export type __longMin0Max4294967295 = number;
   export type __longMin0Max8589934591 = number;
+  export type __longMin0Max86400000 = number;
   export type __string = string;
+  export type __stringMax1000 = string;
+  export type __stringMax2048 = string;
+  export type __stringMax255 = string;
   export type __stringMax256 = string;
   export type __stringMax32 = string;
   export type __stringMin1 = string;
   export type __stringMin1Max255 = string;
   export type __stringMin1Max256 = string;
   export type __stringMin1Max35 = string;
+  export type __stringMin1Max7 = string;
+  export type __stringMin2Max2 = string;
   export type __stringMin32Max32 = string;
   export type __stringMin34Max34 = string;
   export type __stringMin3Max3 = string;
   export type __stringMin6Max6 = string;
+  export type __stringPattern010920300 = string;
+  export type __timestampIso8601 = Date;
   export type InputDeviceThumbnail = Buffer|Uint8Array|Blob|string|Readable;
   export type AcceptHeader = "image/jpeg"|string;
   export type ContentType = "image/jpeg"|string;
   export type __timestamp = Date;
+  export interface InputDeviceConfigurableAudioChannelPairConfig {
+    /**
+     * The ID for one audio pair configuration, a value from 1 to 8.
+     */
+    Id?: __integer;
+    /**
+     * The profile to set for one audio pair configuration. Choose an enumeration value. Each value describes one audio configuration using the format (rate control algorithm)-(codec)_(quality)-(bitrate in bytes). For example, CBR-AAC_HQ-192000. Or choose DISABLED, in which case the device won't produce audio for this pair.
+     */
+    Profile?: InputDeviceConfigurableAudioChannelPairProfile;
+  }
+  export type InputDeviceConfigurableAudioChannelPairProfile = "DISABLED"|"VBR-AAC_HHE-16000"|"VBR-AAC_HE-64000"|"VBR-AAC_LC-128000"|"CBR-AAC_HQ-192000"|"CBR-AAC_HQ-256000"|"CBR-AAC_HQ-384000"|"CBR-AAC_HQ-512000"|string;
+  export interface InputDeviceUhdAudioChannelPairConfig {
+    /**
+     * The ID for one audio pair configuration, a value from 1 to 8.
+     */
+    Id?: __integer;
+    /**
+     * The profile for one audio pair configuration. This property describes one audio configuration in the format (rate control algorithm)-(codec)_(quality)-(bitrate in bytes). For example, CBR-AAC_HQ-192000. Or DISABLED, in which case the device won't produce audio for this pair.
+     */
+    Profile?: InputDeviceUhdAudioChannelPairProfile;
+  }
+  export type InputDeviceUhdAudioChannelPairProfile = "DISABLED"|"VBR-AAC_HHE-16000"|"VBR-AAC_HE-64000"|"VBR-AAC_LC-128000"|"CBR-AAC_HQ-192000"|"CBR-AAC_HQ-256000"|"CBR-AAC_HQ-384000"|"CBR-AAC_HQ-512000"|string;
+  export type __listOfInputDeviceConfigurableAudioChannelPairConfig = InputDeviceConfigurableAudioChannelPairConfig[];
+  export type __listOfInputDeviceUhdAudioChannelPairConfig = InputDeviceUhdAudioChannelPairConfig[];
+  export type ChannelPipelineIdToRestart = "PIPELINE_0"|"PIPELINE_1"|string;
+  export interface RestartChannelPipelinesRequest {
+    /**
+     * ID of channel
+     */
+    ChannelId: __string;
+    /**
+     * An array of pipelines to restart in this channel. Format PIPELINE_0 or PIPELINE_1.
+     */
+    PipelineIds?: __listOfChannelPipelineIdToRestart;
+  }
+  export interface RestartChannelPipelinesResponse {
+    /**
+     * The unique arn of the channel.
+     */
+    Arn?: __string;
+    /**
+     * Specification of CDI inputs for this channel
+     */
+    CdiInputSpecification?: CdiInputSpecification;
+    /**
+     * The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
+     */
+    ChannelClass?: ChannelClass;
+    /**
+     * A list of destinations of the channel. For UDP outputs, there is one
+destination per output. For other types (HLS, for example), there is
+one destination per packager.
+     */
+    Destinations?: __listOfOutputDestination;
+    /**
+     * The endpoints where outgoing connections initiate from
+     */
+    EgressEndpoints?: __listOfChannelEgressEndpoint;
+    EncoderSettings?: EncoderSettings;
+    /**
+     * The unique id of the channel.
+     */
+    Id?: __string;
+    /**
+     * List of input attachments for channel.
+     */
+    InputAttachments?: __listOfInputAttachment;
+    /**
+     * Specification of network and file inputs for this channel
+     */
+    InputSpecification?: InputSpecification;
+    /**
+     * The log level being written to CloudWatch Logs.
+     */
+    LogLevel?: LogLevel;
+    /**
+     * Maintenance settings for this channel.
+     */
+    Maintenance?: MaintenanceStatus;
+    /**
+     * The time in milliseconds by when the PVRE restart must occur.
+     */
+    MaintenanceStatus?: __string;
+    /**
+     * The name of the channel. (user-mutable)
+     */
+    Name?: __string;
+    /**
+     * Runtime details for the pipelines of a running channel.
+     */
+    PipelineDetails?: __listOfPipelineDetail;
+    /**
+     * The number of currently healthy pipelines.
+     */
+    PipelinesRunningCount?: __integer;
+    /**
+     * The Amazon Resource Name (ARN) of the role assumed when running the Channel.
+     */
+    RoleArn?: __string;
+    State?: ChannelState;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
+    /**
+     * Settings for VPC output
+     */
+    Vpc?: VpcOutputSettingsDescription;
+  }
+  export type __listOfChannelPipelineIdToRestart = ChannelPipelineIdToRestart[];
+  export type H265MvOverPictureBoundaries = "DISABLED"|"ENABLED"|string;
+  export type H265MvTemporalPredictor = "DISABLED"|"ENABLED"|string;
+  export type H265TilePadding = "NONE"|"PADDED"|string;
+  export type H265TreeblockSize = "AUTO"|"TREE_SIZE_32X32"|string;
+  export type __integerMin256Max3840 = number;
+  export type __integerMin64Max2160 = number;
+  export interface CmafIngestGroupSettings {
+    /**
+     * A HTTP destination for the tracks
+     */
+    Destination: OutputLocationRef;
+    /**
+     * If set to passthrough, Nielsen inaudible tones for media tracking will be detected in the input audio and an equivalent ID3 tag will be inserted in the output.
+     */
+    NielsenId3Behavior?: CmafNielsenId3Behavior;
+    /**
+     * Type of scte35 track to add. none or scte35WithoutSegmentation
+     */
+    Scte35Type?: Scte35Type;
+    /**
+     * The nominal duration of segments. The units are specified in SegmentLengthUnits. The segments will end on the next keyframe after the specified duration, so the actual segment length might be longer, and it might be a fraction of the units.
+     */
+    SegmentLength?: __integerMin1;
+    /**
+     * Time unit for segment length parameter.
+     */
+    SegmentLengthUnits?: CmafIngestSegmentLengthUnits;
+    /**
+     * Number of milliseconds to delay the output from the second pipeline.
+     */
+    SendDelayMs?: __integerMin0Max2000;
+  }
+  export interface CmafIngestOutputSettings {
+    /**
+     * String concatenated to the end of the destination filename.  Required for multiple outputs of the same type.
+     */
+    NameModifier?: __string;
+  }
+  export type CmafIngestSegmentLengthUnits = "MILLISECONDS"|"SECONDS"|string;
+  export type CmafNielsenId3Behavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
+  export type DashRoleAudio = "ALTERNATE"|"COMMENTARY"|"DESCRIPTION"|"DUB"|"EMERGENCY"|"ENHANCED-AUDIO-INTELLIGIBILITY"|"KARAOKE"|"MAIN"|"SUPPLEMENTARY"|string;
+  export type DashRoleCaption = "ALTERNATE"|"CAPTION"|"COMMENTARY"|"DESCRIPTION"|"DUB"|"EASYREADER"|"EMERGENCY"|"FORCED-SUBTITLE"|"KARAOKE"|"MAIN"|"METADATA"|"SUBTITLE"|"SUPPLEMENTARY"|string;
+  export type DvbDashAccessibility = "DVBDASH_1_VISUALLY_IMPAIRED"|"DVBDASH_2_HARD_OF_HEARING"|"DVBDASH_3_SUPPLEMENTAL_COMMENTARY"|"DVBDASH_4_DIRECTORS_COMMENTARY"|"DVBDASH_5_EDUCATIONAL_NOTES"|"DVBDASH_6_MAIN_PROGRAM"|"DVBDASH_7_CLEAN_FEED"|string;
+  export type __listOfDashRoleAudio = DashRoleAudio[];
+  export type __listOfDashRoleCaption = DashRoleCaption[];
+  export type Scte35Type = "NONE"|"SCTE_35_WITHOUT_SEGMENTATION"|string;
+  export type CloudWatchAlarmTemplateComparisonOperator = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold"|string;
+  export interface CloudWatchAlarmTemplateGroupSummary {
+    /**
+     * A cloudwatch alarm template group's ARN (Amazon Resource Name)
+     */
+    Arn: __stringPatternArnMedialiveCloudwatchAlarmTemplateGroup;
+    CreatedAt: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A cloudwatch alarm template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    Id: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+    /**
+     * The number of templates in a group.
+     */
+    TemplateCount: __integer;
+  }
+  export type CloudWatchAlarmTemplateStatistic = "SampleCount"|"Average"|"Sum"|"Minimum"|"Maximum"|string;
+  export interface CloudWatchAlarmTemplateSummary {
+    /**
+     * A cloudwatch alarm template's ARN (Amazon Resource Name)
+     */
+    Arn: __stringPatternArnMedialiveCloudwatchAlarmTemplate;
+    ComparisonOperator: CloudWatchAlarmTemplateComparisonOperator;
+    CreatedAt: __timestampIso8601;
+    /**
+     * The number of datapoints within the evaluation period that must be breaching to trigger the alarm.
+     */
+    DatapointsToAlarm?: __integerMin1;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * The number of periods over which data is compared to the specified threshold.
+     */
+    EvaluationPeriods: __integerMin1;
+    /**
+     * A cloudwatch alarm template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    GroupId: __stringMin7Max11PatternAws097;
+    /**
+     * A cloudwatch alarm template's id. AWS provided templates have ids that start with `aws-`
+     */
+    Id: __stringMin7Max11PatternAws097;
+    /**
+     * The name of the metric associated with the alarm. Must be compatible with targetResourceType.
+     */
+    MetricName: __stringMax64;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name: __stringMin1Max255PatternS;
+    /**
+     * The period, in seconds, over which the specified statistic is applied.
+     */
+    Period: __integerMin10Max86400;
+    Statistic: CloudWatchAlarmTemplateStatistic;
+    Tags?: TagMap;
+    TargetResourceType: CloudWatchAlarmTemplateTargetResourceType;
+    /**
+     * The threshold value to compare with the specified statistic.
+     */
+    Threshold: __double;
+    TreatMissingData: CloudWatchAlarmTemplateTreatMissingData;
+  }
+  export type CloudWatchAlarmTemplateTargetResourceType = "CLOUDFRONT_DISTRIBUTION"|"MEDIALIVE_MULTIPLEX"|"MEDIALIVE_CHANNEL"|"MEDIALIVE_INPUT_DEVICE"|"MEDIAPACKAGE_CHANNEL"|"MEDIAPACKAGE_ORIGIN_ENDPOINT"|"MEDIACONNECT_FLOW"|"S3_BUCKET"|string;
+  export type CloudWatchAlarmTemplateTreatMissingData = "notBreaching"|"breaching"|"ignore"|"missing"|string;
+  export interface CreateCloudWatchAlarmTemplateGroupRequest {
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface CreateCloudWatchAlarmTemplateGroupResponse {
+    /**
+     * A cloudwatch alarm template group's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveCloudwatchAlarmTemplateGroup;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A cloudwatch alarm template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface CreateCloudWatchAlarmTemplateRequest {
+    ComparisonOperator: CloudWatchAlarmTemplateComparisonOperator;
+    /**
+     * The number of datapoints within the evaluation period that must be breaching to trigger the alarm.
+     */
+    DatapointsToAlarm?: __integerMin1;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * The number of periods over which data is compared to the specified threshold.
+     */
+    EvaluationPeriods: __integerMin1;
+    /**
+     * A cloudwatch alarm template group's identifier. Can be either be its id or current name.
+     */
+    GroupIdentifier: __stringPatternS;
+    /**
+     * The name of the metric associated with the alarm. Must be compatible with targetResourceType.
+     */
+    MetricName: __stringMax64;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name: __stringMin1Max255PatternS;
+    /**
+     * The period, in seconds, over which the specified statistic is applied.
+     */
+    Period: __integerMin10Max86400;
+    Statistic: CloudWatchAlarmTemplateStatistic;
+    Tags?: TagMap;
+    TargetResourceType: CloudWatchAlarmTemplateTargetResourceType;
+    /**
+     * The threshold value to compare with the specified statistic.
+     */
+    Threshold: __double;
+    TreatMissingData: CloudWatchAlarmTemplateTreatMissingData;
+  }
+  export interface CreateCloudWatchAlarmTemplateResponse {
+    /**
+     * A cloudwatch alarm template's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveCloudwatchAlarmTemplate;
+    ComparisonOperator?: CloudWatchAlarmTemplateComparisonOperator;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * The number of datapoints within the evaluation period that must be breaching to trigger the alarm.
+     */
+    DatapointsToAlarm?: __integerMin1;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * The number of periods over which data is compared to the specified threshold.
+     */
+    EvaluationPeriods?: __integerMin1;
+    /**
+     * A cloudwatch alarm template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    GroupId?: __stringMin7Max11PatternAws097;
+    /**
+     * A cloudwatch alarm template's id. AWS provided templates have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    /**
+     * The name of the metric associated with the alarm. Must be compatible with targetResourceType.
+     */
+    MetricName?: __stringMax64;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    /**
+     * The period, in seconds, over which the specified statistic is applied.
+     */
+    Period?: __integerMin10Max86400;
+    Statistic?: CloudWatchAlarmTemplateStatistic;
+    Tags?: TagMap;
+    TargetResourceType?: CloudWatchAlarmTemplateTargetResourceType;
+    /**
+     * The threshold value to compare with the specified statistic.
+     */
+    Threshold?: __double;
+    TreatMissingData?: CloudWatchAlarmTemplateTreatMissingData;
+  }
+  export interface CreateEventBridgeRuleTemplateGroupRequest {
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface CreateEventBridgeRuleTemplateGroupResponse {
+    /**
+     * An eventbridge rule template group's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveEventbridgeRuleTemplateGroup;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * An eventbridge rule template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface CreateEventBridgeRuleTemplateRequest {
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    EventTargets?: __listOfEventBridgeRuleTemplateTarget;
+    EventType: EventBridgeRuleTemplateEventType;
+    /**
+     * An eventbridge rule template group's identifier. Can be either be its id or current name.
+     */
+    GroupIdentifier: __stringPatternS;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface CreateEventBridgeRuleTemplateResponse {
+    /**
+     * An eventbridge rule template's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveEventbridgeRuleTemplate;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    EventTargets?: __listOfEventBridgeRuleTemplateTarget;
+    EventType?: EventBridgeRuleTemplateEventType;
+    /**
+     * An eventbridge rule template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    GroupId?: __stringMin7Max11PatternAws097;
+    /**
+     * An eventbridge rule template's id. AWS provided templates have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface CreateSignalMapRequest {
+    CloudWatchAlarmTemplateGroupIdentifiers?: __listOf__stringPatternS;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A top-level supported AWS resource ARN to discovery a signal map from.
+     */
+    DiscoveryEntryPointArn: __stringMin1Max2048;
+    EventBridgeRuleTemplateGroupIdentifiers?: __listOf__stringPatternS;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface CreateSignalMapResponse {
+    /**
+     * A signal map's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveSignalMap;
+    CloudWatchAlarmTemplateGroupIds?: __listOf__stringMin7Max11PatternAws097;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A top-level supported AWS resource ARN to discovery a signal map from.
+     */
+    DiscoveryEntryPointArn?: __stringMin1Max2048;
+    /**
+     * Error message associated with a failed creation or failed update attempt of a signal map.
+     */
+    ErrorMessage?: __stringMin1Max2048;
+    EventBridgeRuleTemplateGroupIds?: __listOf__stringMin7Max11PatternAws097;
+    FailedMediaResourceMap?: FailedMediaResourceMap;
+    /**
+     * A signal map's id.
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    LastDiscoveredAt?: __timestampIso8601;
+    LastSuccessfulMonitorDeployment?: SuccessfulMonitorDeployment;
+    MediaResourceMap?: MediaResourceMap;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * If true, there are pending monitor changes for this signal map that can be deployed.
+     */
+    MonitorChangesPendingDeployment?: __boolean;
+    MonitorDeployment?: MonitorDeployment;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Status?: SignalMapStatus;
+    Tags?: TagMap;
+  }
+  export interface DeleteCloudWatchAlarmTemplateGroupRequest {
+    /**
+     * A cloudwatch alarm template group's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface DeleteCloudWatchAlarmTemplateRequest {
+    /**
+     * A cloudwatch alarm template's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface DeleteEventBridgeRuleTemplateGroupRequest {
+    /**
+     * An eventbridge rule template group's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface DeleteEventBridgeRuleTemplateRequest {
+    /**
+     * An eventbridge rule template's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface DeleteSignalMapRequest {
+    /**
+     * A signal map's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export type EventBridgeRuleTemplateEventType = "MEDIALIVE_MULTIPLEX_ALERT"|"MEDIALIVE_MULTIPLEX_STATE_CHANGE"|"MEDIALIVE_CHANNEL_ALERT"|"MEDIALIVE_CHANNEL_INPUT_CHANGE"|"MEDIALIVE_CHANNEL_STATE_CHANGE"|"MEDIAPACKAGE_INPUT_NOTIFICATION"|"MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION"|"MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION"|"SIGNAL_MAP_ACTIVE_ALARM"|"MEDIACONNECT_ALERT"|"MEDIACONNECT_SOURCE_HEALTH"|"MEDIACONNECT_OUTPUT_HEALTH"|"MEDIACONNECT_FLOW_STATUS_CHANGE"|string;
+  export interface EventBridgeRuleTemplateGroupSummary {
+    /**
+     * An eventbridge rule template group's ARN (Amazon Resource Name)
+     */
+    Arn: __stringPatternArnMedialiveEventbridgeRuleTemplateGroup;
+    CreatedAt: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * An eventbridge rule template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    Id: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+    /**
+     * The number of templates in a group.
+     */
+    TemplateCount: __integer;
+  }
+  export interface EventBridgeRuleTemplateSummary {
+    /**
+     * An eventbridge rule template's ARN (Amazon Resource Name)
+     */
+    Arn: __stringPatternArnMedialiveEventbridgeRuleTemplate;
+    CreatedAt: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * The number of targets configured to send matching events.
+     */
+    EventTargetCount: __integerMax5;
+    EventType: EventBridgeRuleTemplateEventType;
+    /**
+     * An eventbridge rule template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    GroupId: __stringMin7Max11PatternAws097;
+    /**
+     * An eventbridge rule template's id. AWS provided templates have ids that start with `aws-`
+     */
+    Id: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface EventBridgeRuleTemplateTarget {
+    /**
+     * Target ARNs must be either an SNS topic or CloudWatch log group.
+     */
+    Arn: __stringMin1Max2048PatternArn;
+  }
+  export type FailedMediaResourceMap = {[key: string]: MediaResource};
+  export interface GetCloudWatchAlarmTemplateGroupRequest {
+    /**
+     * A cloudwatch alarm template group's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface GetCloudWatchAlarmTemplateGroupResponse {
+    /**
+     * A cloudwatch alarm template group's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveCloudwatchAlarmTemplateGroup;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A cloudwatch alarm template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface GetCloudWatchAlarmTemplateRequest {
+    /**
+     * A cloudwatch alarm template's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface GetCloudWatchAlarmTemplateResponse {
+    /**
+     * A cloudwatch alarm template's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveCloudwatchAlarmTemplate;
+    ComparisonOperator?: CloudWatchAlarmTemplateComparisonOperator;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * The number of datapoints within the evaluation period that must be breaching to trigger the alarm.
+     */
+    DatapointsToAlarm?: __integerMin1;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * The number of periods over which data is compared to the specified threshold.
+     */
+    EvaluationPeriods?: __integerMin1;
+    /**
+     * A cloudwatch alarm template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    GroupId?: __stringMin7Max11PatternAws097;
+    /**
+     * A cloudwatch alarm template's id. AWS provided templates have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    /**
+     * The name of the metric associated with the alarm. Must be compatible with targetResourceType.
+     */
+    MetricName?: __stringMax64;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    /**
+     * The period, in seconds, over which the specified statistic is applied.
+     */
+    Period?: __integerMin10Max86400;
+    Statistic?: CloudWatchAlarmTemplateStatistic;
+    Tags?: TagMap;
+    TargetResourceType?: CloudWatchAlarmTemplateTargetResourceType;
+    /**
+     * The threshold value to compare with the specified statistic.
+     */
+    Threshold?: __double;
+    TreatMissingData?: CloudWatchAlarmTemplateTreatMissingData;
+  }
+  export interface GetEventBridgeRuleTemplateGroupRequest {
+    /**
+     * An eventbridge rule template group's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface GetEventBridgeRuleTemplateGroupResponse {
+    /**
+     * An eventbridge rule template group's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveEventbridgeRuleTemplateGroup;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * An eventbridge rule template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface GetEventBridgeRuleTemplateRequest {
+    /**
+     * An eventbridge rule template's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface GetEventBridgeRuleTemplateResponse {
+    /**
+     * An eventbridge rule template's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveEventbridgeRuleTemplate;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    EventTargets?: __listOfEventBridgeRuleTemplateTarget;
+    EventType?: EventBridgeRuleTemplateEventType;
+    /**
+     * An eventbridge rule template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    GroupId?: __stringMin7Max11PatternAws097;
+    /**
+     * An eventbridge rule template's id. AWS provided templates have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface GetSignalMapRequest {
+    /**
+     * A signal map's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface GetSignalMapResponse {
+    /**
+     * A signal map's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveSignalMap;
+    CloudWatchAlarmTemplateGroupIds?: __listOf__stringMin7Max11PatternAws097;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A top-level supported AWS resource ARN to discovery a signal map from.
+     */
+    DiscoveryEntryPointArn?: __stringMin1Max2048;
+    /**
+     * Error message associated with a failed creation or failed update attempt of a signal map.
+     */
+    ErrorMessage?: __stringMin1Max2048;
+    EventBridgeRuleTemplateGroupIds?: __listOf__stringMin7Max11PatternAws097;
+    FailedMediaResourceMap?: FailedMediaResourceMap;
+    /**
+     * A signal map's id.
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    LastDiscoveredAt?: __timestampIso8601;
+    LastSuccessfulMonitorDeployment?: SuccessfulMonitorDeployment;
+    MediaResourceMap?: MediaResourceMap;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * If true, there are pending monitor changes for this signal map that can be deployed.
+     */
+    MonitorChangesPendingDeployment?: __boolean;
+    MonitorDeployment?: MonitorDeployment;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Status?: SignalMapStatus;
+    Tags?: TagMap;
+  }
+  export interface ListCloudWatchAlarmTemplateGroupsRequest {
+    MaxResults?: MaxResults;
+    /**
+     * A token used to retrieve the next set of results in paginated list responses.
+     */
+    NextToken?: __string;
+    /**
+     * Represents the scope of a resource, with options for all scopes, AWS provided resources, or local resources.
+     */
+    Scope?: __string;
+    /**
+     * A signal map's identifier. Can be either be its id or current name.
+     */
+    SignalMapIdentifier?: __string;
+  }
+  export interface ListCloudWatchAlarmTemplateGroupsResponse {
+    CloudWatchAlarmTemplateGroups?: __listOfCloudWatchAlarmTemplateGroupSummary;
+    /**
+     * A token used to retrieve the next set of results in paginated list responses.
+     */
+    NextToken?: __stringMin1Max2048;
+  }
+  export interface ListCloudWatchAlarmTemplatesRequest {
+    /**
+     * A cloudwatch alarm template group's identifier. Can be either be its id or current name.
+     */
+    GroupIdentifier?: __string;
+    MaxResults?: MaxResults;
+    /**
+     * A token used to retrieve the next set of results in paginated list responses.
+     */
+    NextToken?: __string;
+    /**
+     * Represents the scope of a resource, with options for all scopes, AWS provided resources, or local resources.
+     */
+    Scope?: __string;
+    /**
+     * A signal map's identifier. Can be either be its id or current name.
+     */
+    SignalMapIdentifier?: __string;
+  }
+  export interface ListCloudWatchAlarmTemplatesResponse {
+    CloudWatchAlarmTemplates?: __listOfCloudWatchAlarmTemplateSummary;
+    /**
+     * A token used to retrieve the next set of results in paginated list responses.
+     */
+    NextToken?: __stringMin1Max2048;
+  }
+  export interface ListEventBridgeRuleTemplateGroupsRequest {
+    MaxResults?: MaxResults;
+    /**
+     * A token used to retrieve the next set of results in paginated list responses.
+     */
+    NextToken?: __string;
+    /**
+     * A signal map's identifier. Can be either be its id or current name.
+     */
+    SignalMapIdentifier?: __string;
+  }
+  export interface ListEventBridgeRuleTemplateGroupsResponse {
+    EventBridgeRuleTemplateGroups?: __listOfEventBridgeRuleTemplateGroupSummary;
+    /**
+     * A token used to retrieve the next set of results in paginated list responses.
+     */
+    NextToken?: __stringMin1Max2048;
+  }
+  export interface ListEventBridgeRuleTemplatesRequest {
+    /**
+     * An eventbridge rule template group's identifier. Can be either be its id or current name.
+     */
+    GroupIdentifier?: __string;
+    MaxResults?: MaxResults;
+    /**
+     * A token used to retrieve the next set of results in paginated list responses.
+     */
+    NextToken?: __string;
+    /**
+     * A signal map's identifier. Can be either be its id or current name.
+     */
+    SignalMapIdentifier?: __string;
+  }
+  export interface ListEventBridgeRuleTemplatesResponse {
+    EventBridgeRuleTemplates?: __listOfEventBridgeRuleTemplateSummary;
+    /**
+     * A token used to retrieve the next set of results in paginated list responses.
+     */
+    NextToken?: __stringMin1Max2048;
+  }
+  export interface ListSignalMapsRequest {
+    /**
+     * A cloudwatch alarm template group's identifier. Can be either be its id or current name.
+     */
+    CloudWatchAlarmTemplateGroupIdentifier?: __string;
+    /**
+     * An eventbridge rule template group's identifier. Can be either be its id or current name.
+     */
+    EventBridgeRuleTemplateGroupIdentifier?: __string;
+    MaxResults?: MaxResults;
+    /**
+     * A token used to retrieve the next set of results in paginated list responses.
+     */
+    NextToken?: __string;
+  }
+  export interface ListSignalMapsResponse {
+    /**
+     * A token used to retrieve the next set of results in paginated list responses.
+     */
+    NextToken?: __stringMin1Max2048;
+    SignalMaps?: __listOfSignalMapSummary;
+  }
+  export interface MediaResource {
+    Destinations?: __listOfMediaResourceNeighbor;
+    /**
+     * The logical name of an AWS media resource.
+     */
+    Name?: __stringMin1Max256;
+    Sources?: __listOfMediaResourceNeighbor;
+  }
+  export type MediaResourceMap = {[key: string]: MediaResource};
+  export interface MediaResourceNeighbor {
+    /**
+     * The ARN of a resource used in AWS media workflows.
+     */
+    Arn: __stringMin1Max2048PatternArn;
+    /**
+     * The logical name of an AWS media resource.
+     */
+    Name?: __stringMin1Max256;
+  }
+  export interface MonitorDeployment {
+    /**
+     * URI associated with a signal map's monitor deployment.
+     */
+    DetailsUri?: __stringMin1Max2048;
+    /**
+     * Error message associated with a failed monitor deployment of a signal map.
+     */
+    ErrorMessage?: __stringMin1Max2048;
+    Status: SignalMapMonitorDeploymentStatus;
+  }
+  export type SignalMapMonitorDeploymentStatus = "NOT_DEPLOYED"|"DRY_RUN_DEPLOYMENT_COMPLETE"|"DRY_RUN_DEPLOYMENT_FAILED"|"DRY_RUN_DEPLOYMENT_IN_PROGRESS"|"DEPLOYMENT_COMPLETE"|"DEPLOYMENT_FAILED"|"DEPLOYMENT_IN_PROGRESS"|"DELETE_COMPLETE"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|string;
+  export type SignalMapStatus = "CREATE_IN_PROGRESS"|"CREATE_COMPLETE"|"CREATE_FAILED"|"UPDATE_IN_PROGRESS"|"UPDATE_COMPLETE"|"UPDATE_REVERTED"|"UPDATE_FAILED"|"READY"|"NOT_READY"|string;
+  export interface SignalMapSummary {
+    /**
+     * A signal map's ARN (Amazon Resource Name)
+     */
+    Arn: __stringPatternArnMedialiveSignalMap;
+    CreatedAt: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A signal map's id.
+     */
+    Id: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    MonitorDeploymentStatus: SignalMapMonitorDeploymentStatus;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name: __stringMin1Max255PatternS;
+    Status: SignalMapStatus;
+    Tags?: TagMap;
+  }
+  export interface StartDeleteMonitorDeploymentRequest {
+    /**
+     * A signal map's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface StartDeleteMonitorDeploymentResponse {
+    /**
+     * A signal map's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveSignalMap;
+    CloudWatchAlarmTemplateGroupIds?: __listOf__stringMin7Max11PatternAws097;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A top-level supported AWS resource ARN to discovery a signal map from.
+     */
+    DiscoveryEntryPointArn?: __stringMin1Max2048;
+    /**
+     * Error message associated with a failed creation or failed update attempt of a signal map.
+     */
+    ErrorMessage?: __stringMin1Max2048;
+    EventBridgeRuleTemplateGroupIds?: __listOf__stringMin7Max11PatternAws097;
+    FailedMediaResourceMap?: FailedMediaResourceMap;
+    /**
+     * A signal map's id.
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    LastDiscoveredAt?: __timestampIso8601;
+    LastSuccessfulMonitorDeployment?: SuccessfulMonitorDeployment;
+    MediaResourceMap?: MediaResourceMap;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * If true, there are pending monitor changes for this signal map that can be deployed.
+     */
+    MonitorChangesPendingDeployment?: __boolean;
+    MonitorDeployment?: MonitorDeployment;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Status?: SignalMapStatus;
+    Tags?: TagMap;
+  }
+  export interface StartMonitorDeploymentRequest {
+    DryRun?: __boolean;
+    /**
+     * A signal map's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface StartMonitorDeploymentResponse {
+    /**
+     * A signal map's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveSignalMap;
+    CloudWatchAlarmTemplateGroupIds?: __listOf__stringMin7Max11PatternAws097;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A top-level supported AWS resource ARN to discovery a signal map from.
+     */
+    DiscoveryEntryPointArn?: __stringMin1Max2048;
+    /**
+     * Error message associated with a failed creation or failed update attempt of a signal map.
+     */
+    ErrorMessage?: __stringMin1Max2048;
+    EventBridgeRuleTemplateGroupIds?: __listOf__stringMin7Max11PatternAws097;
+    FailedMediaResourceMap?: FailedMediaResourceMap;
+    /**
+     * A signal map's id.
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    LastDiscoveredAt?: __timestampIso8601;
+    LastSuccessfulMonitorDeployment?: SuccessfulMonitorDeployment;
+    MediaResourceMap?: MediaResourceMap;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * If true, there are pending monitor changes for this signal map that can be deployed.
+     */
+    MonitorChangesPendingDeployment?: __boolean;
+    MonitorDeployment?: MonitorDeployment;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Status?: SignalMapStatus;
+    Tags?: TagMap;
+  }
+  export interface StartUpdateSignalMapRequest {
+    CloudWatchAlarmTemplateGroupIdentifiers?: __listOf__stringPatternS;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A top-level supported AWS resource ARN to discovery a signal map from.
+     */
+    DiscoveryEntryPointArn?: __stringMin1Max2048;
+    EventBridgeRuleTemplateGroupIdentifiers?: __listOf__stringPatternS;
+    /**
+     * If true, will force a rediscovery of a signal map if an unchanged discoveryEntryPointArn is provided.
+     */
+    ForceRediscovery?: __boolean;
+    /**
+     * A signal map's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+  }
+  export interface StartUpdateSignalMapResponse {
+    /**
+     * A signal map's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveSignalMap;
+    CloudWatchAlarmTemplateGroupIds?: __listOf__stringMin7Max11PatternAws097;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A top-level supported AWS resource ARN to discovery a signal map from.
+     */
+    DiscoveryEntryPointArn?: __stringMin1Max2048;
+    /**
+     * Error message associated with a failed creation or failed update attempt of a signal map.
+     */
+    ErrorMessage?: __stringMin1Max2048;
+    EventBridgeRuleTemplateGroupIds?: __listOf__stringMin7Max11PatternAws097;
+    FailedMediaResourceMap?: FailedMediaResourceMap;
+    /**
+     * A signal map's id.
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    LastDiscoveredAt?: __timestampIso8601;
+    LastSuccessfulMonitorDeployment?: SuccessfulMonitorDeployment;
+    MediaResourceMap?: MediaResourceMap;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * If true, there are pending monitor changes for this signal map that can be deployed.
+     */
+    MonitorChangesPendingDeployment?: __boolean;
+    MonitorDeployment?: MonitorDeployment;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Status?: SignalMapStatus;
+    Tags?: TagMap;
+  }
+  export interface SuccessfulMonitorDeployment {
+    /**
+     * URI associated with a signal map's monitor deployment.
+     */
+    DetailsUri: __stringMin1Max2048;
+    Status: SignalMapMonitorDeploymentStatus;
+  }
+  export type TagMap = {[key: string]: __string};
+  export interface UpdateCloudWatchAlarmTemplateGroupRequest {
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A cloudwatch alarm template group's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface UpdateCloudWatchAlarmTemplateGroupResponse {
+    /**
+     * A cloudwatch alarm template group's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveCloudwatchAlarmTemplateGroup;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A cloudwatch alarm template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface UpdateCloudWatchAlarmTemplateRequest {
+    ComparisonOperator?: CloudWatchAlarmTemplateComparisonOperator;
+    /**
+     * The number of datapoints within the evaluation period that must be breaching to trigger the alarm.
+     */
+    DatapointsToAlarm?: __integerMin1;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * The number of periods over which data is compared to the specified threshold.
+     */
+    EvaluationPeriods?: __integerMin1;
+    /**
+     * A cloudwatch alarm template group's identifier. Can be either be its id or current name.
+     */
+    GroupIdentifier?: __stringPatternS;
+    /**
+     * A cloudwatch alarm template's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+    /**
+     * The name of the metric associated with the alarm. Must be compatible with targetResourceType.
+     */
+    MetricName?: __stringMax64;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    /**
+     * The period, in seconds, over which the specified statistic is applied.
+     */
+    Period?: __integerMin10Max86400;
+    Statistic?: CloudWatchAlarmTemplateStatistic;
+    TargetResourceType?: CloudWatchAlarmTemplateTargetResourceType;
+    /**
+     * The threshold value to compare with the specified statistic.
+     */
+    Threshold?: __double;
+    TreatMissingData?: CloudWatchAlarmTemplateTreatMissingData;
+  }
+  export interface UpdateCloudWatchAlarmTemplateResponse {
+    /**
+     * A cloudwatch alarm template's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveCloudwatchAlarmTemplate;
+    ComparisonOperator?: CloudWatchAlarmTemplateComparisonOperator;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * The number of datapoints within the evaluation period that must be breaching to trigger the alarm.
+     */
+    DatapointsToAlarm?: __integerMin1;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * The number of periods over which data is compared to the specified threshold.
+     */
+    EvaluationPeriods?: __integerMin1;
+    /**
+     * A cloudwatch alarm template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    GroupId?: __stringMin7Max11PatternAws097;
+    /**
+     * A cloudwatch alarm template's id. AWS provided templates have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    /**
+     * The name of the metric associated with the alarm. Must be compatible with targetResourceType.
+     */
+    MetricName?: __stringMax64;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    /**
+     * The period, in seconds, over which the specified statistic is applied.
+     */
+    Period?: __integerMin10Max86400;
+    Statistic?: CloudWatchAlarmTemplateStatistic;
+    Tags?: TagMap;
+    TargetResourceType?: CloudWatchAlarmTemplateTargetResourceType;
+    /**
+     * The threshold value to compare with the specified statistic.
+     */
+    Threshold?: __double;
+    TreatMissingData?: CloudWatchAlarmTemplateTreatMissingData;
+  }
+  export interface UpdateEventBridgeRuleTemplateGroupRequest {
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * An eventbridge rule template group's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface UpdateEventBridgeRuleTemplateGroupResponse {
+    /**
+     * An eventbridge rule template group's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveEventbridgeRuleTemplateGroup;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * An eventbridge rule template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface UpdateEventBridgeRuleTemplateRequest {
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    EventTargets?: __listOfEventBridgeRuleTemplateTarget;
+    EventType?: EventBridgeRuleTemplateEventType;
+    /**
+     * An eventbridge rule template group's identifier. Can be either be its id or current name.
+     */
+    GroupIdentifier?: __stringPatternS;
+    /**
+     * An eventbridge rule template's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+  }
+  export interface UpdateEventBridgeRuleTemplateResponse {
+    /**
+     * An eventbridge rule template's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveEventbridgeRuleTemplate;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    EventTargets?: __listOfEventBridgeRuleTemplateTarget;
+    EventType?: EventBridgeRuleTemplateEventType;
+    /**
+     * An eventbridge rule template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    GroupId?: __stringMin7Max11PatternAws097;
+    /**
+     * An eventbridge rule template's id. AWS provided templates have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export type __integerMax5 = number;
+  export type __integerMin10Max86400 = number;
+  export type __listOfCloudWatchAlarmTemplateGroupSummary = CloudWatchAlarmTemplateGroupSummary[];
+  export type __listOfCloudWatchAlarmTemplateSummary = CloudWatchAlarmTemplateSummary[];
+  export type __listOfEventBridgeRuleTemplateGroupSummary = EventBridgeRuleTemplateGroupSummary[];
+  export type __listOfEventBridgeRuleTemplateSummary = EventBridgeRuleTemplateSummary[];
+  export type __listOfEventBridgeRuleTemplateTarget = EventBridgeRuleTemplateTarget[];
+  export type __listOfMediaResourceNeighbor = MediaResourceNeighbor[];
+  export type __listOfSignalMapSummary = SignalMapSummary[];
+  export type __listOf__stringMin7Max11PatternAws097 = __stringMin7Max11PatternAws097[];
+  export type __listOf__stringPatternS = __stringPatternS[];
+  export type __stringMax64 = string;
+  export type __stringMin0Max1024 = string;
+  export type __stringMin1Max2048 = string;
+  export type __stringMin1Max2048PatternArn = string;
+  export type __stringMin1Max255PatternS = string;
+  export type __stringMin7Max11PatternAws097 = string;
+  export type __stringPatternArnMedialiveCloudwatchAlarmTemplate = string;
+  export type __stringPatternArnMedialiveCloudwatchAlarmTemplateGroup = string;
+  export type __stringPatternArnMedialiveEventbridgeRuleTemplate = string;
+  export type __stringPatternArnMedialiveEventbridgeRuleTemplateGroup = string;
+  export type __stringPatternArnMedialiveSignalMap = string;
+  export type __stringPatternS = string;
+  export type Scte35SegmentationScope = "ALL_OUTPUT_GROUPS"|"SCTE35_ENABLED_OUTPUT_GROUPS"|string;
+  export type Algorithm = "AES128"|"AES192"|"AES256"|string;
+  export interface SrtCallerDecryption {
+    /**
+     * The algorithm used to encrypt content.
+     */
+    Algorithm?: Algorithm;
+    /**
+     * The ARN for the secret in Secrets Manager. Someone in your organization must create a secret and provide you with its ARN. The secret holds the passphrase that MediaLive uses to decrypt the source content.
+     */
+    PassphraseSecretArn?: __string;
+  }
+  export interface SrtCallerDecryptionRequest {
+    /**
+     * The algorithm used to encrypt content.
+     */
+    Algorithm?: Algorithm;
+    /**
+     * The ARN for the secret in Secrets Manager. Someone in your organization must create a secret and provide you with its ARN. This secret holds the passphrase that MediaLive will use to decrypt the source content.
+     */
+    PassphraseSecretArn?: __string;
+  }
+  export interface SrtCallerSource {
+    Decryption?: SrtCallerDecryption;
+    /**
+     * The preferred latency (in milliseconds) for implementing packet loss and recovery. Packet recovery is a key feature of SRT.
+     */
+    MinimumLatency?: __integer;
+    /**
+     * The IP address at the upstream system (the listener) that MediaLive (the caller) connects to.
+     */
+    SrtListenerAddress?: __string;
+    /**
+     * The port at the upstream system (the listener) that MediaLive (the caller) connects to.
+     */
+    SrtListenerPort?: __string;
+    /**
+     * The stream ID, if the upstream system uses this identifier.
+     */
+    StreamId?: __string;
+  }
+  export interface SrtCallerSourceRequest {
+    Decryption?: SrtCallerDecryptionRequest;
+    /**
+     * The preferred latency (in milliseconds) for implementing packet loss and recovery. Packet recovery is a key feature of SRT. Obtain this value from the operator at the upstream system.
+     */
+    MinimumLatency?: __integer;
+    /**
+     * The IP address at the upstream system (the listener) that MediaLive (the caller) will connect to.
+     */
+    SrtListenerAddress?: __string;
+    /**
+     * The port at the upstream system (the listener) that MediaLive (the caller) will connect to.
+     */
+    SrtListenerPort?: __string;
+    /**
+     * This value is required if the upstream system uses this identifier because without it, the SRT handshake between MediaLive (the caller) and the upstream system (the listener) might fail.
+     */
+    StreamId?: __string;
+  }
+  export interface SrtSettings {
+    SrtCallerSources?: __listOfSrtCallerSource;
+  }
+  export interface SrtSettingsRequest {
+    SrtCallerSources?: __listOfSrtCallerSourceRequest;
+  }
+  export type __listOfSrtCallerSource = SrtCallerSource[];
+  export type __listOfSrtCallerSourceRequest = SrtCallerSourceRequest[];
+  export type MultiplexPacketIdentifiersMapping = {[key: string]: MultiplexProgramPacketIdentifiersMap};
+  export type __integerMin1Max51 = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

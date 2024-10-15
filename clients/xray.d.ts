@@ -44,6 +44,14 @@ declare class XRay extends Service {
    */
   deleteGroup(callback?: (err: AWSError, data: XRay.Types.DeleteGroupResult) => void): Request<XRay.Types.DeleteGroupResult, AWSError>;
   /**
+   * Deletes a resource policy from the target Amazon Web Services account.
+   */
+  deleteResourcePolicy(params: XRay.Types.DeleteResourcePolicyRequest, callback?: (err: AWSError, data: XRay.Types.DeleteResourcePolicyResult) => void): Request<XRay.Types.DeleteResourcePolicyResult, AWSError>;
+  /**
+   * Deletes a resource policy from the target Amazon Web Services account.
+   */
+  deleteResourcePolicy(callback?: (err: AWSError, data: XRay.Types.DeleteResourcePolicyResult) => void): Request<XRay.Types.DeleteResourcePolicyResult, AWSError>;
+  /**
    * Deletes a sampling rule.
    */
   deleteSamplingRule(params: XRay.Types.DeleteSamplingRuleRequest, callback?: (err: AWSError, data: XRay.Types.DeleteSamplingRuleResult) => void): Request<XRay.Types.DeleteSamplingRuleResult, AWSError>;
@@ -132,11 +140,11 @@ declare class XRay extends Service {
    */
   getSamplingTargets(callback?: (err: AWSError, data: XRay.Types.GetSamplingTargetsResult) => void): Request<XRay.Types.GetSamplingTargetsResult, AWSError>;
   /**
-   * Retrieves a document that describes services that process incoming requests, and downstream services that they call as a result. Root services process incoming requests and make calls to downstream services. Root services are applications that use the AWS X-Ray SDK. Downstream services can be other applications, AWS resources, HTTP web APIs, or SQL databases.
+   * Retrieves a document that describes services that process incoming requests, and downstream services that they call as a result. Root services process incoming requests and make calls to downstream services. Root services are applications that use the Amazon Web Services X-Ray SDK. Downstream services can be other applications, Amazon Web Services resources, HTTP web APIs, or SQL databases.
    */
   getServiceGraph(params: XRay.Types.GetServiceGraphRequest, callback?: (err: AWSError, data: XRay.Types.GetServiceGraphResult) => void): Request<XRay.Types.GetServiceGraphResult, AWSError>;
   /**
-   * Retrieves a document that describes services that process incoming requests, and downstream services that they call as a result. Root services process incoming requests and make calls to downstream services. Root services are applications that use the AWS X-Ray SDK. Downstream services can be other applications, AWS resources, HTTP web APIs, or SQL databases.
+   * Retrieves a document that describes services that process incoming requests, and downstream services that they call as a result. Root services process incoming requests and make calls to downstream services. Root services are applications that use the Amazon Web Services X-Ray SDK. Downstream services can be other applications, Amazon Web Services resources, HTTP web APIs, or SQL databases.
    */
   getServiceGraph(callback?: (err: AWSError, data: XRay.Types.GetServiceGraphResult) => void): Request<XRay.Types.GetServiceGraphResult, AWSError>;
   /**
@@ -156,19 +164,27 @@ declare class XRay extends Service {
    */
   getTraceGraph(callback?: (err: AWSError, data: XRay.Types.GetTraceGraphResult) => void): Request<XRay.Types.GetTraceGraphResult, AWSError>;
   /**
-   * Retrieves IDs and annotations for traces available for a specified time frame using an optional filter. To get the full traces, pass the trace IDs to BatchGetTraces. A filter expression can target traced requests that hit specific service nodes or edges, have errors, or come from a known user. For example, the following filter expression targets traces that pass through api.example.com:  service("api.example.com")  This filter expression finds traces that have an annotation named account with the value 12345:  annotation.account = "12345"  For a full list of indexed fields and keywords that you can use in filter expressions, see Using Filter Expressions in the AWS X-Ray Developer Guide.
+   * Retrieves IDs and annotations for traces available for a specified time frame using an optional filter. To get the full traces, pass the trace IDs to BatchGetTraces. A filter expression can target traced requests that hit specific service nodes or edges, have errors, or come from a known user. For example, the following filter expression targets traces that pass through api.example.com:  service("api.example.com")  This filter expression finds traces that have an annotation named account with the value 12345:  annotation.account = "12345"  For a full list of indexed fields and keywords that you can use in filter expressions, see Using Filter Expressions in the Amazon Web Services X-Ray Developer Guide.
    */
   getTraceSummaries(params: XRay.Types.GetTraceSummariesRequest, callback?: (err: AWSError, data: XRay.Types.GetTraceSummariesResult) => void): Request<XRay.Types.GetTraceSummariesResult, AWSError>;
   /**
-   * Retrieves IDs and annotations for traces available for a specified time frame using an optional filter. To get the full traces, pass the trace IDs to BatchGetTraces. A filter expression can target traced requests that hit specific service nodes or edges, have errors, or come from a known user. For example, the following filter expression targets traces that pass through api.example.com:  service("api.example.com")  This filter expression finds traces that have an annotation named account with the value 12345:  annotation.account = "12345"  For a full list of indexed fields and keywords that you can use in filter expressions, see Using Filter Expressions in the AWS X-Ray Developer Guide.
+   * Retrieves IDs and annotations for traces available for a specified time frame using an optional filter. To get the full traces, pass the trace IDs to BatchGetTraces. A filter expression can target traced requests that hit specific service nodes or edges, have errors, or come from a known user. For example, the following filter expression targets traces that pass through api.example.com:  service("api.example.com")  This filter expression finds traces that have an annotation named account with the value 12345:  annotation.account = "12345"  For a full list of indexed fields and keywords that you can use in filter expressions, see Using Filter Expressions in the Amazon Web Services X-Ray Developer Guide.
    */
   getTraceSummaries(callback?: (err: AWSError, data: XRay.Types.GetTraceSummariesResult) => void): Request<XRay.Types.GetTraceSummariesResult, AWSError>;
   /**
-   * Returns a list of tags that are applied to the specified AWS X-Ray group or sampling rule.
+   * Returns the list of resource policies in the target Amazon Web Services account.
+   */
+  listResourcePolicies(params: XRay.Types.ListResourcePoliciesRequest, callback?: (err: AWSError, data: XRay.Types.ListResourcePoliciesResult) => void): Request<XRay.Types.ListResourcePoliciesResult, AWSError>;
+  /**
+   * Returns the list of resource policies in the target Amazon Web Services account.
+   */
+  listResourcePolicies(callback?: (err: AWSError, data: XRay.Types.ListResourcePoliciesResult) => void): Request<XRay.Types.ListResourcePoliciesResult, AWSError>;
+  /**
+   * Returns a list of tags that are applied to the specified Amazon Web Services X-Ray group or sampling rule.
    */
   listTagsForResource(params: XRay.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: XRay.Types.ListTagsForResourceResponse) => void): Request<XRay.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Returns a list of tags that are applied to the specified AWS X-Ray group or sampling rule.
+   * Returns a list of tags that are applied to the specified Amazon Web Services X-Ray group or sampling rule.
    */
   listTagsForResource(callback?: (err: AWSError, data: XRay.Types.ListTagsForResourceResponse) => void): Request<XRay.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -180,35 +196,43 @@ declare class XRay extends Service {
    */
   putEncryptionConfig(callback?: (err: AWSError, data: XRay.Types.PutEncryptionConfigResult) => void): Request<XRay.Types.PutEncryptionConfigResult, AWSError>;
   /**
-   * Used by the AWS X-Ray daemon to upload telemetry.
+   *  Sets the resource policy to grant one or more Amazon Web Services services and accounts permissions to access X-Ray. Each resource policy will be associated with a specific Amazon Web Services account. Each Amazon Web Services account can have a maximum of 5 resource policies, and each policy name must be unique within that account. The maximum size of each resource policy is 5KB. 
+   */
+  putResourcePolicy(params: XRay.Types.PutResourcePolicyRequest, callback?: (err: AWSError, data: XRay.Types.PutResourcePolicyResult) => void): Request<XRay.Types.PutResourcePolicyResult, AWSError>;
+  /**
+   *  Sets the resource policy to grant one or more Amazon Web Services services and accounts permissions to access X-Ray. Each resource policy will be associated with a specific Amazon Web Services account. Each Amazon Web Services account can have a maximum of 5 resource policies, and each policy name must be unique within that account. The maximum size of each resource policy is 5KB. 
+   */
+  putResourcePolicy(callback?: (err: AWSError, data: XRay.Types.PutResourcePolicyResult) => void): Request<XRay.Types.PutResourcePolicyResult, AWSError>;
+  /**
+   * Used by the Amazon Web Services X-Ray daemon to upload telemetry.
    */
   putTelemetryRecords(params: XRay.Types.PutTelemetryRecordsRequest, callback?: (err: AWSError, data: XRay.Types.PutTelemetryRecordsResult) => void): Request<XRay.Types.PutTelemetryRecordsResult, AWSError>;
   /**
-   * Used by the AWS X-Ray daemon to upload telemetry.
+   * Used by the Amazon Web Services X-Ray daemon to upload telemetry.
    */
   putTelemetryRecords(callback?: (err: AWSError, data: XRay.Types.PutTelemetryRecordsResult) => void): Request<XRay.Types.PutTelemetryRecordsResult, AWSError>;
   /**
-   * Uploads segment documents to AWS X-Ray. The X-Ray SDK generates segment documents and sends them to the X-Ray daemon, which uploads them in batches. A segment document can be a completed segment, an in-progress segment, or an array of subsegments. Segments must include the following fields. For the full segment document schema, see AWS X-Ray Segment Documents in the AWS X-Ray Developer Guide.  Required segment document fields     name - The name of the service that handled the request.    id - A 64-bit identifier for the segment, unique among segments in the same trace, in 16 hexadecimal digits.    trace_id - A unique identifier that connects all segments and subsegments originating from a single client request.    start_time - Time the segment or subsegment was created, in floating point seconds in epoch time, accurate to milliseconds. For example, 1480615200.010 or 1.480615200010E9.    end_time - Time the segment or subsegment was closed. For example, 1480615200.090 or 1.480615200090E9. Specify either an end_time or in_progress.    in_progress - Set to true instead of specifying an end_time to record that a segment has been started, but is not complete. Send an in-progress segment when your application receives a request that will take a long time to serve, to trace that the request was received. When the response is sent, send the complete segment to overwrite the in-progress segment.   A trace_id consists of three numbers separated by hyphens. For example, 1-58406520-a006649127e371903a2de979. This includes:  Trace ID Format    The version number, for instance, 1.   The time of the original request, in Unix epoch time, in 8 hexadecimal digits. For example, 10:00AM December 2nd, 2016 PST in epoch time is 1480615200 seconds, or 58406520 in hexadecimal.   A 96-bit identifier for the trace, globally unique, in 24 hexadecimal digits.  
+   * Uploads segment documents to Amazon Web Services X-Ray. The X-Ray SDK generates segment documents and sends them to the X-Ray daemon, which uploads them in batches. A segment document can be a completed segment, an in-progress segment, or an array of subsegments. Segments must include the following fields. For the full segment document schema, see Amazon Web Services X-Ray Segment Documents in the Amazon Web Services X-Ray Developer Guide.  Required segment document fields     name - The name of the service that handled the request.    id - A 64-bit identifier for the segment, unique among segments in the same trace, in 16 hexadecimal digits.    trace_id - A unique identifier that connects all segments and subsegments originating from a single client request.    start_time - Time the segment or subsegment was created, in floating point seconds in epoch time, accurate to milliseconds. For example, 1480615200.010 or 1.480615200010E9.    end_time - Time the segment or subsegment was closed. For example, 1480615200.090 or 1.480615200090E9. Specify either an end_time or in_progress.    in_progress - Set to true instead of specifying an end_time to record that a segment has been started, but is not complete. Send an in-progress segment when your application receives a request that will take a long time to serve, to trace that the request was received. When the response is sent, send the complete segment to overwrite the in-progress segment.   A trace_id consists of three numbers separated by hyphens. For example, 1-58406520-a006649127e371903a2de979. This includes:  Trace ID Format    The version number, for instance, 1.   The time of the original request, in Unix epoch time, in 8 hexadecimal digits. For example, 10:00AM December 2nd, 2016 PST in epoch time is 1480615200 seconds, or 58406520 in hexadecimal.   A 96-bit identifier for the trace, globally unique, in 24 hexadecimal digits.  
    */
   putTraceSegments(params: XRay.Types.PutTraceSegmentsRequest, callback?: (err: AWSError, data: XRay.Types.PutTraceSegmentsResult) => void): Request<XRay.Types.PutTraceSegmentsResult, AWSError>;
   /**
-   * Uploads segment documents to AWS X-Ray. The X-Ray SDK generates segment documents and sends them to the X-Ray daemon, which uploads them in batches. A segment document can be a completed segment, an in-progress segment, or an array of subsegments. Segments must include the following fields. For the full segment document schema, see AWS X-Ray Segment Documents in the AWS X-Ray Developer Guide.  Required segment document fields     name - The name of the service that handled the request.    id - A 64-bit identifier for the segment, unique among segments in the same trace, in 16 hexadecimal digits.    trace_id - A unique identifier that connects all segments and subsegments originating from a single client request.    start_time - Time the segment or subsegment was created, in floating point seconds in epoch time, accurate to milliseconds. For example, 1480615200.010 or 1.480615200010E9.    end_time - Time the segment or subsegment was closed. For example, 1480615200.090 or 1.480615200090E9. Specify either an end_time or in_progress.    in_progress - Set to true instead of specifying an end_time to record that a segment has been started, but is not complete. Send an in-progress segment when your application receives a request that will take a long time to serve, to trace that the request was received. When the response is sent, send the complete segment to overwrite the in-progress segment.   A trace_id consists of three numbers separated by hyphens. For example, 1-58406520-a006649127e371903a2de979. This includes:  Trace ID Format    The version number, for instance, 1.   The time of the original request, in Unix epoch time, in 8 hexadecimal digits. For example, 10:00AM December 2nd, 2016 PST in epoch time is 1480615200 seconds, or 58406520 in hexadecimal.   A 96-bit identifier for the trace, globally unique, in 24 hexadecimal digits.  
+   * Uploads segment documents to Amazon Web Services X-Ray. The X-Ray SDK generates segment documents and sends them to the X-Ray daemon, which uploads them in batches. A segment document can be a completed segment, an in-progress segment, or an array of subsegments. Segments must include the following fields. For the full segment document schema, see Amazon Web Services X-Ray Segment Documents in the Amazon Web Services X-Ray Developer Guide.  Required segment document fields     name - The name of the service that handled the request.    id - A 64-bit identifier for the segment, unique among segments in the same trace, in 16 hexadecimal digits.    trace_id - A unique identifier that connects all segments and subsegments originating from a single client request.    start_time - Time the segment or subsegment was created, in floating point seconds in epoch time, accurate to milliseconds. For example, 1480615200.010 or 1.480615200010E9.    end_time - Time the segment or subsegment was closed. For example, 1480615200.090 or 1.480615200090E9. Specify either an end_time or in_progress.    in_progress - Set to true instead of specifying an end_time to record that a segment has been started, but is not complete. Send an in-progress segment when your application receives a request that will take a long time to serve, to trace that the request was received. When the response is sent, send the complete segment to overwrite the in-progress segment.   A trace_id consists of three numbers separated by hyphens. For example, 1-58406520-a006649127e371903a2de979. This includes:  Trace ID Format    The version number, for instance, 1.   The time of the original request, in Unix epoch time, in 8 hexadecimal digits. For example, 10:00AM December 2nd, 2016 PST in epoch time is 1480615200 seconds, or 58406520 in hexadecimal.   A 96-bit identifier for the trace, globally unique, in 24 hexadecimal digits.  
    */
   putTraceSegments(callback?: (err: AWSError, data: XRay.Types.PutTraceSegmentsResult) => void): Request<XRay.Types.PutTraceSegmentsResult, AWSError>;
   /**
-   * Applies tags to an existing AWS X-Ray group or sampling rule.
+   * Applies tags to an existing Amazon Web Services X-Ray group or sampling rule.
    */
   tagResource(params: XRay.Types.TagResourceRequest, callback?: (err: AWSError, data: XRay.Types.TagResourceResponse) => void): Request<XRay.Types.TagResourceResponse, AWSError>;
   /**
-   * Applies tags to an existing AWS X-Ray group or sampling rule.
+   * Applies tags to an existing Amazon Web Services X-Ray group or sampling rule.
    */
   tagResource(callback?: (err: AWSError, data: XRay.Types.TagResourceResponse) => void): Request<XRay.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes tags from an AWS X-Ray group or sampling rule. You cannot edit or delete system tags (those with an aws: prefix).
+   * Removes tags from an Amazon Web Services X-Ray group or sampling rule. You cannot edit or delete system tags (those with an aws: prefix).
    */
   untagResource(params: XRay.Types.UntagResourceRequest, callback?: (err: AWSError, data: XRay.Types.UntagResourceResponse) => void): Request<XRay.Types.UntagResourceResponse, AWSError>;
   /**
-   * Removes tags from an AWS X-Ray group or sampling rule. You cannot edit or delete system tags (those with an aws: prefix).
+   * Removes tags from an Amazon Web Services X-Ray group or sampling rule. You cannot edit or delete system tags (those with an aws: prefix).
    */
   untagResource(callback?: (err: AWSError, data: XRay.Types.UntagResourceResponse) => void): Request<XRay.Types.UntagResourceResponse, AWSError>;
   /**
@@ -338,11 +362,11 @@ declare namespace XRay {
      */
     FilterExpression?: FilterExpression;
     /**
-     * The structure containing configurations related to insights.   The InsightsEnabled boolean can be set to true to enable insights for the new group or false to disable insights for the new group.   The NotifcationsEnabled boolean can be set to true to enable insights notifications for the new group. Notifications may only be enabled on a group with InsightsEnabled set to true.  
+     * The structure containing configurations related to insights.   The InsightsEnabled boolean can be set to true to enable insights for the new group or false to disable insights for the new group.   The NotificationsEnabled boolean can be set to true to enable insights notifications for the new group. Notifications may only be enabled on a group with InsightsEnabled set to true.  
      */
     InsightsConfiguration?: InsightsConfiguration;
     /**
-     * A map that contains one or more tag keys and tag values to attach to an X-Ray group. For more information about ways to use tags, see Tagging AWS resources in the AWS General Reference. The following restrictions apply to tags:   Maximum number of user-applied tags per resource: 50   Maximum tag key length: 128 Unicode characters   Maximum tag value length: 256 Unicode characters   Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . : / = + - and @   Tag keys and values are case sensitive.   Don't use aws: as a prefix for keys; it's reserved for AWS use.  
+     * A map that contains one or more tag keys and tag values to attach to an X-Ray group. For more information about ways to use tags, see Tagging Amazon Web Services resources in the Amazon Web Services General Reference. The following restrictions apply to tags:   Maximum number of user-applied tags per resource: 50   Maximum tag key length: 128 Unicode characters   Maximum tag value length: 256 Unicode characters   Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . : / = + - and @   Tag keys and values are case sensitive.   Don't use aws: as a prefix for keys; it's reserved for Amazon Web Services use.  
      */
     Tags?: TagList;
   }
@@ -358,7 +382,7 @@ declare namespace XRay {
      */
     SamplingRule: SamplingRule;
     /**
-     * A map that contains one or more tag keys and tag values to attach to an X-Ray sampling rule. For more information about ways to use tags, see Tagging AWS resources in the AWS General Reference. The following restrictions apply to tags:   Maximum number of user-applied tags per resource: 50   Maximum tag key length: 128 Unicode characters   Maximum tag value length: 256 Unicode characters   Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . : / = + - and @   Tag keys and values are case sensitive.   Don't use aws: as a prefix for keys; it's reserved for AWS use.  
+     * A map that contains one or more tag keys and tag values to attach to an X-Ray sampling rule. For more information about ways to use tags, see Tagging Amazon Web Services resources in the Amazon Web Services General Reference. The following restrictions apply to tags:   Maximum number of user-applied tags per resource: 50   Maximum tag key length: 128 Unicode characters   Maximum tag value length: 256 Unicode characters   Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . : / = + - and @   Tag keys and values are case sensitive.   Don't use aws: as a prefix for keys; it's reserved for Amazon Web Services use.  
      */
     Tags?: TagList;
   }
@@ -379,6 +403,18 @@ declare namespace XRay {
     GroupARN?: GroupARN;
   }
   export interface DeleteGroupResult {
+  }
+  export interface DeleteResourcePolicyRequest {
+    /**
+     * The name of the resource policy to delete.
+     */
+    PolicyName: PolicyName;
+    /**
+     * Specifies a specific policy revision to delete. Provide a PolicyRevisionId to ensure an atomic delete operation. If the provided revision id does not match the latest policy revision id, an InvalidPolicyRevisionIdException exception is returned. 
+     */
+    PolicyRevisionId?: PolicyRevisionId;
+  }
+  export interface DeleteResourcePolicyResult {
   }
   export interface DeleteSamplingRuleRequest {
     /**
@@ -416,13 +452,21 @@ declare namespace XRay {
      */
     SummaryStatistics?: EdgeStatistics;
     /**
-     * A histogram that maps the spread of client response times on an edge.
+     * A histogram that maps the spread of client response times on an edge. Only populated for synchronous edges.
      */
     ResponseTimeHistogram?: Histogram;
     /**
      * Aliases for the edge.
      */
     Aliases?: AliasList;
+    /**
+     * Describes an asynchronous connection, with a value of link.
+     */
+    EdgeType?: String;
+    /**
+     * A histogram that maps the spread of event age when received by consumers. Age is calculated each time an event is received. Only populated when EdgeType is link.
+     */
+    ReceivedEventAgeHistogram?: Histogram;
   }
   export type EdgeList = Edge[];
   export interface EdgeStatistics {
@@ -449,7 +493,7 @@ declare namespace XRay {
   }
   export interface EncryptionConfig {
     /**
-     * The ID of the customer master key (CMK) used for encryption, if applicable.
+     * The ID of the KMS key used for encryption, if applicable.
      */
     KeyId?: String;
     /**
@@ -457,7 +501,7 @@ declare namespace XRay {
      */
     Status?: EncryptionStatus;
     /**
-     * The type of encryption. Set to KMS for encryption with CMKs. Set to NONE for default encryption.
+     * The type of encryption. Set to KMS for encryption with KMS keys. Set to NONE for default encryption.
      */
     Type?: EncryptionType;
   }
@@ -714,7 +758,7 @@ declare namespace XRay {
      */
     ServiceGraphEndTime?: Timestamp;
     /**
-     * The AWS instrumented services related to the insight.
+     * The Amazon Web Services instrumented services related to the insight.
      */
     Services?: InsightImpactGraphServiceList;
     /**
@@ -949,7 +993,7 @@ declare namespace XRay {
      */
     EndTime: Timestamp;
     /**
-     * A parameter to indicate whether to query trace summaries by TraceId or Event time.
+     * A parameter to indicate whether to query trace summaries by TraceId, Event (trace update time), or Service (segment end time).
      */
     TimeRangeType?: TimeRangeType;
     /**
@@ -1001,7 +1045,7 @@ declare namespace XRay {
      */
     FilterExpression?: String;
     /**
-     * The structure containing configurations related to insights.   The InsightsEnabled boolean can be set to true to enable insights for the group or false to disable insights for the group.   The NotifcationsEnabled boolean can be set to true to enable insights notifications through Amazon EventBridge for the group.  
+     * The structure containing configurations related to insights.   The InsightsEnabled boolean can be set to true to enable insights for the group or false to disable insights for the group.   The NotificationsEnabled boolean can be set to true to enable insights notifications through Amazon EventBridge for the group.  
      */
     InsightsConfiguration?: InsightsConfiguration;
   }
@@ -1148,7 +1192,7 @@ declare namespace XRay {
      */
     ReferenceId?: NullableInteger;
     /**
-     * Identifier for the service. Unique within the service map.   AWS Resource - The type of an AWS resource. For example, AWS::EC2::Instance for an application running on Amazon EC2 or AWS::DynamoDB::Table for an Amazon DynamoDB table that the application used.    AWS Service - The type of an AWS service. For example, AWS::DynamoDB for downstream calls to Amazon DynamoDB that didn't target a specific table.    AWS Service - The type of an AWS service. For example, AWS::DynamoDB for downstream calls to Amazon DynamoDB that didn't target a specific table.    remote - A downstream service of indeterminate type.  
+     * Identifier for the service. Unique within the service map.   Amazon Web Services Resource - The type of an Amazon Web Services resource. For example, AWS::EC2::Instance for an application running on Amazon EC2 or AWS::DynamoDB::Table for an Amazon DynamoDB table that the application used.    Amazon Web Services Service - The type of an Amazon Web Services service. For example, AWS::DynamoDB for downstream calls to Amazon DynamoDB that didn't target a specific table.    Amazon Web Services Service - The type of an Amazon Web Services service. For example, AWS::DynamoDB for downstream calls to Amazon DynamoDB that didn't target a specific table.    remote - A downstream service of indeterminate type.  
      */
     Type?: String;
     /**
@@ -1160,7 +1204,7 @@ declare namespace XRay {
      */
     Names?: ServiceNames;
     /**
-     * Identifier of the AWS account in which the service runs.
+     * Identifier of the Amazon Web Services account in which the service runs.
      */
     AccountId?: String;
     /**
@@ -1241,6 +1285,22 @@ declare namespace XRay {
     Id?: String;
   }
   export type Integer = number;
+  export interface ListResourcePoliciesRequest {
+    /**
+     * Not currently supported.
+     */
+    NextToken?: ResourcePolicyNextToken;
+  }
+  export interface ListResourcePoliciesResult {
+    /**
+     * The list of resource policies in the target Amazon Web Services account.
+     */
+    ResourcePolicies?: ResourcePolicyList;
+    /**
+     * Pagination token. Not currently supported.
+     */
+    NextToken?: ResourcePolicyNextToken;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
@@ -1265,10 +1325,13 @@ declare namespace XRay {
   export type NullableDouble = number;
   export type NullableInteger = number;
   export type NullableLong = number;
+  export type PolicyDocument = string;
+  export type PolicyName = string;
+  export type PolicyRevisionId = string;
   export type Priority = number;
   export interface PutEncryptionConfigRequest {
     /**
-     * An AWS KMS customer master key (CMK) in one of the following formats:    Alias - The name of the key. For example, alias/MyKey.    Key ID - The KMS key ID of the key. For example, ae4aa6d49-a4d8-9df9-a475-4ff6d7898456. AWS X-Ray does not support asymmetric CMKs.    ARN - The full Amazon Resource Name of the key ID or alias. For example, arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456. Use this format to specify a key in a different account.   Omit this key if you set Type to NONE.
+     * An Amazon Web Services KMS key in one of the following formats:    Alias - The name of the key. For example, alias/MyKey.    Key ID - The KMS key ID of the key. For example, ae4aa6d49-a4d8-9df9-a475-4ff6d7898456. Amazon Web Services X-Ray does not support asymmetric KMS keys.    ARN - The full Amazon Resource Name of the key ID or alias. For example, arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456. Use this format to specify a key in a different account.   Omit this key if you set Type to NONE.
      */
     KeyId?: EncryptionKeyId;
     /**
@@ -1281,6 +1344,30 @@ declare namespace XRay {
      * The new encryption configuration.
      */
     EncryptionConfig?: EncryptionConfig;
+  }
+  export interface PutResourcePolicyRequest {
+    /**
+     * The name of the resource policy. Must be unique within a specific Amazon Web Services account.
+     */
+    PolicyName: PolicyName;
+    /**
+     * The resource policy document, which can be up to 5kb in size.
+     */
+    PolicyDocument: PolicyDocument;
+    /**
+     * Specifies a specific policy revision, to ensure an atomic create operation. By default the resource policy is created if it does not exist, or updated with an incremented revision id. The revision id is unique to each policy in the account. If the policy revision id does not match the latest revision id, the operation will fail with an InvalidPolicyRevisionIdException exception. You can also provide a PolicyRevisionId of 0. In this case, the operation will fail with an InvalidPolicyRevisionIdException exception if a resource policy with the same name already exists. 
+     */
+    PolicyRevisionId?: PolicyRevisionId;
+    /**
+     * A flag to indicate whether to bypass the resource policy lockout safety check.  Setting this value to true increases the risk that the policy becomes unmanageable. Do not set this value to true indiscriminately.  Use this parameter only when you include a policy in the request and you intend to prevent the principal that is making the request from making a subsequent PutResourcePolicy request. The default value is false.
+     */
+    BypassPolicyLockoutCheck?: Boolean;
+  }
+  export interface PutResourcePolicyResult {
+    /**
+     * The resource policy document, as provided in the PutResourcePolicyRequest.
+     */
+    ResourcePolicy?: ResourcePolicy;
   }
   export interface PutTelemetryRecordsRequest {
     /**
@@ -1337,6 +1424,26 @@ declare namespace XRay {
      */
     ARN?: String;
   }
+  export interface ResourcePolicy {
+    /**
+     * The name of the resource policy. Must be unique within a specific Amazon Web Services account.
+     */
+    PolicyName?: PolicyName;
+    /**
+     * The resource policy document, which can be up to 5kb in size.
+     */
+    PolicyDocument?: PolicyDocument;
+    /**
+     * Returns the current policy revision id for this policy name.
+     */
+    PolicyRevisionId?: PolicyRevisionId;
+    /**
+     * When the policy was last updated, in Unix time seconds.
+     */
+    LastUpdatedTime?: Timestamp;
+  }
+  export type ResourcePolicyList = ResourcePolicy[];
+  export type ResourcePolicyNextToken = string;
   export interface ResponseTimeRootCause {
     /**
      * A list of corresponding services. A service identifies a segment and contains a name, account ID, type, and inferred flag.
@@ -1413,7 +1520,7 @@ declare namespace XRay {
      */
     RuleARN?: String;
     /**
-     * Matches the ARN of the AWS resource on which the service runs.
+     * Matches the ARN of the Amazon Web Services resource on which the service runs.
      */
     ResourceARN: ResourceARN;
     /**
@@ -1482,7 +1589,7 @@ declare namespace XRay {
      */
     RuleARN?: String;
     /**
-     * Matches the ARN of the AWS resource on which the service runs.
+     * Matches the ARN of the Amazon Web Services resource on which the service runs.
      */
     ResourceARN?: ResourceARN;
     /**
@@ -1637,11 +1744,11 @@ declare namespace XRay {
      */
     Root?: NullableBoolean;
     /**
-     * Identifier of the AWS account in which the service runs.
+     * Identifier of the Amazon Web Services account in which the service runs.
      */
     AccountId?: String;
     /**
-     * The type of service.   AWS Resource - The type of an AWS resource. For example, AWS::EC2::Instance for an application running on Amazon EC2 or AWS::DynamoDB::Table for an Amazon DynamoDB table that the application used.   AWS Service - The type of an AWS service. For example, AWS::DynamoDB for downstream calls to Amazon DynamoDB that didn't target a specific table.    client - Represents the clients that sent requests to a root service.    remote - A downstream service of indeterminate type.  
+     * The type of service.   Amazon Web Services Resource - The type of an Amazon Web Services resource. For example, AWS::EC2::Instance for an application running on Amazon EC2 or AWS::DynamoDB::Table for an Amazon DynamoDB table that the application used.   Amazon Web Services Service - The type of an Amazon Web Services service. For example, AWS::DynamoDB for downstream calls to Amazon DynamoDB that didn't target a specific table.    client - Represents the clients that sent requests to a root service.    remote - A downstream service of indeterminate type.  
      */
     Type?: String;
     /**
@@ -1738,7 +1845,7 @@ declare namespace XRay {
      */
     ResourceARN: AmazonResourceName;
     /**
-     * A map that contains one or more tag keys and tag values to attach to an X-Ray group or sampling rule. For more information about ways to use tags, see Tagging AWS resources in the AWS General Reference. The following restrictions apply to tags:   Maximum number of user-applied tags per resource: 50   Maximum tag key length: 128 Unicode characters   Maximum tag value length: 256 Unicode characters   Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . : / = + - and @   Tag keys and values are case sensitive.   Don't use aws: as a prefix for keys; it's reserved for AWS use. You cannot edit or delete system tags.  
+     * A map that contains one or more tag keys and tag values to attach to an X-Ray group or sampling rule. For more information about ways to use tags, see Tagging Amazon Web Services resources in the Amazon Web Services General Reference. The following restrictions apply to tags:   Maximum number of user-applied tags per resource: 50   Maximum tag key length: 128 Unicode characters   Maximum tag value length: 256 Unicode characters   Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . : / = + - and @   Tag keys and values are case sensitive.   Don't use aws: as a prefix for keys; it's reserved for Amazon Web Services use. You cannot edit or delete system tags.  
      */
     Tags: TagList;
   }
@@ -1772,7 +1879,7 @@ declare namespace XRay {
     BackendConnectionErrors?: BackendConnectionErrors;
   }
   export type TelemetryRecordList = TelemetryRecord[];
-  export type TimeRangeType = "TraceId"|"Event"|string;
+  export type TimeRangeType = "TraceId"|"Event"|"Service"|string;
   export interface TimeSeriesServiceStatistics {
     /**
      * Timestamp of the window for which statistics are aggregated.
@@ -1802,7 +1909,7 @@ declare namespace XRay {
      */
     Duration?: NullableDouble;
     /**
-     * LimitExceeded is set to true when the trace has exceeded one of the defined quotas. For more information about quotas, see AWS X-Ray endpoints and quotas.
+     * LimitExceeded is set to true when the trace has exceeded the Trace document size limit. For more information about this limit and other X-Ray limits and quotas, see Amazon Web Services X-Ray endpoints and quotas.
      */
     LimitExceeded?: NullableBoolean;
     /**
@@ -1823,6 +1930,10 @@ declare namespace XRay {
      * The unique identifier for the request that generated the trace's segments and subsegments.
      */
     Id?: TraceId;
+    /**
+     * The start time of a trace, based on the earliest trace segment start time.
+     */
+    StartTime?: Timestamp;
     /**
      * The length of time in seconds between the start time of the root segment and the end time of the last segment that completed.
      */
@@ -1970,7 +2081,7 @@ declare namespace XRay {
      */
     FilterExpression?: FilterExpression;
     /**
-     * The structure containing configurations related to insights.   The InsightsEnabled boolean can be set to true to enable insights for the group or false to disable insights for the group.   The NotifcationsEnabled boolean can be set to true to enable insights notifications for the group. Notifications can only be enabled on a group with InsightsEnabled set to true.  
+     * The structure containing configurations related to insights.   The InsightsEnabled boolean can be set to true to enable insights for the group or false to disable insights for the group.   The NotificationsEnabled boolean can be set to true to enable insights notifications for the group. Notifications can only be enabled on a group with InsightsEnabled set to true.  
      */
     InsightsConfiguration?: InsightsConfiguration;
   }

@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "Adds the BatchGetFlowAssociation API which returns flow associations (flow-resource) corresponding to the list of resourceArns supplied in the request. This release also adds IsDefault, LastModifiedRegion and LastModifiedTime fields to the responses of several Describe and List APIs."
+    },
+    {
+        "type": "feature",
+        "category": "GlobalAccelerator",
+        "description": "Global Accelerator now support accelerators with cross account endpoints."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This release adds support for customized networking resources to Amazon RDS Custom."
+    },
+    {
+        "type": "feature",
+        "category": "Redshift",
+        "description": "Added support for Multi-AZ deployments for Provisioned RA3 clusters that provide 99.99% SLA availability."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Support for batch transform input in Model dashboard"
+    }
+]

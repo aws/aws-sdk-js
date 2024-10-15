@@ -28,6 +28,38 @@ declare class FraudDetector extends Service {
    */
   batchGetVariable(callback?: (err: AWSError, data: FraudDetector.Types.BatchGetVariableResult) => void): Request<FraudDetector.Types.BatchGetVariableResult, AWSError>;
   /**
+   *  Cancels an in-progress batch import job.
+   */
+  cancelBatchImportJob(params: FraudDetector.Types.CancelBatchImportJobRequest, callback?: (err: AWSError, data: FraudDetector.Types.CancelBatchImportJobResult) => void): Request<FraudDetector.Types.CancelBatchImportJobResult, AWSError>;
+  /**
+   *  Cancels an in-progress batch import job.
+   */
+  cancelBatchImportJob(callback?: (err: AWSError, data: FraudDetector.Types.CancelBatchImportJobResult) => void): Request<FraudDetector.Types.CancelBatchImportJobResult, AWSError>;
+  /**
+   * Cancels the specified batch prediction job.
+   */
+  cancelBatchPredictionJob(params: FraudDetector.Types.CancelBatchPredictionJobRequest, callback?: (err: AWSError, data: FraudDetector.Types.CancelBatchPredictionJobResult) => void): Request<FraudDetector.Types.CancelBatchPredictionJobResult, AWSError>;
+  /**
+   * Cancels the specified batch prediction job.
+   */
+  cancelBatchPredictionJob(callback?: (err: AWSError, data: FraudDetector.Types.CancelBatchPredictionJobResult) => void): Request<FraudDetector.Types.CancelBatchPredictionJobResult, AWSError>;
+  /**
+   * Creates a batch import job. 
+   */
+  createBatchImportJob(params: FraudDetector.Types.CreateBatchImportJobRequest, callback?: (err: AWSError, data: FraudDetector.Types.CreateBatchImportJobResult) => void): Request<FraudDetector.Types.CreateBatchImportJobResult, AWSError>;
+  /**
+   * Creates a batch import job. 
+   */
+  createBatchImportJob(callback?: (err: AWSError, data: FraudDetector.Types.CreateBatchImportJobResult) => void): Request<FraudDetector.Types.CreateBatchImportJobResult, AWSError>;
+  /**
+   * Creates a batch prediction job.
+   */
+  createBatchPredictionJob(params: FraudDetector.Types.CreateBatchPredictionJobRequest, callback?: (err: AWSError, data: FraudDetector.Types.CreateBatchPredictionJobResult) => void): Request<FraudDetector.Types.CreateBatchPredictionJobResult, AWSError>;
+  /**
+   * Creates a batch prediction job.
+   */
+  createBatchPredictionJob(callback?: (err: AWSError, data: FraudDetector.Types.CreateBatchPredictionJobResult) => void): Request<FraudDetector.Types.CreateBatchPredictionJobResult, AWSError>;
+  /**
    * Creates a detector version. The detector version starts in a DRAFT status.
    */
   createDetectorVersion(params: FraudDetector.Types.CreateDetectorVersionRequest, callback?: (err: AWSError, data: FraudDetector.Types.CreateDetectorVersionResult) => void): Request<FraudDetector.Types.CreateDetectorVersionResult, AWSError>;
@@ -35,6 +67,14 @@ declare class FraudDetector extends Service {
    * Creates a detector version. The detector version starts in a DRAFT status.
    */
   createDetectorVersion(callback?: (err: AWSError, data: FraudDetector.Types.CreateDetectorVersionResult) => void): Request<FraudDetector.Types.CreateDetectorVersionResult, AWSError>;
+  /**
+   *  Creates a list.  List is a set of input data for a variable in your event dataset. You use the input data in a rule that's associated with your detector. For more information, see Lists.
+   */
+  createList(params: FraudDetector.Types.CreateListRequest, callback?: (err: AWSError, data: FraudDetector.Types.CreateListResult) => void): Request<FraudDetector.Types.CreateListResult, AWSError>;
+  /**
+   *  Creates a list.  List is a set of input data for a variable in your event dataset. You use the input data in a rule that's associated with your detector. For more information, see Lists.
+   */
+  createList(callback?: (err: AWSError, data: FraudDetector.Types.CreateListResult) => void): Request<FraudDetector.Types.CreateListResult, AWSError>;
   /**
    * Creates a model using the specified model type.
    */
@@ -68,6 +108,22 @@ declare class FraudDetector extends Service {
    */
   createVariable(callback?: (err: AWSError, data: FraudDetector.Types.CreateVariableResult) => void): Request<FraudDetector.Types.CreateVariableResult, AWSError>;
   /**
+   * Deletes the specified batch import job ID record. This action does not delete the data that was batch imported. 
+   */
+  deleteBatchImportJob(params: FraudDetector.Types.DeleteBatchImportJobRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteBatchImportJobResult) => void): Request<FraudDetector.Types.DeleteBatchImportJobResult, AWSError>;
+  /**
+   * Deletes the specified batch import job ID record. This action does not delete the data that was batch imported. 
+   */
+  deleteBatchImportJob(callback?: (err: AWSError, data: FraudDetector.Types.DeleteBatchImportJobResult) => void): Request<FraudDetector.Types.DeleteBatchImportJobResult, AWSError>;
+  /**
+   * Deletes a batch prediction job.
+   */
+  deleteBatchPredictionJob(params: FraudDetector.Types.DeleteBatchPredictionJobRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteBatchPredictionJobResult) => void): Request<FraudDetector.Types.DeleteBatchPredictionJobResult, AWSError>;
+  /**
+   * Deletes a batch prediction job.
+   */
+  deleteBatchPredictionJob(callback?: (err: AWSError, data: FraudDetector.Types.DeleteBatchPredictionJobResult) => void): Request<FraudDetector.Types.DeleteBatchPredictionJobResult, AWSError>;
+  /**
    * Deletes the detector. Before deleting a detector, you must first delete all detector versions and rule versions associated with the detector. When you delete a detector, Amazon Fraud Detector permanently deletes the detector and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteDetector(params: FraudDetector.Types.DeleteDetectorRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteDetectorResult) => void): Request<FraudDetector.Types.DeleteDetectorResult, AWSError>;
@@ -84,29 +140,37 @@ declare class FraudDetector extends Service {
    */
   deleteDetectorVersion(callback?: (err: AWSError, data: FraudDetector.Types.DeleteDetectorVersionResult) => void): Request<FraudDetector.Types.DeleteDetectorVersionResult, AWSError>;
   /**
-   * Deletes an entity type. You cannot delete an entity type that is included in an event type. When you delete an entity type, Amazon Fraud Detector permanently deletes that entity type from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.
+   * Deletes an entity type. You cannot delete an entity type that is included in an event type. When you delete an entity type, Amazon Fraud Detector permanently deletes that entity type and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteEntityType(params: FraudDetector.Types.DeleteEntityTypeRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteEntityTypeResult) => void): Request<FraudDetector.Types.DeleteEntityTypeResult, AWSError>;
   /**
-   * Deletes an entity type. You cannot delete an entity type that is included in an event type. When you delete an entity type, Amazon Fraud Detector permanently deletes that entity type from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.
+   * Deletes an entity type. You cannot delete an entity type that is included in an event type. When you delete an entity type, Amazon Fraud Detector permanently deletes that entity type and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteEntityType(callback?: (err: AWSError, data: FraudDetector.Types.DeleteEntityTypeResult) => void): Request<FraudDetector.Types.DeleteEntityTypeResult, AWSError>;
   /**
-   * Deletes the specified event. When you delete an event, Amazon Fraud Detector permanently deletes that event from the evaluation history, and the event data is no longer stored in Amazon Fraud Detector.
+   * Deletes the specified event. When you delete an event, Amazon Fraud Detector permanently deletes that event and the event data is no longer stored in Amazon Fraud Detector. If deleteAuditHistory is True, event data is available through search for up to 30 seconds after the delete operation is completed.
    */
   deleteEvent(params: FraudDetector.Types.DeleteEventRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteEventResult) => void): Request<FraudDetector.Types.DeleteEventResult, AWSError>;
   /**
-   * Deletes the specified event. When you delete an event, Amazon Fraud Detector permanently deletes that event from the evaluation history, and the event data is no longer stored in Amazon Fraud Detector.
+   * Deletes the specified event. When you delete an event, Amazon Fraud Detector permanently deletes that event and the event data is no longer stored in Amazon Fraud Detector. If deleteAuditHistory is True, event data is available through search for up to 30 seconds after the delete operation is completed.
    */
   deleteEvent(callback?: (err: AWSError, data: FraudDetector.Types.DeleteEventResult) => void): Request<FraudDetector.Types.DeleteEventResult, AWSError>;
   /**
-   * Deletes an event type. You cannot delete an event type that is used in a detector or a model. When you delete an entity type, Amazon Fraud Detector permanently deletes that entity type from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.
+   * Deletes an event type. You cannot delete an event type that is used in a detector or a model. When you delete an event type, Amazon Fraud Detector permanently deletes that event type and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteEventType(params: FraudDetector.Types.DeleteEventTypeRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteEventTypeResult) => void): Request<FraudDetector.Types.DeleteEventTypeResult, AWSError>;
   /**
-   * Deletes an event type. You cannot delete an event type that is used in a detector or a model. When you delete an entity type, Amazon Fraud Detector permanently deletes that entity type from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.
+   * Deletes an event type. You cannot delete an event type that is used in a detector or a model. When you delete an event type, Amazon Fraud Detector permanently deletes that event type and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteEventType(callback?: (err: AWSError, data: FraudDetector.Types.DeleteEventTypeResult) => void): Request<FraudDetector.Types.DeleteEventTypeResult, AWSError>;
+  /**
+   * Deletes all events of a particular event type.
+   */
+  deleteEventsByEventType(params: FraudDetector.Types.DeleteEventsByEventTypeRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteEventsByEventTypeResult) => void): Request<FraudDetector.Types.DeleteEventsByEventTypeResult, AWSError>;
+  /**
+   * Deletes all events of a particular event type.
+   */
+  deleteEventsByEventType(callback?: (err: AWSError, data: FraudDetector.Types.DeleteEventsByEventTypeResult) => void): Request<FraudDetector.Types.DeleteEventsByEventTypeResult, AWSError>;
   /**
    * Removes a SageMaker model from Amazon Fraud Detector. You can remove an Amazon SageMaker model if it is not associated with a detector version. Removing a SageMaker model disconnects it from Amazon Fraud Detector, but the model remains available in SageMaker.
    */
@@ -116,51 +180,59 @@ declare class FraudDetector extends Service {
    */
   deleteExternalModel(callback?: (err: AWSError, data: FraudDetector.Types.DeleteExternalModelResult) => void): Request<FraudDetector.Types.DeleteExternalModelResult, AWSError>;
   /**
-   * Deletes a label. You cannot delete labels that are included in an event type in Amazon Fraud Detector. You cannot delete a label assigned to an event ID. You must first delete the relevant event ID. When you delete a label, Amazon Fraud Detector permanently deletes that label from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.
+   * Deletes a label. You cannot delete labels that are included in an event type in Amazon Fraud Detector. You cannot delete a label assigned to an event ID. You must first delete the relevant event ID. When you delete a label, Amazon Fraud Detector permanently deletes that label and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteLabel(params: FraudDetector.Types.DeleteLabelRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteLabelResult) => void): Request<FraudDetector.Types.DeleteLabelResult, AWSError>;
   /**
-   * Deletes a label. You cannot delete labels that are included in an event type in Amazon Fraud Detector. You cannot delete a label assigned to an event ID. You must first delete the relevant event ID. When you delete a label, Amazon Fraud Detector permanently deletes that label from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.
+   * Deletes a label. You cannot delete labels that are included in an event type in Amazon Fraud Detector. You cannot delete a label assigned to an event ID. You must first delete the relevant event ID. When you delete a label, Amazon Fraud Detector permanently deletes that label and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteLabel(callback?: (err: AWSError, data: FraudDetector.Types.DeleteLabelResult) => void): Request<FraudDetector.Types.DeleteLabelResult, AWSError>;
   /**
-   * Deletes a model. You can delete models and model versions in Amazon Fraud Detector, provided that they are not associated with a detector version.  When you delete a model, Amazon Fraud Detector permanently deletes that model from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.
+   *  Deletes the list, provided it is not used in a rule.   When you delete a list, Amazon Fraud Detector permanently deletes that list and the elements in the list.
+   */
+  deleteList(params: FraudDetector.Types.DeleteListRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteListResult) => void): Request<FraudDetector.Types.DeleteListResult, AWSError>;
+  /**
+   *  Deletes the list, provided it is not used in a rule.   When you delete a list, Amazon Fraud Detector permanently deletes that list and the elements in the list.
+   */
+  deleteList(callback?: (err: AWSError, data: FraudDetector.Types.DeleteListResult) => void): Request<FraudDetector.Types.DeleteListResult, AWSError>;
+  /**
+   * Deletes a model. You can delete models and model versions in Amazon Fraud Detector, provided that they are not associated with a detector version.  When you delete a model, Amazon Fraud Detector permanently deletes that model and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteModel(params: FraudDetector.Types.DeleteModelRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteModelResult) => void): Request<FraudDetector.Types.DeleteModelResult, AWSError>;
   /**
-   * Deletes a model. You can delete models and model versions in Amazon Fraud Detector, provided that they are not associated with a detector version.  When you delete a model, Amazon Fraud Detector permanently deletes that model from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.
+   * Deletes a model. You can delete models and model versions in Amazon Fraud Detector, provided that they are not associated with a detector version.  When you delete a model, Amazon Fraud Detector permanently deletes that model and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteModel(callback?: (err: AWSError, data: FraudDetector.Types.DeleteModelResult) => void): Request<FraudDetector.Types.DeleteModelResult, AWSError>;
   /**
-   * Deletes a model version. You can delete models and model versions in Amazon Fraud Detector, provided that they are not associated with a detector version.  When you delete a model version, Amazon Fraud Detector permanently deletes that model version from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.
+   * Deletes a model version. You can delete models and model versions in Amazon Fraud Detector, provided that they are not associated with a detector version.  When you delete a model version, Amazon Fraud Detector permanently deletes that model version and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteModelVersion(params: FraudDetector.Types.DeleteModelVersionRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteModelVersionResult) => void): Request<FraudDetector.Types.DeleteModelVersionResult, AWSError>;
   /**
-   * Deletes a model version. You can delete models and model versions in Amazon Fraud Detector, provided that they are not associated with a detector version.  When you delete a model version, Amazon Fraud Detector permanently deletes that model version from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.
+   * Deletes a model version. You can delete models and model versions in Amazon Fraud Detector, provided that they are not associated with a detector version.  When you delete a model version, Amazon Fraud Detector permanently deletes that model version and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteModelVersion(callback?: (err: AWSError, data: FraudDetector.Types.DeleteModelVersionResult) => void): Request<FraudDetector.Types.DeleteModelVersionResult, AWSError>;
   /**
-   * Deletes an outcome. You cannot delete an outcome that is used in a rule version. When you delete an outcome, Amazon Fraud Detector permanently deletes that outcome from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.
+   * Deletes an outcome. You cannot delete an outcome that is used in a rule version. When you delete an outcome, Amazon Fraud Detector permanently deletes that outcome and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteOutcome(params: FraudDetector.Types.DeleteOutcomeRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteOutcomeResult) => void): Request<FraudDetector.Types.DeleteOutcomeResult, AWSError>;
   /**
-   * Deletes an outcome. You cannot delete an outcome that is used in a rule version. When you delete an outcome, Amazon Fraud Detector permanently deletes that outcome from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.
+   * Deletes an outcome. You cannot delete an outcome that is used in a rule version. When you delete an outcome, Amazon Fraud Detector permanently deletes that outcome and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteOutcome(callback?: (err: AWSError, data: FraudDetector.Types.DeleteOutcomeResult) => void): Request<FraudDetector.Types.DeleteOutcomeResult, AWSError>;
   /**
-   * Deletes the rule. You cannot delete a rule if it is used by an ACTIVE or INACTIVE detector version. When you delete a rule, Amazon Fraud Detector permanently deletes that rule from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.
+   * Deletes the rule. You cannot delete a rule if it is used by an ACTIVE or INACTIVE detector version. When you delete a rule, Amazon Fraud Detector permanently deletes that rule and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteRule(params: FraudDetector.Types.DeleteRuleRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteRuleResult) => void): Request<FraudDetector.Types.DeleteRuleResult, AWSError>;
   /**
-   * Deletes the rule. You cannot delete a rule if it is used by an ACTIVE or INACTIVE detector version. When you delete a rule, Amazon Fraud Detector permanently deletes that rule from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.
+   * Deletes the rule. You cannot delete a rule if it is used by an ACTIVE or INACTIVE detector version. When you delete a rule, Amazon Fraud Detector permanently deletes that rule and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteRule(callback?: (err: AWSError, data: FraudDetector.Types.DeleteRuleResult) => void): Request<FraudDetector.Types.DeleteRuleResult, AWSError>;
   /**
-   * Deletes a variable. You can't delete variables that are included in an event type in Amazon Fraud Detector. Amazon Fraud Detector automatically deletes model output variables and SageMaker model output variables when you delete the model. You can't delete these variables manually. When you delete a variable, Amazon Fraud Detector permanently deletes that variable from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.
+   * Deletes a variable. You can't delete variables that are included in an event type in Amazon Fraud Detector. Amazon Fraud Detector automatically deletes model output variables and SageMaker model output variables when you delete the model. You can't delete these variables manually. When you delete a variable, Amazon Fraud Detector permanently deletes that variable and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteVariable(params: FraudDetector.Types.DeleteVariableRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteVariableResult) => void): Request<FraudDetector.Types.DeleteVariableResult, AWSError>;
   /**
-   * Deletes a variable. You can't delete variables that are included in an event type in Amazon Fraud Detector. Amazon Fraud Detector automatically deletes model output variables and SageMaker model output variables when you delete the model. You can't delete these variables manually. When you delete a variable, Amazon Fraud Detector permanently deletes that variable from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.
+   * Deletes a variable. You can't delete variables that are included in an event type in Amazon Fraud Detector. Amazon Fraud Detector automatically deletes model output variables and SageMaker model output variables when you delete the model. You can't delete these variables manually. When you delete a variable, Amazon Fraud Detector permanently deletes that variable and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteVariable(callback?: (err: AWSError, data: FraudDetector.Types.DeleteVariableResult) => void): Request<FraudDetector.Types.DeleteVariableResult, AWSError>;
   /**
@@ -179,6 +251,30 @@ declare class FraudDetector extends Service {
    * Gets all of the model versions for the specified model type or for the specified model type and model ID. You can also get details for a single, specified model version. 
    */
   describeModelVersions(callback?: (err: AWSError, data: FraudDetector.Types.DescribeModelVersionsResult) => void): Request<FraudDetector.Types.DescribeModelVersionsResult, AWSError>;
+  /**
+   * Gets all batch import jobs or a specific job of the specified ID. This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 50 records per page. If you provide a maxResults, the value must be between 1 and 50. To get the next page results, provide the pagination token from the GetBatchImportJobsResponse as part of your request. A null pagination token fetches the records from the beginning.
+   */
+  getBatchImportJobs(params: FraudDetector.Types.GetBatchImportJobsRequest, callback?: (err: AWSError, data: FraudDetector.Types.GetBatchImportJobsResult) => void): Request<FraudDetector.Types.GetBatchImportJobsResult, AWSError>;
+  /**
+   * Gets all batch import jobs or a specific job of the specified ID. This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 50 records per page. If you provide a maxResults, the value must be between 1 and 50. To get the next page results, provide the pagination token from the GetBatchImportJobsResponse as part of your request. A null pagination token fetches the records from the beginning.
+   */
+  getBatchImportJobs(callback?: (err: AWSError, data: FraudDetector.Types.GetBatchImportJobsResult) => void): Request<FraudDetector.Types.GetBatchImportJobsResult, AWSError>;
+  /**
+   * Gets all batch prediction jobs or a specific job if you specify a job ID. This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 50 records per page. If you provide a maxResults, the value must be between 1 and 50. To get the next page results, provide the pagination token from the GetBatchPredictionJobsResponse as part of your request. A null pagination token fetches the records from the beginning.
+   */
+  getBatchPredictionJobs(params: FraudDetector.Types.GetBatchPredictionJobsRequest, callback?: (err: AWSError, data: FraudDetector.Types.GetBatchPredictionJobsResult) => void): Request<FraudDetector.Types.GetBatchPredictionJobsResult, AWSError>;
+  /**
+   * Gets all batch prediction jobs or a specific job if you specify a job ID. This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 50 records per page. If you provide a maxResults, the value must be between 1 and 50. To get the next page results, provide the pagination token from the GetBatchPredictionJobsResponse as part of your request. A null pagination token fetches the records from the beginning.
+   */
+  getBatchPredictionJobs(callback?: (err: AWSError, data: FraudDetector.Types.GetBatchPredictionJobsResult) => void): Request<FraudDetector.Types.GetBatchPredictionJobsResult, AWSError>;
+  /**
+   * Retrieves the status of a DeleteEventsByEventType action.
+   */
+  getDeleteEventsByEventTypeStatus(params: FraudDetector.Types.GetDeleteEventsByEventTypeStatusRequest, callback?: (err: AWSError, data: FraudDetector.Types.GetDeleteEventsByEventTypeStatusResult) => void): Request<FraudDetector.Types.GetDeleteEventsByEventTypeStatusResult, AWSError>;
+  /**
+   * Retrieves the status of a DeleteEventsByEventType action.
+   */
+  getDeleteEventsByEventTypeStatus(callback?: (err: AWSError, data: FraudDetector.Types.GetDeleteEventsByEventTypeStatusResult) => void): Request<FraudDetector.Types.GetDeleteEventsByEventTypeStatusResult, AWSError>;
   /**
    * Gets a particular detector version. 
    */
@@ -204,6 +300,14 @@ declare class FraudDetector extends Service {
    */
   getEntityTypes(callback?: (err: AWSError, data: FraudDetector.Types.GetEntityTypesResult) => void): Request<FraudDetector.Types.GetEntityTypesResult, AWSError>;
   /**
+   * Retrieves details of events stored with Amazon Fraud Detector. This action does not retrieve prediction results.
+   */
+  getEvent(params: FraudDetector.Types.GetEventRequest, callback?: (err: AWSError, data: FraudDetector.Types.GetEventResult) => void): Request<FraudDetector.Types.GetEventResult, AWSError>;
+  /**
+   * Retrieves details of events stored with Amazon Fraud Detector. This action does not retrieve prediction results.
+   */
+  getEvent(callback?: (err: AWSError, data: FraudDetector.Types.GetEventResult) => void): Request<FraudDetector.Types.GetEventResult, AWSError>;
+  /**
    * Evaluates an event against a detector version. If a version ID is not provided, the detector’s (ACTIVE) version is used.
    */
   getEventPrediction(params: FraudDetector.Types.GetEventPredictionRequest, callback?: (err: AWSError, data: FraudDetector.Types.GetEventPredictionResult) => void): Request<FraudDetector.Types.GetEventPredictionResult, AWSError>;
@@ -211,6 +315,14 @@ declare class FraudDetector extends Service {
    * Evaluates an event against a detector version. If a version ID is not provided, the detector’s (ACTIVE) version is used.
    */
   getEventPrediction(callback?: (err: AWSError, data: FraudDetector.Types.GetEventPredictionResult) => void): Request<FraudDetector.Types.GetEventPredictionResult, AWSError>;
+  /**
+   *  Gets details of the past fraud predictions for the specified event ID, event type, detector ID, and detector version ID that was generated in the specified time period. 
+   */
+  getEventPredictionMetadata(params: FraudDetector.Types.GetEventPredictionMetadataRequest, callback?: (err: AWSError, data: FraudDetector.Types.GetEventPredictionMetadataResult) => void): Request<FraudDetector.Types.GetEventPredictionMetadataResult, AWSError>;
+  /**
+   *  Gets details of the past fraud predictions for the specified event ID, event type, detector ID, and detector version ID that was generated in the specified time period. 
+   */
+  getEventPredictionMetadata(callback?: (err: AWSError, data: FraudDetector.Types.GetEventPredictionMetadataResult) => void): Request<FraudDetector.Types.GetEventPredictionMetadataResult, AWSError>;
   /**
    * Gets all event types or a specific event type if name is provided. This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 10 records per page. If you provide a maxResults, the value must be between 5 and 10. To get the next page results, provide the pagination token from the GetEventTypesResponse as part of your request. A null pagination token fetches the records from the beginning. 
    */
@@ -228,7 +340,7 @@ declare class FraudDetector extends Service {
    */
   getExternalModels(callback?: (err: AWSError, data: FraudDetector.Types.GetExternalModelsResult) => void): Request<FraudDetector.Types.GetExternalModelsResult, AWSError>;
   /**
-   * Gets the encryption key if a Key Management Service (KMS) customer master key (CMK) has been specified to be used to encrypt content in Amazon Fraud Detector.
+   * Gets the encryption key if a KMS key has been specified to be used to encrypt content in Amazon Fraud Detector.
    */
   getKMSEncryptionKey(callback?: (err: AWSError, data: FraudDetector.Types.GetKMSEncryptionKeyResult) => void): Request<FraudDetector.Types.GetKMSEncryptionKeyResult, AWSError>;
   /**
@@ -240,6 +352,22 @@ declare class FraudDetector extends Service {
    */
   getLabels(callback?: (err: AWSError, data: FraudDetector.Types.GetLabelsResult) => void): Request<FraudDetector.Types.GetLabelsResult, AWSError>;
   /**
+   *  Gets all the elements in the specified list. 
+   */
+  getListElements(params: FraudDetector.Types.GetListElementsRequest, callback?: (err: AWSError, data: FraudDetector.Types.GetListElementsResult) => void): Request<FraudDetector.Types.GetListElementsResult, AWSError>;
+  /**
+   *  Gets all the elements in the specified list. 
+   */
+  getListElements(callback?: (err: AWSError, data: FraudDetector.Types.GetListElementsResult) => void): Request<FraudDetector.Types.GetListElementsResult, AWSError>;
+  /**
+   *  Gets the metadata of either all the lists under the account or the specified list. 
+   */
+  getListsMetadata(params: FraudDetector.Types.GetListsMetadataRequest, callback?: (err: AWSError, data: FraudDetector.Types.GetListsMetadataResult) => void): Request<FraudDetector.Types.GetListsMetadataResult, AWSError>;
+  /**
+   *  Gets the metadata of either all the lists under the account or the specified list. 
+   */
+  getListsMetadata(callback?: (err: AWSError, data: FraudDetector.Types.GetListsMetadataResult) => void): Request<FraudDetector.Types.GetListsMetadataResult, AWSError>;
+  /**
    * Gets the details of the specified model version.
    */
   getModelVersion(params: FraudDetector.Types.GetModelVersionRequest, callback?: (err: AWSError, data: FraudDetector.Types.GetModelVersionResult) => void): Request<FraudDetector.Types.GetModelVersionResult, AWSError>;
@@ -248,11 +376,11 @@ declare class FraudDetector extends Service {
    */
   getModelVersion(callback?: (err: AWSError, data: FraudDetector.Types.GetModelVersionResult) => void): Request<FraudDetector.Types.GetModelVersionResult, AWSError>;
   /**
-   * Gets one or more models. Gets all models for the AWS account if no model type and no model id provided. Gets all models for the AWS account and model type, if the model type is specified but model id is not provided. Gets a specific model if (model type, model id) tuple is specified.  This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 10 records per page. If you provide a maxResults, the value must be between 1 and 10. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning.
+   * Gets one or more models. Gets all models for the Amazon Web Services account if no model type and no model id provided. Gets all models for the Amazon Web Services account and model type, if the model type is specified but model id is not provided. Gets a specific model if (model type, model id) tuple is specified.  This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 10 records per page. If you provide a maxResults, the value must be between 1 and 10. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning.
    */
   getModels(params: FraudDetector.Types.GetModelsRequest, callback?: (err: AWSError, data: FraudDetector.Types.GetModelsResult) => void): Request<FraudDetector.Types.GetModelsResult, AWSError>;
   /**
-   * Gets one or more models. Gets all models for the AWS account if no model type and no model id provided. Gets all models for the AWS account and model type, if the model type is specified but model id is not provided. Gets a specific model if (model type, model id) tuple is specified.  This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 10 records per page. If you provide a maxResults, the value must be between 1 and 10. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning.
+   * Gets one or more models. Gets all models for the Amazon Web Services account if no model type and no model id provided. Gets all models for the Amazon Web Services account and model type, if the model type is specified but model id is not provided. Gets a specific model if (model type, model id) tuple is specified.  This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 10 records per page. If you provide a maxResults, the value must be between 1 and 10. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning.
    */
   getModels(callback?: (err: AWSError, data: FraudDetector.Types.GetModelsResult) => void): Request<FraudDetector.Types.GetModelsResult, AWSError>;
   /**
@@ -279,6 +407,14 @@ declare class FraudDetector extends Service {
    * Gets all of the variables or the specific variable. This is a paginated API. Providing null maxSizePerPage results in retrieving maximum of 100 records per page. If you provide maxSizePerPage the value must be between 50 and 100. To get the next page result, a provide a pagination token from GetVariablesResult as part of your request. Null pagination token fetches the records from the beginning. 
    */
   getVariables(callback?: (err: AWSError, data: FraudDetector.Types.GetVariablesResult) => void): Request<FraudDetector.Types.GetVariablesResult, AWSError>;
+  /**
+   * Gets a list of past predictions. The list can be filtered by detector ID, detector version ID, event ID, event type, or by specifying a time period. If filter is not specified, the most recent prediction is returned. For example, the following filter lists all past predictions for xyz event type - { "eventType":{ "value": "xyz" }” }   This is a paginated API. If you provide a null maxResults, this action will retrieve a maximum of 10 records per page. If you provide a maxResults, the value must be between 50 and 100. To get the next page results, provide the nextToken from the response as part of your request. A null nextToken fetches the records from the beginning. 
+   */
+  listEventPredictions(params: FraudDetector.Types.ListEventPredictionsRequest, callback?: (err: AWSError, data: FraudDetector.Types.ListEventPredictionsResult) => void): Request<FraudDetector.Types.ListEventPredictionsResult, AWSError>;
+  /**
+   * Gets a list of past predictions. The list can be filtered by detector ID, detector version ID, event ID, event type, or by specifying a time period. If filter is not specified, the most recent prediction is returned. For example, the following filter lists all past predictions for xyz event type - { "eventType":{ "value": "xyz" }” }   This is a paginated API. If you provide a null maxResults, this action will retrieve a maximum of 10 records per page. If you provide a maxResults, the value must be between 50 and 100. To get the next page results, provide the nextToken from the response as part of your request. A null nextToken fetches the records from the beginning. 
+   */
+  listEventPredictions(callback?: (err: AWSError, data: FraudDetector.Types.ListEventPredictionsResult) => void): Request<FraudDetector.Types.ListEventPredictionsResult, AWSError>;
   /**
    * Lists all tags associated with the resource. This is a paginated API. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning. 
    */
@@ -320,11 +456,11 @@ declare class FraudDetector extends Service {
    */
   putExternalModel(callback?: (err: AWSError, data: FraudDetector.Types.PutExternalModelResult) => void): Request<FraudDetector.Types.PutExternalModelResult, AWSError>;
   /**
-   * Specifies the Key Management Service (KMS) customer master key (CMK) to be used to encrypt content in Amazon Fraud Detector.
+   * Specifies the KMS key to be used to encrypt content in Amazon Fraud Detector.
    */
   putKMSEncryptionKey(params: FraudDetector.Types.PutKMSEncryptionKeyRequest, callback?: (err: AWSError, data: FraudDetector.Types.PutKMSEncryptionKeyResult) => void): Request<FraudDetector.Types.PutKMSEncryptionKeyResult, AWSError>;
   /**
-   * Specifies the Key Management Service (KMS) customer master key (CMK) to be used to encrypt content in Amazon Fraud Detector.
+   * Specifies the KMS key to be used to encrypt content in Amazon Fraud Detector.
    */
   putKMSEncryptionKey(callback?: (err: AWSError, data: FraudDetector.Types.PutKMSEncryptionKeyResult) => void): Request<FraudDetector.Types.PutKMSEncryptionKeyResult, AWSError>;
   /**
@@ -343,6 +479,14 @@ declare class FraudDetector extends Service {
    * Creates or updates an outcome. 
    */
   putOutcome(callback?: (err: AWSError, data: FraudDetector.Types.PutOutcomeResult) => void): Request<FraudDetector.Types.PutOutcomeResult, AWSError>;
+  /**
+   * Stores events in Amazon Fraud Detector without generating fraud predictions for those events. For example, you can use SendEvent to upload a historical dataset, which you can then later use to train a model.
+   */
+  sendEvent(params: FraudDetector.Types.SendEventRequest, callback?: (err: AWSError, data: FraudDetector.Types.SendEventResult) => void): Request<FraudDetector.Types.SendEventResult, AWSError>;
+  /**
+   * Stores events in Amazon Fraud Detector without generating fraud predictions for those events. For example, you can use SendEvent to upload a historical dataset, which you can then later use to train a model.
+   */
+  sendEvent(callback?: (err: AWSError, data: FraudDetector.Types.SendEventResult) => void): Request<FraudDetector.Types.SendEventResult, AWSError>;
   /**
    * Assigns tags to a resource.
    */
@@ -384,11 +528,27 @@ declare class FraudDetector extends Service {
    */
   updateDetectorVersionStatus(callback?: (err: AWSError, data: FraudDetector.Types.UpdateDetectorVersionStatusResult) => void): Request<FraudDetector.Types.UpdateDetectorVersionStatusResult, AWSError>;
   /**
-   * Updates a model. You can update the description attribute using this action.
+   * Updates the specified event with a new label.
+   */
+  updateEventLabel(params: FraudDetector.Types.UpdateEventLabelRequest, callback?: (err: AWSError, data: FraudDetector.Types.UpdateEventLabelResult) => void): Request<FraudDetector.Types.UpdateEventLabelResult, AWSError>;
+  /**
+   * Updates the specified event with a new label.
+   */
+  updateEventLabel(callback?: (err: AWSError, data: FraudDetector.Types.UpdateEventLabelResult) => void): Request<FraudDetector.Types.UpdateEventLabelResult, AWSError>;
+  /**
+   *  Updates a list. 
+   */
+  updateList(params: FraudDetector.Types.UpdateListRequest, callback?: (err: AWSError, data: FraudDetector.Types.UpdateListResult) => void): Request<FraudDetector.Types.UpdateListResult, AWSError>;
+  /**
+   *  Updates a list. 
+   */
+  updateList(callback?: (err: AWSError, data: FraudDetector.Types.UpdateListResult) => void): Request<FraudDetector.Types.UpdateListResult, AWSError>;
+  /**
+   * Updates model description.
    */
   updateModel(params: FraudDetector.Types.UpdateModelRequest, callback?: (err: AWSError, data: FraudDetector.Types.UpdateModelResult) => void): Request<FraudDetector.Types.UpdateModelResult, AWSError>;
   /**
-   * Updates a model. You can update the description attribute using this action.
+   * Updates model description.
    */
   updateModel(callback?: (err: AWSError, data: FraudDetector.Types.UpdateModelResult) => void): Request<FraudDetector.Types.UpdateModelResult, AWSError>;
   /**
@@ -400,11 +560,11 @@ declare class FraudDetector extends Service {
    */
   updateModelVersion(callback?: (err: AWSError, data: FraudDetector.Types.UpdateModelVersionResult) => void): Request<FraudDetector.Types.UpdateModelVersionResult, AWSError>;
   /**
-   * Updates the status of a model version. You can perform the following status updates:   Change the TRAINING_COMPLETE status to ACTIVE.   Change ACTIVEto INACTIVE.  
+   * Updates the status of a model version. You can perform the following status updates:   Change the TRAINING_IN_PROGRESS status to TRAINING_CANCELLED.   Change the TRAINING_COMPLETE status to ACTIVE.   Change ACTIVE to INACTIVE.  
    */
   updateModelVersionStatus(params: FraudDetector.Types.UpdateModelVersionStatusRequest, callback?: (err: AWSError, data: FraudDetector.Types.UpdateModelVersionStatusResult) => void): Request<FraudDetector.Types.UpdateModelVersionStatusResult, AWSError>;
   /**
-   * Updates the status of a model version. You can perform the following status updates:   Change the TRAINING_COMPLETE status to ACTIVE.   Change ACTIVEto INACTIVE.  
+   * Updates the status of a model version. You can perform the following status updates:   Change the TRAINING_IN_PROGRESS status to TRAINING_CANCELLED.   Change the TRAINING_COMPLETE status to ACTIVE.   Change ACTIVE to INACTIVE.  
    */
   updateModelVersionStatus(callback?: (err: AWSError, data: FraudDetector.Types.UpdateModelVersionStatusResult) => void): Request<FraudDetector.Types.UpdateModelVersionStatusResult, AWSError>;
   /**
@@ -433,6 +593,99 @@ declare class FraudDetector extends Service {
   updateVariable(callback?: (err: AWSError, data: FraudDetector.Types.UpdateVariableResult) => void): Request<FraudDetector.Types.UpdateVariableResult, AWSError>;
 }
 declare namespace FraudDetector {
+  export interface ATIMetricDataPoint {
+    /**
+     *  The challenge rate. This indicates the percentage of login events that the model recommends to challenge such as one-time password, multi-factor authentication, and investigations. 
+     */
+    cr?: float;
+    /**
+     *  The anomaly discovery rate. This metric quantifies the percentage of anomalies that can be detected by the model at the selected score threshold. A lower score threshold increases the percentage of anomalies captured by the model, but would also require challenging a larger percentage of login events, leading to a higher customer friction. 
+     */
+    adr?: float;
+    /**
+     *  The model's threshold that specifies an acceptable fraud capture rate. For example, a threshold of 500 means any model score 500 or above is labeled as fraud. 
+     */
+    threshold?: float;
+    /**
+     *  The account takeover discovery rate. This metric quantifies the percentage of account compromise events that can be detected by the model at the selected score threshold. This metric is only available if 50 or more entities with at-least one labeled account takeover event is present in the ingested dataset. 
+     */
+    atodr?: float;
+  }
+  export type ATIMetricDataPointsList = ATIMetricDataPoint[];
+  export interface ATIModelPerformance {
+    /**
+     *  The anomaly separation index (ASI) score. This metric summarizes the overall ability of the model to separate anomalous activities from the normal behavior. Depending on the business, a large fraction of these anomalous activities can be malicious and correspond to the account takeover attacks. A model with no separability power will have the lowest possible ASI score of 0.5, whereas the a model with a high separability power will have the highest possible ASI score of 1.0 
+     */
+    asi?: float;
+  }
+  export interface ATITrainingMetricsValue {
+    /**
+     *  The model's performance metrics data points. 
+     */
+    metricDataPoints?: ATIMetricDataPointsList;
+    /**
+     *  The model's overall performance scores. 
+     */
+    modelPerformance?: ATIModelPerformance;
+  }
+  export interface AggregatedLogOddsMetric {
+    /**
+     *  The names of all the variables. 
+     */
+    variableNames: ListOfStrings;
+    /**
+     *  The relative importance of the variables in the list to the other event variable. 
+     */
+    aggregatedVariablesImportance: float;
+  }
+  export interface AggregatedVariablesImpactExplanation {
+    /**
+     *  The names of all the event variables that were used to derive the aggregated variables. 
+     */
+    eventVariableNames?: ListOfStrings;
+    /**
+     *  The relative impact of the aggregated variables in terms of magnitude on the prediction scores. 
+     */
+    relativeImpact?: string;
+    /**
+     *  The raw, uninterpreted value represented as log-odds of the fraud. These values are usually between -10 to +10, but range from -infinity to +infinity.   A positive value indicates that the variables drove the risk score up.   A negative value indicates that the variables drove the risk score down.  
+     */
+    logOddsImpact?: float;
+  }
+  export interface AggregatedVariablesImportanceMetrics {
+    /**
+     *  List of variables' metrics. 
+     */
+    logOddsMetrics?: ListOfAggregatedLogOddsMetrics;
+  }
+  export interface AllowDenyList {
+    /**
+     *  The name of the list. 
+     */
+    name: noDashIdentifier;
+    /**
+     *  The description of the list. 
+     */
+    description?: description;
+    /**
+     *  The variable type of the list. 
+     */
+    variableType?: variableType;
+    /**
+     *  The time the list was created. 
+     */
+    createdTime?: time;
+    /**
+     *  The time the list was last updated. 
+     */
+    updatedTime?: time;
+    /**
+     *  The ARN of the list. 
+     */
+    arn?: fraudDetectorArn;
+  }
+  export type AllowDenyLists = AllowDenyList[];
+  export type AsyncJobStatus = "IN_PROGRESS_INITIALIZING"|"IN_PROGRESS"|"CANCEL_IN_PROGRESS"|"CANCELED"|"COMPLETE"|"FAILED"|string;
   export interface BatchCreateVariableError {
     /**
      * The name.
@@ -495,6 +748,205 @@ declare namespace FraudDetector {
      */
     errors?: BatchGetVariableErrorList;
   }
+  export interface BatchImport {
+    /**
+     * The ID of the batch import job. 
+     */
+    jobId?: identifier;
+    /**
+     * The status of the batch import job.
+     */
+    status?: AsyncJobStatus;
+    /**
+     * The reason batch import job failed.
+     */
+    failureReason?: string;
+    /**
+     * Timestamp of when the batch import job started.
+     */
+    startTime?: time;
+    /**
+     * Timestamp of when batch import job completed.
+     */
+    completionTime?: time;
+    /**
+     * The Amazon S3 location of your data file for batch import.
+     */
+    inputPath?: s3BucketLocation;
+    /**
+     * The Amazon S3 location of your output file.
+     */
+    outputPath?: s3BucketLocation;
+    /**
+     * The name of the event type.
+     */
+    eventTypeName?: identifier;
+    /**
+     * The ARN of the IAM role to use for this job request.
+     */
+    iamRoleArn?: iamRoleArn;
+    /**
+     * The ARN of the batch import job.
+     */
+    arn?: fraudDetectorArn;
+    /**
+     * The number of records processed by batch import job.
+     */
+    processedRecordsCount?: Integer;
+    /**
+     * The number of records that failed to import. 
+     */
+    failedRecordsCount?: Integer;
+    /**
+     * The total number of records in the batch import job.
+     */
+    totalRecordsCount?: Integer;
+  }
+  export type BatchImportList = BatchImport[];
+  export interface BatchPrediction {
+    /**
+     * The job ID for the batch prediction.
+     */
+    jobId?: identifier;
+    /**
+     * The batch prediction status.
+     */
+    status?: AsyncJobStatus;
+    /**
+     * The reason a batch prediction job failed.
+     */
+    failureReason?: string;
+    /**
+     * Timestamp of when the batch prediction job started.
+     */
+    startTime?: time;
+    /**
+     * Timestamp of when the batch prediction job completed.
+     */
+    completionTime?: time;
+    /**
+     * Timestamp of most recent heartbeat indicating the batch prediction job was making progress.
+     */
+    lastHeartbeatTime?: time;
+    /**
+     * The Amazon S3 location of your training file.
+     */
+    inputPath?: s3BucketLocation;
+    /**
+     * The Amazon S3 location of your output file.
+     */
+    outputPath?: s3BucketLocation;
+    /**
+     * The name of the event type.
+     */
+    eventTypeName?: identifier;
+    /**
+     * The name of the detector.
+     */
+    detectorName?: identifier;
+    /**
+     * The detector version. 
+     */
+    detectorVersion?: floatVersionString;
+    /**
+     * The ARN of the IAM role to use for this job request.
+     */
+    iamRoleArn?: iamRoleArn;
+    /**
+     * The ARN of batch prediction job.
+     */
+    arn?: fraudDetectorArn;
+    /**
+     * The number of records processed by the batch prediction job.
+     */
+    processedRecordsCount?: Integer;
+    /**
+     * The total number of records in the batch prediction job.
+     */
+    totalRecordsCount?: Integer;
+  }
+  export type BatchPredictionList = BatchPrediction[];
+  export type Boolean = boolean;
+  export interface CancelBatchImportJobRequest {
+    /**
+     *  The ID of an in-progress batch import job to cancel.  Amazon Fraud Detector will throw an error if the batch import job is in FAILED, CANCELED, or COMPLETED state.
+     */
+    jobId: identifier;
+  }
+  export interface CancelBatchImportJobResult {
+  }
+  export interface CancelBatchPredictionJobRequest {
+    /**
+     * The ID of the batch prediction job to cancel.
+     */
+    jobId: identifier;
+  }
+  export interface CancelBatchPredictionJobResult {
+  }
+  export interface CreateBatchImportJobRequest {
+    /**
+     * The ID of the batch import job. The ID cannot be of a past job, unless the job exists in CREATE_FAILED state.
+     */
+    jobId: identifier;
+    /**
+     * The URI that points to the Amazon S3 location of your data file.
+     */
+    inputPath: s3BucketLocation;
+    /**
+     * The URI that points to the Amazon S3 location for storing your results. 
+     */
+    outputPath: s3BucketLocation;
+    /**
+     * The name of the event type.
+     */
+    eventTypeName: identifier;
+    /**
+     * The ARN of the IAM role created for Amazon S3 bucket that holds your data file. The IAM role must have read permissions to your input S3 bucket and write permissions to your output S3 bucket. For more information about bucket permissions, see User policy examples in the Amazon S3 User Guide.
+     */
+    iamRoleArn: iamRoleArn;
+    /**
+     * A collection of key-value pairs associated with this request. 
+     */
+    tags?: tagList;
+  }
+  export interface CreateBatchImportJobResult {
+  }
+  export interface CreateBatchPredictionJobRequest {
+    /**
+     * The ID of the batch prediction job.
+     */
+    jobId: identifier;
+    /**
+     * The Amazon S3 location of your training file.
+     */
+    inputPath: s3BucketLocation;
+    /**
+     * The Amazon S3 location of your output file.
+     */
+    outputPath: s3BucketLocation;
+    /**
+     * The name of the event type.
+     */
+    eventTypeName: identifier;
+    /**
+     * The name of the detector.
+     */
+    detectorName: identifier;
+    /**
+     * The detector version.
+     */
+    detectorVersion?: wholeNumberVersionString;
+    /**
+     * The ARN of the IAM role to use for this job request. The IAM Role must have read permissions to your input S3 bucket and write permissions to your output S3 bucket. For more information about bucket permissions, see User policy examples in the Amazon S3 User Guide.
+     */
+    iamRoleArn: iamRoleArn;
+    /**
+     * A collection of key and value pairs.
+     */
+    tags?: tagList;
+  }
+  export interface CreateBatchPredictionJobResult {
+  }
   export interface CreateDetectorVersionRequest {
     /**
      * The ID of the detector under which you want to create a new version.
@@ -533,11 +985,35 @@ declare namespace FraudDetector {
     /**
      * The ID for the created detector. 
      */
-    detectorVersionId?: nonEmptyString;
+    detectorVersionId?: wholeNumberVersionString;
     /**
      * The status of the detector version.
      */
     status?: DetectorVersionStatus;
+  }
+  export interface CreateListRequest {
+    /**
+     *  The name of the list. 
+     */
+    name: noDashIdentifier;
+    /**
+     *  The names of the elements, if providing. You can also create an empty list and add elements later using the UpdateList API. 
+     */
+    elements?: ElementsList;
+    /**
+     *  The variable type of the list. You can only assign the variable type with String data type. For more information, see Variable types. 
+     */
+    variableType?: variableType;
+    /**
+     *  The description of the list. 
+     */
+    description?: description;
+    /**
+     *  A collection of the key and value pairs. 
+     */
+    tags?: tagList;
+  }
+  export interface CreateListResult {
   }
   export interface CreateModelRequest {
     /**
@@ -581,9 +1057,13 @@ declare namespace FraudDetector {
      */
     trainingDataSchema: TrainingDataSchema;
     /**
-     * Details for the external events data used for model version training. Required if trainingDataSource is EXTERNAL_EVENTS.
+     * Details of the external events data used for model version training. Required if trainingDataSource is EXTERNAL_EVENTS.
      */
     externalEventsDetail?: ExternalEventsDetail;
+    /**
+     * Details of the ingested events data used for model version training. Required if trainingDataSource is INGESTED_EVENTS.
+     */
+    ingestedEventsDetail?: IngestedEventsDetail;
     /**
      * A collection of key and value pairs.
      */
@@ -601,7 +1081,7 @@ declare namespace FraudDetector {
     /**
      * The model version number of the model version created.
      */
-    modelVersionNumber?: nonEmptyString;
+    modelVersionNumber?: floatVersionString;
     /**
      * The model version status. 
      */
@@ -649,7 +1129,7 @@ declare namespace FraudDetector {
      */
     name: string;
     /**
-     * The data type.
+     * The data type of the variable.
      */
     dataType: DataType;
     /**
@@ -677,16 +1157,33 @@ declare namespace FraudDetector {
   }
   export type CsvIndexToVariableMap = {[key: string]: string};
   export type DataSource = "EVENT"|"MODEL_SCORE"|"EXTERNAL_MODEL_SCORE"|string;
-  export type DataType = "STRING"|"INTEGER"|"FLOAT"|"BOOLEAN"|string;
+  export type DataType = "STRING"|"INTEGER"|"FLOAT"|"BOOLEAN"|"DATETIME"|string;
   export interface DataValidationMetrics {
     /**
-     * The file-specific model training validation messages.
+     * The file-specific model training data validation messages.
      */
     fileLevelMessages?: fileValidationMessageList;
     /**
      * The field-specific model training validation messages.
      */
     fieldLevelMessages?: fieldValidationMessageList;
+  }
+  export type DeleteAuditHistory = boolean;
+  export interface DeleteBatchImportJobRequest {
+    /**
+     * The ID of the batch import job to delete. 
+     */
+    jobId: identifier;
+  }
+  export interface DeleteBatchImportJobResult {
+  }
+  export interface DeleteBatchPredictionJobRequest {
+    /**
+     * The ID of the batch prediction job to delete.
+     */
+    jobId: identifier;
+  }
+  export interface DeleteBatchPredictionJobResult {
   }
   export interface DeleteDetectorRequest {
     /**
@@ -725,6 +1222,10 @@ declare namespace FraudDetector {
      * The name of the event type.
      */
     eventTypeName: identifier;
+    /**
+     * Specifies whether or not to delete any predictions associated with the event. If set to True, 
+     */
+    deleteAuditHistory?: DeleteAuditHistory;
   }
   export interface DeleteEventResult {
   }
@@ -735,6 +1236,22 @@ declare namespace FraudDetector {
     name: identifier;
   }
   export interface DeleteEventTypeResult {
+  }
+  export interface DeleteEventsByEventTypeRequest {
+    /**
+     * The name of the event type.
+     */
+    eventTypeName: identifier;
+  }
+  export interface DeleteEventsByEventTypeResult {
+    /**
+     * Name of event type for which to delete the events.
+     */
+    eventTypeName?: identifier;
+    /**
+     * The status of the delete request.
+     */
+    eventsDeletionStatus?: string;
   }
   export interface DeleteExternalModelRequest {
     /**
@@ -751,6 +1268,14 @@ declare namespace FraudDetector {
     name: identifier;
   }
   export interface DeleteLabelResult {
+  }
+  export interface DeleteListRequest {
+    /**
+     *  The name of the list to delete. 
+     */
+    name: noDashIdentifier;
+  }
+  export interface DeleteListResult {
   }
   export interface DeleteModelRequest {
     /**
@@ -898,7 +1423,7 @@ declare namespace FraudDetector {
     /**
      * The detector version ID. 
      */
-    detectorVersionId?: nonEmptyString;
+    detectorVersionId?: wholeNumberVersionString;
     /**
      * The detector version status. 
      */
@@ -914,6 +1439,8 @@ declare namespace FraudDetector {
   }
   export type DetectorVersionSummaryList = DetectorVersionSummary[];
   export type DetectorsMaxResults = number;
+  export type Elements = string;
+  export type ElementsList = Elements[];
   export interface Entity {
     /**
      * The entity type.
@@ -922,7 +1449,7 @@ declare namespace FraudDetector {
     /**
      * The entity ID. If you do not know the entityId, you can pass unknown, which is areserved string literal.
      */
-    entityId: identifier;
+    entityId: entityRestrictedString;
   }
   export interface EntityType {
     /**
@@ -946,6 +1473,138 @@ declare namespace FraudDetector {
      */
     arn?: fraudDetectorArn;
   }
+  export interface EvaluatedExternalModel {
+    /**
+     *  The endpoint of the external (Amazon Sagemaker) model. 
+     */
+    modelEndpoint?: string;
+    /**
+     *  Indicates whether event variables were used to generate predictions. 
+     */
+    useEventVariables?: Boolean;
+    /**
+     *  Input variables use for generating predictions. 
+     */
+    inputVariables?: MapOfStrings;
+    /**
+     *  Output variables. 
+     */
+    outputVariables?: MapOfStrings;
+  }
+  export interface EvaluatedModelVersion {
+    /**
+     *  The model ID. 
+     */
+    modelId?: string;
+    /**
+     *  The model version. 
+     */
+    modelVersion?: string;
+    /**
+     * The model type.  Valid values: ONLINE_FRAUD_INSIGHTS | TRANSACTION_FRAUD_INSIGHTS 
+     */
+    modelType?: string;
+    /**
+     *  Evaluations generated for the model version. 
+     */
+    evaluations?: ListOfModelVersionEvaluations;
+  }
+  export interface EvaluatedRule {
+    /**
+     *  The rule ID. 
+     */
+    ruleId?: identifier;
+    /**
+     *  The rule version. 
+     */
+    ruleVersion?: wholeNumberVersionString;
+    /**
+     *  The rule expression. 
+     */
+    expression?: sensitiveString;
+    /**
+     *  The rule expression value. 
+     */
+    expressionWithValues?: sensitiveString;
+    /**
+     *  The rule outcome. 
+     */
+    outcomes?: ListOfStrings;
+    /**
+     *  Indicates whether the rule was evaluated. 
+     */
+    evaluated?: Boolean;
+    /**
+     *  Indicates whether the rule matched. 
+     */
+    matched?: Boolean;
+  }
+  export type EvaluatedRuleList = EvaluatedRule[];
+  export interface Event {
+    /**
+     * The event ID.
+     */
+    eventId?: string;
+    /**
+     * The event type.
+     */
+    eventTypeName?: string;
+    /**
+     * The timestamp that defines when the event under evaluation occurred. The timestamp must be specified using ISO 8601 standard in UTC.
+     */
+    eventTimestamp?: string;
+    /**
+     * Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.
+     */
+    eventVariables?: EventAttributeMap;
+    /**
+     * The label associated with the event.
+     */
+    currentLabel?: string;
+    /**
+     * The timestamp associated with the label to update. The timestamp must be specified using ISO 8601 standard in UTC.
+     */
+    labelTimestamp?: string;
+    /**
+     * The event entities.
+     */
+    entities?: listOfEntities;
+  }
+  export type EventAttributeMap = {[key: string]: attributeValue};
+  export type EventIngestion = "ENABLED"|"DISABLED"|string;
+  export interface EventOrchestration {
+    /**
+     * Specifies if event orchestration is enabled through Amazon EventBridge.
+     */
+    eventBridgeEnabled: Boolean;
+  }
+  export interface EventPredictionSummary {
+    /**
+     *  The event ID. 
+     */
+    eventId?: identifier;
+    /**
+     *  The event type. 
+     */
+    eventTypeName?: identifier;
+    /**
+     *  The timestamp of the event. 
+     */
+    eventTimestamp?: time;
+    /**
+     *  The timestamp when the prediction was generated. 
+     */
+    predictionTimestamp?: time;
+    /**
+     *  The detector ID. 
+     */
+    detectorId?: identifier;
+    /**
+     *  The detector version ID. 
+     */
+    detectorVersionId?: wholeNumberVersionString;
+  }
+  export type EventPredictionsMaxResults = number;
   export interface EventType {
     /**
      * The event type name.
@@ -968,6 +1627,14 @@ declare namespace FraudDetector {
      */
     entityTypes?: NonEmptyListOfStrings;
     /**
+     * If Enabled, Amazon Fraud Detector stores event data when you generate a prediction and uses that data to update calculated variables in near real-time. Amazon Fraud Detector uses this data, known as INGESTED_EVENTS, to train your model and improve fraud predictions.
+     */
+    eventIngestion?: EventIngestion;
+    /**
+     * Data about the stored events.
+     */
+    ingestedEventStatistics?: IngestedEventStatistics;
+    /**
      * Timestamp of when the event type was last updated.
      */
     lastUpdatedTime?: time;
@@ -979,8 +1646,26 @@ declare namespace FraudDetector {
      * The entity type ARN.
      */
     arn?: fraudDetectorArn;
+    /**
+     * The event orchestration status. 
+     */
+    eventOrchestration?: EventOrchestration;
   }
   export type EventVariableMap = {[key: string]: variableValue};
+  export interface EventVariableSummary {
+    /**
+     *  The event variable name. 
+     */
+    name?: sensitiveString;
+    /**
+     *  The value of the event variable. 
+     */
+    value?: sensitiveString;
+    /**
+     *  The event variable source. 
+     */
+    source?: sensitiveString;
+  }
   export interface ExternalEventsDetail {
     /**
      * The Amazon S3 bucket location for the data.
@@ -1031,6 +1716,27 @@ declare namespace FraudDetector {
   }
   export type ExternalModelEndpointDataBlobMap = {[key: string]: ModelEndpointDataBlob};
   export type ExternalModelList = ExternalModel[];
+  export interface ExternalModelOutputs {
+    /**
+     * The Amazon SageMaker model.
+     */
+    externalModel?: ExternalModelSummary;
+    /**
+     * The fraud prediction scores from Amazon SageMaker model.
+     */
+    outputs?: ExternalModelPredictionMap;
+  }
+  export type ExternalModelPredictionMap = {[key: string]: string};
+  export interface ExternalModelSummary {
+    /**
+     * The endpoint of the Amazon SageMaker model.
+     */
+    modelEndpoint?: string;
+    /**
+     * The source of the model.
+     */
+    modelSource?: ModelSource;
+  }
   export type ExternalModelsMaxResults = number;
   export interface FieldValidationMessage {
     /**
@@ -1067,6 +1773,76 @@ declare namespace FraudDetector {
      * The message type.
      */
     type?: string;
+  }
+  export interface FilterCondition {
+    /**
+     *  A statement containing a resource property and a value to specify filter condition. 
+     */
+    value?: filterString;
+  }
+  export interface GetBatchImportJobsRequest {
+    /**
+     * The ID of the batch import job to get.
+     */
+    jobId?: identifier;
+    /**
+     * The maximum number of objects to return for request.
+     */
+    maxResults?: batchImportsMaxPageSize;
+    /**
+     * The next token from the previous request.
+     */
+    nextToken?: string;
+  }
+  export interface GetBatchImportJobsResult {
+    /**
+     * An array containing the details of each batch import job.
+     */
+    batchImports?: BatchImportList;
+    /**
+     * The next token for the subsequent resquest.
+     */
+    nextToken?: string;
+  }
+  export interface GetBatchPredictionJobsRequest {
+    /**
+     * The batch prediction job for which to get the details.
+     */
+    jobId?: identifier;
+    /**
+     * The maximum number of objects to return for the request.
+     */
+    maxResults?: batchPredictionsMaxPageSize;
+    /**
+     * The next token from the previous request.
+     */
+    nextToken?: string;
+  }
+  export interface GetBatchPredictionJobsResult {
+    /**
+     * An array containing the details of each batch prediction job.
+     */
+    batchPredictions?: BatchPredictionList;
+    /**
+     * The next token for the subsequent request.
+     */
+    nextToken?: string;
+  }
+  export interface GetDeleteEventsByEventTypeStatusRequest {
+    /**
+     * Name of event type for which to get the deletion status.
+     */
+    eventTypeName: identifier;
+  }
+  export interface GetDeleteEventsByEventTypeStatusResult {
+    /**
+     * The event type name.
+     */
+    eventTypeName?: identifier;
+    /**
+     * The deletion status.
+     */
+    eventsDeletionStatus?: AsyncJobStatus;
   }
   export interface GetDetectorVersionRequest {
     /**
@@ -1172,6 +1948,90 @@ declare namespace FraudDetector {
      */
     nextToken?: string;
   }
+  export interface GetEventPredictionMetadataRequest {
+    /**
+     *  The event ID. 
+     */
+    eventId: identifier;
+    /**
+     *  The event type associated with the detector specified for the prediction. 
+     */
+    eventTypeName: identifier;
+    /**
+     *  The detector ID. 
+     */
+    detectorId: identifier;
+    /**
+     *  The detector version ID. 
+     */
+    detectorVersionId: wholeNumberVersionString;
+    /**
+     *  The timestamp that defines when the prediction was generated. The timestamp must be specified using ISO 8601 standard in UTC. We recommend calling ListEventPredictions first, and using the predictionTimestamp value in the response to provide an accurate prediction timestamp value.
+     */
+    predictionTimestamp: time;
+  }
+  export interface GetEventPredictionMetadataResult {
+    /**
+     *  The event ID. 
+     */
+    eventId?: identifier;
+    /**
+     *  The event type associated with the detector specified for this prediction. 
+     */
+    eventTypeName?: identifier;
+    /**
+     *  The entity ID. 
+     */
+    entityId?: string;
+    /**
+     *  The entity type. 
+     */
+    entityType?: string;
+    /**
+     *  The timestamp for when the prediction was generated for the associated event ID. 
+     */
+    eventTimestamp?: time;
+    /**
+     *  The detector ID. 
+     */
+    detectorId?: identifier;
+    /**
+     *  The detector version ID. 
+     */
+    detectorVersionId?: wholeNumberVersionString;
+    /**
+     *  The status of the detector version. 
+     */
+    detectorVersionStatus?: string;
+    /**
+     *  A list of event variables that influenced the prediction scores. 
+     */
+    eventVariables?: ListOfEventVariableSummaries;
+    /**
+     *  List of rules associated with the detector version that were used for evaluating variable values. 
+     */
+    rules?: EvaluatedRuleList;
+    /**
+     *  The execution mode of the rule used for evaluating variable values. 
+     */
+    ruleExecutionMode?: RuleExecutionMode;
+    /**
+     *  The outcomes of the matched rule, based on the rule execution mode. 
+     */
+    outcomes?: ListOfStrings;
+    /**
+     *  Model versions that were evaluated for generating predictions. 
+     */
+    evaluatedModelVersions?: ListOfEvaluatedModelVersions;
+    /**
+     *  External (Amazon SageMaker) models that were evaluated for generating predictions. 
+     */
+    evaluatedExternalModels?: ListOfEvaluatedExternalModels;
+    /**
+     * The timestamp that defines when the prediction was generated. 
+     */
+    predictionTimestamp?: time;
+  }
   export interface GetEventPredictionRequest {
     /**
      * The detector ID.
@@ -1194,11 +2054,11 @@ declare namespace FraudDetector {
      */
     entities: listOfEntities;
     /**
-     * Timestamp that defines when the event under evaluation occurred.
+     * Timestamp that defines when the event under evaluation occurred. The timestamp must be specified using ISO 8601 standard in UTC.
      */
-    eventTimestamp: string;
+    eventTimestamp: utcTimestampISO8601;
     /**
-     * Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.
+     * Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.  You must provide at least one eventVariable  To ensure most accurate fraud prediction and to simplify your data preparation, Amazon Fraud Detector will replace all missing variables or values as follows:  For Amazon Fraud Detector trained models:  If a null value is provided explicitly for a variable or if a variable is missing, model will replace the null value or the missing variable (no variable name in the eventVariables map) with calculated default mean/medians for numeric variables and with special values for categorical variables.  For imported SageMaker models:  If a null value is provided explicitly for a variable, the model and rules will use “null” as the value. If a variable is not provided (no variable name in the eventVariables map), model and rules will use the default value that is provided for the variable. 
      */
     eventVariables: EventVariableMap;
     /**
@@ -1212,9 +2072,29 @@ declare namespace FraudDetector {
      */
     modelScores?: ListOfModelScores;
     /**
-     * The results.
+     * The results from the rules.
      */
     ruleResults?: ListOfRuleResults;
+    /**
+     * The model scores for Amazon SageMaker models.
+     */
+    externalModelOutputs?: ListOfExternalModelOutputs;
+  }
+  export interface GetEventRequest {
+    /**
+     * The ID of the event to retrieve.
+     */
+    eventId: string;
+    /**
+     * The event type of the event to retrieve.
+     */
+    eventTypeName: string;
+  }
+  export interface GetEventResult {
+    /**
+     * The details of the event.
+     */
+    event?: Event;
   }
   export interface GetEventTypesRequest {
     /**
@@ -1294,6 +2174,54 @@ declare namespace FraudDetector {
      */
     nextToken?: string;
   }
+  export interface GetListElementsRequest {
+    /**
+     *  The name of the list. 
+     */
+    name: noDashIdentifier;
+    /**
+     *  The next token for the subsequent request. 
+     */
+    nextToken?: nextToken;
+    /**
+     *  The maximum number of objects to return for the request. 
+     */
+    maxResults?: ListsElementsMaxResults;
+  }
+  export interface GetListElementsResult {
+    /**
+     *  The list elements. 
+     */
+    elements?: ElementsList;
+    /**
+     *  The next page token. 
+     */
+    nextToken?: nextToken;
+  }
+  export interface GetListsMetadataRequest {
+    /**
+     *  The name of the list. 
+     */
+    name?: noDashIdentifier;
+    /**
+     *  The next token for the subsequent request. 
+     */
+    nextToken?: nextToken;
+    /**
+     *  The maximum number of objects to return for the request. 
+     */
+    maxResults?: ListsMetadataMaxResults;
+  }
+  export interface GetListsMetadataResult {
+    /**
+     *  The metadata of the specified list or all lists under the account. 
+     */
+    lists?: AllowDenyLists;
+    /**
+     *  The next page token. 
+     */
+    nextToken?: nextToken;
+  }
   export interface GetModelVersionRequest {
     /**
      * The model ID.
@@ -1330,9 +2258,13 @@ declare namespace FraudDetector {
      */
     trainingDataSchema?: TrainingDataSchema;
     /**
-     * The event details.
+     * The details of the external events data used for training the model version. This will be populated if the trainingDataSource is EXTERNAL_EVENTS 
      */
     externalEventsDetail?: ExternalEventsDetail;
+    /**
+     * The details of the ingested events data used for training the model version. This will be populated if the trainingDataSource is INGESTED_EVENTS.
+     */
+    ingestedEventsDetail?: IngestedEventsDetail;
     /**
      * The model version status. Possible values are:    TRAINING_IN_PROGRESS     TRAINING_COMPLETE     ACTIVATE_REQUESTED     ACTIVATE_IN_PROGRESS     ACTIVE     INACTIVATE_REQUESTED     INACTIVATE_IN_PROGRESS     INACTIVE     ERROR   
      */
@@ -1450,6 +2382,45 @@ declare namespace FraudDetector {
      */
     nextToken?: string;
   }
+  export interface IngestedEventStatistics {
+    /**
+     * The number of stored events.
+     */
+    numberOfEvents?: Long;
+    /**
+     * The total size of the stored events.
+     */
+    eventDataSizeInBytes?: Long;
+    /**
+     * The oldest stored event.
+     */
+    leastRecentEvent?: time;
+    /**
+     * The newest stored event.
+     */
+    mostRecentEvent?: time;
+    /**
+     * Timestamp of when the stored event was last updated. 
+     */
+    lastUpdatedTime?: time;
+  }
+  export interface IngestedEventsDetail {
+    /**
+     * The start and stop time of the ingested events.
+     */
+    ingestedEventsTimeWindow: IngestedEventsTimeWindow;
+  }
+  export interface IngestedEventsTimeWindow {
+    /**
+     * Timestamp of the first ingensted event.
+     */
+    startTime: time;
+    /**
+     * Timestamp of the final ingested event.
+     */
+    endTime: time;
+  }
+  export type Integer = number;
   export type JsonKeyToVariableMap = {[key: string]: string};
   export interface KMSKey {
     /**
@@ -1484,10 +2455,63 @@ declare namespace FraudDetector {
     /**
      * The label mapper maps the Amazon Fraud Detector supported model classification labels (FRAUD, LEGIT) to the appropriate event type labels. For example, if "FRAUD" and "LEGIT" are Amazon Fraud Detector supported labels, this mapper could be: {"FRAUD" =&gt; ["0"], "LEGIT" =&gt; ["1"]} or {"FRAUD" =&gt; ["false"], "LEGIT" =&gt; ["true"]} or {"FRAUD" =&gt; ["fraud", "abuse"], "LEGIT" =&gt; ["legit", "safe"]}. The value part of the mapper is a list, because you may have multiple label variants from your event type for a single Amazon Fraud Detector label. 
      */
-    labelMapper: labelMapper;
+    labelMapper?: labelMapper;
+    /**
+     * The action to take for unlabeled events.   Use IGNORE if you want the unlabeled events to be ignored. This is recommended when the majority of the events in the dataset are labeled.   Use FRAUD if you want to categorize all unlabeled events as “Fraud”. This is recommended when most of the events in your dataset are fraudulent.   Use LEGIT if you want to categorize all unlabeled events as “Legit”. This is recommended when most of the events in your dataset are legitimate.   Use AUTO if you want Amazon Fraud Detector to decide how to use the unlabeled data. This is recommended when there is significant unlabeled events in the dataset.   By default, Amazon Fraud Detector ignores the unlabeled data.
+     */
+    unlabeledEventsTreatment?: UnlabeledEventsTreatment;
   }
   export type Language = "DETECTORPL"|string;
+  export interface ListEventPredictionsRequest {
+    /**
+     *  The event ID. 
+     */
+    eventId?: FilterCondition;
+    /**
+     *  The event type associated with the detector. 
+     */
+    eventType?: FilterCondition;
+    /**
+     *  The detector ID. 
+     */
+    detectorId?: FilterCondition;
+    /**
+     *  The detector version ID. 
+     */
+    detectorVersionId?: FilterCondition;
+    /**
+     *  The time period for when the predictions were generated. 
+     */
+    predictionTimeRange?: PredictionTimeRange;
+    /**
+     *  Identifies the next page of results to return. Use the token to make the call again to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. 
+     */
+    nextToken?: string;
+    /**
+     *  The maximum number of predictions to return for the request. 
+     */
+    maxResults?: EventPredictionsMaxResults;
+  }
+  export interface ListEventPredictionsResult {
+    /**
+     *  The summary of the past predictions. 
+     */
+    eventPredictionSummaries?: ListOfEventPredictionSummaries;
+    /**
+     *  Identifies the next page of results to return. Use the token to make the call again to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. 
+     */
+    nextToken?: string;
+  }
+  export type ListOfAggregatedLogOddsMetrics = AggregatedLogOddsMetric[];
+  export type ListOfAggregatedVariablesImpactExplanations = AggregatedVariablesImpactExplanation[];
+  export type ListOfEvaluatedExternalModels = EvaluatedExternalModel[];
+  export type ListOfEvaluatedModelVersions = EvaluatedModelVersion[];
+  export type ListOfEventPredictionSummaries = EventPredictionSummary[];
+  export type ListOfEventVariableSummaries = EventVariableSummary[];
+  export type ListOfExternalModelOutputs = ExternalModelOutputs[];
+  export type ListOfLogOddsMetrics = LogOddsMetric[];
   export type ListOfModelScores = ModelScores[];
+  export type ListOfModelVersionEvaluations = ModelVersionEvaluation[];
   export type ListOfModelVersions = ModelVersion[];
   export type ListOfRuleResults = RuleResult[];
   export type ListOfStrings = string[];
@@ -1515,6 +2539,25 @@ declare namespace FraudDetector {
      */
     nextToken?: string;
   }
+  export type ListUpdateMode = "REPLACE"|"APPEND"|"REMOVE"|string;
+  export type ListsElementsMaxResults = number;
+  export type ListsMetadataMaxResults = number;
+  export interface LogOddsMetric {
+    /**
+     * The name of the variable.
+     */
+    variableName: string;
+    /**
+     * The type of variable.
+     */
+    variableType: string;
+    /**
+     * The relative importance of the variable. For more information, see Model variable importance.
+     */
+    variableImportance: float;
+  }
+  export type Long = number;
+  export type MapOfStrings = {[key: string]: string};
   export interface MetricDataPoint {
     /**
      * The false positive rate. This is the percentage of total legitimate events that are incorrectly predicted as fraud.
@@ -1590,11 +2633,11 @@ declare namespace FraudDetector {
     /**
      *  Template for constructing the JSON input-data sent to SageMaker. At event-evaluation, the placeholders for variable names in the template will be replaced with the variable values before being sent to SageMaker. 
      */
-    jsonInputTemplate?: string;
+    jsonInputTemplate?: modelInputTemplate;
     /**
      *  Template for constructing the CSV input-data sent to SageMaker. At event-evaluation, the placeholders for variable-names in the template will be replaced with the variable values before being sent to SageMaker. 
      */
-    csvInputTemplate?: string;
+    csvInputTemplate?: modelInputTemplate;
   }
   export type ModelInputDataFormat = "TEXT_CSV"|"APPLICATION_JSON"|string;
   export interface ModelOutputConfiguration {
@@ -1624,7 +2667,7 @@ declare namespace FraudDetector {
     scores?: ModelPredictionMap;
   }
   export type ModelSource = "SAGEMAKER"|string;
-  export type ModelTypeEnum = "ONLINE_FRAUD_INSIGHTS"|string;
+  export type ModelTypeEnum = "ONLINE_FRAUD_INSIGHTS"|"TRANSACTION_FRAUD_INSIGHTS"|"ACCOUNT_TAKEOVER_INSIGHTS"|string;
   export interface ModelVersion {
     /**
      * The model ID.
@@ -1637,7 +2680,7 @@ declare namespace FraudDetector {
     /**
      * The model version number.
      */
-    modelVersionNumber: nonEmptyString;
+    modelVersionNumber: floatVersionString;
     /**
      * The model version ARN.
      */
@@ -1669,9 +2712,13 @@ declare namespace FraudDetector {
      */
     trainingDataSchema?: TrainingDataSchema;
     /**
-     * The event details.
+     * The external events data details. This will be populated if the trainingDataSource for the model version is specified as EXTERNAL_EVENTS.
      */
     externalEventsDetail?: ExternalEventsDetail;
+    /**
+     * The ingested events data details. This will be populated if the trainingDataSource for the model version is specified as INGESTED_EVENTS.
+     */
+    ingestedEventsDetail?: IngestedEventsDetail;
     /**
      * The training results.
      */
@@ -1688,10 +2735,67 @@ declare namespace FraudDetector {
      * The model version ARN.
      */
     arn?: fraudDetectorArn;
+    /**
+     *  The training result details. The details include the relative importance of the variables. 
+     */
+    trainingResultV2?: TrainingResultV2;
   }
-  export type ModelVersionStatus = "ACTIVE"|"INACTIVE"|string;
+  export interface ModelVersionEvaluation {
+    /**
+     *  The output variable name. 
+     */
+    outputVariableName?: string;
+    /**
+     *  The evaluation score generated for the model version. 
+     */
+    evaluationScore?: string;
+    /**
+     *  The prediction explanations generated for the model version. 
+     */
+    predictionExplanations?: PredictionExplanations;
+  }
+  export type ModelVersionStatus = "ACTIVE"|"INACTIVE"|"TRAINING_CANCELLED"|string;
   export type NameList = string[];
   export type NonEmptyListOfStrings = string[];
+  export interface OFIMetricDataPoint {
+    /**
+     *  The false positive rate. This is the percentage of total legitimate events that are incorrectly predicted as fraud. 
+     */
+    fpr?: float;
+    /**
+     *  The percentage of fraud events correctly predicted as fraudulent as compared to all events predicted as fraudulent. 
+     */
+    precision?: float;
+    /**
+     *  The true positive rate. This is the percentage of total fraud the model detects. Also known as capture rate. 
+     */
+    tpr?: float;
+    /**
+     *  The model threshold that specifies an acceptable fraud capture rate. For example, a threshold of 500 means any model score 500 or above is labeled as fraud. 
+     */
+    threshold?: float;
+  }
+  export type OFIMetricDataPointsList = OFIMetricDataPoint[];
+  export interface OFIModelPerformance {
+    /**
+     *  The area under the curve (auc). This summarizes the total positive rate (tpr) and false positive rate (FPR) across all possible model score thresholds. 
+     */
+    auc?: float;
+    /**
+     *  Indicates the range of area under curve (auc) expected from the OFI model. A range greater than 0.1 indicates higher model uncertainity. 
+     */
+    uncertaintyRange?: UncertaintyRange;
+  }
+  export interface OFITrainingMetricsValue {
+    /**
+     *  The model's performance metrics data points. 
+     */
+    metricDataPoints?: OFIMetricDataPointsList;
+    /**
+     *  The model's overall performance score. 
+     */
+    modelPerformance?: OFIModelPerformance;
+  }
   export interface Outcome {
     /**
      * The outcome name.
@@ -1716,6 +2820,26 @@ declare namespace FraudDetector {
   }
   export type OutcomeList = Outcome[];
   export type OutcomesMaxResults = number;
+  export interface PredictionExplanations {
+    /**
+     *  The details of the event variable's impact on the prediction score. 
+     */
+    variableImpactExplanations?: listOfVariableImpactExplanations;
+    /**
+     *  The details of the aggregated variables impact on the prediction score.  Account Takeover Insights (ATI) model uses event variables from the login data you provide to continuously calculate a set of variables (aggregated variables) based on historical events. For example, your ATI model might calculate the number of times an user has logged in using the same IP address. In this case, event variables used to derive the aggregated variables are IP address and user.
+     */
+    aggregatedVariablesImpactExplanations?: ListOfAggregatedVariablesImpactExplanations;
+  }
+  export interface PredictionTimeRange {
+    /**
+     *  The start time of the time period for when the predictions were generated. 
+     */
+    startTime: time;
+    /**
+     *  The end time of the time period for when the predictions were generated. 
+     */
+    endTime: time;
+  }
   export interface PutDetectorRequest {
     /**
      * The detector ID. 
@@ -1774,9 +2898,17 @@ declare namespace FraudDetector {
      */
     entityTypes: NonEmptyListOfStrings;
     /**
+     * Specifies if ingestion is enabled or disabled.
+     */
+    eventIngestion?: EventIngestion;
+    /**
      * A collection of key and value pairs.
      */
     tags?: tagList;
+    /**
+     * Enables or disables event orchestration. If enabled, you can send event predictions to select AWS services for downstream processing of the events.
+     */
+    eventOrchestration?: EventOrchestration;
   }
   export interface PutEventTypeResult {
   }
@@ -1814,7 +2946,7 @@ declare namespace FraudDetector {
   }
   export interface PutKMSEncryptionKeyRequest {
     /**
-     * The KMS encryption key ARN.
+     * The KMS encryption key ARN. The KMS key must be single-Region key. Amazon Fraud Detector does not support multi-Region KMS key.
      */
     kmsEncryptionKeyArn: KmsEncryptionKeyArn;
   }
@@ -1830,7 +2962,7 @@ declare namespace FraudDetector {
      */
     description?: description;
     /**
-     * 
+     * A collection of key and value pairs.
      */
     tags?: tagList;
   }
@@ -1922,6 +3054,77 @@ declare namespace FraudDetector {
     outcomes?: ListOfStrings;
   }
   export type RulesMaxResults = number;
+  export interface SendEventRequest {
+    /**
+     * The event ID to upload.
+     */
+    eventId: identifier;
+    /**
+     * The event type name of the event.
+     */
+    eventTypeName: identifier;
+    /**
+     * The timestamp that defines when the event under evaluation occurred. The timestamp must be specified using ISO 8601 standard in UTC.
+     */
+    eventTimestamp: utcTimestampISO8601;
+    /**
+     * Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.
+     */
+    eventVariables: EventVariableMap;
+    /**
+     * The label to associate with the event. Required if specifying labelTimestamp.
+     */
+    assignedLabel?: identifier;
+    /**
+     * The timestamp associated with the label. Required if specifying assignedLabel.
+     */
+    labelTimestamp?: utcTimestampISO8601;
+    /**
+     * An array of entities.
+     */
+    entities: listOfEntities;
+  }
+  export interface SendEventResult {
+  }
+  export interface TFIMetricDataPoint {
+    /**
+     *  The false positive rate. This is the percentage of total legitimate events that are incorrectly predicted as fraud. 
+     */
+    fpr?: float;
+    /**
+     *  The percentage of fraud events correctly predicted as fraudulent as compared to all events predicted as fraudulent. 
+     */
+    precision?: float;
+    /**
+     *  The true positive rate. This is the percentage of total fraud the model detects. Also known as capture rate. 
+     */
+    tpr?: float;
+    /**
+     *  The model threshold that specifies an acceptable fraud capture rate. For example, a threshold of 500 means any model score 500 or above is labeled as fraud. 
+     */
+    threshold?: float;
+  }
+  export type TFIMetricDataPointsList = TFIMetricDataPoint[];
+  export interface TFIModelPerformance {
+    /**
+     *  The area under the curve (auc). This summarizes the total positive rate (tpr) and false positive rate (FPR) across all possible model score thresholds. 
+     */
+    auc?: float;
+    /**
+     *  Indicates the range of area under curve (auc) expected from the TFI model. A range greater than 0.1 indicates higher model uncertainity. 
+     */
+    uncertaintyRange?: UncertaintyRange;
+  }
+  export interface TFITrainingMetricsValue {
+    /**
+     *  The model's performance metrics data points. 
+     */
+    metricDataPoints?: TFIMetricDataPointsList;
+    /**
+     *  The model performance score. 
+     */
+    modelPerformance?: TFIModelPerformance;
+  }
   export interface Tag {
     /**
      * A tag key.
@@ -1950,9 +3153,9 @@ declare namespace FraudDetector {
      * The training data schema variables.
      */
     modelVariables: ListOfStrings;
-    labelSchema: LabelSchema;
+    labelSchema?: LabelSchema;
   }
-  export type TrainingDataSourceEnum = "EXTERNAL_EVENTS"|string;
+  export type TrainingDataSourceEnum = "EXTERNAL_EVENTS"|"INGESTED_EVENTS"|string;
   export interface TrainingMetrics {
     /**
      * The area under the curve. This summarizes true positive rate (TPR) and false positive rate (FPR) across all possible model score thresholds. A model with no predictive power has an AUC of 0.5, whereas a perfect model has a score of 1.0.
@@ -1963,6 +3166,20 @@ declare namespace FraudDetector {
      */
     metricDataPoints?: metricDataPointsList;
   }
+  export interface TrainingMetricsV2 {
+    /**
+     *  The Online Fraud Insights (OFI) model training metric details. 
+     */
+    ofi?: OFITrainingMetricsValue;
+    /**
+     *  The Transaction Fraud Insights (TFI) model training metric details. 
+     */
+    tfi?: TFITrainingMetricsValue;
+    /**
+     *  The Account Takeover Insights (ATI) model training metric details. 
+     */
+    ati?: ATITrainingMetricsValue;
+  }
   export interface TrainingResult {
     /**
      * The validation metrics.
@@ -1972,7 +3189,34 @@ declare namespace FraudDetector {
      * The training metric details.
      */
     trainingMetrics?: TrainingMetrics;
+    /**
+     * The variable importance metrics.
+     */
+    variableImportanceMetrics?: VariableImportanceMetrics;
   }
+  export interface TrainingResultV2 {
+    dataValidationMetrics?: DataValidationMetrics;
+    /**
+     *  The training metric details. 
+     */
+    trainingMetricsV2?: TrainingMetricsV2;
+    variableImportanceMetrics?: VariableImportanceMetrics;
+    /**
+     *  The variable importance metrics of the aggregated variables.  Account Takeover Insights (ATI) model uses event variables from the login data you provide to continuously calculate a set of variables (aggregated variables) based on historical events. For example, your ATI model might calculate the number of times an user has logged in using the same IP address. In this case, event variables used to derive the aggregated variables are IP address and user.
+     */
+    aggregatedVariablesImportanceMetrics?: AggregatedVariablesImportanceMetrics;
+  }
+  export interface UncertaintyRange {
+    /**
+     *  The lower bound value of the area under curve (auc). 
+     */
+    lowerBoundValue: float;
+    /**
+     *  The upper bound value of the area under curve (auc). 
+     */
+    upperBoundValue: float;
+  }
+  export type UnlabeledEventsTreatment = "IGNORE"|"FRAUD"|"LEGIT"|"AUTO"|string;
   export interface UntagResourceRequest {
     /**
      * The ARN of the resource from which to remove the tag.
@@ -2043,11 +3287,55 @@ declare namespace FraudDetector {
      */
     detectorVersionId: wholeNumberVersionString;
     /**
-     * The new status.
+     * The new status. The only supported values are ACTIVE and INACTIVE 
      */
     status: DetectorVersionStatus;
   }
   export interface UpdateDetectorVersionStatusResult {
+  }
+  export interface UpdateEventLabelRequest {
+    /**
+     * The ID of the event associated with the label to update.
+     */
+    eventId: identifier;
+    /**
+     * The event type of the event associated with the label to update.
+     */
+    eventTypeName: identifier;
+    /**
+     * The new label to assign to the event.
+     */
+    assignedLabel: identifier;
+    /**
+     * The timestamp associated with the label. The timestamp must be specified using ISO 8601 standard in UTC. 
+     */
+    labelTimestamp: utcTimestampISO8601;
+  }
+  export interface UpdateEventLabelResult {
+  }
+  export interface UpdateListRequest {
+    /**
+     *  The name of the list to update. 
+     */
+    name: noDashIdentifier;
+    /**
+     *  One or more list elements to add or replace. If you are providing the elements, make sure to specify the updateMode to use.  If you are deleting all elements from the list, use REPLACE for the updateMode and provide an empty list (0 elements).
+     */
+    elements?: ElementsList;
+    /**
+     *  The new description. 
+     */
+    description?: description;
+    /**
+     *  The update mode (type).    Use APPEND if you are adding elements to the list.   Use REPLACE if you replacing existing elements in the list.   Use REMOVE if you are removing elements from the list.  
+     */
+    updateMode?: ListUpdateMode;
+    /**
+     *  The variable type you want to assign to the list.   You cannot update a variable type of a list that already has a variable type assigned to it. You can assign a variable type to a list only if the list does not already have a variable type. 
+     */
+    variableType?: variableType;
+  }
+  export interface UpdateListResult {
   }
   export interface UpdateModelRequest {
     /**
@@ -2079,9 +3367,13 @@ declare namespace FraudDetector {
      */
     majorVersionNumber: wholeNumberVersionString;
     /**
-     * The event details.
+     * The details of the external events data used for training the model version. Required if trainingDataSource is EXTERNAL_EVENTS.
      */
     externalEventsDetail?: ExternalEventsDetail;
+    /**
+     * The details of the ingested event used for training the model version. Required if your trainingDataSource is INGESTED_EVENTS.
+     */
+    ingestedEventsDetail?: IngestedEventsDetail;
     /**
      * A collection of key and value pairs.
      */
@@ -2255,17 +3547,43 @@ declare namespace FraudDetector {
     variableType?: string;
   }
   export type VariableEntryList = VariableEntry[];
+  export interface VariableImpactExplanation {
+    /**
+     *  The event variable name. 
+     */
+    eventVariableName?: string;
+    /**
+     *  The event variable's relative impact in terms of magnitude on the prediction scores. The relative impact values consist of a numerical rating (0-5, 5 being the highest) and direction (increased/decreased) impact of the fraud risk. 
+     */
+    relativeImpact?: string;
+    /**
+     *  The raw, uninterpreted value represented as log-odds of the fraud. These values are usually between -10 to +10, but range from - infinity to + infinity.   A positive value indicates that the variable drove the risk score up.   A negative value indicates that the variable drove the risk score down.  
+     */
+    logOddsImpact?: float;
+  }
+  export interface VariableImportanceMetrics {
+    /**
+     * List of variable metrics.
+     */
+    logOddsMetrics?: ListOfLogOddsMetrics;
+  }
   export type VariableList = Variable[];
   export type VariablesMaxResults = number;
+  export type attributeKey = string;
+  export type attributeValue = string;
+  export type batchImportsMaxPageSize = number;
+  export type batchPredictionsMaxPageSize = number;
   export type blob = Buffer|Uint8Array|Blob|string;
   export type contentType = string;
   export type description = string;
+  export type entityRestrictedString = string;
   export type entityTypeList = EntityType[];
   export type entityTypesMaxResults = number;
   export type eventTypeList = EventType[];
   export type eventTypesMaxResults = number;
   export type fieldValidationMessageList = FieldValidationMessage[];
   export type fileValidationMessageList = FileValidationMessage[];
+  export type filterString = string;
   export type float = number;
   export type floatVersionString = string;
   export type fraudDetectorArn = string;
@@ -2276,21 +3594,27 @@ declare namespace FraudDetector {
   export type labelMapper = {[key: string]: ListOfStrings};
   export type labelsMaxResults = number;
   export type listOfEntities = Entity[];
+  export type listOfVariableImpactExplanations = VariableImpactExplanation[];
   export type metricDataPointsList = MetricDataPoint[];
   export type modelIdentifier = string;
+  export type modelInputTemplate = string;
   export type modelList = Model[];
   export type modelVersionDetailList = ModelVersionDetail[];
   export type modelsMaxPageSize = number;
-  export type nonEmptyString = string;
+  export type nextToken = string;
+  export type noDashIdentifier = string;
   export type ruleExpression = string;
   export type s3BucketLocation = string;
   export type sageMakerEndpointIdentifier = string;
+  export type sensitiveString = string;
   export type tagKey = string;
   export type tagKeyList = tagKey[];
   export type tagList = Tag[];
   export type tagValue = string;
   export type time = string;
+  export type utcTimestampISO8601 = string;
   export type variableName = string;
+  export type variableType = string;
   export type variableValue = string;
   export type wholeNumberVersionString = string;
   /**

@@ -20,9 +20,9 @@ function customEval(cmd, context, filename, callback) {
       context.error = resp.error;
       callback(resp.error, resp.data);
     }
-    
+
     if (value && value.constructor === AWS.Request && !value.__hasBeenEval__) {
-      
+
       try {
         value.__hasBeenEval__ = true;
         if (value.response) value.response.__hasBeenEval__ = true;
