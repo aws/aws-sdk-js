@@ -6,17 +6,13 @@
     "endpointPrefix": "s3",
     "globalEndpoint": "s3.amazonaws.com",
     "protocol": "rest-xml",
-    "protocols": [
-      "rest-xml"
-    ],
+    "protocols": ["rest-xml"],
     "serviceAbbreviation": "Amazon S3",
     "serviceFullName": "Amazon Simple Storage Service",
     "serviceId": "S3",
     "signatureVersion": "s3",
     "uid": "s3-2006-03-01",
-    "auth": [
-      "aws.auth#sigv4"
-    ]
+    "auth": ["aws.auth#sigv4"]
   },
   "operations": {
     "AbortMultipartUpload": {
@@ -903,12 +899,7 @@
       "documentation": "<p>Retrieves an object from Amazon S3.</p> <p>In the <code>GetObject</code> request, specify the full key name for the object.</p> <p> <b>General purpose buckets</b> - Both the virtual-hosted-style requests and the path-style requests are supported. For a virtual hosted-style request example, if you have the object <code>photos/2006/February/sample.jpg</code>, specify the object key name as <code>/photos/2006/February/sample.jpg</code>. For a path-style request example, if you have the object <code>photos/2006/February/sample.jpg</code> in the bucket named <code>examplebucket</code>, specify the object key name as <code>/examplebucket/photos/2006/February/sample.jpg</code>. For more information about request types, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html#VirtualHostingSpecifyBucket\">HTTP Host Header Bucket Specification</a> in the <i>Amazon S3 User Guide</i>.</p> <p> <b>Directory buckets</b> - Only virtual-hosted-style requests are supported. For a virtual hosted-style request example, if you have the object <code>photos/2006/February/sample.jpg</code> in the bucket named <code>examplebucket--use1-az5--x-s3</code>, specify the object key name as <code>/photos/2006/February/sample.jpg</code>. Also, when you make requests to this API operation, your requests are sent to the Zonal endpoint. These endpoints support virtual-hosted-style requests in the format <code>https://<i>bucket_name</i>.s3express-<i>az_id</i>.<i>region</i>.amazonaws.com/<i>key-name</i> </code>. Path-style requests are not supported. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html\">Regional and Zonal endpoints</a> in the <i>Amazon S3 User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <ul> <li> <p> <b>General purpose bucket permissions</b> - You must have the required permissions in a policy. To use <code>GetObject</code>, you must have the <code>READ</code> access to the object (or version). If you grant <code>READ</code> access to the anonymous user, the <code>GetObject</code> operation returns the object without using an authorization header. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html\">Specifying permissions in a policy</a> in the <i>Amazon S3 User Guide</i>.</p> <p>If you include a <code>versionId</code> in your request header, you must have the <code>s3:GetObjectVersion</code> permission to access a specific version of an object. The <code>s3:GetObject</code> permission is not required in this scenario.</p> <p>If you request the current version of an object without a specific <code>versionId</code> in the request header, only the <code>s3:GetObject</code> permission is required. The <code>s3:GetObjectVersion</code> permission is not required in this scenario. </p> <p>If the object that you request doesn’t exist, the error that Amazon S3 returns depends on whether you also have the <code>s3:ListBucket</code> permission.</p> <ul> <li> <p>If you have the <code>s3:ListBucket</code> permission on the bucket, Amazon S3 returns an HTTP status code <code>404 Not Found</code> error.</p> </li> <li> <p>If you don’t have the <code>s3:ListBucket</code> permission, Amazon S3 returns an HTTP status code <code>403 Access Denied</code> error.</p> </li> </ul> </li> <li> <p> <b>Directory bucket permissions</b> - To grant access to this API operation on a directory bucket, we recommend that you use the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html\"> <code>CreateSession</code> </a> API operation for session-based authorization. Specifically, you grant the <code>s3express:CreateSession</code> permission to the directory bucket in a bucket policy or an IAM identity-based policy. Then, you make the <code>CreateSession</code> API call on the bucket to obtain a session token. With the session token in your request header, you can make API requests to this operation. After the session token expires, you make another <code>CreateSession</code> API call to generate a new session token for use. Amazon Web Services CLI or SDKs create session and refresh the session token automatically to avoid service interruptions when a session expires. For more information about authorization, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html\"> <code>CreateSession</code> </a>.</p> </li> </ul> </dd> <dt>Storage classes</dt> <dd> <p>If the object you are retrieving is stored in the S3 Glacier Flexible Retrieval storage class, the S3 Glacier Deep Archive storage class, the S3 Intelligent-Tiering Archive Access tier, or the S3 Intelligent-Tiering Deep Archive Access tier, before you can retrieve the object you must first restore a copy using <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html\">RestoreObject</a>. Otherwise, this operation returns an <code>InvalidObjectState</code> error. For information about restoring archived objects, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html\">Restoring Archived Objects</a> in the <i>Amazon S3 User Guide</i>.</p> <p> <b>Directory buckets </b> - For directory buckets, only the S3 Express One Zone storage class is supported to store newly created objects. Unsupported storage class values won't write a destination object and will respond with the HTTP status code <code>400 Bad Request</code>.</p> </dd> <dt>Encryption</dt> <dd> <p>Encryption request headers, like <code>x-amz-server-side-encryption</code>, should not be sent for the <code>GetObject</code> requests, if your object uses server-side encryption with Amazon S3 managed encryption keys (SSE-S3), server-side encryption with Key Management Service (KMS) keys (SSE-KMS), or dual-layer server-side encryption with Amazon Web Services KMS keys (DSSE-KMS). If you include the header in your <code>GetObject</code> requests for the object that uses these types of keys, you’ll get an HTTP <code>400 Bad Request</code> error.</p> </dd> <dt>Overriding response header values through the request</dt> <dd> <p>There are times when you want to override certain response header values of a <code>GetObject</code> response. For example, you might override the <code>Content-Disposition</code> response header value through your <code>GetObject</code> request.</p> <p>You can override values for a set of response headers. These modified response header values are included only in a successful response, that is, when the HTTP status code <code>200 OK</code> is returned. The headers you can override using the following query parameters in the request are a subset of the headers that Amazon S3 accepts when you create an object. </p> <p>The response headers that you can override for the <code>GetObject</code> response are <code>Cache-Control</code>, <code>Content-Disposition</code>, <code>Content-Encoding</code>, <code>Content-Language</code>, <code>Content-Type</code>, and <code>Expires</code>.</p> <p>To override values for a set of response headers in the <code>GetObject</code> response, you can use the following query parameters in the request.</p> <ul> <li> <p> <code>response-cache-control</code> </p> </li> <li> <p> <code>response-content-disposition</code> </p> </li> <li> <p> <code>response-content-encoding</code> </p> </li> <li> <p> <code>response-content-language</code> </p> </li> <li> <p> <code>response-content-type</code> </p> </li> <li> <p> <code>response-expires</code> </p> </li> </ul> <note> <p>When you use these parameters, you must sign the request by using either an Authorization header or a presigned URL. These parameters cannot be used with an unsigned (anonymous) request.</p> </note> </dd> <dt>HTTP Host header syntax</dt> <dd> <p> <b>Directory buckets </b> - The HTTP Host header syntax is <code> <i>Bucket_name</i>.s3express-<i>az_id</i>.<i>region</i>.amazonaws.com</code>.</p> </dd> </dl> <p>The following operations are related to <code>GetObject</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html\">ListBuckets</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAcl.html\">GetObjectAcl</a> </p> </li> </ul>",
       "httpChecksum": {
         "requestValidationModeMember": "ChecksumMode",
-        "responseAlgorithms": [
-          "CRC32",
-          "CRC32C",
-          "SHA256",
-          "SHA1"
-        ]
+        "responseAlgorithms": ["CRC32", "CRC32C", "SHA256", "SHA1"]
       }
     },
     "GetObjectAcl": {
@@ -1928,11 +1919,7 @@
     },
     "AbortMultipartUploadRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Key",
-        "UploadId"
-      ],
+      "required": ["Bucket", "Key", "UploadId"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -2004,9 +1991,7 @@
     },
     "AccessControlTranslation": {
       "type": "structure",
-      "required": [
-        "Owner"
-      ],
+      "required": ["Owner"],
       "members": {
         "Owner": {
           "shape": "OwnerOverride",
@@ -2080,10 +2065,7 @@
     },
     "AnalyticsConfiguration": {
       "type": "structure",
-      "required": [
-        "Id",
-        "StorageClassAnalysis"
-      ],
+      "required": ["Id", "StorageClassAnalysis"],
       "members": {
         "Id": {
           "shape": "AnalyticsId",
@@ -2109,9 +2091,7 @@
     },
     "AnalyticsExportDestination": {
       "type": "structure",
-      "required": [
-        "S3BucketDestination"
-      ],
+      "required": ["S3BucketDestination"],
       "members": {
         "S3BucketDestination": {
           "shape": "AnalyticsS3BucketDestination",
@@ -2143,10 +2123,7 @@
     },
     "AnalyticsS3BucketDestination": {
       "type": "structure",
-      "required": [
-        "Format",
-        "Bucket"
-      ],
+      "required": ["Format", "Bucket"],
       "members": {
         "Format": {
           "shape": "AnalyticsS3ExportFileFormat",
@@ -2169,16 +2146,11 @@
     },
     "AnalyticsS3ExportFileFormat": {
       "type": "string",
-      "enum": [
-        "CSV"
-      ]
+      "enum": ["CSV"]
     },
     "ArchiveStatus": {
       "type": "string",
-      "enum": [
-        "ARCHIVE_ACCESS",
-        "DEEP_ARCHIVE_ACCESS"
-      ]
+      "enum": ["ARCHIVE_ACCESS", "DEEP_ARCHIVE_ACCESS"]
     },
     "Body": {
       "type": "blob"
@@ -2199,10 +2171,7 @@
     },
     "BucketAccelerateStatus": {
       "type": "string",
-      "enum": [
-        "Enabled",
-        "Suspended"
-      ]
+      "enum": ["Enabled", "Suspended"]
     },
     "BucketCannedACL": {
       "type": "string",
@@ -2233,9 +2202,7 @@
     },
     "BucketLifecycleConfiguration": {
       "type": "structure",
-      "required": [
-        "Rules"
-      ],
+      "required": ["Rules"],
       "members": {
         "Rules": {
           "shape": "LifecycleRules",
@@ -2292,27 +2259,18 @@
     },
     "BucketLogsPermission": {
       "type": "string",
-      "enum": [
-        "FULL_CONTROL",
-        "READ",
-        "WRITE"
-      ]
+      "enum": ["FULL_CONTROL", "READ", "WRITE"]
     },
     "BucketName": {
       "type": "string"
     },
     "BucketType": {
       "type": "string",
-      "enum": [
-        "Directory"
-      ]
+      "enum": ["Directory"]
     },
     "BucketVersioningStatus": {
       "type": "string",
-      "enum": [
-        "Enabled",
-        "Suspended"
-      ]
+      "enum": ["Enabled", "Suspended"]
     },
     "Buckets": {
       "type": "list",
@@ -2339,9 +2297,7 @@
     },
     "CORSConfiguration": {
       "type": "structure",
-      "required": [
-        "CORSRules"
-      ],
+      "required": ["CORSRules"],
       "members": {
         "CORSRules": {
           "shape": "CORSRules",
@@ -2353,10 +2309,7 @@
     },
     "CORSRule": {
       "type": "structure",
-      "required": [
-        "AllowedMethods",
-        "AllowedOrigins"
-      ],
+      "required": ["AllowedMethods", "AllowedOrigins"],
       "members": {
         "ID": {
           "shape": "ID",
@@ -2483,12 +2436,7 @@
     },
     "ChecksumAlgorithm": {
       "type": "string",
-      "enum": [
-        "CRC32",
-        "CRC32C",
-        "SHA1",
-        "SHA256"
-      ]
+      "enum": ["CRC32", "CRC32C", "SHA1", "SHA256"]
     },
     "ChecksumAlgorithmList": {
       "type": "list",
@@ -2505,9 +2453,7 @@
     },
     "ChecksumMode": {
       "type": "string",
-      "enum": [
-        "ENABLED"
-      ]
+      "enum": ["ENABLED"]
     },
     "ChecksumSHA1": {
       "type": "string"
@@ -2644,11 +2590,7 @@
     },
     "CompleteMultipartUploadRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Key",
-        "UploadId"
-      ],
+      "required": ["Bucket", "Key", "UploadId"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -2794,11 +2736,7 @@
     },
     "CompressionType": {
       "type": "string",
-      "enum": [
-        "NONE",
-        "GZIP",
-        "BZIP2"
-      ]
+      "enum": ["NONE", "GZIP", "BZIP2"]
     },
     "Condition": {
       "type": "structure",
@@ -2916,11 +2854,7 @@
     },
     "CopyObjectRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "CopySource",
-        "Key"
-      ],
+      "required": ["Bucket", "CopySource", "Key"],
       "members": {
         "ACL": {
           "shape": "ObjectCannedACL",
@@ -3301,9 +3235,7 @@
     },
     "CreateBucketRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "ACL": {
           "shape": "BucketCannedACL",
@@ -3451,10 +3383,7 @@
     },
     "CreateMultipartUploadRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Key"
-      ],
+      "required": ["Bucket", "Key"],
       "members": {
         "ACL": {
           "shape": "ObjectCannedACL",
@@ -3645,9 +3574,7 @@
     },
     "CreateSessionOutput": {
       "type": "structure",
-      "required": [
-        "Credentials"
-      ],
+      "required": ["Credentials"],
       "members": {
         "Credentials": {
           "shape": "SessionCredentials",
@@ -3658,9 +3585,7 @@
     },
     "CreateSessionRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "SessionMode": {
           "shape": "SessionMode",
@@ -3684,9 +3609,7 @@
     },
     "DataRedundancy": {
       "type": "string",
-      "enum": [
-        "SingleAvailabilityZone"
-      ]
+      "enum": ["SingleAvailabilityZone"]
     },
     "Date": {
       "type": "timestamp",
@@ -3720,9 +3643,7 @@
     },
     "Delete": {
       "type": "structure",
-      "required": [
-        "Objects"
-      ],
+      "required": ["Objects"],
       "members": {
         "Objects": {
           "shape": "ObjectIdentifierList",
@@ -3738,10 +3659,7 @@
     },
     "DeleteBucketAnalyticsConfigurationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Id"
-      ],
+      "required": ["Bucket", "Id"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -3768,9 +3686,7 @@
     },
     "DeleteBucketCorsRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -3791,9 +3707,7 @@
     },
     "DeleteBucketEncryptionRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -3814,10 +3728,7 @@
     },
     "DeleteBucketIntelligentTieringConfigurationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Id"
-      ],
+      "required": ["Bucket", "Id"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -3838,10 +3749,7 @@
     },
     "DeleteBucketInventoryConfigurationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Id"
-      ],
+      "required": ["Bucket", "Id"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -3868,9 +3776,7 @@
     },
     "DeleteBucketLifecycleRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -3891,10 +3797,7 @@
     },
     "DeleteBucketMetricsConfigurationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Id"
-      ],
+      "required": ["Bucket", "Id"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -3921,9 +3824,7 @@
     },
     "DeleteBucketOwnershipControlsRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -3944,9 +3845,7 @@
     },
     "DeleteBucketPolicyRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -3967,9 +3866,7 @@
     },
     "DeleteBucketReplicationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -3990,9 +3887,7 @@
     },
     "DeleteBucketRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -4013,9 +3908,7 @@
     },
     "DeleteBucketTaggingRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -4036,9 +3929,7 @@
     },
     "DeleteBucketWebsiteRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -4098,10 +3989,7 @@
     },
     "DeleteMarkerReplicationStatus": {
       "type": "string",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ]
+      "enum": ["Enabled", "Disabled"]
     },
     "DeleteMarkerVersionId": {
       "type": "string"
@@ -4137,10 +4025,7 @@
     },
     "DeleteObjectRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Key"
-      ],
+      "required": ["Bucket", "Key"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -4204,10 +4089,7 @@
     },
     "DeleteObjectTaggingRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Key"
-      ],
+      "required": ["Bucket", "Key"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -4259,10 +4141,7 @@
     },
     "DeleteObjectsRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Delete"
-      ],
+      "required": ["Bucket", "Delete"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -4315,9 +4194,7 @@
     },
     "DeletePublicAccessBlockRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -4373,9 +4250,7 @@
     },
     "Destination": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -4429,15 +4304,11 @@
     "EncodingType": {
       "type": "string",
       "documentation": "<p>Encoding type used by Amazon S3 to encode the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html\">object keys</a> in the response. Responses are encoded only in UTF-8. An object key can contain any Unicode character. However, the XML 1.0 parser can't parse certain characters, such as characters with an ASCII value from 0 to 10. For characters that aren't supported in XML 1.0, you can add this parameter to request that Amazon S3 encode the keys in the response. For more information about characters to avoid in object key names, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-guidelines\">Object key naming guidelines</a>.</p> <note> <p>When using the URL encoding type, non-ASCII characters that are used in an object's key name will be percent-encoded according to UTF-8 code values. For example, the object <code>test_file(3).png</code> will appear as <code>test_file%283%29.png</code>.</p> </note>",
-      "enum": [
-        "url"
-      ]
+      "enum": ["url"]
     },
     "Encryption": {
       "type": "structure",
-      "required": [
-        "EncryptionType"
-      ],
+      "required": ["EncryptionType"],
       "members": {
         "EncryptionType": {
           "shape": "ServerSideEncryption",
@@ -4501,9 +4372,7 @@
     },
     "ErrorDocument": {
       "type": "structure",
-      "required": [
-        "Key"
-      ],
+      "required": ["Key"],
       "members": {
         "Key": {
           "shape": "ObjectKey",
@@ -4569,9 +4438,7 @@
     },
     "ExistingObjectReplication": {
       "type": "structure",
-      "required": [
-        "Status"
-      ],
+      "required": ["Status"],
       "members": {
         "Status": {
           "shape": "ExistingObjectReplicationStatus",
@@ -4582,20 +4449,14 @@
     },
     "ExistingObjectReplicationStatus": {
       "type": "string",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ]
+      "enum": ["Enabled", "Disabled"]
     },
     "Expiration": {
       "type": "string"
     },
     "ExpirationStatus": {
       "type": "string",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ]
+      "enum": ["Enabled", "Disabled"]
     },
     "ExpiredObjectDeleteMarker": {
       "type": "boolean",
@@ -4622,9 +4483,7 @@
     },
     "ExpressionType": {
       "type": "string",
-      "enum": [
-        "SQL"
-      ]
+      "enum": ["SQL"]
     },
     "FetchOwner": {
       "type": "boolean",
@@ -4635,11 +4494,7 @@
     },
     "FileHeaderInfo": {
       "type": "string",
-      "enum": [
-        "USE",
-        "IGNORE",
-        "NONE"
-      ]
+      "enum": ["USE", "IGNORE", "NONE"]
     },
     "FilterRule": {
       "type": "structure",
@@ -4665,10 +4520,7 @@
     },
     "FilterRuleName": {
       "type": "string",
-      "enum": [
-        "prefix",
-        "suffix"
-      ]
+      "enum": ["prefix", "suffix"]
     },
     "FilterRuleValue": {
       "type": "string"
@@ -4689,9 +4541,7 @@
     },
     "GetBucketAccelerateConfigurationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -4731,9 +4581,7 @@
     },
     "GetBucketAclRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -4764,10 +4612,7 @@
     },
     "GetBucketAnalyticsConfigurationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Id"
-      ],
+      "required": ["Bucket", "Id"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -4804,9 +4649,7 @@
     },
     "GetBucketCorsRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -4836,9 +4679,7 @@
     },
     "GetBucketEncryptionRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -4869,10 +4710,7 @@
     },
     "GetBucketIntelligentTieringConfigurationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Id"
-      ],
+      "required": ["Bucket", "Id"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -4903,10 +4741,7 @@
     },
     "GetBucketInventoryConfigurationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Id"
-      ],
+      "required": ["Bucket", "Id"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -4943,9 +4778,7 @@
     },
     "GetBucketLifecycleConfigurationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -4976,9 +4809,7 @@
     },
     "GetBucketLifecycleRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -5008,9 +4839,7 @@
     },
     "GetBucketLocationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -5039,9 +4868,7 @@
     },
     "GetBucketLoggingRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -5072,10 +4899,7 @@
     },
     "GetBucketMetricsConfigurationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Id"
-      ],
+      "required": ["Bucket", "Id"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -5102,9 +4926,7 @@
     },
     "GetBucketNotificationConfigurationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -5135,9 +4957,7 @@
     },
     "GetBucketOwnershipControlsRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -5168,9 +4988,7 @@
     },
     "GetBucketPolicyRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -5201,9 +5019,7 @@
     },
     "GetBucketPolicyStatusRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -5233,9 +5049,7 @@
     },
     "GetBucketReplicationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -5265,9 +5079,7 @@
     },
     "GetBucketRequestPaymentRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -5288,9 +5100,7 @@
     },
     "GetBucketTaggingOutput": {
       "type": "structure",
-      "required": [
-        "TagSet"
-      ],
+      "required": ["TagSet"],
       "members": {
         "TagSet": {
           "shape": "TagSet",
@@ -5300,9 +5110,7 @@
     },
     "GetBucketTaggingRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -5337,9 +5145,7 @@
     },
     "GetBucketVersioningRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -5381,9 +5187,7 @@
     },
     "GetBucketWebsiteRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -5423,10 +5227,7 @@
     },
     "GetObjectAclRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Key"
-      ],
+      "required": ["Bucket", "Key"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -5547,11 +5348,7 @@
     },
     "GetObjectAttributesRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Key",
-        "ObjectAttributes"
-      ],
+      "required": ["Bucket", "Key", "ObjectAttributes"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -5636,10 +5433,7 @@
     },
     "GetObjectLegalHoldRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Key"
-      ],
+      "required": ["Bucket", "Key"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -5687,9 +5481,7 @@
     },
     "GetObjectLockConfigurationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -5937,10 +5729,7 @@
     },
     "GetObjectRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Key"
-      ],
+      "required": ["Bucket", "Key"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -6092,10 +5881,7 @@
     },
     "GetObjectRetentionRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Key"
-      ],
+      "required": ["Bucket", "Key"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -6133,9 +5919,7 @@
     },
     "GetObjectTaggingOutput": {
       "type": "structure",
-      "required": [
-        "TagSet"
-      ],
+      "required": ["TagSet"],
       "members": {
         "VersionId": {
           "shape": "ObjectVersionId",
@@ -6151,10 +5935,7 @@
     },
     "GetObjectTaggingRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Key"
-      ],
+      "required": ["Bucket", "Key"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -6208,10 +5989,7 @@
     },
     "GetObjectTorrentRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Key"
-      ],
+      "required": ["Bucket", "Key"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -6253,9 +6031,7 @@
     },
     "GetPublicAccessBlockRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -6276,9 +6052,7 @@
     },
     "GlacierJobParameters": {
       "type": "structure",
-      "required": [
-        "Tier"
-      ],
+      "required": ["Tier"],
       "members": {
         "Tier": {
           "shape": "Tier",
@@ -6318,9 +6092,7 @@
     },
     "Grantee": {
       "type": "structure",
-      "required": [
-        "Type"
-      ],
+      "required": ["Type"],
       "members": {
         "DisplayName": {
           "shape": "DisplayName",
@@ -6389,9 +6161,7 @@
     },
     "HeadBucketRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -6627,10 +6397,7 @@
     },
     "HeadObjectRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Key"
-      ],
+      "required": ["Bucket", "Key"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -6791,9 +6558,7 @@
     },
     "IndexDocument": {
       "type": "structure",
-      "required": [
-        "Suffix"
-      ],
+      "required": ["Suffix"],
       "members": {
         "Suffix": {
           "shape": "Suffix",
@@ -6843,10 +6608,7 @@
     },
     "IntelligentTieringAccessTier": {
       "type": "string",
-      "enum": [
-        "ARCHIVE_ACCESS",
-        "DEEP_ARCHIVE_ACCESS"
-      ]
+      "enum": ["ARCHIVE_ACCESS", "DEEP_ARCHIVE_ACCESS"]
     },
     "IntelligentTieringAndOperator": {
       "type": "structure",
@@ -6866,11 +6628,7 @@
     },
     "IntelligentTieringConfiguration": {
       "type": "structure",
-      "required": [
-        "Id",
-        "Status",
-        "Tierings"
-      ],
+      "required": ["Id", "Status", "Tierings"],
       "members": {
         "Id": {
           "shape": "IntelligentTieringId",
@@ -6925,10 +6683,7 @@
     },
     "IntelligentTieringStatus": {
       "type": "string",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ]
+      "enum": ["Enabled", "Disabled"]
     },
     "InventoryConfiguration": {
       "type": "structure",
@@ -6980,9 +6735,7 @@
     },
     "InventoryDestination": {
       "type": "structure",
-      "required": [
-        "S3BucketDestination"
-      ],
+      "required": ["S3BucketDestination"],
       "members": {
         "S3BucketDestination": {
           "shape": "InventoryS3BucketDestination",
@@ -7009,9 +6762,7 @@
     },
     "InventoryFilter": {
       "type": "structure",
-      "required": [
-        "Prefix"
-      ],
+      "required": ["Prefix"],
       "members": {
         "Prefix": {
           "shape": "Prefix",
@@ -7022,28 +6773,18 @@
     },
     "InventoryFormat": {
       "type": "string",
-      "enum": [
-        "CSV",
-        "ORC",
-        "Parquet"
-      ]
+      "enum": ["CSV", "ORC", "Parquet"]
     },
     "InventoryFrequency": {
       "type": "string",
-      "enum": [
-        "Daily",
-        "Weekly"
-      ]
+      "enum": ["Daily", "Weekly"]
     },
     "InventoryId": {
       "type": "string"
     },
     "InventoryIncludedObjectVersions": {
       "type": "string",
-      "enum": [
-        "All",
-        "Current"
-      ]
+      "enum": ["All", "Current"]
     },
     "InventoryOptionalField": {
       "type": "string",
@@ -7074,10 +6815,7 @@
     },
     "InventoryS3BucketDestination": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Format"
-      ],
+      "required": ["Bucket", "Format"],
       "members": {
         "AccountId": {
           "shape": "AccountId",
@@ -7104,9 +6842,7 @@
     },
     "InventorySchedule": {
       "type": "structure",
-      "required": [
-        "Frequency"
-      ],
+      "required": ["Frequency"],
       "members": {
         "Frequency": {
           "shape": "InventoryFrequency",
@@ -7157,10 +6893,7 @@
     },
     "JSONType": {
       "type": "string",
-      "enum": [
-        "DOCUMENT",
-        "LINES"
-      ]
+      "enum": ["DOCUMENT", "LINES"]
     },
     "KMSContext": {
       "type": "string"
@@ -7179,10 +6912,7 @@
     },
     "LambdaFunctionConfiguration": {
       "type": "structure",
-      "required": [
-        "LambdaFunctionArn",
-        "Events"
-      ],
+      "required": ["LambdaFunctionArn", "Events"],
       "members": {
         "Id": {
           "shape": "NotificationId"
@@ -7215,9 +6945,7 @@
     },
     "LifecycleConfiguration": {
       "type": "structure",
-      "required": [
-        "Rules"
-      ],
+      "required": ["Rules"],
       "members": {
         "Rules": {
           "shape": "Rules",
@@ -7247,9 +6975,7 @@
     },
     "LifecycleRule": {
       "type": "structure",
-      "required": [
-        "Status"
-      ],
+      "required": ["Status"],
       "members": {
         "Expiration": {
           "shape": "LifecycleExpiration",
@@ -7371,9 +7097,7 @@
     },
     "ListBucketAnalyticsConfigurationsRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -7422,9 +7146,7 @@
     },
     "ListBucketIntelligentTieringConfigurationsRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -7467,9 +7189,7 @@
     },
     "ListBucketInventoryConfigurationsRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -7518,9 +7238,7 @@
     },
     "ListBucketMetricsConfigurationsRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -7670,9 +7388,7 @@
     },
     "ListMultipartUploadsRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -7800,9 +7516,7 @@
     },
     "ListObjectVersionsRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -7922,9 +7636,7 @@
     },
     "ListObjectsRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -8047,9 +7759,7 @@
     },
     "ListObjectsV2Request": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -8198,11 +7908,7 @@
     },
     "ListPartsRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Key",
-        "UploadId"
-      ],
+      "required": ["Bucket", "Key", "UploadId"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -8296,16 +8002,11 @@
     },
     "LocationType": {
       "type": "string",
-      "enum": [
-        "AvailabilityZone"
-      ]
+      "enum": ["AvailabilityZone"]
     },
     "LoggingEnabled": {
       "type": "structure",
-      "required": [
-        "TargetBucket",
-        "TargetPrefix"
-      ],
+      "required": ["TargetBucket", "TargetPrefix"],
       "members": {
         "TargetBucket": {
           "shape": "TargetBucket",
@@ -8331,17 +8032,11 @@
     },
     "MFADelete": {
       "type": "string",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ]
+      "enum": ["Enabled", "Disabled"]
     },
     "MFADeleteStatus": {
       "type": "string",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ]
+      "enum": ["Enabled", "Disabled"]
     },
     "Marker": {
       "type": "string"
@@ -8385,10 +8080,7 @@
     },
     "MetadataDirective": {
       "type": "string",
-      "enum": [
-        "COPY",
-        "REPLACE"
-      ]
+      "enum": ["COPY", "REPLACE"]
     },
     "MetadataEntry": {
       "type": "structure",
@@ -8412,9 +8104,7 @@
     },
     "Metrics": {
       "type": "structure",
-      "required": [
-        "Status"
-      ],
+      "required": ["Status"],
       "members": {
         "Status": {
           "shape": "MetricsStatus",
@@ -8449,9 +8139,7 @@
     },
     "MetricsConfiguration": {
       "type": "structure",
-      "required": [
-        "Id"
-      ],
+      "required": ["Id"],
       "members": {
         "Id": {
           "shape": "MetricsId",
@@ -8498,10 +8186,7 @@
     },
     "MetricsStatus": {
       "type": "string",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ]
+      "enum": ["Enabled", "Disabled"]
     },
     "Minutes": {
       "type": "integer",
@@ -8708,13 +8393,7 @@
     },
     "ObjectAttributes": {
       "type": "string",
-      "enum": [
-        "ETag",
-        "Checksum",
-        "ObjectParts",
-        "StorageClass",
-        "ObjectSize"
-      ]
+      "enum": ["ETag", "Checksum", "ObjectParts", "StorageClass", "ObjectSize"]
     },
     "ObjectAttributesList": {
       "type": "list",
@@ -8736,9 +8415,7 @@
     },
     "ObjectIdentifier": {
       "type": "structure",
-      "required": [
-        "Key"
-      ],
+      "required": ["Key"],
       "members": {
         "Key": {
           "shape": "ObjectKey",
@@ -8785,9 +8462,7 @@
     },
     "ObjectLockEnabled": {
       "type": "string",
-      "enum": [
-        "Enabled"
-      ]
+      "enum": ["Enabled"]
     },
     "ObjectLockEnabledForBucket": {
       "type": "boolean",
@@ -8805,17 +8480,11 @@
     },
     "ObjectLockLegalHoldStatus": {
       "type": "string",
-      "enum": [
-        "ON",
-        "OFF"
-      ]
+      "enum": ["ON", "OFF"]
     },
     "ObjectLockMode": {
       "type": "string",
-      "enum": [
-        "GOVERNANCE",
-        "COMPLIANCE"
-      ]
+      "enum": ["GOVERNANCE", "COMPLIANCE"]
     },
     "ObjectLockRetainUntilDate": {
       "type": "timestamp",
@@ -8837,10 +8506,7 @@
     },
     "ObjectLockRetentionMode": {
       "type": "string",
-      "enum": [
-        "GOVERNANCE",
-        "COMPLIANCE"
-      ]
+      "enum": ["GOVERNANCE", "COMPLIANCE"]
     },
     "ObjectLockRule": {
       "type": "structure",
@@ -8858,11 +8524,7 @@
     "ObjectOwnership": {
       "type": "string",
       "documentation": "<p>The container element for object ownership for a bucket's ownership controls.</p> <p> <code>BucketOwnerPreferred</code> - Objects uploaded to the bucket change ownership to the bucket owner if the objects are uploaded with the <code>bucket-owner-full-control</code> canned ACL.</p> <p> <code>ObjectWriter</code> - The uploading account will own the object if the object is uploaded with the <code>bucket-owner-full-control</code> canned ACL.</p> <p> <code>BucketOwnerEnforced</code> - Access control lists (ACLs) are disabled and no longer affect permissions. The bucket owner automatically owns and has full control over every object in the bucket. The bucket only accepts PUT requests that don't specify an ACL or specify bucket owner full control ACLs (such as the predefined <code>bucket-owner-full-control</code> canned ACL or a custom ACL in XML format that grants the same permissions).</p> <p>By default, <code>ObjectOwnership</code> is set to <code>BucketOwnerEnforced</code> and ACLs are disabled. We recommend keeping ACLs disabled, except in uncommon use cases where you must control access for each object individually. For more information about S3 Object Ownership, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html\">Controlling ownership of objects and disabling ACLs for your bucket</a> in the <i>Amazon S3 User Guide</i>. </p> <note> <p>This functionality is not supported for directory buckets. Directory buckets use the bucket owner enforced setting for S3 Object Ownership.</p> </note>",
-      "enum": [
-        "BucketOwnerPreferred",
-        "ObjectWriter",
-        "BucketOwnerEnforced"
-      ]
+      "enum": ["BucketOwnerPreferred", "ObjectWriter", "BucketOwnerEnforced"]
     },
     "ObjectPart": {
       "type": "structure",
@@ -8980,15 +8642,11 @@
     },
     "ObjectVersionStorageClass": {
       "type": "string",
-      "enum": [
-        "STANDARD"
-      ]
+      "enum": ["STANDARD"]
     },
     "OptionalObjectAttributes": {
       "type": "string",
-      "enum": [
-        "RestoreStatus"
-      ]
+      "enum": ["RestoreStatus"]
     },
     "OptionalObjectAttributesList": {
       "type": "list",
@@ -9036,15 +8694,11 @@
     },
     "OwnerOverride": {
       "type": "string",
-      "enum": [
-        "Destination"
-      ]
+      "enum": ["Destination"]
     },
     "OwnershipControls": {
       "type": "structure",
-      "required": [
-        "Rules"
-      ],
+      "required": ["Rules"],
       "members": {
         "Rules": {
           "shape": "OwnershipControlsRules",
@@ -9056,9 +8710,7 @@
     },
     "OwnershipControlsRule": {
       "type": "structure",
-      "required": [
-        "ObjectOwnership"
-      ],
+      "required": ["ObjectOwnership"],
       "members": {
         "ObjectOwnership": {
           "shape": "ObjectOwnership"
@@ -9124,10 +8776,7 @@
     },
     "PartitionDateSource": {
       "type": "string",
-      "enum": [
-        "EventTime",
-        "DeliveryTime"
-      ]
+      "enum": ["EventTime", "DeliveryTime"]
     },
     "PartitionedPrefix": {
       "type": "structure",
@@ -9160,20 +8809,11 @@
     },
     "Payer": {
       "type": "string",
-      "enum": [
-        "Requester",
-        "BucketOwner"
-      ]
+      "enum": ["Requester", "BucketOwner"]
     },
     "Permission": {
       "type": "string",
-      "enum": [
-        "FULL_CONTROL",
-        "WRITE",
-        "WRITE_ACP",
-        "READ",
-        "READ_ACP"
-      ]
+      "enum": ["FULL_CONTROL", "WRITE", "WRITE_ACP", "READ", "READ_ACP"]
     },
     "Policy": {
       "type": "string"
@@ -9228,10 +8868,7 @@
     },
     "Protocol": {
       "type": "string",
-      "enum": [
-        "http",
-        "https"
-      ]
+      "enum": ["http", "https"]
     },
     "PublicAccessBlockConfiguration": {
       "type": "structure",
@@ -9261,10 +8898,7 @@
     },
     "PutBucketAccelerateConfigurationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "AccelerateConfiguration"
-      ],
+      "required": ["Bucket", "AccelerateConfiguration"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -9300,9 +8934,7 @@
     },
     "PutBucketAclRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "ACL": {
           "shape": "BucketCannedACL",
@@ -9380,11 +9012,7 @@
     },
     "PutBucketAnalyticsConfigurationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Id",
-        "AnalyticsConfiguration"
-      ],
+      "required": ["Bucket", "Id", "AnalyticsConfiguration"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -9420,10 +9048,7 @@
     },
     "PutBucketCorsRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "CORSConfiguration"
-      ],
+      "required": ["Bucket", "CORSConfiguration"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -9465,10 +9090,7 @@
     },
     "PutBucketEncryptionRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "ServerSideEncryptionConfiguration"
-      ],
+      "required": ["Bucket", "ServerSideEncryptionConfiguration"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -9509,11 +9131,7 @@
     },
     "PutBucketIntelligentTieringConfigurationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Id",
-        "IntelligentTieringConfiguration"
-      ],
+      "required": ["Bucket", "Id", "IntelligentTieringConfiguration"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -9543,11 +9161,7 @@
     },
     "PutBucketInventoryConfigurationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Id",
-        "InventoryConfiguration"
-      ],
+      "required": ["Bucket", "Id", "InventoryConfiguration"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -9583,9 +9197,7 @@
     },
     "PutBucketLifecycleConfigurationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -9621,9 +9233,7 @@
     },
     "PutBucketLifecycleRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -9665,10 +9275,7 @@
     },
     "PutBucketLoggingRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "BucketLoggingStatus"
-      ],
+      "required": ["Bucket", "BucketLoggingStatus"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -9710,11 +9317,7 @@
     },
     "PutBucketMetricsConfigurationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Id",
-        "MetricsConfiguration"
-      ],
+      "required": ["Bucket", "Id", "MetricsConfiguration"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -9750,10 +9353,7 @@
     },
     "PutBucketNotificationConfigurationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "NotificationConfiguration"
-      ],
+      "required": ["Bucket", "NotificationConfiguration"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -9788,10 +9388,7 @@
     },
     "PutBucketNotificationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "NotificationConfiguration"
-      ],
+      "required": ["Bucket", "NotificationConfiguration"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -9833,10 +9430,7 @@
     },
     "PutBucketOwnershipControlsRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "OwnershipControls"
-      ],
+      "required": ["Bucket", "OwnershipControls"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -9872,10 +9466,7 @@
     },
     "PutBucketPolicyRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Policy"
-      ],
+      "required": ["Bucket", "Policy"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -9919,10 +9510,7 @@
     },
     "PutBucketReplicationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "ReplicationConfiguration"
-      ],
+      "required": ["Bucket", "ReplicationConfiguration"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -9969,10 +9557,7 @@
     },
     "PutBucketRequestPaymentRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "RequestPaymentConfiguration"
-      ],
+      "required": ["Bucket", "RequestPaymentConfiguration"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -10014,10 +9599,7 @@
     },
     "PutBucketTaggingRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Tagging"
-      ],
+      "required": ["Bucket", "Tagging"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -10059,10 +9641,7 @@
     },
     "PutBucketVersioningRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "VersioningConfiguration"
-      ],
+      "required": ["Bucket", "VersioningConfiguration"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -10110,10 +9689,7 @@
     },
     "PutBucketWebsiteRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "WebsiteConfiguration"
-      ],
+      "required": ["Bucket", "WebsiteConfiguration"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -10165,10 +9741,7 @@
     },
     "PutObjectAclRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Key"
-      ],
+      "required": ["Bucket", "Key"],
       "members": {
         "ACL": {
           "shape": "ObjectCannedACL",
@@ -10276,10 +9849,7 @@
     },
     "PutObjectLegalHoldRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Key"
-      ],
+      "required": ["Bucket", "Key"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -10348,9 +9918,7 @@
     },
     "PutObjectLockConfigurationRequest": {
       "type": "structure",
-      "required": [
-        "Bucket"
-      ],
+      "required": ["Bucket"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -10491,10 +10059,7 @@
     },
     "PutObjectRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Key"
-      ],
+      "required": ["Bucket", "Key"],
       "members": {
         "ACL": {
           "shape": "ObjectCannedACL",
@@ -10743,10 +10308,7 @@
     },
     "PutObjectRetentionRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Key"
-      ],
+      "required": ["Bucket", "Key"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -10822,11 +10384,7 @@
     },
     "PutObjectTaggingRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Key",
-        "Tagging"
-      ],
+      "required": ["Bucket", "Key", "Tagging"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -10885,10 +10443,7 @@
     },
     "PutPublicAccessBlockRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "PublicAccessBlockConfiguration"
-      ],
+      "required": ["Bucket", "PublicAccessBlockConfiguration"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -10933,10 +10488,7 @@
     },
     "QueueConfiguration": {
       "type": "structure",
-      "required": [
-        "QueueArn",
-        "Events"
-      ],
+      "required": ["QueueArn", "Events"],
       "members": {
         "Id": {
           "shape": "NotificationId"
@@ -10998,10 +10550,7 @@
     },
     "QuoteFields": {
       "type": "string",
-      "enum": [
-        "ALWAYS",
-        "ASNEEDED"
-      ]
+      "enum": ["ALWAYS", "ASNEEDED"]
     },
     "Range": {
       "type": "string"
@@ -11049,9 +10598,7 @@
     },
     "RedirectAllRequestsTo": {
       "type": "structure",
-      "required": [
-        "HostName"
-      ],
+      "required": ["HostName"],
       "members": {
         "HostName": {
           "shape": "HostName",
@@ -11080,9 +10627,7 @@
     },
     "ReplicaModifications": {
       "type": "structure",
-      "required": [
-        "Status"
-      ],
+      "required": ["Status"],
       "members": {
         "Status": {
           "shape": "ReplicaModificationsStatus",
@@ -11093,17 +10638,11 @@
     },
     "ReplicaModificationsStatus": {
       "type": "string",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ]
+      "enum": ["Enabled", "Disabled"]
     },
     "ReplicationConfiguration": {
       "type": "structure",
-      "required": [
-        "Role",
-        "Rules"
-      ],
+      "required": ["Role", "Rules"],
       "members": {
         "Role": {
           "shape": "Role",
@@ -11119,10 +10658,7 @@
     },
     "ReplicationRule": {
       "type": "structure",
-      "required": [
-        "Status",
-        "Destination"
-      ],
+      "required": ["Status", "Destination"],
       "members": {
         "ID": {
           "shape": "ID",
@@ -11198,10 +10734,7 @@
     },
     "ReplicationRuleStatus": {
       "type": "string",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ]
+      "enum": ["Enabled", "Disabled"]
     },
     "ReplicationRules": {
       "type": "list",
@@ -11212,20 +10745,11 @@
     },
     "ReplicationStatus": {
       "type": "string",
-      "enum": [
-        "COMPLETE",
-        "PENDING",
-        "FAILED",
-        "REPLICA",
-        "COMPLETED"
-      ]
+      "enum": ["COMPLETE", "PENDING", "FAILED", "REPLICA", "COMPLETED"]
     },
     "ReplicationTime": {
       "type": "structure",
-      "required": [
-        "Status",
-        "Time"
-      ],
+      "required": ["Status", "Time"],
       "members": {
         "Status": {
           "shape": "ReplicationTimeStatus",
@@ -11240,10 +10764,7 @@
     },
     "ReplicationTimeStatus": {
       "type": "string",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ]
+      "enum": ["Enabled", "Disabled"]
     },
     "ReplicationTimeValue": {
       "type": "structure",
@@ -11258,22 +10779,16 @@
     "RequestCharged": {
       "type": "string",
       "documentation": "<p>If present, indicates that the requester was successfully charged for the request.</p> <note> <p>This functionality is not supported for directory buckets.</p> </note>",
-      "enum": [
-        "requester"
-      ]
+      "enum": ["requester"]
     },
     "RequestPayer": {
       "type": "string",
       "documentation": "<p>Confirms that the requester knows that they will be charged for the request. Bucket owners need not specify this parameter in their requests. If either the source or destination S3 bucket has Requester Pays enabled, the requester will pay for corresponding charges to copy the object. For information about downloading objects from Requester Pays buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html\">Downloading Objects in Requester Pays Buckets</a> in the <i>Amazon S3 User Guide</i>.</p> <note> <p>This functionality is not supported for directory buckets.</p> </note>",
-      "enum": [
-        "requester"
-      ]
+      "enum": ["requester"]
     },
     "RequestPaymentConfiguration": {
       "type": "structure",
-      "required": [
-        "Payer"
-      ],
+      "required": ["Payer"],
       "members": {
         "Payer": {
           "shape": "Payer",
@@ -11341,10 +10856,7 @@
     },
     "RestoreObjectRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Key"
-      ],
+      "required": ["Bucket", "Key"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -11433,9 +10945,7 @@
     },
     "RestoreRequestType": {
       "type": "string",
-      "enum": [
-        "SELECT"
-      ]
+      "enum": ["SELECT"]
     },
     "RestoreStatus": {
       "type": "structure",
@@ -11456,9 +10966,7 @@
     },
     "RoutingRule": {
       "type": "structure",
-      "required": [
-        "Redirect"
-      ],
+      "required": ["Redirect"],
       "members": {
         "Condition": {
           "shape": "Condition",
@@ -11480,10 +10988,7 @@
     },
     "Rule": {
       "type": "structure",
-      "required": [
-        "Prefix",
-        "Status"
-      ],
+      "required": ["Prefix", "Status"],
       "members": {
         "Expiration": {
           "shape": "LifecycleExpiration",
@@ -11536,10 +11041,7 @@
     },
     "S3Location": {
       "type": "structure",
-      "required": [
-        "BucketName",
-        "Prefix"
-      ],
+      "required": ["BucketName", "Prefix"],
       "members": {
         "BucketName": {
           "shape": "BucketName",
@@ -11587,9 +11089,7 @@
     },
     "SSEKMS": {
       "type": "structure",
-      "required": [
-        "KeyId"
-      ],
+      "required": ["KeyId"],
       "members": {
         "KeyId": {
           "shape": "SSEKMSKeyId",
@@ -11771,17 +11271,11 @@
     },
     "ServerSideEncryption": {
       "type": "string",
-      "enum": [
-        "AES256",
-        "aws:kms",
-        "aws:kms:dsse"
-      ]
+      "enum": ["AES256", "aws:kms", "aws:kms:dsse"]
     },
     "ServerSideEncryptionByDefault": {
       "type": "structure",
-      "required": [
-        "SSEAlgorithm"
-      ],
+      "required": ["SSEAlgorithm"],
       "members": {
         "SSEAlgorithm": {
           "shape": "ServerSideEncryption",
@@ -11796,9 +11290,7 @@
     },
     "ServerSideEncryptionConfiguration": {
       "type": "structure",
-      "required": [
-        "Rules"
-      ],
+      "required": ["Rules"],
       "members": {
         "Rules": {
           "shape": "ServerSideEncryptionRules",
@@ -11870,10 +11362,7 @@
     },
     "SessionMode": {
       "type": "string",
-      "enum": [
-        "ReadOnly",
-        "ReadWrite"
-      ]
+      "enum": ["ReadOnly", "ReadWrite"]
     },
     "Setting": {
       "type": "boolean",
@@ -11909,9 +11398,7 @@
     },
     "SseKmsEncryptedObjects": {
       "type": "structure",
-      "required": [
-        "Status"
-      ],
+      "required": ["Status"],
       "members": {
         "Status": {
           "shape": "SseKmsEncryptedObjectsStatus",
@@ -11922,10 +11409,7 @@
     },
     "SseKmsEncryptedObjectsStatus": {
       "type": "string",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ]
+      "enum": ["Enabled", "Disabled"]
     },
     "Start": {
       "type": "long",
@@ -11992,10 +11476,7 @@
     },
     "StorageClassAnalysisDataExport": {
       "type": "structure",
-      "required": [
-        "OutputSchemaVersion",
-        "Destination"
-      ],
+      "required": ["OutputSchemaVersion", "Destination"],
       "members": {
         "OutputSchemaVersion": {
           "shape": "StorageClassAnalysisSchemaVersion",
@@ -12010,19 +11491,14 @@
     },
     "StorageClassAnalysisSchemaVersion": {
       "type": "string",
-      "enum": [
-        "V_1"
-      ]
+      "enum": ["V_1"]
     },
     "Suffix": {
       "type": "string"
     },
     "Tag": {
       "type": "structure",
-      "required": [
-        "Key",
-        "Value"
-      ],
+      "required": ["Key", "Value"],
       "members": {
         "Key": {
           "shape": "ObjectKey",
@@ -12048,9 +11524,7 @@
     },
     "Tagging": {
       "type": "structure",
-      "required": [
-        "TagSet"
-      ],
+      "required": ["TagSet"],
       "members": {
         "TagSet": {
           "shape": "TagSet",
@@ -12061,10 +11535,7 @@
     },
     "TaggingDirective": {
       "type": "string",
-      "enum": [
-        "COPY",
-        "REPLACE"
-      ]
+      "enum": ["COPY", "REPLACE"]
     },
     "TaggingHeader": {
       "type": "string"
@@ -12114,18 +11585,11 @@
     },
     "Tier": {
       "type": "string",
-      "enum": [
-        "Standard",
-        "Bulk",
-        "Expedited"
-      ]
+      "enum": ["Standard", "Bulk", "Expedited"]
     },
     "Tiering": {
       "type": "structure",
-      "required": [
-        "Days",
-        "AccessTier"
-      ],
+      "required": ["Days", "AccessTier"],
       "members": {
         "Days": {
           "shape": "IntelligentTieringDays",
@@ -12153,10 +11617,7 @@
     },
     "TopicConfiguration": {
       "type": "structure",
-      "required": [
-        "TopicArn",
-        "Events"
-      ],
+      "required": ["TopicArn", "Events"],
       "members": {
         "Id": {
           "shape": "NotificationId"
@@ -12245,11 +11706,7 @@
     },
     "Type": {
       "type": "string",
-      "enum": [
-        "CanonicalUser",
-        "AmazonCustomerByEmail",
-        "Group"
-      ]
+      "enum": ["CanonicalUser", "AmazonCustomerByEmail", "Group"]
     },
     "URI": {
       "type": "string"
@@ -12310,13 +11767,7 @@
     },
     "UploadPartCopyRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "CopySource",
-        "Key",
-        "PartNumber",
-        "UploadId"
-      ],
+      "required": ["Bucket", "CopySource", "Key", "PartNumber", "UploadId"],
       "members": {
         "Bucket": {
           "shape": "BucketName",
@@ -12508,12 +11959,7 @@
     },
     "UploadPartRequest": {
       "type": "structure",
-      "required": [
-        "Bucket",
-        "Key",
-        "PartNumber",
-        "UploadId"
-      ],
+      "required": ["Bucket", "Key", "PartNumber", "UploadId"],
       "members": {
         "Body": {
           "shape": "Body",
@@ -12683,10 +12129,7 @@
     },
     "WriteGetObjectResponseRequest": {
       "type": "structure",
-      "required": [
-        "RequestRoute",
-        "RequestToken"
-      ],
+      "required": ["RequestRoute", "RequestToken"],
       "members": {
         "RequestRoute": {
           "shape": "RequestRoute",

@@ -8,13 +8,10 @@
           "Key": "bigobject",
           "UploadId": "xadcOB_7YPBOJuoFiQ9cz4P3Pe6FIZwO4f7wN93uHsNBEw97pl5eNwzExg0LAT2dUN91cOmrEQHDsP3WA60CEg--"
         },
-        "output": {
-        },
+        "output": {},
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example aborts a multipart upload.",
         "id": "to-abort-a-multipart-upload-1481853354987",
@@ -47,10 +44,8 @@
           "Location": "https://examplebucket.s3.<Region>.amazonaws.com/bigobject"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example completes a multipart upload.",
         "id": "to-complete-multipart-upload-1481851590483",
@@ -71,10 +66,8 @@
           }
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example copies an object from one bucket to another.",
         "id": "to-copy-an-object-1481823186878",
@@ -93,10 +86,8 @@
           "Location": "http://examplebucket.<Region>.s3.amazonaws.com/"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example creates a bucket. The request specifies an AWS region where to create the bucket.",
         "id": "to-create-a-bucket-in-a-specific-region-1483399072992",
@@ -110,10 +101,8 @@
           "Location": "/examplebucket"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example creates a bucket.",
         "id": "to-create-a-bucket--1472851826060",
@@ -132,10 +121,8 @@
           "UploadId": "ibZBv_75gd9r8lH_gqXatLdxMVpAlj6ZQjEs.OwyF3953YdwbcQnMA2BLGn8Lx12fQNICtMw5KyteFeHw.Sjng--"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example initiates a multipart upload.",
         "id": "to-initiate-a-multipart-upload-1481836794513",
@@ -148,10 +135,8 @@
           "Bucket": "forrandall2"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example deletes the specified bucket.",
         "id": "to-delete-a-bucket-1473108514262",
@@ -164,10 +149,8 @@
           "Bucket": "examplebucket"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example deletes CORS configuration on a bucket.",
         "id": "to-delete-cors-configuration-on-a-bucket-1483042856112",
@@ -180,10 +163,8 @@
           "Bucket": "examplebucket"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example deletes lifecycle configuration on a bucket.",
         "id": "to-delete-lifecycle-configuration-on-a-bucket-1483043310583",
@@ -196,10 +177,8 @@
           "Bucket": "examplebucket"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example deletes bucket policy on the specified bucket.",
         "id": "to-delete-bucket-policy-1483043406577",
@@ -212,10 +191,8 @@
           "Bucket": "example"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example deletes replication configuration set on bucket.",
         "id": "to-delete-bucket-replication-configuration-1483043684668",
@@ -228,10 +205,8 @@
           "Bucket": "examplebucket"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example deletes bucket tags.",
         "id": "to-delete-bucket-tags-1483043846509",
@@ -244,10 +219,8 @@
           "Bucket": "examplebucket"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example deletes bucket website configuration.",
         "id": "to-delete-bucket-website-configuration-1483043937825",
@@ -261,10 +234,8 @@
           "Key": "HappyFace.jpg"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example deletes an object from a non-versioned bucket.",
         "id": "to-delete-an-object-from-a-non-versioned-bucket-1481588533089",
@@ -275,13 +246,10 @@
           "Bucket": "examplebucket",
           "Key": "objectkey.jpg"
         },
-        "output": {
-        },
+        "output": {},
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example deletes an object from an S3 bucket.",
         "id": "to-delete-an-object-1472850136595",
@@ -299,10 +267,8 @@
           "VersionId": "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example removes tag set associated with the specified object version. The request specifies both the object key and object version.",
         "id": "to-remove-tag-set-from-an-object-version-1483145285913",
@@ -317,10 +283,8 @@
           "VersionId": "null"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example removes tag set associated with the specified object. If the bucket is versioning enabled, the operation removes tag set from the latest object version.",
         "id": "to-remove-tag-set-from-an-object-1483145342862",
@@ -358,10 +322,8 @@
           ]
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example deletes objects from a bucket. The bucket is versioned, and the request does not specify the object version to delete. In this case, all versions remain in the bucket and S3 adds a delete marker.",
         "id": "to-delete-multiple-objects-from-a-versioned-bucket-1483146248805",
@@ -397,10 +359,8 @@
           ]
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example deletes objects from a bucket. The request specifies object versions. S3 deletes specific object versions and returns the key and versions of deleted objects in the response.",
         "id": "to-delete-multiple-object-versions-from-a-versioned-bucket-1483147087737",
@@ -415,24 +375,16 @@
         "output": {
           "CORSRules": [
             {
-              "AllowedHeaders": [
-                "Authorization"
-              ],
-              "AllowedMethods": [
-                "GET"
-              ],
-              "AllowedOrigins": [
-                "*"
-              ],
+              "AllowedHeaders": ["Authorization"],
+              "AllowedMethods": ["GET"],
+              "AllowedOrigins": ["*"],
               "MaxAgeSeconds": 3000
             }
           ]
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example returns cross-origin resource sharing (CORS) configuration set on a bucket.",
         "id": "to-get-cors-configuration-set-on-a-bucket-1481596855475",
@@ -457,10 +409,8 @@
           ]
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example gets ACL on the specified bucket.",
         "id": "to-get-a-bucket-acl-1474413606503",
@@ -488,10 +438,8 @@
           ]
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example retrieves lifecycle configuration on set on a bucket. ",
         "id": "to-get-lifecycle-configuration-on-a-bucket-1481666063200",
@@ -507,10 +455,8 @@
           "LocationConstraint": "us-west-2"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example returns bucket location.",
         "id": "to-get-bucket-location-1481594573609",
@@ -525,26 +471,20 @@
         "output": {
           "QueueConfiguration": {
             "Event": "s3:ObjectCreated:Put",
-            "Events": [
-              "s3:ObjectCreated:Put"
-            ],
+            "Events": ["s3:ObjectCreated:Put"],
             "Id": "MDQ2OGQ4NDEtOTBmNi00YTM4LTk0NzYtZDIwN2I3NWQ1NjIx",
             "Queue": "arn:aws:sqs:us-east-1:acct-id:S3ObjectCreatedEventQueue"
           },
           "TopicConfiguration": {
             "Event": "s3:ObjectCreated:Copy",
-            "Events": [
-              "s3:ObjectCreated:Copy"
-            ],
+            "Events": ["s3:ObjectCreated:Copy"],
             "Id": "YTVkMWEzZGUtNTY1NS00ZmE2LWJjYjktMmRlY2QwODFkNTJi",
             "Topic": "arn:aws:sns:us-east-1:acct-id:S3ObjectCreatedEventTopic"
           }
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example returns notification configuration set on a bucket.",
         "id": "to-get-notification-configuration-set-on-a-bucket-1481594028667",
@@ -557,26 +497,20 @@
         "output": {
           "QueueConfiguration": {
             "Event": "s3:ObjectCreated:Put",
-            "Events": [
-              "s3:ObjectCreated:Put"
-            ],
+            "Events": ["s3:ObjectCreated:Put"],
             "Id": "MDQ2OGQ4NDEtOTBmNi00YTM4LTk0NzYtZDIwN2I3NWQ1NjIx",
             "Queue": "arn:aws:sqs:us-east-1:acct-id:S3ObjectCreatedEventQueue"
           },
           "TopicConfiguration": {
             "Event": "s3:ObjectCreated:Copy",
-            "Events": [
-              "s3:ObjectCreated:Copy"
-            ],
+            "Events": ["s3:ObjectCreated:Copy"],
             "Id": "YTVkMWEzZGUtNTY1NS00ZmE2LWJjYjktMmRlY2QwODFkNTJi",
             "Topic": "arn:aws:sns:us-east-1:acct-id:S3ObjectCreatedEventTopic"
           }
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example returns notification configuration set on a bucket.",
         "id": "to-get-notification-configuration-set-on-a-bucket-1481594028667",
@@ -592,10 +526,8 @@
           "Policy": "{\"Version\":\"2008-10-17\",\"Id\":\"LogPolicy\",\"Statement\":[{\"Sid\":\"Enables the log delivery group to publish logs to your bucket \",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"111122223333\"},\"Action\":[\"s3:GetBucketAcl\",\"s3:GetObjectAcl\",\"s3:PutObject\"],\"Resource\":[\"arn:aws:s3:::policytest1/*\",\"arn:aws:s3:::policytest1\"]}]}"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example returns bucket policy associated with a bucket.",
         "id": "to-get-bucket-policy-1481595098424",
@@ -623,10 +555,8 @@
           }
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example returns replication configuration set on a bucket.",
         "id": "to-get-replication-configuration-set-on-a-bucket-1481593597175",
@@ -642,10 +572,8 @@
           "Payer": "BucketOwner"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example retrieves bucket versioning configuration.",
         "id": "to-get-bucket-versioning-configuration-1483037183929",
@@ -670,10 +598,8 @@
           ]
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example returns tag set associated with a bucket",
         "id": "to-get-tag-set-associated-with-a-bucket-1481593232107",
@@ -690,10 +616,8 @@
           "Status": "Enabled"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example retrieves bucket versioning configuration.",
         "id": "to-get-bucket-versioning-configuration-1483037183929",
@@ -714,10 +638,8 @@
           }
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example retrieves website configuration of a bucket.",
         "id": "to-get-bucket-website-configuration-1483037016926",
@@ -736,16 +658,13 @@
           "ContentType": "image/jpeg",
           "ETag": "\"6805f2cfc46c0f04559748bb039d69ae\"",
           "LastModified": "Thu, 15 Dec 2016 01:19:41 GMT",
-          "Metadata": {
-          },
+          "Metadata": {},
           "TagCount": 2,
           "VersionId": "null"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example retrieves an object for an S3 bucket.",
         "id": "to-retrieve-an-object-1481827837012",
@@ -764,15 +683,12 @@
           "ContentType": "text/plain",
           "ETag": "\"0d94420ffd0bc68cd3d152506b97a9cc\"",
           "LastModified": "Thu, 09 Oct 2014 22:57:28 GMT",
-          "Metadata": {
-          },
+          "Metadata": {},
           "VersionId": "null"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example retrieves an object for an S3 bucket. The request specifies the range header to retrieve a specific byte range.",
         "id": "to-retrieve-a-byte-range-of-an-object--1481832674603",
@@ -826,10 +742,8 @@
           }
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example retrieves access control list (ACL) of an object.",
         "id": "to-retrieve-object-acl-1481833557740",
@@ -856,10 +770,8 @@
           "VersionId": "null"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example retrieves tag set of an object.",
         "id": "to-retrieve-tag-set-of-an-object-1481833847896",
@@ -881,10 +793,8 @@
           "VersionId": "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example retrieves tag set of an object. The request specifies object version.",
         "id": "to-retrieve-tag-set-of-a-specific-object-version-1483400283663",
@@ -897,13 +807,10 @@
           "Bucket": "examplebucket",
           "Key": "HappyFace.jpg"
         },
-        "output": {
-        },
+        "output": {},
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example retrieves torrent files of an object.",
         "id": "to-retrieve-torrent-files-for-an-object-1481834115959",
@@ -916,10 +823,8 @@
           "Bucket": "acl1"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "This operation checks to see if a bucket exists.",
         "id": "to-determine-if-bucket-exists-1473110292262",
@@ -938,15 +843,12 @@
           "ContentType": "image/jpeg",
           "ETag": "\"6805f2cfc46c0f04559748bb039d69ae\"",
           "LastModified": "Thu, 15 Dec 2016 01:19:41 GMT",
-          "Metadata": {
-          },
+          "Metadata": {},
           "VersionId": "null"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example retrieves an object metadata.",
         "id": "to-retrieve-metadata-of-an-object-without-returning-the-object-itself-1481834820480",
@@ -976,10 +878,8 @@
           }
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example returns all the buckets owned by the sender of this request.",
         "id": "to-list-buckets-1481910996058",
@@ -1024,10 +924,8 @@
           ]
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example lists in-progress multipart uploads on a specific bucket.",
         "id": "to-list-in-progress-multipart-uploads-on-a-bucket-1481852775260",
@@ -1080,10 +978,8 @@
           ]
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example specifies the upload-id-marker and key-marker from previous truncated response to retrieve next setup of multipart uploads.",
         "id": "list-next-set-of-multipart-uploads-when-previous-result-is-truncated-1482428106748",
@@ -1127,10 +1023,8 @@
           ]
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example returns versions of an object with specific key name prefix.",
         "id": "to-list-object-versions-1481910996058",
@@ -1171,10 +1065,8 @@
           "NextMarker": "eyJNYXJrZXIiOiBudWxsLCAiYm90b190cnVuY2F0ZV9hbW91bnQiOiAyfQ=="
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example list two objects in a bucket.",
         "id": "to-list-objects-in-a-bucket-1473447646507",
@@ -1212,10 +1104,8 @@
           "Prefix": ""
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example retrieves object list. The request specifies max keys to limit response to include only 2 object keys. ",
         "id": "to-get-object-list",
@@ -1255,10 +1145,8 @@
           "StorageClass": "STANDARD"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example lists parts uploaded for a specific multipart upload.",
         "id": "to-list-parts-of-a-multipart-upload-1481852006923",
@@ -1273,10 +1161,8 @@
           "GrantWrite": "uri=http://acs.amazonaws.com/groups/s3/LogDelivery"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example replaces existing ACL on a bucket. The ACL grants the bucket owner (specified using the owner ID) and write permission to the LogDelivery group. Because this is a replace operation, you must specify all the grants in your request. To incrementally add or remove ACL grants, you might use the console.",
         "id": "put-bucket-acl-1482260397033",
@@ -1290,32 +1176,16 @@
           "CORSConfiguration": {
             "CORSRules": [
               {
-                "AllowedHeaders": [
-                  "*"
-                ],
-                "AllowedMethods": [
-                  "PUT",
-                  "POST",
-                  "DELETE"
-                ],
-                "AllowedOrigins": [
-                  "http://www.example.com"
-                ],
-                "ExposeHeaders": [
-                  "x-amz-server-side-encryption"
-                ],
+                "AllowedHeaders": ["*"],
+                "AllowedMethods": ["PUT", "POST", "DELETE"],
+                "AllowedOrigins": ["http://www.example.com"],
+                "ExposeHeaders": ["x-amz-server-side-encryption"],
                 "MaxAgeSeconds": 3000
               },
               {
-                "AllowedHeaders": [
-                  "Authorization"
-                ],
-                "AllowedMethods": [
-                  "GET"
-                ],
-                "AllowedOrigins": [
-                  "*"
-                ],
+                "AllowedHeaders": ["Authorization"],
+                "AllowedMethods": ["GET"],
+                "AllowedOrigins": ["*"],
                 "MaxAgeSeconds": 3000
               }
             ]
@@ -1323,10 +1193,8 @@
           "ContentMD5": ""
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example enables PUT, POST, and DELETE requests from www.example.com, and enables GET requests from any domain.",
         "id": "to-set-cors-configuration-on-a-bucket-1483037818805",
@@ -1359,10 +1227,8 @@
           }
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example replaces existing lifecycle configuration, if any, on the specified bucket. ",
         "id": "put-bucket-lifecycle-1482264533092",
@@ -1390,10 +1256,8 @@
           }
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example sets logging policy on a bucket. For the Log Delivery group to deliver logs to the destination bucket, it needs permission for the READ_ACP action which the policy grants.",
         "id": "set-logging-configuration-for-a-bucket-1482269119909",
@@ -1407,19 +1271,15 @@
           "NotificationConfiguration": {
             "TopicConfigurations": [
               {
-                "Events": [
-                  "s3:ObjectCreated:*"
-                ],
+                "Events": ["s3:ObjectCreated:*"],
                 "TopicArn": "arn:aws:sns:us-west-2:123456789012:s3-notification-topic"
               }
             ]
           }
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example sets notification configuration on a bucket to publish the object created events to an SNS topic.",
         "id": "set-notification-configuration-for-a-bucket-1482270296426",
@@ -1433,10 +1293,8 @@
           "Policy": "{\"Version\": \"2012-10-17\", \"Statement\": [{ \"Sid\": \"id-1\",\"Effect\": \"Allow\",\"Principal\": {\"AWS\": \"arn:aws:iam::123456789012:root\"}, \"Action\": [ \"s3:PutObject\",\"s3:PutObjectAcl\"], \"Resource\": [\"arn:aws:s3:::acl3/*\" ] } ]}"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example sets a permission policy on a bucket.",
         "id": "set-bucket-policy-1482448903302",
@@ -1462,10 +1320,8 @@
           }
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example sets replication configuration on a bucket.",
         "id": "id-1",
@@ -1481,10 +1337,8 @@
           }
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example sets request payment configuration on a bucket so that person requesting the download is charged.",
         "id": "set-request-payment-configuration-on-a-bucket-1482343596680",
@@ -1509,10 +1363,8 @@
           }
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example sets tags on a bucket. Any existing tags are replaced.",
         "id": "set-tags-on-a-bucket-1482346269066",
@@ -1529,10 +1381,8 @@
           }
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example sets versioning configuration on bucket. The configuration enables versioning on the bucket.",
         "id": "set-versioning-configuration-on-a-bucket-1482344186279",
@@ -1554,10 +1404,8 @@
           }
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example adds website configuration to a bucket.",
         "id": "set-website-configuration-on-a-bucket-1482346836261",
@@ -1579,10 +1427,8 @@
           "VersionId": "CG612hodqujkf8FaaNfp8U..FIhLROcp"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example uploads an object. The request specifies optional request headers to directs S3 to use specific storage class and use server-side encryption.",
         "id": "to-upload-an-object-(specify-optional-headers)",
@@ -1599,10 +1445,8 @@
           "VersionId": "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.",
         "id": "to-create-an-object-1483147613675",
@@ -1619,10 +1463,8 @@
           "VersionId": "tpf3zF08nBplQK1XLOefGskR7mGDwcDk"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file syntax. S3 returns VersionId of the newly created object.",
         "id": "to-upload-an-object-1481760101010",
@@ -1640,10 +1482,8 @@
           "VersionId": "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore S3 returns version ID of the newly created object.",
         "id": "to-upload-an-object-and-specify-optional-tags-1481762310955",
@@ -1661,10 +1501,8 @@
           "VersionId": "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.",
         "id": "to-upload-an-object-and-specify-canned-acl-1483397779571",
@@ -1685,10 +1523,8 @@
           "VersionId": "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example creates an object. The request also specifies optional metadata. If the bucket is versioning enabled, S3 returns version ID in response.",
         "id": "to-upload-object-and-specify-user-defined-metadata-1483396974757",
@@ -1708,10 +1544,8 @@
           "VersionId": "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example uploads an object. The request specifies the optional server-side encryption option. The request also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.",
         "id": "to-upload-an-object-and-specify-server-side-encryption-and-object-tags-1483398331831",
@@ -1721,20 +1555,16 @@
     "PutObjectAcl": [
       {
         "input": {
-          "AccessControlPolicy": {
-          },
+          "AccessControlPolicy": {},
           "Bucket": "examplebucket",
           "GrantFullControl": "emailaddress=user1@example.com,emailaddress=user2@example.com",
           "GrantRead": "uri=http://acs.amazonaws.com/groups/global/AllUsers",
           "Key": "HappyFace.jpg"
         },
-        "output": {
-        },
+        "output": {},
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example adds grants to an object ACL. The first permission grants user1 and user2 FULL_CONTROL and the AllUsers group READ permission.",
         "id": "to-grant-permissions-using-object-acl-1481835549285",
@@ -1763,10 +1593,8 @@
           "VersionId": "null"
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example adds tags to an existing object.",
         "id": "to-add-tags-to-an-existing-object-1481764668793",
@@ -1785,13 +1613,10 @@
             }
           }
         },
-        "output": {
-        },
+        "output": {},
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example restores for one day an archived copy of an object back into Amazon S3 bucket.",
         "id": "to-restore-an-archived-object-1483049329953",
@@ -1811,10 +1636,8 @@
           "ETag": "\"d8c2eafd90c266e19ab9dcacc479f8af\""
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example uploads part 1 of a multipart upload. The example specifies a file name for the part data. The Upload ID is same that is returned by the initiate multipart upload.",
         "id": "to-upload-a-part-1481847914943",
@@ -1837,10 +1660,8 @@
           }
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example uploads a part of a multipart upload by copying data from an existing object as data source.",
         "id": "to-upload-a-part-by-copying-data-from-an-existing-object-as-data-source-1483046746348",
@@ -1862,10 +1683,8 @@
           }
         },
         "comments": {
-          "input": {
-          },
-          "output": {
-          }
+          "input": {},
+          "output": {}
         },
         "description": "The following example uploads a part of a multipart upload by copying a specified byte range from an existing object as data source.",
         "id": "to-upload-a-part-by-copying-byte-range-from-an-existing-object-as-data-source-1483048068594",
