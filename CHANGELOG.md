@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1691.0-->
+<!--LATEST=2.1692.0-->
 <!--ENTRYINSERT-->
+
+## 2.1692.0
+* feature: S3: Add support for the new optional bucket-region and prefix query parameters in the ListBuckets API. For ListBuckets requests that express pagination, Amazon S3 will now return both the bucket names and associated AWS regions in the response.
 
 ## 2.1691.0
 * feature: QApps: Adds UpdateLibraryItemMetadata api to change status of app for admin verification feature and returns isVerified field in any api returning the app or library item.
