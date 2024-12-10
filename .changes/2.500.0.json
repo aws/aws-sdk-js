@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "ECR",
+        "description": "This release adds support for immutable image tags."
+    },
+    {
+        "type": "feature",
+        "category": "MediaConvert",
+        "description": "AWS Elemental MediaConvert has added several features including support for: audio normalization using ITU BS.1770-3, 1770-4 algorithms, extension of job progress indicators, input cropping rectangle & output position rectangle filters per input, and dual SCC caption mapping to additional codecs and containers. "
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "AWS Elemental MediaLive is adding Input Clipping, Immediate Mode Input Switching, and Dynamic Inputs."
+    }
+]

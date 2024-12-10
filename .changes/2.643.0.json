@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "ServiceCatalog",
+        "description": "Added \"productId\" and \"portfolioId\" to responses from CreateConstraint, UpdateConstraint, ListConstraintsForPortfolio, and DescribeConstraint APIs"
+    }
+]

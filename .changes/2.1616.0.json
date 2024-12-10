@@ -1,0 +1,37 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Alexa for Business",
+        "description": "Deprecates Alexa for Business"
+    },
+    {
+        "type": "bugfix",
+        "category": "Honeycode",
+        "description": "Deprecate Honeycode"
+    },
+    {
+        "type": "feature",
+        "category": "CognitoIdentityServiceProvider",
+        "description": "Add EXTERNAL_PROVIDER enum value to UserStatusType."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Adding Precision Hardware Clock (PHC) to public API DescribeInstanceTypes"
+    },
+    {
+        "type": "feature",
+        "category": "ECR",
+        "description": "This release adds pull through cache rules support for GitLab container registry in Amazon ECR."
+    },
+    {
+        "type": "feature",
+        "category": "Polly",
+        "description": "Add new engine - generative - that builds the most expressive conversational voices."
+    },
+    {
+        "type": "feature",
+        "category": "SQS",
+        "description": "This release adds MessageSystemAttributeNames to ReceiveMessageRequest to replace AttributeNames."
+    }
+]

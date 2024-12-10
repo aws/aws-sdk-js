@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Neptune",
+        "description": "This release adds a feature to configure Amazon Neptune to publish audit logs to Amazon CloudWatch Logs."
+    },
+    {
+        "type": "feature",
+        "category": "RoboMaker",
+        "description": "Add the ServiceUnavailableException (503) into CreateSimulationJob API."
+    },
+    {
+        "type": "feature",
+        "category": "ServiceCatalog",
+        "description": "Restrict concurrent calls by a single customer account for CreatePortfolioShare and DeletePortfolioShare when sharing/unsharing to an Organization."
+    }
+]

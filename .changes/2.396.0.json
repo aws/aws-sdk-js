@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeCommit",
+        "description": "This release supports a more graceful handling of the error case when a repository is not associated with a pull request ID in a merge request in AWS CodeCommit."
+    },
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "This release of Amazon Elastic Container Service (Amazon ECS) introduces support for GPU workloads by enabling you to create clusters with GPU-enabled container instances."
+    },
+    {
+        "type": "feature",
+        "category": "WorkSpaces",
+        "description": "This release sets ClientProperties as a required parameter."
+    }
+]

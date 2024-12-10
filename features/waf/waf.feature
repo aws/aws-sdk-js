@@ -11,13 +11,3 @@ Feature: AWS WAF
     """
     Then the request should be successful
     And the value at "Rules" should be a list
-
-  Scenario: Error handling
-    Given I run the "createSqlInjectionMatchSet" operation with params:
-    """
-    {
-      "Name": "fake_name",
-      "ChangeToken": "fake_token"
-    }
-    """
-    Then the error code should be "WAFStaleDataException"

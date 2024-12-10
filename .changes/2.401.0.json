@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "AppStream",
+        "description": "This update enables customers to find the start time, max expiration time, and connection status associated with AppStream streaming session."
+    },
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "Add customized webhook filter support"
+    },
+    {
+        "type": "feature",
+        "category": "MediaPackage",
+        "description": "Adds optional configuration for DASH to compact the manifest by combining duplicate SegmentTemplate tags. Adds optional configuration for DASH SegmentTemplate format to refer to segments by \"Number\" (default) or by \"Time\"."
+    }
+]

@@ -3,7 +3,7 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
-import {ConfigBase as Config} from '../lib/config';
+import {ConfigBase as Config} from '../lib/config-base';
 interface Blob {}
 declare class MarketplaceEntitlementService extends Service {
   /**
@@ -64,7 +64,6 @@ declare namespace MarketplaceEntitlementService {
      */
     StringValue?: String;
   }
-  export type ErrorMessage = string;
   export type FilterValue = string;
   export type FilterValueList = FilterValue[];
   export type GetEntitlementFilterName = "CUSTOMER_IDENTIFIER"|"DIMENSION"|string;
@@ -85,7 +84,7 @@ declare namespace MarketplaceEntitlementService {
     /**
      * The maximum number of items to retrieve from the GetEntitlements operation. For pagination, use the NextToken field in subsequent calls to GetEntitlements.
      */
-    MaxResults?: Integer;
+    MaxResults?: PageSizeInteger;
   }
   export interface GetEntitlementsResult {
     /**
@@ -99,6 +98,7 @@ declare namespace MarketplaceEntitlementService {
   }
   export type Integer = number;
   export type NonEmptyString = string;
+  export type PageSizeInteger = number;
   export type ProductCode = string;
   export type String = string;
   export type Timestamp = Date;

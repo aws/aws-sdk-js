@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "Imagebuilder",
+        "description": "Add PENDING status to Lifecycle Execution resource status. Add StartTime and EndTime to ListLifecycleExecutionResource API response."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "Updated the input of CreateDBCluster and ModifyDBCluster to support setting CA certificates. Updated the output of DescribeDBCluster to show current CA certificate setting value."
+    },
+    {
+        "type": "feature",
+        "category": "Support",
+        "description": "Update README with v2 end-of-support announcement"
+    },
+    {
+        "type": "feature",
+        "category": "Support",
+        "description": "Add upcoming end-of-support message in postinstall"
+    },
+    {
+        "type": "feature",
+        "category": "VerifiedPermissions",
+        "description": "Deprecating details in favor of configuration for GetIdentitySource and ListIdentitySources APIs."
+    }
+]

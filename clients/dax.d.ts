@@ -3,7 +3,7 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
-import {ConfigBase as Config} from '../lib/config';
+import {ConfigBase as Config} from '../lib/config-base';
 interface Blob {}
 declare class DAX extends Service {
   /**
@@ -84,11 +84,11 @@ declare class DAX extends Service {
    */
   describeDefaultParameters(callback?: (err: AWSError, data: DAX.Types.DescribeDefaultParametersResponse) => void): Request<DAX.Types.DescribeDefaultParametersResponse, AWSError>;
   /**
-   * Returns events related to DAX clusters and parameter groups. You can obtain events specific to a particular DAX cluster or parameter group by providing the name as a parameter. By default, only the events occurring within the last hour are returned; however, you can retrieve up to 14 days' worth of events if necessary.
+   * Returns events related to DAX clusters and parameter groups. You can obtain events specific to a particular DAX cluster or parameter group by providing the name as a parameter. By default, only the events occurring within the last 24 hours are returned; however, you can retrieve up to 14 days' worth of events if necessary.
    */
   describeEvents(params: DAX.Types.DescribeEventsRequest, callback?: (err: AWSError, data: DAX.Types.DescribeEventsResponse) => void): Request<DAX.Types.DescribeEventsResponse, AWSError>;
   /**
-   * Returns events related to DAX clusters and parameter groups. You can obtain events specific to a particular DAX cluster or parameter group by providing the name as a parameter. By default, only the events occurring within the last hour are returned; however, you can retrieve up to 14 days' worth of events if necessary.
+   * Returns events related to DAX clusters and parameter groups. You can obtain events specific to a particular DAX cluster or parameter group by providing the name as a parameter. By default, only the events occurring within the last 24 hours are returned; however, you can retrieve up to 14 days' worth of events if necessary.
    */
   describeEvents(callback?: (err: AWSError, data: DAX.Types.DescribeEventsResponse) => void): Request<DAX.Types.DescribeEventsResponse, AWSError>;
   /**
@@ -132,11 +132,11 @@ declare class DAX extends Service {
    */
   listTags(callback?: (err: AWSError, data: DAX.Types.ListTagsResponse) => void): Request<DAX.Types.ListTagsResponse, AWSError>;
   /**
-   * Reboots a single node of a DAX cluster. The reboot action takes place as soon as possible. During the reboot, the node status is set to REBOOTING.
+   * Reboots a single node of a DAX cluster. The reboot action takes place as soon as possible. During the reboot, the node status is set to REBOOTING.   RebootNode restarts the DAX engine process and does not remove the contents of the cache.  
    */
   rebootNode(params: DAX.Types.RebootNodeRequest, callback?: (err: AWSError, data: DAX.Types.RebootNodeResponse) => void): Request<DAX.Types.RebootNodeResponse, AWSError>;
   /**
-   * Reboots a single node of a DAX cluster. The reboot action takes place as soon as possible. During the reboot, the node status is set to REBOOTING.
+   * Reboots a single node of a DAX cluster. The reboot action takes place as soon as possible. During the reboot, the node status is set to REBOOTING.   RebootNode restarts the DAX engine process and does not remove the contents of the cache.  
    */
   rebootNode(callback?: (err: AWSError, data: DAX.Types.RebootNodeResponse) => void): Request<DAX.Types.RebootNodeResponse, AWSError>;
   /**
@@ -182,7 +182,6 @@ declare class DAX extends Service {
 }
 declare namespace DAX {
   export type AvailabilityZoneList = String[];
-  export type AwsQueryErrorMessage = string;
   export type ChangeType = "IMMEDIATE"|"REQUIRES_REBOOT"|string;
   export interface Cluster {
     /**
@@ -214,7 +213,7 @@ declare namespace DAX {
      */
     Status?: String;
     /**
-     * The configuration endpoint for this DAX cluster, consisting of a DNS name and a port number. Client applications can specify this endpoint, rather than an individual node endpoint, and allow the DAX client software to intelligently route requests and responses to nodes in the DAX cluster.
+     * The endpoint for this DAX cluster, consisting of a DNS name, a port number, and a URL. Applications should use the URL to configure the DAX client to find their cluster.
      */
     ClusterDiscoveryEndpoint?: Endpoint;
     /**
@@ -249,7 +248,16 @@ declare namespace DAX {
      * The parameter group being used by nodes in the cluster.
      */
     ParameterGroup?: ParameterGroupStatus;
+    /**
+     * The description of the server-side encryption status on the specified DAX cluster.
+     */
+    SSEDescription?: SSEDescription;
+    /**
+     * The type of encryption supported by the cluster's endpoint. Values are:    NONE for no encryption  TLS for Transport Layer Security  
+     */
+    ClusterEndpointEncryptionType?: ClusterEndpointEncryptionType;
   }
+  export type ClusterEndpointEncryptionType = "NONE"|"TLS"|string;
   export type ClusterList = Cluster[];
   export type ClusterNameList = String[];
   export interface CreateClusterRequest {
@@ -266,11 +274,11 @@ declare namespace DAX {
      */
     Description?: String;
     /**
-     * The number of nodes in the DAX cluster. A replication factor of 1 will create a single-node cluster, without any read replicas. For additional fault tolerance, you can create a multiple node cluster with one or more read replicas. To do this, set ReplicationFactor to 2 or more.  AWS recommends that you have at least two read replicas per cluster. 
+     * The number of nodes in the DAX cluster. A replication factor of 1 will create a single-node cluster, without any read replicas. For additional fault tolerance, you can create a multiple node cluster with one or more read replicas. To do this, set ReplicationFactor to a number between 3 (one primary and two read replicas) and 10 (one primary and nine read replicas). If the AvailabilityZones parameter is provided, its length must equal the ReplicationFactor.  AWS recommends that you have at least two read replicas per cluster. 
      */
     ReplicationFactor: Integer;
     /**
-     * The Availability Zones (AZs) in which the cluster nodes will be created. All nodes belonging to the cluster are placed in these Availability Zones. Use this parameter if you want to distribute the nodes across multiple AZs.
+     * The Availability Zones (AZs) in which the cluster nodes will reside after the cluster has been created or updated. If provided, the length of this list must equal the ReplicationFactor parameter. If you omit this parameter, DAX will spread the nodes across Availability Zones for the highest availability.
      */
     AvailabilityZones?: AvailabilityZoneList;
     /**
@@ -301,6 +309,14 @@ declare namespace DAX {
      * A set of tags to associate with the DAX cluster. 
      */
     Tags?: TagList;
+    /**
+     * Represents the settings used to enable server-side encryption on the cluster.
+     */
+    SSESpecification?: SSESpecification;
+    /**
+     * The type of encryption the cluster's endpoint should support. Values are:    NONE for no encryption    TLS for Transport Layer Security  
+     */
+    ClusterEndpointEncryptionType?: ClusterEndpointEncryptionType;
   }
   export interface CreateClusterResponse {
     /**
@@ -573,6 +589,10 @@ declare namespace DAX {
      * The port number that applications should use to connect to the endpoint.
      */
     Port?: Integer;
+    /**
+     * The URL that applications should use to connect to the endpoint. The default ports are 8111 for the "dax" protocol and 9111 for the "daxs" protocol.
+     */
+    URL?: String;
   }
   export interface Event {
     /**
@@ -682,7 +702,7 @@ declare namespace DAX {
      */
     TopicArn?: String;
     /**
-     * The current state of the topic.
+     * The current state of the topic. A value of “active” means that notifications will be sent to the topic. A value of “inactive” means that notifications will not be sent to the topic.
      */
     TopicStatus?: String;
   }
@@ -783,6 +803,20 @@ declare namespace DAX {
      */
     Cluster?: Cluster;
   }
+  export interface SSEDescription {
+    /**
+     * The current state of server-side encryption:    ENABLING - Server-side encryption is being enabled.    ENABLED - Server-side encryption is enabled.    DISABLING - Server-side encryption is being disabled.    DISABLED - Server-side encryption is disabled.  
+     */
+    Status?: SSEStatus;
+  }
+  export type SSEEnabled = boolean;
+  export interface SSESpecification {
+    /**
+     * Indicates whether server-side encryption is enabled (true) or disabled (false) on the cluster.
+     */
+    Enabled: SSEEnabled;
+  }
+  export type SSEStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|string;
   export type SecurityGroupIdentifierList = String[];
   export interface SecurityGroupMembership {
     /**
@@ -803,7 +837,7 @@ declare namespace DAX {
      */
     SubnetIdentifier?: String;
     /**
-     * The Availability Zone (AZ) for subnet subnet.
+     * The Availability Zone (AZ) for the subnet.
      */
     SubnetAvailabilityZone?: String;
   }
@@ -891,7 +925,7 @@ declare namespace DAX {
      */
     NotificationTopicArn?: String;
     /**
-     * The current state of the topic.
+     * The current state of the topic. A value of “active” means that notifications will be sent to the topic. A value of “inactive” means that notifications will not be sent to the topic.
      */
     NotificationTopicStatus?: String;
     /**
@@ -915,7 +949,7 @@ declare namespace DAX {
      */
     ParameterGroupName: String;
     /**
-     * An array of name-value pairs for the parameters in the group. Each element in the array represents a single parameter.
+     * An array of name-value pairs for the parameters in the group. Each element in the array represents a single parameter.   record-ttl-millis and query-ttl-millis are the only supported parameter names. For more details, see Configuring TTL Settings. 
      */
     ParameterNameValues: ParameterNameValueList;
   }

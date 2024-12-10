@@ -1,0 +1,1091 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2023-09-30",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "bedrock-runtime",
+    "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
+    "serviceFullName": "Amazon Bedrock Runtime",
+    "serviceId": "Bedrock Runtime",
+    "signatureVersion": "v4",
+    "signingName": "bedrock",
+    "uid": "bedrock-runtime-2023-09-30"
+  },
+  "operations": {
+    "ApplyGuardrail": {
+      "http": {
+        "requestUri": "/guardrail/{guardrailIdentifier}/version/{guardrailVersion}/apply",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "guardrailIdentifier",
+          "guardrailVersion",
+          "source",
+          "content"
+        ],
+        "members": {
+          "guardrailIdentifier": {
+            "location": "uri",
+            "locationName": "guardrailIdentifier"
+          },
+          "guardrailVersion": {
+            "location": "uri",
+            "locationName": "guardrailVersion"
+          },
+          "source": {},
+          "content": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "text": {
+                  "type": "structure",
+                  "required": [
+                    "text"
+                  ],
+                  "members": {
+                    "text": {},
+                    "qualifiers": {
+                      "type": "list",
+                      "member": {}
+                    }
+                  }
+                }
+              },
+              "union": true
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "usage",
+          "action",
+          "outputs",
+          "assessments"
+        ],
+        "members": {
+          "usage": {
+            "type": "structure",
+            "required": [
+              "topicPolicyUnits",
+              "contentPolicyUnits",
+              "wordPolicyUnits",
+              "sensitiveInformationPolicyUnits",
+              "sensitiveInformationPolicyFreeUnits",
+              "contextualGroundingPolicyUnits"
+            ],
+            "members": {
+              "topicPolicyUnits": {
+                "type": "integer"
+              },
+              "contentPolicyUnits": {
+                "type": "integer"
+              },
+              "wordPolicyUnits": {
+                "type": "integer"
+              },
+              "sensitiveInformationPolicyUnits": {
+                "type": "integer"
+              },
+              "sensitiveInformationPolicyFreeUnits": {
+                "type": "integer"
+              },
+              "contextualGroundingPolicyUnits": {
+                "type": "integer"
+              }
+            }
+          },
+          "action": {},
+          "outputs": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "text": {}
+              }
+            }
+          },
+          "assessments": {
+            "shape": "Sn"
+          }
+        }
+      }
+    },
+    "Converse": {
+      "http": {
+        "requestUri": "/model/{modelId}/converse",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "modelId",
+          "messages"
+        ],
+        "members": {
+          "modelId": {
+            "location": "uri",
+            "locationName": "modelId"
+          },
+          "messages": {
+            "shape": "S1n"
+          },
+          "system": {
+            "shape": "S2d"
+          },
+          "inferenceConfig": {
+            "shape": "S2g"
+          },
+          "toolConfig": {
+            "shape": "S2l"
+          },
+          "guardrailConfig": {
+            "type": "structure",
+            "required": [
+              "guardrailIdentifier",
+              "guardrailVersion"
+            ],
+            "members": {
+              "guardrailIdentifier": {},
+              "guardrailVersion": {},
+              "trace": {}
+            }
+          },
+          "additionalModelRequestFields": {
+            "shape": "S24"
+          },
+          "additionalModelResponseFieldPaths": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "output",
+          "stopReason",
+          "usage",
+          "metrics"
+        ],
+        "members": {
+          "output": {
+            "type": "structure",
+            "members": {
+              "message": {
+                "shape": "S1o"
+              }
+            },
+            "union": true
+          },
+          "stopReason": {},
+          "usage": {
+            "shape": "S31"
+          },
+          "metrics": {
+            "type": "structure",
+            "required": [
+              "latencyMs"
+            ],
+            "members": {
+              "latencyMs": {
+                "type": "long"
+              }
+            }
+          },
+          "additionalModelResponseFields": {
+            "shape": "S24"
+          },
+          "trace": {
+            "type": "structure",
+            "members": {
+              "guardrail": {
+                "shape": "S38"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ConverseStream": {
+      "http": {
+        "requestUri": "/model/{modelId}/converse-stream",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "modelId",
+          "messages"
+        ],
+        "members": {
+          "modelId": {
+            "location": "uri",
+            "locationName": "modelId"
+          },
+          "messages": {
+            "shape": "S1n"
+          },
+          "system": {
+            "shape": "S2d"
+          },
+          "inferenceConfig": {
+            "shape": "S2g"
+          },
+          "toolConfig": {
+            "shape": "S2l"
+          },
+          "guardrailConfig": {
+            "type": "structure",
+            "required": [
+              "guardrailIdentifier",
+              "guardrailVersion"
+            ],
+            "members": {
+              "guardrailIdentifier": {},
+              "guardrailVersion": {},
+              "trace": {},
+              "streamProcessingMode": {}
+            }
+          },
+          "additionalModelRequestFields": {
+            "shape": "S24"
+          },
+          "additionalModelResponseFieldPaths": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "stream": {
+            "type": "structure",
+            "members": {
+              "messageStart": {
+                "type": "structure",
+                "required": [
+                  "role"
+                ],
+                "members": {
+                  "role": {}
+                },
+                "event": true
+              },
+              "contentBlockStart": {
+                "type": "structure",
+                "required": [
+                  "start",
+                  "contentBlockIndex"
+                ],
+                "members": {
+                  "start": {
+                    "type": "structure",
+                    "members": {
+                      "toolUse": {
+                        "type": "structure",
+                        "required": [
+                          "toolUseId",
+                          "name"
+                        ],
+                        "members": {
+                          "toolUseId": {},
+                          "name": {}
+                        }
+                      }
+                    },
+                    "union": true
+                  },
+                  "contentBlockIndex": {
+                    "type": "integer"
+                  }
+                },
+                "event": true
+              },
+              "contentBlockDelta": {
+                "type": "structure",
+                "required": [
+                  "delta",
+                  "contentBlockIndex"
+                ],
+                "members": {
+                  "delta": {
+                    "type": "structure",
+                    "members": {
+                      "text": {},
+                      "toolUse": {
+                        "type": "structure",
+                        "required": [
+                          "input"
+                        ],
+                        "members": {
+                          "input": {}
+                        }
+                      }
+                    },
+                    "union": true
+                  },
+                  "contentBlockIndex": {
+                    "type": "integer"
+                  }
+                },
+                "event": true
+              },
+              "contentBlockStop": {
+                "type": "structure",
+                "required": [
+                  "contentBlockIndex"
+                ],
+                "members": {
+                  "contentBlockIndex": {
+                    "type": "integer"
+                  }
+                },
+                "event": true
+              },
+              "messageStop": {
+                "type": "structure",
+                "required": [
+                  "stopReason"
+                ],
+                "members": {
+                  "stopReason": {},
+                  "additionalModelResponseFields": {
+                    "shape": "S24"
+                  }
+                },
+                "event": true
+              },
+              "metadata": {
+                "type": "structure",
+                "required": [
+                  "usage",
+                  "metrics"
+                ],
+                "members": {
+                  "usage": {
+                    "shape": "S31"
+                  },
+                  "metrics": {
+                    "type": "structure",
+                    "required": [
+                      "latencyMs"
+                    ],
+                    "members": {
+                      "latencyMs": {
+                        "type": "long"
+                      }
+                    }
+                  },
+                  "trace": {
+                    "type": "structure",
+                    "members": {
+                      "guardrail": {
+                        "shape": "S38"
+                      }
+                    }
+                  }
+                },
+                "event": true
+              },
+              "internalServerException": {
+                "shape": "S3w"
+              },
+              "modelStreamErrorException": {
+                "shape": "S3y"
+              },
+              "validationException": {
+                "shape": "S40"
+              },
+              "throttlingException": {
+                "shape": "S41"
+              },
+              "serviceUnavailableException": {
+                "shape": "S42"
+              }
+            },
+            "eventstream": true
+          }
+        },
+        "payload": "stream"
+      }
+    },
+    "InvokeModel": {
+      "http": {
+        "requestUri": "/model/{modelId}/invoke",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "body",
+          "modelId"
+        ],
+        "members": {
+          "body": {
+            "shape": "S44"
+          },
+          "contentType": {
+            "location": "header",
+            "locationName": "Content-Type"
+          },
+          "accept": {
+            "location": "header",
+            "locationName": "Accept"
+          },
+          "modelId": {
+            "location": "uri",
+            "locationName": "modelId"
+          },
+          "trace": {
+            "location": "header",
+            "locationName": "X-Amzn-Bedrock-Trace"
+          },
+          "guardrailIdentifier": {
+            "location": "header",
+            "locationName": "X-Amzn-Bedrock-GuardrailIdentifier"
+          },
+          "guardrailVersion": {
+            "location": "header",
+            "locationName": "X-Amzn-Bedrock-GuardrailVersion"
+          }
+        },
+        "payload": "body"
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "body",
+          "contentType"
+        ],
+        "members": {
+          "body": {
+            "shape": "S44"
+          },
+          "contentType": {
+            "location": "header",
+            "locationName": "Content-Type"
+          }
+        },
+        "payload": "body"
+      }
+    },
+    "InvokeModelWithResponseStream": {
+      "http": {
+        "requestUri": "/model/{modelId}/invoke-with-response-stream",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "body",
+          "modelId"
+        ],
+        "members": {
+          "body": {
+            "shape": "S44"
+          },
+          "contentType": {
+            "location": "header",
+            "locationName": "Content-Type"
+          },
+          "accept": {
+            "location": "header",
+            "locationName": "X-Amzn-Bedrock-Accept"
+          },
+          "modelId": {
+            "location": "uri",
+            "locationName": "modelId"
+          },
+          "trace": {
+            "location": "header",
+            "locationName": "X-Amzn-Bedrock-Trace"
+          },
+          "guardrailIdentifier": {
+            "location": "header",
+            "locationName": "X-Amzn-Bedrock-GuardrailIdentifier"
+          },
+          "guardrailVersion": {
+            "location": "header",
+            "locationName": "X-Amzn-Bedrock-GuardrailVersion"
+          }
+        },
+        "payload": "body"
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "body",
+          "contentType"
+        ],
+        "members": {
+          "body": {
+            "type": "structure",
+            "members": {
+              "chunk": {
+                "type": "structure",
+                "members": {
+                  "bytes": {
+                    "type": "blob",
+                    "sensitive": true
+                  }
+                },
+                "event": true,
+                "sensitive": true
+              },
+              "internalServerException": {
+                "shape": "S3w"
+              },
+              "modelStreamErrorException": {
+                "shape": "S3y"
+              },
+              "validationException": {
+                "shape": "S40"
+              },
+              "throttlingException": {
+                "shape": "S41"
+              },
+              "modelTimeoutException": {
+                "type": "structure",
+                "members": {
+                  "message": {}
+                },
+                "error": {
+                  "httpStatusCode": 408,
+                  "senderFault": true
+                },
+                "exception": true
+              },
+              "serviceUnavailableException": {
+                "shape": "S42"
+              }
+            },
+            "eventstream": true
+          },
+          "contentType": {
+            "location": "header",
+            "locationName": "X-Amzn-Bedrock-Content-Type"
+          }
+        },
+        "payload": "body"
+      }
+    }
+  },
+  "shapes": {
+    "Sn": {
+      "type": "list",
+      "member": {
+        "shape": "So"
+      }
+    },
+    "So": {
+      "type": "structure",
+      "members": {
+        "topicPolicy": {
+          "type": "structure",
+          "required": [
+            "topics"
+          ],
+          "members": {
+            "topics": {
+              "type": "list",
+              "member": {
+                "type": "structure",
+                "required": [
+                  "name",
+                  "type",
+                  "action"
+                ],
+                "members": {
+                  "name": {},
+                  "type": {},
+                  "action": {}
+                }
+              }
+            }
+          }
+        },
+        "contentPolicy": {
+          "type": "structure",
+          "required": [
+            "filters"
+          ],
+          "members": {
+            "filters": {
+              "type": "list",
+              "member": {
+                "type": "structure",
+                "required": [
+                  "type",
+                  "confidence",
+                  "action"
+                ],
+                "members": {
+                  "type": {},
+                  "confidence": {},
+                  "action": {}
+                }
+              }
+            }
+          }
+        },
+        "wordPolicy": {
+          "type": "structure",
+          "required": [
+            "customWords",
+            "managedWordLists"
+          ],
+          "members": {
+            "customWords": {
+              "type": "list",
+              "member": {
+                "type": "structure",
+                "required": [
+                  "match",
+                  "action"
+                ],
+                "members": {
+                  "match": {},
+                  "action": {}
+                }
+              }
+            },
+            "managedWordLists": {
+              "type": "list",
+              "member": {
+                "type": "structure",
+                "required": [
+                  "match",
+                  "type",
+                  "action"
+                ],
+                "members": {
+                  "match": {},
+                  "type": {},
+                  "action": {}
+                }
+              }
+            }
+          }
+        },
+        "sensitiveInformationPolicy": {
+          "type": "structure",
+          "required": [
+            "piiEntities",
+            "regexes"
+          ],
+          "members": {
+            "piiEntities": {
+              "type": "list",
+              "member": {
+                "type": "structure",
+                "required": [
+                  "match",
+                  "type",
+                  "action"
+                ],
+                "members": {
+                  "match": {},
+                  "type": {},
+                  "action": {}
+                }
+              }
+            },
+            "regexes": {
+              "type": "list",
+              "member": {
+                "type": "structure",
+                "required": [
+                  "action"
+                ],
+                "members": {
+                  "name": {},
+                  "match": {},
+                  "regex": {},
+                  "action": {}
+                }
+              }
+            }
+          }
+        },
+        "contextualGroundingPolicy": {
+          "type": "structure",
+          "members": {
+            "filters": {
+              "type": "list",
+              "member": {
+                "type": "structure",
+                "required": [
+                  "type",
+                  "threshold",
+                  "score",
+                  "action"
+                ],
+                "members": {
+                  "type": {},
+                  "threshold": {
+                    "type": "double"
+                  },
+                  "score": {
+                    "type": "double"
+                  },
+                  "action": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "S1n": {
+      "type": "list",
+      "member": {
+        "shape": "S1o"
+      }
+    },
+    "S1o": {
+      "type": "structure",
+      "required": [
+        "role",
+        "content"
+      ],
+      "members": {
+        "role": {},
+        "content": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "text": {},
+              "image": {
+                "shape": "S1s"
+              },
+              "document": {
+                "shape": "S1w"
+              },
+              "toolUse": {
+                "type": "structure",
+                "required": [
+                  "toolUseId",
+                  "name",
+                  "input"
+                ],
+                "members": {
+                  "toolUseId": {},
+                  "name": {},
+                  "input": {
+                    "shape": "S24"
+                  }
+                }
+              },
+              "toolResult": {
+                "type": "structure",
+                "required": [
+                  "toolUseId",
+                  "content"
+                ],
+                "members": {
+                  "toolUseId": {},
+                  "content": {
+                    "type": "list",
+                    "member": {
+                      "type": "structure",
+                      "members": {
+                        "json": {
+                          "shape": "S24"
+                        },
+                        "text": {},
+                        "image": {
+                          "shape": "S1s"
+                        },
+                        "document": {
+                          "shape": "S1w"
+                        }
+                      },
+                      "union": true
+                    }
+                  },
+                  "status": {}
+                }
+              },
+              "guardContent": {
+                "shape": "S29"
+              }
+            },
+            "union": true
+          }
+        }
+      }
+    },
+    "S1s": {
+      "type": "structure",
+      "required": [
+        "format",
+        "source"
+      ],
+      "members": {
+        "format": {},
+        "source": {
+          "type": "structure",
+          "members": {
+            "bytes": {
+              "type": "blob"
+            }
+          },
+          "union": true
+        }
+      }
+    },
+    "S1w": {
+      "type": "structure",
+      "required": [
+        "format",
+        "name",
+        "source"
+      ],
+      "members": {
+        "format": {},
+        "name": {},
+        "source": {
+          "type": "structure",
+          "members": {
+            "bytes": {
+              "type": "blob"
+            }
+          },
+          "union": true
+        }
+      }
+    },
+    "S24": {
+      "type": "structure",
+      "members": {},
+      "document": true
+    },
+    "S29": {
+      "type": "structure",
+      "members": {
+        "text": {
+          "type": "structure",
+          "required": [
+            "text"
+          ],
+          "members": {
+            "text": {},
+            "qualifiers": {
+              "type": "list",
+              "member": {}
+            }
+          }
+        }
+      },
+      "union": true
+    },
+    "S2d": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "text": {},
+          "guardContent": {
+            "shape": "S29"
+          }
+        },
+        "union": true
+      }
+    },
+    "S2g": {
+      "type": "structure",
+      "members": {
+        "maxTokens": {
+          "type": "integer"
+        },
+        "temperature": {
+          "type": "float"
+        },
+        "topP": {
+          "type": "float"
+        },
+        "stopSequences": {
+          "type": "list",
+          "member": {}
+        }
+      }
+    },
+    "S2l": {
+      "type": "structure",
+      "required": [
+        "tools"
+      ],
+      "members": {
+        "tools": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "toolSpec": {
+                "type": "structure",
+                "required": [
+                  "name",
+                  "inputSchema"
+                ],
+                "members": {
+                  "name": {},
+                  "description": {},
+                  "inputSchema": {
+                    "type": "structure",
+                    "members": {
+                      "json": {
+                        "shape": "S24"
+                      }
+                    },
+                    "union": true
+                  }
+                }
+              }
+            },
+            "union": true
+          }
+        },
+        "toolChoice": {
+          "type": "structure",
+          "members": {
+            "auto": {
+              "type": "structure",
+              "members": {}
+            },
+            "any": {
+              "type": "structure",
+              "members": {}
+            },
+            "tool": {
+              "type": "structure",
+              "required": [
+                "name"
+              ],
+              "members": {
+                "name": {}
+              }
+            }
+          },
+          "union": true
+        }
+      }
+    },
+    "S31": {
+      "type": "structure",
+      "required": [
+        "inputTokens",
+        "outputTokens",
+        "totalTokens"
+      ],
+      "members": {
+        "inputTokens": {
+          "type": "integer"
+        },
+        "outputTokens": {
+          "type": "integer"
+        },
+        "totalTokens": {
+          "type": "integer"
+        }
+      }
+    },
+    "S38": {
+      "type": "structure",
+      "members": {
+        "modelOutput": {
+          "type": "list",
+          "member": {}
+        },
+        "inputAssessment": {
+          "type": "map",
+          "key": {},
+          "value": {
+            "shape": "So"
+          }
+        },
+        "outputAssessments": {
+          "type": "map",
+          "key": {},
+          "value": {
+            "shape": "Sn"
+          }
+        }
+      }
+    },
+    "S3w": {
+      "type": "structure",
+      "members": {
+        "message": {}
+      },
+      "error": {
+        "httpStatusCode": 500
+      },
+      "exception": true,
+      "fault": true
+    },
+    "S3y": {
+      "type": "structure",
+      "members": {
+        "message": {},
+        "originalStatusCode": {
+          "type": "integer"
+        },
+        "originalMessage": {}
+      },
+      "error": {
+        "httpStatusCode": 424,
+        "senderFault": true
+      },
+      "exception": true
+    },
+    "S40": {
+      "type": "structure",
+      "members": {
+        "message": {}
+      },
+      "error": {
+        "httpStatusCode": 400,
+        "senderFault": true
+      },
+      "exception": true
+    },
+    "S41": {
+      "type": "structure",
+      "members": {
+        "message": {}
+      },
+      "error": {
+        "httpStatusCode": 429,
+        "senderFault": true
+      },
+      "exception": true
+    },
+    "S42": {
+      "type": "structure",
+      "members": {
+        "message": {}
+      },
+      "error": {
+        "httpStatusCode": 503
+      },
+      "exception": true,
+      "fault": true
+    },
+    "S44": {
+      "type": "blob",
+      "sensitive": true
+    }
+  }
+}

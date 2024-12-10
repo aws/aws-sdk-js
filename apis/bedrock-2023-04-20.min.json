@@ -1,0 +1,3045 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2023-04-20",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "bedrock",
+    "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
+    "serviceFullName": "Amazon Bedrock",
+    "serviceId": "Bedrock",
+    "signatureVersion": "v4",
+    "signingName": "bedrock",
+    "uid": "bedrock-2023-04-20"
+  },
+  "operations": {
+    "BatchDeleteEvaluationJob": {
+      "http": {
+        "requestUri": "/evaluation-jobs/batch-delete",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "jobIdentifiers"
+        ],
+        "members": {
+          "jobIdentifiers": {
+            "type": "list",
+            "member": {
+              "shape": "S3"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "errors",
+          "evaluationJobs"
+        ],
+        "members": {
+          "errors": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "jobIdentifier",
+                "code"
+              ],
+              "members": {
+                "jobIdentifier": {
+                  "shape": "S3"
+                },
+                "code": {},
+                "message": {}
+              }
+            }
+          },
+          "evaluationJobs": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "jobIdentifier",
+                "jobStatus"
+              ],
+              "members": {
+                "jobIdentifier": {
+                  "shape": "S3"
+                },
+                "jobStatus": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "CreateEvaluationJob": {
+      "http": {
+        "requestUri": "/evaluation-jobs",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "jobName",
+          "roleArn",
+          "evaluationConfig",
+          "inferenceConfig",
+          "outputDataConfig"
+        ],
+        "members": {
+          "jobName": {},
+          "jobDescription": {
+            "shape": "Sd"
+          },
+          "clientRequestToken": {
+            "idempotencyToken": true
+          },
+          "roleArn": {},
+          "customerEncryptionKeyId": {},
+          "jobTags": {
+            "shape": "Sh"
+          },
+          "evaluationConfig": {
+            "shape": "Sl"
+          },
+          "inferenceConfig": {
+            "shape": "S14"
+          },
+          "outputDataConfig": {
+            "shape": "S1a"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "jobArn"
+        ],
+        "members": {
+          "jobArn": {}
+        }
+      },
+      "idempotent": true
+    },
+    "CreateGuardrail": {
+      "http": {
+        "requestUri": "/guardrails",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name",
+          "blockedInputMessaging",
+          "blockedOutputsMessaging"
+        ],
+        "members": {
+          "name": {
+            "shape": "S1e"
+          },
+          "description": {
+            "shape": "S1f"
+          },
+          "topicPolicyConfig": {
+            "shape": "S1g"
+          },
+          "contentPolicyConfig": {
+            "shape": "S1o"
+          },
+          "wordPolicyConfig": {
+            "shape": "S1t"
+          },
+          "sensitiveInformationPolicyConfig": {
+            "shape": "S20"
+          },
+          "contextualGroundingPolicyConfig": {
+            "shape": "S2a"
+          },
+          "blockedInputMessaging": {
+            "shape": "S2f"
+          },
+          "blockedOutputsMessaging": {
+            "shape": "S2f"
+          },
+          "kmsKeyId": {},
+          "tags": {
+            "shape": "Sh"
+          },
+          "clientRequestToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "guardrailId",
+          "guardrailArn",
+          "version",
+          "createdAt"
+        ],
+        "members": {
+          "guardrailId": {},
+          "guardrailArn": {},
+          "version": {},
+          "createdAt": {
+            "shape": "S2k"
+          }
+        }
+      }
+    },
+    "CreateGuardrailVersion": {
+      "http": {
+        "requestUri": "/guardrails/{guardrailIdentifier}",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "guardrailIdentifier"
+        ],
+        "members": {
+          "guardrailIdentifier": {
+            "location": "uri",
+            "locationName": "guardrailIdentifier"
+          },
+          "description": {
+            "shape": "S1f"
+          },
+          "clientRequestToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "guardrailId",
+          "version"
+        ],
+        "members": {
+          "guardrailId": {},
+          "version": {}
+        }
+      }
+    },
+    "CreateModelCopyJob": {
+      "http": {
+        "requestUri": "/model-copy-jobs",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "sourceModelArn",
+          "targetModelName"
+        ],
+        "members": {
+          "sourceModelArn": {},
+          "targetModelName": {},
+          "modelKmsKeyId": {},
+          "targetModelTags": {
+            "shape": "Sh"
+          },
+          "clientRequestToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "jobArn"
+        ],
+        "members": {
+          "jobArn": {}
+        }
+      },
+      "idempotent": true
+    },
+    "CreateModelCustomizationJob": {
+      "http": {
+        "requestUri": "/model-customization-jobs",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "jobName",
+          "customModelName",
+          "roleArn",
+          "baseModelIdentifier",
+          "trainingDataConfig",
+          "outputDataConfig",
+          "hyperParameters"
+        ],
+        "members": {
+          "jobName": {},
+          "customModelName": {},
+          "roleArn": {},
+          "clientRequestToken": {
+            "idempotencyToken": true
+          },
+          "baseModelIdentifier": {},
+          "customizationType": {},
+          "customModelKmsKeyId": {},
+          "jobTags": {
+            "shape": "Sh"
+          },
+          "customModelTags": {
+            "shape": "Sh"
+          },
+          "trainingDataConfig": {
+            "shape": "S2y"
+          },
+          "validationDataConfig": {
+            "shape": "S2z"
+          },
+          "outputDataConfig": {
+            "shape": "S32"
+          },
+          "hyperParameters": {
+            "shape": "S33"
+          },
+          "vpcConfig": {
+            "shape": "S34"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "jobArn"
+        ],
+        "members": {
+          "jobArn": {}
+        }
+      },
+      "idempotent": true
+    },
+    "CreateModelImportJob": {
+      "http": {
+        "requestUri": "/model-import-jobs",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "jobName",
+          "importedModelName",
+          "roleArn",
+          "modelDataSource"
+        ],
+        "members": {
+          "jobName": {},
+          "importedModelName": {},
+          "roleArn": {},
+          "modelDataSource": {
+            "shape": "S3d"
+          },
+          "jobTags": {
+            "shape": "Sh"
+          },
+          "importedModelTags": {
+            "shape": "Sh"
+          },
+          "clientRequestToken": {},
+          "vpcConfig": {
+            "shape": "S34"
+          },
+          "importedModelKmsKeyId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "jobArn"
+        ],
+        "members": {
+          "jobArn": {}
+        }
+      },
+      "idempotent": true
+    },
+    "CreateModelInvocationJob": {
+      "http": {
+        "requestUri": "/model-invocation-job",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "jobName",
+          "roleArn",
+          "modelId",
+          "inputDataConfig",
+          "outputDataConfig"
+        ],
+        "members": {
+          "jobName": {},
+          "roleArn": {},
+          "clientRequestToken": {
+            "idempotencyToken": true
+          },
+          "modelId": {},
+          "inputDataConfig": {
+            "shape": "S3l"
+          },
+          "outputDataConfig": {
+            "shape": "S3o"
+          },
+          "timeoutDurationInHours": {
+            "type": "integer"
+          },
+          "tags": {
+            "shape": "Sh"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "jobArn"
+        ],
+        "members": {
+          "jobArn": {}
+        }
+      },
+      "idempotent": true
+    },
+    "CreateProvisionedModelThroughput": {
+      "http": {
+        "requestUri": "/provisioned-model-throughput",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "modelUnits",
+          "provisionedModelName",
+          "modelId"
+        ],
+        "members": {
+          "clientRequestToken": {
+            "idempotencyToken": true
+          },
+          "modelUnits": {
+            "type": "integer"
+          },
+          "provisionedModelName": {},
+          "modelId": {},
+          "commitmentDuration": {},
+          "tags": {
+            "shape": "Sh"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "provisionedModelArn"
+        ],
+        "members": {
+          "provisionedModelArn": {}
+        }
+      },
+      "idempotent": true
+    },
+    "DeleteCustomModel": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/custom-models/{modelIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "modelIdentifier"
+        ],
+        "members": {
+          "modelIdentifier": {
+            "location": "uri",
+            "locationName": "modelIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DeleteGuardrail": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/guardrails/{guardrailIdentifier}",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "guardrailIdentifier"
+        ],
+        "members": {
+          "guardrailIdentifier": {
+            "location": "uri",
+            "locationName": "guardrailIdentifier"
+          },
+          "guardrailVersion": {
+            "location": "querystring",
+            "locationName": "guardrailVersion"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DeleteImportedModel": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/imported-models/{modelIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "modelIdentifier"
+        ],
+        "members": {
+          "modelIdentifier": {
+            "location": "uri",
+            "locationName": "modelIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DeleteModelInvocationLoggingConfiguration": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/logging/modelinvocations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {}
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DeleteProvisionedModelThroughput": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/provisioned-model-throughput/{provisionedModelId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "provisionedModelId"
+        ],
+        "members": {
+          "provisionedModelId": {
+            "location": "uri",
+            "locationName": "provisionedModelId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "GetCustomModel": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/custom-models/{modelIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "modelIdentifier"
+        ],
+        "members": {
+          "modelIdentifier": {
+            "location": "uri",
+            "locationName": "modelIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "modelArn",
+          "modelName",
+          "jobArn",
+          "baseModelArn",
+          "trainingDataConfig",
+          "outputDataConfig",
+          "creationTime"
+        ],
+        "members": {
+          "modelArn": {},
+          "modelName": {},
+          "jobName": {},
+          "jobArn": {},
+          "baseModelArn": {},
+          "customizationType": {},
+          "modelKmsKeyArn": {},
+          "hyperParameters": {
+            "shape": "S33"
+          },
+          "trainingDataConfig": {
+            "shape": "S2y"
+          },
+          "validationDataConfig": {
+            "shape": "S2z"
+          },
+          "outputDataConfig": {
+            "shape": "S32"
+          },
+          "trainingMetrics": {
+            "shape": "S4f"
+          },
+          "validationMetrics": {
+            "shape": "S4h"
+          },
+          "creationTime": {
+            "shape": "S2k"
+          }
+        }
+      }
+    },
+    "GetEvaluationJob": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/evaluation-jobs/{jobIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "jobIdentifier"
+        ],
+        "members": {
+          "jobIdentifier": {
+            "shape": "S3",
+            "location": "uri",
+            "locationName": "jobIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "jobName",
+          "status",
+          "jobArn",
+          "roleArn",
+          "jobType",
+          "evaluationConfig",
+          "inferenceConfig",
+          "outputDataConfig",
+          "creationTime"
+        ],
+        "members": {
+          "jobName": {},
+          "status": {},
+          "jobArn": {},
+          "jobDescription": {
+            "shape": "Sd"
+          },
+          "roleArn": {},
+          "customerEncryptionKeyId": {},
+          "jobType": {},
+          "evaluationConfig": {
+            "shape": "Sl"
+          },
+          "inferenceConfig": {
+            "shape": "S14"
+          },
+          "outputDataConfig": {
+            "shape": "S1a"
+          },
+          "creationTime": {
+            "shape": "S2k"
+          },
+          "lastModifiedTime": {
+            "shape": "S2k"
+          },
+          "failureMessages": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      }
+    },
+    "GetFoundationModel": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/foundation-models/{modelIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "modelIdentifier"
+        ],
+        "members": {
+          "modelIdentifier": {
+            "location": "uri",
+            "locationName": "modelIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "modelDetails": {
+            "type": "structure",
+            "required": [
+              "modelArn",
+              "modelId"
+            ],
+            "members": {
+              "modelArn": {},
+              "modelId": {},
+              "modelName": {},
+              "providerName": {},
+              "inputModalities": {
+                "shape": "S4u"
+              },
+              "outputModalities": {
+                "shape": "S4u"
+              },
+              "responseStreamingSupported": {
+                "type": "boolean"
+              },
+              "customizationsSupported": {
+                "shape": "S4x"
+              },
+              "inferenceTypesSupported": {
+                "shape": "S4z"
+              },
+              "modelLifecycle": {
+                "shape": "S51"
+              }
+            }
+          }
+        }
+      }
+    },
+    "GetGuardrail": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/guardrails/{guardrailIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "guardrailIdentifier"
+        ],
+        "members": {
+          "guardrailIdentifier": {
+            "location": "uri",
+            "locationName": "guardrailIdentifier"
+          },
+          "guardrailVersion": {
+            "location": "querystring",
+            "locationName": "guardrailVersion"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "name",
+          "guardrailId",
+          "guardrailArn",
+          "version",
+          "status",
+          "createdAt",
+          "updatedAt",
+          "blockedInputMessaging",
+          "blockedOutputsMessaging"
+        ],
+        "members": {
+          "name": {
+            "shape": "S1e"
+          },
+          "description": {
+            "shape": "S1f"
+          },
+          "guardrailId": {},
+          "guardrailArn": {},
+          "version": {},
+          "status": {},
+          "topicPolicy": {
+            "type": "structure",
+            "required": [
+              "topics"
+            ],
+            "members": {
+              "topics": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "required": [
+                    "name",
+                    "definition"
+                  ],
+                  "members": {
+                    "name": {
+                      "shape": "S1j"
+                    },
+                    "definition": {
+                      "shape": "S1k"
+                    },
+                    "examples": {
+                      "shape": "S1l"
+                    },
+                    "type": {}
+                  }
+                }
+              }
+            }
+          },
+          "contentPolicy": {
+            "type": "structure",
+            "members": {
+              "filters": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "required": [
+                    "type",
+                    "inputStrength",
+                    "outputStrength"
+                  ],
+                  "members": {
+                    "type": {},
+                    "inputStrength": {},
+                    "outputStrength": {}
+                  }
+                }
+              }
+            }
+          },
+          "wordPolicy": {
+            "type": "structure",
+            "members": {
+              "words": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "required": [
+                    "text"
+                  ],
+                  "members": {
+                    "text": {}
+                  }
+                }
+              },
+              "managedWordLists": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "required": [
+                    "type"
+                  ],
+                  "members": {
+                    "type": {}
+                  }
+                }
+              }
+            }
+          },
+          "sensitiveInformationPolicy": {
+            "type": "structure",
+            "members": {
+              "piiEntities": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "required": [
+                    "type",
+                    "action"
+                  ],
+                  "members": {
+                    "type": {},
+                    "action": {}
+                  }
+                }
+              },
+              "regexes": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "required": [
+                    "name",
+                    "pattern",
+                    "action"
+                  ],
+                  "members": {
+                    "name": {},
+                    "description": {},
+                    "pattern": {},
+                    "action": {}
+                  }
+                }
+              }
+            }
+          },
+          "contextualGroundingPolicy": {
+            "type": "structure",
+            "required": [
+              "filters"
+            ],
+            "members": {
+              "filters": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "required": [
+                    "type",
+                    "threshold"
+                  ],
+                  "members": {
+                    "type": {},
+                    "threshold": {
+                      "type": "double"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "createdAt": {
+            "shape": "S2k"
+          },
+          "updatedAt": {
+            "shape": "S2k"
+          },
+          "statusReasons": {
+            "type": "list",
+            "member": {
+              "type": "string",
+              "sensitive": true
+            }
+          },
+          "failureRecommendations": {
+            "type": "list",
+            "member": {
+              "type": "string",
+              "sensitive": true
+            }
+          },
+          "blockedInputMessaging": {
+            "shape": "S2f"
+          },
+          "blockedOutputsMessaging": {
+            "shape": "S2f"
+          },
+          "kmsKeyArn": {}
+        }
+      }
+    },
+    "GetImportedModel": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/imported-models/{modelIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "modelIdentifier"
+        ],
+        "members": {
+          "modelIdentifier": {
+            "location": "uri",
+            "locationName": "modelIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "modelArn": {},
+          "modelName": {},
+          "jobName": {},
+          "jobArn": {},
+          "modelDataSource": {
+            "shape": "S3d"
+          },
+          "creationTime": {
+            "shape": "S2k"
+          },
+          "modelArchitecture": {},
+          "modelKmsKeyArn": {}
+        }
+      }
+    },
+    "GetInferenceProfile": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/inference-profiles/{inferenceProfileIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "inferenceProfileIdentifier"
+        ],
+        "members": {
+          "inferenceProfileIdentifier": {
+            "location": "uri",
+            "locationName": "inferenceProfileIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "inferenceProfileName",
+          "models",
+          "inferenceProfileArn",
+          "inferenceProfileId",
+          "status",
+          "type"
+        ],
+        "members": {
+          "inferenceProfileName": {},
+          "models": {
+            "shape": "S66"
+          },
+          "description": {},
+          "createdAt": {
+            "shape": "S2k"
+          },
+          "updatedAt": {
+            "shape": "S2k"
+          },
+          "inferenceProfileArn": {},
+          "inferenceProfileId": {},
+          "status": {},
+          "type": {}
+        }
+      }
+    },
+    "GetModelCopyJob": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/model-copy-jobs/{jobArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "jobArn"
+        ],
+        "members": {
+          "jobArn": {
+            "location": "uri",
+            "locationName": "jobArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "jobArn",
+          "status",
+          "creationTime",
+          "targetModelArn",
+          "sourceAccountId",
+          "sourceModelArn"
+        ],
+        "members": {
+          "jobArn": {},
+          "status": {},
+          "creationTime": {
+            "shape": "S2k"
+          },
+          "targetModelArn": {},
+          "targetModelName": {},
+          "sourceAccountId": {},
+          "sourceModelArn": {},
+          "targetModelKmsKeyArn": {},
+          "targetModelTags": {
+            "shape": "Sh"
+          },
+          "failureMessage": {},
+          "sourceModelName": {}
+        }
+      }
+    },
+    "GetModelCustomizationJob": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/model-customization-jobs/{jobIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "jobIdentifier"
+        ],
+        "members": {
+          "jobIdentifier": {
+            "location": "uri",
+            "locationName": "jobIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "jobArn",
+          "jobName",
+          "outputModelName",
+          "roleArn",
+          "creationTime",
+          "baseModelArn",
+          "hyperParameters",
+          "trainingDataConfig",
+          "validationDataConfig",
+          "outputDataConfig"
+        ],
+        "members": {
+          "jobArn": {},
+          "jobName": {},
+          "outputModelName": {},
+          "outputModelArn": {},
+          "clientRequestToken": {},
+          "roleArn": {},
+          "status": {},
+          "failureMessage": {},
+          "creationTime": {
+            "shape": "S2k"
+          },
+          "lastModifiedTime": {
+            "shape": "S2k"
+          },
+          "endTime": {
+            "shape": "S2k"
+          },
+          "baseModelArn": {},
+          "hyperParameters": {
+            "shape": "S33"
+          },
+          "trainingDataConfig": {
+            "shape": "S2y"
+          },
+          "validationDataConfig": {
+            "shape": "S2z"
+          },
+          "outputDataConfig": {
+            "shape": "S32"
+          },
+          "customizationType": {},
+          "outputModelKmsKeyArn": {},
+          "trainingMetrics": {
+            "shape": "S4f"
+          },
+          "validationMetrics": {
+            "shape": "S4h"
+          },
+          "vpcConfig": {
+            "shape": "S34"
+          }
+        }
+      }
+    },
+    "GetModelImportJob": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/model-import-jobs/{jobIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "jobIdentifier"
+        ],
+        "members": {
+          "jobIdentifier": {
+            "location": "uri",
+            "locationName": "jobIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "jobArn": {},
+          "jobName": {},
+          "importedModelName": {},
+          "importedModelArn": {},
+          "roleArn": {},
+          "modelDataSource": {
+            "shape": "S3d"
+          },
+          "status": {},
+          "failureMessage": {},
+          "creationTime": {
+            "shape": "S2k"
+          },
+          "lastModifiedTime": {
+            "shape": "S2k"
+          },
+          "endTime": {
+            "shape": "S2k"
+          },
+          "vpcConfig": {
+            "shape": "S34"
+          },
+          "importedModelKmsKeyArn": {}
+        }
+      }
+    },
+    "GetModelInvocationJob": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/model-invocation-job/{jobIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "jobIdentifier"
+        ],
+        "members": {
+          "jobIdentifier": {
+            "location": "uri",
+            "locationName": "jobIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "jobArn",
+          "modelId",
+          "roleArn",
+          "submitTime",
+          "inputDataConfig",
+          "outputDataConfig"
+        ],
+        "members": {
+          "jobArn": {},
+          "jobName": {},
+          "modelId": {},
+          "clientRequestToken": {},
+          "roleArn": {},
+          "status": {},
+          "message": {
+            "shape": "S6u"
+          },
+          "submitTime": {
+            "shape": "S2k"
+          },
+          "lastModifiedTime": {
+            "shape": "S2k"
+          },
+          "endTime": {
+            "shape": "S2k"
+          },
+          "inputDataConfig": {
+            "shape": "S3l"
+          },
+          "outputDataConfig": {
+            "shape": "S3o"
+          },
+          "timeoutDurationInHours": {
+            "type": "integer"
+          },
+          "jobExpirationTime": {
+            "shape": "S2k"
+          }
+        }
+      }
+    },
+    "GetModelInvocationLoggingConfiguration": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/logging/modelinvocations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {}
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "loggingConfig": {
+            "shape": "S6x"
+          }
+        }
+      }
+    },
+    "GetProvisionedModelThroughput": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/provisioned-model-throughput/{provisionedModelId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "provisionedModelId"
+        ],
+        "members": {
+          "provisionedModelId": {
+            "location": "uri",
+            "locationName": "provisionedModelId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "modelUnits",
+          "desiredModelUnits",
+          "provisionedModelName",
+          "provisionedModelArn",
+          "modelArn",
+          "desiredModelArn",
+          "foundationModelArn",
+          "status",
+          "creationTime",
+          "lastModifiedTime"
+        ],
+        "members": {
+          "modelUnits": {
+            "type": "integer"
+          },
+          "desiredModelUnits": {
+            "type": "integer"
+          },
+          "provisionedModelName": {},
+          "provisionedModelArn": {},
+          "modelArn": {},
+          "desiredModelArn": {},
+          "foundationModelArn": {},
+          "status": {},
+          "creationTime": {
+            "shape": "S2k"
+          },
+          "lastModifiedTime": {
+            "shape": "S2k"
+          },
+          "failureMessage": {},
+          "commitmentDuration": {},
+          "commitmentExpirationTime": {
+            "shape": "S2k"
+          }
+        }
+      }
+    },
+    "ListCustomModels": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/custom-models",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "creationTimeBefore": {
+            "shape": "S2k",
+            "location": "querystring",
+            "locationName": "creationTimeBefore"
+          },
+          "creationTimeAfter": {
+            "shape": "S2k",
+            "location": "querystring",
+            "locationName": "creationTimeAfter"
+          },
+          "nameContains": {
+            "location": "querystring",
+            "locationName": "nameContains"
+          },
+          "baseModelArnEquals": {
+            "location": "querystring",
+            "locationName": "baseModelArnEquals"
+          },
+          "foundationModelArnEquals": {
+            "location": "querystring",
+            "locationName": "foundationModelArnEquals"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "sortBy": {
+            "location": "querystring",
+            "locationName": "sortBy"
+          },
+          "sortOrder": {
+            "location": "querystring",
+            "locationName": "sortOrder"
+          },
+          "isOwned": {
+            "location": "querystring",
+            "locationName": "isOwned",
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "nextToken": {},
+          "modelSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "modelArn",
+                "modelName",
+                "creationTime",
+                "baseModelArn",
+                "baseModelName"
+              ],
+              "members": {
+                "modelArn": {},
+                "modelName": {},
+                "creationTime": {
+                  "shape": "S2k"
+                },
+                "baseModelArn": {},
+                "baseModelName": {},
+                "customizationType": {},
+                "ownerAccountId": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListEvaluationJobs": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/evaluation-jobs",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "creationTimeAfter": {
+            "shape": "S2k",
+            "location": "querystring",
+            "locationName": "creationTimeAfter"
+          },
+          "creationTimeBefore": {
+            "shape": "S2k",
+            "location": "querystring",
+            "locationName": "creationTimeBefore"
+          },
+          "statusEquals": {
+            "location": "querystring",
+            "locationName": "statusEquals"
+          },
+          "nameContains": {
+            "location": "querystring",
+            "locationName": "nameContains"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "sortBy": {
+            "location": "querystring",
+            "locationName": "sortBy"
+          },
+          "sortOrder": {
+            "location": "querystring",
+            "locationName": "sortOrder"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "nextToken": {},
+          "jobSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "jobArn",
+                "jobName",
+                "status",
+                "creationTime",
+                "jobType",
+                "evaluationTaskTypes",
+                "modelIdentifiers"
+              ],
+              "members": {
+                "jobArn": {},
+                "jobName": {},
+                "status": {},
+                "creationTime": {
+                  "shape": "S2k"
+                },
+                "jobType": {},
+                "evaluationTaskTypes": {
+                  "type": "list",
+                  "member": {}
+                },
+                "modelIdentifiers": {
+                  "type": "list",
+                  "member": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListFoundationModels": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/foundation-models",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "byProvider": {
+            "location": "querystring",
+            "locationName": "byProvider"
+          },
+          "byCustomizationType": {
+            "location": "querystring",
+            "locationName": "byCustomizationType"
+          },
+          "byOutputModality": {
+            "location": "querystring",
+            "locationName": "byOutputModality"
+          },
+          "byInferenceType": {
+            "location": "querystring",
+            "locationName": "byInferenceType"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "modelSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "modelArn",
+                "modelId"
+              ],
+              "members": {
+                "modelArn": {},
+                "modelId": {},
+                "modelName": {},
+                "providerName": {},
+                "inputModalities": {
+                  "shape": "S4u"
+                },
+                "outputModalities": {
+                  "shape": "S4u"
+                },
+                "responseStreamingSupported": {
+                  "type": "boolean"
+                },
+                "customizationsSupported": {
+                  "shape": "S4x"
+                },
+                "inferenceTypesSupported": {
+                  "shape": "S4z"
+                },
+                "modelLifecycle": {
+                  "shape": "S51"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListGuardrails": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/guardrails",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "guardrailIdentifier": {
+            "location": "querystring",
+            "locationName": "guardrailIdentifier"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "guardrails"
+        ],
+        "members": {
+          "guardrails": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "id",
+                "arn",
+                "status",
+                "name",
+                "version",
+                "createdAt",
+                "updatedAt"
+              ],
+              "members": {
+                "id": {},
+                "arn": {},
+                "status": {},
+                "name": {
+                  "shape": "S1e"
+                },
+                "description": {
+                  "shape": "S1f"
+                },
+                "version": {},
+                "createdAt": {
+                  "shape": "S2k"
+                },
+                "updatedAt": {
+                  "shape": "S2k"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListImportedModels": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/imported-models",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "creationTimeBefore": {
+            "shape": "S2k",
+            "location": "querystring",
+            "locationName": "creationTimeBefore"
+          },
+          "creationTimeAfter": {
+            "shape": "S2k",
+            "location": "querystring",
+            "locationName": "creationTimeAfter"
+          },
+          "nameContains": {
+            "location": "querystring",
+            "locationName": "nameContains"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "sortBy": {
+            "location": "querystring",
+            "locationName": "sortBy"
+          },
+          "sortOrder": {
+            "location": "querystring",
+            "locationName": "sortOrder"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "nextToken": {},
+          "modelSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "modelArn",
+                "modelName",
+                "creationTime"
+              ],
+              "members": {
+                "modelArn": {},
+                "modelName": {},
+                "creationTime": {
+                  "shape": "S2k"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListInferenceProfiles": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/inference-profiles",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "inferenceProfileSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "inferenceProfileName",
+                "models",
+                "inferenceProfileArn",
+                "inferenceProfileId",
+                "status",
+                "type"
+              ],
+              "members": {
+                "inferenceProfileName": {},
+                "models": {
+                  "shape": "S66"
+                },
+                "description": {},
+                "createdAt": {
+                  "shape": "S2k"
+                },
+                "updatedAt": {
+                  "shape": "S2k"
+                },
+                "inferenceProfileArn": {},
+                "inferenceProfileId": {},
+                "status": {},
+                "type": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListModelCopyJobs": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/model-copy-jobs",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "creationTimeAfter": {
+            "shape": "S2k",
+            "location": "querystring",
+            "locationName": "creationTimeAfter"
+          },
+          "creationTimeBefore": {
+            "shape": "S2k",
+            "location": "querystring",
+            "locationName": "creationTimeBefore"
+          },
+          "statusEquals": {
+            "location": "querystring",
+            "locationName": "statusEquals"
+          },
+          "sourceAccountEquals": {
+            "location": "querystring",
+            "locationName": "sourceAccountEquals"
+          },
+          "sourceModelArnEquals": {
+            "location": "querystring",
+            "locationName": "sourceModelArnEquals"
+          },
+          "targetModelNameContains": {
+            "location": "querystring",
+            "locationName": "outputModelNameContains"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "sortBy": {
+            "location": "querystring",
+            "locationName": "sortBy"
+          },
+          "sortOrder": {
+            "location": "querystring",
+            "locationName": "sortOrder"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "nextToken": {},
+          "modelCopyJobSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "jobArn",
+                "status",
+                "creationTime",
+                "targetModelArn",
+                "sourceAccountId",
+                "sourceModelArn"
+              ],
+              "members": {
+                "jobArn": {},
+                "status": {},
+                "creationTime": {
+                  "shape": "S2k"
+                },
+                "targetModelArn": {},
+                "targetModelName": {},
+                "sourceAccountId": {},
+                "sourceModelArn": {},
+                "targetModelKmsKeyArn": {},
+                "targetModelTags": {
+                  "shape": "Sh"
+                },
+                "failureMessage": {},
+                "sourceModelName": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListModelCustomizationJobs": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/model-customization-jobs",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "creationTimeAfter": {
+            "shape": "S2k",
+            "location": "querystring",
+            "locationName": "creationTimeAfter"
+          },
+          "creationTimeBefore": {
+            "shape": "S2k",
+            "location": "querystring",
+            "locationName": "creationTimeBefore"
+          },
+          "statusEquals": {
+            "location": "querystring",
+            "locationName": "statusEquals"
+          },
+          "nameContains": {
+            "location": "querystring",
+            "locationName": "nameContains"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "sortBy": {
+            "location": "querystring",
+            "locationName": "sortBy"
+          },
+          "sortOrder": {
+            "location": "querystring",
+            "locationName": "sortOrder"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "nextToken": {},
+          "modelCustomizationJobSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "jobArn",
+                "baseModelArn",
+                "jobName",
+                "status",
+                "creationTime"
+              ],
+              "members": {
+                "jobArn": {},
+                "baseModelArn": {},
+                "jobName": {},
+                "status": {},
+                "lastModifiedTime": {
+                  "shape": "S2k"
+                },
+                "creationTime": {
+                  "shape": "S2k"
+                },
+                "endTime": {
+                  "shape": "S2k"
+                },
+                "customModelArn": {},
+                "customModelName": {},
+                "customizationType": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListModelImportJobs": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/model-import-jobs",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "creationTimeAfter": {
+            "shape": "S2k",
+            "location": "querystring",
+            "locationName": "creationTimeAfter"
+          },
+          "creationTimeBefore": {
+            "shape": "S2k",
+            "location": "querystring",
+            "locationName": "creationTimeBefore"
+          },
+          "statusEquals": {
+            "location": "querystring",
+            "locationName": "statusEquals"
+          },
+          "nameContains": {
+            "location": "querystring",
+            "locationName": "nameContains"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "sortBy": {
+            "location": "querystring",
+            "locationName": "sortBy"
+          },
+          "sortOrder": {
+            "location": "querystring",
+            "locationName": "sortOrder"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "nextToken": {},
+          "modelImportJobSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "jobArn",
+                "jobName",
+                "status",
+                "creationTime"
+              ],
+              "members": {
+                "jobArn": {},
+                "jobName": {},
+                "status": {},
+                "lastModifiedTime": {
+                  "shape": "S2k"
+                },
+                "creationTime": {
+                  "shape": "S2k"
+                },
+                "endTime": {
+                  "shape": "S2k"
+                },
+                "importedModelArn": {},
+                "importedModelName": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListModelInvocationJobs": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/model-invocation-jobs",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "submitTimeAfter": {
+            "shape": "S2k",
+            "location": "querystring",
+            "locationName": "submitTimeAfter"
+          },
+          "submitTimeBefore": {
+            "shape": "S2k",
+            "location": "querystring",
+            "locationName": "submitTimeBefore"
+          },
+          "statusEquals": {
+            "location": "querystring",
+            "locationName": "statusEquals"
+          },
+          "nameContains": {
+            "location": "querystring",
+            "locationName": "nameContains"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "sortBy": {
+            "location": "querystring",
+            "locationName": "sortBy"
+          },
+          "sortOrder": {
+            "location": "querystring",
+            "locationName": "sortOrder"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "nextToken": {},
+          "invocationJobSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "jobArn",
+                "jobName",
+                "modelId",
+                "roleArn",
+                "submitTime",
+                "inputDataConfig",
+                "outputDataConfig"
+              ],
+              "members": {
+                "jobArn": {},
+                "jobName": {},
+                "modelId": {},
+                "clientRequestToken": {},
+                "roleArn": {},
+                "status": {},
+                "message": {
+                  "shape": "S6u"
+                },
+                "submitTime": {
+                  "shape": "S2k"
+                },
+                "lastModifiedTime": {
+                  "shape": "S2k"
+                },
+                "endTime": {
+                  "shape": "S2k"
+                },
+                "inputDataConfig": {
+                  "shape": "S3l"
+                },
+                "outputDataConfig": {
+                  "shape": "S3o"
+                },
+                "timeoutDurationInHours": {
+                  "type": "integer"
+                },
+                "jobExpirationTime": {
+                  "shape": "S2k"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListProvisionedModelThroughputs": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/provisioned-model-throughputs",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "creationTimeAfter": {
+            "shape": "S2k",
+            "location": "querystring",
+            "locationName": "creationTimeAfter"
+          },
+          "creationTimeBefore": {
+            "shape": "S2k",
+            "location": "querystring",
+            "locationName": "creationTimeBefore"
+          },
+          "statusEquals": {
+            "location": "querystring",
+            "locationName": "statusEquals"
+          },
+          "modelArnEquals": {
+            "location": "querystring",
+            "locationName": "modelArnEquals"
+          },
+          "nameContains": {
+            "location": "querystring",
+            "locationName": "nameContains"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "sortBy": {
+            "location": "querystring",
+            "locationName": "sortBy"
+          },
+          "sortOrder": {
+            "location": "querystring",
+            "locationName": "sortOrder"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "nextToken": {},
+          "provisionedModelSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "provisionedModelName",
+                "provisionedModelArn",
+                "modelArn",
+                "desiredModelArn",
+                "foundationModelArn",
+                "modelUnits",
+                "desiredModelUnits",
+                "status",
+                "creationTime",
+                "lastModifiedTime"
+              ],
+              "members": {
+                "provisionedModelName": {},
+                "provisionedModelArn": {},
+                "modelArn": {},
+                "desiredModelArn": {},
+                "foundationModelArn": {},
+                "modelUnits": {
+                  "type": "integer"
+                },
+                "desiredModelUnits": {
+                  "type": "integer"
+                },
+                "status": {},
+                "commitmentDuration": {},
+                "commitmentExpirationTime": {
+                  "shape": "S2k"
+                },
+                "creationTime": {
+                  "shape": "S2k"
+                },
+                "lastModifiedTime": {
+                  "shape": "S2k"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListTagsForResource": {
+      "http": {
+        "requestUri": "/listTagsForResource",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceARN"
+        ],
+        "members": {
+          "resourceARN": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "tags": {
+            "shape": "Sh"
+          }
+        }
+      }
+    },
+    "PutModelInvocationLoggingConfiguration": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/logging/modelinvocations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "loggingConfig"
+        ],
+        "members": {
+          "loggingConfig": {
+            "shape": "S6x"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "StopEvaluationJob": {
+      "http": {
+        "requestUri": "/evaluation-job/{jobIdentifier}/stop",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "jobIdentifier"
+        ],
+        "members": {
+          "jobIdentifier": {
+            "shape": "S3",
+            "location": "uri",
+            "locationName": "jobIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "StopModelCustomizationJob": {
+      "http": {
+        "requestUri": "/model-customization-jobs/{jobIdentifier}/stop",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "jobIdentifier"
+        ],
+        "members": {
+          "jobIdentifier": {
+            "location": "uri",
+            "locationName": "jobIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "StopModelInvocationJob": {
+      "http": {
+        "requestUri": "/model-invocation-job/{jobIdentifier}/stop",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "jobIdentifier"
+        ],
+        "members": {
+          "jobIdentifier": {
+            "location": "uri",
+            "locationName": "jobIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "TagResource": {
+      "http": {
+        "requestUri": "/tagResource",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceARN",
+          "tags"
+        ],
+        "members": {
+          "resourceARN": {},
+          "tags": {
+            "shape": "Sh"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UntagResource": {
+      "http": {
+        "requestUri": "/untagResource",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceARN",
+          "tagKeys"
+        ],
+        "members": {
+          "resourceARN": {},
+          "tagKeys": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UpdateGuardrail": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/guardrails/{guardrailIdentifier}",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "guardrailIdentifier",
+          "name",
+          "blockedInputMessaging",
+          "blockedOutputsMessaging"
+        ],
+        "members": {
+          "guardrailIdentifier": {
+            "location": "uri",
+            "locationName": "guardrailIdentifier"
+          },
+          "name": {
+            "shape": "S1e"
+          },
+          "description": {
+            "shape": "S1f"
+          },
+          "topicPolicyConfig": {
+            "shape": "S1g"
+          },
+          "contentPolicyConfig": {
+            "shape": "S1o"
+          },
+          "wordPolicyConfig": {
+            "shape": "S1t"
+          },
+          "sensitiveInformationPolicyConfig": {
+            "shape": "S20"
+          },
+          "contextualGroundingPolicyConfig": {
+            "shape": "S2a"
+          },
+          "blockedInputMessaging": {
+            "shape": "S2f"
+          },
+          "blockedOutputsMessaging": {
+            "shape": "S2f"
+          },
+          "kmsKeyId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "guardrailId",
+          "guardrailArn",
+          "version",
+          "updatedAt"
+        ],
+        "members": {
+          "guardrailId": {},
+          "guardrailArn": {},
+          "version": {},
+          "updatedAt": {
+            "shape": "S2k"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "UpdateProvisionedModelThroughput": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/provisioned-model-throughput/{provisionedModelId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "provisionedModelId"
+        ],
+        "members": {
+          "provisionedModelId": {
+            "location": "uri",
+            "locationName": "provisionedModelId"
+          },
+          "desiredProvisionedModelName": {},
+          "desiredModelId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    }
+  },
+  "shapes": {
+    "S3": {
+      "type": "string",
+      "sensitive": true
+    },
+    "Sd": {
+      "type": "string",
+      "sensitive": true
+    },
+    "Sh": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "key",
+          "value"
+        ],
+        "members": {
+          "key": {},
+          "value": {}
+        }
+      }
+    },
+    "Sl": {
+      "type": "structure",
+      "members": {
+        "automated": {
+          "type": "structure",
+          "required": [
+            "datasetMetricConfigs"
+          ],
+          "members": {
+            "datasetMetricConfigs": {
+              "shape": "Sn"
+            }
+          }
+        },
+        "human": {
+          "type": "structure",
+          "required": [
+            "datasetMetricConfigs"
+          ],
+          "members": {
+            "humanWorkflowConfig": {
+              "type": "structure",
+              "required": [
+                "flowDefinitionArn"
+              ],
+              "members": {
+                "flowDefinitionArn": {},
+                "instructions": {
+                  "type": "string",
+                  "sensitive": true
+                }
+              }
+            },
+            "customMetrics": {
+              "type": "list",
+              "member": {
+                "type": "structure",
+                "required": [
+                  "name",
+                  "ratingMethod"
+                ],
+                "members": {
+                  "name": {
+                    "shape": "Sv"
+                  },
+                  "description": {
+                    "type": "string",
+                    "sensitive": true
+                  },
+                  "ratingMethod": {}
+                }
+              }
+            },
+            "datasetMetricConfigs": {
+              "shape": "Sn"
+            }
+          }
+        }
+      },
+      "union": true
+    },
+    "Sn": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "taskType",
+          "dataset",
+          "metricNames"
+        ],
+        "members": {
+          "taskType": {},
+          "dataset": {
+            "type": "structure",
+            "required": [
+              "name"
+            ],
+            "members": {
+              "name": {
+                "type": "string",
+                "sensitive": true
+              },
+              "datasetLocation": {
+                "type": "structure",
+                "members": {
+                  "s3Uri": {}
+                },
+                "union": true
+              }
+            }
+          },
+          "metricNames": {
+            "type": "list",
+            "member": {
+              "shape": "Sv"
+            }
+          }
+        }
+      }
+    },
+    "Sv": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S14": {
+      "type": "structure",
+      "members": {
+        "models": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "bedrockModel": {
+                "type": "structure",
+                "required": [
+                  "modelIdentifier",
+                  "inferenceParams"
+                ],
+                "members": {
+                  "modelIdentifier": {},
+                  "inferenceParams": {
+                    "type": "string",
+                    "sensitive": true
+                  }
+                }
+              }
+            },
+            "union": true
+          }
+        }
+      },
+      "union": true
+    },
+    "S1a": {
+      "type": "structure",
+      "required": [
+        "s3Uri"
+      ],
+      "members": {
+        "s3Uri": {}
+      }
+    },
+    "S1e": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S1f": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S1g": {
+      "type": "structure",
+      "required": [
+        "topicsConfig"
+      ],
+      "members": {
+        "topicsConfig": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "required": [
+              "name",
+              "definition",
+              "type"
+            ],
+            "members": {
+              "name": {
+                "shape": "S1j"
+              },
+              "definition": {
+                "shape": "S1k"
+              },
+              "examples": {
+                "shape": "S1l"
+              },
+              "type": {}
+            }
+          }
+        }
+      }
+    },
+    "S1j": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S1k": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S1l": {
+      "type": "list",
+      "member": {
+        "type": "string",
+        "sensitive": true
+      }
+    },
+    "S1o": {
+      "type": "structure",
+      "required": [
+        "filtersConfig"
+      ],
+      "members": {
+        "filtersConfig": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "required": [
+              "type",
+              "inputStrength",
+              "outputStrength"
+            ],
+            "members": {
+              "type": {},
+              "inputStrength": {},
+              "outputStrength": {}
+            }
+          }
+        }
+      }
+    },
+    "S1t": {
+      "type": "structure",
+      "members": {
+        "wordsConfig": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "required": [
+              "text"
+            ],
+            "members": {
+              "text": {}
+            }
+          }
+        },
+        "managedWordListsConfig": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "required": [
+              "type"
+            ],
+            "members": {
+              "type": {}
+            }
+          }
+        }
+      }
+    },
+    "S20": {
+      "type": "structure",
+      "members": {
+        "piiEntitiesConfig": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "required": [
+              "type",
+              "action"
+            ],
+            "members": {
+              "type": {},
+              "action": {}
+            }
+          }
+        },
+        "regexesConfig": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "required": [
+              "name",
+              "pattern",
+              "action"
+            ],
+            "members": {
+              "name": {},
+              "description": {},
+              "pattern": {},
+              "action": {}
+            }
+          }
+        }
+      }
+    },
+    "S2a": {
+      "type": "structure",
+      "required": [
+        "filtersConfig"
+      ],
+      "members": {
+        "filtersConfig": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "required": [
+              "type",
+              "threshold"
+            ],
+            "members": {
+              "type": {},
+              "threshold": {
+                "type": "double"
+              }
+            }
+          }
+        }
+      }
+    },
+    "S2f": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S2k": {
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
+    },
+    "S2y": {
+      "type": "structure",
+      "required": [
+        "s3Uri"
+      ],
+      "members": {
+        "s3Uri": {}
+      }
+    },
+    "S2z": {
+      "type": "structure",
+      "required": [
+        "validators"
+      ],
+      "members": {
+        "validators": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "required": [
+              "s3Uri"
+            ],
+            "members": {
+              "s3Uri": {}
+            }
+          }
+        }
+      }
+    },
+    "S32": {
+      "type": "structure",
+      "required": [
+        "s3Uri"
+      ],
+      "members": {
+        "s3Uri": {}
+      }
+    },
+    "S33": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "S34": {
+      "type": "structure",
+      "required": [
+        "subnetIds",
+        "securityGroupIds"
+      ],
+      "members": {
+        "subnetIds": {
+          "type": "list",
+          "member": {}
+        },
+        "securityGroupIds": {
+          "type": "list",
+          "member": {}
+        }
+      }
+    },
+    "S3d": {
+      "type": "structure",
+      "members": {
+        "s3DataSource": {
+          "type": "structure",
+          "required": [
+            "s3Uri"
+          ],
+          "members": {
+            "s3Uri": {}
+          }
+        }
+      },
+      "union": true
+    },
+    "S3l": {
+      "type": "structure",
+      "members": {
+        "s3InputDataConfig": {
+          "type": "structure",
+          "required": [
+            "s3Uri"
+          ],
+          "members": {
+            "s3InputFormat": {},
+            "s3Uri": {}
+          }
+        }
+      },
+      "union": true
+    },
+    "S3o": {
+      "type": "structure",
+      "members": {
+        "s3OutputDataConfig": {
+          "type": "structure",
+          "required": [
+            "s3Uri"
+          ],
+          "members": {
+            "s3Uri": {},
+            "s3EncryptionKeyId": {}
+          }
+        }
+      },
+      "union": true
+    },
+    "S4f": {
+      "type": "structure",
+      "members": {
+        "trainingLoss": {
+          "type": "float"
+        }
+      }
+    },
+    "S4h": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "validationLoss": {
+            "type": "float"
+          }
+        }
+      }
+    },
+    "S4u": {
+      "type": "list",
+      "member": {}
+    },
+    "S4x": {
+      "type": "list",
+      "member": {}
+    },
+    "S4z": {
+      "type": "list",
+      "member": {}
+    },
+    "S51": {
+      "type": "structure",
+      "required": [
+        "status"
+      ],
+      "members": {
+        "status": {}
+      }
+    },
+    "S66": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "modelArn": {}
+        }
+      }
+    },
+    "S6u": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S6x": {
+      "type": "structure",
+      "members": {
+        "cloudWatchConfig": {
+          "type": "structure",
+          "required": [
+            "logGroupName",
+            "roleArn"
+          ],
+          "members": {
+            "logGroupName": {},
+            "roleArn": {},
+            "largeDataDeliveryS3Config": {
+              "shape": "S70"
+            }
+          }
+        },
+        "s3Config": {
+          "shape": "S70"
+        },
+        "textDataDeliveryEnabled": {
+          "type": "boolean"
+        },
+        "imageDataDeliveryEnabled": {
+          "type": "boolean"
+        },
+        "embeddingDataDeliveryEnabled": {
+          "type": "boolean"
+        }
+      }
+    },
+    "S70": {
+      "type": "structure",
+      "required": [
+        "bucketName"
+      ],
+      "members": {
+        "bucketName": {},
+        "keyPrefix": {}
+      }
+    }
+  }
+}

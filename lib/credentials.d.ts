@@ -8,7 +8,7 @@ export class Credentials {
     constructor(options: CredentialsOptions);
     /**
      * Creates a Credentials object with a given set of credential information as positional arguments.
-     *          *
+     *
      * @param {string} accessKeyId - The AWS access key ID.
      * @param {string} secretAccessKey - The AWS secret access key.
      * @param {string} sessionToken - The optional AWS session token.
@@ -21,7 +21,7 @@ export class Credentials {
      *
      * @param {get} callback - Called when the instance metadata service responds. When called with no error, the credentials information has been loaded into the object.
      */
-    get(callback: (err: AWSError) => void): void;
+    get(callback: (err?: AWSError) => void): void;
     /**
      * Gets the existing credentials, refreshing them if necessary, and returns
      * a promise that will be fulfilled immediately (if no refresh is necessary)
@@ -38,7 +38,7 @@ export class Credentials {
      *
      * @param {function} callback - Called when the instance metadata service responds. When called with no error, the credentials information has been loaded into the object.
      */
-    refresh(callback: (err: AWSError) => void): void;
+    refresh(callback: (err?: AWSError) => void): void;
     /**
      * Invokes a credential refresh and returns a promise that will be fulfilled
      * when the refresh has completed or rejected when the refresh has failed.
@@ -70,7 +70,7 @@ export class Credentials {
     sessionToken: string;
 }
 
-interface CredentialsOptions {
+export interface CredentialsOptions {
     /**
      * AWS access key ID.
      */

@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "MediaPackage",
+        "description": "Fix SDK logging of certain fields."
+    },
+    {
+        "type": "feature",
+        "category": "Omics",
+        "description": "This release provides support for annotation store versioning and cross account sharing for Omics Analytics"
+    }
+]

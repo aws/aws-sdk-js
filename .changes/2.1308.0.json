@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "AppConfig",
+        "description": "AWS AppConfig introduces KMS customer-managed key (CMK) encryption of configuration data, along with AWS Secrets Manager as a new configuration data source. S3 objects using SSE-KMS encryption and SSM Parameter Store SecureStrings are also now supported."
+    },
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "Enabled FIPS endpoints for GovCloud (US) regions in SDK."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Documentation updates for EC2."
+    },
+    {
+        "type": "feature",
+        "category": "Keyspaces",
+        "description": "Enabled FIPS endpoints for GovCloud (US) regions in SDK."
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "QuickSight support for Radar Chart and Dashboard Publish Options"
+    },
+    {
+        "type": "feature",
+        "category": "Redshift",
+        "description": "Enabled FIPS endpoints for GovCloud (US) regions in SDK."
+    },
+    {
+        "type": "feature",
+        "category": "SSOAdmin",
+        "description": "Enabled FIPS endpoints for GovCloud (US) regions in SDK."
+    }
+]

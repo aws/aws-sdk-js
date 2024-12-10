@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "CleanRooms",
+        "description": "Initial release of AWS Clean Rooms"
+    },
+    {
+        "type": "feature",
+        "category": "CloudWatchLogs",
+        "description": "Bug fix: logGroupName is now not a required field in GetLogEvents, FilterLogEvents, GetLogGroupFields, and DescribeLogStreams APIs as logGroupIdentifier can be provided instead"
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "Add support for MaximumConcurrency parameter for SQS event source. Customers can now limit the maximum concurrent invocations for their SQS Event Source Mapping."
+    },
+    {
+        "type": "feature",
+        "category": "MediaConvert",
+        "description": "The AWS Elemental MediaConvert SDK has added support for compact DASH manifest generation, audio normalization using TruePeak measurements, and the ability to clip the sample range in the color corrector."
+    }
+]

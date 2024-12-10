@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "Update list and string length limits for predefined attributes."
+    },
+    {
+        "type": "feature",
+        "category": "Inspector2",
+        "description": "This release adds ECR container image scanning based on their lastRecordedPullTime."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Amazon SageMaker Automatic Model Tuning now provides an API to programmatically delete tuning jobs."
+    }
+]

@@ -19,6 +19,14 @@ function generateRandomIdentifier() {
     return crypto.randomBytes(4).toString('hex');
 }
 
+/**
+ * Escapes illegal characters from filename
+ * Ref: https://github.com/aws/aws-sdk-js/issues/3691
+ */
+function sanitizeFileName(filename) {
+    return filename.replace(/[^a-zA-Z0-9\\.]/g, '-');
+}
+
 var CHANGES_DIR = path.join(process.cwd(), '.changes');
 
 /**
@@ -169,7 +177,8 @@ ChangeCreator.prototype = {
             return config['inFile'];
         }
         // Determine default location
-        var newFileName = this._type + '-' + this._category + '-' + generateRandomIdentifier() + '.json';
+        var newFileName = sanitizeFileName(this._type) + '-' + sanitizeFileName(this._category)
+            + '-' + generateRandomIdentifier() + '.json';
         return path.join(process.cwd(), '.changes', 'next-release', newFileName);
     },
 

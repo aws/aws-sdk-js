@@ -3,7 +3,7 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
-import {ConfigBase as Config} from '../lib/config';
+import {ConfigBase as Config} from '../lib/config-base';
 interface Blob {}
 declare class CloudTrail extends Service {
   /**
@@ -12,140 +12,621 @@ declare class CloudTrail extends Service {
   constructor(options?: CloudTrail.Types.ClientConfiguration)
   config: Config & CloudTrail.Types.ClientConfiguration;
   /**
-   * Adds one or more tags to a trail, up to a limit of 50. Tags must be unique per trail. Overwrites an existing tag's value when a new value is specified for an existing tag key. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail that applies to all regions only from the region in which the trail was created (that is, from its home region).
+   * Adds one or more tags to a trail, event data store, or channel, up to a limit of 50. Overwrites an existing tag's value when a new value is specified for an existing tag key. Tag key names must be unique; you cannot have two keys with the same name but different values. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail or event data store that applies to all Amazon Web Services Regions only from the Region in which the trail or event data store was created (also known as its home Region).
    */
   addTags(params: CloudTrail.Types.AddTagsRequest, callback?: (err: AWSError, data: CloudTrail.Types.AddTagsResponse) => void): Request<CloudTrail.Types.AddTagsResponse, AWSError>;
   /**
-   * Adds one or more tags to a trail, up to a limit of 50. Tags must be unique per trail. Overwrites an existing tag's value when a new value is specified for an existing tag key. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail that applies to all regions only from the region in which the trail was created (that is, from its home region).
+   * Adds one or more tags to a trail, event data store, or channel, up to a limit of 50. Overwrites an existing tag's value when a new value is specified for an existing tag key. Tag key names must be unique; you cannot have two keys with the same name but different values. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail or event data store that applies to all Amazon Web Services Regions only from the Region in which the trail or event data store was created (also known as its home Region).
    */
   addTags(callback?: (err: AWSError, data: CloudTrail.Types.AddTagsResponse) => void): Request<CloudTrail.Types.AddTagsResponse, AWSError>;
   /**
-   * Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket. A maximum of five trails can exist in a region, irrespective of the region in which they were created.
+   * Cancels a query if the query is not in a terminated state, such as CANCELLED, FAILED, TIMED_OUT, or FINISHED. You must specify an ARN value for EventDataStore. The ID of the query that you want to cancel is also required. When you run CancelQuery, the query status might show as CANCELLED even if the operation is not yet finished.
+   */
+  cancelQuery(params: CloudTrail.Types.CancelQueryRequest, callback?: (err: AWSError, data: CloudTrail.Types.CancelQueryResponse) => void): Request<CloudTrail.Types.CancelQueryResponse, AWSError>;
+  /**
+   * Cancels a query if the query is not in a terminated state, such as CANCELLED, FAILED, TIMED_OUT, or FINISHED. You must specify an ARN value for EventDataStore. The ID of the query that you want to cancel is also required. When you run CancelQuery, the query status might show as CANCELLED even if the operation is not yet finished.
+   */
+  cancelQuery(callback?: (err: AWSError, data: CloudTrail.Types.CancelQueryResponse) => void): Request<CloudTrail.Types.CancelQueryResponse, AWSError>;
+  /**
+   * Creates a channel for CloudTrail to ingest events from a partner or external source. After you create a channel, a CloudTrail Lake event data store can log events from the partner or source that you specify.
+   */
+  createChannel(params: CloudTrail.Types.CreateChannelRequest, callback?: (err: AWSError, data: CloudTrail.Types.CreateChannelResponse) => void): Request<CloudTrail.Types.CreateChannelResponse, AWSError>;
+  /**
+   * Creates a channel for CloudTrail to ingest events from a partner or external source. After you create a channel, a CloudTrail Lake event data store can log events from the partner or source that you specify.
+   */
+  createChannel(callback?: (err: AWSError, data: CloudTrail.Types.CreateChannelResponse) => void): Request<CloudTrail.Types.CreateChannelResponse, AWSError>;
+  /**
+   * Creates a new event data store.
+   */
+  createEventDataStore(params: CloudTrail.Types.CreateEventDataStoreRequest, callback?: (err: AWSError, data: CloudTrail.Types.CreateEventDataStoreResponse) => void): Request<CloudTrail.Types.CreateEventDataStoreResponse, AWSError>;
+  /**
+   * Creates a new event data store.
+   */
+  createEventDataStore(callback?: (err: AWSError, data: CloudTrail.Types.CreateEventDataStoreResponse) => void): Request<CloudTrail.Types.CreateEventDataStoreResponse, AWSError>;
+  /**
+   * Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket. 
    */
   createTrail(params: CloudTrail.Types.CreateTrailRequest, callback?: (err: AWSError, data: CloudTrail.Types.CreateTrailResponse) => void): Request<CloudTrail.Types.CreateTrailResponse, AWSError>;
   /**
-   * Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket. A maximum of five trails can exist in a region, irrespective of the region in which they were created.
+   * Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket. 
    */
   createTrail(callback?: (err: AWSError, data: CloudTrail.Types.CreateTrailResponse) => void): Request<CloudTrail.Types.CreateTrailResponse, AWSError>;
   /**
-   * Deletes a trail. This operation must be called from the region in which the trail was created. DeleteTrail cannot be called on the shadow trails (replicated trails in other regions) of a trail that is enabled in all regions.
+   * Deletes a channel.
+   */
+  deleteChannel(params: CloudTrail.Types.DeleteChannelRequest, callback?: (err: AWSError, data: CloudTrail.Types.DeleteChannelResponse) => void): Request<CloudTrail.Types.DeleteChannelResponse, AWSError>;
+  /**
+   * Deletes a channel.
+   */
+  deleteChannel(callback?: (err: AWSError, data: CloudTrail.Types.DeleteChannelResponse) => void): Request<CloudTrail.Types.DeleteChannelResponse, AWSError>;
+  /**
+   * Disables the event data store specified by EventDataStore, which accepts an event data store ARN. After you run DeleteEventDataStore, the event data store enters a PENDING_DELETION state, and is automatically deleted after a wait period of seven days. TerminationProtectionEnabled must be set to False on the event data store and the FederationStatus must be DISABLED. You cannot delete an event data store if TerminationProtectionEnabled is True or the FederationStatus is ENABLED. After you run DeleteEventDataStore on an event data store, you cannot run ListQueries, DescribeQuery, or GetQueryResults on queries that are using an event data store in a PENDING_DELETION state. An event data store in the PENDING_DELETION state does not incur costs.
+   */
+  deleteEventDataStore(params: CloudTrail.Types.DeleteEventDataStoreRequest, callback?: (err: AWSError, data: CloudTrail.Types.DeleteEventDataStoreResponse) => void): Request<CloudTrail.Types.DeleteEventDataStoreResponse, AWSError>;
+  /**
+   * Disables the event data store specified by EventDataStore, which accepts an event data store ARN. After you run DeleteEventDataStore, the event data store enters a PENDING_DELETION state, and is automatically deleted after a wait period of seven days. TerminationProtectionEnabled must be set to False on the event data store and the FederationStatus must be DISABLED. You cannot delete an event data store if TerminationProtectionEnabled is True or the FederationStatus is ENABLED. After you run DeleteEventDataStore on an event data store, you cannot run ListQueries, DescribeQuery, or GetQueryResults on queries that are using an event data store in a PENDING_DELETION state. An event data store in the PENDING_DELETION state does not incur costs.
+   */
+  deleteEventDataStore(callback?: (err: AWSError, data: CloudTrail.Types.DeleteEventDataStoreResponse) => void): Request<CloudTrail.Types.DeleteEventDataStoreResponse, AWSError>;
+  /**
+   *  Deletes the resource-based policy attached to the CloudTrail channel. 
+   */
+  deleteResourcePolicy(params: CloudTrail.Types.DeleteResourcePolicyRequest, callback?: (err: AWSError, data: CloudTrail.Types.DeleteResourcePolicyResponse) => void): Request<CloudTrail.Types.DeleteResourcePolicyResponse, AWSError>;
+  /**
+   *  Deletes the resource-based policy attached to the CloudTrail channel. 
+   */
+  deleteResourcePolicy(callback?: (err: AWSError, data: CloudTrail.Types.DeleteResourcePolicyResponse) => void): Request<CloudTrail.Types.DeleteResourcePolicyResponse, AWSError>;
+  /**
+   * Deletes a trail. This operation must be called from the Region in which the trail was created. DeleteTrail cannot be called on the shadow trails (replicated trails in other Regions) of a trail that is enabled in all Regions.
    */
   deleteTrail(params: CloudTrail.Types.DeleteTrailRequest, callback?: (err: AWSError, data: CloudTrail.Types.DeleteTrailResponse) => void): Request<CloudTrail.Types.DeleteTrailResponse, AWSError>;
   /**
-   * Deletes a trail. This operation must be called from the region in which the trail was created. DeleteTrail cannot be called on the shadow trails (replicated trails in other regions) of a trail that is enabled in all regions.
+   * Deletes a trail. This operation must be called from the Region in which the trail was created. DeleteTrail cannot be called on the shadow trails (replicated trails in other Regions) of a trail that is enabled in all Regions.
    */
   deleteTrail(callback?: (err: AWSError, data: CloudTrail.Types.DeleteTrailResponse) => void): Request<CloudTrail.Types.DeleteTrailResponse, AWSError>;
   /**
-   * Retrieves settings for the trail associated with the current region for your account.
+   * Removes CloudTrail delegated administrator permissions from a member account in an organization.
+   */
+  deregisterOrganizationDelegatedAdmin(params: CloudTrail.Types.DeregisterOrganizationDelegatedAdminRequest, callback?: (err: AWSError, data: CloudTrail.Types.DeregisterOrganizationDelegatedAdminResponse) => void): Request<CloudTrail.Types.DeregisterOrganizationDelegatedAdminResponse, AWSError>;
+  /**
+   * Removes CloudTrail delegated administrator permissions from a member account in an organization.
+   */
+  deregisterOrganizationDelegatedAdmin(callback?: (err: AWSError, data: CloudTrail.Types.DeregisterOrganizationDelegatedAdminResponse) => void): Request<CloudTrail.Types.DeregisterOrganizationDelegatedAdminResponse, AWSError>;
+  /**
+   * Returns metadata about a query, including query run time in milliseconds, number of events scanned and matched, and query status. If the query results were delivered to an S3 bucket, the response also provides the S3 URI and the delivery status. You must specify either a QueryID or a QueryAlias. Specifying the QueryAlias parameter returns information about the last query run for the alias.
+   */
+  describeQuery(params: CloudTrail.Types.DescribeQueryRequest, callback?: (err: AWSError, data: CloudTrail.Types.DescribeQueryResponse) => void): Request<CloudTrail.Types.DescribeQueryResponse, AWSError>;
+  /**
+   * Returns metadata about a query, including query run time in milliseconds, number of events scanned and matched, and query status. If the query results were delivered to an S3 bucket, the response also provides the S3 URI and the delivery status. You must specify either a QueryID or a QueryAlias. Specifying the QueryAlias parameter returns information about the last query run for the alias.
+   */
+  describeQuery(callback?: (err: AWSError, data: CloudTrail.Types.DescribeQueryResponse) => void): Request<CloudTrail.Types.DescribeQueryResponse, AWSError>;
+  /**
+   * Retrieves settings for one or more trails associated with the current Region for your account.
    */
   describeTrails(params: CloudTrail.Types.DescribeTrailsRequest, callback?: (err: AWSError, data: CloudTrail.Types.DescribeTrailsResponse) => void): Request<CloudTrail.Types.DescribeTrailsResponse, AWSError>;
   /**
-   * Retrieves settings for the trail associated with the current region for your account.
+   * Retrieves settings for one or more trails associated with the current Region for your account.
    */
   describeTrails(callback?: (err: AWSError, data: CloudTrail.Types.DescribeTrailsResponse) => void): Request<CloudTrail.Types.DescribeTrailsResponse, AWSError>;
   /**
-   * Describes the settings for the event selectors that you configured for your trail. The information returned for your event selectors includes the following:   The S3 objects that you are logging for data events.   If your event selector includes management events.   If your event selector includes read-only events, write-only events, or all.    For more information, see Logging Data and Management Events for Trails  in the AWS CloudTrail User Guide.
+   *  Disables Lake query federation on the specified event data store. When you disable federation, CloudTrail disables the integration with Glue, Lake Formation, and Amazon Athena. After disabling Lake query federation, you can no longer query your event data in Amazon Athena. No CloudTrail Lake data is deleted when you disable federation and you can continue to run queries in CloudTrail Lake.
+   */
+  disableFederation(params: CloudTrail.Types.DisableFederationRequest, callback?: (err: AWSError, data: CloudTrail.Types.DisableFederationResponse) => void): Request<CloudTrail.Types.DisableFederationResponse, AWSError>;
+  /**
+   *  Disables Lake query federation on the specified event data store. When you disable federation, CloudTrail disables the integration with Glue, Lake Formation, and Amazon Athena. After disabling Lake query federation, you can no longer query your event data in Amazon Athena. No CloudTrail Lake data is deleted when you disable federation and you can continue to run queries in CloudTrail Lake.
+   */
+  disableFederation(callback?: (err: AWSError, data: CloudTrail.Types.DisableFederationResponse) => void): Request<CloudTrail.Types.DisableFederationResponse, AWSError>;
+  /**
+   *  Enables Lake query federation on the specified event data store. Federating an event data store lets you view the metadata associated with the event data store in the Glue Data Catalog and run SQL queries against your event data using Amazon Athena. The table metadata stored in the Glue Data Catalog lets the Athena query engine know how to find, read, and process the data that you want to query. When you enable Lake query federation, CloudTrail creates a managed database named aws:cloudtrail (if the database doesn't already exist) and a managed federated table in the Glue Data Catalog. The event data store ID is used for the table name. CloudTrail registers the role ARN and event data store in Lake Formation, the service responsible for allowing fine-grained access control of the federated resources in the Glue Data Catalog. For more information about Lake query federation, see Federate an event data store.
+   */
+  enableFederation(params: CloudTrail.Types.EnableFederationRequest, callback?: (err: AWSError, data: CloudTrail.Types.EnableFederationResponse) => void): Request<CloudTrail.Types.EnableFederationResponse, AWSError>;
+  /**
+   *  Enables Lake query federation on the specified event data store. Federating an event data store lets you view the metadata associated with the event data store in the Glue Data Catalog and run SQL queries against your event data using Amazon Athena. The table metadata stored in the Glue Data Catalog lets the Athena query engine know how to find, read, and process the data that you want to query. When you enable Lake query federation, CloudTrail creates a managed database named aws:cloudtrail (if the database doesn't already exist) and a managed federated table in the Glue Data Catalog. The event data store ID is used for the table name. CloudTrail registers the role ARN and event data store in Lake Formation, the service responsible for allowing fine-grained access control of the federated resources in the Glue Data Catalog. For more information about Lake query federation, see Federate an event data store.
+   */
+  enableFederation(callback?: (err: AWSError, data: CloudTrail.Types.EnableFederationResponse) => void): Request<CloudTrail.Types.EnableFederationResponse, AWSError>;
+  /**
+   *  Returns information about a specific channel. 
+   */
+  getChannel(params: CloudTrail.Types.GetChannelRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetChannelResponse) => void): Request<CloudTrail.Types.GetChannelResponse, AWSError>;
+  /**
+   *  Returns information about a specific channel. 
+   */
+  getChannel(callback?: (err: AWSError, data: CloudTrail.Types.GetChannelResponse) => void): Request<CloudTrail.Types.GetChannelResponse, AWSError>;
+  /**
+   * Returns information about an event data store specified as either an ARN or the ID portion of the ARN.
+   */
+  getEventDataStore(params: CloudTrail.Types.GetEventDataStoreRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetEventDataStoreResponse) => void): Request<CloudTrail.Types.GetEventDataStoreResponse, AWSError>;
+  /**
+   * Returns information about an event data store specified as either an ARN or the ID portion of the ARN.
+   */
+  getEventDataStore(callback?: (err: AWSError, data: CloudTrail.Types.GetEventDataStoreResponse) => void): Request<CloudTrail.Types.GetEventDataStoreResponse, AWSError>;
+  /**
+   * Describes the settings for the event selectors that you configured for your trail. The information returned for your event selectors includes the following:   If your event selector includes read-only events, write-only events, or all events. This applies to both management events and data events.   If your event selector includes management events.   If your event selector includes data events, the resources on which you are logging data events.   For more information about logging management and data events, see the following topics in the CloudTrail User Guide:    Logging management events     Logging data events   
    */
   getEventSelectors(params: CloudTrail.Types.GetEventSelectorsRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetEventSelectorsResponse) => void): Request<CloudTrail.Types.GetEventSelectorsResponse, AWSError>;
   /**
-   * Describes the settings for the event selectors that you configured for your trail. The information returned for your event selectors includes the following:   The S3 objects that you are logging for data events.   If your event selector includes management events.   If your event selector includes read-only events, write-only events, or all.    For more information, see Logging Data and Management Events for Trails  in the AWS CloudTrail User Guide.
+   * Describes the settings for the event selectors that you configured for your trail. The information returned for your event selectors includes the following:   If your event selector includes read-only events, write-only events, or all events. This applies to both management events and data events.   If your event selector includes management events.   If your event selector includes data events, the resources on which you are logging data events.   For more information about logging management and data events, see the following topics in the CloudTrail User Guide:    Logging management events     Logging data events   
    */
   getEventSelectors(callback?: (err: AWSError, data: CloudTrail.Types.GetEventSelectorsResponse) => void): Request<CloudTrail.Types.GetEventSelectorsResponse, AWSError>;
   /**
-   * Returns a JSON-formatted list of information about the specified trail. Fields include information on delivery errors, Amazon SNS and Amazon S3 errors, and start and stop logging times for each trail. This operation returns trail status from a single region. To return trail status from all regions, you must call the operation on each region.
+   *  Returns information about a specific import. 
+   */
+  getImport(params: CloudTrail.Types.GetImportRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetImportResponse) => void): Request<CloudTrail.Types.GetImportResponse, AWSError>;
+  /**
+   *  Returns information about a specific import. 
+   */
+  getImport(callback?: (err: AWSError, data: CloudTrail.Types.GetImportResponse) => void): Request<CloudTrail.Types.GetImportResponse, AWSError>;
+  /**
+   * Describes the settings for the Insights event selectors that you configured for your trail or event data store. GetInsightSelectors shows if CloudTrail Insights event logging is enabled on the trail or event data store, and if it is, which Insights types are enabled. If you run GetInsightSelectors on a trail or event data store that does not have Insights events enabled, the operation throws the exception InsightNotEnabledException  Specify either the EventDataStore parameter to get Insights event selectors for an event data store, or the TrailName parameter to the get Insights event selectors for a trail. You cannot specify these parameters together. For more information, see Logging CloudTrail Insights events in the CloudTrail User Guide.
+   */
+  getInsightSelectors(params: CloudTrail.Types.GetInsightSelectorsRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetInsightSelectorsResponse) => void): Request<CloudTrail.Types.GetInsightSelectorsResponse, AWSError>;
+  /**
+   * Describes the settings for the Insights event selectors that you configured for your trail or event data store. GetInsightSelectors shows if CloudTrail Insights event logging is enabled on the trail or event data store, and if it is, which Insights types are enabled. If you run GetInsightSelectors on a trail or event data store that does not have Insights events enabled, the operation throws the exception InsightNotEnabledException  Specify either the EventDataStore parameter to get Insights event selectors for an event data store, or the TrailName parameter to the get Insights event selectors for a trail. You cannot specify these parameters together. For more information, see Logging CloudTrail Insights events in the CloudTrail User Guide.
+   */
+  getInsightSelectors(callback?: (err: AWSError, data: CloudTrail.Types.GetInsightSelectorsResponse) => void): Request<CloudTrail.Types.GetInsightSelectorsResponse, AWSError>;
+  /**
+   * Gets event data results of a query. You must specify the QueryID value returned by the StartQuery operation.
+   */
+  getQueryResults(params: CloudTrail.Types.GetQueryResultsRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetQueryResultsResponse) => void): Request<CloudTrail.Types.GetQueryResultsResponse, AWSError>;
+  /**
+   * Gets event data results of a query. You must specify the QueryID value returned by the StartQuery operation.
+   */
+  getQueryResults(callback?: (err: AWSError, data: CloudTrail.Types.GetQueryResultsResponse) => void): Request<CloudTrail.Types.GetQueryResultsResponse, AWSError>;
+  /**
+   *  Retrieves the JSON text of the resource-based policy document attached to the CloudTrail channel. 
+   */
+  getResourcePolicy(params: CloudTrail.Types.GetResourcePolicyRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetResourcePolicyResponse) => void): Request<CloudTrail.Types.GetResourcePolicyResponse, AWSError>;
+  /**
+   *  Retrieves the JSON text of the resource-based policy document attached to the CloudTrail channel. 
+   */
+  getResourcePolicy(callback?: (err: AWSError, data: CloudTrail.Types.GetResourcePolicyResponse) => void): Request<CloudTrail.Types.GetResourcePolicyResponse, AWSError>;
+  /**
+   * Returns settings information for a specified trail.
+   */
+  getTrail(params: CloudTrail.Types.GetTrailRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetTrailResponse) => void): Request<CloudTrail.Types.GetTrailResponse, AWSError>;
+  /**
+   * Returns settings information for a specified trail.
+   */
+  getTrail(callback?: (err: AWSError, data: CloudTrail.Types.GetTrailResponse) => void): Request<CloudTrail.Types.GetTrailResponse, AWSError>;
+  /**
+   * Returns a JSON-formatted list of information about the specified trail. Fields include information on delivery errors, Amazon SNS and Amazon S3 errors, and start and stop logging times for each trail. This operation returns trail status from a single Region. To return trail status from all Regions, you must call the operation on each Region.
    */
   getTrailStatus(params: CloudTrail.Types.GetTrailStatusRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetTrailStatusResponse) => void): Request<CloudTrail.Types.GetTrailStatusResponse, AWSError>;
   /**
-   * Returns a JSON-formatted list of information about the specified trail. Fields include information on delivery errors, Amazon SNS and Amazon S3 errors, and start and stop logging times for each trail. This operation returns trail status from a single region. To return trail status from all regions, you must call the operation on each region.
+   * Returns a JSON-formatted list of information about the specified trail. Fields include information on delivery errors, Amazon SNS and Amazon S3 errors, and start and stop logging times for each trail. This operation returns trail status from a single Region. To return trail status from all Regions, you must call the operation on each Region.
    */
   getTrailStatus(callback?: (err: AWSError, data: CloudTrail.Types.GetTrailStatusResponse) => void): Request<CloudTrail.Types.GetTrailStatusResponse, AWSError>;
   /**
-   * Returns all public keys whose private keys were used to sign the digest files within the specified time range. The public key is needed to validate digest files that were signed with its corresponding private key.  CloudTrail uses different private/public key pairs per region. Each digest file is signed with a private key unique to its region. Therefore, when you validate a digest file from a particular region, you must look in the same region for its corresponding public key. 
+   *  Lists the channels in the current account, and their source names. 
+   */
+  listChannels(params: CloudTrail.Types.ListChannelsRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListChannelsResponse) => void): Request<CloudTrail.Types.ListChannelsResponse, AWSError>;
+  /**
+   *  Lists the channels in the current account, and their source names. 
+   */
+  listChannels(callback?: (err: AWSError, data: CloudTrail.Types.ListChannelsResponse) => void): Request<CloudTrail.Types.ListChannelsResponse, AWSError>;
+  /**
+   * Returns information about all event data stores in the account, in the current Region.
+   */
+  listEventDataStores(params: CloudTrail.Types.ListEventDataStoresRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListEventDataStoresResponse) => void): Request<CloudTrail.Types.ListEventDataStoresResponse, AWSError>;
+  /**
+   * Returns information about all event data stores in the account, in the current Region.
+   */
+  listEventDataStores(callback?: (err: AWSError, data: CloudTrail.Types.ListEventDataStoresResponse) => void): Request<CloudTrail.Types.ListEventDataStoresResponse, AWSError>;
+  /**
+   *  Returns a list of failures for the specified import. 
+   */
+  listImportFailures(params: CloudTrail.Types.ListImportFailuresRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListImportFailuresResponse) => void): Request<CloudTrail.Types.ListImportFailuresResponse, AWSError>;
+  /**
+   *  Returns a list of failures for the specified import. 
+   */
+  listImportFailures(callback?: (err: AWSError, data: CloudTrail.Types.ListImportFailuresResponse) => void): Request<CloudTrail.Types.ListImportFailuresResponse, AWSError>;
+  /**
+   *  Returns information on all imports, or a select set of imports by ImportStatus or Destination. 
+   */
+  listImports(params: CloudTrail.Types.ListImportsRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListImportsResponse) => void): Request<CloudTrail.Types.ListImportsResponse, AWSError>;
+  /**
+   *  Returns information on all imports, or a select set of imports by ImportStatus or Destination. 
+   */
+  listImports(callback?: (err: AWSError, data: CloudTrail.Types.ListImportsResponse) => void): Request<CloudTrail.Types.ListImportsResponse, AWSError>;
+  /**
+   * Returns Insights metrics data for trails that have enabled Insights. The request must include the EventSource, EventName, and InsightType parameters. If the InsightType is set to ApiErrorRateInsight, the request must also include the ErrorCode parameter. The following are the available time periods for ListInsightsMetricData. Each cutoff is inclusive.   Data points with a period of 60 seconds (1-minute) are available for 15 days.   Data points with a period of 300 seconds (5-minute) are available for 63 days.   Data points with a period of 3600 seconds (1 hour) are available for 90 days.   Access to the ListInsightsMetricData API operation is linked to the cloudtrail:LookupEvents action. To use this operation, you must have permissions to perform the cloudtrail:LookupEvents action.
+   */
+  listInsightsMetricData(params: CloudTrail.Types.ListInsightsMetricDataRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListInsightsMetricDataResponse) => void): Request<CloudTrail.Types.ListInsightsMetricDataResponse, AWSError>;
+  /**
+   * Returns Insights metrics data for trails that have enabled Insights. The request must include the EventSource, EventName, and InsightType parameters. If the InsightType is set to ApiErrorRateInsight, the request must also include the ErrorCode parameter. The following are the available time periods for ListInsightsMetricData. Each cutoff is inclusive.   Data points with a period of 60 seconds (1-minute) are available for 15 days.   Data points with a period of 300 seconds (5-minute) are available for 63 days.   Data points with a period of 3600 seconds (1 hour) are available for 90 days.   Access to the ListInsightsMetricData API operation is linked to the cloudtrail:LookupEvents action. To use this operation, you must have permissions to perform the cloudtrail:LookupEvents action.
+   */
+  listInsightsMetricData(callback?: (err: AWSError, data: CloudTrail.Types.ListInsightsMetricDataResponse) => void): Request<CloudTrail.Types.ListInsightsMetricDataResponse, AWSError>;
+  /**
+   * Returns all public keys whose private keys were used to sign the digest files within the specified time range. The public key is needed to validate digest files that were signed with its corresponding private key.  CloudTrail uses different private and public key pairs per Region. Each digest file is signed with a private key unique to its Region. When you validate a digest file from a specific Region, you must look in the same Region for its corresponding public key. 
    */
   listPublicKeys(params: CloudTrail.Types.ListPublicKeysRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListPublicKeysResponse) => void): Request<CloudTrail.Types.ListPublicKeysResponse, AWSError>;
   /**
-   * Returns all public keys whose private keys were used to sign the digest files within the specified time range. The public key is needed to validate digest files that were signed with its corresponding private key.  CloudTrail uses different private/public key pairs per region. Each digest file is signed with a private key unique to its region. Therefore, when you validate a digest file from a particular region, you must look in the same region for its corresponding public key. 
+   * Returns all public keys whose private keys were used to sign the digest files within the specified time range. The public key is needed to validate digest files that were signed with its corresponding private key.  CloudTrail uses different private and public key pairs per Region. Each digest file is signed with a private key unique to its Region. When you validate a digest file from a specific Region, you must look in the same Region for its corresponding public key. 
    */
   listPublicKeys(callback?: (err: AWSError, data: CloudTrail.Types.ListPublicKeysResponse) => void): Request<CloudTrail.Types.ListPublicKeysResponse, AWSError>;
   /**
-   * Lists the tags for the trail in the current region.
+   * Returns a list of queries and query statuses for the past seven days. You must specify an ARN value for EventDataStore. Optionally, to shorten the list of results, you can specify a time range, formatted as timestamps, by adding StartTime and EndTime parameters, and a QueryStatus value. Valid values for QueryStatus include QUEUED, RUNNING, FINISHED, FAILED, TIMED_OUT, or CANCELLED.
+   */
+  listQueries(params: CloudTrail.Types.ListQueriesRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListQueriesResponse) => void): Request<CloudTrail.Types.ListQueriesResponse, AWSError>;
+  /**
+   * Returns a list of queries and query statuses for the past seven days. You must specify an ARN value for EventDataStore. Optionally, to shorten the list of results, you can specify a time range, formatted as timestamps, by adding StartTime and EndTime parameters, and a QueryStatus value. Valid values for QueryStatus include QUEUED, RUNNING, FINISHED, FAILED, TIMED_OUT, or CANCELLED.
+   */
+  listQueries(callback?: (err: AWSError, data: CloudTrail.Types.ListQueriesResponse) => void): Request<CloudTrail.Types.ListQueriesResponse, AWSError>;
+  /**
+   * Lists the tags for the specified trails, event data stores, or channels in the current Region.
    */
   listTags(params: CloudTrail.Types.ListTagsRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListTagsResponse) => void): Request<CloudTrail.Types.ListTagsResponse, AWSError>;
   /**
-   * Lists the tags for the trail in the current region.
+   * Lists the tags for the specified trails, event data stores, or channels in the current Region.
    */
   listTags(callback?: (err: AWSError, data: CloudTrail.Types.ListTagsResponse) => void): Request<CloudTrail.Types.ListTagsResponse, AWSError>;
   /**
-   * Looks up API activity events captured by CloudTrail that create, update, or delete resources in your account. Events for a region can be looked up for the times in which you had CloudTrail turned on in that region during the last seven days. Lookup supports the following attributes:   Event ID   Event name   Event source   Resource name   Resource type   User name   All attributes are optional. The default number of results returned is 10, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.  The rate of lookup requests is limited to one per second per account. If this limit is exceeded, a throttling error occurs.   Events that occurred during the selected time range will not be available for lookup if CloudTrail logging was not enabled when the events occurred. 
+   * Lists trails that are in the current account.
+   */
+  listTrails(params: CloudTrail.Types.ListTrailsRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListTrailsResponse) => void): Request<CloudTrail.Types.ListTrailsResponse, AWSError>;
+  /**
+   * Lists trails that are in the current account.
+   */
+  listTrails(callback?: (err: AWSError, data: CloudTrail.Types.ListTrailsResponse) => void): Request<CloudTrail.Types.ListTrailsResponse, AWSError>;
+  /**
+   * Looks up management events or CloudTrail Insights events that are captured by CloudTrail. You can look up events that occurred in a Region within the last 90 days.   LookupEvents returns recent Insights events for trails that enable Insights. To view Insights events for an event data store, you can run queries on your Insights event data store, and you can also view the Lake dashboard for Insights.  Lookup supports the following attributes for management events:   Amazon Web Services access key   Event ID   Event name   Event source   Read only   Resource name   Resource type   User name   Lookup supports the following attributes for Insights events:   Event ID   Event name   Event source   All attributes are optional. The default number of results returned is 50, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.  The rate of lookup requests is limited to two per second, per account, per Region. If this limit is exceeded, a throttling error occurs. 
    */
   lookupEvents(params: CloudTrail.Types.LookupEventsRequest, callback?: (err: AWSError, data: CloudTrail.Types.LookupEventsResponse) => void): Request<CloudTrail.Types.LookupEventsResponse, AWSError>;
   /**
-   * Looks up API activity events captured by CloudTrail that create, update, or delete resources in your account. Events for a region can be looked up for the times in which you had CloudTrail turned on in that region during the last seven days. Lookup supports the following attributes:   Event ID   Event name   Event source   Resource name   Resource type   User name   All attributes are optional. The default number of results returned is 10, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.  The rate of lookup requests is limited to one per second per account. If this limit is exceeded, a throttling error occurs.   Events that occurred during the selected time range will not be available for lookup if CloudTrail logging was not enabled when the events occurred. 
+   * Looks up management events or CloudTrail Insights events that are captured by CloudTrail. You can look up events that occurred in a Region within the last 90 days.   LookupEvents returns recent Insights events for trails that enable Insights. To view Insights events for an event data store, you can run queries on your Insights event data store, and you can also view the Lake dashboard for Insights.  Lookup supports the following attributes for management events:   Amazon Web Services access key   Event ID   Event name   Event source   Read only   Resource name   Resource type   User name   Lookup supports the following attributes for Insights events:   Event ID   Event name   Event source   All attributes are optional. The default number of results returned is 50, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.  The rate of lookup requests is limited to two per second, per account, per Region. If this limit is exceeded, a throttling error occurs. 
    */
   lookupEvents(callback?: (err: AWSError, data: CloudTrail.Types.LookupEventsResponse) => void): Request<CloudTrail.Types.LookupEventsResponse, AWSError>;
   /**
-   * Configures an event selector for your trail. Use event selectors to specify whether you want your trail to log management and/or data events. When an event occurs in your account, CloudTrail evaluates the event selectors in all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event.  Example   You create an event selector for a trail and specify that you want write-only events.   The EC2 GetConsoleOutput and RunInstances API operations occur in your account.   CloudTrail evaluates whether the events match your event selectors.   The RunInstances is a write-only event and it matches your event selector. The trail logs the event.   The GetConsoleOutput is a read-only event but it doesn't match your event selector. The trail doesn't log the event.    The PutEventSelectors operation must be called from the region in which the trail was created; otherwise, an InvalidHomeRegionException is thrown. You can configure up to five event selectors for each trail. For more information, see Logging Data and Management Events for Trails  in the AWS CloudTrail User Guide.
+   * Configures an event selector or advanced event selectors for your trail. Use event selectors or advanced event selectors to specify management and data event settings for your trail. If you want your trail to log Insights events, be sure the event selector enables logging of the Insights event types you want configured for your trail. For more information about logging Insights events, see Logging Insights events in the CloudTrail User Guide. By default, trails created without specific event selectors are configured to log all read and write management events, and no data events. When an event occurs in your account, CloudTrail evaluates the event selectors or advanced event selectors in all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event. Example   You create an event selector for a trail and specify that you want write-only events.   The EC2 GetConsoleOutput and RunInstances API operations occur in your account.   CloudTrail evaluates whether the events match your event selectors.   The RunInstances is a write-only event and it matches your event selector. The trail logs the event.   The GetConsoleOutput is a read-only event that doesn't match your event selector. The trail doesn't log the event.    The PutEventSelectors operation must be called from the Region in which the trail was created; otherwise, an InvalidHomeRegionException exception is thrown. You can configure up to five event selectors for each trail. For more information, see Logging management events, Logging data events, and Quotas in CloudTrail in the CloudTrail User Guide. You can add advanced event selectors, and conditions for your advanced event selectors, up to a maximum of 500 values for all conditions and selectors on a trail. You can use either AdvancedEventSelectors or EventSelectors, but not both. If you apply AdvancedEventSelectors to a trail, any existing EventSelectors are overwritten. For more information about advanced event selectors, see Logging data events in the CloudTrail User Guide.
    */
   putEventSelectors(params: CloudTrail.Types.PutEventSelectorsRequest, callback?: (err: AWSError, data: CloudTrail.Types.PutEventSelectorsResponse) => void): Request<CloudTrail.Types.PutEventSelectorsResponse, AWSError>;
   /**
-   * Configures an event selector for your trail. Use event selectors to specify whether you want your trail to log management and/or data events. When an event occurs in your account, CloudTrail evaluates the event selectors in all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event.  Example   You create an event selector for a trail and specify that you want write-only events.   The EC2 GetConsoleOutput and RunInstances API operations occur in your account.   CloudTrail evaluates whether the events match your event selectors.   The RunInstances is a write-only event and it matches your event selector. The trail logs the event.   The GetConsoleOutput is a read-only event but it doesn't match your event selector. The trail doesn't log the event.    The PutEventSelectors operation must be called from the region in which the trail was created; otherwise, an InvalidHomeRegionException is thrown. You can configure up to five event selectors for each trail. For more information, see Logging Data and Management Events for Trails  in the AWS CloudTrail User Guide.
+   * Configures an event selector or advanced event selectors for your trail. Use event selectors or advanced event selectors to specify management and data event settings for your trail. If you want your trail to log Insights events, be sure the event selector enables logging of the Insights event types you want configured for your trail. For more information about logging Insights events, see Logging Insights events in the CloudTrail User Guide. By default, trails created without specific event selectors are configured to log all read and write management events, and no data events. When an event occurs in your account, CloudTrail evaluates the event selectors or advanced event selectors in all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event. Example   You create an event selector for a trail and specify that you want write-only events.   The EC2 GetConsoleOutput and RunInstances API operations occur in your account.   CloudTrail evaluates whether the events match your event selectors.   The RunInstances is a write-only event and it matches your event selector. The trail logs the event.   The GetConsoleOutput is a read-only event that doesn't match your event selector. The trail doesn't log the event.    The PutEventSelectors operation must be called from the Region in which the trail was created; otherwise, an InvalidHomeRegionException exception is thrown. You can configure up to five event selectors for each trail. For more information, see Logging management events, Logging data events, and Quotas in CloudTrail in the CloudTrail User Guide. You can add advanced event selectors, and conditions for your advanced event selectors, up to a maximum of 500 values for all conditions and selectors on a trail. You can use either AdvancedEventSelectors or EventSelectors, but not both. If you apply AdvancedEventSelectors to a trail, any existing EventSelectors are overwritten. For more information about advanced event selectors, see Logging data events in the CloudTrail User Guide.
    */
   putEventSelectors(callback?: (err: AWSError, data: CloudTrail.Types.PutEventSelectorsResponse) => void): Request<CloudTrail.Types.PutEventSelectorsResponse, AWSError>;
   /**
-   * Removes the specified tags from a trail.
+   * Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing trail or event data store. You also use PutInsightSelectors to turn off Insights event logging, by passing an empty list of Insights types. The valid Insights event types are ApiErrorRateInsight and ApiCallRateInsight. To enable Insights on an event data store, you must specify the ARNs (or ID suffix of the ARNs) for the source event data store (EventDataStore) and the destination event data store (InsightsDestination). The source event data store logs management events and enables Insights. The destination event data store logs Insights events based upon the management event activity of the source event data store. The source and destination event data stores must belong to the same Amazon Web Services account. To log Insights events for a trail, you must specify the name (TrailName) of the CloudTrail trail for which you want to change or add Insights selectors. To log CloudTrail Insights events on API call volume, the trail or event data store must log write management events. To log CloudTrail Insights events on API error rate, the trail or event data store must log read or write management events. You can call GetEventSelectors on a trail to check whether the trail logs management events. You can call GetEventDataStore on an event data store to check whether the event data store logs management events. For more information, see Logging CloudTrail Insights events in the CloudTrail User Guide.
+   */
+  putInsightSelectors(params: CloudTrail.Types.PutInsightSelectorsRequest, callback?: (err: AWSError, data: CloudTrail.Types.PutInsightSelectorsResponse) => void): Request<CloudTrail.Types.PutInsightSelectorsResponse, AWSError>;
+  /**
+   * Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing trail or event data store. You also use PutInsightSelectors to turn off Insights event logging, by passing an empty list of Insights types. The valid Insights event types are ApiErrorRateInsight and ApiCallRateInsight. To enable Insights on an event data store, you must specify the ARNs (or ID suffix of the ARNs) for the source event data store (EventDataStore) and the destination event data store (InsightsDestination). The source event data store logs management events and enables Insights. The destination event data store logs Insights events based upon the management event activity of the source event data store. The source and destination event data stores must belong to the same Amazon Web Services account. To log Insights events for a trail, you must specify the name (TrailName) of the CloudTrail trail for which you want to change or add Insights selectors. To log CloudTrail Insights events on API call volume, the trail or event data store must log write management events. To log CloudTrail Insights events on API error rate, the trail or event data store must log read or write management events. You can call GetEventSelectors on a trail to check whether the trail logs management events. You can call GetEventDataStore on an event data store to check whether the event data store logs management events. For more information, see Logging CloudTrail Insights events in the CloudTrail User Guide.
+   */
+  putInsightSelectors(callback?: (err: AWSError, data: CloudTrail.Types.PutInsightSelectorsResponse) => void): Request<CloudTrail.Types.PutInsightSelectorsResponse, AWSError>;
+  /**
+   *  Attaches a resource-based permission policy to a CloudTrail channel that is used for an integration with an event source outside of Amazon Web Services. For more information about resource-based policies, see CloudTrail resource-based policy examples in the CloudTrail User Guide. 
+   */
+  putResourcePolicy(params: CloudTrail.Types.PutResourcePolicyRequest, callback?: (err: AWSError, data: CloudTrail.Types.PutResourcePolicyResponse) => void): Request<CloudTrail.Types.PutResourcePolicyResponse, AWSError>;
+  /**
+   *  Attaches a resource-based permission policy to a CloudTrail channel that is used for an integration with an event source outside of Amazon Web Services. For more information about resource-based policies, see CloudTrail resource-based policy examples in the CloudTrail User Guide. 
+   */
+  putResourcePolicy(callback?: (err: AWSError, data: CloudTrail.Types.PutResourcePolicyResponse) => void): Request<CloudTrail.Types.PutResourcePolicyResponse, AWSError>;
+  /**
+   * Registers an organization’s member account as the CloudTrail delegated administrator.
+   */
+  registerOrganizationDelegatedAdmin(params: CloudTrail.Types.RegisterOrganizationDelegatedAdminRequest, callback?: (err: AWSError, data: CloudTrail.Types.RegisterOrganizationDelegatedAdminResponse) => void): Request<CloudTrail.Types.RegisterOrganizationDelegatedAdminResponse, AWSError>;
+  /**
+   * Registers an organization’s member account as the CloudTrail delegated administrator.
+   */
+  registerOrganizationDelegatedAdmin(callback?: (err: AWSError, data: CloudTrail.Types.RegisterOrganizationDelegatedAdminResponse) => void): Request<CloudTrail.Types.RegisterOrganizationDelegatedAdminResponse, AWSError>;
+  /**
+   * Removes the specified tags from a trail, event data store, or channel.
    */
   removeTags(params: CloudTrail.Types.RemoveTagsRequest, callback?: (err: AWSError, data: CloudTrail.Types.RemoveTagsResponse) => void): Request<CloudTrail.Types.RemoveTagsResponse, AWSError>;
   /**
-   * Removes the specified tags from a trail.
+   * Removes the specified tags from a trail, event data store, or channel.
    */
   removeTags(callback?: (err: AWSError, data: CloudTrail.Types.RemoveTagsResponse) => void): Request<CloudTrail.Types.RemoveTagsResponse, AWSError>;
   /**
-   * Starts the recording of AWS API calls and log file delivery for a trail. For a trail that is enabled in all regions, this operation must be called from the region in which the trail was created. This operation cannot be called on the shadow trails (replicated trails in other regions) of a trail that is enabled in all regions.
+   * Restores a deleted event data store specified by EventDataStore, which accepts an event data store ARN. You can only restore a deleted event data store within the seven-day wait period after deletion. Restoring an event data store can take several minutes, depending on the size of the event data store.
+   */
+  restoreEventDataStore(params: CloudTrail.Types.RestoreEventDataStoreRequest, callback?: (err: AWSError, data: CloudTrail.Types.RestoreEventDataStoreResponse) => void): Request<CloudTrail.Types.RestoreEventDataStoreResponse, AWSError>;
+  /**
+   * Restores a deleted event data store specified by EventDataStore, which accepts an event data store ARN. You can only restore a deleted event data store within the seven-day wait period after deletion. Restoring an event data store can take several minutes, depending on the size of the event data store.
+   */
+  restoreEventDataStore(callback?: (err: AWSError, data: CloudTrail.Types.RestoreEventDataStoreResponse) => void): Request<CloudTrail.Types.RestoreEventDataStoreResponse, AWSError>;
+  /**
+   * Starts the ingestion of live events on an event data store specified as either an ARN or the ID portion of the ARN. To start ingestion, the event data store Status must be STOPPED_INGESTION and the eventCategory must be Management, Data, or ConfigurationItem.
+   */
+  startEventDataStoreIngestion(params: CloudTrail.Types.StartEventDataStoreIngestionRequest, callback?: (err: AWSError, data: CloudTrail.Types.StartEventDataStoreIngestionResponse) => void): Request<CloudTrail.Types.StartEventDataStoreIngestionResponse, AWSError>;
+  /**
+   * Starts the ingestion of live events on an event data store specified as either an ARN or the ID portion of the ARN. To start ingestion, the event data store Status must be STOPPED_INGESTION and the eventCategory must be Management, Data, or ConfigurationItem.
+   */
+  startEventDataStoreIngestion(callback?: (err: AWSError, data: CloudTrail.Types.StartEventDataStoreIngestionResponse) => void): Request<CloudTrail.Types.StartEventDataStoreIngestionResponse, AWSError>;
+  /**
+   *  Starts an import of logged trail events from a source S3 bucket to a destination event data store. By default, CloudTrail only imports events contained in the S3 bucket's CloudTrail prefix and the prefixes inside the CloudTrail prefix, and does not check prefixes for other Amazon Web Services services. If you want to import CloudTrail events contained in another prefix, you must include the prefix in the S3LocationUri. For more considerations about importing trail events, see Considerations for copying trail events in the CloudTrail User Guide.   When you start a new import, the Destinations and ImportSource parameters are required. Before starting a new import, disable any access control lists (ACLs) attached to the source S3 bucket. For more information about disabling ACLs, see Controlling ownership of objects and disabling ACLs for your bucket.   When you retry an import, the ImportID parameter is required.    If the destination event data store is for an organization, you must use the management account to import trail events. You cannot use the delegated administrator account for the organization.  
+   */
+  startImport(params: CloudTrail.Types.StartImportRequest, callback?: (err: AWSError, data: CloudTrail.Types.StartImportResponse) => void): Request<CloudTrail.Types.StartImportResponse, AWSError>;
+  /**
+   *  Starts an import of logged trail events from a source S3 bucket to a destination event data store. By default, CloudTrail only imports events contained in the S3 bucket's CloudTrail prefix and the prefixes inside the CloudTrail prefix, and does not check prefixes for other Amazon Web Services services. If you want to import CloudTrail events contained in another prefix, you must include the prefix in the S3LocationUri. For more considerations about importing trail events, see Considerations for copying trail events in the CloudTrail User Guide.   When you start a new import, the Destinations and ImportSource parameters are required. Before starting a new import, disable any access control lists (ACLs) attached to the source S3 bucket. For more information about disabling ACLs, see Controlling ownership of objects and disabling ACLs for your bucket.   When you retry an import, the ImportID parameter is required.    If the destination event data store is for an organization, you must use the management account to import trail events. You cannot use the delegated administrator account for the organization.  
+   */
+  startImport(callback?: (err: AWSError, data: CloudTrail.Types.StartImportResponse) => void): Request<CloudTrail.Types.StartImportResponse, AWSError>;
+  /**
+   * Starts the recording of Amazon Web Services API calls and log file delivery for a trail. For a trail that is enabled in all Regions, this operation must be called from the Region in which the trail was created. This operation cannot be called on the shadow trails (replicated trails in other Regions) of a trail that is enabled in all Regions.
    */
   startLogging(params: CloudTrail.Types.StartLoggingRequest, callback?: (err: AWSError, data: CloudTrail.Types.StartLoggingResponse) => void): Request<CloudTrail.Types.StartLoggingResponse, AWSError>;
   /**
-   * Starts the recording of AWS API calls and log file delivery for a trail. For a trail that is enabled in all regions, this operation must be called from the region in which the trail was created. This operation cannot be called on the shadow trails (replicated trails in other regions) of a trail that is enabled in all regions.
+   * Starts the recording of Amazon Web Services API calls and log file delivery for a trail. For a trail that is enabled in all Regions, this operation must be called from the Region in which the trail was created. This operation cannot be called on the shadow trails (replicated trails in other Regions) of a trail that is enabled in all Regions.
    */
   startLogging(callback?: (err: AWSError, data: CloudTrail.Types.StartLoggingResponse) => void): Request<CloudTrail.Types.StartLoggingResponse, AWSError>;
   /**
-   * Suspends the recording of AWS API calls and log file delivery for the specified trail. Under most circumstances, there is no need to use this action. You can update a trail without stopping it first. This action is the only way to stop recording. For a trail enabled in all regions, this operation must be called from the region in which the trail was created, or an InvalidHomeRegionException will occur. This operation cannot be called on the shadow trails (replicated trails in other regions) of a trail enabled in all regions.
+   * Starts a CloudTrail Lake query. Use the QueryStatement parameter to provide your SQL query, enclosed in single quotation marks. Use the optional DeliveryS3Uri parameter to deliver the query results to an S3 bucket.  StartQuery requires you specify either the QueryStatement parameter, or a QueryAlias and any QueryParameters. In the current release, the QueryAlias and QueryParameters parameters are used only for the queries that populate the CloudTrail Lake dashboards.
+   */
+  startQuery(params: CloudTrail.Types.StartQueryRequest, callback?: (err: AWSError, data: CloudTrail.Types.StartQueryResponse) => void): Request<CloudTrail.Types.StartQueryResponse, AWSError>;
+  /**
+   * Starts a CloudTrail Lake query. Use the QueryStatement parameter to provide your SQL query, enclosed in single quotation marks. Use the optional DeliveryS3Uri parameter to deliver the query results to an S3 bucket.  StartQuery requires you specify either the QueryStatement parameter, or a QueryAlias and any QueryParameters. In the current release, the QueryAlias and QueryParameters parameters are used only for the queries that populate the CloudTrail Lake dashboards.
+   */
+  startQuery(callback?: (err: AWSError, data: CloudTrail.Types.StartQueryResponse) => void): Request<CloudTrail.Types.StartQueryResponse, AWSError>;
+  /**
+   * Stops the ingestion of live events on an event data store specified as either an ARN or the ID portion of the ARN. To stop ingestion, the event data store Status must be ENABLED and the eventCategory must be Management, Data, or ConfigurationItem.
+   */
+  stopEventDataStoreIngestion(params: CloudTrail.Types.StopEventDataStoreIngestionRequest, callback?: (err: AWSError, data: CloudTrail.Types.StopEventDataStoreIngestionResponse) => void): Request<CloudTrail.Types.StopEventDataStoreIngestionResponse, AWSError>;
+  /**
+   * Stops the ingestion of live events on an event data store specified as either an ARN or the ID portion of the ARN. To stop ingestion, the event data store Status must be ENABLED and the eventCategory must be Management, Data, or ConfigurationItem.
+   */
+  stopEventDataStoreIngestion(callback?: (err: AWSError, data: CloudTrail.Types.StopEventDataStoreIngestionResponse) => void): Request<CloudTrail.Types.StopEventDataStoreIngestionResponse, AWSError>;
+  /**
+   *  Stops a specified import. 
+   */
+  stopImport(params: CloudTrail.Types.StopImportRequest, callback?: (err: AWSError, data: CloudTrail.Types.StopImportResponse) => void): Request<CloudTrail.Types.StopImportResponse, AWSError>;
+  /**
+   *  Stops a specified import. 
+   */
+  stopImport(callback?: (err: AWSError, data: CloudTrail.Types.StopImportResponse) => void): Request<CloudTrail.Types.StopImportResponse, AWSError>;
+  /**
+   * Suspends the recording of Amazon Web Services API calls and log file delivery for the specified trail. Under most circumstances, there is no need to use this action. You can update a trail without stopping it first. This action is the only way to stop recording. For a trail enabled in all Regions, this operation must be called from the Region in which the trail was created, or an InvalidHomeRegionException will occur. This operation cannot be called on the shadow trails (replicated trails in other Regions) of a trail enabled in all Regions.
    */
   stopLogging(params: CloudTrail.Types.StopLoggingRequest, callback?: (err: AWSError, data: CloudTrail.Types.StopLoggingResponse) => void): Request<CloudTrail.Types.StopLoggingResponse, AWSError>;
   /**
-   * Suspends the recording of AWS API calls and log file delivery for the specified trail. Under most circumstances, there is no need to use this action. You can update a trail without stopping it first. This action is the only way to stop recording. For a trail enabled in all regions, this operation must be called from the region in which the trail was created, or an InvalidHomeRegionException will occur. This operation cannot be called on the shadow trails (replicated trails in other regions) of a trail enabled in all regions.
+   * Suspends the recording of Amazon Web Services API calls and log file delivery for the specified trail. Under most circumstances, there is no need to use this action. You can update a trail without stopping it first. This action is the only way to stop recording. For a trail enabled in all Regions, this operation must be called from the Region in which the trail was created, or an InvalidHomeRegionException will occur. This operation cannot be called on the shadow trails (replicated trails in other Regions) of a trail enabled in all Regions.
    */
   stopLogging(callback?: (err: AWSError, data: CloudTrail.Types.StopLoggingResponse) => void): Request<CloudTrail.Types.StopLoggingResponse, AWSError>;
   /**
-   * Updates the settings that specify delivery of log files. Changes to a trail do not require stopping the CloudTrail service. Use this action to designate an existing bucket for log delivery. If the existing bucket has previously been a target for CloudTrail log files, an IAM policy exists for the bucket. UpdateTrail must be called from the region in which the trail was created; otherwise, an InvalidHomeRegionException is thrown.
+   * Updates a channel specified by a required channel ARN or UUID.
+   */
+  updateChannel(params: CloudTrail.Types.UpdateChannelRequest, callback?: (err: AWSError, data: CloudTrail.Types.UpdateChannelResponse) => void): Request<CloudTrail.Types.UpdateChannelResponse, AWSError>;
+  /**
+   * Updates a channel specified by a required channel ARN or UUID.
+   */
+  updateChannel(callback?: (err: AWSError, data: CloudTrail.Types.UpdateChannelResponse) => void): Request<CloudTrail.Types.UpdateChannelResponse, AWSError>;
+  /**
+   * Updates an event data store. The required EventDataStore value is an ARN or the ID portion of the ARN. Other parameters are optional, but at least one optional parameter must be specified, or CloudTrail throws an error. RetentionPeriod is in days, and valid values are integers between 7 and 3653 if the BillingMode is set to EXTENDABLE_RETENTION_PRICING, or between 7 and 2557 if BillingMode is set to FIXED_RETENTION_PRICING. By default, TerminationProtection is enabled. For event data stores for CloudTrail events, AdvancedEventSelectors includes or excludes management or data events in your event data store. For more information about AdvancedEventSelectors, see AdvancedEventSelectors.  For event data stores for CloudTrail Insights events, Config configuration items, Audit Manager evidence, or non-Amazon Web Services events, AdvancedEventSelectors includes events of that type in your event data store.
+   */
+  updateEventDataStore(params: CloudTrail.Types.UpdateEventDataStoreRequest, callback?: (err: AWSError, data: CloudTrail.Types.UpdateEventDataStoreResponse) => void): Request<CloudTrail.Types.UpdateEventDataStoreResponse, AWSError>;
+  /**
+   * Updates an event data store. The required EventDataStore value is an ARN or the ID portion of the ARN. Other parameters are optional, but at least one optional parameter must be specified, or CloudTrail throws an error. RetentionPeriod is in days, and valid values are integers between 7 and 3653 if the BillingMode is set to EXTENDABLE_RETENTION_PRICING, or between 7 and 2557 if BillingMode is set to FIXED_RETENTION_PRICING. By default, TerminationProtection is enabled. For event data stores for CloudTrail events, AdvancedEventSelectors includes or excludes management or data events in your event data store. For more information about AdvancedEventSelectors, see AdvancedEventSelectors.  For event data stores for CloudTrail Insights events, Config configuration items, Audit Manager evidence, or non-Amazon Web Services events, AdvancedEventSelectors includes events of that type in your event data store.
+   */
+  updateEventDataStore(callback?: (err: AWSError, data: CloudTrail.Types.UpdateEventDataStoreResponse) => void): Request<CloudTrail.Types.UpdateEventDataStoreResponse, AWSError>;
+  /**
+   * Updates trail settings that control what events you are logging, and how to handle log files. Changes to a trail do not require stopping the CloudTrail service. Use this action to designate an existing bucket for log delivery. If the existing bucket has previously been a target for CloudTrail log files, an IAM policy exists for the bucket. UpdateTrail must be called from the Region in which the trail was created; otherwise, an InvalidHomeRegionException is thrown.
    */
   updateTrail(params: CloudTrail.Types.UpdateTrailRequest, callback?: (err: AWSError, data: CloudTrail.Types.UpdateTrailResponse) => void): Request<CloudTrail.Types.UpdateTrailResponse, AWSError>;
   /**
-   * Updates the settings that specify delivery of log files. Changes to a trail do not require stopping the CloudTrail service. Use this action to designate an existing bucket for log delivery. If the existing bucket has previously been a target for CloudTrail log files, an IAM policy exists for the bucket. UpdateTrail must be called from the region in which the trail was created; otherwise, an InvalidHomeRegionException is thrown.
+   * Updates trail settings that control what events you are logging, and how to handle log files. Changes to a trail do not require stopping the CloudTrail service. Use this action to designate an existing bucket for log delivery. If the existing bucket has previously been a target for CloudTrail log files, an IAM policy exists for the bucket. UpdateTrail must be called from the Region in which the trail was created; otherwise, an InvalidHomeRegionException is thrown.
    */
   updateTrail(callback?: (err: AWSError, data: CloudTrail.Types.UpdateTrailResponse) => void): Request<CloudTrail.Types.UpdateTrailResponse, AWSError>;
 }
 declare namespace CloudTrail {
+  export type AccountId = string;
   export interface AddTagsRequest {
     /**
-     * Specifies the ARN of the trail to which one or more tags will be added. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the ARN of the trail, event data store, or channel to which one or more tags will be added. The format of a trail ARN is: arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail  The format of an event data store ARN is: arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE  The format of a channel ARN is: arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890 
      */
     ResourceId: String;
     /**
-     * Contains a list of CloudTrail tags, up to a limit of 50
+     * Contains a list of tags, up to a limit of 50
      */
-    TagsList?: TagsList;
+    TagsList: TagsList;
   }
   export interface AddTagsResponse {
   }
+  export interface AdvancedEventSelector {
+    /**
+     * An optional, descriptive name for an advanced event selector, such as "Log data events for only two S3 buckets".
+     */
+    Name?: SelectorName;
+    /**
+     * Contains all selector statements in an advanced event selector.
+     */
+    FieldSelectors: AdvancedFieldSelectors;
+  }
+  export type AdvancedEventSelectors = AdvancedEventSelector[];
+  export interface AdvancedFieldSelector {
+    /**
+     *  A field in a CloudTrail event record on which to filter events to be logged. For event data stores for CloudTrail Insights events, Config configuration items, Audit Manager evidence, or events outside of Amazon Web Services, the field is used only for selecting events as filtering is not supported. For CloudTrail management events, supported fields include readOnly, eventCategory, and eventSource. For CloudTrail data events, supported fields include readOnly, eventCategory, eventName, resources.type, and resources.ARN.  For event data stores for CloudTrail Insights events, Config configuration items, Audit Manager evidence, or events outside of Amazon Web Services, the only supported field is eventCategory.      readOnly  - Optional. Can be set to Equals a value of true or false. If you do not add this field, CloudTrail logs both read and write events. A value of true logs only read events. A value of false logs only write events.     eventSource  - For filtering management events only. This can be set to NotEquals kms.amazonaws.com or NotEquals rdsdata.amazonaws.com.     eventName  - Can use any operator. You can use it to ﬁlter in or ﬁlter out any data event logged to CloudTrail, such as PutBucket or GetSnapshotBlock. You can have multiple values for this ﬁeld, separated by commas.     eventCategory  - This is required and must be set to Equals.     For CloudTrail management events, the value must be Management.     For CloudTrail data events, the value must be Data.    The following are used only for event data stores:    For CloudTrail Insights events, the value must be Insight.     For Config configuration items, the value must be ConfigurationItem.     For Audit Manager evidence, the value must be Evidence.     For non-Amazon Web Services events, the value must be ActivityAuditLog.        resources.type  - This ﬁeld is required for CloudTrail data events. resources.type can only use the Equals operator, and the value can be one of the following:    AWS::DynamoDB::Table     AWS::Lambda::Function     AWS::S3::Object     AWS::AppConfig::Configuration     AWS::B2BI::Transformer     AWS::Bedrock::AgentAlias     AWS::Bedrock::KnowledgeBase     AWS::Cassandra::Table     AWS::CloudFront::KeyValueStore     AWS::CloudTrail::Channel     AWS::CodeWhisperer::Customization     AWS::CodeWhisperer::Profile     AWS::Cognito::IdentityPool     AWS::DynamoDB::Stream     AWS::EC2::Snapshot     AWS::EMRWAL::Workspace     AWS::FinSpace::Environment     AWS::Glue::Table     AWS::GreengrassV2::ComponentVersion     AWS::GreengrassV2::Deployment     AWS::GuardDuty::Detector     AWS::IoT::Certificate     AWS::IoT::Thing     AWS::IoTSiteWise::Asset     AWS::IoTSiteWise::TimeSeries     AWS::IoTTwinMaker::Entity     AWS::IoTTwinMaker::Workspace     AWS::KendraRanking::ExecutionPlan     AWS::KinesisVideo::Stream     AWS::ManagedBlockchain::Network     AWS::ManagedBlockchain::Node     AWS::MedicalImaging::Datastore     AWS::NeptuneGraph::Graph     AWS::PCAConnectorAD::Connector     AWS::QApps:QApp     AWS::QBusiness::Application     AWS::QBusiness::DataSource     AWS::QBusiness::Index     AWS::QBusiness::WebExperience     AWS::RDS::DBCluster     AWS::S3::AccessPoint     AWS::S3ObjectLambda::AccessPoint     AWS::S3Outposts::Object     AWS::SageMaker::Endpoint     AWS::SageMaker::ExperimentTrialComponent     AWS::SageMaker::FeatureGroup     AWS::ServiceDiscovery::Namespace      AWS::ServiceDiscovery::Service     AWS::SCN::Instance     AWS::SNS::PlatformEndpoint     AWS::SNS::Topic     AWS::SQS::Queue     AWS::SSM::ManagedNode     AWS::SSMMessages::ControlChannel     AWS::SWF::Domain     AWS::ThinClient::Device     AWS::ThinClient::Environment     AWS::Timestream::Database     AWS::Timestream::Table     AWS::VerifiedPermissions::PolicyStore     AWS::XRay::Trace     You can have only one resources.type ﬁeld per selector. To log data events on more than one resource type, add another selector.     resources.ARN  - You can use any operator with resources.ARN, but if you use Equals or NotEquals, the value must exactly match the ARN of a valid resource of the type you've speciﬁed in the template as the value of resources.type.  You can't use the resources.ARN field to filter resource types that do not have ARNs.  The resources.ARN field can be set one of the following. If resources.type equals AWS::S3::Object, the ARN must be in one of the following formats. To log all data events for all objects in a specific S3 bucket, use the StartsWith operator, and include only the bucket ARN as the matching value. The trailing slash is intentional; do not exclude it. Replace the text between less than and greater than symbols (&lt;&gt;) with resource-specific information.     arn:&lt;partition&gt;:s3:::&lt;bucket_name&gt;/     arn:&lt;partition&gt;:s3:::&lt;bucket_name&gt;/&lt;object_path&gt;/    When resources.type equals AWS::DynamoDB::Table, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:dynamodb:&lt;region&gt;:&lt;account_ID&gt;:table/&lt;table_name&gt;    When resources.type equals AWS::Lambda::Function, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:lambda:&lt;region&gt;:&lt;account_ID&gt;:function:&lt;function_name&gt;    When resources.type equals AWS::AppConfig::Configuration, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:appconfig:&lt;region&gt;:&lt;account_ID&gt;:application/&lt;application_ID&gt;/environment/&lt;environment_ID&gt;/configuration/&lt;configuration_profile_ID&gt;    When resources.type equals AWS::B2BI::Transformer, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:b2bi:&lt;region&gt;:&lt;account_ID&gt;:transformer/&lt;transformer_ID&gt;    When resources.type equals AWS::Bedrock::AgentAlias, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:bedrock:&lt;region&gt;:&lt;account_ID&gt;:agent-alias/&lt;agent_ID&gt;/&lt;alias_ID&gt;    When resources.type equals AWS::Bedrock::KnowledgeBase, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:bedrock:&lt;region&gt;:&lt;account_ID&gt;:knowledge-base/&lt;knowledge_base_ID&gt;    When resources.type equals AWS::Cassandra::Table, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:cassandra:&lt;region&gt;:&lt;account_ID&gt;:/keyspace/&lt;keyspace_name&gt;/table/&lt;table_name&gt;    When resources.type equals AWS::CloudFront::KeyValueStore, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:cloudfront:&lt;region&gt;:&lt;account_ID&gt;:key-value-store/&lt;KVS_name&gt;    When resources.type equals AWS::CloudTrail::Channel, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:cloudtrail:&lt;region&gt;:&lt;account_ID&gt;:channel/&lt;channel_UUID&gt;    When resources.type equals AWS::CodeWhisperer::Customization, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:codewhisperer:&lt;region&gt;:&lt;account_ID&gt;:customization/&lt;customization_ID&gt;    When resources.type equals AWS::CodeWhisperer::Profile, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:codewhisperer:&lt;region&gt;:&lt;account_ID&gt;:profile/&lt;profile_ID&gt;    When resources.type equals AWS::Cognito::IdentityPool, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:cognito-identity:&lt;region&gt;:&lt;account_ID&gt;:identitypool/&lt;identity_pool_ID&gt;    When resources.type equals AWS::DynamoDB::Stream, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:dynamodb:&lt;region&gt;:&lt;account_ID&gt;:table/&lt;table_name&gt;/stream/&lt;date_time&gt;    When resources.type equals AWS::EC2::Snapshot, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:ec2:&lt;region&gt;::snapshot/&lt;snapshot_ID&gt;    When resources.type equals AWS::EMRWAL::Workspace, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:emrwal:&lt;region&gt;:&lt;account_ID&gt;:workspace/&lt;workspace_name&gt;    When resources.type equals AWS::FinSpace::Environment, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:finspace:&lt;region&gt;:&lt;account_ID&gt;:environment/&lt;environment_ID&gt;    When resources.type equals AWS::Glue::Table, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:glue:&lt;region&gt;:&lt;account_ID&gt;:table/&lt;database_name&gt;/&lt;table_name&gt;    When resources.type equals AWS::GreengrassV2::ComponentVersion, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:greengrass:&lt;region&gt;:&lt;account_ID&gt;:components/&lt;component_name&gt;    When resources.type equals AWS::GreengrassV2::Deployment, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:greengrass:&lt;region&gt;:&lt;account_ID&gt;:deployments/&lt;deployment_ID    When resources.type equals AWS::GuardDuty::Detector, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:guardduty:&lt;region&gt;:&lt;account_ID&gt;:detector/&lt;detector_ID&gt;    When resources.type equals AWS::IoT::Certificate, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:iot:&lt;region&gt;:&lt;account_ID&gt;:cert/&lt;certificate_ID&gt;    When resources.type equals AWS::IoT::Thing, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:iot:&lt;region&gt;:&lt;account_ID&gt;:thing/&lt;thing_ID&gt;    When resources.type equals AWS::IoTSiteWise::Asset, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:iotsitewise:&lt;region&gt;:&lt;account_ID&gt;:asset/&lt;asset_ID&gt;    When resources.type equals AWS::IoTSiteWise::TimeSeries, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:iotsitewise:&lt;region&gt;:&lt;account_ID&gt;:timeseries/&lt;timeseries_ID&gt;    When resources.type equals AWS::IoTTwinMaker::Entity, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:iottwinmaker:&lt;region&gt;:&lt;account_ID&gt;:workspace/&lt;workspace_ID&gt;/entity/&lt;entity_ID&gt;    When resources.type equals AWS::IoTTwinMaker::Workspace, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:iottwinmaker:&lt;region&gt;:&lt;account_ID&gt;:workspace/&lt;workspace_ID&gt;    When resources.type equals AWS::KendraRanking::ExecutionPlan, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:kendra-ranking:&lt;region&gt;:&lt;account_ID&gt;:rescore-execution-plan/&lt;rescore_execution_plan_ID&gt;    When resources.type equals AWS::KinesisVideo::Stream, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:kinesisvideo:&lt;region&gt;:&lt;account_ID&gt;:stream/&lt;stream_name&gt;/&lt;creation_time&gt;    When resources.type equals AWS::ManagedBlockchain::Network, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:managedblockchain:::networks/&lt;network_name&gt;    When resources.type equals AWS::ManagedBlockchain::Node, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:managedblockchain:&lt;region&gt;:&lt;account_ID&gt;:nodes/&lt;node_ID&gt;    When resources.type equals AWS::MedicalImaging::Datastore, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:medical-imaging:&lt;region&gt;:&lt;account_ID&gt;:datastore/&lt;data_store_ID&gt;    When resources.type equals AWS::NeptuneGraph::Graph, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:neptune-graph:&lt;region&gt;:&lt;account_ID&gt;:graph/&lt;graph_ID&gt;    When resources.type equals AWS::PCAConnectorAD::Connector, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:pca-connector-ad:&lt;region&gt;:&lt;account_ID&gt;:connector/&lt;connector_ID&gt;    When resources.type equals AWS::QApps:QApp, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:qapps:&lt;region&gt;:&lt;account_ID&gt;:application/&lt;application_UUID&gt;/qapp/&lt;qapp_UUID&gt;    When resources.type equals AWS::QBusiness::Application, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:qbusiness:&lt;region&gt;:&lt;account_ID&gt;:application/&lt;application_ID&gt;    When resources.type equals AWS::QBusiness::DataSource, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:qbusiness:&lt;region&gt;:&lt;account_ID&gt;:application/&lt;application_ID&gt;/index/&lt;index_ID&gt;/data-source/&lt;datasource_ID&gt;    When resources.type equals AWS::QBusiness::Index, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:qbusiness:&lt;region&gt;:&lt;account_ID&gt;:application/&lt;application_ID&gt;/index/&lt;index_ID&gt;    When resources.type equals AWS::QBusiness::WebExperience, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:qbusiness:&lt;region&gt;:&lt;account_ID&gt;:application/&lt;application_ID&gt;/web-experience/&lt;web_experience_ID&gt;    When resources.type equals AWS::RDS::DBCluster, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:rds:&lt;region&gt;:&lt;account_ID&gt;:cluster/&lt;cluster_name&gt;    When resources.type equals AWS::S3::AccessPoint, and the operator is set to Equals or NotEquals, the ARN must be in one of the following formats. To log events on all objects in an S3 access point, we recommend that you use only the access point ARN, don’t include the object path, and use the StartsWith or NotStartsWith operators.    arn:&lt;partition&gt;:s3:&lt;region&gt;:&lt;account_ID&gt;:accesspoint/&lt;access_point_name&gt;     arn:&lt;partition&gt;:s3:&lt;region&gt;:&lt;account_ID&gt;:accesspoint/&lt;access_point_name&gt;/object/&lt;object_path&gt;    When resources.type equals AWS::S3ObjectLambda::AccessPoint, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:s3-object-lambda:&lt;region&gt;:&lt;account_ID&gt;:accesspoint/&lt;access_point_name&gt;    When resources.type equals AWS::S3Outposts::Object, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:s3-outposts:&lt;region&gt;:&lt;account_ID&gt;:&lt;object_path&gt;    When resources.type equals AWS::SageMaker::Endpoint, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:sagemaker:&lt;region&gt;:&lt;account_ID&gt;:endpoint/&lt;endpoint_name&gt;    When resources.type equals AWS::SageMaker::ExperimentTrialComponent, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:sagemaker:&lt;region&gt;:&lt;account_ID&gt;:experiment-trial-component/&lt;experiment_trial_component_name&gt;    When resources.type equals AWS::SageMaker::FeatureGroup, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:sagemaker:&lt;region&gt;:&lt;account_ID&gt;:feature-group/&lt;feature_group_name&gt;    When resources.type equals AWS::SCN::Instance, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:scn:&lt;region&gt;:&lt;account_ID&gt;:instance/&lt;instance_ID&gt;    When resources.type equals AWS::ServiceDiscovery::Namespace, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:servicediscovery:&lt;region&gt;:&lt;account_ID&gt;:namespace/&lt;namespace_ID&gt;    When resources.type equals AWS::ServiceDiscovery::Service, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:servicediscovery:&lt;region&gt;:&lt;account_ID&gt;:service/&lt;service_ID&gt;    When resources.type equals AWS::SNS::PlatformEndpoint, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:sns:&lt;region&gt;:&lt;account_ID&gt;:endpoint/&lt;endpoint_type&gt;/&lt;endpoint_name&gt;/&lt;endpoint_ID&gt;    When resources.type equals AWS::SNS::Topic, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:sns:&lt;region&gt;:&lt;account_ID&gt;:&lt;topic_name&gt;    When resources.type equals AWS::SQS::Queue, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:sqs:&lt;region&gt;:&lt;account_ID&gt;:&lt;queue_name&gt;    When resources.type equals AWS::SSM::ManagedNode, and the operator is set to Equals or NotEquals, the ARN must be in one of the following formats:    arn:&lt;partition&gt;:ssm:&lt;region&gt;:&lt;account_ID&gt;:managed-instance/&lt;instance_ID&gt;     arn:&lt;partition&gt;:ec2:&lt;region&gt;:&lt;account_ID&gt;:instance/&lt;instance_ID&gt;    When resources.type equals AWS::SSMMessages::ControlChannel, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:ssmmessages:&lt;region&gt;:&lt;account_ID&gt;:control-channel/&lt;channel_ID&gt;    When resources.type equals AWS::SWF::Domain, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:swf:&lt;region&gt;:&lt;account_ID&gt;:domain/&lt;domain_name&gt;    When resources.type equals AWS::ThinClient::Device, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:thinclient:&lt;region&gt;:&lt;account_ID&gt;:device/&lt;device_ID&gt;    When resources.type equals AWS::ThinClient::Environment, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:thinclient:&lt;region&gt;:&lt;account_ID&gt;:environment/&lt;environment_ID&gt;    When resources.type equals AWS::Timestream::Database, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:timestream:&lt;region&gt;:&lt;account_ID&gt;:database/&lt;database_name&gt;    When resources.type equals AWS::Timestream::Table, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:timestream:&lt;region&gt;:&lt;account_ID&gt;:database/&lt;database_name&gt;/table/&lt;table_name&gt;    When resources.type equals AWS::VerifiedPermissions::PolicyStore, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:verifiedpermissions:&lt;region&gt;:&lt;account_ID&gt;:policy-store/&lt;policy_store_UUID&gt;     
+     */
+    Field: SelectorField;
+    /**
+     *  An operator that includes events that match the exact value of the event record field specified as the value of Field. This is the only valid operator that you can use with the readOnly, eventCategory, and resources.type fields.
+     */
+    Equals?: Operator;
+    /**
+     * An operator that includes events that match the first few characters of the event record field specified as the value of Field.
+     */
+    StartsWith?: Operator;
+    /**
+     * An operator that includes events that match the last few characters of the event record field specified as the value of Field.
+     */
+    EndsWith?: Operator;
+    /**
+     *  An operator that excludes events that match the exact value of the event record field specified as the value of Field. 
+     */
+    NotEquals?: Operator;
+    /**
+     *  An operator that excludes events that match the first few characters of the event record field specified as the value of Field. 
+     */
+    NotStartsWith?: Operator;
+    /**
+     *  An operator that excludes events that match the last few characters of the event record field specified as the value of Field. 
+     */
+    NotEndsWith?: Operator;
+  }
+  export type AdvancedFieldSelectors = AdvancedFieldSelector[];
+  export type BillingMode = "EXTENDABLE_RETENTION_PRICING"|"FIXED_RETENTION_PRICING"|string;
   export type Boolean = boolean;
   export type ByteBuffer = Buffer|Uint8Array|Blob|string;
+  export interface CancelQueryRequest {
+    /**
+     * The ARN (or the ID suffix of the ARN) of an event data store on which the specified query is running.
+     */
+    EventDataStore?: EventDataStoreArn;
+    /**
+     * The ID of the query that you want to cancel. The QueryId comes from the response of a StartQuery operation.
+     */
+    QueryId: UUID;
+  }
+  export interface CancelQueryResponse {
+    /**
+     * The ID of the canceled query.
+     */
+    QueryId: UUID;
+    /**
+     * Shows the status of a query after a CancelQuery request. Typically, the values shown are either RUNNING or CANCELLED.
+     */
+    QueryStatus: QueryStatus;
+  }
+  export interface Channel {
+    /**
+     * The Amazon Resource Name (ARN) of a channel.
+     */
+    ChannelArn?: ChannelArn;
+    /**
+     *  The name of the CloudTrail channel. For service-linked channels, the name is aws-service-channel/service-name/custom-suffix where service-name represents the name of the Amazon Web Services service that created the channel and custom-suffix represents the suffix created by the Amazon Web Services service. 
+     */
+    Name?: ChannelName;
+  }
+  export type ChannelArn = string;
+  export type ChannelName = string;
+  export type Channels = Channel[];
+  export interface CreateChannelRequest {
+    /**
+     * The name of the channel.
+     */
+    Name: ChannelName;
+    /**
+     * The name of the partner or external event source. You cannot change this name after you create the channel. A maximum of one channel is allowed per source.  A source can be either Custom for all valid non-Amazon Web Services events, or the name of a partner event source. For information about the source names for available partners, see Additional information about integration partners in the CloudTrail User Guide. 
+     */
+    Source: Source;
+    /**
+     * One or more event data stores to which events arriving through a channel will be logged.
+     */
+    Destinations: Destinations;
+    Tags?: TagsList;
+  }
+  export interface CreateChannelResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the new channel.
+     */
+    ChannelArn?: ChannelArn;
+    /**
+     * The name of the new channel.
+     */
+    Name?: ChannelName;
+    /**
+     * The partner or external event source name.
+     */
+    Source?: Source;
+    /**
+     * The event data stores that log the events arriving through the channel.
+     */
+    Destinations?: Destinations;
+    Tags?: TagsList;
+  }
+  export interface CreateEventDataStoreRequest {
+    /**
+     * The name of the event data store.
+     */
+    Name: EventDataStoreName;
+    /**
+     * The advanced event selectors to use to select the events for the data store. You can configure up to five advanced event selectors for each event data store.  For more information about how to use advanced event selectors to log CloudTrail events, see Log events by using advanced event selectors in the CloudTrail User Guide. For more information about how to use advanced event selectors to include Config configuration items in your event data store, see Create an event data store for Config configuration items in the CloudTrail User Guide. For more information about how to use advanced event selectors to include events outside of Amazon Web Services events in your event data store, see Create an integration to log events from outside Amazon Web Services in the CloudTrail User Guide.
+     */
+    AdvancedEventSelectors?: AdvancedEventSelectors;
+    /**
+     * Specifies whether the event data store includes events from all Regions, or only from the Region in which the event data store is created.
+     */
+    MultiRegionEnabled?: Boolean;
+    /**
+     * Specifies whether an event data store collects events logged for an organization in Organizations.
+     */
+    OrganizationEnabled?: Boolean;
+    /**
+     * The retention period of the event data store, in days. If BillingMode is set to EXTENDABLE_RETENTION_PRICING, you can set a retention period of up to 3653 days, the equivalent of 10 years. If BillingMode is set to FIXED_RETENTION_PRICING, you can set a retention period of up to 2557 days, the equivalent of seven years. CloudTrail Lake determines whether to retain an event by checking if the eventTime of the event is within the specified retention period. For example, if you set a retention period of 90 days, CloudTrail will remove events when the eventTime is older than 90 days.  If you plan to copy trail events to this event data store, we recommend that you consider both the age of the events that you want to copy as well as how long you want to keep the copied events in your event data store. For example, if you copy trail events that are 5 years old and specify a retention period of 7 years, the event data store will retain those events for two years. 
+     */
+    RetentionPeriod?: RetentionPeriod;
+    /**
+     * Specifies whether termination protection is enabled for the event data store. If termination protection is enabled, you cannot delete the event data store until termination protection is disabled.
+     */
+    TerminationProtectionEnabled?: TerminationProtectionEnabled;
+    TagsList?: TagsList;
+    /**
+     * Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail. The value can be an alias name prefixed by alias/, a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.  Disabling or deleting the KMS key, or removing CloudTrail permissions on the key, prevents CloudTrail from logging events to the event data store, and prevents users from querying the data in the event data store that was encrypted with the key. After you associate an event data store with a KMS key, the KMS key cannot be removed or changed. Before you disable or delete a KMS key that you are using with an event data store, delete or back up your event data store.  CloudTrail also supports KMS multi-Region keys. For more information about multi-Region keys, see Using multi-Region keys in the Key Management Service Developer Guide. Examples:    alias/MyAliasName     arn:aws:kms:us-east-2:123456789012:alias/MyAliasName     arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012     12345678-1234-1234-1234-123456789012   
+     */
+    KmsKeyId?: EventDataStoreKmsKeyId;
+    /**
+     * Specifies whether the event data store should start ingesting live events. The default is true.
+     */
+    StartIngestion?: Boolean;
+    /**
+     * The billing mode for the event data store determines the cost for ingesting events and the default and maximum retention period for the event data store. The following are the possible values:    EXTENDABLE_RETENTION_PRICING - This billing mode is generally recommended if you want a flexible retention period of up to 3653 days (about 10 years). The default retention period for this billing mode is 366 days.    FIXED_RETENTION_PRICING - This billing mode is recommended if you expect to ingest more than 25 TB of event data per month and need a retention period of up to 2557 days (about 7 years). The default retention period for this billing mode is 2557 days.   The default value is EXTENDABLE_RETENTION_PRICING. For more information about CloudTrail pricing, see CloudTrail Pricing and Managing CloudTrail Lake costs.
+     */
+    BillingMode?: BillingMode;
+  }
+  export interface CreateEventDataStoreResponse {
+    /**
+     * The ARN of the event data store.
+     */
+    EventDataStoreArn?: EventDataStoreArn;
+    /**
+     * The name of the event data store.
+     */
+    Name?: EventDataStoreName;
+    /**
+     * The status of event data store creation.
+     */
+    Status?: EventDataStoreStatus;
+    /**
+     * The advanced event selectors that were used to select the events for the data store.
+     */
+    AdvancedEventSelectors?: AdvancedEventSelectors;
+    /**
+     * Indicates whether the event data store collects events from all Regions, or only from the Region in which it was created.
+     */
+    MultiRegionEnabled?: Boolean;
+    /**
+     * Indicates whether an event data store is collecting logged events for an organization in Organizations.
+     */
+    OrganizationEnabled?: Boolean;
+    /**
+     * The retention period of an event data store, in days.
+     */
+    RetentionPeriod?: RetentionPeriod;
+    /**
+     * Indicates whether termination protection is enabled for the event data store.
+     */
+    TerminationProtectionEnabled?: TerminationProtectionEnabled;
+    TagsList?: TagsList;
+    /**
+     * The timestamp that shows when the event data store was created.
+     */
+    CreatedTimestamp?: _Date;
+    /**
+     * The timestamp that shows when an event data store was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.
+     */
+    UpdatedTimestamp?: _Date;
+    /**
+     * Specifies the KMS key ID that encrypts the events delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the following format.  arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012 
+     */
+    KmsKeyId?: EventDataStoreKmsKeyId;
+    /**
+     * The billing mode for the event data store.
+     */
+    BillingMode?: BillingMode;
+  }
   export interface CreateTrailRequest {
     /**
-     * Specifies the name of the trail. The name must meet the following requirements:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)   Start with a letter or number, and end with a letter or number   Be between 3 and 128 characters   Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are invalid.   Not be in IP address format (for example, 192.168.5.4)  
+     * Specifies the name of the trail. The name must meet the following requirements:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)   Start with a letter or number, and end with a letter or number   Be between 3 and 128 characters   Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are not valid.   Not be in IP address format (for example, 192.168.5.4)  
      */
     Name: String;
     /**
-     * Specifies the name of the Amazon S3 bucket designated for publishing log files. See Amazon S3 Bucket Naming Requirements.
+     * Specifies the name of the Amazon S3 bucket designated for publishing log files. For information about bucket naming rules, see Bucket naming rules in the Amazon Simple Storage Service User Guide. 
      */
     S3BucketName: String;
     /**
@@ -161,25 +642,30 @@ declare namespace CloudTrail {
      */
     IncludeGlobalServiceEvents?: Boolean;
     /**
-     * Specifies whether the trail is created in the current region or in all regions. The default is false.
+     * Specifies whether the trail is created in the current Region or in all Regions. The default is false, which creates a trail only in the Region where you are signed in. As a best practice, consider creating trails that log events in all Regions.
      */
     IsMultiRegionTrail?: Boolean;
     /**
-     * Specifies whether log file integrity validation is enabled. The default is false.  When you disable log file integrity validation, the chain of digest files is broken after one hour. CloudTrail will not create digest files for log files that were delivered during a period in which log file integrity validation was disabled. For example, if you enable log file integrity validation at noon on January 1, disable it at noon on January 2, and re-enable it at noon on January 10, digest files will not be created for the log files delivered from noon on January 2 to noon on January 10. The same applies whenever you stop CloudTrail logging or delete a trail. 
+     * Specifies whether log file integrity validation is enabled. The default is false.  When you disable log file integrity validation, the chain of digest files is broken after one hour. CloudTrail does not create digest files for log files that were delivered during a period in which log file integrity validation was disabled. For example, if you enable log file integrity validation at noon on January 1, disable it at noon on January 2, and re-enable it at noon on January 10, digest files will not be created for the log files delivered from noon on January 2 to noon on January 10. The same applies whenever you stop CloudTrail logging or delete a trail. 
      */
     EnableLogFileValidation?: Boolean;
     /**
-     * Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn.
+     * Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. You must use a log group that exists in your account. Not required unless you specify CloudWatchLogsRoleArn.
      */
     CloudWatchLogsLogGroupArn?: String;
     /**
-     * Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.
+     * Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group. You must use a role that exists in your account.
      */
     CloudWatchLogsRoleArn?: String;
     /**
-     * Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by "alias/", a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier. Examples:   alias/MyAliasName   arn:aws:kms:us-east-1:123456789012:alias/MyAliasName   arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012   12345678-1234-1234-1234-123456789012  
+     * Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by alias/, a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier. CloudTrail also supports KMS multi-Region keys. For more information about multi-Region keys, see Using multi-Region keys in the Key Management Service Developer Guide. Examples:    alias/MyAliasName     arn:aws:kms:us-east-2:123456789012:alias/MyAliasName     arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012     12345678-1234-1234-1234-123456789012   
      */
     KmsKeyId?: String;
+    /**
+     * Specifies whether the trail is created for all accounts in an organization in Organizations, or only for the current Amazon Web Services account. The default is false, and cannot be true unless the call is made on behalf of an Amazon Web Services account that is the management account or delegated administrator account for an organization in Organizations.
+     */
+    IsOrganizationTrail?: Boolean;
+    TagsList?: TagsList;
   }
   export interface CreateTrailResponse {
     /**
@@ -195,11 +681,11 @@ declare namespace CloudTrail {
      */
     S3KeyPrefix?: String;
     /**
-     * This field is deprecated. Use SnsTopicARN.
+     * This field is no longer in use. Use SnsTopicARN.
      */
     SnsTopicName?: String;
     /**
-     * Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered. The format of a topic ARN is:  arn:aws:sns:us-east-1:123456789012:MyTopic 
+     * Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered. The format of a topic ARN is:  arn:aws:sns:us-east-2:123456789012:MyTopic 
      */
     SnsTopicARN?: String;
     /**
@@ -207,11 +693,11 @@ declare namespace CloudTrail {
      */
     IncludeGlobalServiceEvents?: Boolean;
     /**
-     * Specifies whether the trail exists in one region or in all regions.
+     * Specifies whether the trail exists in one Region or in all Regions.
      */
     IsMultiRegionTrail?: Boolean;
     /**
-     * Specifies the ARN of the trail that was created. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the ARN of the trail that was created. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     TrailARN?: String;
     /**
@@ -227,47 +713,184 @@ declare namespace CloudTrail {
      */
     CloudWatchLogsRoleArn?: String;
     /**
-     * Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:  arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012 
+     * Specifies the KMS key ID that encrypts the events delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the following format.  arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012 
      */
     KmsKeyId?: String;
+    /**
+     * Specifies whether the trail is an organization trail.
+     */
+    IsOrganizationTrail?: Boolean;
   }
   export interface DataResource {
     /**
-     * The resource type in which you want to log data events. You can specify only the following value: AWS::S3::Object.
+     * The resource type in which you want to log data events. You can specify the following basic event selector resource types:    AWS::DynamoDB::Table     AWS::Lambda::Function     AWS::S3::Object    Additional resource types are available through advanced event selectors. For more information about these additional resource types, see AdvancedFieldSelector.
      */
     Type?: String;
     /**
-     * A list of ARN-like strings for the specified S3 objects. To log data events for all objects in an S3 bucket, specify the bucket and an empty object prefix such as arn:aws:s3:::bucket-1/. The trail logs data events for all objects in this S3 bucket. To log data events for specific objects, specify the S3 bucket and object prefix such as arn:aws:s3:::bucket-1/example-images. The trail logs data events for objects in this S3 bucket that match the prefix.
+     * An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified resource type.   To log data events for all objects in all S3 buckets in your Amazon Web Services account, specify the prefix as arn:aws:s3.  This also enables logging of data event activity performed by any user or role in your Amazon Web Services account, even if that activity is performed on a bucket that belongs to another Amazon Web Services account.    To log data events for all objects in an S3 bucket, specify the bucket and an empty object prefix such as arn:aws:s3:::bucket-1/. The trail logs data events for all objects in this S3 bucket.   To log data events for specific objects, specify the S3 bucket and object prefix such as arn:aws:s3:::bucket-1/example-images. The trail logs data events for objects in this S3 bucket that match the prefix.   To log data events for all Lambda functions in your Amazon Web Services account, specify the prefix as arn:aws:lambda.  This also enables logging of Invoke activity performed by any user or role in your Amazon Web Services account, even if that activity is performed on a function that belongs to another Amazon Web Services account.     To log data events for a specific Lambda function, specify the function ARN.  Lambda function ARNs are exact. For example, if you specify a function ARN arn:aws:lambda:us-west-2:111111111111:function:helloworld, data events will only be logged for arn:aws:lambda:us-west-2:111111111111:function:helloworld. They will not be logged for arn:aws:lambda:us-west-2:111111111111:function:helloworld2.    To log data events for all DynamoDB tables in your Amazon Web Services account, specify the prefix as arn:aws:dynamodb.  
      */
     Values?: DataResourceValues;
   }
   export type DataResourceValues = String[];
   export type DataResources = DataResource[];
   export type _Date = Date;
+  export interface DeleteChannelRequest {
+    /**
+     * The ARN or the UUID value of the channel that you want to delete.
+     */
+    Channel: ChannelArn;
+  }
+  export interface DeleteChannelResponse {
+  }
+  export interface DeleteEventDataStoreRequest {
+    /**
+     * The ARN (or the ID suffix of the ARN) of the event data store to delete.
+     */
+    EventDataStore: EventDataStoreArn;
+  }
+  export interface DeleteEventDataStoreResponse {
+  }
+  export interface DeleteResourcePolicyRequest {
+    /**
+     *  The Amazon Resource Name (ARN) of the CloudTrail channel you're deleting the resource-based policy from. The following is the format of a resource ARN: arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel. 
+     */
+    ResourceArn: ResourceArn;
+  }
+  export interface DeleteResourcePolicyResponse {
+  }
   export interface DeleteTrailRequest {
     /**
-     * Specifies the name or the CloudTrail ARN of the trail to be deleted. The format of a trail ARN is: arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the name or the CloudTrail ARN of the trail to be deleted. The following is the format of a trail ARN. arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     Name: String;
   }
   export interface DeleteTrailResponse {
   }
+  export type DeliveryS3Uri = string;
+  export type DeliveryStatus = "SUCCESS"|"FAILED"|"FAILED_SIGNING_FILE"|"PENDING"|"RESOURCE_NOT_FOUND"|"ACCESS_DENIED"|"ACCESS_DENIED_SIGNING_FILE"|"CANCELLED"|"UNKNOWN"|string;
+  export interface DeregisterOrganizationDelegatedAdminRequest {
+    /**
+     * A delegated administrator account ID. This is a member account in an organization that is currently designated as a delegated administrator.
+     */
+    DelegatedAdminAccountId: AccountId;
+  }
+  export interface DeregisterOrganizationDelegatedAdminResponse {
+  }
+  export interface DescribeQueryRequest {
+    /**
+     * The ARN (or the ID suffix of the ARN) of an event data store on which the specified query was run.
+     */
+    EventDataStore?: EventDataStoreArn;
+    /**
+     * The query ID.
+     */
+    QueryId?: UUID;
+    /**
+     *  The alias that identifies a query template. 
+     */
+    QueryAlias?: QueryAlias;
+  }
+  export interface DescribeQueryResponse {
+    /**
+     * The ID of the query.
+     */
+    QueryId?: UUID;
+    /**
+     * The SQL code of a query.
+     */
+    QueryString?: QueryStatement;
+    /**
+     * The status of a query. Values for QueryStatus include QUEUED, RUNNING, FINISHED, FAILED, TIMED_OUT, or CANCELLED 
+     */
+    QueryStatus?: QueryStatus;
+    /**
+     * Metadata about a query, including the number of events that were matched, the total number of events scanned, the query run time in milliseconds, and the query's creation time.
+     */
+    QueryStatistics?: QueryStatisticsForDescribeQuery;
+    /**
+     * The error message returned if a query failed.
+     */
+    ErrorMessage?: ErrorMessage;
+    /**
+     * The URI for the S3 bucket where CloudTrail delivered query results, if applicable.
+     */
+    DeliveryS3Uri?: DeliveryS3Uri;
+    /**
+     * The delivery status.
+     */
+    DeliveryStatus?: DeliveryStatus;
+  }
   export interface DescribeTrailsRequest {
     /**
-     * Specifies a list of trail names, trail ARNs, or both, of the trails to describe. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail  If an empty list is specified, information for the trail in the current region is returned.   If an empty list is specified and IncludeShadowTrails is false, then information for all trails in the current region is returned.   If an empty list is specified and IncludeShadowTrails is null or true, then information for all trails in the current region and any associated shadow trails in other regions is returned.    If one or more trail names are specified, information is returned only if the names match the names of trails belonging only to the current region. To return information about a trail in another region, you must specify its trail ARN. 
+     * Specifies a list of trail names, trail ARNs, or both, of the trails to describe. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail  If an empty list is specified, information for the trail in the current Region is returned.   If an empty list is specified and IncludeShadowTrails is false, then information for all trails in the current Region is returned.   If an empty list is specified and IncludeShadowTrails is null or true, then information for all trails in the current Region and any associated shadow trails in other Regions is returned.    If one or more trail names are specified, information is returned only if the names match the names of trails belonging only to the current Region and current account. To return information about a trail in another Region, you must specify its trail ARN. 
      */
     trailNameList?: TrailNameList;
     /**
-     * Specifies whether to include shadow trails in the response. A shadow trail is the replication in a region of a trail that was created in a different region. The default is true.
+     * Specifies whether to include shadow trails in the response. A shadow trail is the replication in a Region of a trail that was created in a different Region, or in the case of an organization trail, the replication of an organization trail in member accounts. If you do not include shadow trails, organization trails in a member account and Region replication trails will not be returned. The default is true.
      */
     includeShadowTrails?: Boolean;
   }
   export interface DescribeTrailsResponse {
     /**
-     * The list of trail objects.
+     * The list of trail objects. Trail objects with string values are only returned if values for the objects exist in a trail's configuration. For example, SNSTopicName and SNSTopicARN are only returned in results if a trail is configured to send SNS notifications. Similarly, KMSKeyId only appears in results if a trail's log files are encrypted with KMS customer managed keys.
      */
     trailList?: TrailList;
   }
+  export interface Destination {
+    /**
+     * The type of destination for events arriving from a channel. For channels used for a CloudTrail Lake integration, the value is EVENT_DATA_STORE. For service-linked channels, the value is AWS_SERVICE. 
+     */
+    Type: DestinationType;
+    /**
+     *  For channels used for a CloudTrail Lake integration, the location is the ARN of an event data store that receives events from a channel. For service-linked channels, the location is the name of the Amazon Web Services service.
+     */
+    Location: Location;
+  }
+  export type DestinationType = "EVENT_DATA_STORE"|"AWS_SERVICE"|string;
+  export type Destinations = Destination[];
+  export interface DisableFederationRequest {
+    /**
+     *  The ARN (or ID suffix of the ARN) of the event data store for which you want to disable Lake query federation. 
+     */
+    EventDataStore: EventDataStoreArn;
+  }
+  export interface DisableFederationResponse {
+    /**
+     *  The ARN of the event data store for which you disabled Lake query federation. 
+     */
+    EventDataStoreArn?: EventDataStoreArn;
+    /**
+     *  The federation status. 
+     */
+    FederationStatus?: FederationStatus;
+  }
+  export type Double = number;
+  export interface EnableFederationRequest {
+    /**
+     * The ARN (or ID suffix of the ARN) of the event data store for which you want to enable Lake query federation.
+     */
+    EventDataStore: EventDataStoreArn;
+    /**
+     *  The ARN of the federation role to use for the event data store. Amazon Web Services services like Lake Formation use this federation role to access data for the federated event data store. The federation role must exist in your account and provide the required minimum permissions. 
+     */
+    FederationRoleArn: FederationRoleArn;
+  }
+  export interface EnableFederationResponse {
+    /**
+     *  The ARN of the event data store for which you enabled Lake query federation. 
+     */
+    EventDataStoreArn?: EventDataStoreArn;
+    /**
+     *  The federation status. 
+     */
+    FederationStatus?: FederationStatus;
+    /**
+     *  The ARN of the federation role. 
+     */
+    FederationRoleArn?: FederationRoleArn;
+  }
+  export type ErrorCode = string;
+  export type ErrorMessage = string;
   export interface Event {
     /**
      * The CloudTrail ID of the event returned.
@@ -278,11 +901,19 @@ declare namespace CloudTrail {
      */
     EventName?: String;
     /**
+     * Information about whether the event is a write event or a read event. 
+     */
+    ReadOnly?: String;
+    /**
+     * The Amazon Web Services access key ID that was used to sign the request. If the request was made with temporary security credentials, this is the access key ID of the temporary credentials.
+     */
+    AccessKeyId?: String;
+    /**
      * The date and time of the event returned.
      */
     EventTime?: _Date;
     /**
-     * The AWS service that the request was made to.
+     * The Amazon Web Services service to which the request was made.
      */
     EventSource?: String;
     /**
@@ -298,25 +929,182 @@ declare namespace CloudTrail {
      */
     CloudTrailEvent?: String;
   }
+  export type EventCategory = "insight"|string;
+  export interface EventDataStore {
+    /**
+     * The ARN of the event data store.
+     */
+    EventDataStoreArn?: EventDataStoreArn;
+    /**
+     * The name of the event data store.
+     */
+    Name?: EventDataStoreName;
+    /**
+     * Indicates whether the event data store is protected from termination.
+     */
+    TerminationProtectionEnabled?: TerminationProtectionEnabled;
+    /**
+     * The status of an event data store.
+     */
+    Status?: EventDataStoreStatus;
+    /**
+     * The advanced event selectors that were used to select events for the data store.
+     */
+    AdvancedEventSelectors?: AdvancedEventSelectors;
+    /**
+     * Indicates whether the event data store includes events from all Regions, or only from the Region in which it was created.
+     */
+    MultiRegionEnabled?: Boolean;
+    /**
+     * Indicates that an event data store is collecting logged events for an organization.
+     */
+    OrganizationEnabled?: Boolean;
+    /**
+     * The retention period, in days.
+     */
+    RetentionPeriod?: RetentionPeriod;
+    /**
+     * The timestamp of the event data store's creation.
+     */
+    CreatedTimestamp?: _Date;
+    /**
+     * The timestamp showing when an event data store was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.
+     */
+    UpdatedTimestamp?: _Date;
+  }
+  export type EventDataStoreArn = string;
+  export type EventDataStoreKmsKeyId = string;
+  export type EventDataStoreName = string;
+  export type EventDataStoreStatus = "CREATED"|"ENABLED"|"PENDING_DELETION"|"STARTING_INGESTION"|"STOPPING_INGESTION"|"STOPPED_INGESTION"|string;
+  export type EventDataStores = EventDataStore[];
+  export type EventName = string;
   export interface EventSelector {
     /**
      * Specify if you want your trail to log read-only events, write-only events, or all. For example, the EC2 GetConsoleOutput is a read-only API operation and RunInstances is a write-only API operation.  By default, the value is All.
      */
     ReadWriteType?: ReadWriteType;
     /**
-     * Specify if you want your event selector to include management events for your trail.  For more information, see Management Events in the AWS CloudTrail User Guide. By default, the value is true.
+     * Specify if you want your event selector to include management events for your trail.  For more information, see Management Events in the CloudTrail User Guide. By default, the value is true. The first copy of management events is free. You are charged for additional copies of management events that you are logging on any subsequent trail in the same Region. For more information about CloudTrail pricing, see CloudTrail Pricing.
      */
     IncludeManagementEvents?: Boolean;
     /**
-     * CloudTrail supports logging only data events for S3 objects. You can specify up to 250 S3 buckets and object prefixes for a trail. For more information, see Data Events in the AWS CloudTrail User Guide.
+     * CloudTrail supports data event logging for Amazon S3 objects, Lambda functions, and Amazon DynamoDB tables with basic event selectors. You can specify up to 250 resources for an individual event selector, but the total number of data resources cannot exceed 250 across all event selectors in a trail. This limit does not apply if you configure resource logging for all data events. For more information, see Data Events and Limits in CloudTrail in the CloudTrail User Guide.
      */
     DataResources?: DataResources;
+    /**
+     * An optional list of service event sources from which you do not want management events to be logged on your trail. In this release, the list can be empty (disables the filter), or it can filter out Key Management Service or Amazon RDS Data API events by containing kms.amazonaws.com or rdsdata.amazonaws.com. By default, ExcludeManagementEventSources is empty, and KMS and Amazon RDS Data API events are logged to your trail. You can exclude management event sources only in Regions that support the event source.
+     */
+    ExcludeManagementEventSources?: ExcludeManagementEventSources;
   }
   export type EventSelectors = EventSelector[];
+  export type EventSource = string;
   export type EventsList = Event[];
+  export type ExcludeManagementEventSources = String[];
+  export type FederationRoleArn = string;
+  export type FederationStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|string;
+  export interface GetChannelRequest {
+    /**
+     * The ARN or UUID of a channel.
+     */
+    Channel: ChannelArn;
+  }
+  export interface GetChannelResponse {
+    /**
+     * The ARN of an channel returned by a GetChannel request.
+     */
+    ChannelArn?: ChannelArn;
+    /**
+     *  The name of the CloudTrail channel. For service-linked channels, the name is aws-service-channel/service-name/custom-suffix where service-name represents the name of the Amazon Web Services service that created the channel and custom-suffix represents the suffix generated by the Amazon Web Services service. 
+     */
+    Name?: ChannelName;
+    /**
+     * The source for the CloudTrail channel.
+     */
+    Source?: Source;
+    /**
+     *  Provides information about the advanced event selectors configured for the channel, and whether the channel applies to all Regions or a single Region. 
+     */
+    SourceConfig?: SourceConfig;
+    /**
+     * The destinations for the channel. For channels created for integrations, the destinations are the event data stores that log events arriving through the channel. For service-linked channels, the destination is the Amazon Web Services service that created the service-linked channel to receive events.
+     */
+    Destinations?: Destinations;
+    /**
+     * A table showing information about the most recent successful and failed attempts to ingest events.
+     */
+    IngestionStatus?: IngestionStatus;
+  }
+  export interface GetEventDataStoreRequest {
+    /**
+     * The ARN (or ID suffix of the ARN) of the event data store about which you want information.
+     */
+    EventDataStore: EventDataStoreArn;
+  }
+  export interface GetEventDataStoreResponse {
+    /**
+     * The event data store Amazon Resource Number (ARN).
+     */
+    EventDataStoreArn?: EventDataStoreArn;
+    /**
+     * The name of the event data store.
+     */
+    Name?: EventDataStoreName;
+    /**
+     * The status of an event data store.
+     */
+    Status?: EventDataStoreStatus;
+    /**
+     * The advanced event selectors used to select events for the data store.
+     */
+    AdvancedEventSelectors?: AdvancedEventSelectors;
+    /**
+     * Indicates whether the event data store includes events from all Regions, or only from the Region in which it was created.
+     */
+    MultiRegionEnabled?: Boolean;
+    /**
+     * Indicates whether an event data store is collecting logged events for an organization in Organizations.
+     */
+    OrganizationEnabled?: Boolean;
+    /**
+     * The retention period of the event data store, in days.
+     */
+    RetentionPeriod?: RetentionPeriod;
+    /**
+     * Indicates that termination protection is enabled.
+     */
+    TerminationProtectionEnabled?: TerminationProtectionEnabled;
+    /**
+     * The timestamp of the event data store's creation.
+     */
+    CreatedTimestamp?: _Date;
+    /**
+     * Shows the time that an event data store was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.
+     */
+    UpdatedTimestamp?: _Date;
+    /**
+     * Specifies the KMS key ID that encrypts the events delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the following format.  arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012 
+     */
+    KmsKeyId?: EventDataStoreKmsKeyId;
+    /**
+     * The billing mode for the event data store.
+     */
+    BillingMode?: BillingMode;
+    /**
+     *  Indicates the Lake query federation status. The status is ENABLED if Lake query federation is enabled, or DISABLED if Lake query federation is disabled. You cannot delete an event data store if the FederationStatus is ENABLED. 
+     */
+    FederationStatus?: FederationStatus;
+    /**
+     *  If Lake query federation is enabled, provides the ARN of the federation role used to access the resources for the federated event data store. 
+     */
+    FederationRoleArn?: FederationRoleArn;
+    /**
+     * The partition keys for the event data store. To improve query performance and efficiency, CloudTrail Lake organizes event data into partitions based on values derived from partition keys.
+     */
+    PartitionKeys?: PartitionKeyList;
+  }
   export interface GetEventSelectorsRequest {
     /**
-     * Specifies the name of the trail or trail ARN. If you specify a trail name, the string must meet the following requirements:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)   Start with a letter or number, and end with a letter or number   Be between 3 and 128 characters   Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are invalid.   Not be in IP address format (for example, 192.168.5.4)   If you specify a trail ARN, it must be in the format:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the name of the trail or trail ARN. If you specify a trail name, the string must meet the following requirements:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)   Start with a letter or number, and end with a letter or number   Be between 3 and 128 characters   Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are not valid.   Not be in IP address format (for example, 192.168.5.4)   If you specify a trail ARN, it must be in the format:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     TrailName: String;
   }
@@ -329,20 +1117,161 @@ declare namespace CloudTrail {
      * The event selectors that are configured for the trail.
      */
     EventSelectors?: EventSelectors;
+    /**
+     *  The advanced event selectors that are configured for the trail. 
+     */
+    AdvancedEventSelectors?: AdvancedEventSelectors;
+  }
+  export interface GetImportRequest {
+    /**
+     *  The ID for the import. 
+     */
+    ImportId: UUID;
+  }
+  export interface GetImportResponse {
+    /**
+     *  The ID of the import. 
+     */
+    ImportId?: UUID;
+    /**
+     *  The ARN of the destination event data store. 
+     */
+    Destinations?: ImportDestinations;
+    /**
+     *  The source S3 bucket. 
+     */
+    ImportSource?: ImportSource;
+    /**
+     *  Used with EndEventTime to bound a StartImport request, and limit imported trail events to only those events logged within a specified time period. 
+     */
+    StartEventTime?: _Date;
+    /**
+     *  Used with StartEventTime to bound a StartImport request, and limit imported trail events to only those events logged within a specified time period. 
+     */
+    EndEventTime?: _Date;
+    /**
+     *  The status of the import. 
+     */
+    ImportStatus?: ImportStatus;
+    /**
+     *  The timestamp of the import's creation. 
+     */
+    CreatedTimestamp?: _Date;
+    /**
+     *  The timestamp of when the import was updated. 
+     */
+    UpdatedTimestamp?: _Date;
+    /**
+     *  Provides statistics for the import. CloudTrail does not update import statistics in real-time. Returned values for parameters such as EventsCompleted may be lower than the actual value, because CloudTrail updates statistics incrementally over the course of the import. 
+     */
+    ImportStatistics?: ImportStatistics;
+  }
+  export interface GetInsightSelectorsRequest {
+    /**
+     * Specifies the name of the trail or trail ARN. If you specify a trail name, the string must meet the following requirements:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)   Start with a letter or number, and end with a letter or number   Be between 3 and 128 characters   Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are not valid.   Not be in IP address format (for example, 192.168.5.4)   If you specify a trail ARN, it must be in the format:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail  You cannot use this parameter with the EventDataStore parameter.
+     */
+    TrailName?: String;
+    /**
+     *  Specifies the ARN (or ID suffix of the ARN) of the event data store for which you want to get Insights selectors.  You cannot use this parameter with the TrailName parameter.
+     */
+    EventDataStore?: EventDataStoreArn;
+  }
+  export interface GetInsightSelectorsResponse {
+    /**
+     * The Amazon Resource Name (ARN) of a trail for which you want to get Insights selectors.
+     */
+    TrailARN?: String;
+    /**
+     * A JSON string that contains the Insight types you want to log on a trail or event data store. ApiErrorRateInsight and ApiCallRateInsight are supported as Insights types.
+     */
+    InsightSelectors?: InsightSelectors;
+    /**
+     *  The ARN of the source event data store that enabled Insights events. 
+     */
+    EventDataStoreArn?: EventDataStoreArn;
+    /**
+     *  The ARN of the destination event data store that logs Insights events. 
+     */
+    InsightsDestination?: EventDataStoreArn;
+  }
+  export interface GetQueryResultsRequest {
+    /**
+     * The ARN (or ID suffix of the ARN) of the event data store against which the query was run.
+     */
+    EventDataStore?: EventDataStoreArn;
+    /**
+     * The ID of the query for which you want to get results.
+     */
+    QueryId: UUID;
+    /**
+     * A token you can use to get the next page of query results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of query results to display on a single page.
+     */
+    MaxQueryResults?: MaxQueryResults;
+  }
+  export interface GetQueryResultsResponse {
+    /**
+     * The status of the query. Values include QUEUED, RUNNING, FINISHED, FAILED, TIMED_OUT, or CANCELLED.
+     */
+    QueryStatus?: QueryStatus;
+    /**
+     * Shows the count of query results.
+     */
+    QueryStatistics?: QueryStatistics;
+    /**
+     * Contains the individual event results of the query.
+     */
+    QueryResultRows?: QueryResultRows;
+    /**
+     * A token you can use to get the next page of query results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The error message returned if a query failed.
+     */
+    ErrorMessage?: ErrorMessage;
+  }
+  export interface GetResourcePolicyRequest {
+    /**
+     *  The Amazon Resource Name (ARN) of the CloudTrail channel attached to the resource-based policy. The following is the format of a resource ARN: arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel. 
+     */
+    ResourceArn: ResourceArn;
+  }
+  export interface GetResourcePolicyResponse {
+    /**
+     *  The Amazon Resource Name (ARN) of the CloudTrail channel attached to resource-based policy. 
+     */
+    ResourceArn?: ResourceArn;
+    /**
+     *  A JSON-formatted string that contains the resource-based policy attached to the CloudTrail channel. 
+     */
+    ResourcePolicy?: ResourcePolicy;
+  }
+  export interface GetTrailRequest {
+    /**
+     * The name or the Amazon Resource Name (ARN) of the trail for which you want to retrieve settings information.
+     */
+    Name: String;
+  }
+  export interface GetTrailResponse {
+    Trail?: Trail;
   }
   export interface GetTrailStatusRequest {
     /**
-     * Specifies the name or the CloudTrail ARN of the trail for which you are requesting status. To get the status of a shadow trail (a replication of the trail in another region), you must specify its ARN. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the name or the CloudTrail ARN of the trail for which you are requesting status. To get the status of a shadow trail (a replication of the trail in another Region), you must specify its ARN. The following is the format of a trail ARN.  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     Name: String;
   }
   export interface GetTrailStatusResponse {
     /**
-     * Whether the CloudTrail is currently logging AWS API calls.
+     * Whether the CloudTrail trail is currently logging Amazon Web Services API calls.
      */
     IsLogging?: Boolean;
     /**
-     * Displays any Amazon S3 error that CloudTrail encountered when attempting to deliver log files to the designated bucket. For more information see the topic Error Responses in the Amazon S3 API Reference.   This error occurs only when there is a problem with the destination S3 bucket and will not occur for timeouts. To resolve the issue, create a new bucket and call UpdateTrail to specify the new bucket, or fix the existing objects so that CloudTrail can again write to the bucket. 
+     * Displays any Amazon S3 error that CloudTrail encountered when attempting to deliver log files to the designated bucket. For more information, see Error Responses in the Amazon S3 API Reference.   This error occurs only when there is a problem with the destination S3 bucket, and does not occur for requests that time out. To resolve the issue, fix the bucket policy so that CloudTrail can write to the bucket; or create a new bucket and call UpdateTrail to specify the new bucket. 
      */
     LatestDeliveryError?: String;
     /**
@@ -358,11 +1287,11 @@ declare namespace CloudTrail {
      */
     LatestNotificationTime?: _Date;
     /**
-     * Specifies the most recent date and time when CloudTrail started recording API calls for an AWS account.
+     * Specifies the most recent date and time when CloudTrail started recording API calls for an Amazon Web Services account.
      */
     StartLoggingTime?: _Date;
     /**
-     * Specifies the most recent date and time when CloudTrail stopped recording API calls for an AWS account.
+     * Specifies the most recent date and time when CloudTrail stopped recording API calls for an Amazon Web Services account.
      */
     StopLoggingTime?: _Date;
     /**
@@ -378,33 +1307,314 @@ declare namespace CloudTrail {
      */
     LatestDigestDeliveryTime?: _Date;
     /**
-     * Displays any Amazon S3 error that CloudTrail encountered when attempting to deliver a digest file to the designated bucket. For more information see the topic Error Responses in the Amazon S3 API Reference.   This error occurs only when there is a problem with the destination S3 bucket and will not occur for timeouts. To resolve the issue, create a new bucket and call UpdateTrail to specify the new bucket, or fix the existing objects so that CloudTrail can again write to the bucket. 
+     * Displays any Amazon S3 error that CloudTrail encountered when attempting to deliver a digest file to the designated bucket. For more information, see Error Responses in the Amazon S3 API Reference.   This error occurs only when there is a problem with the destination S3 bucket, and does not occur for requests that time out. To resolve the issue, fix the bucket policy so that CloudTrail can write to the bucket; or create a new bucket and call UpdateTrail to specify the new bucket. 
      */
     LatestDigestDeliveryError?: String;
     /**
-     * This field is deprecated.
+     * This field is no longer in use.
      */
     LatestDeliveryAttemptTime?: String;
     /**
-     * This field is deprecated.
+     * This field is no longer in use.
      */
     LatestNotificationAttemptTime?: String;
     /**
-     * This field is deprecated.
+     * This field is no longer in use.
      */
     LatestNotificationAttemptSucceeded?: String;
     /**
-     * This field is deprecated.
+     * This field is no longer in use.
      */
     LatestDeliveryAttemptSucceeded?: String;
     /**
-     * This field is deprecated.
+     * This field is no longer in use.
      */
     TimeLoggingStarted?: String;
     /**
-     * This field is deprecated.
+     * This field is no longer in use.
      */
     TimeLoggingStopped?: String;
+  }
+  export type ImportDestinations = EventDataStoreArn[];
+  export type ImportFailureList = ImportFailureListItem[];
+  export interface ImportFailureListItem {
+    /**
+     *  The location of the failure in the S3 bucket. 
+     */
+    Location?: String;
+    /**
+     *  The status of the import. 
+     */
+    Status?: ImportFailureStatus;
+    /**
+     *  The type of import error. 
+     */
+    ErrorType?: String;
+    /**
+     *  Provides the reason the import failed. 
+     */
+    ErrorMessage?: String;
+    /**
+     *  When the import was last updated. 
+     */
+    LastUpdatedTime?: _Date;
+  }
+  export type ImportFailureStatus = "FAILED"|"RETRY"|"SUCCEEDED"|string;
+  export interface ImportSource {
+    /**
+     *  The source S3 bucket. 
+     */
+    S3: S3ImportSource;
+  }
+  export interface ImportStatistics {
+    /**
+     *  The number of S3 prefixes found for the import. 
+     */
+    PrefixesFound?: Long;
+    /**
+     *  The number of S3 prefixes that completed import. 
+     */
+    PrefixesCompleted?: Long;
+    /**
+     * The number of log files that completed import.
+     */
+    FilesCompleted?: Long;
+    /**
+     *  The number of trail events imported into the event data store. 
+     */
+    EventsCompleted?: Long;
+    /**
+     *  The number of failed entries. 
+     */
+    FailedEntries?: Long;
+  }
+  export type ImportStatus = "INITIALIZING"|"IN_PROGRESS"|"FAILED"|"STOPPED"|"COMPLETED"|string;
+  export type ImportsList = ImportsListItem[];
+  export interface ImportsListItem {
+    /**
+     *  The ID of the import. 
+     */
+    ImportId?: UUID;
+    /**
+     *  The status of the import. 
+     */
+    ImportStatus?: ImportStatus;
+    /**
+     *  The ARN of the destination event data store. 
+     */
+    Destinations?: ImportDestinations;
+    /**
+     *  The timestamp of the import's creation. 
+     */
+    CreatedTimestamp?: _Date;
+    /**
+     *  The timestamp of the import's last update. 
+     */
+    UpdatedTimestamp?: _Date;
+  }
+  export interface IngestionStatus {
+    /**
+     * The time stamp of the most recent successful ingestion of events for the channel.
+     */
+    LatestIngestionSuccessTime?: _Date;
+    /**
+     * The event ID of the most recent successful ingestion of events.
+     */
+    LatestIngestionSuccessEventID?: UUID;
+    /**
+     * The error code for the most recent failure to ingest events.
+     */
+    LatestIngestionErrorCode?: ErrorMessage;
+    /**
+     * The time stamp of the most recent attempt to ingest events on the channel.
+     */
+    LatestIngestionAttemptTime?: _Date;
+    /**
+     * The event ID of the most recent attempt to ingest events.
+     */
+    LatestIngestionAttemptEventID?: UUID;
+  }
+  export interface InsightSelector {
+    /**
+     * The type of Insights events to log on a trail or event data store. ApiCallRateInsight and ApiErrorRateInsight are valid Insight types. The ApiCallRateInsight Insights type analyzes write-only management API calls that are aggregated per minute against a baseline API call volume. The ApiErrorRateInsight Insights type analyzes management API calls that result in error codes. The error is shown if the API call is unsuccessful.
+     */
+    InsightType?: InsightType;
+  }
+  export type InsightSelectors = InsightSelector[];
+  export type InsightType = "ApiCallRateInsight"|"ApiErrorRateInsight"|string;
+  export type InsightsMetricDataType = "FillWithZeros"|"NonZeroData"|string;
+  export type InsightsMetricMaxResults = number;
+  export type InsightsMetricNextToken = string;
+  export type InsightsMetricPeriod = number;
+  export type InsightsMetricValues = Double[];
+  export type Integer = number;
+  export type ListChannelsMaxResultsCount = number;
+  export interface ListChannelsRequest {
+    /**
+     *  The maximum number of CloudTrail channels to display on a single page. 
+     */
+    MaxResults?: ListChannelsMaxResultsCount;
+    /**
+     * The token to use to get the next page of results after a previous API call. This token must be passed in with the same parameters that were specified in the original call. For example, if the original call specified an AttributeKey of 'Username' with a value of 'root', the call with NextToken should include those same parameters.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListChannelsResponse {
+    /**
+     *  The list of channels in the account. 
+     */
+    Channels?: Channels;
+    /**
+     * The token to use to get the next page of results after a previous API call.
+     */
+    NextToken?: PaginationToken;
+  }
+  export type ListEventDataStoresMaxResultsCount = number;
+  export interface ListEventDataStoresRequest {
+    /**
+     * A token you can use to get the next page of event data store results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of event data stores to display on a single page.
+     */
+    MaxResults?: ListEventDataStoresMaxResultsCount;
+  }
+  export interface ListEventDataStoresResponse {
+    /**
+     * Contains information about event data stores in the account, in the current Region.
+     */
+    EventDataStores?: EventDataStores;
+    /**
+     * A token you can use to get the next page of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export type ListImportFailuresMaxResultsCount = number;
+  export interface ListImportFailuresRequest {
+    /**
+     *  The ID of the import. 
+     */
+    ImportId: UUID;
+    /**
+     *  The maximum number of failures to display on a single page. 
+     */
+    MaxResults?: ListImportFailuresMaxResultsCount;
+    /**
+     *  A token you can use to get the next page of import failures. 
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListImportFailuresResponse {
+    /**
+     *  Contains information about the import failures. 
+     */
+    Failures?: ImportFailureList;
+    /**
+     *  A token you can use to get the next page of results. 
+     */
+    NextToken?: PaginationToken;
+  }
+  export type ListImportsMaxResultsCount = number;
+  export interface ListImportsRequest {
+    /**
+     *  The maximum number of imports to display on a single page. 
+     */
+    MaxResults?: ListImportsMaxResultsCount;
+    /**
+     *  The ARN of the destination event data store. 
+     */
+    Destination?: EventDataStoreArn;
+    /**
+     *  The status of the import. 
+     */
+    ImportStatus?: ImportStatus;
+    /**
+     *  A token you can use to get the next page of import results. 
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListImportsResponse {
+    /**
+     *  The list of returned imports. 
+     */
+    Imports?: ImportsList;
+    /**
+     *  A token you can use to get the next page of import results. 
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListInsightsMetricDataRequest {
+    /**
+     * The Amazon Web Services service to which the request was made, such as iam.amazonaws.com or s3.amazonaws.com.
+     */
+    EventSource: EventSource;
+    /**
+     * The name of the event, typically the Amazon Web Services API on which unusual levels of activity were recorded.
+     */
+    EventName: EventName;
+    /**
+     * The type of CloudTrail Insights event, which is either ApiCallRateInsight or ApiErrorRateInsight. The ApiCallRateInsight Insights type analyzes write-only management API calls that are aggregated per minute against a baseline API call volume. The ApiErrorRateInsight Insights type analyzes management API calls that result in error codes.
+     */
+    InsightType: InsightType;
+    /**
+     * Conditionally required if the InsightType parameter is set to ApiErrorRateInsight. If returning metrics for the ApiErrorRateInsight Insights type, this is the error to retrieve data for. For example, AccessDenied.
+     */
+    ErrorCode?: ErrorCode;
+    /**
+     * Specifies, in UTC, the start time for time-series data. The value specified is inclusive; results include data points with the specified time stamp. The default is 90 days before the time of request.
+     */
+    StartTime?: _Date;
+    /**
+     * Specifies, in UTC, the end time for time-series data. The value specified is exclusive; results include data points up to the specified time stamp. The default is the time of request.
+     */
+    EndTime?: _Date;
+    /**
+     * Granularity of data to retrieve, in seconds. Valid values are 60, 300, and 3600. If you specify any other value, you will get an error. The default is 3600 seconds.
+     */
+    Period?: InsightsMetricPeriod;
+    /**
+     * Type of datapoints to return. Valid values are NonZeroData and FillWithZeros. The default is NonZeroData.
+     */
+    DataType?: InsightsMetricDataType;
+    /**
+     * The maximum number of datapoints to return. Valid values are integers from 1 to 21600. The default value is 21600.
+     */
+    MaxResults?: InsightsMetricMaxResults;
+    /**
+     * Returned if all datapoints can't be returned in a single call. For example, due to reaching MaxResults. Add this parameter to the request to continue retrieving results starting from the last evaluated point.
+     */
+    NextToken?: InsightsMetricNextToken;
+  }
+  export interface ListInsightsMetricDataResponse {
+    /**
+     * The Amazon Web Services service to which the request was made, such as iam.amazonaws.com or s3.amazonaws.com.
+     */
+    EventSource?: EventSource;
+    /**
+     * The name of the event, typically the Amazon Web Services API on which unusual levels of activity were recorded.
+     */
+    EventName?: EventName;
+    /**
+     * The type of CloudTrail Insights event, which is either ApiCallRateInsight or ApiErrorRateInsight. The ApiCallRateInsight Insights type analyzes write-only management API calls that are aggregated per minute against a baseline API call volume. The ApiErrorRateInsight Insights type analyzes management API calls that result in error codes.
+     */
+    InsightType?: InsightType;
+    /**
+     * Only returned if InsightType parameter was set to ApiErrorRateInsight. If returning metrics for the ApiErrorRateInsight Insights type, this is the error to retrieve data for. For example, AccessDenied.
+     */
+    ErrorCode?: ErrorCode;
+    /**
+     * List of timestamps at intervals corresponding to the specified time period.
+     */
+    Timestamps?: Timestamps;
+    /**
+     * List of values representing the API call rate or error rate at each timestamp. The number of values is equal to the number of timestamps.
+     */
+    Values?: InsightsMetricValues;
+    /**
+     * Only returned if the full results could not be returned in a single query. You can set the NextToken parameter in the next request to this value to continue retrieval.
+     */
+    NextToken?: InsightsMetricNextToken;
   }
   export interface ListPublicKeysRequest {
     /**
@@ -430,9 +1640,46 @@ declare namespace CloudTrail {
      */
     NextToken?: String;
   }
+  export type ListQueriesMaxResultsCount = number;
+  export interface ListQueriesRequest {
+    /**
+     * The ARN (or the ID suffix of the ARN) of an event data store on which queries were run.
+     */
+    EventDataStore: EventDataStoreArn;
+    /**
+     * A token you can use to get the next page of results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of queries to show on a page.
+     */
+    MaxResults?: ListQueriesMaxResultsCount;
+    /**
+     * Use with EndTime to bound a ListQueries request, and limit its results to only those queries run within a specified time period.
+     */
+    StartTime?: _Date;
+    /**
+     * Use with StartTime to bound a ListQueries request, and limit its results to only those queries run within a specified time period.
+     */
+    EndTime?: _Date;
+    /**
+     * The status of queries that you want to return in results. Valid values for QueryStatus include QUEUED, RUNNING, FINISHED, FAILED, TIMED_OUT, or CANCELLED.
+     */
+    QueryStatus?: QueryStatus;
+  }
+  export interface ListQueriesResponse {
+    /**
+     * Lists matching query results, and shows query ID, status, and creation time of each query.
+     */
+    Queries?: Queries;
+    /**
+     * A token you can use to get the next page of results.
+     */
+    NextToken?: PaginationToken;
+  }
   export interface ListTagsRequest {
     /**
-     * Specifies a list of trail ARNs whose tags will be listed. The list has a limit of 20 ARNs. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies a list of trail, event data store, or channel ARNs whose tags will be listed. The list has a limit of 20 ARNs.  Example trail ARN format: arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail  Example event data store ARN format: arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE  Example channel ARN format: arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890 
      */
     ResourceIdList: ResourceIdList;
     /**
@@ -450,17 +1697,36 @@ declare namespace CloudTrail {
      */
     NextToken?: String;
   }
+  export interface ListTrailsRequest {
+    /**
+     * The token to use to get the next page of results after a previous API call. This token must be passed in with the same parameters that were specified in the original call. For example, if the original call specified an AttributeKey of 'Username' with a value of 'root', the call with NextToken should include those same parameters.
+     */
+    NextToken?: String;
+  }
+  export interface ListTrailsResponse {
+    /**
+     * Returns the name, ARN, and home Region of trails in the current account.
+     */
+    Trails?: Trails;
+    /**
+     * The token to use to get the next page of results after a previous API call. If the token does not appear, there are no more results to return. The token must be passed in with the same parameters as the previous call. For example, if the original call specified an AttributeKey of 'Username' with a value of 'root', the call with NextToken should include those same parameters.
+     */
+    NextToken?: String;
+  }
+  export type Location = string;
+  export type Long = number;
   export interface LookupAttribute {
     /**
      * Specifies an attribute on which to filter the events returned.
      */
     AttributeKey: LookupAttributeKey;
     /**
-     * Specifies a value for the specified AttributeKey.
+     * Specifies a value for the specified AttributeKey. The maximum length for the AttributeValue is 2000 characters. The following characters ('_', ' ', ',', '\\n') count as two characters towards the 2000 character limit.
      */
-    AttributeValue: String;
+    AttributeValue: LookupAttributeValue;
   }
-  export type LookupAttributeKey = "EventId"|"EventName"|"Username"|"ResourceType"|"ResourceName"|"EventSource"|string;
+  export type LookupAttributeKey = "EventId"|"EventName"|"ReadOnly"|"Username"|"ResourceType"|"ResourceName"|"EventSource"|"AccessKeyId"|string;
+  export type LookupAttributeValue = string;
   export type LookupAttributesList = LookupAttribute[];
   export interface LookupEventsRequest {
     /**
@@ -476,11 +1742,15 @@ declare namespace CloudTrail {
      */
     EndTime?: _Date;
     /**
-     * The number of events to return. Possible values are 1 through 50. The default is 10.
+     * Specifies the event category. If you do not specify an event category, events of the category are not returned in the response. For example, if you do not specify insight as the value of EventCategory, no Insights events are returned.
+     */
+    EventCategory?: EventCategory;
+    /**
+     * The number of events to return. Possible values are 1 through 50. The default is 50.
      */
     MaxResults?: MaxResults;
     /**
-     * The token to use to get the next page of results after a previous API call. This token must be passed in with the same parameters that were specified in the the original call. For example, if the original call specified an AttributeKey of 'Username' with a value of 'root', the call with NextToken should include those same parameters.
+     * The token to use to get the next page of results after a previous API call. This token must be passed in with the same parameters that were specified in the original call. For example, if the original call specified an AttributeKey of 'Username' with a value of 'root', the call with NextToken should include those same parameters.
      */
     NextToken?: NextToken;
   }
@@ -494,8 +1764,25 @@ declare namespace CloudTrail {
      */
     NextToken?: NextToken;
   }
+  export type MaxQueryResults = number;
   export type MaxResults = number;
   export type NextToken = string;
+  export type Operator = OperatorValue[];
+  export type OperatorValue = string;
+  export type PaginationToken = string;
+  export interface PartitionKey {
+    /**
+     * The name of the partition key.
+     */
+    Name: PartitionKeyName;
+    /**
+     * The data type of the partition key. For example, bigint or string.
+     */
+    Type: PartitionKeyType;
+  }
+  export type PartitionKeyList = PartitionKey[];
+  export type PartitionKeyName = string;
+  export type PartitionKeyType = string;
   export interface PublicKey {
     /**
      * The DER encoded public key value in PKCS#1 format.
@@ -517,40 +1804,173 @@ declare namespace CloudTrail {
   export type PublicKeyList = PublicKey[];
   export interface PutEventSelectorsRequest {
     /**
-     * Specifies the name of the trail or trail ARN. If you specify a trail name, the string must meet the following requirements:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)   Start with a letter or number, and end with a letter or number   Be between 3 and 128 characters   Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are invalid.   Not be in IP address format (for example, 192.168.5.4)   If you specify a trail ARN, it must be in the format:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the name of the trail or trail ARN. If you specify a trail name, the string must meet the following requirements:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)   Start with a letter or number, and end with a letter or number   Be between 3 and 128 characters   Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are not valid.   Not be in IP address format (for example, 192.168.5.4)   If you specify a trail ARN, it must be in the following format.  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     TrailName: String;
     /**
-     * Specifies the settings for your event selectors. You can configure up to five event selectors for a trail.
+     * Specifies the settings for your event selectors. You can configure up to five event selectors for a trail. You can use either EventSelectors or AdvancedEventSelectors in a PutEventSelectors request, but not both. If you apply EventSelectors to a trail, any existing AdvancedEventSelectors are overwritten.
      */
-    EventSelectors: EventSelectors;
+    EventSelectors?: EventSelectors;
+    /**
+     *  Specifies the settings for advanced event selectors. You can add advanced event selectors, and conditions for your advanced event selectors, up to a maximum of 500 values for all conditions and selectors on a trail. You can use either AdvancedEventSelectors or EventSelectors, but not both. If you apply AdvancedEventSelectors to a trail, any existing EventSelectors are overwritten. For more information about advanced event selectors, see Logging data events in the CloudTrail User Guide. 
+     */
+    AdvancedEventSelectors?: AdvancedEventSelectors;
   }
   export interface PutEventSelectorsResponse {
     /**
-     * Specifies the ARN of the trail that was updated with event selectors. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the ARN of the trail that was updated with event selectors. The following is the format of a trail ARN.  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     TrailARN?: String;
     /**
      * Specifies the event selectors configured for your trail.
      */
     EventSelectors?: EventSelectors;
+    /**
+     * Specifies the advanced event selectors configured for your trail.
+     */
+    AdvancedEventSelectors?: AdvancedEventSelectors;
   }
+  export interface PutInsightSelectorsRequest {
+    /**
+     * The name of the CloudTrail trail for which you want to change or add Insights selectors. You cannot use this parameter with the EventDataStore and InsightsDestination parameters.
+     */
+    TrailName?: String;
+    /**
+     * A JSON string that contains the Insights types you want to log on a trail or event data store. ApiCallRateInsight and ApiErrorRateInsight are valid Insight types. The ApiCallRateInsight Insights type analyzes write-only management API calls that are aggregated per minute against a baseline API call volume. The ApiErrorRateInsight Insights type analyzes management API calls that result in error codes. The error is shown if the API call is unsuccessful.
+     */
+    InsightSelectors: InsightSelectors;
+    /**
+     * The ARN (or ID suffix of the ARN) of the source event data store for which you want to change or add Insights selectors. To enable Insights on an event data store, you must provide both the EventDataStore and InsightsDestination parameters. You cannot use this parameter with the TrailName parameter.
+     */
+    EventDataStore?: EventDataStoreArn;
+    /**
+     *  The ARN (or ID suffix of the ARN) of the destination event data store that logs Insights events. To enable Insights on an event data store, you must provide both the EventDataStore and InsightsDestination parameters.  You cannot use this parameter with the TrailName parameter.
+     */
+    InsightsDestination?: EventDataStoreArn;
+  }
+  export interface PutInsightSelectorsResponse {
+    /**
+     * The Amazon Resource Name (ARN) of a trail for which you want to change or add Insights selectors.
+     */
+    TrailARN?: String;
+    /**
+     * A JSON string that contains the Insights event types that you want to log on a trail or event data store. The valid Insights types are ApiErrorRateInsight and ApiCallRateInsight.
+     */
+    InsightSelectors?: InsightSelectors;
+    /**
+     * The Amazon Resource Name (ARN) of the source event data store for which you want to change or add Insights selectors.
+     */
+    EventDataStoreArn?: EventDataStoreArn;
+    /**
+     *  The ARN of the destination event data store that logs Insights events. 
+     */
+    InsightsDestination?: EventDataStoreArn;
+  }
+  export interface PutResourcePolicyRequest {
+    /**
+     *  The Amazon Resource Name (ARN) of the CloudTrail channel attached to the resource-based policy. The following is the format of a resource ARN: arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel. 
+     */
+    ResourceArn: ResourceArn;
+    /**
+     *  A JSON-formatted string for an Amazon Web Services resource-based policy.  The following are requirements for the resource policy:    Contains only one action: cloudtrail-data:PutAuditEvents     Contains at least one statement. The policy can have a maximum of 20 statements.     Each statement contains at least one principal. A statement can have a maximum of 50 principals.   
+     */
+    ResourcePolicy: ResourcePolicy;
+  }
+  export interface PutResourcePolicyResponse {
+    /**
+     *  The Amazon Resource Name (ARN) of the CloudTrail channel attached to the resource-based policy. 
+     */
+    ResourceArn?: ResourceArn;
+    /**
+     *  The JSON-formatted string of the Amazon Web Services resource-based policy attached to the CloudTrail channel. 
+     */
+    ResourcePolicy?: ResourcePolicy;
+  }
+  export type Queries = Query[];
+  export interface Query {
+    /**
+     * The ID of a query.
+     */
+    QueryId?: UUID;
+    /**
+     * The status of the query. This can be QUEUED, RUNNING, FINISHED, FAILED, TIMED_OUT, or CANCELLED.
+     */
+    QueryStatus?: QueryStatus;
+    /**
+     * The creation time of a query.
+     */
+    CreationTime?: _Date;
+  }
+  export type QueryAlias = string;
+  export type QueryParameter = string;
+  export type QueryParameters = QueryParameter[];
+  export type QueryResultColumn = {[key: string]: QueryResultValue};
+  export type QueryResultKey = string;
+  export type QueryResultRow = QueryResultColumn[];
+  export type QueryResultRows = QueryResultRow[];
+  export type QueryResultValue = string;
+  export type QueryStatement = string;
+  export interface QueryStatistics {
+    /**
+     * The number of results returned.
+     */
+    ResultsCount?: Integer;
+    /**
+     * The total number of results returned by a query.
+     */
+    TotalResultsCount?: Integer;
+    /**
+     * The total bytes that the query scanned in the event data store. This value matches the number of bytes for which your account is billed for the query, unless the query is still running.
+     */
+    BytesScanned?: Long;
+  }
+  export interface QueryStatisticsForDescribeQuery {
+    /**
+     * The number of events that matched a query.
+     */
+    EventsMatched?: Long;
+    /**
+     * The number of events that the query scanned in the event data store.
+     */
+    EventsScanned?: Long;
+    /**
+     * The total bytes that the query scanned in the event data store. This value matches the number of bytes for which your account is billed for the query, unless the query is still running.
+     */
+    BytesScanned?: Long;
+    /**
+     * The query's run time, in milliseconds.
+     */
+    ExecutionTimeInMillis?: Integer;
+    /**
+     * The creation time of the query.
+     */
+    CreationTime?: _Date;
+  }
+  export type QueryStatus = "QUEUED"|"RUNNING"|"FINISHED"|"FAILED"|"CANCELLED"|"TIMED_OUT"|string;
   export type ReadWriteType = "ReadOnly"|"WriteOnly"|"All"|string;
+  export interface RegisterOrganizationDelegatedAdminRequest {
+    /**
+     * An organization member account ID that you want to designate as a delegated administrator.
+     */
+    MemberAccountId: AccountId;
+  }
+  export interface RegisterOrganizationDelegatedAdminResponse {
+  }
   export interface RemoveTagsRequest {
     /**
-     * Specifies the ARN of the trail from which tags should be removed. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the ARN of the trail, event data store, or channel from which tags should be removed.  Example trail ARN format: arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail  Example event data store ARN format: arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE  Example channel ARN format: arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890 
      */
     ResourceId: String;
     /**
      * Specifies a list of tags to be removed.
      */
-    TagsList?: TagsList;
+    TagsList: TagsList;
   }
   export interface RemoveTagsResponse {
   }
   export interface Resource {
     /**
-     * The type of a resource referenced by the event returned. When the resource type cannot be determined, null is returned. Some examples of resource types are: Instance for EC2, Trail for CloudTrail, DBInstance for RDS, and AccessKey for IAM. For a list of resource types supported for event lookup, see Resource Types Supported for Event Lookup.
+     * The type of a resource referenced by the event returned. When the resource type cannot be determined, null is returned. Some examples of resource types are: Instance for EC2, Trail for CloudTrail, DBInstance for Amazon RDS, and AccessKey for IAM. To learn more about how to look up and filter events by the resource types supported for a service, see Filtering CloudTrail Events.
      */
     ResourceType?: String;
     /**
@@ -558,8 +1978,10 @@ declare namespace CloudTrail {
      */
     ResourceName?: String;
   }
+  export type ResourceArn = string;
   export type ResourceIdList = String[];
   export type ResourceList = Resource[];
+  export type ResourcePolicy = string;
   export interface ResourceTag {
     /**
      * Specifies the ARN of the resource.
@@ -571,17 +1993,241 @@ declare namespace CloudTrail {
     TagsList?: TagsList;
   }
   export type ResourceTagList = ResourceTag[];
+  export interface RestoreEventDataStoreRequest {
+    /**
+     * The ARN (or the ID suffix of the ARN) of the event data store that you want to restore.
+     */
+    EventDataStore: EventDataStoreArn;
+  }
+  export interface RestoreEventDataStoreResponse {
+    /**
+     * The event data store ARN.
+     */
+    EventDataStoreArn?: EventDataStoreArn;
+    /**
+     * The name of the event data store.
+     */
+    Name?: EventDataStoreName;
+    /**
+     * The status of the event data store.
+     */
+    Status?: EventDataStoreStatus;
+    /**
+     * The advanced event selectors that were used to select events.
+     */
+    AdvancedEventSelectors?: AdvancedEventSelectors;
+    /**
+     * Indicates whether the event data store is collecting events from all Regions, or only from the Region in which the event data store was created.
+     */
+    MultiRegionEnabled?: Boolean;
+    /**
+     * Indicates whether an event data store is collecting logged events for an organization in Organizations.
+     */
+    OrganizationEnabled?: Boolean;
+    /**
+     * The retention period, in days.
+     */
+    RetentionPeriod?: RetentionPeriod;
+    /**
+     * Indicates that termination protection is enabled and the event data store cannot be automatically deleted.
+     */
+    TerminationProtectionEnabled?: TerminationProtectionEnabled;
+    /**
+     * The timestamp of an event data store's creation.
+     */
+    CreatedTimestamp?: _Date;
+    /**
+     * The timestamp that shows when an event data store was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.
+     */
+    UpdatedTimestamp?: _Date;
+    /**
+     * Specifies the KMS key ID that encrypts the events delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the following format.  arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012 
+     */
+    KmsKeyId?: EventDataStoreKmsKeyId;
+    /**
+     * The billing mode for the event data store.
+     */
+    BillingMode?: BillingMode;
+  }
+  export type RetentionPeriod = number;
+  export interface S3ImportSource {
+    /**
+     *  The URI for the source S3 bucket. 
+     */
+    S3LocationUri: String;
+    /**
+     *  The Region associated with the source S3 bucket. 
+     */
+    S3BucketRegion: String;
+    /**
+     *  The IAM ARN role used to access the source S3 bucket. 
+     */
+    S3BucketAccessRoleArn: String;
+  }
+  export type SelectorField = string;
+  export type SelectorName = string;
+  export type Source = string;
+  export interface SourceConfig {
+    /**
+     *  Specifies whether the channel applies to a single Region or to all Regions.
+     */
+    ApplyToAllRegions?: Boolean;
+    /**
+     *  The advanced event selectors that are configured for the channel.
+     */
+    AdvancedEventSelectors?: AdvancedEventSelectors;
+  }
+  export interface StartEventDataStoreIngestionRequest {
+    /**
+     * The ARN (or ID suffix of the ARN) of the event data store for which you want to start ingestion.
+     */
+    EventDataStore: EventDataStoreArn;
+  }
+  export interface StartEventDataStoreIngestionResponse {
+  }
+  export interface StartImportRequest {
+    /**
+     *  The ARN of the destination event data store. Use this parameter for a new import. 
+     */
+    Destinations?: ImportDestinations;
+    /**
+     *  The source S3 bucket for the import. Use this parameter for a new import. 
+     */
+    ImportSource?: ImportSource;
+    /**
+     *  Use with EndEventTime to bound a StartImport request, and limit imported trail events to only those events logged within a specified time period. When you specify a time range, CloudTrail checks the prefix and log file names to verify the names contain a date between the specified StartEventTime and EndEventTime before attempting to import events. 
+     */
+    StartEventTime?: _Date;
+    /**
+     *  Use with StartEventTime to bound a StartImport request, and limit imported trail events to only those events logged within a specified time period. When you specify a time range, CloudTrail checks the prefix and log file names to verify the names contain a date between the specified StartEventTime and EndEventTime before attempting to import events. 
+     */
+    EndEventTime?: _Date;
+    /**
+     *  The ID of the import. Use this parameter when you are retrying an import. 
+     */
+    ImportId?: UUID;
+  }
+  export interface StartImportResponse {
+    /**
+     *  The ID of the import. 
+     */
+    ImportId?: UUID;
+    /**
+     *  The ARN of the destination event data store. 
+     */
+    Destinations?: ImportDestinations;
+    /**
+     *  The source S3 bucket for the import. 
+     */
+    ImportSource?: ImportSource;
+    /**
+     *  Used with EndEventTime to bound a StartImport request, and limit imported trail events to only those events logged within a specified time period. 
+     */
+    StartEventTime?: _Date;
+    /**
+     *  Used with StartEventTime to bound a StartImport request, and limit imported trail events to only those events logged within a specified time period. 
+     */
+    EndEventTime?: _Date;
+    /**
+     *  Shows the status of the import after a StartImport request. An import finishes with a status of COMPLETED if there were no failures, or FAILED if there were failures. 
+     */
+    ImportStatus?: ImportStatus;
+    /**
+     *  The timestamp for the import's creation. 
+     */
+    CreatedTimestamp?: _Date;
+    /**
+     *  The timestamp of the import's last update, if applicable. 
+     */
+    UpdatedTimestamp?: _Date;
+  }
   export interface StartLoggingRequest {
     /**
-     * Specifies the name or the CloudTrail ARN of the trail for which CloudTrail logs AWS API calls. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the name or the CloudTrail ARN of the trail for which CloudTrail logs Amazon Web Services API calls. The following is the format of a trail ARN.  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     Name: String;
   }
   export interface StartLoggingResponse {
   }
+  export interface StartQueryRequest {
+    /**
+     * The SQL code of your query.
+     */
+    QueryStatement?: QueryStatement;
+    /**
+     *  The URI for the S3 bucket where CloudTrail delivers the query results. 
+     */
+    DeliveryS3Uri?: DeliveryS3Uri;
+    /**
+     *  The alias that identifies a query template. 
+     */
+    QueryAlias?: QueryAlias;
+    /**
+     *  The query parameters for the specified QueryAlias. 
+     */
+    QueryParameters?: QueryParameters;
+  }
+  export interface StartQueryResponse {
+    /**
+     * The ID of the started query.
+     */
+    QueryId?: UUID;
+  }
+  export interface StopEventDataStoreIngestionRequest {
+    /**
+     * The ARN (or ID suffix of the ARN) of the event data store for which you want to stop ingestion.
+     */
+    EventDataStore: EventDataStoreArn;
+  }
+  export interface StopEventDataStoreIngestionResponse {
+  }
+  export interface StopImportRequest {
+    /**
+     *  The ID of the import. 
+     */
+    ImportId: UUID;
+  }
+  export interface StopImportResponse {
+    /**
+     *  The ID for the import. 
+     */
+    ImportId?: UUID;
+    /**
+     *  The source S3 bucket for the import. 
+     */
+    ImportSource?: ImportSource;
+    /**
+     *  The ARN of the destination event data store. 
+     */
+    Destinations?: ImportDestinations;
+    /**
+     *  The status of the import. 
+     */
+    ImportStatus?: ImportStatus;
+    /**
+     *  The timestamp of the import's creation. 
+     */
+    CreatedTimestamp?: _Date;
+    /**
+     *  The timestamp of the import's last update. 
+     */
+    UpdatedTimestamp?: _Date;
+    /**
+     *  Used with EndEventTime to bound a StartImport request, and limit imported trail events to only those events logged within a specified time period. 
+     */
+    StartEventTime?: _Date;
+    /**
+     *  Used with StartEventTime to bound a StartImport request, and limit imported trail events to only those events logged within a specified time period. 
+     */
+    EndEventTime?: _Date;
+    /**
+     *  Returns information on the stopped import. 
+     */
+    ImportStatistics?: ImportStatistics;
+  }
   export interface StopLoggingRequest {
     /**
-     * Specifies the name or the CloudTrail ARN of the trail for which CloudTrail will stop logging AWS API calls. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the name or the CloudTrail ARN of the trail for which CloudTrail will stop logging Amazon Web Services API calls. The following is the format of a trail ARN.  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     Name: String;
   }
@@ -592,48 +2238,52 @@ declare namespace CloudTrail {
     /**
      * The key in a key-value pair. The key must be must be no longer than 128 Unicode characters. The key must be unique for the resource to which it applies.
      */
-    Key: String;
+    Key: TagKey;
     /**
      * The value in a key-value pair of a tag. The value must be no longer than 256 Unicode characters.
      */
-    Value?: String;
+    Value?: TagValue;
   }
+  export type TagKey = string;
+  export type TagValue = string;
   export type TagsList = Tag[];
+  export type TerminationProtectionEnabled = boolean;
+  export type Timestamps = Date[];
   export interface Trail {
     /**
      * Name of the trail set by calling CreateTrail. The maximum length is 128 characters.
      */
     Name?: String;
     /**
-     * Name of the Amazon S3 bucket into which CloudTrail delivers your trail files. See Amazon S3 Bucket Naming Requirements.
+     * Name of the Amazon S3 bucket into which CloudTrail delivers your trail files. See Amazon S3 Bucket naming rules.
      */
     S3BucketName?: String;
     /**
-     * Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see Finding Your CloudTrail Log Files.The maximum length is 200 characters.
+     * Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see Finding Your CloudTrail Log Files. The maximum length is 200 characters.
      */
     S3KeyPrefix?: String;
     /**
-     * This field is deprecated. Use SnsTopicARN.
+     * This field is no longer in use. Use SnsTopicARN.
      */
     SnsTopicName?: String;
     /**
-     * Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered. The format of a topic ARN is:  arn:aws:sns:us-east-1:123456789012:MyTopic 
+     * Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered. The following is the format of a topic ARN.  arn:aws:sns:us-east-2:123456789012:MyTopic 
      */
     SnsTopicARN?: String;
     /**
-     * Set to True to include AWS API calls from AWS global services such as IAM. Otherwise, False.
+     * Set to True to include Amazon Web Services API calls from Amazon Web Services global services such as IAM. Otherwise, False.
      */
     IncludeGlobalServiceEvents?: Boolean;
     /**
-     * Specifies whether the trail belongs only to one region or exists in all regions.
+     * Specifies whether the trail exists only in one Region or exists in all Regions.
      */
     IsMultiRegionTrail?: Boolean;
     /**
-     * The region in which the trail was created.
+     * The Region in which the trail was created.
      */
     HomeRegion?: String;
     /**
-     * Specifies the ARN of the trail. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the ARN of the trail. The following is the format of a trail ARN.  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     TrailARN?: String;
     /**
@@ -649,23 +2299,175 @@ declare namespace CloudTrail {
      */
     CloudWatchLogsRoleArn?: String;
     /**
-     * Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:  arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012 
+     * Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the following format.  arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012 
      */
     KmsKeyId?: String;
     /**
      * Specifies if the trail has custom event selectors.
      */
     HasCustomEventSelectors?: Boolean;
+    /**
+     * Specifies whether a trail has insight types specified in an InsightSelector list.
+     */
+    HasInsightSelectors?: Boolean;
+    /**
+     * Specifies whether the trail is an organization trail.
+     */
+    IsOrganizationTrail?: Boolean;
+  }
+  export interface TrailInfo {
+    /**
+     * The ARN of a trail.
+     */
+    TrailARN?: String;
+    /**
+     * The name of a trail.
+     */
+    Name?: String;
+    /**
+     * The Amazon Web Services Region in which a trail was created.
+     */
+    HomeRegion?: String;
   }
   export type TrailList = Trail[];
   export type TrailNameList = String[];
+  export type Trails = TrailInfo[];
+  export type UUID = string;
+  export interface UpdateChannelRequest {
+    /**
+     * The ARN or ID (the ARN suffix) of the channel that you want to update.
+     */
+    Channel: ChannelArn;
+    /**
+     * The ARNs of event data stores that you want to log events arriving through the channel.
+     */
+    Destinations?: Destinations;
+    /**
+     *  Changes the name of the channel. 
+     */
+    Name?: ChannelName;
+  }
+  export interface UpdateChannelResponse {
+    /**
+     * The ARN of the channel that was updated.
+     */
+    ChannelArn?: ChannelArn;
+    /**
+     * The name of the channel that was updated.
+     */
+    Name?: ChannelName;
+    /**
+     * The event source of the channel that was updated.
+     */
+    Source?: Source;
+    /**
+     * The event data stores that log events arriving through the channel.
+     */
+    Destinations?: Destinations;
+  }
+  export interface UpdateEventDataStoreRequest {
+    /**
+     * The ARN (or the ID suffix of the ARN) of the event data store that you want to update.
+     */
+    EventDataStore: EventDataStoreArn;
+    /**
+     * The event data store name.
+     */
+    Name?: EventDataStoreName;
+    /**
+     * The advanced event selectors used to select events for the event data store. You can configure up to five advanced event selectors for each event data store.
+     */
+    AdvancedEventSelectors?: AdvancedEventSelectors;
+    /**
+     * Specifies whether an event data store collects events from all Regions, or only from the Region in which it was created.
+     */
+    MultiRegionEnabled?: Boolean;
+    /**
+     * Specifies whether an event data store collects events logged for an organization in Organizations.  Only the management account for the organization can convert an organization event data store to a non-organization event data store, or convert a non-organization event data store to an organization event data store. 
+     */
+    OrganizationEnabled?: Boolean;
+    /**
+     * The retention period of the event data store, in days. If BillingMode is set to EXTENDABLE_RETENTION_PRICING, you can set a retention period of up to 3653 days, the equivalent of 10 years. If BillingMode is set to FIXED_RETENTION_PRICING, you can set a retention period of up to 2557 days, the equivalent of seven years. CloudTrail Lake determines whether to retain an event by checking if the eventTime of the event is within the specified retention period. For example, if you set a retention period of 90 days, CloudTrail will remove events when the eventTime is older than 90 days.  If you decrease the retention period of an event data store, CloudTrail will remove any events with an eventTime older than the new retention period. For example, if the previous retention period was 365 days and you decrease it to 100 days, CloudTrail will remove events with an eventTime older than 100 days. 
+     */
+    RetentionPeriod?: RetentionPeriod;
+    /**
+     * Indicates that termination protection is enabled and the event data store cannot be automatically deleted.
+     */
+    TerminationProtectionEnabled?: TerminationProtectionEnabled;
+    /**
+     * Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail. The value can be an alias name prefixed by alias/, a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.  Disabling or deleting the KMS key, or removing CloudTrail permissions on the key, prevents CloudTrail from logging events to the event data store, and prevents users from querying the data in the event data store that was encrypted with the key. After you associate an event data store with a KMS key, the KMS key cannot be removed or changed. Before you disable or delete a KMS key that you are using with an event data store, delete or back up your event data store.  CloudTrail also supports KMS multi-Region keys. For more information about multi-Region keys, see Using multi-Region keys in the Key Management Service Developer Guide. Examples:    alias/MyAliasName     arn:aws:kms:us-east-2:123456789012:alias/MyAliasName     arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012     12345678-1234-1234-1234-123456789012   
+     */
+    KmsKeyId?: EventDataStoreKmsKeyId;
+    /**
+     *  You can't change the billing mode from EXTENDABLE_RETENTION_PRICING to FIXED_RETENTION_PRICING. If BillingMode is set to EXTENDABLE_RETENTION_PRICING and you want to use FIXED_RETENTION_PRICING instead, you'll need to stop ingestion on the event data store and create a new event data store that uses FIXED_RETENTION_PRICING.  The billing mode for the event data store determines the cost for ingesting events and the default and maximum retention period for the event data store. The following are the possible values:    EXTENDABLE_RETENTION_PRICING - This billing mode is generally recommended if you want a flexible retention period of up to 3653 days (about 10 years). The default retention period for this billing mode is 366 days.    FIXED_RETENTION_PRICING - This billing mode is recommended if you expect to ingest more than 25 TB of event data per month and need a retention period of up to 2557 days (about 7 years). The default retention period for this billing mode is 2557 days.   For more information about CloudTrail pricing, see CloudTrail Pricing and Managing CloudTrail Lake costs.
+     */
+    BillingMode?: BillingMode;
+  }
+  export interface UpdateEventDataStoreResponse {
+    /**
+     * The ARN of the event data store.
+     */
+    EventDataStoreArn?: EventDataStoreArn;
+    /**
+     * The name of the event data store.
+     */
+    Name?: EventDataStoreName;
+    /**
+     * The status of an event data store.
+     */
+    Status?: EventDataStoreStatus;
+    /**
+     * The advanced event selectors that are applied to the event data store.
+     */
+    AdvancedEventSelectors?: AdvancedEventSelectors;
+    /**
+     * Indicates whether the event data store includes events from all Regions, or only from the Region in which it was created.
+     */
+    MultiRegionEnabled?: Boolean;
+    /**
+     * Indicates whether an event data store is collecting logged events for an organization in Organizations.
+     */
+    OrganizationEnabled?: Boolean;
+    /**
+     * The retention period, in days.
+     */
+    RetentionPeriod?: RetentionPeriod;
+    /**
+     * Indicates whether termination protection is enabled for the event data store.
+     */
+    TerminationProtectionEnabled?: TerminationProtectionEnabled;
+    /**
+     * The timestamp that shows when an event data store was first created.
+     */
+    CreatedTimestamp?: _Date;
+    /**
+     * The timestamp that shows when the event data store was last updated. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.
+     */
+    UpdatedTimestamp?: _Date;
+    /**
+     * Specifies the KMS key ID that encrypts the events delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the following format.  arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012 
+     */
+    KmsKeyId?: EventDataStoreKmsKeyId;
+    /**
+     * The billing mode for the event data store.
+     */
+    BillingMode?: BillingMode;
+    /**
+     *  Indicates the Lake query federation status. The status is ENABLED if Lake query federation is enabled, or DISABLED if Lake query federation is disabled. You cannot delete an event data store if the FederationStatus is ENABLED. 
+     */
+    FederationStatus?: FederationStatus;
+    /**
+     *  If Lake query federation is enabled, provides the ARN of the federation role used to access the resources for the federated event data store. 
+     */
+    FederationRoleArn?: FederationRoleArn;
+  }
   export interface UpdateTrailRequest {
     /**
-     * Specifies the name of the trail or trail ARN. If Name is a trail name, the string must meet the following requirements:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)   Start with a letter or number, and end with a letter or number   Be between 3 and 128 characters   Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are invalid.   Not be in IP address format (for example, 192.168.5.4)   If Name is a trail ARN, it must be in the format:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the name of the trail or trail ARN. If Name is a trail name, the string must meet the following requirements:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)   Start with a letter or number, and end with a letter or number   Be between 3 and 128 characters   Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are not valid.   Not be in IP address format (for example, 192.168.5.4)   If Name is a trail ARN, it must be in the following format.  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     Name: String;
     /**
-     * Specifies the name of the Amazon S3 bucket designated for publishing log files. See Amazon S3 Bucket Naming Requirements.
+     * Specifies the name of the Amazon S3 bucket designated for publishing log files. See Amazon S3 Bucket naming rules.
      */
     S3BucketName?: String;
     /**
@@ -681,25 +2483,29 @@ declare namespace CloudTrail {
      */
     IncludeGlobalServiceEvents?: Boolean;
     /**
-     * Specifies whether the trail applies only to the current region or to all regions. The default is false. If the trail exists only in the current region and this value is set to true, shadow trails (replications of the trail) will be created in the other regions. If the trail exists in all regions and this value is set to false, the trail will remain in the region where it was created, and its shadow trails in other regions will be deleted.
+     * Specifies whether the trail applies only to the current Region or to all Regions. The default is false. If the trail exists only in the current Region and this value is set to true, shadow trails (replications of the trail) will be created in the other Regions. If the trail exists in all Regions and this value is set to false, the trail will remain in the Region where it was created, and its shadow trails in other Regions will be deleted. As a best practice, consider using trails that log events in all Regions.
      */
     IsMultiRegionTrail?: Boolean;
     /**
-     * Specifies whether log file validation is enabled. The default is false.  When you disable log file integrity validation, the chain of digest files is broken after one hour. CloudTrail will not create digest files for log files that were delivered during a period in which log file integrity validation was disabled. For example, if you enable log file integrity validation at noon on January 1, disable it at noon on January 2, and re-enable it at noon on January 10, digest files will not be created for the log files delivered from noon on January 2 to noon on January 10. The same applies whenever you stop CloudTrail logging or delete a trail. 
+     * Specifies whether log file validation is enabled. The default is false.  When you disable log file integrity validation, the chain of digest files is broken after one hour. CloudTrail does not create digest files for log files that were delivered during a period in which log file integrity validation was disabled. For example, if you enable log file integrity validation at noon on January 1, disable it at noon on January 2, and re-enable it at noon on January 10, digest files will not be created for the log files delivered from noon on January 2 to noon on January 10. The same applies whenever you stop CloudTrail logging or delete a trail. 
      */
     EnableLogFileValidation?: Boolean;
     /**
-     * Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn.
+     * Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs are delivered. You must use a log group that exists in your account. Not required unless you specify CloudWatchLogsRoleArn.
      */
     CloudWatchLogsLogGroupArn?: String;
     /**
-     * Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.
+     * Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group. You must use a role that exists in your account.
      */
     CloudWatchLogsRoleArn?: String;
     /**
-     * Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by "alias/", a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier. Examples:   alias/MyAliasName   arn:aws:kms:us-east-1:123456789012:alias/MyAliasName   arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012   12345678-1234-1234-1234-123456789012  
+     * Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by "alias/", a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier. CloudTrail also supports KMS multi-Region keys. For more information about multi-Region keys, see Using multi-Region keys in the Key Management Service Developer Guide. Examples:   alias/MyAliasName   arn:aws:kms:us-east-2:123456789012:alias/MyAliasName   arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012   12345678-1234-1234-1234-123456789012  
      */
     KmsKeyId?: String;
+    /**
+     * Specifies whether the trail is applied to all accounts in an organization in Organizations, or only for the current Amazon Web Services account. The default is false, and cannot be true unless the call is made on behalf of an Amazon Web Services account that is the management account for an organization in Organizations. If the trail is not an organization trail and this is set to true, the trail will be created in all Amazon Web Services accounts that belong to the organization. If the trail is an organization trail and this is set to false, the trail will remain in the current Amazon Web Services account but be deleted from all member accounts in the organization.  Only the management account for the organization can convert an organization trail to a non-organization trail, or convert a non-organization trail to an organization trail. 
+     */
+    IsOrganizationTrail?: Boolean;
   }
   export interface UpdateTrailResponse {
     /**
@@ -711,15 +2517,15 @@ declare namespace CloudTrail {
      */
     S3BucketName?: String;
     /**
-     * Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see Finding Your CloudTrail Log Files.
+     * Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see Finding Your IAM Log Files.
      */
     S3KeyPrefix?: String;
     /**
-     * This field is deprecated. Use SnsTopicARN.
+     * This field is no longer in use. Use SnsTopicARN.
      */
     SnsTopicName?: String;
     /**
-     * Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered. The format of a topic ARN is:  arn:aws:sns:us-east-1:123456789012:MyTopic 
+     * Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered. The following is the format of a topic ARN.  arn:aws:sns:us-east-2:123456789012:MyTopic 
      */
     SnsTopicARN?: String;
     /**
@@ -727,11 +2533,11 @@ declare namespace CloudTrail {
      */
     IncludeGlobalServiceEvents?: Boolean;
     /**
-     * Specifies whether the trail exists in one region or in all regions.
+     * Specifies whether the trail exists in one Region or in all Regions.
      */
     IsMultiRegionTrail?: Boolean;
     /**
-     * Specifies the ARN of the trail that was updated. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the ARN of the trail that was updated. The following is the format of a trail ARN.  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     TrailARN?: String;
     /**
@@ -739,7 +2545,7 @@ declare namespace CloudTrail {
      */
     LogFileValidationEnabled?: Boolean;
     /**
-     * Specifies the Amazon Resource Name (ARN) of the log group to which CloudTrail logs will be delivered.
+     * Specifies the Amazon Resource Name (ARN) of the log group to which CloudTrail logs are delivered.
      */
     CloudWatchLogsLogGroupArn?: String;
     /**
@@ -747,9 +2553,13 @@ declare namespace CloudTrail {
      */
     CloudWatchLogsRoleArn?: String;
     /**
-     * Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:  arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012 
+     * Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the following format.  arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012 
      */
     KmsKeyId?: String;
+    /**
+     * Specifies whether the trail is an organization trail.
+     */
+    IsOrganizationTrail?: Boolean;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

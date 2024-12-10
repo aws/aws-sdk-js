@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudFront",
+        "description": "Amazon CloudFront has deprecated the CreateStreamingDistribution and CreateStreamingDistributionWithTags APIs as part of discontinuing support for Real-Time Messaging Protocol (RTMP) distributions."
+    }
+]

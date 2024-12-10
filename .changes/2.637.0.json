@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Documentation updates for EC2"
+    },
+    {
+        "type": "feature",
+        "category": "IoTEvents",
+        "description": "API update that adds a new parameter, durationExpression, to SetTimerAction, and deprecates seconds"
+    },
+    {
+        "type": "feature",
+        "category": "MarketplaceCommerceAnalytics",
+        "description": "Change the disbursement data set to look past 31 days instead until the beginning of the month."
+    },
+    {
+        "type": "feature",
+        "category": "ServerlessApplicationRepository",
+        "description": "AWS Serverless Application Repository now supports sharing applications privately with AWS Organizations."
+    },
+    {
+        "type": "feature",
+        "category": "TranscribeService",
+        "description": "Amazon Transcribe's Automatic Content Redaction feature enables you to automatically redact sensitive personally identifiable information (PII) from transcription results. It replaces each instance of an identified PII utterance with a [PII] tag in the transcript."
+    }
+]

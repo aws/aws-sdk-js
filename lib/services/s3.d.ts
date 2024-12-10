@@ -13,6 +13,11 @@ export class S3Customizations extends Service {
     getSignedUrl(operation: string, params: any): string;
 
     /**
+     * Returns a 'thenable' promise that will be resolved with a pre-signed URL for a given operation name.
+     */
+    getSignedUrlPromise(operation: string, params: any): Promise<string>;
+
+    /**
      * Get the form fields and target URL for direct POST uploading.
      */
     createPresignedPost(

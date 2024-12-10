@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "This release updates the \"MonitorArnList\" from a list of String to be a list of Arn for both CreateAnomalySubscription and UpdateAnomalySubscription APIs"
+    },
+    {
+        "type": "feature",
+        "category": "Location",
+        "description": "Initial release of Amazon Location Service. A new geospatial service providing capabilities to render maps, geocode/reverse geocode, track device locations, and detect geofence entry/exit events."
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "QuickSight now supports connecting to federated data sources of Athena"
+    },
+    {
+        "type": "feature",
+        "category": "WellArchitected",
+        "description": "This is the first release of AWS Well-Architected Tool API support, use to review your workload and compare against the latest AWS architectural best practices."
+    }
+]

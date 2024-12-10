@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "AccessAnalyzer",
+        "description": "This release adds support for inclusion of S3 Access Point policies in IAM Access Analyzer evaluation of S3 bucket access. IAM Access Analyzer now reports findings for buckets shared through access points and identifies the access point that permits access."
+    },
+    {
+        "type": "feature",
+        "category": "DMS",
+        "description": "Adding minimum replication engine version for describe-endpoint-types api."
+    },
+    {
+        "type": "feature",
+        "category": "DataExchange",
+        "description": "This release introduces AWS Data Exchange support for configurable encryption parameters when exporting data sets to Amazon S3. "
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Change to the input, ResourceSpec, changing EnvironmentArn to SageMakerImageArn. This affects the following preview APIs: CreateDomain, DescribeDomain, UpdateDomain, CreateUserProfile, DescribeUserProfile, UpdateUserProfile, CreateApp and DescribeApp."
+    }
+]

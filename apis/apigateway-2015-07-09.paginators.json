@@ -51,6 +51,11 @@
     "GetUsage": {
       "input_token": "position",
       "limit_key": "limit",
+      "non_aggregate_keys": [
+        "usagePlanId",
+        "startDate",
+        "endDate"
+      ],
       "output_token": "position",
       "result_key": "items"
     },
@@ -61,6 +66,12 @@
       "result_key": "items"
     },
     "GetUsagePlans": {
+      "input_token": "position",
+      "limit_key": "limit",
+      "output_token": "position",
+      "result_key": "items"
+    },
+    "GetVpcLinks": {
       "input_token": "position",
       "limit_key": "limit",
       "output_token": "position",

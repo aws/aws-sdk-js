@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Kafka",
+        "description": "New APIs for upgrading the Apache Kafka version of a cluster and to find out compatible upgrade paths"
+    },
+    {
+        "type": "feature",
+        "category": "MarketplaceCatalog",
+        "description": "AWS Marketplace Catalog now supports accessing initial change payloads with DescribeChangeSet operation."
+    },
+    {
+        "type": "feature",
+        "category": "WorkMail",
+        "description": "This release adds support for Amazon WorkMail organization-level retention policies."
+    }
+]

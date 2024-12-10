@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "Drs",
+        "description": "Adding AgentVersion to SourceServer and RecoveryInstance structures"
+    }
+]

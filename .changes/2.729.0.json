@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "AWS Glue now adds support for Network connection type enabling you to access resources inside your VPC using Glue crawlers and Glue ETL jobs."
+    },
+    {
+        "type": "feature",
+        "category": "Organizations",
+        "description": "Documentation updates for some new error reasons."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "Updates Amazon S3 API reference documentation. "
+    },
+    {
+        "type": "feature",
+        "category": "SMS",
+        "description": "In this release, AWS Server Migration Service (SMS) has added new features: 1. APIs to work with application and instance level validation 2. Import application catalog from AWS Application Discovery Service 3. For an application you can start on-demand replication"
+    }
+]

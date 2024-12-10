@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "Documentation update for a new Initiation Method value in DescribeContact API"
+    },
+    {
+        "type": "feature",
+        "category": "IoTWireless",
+        "description": "Add Multicast Group support in Network Analyzer Configuration."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Added ml.p4d and ml.inf1 as supported instance type families for SageMaker Notebook Instances."
+    }
+]

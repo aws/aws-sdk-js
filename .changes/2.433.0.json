@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "EMR",
+        "description": "Amazon EMR adds the ability to modify instance group configurations on a running cluster through the new \"configurations\" field in the ModifyInstanceGroups API."
+    }
+]

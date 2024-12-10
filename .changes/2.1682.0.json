@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "BedrockAgent",
+        "description": "Releasing the support for Action User Confirmation."
+    },
+    {
+        "type": "feature",
+        "category": "BedrockAgentRuntime",
+        "description": "Releasing the support for Action User Confirmation."
+    },
+    {
+        "type": "feature",
+        "category": "Organizations",
+        "description": "Releasing minor partitional endpoint updates."
+    },
+    {
+        "type": "feature",
+        "category": "QBusiness",
+        "description": "Updates API to latest version."
+    }
+]

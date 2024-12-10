@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "ES",
+        "description": "Feature: Support for three Availability Zone deployments"
+    },
+    {
+        "type": "feature",
+        "category": "GameLift",
+        "description": "This release delivers a new API action for deleting unused matchmaking rule sets. More details are available at https://aws.amazon.com/releasenotes/?tag=releasenotes%23keywords%23amazon-gamelift."
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "This release adds tagging of channels, inputs, and input security groups."
+    },
+    {
+        "type": "feature",
+        "category": "RoboMaker",
+        "description": "Added support for tagging and tag-based access control for AWS RoboMaker resources. Also, DescribeSimulationJob now includes a new failureReason field to help debug simulation job failures"
+    }
+]

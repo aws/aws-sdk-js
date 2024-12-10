@@ -1,0 +1,21 @@
+<% if object.tags(:callback).size == 1 %>
+  <% callback = object.tag(:callback) %>
+  <p class="tag_title">Callback (<tt><%= callback.param_name %></tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><%= signature(callback, false, false) %></span>
+      <%= yieldall :object => callback %>
+    </li>
+  </ul>
+<% elsif object.has_tag?(:callback) && object.tags(:callback).any? {|o| !o.docstring.blank? } %>
+  <p class="tag_title">Callbacks:</p>
+  <ul class="callback">
+    <% object.tags(:callback).each do |callback| %>
+      <% next if callback.docstring.blank? %>
+      <li class="callback_item">
+        <span class="signature"><%= signature(callback, false, false) %></span>
+        <%= yieldall :object => callback %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Documentation updates for Elastic Compute Cloud (EC2)."
+    },
+    {
+        "type": "feature",
+        "category": "FMS",
+        "description": "Increases Customer API's ManagedServiceData length"
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "Added response overrides to Head Object requests."
+    }
+]

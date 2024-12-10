@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "ECR",
+        "description": "Adds waiters for ImageScanComplete and LifecyclePolicyPreviewComplete"
+    },
+    {
+        "type": "feature",
+        "category": "Lightsail",
+        "description": "This release adds support for Certificate Authority (CA) certificate identifier to managed databases in Amazon Lightsail."
+    }
+]

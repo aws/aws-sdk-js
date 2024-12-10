@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "AlexaForBusiness",
+        "description": "This release allows developers and customers to add SIP addresses and international phone numbers to contacts."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "You can now launch 8xlarge and 16xlarge instance sizes on the general purpose M5 and memory optimized R5 instance types."
+    },
+    {
+        "type": "feature",
+        "category": "Redshift",
+        "description": "ClusterAvailabilityStatus: The availability status of the cluster for queries. Possible values are the following: Available, Unavailable, Maintenance, Modifying, Failed."
+    },
+    {
+        "type": "feature",
+        "category": "WorkSpaces",
+        "description": "Minor API fixes for WorkSpaces."
+    }
+]

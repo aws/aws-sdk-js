@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "AppSync",
+        "description": "Adds new logging levels (INFO and DEBUG) for additional log output control"
+    },
+    {
+        "type": "feature",
+        "category": "BedrockAgent",
+        "description": "Add support for user metadata inside PromptVariant."
+    },
+    {
+        "type": "feature",
+        "category": "CloudWatchLogs",
+        "description": "Update to support new APIs for delivery of logs from AWS services."
+    },
+    {
+        "type": "feature",
+        "category": "Fis",
+        "description": "This release adds safety levers, a new mechanism to stop all running experiments and prevent new experiments from starting."
+    },
+    {
+        "type": "feature",
+        "category": "S3Control",
+        "description": "Amazon Simple Storage Service /S3 Access Grants / Features : This release launches new Access Grants API - ListCallerAccessGrants."
+    }
+]

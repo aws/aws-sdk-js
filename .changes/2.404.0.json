@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "ApplicationAutoScaling",
+        "description": "Documentation updates for Application Auto Scaling"
+    },
+    {
+        "type": "feature",
+        "category": "Iot",
+        "description": "In this release, IoT Device Defender introduces support for tagging Scheduled Audit resources."
+    }
+]

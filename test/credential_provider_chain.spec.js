@@ -9,10 +9,11 @@
   if (AWS.util.isNode()) {
     describe('AWS.CredentialProviderChain', function() {
       describe('resolve', function() {
-        var chain, defaultProviders;
-        chain = null;
-        defaultProviders = AWS.CredentialProviderChain.defaultProviders;
+        var chain = null;
+        var defaultProviders = AWS.CredentialProviderChain.defaultProviders;
+        var env;
         beforeEach(function(done) {
+          env = process.env;
           process.env = {};
           chain = new AWS.CredentialProviderChain([
             function() {
@@ -25,7 +26,7 @@
         });
         afterEach(function() {
           AWS.CredentialProviderChain.defaultProviders = defaultProviders;
-          return process.env = {};
+          process.env = env;
         });
         it('returns an error by default', function() {
           return chain.resolve(function(err) {
@@ -51,6 +52,18 @@
             expect(creds.secretAccessKey).to.equal('secret');
             return expect(creds.sessionToken).to.equal('session');
           });
+        });
+        it('should be able to resolve credentials synchronously', function() {
+          process.env['AMAZON_ACCESS_KEY_ID'] = 'akid';
+          process.env['AMAZON_SECRET_ACCESS_KEY'] = 'secret';
+          process.env['AMAZON_SESSION_TOKEN'] = 'session';
+          var credentials = null;
+          chain.resolve(function(err, creds) {
+            credentials = creds;
+          });
+          expect(credentials.accessKeyId).to.equal('akid');
+          expect(credentials.secretAccessKey).to.equal('secret');
+          expect(credentials.sessionToken).to.equal('session');
         });
         it('prefers AWS credentials to AMAZON credentials', function() {
           process.env['AWS_ACCESS_KEY_ID'] = 'akid';
@@ -88,7 +101,7 @@
             return expect(creds.sessionToken).to.equal(void 0);
           });
         });
-        return it('accepts providers as functions, elavuating them during resolution', function() {
+        it('accepts providers as functions, evaluating them during resolution', function() {
           var provider;
           provider = function() {
             return {
@@ -102,6 +115,37 @@
             expect(creds.secretAccessKey).to.equal('xyz');
             return expect(creds.sessionToken).to.equal(void 0);
           });
+        });
+        it('coalesces concurrent calls', function (done) {
+          var provderCalls = 0;
+          var getCalls = 0;
+          var credsInstance = {
+            get: function get(callback) {
+              getCalls++;
+              setImmediate(function () {
+                this.accessKeyId = 'abc';
+                this.secretAccessKey = 'xyz';
+                callback();
+              });
+            }
+          };
+          var provider = function () {
+            provderCalls++;
+            return credsInstance;
+          };
+          var count = 10;
+          var callbackCount = 0;
+          var chain = new AWS.CredentialProviderChain([provider]);
+          for (var i = 0; i < count; i++) {
+            chain.resolve(function (err, creds) {
+              if (++callbackCount === count) {
+                expect(provderCalls).to.equal(1);
+                expect(getCalls).to.equal(1);
+                expect(creds).to.equal(credsInstance);
+                done();
+              }
+            });
+          }
         });
       });
       if (typeof Promise === 'function') {
@@ -122,7 +166,7 @@
             }
             return provider;
           };
-          before(function() {
+          beforeEach(function() {
             return AWS.config.setPromisesDependency();
           });
           beforeEach(function() {
@@ -132,19 +176,19 @@
           });
           it('resolves when creds successfully retrieved from a provider in the chain', function() {
             forceError = false;
-            return chain.resolvePromise().then(thenFunction)["catch"](catchFunction).then(function() {
-              expect(err).to.be["null"];
-              expect(creds).to.not.be["null"];
+            return chain.resolvePromise().then(thenFunction)['catch'](catchFunction).then(function() {
+              expect(err).to.be['null'];
+              expect(creds).to.not.be['null'];
               expect(creds.accessKeyId).to.equal('akid');
               return expect(creds.secretAccessKey).to.equal('secret');
             });
           });
           return it('rejects when all providers in chain return an error', function() {
             forceError = true;
-            return chain.resolvePromise().then(thenFunction)["catch"](catchFunction).then(function() {
-              expect(err).to.not.be["null"];
+            return chain.resolvePromise().then(thenFunction)['catch'](catchFunction).then(function() {
+              expect(err).to.not.be['null'];
               expect(err.code).to.equal('MockCredentialsProviderFailure');
-              return expect(creds).to.be["null"];
+              return expect(creds).to.be['null'];
             });
           });
         });

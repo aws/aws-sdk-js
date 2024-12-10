@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "ACMPCA",
+        "description": "ACM Private CA is launching additional certificate templates and API parameters. This allows customers to create custom certificates for their identity and secure communication use cases."
+    },
+    {
+        "type": "feature",
+        "category": "Chime",
+        "description": "Add support for specifying ChimeBearer header as part of the request for Amazon Chime SDK messaging APIs. Documentation updates."
+    },
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "This release adds support to include task definition metadata information such as registeredAt, deregisteredAt, registeredBy as part of DescribeTaskDefinition API."
+    }
+]

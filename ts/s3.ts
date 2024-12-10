@@ -10,6 +10,20 @@ new S3({
     credentials: null
 });
 
+// Instantiate S3 with an Endpoint object
+new S3({
+    endpoint: new Endpoint('awsproxy.example.com')
+});
+
+// test waiters
+s3.waitFor('bucketExists', {
+    Bucket: 'test',
+    $waiter: {
+        maxAttempts: 100,
+        delay: 30
+    }
+});
+
 // Instantiate S3 with config
 var s3Config: S3.Types.ClientConfiguration = {
     apiVersion: '2006-03-01',
@@ -30,7 +44,7 @@ s3.listObjects({
     Bucket: 'BUCKET2'
 }, function(err, data) {
     if (err) {
-        console.log(err.extendedRequstId);
+        console.log(err.extendedRequestId);
     } else if (data && data.Contents) {
         data.Contents.forEach(function(content) {
             console.log(content.Key);
@@ -125,6 +139,14 @@ s3.putObject({
     Key: 'Test',
     Body: fs.createReadStream('/fake/path')
 });
+
+const printUrl = (url: string)=> {
+    console.log(url);
+}
+s3.getSignedUrlPromise('getObject', {
+  Bucket: 'bucket',
+  Key: 'key'
+}).then(printUrl);
 
 const upload = s3.upload(
     {

@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "ApiGatewayV2",
+        "description": "Documentation updates to reflect that the default timeout for integrations is now 30 seconds for HTTP APIs."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Add EC2ThrottledException to throttledError"
+    },
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Adding new error code IamLimitExceeded for Nodegroups in EKS"
+    }
+]

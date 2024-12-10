@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "This release adds SnapStart related exceptions to InvokeWithResponseStream API. IAM access related documentation is also added for this API."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This release adds support of modifying the engine mode of database clusters."
+    }
+]

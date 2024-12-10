@@ -19,7 +19,7 @@
       })());
     } catch (error) {
       e = error;
-      return new AWS.util.Buffer(size);
+      return new AWS.util.buffer.alloc(size);
     }
   };
 
@@ -45,6 +45,9 @@
       AWS.S3.ManagedUpload.prototype.minPartSize = 10;
       ref1 = [], err = ref1[0], data = ref1[1];
       helpers.spyOn(AWS.S3.prototype, 'extractError').andReturn(function() {});
+      //Because we cannot mock individual body for a series of responses, so we will just disable
+      //this function. Otherwise it will make each 'completeMultipartUpload' throws because of empty body.
+      helpers.spyOn(AWS.S3.prototype, 'extractErrorFrom200Response').andReturn(function() {});
       return upload = null;
     });
     afterEach(function() {
@@ -65,6 +68,7 @@
         }
       });
     };
+
     it('defaults to using sigv4', function() {
       var upload = new AWS.S3.ManagedUpload({
         params: {
@@ -73,6 +77,7 @@
       });
       expect(upload.service.getSignatureVersion()).to.eql('v4');
     });
+
     it('uses sigv4 if customer supplies a configured S3 client', function() {
       var upload = new AWS.S3.ManagedUpload({
         params: {
@@ -82,6 +87,7 @@
       });
       expect(upload.service.getSignatureVersion()).to.eql('v4');
     });
+
     it('uses sigv2 if customer supplies a configured S3 client', function() {
       var upload = new AWS.S3.ManagedUpload({
         params: {
@@ -91,7 +97,19 @@
       });
       expect(upload.service.getSignatureVersion()).to.eql('s3');
     });
-    return describe('send', function() {
+
+    it('uses resolved credential if customer supplies a configured S3 client', function() {
+      var credential = 'Some Credential Providers';
+      var upload = new AWS.S3.ManagedUpload({
+        params: {
+          Body: 'body'
+        },
+        service: new AWS.S3({credentials: credential })
+      });
+      expect(upload.service.config.credentials).to.be[credential];
+    });
+
+    describe('send', function() {
       it('default callback throws', function() {
         helpers.mockResponses([
           {
@@ -105,12 +123,12 @@
         });
         return expect(function() {
           return upload.send();
-        }).to["throw"]('ERROR');
+        }).to['throw']('ERROR');
       });
       it('fails if Body is not passed', function() {
         return expect(function() {
           return send();
-        }).to["throw"]('params.Body is required');
+        }).to['throw']('params.Body is required');
       });
       it('fails if Body is unknown type', function() {
         send({
@@ -135,7 +153,7 @@
       it('uses a default service object if none provided', function() {
         return expect(function() {
           return new AWS.S3.ManagedUpload();
-        }).to["throw"]('params.Body is required');
+        }).to['throw']('params.Body is required');
       });
       it('uploads a single part if size is less than min multipart size', function(done) {
         var reqs;
@@ -201,6 +219,30 @@
         expect(data).not.to.exist;
         return expect(err.message).to.equal('ERROR');
       });
+
+      it('can abort a single part', function(done) {
+        helpers.mockHttpResponse(200, {}, '');
+        function WAIT_WHEN_SEND(req, done) {
+          setImmediate(function() {
+            done();
+          });
+        }
+        AWS.events.onAsync('send', WAIT_WHEN_SEND, true);
+        var upload = new AWS.S3.ManagedUpload({
+          service: s3,
+          params: {
+            Body: smallbody
+          }
+        });
+        upload.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.message).to.eql('Request aborted by user');
+          AWS.events.removeListener('send', WAIT_WHEN_SEND);
+          done();
+        });
+        upload.abort();
+      });
+
       it('uploads multipart if size is greater than min multipart size', function(done) {
         var reqs;
         reqs = helpers.mockResponses([
@@ -382,7 +424,7 @@
           return new AWS.S3.ManagedUpload({
             partSize: 5
           });
-        }).to["throw"]('partSize must be greater than 10');
+        }).to['throw']('partSize must be greater than 10');
       });
       it('aborts if uploadPart fails', function(done) {
         var reqs;
@@ -501,7 +543,7 @@
           queueSize: 4,
           leavePartsOnError: true,
           params: {
-            Body: new AWS.util.Buffer(1024 * 1024 * 20)
+            Body: AWS.util.buffer.alloc(1024 * 1024 * 20)
           }
         });
 
@@ -526,7 +568,7 @@
           partSize: 1024 * 1024 * 5,
           leavePartsOnError: true,
           params: {
-            Body: new AWS.util.Buffer(1024 * 1024 * 20)
+            Body: AWS.util.buffer.alloc(1024 * 1024 * 20)
           }
         });
         upload.send(function(err, data) {
@@ -596,6 +638,7 @@
           });
         });
       });
+
       it('does not resume multipart buffer upload if leavePartsOnError is not set', function(done) {
         var reqs;
         reqs = helpers.mockResponses([
@@ -623,18 +666,19 @@
             Body: bigbody
           }
         });
-        return send({}, function() {
+        send({}, function() {
           expect(helpers.operationsForRequests(reqs)).to.eql(['s3.createMultipartUpload', 's3.uploadPart', 's3.uploadPart', 's3.abortMultipartUpload']);
           expect(err).to.exist;
           expect(err.code).to.equal('UploadPartFailed');
           expect(data).not.to.exist;
-          return send({}, function() {
+          send({}, function() {
             expect(err).to.exist;
             expect(data).not.to.exist;
-            return done();
+            done();
           });
         });
       });
+
       it('returns data with ETag, Location, Bucket, and Key with single part upload', function(done) {
         var reqs;
         reqs = helpers.mockResponses([
@@ -644,7 +688,7 @@
             }
           }
         ]);
-        return send({
+        send({
           Body: smallbody,
           ContentEncoding: 'encoding'
         }, function() {
@@ -653,9 +697,58 @@
           expect(data.Location).to.equal('https://bucket.s3.mock-region.amazonaws.com/key');
           expect(data.Key).to.equal('key');
           expect(data.Bucket).to.equal('bucket');
-          return done();
+          done();
         });
       });
+
+      it('should not count done parts twice if same part is returned twice', function(done) {
+        var reqs = helpers.mockResponses([
+          {
+            data: {
+              UploadId: 'uploadId'
+            }
+          }, {
+            data: {
+              ETag: 'ETAG1'
+            }
+          }, {
+            data: {
+              ETag: 'ETAG2'
+            }
+          }, {
+            data: {
+              ETag: 'FINAL_ETAG',
+              Location: 'FINAL_LOCATION'
+            }
+          }
+        ]);
+        upload = new AWS.S3.ManagedUpload({
+          service: s3,
+          params: {Body: body(20)}
+        });
+        var uploadPartSpy = helpers.spyOn(upload.service, 'uploadPart').andCallFake(function() {
+          //fake the first part already done
+          if (upload.completeInfo[1] && upload.completeInfo[1].ETag === null) {
+            upload.completeInfo[1] = {
+              ETag: 'ETAG1',
+              PartNumber: 1
+            };
+            upload.doneParts++;
+          }
+          return uploadPartSpy.origMethod.apply(uploadPartSpy.object, arguments);
+        });
+        send({}, function(err, data) {
+          expect(err).not.to.exist;
+          expect(helpers.operationsForRequests(reqs)).to.eql([
+            's3.createMultipartUpload',
+            's3.uploadPart',
+            's3.uploadPart',
+            's3.completeMultipartUpload'
+          ]);
+          done();
+        });
+      });
+
       describe('Location', function() {
         it('returns paths with simple string keys for single part uploads', function(done) {
           var reqs;
@@ -997,7 +1090,7 @@
               service: s3,
               params: params
             });
-            return upload.promise().then(thenFunction)["catch"](catchFunction).then(function() {
+            return upload.promise().then(thenFunction)['catch'](catchFunction).then(function() {
               expect(err).not.to.exist;
               expect(data.ETag).to.equal('ETAG');
               expect(data.Location).to.equal('https://bucket.s3.mock-region.amazonaws.com/key');
@@ -1043,7 +1136,7 @@
               service: s3,
               params: params
             });
-            return upload.promise().then(thenFunction)["catch"](catchFunction).then(function() {
+            return upload.promise().then(thenFunction)['catch'](catchFunction).then(function() {
               expect(helpers.operationsForRequests(reqs)).to.eql(['s3.createMultipartUpload', 's3.uploadPart', 's3.uploadPart', 's3.uploadPart', 's3.uploadPart', 's3.completeMultipartUpload']);
               expect(err).not.to.exist;
               expect(data.ETag).to.equal('FINAL_ETAG');
@@ -1094,14 +1187,14 @@
               service: s3,
               params: params
             });
-            return upload.promise().then(thenFunction)["catch"](catchFunction).then(function() {
+            return upload.promise().then(thenFunction)['catch'](catchFunction).then(function() {
               expect(data).not.to.exist;
               return expect(err.message).to.equal('ERROR');
             });
           });
         });
       }
-      return describe('tagging', function() {
+      describe('tagging', function() {
         it('should embed tags in PutObject request for single part uploads', function(done) {
           var reqs;
           reqs = helpers.mockResponses([
@@ -1180,6 +1273,9 @@
               }, {
                 Key: 'étiquette',
                 Value: 'valeur à être encodé'
+              }, {
+                Key: 'number',
+                Value: 100
               }
             ]
           });
@@ -1198,6 +1294,9 @@
                 }, {
                   Key: 'étiquette',
                   Value: 'valeur à être encodé'
+                }, {
+                  Key: 'number',
+                  Value: '100'
                 }
               ]
             });
@@ -1285,6 +1384,52 @@
             e = error;
             return done();
           }
+        });
+      });
+
+      describe('accesspoint', function() {
+        it('should make subsequent calls with accesspoint', function(done) {
+          var reqs = helpers.mockResponses([
+            {
+              data: {
+                UploadId: 'uploadId'
+              }
+            }, {
+              data: {
+                ETag: 'ETAG1'
+              }
+            }, {
+              data: {
+                ETag: 'ETAG2'
+              }
+            }, {
+              data: {
+                ETag: 'FINAL_ETAG',
+                Location: 'FINAL_LOCATION'
+              }
+            }
+          ]);
+          var size = 18;
+          var opts = {
+            partSize: size,
+            queueSize: 1,
+            service: s3,
+            params: {
+              Body: bigbody,
+              Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint/myendpoint'
+            }
+          };
+          var endpoint = 'myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com';
+          upload = new AWS.S3.ManagedUpload(opts);
+          return send({}, function() {
+            expect(helpers.operationsForRequests(reqs)).to.eql(['s3.createMultipartUpload', 's3.uploadPart', 's3.uploadPart', 's3.completeMultipartUpload']);
+            expect(err).not.to.exist;
+            expect(reqs[0].httpRequest.endpoint.hostname).to.equal(endpoint);
+            expect(reqs[1].httpRequest.endpoint.hostname).to.equal(endpoint);
+            expect(reqs[2].httpRequest.endpoint.hostname).to.equal(endpoint);
+            expect(reqs[3].httpRequest.endpoint.hostname).to.equal(endpoint);
+            return done();
+          });
         });
       });
     });

@@ -1,0 +1,47 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeCatalyst",
+        "description": "This release adds support for updating and deleting spaces and projects in Amazon CodeCatalyst. It also adds support for creating, getting, and deleting source repositories in CodeCatalyst projects."
+    },
+    {
+        "type": "feature",
+        "category": "ConnectCases",
+        "description": "This release adds the ability to assign a case to a queue or user."
+    },
+    {
+        "type": "feature",
+        "category": "LexModelsV2",
+        "description": "This release updates type for Channel field in SessionSpecification and UtteranceSpecification"
+    },
+    {
+        "type": "feature",
+        "category": "Route53Resolver",
+        "description": "This release adds support for Route 53 On Outposts, a new feature that allows customers to run Route 53 Resolver and Resolver endpoints locally on their Outposts."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "Improve performance of S3 clients by simplifying and optimizing endpoint resolution."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Cross account support for SageMaker Feature Store"
+    },
+    {
+        "type": "feature",
+        "category": "SageMakerFeatureStoreRuntime",
+        "description": "Cross account support for SageMaker Feature Store"
+    },
+    {
+        "type": "feature",
+        "category": "SecurityLake",
+        "description": "Adding support for Tags on Create and Resource Tagging API."
+    },
+    {
+        "type": "feature",
+        "category": "TranscribeService",
+        "description": "Added API argument --toxicity-detection to startTranscriptionJob API, which allows users to view toxicity scores of submitted audio."
+    }
+]

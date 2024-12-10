@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudTrail",
+        "description": "This release adds CloudTrail getChannel and listChannels APIs to allow customer to view the ServiceLinkedChannel configurations."
+    },
+    {
+        "type": "feature",
+        "category": "LexModelsV2",
+        "description": "This release is for supporting Composite Slot Type feature in AWS Lex V2. Composite Slot Type will help developer to logically group coherent slots and maintain their inter-relationships in runtime conversation."
+    },
+    {
+        "type": "feature",
+        "category": "LexRuntimeV2",
+        "description": "Updates API to latest version."
+    },
+    {
+        "type": "feature",
+        "category": "PI",
+        "description": "Increases the maximum values of two RDS Performance Insights APIs. The maximum value of the Limit parameter of DimensionGroup is 25. The MaxResult maximum is now 25 for the following APIs: DescribeDimensionKeys, GetResourceMetrics, ListAvailableResourceDimensions, and ListAvailableResourceMetrics."
+    }
+]

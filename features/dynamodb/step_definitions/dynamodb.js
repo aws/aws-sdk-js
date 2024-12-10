@@ -1,51 +1,33 @@
 var jmespath = require('jmespath');
 
 module.exports = function() {
-  this.Before("@dynamodb-2011-12-05", function (next) {
+  this.Before("@dynamodb", function (next) {
     this.service = new this.AWS.DynamoDB({
-      apiVersion: '2011-12-05',
-      maxRetries: 2
-    });
-    next();
-  });
-
-  this.Before("@dynamodb-2012-08-10", function (next) {
-    this.service = new this.AWS.DynamoDB({
-      apiVersion: '2012-08-10',
       maxRetries: 2
     });
     next();
   });
 
   function createTable(world, callback) {
-    var db = new world.AWS.DynamoDB({
-      apiVersion: '2011-12-05',
-    });
-
     var params = {
       TableName: world.tableName,
-      KeySchema: {
-        HashKeyElement: { AttributeName: 'id', AttributeType: 'S' }
-      },
-      ProvisionedThroughput: {
-        ReadCapacityUnits: 10,
-        WriteCapacityUnits: 5,
-      }
+      AttributeDefinitions: [{ AttributeName: "id", AttributeType: "S" }],
+      KeySchema: [{ AttributeName: "id", KeyType: "HASH" }],
+      BillingMode: "PAY_PER_REQUEST"
     };
 
-    db.createTable(params, function(err, data) {
+    world.service.createTable(params, function(err, data) {
       if (err) {
         callback.fail(err);
         return;
       }
       params = { TableName: world.tableName };
-      db.waitFor('tableExists', params, callback);
+      world.service.waitFor('tableExists', params, callback);
     });
   }
 
   this.Given(/^I have a table$/, function(callback) {
     var world = this;
-    this.tableName = 'aws-sdk-js-integration-test';
     this.service.listTables(function(err, data) {
       for (var i = 0; i < data.TableNames.length; i++) {
         if (data.TableNames[i] == world.tableName) {
@@ -57,6 +39,12 @@ module.exports = function() {
     });
   });
 
+  this.When(/^I create a table$/, function(callback) {
+    var world = this;
+    this.tableName = this.uniqueName("aws-sdk-js-integration-");
+    createTable(world, callback);
+  });
+
   this.When(/^I put the item:$/, function(string, next) {
     var params = {TableName: this.tableName, Item: JSON.parse(string)};
     this.request(null, 'putItem', params, next);
@@ -64,12 +52,7 @@ module.exports = function() {
 
   this.Then(/^the item with id "([^"]*)" should exist$/, function(key, next) {
     var world = this;
-    var params;
-    if (this.service.config.apiVersion === '2011-12-05') {
-      params = {TableName: this.tableName, Key: {HashKeyElement: {S: key}}};
-    } else if (this.service.config.apiVersion === '2012-08-10') {
-      params = {TableName: this.tableName, Key: {id: {S: key}}};
-    }
+    var params = {TableName: this.tableName, Key: {id: {S: key}}};
     this.request(null, 'getItem', params, next);
   });
 
@@ -81,6 +64,11 @@ module.exports = function() {
   this.When(/^I delete the table$/, function(next) {
     var params = {TableName: this.tableName};
     this.request(null, 'deleteTable', params, next);
+  });
+
+  this.Then(/^the table should eventually exist$/, function(callback) {
+    var params = {TableName: this.tableName};
+    this.service.waitFor('tableExists', params, callback);
   });
 
   this.Then(/^the table should eventually not exist$/, function(callback) {
@@ -96,7 +84,7 @@ module.exports = function() {
     req.removeAllListeners('httpData');
     req.on('httpData', function(chunk, resp) {
       if (resp.retryCount == 0) {
-        resp.httpResponse.body = new Buffer('{"invalid":"response"}');
+        resp.httpResponse.body = Buffer.from('{"invalid":"response"}');
       } else {
         world.AWS.EventListeners.Core.HTTP_DATA.call(this, chunk, resp);
       }
@@ -121,7 +109,7 @@ module.exports = function() {
     var req = this.service.listTables();
     req.removeAllListeners('httpData');
     req.on('httpData', function(chunk, resp) {
-      resp.httpResponse.body = new Buffer('{"invalid":"response"}');
+      resp.httpResponse.body = Buffer.from('{"invalid":"response"}');
     });
     req.on('complete', function(resp) {
       world.error = resp.error;

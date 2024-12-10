@@ -1,0 +1,27 @@
+[
+    {
+        "type": "bugfix",
+        "category": "maintenance mode message",
+        "description": "add environment var for suppression of maintenance mode message"
+    },
+    {
+        "type": "feature",
+        "category": "AppIntegrations",
+        "description": "Adds FileConfiguration to Amazon AppIntegrations CreateDataIntegration supporting scheduled downloading of third party files into Amazon Connect from sources such as Microsoft SharePoint."
+    },
+    {
+        "type": "feature",
+        "category": "S3Control",
+        "description": "Added support for cross-account Multi-Region Access Points. Added support for S3 Replication for S3 on Outposts."
+    },
+    {
+        "type": "feature",
+        "category": "Tnb",
+        "description": "This release adds tagging support to the following Network Instance APIs : Instantiate, Update, Terminate."
+    },
+    {
+        "type": "feature",
+        "category": "Wisdom",
+        "description": "This release extends Wisdom CreateKnowledgeBase API to support SharePoint connector type by removing the @required trait for objectField"
+    }
+]

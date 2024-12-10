@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "APIGateway",
+        "description": "Add support for Active X-Ray with API Gateway"
+    },
+    {
+        "type": "feature",
+        "category": "CodeCommit",
+        "description": "This release adds additional optional fields to the pull request APIs."
+    },
+    {
+        "type": "feature",
+        "category": "MediaConvert",
+        "description": "This release adds support for Cost Allocation through tagging and also enables adding, editing, and removal of tags from the MediaConvert console."
+    }
+]

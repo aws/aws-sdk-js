@@ -36,6 +36,13 @@
           return expect(data).to.eql({});
         });
       });
+      it('returns an empty object from an empty document with attributes', function() {
+        var xml;
+        xml = '<xml xmlns="http://foo.bar.com"/>';
+        return parse(xml, rules, function(data) {
+          return expect(data).to.eql({});
+        });
+      });
       it('returns empty elements as empty string', function() {
         var xml;
         xml = '<xml><element/></xml>';
@@ -108,7 +115,8 @@
           });
         });
       });
-      return it('parses attributes from tags', function() {
+
+      it('parses attributes from tags', function() {
         var rules, xml;
         xml = '<xml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"> <Item xsi:name="name"></Item></xml>';
         rules = {
@@ -130,6 +138,42 @@
           return expect(data).to.eql({
             Item: {
               Name: 'name'
+            }
+          });
+        });
+      });
+
+      it('resolves nested duplicate fields by choosing direct children', function() {
+        var xml = '<xml><Item><Nested><Enabled>false</Enabled></Nested><Enabled>true</Enabled></Item></xml>';
+        var rules = {
+          type: 'structure',
+          members: {
+            Item: {
+              type: 'structure',
+              members: {
+                Enabled: {
+                  type: 'boolean'
+                },
+                Nested: {
+                  type: 'structure',
+                  members: {
+                    Enabled: {
+                      type: 'boolean'
+                    }
+                  }
+                }
+              }
+            }
+          }
+        };
+
+        parse(xml, rules, function(data) {
+          expect(data).to.eql({
+            Item: {
+              Enabled: true,
+              Nested: {
+                Enabled: false
+              }
             }
           });
         });
@@ -176,9 +220,31 @@
           });
         });
       });
+      it('return empty string for missing list when xmlNoDefaultLists is set', function() {
+        xml = '<xml></xml>';
+        rules = {
+          type: 'structure',
+          members: {
+            items: {
+              type: 'list',
+              member: {
+                type: 'string'
+              }
+            }
+          }
+        };
+        var shape = AWS.Model.Shape.create(rules, {
+          api: {
+            protocol: 'rest-xml',
+            xmlNoDefaultLists: true
+          }
+        });
+        var data = new AWS.XML.Parser().parse(xml, shape);
+        expect(data).to.eql({});
+      });
       it('Converts xml lists of strings into arrays of strings', function() {
         var rules, xml;
-        xml = "<xml>\n  <items>\n    <member>abc</member>\n    <member>xyz</member>\n  </items>\n</xml>";
+        xml = '<xml>\n  <items>\n    <member>abc</member>\n    <member>xyz</member>\n  </items>\n</xml>';
         rules = {
           type: 'structure',
           members: {
@@ -196,7 +262,7 @@
       });
       it('observes list member names when present', function() {
         var rules, xml;
-        xml = "<xml>\n  <items>\n    <item>abc</item>\n    <item>xyz</item>\n  </items>\n</xml>";
+        xml = '<xml>\n  <items>\n    <item>abc</item>\n    <item>xyz</item>\n  </items>\n</xml>';
         rules = {
           type: 'structure',
           members: {
@@ -216,7 +282,7 @@
       });
       it('can parse lists of strucures', function() {
         var rules, xml;
-        xml = "<xml>\n  <People>\n    <member><Name>abc</Name></member>>\n    <member><Name>xyz</Name></member>>\n  </People>\n</xml>";
+        xml = '<xml>\n  <People>\n    <member><Name>abc</Name></member>>\n    <member><Name>xyz</Name></member>>\n  </People>\n</xml>';
         rules = {
           type: 'structure',
           members: {
@@ -247,7 +313,7 @@
       });
       return it('can parse lists of strucures with renames', function() {
         var rules, xml;
-        xml = "<xml>\n  <People>\n    <Person><Name>abc</Name></Person>>\n    <Person><Name>xyz</Name></Person>>\n  </People>\n</xml>";
+        xml = '<xml>\n  <People>\n    <Person><Name>abc</Name></Person>>\n    <Person><Name>xyz</Name></Person>>\n  </People>\n</xml>';
         rules = {
           type: 'structure',
           members: {
@@ -280,7 +346,7 @@
     });
     describe('flattened lists', function() {
       var xml;
-      xml = "<xml>\n  <person>\n    <name>Unknown</name>\n    <alias>John Doe</alias>\n    <alias>Jane Doe</alias>\n  </person>\n</xml>";
+      xml = '<xml>\n  <person>\n    <name>Unknown</name>\n    <alias>John Doe</alias>\n    <alias>Jane Doe</alias>\n  </person>\n</xml>';
       it('collects sibling elements of the same name', function() {
         var rules;
         rules = {
@@ -312,7 +378,7 @@
       });
       it('flattened lists can be composed of complex obects', function() {
         var rules, values;
-        xml = "<xml>\n  <name>Name</name>\n  <complexValue>\n    <a>1</a>\n    <b>2</b>\n  </complexValue>\n  <complexValue>\n    <a>3</a>\n    <b>4</b>\n  </complexValue>\n</xml>";
+        xml = '<xml>\n  <name>Name</name>\n  <complexValue>\n    <a>1</a>\n    <b>2</b>\n  </complexValue>\n  <complexValue>\n    <a>3</a>\n    <b>4</b>\n  </complexValue>\n</xml>';
         rules = {
           type: 'structure',
           members: {
@@ -355,7 +421,7 @@
       });
       return it('can parse flattened lists of complex objects', function() {
         var rules;
-        xml = "<xml>\n  <Count>2</Count>\n  <Person><Name>abc</Name></Person>\n  <Person><Name>xyz</Name></Person>\n</xml>";
+        xml = '<xml>\n  <Count>2</Count>\n  <Person><Name>abc</Name></Person>\n  <Person><Name>xyz</Name></Person>\n</xml>';
         rules = {
           type: 'structure',
           members: {
@@ -393,7 +459,7 @@
       describe('non-flattened', function() {
         it('returns empty maps as {}', function() {
           var rules, xml;
-          xml = "<xml>\n  <DomainMap/>\n</xml>";
+          xml = '<xml>\n  <DomainMap/>\n</xml>';
           rules = {
             type: 'structure',
             members: {
@@ -411,9 +477,58 @@
             });
           });
         });
+
+        it('resolves nested duplicate fields by choosing direct children', function() {
+          var xml = '';
+          xml += '<xml>';
+          xml +=   '<FooMap>';
+          xml +=     '<entry>';
+          xml +=       '<value>';
+          xml +=         '<Nested>';
+          xml +=           '<key>Foo</key>';
+          xml +=         '</Nested>';
+          xml +=       '</value>';
+          xml +=       '<key>Count</key>';
+          xml +=     '</entry>';
+          xml +=   '</FooMap>';
+          xml += '</xml>';
+
+          var rules = {
+            type: 'structure',
+            members: {
+              FooMap: {
+                type: 'map',
+                value: {
+                  type: 'structure',
+                  members: {
+                    Nested: {
+                      type: 'structure',
+                      members: {
+                        key: {}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          };
+
+          parse(xml, rules, function(data) {
+            expect(data).to.eql({
+              FooMap: {
+                Count: {
+                  Nested: {
+                    key: 'Foo'
+                  }
+                }
+              }
+            });
+          });
+        });
+
         it('expects entry, key, and value elements by default', function() {
           var rules, xml;
-          xml = "<xml>\n  <SummaryMap>\n    <entry>\n      <key>Groups</key>\n      <value>31</value>\n    </entry>\n    <entry>\n      <key>GroupsQuota</key>\n      <value>50</value>\n    </entry>\n    <entry>\n      <key>UsersQuota</key>\n      <value>150</value>\n    </entry>\n  </SummaryMap>\n</xml>";
+          xml = '<xml>\n  <SummaryMap>\n    <entry>\n      <key>Groups</key>\n      <value>31</value>\n    </entry>\n    <entry>\n      <key>GroupsQuota</key>\n      <value>50</value>\n    </entry>\n    <entry>\n      <key>UsersQuota</key>\n      <value>150</value>\n    </entry>\n  </SummaryMap>\n</xml>';
           rules = {
             type: 'structure',
             members: {
@@ -437,7 +552,7 @@
         });
         return it('can use alternate names for key and value elements', function() {
           var rules, xml;
-          xml = "<xml>\n  <SummaryMap>\n    <entry>\n      <Property>Groups</Property>\n      <Count>31</Count>\n    </entry>\n    <entry>\n      <Property>GroupsQuota</Property>\n      <Count>50</Count>\n    </entry>\n    <entry>\n      <Property>UsersQuota</Property>\n      <Count>150</Count>\n    </entry>\n  </SummaryMap>\n</xml>";
+          xml = '<xml>\n  <SummaryMap>\n    <entry>\n      <Property>Groups</Property>\n      <Count>31</Count>\n    </entry>\n    <entry>\n      <Property>GroupsQuota</Property>\n      <Count>50</Count>\n    </entry>\n    <entry>\n      <Property>UsersQuota</Property>\n      <Count>150</Count>\n    </entry>\n  </SummaryMap>\n</xml>';
           rules = {
             type: 'structure',
             members: {
@@ -468,7 +583,7 @@
       return describe('flattened', function() {
         it('expects key and value elements by default', function() {
           var rules, xml;
-          xml = "<xml>\n  <Attributes>\n    <key>color</key>\n    <value>red</value>\n  </Attributes>\n  <Attributes>\n    <key>size</key>\n    <value>large</value>\n  </Attributes>\n</xml>";
+          xml = '<xml>\n  <Attributes>\n    <key>color</key>\n    <value>red</value>\n  </Attributes>\n  <Attributes>\n    <key>size</key>\n    <value>large</value>\n  </Attributes>\n</xml>';
           rules = {
             type: 'structure',
             members: {
@@ -489,7 +604,7 @@
         });
         return it('can use alternate names for key and value elements', function() {
           var rules, xml;
-          xml = "<xml>\n  <Attribute>\n    <AttrName>age</AttrName>\n    <AttrValue>35</AttrValue>\n  </Attribute>\n  <Attribute>\n    <AttrName>height</AttrName>\n    <AttrValue>72</AttrValue>\n  </Attribute>\n</xml>";
+          xml = '<xml>\n  <Attribute>\n    <AttrName>age</AttrName>\n    <AttrValue>35</AttrValue>\n  </Attribute>\n  <Attribute>\n    <AttrName>height</AttrName>\n    <AttrValue>72</AttrValue>\n  </Attribute>\n</xml>';
           rules = {
             type: 'structure',
             members: {
@@ -530,7 +645,7 @@
       };
       it('converts the string "true" in to the boolean value true', function() {
         var xml;
-        xml = "<xml><enabled>true</enabled></xml>";
+        xml = '<xml><enabled>true</enabled></xml>';
         return parse(xml, rules, function(data) {
           return expect(data).to.eql({
             enabled: true
@@ -539,7 +654,7 @@
       });
       it('converts the string "false" in to the boolean value false', function() {
         var xml;
-        xml = "<xml><enabled>false</enabled></xml>";
+        xml = '<xml><enabled>false</enabled></xml>';
         return parse(xml, rules, function(data) {
           return expect(data).to.eql({
             enabled: false
@@ -548,7 +663,7 @@
       });
       return it('converts the empty elements into null', function() {
         var xml;
-        xml = "<xml><enabled/></xml>";
+        xml = '<xml><enabled/></xml>';
         return parse(xml, rules, function(data) {
           return expect(data).to.eql({
             enabled: null
@@ -568,7 +683,7 @@
       };
       it('returns an empty element as null', function() {
         var xml;
-        xml = "<xml><CreatedAt/></xml>";
+        xml = '<xml><CreatedAt/></xml>';
         return parse(xml, rules, function(data) {
           return expect(data).to.eql({
             CreatedAt: null
@@ -579,7 +694,7 @@
         var date, timestamp, xml;
         timestamp = 1349908100;
         date = new Date(timestamp * 1000);
-        xml = "<xml><CreatedAt>" + timestamp + "</CreatedAt></xml>";
+        xml = '<xml><CreatedAt>' + timestamp + '</CreatedAt></xml>';
         return parse(xml, rules, function(data) {
           return expect(data).to.eql({
             CreatedAt: date
@@ -590,7 +705,7 @@
         var date, timestamp, xml;
         timestamp = '2012-10-10T15:47:10.001Z';
         date = new Date(timestamp);
-        xml = "<xml><CreatedAt>" + timestamp + "</CreatedAt></xml>";
+        xml = '<xml><CreatedAt>' + timestamp + '</CreatedAt></xml>';
         return parse(xml, rules, function(data) {
           return expect(data).to.eql({
             CreatedAt: date
@@ -601,7 +716,7 @@
         var date, timestamp, xml;
         timestamp = 'Wed, 10 Oct 2012 15:59:55 UTC';
         date = new Date(timestamp);
-        xml = "<xml><CreatedAt>" + timestamp + "</CreatedAt></xml>";
+        xml = '<xml><CreatedAt>' + timestamp + '</CreatedAt></xml>';
         return parse(xml, rules, function(data) {
           return expect(data).to.eql({
             CreatedAt: date
@@ -611,7 +726,7 @@
       return it('throws an error when unable to determine the format', function() {
         var e, error, message, timestamp, xml;
         timestamp = 'bad-date-format';
-        xml = "<xml><CreatedAt>" + timestamp + "</CreatedAt></xml>";
+        xml = '<xml><CreatedAt>' + timestamp + '</CreatedAt></xml>';
         message = 'unhandled timestamp format: ' + timestamp;
         error = {};
         try {
@@ -635,7 +750,7 @@
       };
       it('float parses elements types as integer', function() {
         var xml;
-        xml = "<xml><decimal>123.456</decimal></xml>";
+        xml = '<xml><decimal>123.456</decimal></xml>';
         return parse(xml, rules, function(data) {
           return expect(data).to.eql({
             decimal: 123.456
@@ -644,7 +759,7 @@
       });
       return it('returns null for empty elements', function() {
         var xml;
-        xml = "<xml><decimal/></xml>";
+        xml = '<xml><decimal/></xml>';
         return parse(xml, rules, function(data) {
           return expect(data).to.eql({
             decimal: null
@@ -664,7 +779,7 @@
       };
       it('integer parses elements types as integer', function() {
         var xml;
-        xml = "<xml><count>123</count></xml>";
+        xml = '<xml><count>123</count></xml>';
         return parse(xml, rules, function(data) {
           return expect(data).to.eql({
             count: 123
@@ -673,7 +788,7 @@
       });
       return it('returns null for empty elements', function() {
         var xml;
-        xml = "<xml><count/></xml>";
+        xml = '<xml><count/></xml>';
         return parse(xml, rules, function(data) {
           return expect(data).to.eql({
             count: null
@@ -692,7 +807,7 @@
             }
           }
         };
-        xml = "<xml><alias>John Doe</alias></xml>";
+        xml = '<xml><alias>John Doe</alias></xml>';
         return parse(xml, rules, function(data) {
           return expect(data).to.eql({
             aka: 'John Doe'
@@ -714,7 +829,7 @@
             }
           }
         };
-        xml = "<xml><person><name>Joe</name><alias>John Doe</alias></person></xml>";
+        xml = '<xml><person><name>Joe</name><alias>John Doe</alias></person></xml>';
         return parse(xml, rules, function(data) {
           return expect(data).to.eql({
             person: {
@@ -736,7 +851,7 @@
             }
           }
         };
-        xml = "<xml><Value></Value></xml>";
+        xml = '<xml><Value></Value></xml>';
         return parse(xml, rules, function(data) {
           return expect(data.Value).to.equal('');
         });
@@ -753,7 +868,7 @@
             }
           }
         };
-        xml = "<xml>\n  <Value encoding=\"base64\">Zm9v</Value>\n</xml>";
+        xml = '<xml>\n  <Value encoding="base64">Zm9v</Value>\n</xml>';
         parse(xml, rules, function(data) {
           return expect(data.Value.toString()).to.equal('foo');
         });
@@ -763,7 +878,7 @@
             Value: {}
           }
         };
-        xml = "<xml>\n  <Value encoding=\"base64\">Zm9v</Value>\n</xml>";
+        xml = '<xml>\n  <Value encoding="base64">Zm9v</Value>\n</xml>';
         return parse(xml, rules, function(data) {
           return expect(data.Value.toString()).to.equal('foo');
         });
@@ -792,7 +907,7 @@
             }
           }
         };
-        xml = "<xml xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n  <List>\n    <member>\n      <Attr1 xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">abc</Attr1>\n      <Attr2 xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\"><Foo>bar</Foo></Attr2>\n    </member>\n  </List>\n</xml>";
+        xml = '<xml xmlns="http://s3.amazonaws.com/doc/2006-03-01/">\n  <List>\n    <member>\n      <Attr1 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">abc</Attr1>\n      <Attr2 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser"><Foo>bar</Foo></Attr2>\n    </member>\n  </List>\n</xml>';
         return parse(xml, rules, function(data) {
           return expect(data).to.eql({
             List: [
@@ -807,7 +922,7 @@
         });
       });
     });
-    return describe('parsing errors', function() {
+    describe('parsing errors', function() {
       it('throws an error when unable to parse the xml', function() {
         var e, error, rules, xml;
         xml = 'asdf';
@@ -845,7 +960,49 @@
           e = error1;
           error = e;
         }
-        return expect(error.retryable).to.be["true"];
+        return expect(error.retryable).to.be['true'];
+      });
+    });
+
+    describe('response metadata', function() {
+      it('resolves nested duplicate fields by choosing direct children', function() {
+        var xml = '';
+        xml += '<xml>';
+        xml +=   '<Item>';
+        xml +=     '<ResponseMetadata><Foo>foo</Foo></ResponseMetadata>';
+        xml +=   '</Item>';
+        xml +=   '<ResponseMetadata><RequestId>request-id</RequestId></ResponseMetadata>';
+        xml += '</xml>';
+
+        var rules = {
+          type: 'structure',
+          members: {
+            Item: {
+              type: 'structure',
+              members: {
+                ResponseMetadata: {
+                  type: 'structure',
+                  members: {
+                    Foo: {}
+                  }
+                }
+              }
+            }
+          }
+        };
+
+        parse(xml, rules, function(data) {
+          expect(data).to.eql({
+            Item: {
+              ResponseMetadata: {
+                Foo: 'foo'
+              }
+            },
+            ResponseMetadata: {
+              RequestId: 'request-id'
+            }
+          });
+        });
       });
     });
   });

@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "Batch",
+        "description": "This release adds JobStateTimeLimitActions setting to the Job Queue API. It allows you to configure an action Batch can take for a blocking job in front of the queue after the defined period of time. The new parameter applies for ECS, EKS, and FARGATE Job Queues."
+    },
+    {
+        "type": "feature",
+        "category": "CloudTrail",
+        "description": "Added exceptions to CreateTrail, DescribeTrails, and ListImportFailures APIs."
+    },
+    {
+        "type": "feature",
+        "category": "CognitoIdentityServiceProvider",
+        "description": "Add ConcurrentModificationException to SetUserPoolMfaConfig"
+    },
+    {
+        "type": "feature",
+        "category": "GuardDuty",
+        "description": "Add RDS Provisioned and Serverless Usage types"
+    },
+    {
+        "type": "feature",
+        "category": "Support",
+        "description": "Update maintenance mode message to share upcoming end-of-support"
+    },
+    {
+        "type": "feature",
+        "category": "Transfer",
+        "description": "Added DES_EDE3_CBC to the list of supported encryption algorithms for messages sent with an AS2 connector."
+    }
+]

@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "Chime",
+        "description": "Adds support for SipHeaders parameter for CreateSipMediaApplicationCall."
+    },
+    {
+        "type": "feature",
+        "category": "Comprehend",
+        "description": "Amazon Comprehend now allows you to train and run PDF and Word documents for custom entity recognition. With PDF and Word formats, you can extract information from documents containing headers, lists and tables."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds support for vt1 3xlarge, 6xlarge and 24xlarge instances powered by Xilinx Alveo U30 Media Accelerators for video transcoding workloads"
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "This release adds support for \"Project Search\""
+    },
+    {
+        "type": "feature",
+        "category": "WAFV2",
+        "description": "This release adds support for including rate based rules in a rule group."
+    }
+]

@@ -1,0 +1,82 @@
+[
+    {
+        "type": "feature",
+        "category": "Athena",
+        "description": "Make DefaultExecutorDpuSize and CoordinatorDpuSize  fields optional  in StartSession"
+    },
+    {
+        "type": "feature",
+        "category": "AutoScaling",
+        "description": "Amazon EC2 Auto Scaling now supports Elastic Load Balancing traffic sources with the AttachTrafficSources, DetachTrafficSources, and DescribeTrafficSources APIs. This release also introduces a new activity status, \"WaitingForConnectionDraining\", for VPC Lattice to the DescribeScalingActivities API."
+    },
+    {
+        "type": "feature",
+        "category": "Batch",
+        "description": "This feature allows Batch on EKS to support configuration of Pod Labels through Metadata for Batch on EKS Jobs."
+    },
+    {
+        "type": "feature",
+        "category": "ComputeOptimizer",
+        "description": "This release adds support for HDD EBS volume types and io2 Block Express. We are also adding support for 61 new instance types and instances that have non consecutive runtime."
+    },
+    {
+        "type": "feature",
+        "category": "Drs",
+        "description": "Adding a field to the replication configuration APIs to support the auto replicate new disks feature. We also deprecated RetryDataReplication."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds support for Tunnel Endpoint Lifecycle control, a new feature that provides Site-to-Site VPN customers with better visibility and control of their VPN tunnel maintenance updates."
+    },
+    {
+        "type": "feature",
+        "category": "EMR",
+        "description": "Updated DescribeCluster and ListClusters API responses to include ErrorDetail that specifies error code, programmatically accessible error data,and an error message. ErrorDetail provides the underlying reason for cluster failure and recommends actions to simplify troubleshooting of EMR clusters."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "This release adds support for AWS Glue Data Quality, which helps you evaluate and monitor the quality of your data and includes the API for creating, deleting, or updating data quality rulesets, runs and evaluations."
+    },
+    {
+        "type": "feature",
+        "category": "GuardDuty",
+        "description": "Added EKS Runtime Monitoring feature support to existing detector, finding APIs and introducing new Coverage APIs"
+    },
+    {
+        "type": "feature",
+        "category": "IVS",
+        "description": "Amazon Interactive Video Service (IVS) now offers customers the ability to configure IVS channels to allow insecure RTMP ingest."
+    },
+    {
+        "type": "feature",
+        "category": "Imagebuilder",
+        "description": "Adds support for new image workflow details and image vulnerability detection."
+    },
+    {
+        "type": "feature",
+        "category": "Kendra",
+        "description": "AWS Kendra now supports featured results for a query."
+    },
+    {
+        "type": "feature",
+        "category": "NetworkFirewall",
+        "description": "AWS Network Firewall added TLS inspection configurations to allow TLS traffic inspection."
+    },
+    {
+        "type": "feature",
+        "category": "SageMakerGeospatial",
+        "description": "Amazon SageMaker geospatial capabilities now supports server-side encryption with customer managed KMS key and SageMaker notebooks with a SageMaker geospatial image in a Amazon SageMaker Domain with VPC only mode."
+    },
+    {
+        "type": "feature",
+        "category": "VPCLattice",
+        "description": "General Availability (GA) release of Amazon VPC Lattice"
+    },
+    {
+        "type": "feature",
+        "category": "WellArchitected",
+        "description": "AWS Well-Architected SDK now supports getting consolidated report metrics and generating a consolidated report PDF."
+    }
+]

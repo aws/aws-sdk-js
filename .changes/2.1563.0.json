@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "IoTEvents",
+        "description": "Increase the maximum length of descriptions for Inputs, Detector Models, and Alarm Models"
+    },
+    {
+        "type": "feature",
+        "category": "LookoutEquipment",
+        "description": "This release adds a field exposing model quality to read APIs for models. It also adds a model quality field to the API response when creating an inference scheduler."
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "MediaLive now supports the ability to restart pipelines in a running channel."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "This release adds support for sharing Systems Manager parameters with other AWS accounts."
+    }
+]

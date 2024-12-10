@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Adding new error codes: Ec2SubnetInvalidConfiguration and NodeCreationFailure for Nodegroups in EKS"
+    },
+    {
+        "type": "feature",
+        "category": "Organizations",
+        "description": "Introduces actions for giving a member account administrative Organizations permissions for an AWS service. You can run this action only for AWS services that support this feature."
+    }
+]

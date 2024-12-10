@@ -1,0 +1,3868 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2019-07-05",
+    "endpointPrefix": "networkmanager",
+    "jsonVersion": "1.1",
+    "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
+    "serviceAbbreviation": "NetworkManager",
+    "serviceFullName": "AWS Network Manager",
+    "serviceId": "NetworkManager",
+    "signatureVersion": "v4",
+    "signingName": "networkmanager",
+    "uid": "networkmanager-2019-07-05",
+    "auth": [
+      "aws.auth#sigv4"
+    ]
+  },
+  "operations": {
+    "AcceptAttachment": {
+      "http": {
+        "requestUri": "/attachments/{attachmentId}/accept"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "AttachmentId"
+        ],
+        "members": {
+          "AttachmentId": {
+            "location": "uri",
+            "locationName": "attachmentId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Attachment": {
+            "shape": "S4"
+          }
+        }
+      }
+    },
+    "AssociateConnectPeer": {
+      "http": {
+        "requestUri": "/global-networks/{globalNetworkId}/connect-peer-associations"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId",
+          "ConnectPeerId",
+          "DeviceId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "ConnectPeerId": {},
+          "DeviceId": {},
+          "LinkId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ConnectPeerAssociation": {
+            "shape": "Sw"
+          }
+        }
+      }
+    },
+    "AssociateCustomerGateway": {
+      "http": {
+        "requestUri": "/global-networks/{globalNetworkId}/customer-gateway-associations"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "CustomerGatewayArn",
+          "GlobalNetworkId",
+          "DeviceId"
+        ],
+        "members": {
+          "CustomerGatewayArn": {},
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "DeviceId": {},
+          "LinkId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CustomerGatewayAssociation": {
+            "shape": "S11"
+          }
+        }
+      }
+    },
+    "AssociateLink": {
+      "http": {
+        "requestUri": "/global-networks/{globalNetworkId}/link-associations"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId",
+          "DeviceId",
+          "LinkId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "DeviceId": {},
+          "LinkId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "LinkAssociation": {
+            "shape": "S15"
+          }
+        }
+      }
+    },
+    "AssociateTransitGatewayConnectPeer": {
+      "http": {
+        "requestUri": "/global-networks/{globalNetworkId}/transit-gateway-connect-peer-associations"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId",
+          "TransitGatewayConnectPeerArn",
+          "DeviceId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "TransitGatewayConnectPeerArn": {},
+          "DeviceId": {},
+          "LinkId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "TransitGatewayConnectPeerAssociation": {
+            "shape": "S1a"
+          }
+        }
+      }
+    },
+    "CreateConnectAttachment": {
+      "http": {
+        "requestUri": "/connect-attachments"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "CoreNetworkId",
+          "EdgeLocation",
+          "TransportAttachmentId",
+          "Options"
+        ],
+        "members": {
+          "CoreNetworkId": {},
+          "EdgeLocation": {},
+          "TransportAttachmentId": {},
+          "Options": {
+            "shape": "S1d"
+          },
+          "Tags": {
+            "shape": "Sf"
+          },
+          "ClientToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ConnectAttachment": {
+            "shape": "S1h"
+          }
+        }
+      }
+    },
+    "CreateConnectPeer": {
+      "http": {
+        "requestUri": "/connect-peers"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ConnectAttachmentId",
+          "PeerAddress"
+        ],
+        "members": {
+          "ConnectAttachmentId": {},
+          "CoreNetworkAddress": {},
+          "PeerAddress": {},
+          "BgpOptions": {
+            "type": "structure",
+            "members": {
+              "PeerAsn": {
+                "type": "long"
+              }
+            }
+          },
+          "InsideCidrBlocks": {
+            "shape": "S1m"
+          },
+          "Tags": {
+            "shape": "Sf"
+          },
+          "ClientToken": {
+            "idempotencyToken": true
+          },
+          "SubnetArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ConnectPeer": {
+            "shape": "S1p"
+          }
+        }
+      }
+    },
+    "CreateConnection": {
+      "http": {
+        "requestUri": "/global-networks/{globalNetworkId}/connections"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId",
+          "DeviceId",
+          "ConnectedDeviceId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "DeviceId": {},
+          "ConnectedDeviceId": {},
+          "LinkId": {},
+          "ConnectedLinkId": {},
+          "Description": {},
+          "Tags": {
+            "shape": "Sf"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Connection": {
+            "shape": "S1z"
+          }
+        }
+      }
+    },
+    "CreateCoreNetwork": {
+      "http": {
+        "requestUri": "/core-networks"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId"
+        ],
+        "members": {
+          "GlobalNetworkId": {},
+          "Description": {},
+          "Tags": {
+            "shape": "Sf"
+          },
+          "PolicyDocument": {},
+          "ClientToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CoreNetwork": {
+            "shape": "S26"
+          }
+        }
+      }
+    },
+    "CreateDevice": {
+      "http": {
+        "requestUri": "/global-networks/{globalNetworkId}/devices"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "AWSLocation": {
+            "shape": "S2h"
+          },
+          "Description": {},
+          "Type": {},
+          "Vendor": {},
+          "Model": {},
+          "SerialNumber": {},
+          "Location": {
+            "shape": "S2i"
+          },
+          "SiteId": {},
+          "Tags": {
+            "shape": "Sf"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Device": {
+            "shape": "S2l"
+          }
+        }
+      }
+    },
+    "CreateGlobalNetwork": {
+      "http": {
+        "requestUri": "/global-networks"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Description": {},
+          "Tags": {
+            "shape": "Sf"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "GlobalNetwork": {
+            "shape": "S2q"
+          }
+        }
+      }
+    },
+    "CreateLink": {
+      "http": {
+        "requestUri": "/global-networks/{globalNetworkId}/links"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId",
+          "Bandwidth",
+          "SiteId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "Description": {},
+          "Type": {},
+          "Bandwidth": {
+            "shape": "S2u"
+          },
+          "Provider": {},
+          "SiteId": {},
+          "Tags": {
+            "shape": "Sf"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Link": {
+            "shape": "S2w"
+          }
+        }
+      }
+    },
+    "CreateSite": {
+      "http": {
+        "requestUri": "/global-networks/{globalNetworkId}/sites"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "Description": {},
+          "Location": {
+            "shape": "S2i"
+          },
+          "Tags": {
+            "shape": "Sf"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Site": {
+            "shape": "S31"
+          }
+        }
+      }
+    },
+    "CreateSiteToSiteVpnAttachment": {
+      "http": {
+        "requestUri": "/site-to-site-vpn-attachments"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "CoreNetworkId",
+          "VpnConnectionArn"
+        ],
+        "members": {
+          "CoreNetworkId": {},
+          "VpnConnectionArn": {},
+          "Tags": {
+            "shape": "Sf"
+          },
+          "ClientToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "SiteToSiteVpnAttachment": {
+            "shape": "S37"
+          }
+        }
+      }
+    },
+    "CreateTransitGatewayPeering": {
+      "http": {
+        "requestUri": "/transit-gateway-peerings"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "CoreNetworkId",
+          "TransitGatewayArn"
+        ],
+        "members": {
+          "CoreNetworkId": {},
+          "TransitGatewayArn": {},
+          "Tags": {
+            "shape": "Sf"
+          },
+          "ClientToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "TransitGatewayPeering": {
+            "shape": "S3b"
+          }
+        }
+      }
+    },
+    "CreateTransitGatewayRouteTableAttachment": {
+      "http": {
+        "requestUri": "/transit-gateway-route-table-attachments"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "PeeringId",
+          "TransitGatewayRouteTableArn"
+        ],
+        "members": {
+          "PeeringId": {},
+          "TransitGatewayRouteTableArn": {},
+          "Tags": {
+            "shape": "Sf"
+          },
+          "ClientToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "TransitGatewayRouteTableAttachment": {
+            "shape": "S3o"
+          }
+        }
+      }
+    },
+    "CreateVpcAttachment": {
+      "http": {
+        "requestUri": "/vpc-attachments"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "CoreNetworkId",
+          "VpcArn",
+          "SubnetArns"
+        ],
+        "members": {
+          "CoreNetworkId": {},
+          "VpcArn": {},
+          "SubnetArns": {
+            "shape": "S3r"
+          },
+          "Options": {
+            "shape": "S3s"
+          },
+          "Tags": {
+            "shape": "Sf"
+          },
+          "ClientToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "VpcAttachment": {
+            "shape": "S3v"
+          }
+        }
+      }
+    },
+    "DeleteAttachment": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/attachments/{attachmentId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "AttachmentId"
+        ],
+        "members": {
+          "AttachmentId": {
+            "location": "uri",
+            "locationName": "attachmentId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Attachment": {
+            "shape": "S4"
+          }
+        }
+      }
+    },
+    "DeleteConnectPeer": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/connect-peers/{connectPeerId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ConnectPeerId"
+        ],
+        "members": {
+          "ConnectPeerId": {
+            "location": "uri",
+            "locationName": "connectPeerId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ConnectPeer": {
+            "shape": "S1p"
+          }
+        }
+      }
+    },
+    "DeleteConnection": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/global-networks/{globalNetworkId}/connections/{connectionId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId",
+          "ConnectionId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "ConnectionId": {
+            "location": "uri",
+            "locationName": "connectionId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Connection": {
+            "shape": "S1z"
+          }
+        }
+      }
+    },
+    "DeleteCoreNetwork": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/core-networks/{coreNetworkId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "CoreNetworkId"
+        ],
+        "members": {
+          "CoreNetworkId": {
+            "location": "uri",
+            "locationName": "coreNetworkId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CoreNetwork": {
+            "shape": "S26"
+          }
+        }
+      }
+    },
+    "DeleteCoreNetworkPolicyVersion": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/core-networks/{coreNetworkId}/core-network-policy-versions/{policyVersionId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "CoreNetworkId",
+          "PolicyVersionId"
+        ],
+        "members": {
+          "CoreNetworkId": {
+            "location": "uri",
+            "locationName": "coreNetworkId"
+          },
+          "PolicyVersionId": {
+            "location": "uri",
+            "locationName": "policyVersionId",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CoreNetworkPolicy": {
+            "shape": "S46"
+          }
+        }
+      }
+    },
+    "DeleteDevice": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/global-networks/{globalNetworkId}/devices/{deviceId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId",
+          "DeviceId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "DeviceId": {
+            "location": "uri",
+            "locationName": "deviceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Device": {
+            "shape": "S2l"
+          }
+        }
+      }
+    },
+    "DeleteGlobalNetwork": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/global-networks/{globalNetworkId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "GlobalNetwork": {
+            "shape": "S2q"
+          }
+        }
+      }
+    },
+    "DeleteLink": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/global-networks/{globalNetworkId}/links/{linkId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId",
+          "LinkId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "LinkId": {
+            "location": "uri",
+            "locationName": "linkId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Link": {
+            "shape": "S2w"
+          }
+        }
+      }
+    },
+    "DeletePeering": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/peerings/{peeringId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "PeeringId"
+        ],
+        "members": {
+          "PeeringId": {
+            "location": "uri",
+            "locationName": "peeringId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Peering": {
+            "shape": "S3c"
+          }
+        }
+      }
+    },
+    "DeleteResourcePolicy": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/resource-policy/{resourceArn}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn"
+        ],
+        "members": {
+          "ResourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DeleteSite": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/global-networks/{globalNetworkId}/sites/{siteId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId",
+          "SiteId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "SiteId": {
+            "location": "uri",
+            "locationName": "siteId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Site": {
+            "shape": "S31"
+          }
+        }
+      }
+    },
+    "DeregisterTransitGateway": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/global-networks/{globalNetworkId}/transit-gateway-registrations/{transitGatewayArn}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId",
+          "TransitGatewayArn"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "TransitGatewayArn": {
+            "location": "uri",
+            "locationName": "transitGatewayArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "TransitGatewayRegistration": {
+            "shape": "S4p"
+          }
+        }
+      }
+    },
+    "DescribeGlobalNetworks": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/global-networks"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "GlobalNetworkIds": {
+            "location": "querystring",
+            "locationName": "globalNetworkIds",
+            "type": "list",
+            "member": {}
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "GlobalNetworks": {
+            "type": "list",
+            "member": {
+              "shape": "S2q"
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "DisassociateConnectPeer": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/global-networks/{globalNetworkId}/connect-peer-associations/{connectPeerId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId",
+          "ConnectPeerId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "ConnectPeerId": {
+            "location": "uri",
+            "locationName": "connectPeerId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ConnectPeerAssociation": {
+            "shape": "Sw"
+          }
+        }
+      }
+    },
+    "DisassociateCustomerGateway": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/global-networks/{globalNetworkId}/customer-gateway-associations/{customerGatewayArn}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId",
+          "CustomerGatewayArn"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "CustomerGatewayArn": {
+            "location": "uri",
+            "locationName": "customerGatewayArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CustomerGatewayAssociation": {
+            "shape": "S11"
+          }
+        }
+      }
+    },
+    "DisassociateLink": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/global-networks/{globalNetworkId}/link-associations"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId",
+          "DeviceId",
+          "LinkId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "DeviceId": {
+            "location": "querystring",
+            "locationName": "deviceId"
+          },
+          "LinkId": {
+            "location": "querystring",
+            "locationName": "linkId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "LinkAssociation": {
+            "shape": "S15"
+          }
+        }
+      }
+    },
+    "DisassociateTransitGatewayConnectPeer": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/global-networks/{globalNetworkId}/transit-gateway-connect-peer-associations/{transitGatewayConnectPeerArn}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId",
+          "TransitGatewayConnectPeerArn"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "TransitGatewayConnectPeerArn": {
+            "location": "uri",
+            "locationName": "transitGatewayConnectPeerArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "TransitGatewayConnectPeerAssociation": {
+            "shape": "S1a"
+          }
+        }
+      }
+    },
+    "ExecuteCoreNetworkChangeSet": {
+      "http": {
+        "requestUri": "/core-networks/{coreNetworkId}/core-network-change-sets/{policyVersionId}/execute"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "CoreNetworkId",
+          "PolicyVersionId"
+        ],
+        "members": {
+          "CoreNetworkId": {
+            "location": "uri",
+            "locationName": "coreNetworkId"
+          },
+          "PolicyVersionId": {
+            "location": "uri",
+            "locationName": "policyVersionId",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "GetConnectAttachment": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/connect-attachments/{attachmentId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "AttachmentId"
+        ],
+        "members": {
+          "AttachmentId": {
+            "location": "uri",
+            "locationName": "attachmentId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ConnectAttachment": {
+            "shape": "S1h"
+          }
+        }
+      }
+    },
+    "GetConnectPeer": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/connect-peers/{connectPeerId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ConnectPeerId"
+        ],
+        "members": {
+          "ConnectPeerId": {
+            "location": "uri",
+            "locationName": "connectPeerId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ConnectPeer": {
+            "shape": "S1p"
+          }
+        }
+      }
+    },
+    "GetConnectPeerAssociations": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/global-networks/{globalNetworkId}/connect-peer-associations"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "ConnectPeerIds": {
+            "location": "querystring",
+            "locationName": "connectPeerIds",
+            "type": "list",
+            "member": {}
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ConnectPeerAssociations": {
+            "type": "list",
+            "member": {
+              "shape": "Sw"
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "GetConnections": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/global-networks/{globalNetworkId}/connections"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "ConnectionIds": {
+            "location": "querystring",
+            "locationName": "connectionIds",
+            "type": "list",
+            "member": {}
+          },
+          "DeviceId": {
+            "location": "querystring",
+            "locationName": "deviceId"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Connections": {
+            "type": "list",
+            "member": {
+              "shape": "S1z"
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "GetCoreNetwork": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/core-networks/{coreNetworkId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "CoreNetworkId"
+        ],
+        "members": {
+          "CoreNetworkId": {
+            "location": "uri",
+            "locationName": "coreNetworkId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CoreNetwork": {
+            "shape": "S26"
+          }
+        }
+      }
+    },
+    "GetCoreNetworkChangeEvents": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/core-networks/{coreNetworkId}/core-network-change-events/{policyVersionId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "CoreNetworkId",
+          "PolicyVersionId"
+        ],
+        "members": {
+          "CoreNetworkId": {
+            "location": "uri",
+            "locationName": "coreNetworkId"
+          },
+          "PolicyVersionId": {
+            "location": "uri",
+            "locationName": "policyVersionId",
+            "type": "integer"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CoreNetworkChangeEvents": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "Type": {},
+                "Action": {},
+                "IdentifierPath": {},
+                "EventTime": {
+                  "type": "timestamp"
+                },
+                "Status": {},
+                "Values": {
+                  "type": "structure",
+                  "members": {
+                    "EdgeLocation": {},
+                    "SegmentName": {},
+                    "NetworkFunctionGroupName": {},
+                    "AttachmentId": {},
+                    "Cidr": {}
+                  }
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "GetCoreNetworkChangeSet": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/core-networks/{coreNetworkId}/core-network-change-sets/{policyVersionId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "CoreNetworkId",
+          "PolicyVersionId"
+        ],
+        "members": {
+          "CoreNetworkId": {
+            "location": "uri",
+            "locationName": "coreNetworkId"
+          },
+          "PolicyVersionId": {
+            "location": "uri",
+            "locationName": "policyVersionId",
+            "type": "integer"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CoreNetworkChanges": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "Type": {},
+                "Action": {},
+                "Identifier": {},
+                "PreviousValues": {
+                  "shape": "S5y"
+                },
+                "NewValues": {
+                  "shape": "S5y"
+                },
+                "IdentifierPath": {}
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "GetCoreNetworkPolicy": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/core-networks/{coreNetworkId}/core-network-policy"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "CoreNetworkId"
+        ],
+        "members": {
+          "CoreNetworkId": {
+            "location": "uri",
+            "locationName": "coreNetworkId"
+          },
+          "PolicyVersionId": {
+            "location": "querystring",
+            "locationName": "policyVersionId",
+            "type": "integer"
+          },
+          "Alias": {
+            "location": "querystring",
+            "locationName": "alias"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CoreNetworkPolicy": {
+            "shape": "S46"
+          }
+        }
+      }
+    },
+    "GetCustomerGatewayAssociations": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/global-networks/{globalNetworkId}/customer-gateway-associations"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "CustomerGatewayArns": {
+            "location": "querystring",
+            "locationName": "customerGatewayArns",
+            "type": "list",
+            "member": {}
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CustomerGatewayAssociations": {
+            "type": "list",
+            "member": {
+              "shape": "S11"
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "GetDevices": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/global-networks/{globalNetworkId}/devices"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "DeviceIds": {
+            "location": "querystring",
+            "locationName": "deviceIds",
+            "type": "list",
+            "member": {}
+          },
+          "SiteId": {
+            "location": "querystring",
+            "locationName": "siteId"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Devices": {
+            "type": "list",
+            "member": {
+              "shape": "S2l"
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "GetLinkAssociations": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/global-networks/{globalNetworkId}/link-associations"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "DeviceId": {
+            "location": "querystring",
+            "locationName": "deviceId"
+          },
+          "LinkId": {
+            "location": "querystring",
+            "locationName": "linkId"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "LinkAssociations": {
+            "type": "list",
+            "member": {
+              "shape": "S15"
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "GetLinks": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/global-networks/{globalNetworkId}/links"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "LinkIds": {
+            "location": "querystring",
+            "locationName": "linkIds",
+            "type": "list",
+            "member": {}
+          },
+          "SiteId": {
+            "location": "querystring",
+            "locationName": "siteId"
+          },
+          "Type": {
+            "location": "querystring",
+            "locationName": "type"
+          },
+          "Provider": {
+            "location": "querystring",
+            "locationName": "provider"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Links": {
+            "type": "list",
+            "member": {
+              "shape": "S2w"
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "GetNetworkResourceCounts": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/global-networks/{globalNetworkId}/network-resource-count"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "ResourceType": {
+            "location": "querystring",
+            "locationName": "resourceType"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NetworkResourceCounts": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "ResourceType": {},
+                "Count": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "GetNetworkResourceRelationships": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/global-networks/{globalNetworkId}/network-resource-relationships"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "CoreNetworkId": {
+            "location": "querystring",
+            "locationName": "coreNetworkId"
+          },
+          "RegisteredGatewayArn": {
+            "location": "querystring",
+            "locationName": "registeredGatewayArn"
+          },
+          "AwsRegion": {
+            "location": "querystring",
+            "locationName": "awsRegion"
+          },
+          "AccountId": {
+            "location": "querystring",
+            "locationName": "accountId"
+          },
+          "ResourceType": {
+            "location": "querystring",
+            "locationName": "resourceType"
+          },
+          "ResourceArn": {
+            "location": "querystring",
+            "locationName": "resourceArn"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Relationships": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "From": {},
+                "To": {}
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "GetNetworkResources": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/global-networks/{globalNetworkId}/network-resources"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "CoreNetworkId": {
+            "location": "querystring",
+            "locationName": "coreNetworkId"
+          },
+          "RegisteredGatewayArn": {
+            "location": "querystring",
+            "locationName": "registeredGatewayArn"
+          },
+          "AwsRegion": {
+            "location": "querystring",
+            "locationName": "awsRegion"
+          },
+          "AccountId": {
+            "location": "querystring",
+            "locationName": "accountId"
+          },
+          "ResourceType": {
+            "location": "querystring",
+            "locationName": "resourceType"
+          },
+          "ResourceArn": {
+            "location": "querystring",
+            "locationName": "resourceArn"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NetworkResources": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "RegisteredGatewayArn": {},
+                "CoreNetworkId": {},
+                "AwsRegion": {},
+                "AccountId": {},
+                "ResourceType": {},
+                "ResourceId": {},
+                "ResourceArn": {},
+                "Definition": {},
+                "DefinitionTimestamp": {
+                  "type": "timestamp"
+                },
+                "Tags": {
+                  "shape": "Sf"
+                },
+                "Metadata": {
+                  "shape": "S75"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "GetNetworkRoutes": {
+      "http": {
+        "requestUri": "/global-networks/{globalNetworkId}/network-routes"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId",
+          "RouteTableIdentifier"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "RouteTableIdentifier": {
+            "type": "structure",
+            "members": {
+              "TransitGatewayRouteTableArn": {},
+              "CoreNetworkSegmentEdge": {
+                "shape": "S78"
+              },
+              "CoreNetworkNetworkFunctionGroup": {
+                "type": "structure",
+                "members": {
+                  "CoreNetworkId": {},
+                  "NetworkFunctionGroupName": {},
+                  "EdgeLocation": {}
+                }
+              }
+            }
+          },
+          "ExactCidrMatches": {
+            "shape": "S1m"
+          },
+          "LongestPrefixMatches": {
+            "shape": "S1m"
+          },
+          "SubnetOfMatches": {
+            "shape": "S1m"
+          },
+          "SupernetOfMatches": {
+            "shape": "S1m"
+          },
+          "PrefixListIds": {
+            "shape": "S1m"
+          },
+          "States": {
+            "type": "list",
+            "member": {}
+          },
+          "Types": {
+            "type": "list",
+            "member": {}
+          },
+          "DestinationFilters": {
+            "type": "map",
+            "key": {},
+            "value": {
+              "type": "list",
+              "member": {}
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "RouteTableArn": {},
+          "CoreNetworkSegmentEdge": {
+            "shape": "S78"
+          },
+          "RouteTableType": {},
+          "RouteTableTimestamp": {
+            "type": "timestamp"
+          },
+          "NetworkRoutes": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "DestinationCidrBlock": {},
+                "Destinations": {
+                  "type": "list",
+                  "member": {
+                    "type": "structure",
+                    "members": {
+                      "CoreNetworkAttachmentId": {},
+                      "TransitGatewayAttachmentId": {},
+                      "SegmentName": {},
+                      "NetworkFunctionGroupName": {},
+                      "EdgeLocation": {},
+                      "ResourceType": {},
+                      "ResourceId": {}
+                    }
+                  }
+                },
+                "PrefixListId": {},
+                "State": {},
+                "Type": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "GetNetworkTelemetry": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/global-networks/{globalNetworkId}/network-telemetry"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "CoreNetworkId": {
+            "location": "querystring",
+            "locationName": "coreNetworkId"
+          },
+          "RegisteredGatewayArn": {
+            "location": "querystring",
+            "locationName": "registeredGatewayArn"
+          },
+          "AwsRegion": {
+            "location": "querystring",
+            "locationName": "awsRegion"
+          },
+          "AccountId": {
+            "location": "querystring",
+            "locationName": "accountId"
+          },
+          "ResourceType": {
+            "location": "querystring",
+            "locationName": "resourceType"
+          },
+          "ResourceArn": {
+            "location": "querystring",
+            "locationName": "resourceArn"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NetworkTelemetry": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "RegisteredGatewayArn": {},
+                "CoreNetworkId": {},
+                "AwsRegion": {},
+                "AccountId": {},
+                "ResourceType": {},
+                "ResourceId": {},
+                "ResourceArn": {},
+                "Address": {},
+                "Health": {
+                  "type": "structure",
+                  "members": {
+                    "Type": {},
+                    "Status": {},
+                    "Timestamp": {
+                      "type": "timestamp"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "GetResourcePolicy": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/resource-policy/{resourceArn}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn"
+        ],
+        "members": {
+          "ResourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "PolicyDocument": {
+            "jsonvalue": true
+          }
+        }
+      }
+    },
+    "GetRouteAnalysis": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/global-networks/{globalNetworkId}/route-analyses/{routeAnalysisId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId",
+          "RouteAnalysisId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "RouteAnalysisId": {
+            "location": "uri",
+            "locationName": "routeAnalysisId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "RouteAnalysis": {
+            "shape": "S81"
+          }
+        }
+      }
+    },
+    "GetSiteToSiteVpnAttachment": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/site-to-site-vpn-attachments/{attachmentId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "AttachmentId"
+        ],
+        "members": {
+          "AttachmentId": {
+            "location": "uri",
+            "locationName": "attachmentId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "SiteToSiteVpnAttachment": {
+            "shape": "S37"
+          }
+        }
+      }
+    },
+    "GetSites": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/global-networks/{globalNetworkId}/sites"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "SiteIds": {
+            "location": "querystring",
+            "locationName": "siteIds",
+            "type": "list",
+            "member": {}
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Sites": {
+            "type": "list",
+            "member": {
+              "shape": "S31"
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "GetTransitGatewayConnectPeerAssociations": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/global-networks/{globalNetworkId}/transit-gateway-connect-peer-associations"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "TransitGatewayConnectPeerArns": {
+            "location": "querystring",
+            "locationName": "transitGatewayConnectPeerArns",
+            "type": "list",
+            "member": {}
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "TransitGatewayConnectPeerAssociations": {
+            "type": "list",
+            "member": {
+              "shape": "S1a"
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "GetTransitGatewayPeering": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/transit-gateway-peerings/{peeringId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "PeeringId"
+        ],
+        "members": {
+          "PeeringId": {
+            "location": "uri",
+            "locationName": "peeringId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "TransitGatewayPeering": {
+            "shape": "S3b"
+          }
+        }
+      }
+    },
+    "GetTransitGatewayRegistrations": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/global-networks/{globalNetworkId}/transit-gateway-registrations"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "TransitGatewayArns": {
+            "location": "querystring",
+            "locationName": "transitGatewayArns",
+            "type": "list",
+            "member": {}
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "TransitGatewayRegistrations": {
+            "type": "list",
+            "member": {
+              "shape": "S4p"
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "GetTransitGatewayRouteTableAttachment": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/transit-gateway-route-table-attachments/{attachmentId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "AttachmentId"
+        ],
+        "members": {
+          "AttachmentId": {
+            "location": "uri",
+            "locationName": "attachmentId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "TransitGatewayRouteTableAttachment": {
+            "shape": "S3o"
+          }
+        }
+      }
+    },
+    "GetVpcAttachment": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/vpc-attachments/{attachmentId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "AttachmentId"
+        ],
+        "members": {
+          "AttachmentId": {
+            "location": "uri",
+            "locationName": "attachmentId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "VpcAttachment": {
+            "shape": "S3v"
+          }
+        }
+      }
+    },
+    "ListAttachments": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/attachments"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "CoreNetworkId": {
+            "location": "querystring",
+            "locationName": "coreNetworkId"
+          },
+          "AttachmentType": {
+            "location": "querystring",
+            "locationName": "attachmentType"
+          },
+          "EdgeLocation": {
+            "location": "querystring",
+            "locationName": "edgeLocation"
+          },
+          "State": {
+            "location": "querystring",
+            "locationName": "state"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Attachments": {
+            "type": "list",
+            "member": {
+              "shape": "S4"
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListConnectPeers": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/connect-peers"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "CoreNetworkId": {
+            "location": "querystring",
+            "locationName": "coreNetworkId"
+          },
+          "ConnectAttachmentId": {
+            "location": "querystring",
+            "locationName": "connectAttachmentId"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ConnectPeers": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "CoreNetworkId": {},
+                "ConnectAttachmentId": {},
+                "ConnectPeerId": {},
+                "EdgeLocation": {},
+                "ConnectPeerState": {},
+                "CreatedAt": {
+                  "type": "timestamp"
+                },
+                "Tags": {
+                  "shape": "Sf"
+                },
+                "SubnetArn": {}
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListCoreNetworkPolicyVersions": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/core-networks/{coreNetworkId}/core-network-policy-versions"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "CoreNetworkId"
+        ],
+        "members": {
+          "CoreNetworkId": {
+            "location": "uri",
+            "locationName": "coreNetworkId"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CoreNetworkPolicyVersions": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "CoreNetworkId": {},
+                "PolicyVersionId": {
+                  "type": "integer"
+                },
+                "Alias": {},
+                "Description": {},
+                "CreatedAt": {
+                  "type": "timestamp"
+                },
+                "ChangeSetState": {}
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListCoreNetworks": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/core-networks"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CoreNetworks": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "CoreNetworkId": {},
+                "CoreNetworkArn": {},
+                "GlobalNetworkId": {},
+                "OwnerAccountId": {},
+                "State": {},
+                "Description": {},
+                "Tags": {
+                  "shape": "Sf"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListOrganizationServiceAccessStatus": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/organizations/service-access"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "OrganizationStatus": {
+            "shape": "S9g"
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListPeerings": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/peerings"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "CoreNetworkId": {
+            "location": "querystring",
+            "locationName": "coreNetworkId"
+          },
+          "PeeringType": {
+            "location": "querystring",
+            "locationName": "peeringType"
+          },
+          "EdgeLocation": {
+            "location": "querystring",
+            "locationName": "edgeLocation"
+          },
+          "State": {
+            "location": "querystring",
+            "locationName": "state"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Peerings": {
+            "type": "list",
+            "member": {
+              "shape": "S3c"
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListTagsForResource": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resourceArn}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn"
+        ],
+        "members": {
+          "ResourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "TagList": {
+            "shape": "Sf"
+          }
+        }
+      }
+    },
+    "PutCoreNetworkPolicy": {
+      "http": {
+        "requestUri": "/core-networks/{coreNetworkId}/core-network-policy"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "CoreNetworkId",
+          "PolicyDocument"
+        ],
+        "members": {
+          "CoreNetworkId": {
+            "location": "uri",
+            "locationName": "coreNetworkId"
+          },
+          "PolicyDocument": {
+            "jsonvalue": true
+          },
+          "Description": {},
+          "LatestVersionId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CoreNetworkPolicy": {
+            "shape": "S46"
+          }
+        }
+      }
+    },
+    "PutResourcePolicy": {
+      "http": {
+        "requestUri": "/resource-policy/{resourceArn}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "PolicyDocument",
+          "ResourceArn"
+        ],
+        "members": {
+          "PolicyDocument": {
+            "jsonvalue": true
+          },
+          "ResourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "RegisterTransitGateway": {
+      "http": {
+        "requestUri": "/global-networks/{globalNetworkId}/transit-gateway-registrations"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId",
+          "TransitGatewayArn"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "TransitGatewayArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "TransitGatewayRegistration": {
+            "shape": "S4p"
+          }
+        }
+      }
+    },
+    "RejectAttachment": {
+      "http": {
+        "requestUri": "/attachments/{attachmentId}/reject"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "AttachmentId"
+        ],
+        "members": {
+          "AttachmentId": {
+            "location": "uri",
+            "locationName": "attachmentId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Attachment": {
+            "shape": "S4"
+          }
+        }
+      }
+    },
+    "RestoreCoreNetworkPolicyVersion": {
+      "http": {
+        "requestUri": "/core-networks/{coreNetworkId}/core-network-policy-versions/{policyVersionId}/restore"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "CoreNetworkId",
+          "PolicyVersionId"
+        ],
+        "members": {
+          "CoreNetworkId": {
+            "location": "uri",
+            "locationName": "coreNetworkId"
+          },
+          "PolicyVersionId": {
+            "location": "uri",
+            "locationName": "policyVersionId",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CoreNetworkPolicy": {
+            "shape": "S46"
+          }
+        }
+      }
+    },
+    "StartOrganizationServiceAccessUpdate": {
+      "http": {
+        "requestUri": "/organizations/service-access"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Action"
+        ],
+        "members": {
+          "Action": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "OrganizationStatus": {
+            "shape": "S9g"
+          }
+        }
+      }
+    },
+    "StartRouteAnalysis": {
+      "http": {
+        "requestUri": "/global-networks/{globalNetworkId}/route-analyses"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId",
+          "Source",
+          "Destination"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "Source": {
+            "shape": "Sa6"
+          },
+          "Destination": {
+            "shape": "Sa6"
+          },
+          "IncludeReturnPath": {
+            "type": "boolean"
+          },
+          "UseMiddleboxes": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "RouteAnalysis": {
+            "shape": "S81"
+          }
+        }
+      }
+    },
+    "TagResource": {
+      "http": {
+        "requestUri": "/tags/{resourceArn}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn",
+          "Tags"
+        ],
+        "members": {
+          "ResourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          },
+          "Tags": {
+            "shape": "Sf"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UntagResource": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resourceArn}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn",
+          "TagKeys"
+        ],
+        "members": {
+          "ResourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          },
+          "TagKeys": {
+            "location": "querystring",
+            "locationName": "tagKeys",
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UpdateConnection": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/global-networks/{globalNetworkId}/connections/{connectionId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId",
+          "ConnectionId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "ConnectionId": {
+            "location": "uri",
+            "locationName": "connectionId"
+          },
+          "LinkId": {},
+          "ConnectedLinkId": {},
+          "Description": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Connection": {
+            "shape": "S1z"
+          }
+        }
+      }
+    },
+    "UpdateCoreNetwork": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/core-networks/{coreNetworkId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "CoreNetworkId"
+        ],
+        "members": {
+          "CoreNetworkId": {
+            "location": "uri",
+            "locationName": "coreNetworkId"
+          },
+          "Description": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CoreNetwork": {
+            "shape": "S26"
+          }
+        }
+      }
+    },
+    "UpdateDevice": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/global-networks/{globalNetworkId}/devices/{deviceId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId",
+          "DeviceId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "DeviceId": {
+            "location": "uri",
+            "locationName": "deviceId"
+          },
+          "AWSLocation": {
+            "shape": "S2h"
+          },
+          "Description": {},
+          "Type": {},
+          "Vendor": {},
+          "Model": {},
+          "SerialNumber": {},
+          "Location": {
+            "shape": "S2i"
+          },
+          "SiteId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Device": {
+            "shape": "S2l"
+          }
+        }
+      }
+    },
+    "UpdateGlobalNetwork": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/global-networks/{globalNetworkId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "Description": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "GlobalNetwork": {
+            "shape": "S2q"
+          }
+        }
+      }
+    },
+    "UpdateLink": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/global-networks/{globalNetworkId}/links/{linkId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId",
+          "LinkId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "LinkId": {
+            "location": "uri",
+            "locationName": "linkId"
+          },
+          "Description": {},
+          "Type": {},
+          "Bandwidth": {
+            "shape": "S2u"
+          },
+          "Provider": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Link": {
+            "shape": "S2w"
+          }
+        }
+      }
+    },
+    "UpdateNetworkResourceMetadata": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/global-networks/{globalNetworkId}/network-resources/{resourceArn}/metadata"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId",
+          "ResourceArn",
+          "Metadata"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "ResourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          },
+          "Metadata": {
+            "shape": "S75"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ResourceArn": {},
+          "Metadata": {
+            "shape": "S75"
+          }
+        }
+      }
+    },
+    "UpdateSite": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/global-networks/{globalNetworkId}/sites/{siteId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GlobalNetworkId",
+          "SiteId"
+        ],
+        "members": {
+          "GlobalNetworkId": {
+            "location": "uri",
+            "locationName": "globalNetworkId"
+          },
+          "SiteId": {
+            "location": "uri",
+            "locationName": "siteId"
+          },
+          "Description": {},
+          "Location": {
+            "shape": "S2i"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Site": {
+            "shape": "S31"
+          }
+        }
+      }
+    },
+    "UpdateVpcAttachment": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/vpc-attachments/{attachmentId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "AttachmentId"
+        ],
+        "members": {
+          "AttachmentId": {
+            "location": "uri",
+            "locationName": "attachmentId"
+          },
+          "AddSubnetArns": {
+            "shape": "S3r"
+          },
+          "RemoveSubnetArns": {
+            "shape": "S3r"
+          },
+          "Options": {
+            "shape": "S3s"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "VpcAttachment": {
+            "shape": "S3v"
+          }
+        }
+      }
+    }
+  },
+  "shapes": {
+    "S4": {
+      "type": "structure",
+      "members": {
+        "CoreNetworkId": {},
+        "CoreNetworkArn": {},
+        "AttachmentId": {},
+        "OwnerAccountId": {},
+        "AttachmentType": {},
+        "State": {},
+        "EdgeLocation": {},
+        "ResourceArn": {},
+        "AttachmentPolicyRuleNumber": {
+          "type": "integer"
+        },
+        "SegmentName": {},
+        "NetworkFunctionGroupName": {},
+        "Tags": {
+          "shape": "Sf"
+        },
+        "ProposedSegmentChange": {
+          "type": "structure",
+          "members": {
+            "Tags": {
+              "shape": "Sf"
+            },
+            "AttachmentPolicyRuleNumber": {
+              "type": "integer"
+            },
+            "SegmentName": {}
+          }
+        },
+        "ProposedNetworkFunctionGroupChange": {
+          "type": "structure",
+          "members": {
+            "Tags": {
+              "shape": "Sf"
+            },
+            "AttachmentPolicyRuleNumber": {
+              "type": "integer"
+            },
+            "NetworkFunctionGroupName": {}
+          }
+        },
+        "CreatedAt": {
+          "type": "timestamp"
+        },
+        "UpdatedAt": {
+          "type": "timestamp"
+        },
+        "LastModificationErrors": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "Code": {},
+              "Message": {},
+              "ResourceArn": {},
+              "RequestId": {}
+            }
+          }
+        }
+      }
+    },
+    "Sf": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "Key": {},
+          "Value": {}
+        }
+      }
+    },
+    "Sw": {
+      "type": "structure",
+      "members": {
+        "ConnectPeerId": {},
+        "GlobalNetworkId": {},
+        "DeviceId": {},
+        "LinkId": {},
+        "State": {}
+      }
+    },
+    "S11": {
+      "type": "structure",
+      "members": {
+        "CustomerGatewayArn": {},
+        "GlobalNetworkId": {},
+        "DeviceId": {},
+        "LinkId": {},
+        "State": {}
+      }
+    },
+    "S15": {
+      "type": "structure",
+      "members": {
+        "GlobalNetworkId": {},
+        "DeviceId": {},
+        "LinkId": {},
+        "LinkAssociationState": {}
+      }
+    },
+    "S1a": {
+      "type": "structure",
+      "members": {
+        "TransitGatewayConnectPeerArn": {},
+        "GlobalNetworkId": {},
+        "DeviceId": {},
+        "LinkId": {},
+        "State": {}
+      }
+    },
+    "S1d": {
+      "type": "structure",
+      "members": {
+        "Protocol": {}
+      }
+    },
+    "S1h": {
+      "type": "structure",
+      "members": {
+        "Attachment": {
+          "shape": "S4"
+        },
+        "TransportAttachmentId": {},
+        "Options": {
+          "shape": "S1d"
+        }
+      }
+    },
+    "S1m": {
+      "type": "list",
+      "member": {}
+    },
+    "S1p": {
+      "type": "structure",
+      "members": {
+        "CoreNetworkId": {},
+        "ConnectAttachmentId": {},
+        "ConnectPeerId": {},
+        "EdgeLocation": {},
+        "State": {},
+        "CreatedAt": {
+          "type": "timestamp"
+        },
+        "Configuration": {
+          "type": "structure",
+          "members": {
+            "CoreNetworkAddress": {},
+            "PeerAddress": {},
+            "InsideCidrBlocks": {
+              "shape": "S1m"
+            },
+            "Protocol": {},
+            "BgpConfigurations": {
+              "type": "list",
+              "member": {
+                "type": "structure",
+                "members": {
+                  "CoreNetworkAsn": {
+                    "type": "long"
+                  },
+                  "PeerAsn": {
+                    "type": "long"
+                  },
+                  "CoreNetworkAddress": {},
+                  "PeerAddress": {}
+                }
+              }
+            }
+          }
+        },
+        "Tags": {
+          "shape": "Sf"
+        },
+        "SubnetArn": {},
+        "LastModificationErrors": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "Code": {},
+              "Message": {},
+              "ResourceArn": {},
+              "RequestId": {}
+            }
+          }
+        }
+      }
+    },
+    "S1z": {
+      "type": "structure",
+      "members": {
+        "ConnectionId": {},
+        "ConnectionArn": {},
+        "GlobalNetworkId": {},
+        "DeviceId": {},
+        "ConnectedDeviceId": {},
+        "LinkId": {},
+        "ConnectedLinkId": {},
+        "Description": {},
+        "CreatedAt": {
+          "type": "timestamp"
+        },
+        "State": {},
+        "Tags": {
+          "shape": "Sf"
+        }
+      }
+    },
+    "S26": {
+      "type": "structure",
+      "members": {
+        "GlobalNetworkId": {},
+        "CoreNetworkId": {},
+        "CoreNetworkArn": {},
+        "Description": {},
+        "CreatedAt": {
+          "type": "timestamp"
+        },
+        "State": {},
+        "Segments": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "Name": {},
+              "EdgeLocations": {
+                "shape": "S2a"
+              },
+              "SharedSegments": {
+                "shape": "S1m"
+              }
+            }
+          }
+        },
+        "NetworkFunctionGroups": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "Name": {},
+              "EdgeLocations": {
+                "shape": "S2a"
+              },
+              "Segments": {
+                "type": "structure",
+                "members": {
+                  "SendVia": {
+                    "shape": "S1m"
+                  },
+                  "SendTo": {
+                    "shape": "S1m"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "Edges": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "EdgeLocation": {},
+              "Asn": {
+                "type": "long"
+              },
+              "InsideCidrBlocks": {
+                "shape": "S1m"
+              }
+            }
+          }
+        },
+        "Tags": {
+          "shape": "Sf"
+        }
+      }
+    },
+    "S2a": {
+      "type": "list",
+      "member": {}
+    },
+    "S2h": {
+      "type": "structure",
+      "members": {
+        "Zone": {},
+        "SubnetArn": {}
+      }
+    },
+    "S2i": {
+      "type": "structure",
+      "members": {
+        "Address": {},
+        "Latitude": {},
+        "Longitude": {}
+      },
+      "sensitive": true
+    },
+    "S2l": {
+      "type": "structure",
+      "members": {
+        "DeviceId": {},
+        "DeviceArn": {},
+        "GlobalNetworkId": {},
+        "AWSLocation": {
+          "shape": "S2h"
+        },
+        "Description": {},
+        "Type": {},
+        "Vendor": {},
+        "Model": {},
+        "SerialNumber": {},
+        "Location": {
+          "shape": "S2i"
+        },
+        "SiteId": {},
+        "CreatedAt": {
+          "type": "timestamp"
+        },
+        "State": {},
+        "Tags": {
+          "shape": "Sf"
+        }
+      }
+    },
+    "S2q": {
+      "type": "structure",
+      "members": {
+        "GlobalNetworkId": {},
+        "GlobalNetworkArn": {},
+        "Description": {},
+        "CreatedAt": {
+          "type": "timestamp"
+        },
+        "State": {},
+        "Tags": {
+          "shape": "Sf"
+        }
+      }
+    },
+    "S2u": {
+      "type": "structure",
+      "members": {
+        "UploadSpeed": {
+          "type": "integer"
+        },
+        "DownloadSpeed": {
+          "type": "integer"
+        }
+      }
+    },
+    "S2w": {
+      "type": "structure",
+      "members": {
+        "LinkId": {},
+        "LinkArn": {},
+        "GlobalNetworkId": {},
+        "SiteId": {},
+        "Description": {},
+        "Type": {},
+        "Bandwidth": {
+          "shape": "S2u"
+        },
+        "Provider": {},
+        "CreatedAt": {
+          "type": "timestamp"
+        },
+        "State": {},
+        "Tags": {
+          "shape": "Sf"
+        }
+      }
+    },
+    "S31": {
+      "type": "structure",
+      "members": {
+        "SiteId": {},
+        "SiteArn": {},
+        "GlobalNetworkId": {},
+        "Description": {},
+        "Location": {
+          "shape": "S2i"
+        },
+        "CreatedAt": {
+          "type": "timestamp"
+        },
+        "State": {},
+        "Tags": {
+          "shape": "Sf"
+        }
+      }
+    },
+    "S37": {
+      "type": "structure",
+      "members": {
+        "Attachment": {
+          "shape": "S4"
+        },
+        "VpnConnectionArn": {}
+      }
+    },
+    "S3b": {
+      "type": "structure",
+      "members": {
+        "Peering": {
+          "shape": "S3c"
+        },
+        "TransitGatewayArn": {},
+        "TransitGatewayPeeringAttachmentId": {}
+      }
+    },
+    "S3c": {
+      "type": "structure",
+      "members": {
+        "CoreNetworkId": {},
+        "CoreNetworkArn": {},
+        "PeeringId": {},
+        "OwnerAccountId": {},
+        "PeeringType": {},
+        "State": {},
+        "EdgeLocation": {},
+        "ResourceArn": {},
+        "Tags": {
+          "shape": "Sf"
+        },
+        "CreatedAt": {
+          "type": "timestamp"
+        },
+        "LastModificationErrors": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "Code": {},
+              "Message": {},
+              "ResourceArn": {},
+              "RequestId": {},
+              "MissingPermissionsContext": {
+                "type": "structure",
+                "members": {
+                  "MissingPermission": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "S3o": {
+      "type": "structure",
+      "members": {
+        "Attachment": {
+          "shape": "S4"
+        },
+        "PeeringId": {},
+        "TransitGatewayRouteTableArn": {}
+      }
+    },
+    "S3r": {
+      "type": "list",
+      "member": {}
+    },
+    "S3s": {
+      "type": "structure",
+      "members": {
+        "Ipv6Support": {
+          "type": "boolean"
+        },
+        "ApplianceModeSupport": {
+          "type": "boolean"
+        }
+      }
+    },
+    "S3v": {
+      "type": "structure",
+      "members": {
+        "Attachment": {
+          "shape": "S4"
+        },
+        "SubnetArns": {
+          "shape": "S3r"
+        },
+        "Options": {
+          "shape": "S3s"
+        }
+      }
+    },
+    "S46": {
+      "type": "structure",
+      "members": {
+        "CoreNetworkId": {},
+        "PolicyVersionId": {
+          "type": "integer"
+        },
+        "Alias": {},
+        "Description": {},
+        "CreatedAt": {
+          "type": "timestamp"
+        },
+        "ChangeSetState": {},
+        "PolicyErrors": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "required": [
+              "ErrorCode",
+              "Message"
+            ],
+            "members": {
+              "ErrorCode": {},
+              "Message": {},
+              "Path": {}
+            }
+          }
+        },
+        "PolicyDocument": {
+          "jsonvalue": true
+        }
+      }
+    },
+    "S4p": {
+      "type": "structure",
+      "members": {
+        "GlobalNetworkId": {},
+        "TransitGatewayArn": {},
+        "State": {
+          "type": "structure",
+          "members": {
+            "Code": {},
+            "Message": {}
+          }
+        }
+      }
+    },
+    "S5y": {
+      "type": "structure",
+      "members": {
+        "SegmentName": {},
+        "NetworkFunctionGroupName": {},
+        "EdgeLocations": {
+          "shape": "S2a"
+        },
+        "Asn": {
+          "type": "long"
+        },
+        "Cidr": {},
+        "DestinationIdentifier": {},
+        "InsideCidrBlocks": {
+          "shape": "S1m"
+        },
+        "SharedSegments": {
+          "shape": "S1m"
+        },
+        "ServiceInsertionActions": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "Action": {},
+              "Mode": {},
+              "WhenSentTo": {
+                "type": "structure",
+                "members": {
+                  "WhenSentToSegmentsList": {
+                    "type": "list",
+                    "member": {}
+                  }
+                }
+              },
+              "Via": {
+                "type": "structure",
+                "members": {
+                  "NetworkFunctionGroups": {
+                    "type": "list",
+                    "member": {
+                      "type": "structure",
+                      "members": {
+                        "Name": {}
+                      }
+                    }
+                  },
+                  "WithEdgeOverrides": {
+                    "type": "list",
+                    "member": {
+                      "type": "structure",
+                      "members": {
+                        "EdgeSets": {
+                          "type": "list",
+                          "member": {
+                            "type": "list",
+                            "member": {}
+                          }
+                        },
+                        "UseEdge": {}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "S75": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "S78": {
+      "type": "structure",
+      "members": {
+        "CoreNetworkId": {},
+        "SegmentName": {},
+        "EdgeLocation": {}
+      }
+    },
+    "S81": {
+      "type": "structure",
+      "members": {
+        "GlobalNetworkId": {},
+        "OwnerAccountId": {},
+        "RouteAnalysisId": {},
+        "StartTimestamp": {
+          "type": "timestamp"
+        },
+        "Status": {},
+        "Source": {
+          "shape": "S83"
+        },
+        "Destination": {
+          "shape": "S83"
+        },
+        "IncludeReturnPath": {
+          "type": "boolean"
+        },
+        "UseMiddleboxes": {
+          "type": "boolean"
+        },
+        "ForwardPath": {
+          "shape": "S85"
+        },
+        "ReturnPath": {
+          "shape": "S85"
+        }
+      }
+    },
+    "S83": {
+      "type": "structure",
+      "members": {
+        "TransitGatewayAttachmentArn": {},
+        "TransitGatewayArn": {},
+        "IpAddress": {}
+      }
+    },
+    "S85": {
+      "type": "structure",
+      "members": {
+        "CompletionStatus": {
+          "type": "structure",
+          "members": {
+            "ResultCode": {},
+            "ReasonCode": {},
+            "ReasonContext": {
+              "type": "map",
+              "key": {},
+              "value": {}
+            }
+          }
+        },
+        "Path": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "Sequence": {
+                "type": "integer"
+              },
+              "Resource": {
+                "type": "structure",
+                "members": {
+                  "RegisteredGatewayArn": {},
+                  "ResourceArn": {},
+                  "ResourceType": {},
+                  "Definition": {},
+                  "NameTag": {},
+                  "IsMiddlebox": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "DestinationCidrBlock": {}
+            }
+          }
+        }
+      }
+    },
+    "S9g": {
+      "type": "structure",
+      "members": {
+        "OrganizationId": {},
+        "OrganizationAwsServiceAccessStatus": {},
+        "SLRDeploymentStatus": {},
+        "AccountStatusList": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "AccountId": {},
+              "SLRDeploymentStatus": {}
+            }
+          }
+        }
+      }
+    },
+    "Sa6": {
+      "type": "structure",
+      "members": {
+        "TransitGatewayAttachmentArn": {},
+        "IpAddress": {}
+      }
+    }
+  }
+}

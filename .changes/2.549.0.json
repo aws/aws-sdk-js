@@ -1,0 +1,17 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Request Signing",
+        "description": "This change allows requests to a service to be signed if the api.json doesn't specify a signatureVersion or authtype, but the configuration has a signatureVersion specified. Prior to this change, the logic to create a signer would use signatureVersion specified in the config, but the code would never reach it if api.json signatureVersion or authtype weren't defined."
+    },
+    {
+        "type": "feature",
+        "category": "Personalize",
+        "description": "AWS Personalize: Adds ability to create a solution version using FULL or UPDATE training mode"
+    },
+    {
+        "type": "feature",
+        "category": "Retry",
+        "description": "retry all 429 status code exceptions"
+    }
+]

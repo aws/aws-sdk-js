@@ -50,8 +50,8 @@ end
 
 YARD::Parser::SourceParser.after_parse_list do
   $dynamodb_model['operations'].each do |op_name, operation|
-    next unless op_name =~ /^(?:Scan|Query|.+Item)$/
-    obj_name = op_name.sub(/Item$/, '').sub(/^./) {|m| m.downcase}
+    next unless op_name =~ /^(?:Scan|Query|.+Item[s]?)$/
+    obj_name = op_name.sub(/Item[s]?$/, '').sub(/^./) {|m| m.downcase}
     obj_path = "AWS.DynamoDB.DocumentClient.#{obj_name}"
 
     if obj = YARD::Registry.at(obj_path)
@@ -146,9 +146,10 @@ API operation.
 @option options [map] params An optional map of parameters to bind to every
   request sent by this service object. For more information on bound parameters,
   see ["Working with Services" in the Getting Started Guide](/AWSJavaScriptSDK/guide/node-services.html#Bound_Parameters).
-@option options [String] endpoint The endpoint URI to send requests
+@option options [String|AWS.Endpoint] endpoint The endpoint URI to send requests
   to.  The default endpoint is built from the configured `region`.
-  The endpoint should be a string like `'https://{service}.{region}.amazonaws.com'`.
+  The endpoint should be a string like `'https://{service}.{region}.amazonaws.com'` or an
+  Endpoint object.
 @option (see AWS.Config.constructor)
 #{dualstack ? "@option options [Boolean] useDualstack Enables IPv6/IPv4 dualstack endpoint.
   When a DNS lookup is performed on an endpoint of this type, it returns an “A” record with

@@ -149,12 +149,12 @@ module.exports = {
     var body;
     if (typeof size === 'string') {
       switch (size) {
-        case 'empty': body = new Buffer(0); break;
-        case 'small': body = new Buffer(1024 * 1024); break;
-        case 'large': body = new Buffer(1024 * 1024 * 20); break;
+        case 'empty': body = Buffer.alloc(0); break;
+        case 'small': body = Buffer.alloc(1024 * 1024); break;
+        case 'large': body = Buffer.alloc(1024 * 1024 * 20); break;
       }
     } else if (typeof size === 'number') {
-      body = new Buffer(size);
+      body = Buffer.alloc(size);
     }
 
     fs.writeFileSync(filename, body);
@@ -168,15 +168,15 @@ module.exports = {
     var match;
     var buffer;
     if (match = size.match(/(\d+)KB/)) {
-      buffer = new Buffer(parseInt(match[1]) * 1024);
+      buffer = Buffer.alloc(parseInt(match[1]) * 1024);
     } else if (match = size.match(/(\d+)MB/)) {
-      buffer = new Buffer(parseInt(match[1]) * 1024 * 1024);
+      buffer = Buffer.alloc(parseInt(match[1]) * 1024 * 1024);
     } else {
       switch (size) {
-        case 'empty': buffer = new Buffer(0); break;
-        case 'small': buffer = new Buffer(1024 * 1024); break;
-        case 'large': buffer = new Buffer(1024 * 1024 * 20); break;
-        default: return new Buffer(1024 * 1024);
+        case 'empty': buffer = Buffer.alloc(0); break;
+        case 'small': buffer = Buffer.alloc(1024 * 1024); break;
+        case 'large': buffer = Buffer.alloc(1024 * 1024 * 20); break;
+        default: return Buffer.alloc(1024 * 1024);
       }
     }
     buffer.fill('x');

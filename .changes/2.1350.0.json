@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "AmplifyUIBuilder",
+        "description": "Support StorageField and custom displays for data-bound options in form builder. Support non-string operands for predicates in collections. Support choosing client to get token from."
+    },
+    {
+        "type": "feature",
+        "category": "DataExchange",
+        "description": "This release updates the value of MaxResults."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "C6in, M6in, M6idn, R6in and R6idn bare metal instances are powered by 3rd Generation Intel Xeon Scalable processors and offer up to 200 Gbps of network bandwidth."
+    },
+    {
+        "type": "feature",
+        "category": "ElasticInference",
+        "description": "Updated public documentation for the Describe and Tagging APIs."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Amazon SageMaker Asynchronous Inference now allows customer's to receive failure model responses in S3 and receive success/failure model responses in SNS notifications."
+    },
+    {
+        "type": "feature",
+        "category": "SageMakerRuntime",
+        "description": "Amazon SageMaker Asynchronous Inference now provides customers a FailureLocation as a response parameter in InvokeEndpointAsync API to capture the model failure responses."
+    },
+    {
+        "type": "feature",
+        "category": "WAFV2",
+        "description": "This release rolls back association config feature for webACLs that protect CloudFront protections."
+    }
+]

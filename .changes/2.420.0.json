@@ -1,0 +1,12 @@
+[
+    {
+        "type": "bugfix",
+        "category": "ManageUpload",
+        "description": "abort request stream when body is smaller than 5MB"
+    },
+    {
+        "type": "feature",
+        "category": "ServerlessApplicationRepository",
+        "description": "The AWS Serverless Application Repository now supports associating a ZIP source code archive with versions of an application."
+    }
+]

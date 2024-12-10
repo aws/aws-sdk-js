@@ -1,0 +1,12 @@
+[
+    {
+        "type": "bugfix",
+        "category": "redshift-serverless",
+        "description": "remove redshift-serverless client"
+    },
+    {
+        "type": "feature",
+        "category": "Outposts",
+        "description": "This release adds API operations AWS uses to install Outpost servers."
+    }
+]

@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Providing support to accept BgpAsnExtended attribute"
+    },
+    {
+        "type": "feature",
+        "category": "Kafka",
+        "description": "Adds ControllerNodeInfo in ListNodes response to support Raft mode for MSK"
+    },
+    {
+        "type": "feature",
+        "category": "SWF",
+        "description": "This release adds new APIs for deleting activity type and workflow type resources."
+    }
+]

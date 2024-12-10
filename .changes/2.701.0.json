@@ -1,0 +1,22 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Request Signing",
+        "description": "Better handle colons in accessKeyIds when presigning URLs."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Adds support to tag elastic-gpu on the RunInstances api"
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "AWS Elemental MediaLive now supports Input Prepare schedule actions. This feature improves existing input switching by allowing users to prepare an input prior to switching to it."
+    },
+    {
+        "type": "feature",
+        "category": "OpsWorksCM",
+        "description": "Documentation updates for AWS OpsWorks CM."
+    }
+]

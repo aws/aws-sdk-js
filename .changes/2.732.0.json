@@ -1,0 +1,42 @@
+[
+    {
+        "type": "feature",
+        "category": "Cloud9",
+        "description": "Add ConnectionType input parameter to CreateEnvironmentEC2 endpoint. New parameter enables creation of environments with SSM connection."
+    },
+    {
+        "type": "feature",
+        "category": "Comprehend",
+        "description": "Amazon Comprehend Custom Entity Recognition now supports Spanish, German, French, Italian and Portuguese and up to 25 entity types per model."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Introduces support for IPv6-in-IPv4 IPsec tunnels. A user can now send traffic from their on-premise IPv6 network to AWS VPCs that have IPv6 support enabled."
+    },
+    {
+        "type": "feature",
+        "category": "FSx",
+        "description": "This release adds the capability to create persistent file systems for throughput-intensive workloads using Hard Disk Drive (HDD) storage and an optional read-only Solid-State Drive (SSD) cache."
+    },
+    {
+        "type": "feature",
+        "category": "Iot",
+        "description": "Audit finding suppressions: Device Defender enables customers to turn off non-compliant findings for specific resources on a per check basis."
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "Support for creating Lambda Functions using 'java8.al2' and 'provided.al2'"
+    },
+    {
+        "type": "feature",
+        "category": "Transfer",
+        "description": "Adds security policies to control cryptographic algorithms advertised by your server, additional characters in usernames and length increase, and FIPS compliant endpoints in the US and Canada regions."
+    },
+    {
+        "type": "feature",
+        "category": "WorkSpaces",
+        "description": "Adds optional EnableWorkDocs property to WorkspaceCreationProperties in the ModifyWorkspaceCreationProperties API"
+    }
+]

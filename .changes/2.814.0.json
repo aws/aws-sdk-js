@@ -1,0 +1,22 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Credentials",
+        "description": "SDK will throw if shared ini file's profile name can be resolved to __proto__"
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "EBS io2 volumes now supports Multi-Attach"
+    },
+    {
+        "type": "feature",
+        "category": "PersonalizeRuntime",
+        "description": "Updated FilterValues regex pattern to align with Filter Expression."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "Adds IAM DB authentication information to the PendingModifiedValues output of the DescribeDBInstances API. Adds ClusterPendingModifiedValues information to the output of the DescribeDBClusters API."
+    }
+]

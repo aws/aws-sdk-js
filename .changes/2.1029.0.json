@@ -1,0 +1,42 @@
+[
+    {
+        "type": "feature",
+        "category": "AppStream",
+        "description": "This release includes support for images of AmazonLinux2 platform type."
+    },
+    {
+        "type": "feature",
+        "category": "DMS",
+        "description": "Add Settings in JSON format for the source GCP MySQL endpoint"
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Adds a new VPC Subnet attribute \"EnableDns64.\" When enabled on IPv6 Subnets, the Amazon-Provided DNS Resolver returns synthetic IPv6 addresses for IPv4-only destinations."
+    },
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Adding Tags support to Cluster Registrations."
+    },
+    {
+        "type": "feature",
+        "category": "MigrationHubStrategy",
+        "description": "AWS SDK for Migration Hub Strategy Recommendations. It includes APIs to start the portfolio assessment, import portfolio data for assessment, and to retrieve recommendations. For more information, see the AWS Migration Hub documentation at https://docs.aws.amazon.com/migrationhub/index.html"
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "Adds support for Session Reason and Max Session Duration for Systems Manager Session Manager."
+    },
+    {
+        "type": "feature",
+        "category": "Transfer",
+        "description": "AWS Transfer Family now supports integrating a custom identity provider using AWS Lambda"
+    },
+    {
+        "type": "feature",
+        "category": "WAFV2",
+        "description": "Your options for logging web ACL traffic now include Amazon CloudWatch Logs log groups and Amazon S3 buckets."
+    }
+]

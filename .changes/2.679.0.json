@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "Chime",
+        "description": "Amazon Chime now supports redacting chat messages."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release changes the RunInstances CLI and SDK's so that if you do not specify a client token, a randomly generated token is used for the request to ensure idempotency."
+    },
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "This release adds support for specifying environment files to add environment variables to your containers."
+    },
+    {
+        "type": "feature",
+        "category": "QLDB",
+        "description": "Amazon QLDB now supports Amazon Kinesis data streams. You can now emit QLDB journal data, via the new QLDB Streams feature, directly to Amazon Kinesis supporting event processing and analytics among related use cases."
+    }
+]

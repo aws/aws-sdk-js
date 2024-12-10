@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "DataSync",
+        "description": "This change allows users to disable and enable the schedules associated with their tasks."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Launching capability for customers to enable or disable automatic assignment of public IPv4 addresses to their network interface"
+    },
+    {
+        "type": "feature",
+        "category": "EMRcontainers",
+        "description": "EMRonEKS Service support for SecurityConfiguration enforcement for Spark Jobs."
+    },
+    {
+        "type": "feature",
+        "category": "EntityResolution",
+        "description": "Support Batch Unique IDs Deletion."
+    },
+    {
+        "type": "feature",
+        "category": "GameLift",
+        "description": "Amazon GameLift releases container fleets support for public preview. Deploy Linux-based containerized game server software for hosting on Amazon GameLift."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "Add SSM DescribeInstanceProperties API to public AWS SDK."
+    }
+]

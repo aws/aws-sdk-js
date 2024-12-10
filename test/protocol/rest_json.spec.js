@@ -237,6 +237,62 @@
           expect(request.httpRequest.headers['Content-Type'])
             .to.equal('application/json');
         });
+
+        it('should add a Content-Type with binary/octet-stream if paylaod is binary', function() {
+          request.params = {
+            Body: 'foobar'
+          };
+          defop({
+            input: {
+              payload: 'Body',
+              members: {
+                Body: {
+                  type: 'binary'
+                }
+              }
+            }
+          });
+          expect(build().httpRequest.headers['Content-Type']).to.equal('binary/octet-stream');
+        });
+
+        it('should add a Content-Type with binary/octet-stream if paylaod is streaming', function() {
+          request.params = {
+            Body: 'foobar'
+          };
+          defop({
+            input: {
+              payload: 'Body',
+              members: {
+                Body: {
+                  type: 'blob',
+                  streaming: true
+                }
+              }
+            }
+          });
+          expect(build().httpRequest.headers['Content-Type']).to.equal('binary/octet-stream');
+        });
+
+        it('should not add a Content-Type if paylaod is already defined', function() {
+          request.params = {
+            Body: 'foobar'
+          };
+
+          request.httpRequest.headers['Content-Type'] = 'foo';
+          defop({
+            input: {
+              payload: 'Body',
+              members: {
+                Body: {
+                  type: 'blob',
+                  streaming: true
+                }
+              }
+            }
+          });
+          expect(build().httpRequest.headers['Content-Type']).to.equal('foo');
+        });
+
       });
 
       describe('body', function() {
@@ -313,7 +369,7 @@
       var extractError;
       extractError = function(body) {
         response.httpResponse.statusCode = 500;
-        response.httpResponse.body = new Buffer(body);
+        response.httpResponse.body = AWS.util.buffer.toBuffer(body);
         return svc.extractError(response);
       };
       it('removes prefixes from the error code', function() {
@@ -365,7 +421,7 @@
       var extractData;
       extractData = function(body) {
         response.httpResponse.statusCode = 200;
-        response.httpResponse.body = new Buffer(body);
+        response.httpResponse.body = AWS.util.buffer.toBuffer(body);
         return svc.extractData(response);
       };
       it('JSON parses http response bodies', function() {

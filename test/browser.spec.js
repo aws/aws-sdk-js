@@ -80,7 +80,6 @@
     apigateway = new AWS.APIGateway(AWS.util.merge(config, config.apigateway));
     cloudformation = new AWS.CloudFormation(AWS.util.merge(config, config.cloudformation));
     cloudfront = new AWS.CloudFront(AWS.util.merge(config, config.cloudfront));
-    cloudhsm = new AWS.CloudHSM(AWS.util.merge(config, config.cloudhsm));
     cloudtrail = new AWS.CloudTrail(AWS.util.merge(config, config.cloudtrail));
     cloudwatch = new AWS.CloudWatch(AWS.util.merge(config, config.cloudwatch));
     cloudwatchlogs = new AWS.CloudWatchLogs(AWS.util.merge(config, config.cloudwatchlogs));
@@ -224,7 +223,7 @@
       });
       return it('lower cases HTTP headers', function() {
         var client, headers, rawHeaders;
-        rawHeaders = "x-amzn-Foo: foo\nx-amzn-Bar: bar";
+        rawHeaders = 'x-amzn-Foo: foo\nx-amzn-Bar: bar';
         client = new AWS.XHRClient();
         headers = client.parseHeaders(rawHeaders);
         expect(headers['x-amzn-foo']).to.equal('foo');
@@ -311,22 +310,7 @@
         });
       });
     });
-    describe('AWS.CloudHSM', function() {
-      it('makes a request', function(done) {
-        return cloudhsm.listHsms({}, function(err, data) {
-          noError(err);
-          expect(Array.isArray(data.HsmList)).to.equal(true);
-          return done();
-        });
-      });
-      return it('handles errors', function(done) {
-        return cloudhsm.describeHsm({}, function(err, data) {
-          assertError(err, 'InvalidRequestException');
-          noData(data);
-          return done();
-        });
-      });
-    });
+
     describe('AWS.CloudTrail', function() {
       it('makes a request', function(done) {
         return cloudtrail.listPublicKeys(function(err, data) {
@@ -975,16 +959,6 @@
       });
     });
 
-    describe('AWS.Pinpoint', function() {
-      it('makes a request', function(done) {
-        pinpoint.getApps({PageSize: '10'}, function(err, data) {
-          noError(err);
-          expect(Array.isArray(data.ApplicationsResponse.Item)).to.equal(true);
-          done();
-        });
-      });
-    });
-
     describe('AWS.RDS', function() {
       it('makes a request', function(done) {
         return rds.describeCertificates(function(err, data) {
@@ -1183,6 +1157,56 @@
           expect(err.name).to.equal('TimeoutError');
           expect(spy.calls.length).to.equal(0);
           return done();
+        });
+      });
+
+      describe('selectObjectContent', function() {
+        beforeEach(function(done) {
+          s3.putObject({
+            Key: 'test.csv',
+            Body: 'user_name,age\nfoo,10\nbar,20\nfizz,30\nbuzz,40'
+          }, done);
+        });
+
+        afterEach(function(done) {
+          s3.deleteObject({
+            Key: 'test.csv'
+          }, done);
+        });
+
+        it('supports reading events from list of events', function(done) {
+          var key = 'test.csv';
+
+          s3.selectObjectContent({
+            Key: 'test.csv',
+            Expression: 'SELECT user_name FROM S3Object WHERE cast(age as int) > 20',
+            ExpressionType: 'SQL',
+            InputSerialization: {
+              CompressionType: 'NONE',
+              CSV: {
+                FileHeaderInfo: 'USE',
+                RecordDelimiter: '\n',
+                FieldDelimiter: ','
+              }
+            },
+            OutputSerialization: {
+              CSV: {}
+            }
+          }, function(err, data) {
+            noError(err);
+            var records = [];
+            for (var i = 0; i < data.Payload.length; i++) {
+              var event = data.Payload[i];
+              if (event.Records) {
+                records.push(event.Records.Payload);
+              }
+            }
+
+            expect(Buffer.concat(records).toString()).to.equal(
+              'fizz\nbuzz\n'
+            );
+            done();
+          });
         });
       });
 

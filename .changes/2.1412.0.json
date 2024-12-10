@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Add Nitro Enclaves support on DescribeInstanceTypes"
+    },
+    {
+        "type": "feature",
+        "category": "Location",
+        "description": "This release adds support for authenticating with Amazon Location Service's Places & Routes APIs with an API Key. Also, with this release developers can publish tracked device position updates to Amazon EventBridge."
+    },
+    {
+        "type": "feature",
+        "category": "Outposts",
+        "description": "Added paginator support to several APIs. Added the ISOLATED enum value to AssetState."
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "This release includes below three changes: small multiples axes improvement, field based coloring, removed required trait from Aggregation function for TopBottomFilter."
+    },
+    {
+        "type": "feature",
+        "category": "SharedIniFileCredentials",
+        "description": "Make duration_seconds work for chained profiles"
+    }
+]

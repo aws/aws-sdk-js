@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "This release adds a new parameter (EnableInterContainerTrafficEncryption) to CreateProcessingJob API to allow for enabling inter-container traffic encryption on processing jobs."
+    }
+]

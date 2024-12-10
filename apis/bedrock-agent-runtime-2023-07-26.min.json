@@ -1,0 +1,1666 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2023-07-26",
+    "endpointPrefix": "bedrock-agent-runtime",
+    "jsonVersion": "1.1",
+    "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
+    "serviceFullName": "Agents for Amazon Bedrock Runtime",
+    "serviceId": "Bedrock Agent Runtime",
+    "signatureVersion": "v4",
+    "signingName": "bedrock",
+    "uid": "bedrock-agent-runtime-2023-07-26",
+    "auth": [
+      "aws.auth#sigv4"
+    ]
+  },
+  "operations": {
+    "DeleteAgentMemory": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/agents/{agentId}/agentAliases/{agentAliasId}/memories",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "agentAliasId",
+          "agentId"
+        ],
+        "members": {
+          "agentAliasId": {
+            "location": "uri",
+            "locationName": "agentAliasId"
+          },
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          },
+          "memoryId": {
+            "location": "querystring",
+            "locationName": "memoryId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "GetAgentMemory": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/agents/{agentId}/agentAliases/{agentAliasId}/memories",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "agentAliasId",
+          "agentId",
+          "memoryId",
+          "memoryType"
+        ],
+        "members": {
+          "agentAliasId": {
+            "location": "uri",
+            "locationName": "agentAliasId"
+          },
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          },
+          "maxItems": {
+            "location": "querystring",
+            "locationName": "maxItems",
+            "type": "integer"
+          },
+          "memoryId": {
+            "location": "querystring",
+            "locationName": "memoryId"
+          },
+          "memoryType": {
+            "location": "querystring",
+            "locationName": "memoryType"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "memoryContents": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "sessionSummary": {
+                  "type": "structure",
+                  "members": {
+                    "memoryId": {},
+                    "sessionExpiryTime": {
+                      "shape": "Se"
+                    },
+                    "sessionId": {},
+                    "sessionStartTime": {
+                      "shape": "Se"
+                    },
+                    "summaryText": {}
+                  }
+                }
+              },
+              "union": true
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "InvokeAgent": {
+      "http": {
+        "requestUri": "/agents/{agentId}/agentAliases/{agentAliasId}/sessions/{sessionId}/text",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "agentAliasId",
+          "agentId",
+          "sessionId"
+        ],
+        "members": {
+          "agentAliasId": {
+            "location": "uri",
+            "locationName": "agentAliasId"
+          },
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          },
+          "enableTrace": {
+            "type": "boolean"
+          },
+          "endSession": {
+            "type": "boolean"
+          },
+          "inputText": {
+            "type": "string",
+            "sensitive": true
+          },
+          "memoryId": {},
+          "sessionId": {
+            "location": "uri",
+            "locationName": "sessionId"
+          },
+          "sessionState": {
+            "type": "structure",
+            "members": {
+              "files": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "required": [
+                    "name",
+                    "source",
+                    "useCase"
+                  ],
+                  "members": {
+                    "name": {},
+                    "source": {
+                      "type": "structure",
+                      "required": [
+                        "sourceType"
+                      ],
+                      "members": {
+                        "byteContent": {
+                          "type": "structure",
+                          "required": [
+                            "data",
+                            "mediaType"
+                          ],
+                          "members": {
+                            "data": {
+                              "shape": "Sq"
+                            },
+                            "mediaType": {}
+                          }
+                        },
+                        "s3Location": {
+                          "type": "structure",
+                          "required": [
+                            "uri"
+                          ],
+                          "members": {
+                            "uri": {}
+                          }
+                        },
+                        "sourceType": {}
+                      }
+                    },
+                    "useCase": {}
+                  }
+                }
+              },
+              "invocationId": {},
+              "knowledgeBaseConfigurations": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "required": [
+                    "knowledgeBaseId",
+                    "retrievalConfiguration"
+                  ],
+                  "members": {
+                    "knowledgeBaseId": {},
+                    "retrievalConfiguration": {
+                      "shape": "Sz"
+                    }
+                  }
+                }
+              },
+              "promptSessionAttributes": {
+                "type": "map",
+                "key": {},
+                "value": {}
+              },
+              "returnControlInvocationResults": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "members": {
+                    "apiResult": {
+                      "type": "structure",
+                      "required": [
+                        "actionGroup"
+                      ],
+                      "members": {
+                        "actionGroup": {},
+                        "apiPath": {
+                          "shape": "S1c"
+                        },
+                        "confirmationState": {},
+                        "httpMethod": {},
+                        "httpStatusCode": {
+                          "type": "integer"
+                        },
+                        "responseBody": {
+                          "shape": "S1f"
+                        },
+                        "responseState": {}
+                      }
+                    },
+                    "functionResult": {
+                      "type": "structure",
+                      "required": [
+                        "actionGroup"
+                      ],
+                      "members": {
+                        "actionGroup": {},
+                        "confirmationState": {},
+                        "function": {},
+                        "responseBody": {
+                          "shape": "S1f"
+                        },
+                        "responseState": {}
+                      }
+                    }
+                  },
+                  "union": true
+                }
+              },
+              "sessionAttributes": {
+                "type": "map",
+                "key": {},
+                "value": {}
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "completion",
+          "contentType",
+          "sessionId"
+        ],
+        "members": {
+          "completion": {
+            "type": "structure",
+            "members": {
+              "accessDeniedException": {
+                "shape": "S1m"
+              },
+              "badGatewayException": {
+                "shape": "S1o"
+              },
+              "chunk": {
+                "type": "structure",
+                "members": {
+                  "attribution": {
+                    "type": "structure",
+                    "members": {
+                      "citations": {
+                        "shape": "S1r"
+                      }
+                    }
+                  },
+                  "bytes": {
+                    "type": "blob",
+                    "sensitive": true
+                  }
+                },
+                "event": true,
+                "sensitive": true
+              },
+              "conflictException": {
+                "shape": "S2c"
+              },
+              "dependencyFailedException": {
+                "shape": "S2d"
+              },
+              "files": {
+                "type": "structure",
+                "members": {
+                  "files": {
+                    "type": "list",
+                    "member": {
+                      "type": "structure",
+                      "members": {
+                        "bytes": {
+                          "type": "blob",
+                          "sensitive": true
+                        },
+                        "name": {},
+                        "type": {}
+                      },
+                      "sensitive": true
+                    }
+                  }
+                },
+                "event": true
+              },
+              "internalServerException": {
+                "shape": "S2i"
+              },
+              "resourceNotFoundException": {
+                "shape": "S2j"
+              },
+              "returnControl": {
+                "type": "structure",
+                "members": {
+                  "invocationId": {},
+                  "invocationInputs": {
+                    "type": "list",
+                    "member": {
+                      "type": "structure",
+                      "members": {
+                        "apiInvocationInput": {
+                          "type": "structure",
+                          "required": [
+                            "actionGroup"
+                          ],
+                          "members": {
+                            "actionGroup": {},
+                            "actionInvocationType": {},
+                            "apiPath": {
+                              "shape": "S1c"
+                            },
+                            "httpMethod": {},
+                            "parameters": {
+                              "type": "list",
+                              "member": {
+                                "type": "structure",
+                                "members": {
+                                  "name": {},
+                                  "type": {},
+                                  "value": {}
+                                }
+                              }
+                            },
+                            "requestBody": {
+                              "type": "structure",
+                              "members": {
+                                "content": {
+                                  "type": "map",
+                                  "key": {},
+                                  "value": {
+                                    "type": "structure",
+                                    "members": {
+                                      "properties": {
+                                        "type": "list",
+                                        "member": {
+                                          "shape": "S2v"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "functionInvocationInput": {
+                          "type": "structure",
+                          "required": [
+                            "actionGroup"
+                          ],
+                          "members": {
+                            "actionGroup": {},
+                            "actionInvocationType": {},
+                            "function": {},
+                            "parameters": {
+                              "type": "list",
+                              "member": {
+                                "type": "structure",
+                                "members": {
+                                  "name": {},
+                                  "type": {},
+                                  "value": {}
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "union": true
+                    }
+                  }
+                },
+                "event": true,
+                "sensitive": true
+              },
+              "serviceQuotaExceededException": {
+                "shape": "S2z"
+              },
+              "throttlingException": {
+                "shape": "S30"
+              },
+              "trace": {
+                "type": "structure",
+                "members": {
+                  "agentAliasId": {},
+                  "agentId": {},
+                  "agentVersion": {},
+                  "sessionId": {},
+                  "trace": {
+                    "type": "structure",
+                    "members": {
+                      "failureTrace": {
+                        "type": "structure",
+                        "members": {
+                          "failureReason": {
+                            "type": "string",
+                            "sensitive": true
+                          },
+                          "traceId": {}
+                        },
+                        "sensitive": true
+                      },
+                      "guardrailTrace": {
+                        "type": "structure",
+                        "members": {
+                          "action": {},
+                          "inputAssessments": {
+                            "shape": "S39"
+                          },
+                          "outputAssessments": {
+                            "shape": "S39"
+                          },
+                          "traceId": {}
+                        },
+                        "sensitive": true
+                      },
+                      "orchestrationTrace": {
+                        "type": "structure",
+                        "members": {
+                          "invocationInput": {
+                            "type": "structure",
+                            "members": {
+                              "actionGroupInvocationInput": {
+                                "type": "structure",
+                                "members": {
+                                  "actionGroupName": {
+                                    "type": "string",
+                                    "sensitive": true
+                                  },
+                                  "apiPath": {
+                                    "shape": "S1c"
+                                  },
+                                  "executionType": {},
+                                  "function": {
+                                    "type": "string",
+                                    "sensitive": true
+                                  },
+                                  "invocationId": {},
+                                  "parameters": {
+                                    "shape": "S46"
+                                  },
+                                  "requestBody": {
+                                    "type": "structure",
+                                    "members": {
+                                      "content": {
+                                        "type": "map",
+                                        "key": {},
+                                        "value": {
+                                          "shape": "S46"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "verb": {
+                                    "type": "string",
+                                    "sensitive": true
+                                  }
+                                }
+                              },
+                              "codeInterpreterInvocationInput": {
+                                "type": "structure",
+                                "members": {
+                                  "code": {},
+                                  "files": {
+                                    "shape": "S4b"
+                                  }
+                                }
+                              },
+                              "invocationType": {},
+                              "knowledgeBaseLookupInput": {
+                                "type": "structure",
+                                "members": {
+                                  "knowledgeBaseId": {
+                                    "type": "string",
+                                    "sensitive": true
+                                  },
+                                  "text": {
+                                    "type": "string",
+                                    "sensitive": true
+                                  }
+                                }
+                              },
+                              "traceId": {}
+                            },
+                            "sensitive": true
+                          },
+                          "modelInvocationInput": {
+                            "shape": "S4g"
+                          },
+                          "modelInvocationOutput": {
+                            "type": "structure",
+                            "members": {
+                              "metadata": {
+                                "type": "structure",
+                                "members": {
+                                  "usage": {
+                                    "type": "structure",
+                                    "members": {
+                                      "inputTokens": {
+                                        "type": "integer"
+                                      },
+                                      "outputTokens": {
+                                        "type": "integer"
+                                      }
+                                    },
+                                    "sensitive": true
+                                  }
+                                },
+                                "sensitive": true
+                              },
+                              "rawResponse": {
+                                "type": "structure",
+                                "members": {
+                                  "content": {}
+                                },
+                                "sensitive": true
+                              },
+                              "traceId": {}
+                            },
+                            "sensitive": true
+                          },
+                          "observation": {
+                            "type": "structure",
+                            "members": {
+                              "actionGroupInvocationOutput": {
+                                "type": "structure",
+                                "members": {
+                                  "text": {
+                                    "type": "string",
+                                    "sensitive": true
+                                  }
+                                }
+                              },
+                              "codeInterpreterInvocationOutput": {
+                                "type": "structure",
+                                "members": {
+                                  "executionError": {},
+                                  "executionOutput": {},
+                                  "executionTimeout": {
+                                    "type": "boolean"
+                                  },
+                                  "files": {
+                                    "shape": "S4b"
+                                  }
+                                }
+                              },
+                              "finalResponse": {
+                                "type": "structure",
+                                "members": {
+                                  "text": {
+                                    "type": "string",
+                                    "sensitive": true
+                                  }
+                                }
+                              },
+                              "knowledgeBaseLookupOutput": {
+                                "type": "structure",
+                                "members": {
+                                  "retrievedReferences": {
+                                    "shape": "S1y"
+                                  }
+                                }
+                              },
+                              "repromptResponse": {
+                                "type": "structure",
+                                "members": {
+                                  "source": {
+                                    "type": "string",
+                                    "sensitive": true
+                                  },
+                                  "text": {}
+                                },
+                                "sensitive": true
+                              },
+                              "traceId": {},
+                              "type": {}
+                            },
+                            "sensitive": true
+                          },
+                          "rationale": {
+                            "type": "structure",
+                            "members": {
+                              "text": {
+                                "shape": "S56"
+                              },
+                              "traceId": {}
+                            },
+                            "sensitive": true
+                          }
+                        },
+                        "sensitive": true,
+                        "union": true
+                      },
+                      "postProcessingTrace": {
+                        "type": "structure",
+                        "members": {
+                          "modelInvocationInput": {
+                            "shape": "S4g"
+                          },
+                          "modelInvocationOutput": {
+                            "type": "structure",
+                            "members": {
+                              "parsedResponse": {
+                                "type": "structure",
+                                "members": {
+                                  "text": {
+                                    "type": "string",
+                                    "sensitive": true
+                                  }
+                                },
+                                "sensitive": true
+                              },
+                              "traceId": {}
+                            },
+                            "sensitive": true
+                          }
+                        },
+                        "sensitive": true,
+                        "union": true
+                      },
+                      "preProcessingTrace": {
+                        "type": "structure",
+                        "members": {
+                          "modelInvocationInput": {
+                            "shape": "S4g"
+                          },
+                          "modelInvocationOutput": {
+                            "type": "structure",
+                            "members": {
+                              "parsedResponse": {
+                                "type": "structure",
+                                "members": {
+                                  "isValid": {
+                                    "type": "boolean"
+                                  },
+                                  "rationale": {
+                                    "shape": "S56"
+                                  }
+                                },
+                                "sensitive": true
+                              },
+                              "traceId": {}
+                            },
+                            "sensitive": true
+                          }
+                        },
+                        "sensitive": true,
+                        "union": true
+                      }
+                    },
+                    "sensitive": true,
+                    "union": true
+                  }
+                },
+                "event": true,
+                "sensitive": true
+              },
+              "validationException": {
+                "shape": "S5e"
+              }
+            },
+            "eventstream": true
+          },
+          "contentType": {
+            "location": "header",
+            "locationName": "x-amzn-bedrock-agent-content-type"
+          },
+          "memoryId": {
+            "location": "header",
+            "locationName": "x-amz-bedrock-agent-memory-id"
+          },
+          "sessionId": {
+            "location": "header",
+            "locationName": "x-amz-bedrock-agent-session-id"
+          }
+        },
+        "payload": "completion"
+      }
+    },
+    "InvokeFlow": {
+      "http": {
+        "requestUri": "/flows/{flowIdentifier}/aliases/{flowAliasIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "flowAliasIdentifier",
+          "flowIdentifier",
+          "inputs"
+        ],
+        "members": {
+          "flowAliasIdentifier": {
+            "location": "uri",
+            "locationName": "flowAliasIdentifier"
+          },
+          "flowIdentifier": {
+            "location": "uri",
+            "locationName": "flowIdentifier"
+          },
+          "inputs": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "content",
+                "nodeName",
+                "nodeOutputName"
+              ],
+              "members": {
+                "content": {
+                  "type": "structure",
+                  "members": {
+                    "document": {
+                      "shape": "S5l"
+                    }
+                  },
+                  "sensitive": true,
+                  "union": true
+                },
+                "nodeName": {},
+                "nodeOutputName": {}
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "responseStream"
+        ],
+        "members": {
+          "responseStream": {
+            "type": "structure",
+            "members": {
+              "accessDeniedException": {
+                "shape": "S1m"
+              },
+              "badGatewayException": {
+                "shape": "S1o"
+              },
+              "conflictException": {
+                "shape": "S2c"
+              },
+              "dependencyFailedException": {
+                "shape": "S2d"
+              },
+              "flowCompletionEvent": {
+                "type": "structure",
+                "required": [
+                  "completionReason"
+                ],
+                "members": {
+                  "completionReason": {}
+                },
+                "event": true,
+                "sensitive": true
+              },
+              "flowOutputEvent": {
+                "type": "structure",
+                "required": [
+                  "content",
+                  "nodeName",
+                  "nodeType"
+                ],
+                "members": {
+                  "content": {
+                    "type": "structure",
+                    "members": {
+                      "document": {
+                        "shape": "S5l"
+                      }
+                    },
+                    "union": true
+                  },
+                  "nodeName": {},
+                  "nodeType": {}
+                },
+                "event": true,
+                "sensitive": true
+              },
+              "internalServerException": {
+                "shape": "S2i"
+              },
+              "resourceNotFoundException": {
+                "shape": "S2j"
+              },
+              "serviceQuotaExceededException": {
+                "shape": "S2z"
+              },
+              "throttlingException": {
+                "shape": "S30"
+              },
+              "validationException": {
+                "shape": "S5e"
+              }
+            },
+            "eventstream": true
+          }
+        },
+        "payload": "responseStream"
+      }
+    },
+    "Retrieve": {
+      "http": {
+        "requestUri": "/knowledgebases/{knowledgeBaseId}/retrieve",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "knowledgeBaseId",
+          "retrievalQuery"
+        ],
+        "members": {
+          "knowledgeBaseId": {
+            "location": "uri",
+            "locationName": "knowledgeBaseId"
+          },
+          "nextToken": {},
+          "retrievalConfiguration": {
+            "shape": "Sz"
+          },
+          "retrievalQuery": {
+            "type": "structure",
+            "required": [
+              "text"
+            ],
+            "members": {
+              "text": {}
+            },
+            "sensitive": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "retrievalResults"
+        ],
+        "members": {
+          "nextToken": {},
+          "retrievalResults": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "content"
+              ],
+              "members": {
+                "content": {
+                  "shape": "S20"
+                },
+                "location": {
+                  "shape": "S21"
+                },
+                "metadata": {
+                  "shape": "S28"
+                },
+                "score": {
+                  "type": "double"
+                }
+              }
+            },
+            "sensitive": true
+          }
+        }
+      }
+    },
+    "RetrieveAndGenerate": {
+      "http": {
+        "requestUri": "/retrieveAndGenerate",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "input"
+        ],
+        "members": {
+          "input": {
+            "type": "structure",
+            "required": [
+              "text"
+            ],
+            "members": {
+              "text": {}
+            },
+            "sensitive": true
+          },
+          "retrieveAndGenerateConfiguration": {
+            "type": "structure",
+            "required": [
+              "type"
+            ],
+            "members": {
+              "externalSourcesConfiguration": {
+                "type": "structure",
+                "required": [
+                  "modelArn",
+                  "sources"
+                ],
+                "members": {
+                  "generationConfiguration": {
+                    "type": "structure",
+                    "members": {
+                      "additionalModelRequestFields": {
+                        "shape": "S68"
+                      },
+                      "guardrailConfiguration": {
+                        "shape": "S6b"
+                      },
+                      "inferenceConfig": {
+                        "shape": "S6e"
+                      },
+                      "promptTemplate": {
+                        "shape": "S6j"
+                      }
+                    }
+                  },
+                  "modelArn": {},
+                  "sources": {
+                    "type": "list",
+                    "member": {
+                      "type": "structure",
+                      "required": [
+                        "sourceType"
+                      ],
+                      "members": {
+                        "byteContent": {
+                          "type": "structure",
+                          "required": [
+                            "contentType",
+                            "data",
+                            "identifier"
+                          ],
+                          "members": {
+                            "contentType": {},
+                            "data": {
+                              "shape": "Sq"
+                            },
+                            "identifier": {
+                              "type": "string",
+                              "sensitive": true
+                            }
+                          }
+                        },
+                        "s3Location": {
+                          "type": "structure",
+                          "required": [
+                            "uri"
+                          ],
+                          "members": {
+                            "uri": {}
+                          }
+                        },
+                        "sourceType": {}
+                      }
+                    }
+                  }
+                }
+              },
+              "knowledgeBaseConfiguration": {
+                "type": "structure",
+                "required": [
+                  "knowledgeBaseId",
+                  "modelArn"
+                ],
+                "members": {
+                  "generationConfiguration": {
+                    "type": "structure",
+                    "members": {
+                      "additionalModelRequestFields": {
+                        "shape": "S68"
+                      },
+                      "guardrailConfiguration": {
+                        "shape": "S6b"
+                      },
+                      "inferenceConfig": {
+                        "shape": "S6e"
+                      },
+                      "promptTemplate": {
+                        "shape": "S6j"
+                      }
+                    }
+                  },
+                  "knowledgeBaseId": {},
+                  "modelArn": {},
+                  "orchestrationConfiguration": {
+                    "type": "structure",
+                    "required": [
+                      "queryTransformationConfiguration"
+                    ],
+                    "members": {
+                      "queryTransformationConfiguration": {
+                        "type": "structure",
+                        "required": [
+                          "type"
+                        ],
+                        "members": {
+                          "type": {}
+                        }
+                      }
+                    }
+                  },
+                  "retrievalConfiguration": {
+                    "shape": "Sz"
+                  }
+                }
+              },
+              "type": {}
+            }
+          },
+          "sessionConfiguration": {
+            "type": "structure",
+            "required": [
+              "kmsKeyArn"
+            ],
+            "members": {
+              "kmsKeyArn": {}
+            }
+          },
+          "sessionId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "output",
+          "sessionId"
+        ],
+        "members": {
+          "citations": {
+            "shape": "S1r"
+          },
+          "guardrailAction": {},
+          "output": {
+            "type": "structure",
+            "required": [
+              "text"
+            ],
+            "members": {
+              "text": {}
+            },
+            "sensitive": true
+          },
+          "sessionId": {}
+        }
+      }
+    }
+  },
+  "shapes": {
+    "Se": {
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
+    },
+    "Sq": {
+      "type": "blob",
+      "sensitive": true
+    },
+    "Sz": {
+      "type": "structure",
+      "required": [
+        "vectorSearchConfiguration"
+      ],
+      "members": {
+        "vectorSearchConfiguration": {
+          "type": "structure",
+          "members": {
+            "filter": {
+              "shape": "S11"
+            },
+            "numberOfResults": {
+              "type": "integer"
+            },
+            "overrideSearchType": {}
+          }
+        }
+      }
+    },
+    "S11": {
+      "type": "structure",
+      "members": {
+        "andAll": {
+          "shape": "S12"
+        },
+        "equals": {
+          "shape": "S13"
+        },
+        "greaterThan": {
+          "shape": "S13"
+        },
+        "greaterThanOrEquals": {
+          "shape": "S13"
+        },
+        "in": {
+          "shape": "S13"
+        },
+        "lessThan": {
+          "shape": "S13"
+        },
+        "lessThanOrEquals": {
+          "shape": "S13"
+        },
+        "listContains": {
+          "shape": "S13"
+        },
+        "notEquals": {
+          "shape": "S13"
+        },
+        "notIn": {
+          "shape": "S13"
+        },
+        "orAll": {
+          "shape": "S12"
+        },
+        "startsWith": {
+          "shape": "S13"
+        },
+        "stringContains": {
+          "shape": "S13"
+        }
+      },
+      "sensitive": true,
+      "union": true
+    },
+    "S12": {
+      "type": "list",
+      "member": {
+        "shape": "S11"
+      }
+    },
+    "S13": {
+      "type": "structure",
+      "required": [
+        "key",
+        "value"
+      ],
+      "members": {
+        "key": {},
+        "value": {
+          "type": "structure",
+          "members": {},
+          "document": true
+        }
+      }
+    },
+    "S1c": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S1f": {
+      "type": "map",
+      "key": {},
+      "value": {
+        "type": "structure",
+        "members": {
+          "body": {}
+        }
+      }
+    },
+    "S1m": {
+      "type": "structure",
+      "members": {
+        "message": {}
+      },
+      "error": {
+        "httpStatusCode": 403,
+        "senderFault": true
+      },
+      "exception": true
+    },
+    "S1o": {
+      "type": "structure",
+      "members": {
+        "message": {},
+        "resourceName": {}
+      },
+      "error": {
+        "httpStatusCode": 502
+      },
+      "exception": true,
+      "fault": true
+    },
+    "S1r": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "generatedResponsePart": {
+            "type": "structure",
+            "members": {
+              "textResponsePart": {
+                "type": "structure",
+                "members": {
+                  "span": {
+                    "type": "structure",
+                    "members": {
+                      "end": {
+                        "type": "integer"
+                      },
+                      "start": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "text": {}
+                },
+                "sensitive": true
+              }
+            }
+          },
+          "retrievedReferences": {
+            "shape": "S1y"
+          }
+        }
+      }
+    },
+    "S1y": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "content": {
+            "shape": "S20"
+          },
+          "location": {
+            "shape": "S21"
+          },
+          "metadata": {
+            "shape": "S28"
+          }
+        }
+      }
+    },
+    "S20": {
+      "type": "structure",
+      "required": [
+        "text"
+      ],
+      "members": {
+        "text": {}
+      },
+      "sensitive": true
+    },
+    "S21": {
+      "type": "structure",
+      "required": [
+        "type"
+      ],
+      "members": {
+        "confluenceLocation": {
+          "type": "structure",
+          "members": {
+            "url": {}
+          }
+        },
+        "s3Location": {
+          "type": "structure",
+          "members": {
+            "uri": {}
+          }
+        },
+        "salesforceLocation": {
+          "type": "structure",
+          "members": {
+            "url": {}
+          }
+        },
+        "sharePointLocation": {
+          "type": "structure",
+          "members": {
+            "url": {}
+          }
+        },
+        "type": {},
+        "webLocation": {
+          "type": "structure",
+          "members": {
+            "url": {}
+          }
+        }
+      },
+      "sensitive": true
+    },
+    "S28": {
+      "type": "map",
+      "key": {},
+      "value": {
+        "type": "structure",
+        "members": {},
+        "document": true
+      },
+      "sensitive": true
+    },
+    "S2c": {
+      "type": "structure",
+      "members": {
+        "message": {}
+      },
+      "error": {
+        "httpStatusCode": 409,
+        "senderFault": true
+      },
+      "exception": true
+    },
+    "S2d": {
+      "type": "structure",
+      "members": {
+        "message": {},
+        "resourceName": {}
+      },
+      "error": {
+        "httpStatusCode": 424,
+        "senderFault": true
+      },
+      "exception": true
+    },
+    "S2i": {
+      "type": "structure",
+      "members": {
+        "message": {}
+      },
+      "error": {
+        "httpStatusCode": 500
+      },
+      "exception": true,
+      "fault": true
+    },
+    "S2j": {
+      "type": "structure",
+      "members": {
+        "message": {}
+      },
+      "error": {
+        "httpStatusCode": 404,
+        "senderFault": true
+      },
+      "exception": true
+    },
+    "S2v": {
+      "type": "structure",
+      "members": {
+        "name": {},
+        "type": {},
+        "value": {}
+      }
+    },
+    "S2z": {
+      "type": "structure",
+      "members": {
+        "message": {}
+      },
+      "error": {
+        "httpStatusCode": 400,
+        "senderFault": true
+      },
+      "exception": true
+    },
+    "S30": {
+      "type": "structure",
+      "members": {
+        "message": {}
+      },
+      "error": {
+        "httpStatusCode": 429,
+        "senderFault": true
+      },
+      "exception": true
+    },
+    "S39": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "contentPolicy": {
+            "type": "structure",
+            "members": {
+              "filters": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "members": {
+                    "action": {},
+                    "confidence": {},
+                    "type": {}
+                  },
+                  "sensitive": true
+                },
+                "sensitive": true
+              }
+            },
+            "sensitive": true
+          },
+          "sensitiveInformationPolicy": {
+            "type": "structure",
+            "members": {
+              "piiEntities": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "members": {
+                    "action": {},
+                    "match": {},
+                    "type": {}
+                  },
+                  "sensitive": true
+                },
+                "sensitive": true
+              },
+              "regexes": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "members": {
+                    "action": {},
+                    "match": {},
+                    "name": {},
+                    "regex": {}
+                  },
+                  "sensitive": true
+                },
+                "sensitive": true
+              }
+            },
+            "sensitive": true
+          },
+          "topicPolicy": {
+            "type": "structure",
+            "members": {
+              "topics": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "members": {
+                    "action": {},
+                    "name": {},
+                    "type": {}
+                  },
+                  "sensitive": true
+                },
+                "sensitive": true
+              }
+            },
+            "sensitive": true
+          },
+          "wordPolicy": {
+            "type": "structure",
+            "members": {
+              "customWords": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "members": {
+                    "action": {},
+                    "match": {}
+                  },
+                  "sensitive": true
+                },
+                "sensitive": true
+              },
+              "managedWordLists": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "members": {
+                    "action": {},
+                    "match": {},
+                    "type": {}
+                  },
+                  "sensitive": true
+                },
+                "sensitive": true
+              }
+            },
+            "sensitive": true
+          }
+        },
+        "sensitive": true
+      }
+    },
+    "S46": {
+      "type": "list",
+      "member": {
+        "shape": "S2v"
+      }
+    },
+    "S4b": {
+      "type": "list",
+      "member": {}
+    },
+    "S4g": {
+      "type": "structure",
+      "members": {
+        "inferenceConfiguration": {
+          "type": "structure",
+          "members": {
+            "maximumLength": {
+              "type": "integer"
+            },
+            "stopSequences": {
+              "type": "list",
+              "member": {}
+            },
+            "temperature": {
+              "type": "float"
+            },
+            "topK": {
+              "type": "integer"
+            },
+            "topP": {
+              "type": "float"
+            }
+          }
+        },
+        "overrideLambda": {},
+        "parserMode": {},
+        "promptCreationMode": {},
+        "text": {
+          "type": "string",
+          "sensitive": true
+        },
+        "traceId": {},
+        "type": {}
+      },
+      "sensitive": true
+    },
+    "S56": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S5e": {
+      "type": "structure",
+      "members": {
+        "message": {}
+      },
+      "error": {
+        "httpStatusCode": 400,
+        "senderFault": true
+      },
+      "exception": true
+    },
+    "S5l": {
+      "type": "structure",
+      "members": {},
+      "document": true
+    },
+    "S68": {
+      "type": "map",
+      "key": {},
+      "value": {
+        "type": "structure",
+        "members": {},
+        "document": true
+      }
+    },
+    "S6b": {
+      "type": "structure",
+      "required": [
+        "guardrailId",
+        "guardrailVersion"
+      ],
+      "members": {
+        "guardrailId": {},
+        "guardrailVersion": {}
+      }
+    },
+    "S6e": {
+      "type": "structure",
+      "members": {
+        "textInferenceConfig": {
+          "type": "structure",
+          "members": {
+            "maxTokens": {
+              "type": "integer"
+            },
+            "stopSequences": {
+              "type": "list",
+              "member": {}
+            },
+            "temperature": {
+              "type": "float"
+            },
+            "topP": {
+              "type": "float"
+            }
+          }
+        }
+      }
+    },
+    "S6j": {
+      "type": "structure",
+      "members": {
+        "textPromptTemplate": {
+          "type": "string",
+          "sensitive": true
+        }
+      }
+    }
+  }
+}

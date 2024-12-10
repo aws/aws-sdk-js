@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "DevOpsGuru",
+        "description": "Documentation updates for DevOps Guru."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Add c5n.metal to ec2 instance types list"
+    },
+    {
+        "type": "feature",
+        "category": "GlobalAccelerator",
+        "description": "This release adds support for custom routing accelerators"
+    }
+]

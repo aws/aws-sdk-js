@@ -1,0 +1,32 @@
+[
+    {
+        "type": "bugfix",
+        "category": "AWS.EventListeners.Core",
+        "description": "add error message"
+    },
+    {
+        "type": "feature",
+        "category": "CognitoIdentityServiceProvider",
+        "description": "Additional response field \"CompromisedCredentialsDetected\" added to AdminListUserAuthEvents."
+    },
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "This release adds the ability to update the task placement strategy and constraints for Amazon ECS services."
+    },
+    {
+        "type": "feature",
+        "category": "ElastiCache",
+        "description": "Amazon ElastiCache now supports Global Datastore for Redis. Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. You can create, modify and describe a Global Datastore, as well as add or remove regions from your Global Datastore and promote a region as primary in Global Datastore."
+    },
+    {
+        "type": "feature",
+        "category": "S3Control",
+        "description": "Amazon S3 now supports Batch Operations job tagging."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "Resource data sync for AWS Systems Manager Inventory now includes destination data sharing. This feature enables you to synchronize inventory data from multiple AWS accounts into a central Amazon S3 bucket. To use this feature, all AWS accounts must be listed in AWS Organizations."
+    }
+]

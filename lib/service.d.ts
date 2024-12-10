@@ -1,9 +1,9 @@
 import {Request} from './request';
 import {AWSError} from './error';
-import {ConfigurationOptions, ConfigBase} from './config';
+import {ConfigurationOptions, ConfigBase} from './config-base';
 import {Endpoint} from './endpoint';
 
-interface WaiterConfiguration {
+export interface WaiterConfiguration {
     /**
      * The number of seconds to wait between requests
      */
@@ -46,7 +46,7 @@ export class Service {
     /**
      * Override this method to setup any custom request listeners for each new request to the service.
      */
-    setupRequestListeners(): void;
+    setupRequestListeners(request: Request<any, AWSError>): void;
     /**
      * Waits for a given state.
      */
@@ -69,9 +69,9 @@ export class Service {
 export interface ServiceConfigurationOptions extends ConfigurationOptions {
     /**
      * The endpoint URI to send requests to. The default endpoint is built from the configured region. 
-     * The endpoint should be a string like 'https://{service}.{region}.amazonaws.com'.
+     * The endpoint should be a string like 'https://{service}.{region}.amazonaws.com' or an Endpoint object.
      */
-    endpoint?: string;
+    endpoint?: string | Endpoint;
     /**
      * An optional map of parameters to bind to every request sent by this service object. 
      * For more information on bound parameters, see "Working with Services" in the Getting Started Guide.

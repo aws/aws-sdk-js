@@ -1,6 +1,6 @@
 import {Credentials} from '../credentials';
 import {AWSError} from '../error';
-import {ConfigurationOptions} from '../config';
+import {ConfigurationOptions} from '../config-base';
 import CognitoIdentity = require('../../clients/cognitoidentity');
 import STS = require('../../clients/sts');
 
@@ -16,7 +16,7 @@ export class CognitoIdentityCredentials extends Credentials {
     /**
      * Refreshes credentials using AWS.CognitoIdentity.getCredentialsForIdentity(), or AWS.STS.assumeRoleWithWebIdentity().
      */
-    refresh(callback: (err: AWSError) => void): void;
+    refresh(callback: (err?: AWSError) => void): void;
     /**
      * Clears the cached Cognito ID associated with the currently configured identity pool ID.
      */

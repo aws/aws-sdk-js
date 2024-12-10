@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "ChimeSDKMessaging",
+        "description": "The Amazon Chime SDK now supports updating message attributes via channel flows"
+    },
+    {
+        "type": "feature",
+        "category": "LookoutMetrics",
+        "description": "This release adds support for Causal Relationships. Added new ListAnomalyGroupRelatedMetrics API operation and InterMetricImpactDetails API data type"
+    },
+    {
+        "type": "feature",
+        "category": "MediaConnect",
+        "description": "You can now use the Fujitsu-QoS protocol for your MediaConnect sources and outputs to transport content to and from Fujitsu devices."
+    },
+    {
+        "type": "feature",
+        "category": "Nimble",
+        "description": "Amazon Nimble Studio adds support for users to upload files during a streaming session using NICE DCV native client or browser."
+    },
+    {
+        "type": "feature",
+        "category": "QLDB",
+        "description": "Amazon QLDB now supports journal exports in JSON and Ion Binary formats. This release adds an optional OutputFormat parameter to the ExportJournalToS3 API."
+    },
+    {
+        "type": "feature",
+        "category": "Transfer",
+        "description": "Property for Transfer Family used with the FTPS protocol. TLS Session Resumption provides a mechanism to resume or share a negotiated secret key between the control and data connection for an FTPS session."
+    },
+    {
+        "type": "feature",
+        "category": "WorkMail",
+        "description": "This release allows customers to change their email monitoring configuration in Amazon WorkMail."
+    }
+]

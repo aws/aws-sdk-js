@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "LexModelsV2",
+        "description": "This release introduces additional optional parameters \"messageSelectionStrategy\" to PromptSpecification, which enables the users to configure the bot to play messages in orderly manner."
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "This release allows customers to programmatically create QuickSight accounts with Enterprise and Enterprise + Q editions. It also releases allowlisting domains for embedding QuickSight dashboards at runtime through the embedding APIs."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "Adds waiters support for DBCluster."
+    },
+    {
+        "type": "feature",
+        "category": "RolesAnywhere",
+        "description": "IAM Roles Anywhere allows your workloads such as servers, containers, and applications to obtain temporary AWS credentials and use the same IAM roles and policies that you have configured for your AWS workloads to access AWS resources."
+    },
+    {
+        "type": "feature",
+        "category": "SSMIncidents",
+        "description": "Adds support for tagging incident-record on creation by providing incident tags in the template within a response-plan."
+    }
+]

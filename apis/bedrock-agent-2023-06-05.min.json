@@ -1,0 +1,4326 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2023-06-05",
+    "endpointPrefix": "bedrock-agent",
+    "jsonVersion": "1.1",
+    "protocol": "rest-json",
+    "serviceFullName": "Agents for Amazon Bedrock",
+    "serviceId": "Bedrock Agent",
+    "signatureVersion": "v4",
+    "signingName": "bedrock",
+    "uid": "bedrock-agent-2023-06-05"
+  },
+  "operations": {
+    "AssociateAgentKnowledgeBase": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/agents/{agentId}/agentversions/{agentVersion}/knowledgebases/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "agentId",
+          "agentVersion",
+          "description",
+          "knowledgeBaseId"
+        ],
+        "members": {
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          },
+          "agentVersion": {
+            "location": "uri",
+            "locationName": "agentVersion"
+          },
+          "description": {},
+          "knowledgeBaseId": {},
+          "knowledgeBaseState": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "agentKnowledgeBase"
+        ],
+        "members": {
+          "agentKnowledgeBase": {
+            "shape": "S7"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "CreateAgent": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/agents/",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "agentName"
+        ],
+        "members": {
+          "agentName": {},
+          "agentResourceRoleArn": {},
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "customerEncryptionKeyArn": {},
+          "description": {},
+          "foundationModel": {},
+          "guardrailConfiguration": {
+            "shape": "Sg"
+          },
+          "idleSessionTTLInSeconds": {
+            "type": "integer"
+          },
+          "instruction": {
+            "shape": "Sk"
+          },
+          "memoryConfiguration": {
+            "shape": "Sl"
+          },
+          "promptOverrideConfiguration": {
+            "shape": "Sp"
+          },
+          "tags": {
+            "shape": "S14"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "agent"
+        ],
+        "members": {
+          "agent": {
+            "shape": "S18"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "CreateAgentActionGroup": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/agents/{agentId}/agentversions/{agentVersion}/actiongroups/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "actionGroupName",
+          "agentId",
+          "agentVersion"
+        ],
+        "members": {
+          "actionGroupExecutor": {
+            "shape": "S1g"
+          },
+          "actionGroupName": {},
+          "actionGroupState": {},
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          },
+          "agentVersion": {
+            "location": "uri",
+            "locationName": "agentVersion"
+          },
+          "apiSchema": {
+            "shape": "S1j"
+          },
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "description": {},
+          "functionSchema": {
+            "shape": "S1o"
+          },
+          "parentActionGroupSignature": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "agentActionGroup"
+        ],
+        "members": {
+          "agentActionGroup": {
+            "shape": "S20"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "CreateAgentAlias": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/agents/{agentId}/agentaliases/",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "agentAliasName",
+          "agentId"
+        ],
+        "members": {
+          "agentAliasName": {},
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          },
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "description": {},
+          "routingConfiguration": {
+            "shape": "S22"
+          },
+          "tags": {
+            "shape": "S14"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "agentAlias"
+        ],
+        "members": {
+          "agentAlias": {
+            "shape": "S26"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "CreateDataSource": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/knowledgebases/{knowledgeBaseId}/datasources/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "dataSourceConfiguration",
+          "knowledgeBaseId",
+          "name"
+        ],
+        "members": {
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "dataDeletionPolicy": {},
+          "dataSourceConfiguration": {
+            "shape": "S2e"
+          },
+          "description": {},
+          "knowledgeBaseId": {
+            "location": "uri",
+            "locationName": "knowledgeBaseId"
+          },
+          "name": {},
+          "serverSideEncryptionConfiguration": {
+            "shape": "S3m"
+          },
+          "vectorIngestionConfiguration": {
+            "shape": "S3n"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "dataSource"
+        ],
+        "members": {
+          "dataSource": {
+            "shape": "S4i"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "CreateFlow": {
+      "http": {
+        "requestUri": "/flows/",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "executionRoleArn",
+          "name"
+        ],
+        "members": {
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "customerEncryptionKeyArn": {},
+          "definition": {
+            "shape": "S4l"
+          },
+          "description": {},
+          "executionRoleArn": {},
+          "name": {},
+          "tags": {
+            "shape": "S14"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "arn",
+          "createdAt",
+          "executionRoleArn",
+          "id",
+          "name",
+          "status",
+          "updatedAt",
+          "version"
+        ],
+        "members": {
+          "arn": {},
+          "createdAt": {
+            "shape": "S9"
+          },
+          "customerEncryptionKeyArn": {},
+          "definition": {
+            "shape": "S4l"
+          },
+          "description": {},
+          "executionRoleArn": {},
+          "id": {},
+          "name": {},
+          "status": {},
+          "updatedAt": {
+            "shape": "S9"
+          },
+          "version": {}
+        }
+      },
+      "idempotent": true
+    },
+    "CreateFlowAlias": {
+      "http": {
+        "requestUri": "/flows/{flowIdentifier}/aliases",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "flowIdentifier",
+          "name",
+          "routingConfiguration"
+        ],
+        "members": {
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "description": {},
+          "flowIdentifier": {
+            "location": "uri",
+            "locationName": "flowIdentifier"
+          },
+          "name": {},
+          "routingConfiguration": {
+            "shape": "S6g"
+          },
+          "tags": {
+            "shape": "S14"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "arn",
+          "createdAt",
+          "flowId",
+          "id",
+          "name",
+          "routingConfiguration",
+          "updatedAt"
+        ],
+        "members": {
+          "arn": {},
+          "createdAt": {
+            "shape": "S9"
+          },
+          "description": {},
+          "flowId": {},
+          "id": {},
+          "name": {},
+          "routingConfiguration": {
+            "shape": "S6g"
+          },
+          "updatedAt": {
+            "shape": "S9"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "CreateFlowVersion": {
+      "http": {
+        "requestUri": "/flows/{flowIdentifier}/versions",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "flowIdentifier"
+        ],
+        "members": {
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "description": {},
+          "flowIdentifier": {
+            "location": "uri",
+            "locationName": "flowIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "arn",
+          "createdAt",
+          "executionRoleArn",
+          "id",
+          "name",
+          "status",
+          "version"
+        ],
+        "members": {
+          "arn": {},
+          "createdAt": {
+            "shape": "S9"
+          },
+          "customerEncryptionKeyArn": {},
+          "definition": {
+            "shape": "S4l"
+          },
+          "description": {},
+          "executionRoleArn": {},
+          "id": {},
+          "name": {},
+          "status": {},
+          "version": {}
+        }
+      },
+      "idempotent": true
+    },
+    "CreateKnowledgeBase": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/knowledgebases/",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "knowledgeBaseConfiguration",
+          "name",
+          "roleArn",
+          "storageConfiguration"
+        ],
+        "members": {
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "description": {},
+          "knowledgeBaseConfiguration": {
+            "shape": "S6p"
+          },
+          "name": {},
+          "roleArn": {},
+          "storageConfiguration": {
+            "shape": "S6x"
+          },
+          "tags": {
+            "shape": "S14"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "knowledgeBase"
+        ],
+        "members": {
+          "knowledgeBase": {
+            "shape": "S7q"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "CreatePrompt": {
+      "http": {
+        "requestUri": "/prompts/",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name"
+        ],
+        "members": {
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "customerEncryptionKeyArn": {},
+          "defaultVariant": {},
+          "description": {},
+          "name": {},
+          "tags": {
+            "shape": "S14"
+          },
+          "variants": {
+            "shape": "S7x"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "arn",
+          "createdAt",
+          "id",
+          "name",
+          "updatedAt",
+          "version"
+        ],
+        "members": {
+          "arn": {},
+          "createdAt": {
+            "shape": "S9"
+          },
+          "customerEncryptionKeyArn": {},
+          "defaultVariant": {},
+          "description": {},
+          "id": {},
+          "name": {},
+          "updatedAt": {
+            "shape": "S9"
+          },
+          "variants": {
+            "shape": "S7x"
+          },
+          "version": {}
+        }
+      },
+      "idempotent": true
+    },
+    "CreatePromptVersion": {
+      "http": {
+        "requestUri": "/prompts/{promptIdentifier}/versions",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "promptIdentifier"
+        ],
+        "members": {
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "description": {},
+          "promptIdentifier": {
+            "location": "uri",
+            "locationName": "promptIdentifier"
+          },
+          "tags": {
+            "shape": "S14"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "arn",
+          "createdAt",
+          "id",
+          "name",
+          "updatedAt",
+          "version"
+        ],
+        "members": {
+          "arn": {},
+          "createdAt": {
+            "shape": "S9"
+          },
+          "customerEncryptionKeyArn": {},
+          "defaultVariant": {},
+          "description": {},
+          "id": {},
+          "name": {},
+          "updatedAt": {
+            "shape": "S9"
+          },
+          "variants": {
+            "shape": "S7x"
+          },
+          "version": {}
+        }
+      },
+      "idempotent": true
+    },
+    "DeleteAgent": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/agents/{agentId}/",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "agentId"
+        ],
+        "members": {
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          },
+          "skipResourceInUseCheck": {
+            "location": "querystring",
+            "locationName": "skipResourceInUseCheck",
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "agentId",
+          "agentStatus"
+        ],
+        "members": {
+          "agentId": {},
+          "agentStatus": {}
+        }
+      },
+      "idempotent": true
+    },
+    "DeleteAgentActionGroup": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/agents/{agentId}/agentversions/{agentVersion}/actiongroups/{actionGroupId}/",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "actionGroupId",
+          "agentId",
+          "agentVersion"
+        ],
+        "members": {
+          "actionGroupId": {
+            "location": "uri",
+            "locationName": "actionGroupId"
+          },
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          },
+          "agentVersion": {
+            "location": "uri",
+            "locationName": "agentVersion"
+          },
+          "skipResourceInUseCheck": {
+            "location": "querystring",
+            "locationName": "skipResourceInUseCheck",
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DeleteAgentAlias": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/agents/{agentId}/agentaliases/{agentAliasId}/",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "agentAliasId",
+          "agentId"
+        ],
+        "members": {
+          "agentAliasId": {
+            "location": "uri",
+            "locationName": "agentAliasId"
+          },
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "agentAliasId",
+          "agentAliasStatus",
+          "agentId"
+        ],
+        "members": {
+          "agentAliasId": {},
+          "agentAliasStatus": {},
+          "agentId": {}
+        }
+      },
+      "idempotent": true
+    },
+    "DeleteAgentVersion": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/agents/{agentId}/agentversions/{agentVersion}/",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "agentId",
+          "agentVersion"
+        ],
+        "members": {
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          },
+          "agentVersion": {
+            "location": "uri",
+            "locationName": "agentVersion"
+          },
+          "skipResourceInUseCheck": {
+            "location": "querystring",
+            "locationName": "skipResourceInUseCheck",
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "agentId",
+          "agentStatus",
+          "agentVersion"
+        ],
+        "members": {
+          "agentId": {},
+          "agentStatus": {},
+          "agentVersion": {}
+        }
+      },
+      "idempotent": true
+    },
+    "DeleteDataSource": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/knowledgebases/{knowledgeBaseId}/datasources/{dataSourceId}",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "dataSourceId",
+          "knowledgeBaseId"
+        ],
+        "members": {
+          "dataSourceId": {
+            "location": "uri",
+            "locationName": "dataSourceId"
+          },
+          "knowledgeBaseId": {
+            "location": "uri",
+            "locationName": "knowledgeBaseId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "dataSourceId",
+          "knowledgeBaseId",
+          "status"
+        ],
+        "members": {
+          "dataSourceId": {},
+          "knowledgeBaseId": {},
+          "status": {}
+        }
+      },
+      "idempotent": true
+    },
+    "DeleteFlow": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/flows/{flowIdentifier}/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "flowIdentifier"
+        ],
+        "members": {
+          "flowIdentifier": {
+            "location": "uri",
+            "locationName": "flowIdentifier"
+          },
+          "skipResourceInUseCheck": {
+            "location": "querystring",
+            "locationName": "skipResourceInUseCheck",
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "id"
+        ],
+        "members": {
+          "id": {}
+        }
+      },
+      "idempotent": true
+    },
+    "DeleteFlowAlias": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/flows/{flowIdentifier}/aliases/{aliasIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "aliasIdentifier",
+          "flowIdentifier"
+        ],
+        "members": {
+          "aliasIdentifier": {
+            "location": "uri",
+            "locationName": "aliasIdentifier"
+          },
+          "flowIdentifier": {
+            "location": "uri",
+            "locationName": "flowIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "flowId",
+          "id"
+        ],
+        "members": {
+          "flowId": {},
+          "id": {}
+        }
+      },
+      "idempotent": true
+    },
+    "DeleteFlowVersion": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/flows/{flowIdentifier}/versions/{flowVersion}/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "flowIdentifier",
+          "flowVersion"
+        ],
+        "members": {
+          "flowIdentifier": {
+            "location": "uri",
+            "locationName": "flowIdentifier"
+          },
+          "flowVersion": {
+            "location": "uri",
+            "locationName": "flowVersion"
+          },
+          "skipResourceInUseCheck": {
+            "location": "querystring",
+            "locationName": "skipResourceInUseCheck",
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "id",
+          "version"
+        ],
+        "members": {
+          "id": {},
+          "version": {}
+        }
+      },
+      "idempotent": true
+    },
+    "DeleteKnowledgeBase": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/knowledgebases/{knowledgeBaseId}",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "knowledgeBaseId"
+        ],
+        "members": {
+          "knowledgeBaseId": {
+            "location": "uri",
+            "locationName": "knowledgeBaseId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "knowledgeBaseId",
+          "status"
+        ],
+        "members": {
+          "knowledgeBaseId": {},
+          "status": {}
+        }
+      },
+      "idempotent": true
+    },
+    "DeletePrompt": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/prompts/{promptIdentifier}/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "promptIdentifier"
+        ],
+        "members": {
+          "promptIdentifier": {
+            "location": "uri",
+            "locationName": "promptIdentifier"
+          },
+          "promptVersion": {
+            "location": "querystring",
+            "locationName": "promptVersion"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "id"
+        ],
+        "members": {
+          "id": {},
+          "version": {}
+        }
+      },
+      "idempotent": true
+    },
+    "DisassociateAgentKnowledgeBase": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/agents/{agentId}/agentversions/{agentVersion}/knowledgebases/{knowledgeBaseId}/",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "agentId",
+          "agentVersion",
+          "knowledgeBaseId"
+        ],
+        "members": {
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          },
+          "agentVersion": {
+            "location": "uri",
+            "locationName": "agentVersion"
+          },
+          "knowledgeBaseId": {
+            "location": "uri",
+            "locationName": "knowledgeBaseId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "GetAgent": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/agents/{agentId}/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "agentId"
+        ],
+        "members": {
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "agent"
+        ],
+        "members": {
+          "agent": {
+            "shape": "S18"
+          }
+        }
+      }
+    },
+    "GetAgentActionGroup": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/agents/{agentId}/agentversions/{agentVersion}/actiongroups/{actionGroupId}/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "actionGroupId",
+          "agentId",
+          "agentVersion"
+        ],
+        "members": {
+          "actionGroupId": {
+            "location": "uri",
+            "locationName": "actionGroupId"
+          },
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          },
+          "agentVersion": {
+            "location": "uri",
+            "locationName": "agentVersion"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "agentActionGroup"
+        ],
+        "members": {
+          "agentActionGroup": {
+            "shape": "S20"
+          }
+        }
+      }
+    },
+    "GetAgentAlias": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/agents/{agentId}/agentaliases/{agentAliasId}/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "agentAliasId",
+          "agentId"
+        ],
+        "members": {
+          "agentAliasId": {
+            "location": "uri",
+            "locationName": "agentAliasId"
+          },
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "agentAlias"
+        ],
+        "members": {
+          "agentAlias": {
+            "shape": "S26"
+          }
+        }
+      }
+    },
+    "GetAgentKnowledgeBase": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/agents/{agentId}/agentversions/{agentVersion}/knowledgebases/{knowledgeBaseId}/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "agentId",
+          "agentVersion",
+          "knowledgeBaseId"
+        ],
+        "members": {
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          },
+          "agentVersion": {
+            "location": "uri",
+            "locationName": "agentVersion"
+          },
+          "knowledgeBaseId": {
+            "location": "uri",
+            "locationName": "knowledgeBaseId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "agentKnowledgeBase"
+        ],
+        "members": {
+          "agentKnowledgeBase": {
+            "shape": "S7"
+          }
+        }
+      }
+    },
+    "GetAgentVersion": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/agents/{agentId}/agentversions/{agentVersion}/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "agentId",
+          "agentVersion"
+        ],
+        "members": {
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          },
+          "agentVersion": {
+            "location": "uri",
+            "locationName": "agentVersion"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "agentVersion"
+        ],
+        "members": {
+          "agentVersion": {
+            "type": "structure",
+            "required": [
+              "agentArn",
+              "agentId",
+              "agentName",
+              "agentResourceRoleArn",
+              "agentStatus",
+              "createdAt",
+              "idleSessionTTLInSeconds",
+              "updatedAt",
+              "version"
+            ],
+            "members": {
+              "agentArn": {},
+              "agentId": {},
+              "agentName": {},
+              "agentResourceRoleArn": {},
+              "agentStatus": {},
+              "createdAt": {
+                "shape": "S9"
+              },
+              "customerEncryptionKeyArn": {},
+              "description": {},
+              "failureReasons": {
+                "shape": "S1b"
+              },
+              "foundationModel": {},
+              "guardrailConfiguration": {
+                "shape": "Sg"
+              },
+              "idleSessionTTLInSeconds": {
+                "type": "integer"
+              },
+              "instruction": {
+                "shape": "Sk"
+              },
+              "memoryConfiguration": {
+                "shape": "Sl"
+              },
+              "promptOverrideConfiguration": {
+                "shape": "Sp"
+              },
+              "recommendedActions": {
+                "shape": "S1d"
+              },
+              "updatedAt": {
+                "shape": "S9"
+              },
+              "version": {}
+            }
+          }
+        }
+      }
+    },
+    "GetDataSource": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/knowledgebases/{knowledgeBaseId}/datasources/{dataSourceId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "dataSourceId",
+          "knowledgeBaseId"
+        ],
+        "members": {
+          "dataSourceId": {
+            "location": "uri",
+            "locationName": "dataSourceId"
+          },
+          "knowledgeBaseId": {
+            "location": "uri",
+            "locationName": "knowledgeBaseId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "dataSource"
+        ],
+        "members": {
+          "dataSource": {
+            "shape": "S4i"
+          }
+        }
+      }
+    },
+    "GetFlow": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/flows/{flowIdentifier}/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "flowIdentifier"
+        ],
+        "members": {
+          "flowIdentifier": {
+            "location": "uri",
+            "locationName": "flowIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "arn",
+          "createdAt",
+          "executionRoleArn",
+          "id",
+          "name",
+          "status",
+          "updatedAt",
+          "version"
+        ],
+        "members": {
+          "arn": {},
+          "createdAt": {
+            "shape": "S9"
+          },
+          "customerEncryptionKeyArn": {},
+          "definition": {
+            "shape": "S4l"
+          },
+          "description": {},
+          "executionRoleArn": {},
+          "id": {},
+          "name": {},
+          "status": {},
+          "updatedAt": {
+            "shape": "S9"
+          },
+          "validations": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "message",
+                "severity"
+              ],
+              "members": {
+                "message": {},
+                "severity": {}
+              }
+            }
+          },
+          "version": {}
+        }
+      }
+    },
+    "GetFlowAlias": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/flows/{flowIdentifier}/aliases/{aliasIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "aliasIdentifier",
+          "flowIdentifier"
+        ],
+        "members": {
+          "aliasIdentifier": {
+            "location": "uri",
+            "locationName": "aliasIdentifier"
+          },
+          "flowIdentifier": {
+            "location": "uri",
+            "locationName": "flowIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "arn",
+          "createdAt",
+          "flowId",
+          "id",
+          "name",
+          "routingConfiguration",
+          "updatedAt"
+        ],
+        "members": {
+          "arn": {},
+          "createdAt": {
+            "shape": "S9"
+          },
+          "description": {},
+          "flowId": {},
+          "id": {},
+          "name": {},
+          "routingConfiguration": {
+            "shape": "S6g"
+          },
+          "updatedAt": {
+            "shape": "S9"
+          }
+        }
+      }
+    },
+    "GetFlowVersion": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/flows/{flowIdentifier}/versions/{flowVersion}/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "flowIdentifier",
+          "flowVersion"
+        ],
+        "members": {
+          "flowIdentifier": {
+            "location": "uri",
+            "locationName": "flowIdentifier"
+          },
+          "flowVersion": {
+            "location": "uri",
+            "locationName": "flowVersion"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "arn",
+          "createdAt",
+          "executionRoleArn",
+          "id",
+          "name",
+          "status",
+          "version"
+        ],
+        "members": {
+          "arn": {},
+          "createdAt": {
+            "shape": "S9"
+          },
+          "customerEncryptionKeyArn": {},
+          "definition": {
+            "shape": "S4l"
+          },
+          "description": {},
+          "executionRoleArn": {},
+          "id": {},
+          "name": {},
+          "status": {},
+          "version": {}
+        }
+      }
+    },
+    "GetIngestionJob": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/knowledgebases/{knowledgeBaseId}/datasources/{dataSourceId}/ingestionjobs/{ingestionJobId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "dataSourceId",
+          "ingestionJobId",
+          "knowledgeBaseId"
+        ],
+        "members": {
+          "dataSourceId": {
+            "location": "uri",
+            "locationName": "dataSourceId"
+          },
+          "ingestionJobId": {
+            "location": "uri",
+            "locationName": "ingestionJobId"
+          },
+          "knowledgeBaseId": {
+            "location": "uri",
+            "locationName": "knowledgeBaseId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "ingestionJob"
+        ],
+        "members": {
+          "ingestionJob": {
+            "shape": "S9k"
+          }
+        }
+      }
+    },
+    "GetKnowledgeBase": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/knowledgebases/{knowledgeBaseId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "knowledgeBaseId"
+        ],
+        "members": {
+          "knowledgeBaseId": {
+            "location": "uri",
+            "locationName": "knowledgeBaseId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "knowledgeBase"
+        ],
+        "members": {
+          "knowledgeBase": {
+            "shape": "S7q"
+          }
+        }
+      }
+    },
+    "GetPrompt": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/prompts/{promptIdentifier}/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "promptIdentifier"
+        ],
+        "members": {
+          "promptIdentifier": {
+            "location": "uri",
+            "locationName": "promptIdentifier"
+          },
+          "promptVersion": {
+            "location": "querystring",
+            "locationName": "promptVersion"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "arn",
+          "createdAt",
+          "id",
+          "name",
+          "updatedAt",
+          "version"
+        ],
+        "members": {
+          "arn": {},
+          "createdAt": {
+            "shape": "S9"
+          },
+          "customerEncryptionKeyArn": {},
+          "defaultVariant": {},
+          "description": {},
+          "id": {},
+          "name": {},
+          "updatedAt": {
+            "shape": "S9"
+          },
+          "variants": {
+            "shape": "S7x"
+          },
+          "version": {}
+        }
+      }
+    },
+    "ListAgentActionGroups": {
+      "http": {
+        "requestUri": "/agents/{agentId}/agentversions/{agentVersion}/actiongroups/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "agentId",
+          "agentVersion"
+        ],
+        "members": {
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          },
+          "agentVersion": {
+            "location": "uri",
+            "locationName": "agentVersion"
+          },
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "actionGroupSummaries"
+        ],
+        "members": {
+          "actionGroupSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "actionGroupId",
+                "actionGroupName",
+                "actionGroupState",
+                "updatedAt"
+              ],
+              "members": {
+                "actionGroupId": {},
+                "actionGroupName": {},
+                "actionGroupState": {},
+                "description": {},
+                "updatedAt": {
+                  "shape": "S9"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListAgentAliases": {
+      "http": {
+        "requestUri": "/agents/{agentId}/agentaliases/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "agentId"
+        ],
+        "members": {
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          },
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "agentAliasSummaries"
+        ],
+        "members": {
+          "agentAliasSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "agentAliasId",
+                "agentAliasName",
+                "agentAliasStatus",
+                "createdAt",
+                "updatedAt"
+              ],
+              "members": {
+                "agentAliasId": {},
+                "agentAliasName": {},
+                "agentAliasStatus": {},
+                "createdAt": {
+                  "shape": "S9"
+                },
+                "description": {},
+                "routingConfiguration": {
+                  "shape": "S22"
+                },
+                "updatedAt": {
+                  "shape": "S9"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListAgentKnowledgeBases": {
+      "http": {
+        "requestUri": "/agents/{agentId}/agentversions/{agentVersion}/knowledgebases/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "agentId",
+          "agentVersion"
+        ],
+        "members": {
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          },
+          "agentVersion": {
+            "location": "uri",
+            "locationName": "agentVersion"
+          },
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "agentKnowledgeBaseSummaries"
+        ],
+        "members": {
+          "agentKnowledgeBaseSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "knowledgeBaseId",
+                "knowledgeBaseState",
+                "updatedAt"
+              ],
+              "members": {
+                "description": {},
+                "knowledgeBaseId": {},
+                "knowledgeBaseState": {},
+                "updatedAt": {
+                  "shape": "S9"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListAgentVersions": {
+      "http": {
+        "requestUri": "/agents/{agentId}/agentversions/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "agentId"
+        ],
+        "members": {
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          },
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "agentVersionSummaries"
+        ],
+        "members": {
+          "agentVersionSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "agentName",
+                "agentStatus",
+                "agentVersion",
+                "createdAt",
+                "updatedAt"
+              ],
+              "members": {
+                "agentName": {},
+                "agentStatus": {},
+                "agentVersion": {},
+                "createdAt": {
+                  "shape": "S9"
+                },
+                "description": {},
+                "guardrailConfiguration": {
+                  "shape": "Sg"
+                },
+                "updatedAt": {
+                  "shape": "S9"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListAgents": {
+      "http": {
+        "requestUri": "/agents/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "agentSummaries"
+        ],
+        "members": {
+          "agentSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "agentId",
+                "agentName",
+                "agentStatus",
+                "updatedAt"
+              ],
+              "members": {
+                "agentId": {},
+                "agentName": {},
+                "agentStatus": {},
+                "description": {},
+                "guardrailConfiguration": {
+                  "shape": "Sg"
+                },
+                "latestAgentVersion": {},
+                "updatedAt": {
+                  "shape": "S9"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListDataSources": {
+      "http": {
+        "requestUri": "/knowledgebases/{knowledgeBaseId}/datasources/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "knowledgeBaseId"
+        ],
+        "members": {
+          "knowledgeBaseId": {
+            "location": "uri",
+            "locationName": "knowledgeBaseId"
+          },
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "dataSourceSummaries"
+        ],
+        "members": {
+          "dataSourceSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "dataSourceId",
+                "knowledgeBaseId",
+                "name",
+                "status",
+                "updatedAt"
+              ],
+              "members": {
+                "dataSourceId": {},
+                "description": {},
+                "knowledgeBaseId": {},
+                "name": {},
+                "status": {},
+                "updatedAt": {
+                  "shape": "S9"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListFlowAliases": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/flows/{flowIdentifier}/aliases",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "flowIdentifier"
+        ],
+        "members": {
+          "flowIdentifier": {
+            "location": "uri",
+            "locationName": "flowIdentifier"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "flowAliasSummaries"
+        ],
+        "members": {
+          "flowAliasSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "arn",
+                "createdAt",
+                "flowId",
+                "id",
+                "name",
+                "routingConfiguration",
+                "updatedAt"
+              ],
+              "members": {
+                "arn": {},
+                "createdAt": {
+                  "shape": "S9"
+                },
+                "description": {},
+                "flowId": {},
+                "id": {},
+                "name": {},
+                "routingConfiguration": {
+                  "shape": "S6g"
+                },
+                "updatedAt": {
+                  "shape": "S9"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListFlowVersions": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/flows/{flowIdentifier}/versions",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "flowIdentifier"
+        ],
+        "members": {
+          "flowIdentifier": {
+            "location": "uri",
+            "locationName": "flowIdentifier"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "flowVersionSummaries"
+        ],
+        "members": {
+          "flowVersionSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "arn",
+                "createdAt",
+                "id",
+                "status",
+                "version"
+              ],
+              "members": {
+                "arn": {},
+                "createdAt": {
+                  "shape": "S9"
+                },
+                "id": {},
+                "status": {},
+                "version": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListFlows": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/flows/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "flowSummaries"
+        ],
+        "members": {
+          "flowSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "arn",
+                "createdAt",
+                "id",
+                "name",
+                "status",
+                "updatedAt",
+                "version"
+              ],
+              "members": {
+                "arn": {},
+                "createdAt": {
+                  "shape": "S9"
+                },
+                "description": {},
+                "id": {},
+                "name": {},
+                "status": {},
+                "updatedAt": {
+                  "shape": "S9"
+                },
+                "version": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListIngestionJobs": {
+      "http": {
+        "requestUri": "/knowledgebases/{knowledgeBaseId}/datasources/{dataSourceId}/ingestionjobs/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "dataSourceId",
+          "knowledgeBaseId"
+        ],
+        "members": {
+          "dataSourceId": {
+            "location": "uri",
+            "locationName": "dataSourceId"
+          },
+          "filters": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "attribute",
+                "operator",
+                "values"
+              ],
+              "members": {
+                "attribute": {},
+                "operator": {},
+                "values": {
+                  "type": "list",
+                  "member": {}
+                }
+              }
+            }
+          },
+          "knowledgeBaseId": {
+            "location": "uri",
+            "locationName": "knowledgeBaseId"
+          },
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {},
+          "sortBy": {
+            "type": "structure",
+            "required": [
+              "attribute",
+              "order"
+            ],
+            "members": {
+              "attribute": {},
+              "order": {}
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "ingestionJobSummaries"
+        ],
+        "members": {
+          "ingestionJobSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "dataSourceId",
+                "ingestionJobId",
+                "knowledgeBaseId",
+                "startedAt",
+                "status",
+                "updatedAt"
+              ],
+              "members": {
+                "dataSourceId": {},
+                "description": {},
+                "ingestionJobId": {},
+                "knowledgeBaseId": {},
+                "startedAt": {
+                  "shape": "S9"
+                },
+                "statistics": {
+                  "shape": "S9l"
+                },
+                "status": {},
+                "updatedAt": {
+                  "shape": "S9"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListKnowledgeBases": {
+      "http": {
+        "requestUri": "/knowledgebases/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "knowledgeBaseSummaries"
+        ],
+        "members": {
+          "knowledgeBaseSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "knowledgeBaseId",
+                "name",
+                "status",
+                "updatedAt"
+              ],
+              "members": {
+                "description": {},
+                "knowledgeBaseId": {},
+                "name": {},
+                "status": {},
+                "updatedAt": {
+                  "shape": "S9"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListPrompts": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/prompts/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "promptIdentifier": {
+            "location": "querystring",
+            "locationName": "promptIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "promptSummaries"
+        ],
+        "members": {
+          "nextToken": {},
+          "promptSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "arn",
+                "createdAt",
+                "id",
+                "name",
+                "updatedAt",
+                "version"
+              ],
+              "members": {
+                "arn": {},
+                "createdAt": {
+                  "shape": "S9"
+                },
+                "description": {},
+                "id": {},
+                "name": {},
+                "updatedAt": {
+                  "shape": "S9"
+                },
+                "version": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListTagsForResource": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "tags": {
+            "shape": "S14"
+          }
+        }
+      }
+    },
+    "PrepareAgent": {
+      "http": {
+        "requestUri": "/agents/{agentId}/",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "agentId"
+        ],
+        "members": {
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "agentId",
+          "agentStatus",
+          "agentVersion",
+          "preparedAt"
+        ],
+        "members": {
+          "agentId": {},
+          "agentStatus": {},
+          "agentVersion": {},
+          "preparedAt": {
+            "shape": "S9"
+          }
+        }
+      }
+    },
+    "PrepareFlow": {
+      "http": {
+        "requestUri": "/flows/{flowIdentifier}/",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "flowIdentifier"
+        ],
+        "members": {
+          "flowIdentifier": {
+            "location": "uri",
+            "locationName": "flowIdentifier"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "id",
+          "status"
+        ],
+        "members": {
+          "id": {},
+          "status": {}
+        }
+      }
+    },
+    "StartIngestionJob": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/knowledgebases/{knowledgeBaseId}/datasources/{dataSourceId}/ingestionjobs/",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "dataSourceId",
+          "knowledgeBaseId"
+        ],
+        "members": {
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "dataSourceId": {
+            "location": "uri",
+            "locationName": "dataSourceId"
+          },
+          "description": {},
+          "knowledgeBaseId": {
+            "location": "uri",
+            "locationName": "knowledgeBaseId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "ingestionJob"
+        ],
+        "members": {
+          "ingestionJob": {
+            "shape": "S9k"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "TagResource": {
+      "http": {
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tags"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          },
+          "tags": {
+            "shape": "S14"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UntagResource": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tagKeys"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          },
+          "tagKeys": {
+            "location": "querystring",
+            "locationName": "tagKeys",
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "UpdateAgent": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/agents/{agentId}/",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "agentId",
+          "agentName",
+          "agentResourceRoleArn",
+          "foundationModel"
+        ],
+        "members": {
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          },
+          "agentName": {},
+          "agentResourceRoleArn": {},
+          "customerEncryptionKeyArn": {},
+          "description": {},
+          "foundationModel": {},
+          "guardrailConfiguration": {
+            "shape": "Sg"
+          },
+          "idleSessionTTLInSeconds": {
+            "type": "integer"
+          },
+          "instruction": {
+            "shape": "Sk"
+          },
+          "memoryConfiguration": {
+            "shape": "Sl"
+          },
+          "promptOverrideConfiguration": {
+            "shape": "Sp"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "agent"
+        ],
+        "members": {
+          "agent": {
+            "shape": "S18"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "UpdateAgentActionGroup": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/agents/{agentId}/agentversions/{agentVersion}/actiongroups/{actionGroupId}/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "actionGroupId",
+          "actionGroupName",
+          "agentId",
+          "agentVersion"
+        ],
+        "members": {
+          "actionGroupExecutor": {
+            "shape": "S1g"
+          },
+          "actionGroupId": {
+            "location": "uri",
+            "locationName": "actionGroupId"
+          },
+          "actionGroupName": {},
+          "actionGroupState": {},
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          },
+          "agentVersion": {
+            "location": "uri",
+            "locationName": "agentVersion"
+          },
+          "apiSchema": {
+            "shape": "S1j"
+          },
+          "description": {},
+          "functionSchema": {
+            "shape": "S1o"
+          },
+          "parentActionGroupSignature": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "agentActionGroup"
+        ],
+        "members": {
+          "agentActionGroup": {
+            "shape": "S20"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "UpdateAgentAlias": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/agents/{agentId}/agentaliases/{agentAliasId}/",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "agentAliasId",
+          "agentAliasName",
+          "agentId"
+        ],
+        "members": {
+          "agentAliasId": {
+            "location": "uri",
+            "locationName": "agentAliasId"
+          },
+          "agentAliasName": {},
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          },
+          "description": {},
+          "routingConfiguration": {
+            "shape": "S22"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "agentAlias"
+        ],
+        "members": {
+          "agentAlias": {
+            "shape": "S26"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "UpdateAgentKnowledgeBase": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/agents/{agentId}/agentversions/{agentVersion}/knowledgebases/{knowledgeBaseId}/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "agentId",
+          "agentVersion",
+          "knowledgeBaseId"
+        ],
+        "members": {
+          "agentId": {
+            "location": "uri",
+            "locationName": "agentId"
+          },
+          "agentVersion": {
+            "location": "uri",
+            "locationName": "agentVersion"
+          },
+          "description": {},
+          "knowledgeBaseId": {
+            "location": "uri",
+            "locationName": "knowledgeBaseId"
+          },
+          "knowledgeBaseState": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "agentKnowledgeBase"
+        ],
+        "members": {
+          "agentKnowledgeBase": {
+            "shape": "S7"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "UpdateDataSource": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/knowledgebases/{knowledgeBaseId}/datasources/{dataSourceId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "dataSourceConfiguration",
+          "dataSourceId",
+          "knowledgeBaseId",
+          "name"
+        ],
+        "members": {
+          "dataDeletionPolicy": {},
+          "dataSourceConfiguration": {
+            "shape": "S2e"
+          },
+          "dataSourceId": {
+            "location": "uri",
+            "locationName": "dataSourceId"
+          },
+          "description": {},
+          "knowledgeBaseId": {
+            "location": "uri",
+            "locationName": "knowledgeBaseId"
+          },
+          "name": {},
+          "serverSideEncryptionConfiguration": {
+            "shape": "S3m"
+          },
+          "vectorIngestionConfiguration": {
+            "shape": "S3n"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "dataSource"
+        ],
+        "members": {
+          "dataSource": {
+            "shape": "S4i"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "UpdateFlow": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/flows/{flowIdentifier}/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "executionRoleArn",
+          "flowIdentifier",
+          "name"
+        ],
+        "members": {
+          "customerEncryptionKeyArn": {},
+          "definition": {
+            "shape": "S4l"
+          },
+          "description": {},
+          "executionRoleArn": {},
+          "flowIdentifier": {
+            "location": "uri",
+            "locationName": "flowIdentifier"
+          },
+          "name": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "arn",
+          "createdAt",
+          "executionRoleArn",
+          "id",
+          "name",
+          "status",
+          "updatedAt",
+          "version"
+        ],
+        "members": {
+          "arn": {},
+          "createdAt": {
+            "shape": "S9"
+          },
+          "customerEncryptionKeyArn": {},
+          "definition": {
+            "shape": "S4l"
+          },
+          "description": {},
+          "executionRoleArn": {},
+          "id": {},
+          "name": {},
+          "status": {},
+          "updatedAt": {
+            "shape": "S9"
+          },
+          "version": {}
+        }
+      },
+      "idempotent": true
+    },
+    "UpdateFlowAlias": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/flows/{flowIdentifier}/aliases/{aliasIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "aliasIdentifier",
+          "flowIdentifier",
+          "name",
+          "routingConfiguration"
+        ],
+        "members": {
+          "aliasIdentifier": {
+            "location": "uri",
+            "locationName": "aliasIdentifier"
+          },
+          "description": {},
+          "flowIdentifier": {
+            "location": "uri",
+            "locationName": "flowIdentifier"
+          },
+          "name": {},
+          "routingConfiguration": {
+            "shape": "S6g"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "arn",
+          "createdAt",
+          "flowId",
+          "id",
+          "name",
+          "routingConfiguration",
+          "updatedAt"
+        ],
+        "members": {
+          "arn": {},
+          "createdAt": {
+            "shape": "S9"
+          },
+          "description": {},
+          "flowId": {},
+          "id": {},
+          "name": {},
+          "routingConfiguration": {
+            "shape": "S6g"
+          },
+          "updatedAt": {
+            "shape": "S9"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "UpdateKnowledgeBase": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/knowledgebases/{knowledgeBaseId}",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "knowledgeBaseConfiguration",
+          "knowledgeBaseId",
+          "name",
+          "roleArn",
+          "storageConfiguration"
+        ],
+        "members": {
+          "description": {},
+          "knowledgeBaseConfiguration": {
+            "shape": "S6p"
+          },
+          "knowledgeBaseId": {
+            "location": "uri",
+            "locationName": "knowledgeBaseId"
+          },
+          "name": {},
+          "roleArn": {},
+          "storageConfiguration": {
+            "shape": "S6x"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "knowledgeBase"
+        ],
+        "members": {
+          "knowledgeBase": {
+            "shape": "S7q"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "UpdatePrompt": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/prompts/{promptIdentifier}/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name",
+          "promptIdentifier"
+        ],
+        "members": {
+          "customerEncryptionKeyArn": {},
+          "defaultVariant": {},
+          "description": {},
+          "name": {},
+          "promptIdentifier": {
+            "location": "uri",
+            "locationName": "promptIdentifier"
+          },
+          "variants": {
+            "shape": "S7x"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "arn",
+          "createdAt",
+          "id",
+          "name",
+          "updatedAt",
+          "version"
+        ],
+        "members": {
+          "arn": {},
+          "createdAt": {
+            "shape": "S9"
+          },
+          "customerEncryptionKeyArn": {},
+          "defaultVariant": {},
+          "description": {},
+          "id": {},
+          "name": {},
+          "updatedAt": {
+            "shape": "S9"
+          },
+          "variants": {
+            "shape": "S7x"
+          },
+          "version": {}
+        }
+      },
+      "idempotent": true
+    }
+  },
+  "shapes": {
+    "S7": {
+      "type": "structure",
+      "required": [
+        "agentId",
+        "agentVersion",
+        "createdAt",
+        "description",
+        "knowledgeBaseId",
+        "knowledgeBaseState",
+        "updatedAt"
+      ],
+      "members": {
+        "agentId": {},
+        "agentVersion": {},
+        "createdAt": {
+          "shape": "S9"
+        },
+        "description": {},
+        "knowledgeBaseId": {},
+        "knowledgeBaseState": {},
+        "updatedAt": {
+          "shape": "S9"
+        }
+      }
+    },
+    "S9": {
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
+    },
+    "Sg": {
+      "type": "structure",
+      "members": {
+        "guardrailIdentifier": {},
+        "guardrailVersion": {}
+      }
+    },
+    "Sk": {
+      "type": "string",
+      "sensitive": true
+    },
+    "Sl": {
+      "type": "structure",
+      "required": [
+        "enabledMemoryTypes"
+      ],
+      "members": {
+        "enabledMemoryTypes": {
+          "type": "list",
+          "member": {}
+        },
+        "storageDays": {
+          "type": "integer"
+        }
+      }
+    },
+    "Sp": {
+      "type": "structure",
+      "required": [
+        "promptConfigurations"
+      ],
+      "members": {
+        "overrideLambda": {},
+        "promptConfigurations": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "basePromptTemplate": {
+                "type": "string",
+                "sensitive": true
+              },
+              "inferenceConfiguration": {
+                "type": "structure",
+                "members": {
+                  "maximumLength": {
+                    "type": "integer"
+                  },
+                  "stopSequences": {
+                    "shape": "Sw"
+                  },
+                  "temperature": {
+                    "type": "float"
+                  },
+                  "topK": {
+                    "type": "integer"
+                  },
+                  "topP": {
+                    "type": "float"
+                  }
+                }
+              },
+              "parserMode": {},
+              "promptCreationMode": {},
+              "promptState": {},
+              "promptType": {}
+            }
+          }
+        }
+      },
+      "sensitive": true
+    },
+    "Sw": {
+      "type": "list",
+      "member": {}
+    },
+    "S14": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "S18": {
+      "type": "structure",
+      "required": [
+        "agentArn",
+        "agentId",
+        "agentName",
+        "agentResourceRoleArn",
+        "agentStatus",
+        "agentVersion",
+        "createdAt",
+        "idleSessionTTLInSeconds",
+        "updatedAt"
+      ],
+      "members": {
+        "agentArn": {},
+        "agentId": {},
+        "agentName": {},
+        "agentResourceRoleArn": {},
+        "agentStatus": {},
+        "agentVersion": {},
+        "clientToken": {},
+        "createdAt": {
+          "shape": "S9"
+        },
+        "customerEncryptionKeyArn": {},
+        "description": {},
+        "failureReasons": {
+          "shape": "S1b"
+        },
+        "foundationModel": {},
+        "guardrailConfiguration": {
+          "shape": "Sg"
+        },
+        "idleSessionTTLInSeconds": {
+          "type": "integer"
+        },
+        "instruction": {
+          "shape": "Sk"
+        },
+        "memoryConfiguration": {
+          "shape": "Sl"
+        },
+        "preparedAt": {
+          "shape": "S9"
+        },
+        "promptOverrideConfiguration": {
+          "shape": "Sp"
+        },
+        "recommendedActions": {
+          "shape": "S1d"
+        },
+        "updatedAt": {
+          "shape": "S9"
+        }
+      }
+    },
+    "S1b": {
+      "type": "list",
+      "member": {}
+    },
+    "S1d": {
+      "type": "list",
+      "member": {}
+    },
+    "S1g": {
+      "type": "structure",
+      "members": {
+        "customControl": {},
+        "lambda": {}
+      },
+      "union": true
+    },
+    "S1j": {
+      "type": "structure",
+      "members": {
+        "payload": {
+          "type": "string",
+          "sensitive": true
+        },
+        "s3": {
+          "type": "structure",
+          "members": {
+            "s3BucketName": {},
+            "s3ObjectKey": {}
+          }
+        }
+      },
+      "union": true
+    },
+    "S1o": {
+      "type": "structure",
+      "members": {
+        "functions": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "required": [
+              "name"
+            ],
+            "members": {
+              "description": {},
+              "name": {},
+              "parameters": {
+                "type": "map",
+                "key": {},
+                "value": {
+                  "type": "structure",
+                  "required": [
+                    "type"
+                  ],
+                  "members": {
+                    "description": {},
+                    "required": {
+                      "type": "boolean"
+                    },
+                    "type": {}
+                  }
+                }
+              },
+              "requireConfirmation": {}
+            }
+          }
+        }
+      },
+      "union": true
+    },
+    "S20": {
+      "type": "structure",
+      "required": [
+        "actionGroupId",
+        "actionGroupName",
+        "actionGroupState",
+        "agentId",
+        "agentVersion",
+        "createdAt",
+        "updatedAt"
+      ],
+      "members": {
+        "actionGroupExecutor": {
+          "shape": "S1g"
+        },
+        "actionGroupId": {},
+        "actionGroupName": {},
+        "actionGroupState": {},
+        "agentId": {},
+        "agentVersion": {},
+        "apiSchema": {
+          "shape": "S1j"
+        },
+        "clientToken": {},
+        "createdAt": {
+          "shape": "S9"
+        },
+        "description": {},
+        "functionSchema": {
+          "shape": "S1o"
+        },
+        "parentActionSignature": {},
+        "updatedAt": {
+          "shape": "S9"
+        }
+      }
+    },
+    "S22": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "agentVersion": {},
+          "provisionedThroughput": {}
+        }
+      }
+    },
+    "S26": {
+      "type": "structure",
+      "required": [
+        "agentAliasArn",
+        "agentAliasId",
+        "agentAliasName",
+        "agentAliasStatus",
+        "agentId",
+        "createdAt",
+        "routingConfiguration",
+        "updatedAt"
+      ],
+      "members": {
+        "agentAliasArn": {},
+        "agentAliasHistoryEvents": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "endDate": {
+                "shape": "S9"
+              },
+              "routingConfiguration": {
+                "shape": "S22"
+              },
+              "startDate": {
+                "shape": "S9"
+              }
+            }
+          }
+        },
+        "agentAliasId": {},
+        "agentAliasName": {},
+        "agentAliasStatus": {},
+        "agentId": {},
+        "clientToken": {},
+        "createdAt": {
+          "shape": "S9"
+        },
+        "description": {},
+        "failureReasons": {
+          "shape": "S1b"
+        },
+        "routingConfiguration": {
+          "shape": "S22"
+        },
+        "updatedAt": {
+          "shape": "S9"
+        }
+      }
+    },
+    "S2e": {
+      "type": "structure",
+      "required": [
+        "type"
+      ],
+      "members": {
+        "confluenceConfiguration": {
+          "type": "structure",
+          "required": [
+            "sourceConfiguration"
+          ],
+          "members": {
+            "crawlerConfiguration": {
+              "type": "structure",
+              "members": {
+                "filterConfiguration": {
+                  "shape": "S2h"
+                }
+              }
+            },
+            "sourceConfiguration": {
+              "type": "structure",
+              "required": [
+                "authType",
+                "credentialsSecretArn",
+                "hostType",
+                "hostUrl"
+              ],
+              "members": {
+                "authType": {},
+                "credentialsSecretArn": {},
+                "hostType": {},
+                "hostUrl": {}
+              }
+            }
+          }
+        },
+        "s3Configuration": {
+          "type": "structure",
+          "required": [
+            "bucketArn"
+          ],
+          "members": {
+            "bucketArn": {},
+            "bucketOwnerAccountId": {},
+            "inclusionPrefixes": {
+              "type": "list",
+              "member": {
+                "type": "string",
+                "sensitive": true
+              }
+            }
+          }
+        },
+        "salesforceConfiguration": {
+          "type": "structure",
+          "required": [
+            "sourceConfiguration"
+          ],
+          "members": {
+            "crawlerConfiguration": {
+              "type": "structure",
+              "members": {
+                "filterConfiguration": {
+                  "shape": "S2h"
+                }
+              }
+            },
+            "sourceConfiguration": {
+              "type": "structure",
+              "required": [
+                "authType",
+                "credentialsSecretArn",
+                "hostUrl"
+              ],
+              "members": {
+                "authType": {},
+                "credentialsSecretArn": {},
+                "hostUrl": {}
+              }
+            }
+          }
+        },
+        "sharePointConfiguration": {
+          "type": "structure",
+          "required": [
+            "sourceConfiguration"
+          ],
+          "members": {
+            "crawlerConfiguration": {
+              "type": "structure",
+              "members": {
+                "filterConfiguration": {
+                  "shape": "S2h"
+                }
+              }
+            },
+            "sourceConfiguration": {
+              "type": "structure",
+              "required": [
+                "authType",
+                "credentialsSecretArn",
+                "domain",
+                "hostType",
+                "siteUrls"
+              ],
+              "members": {
+                "authType": {},
+                "credentialsSecretArn": {},
+                "domain": {},
+                "hostType": {},
+                "siteUrls": {
+                  "type": "list",
+                  "member": {}
+                },
+                "tenantId": {}
+              }
+            }
+          }
+        },
+        "type": {},
+        "webConfiguration": {
+          "type": "structure",
+          "required": [
+            "sourceConfiguration"
+          ],
+          "members": {
+            "crawlerConfiguration": {
+              "type": "structure",
+              "members": {
+                "crawlerLimits": {
+                  "type": "structure",
+                  "members": {
+                    "rateLimit": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "exclusionFilters": {
+                  "shape": "S2l"
+                },
+                "inclusionFilters": {
+                  "shape": "S2l"
+                },
+                "scope": {}
+              }
+            },
+            "sourceConfiguration": {
+              "type": "structure",
+              "required": [
+                "urlConfiguration"
+              ],
+              "members": {
+                "urlConfiguration": {
+                  "type": "structure",
+                  "members": {
+                    "seedUrls": {
+                      "type": "list",
+                      "member": {
+                        "type": "structure",
+                        "members": {
+                          "url": {}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "S2h": {
+      "type": "structure",
+      "required": [
+        "type"
+      ],
+      "members": {
+        "patternObjectFilter": {
+          "type": "structure",
+          "required": [
+            "filters"
+          ],
+          "members": {
+            "filters": {
+              "type": "list",
+              "member": {
+                "type": "structure",
+                "required": [
+                  "objectType"
+                ],
+                "members": {
+                  "exclusionFilters": {
+                    "shape": "S2l"
+                  },
+                  "inclusionFilters": {
+                    "shape": "S2l"
+                  },
+                  "objectType": {
+                    "type": "string",
+                    "sensitive": true
+                  }
+                }
+              },
+              "sensitive": true
+            }
+          }
+        },
+        "type": {}
+      }
+    },
+    "S2l": {
+      "type": "list",
+      "member": {
+        "type": "string",
+        "sensitive": true
+      },
+      "sensitive": true
+    },
+    "S3m": {
+      "type": "structure",
+      "members": {
+        "kmsKeyArn": {}
+      }
+    },
+    "S3n": {
+      "type": "structure",
+      "members": {
+        "chunkingConfiguration": {
+          "type": "structure",
+          "required": [
+            "chunkingStrategy"
+          ],
+          "members": {
+            "chunkingStrategy": {},
+            "fixedSizeChunkingConfiguration": {
+              "type": "structure",
+              "required": [
+                "maxTokens",
+                "overlapPercentage"
+              ],
+              "members": {
+                "maxTokens": {
+                  "type": "integer"
+                },
+                "overlapPercentage": {
+                  "type": "integer"
+                }
+              }
+            },
+            "hierarchicalChunkingConfiguration": {
+              "type": "structure",
+              "required": [
+                "levelConfigurations",
+                "overlapTokens"
+              ],
+              "members": {
+                "levelConfigurations": {
+                  "type": "list",
+                  "member": {
+                    "type": "structure",
+                    "required": [
+                      "maxTokens"
+                    ],
+                    "members": {
+                      "maxTokens": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                },
+                "overlapTokens": {
+                  "type": "integer"
+                }
+              }
+            },
+            "semanticChunkingConfiguration": {
+              "type": "structure",
+              "required": [
+                "breakpointPercentileThreshold",
+                "bufferSize",
+                "maxTokens"
+              ],
+              "members": {
+                "breakpointPercentileThreshold": {
+                  "type": "integer"
+                },
+                "bufferSize": {
+                  "type": "integer"
+                },
+                "maxTokens": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "customTransformationConfiguration": {
+          "type": "structure",
+          "required": [
+            "intermediateStorage",
+            "transformations"
+          ],
+          "members": {
+            "intermediateStorage": {
+              "type": "structure",
+              "required": [
+                "s3Location"
+              ],
+              "members": {
+                "s3Location": {
+                  "type": "structure",
+                  "required": [
+                    "uri"
+                  ],
+                  "members": {
+                    "uri": {}
+                  }
+                }
+              }
+            },
+            "transformations": {
+              "type": "list",
+              "member": {
+                "type": "structure",
+                "required": [
+                  "stepToApply",
+                  "transformationFunction"
+                ],
+                "members": {
+                  "stepToApply": {},
+                  "transformationFunction": {
+                    "type": "structure",
+                    "required": [
+                      "transformationLambdaConfiguration"
+                    ],
+                    "members": {
+                      "transformationLambdaConfiguration": {
+                        "type": "structure",
+                        "required": [
+                          "lambdaArn"
+                        ],
+                        "members": {
+                          "lambdaArn": {}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parsingConfiguration": {
+          "type": "structure",
+          "required": [
+            "parsingStrategy"
+          ],
+          "members": {
+            "bedrockFoundationModelConfiguration": {
+              "type": "structure",
+              "required": [
+                "modelArn"
+              ],
+              "members": {
+                "modelArn": {},
+                "parsingPrompt": {
+                  "type": "structure",
+                  "required": [
+                    "parsingPromptText"
+                  ],
+                  "members": {
+                    "parsingPromptText": {}
+                  }
+                }
+              }
+            },
+            "parsingStrategy": {}
+          }
+        }
+      }
+    },
+    "S4i": {
+      "type": "structure",
+      "required": [
+        "createdAt",
+        "dataSourceConfiguration",
+        "dataSourceId",
+        "knowledgeBaseId",
+        "name",
+        "status",
+        "updatedAt"
+      ],
+      "members": {
+        "createdAt": {
+          "shape": "S9"
+        },
+        "dataDeletionPolicy": {},
+        "dataSourceConfiguration": {
+          "shape": "S2e"
+        },
+        "dataSourceId": {},
+        "description": {},
+        "failureReasons": {
+          "shape": "S1b"
+        },
+        "knowledgeBaseId": {},
+        "name": {},
+        "serverSideEncryptionConfiguration": {
+          "shape": "S3m"
+        },
+        "status": {},
+        "updatedAt": {
+          "shape": "S9"
+        },
+        "vectorIngestionConfiguration": {
+          "shape": "S3n"
+        }
+      }
+    },
+    "S4l": {
+      "type": "structure",
+      "members": {
+        "connections": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "required": [
+              "name",
+              "source",
+              "target",
+              "type"
+            ],
+            "members": {
+              "configuration": {
+                "type": "structure",
+                "members": {
+                  "conditional": {
+                    "type": "structure",
+                    "required": [
+                      "condition"
+                    ],
+                    "members": {
+                      "condition": {}
+                    }
+                  },
+                  "data": {
+                    "type": "structure",
+                    "required": [
+                      "sourceOutput",
+                      "targetInput"
+                    ],
+                    "members": {
+                      "sourceOutput": {},
+                      "targetInput": {}
+                    }
+                  }
+                },
+                "union": true
+              },
+              "name": {},
+              "source": {},
+              "target": {},
+              "type": {}
+            }
+          }
+        },
+        "nodes": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "required": [
+              "name",
+              "type"
+            ],
+            "members": {
+              "configuration": {
+                "type": "structure",
+                "members": {
+                  "agent": {
+                    "type": "structure",
+                    "required": [
+                      "agentAliasArn"
+                    ],
+                    "members": {
+                      "agentAliasArn": {}
+                    }
+                  },
+                  "collector": {
+                    "type": "structure",
+                    "members": {}
+                  },
+                  "condition": {
+                    "type": "structure",
+                    "required": [
+                      "conditions"
+                    ],
+                    "members": {
+                      "conditions": {
+                        "type": "list",
+                        "member": {
+                          "type": "structure",
+                          "required": [
+                            "name"
+                          ],
+                          "members": {
+                            "expression": {
+                              "type": "string",
+                              "sensitive": true
+                            },
+                            "name": {}
+                          },
+                          "sensitive": true
+                        },
+                        "sensitive": true
+                      }
+                    }
+                  },
+                  "input": {
+                    "type": "structure",
+                    "members": {}
+                  },
+                  "iterator": {
+                    "type": "structure",
+                    "members": {}
+                  },
+                  "knowledgeBase": {
+                    "type": "structure",
+                    "required": [
+                      "knowledgeBaseId"
+                    ],
+                    "members": {
+                      "knowledgeBaseId": {},
+                      "modelId": {}
+                    }
+                  },
+                  "lambdaFunction": {
+                    "type": "structure",
+                    "required": [
+                      "lambdaArn"
+                    ],
+                    "members": {
+                      "lambdaArn": {}
+                    }
+                  },
+                  "lex": {
+                    "type": "structure",
+                    "required": [
+                      "botAliasArn",
+                      "localeId"
+                    ],
+                    "members": {
+                      "botAliasArn": {},
+                      "localeId": {}
+                    }
+                  },
+                  "output": {
+                    "type": "structure",
+                    "members": {}
+                  },
+                  "prompt": {
+                    "type": "structure",
+                    "required": [
+                      "sourceConfiguration"
+                    ],
+                    "members": {
+                      "sourceConfiguration": {
+                        "type": "structure",
+                        "members": {
+                          "inline": {
+                            "type": "structure",
+                            "required": [
+                              "modelId",
+                              "templateConfiguration",
+                              "templateType"
+                            ],
+                            "members": {
+                              "inferenceConfiguration": {
+                                "shape": "S5i"
+                              },
+                              "modelId": {},
+                              "templateConfiguration": {
+                                "shape": "S5l"
+                              },
+                              "templateType": {}
+                            }
+                          },
+                          "resource": {
+                            "type": "structure",
+                            "required": [
+                              "promptArn"
+                            ],
+                            "members": {
+                              "promptArn": {}
+                            }
+                          }
+                        },
+                        "union": true
+                      }
+                    }
+                  },
+                  "retrieval": {
+                    "type": "structure",
+                    "required": [
+                      "serviceConfiguration"
+                    ],
+                    "members": {
+                      "serviceConfiguration": {
+                        "type": "structure",
+                        "members": {
+                          "s3": {
+                            "type": "structure",
+                            "required": [
+                              "bucketName"
+                            ],
+                            "members": {
+                              "bucketName": {}
+                            }
+                          }
+                        },
+                        "union": true
+                      }
+                    }
+                  },
+                  "storage": {
+                    "type": "structure",
+                    "required": [
+                      "serviceConfiguration"
+                    ],
+                    "members": {
+                      "serviceConfiguration": {
+                        "type": "structure",
+                        "members": {
+                          "s3": {
+                            "type": "structure",
+                            "required": [
+                              "bucketName"
+                            ],
+                            "members": {
+                              "bucketName": {}
+                            }
+                          }
+                        },
+                        "union": true
+                      }
+                    }
+                  }
+                },
+                "union": true
+              },
+              "inputs": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "required": [
+                    "expression",
+                    "name",
+                    "type"
+                  ],
+                  "members": {
+                    "expression": {
+                      "type": "string",
+                      "sensitive": true
+                    },
+                    "name": {},
+                    "type": {}
+                  }
+                }
+              },
+              "name": {},
+              "outputs": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "required": [
+                    "name",
+                    "type"
+                  ],
+                  "members": {
+                    "name": {},
+                    "type": {}
+                  }
+                }
+              },
+              "type": {}
+            }
+          },
+          "sensitive": true
+        }
+      }
+    },
+    "S5i": {
+      "type": "structure",
+      "members": {
+        "text": {
+          "type": "structure",
+          "members": {
+            "maxTokens": {
+              "type": "integer"
+            },
+            "stopSequences": {
+              "shape": "Sw"
+            },
+            "temperature": {
+              "type": "float"
+            },
+            "topK": {
+              "type": "integer"
+            },
+            "topP": {
+              "type": "float"
+            }
+          }
+        }
+      },
+      "union": true
+    },
+    "S5l": {
+      "type": "structure",
+      "members": {
+        "text": {
+          "type": "structure",
+          "required": [
+            "text"
+          ],
+          "members": {
+            "inputVariables": {
+              "type": "list",
+              "member": {
+                "type": "structure",
+                "members": {
+                  "name": {}
+                }
+              },
+              "sensitive": true
+            },
+            "text": {
+              "type": "string",
+              "sensitive": true
+            }
+          },
+          "sensitive": true
+        }
+      },
+      "union": true
+    },
+    "S6g": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "flowVersion": {}
+        }
+      }
+    },
+    "S6p": {
+      "type": "structure",
+      "required": [
+        "type"
+      ],
+      "members": {
+        "type": {},
+        "vectorKnowledgeBaseConfiguration": {
+          "type": "structure",
+          "required": [
+            "embeddingModelArn"
+          ],
+          "members": {
+            "embeddingModelArn": {},
+            "embeddingModelConfiguration": {
+              "type": "structure",
+              "members": {
+                "bedrockEmbeddingModelConfiguration": {
+                  "type": "structure",
+                  "members": {
+                    "dimensions": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "S6x": {
+      "type": "structure",
+      "required": [
+        "type"
+      ],
+      "members": {
+        "mongoDbAtlasConfiguration": {
+          "type": "structure",
+          "required": [
+            "collectionName",
+            "credentialsSecretArn",
+            "databaseName",
+            "endpoint",
+            "fieldMapping",
+            "vectorIndexName"
+          ],
+          "members": {
+            "collectionName": {},
+            "credentialsSecretArn": {},
+            "databaseName": {},
+            "endpoint": {},
+            "endpointServiceName": {},
+            "fieldMapping": {
+              "type": "structure",
+              "required": [
+                "metadataField",
+                "textField",
+                "vectorField"
+              ],
+              "members": {
+                "metadataField": {},
+                "textField": {},
+                "vectorField": {}
+              }
+            },
+            "vectorIndexName": {}
+          }
+        },
+        "opensearchServerlessConfiguration": {
+          "type": "structure",
+          "required": [
+            "collectionArn",
+            "fieldMapping",
+            "vectorIndexName"
+          ],
+          "members": {
+            "collectionArn": {},
+            "fieldMapping": {
+              "type": "structure",
+              "required": [
+                "metadataField",
+                "textField",
+                "vectorField"
+              ],
+              "members": {
+                "metadataField": {},
+                "textField": {},
+                "vectorField": {}
+              }
+            },
+            "vectorIndexName": {}
+          }
+        },
+        "pineconeConfiguration": {
+          "type": "structure",
+          "required": [
+            "connectionString",
+            "credentialsSecretArn",
+            "fieldMapping"
+          ],
+          "members": {
+            "connectionString": {},
+            "credentialsSecretArn": {},
+            "fieldMapping": {
+              "type": "structure",
+              "required": [
+                "metadataField",
+                "textField"
+              ],
+              "members": {
+                "metadataField": {},
+                "textField": {}
+              }
+            },
+            "namespace": {}
+          }
+        },
+        "rdsConfiguration": {
+          "type": "structure",
+          "required": [
+            "credentialsSecretArn",
+            "databaseName",
+            "fieldMapping",
+            "resourceArn",
+            "tableName"
+          ],
+          "members": {
+            "credentialsSecretArn": {},
+            "databaseName": {},
+            "fieldMapping": {
+              "type": "structure",
+              "required": [
+                "metadataField",
+                "primaryKeyField",
+                "textField",
+                "vectorField"
+              ],
+              "members": {
+                "metadataField": {},
+                "primaryKeyField": {},
+                "textField": {},
+                "vectorField": {}
+              }
+            },
+            "resourceArn": {},
+            "tableName": {}
+          }
+        },
+        "redisEnterpriseCloudConfiguration": {
+          "type": "structure",
+          "required": [
+            "credentialsSecretArn",
+            "endpoint",
+            "fieldMapping",
+            "vectorIndexName"
+          ],
+          "members": {
+            "credentialsSecretArn": {},
+            "endpoint": {},
+            "fieldMapping": {
+              "type": "structure",
+              "required": [
+                "metadataField",
+                "textField",
+                "vectorField"
+              ],
+              "members": {
+                "metadataField": {},
+                "textField": {},
+                "vectorField": {}
+              }
+            },
+            "vectorIndexName": {}
+          }
+        },
+        "type": {}
+      }
+    },
+    "S7q": {
+      "type": "structure",
+      "required": [
+        "createdAt",
+        "knowledgeBaseArn",
+        "knowledgeBaseConfiguration",
+        "knowledgeBaseId",
+        "name",
+        "roleArn",
+        "status",
+        "storageConfiguration",
+        "updatedAt"
+      ],
+      "members": {
+        "createdAt": {
+          "shape": "S9"
+        },
+        "description": {},
+        "failureReasons": {
+          "shape": "S1b"
+        },
+        "knowledgeBaseArn": {},
+        "knowledgeBaseConfiguration": {
+          "shape": "S6p"
+        },
+        "knowledgeBaseId": {},
+        "name": {},
+        "roleArn": {},
+        "status": {},
+        "storageConfiguration": {
+          "shape": "S6x"
+        },
+        "updatedAt": {
+          "shape": "S9"
+        }
+      }
+    },
+    "S7x": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "name",
+          "templateType"
+        ],
+        "members": {
+          "inferenceConfiguration": {
+            "shape": "S5i"
+          },
+          "metadata": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "key",
+                "value"
+              ],
+              "members": {
+                "key": {
+                  "type": "string",
+                  "sensitive": true
+                },
+                "value": {
+                  "type": "string",
+                  "sensitive": true
+                }
+              },
+              "sensitive": true
+            },
+            "sensitive": true
+          },
+          "modelId": {},
+          "name": {},
+          "templateConfiguration": {
+            "shape": "S5l"
+          },
+          "templateType": {}
+        },
+        "sensitive": true
+      },
+      "sensitive": true
+    },
+    "S9k": {
+      "type": "structure",
+      "required": [
+        "dataSourceId",
+        "ingestionJobId",
+        "knowledgeBaseId",
+        "startedAt",
+        "status",
+        "updatedAt"
+      ],
+      "members": {
+        "dataSourceId": {},
+        "description": {},
+        "failureReasons": {
+          "shape": "S1b"
+        },
+        "ingestionJobId": {},
+        "knowledgeBaseId": {},
+        "startedAt": {
+          "shape": "S9"
+        },
+        "statistics": {
+          "shape": "S9l"
+        },
+        "status": {},
+        "updatedAt": {
+          "shape": "S9"
+        }
+      }
+    },
+    "S9l": {
+      "type": "structure",
+      "members": {
+        "numberOfDocumentsDeleted": {
+          "type": "long"
+        },
+        "numberOfDocumentsFailed": {
+          "type": "long"
+        },
+        "numberOfDocumentsScanned": {
+          "type": "long"
+        },
+        "numberOfMetadataDocumentsModified": {
+          "type": "long"
+        },
+        "numberOfMetadataDocumentsScanned": {
+          "type": "long"
+        },
+        "numberOfModifiedDocumentsIndexed": {
+          "type": "long"
+        },
+        "numberOfNewDocumentsIndexed": {
+          "type": "long"
+        }
+      }
+    }
+  }
+}

@@ -7,6 +7,8 @@
   AWS = helpers.AWS;
 
   MockService = helpers.MockService;
+  MockServiceFromApi = helpers.MockServiceFromApi;
+  var FooService = require('./foo-service.fixture').FooService;
 
   describe('AWS.EventListeners', function() {
     var completeHandler, config, delays, errorHandler, makeRequest, oldMathRandom, oldSetTimeout, randomValues, retryHandler, service, successHandler, totalWaited;
@@ -66,16 +68,17 @@
         return request;
       }
     };
+
     describe('validate', function() {
       it('takes the request object as a parameter', function() {
         var request, response;
         request = makeRequest();
         request.on('validate', function(req) {
           expect(req).to.equal(request);
-          throw "ERROR";
+          throw 'ERROR';
         });
         response = request.send(function() {});
-        return expect(response.error.message).to.equal("ERROR");
+        return expect(response.error.message).to.equal('ERROR');
       });
       it('sends error event if credentials are not set', function() {
         service.config.credentialProvider = null;
@@ -83,10 +86,10 @@
         makeRequest(function() {});
         expect(errorHandler.calls.length).not.to.equal(0);
         return AWS.util.arrayEach(errorHandler.calls, function(call) {
-          expect(call["arguments"][0]).to.be.instanceOf(Error);
-          expect(call["arguments"][0].code).to.equal('CredentialsError');
-          expect(call["arguments"][0].name).to.equal('CredentialsError');
-          return expect(call["arguments"][0].message).to.match(/Missing credentials/);
+          expect(call['arguments'][0]).to.be.instanceOf(Error);
+          expect(call['arguments'][0].code).to.equal('CredentialsError');
+          expect(call['arguments'][0].name).to.equal('CredentialsError');
+          return expect(call['arguments'][0].message).to.match(/Missing credentials/);
         });
       });
       it('sends error event if credentials are not set', function() {
@@ -95,10 +98,10 @@
         makeRequest(function() {});
         expect(errorHandler.calls.length).not.to.equal(0);
         return AWS.util.arrayEach(errorHandler.calls, function(call) {
-          expect(call["arguments"][0]).to.be.instanceOf(Error);
-          expect(call["arguments"][0].code).to.equal('CredentialsError');
-          expect(call["arguments"][0].name).to.equal('CredentialsError');
-          return expect(call["arguments"][0].message).to.match(/Missing credentials/);
+          expect(call['arguments'][0]).to.be.instanceOf(Error);
+          expect(call['arguments'][0].code).to.equal('CredentialsError');
+          expect(call['arguments'][0].name).to.equal('CredentialsError');
+          return expect(call['arguments'][0].message).to.match(/Missing credentials/);
         });
       });
       it('does not validate credentials if request is not signed', function() {
@@ -115,16 +118,59 @@
         expect(errorHandler.calls.length).to.equal(0);
         return expect(successHandler.calls.length).not.to.equal(0);
       });
-      it('sends error event if region is not set', function() {
-        var call, request;
-        helpers.mockHttpResponse(200, {}, '');
-        service.config.region = null;
-        request = makeRequest(function() {});
-        call = errorHandler.calls[0];
-        expect(errorHandler.calls.length).not.to.equal(0);
-        expect(call["arguments"][0]).to.be.instanceOf(Error);
-        expect(call["arguments"][0].code).to.equal('ConfigError');
-        return expect(call["arguments"][0].message).to.match(/Missing region in config/);
+
+      [null, undefined, ''].forEach(function(region) {
+        it('sends error event if region is ' + region, function() {
+          var call, request;
+          helpers.mockHttpResponse(200, {}, '');
+          service.config.region = region;
+          request = makeRequest(function() {});
+          call = errorHandler.calls[0];
+          expect(errorHandler.calls.length).not.to.equal(0);
+          expect(call['arguments'][0]).to.be.instanceOf(Error);
+          expect(call['arguments'][0].code).to.equal('ConfigError');
+          return expect(call['arguments'][0].message).to.match(/Missing region in config/);
+        });
+      });
+
+      [
+        'has_underscore',
+        '-starts-with-dash',
+        'ends-with-dash-',
+        '-starts-and-ends-with-dash-',
+        '-',
+        'c0nt@in$-$ymb01$',
+        '0123456789012345678901234567890123456789012345678901234567890123', // 64 characters
+      ].forEach(function(region) {
+        it('sends error event if region is "' + region + '"', function() {
+          var call, request;
+          helpers.mockHttpResponse(200, {}, '');
+          service.config.region = region;
+          request = makeRequest(function() {});
+          call = errorHandler.calls[0];
+          expect(errorHandler.calls.length).not.to.equal(0);
+          expect(call['arguments'][0]).to.be.instanceOf(Error);
+          expect(call['arguments'][0].code).to.equal('ConfigError');
+          return expect(call['arguments'][0].message).to.match(/Invalid region in config/);
+        });
+      });
+
+      [
+        'a',
+        'ab',
+        'abc',
+        'contains-dashes-in-the-middle',
+        '123StartsWithNumbers',
+        'EndsWithNumbers123',
+        '123StartsAndEndsWithNumbers000',
+        '012345678901234567890123456789012345678901234567890123456789012', // 63 characters
+      ].forEach(function(region) {
+        it('successful region validation if region is "' + region + '"', function() {
+          helpers.mockHttpResponse(200, {}, '');
+          service.config.region = region;
+          makeRequest(function() {});
+          return expect(errorHandler.calls.length).to.equal(0);
+        });
       });
       return it('ignores region validation if service has global endpoint', function() {
         helpers.mockHttpResponse(200, {}, '');
@@ -135,6 +181,7 @@
         return delete service.isGlobalEndpoint;
       });
     });
+
     describe('build', function() {
       return it('takes the request object as a parameter', function() {
         var request, response;
@@ -142,12 +189,13 @@
         request = makeRequest();
         request.on('build', function(req) {
           expect(req).to.equal(request);
-          throw "ERROR";
+          throw 'ERROR';
         });
         response = request.send(function() {});
-        return expect(response.error.message).to.equal("ERROR");
+        return expect(response.error.message).to.equal('ERROR');
       });
     });
+
     describe('afterBuild', function() {
       var fs, request, sendRequest;
       request = null;
@@ -165,24 +213,83 @@
           return request;
         }
       };
-      return describe('adds Content-Length header', function() {
+
+      describe('add Transfer-Encoding header', function() {
+        it('when streaming payload is unsigned payload if content length is not available', function(done) {
+          var oldByteLength = AWS.util.string.byteLength;
+          helpers.spyOn(AWS.util.string, 'byteLength').andCallFake(function(chunk) {
+            throw new Error('Cannot determine length of ' + chunk);
+          });
+          var service = new FooService();
+          var req = service.putStream({
+            Body: 'NoLengthBody'
+          });
+
+          req.runTo('sign', function(err) {
+            expect(req.httpRequest.headers['Transfer-Encoding']).to.equal('chunked');
+            expect(!err).to.equal(true);
+            AWS.util.string.byteLength = oldByteLength;
+            done();
+          });
+        });
+      });
+
+      describe('adds Content-Length header', function() {
         var contentLength;
         contentLength = function(body) {
           return sendRequest(body).httpRequest.headers['Content-Length'];
         };
 
-        it('ignores Content-Length for operations with an unsigned authtype', function(done) {
-          var service = new AWS.Lambda();
-          service.api.operations.updateFunctionCode.authtype = 'v4-unsigned-body';
-          req = service.makeRequest('updateFunctionCode', {
-            FunctionName: 'fake',
-            ZipFile: new Buffer('fake')
+        describe('when using unsigned authtype', function() {
+          it('when payload is a buffer', function() {
+            var service = new FooService();
+            var req = service.putStream({
+              Body: AWS.util.buffer.toBuffer('test')
+            });
+
+            req.runTo('sign', function(err) {
+              expect(req.httpRequest.headers['Content-Length']).to.equal(4);
+              expect(!err).to.equal(true);
+            });
           });
-          req.runTo('sign', function(err) {
-            expect(typeof req.httpRequest.headers['Content-Length']).to.equal('undefined');
-            delete service.api.operations.updateFunctionCode.authtype;
-            done();
+
+          it('when payload is a string', function() {
+            var service = new FooService();
+            var req = service.putStream({
+              Body: 'test'
+            });
+
+            req.runTo('sign', function(err) {
+              expect(req.httpRequest.headers['Content-Length']).to.equal(4);
+              expect(!err).to.equal(true);
+            });
           });
+
+          if (AWS.util.isNode()) {
+            it('when payload is a file stream', function() {
+              var service = new FooService();
+              var req = service.putStream({
+                Body: require('fs').createReadStream(__filename)
+              });
+
+              req.runTo('sign', function(err) {
+                expect(req.httpRequest.headers['Content-Length'] > 0).to.equal(true);
+                expect(!err).to.equal(true);
+              });
+            });
+
+            it('unless payload is a non-file stream', function() {
+              var service = new FooService();
+              var req = service.putStream({
+                Body: new AWS.util.stream.Readable()
+              });
+
+              req.runTo('sign', function(err) {
+                expect(typeof req.httpRequest.headers['Content-Length']).to.equal('undefined');
+                expect(!err).to.equal(true);
+              });
+            });
+          }
         });
 
         it('builds Content-Length in the request headers for string content', function() {
@@ -198,11 +305,62 @@
         });
 
         it('builds Content-Length for buffer body', function() {
-          return expect(contentLength(new AWS.util.Buffer('tï№'))).to.equal(6);
+          return expect(contentLength(AWS.util.buffer.toBuffer('tï№'))).to.equal(6);
+        });
+
+        describe ('when has requiresLength trait exists', function() {
+          var oldByteLength = AWS.util.string.byteLength;
+          var service = new FooService();
+          beforeEach(function() {
+            helpers.spyOn(AWS.util.string, 'byteLength').andCallFake(function(chunk) {
+              throw new Error('Cannot determine length of ' + chunk);
+            });
+          });
+          afterEach(function() {
+            AWS.util.string.byteLength = oldByteLength;
+          });
+
+          it('throws error when content length is required in payload shape but length is not available', function(done) {
+            var req = service.putBoundedStream({
+              Body: 'NoLengthBody'
+            });
+            //this event listener will raise error even before setting content length
+            req.removeListener('afterBuild', AWS.EventListeners.Core.COMPUTE_SHA256);
+            req.runTo('sign', function(err) {
+              expect(err.message).to.contain('Cannot determine length of');
+              done();
+            });
+          });
+
+          it('throws error when content length is required in unsigned payload shape but length is not available', function(done) {
+            var req = service.putUnsignedBoundedStream({
+              Body: 'NoLengthBody'
+            });
+            req.runTo('sign', function(err) {
+              expect(err.message).to.contain('Cannot determine length of');
+              done();
+            });
+          });
+        });
+
+        it('throws error when non-streaming body has no length', function(done) {
+          var oldByteLength = AWS.util.string.byteLength;
+          var service = new FooService();
+          helpers.spyOn(AWS.util.string, 'byteLength').andCallFake(function(chunk) {
+            throw new Error('Cannot determine length of ' + chunk);
+          });
+          var req = service.putNonStream({
+            Body: 'NoLengthBody'
+          });
+          req.runTo('sign', function(err) {
+            AWS.util.string.byteLength = oldByteLength;
+            expect(err.message).to.contain('Cannot determine length of');
+            done();
+          });
         });
 
         if (AWS.util.isNode()) {
-          return it('builds Content-Length for file body', function(done) {
+          it('builds Content-Length for file body', function(done) {
             var file;
             fs = require('fs');
             file = fs.createReadStream(__filename);
@@ -210,9 +368,127 @@
               return done();
             });
           });
+
+          it('throws an error for non-file body', function(done) {
+            sendRequest(new AWS.util.stream.Readable(), function(err) {
+              expect(typeof err).not.to.equal('undefined');
+              expect(err.message).to.equal('Non-file stream objects are not supported with SigV4');
+              done();
+            });
+          });
+        }
+      });
+
+      describe('adds Content-MD5 header', function() {
+        it('when payload is a string', function() {
+          var service = new FooService();
+          var req = service.putWithChecksum({
+            Body: 'test'
+          });
+
+          req.runTo('sign', function(err) {
+            expect(req.httpRequest.headers['Content-MD5']).to.equal('mi9mZPtVgELD8CntO010Rw==');
+            expect(!err).to.equal(true);
+          });
+        });
+
+        it('when using signature v2', function() {
+          var service = new FooService({ signatureVersion: 's3' });
+          var req = service.putWithChecksum({
+            Body: 'test'
+          });
+
+          req.runTo('sign', function(err) {
+            expect(req.httpRequest.headers['Content-MD5']).to.equal('mi9mZPtVgELD8CntO010Rw==');
+            expect(!err).to.equal(true);
+          });
+        });
+
+        it('should be disabled if computeChecksums set to false', function() {
+          var service = new FooService({
+            computeChecksums: false
+          });
+          var req = service.putWithChecksum({
+            Body: 'test'
+          });
+
+          req.runTo('sign', function(err) {
+            expect(req.httpRequest.headers['Content-MD5']).to.equal(undefined);
+            expect(!err).to.equal(true);
+          });
+        });
+
+        it('should not calculate checksum if provided', function() {
+          var service = new FooService({
+            computeChecksums: false
+          });
+          var req = service.putWithChecksum({
+            Body: 'test'
+          });
+          req.on('build', function(req) {
+            req.httpRequest.headers['Content-MD5'] = '000';
+          });
+
+          req.runTo('sign', function(err) {
+            expect(req.httpRequest.headers['Content-MD5']).to.equal('000');
+            expect(!err).to.equal(true);
+          });
+        });
+      });
+
+      describe('adds X-Amzn-Trace-Id header', function() {
+        if (AWS.util.isNode()) {
+          var originalEnv = process.env;
+          beforeEach(function() {
+            process.env = {};
+          });
+
+          afterEach(function() {
+            process.env = originalEnv;
+          });
+
+          it('when AWS_LAMBDA_FUNCTION_NAME and _X_AMZN_TRACE_ID env exists', function () {
+            helpers.mockHttpResponse(200, {}, '');
+            process.env = {
+              'AWS_LAMBDA_FUNCTION_NAME': 'some-function',
+              '_X_AMZN_TRACE_ID': 'Root=1-5759e988-bd862e3fe1be46a994272793;Parent=53995c3f42cd8ad8;Sampled=1;lineage=a87bd80c:0,68fd508a:5,c512fbe3:2',
+            };
+            var request = sendRequest();
+            request.send(function (err) {
+              expect(err).to.equal(null);
+              expect(request.httpRequest.headers['X-Amzn-Trace-Id']).to.equal('Root=1-5759e988-bd862e3fe1be46a994272793;Parent=53995c3f42cd8ad8;Sampled=1;lineage=a87bd80c:0,68fd508a:5,c512fbe3:2');
+            });
+          });
+
+          it('should not set trace id header when AWS_LAMBDA_FUNCTION_NAME is not set', function () {
+            helpers.mockHttpResponse(200, {}, '');
+            process.env = {
+              '_X_AMZN_TRACE_ID': 'Root=1-5759e988-bd862e3fe1be46a994272793;Parent=53995c3f42cd8ad8;Sampled=1;lineage=a87bd80c:0,68fd508a:5,c512fbe3:2',
+            };
+            var request = sendRequest();
+            request.send(function (err) {
+              expect(err).to.equal(null);
+              expect(request.httpRequest.headers['X-Amzn-Trace-Id']).to.equal(undefined);
+            });
+          });
+
+          it('should not set trace id header when the header is already set', function () {
+            helpers.mockHttpResponse(200, {}, '');
+            process.env = {
+              'AWS_LAMBDA_FUNCTION_NAME': 'some-function',
+              '_X_AMZN_TRACE_ID': 'EnvValue'
+            };
+            request = makeRequest();
+            request.on('build', function(req) {
+              req.httpRequest.headers['X-Amzn-Trace-Id'] = 'OriginalValue';
+            });
+            response = request.send(function() {});
+            expect(request.httpRequest.headers['X-Amzn-Trace-Id']).to.equal('OriginalValue');
+          });
         }
       });
     });
+
     describe('restart', function() {
       var request;
       request = null;
@@ -233,6 +509,7 @@
         return expect(request.httpRequest).not.to.eql(httpRequest);
       });
     });
+
     describe('sign', function() {
       it('takes the request object as a parameter', function() {
         var request, response;
@@ -240,15 +517,15 @@
         request = makeRequest();
         request.on('sign', function(req) {
           expect(req).to.equal(request);
-          throw "ERROR";
+          throw 'ERROR';
         });
         response = request.send(function() {});
-        return expect(response.error.message).to.equal("ERROR");
+        return expect(response.error.message).to.equal('ERROR');
       });
-      it('uses the api.signingName if provided', function() {
+      return it('uses the signingName from service', function() {
         var request, response;
         helpers.mockHttpResponse(200, {}, '');
-        service.api.signingName = 'SIGNING_NAME';
+        service.getSigningName = function() { return 'SIGNING_NAME';};
         helpers.spyOn(AWS.Signers.RequestSigner, 'getVersion').andCallFake(function() {
           return function(req, signingName) {
             throw signingName;
@@ -259,19 +536,8 @@
         expect(response.error).to.equal('SIGNING_NAME');
         return delete service.api.signingName;
       });
-      return it('uses the api.endpointPrefix if signingName not provided', function() {
-        var request, response;
-        helpers.mockHttpResponse(200, {}, '');
-        helpers.spyOn(AWS.Signers.RequestSigner, 'getVersion').andCallFake(function() {
-          return function(req, signingName) {
-            throw signingName;
-          };
-        });
-        request = makeRequest();
-        response = request.send(function() {});
-        return expect(response.error).to.equal('mockservice');
-      });
     });
+
     describe('send', function() {
       it('passes httpOptions from config', function() {
         var options;
@@ -314,8 +580,9 @@
         return done();
       });
     });
+
     describe('httpHeaders', function() {
-      return it('applies clock skew offset when correcClockSkew is true', function(done) {
+      return it('applies clock skew offset when correcClockSkew is true', function() {
         var offset, request, response, serverDate;
         service = new MockService({
           maxRetries: 3,
@@ -325,15 +592,14 @@
         helpers.mockHttpResponse(200, {
           date: serverDate.toString()
         }, '');
-        helpers.spyOn(AWS.util, 'isClockSkewed').andReturn(true);
+        helpers.spyOn(service, 'isClockSkewed').andReturn(true);
         request = makeRequest();
         response = request.send();
-        offset = Math.abs(AWS.config.systemClockOffset);
+        offset = Math.abs(service.config.systemClockOffset);
         expect(offset > 299000 && offset < 310000).to.equal(true);
-        AWS.config.systemClockOffset = 0;
-        return done();
       });
     });
+
     describe('httpData', function() {
       beforeEach(function() {
         return helpers.mockHttpResponse(200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']);
@@ -409,6 +675,7 @@
         });
       });
     }
+
     describe('httpError', function() {
       it('rewrites ENOTFOUND error to include helpful message', function() {
         var request;
@@ -424,6 +691,24 @@
         expect(request.response.error.code).to.equal('UnknownEndpoint');
         return expect(request.response.error.message).to.contain('This service may not be available in the `mock-region\' region.');
       });
+      if (AWS.util.getSystemErrorName) {
+        // errno is a number after Node 12
+        // reference: https://github.com/nodejs/node/pull/28140
+        it('rewrites ENOTFOUND error to include helpful message when errno is number', function() {
+          var request;
+          helpers.mockHttpResponse({
+            code: 'NetworkingError',
+            errno: -3008,
+            region: 'mock-region',
+            hostname: 'svc.mock-region.example.com',
+            retryable: true
+          });
+          request = makeRequest();
+          request.send();
+          expect(request.response.error.code).to.equal('UnknownEndpoint');
+          return expect(request.response.error.message).to.contain('This service may not be available in the `mock-region\' region.');
+        });
+      }
       return it('retries ENOTFOUND errors', function() {
         var request, response, sendHandler;
         helpers.mockHttpResponse({
@@ -446,6 +731,7 @@
         return expect(sendHandler.calls.length).to.equal(service.config.maxRetries + 1);
       });
     });
+
     describe('retry', function() {
       it('retries a request with a set maximum retries', function() {
         var request, response, sendHandler;
@@ -536,6 +822,25 @@
         });
         makeRequest(function() {});
         return expect(delays).to.eql([0, 2, 4]);
+      });
+      it('skips retries if custom backoff returns negative delay', function() {
+        service.config.update({
+          retryDelayOptions: {
+            customBackoff: function(retryCount, err) {
+              if (err.code === 'NetworkingError') {
+                return -1;
+              } else {
+                return 2 * retryCount;
+              }
+            }
+          }
+        });
+        helpers.mockHttpResponse({
+          code: 'NetworkingError',
+          message: 'Cannot connect'
+        });
+        makeRequest(function() {});
+        return expect(delays).to.eql([]);
       });
       it('uses retry from error.retryDelay property', function() {
         var request, response;
@@ -634,7 +939,6 @@
         return it('retries clock skew errors', function() {
           var request, response;
           helpers.mockHttpResponse(400, {}, '');
-          AWS.config.isClockSkewed = true;
           service = new MockService({
             maxRetries: 3,
             correctClockSkew: true
@@ -653,7 +957,10 @@
       it('does not apply clock skew correction when correctClockSkew is false', function() {
         var request, response;
         helpers.mockHttpResponse(400, {}, '');
-        AWS.config.isClockSkewed = true;
+        service = new MockService({
+            maxRetries: 3,
+            correctClockSkew: false
+        });
         request = makeRequest();
         request.on('extractError', function(resp) {
           return resp.error = {
@@ -667,6 +974,10 @@
       it('does not retry other signature errors if clock is not skewed', function() {
         var request, response;
         helpers.mockHttpResponse(403, {}, '');
+        service = new MockService({
+            maxRetries: 3,
+            correctClockSkew: false
+        });
         request = makeRequest();
         request.on('extractError', function(resp) {
           return resp.error = {
@@ -704,6 +1015,7 @@
         return expect(response.error.retryable).to.equal(false);
       });
     });
+
     describe('success', function() {
       return it('emits success on a successful response', function() {
         var response;
@@ -716,6 +1028,7 @@
         return expect(response.retryCount).to.equal(0);
       });
     });
+
     describe('error', function() {
       it('emits error if error found and should not be retrying', function() {
         var response;
@@ -748,6 +1061,7 @@
         return expect(completeHandler.calls.length).not.to.equal(0);
       });
     });
+
     describe('logging', function() {
       var data, logfn, logger, match;
       data = null;
@@ -784,7 +1098,328 @@
         return expect(data).to.match(match);
       });
     });
-    return describe('terminal callback error handling', function() {
+
+    describe('logging sensitive information', function() {
+      var logger;
+      var data = null;
+      var apiJSON = null;
+      logfn = function(d) {
+        return data += d;
+      };
+      beforeEach(function() {
+        logger = {};
+        data = '';
+        apiJSON = {
+          operations: {
+            mockMethod: {
+              input: {
+                type: 'structure',
+                members: {
+                  foo: {
+                    type: 'string',
+                  }
+                },
+              },
+              output: {}
+            }
+          },
+          shapes: {}
+        };
+      });
+
+      it('from input shape of scalars', function() {
+        var allShapeTypes = ['boolean', 'timestamp', 'float','integer', 'string', 'base64', 'binary'];
+        Array.prototype.forEach.call(allShapeTypes, function(shapeType) {
+          apiJSON.operations.mockMethod.input.members.foo = {
+            type: shapeType,
+            sensitive: true
+          };
+          var api = new AWS.Model.Api(apiJSON);
+          var CustomMockService = MockServiceFromApi(api);
+          service = new CustomMockService({logger: logger});
+          helpers.mockHttpResponse(200, {}, []);
+          logger.log = logfn;
+          service.makeRequest('mockMethod', {
+            foo: '1234567'
+          }).send();
+          expect(data.indexOf('1234567')).to.equal(-1);
+        });
+      });
+
+      it('from input of undefined', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'list',
+          member: {
+            type: 'structure',
+            members: {
+              bar: { sensitive: true },
+              baz: {}
+            }
+          }
+        };
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: [undefined, {bar: 'secret_key_id'}]
+        }).send();
+        expect(data.indexOf('secret_key_id')).to.equal(-1);
+        expect(data.indexOf('undefined')).to.be.greaterThan(-1);
+      });
+
+      it('from structure shape with sensitive trait', function() {
+        apiJSON.operations.mockMethod.input.sensitive = true;
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        var request = service.makeRequest('mockMethod', {
+          foo: 'secret_key_id'
+        });
+        request.send();
+        expect(data.indexOf('secret_key_id')).to.equal(-1);
+        expect(data.indexOf('foo')).to.equal(-1);
+      });
+
+      it('from list shape with sensitive trait', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'list',
+          member: {
+            type: 'string'
+          },
+          sensitive: true
+        };
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: ['secret_key_id', 'secret_access_key']
+        }).send();
+        expect(data.indexOf('secret_key_id')).to.equal(-1);
+        expect(data.indexOf('secret_access_key')).to.equal(-1);
+      });
+
+      it('from map shape with sensitive trait', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'map',
+          key: {
+            type: 'string'
+          },
+          value: {
+            type: 'string'
+          },
+          sensitive: true
+        };
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: {
+            key0: 'secret_key_id',
+            key1: 'secret_key_id'
+          }
+        }).send();
+        expect(data.indexOf('key0')).to.equal(-1);
+        expect(data.indexOf('key1')).to.equal(-1);
+        expect(data.indexOf('secret_key_id')).to.equal(-1);
+      });
+
+      it('from array of array shapes with sensitive trait', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'list',
+          member: {
+            type: 'list',
+            member: {
+              type: 'string',
+              sensitive: true
+            },
+          }
+        };
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: [['secret_access_key_a', 'secret_access_key_b']]
+        }).send();
+        expect(data.indexOf('secret_access_key_a')).to.equal(-1);
+        expect(data.indexOf('secret_access_key_b')).to.equal(-1);
+      });
+
+      it('from array of structure shapes with sensitive trait', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'list',
+          member: {
+            type: 'structure',
+            members: {
+              bar: {shape: 'S1'}
+            }
+          }
+        };
+        apiJSON.shapes.S1 = {
+          type: 'string',
+          sensitive: true
+        };
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: [{bar: 'secret_access_key_a'}, {bar: 'secret_access_key_b'}]
+        }).send();
+        expect(data.indexOf('bar')).to.be.greaterThan(-1);
+        expect(data.indexOf('secret_access_key_a')).to.equal(-1);
+        expect(data.indexOf('secret_access_key_b')).to.equal(-1);
+      });
+
+      it('from array of map shapes with sensitive trait', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'list',
+          member: {
+            type: 'map',
+            key: {},
+            value: { sensitive: true }
+          }
+        };
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: [{
+            bar: 'secret_access_key_a',
+            qux: 'secret_access_key_b'
+          }]
+        }).send();
+        expect(data.indexOf('bar')).to.be.greaterThan(-1);
+        expect(data.indexOf('qux')).to.be.greaterThan(-1);
+        expect(data.indexOf('secret_access_key_a')).to.equal(-1);
+        expect(data.indexOf('secret_access_key_b')).to.equal(-1);
+      });
+
+      it('from structure of array shapes with sensitive trait', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'structure',
+          members: {
+            bar: { shape: 'S1' }
+          }
+        };
+        apiJSON.shapes.S1 = {
+          type: 'list',
+          member: {
+            type: 'string'
+          },
+          sensitive: true
+        };
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: {bar: ['secret_access_key']}
+        }).send();
+        expect(data.indexOf('secret_access_key')).to.equal(-1);
+      });
+
+      it('from structure of structure shapes with sensitive trait', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'structure',
+          members: {
+            bar: { shape: 'S1' }
+          }
+        };
+        apiJSON.shapes.S1 = {
+          type: 'structure',
+          members: {
+            qux: { shape: 'S2'}
+          },
+        };
+        apiJSON.shapes.S2 = {
+          sensitive: true
+        };
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: {bar: {qux: 'secret_access_key'}}
+        }).send();
+        expect(data.indexOf('bar')).to.be.greaterThan(-1);
+        expect(data.indexOf('qux')).to.be.greaterThan(-1);
+        expect(data.indexOf('secret_access_key')).to.equal(-1);
+      });
+
+      it('from structure of map shapes with sensitive trait', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'structure',
+          members: {
+            bar: { shape: 'S1' }
+          }
+        };
+        apiJSON.shapes.S1 = {
+          type: 'map',
+          key: {},
+          value: { shape: 'S2' },
+        };
+        apiJSON.shapes.S2 = { sensitive: true };
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: {
+            bar: {key0: 'secret_access_key_0', key1: 'secret_access_key_1'}
+          }
+        }).send();
+        expect(data.indexOf('bar')).to.be.greaterThan(-1);
+        expect(data.indexOf('secret_access_key_0')).to.equal(-1);
+        expect(data.indexOf('secret_access_key_1')).to.equal(-1);
+      });
+
+      it('from map of structure shapes with sensitive trait', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'map',
+          key: {},
+          value: { shape: 'S1' }
+        };
+        apiJSON.shapes.S1 = {
+          type: 'structure',
+          members: {
+            bar: { shape: 'S2' }
+          }
+        };
+        apiJSON.shapes.S2 = { sensitive: true };
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: {
+            key0: { bar: 'secret_access_key_0' },
+            key1: { bar: 'secret_access_key_1' }
+          }
+        }).send();
+        expect(data.indexOf('bar')).to.be.greaterThan(-1);
+        expect(data.indexOf('secret_access_key_0')).to.equal(-1);
+        expect(data.indexOf('secret_access_key_1')).to.equal(-1);
+      });
+    });
+
+    describe('terminal callback error handling', function() {
       describe('without domains', function() {
         it('emits uncaughtException', function() {
           helpers.mockResponse({
@@ -794,7 +1429,7 @@
             return makeRequest(function() {
               return invalidCode;
             });
-          }).to["throw"]();
+          }).to['throw']();
           expect(completeHandler.calls.length).to.equal(1);
           expect(errorHandler.calls.length).to.equal(0);
           return expect(retryHandler.calls.length).to.equal(0);
@@ -808,100 +1443,108 @@
               return request.send(function() {
                 return invalidCode;
               });
-            }).to["throw"]();
+            }).to['throw']();
             return expect(completeHandler.calls.length).not.to.equal(0);
           });
         });
       });
       if (AWS.util.isNode()) {
-        return describe('with domains', function() {
-          var createDomain, domains;
-          domains = [];
-          createDomain = function() {
-            var domain;
-            domain = require('domain').create();
+        describe('with domains', function() {
+          var domains = [];
+
+          function createDomain() {
+            var domain = require('domain').create();
             domains.push(domain);
             return domain;
           };
+
           beforeEach(function() {
             return domains = [];
           });
+
           afterEach(function() {
-            return domains.forEach(function(d) {
+            domains.forEach(function(d) {
               d.exit();
-              return d.dispose();
             });
           });
+
           it('sends error raised from complete event to a domain', function() {
-            var d, result;
-            result = false;
-            d = createDomain();
-            d.enter();
+            var result = false;
+            var d = createDomain();
+
             d.on('error', function(e) {
-              return result = e;
+              result = e;
             });
-            return d.run(function() {
-              var request;
+
+            d.run(function() {
               helpers.mockHttpResponse(200, {}, []);
-              request = makeRequest();
+              var request = makeRequest();
+
               request.on('complete', function() {
-                return invalidCode;
+                // trigger a ReferenceError
+                invalidCode;
               });
+
               expect(function() {
-                return request.send();
-              }).not.to["throw"]();
+                request.send();
+              }).not.to['throw']();
+
               expect(completeHandler.calls.length).not.to.equal(0);
               expect(retryHandler.calls.length).to.equal(0);
               expect(result.code).to.equal('ReferenceError');
-              return d.exit();
             });
           });
+
           it('does not leak service error into domain', function() {
-            var d, result;
-            result = false;
-            d = createDomain();
+            var result = false;
+            var d = createDomain();
+
             d.on('error', function(e) {
-              return result = e;
+              result = e;
             });
-            d.enter();
-            return d.run(function() {
+
+            d.run(function() {
               helpers.mockHttpResponse(500, {}, []);
               makeRequest().send();
               expect(completeHandler.calls.length).not.to.equal(0);
               expect(result).to.equal(false);
-              return d.exit();
             });
           });
-          return it('supports inner domains', function(done) {
-            var err, gotInnerError, gotOuterError, outerDomain;
+
+          it('supports inner domains', function(done) {
             helpers.mockHttpResponse(200, {}, []);
-            err = new ReferenceError();
-            gotOuterError = false;
-            gotInnerError = false;
-            outerDomain = createDomain();
+
+            var err = new ReferenceError();
+            var gotOuterError = false;
+            var gotInnerError = false;
+            var outerDomain = createDomain();
+
             outerDomain.on('error', function() {
-              return gotOuterError = true;
+              gotOuterError = true;
             });
-            outerDomain.enter();
-            return outerDomain.run(function() {
-              var innerDomain, request;
-              request = makeRequest();
-              innerDomain = createDomain();
+
+            outerDomain.run(function() {
+              var request = makeRequest();
+              var innerDomain = createDomain();
+
               innerDomain.enter();
               innerDomain.add(request);
+
               innerDomain.on('error', function(domErr) {
                 gotInnerError = true;
                 expect(gotOuterError).to.equal(false);
                 expect(gotInnerError).to.equal(true);
                 expect(domErr.domainThrown).to.equal(false);
                 expect(domErr.domain).to.equal(innerDomain);
-                return done();
+                done();
               });
-              return request.send(function() {
-                return innerDomain.run(function() {
+
+              request.send(function() {
+                innerDomain.run(function() {
                   throw err;
                 });
               });
+
             });
           });
         });

@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds support for adding an ElasticBlockStorage volume configurations in ECS RunTask/StartTask/CreateService/UpdateService APIs. The configuration allows for attaching EBS volumes to ECS Tasks."
+    },
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "This release adds support for adding an ElasticBlockStorage volume configurations in ECS RunTask/StartTask/CreateService/UpdateService APIs. The configuration allows for attaching EBS volumes to ECS Tasks."
+    },
+    {
+        "type": "feature",
+        "category": "EventBridge",
+        "description": "Adding AppSync as an EventBridge Target"
+    },
+    {
+        "type": "feature",
+        "category": "IoTFleetWise",
+        "description": "The following dataTypes have been removed: CUSTOMER_DECODED_INTERFACE in NetworkInterfaceType; CUSTOMER_DECODED_SIGNAL_INFO_IS_NULL in SignalDecoderFailureReason; CUSTOMER_DECODED_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL in NetworkInterfaceFailureReason; CUSTOMER_DECODED_SIGNAL in SignalDecoderType"
+    },
+    {
+        "type": "feature",
+        "category": "Iot",
+        "description": "Add ConflictException to Update APIs of AWS IoT Software Package Catalog"
+    }
+]

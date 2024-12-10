@@ -1,0 +1,27 @@
+[
+    {
+        "type": "bugfix",
+        "category": "SSO",
+        "description": "fix sso credential resolution failure when sso-session access token requires a refresh"
+    },
+    {
+        "type": "bugfix",
+        "category": "Typing",
+        "description": "Align the typing for constructor param of TokenFileWebIdentityCredentials with STS client"
+    },
+    {
+        "type": "bugfix",
+        "category": "rest-json",
+        "description": "use rules.payload when extracting data for event stream"
+    },
+    {
+        "type": "feature",
+        "category": "EMRServerless",
+        "description": "This release adds the capability to run interactive workloads using Apache Livy Endpoint."
+    },
+    {
+        "type": "feature",
+        "category": "MetadataService",
+        "description": "Update AWS.MetadataService to expose the fetchMetadataToken function."
+    }
+]

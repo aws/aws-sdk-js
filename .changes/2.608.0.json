@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CodePipeline",
+        "description": "AWS CodePipeline enables an ability to stop pipeline executions."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Add an enum value to the result of DescribeByoipCidrs to support CIDRs that are not publicly advertisable."
+    },
+    {
+        "type": "feature",
+        "category": "MarketplaceCommerceAnalytics",
+        "description": "Remove 4 deprecated data sets, change some data sets available dates to 2017-09-15"
+    }
+]

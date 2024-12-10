@@ -1,0 +1,42 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Endpoint Discovery",
+        "description": "Not to inspect environmental variables in browsers"
+    },
+    {
+        "type": "feature",
+        "category": "Batch",
+        "description": "Adding EC2 Launch Template support in AWS Batch Compute Environments."
+    },
+    {
+        "type": "feature",
+        "category": "Budgets",
+        "description": "1. Added budget performance history, enabling you to see how well your budgets matched your actual costs and usage.                                                                                             2. Added budget performance history, notification state, and last updated time, enabling you to see how well your budgets matched your actual costs and usage, how often your budget alerts triggered, and when your budget was last updated."
+    },
+    {
+        "type": "feature",
+        "category": "CloudFormation",
+        "description": "The Drift Detection feature enables customers to detect whether a stack's actual configuration differs, or has drifted, from its expected configuration as defined within AWS CloudFormation."
+    },
+    {
+        "type": "feature",
+        "category": "CodePipeline",
+        "description": "Add support for cross-region pipeline with accompanying definitions as needed in the AWS CodePipeline API Guide."
+    },
+    {
+        "type": "feature",
+        "category": "Firehose",
+        "description": "With this release, Amazon Kinesis Data Firehose allows you to enable/disable server-side encryption(SSE) for your delivery streams ensuring encryption of data at rest. For technical documentation, look at https://docs.aws.amazon.com/firehose/latest/dev/encryption.html"
+    },
+    {
+        "type": "feature",
+        "category": "Polly",
+        "description": "Amazon Polly adds new female voices: Italian - Bianca, Castilian Spanish - Lucia and new language: Mexican Spanish with new female voice - Mia."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "API Update for RDS: this update enables Custom Endpoints, a new feature compatible with Aurora Mysql, Aurora PostgreSQL and Neptune that allows users to configure a customizable endpoint that will provide access to their instances in a cluster. "
+    }
+]

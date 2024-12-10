@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Lightsail",
+        "description": "This release adds support to upgrade the major version of a database."
+    },
+    {
+        "type": "feature",
+        "category": "MarketplaceCatalog",
+        "description": "AWS Marketplace Catalog API now supports setting intent on requests"
+    },
+    {
+        "type": "feature",
+        "category": "ResourceExplorer2",
+        "description": "Resource Explorer now uses newly supported IPv4 'amazonaws.com' endpoints by default."
+    }
+]

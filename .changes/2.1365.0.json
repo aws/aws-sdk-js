@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "ChimeSDKMessaging",
+        "description": "Remove non actionable field from UpdateChannelReadMarker and DeleteChannelRequest.  Add precise exceptions to DeleteChannel and DeleteStreamingConfigurations error cases."
+    },
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "Amazon Connect, Contact Lens Evaluation API release including ability to manage forms and to submit contact evaluations."
+    },
+    {
+        "type": "feature",
+        "category": "DataSync",
+        "description": "This release adds 13 new APIs to support AWS DataSync Discovery GA."
+    },
+    {
+        "type": "feature",
+        "category": "DirectoryService",
+        "description": "New field added in AWS Managed Microsoft AD DescribeSettings response and regex pattern update for UpdateSettings value.  Added length validation to RemoteDomainName."
+    },
+    {
+        "type": "feature",
+        "category": "Pinpoint",
+        "description": "Adds support for journey runs and querying journey execution metrics based on journey runs. Adds execution metrics to campaign activities. Updates docs for Advanced Quiet Time."
+    }
+]

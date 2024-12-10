@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "T4g instances are powered by AWS Graviton2 processors"
+    },
+    {
+        "type": "feature",
+        "category": "Kafka",
+        "description": "Added new API's to support SASL SCRAM Authentication with MSK Clusters."
+    },
+    {
+        "type": "feature",
+        "category": "Kendra",
+        "description": "Amazon Kendra now returns confidence scores for 'document' query responses."
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "AWS Elemental MediaLive now supports CDI (Cloud Digital Interface) inputs which enable uncompressed video from applications on Elastic Cloud Compute (EC2), AWS Media Services, and from AWS partners"
+    },
+    {
+        "type": "feature",
+        "category": "Organizations",
+        "description": "AWS Organizations now enables you to add tags to the AWS accounts, organizational units, organization root, and policies in your organization."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Sagemaker Ground Truth: Added support for a new Streaming feature which helps to continuously feed data and receive labels in real time. This release adds a new input and output SNS data channel."
+    },
+    {
+        "type": "feature",
+        "category": "TranscribeService",
+        "description": "Amazon Transcribe now supports automatic language identification, which enables you to transcribe audio files without needing to know the language in advance."
+    }
+]

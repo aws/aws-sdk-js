@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudFormation",
+        "description": "SDK and documentation updates for GetTemplateSummary API (unrecognized resources)"
+    },
+    {
+        "type": "feature",
+        "category": "Grafana",
+        "description": "Amazon Managed Grafana now supports grafanaVersion update for existing workspaces with UpdateWorkspaceConfiguration API. DescribeWorkspaceConfiguration API additionally returns grafanaVersion. A new ListVersions API lists available versions or, if given a workspaceId, the versions it can upgrade to."
+    },
+    {
+        "type": "feature",
+        "category": "MedicalImaging",
+        "description": "General Availability (GA) release of AWS Health Imaging, enabling customers to store, transform, and analyze medical imaging data at petabyte-scale."
+    },
+    {
+        "type": "feature",
+        "category": "RAM",
+        "description": "This release adds support for securely sharing with AWS service principals."
+    },
+    {
+        "type": "feature",
+        "category": "SsmSap",
+        "description": "Added support for SAP Hana High Availability discovery (primary and secondary nodes) and Backint agent installation with SSM for SAP."
+    },
+    {
+        "type": "feature",
+        "category": "WAFV2",
+        "description": "Added the URI path to the custom aggregation keys that you can specify for a rate-based rule."
+    }
+]

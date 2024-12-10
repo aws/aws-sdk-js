@@ -1,0 +1,1213 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2022-02-03",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "dataplane.payment-cryptography",
+    "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
+    "serviceFullName": "Payment Cryptography Data Plane",
+    "serviceId": "Payment Cryptography Data",
+    "signatureVersion": "v4",
+    "signingName": "payment-cryptography",
+    "uid": "payment-cryptography-data-2022-02-03"
+  },
+  "operations": {
+    "DecryptData": {
+      "http": {
+        "requestUri": "/keys/{KeyIdentifier}/decrypt",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "KeyIdentifier",
+          "CipherText",
+          "DecryptionAttributes"
+        ],
+        "members": {
+          "KeyIdentifier": {
+            "location": "uri",
+            "locationName": "KeyIdentifier"
+          },
+          "CipherText": {
+            "shape": "S3"
+          },
+          "DecryptionAttributes": {
+            "shape": "S4"
+          },
+          "WrappedKey": {
+            "shape": "Sl"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "KeyArn",
+          "KeyCheckValue",
+          "PlainText"
+        ],
+        "members": {
+          "KeyArn": {},
+          "KeyCheckValue": {},
+          "PlainText": {
+            "type": "string",
+            "sensitive": true
+          }
+        }
+      }
+    },
+    "EncryptData": {
+      "http": {
+        "requestUri": "/keys/{KeyIdentifier}/encrypt",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "KeyIdentifier",
+          "PlainText",
+          "EncryptionAttributes"
+        ],
+        "members": {
+          "KeyIdentifier": {
+            "location": "uri",
+            "locationName": "KeyIdentifier"
+          },
+          "PlainText": {
+            "type": "string",
+            "sensitive": true
+          },
+          "EncryptionAttributes": {
+            "shape": "S4"
+          },
+          "WrappedKey": {
+            "shape": "Sl"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "KeyArn",
+          "CipherText"
+        ],
+        "members": {
+          "KeyArn": {},
+          "KeyCheckValue": {},
+          "CipherText": {
+            "shape": "S3"
+          }
+        }
+      }
+    },
+    "GenerateCardValidationData": {
+      "http": {
+        "requestUri": "/cardvalidationdata/generate",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "KeyIdentifier",
+          "PrimaryAccountNumber",
+          "GenerationAttributes"
+        ],
+        "members": {
+          "KeyIdentifier": {},
+          "PrimaryAccountNumber": {
+            "shape": "Sh"
+          },
+          "GenerationAttributes": {
+            "type": "structure",
+            "members": {
+              "AmexCardSecurityCodeVersion1": {
+                "shape": "Sy"
+              },
+              "AmexCardSecurityCodeVersion2": {
+                "shape": "S10"
+              },
+              "CardVerificationValue1": {
+                "shape": "S12"
+              },
+              "CardVerificationValue2": {
+                "shape": "S13"
+              },
+              "CardHolderVerificationValue": {
+                "shape": "S14"
+              },
+              "DynamicCardVerificationCode": {
+                "shape": "S17"
+              },
+              "DynamicCardVerificationValue": {
+                "shape": "S19"
+              }
+            },
+            "union": true
+          },
+          "ValidationDataLength": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "KeyArn",
+          "KeyCheckValue",
+          "ValidationData"
+        ],
+        "members": {
+          "KeyArn": {},
+          "KeyCheckValue": {},
+          "ValidationData": {
+            "shape": "S1c"
+          }
+        }
+      }
+    },
+    "GenerateMac": {
+      "http": {
+        "requestUri": "/mac/generate",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "KeyIdentifier",
+          "MessageData",
+          "GenerationAttributes"
+        ],
+        "members": {
+          "KeyIdentifier": {},
+          "MessageData": {
+            "shape": "S1e"
+          },
+          "GenerationAttributes": {
+            "shape": "S1f"
+          },
+          "MacLength": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "KeyArn",
+          "KeyCheckValue",
+          "Mac"
+        ],
+        "members": {
+          "KeyArn": {},
+          "KeyCheckValue": {},
+          "Mac": {
+            "type": "string",
+            "sensitive": true
+          }
+        }
+      }
+    },
+    "GeneratePinData": {
+      "http": {
+        "requestUri": "/pindata/generate",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "GenerationKeyIdentifier",
+          "EncryptionKeyIdentifier",
+          "GenerationAttributes",
+          "PrimaryAccountNumber",
+          "PinBlockFormat"
+        ],
+        "members": {
+          "GenerationKeyIdentifier": {},
+          "EncryptionKeyIdentifier": {},
+          "GenerationAttributes": {
+            "type": "structure",
+            "members": {
+              "VisaPin": {
+                "type": "structure",
+                "required": [
+                  "PinVerificationKeyIndex"
+                ],
+                "members": {
+                  "PinVerificationKeyIndex": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "VisaPinVerificationValue": {
+                "type": "structure",
+                "required": [
+                  "EncryptedPinBlock",
+                  "PinVerificationKeyIndex"
+                ],
+                "members": {
+                  "EncryptedPinBlock": {
+                    "shape": "S1v"
+                  },
+                  "PinVerificationKeyIndex": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "Ibm3624PinOffset": {
+                "type": "structure",
+                "required": [
+                  "EncryptedPinBlock",
+                  "DecimalizationTable",
+                  "PinValidationDataPadCharacter",
+                  "PinValidationData"
+                ],
+                "members": {
+                  "EncryptedPinBlock": {
+                    "shape": "S1v"
+                  },
+                  "DecimalizationTable": {
+                    "shape": "S1x"
+                  },
+                  "PinValidationDataPadCharacter": {},
+                  "PinValidationData": {
+                    "shape": "S1z"
+                  }
+                }
+              },
+              "Ibm3624NaturalPin": {
+                "type": "structure",
+                "required": [
+                  "DecimalizationTable",
+                  "PinValidationDataPadCharacter",
+                  "PinValidationData"
+                ],
+                "members": {
+                  "DecimalizationTable": {
+                    "shape": "S1x"
+                  },
+                  "PinValidationDataPadCharacter": {},
+                  "PinValidationData": {
+                    "shape": "S1z"
+                  }
+                }
+              },
+              "Ibm3624RandomPin": {
+                "type": "structure",
+                "required": [
+                  "DecimalizationTable",
+                  "PinValidationDataPadCharacter",
+                  "PinValidationData"
+                ],
+                "members": {
+                  "DecimalizationTable": {
+                    "shape": "S1x"
+                  },
+                  "PinValidationDataPadCharacter": {},
+                  "PinValidationData": {
+                    "shape": "S1z"
+                  }
+                }
+              },
+              "Ibm3624PinFromOffset": {
+                "type": "structure",
+                "required": [
+                  "DecimalizationTable",
+                  "PinValidationDataPadCharacter",
+                  "PinValidationData",
+                  "PinOffset"
+                ],
+                "members": {
+                  "DecimalizationTable": {
+                    "shape": "S1x"
+                  },
+                  "PinValidationDataPadCharacter": {},
+                  "PinValidationData": {
+                    "shape": "S1z"
+                  },
+                  "PinOffset": {
+                    "shape": "S23"
+                  }
+                }
+              }
+            },
+            "union": true
+          },
+          "PinDataLength": {
+            "type": "integer"
+          },
+          "PrimaryAccountNumber": {
+            "shape": "Sh"
+          },
+          "PinBlockFormat": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "GenerationKeyArn",
+          "GenerationKeyCheckValue",
+          "EncryptionKeyArn",
+          "EncryptionKeyCheckValue",
+          "EncryptedPinBlock",
+          "PinData"
+        ],
+        "members": {
+          "GenerationKeyArn": {},
+          "GenerationKeyCheckValue": {},
+          "EncryptionKeyArn": {},
+          "EncryptionKeyCheckValue": {},
+          "EncryptedPinBlock": {
+            "shape": "S1v"
+          },
+          "PinData": {
+            "type": "structure",
+            "members": {
+              "PinOffset": {
+                "shape": "S23"
+              },
+              "VerificationValue": {
+                "shape": "S28"
+              }
+            },
+            "union": true
+          }
+        }
+      }
+    },
+    "ReEncryptData": {
+      "http": {
+        "requestUri": "/keys/{IncomingKeyIdentifier}/reencrypt",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "IncomingKeyIdentifier",
+          "OutgoingKeyIdentifier",
+          "CipherText",
+          "IncomingEncryptionAttributes",
+          "OutgoingEncryptionAttributes"
+        ],
+        "members": {
+          "IncomingKeyIdentifier": {
+            "location": "uri",
+            "locationName": "IncomingKeyIdentifier"
+          },
+          "OutgoingKeyIdentifier": {},
+          "CipherText": {
+            "shape": "S3"
+          },
+          "IncomingEncryptionAttributes": {
+            "shape": "S2a"
+          },
+          "OutgoingEncryptionAttributes": {
+            "shape": "S2a"
+          },
+          "IncomingWrappedKey": {
+            "shape": "Sl"
+          },
+          "OutgoingWrappedKey": {
+            "shape": "Sl"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "KeyArn",
+          "KeyCheckValue",
+          "CipherText"
+        ],
+        "members": {
+          "KeyArn": {},
+          "KeyCheckValue": {},
+          "CipherText": {
+            "shape": "S3"
+          }
+        }
+      }
+    },
+    "TranslatePinData": {
+      "http": {
+        "requestUri": "/pindata/translate",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "IncomingKeyIdentifier",
+          "OutgoingKeyIdentifier",
+          "IncomingTranslationAttributes",
+          "OutgoingTranslationAttributes",
+          "EncryptedPinBlock"
+        ],
+        "members": {
+          "IncomingKeyIdentifier": {},
+          "OutgoingKeyIdentifier": {},
+          "IncomingTranslationAttributes": {
+            "shape": "S2d"
+          },
+          "OutgoingTranslationAttributes": {
+            "shape": "S2d"
+          },
+          "EncryptedPinBlock": {
+            "type": "string",
+            "sensitive": true
+          },
+          "IncomingDukptAttributes": {
+            "shape": "S2h"
+          },
+          "OutgoingDukptAttributes": {
+            "shape": "S2h"
+          },
+          "IncomingWrappedKey": {
+            "shape": "Sl"
+          },
+          "OutgoingWrappedKey": {
+            "shape": "Sl"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "PinBlock",
+          "KeyArn",
+          "KeyCheckValue"
+        ],
+        "members": {
+          "PinBlock": {
+            "shape": "S1v"
+          },
+          "KeyArn": {},
+          "KeyCheckValue": {}
+        }
+      }
+    },
+    "VerifyAuthRequestCryptogram": {
+      "http": {
+        "requestUri": "/cryptogram/verify",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "KeyIdentifier",
+          "TransactionData",
+          "AuthRequestCryptogram",
+          "MajorKeyDerivationMode",
+          "SessionKeyDerivationAttributes"
+        ],
+        "members": {
+          "KeyIdentifier": {},
+          "TransactionData": {
+            "type": "string",
+            "sensitive": true
+          },
+          "AuthRequestCryptogram": {
+            "type": "string",
+            "sensitive": true
+          },
+          "MajorKeyDerivationMode": {},
+          "SessionKeyDerivationAttributes": {
+            "type": "structure",
+            "members": {
+              "EmvCommon": {
+                "type": "structure",
+                "required": [
+                  "PrimaryAccountNumber",
+                  "PanSequenceNumber",
+                  "ApplicationTransactionCounter"
+                ],
+                "members": {
+                  "PrimaryAccountNumber": {
+                    "shape": "Sh"
+                  },
+                  "PanSequenceNumber": {},
+                  "ApplicationTransactionCounter": {}
+                }
+              },
+              "Mastercard": {
+                "type": "structure",
+                "required": [
+                  "PrimaryAccountNumber",
+                  "PanSequenceNumber",
+                  "ApplicationTransactionCounter",
+                  "UnpredictableNumber"
+                ],
+                "members": {
+                  "PrimaryAccountNumber": {
+                    "shape": "Sh"
+                  },
+                  "PanSequenceNumber": {},
+                  "ApplicationTransactionCounter": {},
+                  "UnpredictableNumber": {}
+                }
+              },
+              "Emv2000": {
+                "type": "structure",
+                "required": [
+                  "PrimaryAccountNumber",
+                  "PanSequenceNumber",
+                  "ApplicationTransactionCounter"
+                ],
+                "members": {
+                  "PrimaryAccountNumber": {
+                    "shape": "Sh"
+                  },
+                  "PanSequenceNumber": {},
+                  "ApplicationTransactionCounter": {}
+                }
+              },
+              "Amex": {
+                "type": "structure",
+                "required": [
+                  "PrimaryAccountNumber",
+                  "PanSequenceNumber"
+                ],
+                "members": {
+                  "PrimaryAccountNumber": {
+                    "shape": "Sh"
+                  },
+                  "PanSequenceNumber": {}
+                }
+              },
+              "Visa": {
+                "type": "structure",
+                "required": [
+                  "PrimaryAccountNumber",
+                  "PanSequenceNumber"
+                ],
+                "members": {
+                  "PrimaryAccountNumber": {
+                    "shape": "Sh"
+                  },
+                  "PanSequenceNumber": {}
+                }
+              }
+            },
+            "union": true
+          },
+          "AuthResponseAttributes": {
+            "type": "structure",
+            "members": {
+              "ArpcMethod1": {
+                "type": "structure",
+                "required": [
+                  "AuthResponseCode"
+                ],
+                "members": {
+                  "AuthResponseCode": {}
+                }
+              },
+              "ArpcMethod2": {
+                "type": "structure",
+                "required": [
+                  "CardStatusUpdate"
+                ],
+                "members": {
+                  "CardStatusUpdate": {},
+                  "ProprietaryAuthenticationData": {
+                    "type": "string",
+                    "sensitive": true
+                  }
+                }
+              }
+            },
+            "union": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "KeyArn",
+          "KeyCheckValue"
+        ],
+        "members": {
+          "KeyArn": {},
+          "KeyCheckValue": {},
+          "AuthResponseValue": {
+            "type": "string",
+            "sensitive": true
+          }
+        }
+      }
+    },
+    "VerifyCardValidationData": {
+      "http": {
+        "requestUri": "/cardvalidationdata/verify",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "KeyIdentifier",
+          "PrimaryAccountNumber",
+          "VerificationAttributes",
+          "ValidationData"
+        ],
+        "members": {
+          "KeyIdentifier": {},
+          "PrimaryAccountNumber": {
+            "shape": "Sh"
+          },
+          "VerificationAttributes": {
+            "type": "structure",
+            "members": {
+              "AmexCardSecurityCodeVersion1": {
+                "shape": "Sy"
+              },
+              "AmexCardSecurityCodeVersion2": {
+                "shape": "S10"
+              },
+              "CardVerificationValue1": {
+                "shape": "S12"
+              },
+              "CardVerificationValue2": {
+                "shape": "S13"
+              },
+              "CardHolderVerificationValue": {
+                "shape": "S14"
+              },
+              "DynamicCardVerificationCode": {
+                "shape": "S17"
+              },
+              "DynamicCardVerificationValue": {
+                "shape": "S19"
+              },
+              "DiscoverDynamicCardVerificationCode": {
+                "type": "structure",
+                "required": [
+                  "CardExpiryDate",
+                  "UnpredictableNumber",
+                  "ApplicationTransactionCounter"
+                ],
+                "members": {
+                  "CardExpiryDate": {
+                    "shape": "Sz"
+                  },
+                  "UnpredictableNumber": {},
+                  "ApplicationTransactionCounter": {}
+                }
+              }
+            },
+            "union": true
+          },
+          "ValidationData": {
+            "shape": "S1c"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "KeyArn",
+          "KeyCheckValue"
+        ],
+        "members": {
+          "KeyArn": {},
+          "KeyCheckValue": {}
+        }
+      }
+    },
+    "VerifyMac": {
+      "http": {
+        "requestUri": "/mac/verify",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "KeyIdentifier",
+          "MessageData",
+          "Mac",
+          "VerificationAttributes"
+        ],
+        "members": {
+          "KeyIdentifier": {},
+          "MessageData": {
+            "shape": "S1e"
+          },
+          "Mac": {
+            "type": "string",
+            "sensitive": true
+          },
+          "VerificationAttributes": {
+            "shape": "S1f"
+          },
+          "MacLength": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "KeyArn",
+          "KeyCheckValue"
+        ],
+        "members": {
+          "KeyArn": {},
+          "KeyCheckValue": {}
+        }
+      }
+    },
+    "VerifyPinData": {
+      "http": {
+        "requestUri": "/pindata/verify",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "VerificationKeyIdentifier",
+          "EncryptionKeyIdentifier",
+          "VerificationAttributes",
+          "EncryptedPinBlock",
+          "PrimaryAccountNumber",
+          "PinBlockFormat"
+        ],
+        "members": {
+          "VerificationKeyIdentifier": {},
+          "EncryptionKeyIdentifier": {},
+          "VerificationAttributes": {
+            "type": "structure",
+            "members": {
+              "VisaPin": {
+                "type": "structure",
+                "required": [
+                  "PinVerificationKeyIndex",
+                  "VerificationValue"
+                ],
+                "members": {
+                  "PinVerificationKeyIndex": {
+                    "type": "integer"
+                  },
+                  "VerificationValue": {
+                    "shape": "S28"
+                  }
+                }
+              },
+              "Ibm3624Pin": {
+                "type": "structure",
+                "required": [
+                  "DecimalizationTable",
+                  "PinValidationDataPadCharacter",
+                  "PinValidationData",
+                  "PinOffset"
+                ],
+                "members": {
+                  "DecimalizationTable": {
+                    "shape": "S1x"
+                  },
+                  "PinValidationDataPadCharacter": {},
+                  "PinValidationData": {
+                    "shape": "S1z"
+                  },
+                  "PinOffset": {
+                    "shape": "S23"
+                  }
+                }
+              }
+            },
+            "union": true
+          },
+          "EncryptedPinBlock": {
+            "shape": "S1v"
+          },
+          "PrimaryAccountNumber": {
+            "shape": "Sh"
+          },
+          "PinBlockFormat": {},
+          "PinDataLength": {
+            "type": "integer"
+          },
+          "DukptAttributes": {
+            "type": "structure",
+            "required": [
+              "KeySerialNumber",
+              "DukptDerivationType"
+            ],
+            "members": {
+              "KeySerialNumber": {},
+              "DukptDerivationType": {}
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "VerificationKeyArn",
+          "VerificationKeyCheckValue",
+          "EncryptionKeyArn",
+          "EncryptionKeyCheckValue"
+        ],
+        "members": {
+          "VerificationKeyArn": {},
+          "VerificationKeyCheckValue": {},
+          "EncryptionKeyArn": {},
+          "EncryptionKeyCheckValue": {}
+        }
+      }
+    }
+  },
+  "shapes": {
+    "S3": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S4": {
+      "type": "structure",
+      "members": {
+        "Symmetric": {
+          "shape": "S5"
+        },
+        "Asymmetric": {
+          "type": "structure",
+          "members": {
+            "PaddingType": {}
+          }
+        },
+        "Dukpt": {
+          "shape": "Sa"
+        },
+        "Emv": {
+          "type": "structure",
+          "required": [
+            "MajorKeyDerivationMode",
+            "PrimaryAccountNumber",
+            "PanSequenceNumber",
+            "SessionDerivationData"
+          ],
+          "members": {
+            "MajorKeyDerivationMode": {},
+            "PrimaryAccountNumber": {
+              "shape": "Sh"
+            },
+            "PanSequenceNumber": {},
+            "SessionDerivationData": {
+              "type": "string",
+              "sensitive": true
+            },
+            "Mode": {},
+            "InitializationVector": {
+              "shape": "S7"
+            }
+          }
+        }
+      },
+      "union": true
+    },
+    "S5": {
+      "type": "structure",
+      "required": [
+        "Mode"
+      ],
+      "members": {
+        "Mode": {},
+        "InitializationVector": {
+          "shape": "S7"
+        },
+        "PaddingType": {}
+      }
+    },
+    "S7": {
+      "type": "string",
+      "sensitive": true
+    },
+    "Sa": {
+      "type": "structure",
+      "required": [
+        "KeySerialNumber"
+      ],
+      "members": {
+        "KeySerialNumber": {},
+        "Mode": {},
+        "DukptKeyDerivationType": {},
+        "DukptKeyVariant": {},
+        "InitializationVector": {
+          "shape": "S7"
+        }
+      }
+    },
+    "Sh": {
+      "type": "string",
+      "sensitive": true
+    },
+    "Sl": {
+      "type": "structure",
+      "required": [
+        "WrappedKeyMaterial"
+      ],
+      "members": {
+        "WrappedKeyMaterial": {
+          "type": "structure",
+          "members": {
+            "Tr31KeyBlock": {
+              "type": "string",
+              "sensitive": true
+            }
+          },
+          "union": true
+        },
+        "KeyCheckValueAlgorithm": {}
+      }
+    },
+    "Sy": {
+      "type": "structure",
+      "required": [
+        "CardExpiryDate"
+      ],
+      "members": {
+        "CardExpiryDate": {
+          "shape": "Sz"
+        }
+      }
+    },
+    "Sz": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S10": {
+      "type": "structure",
+      "required": [
+        "CardExpiryDate",
+        "ServiceCode"
+      ],
+      "members": {
+        "CardExpiryDate": {
+          "shape": "Sz"
+        },
+        "ServiceCode": {
+          "shape": "S11"
+        }
+      }
+    },
+    "S11": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S12": {
+      "type": "structure",
+      "required": [
+        "CardExpiryDate",
+        "ServiceCode"
+      ],
+      "members": {
+        "CardExpiryDate": {
+          "shape": "Sz"
+        },
+        "ServiceCode": {
+          "shape": "S11"
+        }
+      }
+    },
+    "S13": {
+      "type": "structure",
+      "required": [
+        "CardExpiryDate"
+      ],
+      "members": {
+        "CardExpiryDate": {
+          "shape": "Sz"
+        }
+      }
+    },
+    "S14": {
+      "type": "structure",
+      "required": [
+        "UnpredictableNumber",
+        "PanSequenceNumber",
+        "ApplicationTransactionCounter"
+      ],
+      "members": {
+        "UnpredictableNumber": {},
+        "PanSequenceNumber": {},
+        "ApplicationTransactionCounter": {}
+      }
+    },
+    "S17": {
+      "type": "structure",
+      "required": [
+        "UnpredictableNumber",
+        "PanSequenceNumber",
+        "ApplicationTransactionCounter",
+        "TrackData"
+      ],
+      "members": {
+        "UnpredictableNumber": {},
+        "PanSequenceNumber": {},
+        "ApplicationTransactionCounter": {},
+        "TrackData": {
+          "type": "string",
+          "sensitive": true
+        }
+      }
+    },
+    "S19": {
+      "type": "structure",
+      "required": [
+        "PanSequenceNumber",
+        "CardExpiryDate",
+        "ServiceCode",
+        "ApplicationTransactionCounter"
+      ],
+      "members": {
+        "PanSequenceNumber": {},
+        "CardExpiryDate": {
+          "shape": "Sz"
+        },
+        "ServiceCode": {
+          "shape": "S11"
+        },
+        "ApplicationTransactionCounter": {}
+      }
+    },
+    "S1c": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S1e": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S1f": {
+      "type": "structure",
+      "members": {
+        "Algorithm": {},
+        "EmvMac": {
+          "type": "structure",
+          "required": [
+            "MajorKeyDerivationMode",
+            "PrimaryAccountNumber",
+            "PanSequenceNumber",
+            "SessionKeyDerivationMode",
+            "SessionKeyDerivationValue"
+          ],
+          "members": {
+            "MajorKeyDerivationMode": {},
+            "PrimaryAccountNumber": {
+              "shape": "Sh"
+            },
+            "PanSequenceNumber": {},
+            "SessionKeyDerivationMode": {},
+            "SessionKeyDerivationValue": {
+              "type": "structure",
+              "members": {
+                "ApplicationCryptogram": {
+                  "type": "string",
+                  "sensitive": true
+                },
+                "ApplicationTransactionCounter": {}
+              },
+              "union": true
+            }
+          }
+        },
+        "DukptIso9797Algorithm1": {
+          "shape": "S1m"
+        },
+        "DukptIso9797Algorithm3": {
+          "shape": "S1m"
+        },
+        "DukptCmac": {
+          "shape": "S1m"
+        }
+      },
+      "union": true
+    },
+    "S1m": {
+      "type": "structure",
+      "required": [
+        "KeySerialNumber",
+        "DukptKeyVariant"
+      ],
+      "members": {
+        "KeySerialNumber": {},
+        "DukptKeyVariant": {},
+        "DukptDerivationType": {}
+      }
+    },
+    "S1v": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S1x": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S1z": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S23": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S28": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S2a": {
+      "type": "structure",
+      "members": {
+        "Symmetric": {
+          "shape": "S5"
+        },
+        "Dukpt": {
+          "shape": "Sa"
+        }
+      },
+      "union": true
+    },
+    "S2d": {
+      "type": "structure",
+      "members": {
+        "IsoFormat0": {
+          "shape": "S2e"
+        },
+        "IsoFormat1": {
+          "type": "structure",
+          "members": {}
+        },
+        "IsoFormat3": {
+          "shape": "S2e"
+        },
+        "IsoFormat4": {
+          "shape": "S2e"
+        }
+      },
+      "union": true
+    },
+    "S2e": {
+      "type": "structure",
+      "required": [
+        "PrimaryAccountNumber"
+      ],
+      "members": {
+        "PrimaryAccountNumber": {
+          "shape": "Sh"
+        }
+      }
+    },
+    "S2h": {
+      "type": "structure",
+      "required": [
+        "KeySerialNumber"
+      ],
+      "members": {
+        "KeySerialNumber": {},
+        "DukptKeyDerivationType": {},
+        "DukptKeyVariant": {}
+      }
+    }
+  }
+}

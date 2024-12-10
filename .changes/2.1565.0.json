@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "Add pattern and length based validations for DBShardGroupIdentifier"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Monitoring",
+        "description": "Set MaxRetriesExceeded on monitoring event only when the final retry fails"
+    },
+    {
+        "type": "feature",
+        "category": "Chime",
+        "description": "feature: Chime: This release introduces the ability to tag Amazon Chime SDK meeting resources.  You can use tags to organize and identify your resources for cost allocation. "
+    },
+    {
+        "type": "feature",
+        "category": "CodeGuruProfiler",
+        "description": "CodeGuruProfiler adds support for resource based authorization to submit profile data."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release provides the ability to include tags in EC2 event notifications. "
+    },
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "This release provides native support for specifying Amazon EFS file systems as volumes in your Amazon ECS task definitions."
+    },
+    {
+        "type": "feature",
+        "category": "MediaConvert",
+        "description": "AWS Elemental MediaConvert SDK adds support for queue hopping. Jobs can now hop from their original queue to a specified alternate queue, based on the maximum wait time that you specify in the job settings."
+    },
+    {
+        "type": "feature",
+        "category": "MigrationHubConfig",
+        "description": "Adding ThrottlingException"
+    }
+]

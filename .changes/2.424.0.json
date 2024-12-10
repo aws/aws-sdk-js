@@ -1,0 +1,22 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Paginator",
+        "description": "fix the issue where paginator keys are ignored in GET requests"
+    },
+    {
+        "type": "bugfix",
+        "category": "Request",
+        "description": "Fix nextPage() method signature"
+    },
+    {
+        "type": "feature",
+        "category": "ConfigService",
+        "description": "AWS Config adds a new API called SelectResourceConfig to run advanced queries based on resource configuration properties."
+    },
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Added support to control private/public access to the Kubernetes API-server endpoint"
+    }
+]

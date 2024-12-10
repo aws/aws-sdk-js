@@ -1,0 +1,17 @@
+[
+    {
+        "type": "bugfix",
+        "category": "DocumentClient",
+        "description": "Add options.wrapNumbers doc in DynamoDB.DocumentClient"
+    },
+    {
+        "type": "feature",
+        "category": "CloudFront",
+        "description": "CloudFront now supports real-time logging for CloudFront distributions. CloudFront real-time logs are more detailed, configurable, and are available in real time."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Amazon EC2 and Spot Fleet now support modification of launch template configs for a running fleet enabling instance type, instance weight, AZ, and AMI updates without losing the current fleet ID."
+    }
+]

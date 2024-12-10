@@ -1,0 +1,22 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Dependency",
+        "description": "Pin the dependency to the latest"
+    },
+    {
+        "type": "feature",
+        "category": "APIGateway",
+        "description": "Amazon API Gateway simplifies accessing PRIVATE APIs by allowing you to associate one or more Amazon Virtual Private Cloud (VPC) Endpoints to a private API. API Gateway will create and manage DNS alias records necessary for easily invoking the private APIs. With this feature, you can leverage private APIs in web applications hosted within your VPCs."
+    },
+    {
+        "type": "feature",
+        "category": "RAM",
+        "description": "AWS RAM provides a new ListPendingInvitationResources API action that lists the resources in a resource share that is shared with you but that the invitation is still pending for"
+    },
+    {
+        "type": "feature",
+        "category": "WAFRegional",
+        "description": "Lowering the threshold for Rate Based rule from 2000 to 100."
+    }
+]

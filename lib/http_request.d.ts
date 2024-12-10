@@ -4,6 +4,10 @@ import {Endpoint} from './endpoint';
  */
 export class HttpRequest {
     /**
+     * Constructs HttpRequest object with provided endpoint and region
+     */
+    constructor(endpoint: Endpoint, region: string);
+    /**
      * The part of the path excluding the query string.
      */
     pathname(): string;
@@ -14,7 +18,7 @@ export class HttpRequest {
     /**
      * The request body payload.
      */
-    body: string;
+    body: string | Buffer;
     /**
      * The endpoint for the request.
      */

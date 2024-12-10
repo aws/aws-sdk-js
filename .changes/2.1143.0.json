@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudFormation",
+        "description": "Add a new parameter statusReason to DescribeStackSetOperation output for additional details"
+    },
+    {
+        "type": "feature",
+        "category": "FSx",
+        "description": "This release adds root squash support to FSx for Lustre to restrict root level access from clients by mapping root users to a less-privileged user/group with limited permissions."
+    },
+    {
+        "type": "feature",
+        "category": "LookoutMetrics",
+        "description": "Adding AthenaSourceConfig for MetricSet APIs to support Athena as a data source."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Amazon SageMaker Autopilot adds support for manually selecting features from the input dataset using the CreateAutoMLJob API."
+    },
+    {
+        "type": "feature",
+        "category": "VoiceID",
+        "description": "VoiceID will now automatically expire Speakers if they haven't been accessed for Enrollment, Re-enrollment or Successful Auth for three years. The Speaker APIs now return a \"LastAccessedAt\" time for Speakers, and the EvaluateSession API returns \"SPEAKER_EXPIRED\" Auth Decision for EXPIRED Speakers."
+    }
+]

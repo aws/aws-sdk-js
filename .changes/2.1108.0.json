@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "DataSync",
+        "description": "AWS DataSync now supports Amazon FSx for OpenZFS locations."
+    },
+    {
+        "type": "feature",
+        "category": "FSx",
+        "description": "Provide customers more visibility into file system status by adding new \"Misconfigured Unavailable\" status for Amazon FSx for Windows File Server."
+    },
+    {
+        "type": "feature",
+        "category": "SecurityHub",
+        "description": "Added additional ASFF details for RdsSecurityGroup AutoScalingGroup, ElbLoadBalancer, CodeBuildProject and RedshiftCluster."
+    }
+]

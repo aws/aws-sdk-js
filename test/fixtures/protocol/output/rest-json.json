@@ -166,24 +166,54 @@
       "OutputShape": {
         "type": "structure",
         "members": {
-          "TimeMember": {
-            "shape": "TimeType"
+          "TimeArg": {
+            "shape": "TimestampType"
+          },
+          "TimeArgInHeader": {
+            "shape": "TimestampType",
+            "location": "header",
+            "locationName": "x-amz-timearg"
+          },
+          "TimeCustom": {
+            "timestampFormat": "rfc822",
+            "shape": "TimestampType"
+          },
+          "TimeCustomInHeader": {
+            "timestampFormat": "unixTimestamp",
+            "shape": "TimestampType",
+            "location": "header",
+            "locationName": "x-amz-timecustom"
+          },
+          "TimeFormat": {
+            "shape": "TimestampFormatType"
+          },
+          "TimeFormatInHeader": {
+            "shape": "TimestampFormatType",
+            "location": "header",
+            "locationName": "x-amz-timeformat"
           },
           "StructMember": {
             "shape": "TimeContainer"
           }
         }
       },
-      "TimeType": {
-        "type": "timestamp"
-      },
       "TimeContainer": {
         "type": "structure",
         "members": {
           "foo": {
-            "shape": "TimeType"
+            "shape": "TimestampType"
+          },
+          "bar": {
+            "shape": "TimestampFormatType"
           }
         }
+      },
+      "TimestampFormatType": {
+        "timestampFormat": "iso8601",
+        "type": "timestamp"
+      },
+      "TimestampType": {
+        "type": "timestamp"
       }
     },
     "cases": [
@@ -195,15 +225,25 @@
           "name": "OperationName"
         },
         "result": {
-          "TimeMember": 1398796238,
+          "TimeArg": 1398796238,
+          "TimeArgInHeader": 1398796238,
+          "TimeCustom": 1398796238,
+          "TimeCustomInHeader": 1398796238,
+          "TimeFormat": 1398796238,
+          "TimeFormatInHeader": 1398796238,
           "StructMember": {
-            "foo": 1398796238
+            "foo": 1398796238,
+            "bar": 1398796238
           }
         },
         "response": {
           "status_code": 200,
-          "headers": {},
-          "body": "{\"TimeMember\": 1398796238, \"StructMember\": {\"foo\": 1398796238}}"
+          "headers": {
+            "x-amz-timearg": "Tue, 29 Apr 2014 18:30:38 GMT",
+            "x-amz-timecustom": "1398796238",
+            "x-amz-timeformat": "2014-04-29T18:30:38Z"
+          },
+          "body": "{\"TimeArg\": 1398796238, \"TimeCustom\": \"Tue, 29 Apr 2014 18:30:38 GMT\", \"TimeFormat\": \"2014-04-29T18:30:38Z\", \"StructMember\": {\"foo\": 1398796238, \"bar\": \"2014-04-29T18:30:38Z\"}}"
         }
       }
     ]
@@ -511,20 +551,20 @@
         "result": {
           "AllHeaders": {
             "Content-Length": "10",
-            "x-Foo": "bar",
-            "X-bam": "boo"
+            "X-Foo": "bar",
+            "X-Bam": "boo"
           },
           "PrefixedHeaders": {
             "Foo": "bar",
-            "bam": "boo"
+            "Bam": "boo"
           }
         },
         "response": {
           "status_code": 200,
           "headers": {
             "Content-Length": "10",
-            "x-Foo": "bar",
-            "X-bam": "boo"
+            "X-Foo": "bar",
+            "X-Bam": "boo"
           },
           "body": "{}"
         }
@@ -634,13 +674,190 @@
       "OutputShape": {
         "type": "structure",
         "members": {
-          "Attr": {
+          "HeaderField": {
             "shape": "StringType",
-              "jsonvalue": true,
-              "location": "header",
-              "locationName": "X-Amz-Foo"
+            "jsonvalue": true,
+            "location": "header",
+            "locationName": "X-Amz-Foo"
+          },
+          "BodyField":{
+            "shape": "StringType",
+            "jsonvalue": true
+          },
+          "BodyListField": {
+            "shape": "ListType"
           }
         }
+      },
+      "StringType": {
+        "type": "string"
+      },
+      "ListType": {
+        "type": "list",
+        "member": {
+          "shape": "StringType",
+          "jsonvalue": true
+        }
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "HeaderField": {"Foo":"Bar"},
+          "BodyField": {"Foo":"Bar"}
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {"X-Amz-Foo": "eyJGb28iOiJCYXIifQ=="},
+          "body": "{\"BodyField\":\"{\\\"Foo\\\":\\\"Bar\\\"}\"}"
+        }
+      },
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "BodyListField": [{"Foo":"Bar"}]
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"BodyListField\":[\"{\\\"Foo\\\":\\\"Bar\\\"}\"]}"
+        }
+      },
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "HeaderField": {"Foo":{}}
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {"X-Amz-Foo": "e30="}
+        }
+      },
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {},
+        "response": {
+          "status_code": 200,
+          "headers": {"X-Amz-Foo": ""}
+        }
+      }
+    ]
+  },
+  {
+    "description": "Enum",
+    "metadata": {
+      "protocol": "rest-json",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "HeaderEnum": {
+            "shape": "RESTJSONEnumType",
+            "location": "header",
+            "locationName": "x-amz-enum"
+          },
+          "FooEnum": {
+            "shape": "RESTJSONEnumType"
+          },
+          "ListEnums": {
+            "shape": "EnumList"
+          }
+        }
+      },
+      "RESTJSONEnumType":{
+        "type":"string",
+        "enum":[
+          "foo",
+          "bar",
+          "0",
+          "1"
+        ]
+      },
+      "EnumList":{
+        "type":"list",
+        "member": {"shape": "RESTJSONEnumType"}
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/path"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "HeaderEnum": "baz",
+          "FooEnum": "foo",
+          "ListEnums": ["foo", "bar"]
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {"x-amz-enum": "baz"},
+          "body": "{\"FooEnum\": \"foo\", \"ListEnums\": [\"foo\", \"bar\"]}"
+        }
+      },
+      {
+        "given": {
+          "input": {
+            "shape": "OutputShape"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/path"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {}
+        }
+      }
+    ]
+  },
+  {
+    "description": "Union output, ignore __type before",
+    "metadata": {
+      "protocol": "json"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "Str": {
+            "shape": "StringType"
+          }
+        },
+        "union": true
       },
       "StringType": {
         "type": "string"
@@ -655,12 +872,376 @@
           "name": "OperationName"
         },
         "result": {
-          "Attr": {"Foo":"Bar"}
+          "Str": "foo"
         },
         "response": {
           "status_code": 200,
-          "headers": {"X-Amz-Foo": "eyJGb28iOiJCYXIifQ=="},
-          "body": ""
+          "headers": {},
+          "body": "{\"__type\": \"com.foo#OutputShape\", \"Str\": \"foo\"}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Union output, ignore __type after",
+    "metadata": {
+      "protocol": "json"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "Str": {
+            "shape": "StringType"
+          }
+        },
+        "union": true
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "Str": "foo"
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"Str\": \"foo\", \"__type\": \"com.foo#OutputShape\"}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Modeled exceptions",
+    "metadata": {
+      "protocol": "rest-json"
+    },
+    "shapes": {
+      "ExceptionShape": {
+        "type": "structure",
+        "members": {
+          "ImaHeader": {
+            "shape": "HeaderShape"
+          },
+          "ImaHeaderLocation": {
+            "shape": "HeaderShape",
+            "locationName": "X-Foo"
+          },
+          "Status": {
+            "shape": "StatusShape",
+            "location": "statusCode"
+          },
+          "BodyMember": {
+            "shape": "StringType"
+          },
+          "Message": {
+            "shape": "StringType"
+          }
+        }
+      },
+      "OtherExceptionShape": {
+        "BodyMember": {
+          "shape": "StringType"
+        }
+      },
+      "HeaderShape": {
+        "type": "string",
+        "location": "header"
+      },
+      "StatusShape": {
+        "type": "integer"
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "errors": [
+            {"shape": "ExceptionShape"}
+          ],
+          "name": "OperationName"
+        },
+        "error": {
+          "ImaHeader": "test",
+          "ImaHeaderLocation": "abc",
+          "Status": 400,
+          "BodyMember": "mybody",
+          "Message": "mymessage"
+        },
+        "errorCode": "ExceptionShape",
+        "errorMessage": "mymessage",
+        "response": {
+          "status_code": 400,
+          "headers": {
+            "ImaHeader": "test",
+            "X-Foo": "abc",
+            "X-Amzn-Errortype": "ExceptionShape"
+          },
+          "body": "{\"BodyMember\": \"mybody\", \"Message\": \"mymessage\"}"
+        }
+      },
+      {
+        "given": {
+          "errors": [
+            {"shape": "ExceptionShape"}
+          ],
+          "name": "OperationName"
+        },
+        "error": {
+          "ImaHeader": "test",
+          "ImaHeaderLocation": "abc",
+          "Status": 400,
+          "BodyMember": "mybody",
+          "Message": "mymessage"
+        },
+        "errorCode": "ExceptionShape",
+        "errorMessage": "mymessage",
+        "response": {
+          "status_code": 400,
+          "headers": {
+            "ImaHeader": "test",
+            "X-Foo": "abc"
+          },
+          "body": "{ \"code\": \"ExceptionShape\", \"BodyMember\": \"mybody\", \"Message\": \"mymessage\"}"
+        }
+      },
+      {
+        "given": {
+          "errors": [
+            {"shape": "ExceptionShape"}
+          ],
+          "name": "OperationName"
+        },
+        "error": {
+          "ImaHeader": "test",
+          "ImaHeaderLocation": "abc",
+          "Status": 400,
+          "BodyMember": "mybody",
+          "Message": "mymessage"
+        },
+        "errorCode": "ExceptionShape",
+        "errorMessage": "mymessage",
+        "response": {
+          "status_code": 400,
+          "headers": {
+            "ImaHeader": "test",
+            "X-Foo": "abc",
+            "X-Amzn-Errortype": "ExceptionShape"
+          },
+          "body": "{ \"code\": \"OtherExceptionShape\", \"BodyMember\": \"mybody\", \"Message\": \"mymessage\"}"
+        }
+      },
+      {
+        "given": {
+          "errors": [
+            {"shape": "ExceptionShape"}
+          ],
+          "name": "OperationName"
+        },
+        "error": {},
+        "errorCode": "OtherExceptionShape",
+        "errorMessage": "mymessage",
+        "response": {
+          "status_code": 400,
+          "headers": {
+            "ImaHeader": "test",
+            "X-Foo": "abc",
+            "X-Amzn-Errortype": "OtherExceptionShape"
+          },
+          "body": "{ \"BodyMember\": \"mybody\", \"Message\": \"mymessage\"}"
+        }
+      },
+      {
+        "given": {
+          "errors": [
+            {"shape": "ExceptionShape"}
+          ],
+          "name": "OperationName"
+        },
+        "error": {},
+        "errorCode": "OtherExceptionShape",
+        "errorMessage": "mymessage",
+        "response": {
+          "status_code": 400,
+          "headers": {
+            "ImaHeader": "test",
+            "X-Foo": "abc"
+          },
+          "body": "{ \"code\": \"OtherExceptionShape\", \"BodyMember\": \"mybody\", \"Message\": \"mymessage\"}"
+        }
+      },
+      {
+        "given": {
+          "errors": [
+            {"shape": "ExceptionShape"}
+          ],
+          "name": "OperationName"
+        },
+        "error": {},
+        "errorCode": "UndefinedShape",
+        "response": {
+          "status_code": 400,
+          "headers": {
+            "ImaHeader": "test",
+            "X-Foo": "abc",
+            "X-Amzn-Errortype": "UndefinedShape"
+          },
+          "body": "{ \"BodyMember\": \"mybody\"}"
+        }
+      },
+      {
+        "given": {
+          "errors": [
+            {"shape": "ExceptionShape"}
+          ],
+          "name": "OperationName"
+        },
+        "error": {},
+        "errorCode": "UndefinedShape",
+        "response": {
+          "status_code": 400,
+          "headers": {
+            "ImaHeader": "test",
+            "X-Foo": "abc"
+          },
+          "body": "{ \"code\": \"UndefinedShape\", \"BodyMember\": \"mybody\"}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Unions",
+    "metadata": {
+      "protocol": "rest-json"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "OneOf": {
+            "shape": "MyUnion"
+          }
+        }
+      },
+      "MyUnion": {
+        "type": "structure",
+        "union": true,
+        "members": {
+          "a": {"shape": "StringType"},
+          "b": {"shape": "StringType"},
+          "c": {"shape": "Struct"},
+          "d": {"shape": "Struct"},
+          "e": {"shape": "ComplexList"}
+        }
+      },
+      "StringType": {
+        "type": "string"
+      },
+      "Struct": {
+        "type": "structure",
+        "members": {
+          "hello": {"shape": "StringType"}
+        }
+      },
+      "ComplexList": {
+        "type": "list",
+        "member": {"shape": "Struct"}
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "OneOf": {"a": "hi"}
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"OneOf\": {\"a\": \"hi\"}}"
+        }
+      },
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "OneOf": {"b": "hi"}
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"OneOf\": {\"b\": \"hi\"}}"
+        }
+      },
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "OneOf": {"c": {"hello": "hi"}}
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"OneOf\": {\"c\": {\"hello\": \"hi\"}}}"
+        }
+      },
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "OneOf": {"d": {"hello": "hi"}}
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"OneOf\": {\"d\": {\"hello\": \"hi\"}}}"
+        }
+      },
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "OneOf": {
+            "e": [
+              {"hello": "hi"}
+            ]
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"OneOf\": {\"e\": [{\"hello\": \"hi\"}]}}"
         }
       }
     ]

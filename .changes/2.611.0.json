@@ -1,0 +1,37 @@
+[
+    {
+        "type": "bugfix",
+        "category": "node-s3-sqs",
+        "description": "Respect the NODE_TLS_REJECT_UNAUTHORIZED environment under node when instantiating an http client sslAgent"
+    },
+    {
+        "type": "bugfix",
+        "category": "parser",
+        "description": "Now we can disable inserting empty array in xml parser if the member doesn't exist in response."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Amazon VPC Flow Logs adds support for 1-minute aggregation intervals."
+    },
+    {
+        "type": "feature",
+        "category": "Kafka",
+        "description": "This release enables AWS MSK customers to list Apache Kafka versions that are supported on AWS MSK clusters. Also includes changes to expose additional details of a cluster's state in DescribeCluster and ListClusters APIs."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "This feature ensures that an instance is patched up to the available patches on a particular date. It can be enabled by selecting the 'ApproveUntilDate' option as the auto-approval rule while creating the patch baseline. ApproveUntilDate - The cutoff date for auto approval of released patches. Any patches released on or before this date will be installed automatically."
+    },
+    {
+        "type": "feature",
+        "category": "StorageGateway",
+        "description": "Adding KVM as a support hypervisor"
+    },
+    {
+        "type": "feature",
+        "category": "WorkMail",
+        "description": "This release adds support for tagging Amazon WorkMail organizations."
+    }
+]

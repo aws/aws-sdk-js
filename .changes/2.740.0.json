@@ -1,0 +1,17 @@
+[
+    {
+        "type": "bugfix",
+        "category": "TypeScript type definitions",
+        "description": "Deep imports of clients no longer reference entire SDK type definitions"
+    },
+    {
+        "type": "feature",
+        "category": "Appflow",
+        "description": "Amazon AppFlow is a fully managed integration service that securely transfers data between AWS services and SaaS applications. This update releases the first version of Amazon AppFlow APIs and SDK."
+    },
+    {
+        "type": "feature",
+        "category": "Route53Resolver",
+        "description": "Route 53 Resolver adds support for resolver query logs"
+    }
+]

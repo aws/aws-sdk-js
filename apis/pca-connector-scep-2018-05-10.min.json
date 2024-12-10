@@ -1,0 +1,456 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2018-05-10",
+    "endpointPrefix": "pca-connector-scep",
+    "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
+    "serviceFullName": "Private CA Connector for SCEP",
+    "serviceId": "Pca Connector Scep",
+    "signatureVersion": "v4",
+    "signingName": "pca-connector-scep",
+    "uid": "pca-connector-scep-2018-05-10"
+  },
+  "operations": {
+    "CreateChallenge": {
+      "http": {
+        "requestUri": "/challenges",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ConnectorArn"
+        ],
+        "members": {
+          "ConnectorArn": {},
+          "ClientToken": {
+            "idempotencyToken": true
+          },
+          "Tags": {
+            "shape": "S4"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Challenge": {
+            "type": "structure",
+            "members": {
+              "Arn": {},
+              "ConnectorArn": {},
+              "CreatedAt": {
+                "type": "timestamp"
+              },
+              "UpdatedAt": {
+                "type": "timestamp"
+              },
+              "Password": {
+                "shape": "Sa"
+              }
+            }
+          }
+        }
+      }
+    },
+    "CreateConnector": {
+      "http": {
+        "requestUri": "/connectors",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "CertificateAuthorityArn"
+        ],
+        "members": {
+          "CertificateAuthorityArn": {},
+          "MobileDeviceManagement": {
+            "shape": "Sd"
+          },
+          "ClientToken": {
+            "idempotencyToken": true
+          },
+          "Tags": {
+            "shape": "S4"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ConnectorArn": {}
+        }
+      }
+    },
+    "DeleteChallenge": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/challenges/{ChallengeArn}",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ChallengeArn"
+        ],
+        "members": {
+          "ChallengeArn": {
+            "location": "uri",
+            "locationName": "ChallengeArn"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "DeleteConnector": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/connectors/{ConnectorArn}",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ConnectorArn"
+        ],
+        "members": {
+          "ConnectorArn": {
+            "location": "uri",
+            "locationName": "ConnectorArn"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "GetChallengeMetadata": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/challengeMetadata/{ChallengeArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ChallengeArn"
+        ],
+        "members": {
+          "ChallengeArn": {
+            "location": "uri",
+            "locationName": "ChallengeArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ChallengeMetadata": {
+            "type": "structure",
+            "members": {
+              "Arn": {},
+              "ConnectorArn": {},
+              "CreatedAt": {
+                "type": "timestamp"
+              },
+              "UpdatedAt": {
+                "type": "timestamp"
+              }
+            }
+          }
+        }
+      }
+    },
+    "GetChallengePassword": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/challengePasswords/{ChallengeArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ChallengeArn"
+        ],
+        "members": {
+          "ChallengeArn": {
+            "location": "uri",
+            "locationName": "ChallengeArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Password": {
+            "shape": "Sa"
+          }
+        }
+      }
+    },
+    "GetConnector": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/connectors/{ConnectorArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ConnectorArn"
+        ],
+        "members": {
+          "ConnectorArn": {
+            "location": "uri",
+            "locationName": "ConnectorArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Connector": {
+            "type": "structure",
+            "members": {
+              "Arn": {},
+              "CertificateAuthorityArn": {},
+              "Type": {},
+              "MobileDeviceManagement": {
+                "shape": "Sd"
+              },
+              "OpenIdConfiguration": {
+                "shape": "St"
+              },
+              "Status": {},
+              "StatusReason": {},
+              "Endpoint": {},
+              "CreatedAt": {
+                "type": "timestamp"
+              },
+              "UpdatedAt": {
+                "type": "timestamp"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListChallengeMetadata": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/challengeMetadata",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ConnectorArn"
+        ],
+        "members": {
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "NextToken"
+          },
+          "ConnectorArn": {
+            "location": "querystring",
+            "locationName": "ConnectorArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Challenges": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "Arn": {},
+                "ConnectorArn": {},
+                "CreatedAt": {
+                  "type": "timestamp"
+                },
+                "UpdatedAt": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListConnectors": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/connectors",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "NextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Connectors": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "Arn": {},
+                "CertificateAuthorityArn": {},
+                "Type": {},
+                "MobileDeviceManagement": {
+                  "shape": "Sd"
+                },
+                "OpenIdConfiguration": {
+                  "shape": "St"
+                },
+                "Status": {},
+                "StatusReason": {},
+                "Endpoint": {},
+                "CreatedAt": {
+                  "type": "timestamp"
+                },
+                "UpdatedAt": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListTagsForResource": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{ResourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn"
+        ],
+        "members": {
+          "ResourceArn": {
+            "location": "uri",
+            "locationName": "ResourceArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Tags": {
+            "shape": "S4"
+          }
+        }
+      }
+    },
+    "TagResource": {
+      "http": {
+        "requestUri": "/tags/{ResourceArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn",
+          "Tags"
+        ],
+        "members": {
+          "ResourceArn": {
+            "location": "uri",
+            "locationName": "ResourceArn"
+          },
+          "Tags": {
+            "shape": "S4"
+          }
+        }
+      }
+    },
+    "UntagResource": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{ResourceArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn",
+          "TagKeys"
+        ],
+        "members": {
+          "ResourceArn": {
+            "location": "uri",
+            "locationName": "ResourceArn"
+          },
+          "TagKeys": {
+            "location": "querystring",
+            "locationName": "tagKeys",
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "idempotent": true
+    }
+  },
+  "shapes": {
+    "S4": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "Sa": {
+      "type": "string",
+      "sensitive": true
+    },
+    "Sd": {
+      "type": "structure",
+      "members": {
+        "Intune": {
+          "type": "structure",
+          "required": [
+            "AzureApplicationId",
+            "Domain"
+          ],
+          "members": {
+            "AzureApplicationId": {},
+            "Domain": {}
+          }
+        }
+      },
+      "union": true
+    },
+    "St": {
+      "type": "structure",
+      "members": {
+        "Issuer": {},
+        "Subject": {},
+        "Audience": {}
+      }
+    }
+  }
+}

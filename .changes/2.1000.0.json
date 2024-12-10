@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "CodeBuild now allows you to select how batch build statuses are sent to the source provider for a project."
+    },
+    {
+        "type": "feature",
+        "category": "EFS",
+        "description": "EFS adds a new exception for short identifiers to be thrown after its migration to long resource identifiers."
+    }
+]

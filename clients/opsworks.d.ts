@@ -2,8 +2,9 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
-import {ConfigBase as Config} from '../lib/config';
+import {ConfigBase as Config} from '../lib/config-base';
 interface Blob {}
 declare class OpsWorks extends Service {
   /**
@@ -12,11 +13,11 @@ declare class OpsWorks extends Service {
   constructor(options?: OpsWorks.Types.ClientConfiguration)
   config: Config & OpsWorks.Types.ClientConfiguration;
   /**
-   * Assign a registered instance to a layer.   You can assign registered on-premises instances to any layer type.   You can assign registered Amazon EC2 instances only to custom layers.   You cannot use this action with instances that were created with AWS OpsWorks Stacks.    Required Permissions: To use this action, an AWS Identity and Access Management (IAM) user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Assign a registered instance to a layer.   You can assign registered on-premises instances to any layer type.   You can assign registered Amazon EC2 instances only to custom layers.   You cannot use this action with instances that were created with OpsWorks Stacks.    Required Permissions: To use this action, an Identity and Access Management (IAM) user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
   assignInstance(params: OpsWorks.Types.AssignInstanceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Assign a registered instance to a layer.   You can assign registered on-premises instances to any layer type.   You can assign registered Amazon EC2 instances only to custom layers.   You cannot use this action with instances that were created with AWS OpsWorks Stacks.    Required Permissions: To use this action, an AWS Identity and Access Management (IAM) user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Assign a registered instance to a layer.   You can assign registered on-premises instances to any layer type.   You can assign registered Amazon EC2 instances only to custom layers.   You cannot use this action with instances that were created with OpsWorks Stacks.    Required Permissions: To use this action, an Identity and Access Management (IAM) user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
   assignInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -36,19 +37,19 @@ declare class OpsWorks extends Service {
    */
   associateElasticIp(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Attaches an Elastic Load Balancing load balancer to a specified layer. AWS OpsWorks Stacks does not support Application Load Balancer. You can only use Classic Load Balancer with AWS OpsWorks Stacks. For more information, see Elastic Load Balancing.  You must create the Elastic Load Balancing instance separately, by using the Elastic Load Balancing console, API, or CLI. For more information, see  Elastic Load Balancing Developer Guide.   Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Attaches an Elastic Load Balancing load balancer to a specified layer. OpsWorks Stacks does not support Application Load Balancer. You can only use Classic Load Balancer with OpsWorks Stacks. For more information, see Elastic Load Balancing.  You must create the Elastic Load Balancing instance separately, by using the Elastic Load Balancing console, API, or CLI. For more information, see the Elastic Load Balancing Developer Guide.   Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
   attachElasticLoadBalancer(params: OpsWorks.Types.AttachElasticLoadBalancerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Attaches an Elastic Load Balancing load balancer to a specified layer. AWS OpsWorks Stacks does not support Application Load Balancer. You can only use Classic Load Balancer with AWS OpsWorks Stacks. For more information, see Elastic Load Balancing.  You must create the Elastic Load Balancing instance separately, by using the Elastic Load Balancing console, API, or CLI. For more information, see  Elastic Load Balancing Developer Guide.   Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Attaches an Elastic Load Balancing load balancer to a specified layer. OpsWorks Stacks does not support Application Load Balancer. You can only use Classic Load Balancer with OpsWorks Stacks. For more information, see Elastic Load Balancing.  You must create the Elastic Load Balancing instance separately, by using the Elastic Load Balancing console, API, or CLI. For more information, see the Elastic Load Balancing Developer Guide.   Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
   attachElasticLoadBalancer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a clone of a specified stack. For more information, see Clone a Stack. By default, all parameters are set to the values used by the parent stack.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Creates a clone of a specified stack. For more information, see Clone a Stack. By default, all parameters are set to the values used by the parent stack.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   cloneStack(params: OpsWorks.Types.CloneStackRequest, callback?: (err: AWSError, data: OpsWorks.Types.CloneStackResult) => void): Request<OpsWorks.Types.CloneStackResult, AWSError>;
   /**
-   * Creates a clone of a specified stack. For more information, see Clone a Stack. By default, all parameters are set to the values used by the parent stack.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Creates a clone of a specified stack. For more information, see Clone a Stack. By default, all parameters are set to the values used by the parent stack.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   cloneStack(callback?: (err: AWSError, data: OpsWorks.Types.CloneStackResult) => void): Request<OpsWorks.Types.CloneStackResult, AWSError>;
   /**
@@ -84,19 +85,19 @@ declare class OpsWorks extends Service {
    */
   createLayer(callback?: (err: AWSError, data: OpsWorks.Types.CreateLayerResult) => void): Request<OpsWorks.Types.CreateLayerResult, AWSError>;
   /**
-   * Creates a new stack. For more information, see Create a New Stack.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Creates a new stack. For more information, see Create a New Stack.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   createStack(params: OpsWorks.Types.CreateStackRequest, callback?: (err: AWSError, data: OpsWorks.Types.CreateStackResult) => void): Request<OpsWorks.Types.CreateStackResult, AWSError>;
   /**
-   * Creates a new stack. For more information, see Create a New Stack.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Creates a new stack. For more information, see Create a New Stack.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   createStack(callback?: (err: AWSError, data: OpsWorks.Types.CreateStackResult) => void): Request<OpsWorks.Types.CreateStackResult, AWSError>;
   /**
-   * Creates a new user profile.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Creates a new user profile.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   createUserProfile(params: OpsWorks.Types.CreateUserProfileRequest, callback?: (err: AWSError, data: OpsWorks.Types.CreateUserProfileResult) => void): Request<OpsWorks.Types.CreateUserProfileResult, AWSError>;
   /**
-   * Creates a new user profile.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Creates a new user profile.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   createUserProfile(callback?: (err: AWSError, data: OpsWorks.Types.CreateUserProfileResult) => void): Request<OpsWorks.Types.CreateUserProfileResult, AWSError>;
   /**
@@ -132,35 +133,35 @@ declare class OpsWorks extends Service {
    */
   deleteStack(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a user profile.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Deletes a user profile.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   deleteUserProfile(params: OpsWorks.Types.DeleteUserProfileRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a user profile.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Deletes a user profile.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   deleteUserProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deregisters a specified Amazon ECS cluster from a stack. For more information, see  Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html.
+   * Deregisters a specified Amazon ECS cluster from a stack. For more information, see  Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html.
    */
   deregisterEcsCluster(params: OpsWorks.Types.DeregisterEcsClusterRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deregisters a specified Amazon ECS cluster from a stack. For more information, see  Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html.
+   * Deregisters a specified Amazon ECS cluster from a stack. For more information, see  Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html.
    */
   deregisterEcsCluster(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deregisters a specified Elastic IP address. The address can then be registered by another stack. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Deregisters a specified Elastic IP address. The address can be registered by another stack after it is deregistered. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
   deregisterElasticIp(params: OpsWorks.Types.DeregisterElasticIpRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deregisters a specified Elastic IP address. The address can then be registered by another stack. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Deregisters a specified Elastic IP address. The address can be registered by another stack after it is deregistered. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
   deregisterElasticIp(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deregister a registered Amazon EC2 or on-premises instance. This action removes the instance from the stack and returns it to your control. This action can not be used with instances that were created with AWS OpsWorks Stacks.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Deregister an instance from OpsWorks Stacks. The instance can be a registered instance (Amazon EC2 or on-premises) or an instance created with OpsWorks. This action removes the instance from the stack and returns it to your control.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
   deregisterInstance(params: OpsWorks.Types.DeregisterInstanceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deregister a registered Amazon EC2 or on-premises instance. This action removes the instance from the stack and returns it to your control. This action can not be used with instances that were created with AWS OpsWorks Stacks.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Deregister an instance from OpsWorks Stacks. The instance can be a registered instance (Amazon EC2 or on-premises) or an instance created with OpsWorks. This action removes the instance from the stack and returns it to your control.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
   deregisterInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -180,89 +181,93 @@ declare class OpsWorks extends Service {
    */
   deregisterVolume(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Describes the available AWS OpsWorks Stacks agent versions. You must specify a stack ID or a configuration manager. DescribeAgentVersions returns a list of available agent versions for the specified stack or configuration manager.
+   * Describes the available OpsWorks Stacks agent versions. You must specify a stack ID or a configuration manager. DescribeAgentVersions returns a list of available agent versions for the specified stack or configuration manager.
    */
   describeAgentVersions(params: OpsWorks.Types.DescribeAgentVersionsRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeAgentVersionsResult) => void): Request<OpsWorks.Types.DescribeAgentVersionsResult, AWSError>;
   /**
-   * Describes the available AWS OpsWorks Stacks agent versions. You must specify a stack ID or a configuration manager. DescribeAgentVersions returns a list of available agent versions for the specified stack or configuration manager.
+   * Describes the available OpsWorks Stacks agent versions. You must specify a stack ID or a configuration manager. DescribeAgentVersions returns a list of available agent versions for the specified stack or configuration manager.
    */
   describeAgentVersions(callback?: (err: AWSError, data: OpsWorks.Types.DescribeAgentVersionsResult) => void): Request<OpsWorks.Types.DescribeAgentVersionsResult, AWSError>;
   /**
-   * Requests a description of a specified set of apps.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Requests a description of a specified set of apps.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeApps(params: OpsWorks.Types.DescribeAppsRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeAppsResult) => void): Request<OpsWorks.Types.DescribeAppsResult, AWSError>;
   /**
-   * Requests a description of a specified set of apps.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Requests a description of a specified set of apps.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeApps(callback?: (err: AWSError, data: OpsWorks.Types.DescribeAppsResult) => void): Request<OpsWorks.Types.DescribeAppsResult, AWSError>;
   /**
-   * Describes the results of specified commands.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Describes the results of specified commands.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeCommands(params: OpsWorks.Types.DescribeCommandsRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeCommandsResult) => void): Request<OpsWorks.Types.DescribeCommandsResult, AWSError>;
   /**
-   * Describes the results of specified commands.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Describes the results of specified commands.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeCommands(callback?: (err: AWSError, data: OpsWorks.Types.DescribeCommandsResult) => void): Request<OpsWorks.Types.DescribeCommandsResult, AWSError>;
   /**
-   * Requests a description of a specified set of deployments.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Requests a description of a specified set of deployments.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeDeployments(params: OpsWorks.Types.DescribeDeploymentsRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeDeploymentsResult) => void): Request<OpsWorks.Types.DescribeDeploymentsResult, AWSError>;
   /**
-   * Requests a description of a specified set of deployments.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Requests a description of a specified set of deployments.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeDeployments(callback?: (err: AWSError, data: OpsWorks.Types.DescribeDeploymentsResult) => void): Request<OpsWorks.Types.DescribeDeploymentsResult, AWSError>;
   /**
-   * Describes Amazon ECS clusters that are registered with a stack. If you specify only a stack ID, you can use the MaxResults and NextToken parameters to paginate the response. However, AWS OpsWorks Stacks currently supports only one cluster per layer, so the result set has a maximum of one element.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack or an attached policy that explicitly grants permission. For more information on user permissions, see Managing User Permissions. This call accepts only one resource-identifying parameter.
+   * Describes Amazon ECS clusters that are registered with a stack. If you specify only a stack ID, you can use the MaxResults and NextToken parameters to paginate the response. However, OpsWorks Stacks currently supports only one cluster per layer, so the result set has a maximum of one element.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack or an attached policy that explicitly grants permission. For more information about user permissions, see Managing User Permissions. This call accepts only one resource-identifying parameter.
    */
   describeEcsClusters(params: OpsWorks.Types.DescribeEcsClustersRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeEcsClustersResult) => void): Request<OpsWorks.Types.DescribeEcsClustersResult, AWSError>;
   /**
-   * Describes Amazon ECS clusters that are registered with a stack. If you specify only a stack ID, you can use the MaxResults and NextToken parameters to paginate the response. However, AWS OpsWorks Stacks currently supports only one cluster per layer, so the result set has a maximum of one element.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack or an attached policy that explicitly grants permission. For more information on user permissions, see Managing User Permissions. This call accepts only one resource-identifying parameter.
+   * Describes Amazon ECS clusters that are registered with a stack. If you specify only a stack ID, you can use the MaxResults and NextToken parameters to paginate the response. However, OpsWorks Stacks currently supports only one cluster per layer, so the result set has a maximum of one element.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack or an attached policy that explicitly grants permission. For more information about user permissions, see Managing User Permissions. This call accepts only one resource-identifying parameter.
    */
   describeEcsClusters(callback?: (err: AWSError, data: OpsWorks.Types.DescribeEcsClustersResult) => void): Request<OpsWorks.Types.DescribeEcsClustersResult, AWSError>;
   /**
-   * Describes Elastic IP addresses.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Describes Elastic IP addresses.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeElasticIps(params: OpsWorks.Types.DescribeElasticIpsRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeElasticIpsResult) => void): Request<OpsWorks.Types.DescribeElasticIpsResult, AWSError>;
   /**
-   * Describes Elastic IP addresses.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Describes Elastic IP addresses.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeElasticIps(callback?: (err: AWSError, data: OpsWorks.Types.DescribeElasticIpsResult) => void): Request<OpsWorks.Types.DescribeElasticIpsResult, AWSError>;
   /**
-   * Describes a stack's Elastic Load Balancing instances.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Describes a stack's Elastic Load Balancing instances.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeElasticLoadBalancers(params: OpsWorks.Types.DescribeElasticLoadBalancersRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeElasticLoadBalancersResult) => void): Request<OpsWorks.Types.DescribeElasticLoadBalancersResult, AWSError>;
   /**
-   * Describes a stack's Elastic Load Balancing instances.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Describes a stack's Elastic Load Balancing instances.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeElasticLoadBalancers(callback?: (err: AWSError, data: OpsWorks.Types.DescribeElasticLoadBalancersResult) => void): Request<OpsWorks.Types.DescribeElasticLoadBalancersResult, AWSError>;
   /**
-   * Requests a description of a set of instances.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Requests a description of a set of instances.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeInstances(params: OpsWorks.Types.DescribeInstancesRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeInstancesResult) => void): Request<OpsWorks.Types.DescribeInstancesResult, AWSError>;
   /**
-   * Requests a description of a set of instances.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Requests a description of a set of instances.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeInstances(callback?: (err: AWSError, data: OpsWorks.Types.DescribeInstancesResult) => void): Request<OpsWorks.Types.DescribeInstancesResult, AWSError>;
   /**
-   * Requests a description of one or more layers in a specified stack.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Requests a description of one or more layers in a specified stack.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeLayers(params: OpsWorks.Types.DescribeLayersRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeLayersResult) => void): Request<OpsWorks.Types.DescribeLayersResult, AWSError>;
   /**
-   * Requests a description of one or more layers in a specified stack.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Requests a description of one or more layers in a specified stack.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeLayers(callback?: (err: AWSError, data: OpsWorks.Types.DescribeLayersResult) => void): Request<OpsWorks.Types.DescribeLayersResult, AWSError>;
   /**
-   * Describes load-based auto scaling configurations for specified layers.  You must specify at least one of the parameters.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Describes load-based auto scaling configurations for specified layers.  You must specify at least one of the parameters.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeLoadBasedAutoScaling(params: OpsWorks.Types.DescribeLoadBasedAutoScalingRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeLoadBasedAutoScalingResult) => void): Request<OpsWorks.Types.DescribeLoadBasedAutoScalingResult, AWSError>;
   /**
-   * Describes load-based auto scaling configurations for specified layers.  You must specify at least one of the parameters.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Describes load-based auto scaling configurations for specified layers.  You must specify at least one of the parameters.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeLoadBasedAutoScaling(callback?: (err: AWSError, data: OpsWorks.Types.DescribeLoadBasedAutoScalingResult) => void): Request<OpsWorks.Types.DescribeLoadBasedAutoScalingResult, AWSError>;
   /**
-   * Describes a user's SSH information.  Required Permissions: To use this action, an IAM user must have self-management enabled or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Describes a user's SSH information.  Required Permissions: To use this action, an IAM user must have self-management enabled or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeMyUserProfile(callback?: (err: AWSError, data: OpsWorks.Types.DescribeMyUserProfileResult) => void): Request<OpsWorks.Types.DescribeMyUserProfileResult, AWSError>;
+  /**
+   * Describes the operating systems that are supported by OpsWorks Stacks.
+   */
+  describeOperatingSystems(callback?: (err: AWSError, data: OpsWorks.Types.DescribeOperatingSystemsResponse) => void): Request<OpsWorks.Types.DescribeOperatingSystemsResponse, AWSError>;
   /**
    * Describes the permissions for a specified stack.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -272,75 +277,75 @@ declare class OpsWorks extends Service {
    */
   describePermissions(callback?: (err: AWSError, data: OpsWorks.Types.DescribePermissionsResult) => void): Request<OpsWorks.Types.DescribePermissionsResult, AWSError>;
   /**
-   * Describe an instance's RAID arrays.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Describe an instance's RAID arrays.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeRaidArrays(params: OpsWorks.Types.DescribeRaidArraysRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeRaidArraysResult) => void): Request<OpsWorks.Types.DescribeRaidArraysResult, AWSError>;
   /**
-   * Describe an instance's RAID arrays.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Describe an instance's RAID arrays.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeRaidArrays(callback?: (err: AWSError, data: OpsWorks.Types.DescribeRaidArraysResult) => void): Request<OpsWorks.Types.DescribeRaidArraysResult, AWSError>;
   /**
-   * Describes Amazon RDS instances.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions. This call accepts only one resource-identifying parameter.
+   * Describes Amazon RDS instances.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions. This call accepts only one resource-identifying parameter.
    */
   describeRdsDbInstances(params: OpsWorks.Types.DescribeRdsDbInstancesRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeRdsDbInstancesResult) => void): Request<OpsWorks.Types.DescribeRdsDbInstancesResult, AWSError>;
   /**
-   * Describes Amazon RDS instances.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions. This call accepts only one resource-identifying parameter.
+   * Describes Amazon RDS instances.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions. This call accepts only one resource-identifying parameter.
    */
   describeRdsDbInstances(callback?: (err: AWSError, data: OpsWorks.Types.DescribeRdsDbInstancesResult) => void): Request<OpsWorks.Types.DescribeRdsDbInstancesResult, AWSError>;
   /**
-   * Describes AWS OpsWorks Stacks service errors.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions. This call accepts only one resource-identifying parameter.
+   * Describes OpsWorks Stacks service errors.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions. This call accepts only one resource-identifying parameter.
    */
   describeServiceErrors(params: OpsWorks.Types.DescribeServiceErrorsRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeServiceErrorsResult) => void): Request<OpsWorks.Types.DescribeServiceErrorsResult, AWSError>;
   /**
-   * Describes AWS OpsWorks Stacks service errors.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions. This call accepts only one resource-identifying parameter.
+   * Describes OpsWorks Stacks service errors.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions. This call accepts only one resource-identifying parameter.
    */
   describeServiceErrors(callback?: (err: AWSError, data: OpsWorks.Types.DescribeServiceErrorsResult) => void): Request<OpsWorks.Types.DescribeServiceErrorsResult, AWSError>;
   /**
-   * Requests a description of a stack's provisioning parameters.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Requests a description of a stack's provisioning parameters.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeStackProvisioningParameters(params: OpsWorks.Types.DescribeStackProvisioningParametersRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeStackProvisioningParametersResult) => void): Request<OpsWorks.Types.DescribeStackProvisioningParametersResult, AWSError>;
   /**
-   * Requests a description of a stack's provisioning parameters.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Requests a description of a stack's provisioning parameters.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeStackProvisioningParameters(callback?: (err: AWSError, data: OpsWorks.Types.DescribeStackProvisioningParametersResult) => void): Request<OpsWorks.Types.DescribeStackProvisioningParametersResult, AWSError>;
   /**
-   * Describes the number of layers and apps in a specified stack, and the number of instances in each state, such as running_setup or online.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Describes the number of layers and apps in a specified stack, and the number of instances in each state, such as running_setup or online.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeStackSummary(params: OpsWorks.Types.DescribeStackSummaryRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeStackSummaryResult) => void): Request<OpsWorks.Types.DescribeStackSummaryResult, AWSError>;
   /**
-   * Describes the number of layers and apps in a specified stack, and the number of instances in each state, such as running_setup or online.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Describes the number of layers and apps in a specified stack, and the number of instances in each state, such as running_setup or online.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeStackSummary(callback?: (err: AWSError, data: OpsWorks.Types.DescribeStackSummaryResult) => void): Request<OpsWorks.Types.DescribeStackSummaryResult, AWSError>;
   /**
-   * Requests a description of one or more stacks.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Requests a description of one or more stacks.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeStacks(params: OpsWorks.Types.DescribeStacksRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeStacksResult) => void): Request<OpsWorks.Types.DescribeStacksResult, AWSError>;
   /**
-   * Requests a description of one or more stacks.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Requests a description of one or more stacks.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeStacks(callback?: (err: AWSError, data: OpsWorks.Types.DescribeStacksResult) => void): Request<OpsWorks.Types.DescribeStacksResult, AWSError>;
   /**
-   * Describes time-based auto scaling configurations for specified instances.  You must specify at least one of the parameters.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Describes time-based auto scaling configurations for specified instances.  You must specify at least one of the parameters.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeTimeBasedAutoScaling(params: OpsWorks.Types.DescribeTimeBasedAutoScalingRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeTimeBasedAutoScalingResult) => void): Request<OpsWorks.Types.DescribeTimeBasedAutoScalingResult, AWSError>;
   /**
-   * Describes time-based auto scaling configurations for specified instances.  You must specify at least one of the parameters.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Describes time-based auto scaling configurations for specified instances.  You must specify at least one of the parameters.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeTimeBasedAutoScaling(callback?: (err: AWSError, data: OpsWorks.Types.DescribeTimeBasedAutoScalingResult) => void): Request<OpsWorks.Types.DescribeTimeBasedAutoScalingResult, AWSError>;
   /**
-   * Describe specified users.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Describe specified users.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeUserProfiles(params: OpsWorks.Types.DescribeUserProfilesRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeUserProfilesResult) => void): Request<OpsWorks.Types.DescribeUserProfilesResult, AWSError>;
   /**
-   * Describe specified users.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Describe specified users.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeUserProfiles(callback?: (err: AWSError, data: OpsWorks.Types.DescribeUserProfilesResult) => void): Request<OpsWorks.Types.DescribeUserProfilesResult, AWSError>;
   /**
-   * Describes an instance's Amazon EBS volumes.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Describes an instance's Amazon EBS volumes.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeVolumes(params: OpsWorks.Types.DescribeVolumesRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeVolumesResult) => void): Request<OpsWorks.Types.DescribeVolumesResult, AWSError>;
   /**
-   * Describes an instance's Amazon EBS volumes.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Describes an instance's Amazon EBS volumes.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   describeVolumes(callback?: (err: AWSError, data: OpsWorks.Types.DescribeVolumesResult) => void): Request<OpsWorks.Types.DescribeVolumesResult, AWSError>;
   /**
@@ -408,11 +413,11 @@ declare class OpsWorks extends Service {
    */
   registerElasticIp(callback?: (err: AWSError, data: OpsWorks.Types.RegisterElasticIpResult) => void): Request<OpsWorks.Types.RegisterElasticIpResult, AWSError>;
   /**
-   * Registers instances that were created outside of AWS OpsWorks Stacks with a specified stack.  We do not recommend using this action to register instances. The complete registration operation includes two tasks: installing the AWS OpsWorks Stacks agent on the instance, and registering the instance with the stack. RegisterInstance handles only the second step. You should instead use the AWS CLI register command, which performs the entire registration operation. For more information, see  Registering an Instance with an AWS OpsWorks Stacks Stack.  Registered instances have the same requirements as instances that are created by using the CreateInstance API. For example, registered instances must be running a supported Linux-based operating system, and they must have a supported instance type. For more information about requirements for instances that you want to register, see  Preparing the Instance.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Registers instances that were created outside of OpsWorks Stacks with a specified stack.  We do not recommend using this action to register instances. The complete registration operation includes two tasks: installing the OpsWorks Stacks agent on the instance, and registering the instance with the stack. RegisterInstance handles only the second step. You should instead use the CLI register command, which performs the entire registration operation. For more information, see  Registering an Instance with an OpsWorks Stacks Stack.  Registered instances have the same requirements as instances that are created by using the CreateInstance API. For example, registered instances must be running a supported Linux-based operating system, and they must have a supported instance type. For more information about requirements for instances that you want to register, see  Preparing the Instance.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
   registerInstance(params: OpsWorks.Types.RegisterInstanceRequest, callback?: (err: AWSError, data: OpsWorks.Types.RegisterInstanceResult) => void): Request<OpsWorks.Types.RegisterInstanceResult, AWSError>;
   /**
-   * Registers instances that were created outside of AWS OpsWorks Stacks with a specified stack.  We do not recommend using this action to register instances. The complete registration operation includes two tasks: installing the AWS OpsWorks Stacks agent on the instance, and registering the instance with the stack. RegisterInstance handles only the second step. You should instead use the AWS CLI register command, which performs the entire registration operation. For more information, see  Registering an Instance with an AWS OpsWorks Stacks Stack.  Registered instances have the same requirements as instances that are created by using the CreateInstance API. For example, registered instances must be running a supported Linux-based operating system, and they must have a supported instance type. For more information about requirements for instances that you want to register, see  Preparing the Instance.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Registers instances that were created outside of OpsWorks Stacks with a specified stack.  We do not recommend using this action to register instances. The complete registration operation includes two tasks: installing the OpsWorks Stacks agent on the instance, and registering the instance with the stack. RegisterInstance handles only the second step. You should instead use the CLI register command, which performs the entire registration operation. For more information, see  Registering an Instance with an OpsWorks Stacks Stack.  Registered instances have the same requirements as instances that are created by using the CreateInstance API. For example, registered instances must be running a supported Linux-based operating system, and they must have a supported instance type. For more information about requirements for instances that you want to register, see  Preparing the Instance.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
   registerInstance(callback?: (err: AWSError, data: OpsWorks.Types.RegisterInstanceResult) => void): Request<OpsWorks.Types.RegisterInstanceResult, AWSError>;
   /**
@@ -488,19 +493,19 @@ declare class OpsWorks extends Service {
    */
   stopStack(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Apply cost-allocation tags to a specified stack or layer in AWS OpsWorks Stacks. For more information about how tagging works, see Tags in the AWS OpsWorks User Guide.
+   * Apply cost-allocation tags to a specified stack or layer in OpsWorks Stacks. For more information about how tagging works, see Tags in the OpsWorks User Guide.
    */
   tagResource(params: OpsWorks.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Apply cost-allocation tags to a specified stack or layer in AWS OpsWorks Stacks. For more information about how tagging works, see Tags in the AWS OpsWorks User Guide.
+   * Apply cost-allocation tags to a specified stack or layer in OpsWorks Stacks. For more information about how tagging works, see Tags in the OpsWorks User Guide.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Unassigns a registered instance from all of it's layers. The instance remains in the stack as an unassigned instance and can be assigned to another layer, as needed. You cannot use this action with instances that were created with AWS OpsWorks Stacks.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Unassigns a registered instance from all layers that are using the instance. The instance remains in the stack as an unassigned instance, and can be assigned to another layer as needed. You cannot use this action with instances that were created with OpsWorks Stacks.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   unassignInstance(params: OpsWorks.Types.UnassignInstanceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Unassigns a registered instance from all of it's layers. The instance remains in the stack as an unassigned instance and can be assigned to another layer, as needed. You cannot use this action with instances that were created with AWS OpsWorks Stacks.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Unassigns a registered instance from all layers that are using the instance. The instance remains in the stack as an unassigned instance, and can be assigned to another layer as needed. You cannot use this action with instances that were created with OpsWorks Stacks.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   unassignInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -552,11 +557,11 @@ declare class OpsWorks extends Service {
    */
   updateLayer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates a user's SSH public key.  Required Permissions: To use this action, an IAM user must have self-management enabled or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Updates a user's SSH public key.  Required Permissions: To use this action, an IAM user must have self-management enabled or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   updateMyUserProfile(params: OpsWorks.Types.UpdateMyUserProfileRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates a user's SSH public key.  Required Permissions: To use this action, an IAM user must have self-management enabled or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Updates a user's SSH public key.  Required Permissions: To use this action, an IAM user must have self-management enabled or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   updateMyUserProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -576,11 +581,11 @@ declare class OpsWorks extends Service {
    */
   updateStack(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates a specified user profile.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Updates a specified user profile.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   updateUserProfile(params: OpsWorks.Types.UpdateUserProfileRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates a specified user profile.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
+   * Updates a specified user profile.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
   updateUserProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -594,23 +599,23 @@ declare class OpsWorks extends Service {
   /**
    * Waits for the appExists state by periodically calling the underlying OpsWorks.describeAppsoperation every 1 seconds (at most 40 times).
    */
-  waitFor(state: "appExists", params: OpsWorks.Types.DescribeAppsRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeAppsResult) => void): Request<OpsWorks.Types.DescribeAppsResult, AWSError>;
+  waitFor(state: "appExists", params: OpsWorks.Types.DescribeAppsRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: OpsWorks.Types.DescribeAppsResult) => void): Request<OpsWorks.Types.DescribeAppsResult, AWSError>;
   /**
    * Waits for the appExists state by periodically calling the underlying OpsWorks.describeAppsoperation every 1 seconds (at most 40 times).
    */
   waitFor(state: "appExists", callback?: (err: AWSError, data: OpsWorks.Types.DescribeAppsResult) => void): Request<OpsWorks.Types.DescribeAppsResult, AWSError>;
   /**
-   * Waits for the deploymentSuccessful state by periodically calling the underlying OpsWorks.describeDeploymentsoperation every 15 seconds (at most 40 times). Wait until a deployment has completed successfully
+   * Waits for the deploymentSuccessful state by periodically calling the underlying OpsWorks.describeDeploymentsoperation every 15 seconds (at most 40 times). Wait until a deployment has completed successfully.
    */
-  waitFor(state: "deploymentSuccessful", params: OpsWorks.Types.DescribeDeploymentsRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeDeploymentsResult) => void): Request<OpsWorks.Types.DescribeDeploymentsResult, AWSError>;
+  waitFor(state: "deploymentSuccessful", params: OpsWorks.Types.DescribeDeploymentsRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: OpsWorks.Types.DescribeDeploymentsResult) => void): Request<OpsWorks.Types.DescribeDeploymentsResult, AWSError>;
   /**
-   * Waits for the deploymentSuccessful state by periodically calling the underlying OpsWorks.describeDeploymentsoperation every 15 seconds (at most 40 times). Wait until a deployment has completed successfully
+   * Waits for the deploymentSuccessful state by periodically calling the underlying OpsWorks.describeDeploymentsoperation every 15 seconds (at most 40 times). Wait until a deployment has completed successfully.
    */
   waitFor(state: "deploymentSuccessful", callback?: (err: AWSError, data: OpsWorks.Types.DescribeDeploymentsResult) => void): Request<OpsWorks.Types.DescribeDeploymentsResult, AWSError>;
   /**
    * Waits for the instanceOnline state by periodically calling the underlying OpsWorks.describeInstancesoperation every 15 seconds (at most 40 times). Wait until OpsWorks instance is online.
    */
-  waitFor(state: "instanceOnline", params: OpsWorks.Types.DescribeInstancesRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeInstancesResult) => void): Request<OpsWorks.Types.DescribeInstancesResult, AWSError>;
+  waitFor(state: "instanceOnline", params: OpsWorks.Types.DescribeInstancesRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: OpsWorks.Types.DescribeInstancesResult) => void): Request<OpsWorks.Types.DescribeInstancesResult, AWSError>;
   /**
    * Waits for the instanceOnline state by periodically calling the underlying OpsWorks.describeInstancesoperation every 15 seconds (at most 40 times). Wait until OpsWorks instance is online.
    */
@@ -618,7 +623,7 @@ declare class OpsWorks extends Service {
   /**
    * Waits for the instanceRegistered state by periodically calling the underlying OpsWorks.describeInstancesoperation every 15 seconds (at most 40 times). Wait until OpsWorks instance is registered.
    */
-  waitFor(state: "instanceRegistered", params: OpsWorks.Types.DescribeInstancesRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeInstancesResult) => void): Request<OpsWorks.Types.DescribeInstancesResult, AWSError>;
+  waitFor(state: "instanceRegistered", params: OpsWorks.Types.DescribeInstancesRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: OpsWorks.Types.DescribeInstancesResult) => void): Request<OpsWorks.Types.DescribeInstancesResult, AWSError>;
   /**
    * Waits for the instanceRegistered state by periodically calling the underlying OpsWorks.describeInstancesoperation every 15 seconds (at most 40 times). Wait until OpsWorks instance is registered.
    */
@@ -626,7 +631,7 @@ declare class OpsWorks extends Service {
   /**
    * Waits for the instanceStopped state by periodically calling the underlying OpsWorks.describeInstancesoperation every 15 seconds (at most 40 times). Wait until OpsWorks instance is stopped.
    */
-  waitFor(state: "instanceStopped", params: OpsWorks.Types.DescribeInstancesRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeInstancesResult) => void): Request<OpsWorks.Types.DescribeInstancesResult, AWSError>;
+  waitFor(state: "instanceStopped", params: OpsWorks.Types.DescribeInstancesRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: OpsWorks.Types.DescribeInstancesResult) => void): Request<OpsWorks.Types.DescribeInstancesResult, AWSError>;
   /**
    * Waits for the instanceStopped state by periodically calling the underlying OpsWorks.describeInstancesoperation every 15 seconds (at most 40 times). Wait until OpsWorks instance is stopped.
    */
@@ -634,7 +639,7 @@ declare class OpsWorks extends Service {
   /**
    * Waits for the instanceTerminated state by periodically calling the underlying OpsWorks.describeInstancesoperation every 15 seconds (at most 40 times). Wait until OpsWorks instance is terminated.
    */
-  waitFor(state: "instanceTerminated", params: OpsWorks.Types.DescribeInstancesRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeInstancesResult) => void): Request<OpsWorks.Types.DescribeInstancesResult, AWSError>;
+  waitFor(state: "instanceTerminated", params: OpsWorks.Types.DescribeInstancesRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: OpsWorks.Types.DescribeInstancesResult) => void): Request<OpsWorks.Types.DescribeInstancesResult, AWSError>;
   /**
    * Waits for the instanceTerminated state by periodically calling the underlying OpsWorks.describeInstancesoperation every 15 seconds (at most 40 times). Wait until OpsWorks instance is terminated.
    */
@@ -706,7 +711,7 @@ declare namespace OpsWorks {
      */
     CreatedAt?: String;
     /**
-     * An array of EnvironmentVariable objects that specify environment variables to be associated with the app. After you deploy the app, these variables are defined on the associated app server instances. For more information, see  Environment Variables.   There is no specific limit on the number of environment variables. However, the size of the associated data structure - which includes the variable names, values, and protected flag values - cannot exceed 10 KB (10240 Bytes). This limit should accommodate most if not all use cases, but if you do exceed it, you will cause an exception (API) with an "Environment: is too large (maximum is 10KB)" message. 
+     * An array of EnvironmentVariable objects that specify environment variables to be associated with the app. After you deploy the app, these variables are defined on the associated app server instances. For more information, see  Environment Variables.   There is no specific limit on the number of environment variables. However, the size of the associated data structure - which includes the variable names, values, and protected flag values - cannot exceed 20 KB. This limit should accommodate most if not all use cases, but if you do exceed it, you will cause an exception (API) with an "Environment: is too large (maximum is 20 KB)" message. 
      */
     Environment?: EnvironmentVariables;
   }
@@ -751,7 +756,7 @@ declare namespace OpsWorks {
      */
     ElasticLoadBalancerName: String;
     /**
-     * The ID of the layer that the Elastic Load Balancing instance is to be attached to.
+     * The ID of the layer to which the Elastic Load Balancing instance is to be attached.
      */
     LayerId: String;
   }
@@ -765,7 +770,7 @@ declare namespace OpsWorks {
      */
     ThresholdsWaitTime?: Minute;
     /**
-     * The amount of time (in minutes) after a scaling event occurs that AWS OpsWorks Stacks should ignore metrics and suppress additional scaling events. For example, AWS OpsWorks Stacks adds new instances following an upscaling event but the instances won't start reducing the load until they have been booted and configured. There is no point in raising additional scaling events during that operation, which typically takes several minutes. IgnoreMetricsTime allows you to direct AWS OpsWorks Stacks to suppress scaling events long enough to get the new instances online.
+     * The amount of time (in minutes) after a scaling event occurs that OpsWorks Stacks should ignore metrics and suppress additional scaling events. For example, OpsWorks Stacks adds new instances following an upscaling event but the instances won't start reducing the load until they have been booted and configured. There is no point in raising additional scaling events during that operation, which typically takes several minutes. IgnoreMetricsTime allows you to direct OpsWorks Stacks to suppress scaling events long enough to get the new instances online.
      */
     IgnoreMetricsTime?: Minute;
     /**
@@ -781,14 +786,14 @@ declare namespace OpsWorks {
      */
     LoadThreshold?: Double;
     /**
-     * Custom Cloudwatch auto scaling alarms, to be used as thresholds. This parameter takes a list of up to five alarm names, which are case sensitive and must be in the same region as the stack.  To use custom alarms, you must update your service role to allow cloudwatch:DescribeAlarms. You can either have AWS OpsWorks Stacks update the role for you when you first use this feature or you can edit the role manually. For more information, see Allowing AWS OpsWorks Stacks to Act on Your Behalf. 
+     * Custom CloudWatch auto scaling alarms, to be used as thresholds. This parameter takes a list of up to five alarm names, which are case sensitive and must be in the same region as the stack.  To use custom alarms, you must update your service role to allow cloudwatch:DescribeAlarms. You can either have OpsWorks Stacks update the role for you when you first use this feature or you can edit the role manually. For more information, see Allowing OpsWorks Stacks to Act on Your Behalf. 
      */
     Alarms?: Strings;
   }
   export type AutoScalingType = "load"|"timer"|string;
   export interface BlockDeviceMapping {
     /**
-     * The device name that is exposed to the instance, such as /dev/sdh. For the root device, you can use the explicit device name or you can set this parameter to ROOT_DEVICE and AWS OpsWorks Stacks will provide the correct device name.
+     * The device name that is exposed to the instance, such as /dev/sdh. For the root device, you can use the explicit device name or you can set this parameter to ROOT_DEVICE and OpsWorks Stacks will provide the correct device name.
      */
     DeviceName?: String;
     /**
@@ -822,15 +827,15 @@ declare namespace OpsWorks {
      */
     SourceStackId: String;
     /**
-     * The cloned stack name.
+     * The cloned stack name. Stack names can be a maximum of 64 characters.
      */
     Name?: String;
     /**
-     * The cloned stack AWS region, such as "ap-northeast-2". For more information about AWS regions, see Regions and Endpoints.
+     * The cloned stack Amazon Web Services Region, such as ap-northeast-2. For more information about Amazon Web Services Regions, see Regions and Endpoints.
      */
     Region?: String;
     /**
-     * The ID of the VPC that the cloned stack is to be launched into. It must be in the specified region. All instances are launched into this VPC, and you cannot change the ID later.   If your account supports EC2 Classic, the default value is no VPC.   If your account does not support EC2 Classic, the default value is the default VPC for the specified region.   If the VPC ID corresponds to a default VPC and you have specified either the DefaultAvailabilityZone or the DefaultSubnetId parameter only, AWS OpsWorks Stacks infers the value of the other parameter. If you specify neither parameter, AWS OpsWorks Stacks sets these parameters to the first valid Availability Zone for the specified region and the corresponding default VPC subnet ID, respectively.  If you specify a nondefault VPC ID, note the following:   It must belong to a VPC in your account that is in the specified region.   You must specify a value for DefaultSubnetId.   For more information on how to use AWS OpsWorks Stacks with a VPC, see Running a Stack in a VPC. For more information on default VPC and EC2 Classic, see Supported Platforms. 
+     * The ID of the VPC that the cloned stack is to be launched into. It must be in the specified region. All instances are launched into this VPC, and you cannot change the ID later.   If your account supports EC2 Classic, the default value is no VPC.   If your account does not support EC2 Classic, the default value is the default VPC for the specified region.   If the VPC ID corresponds to a default VPC and you have specified either the DefaultAvailabilityZone or the DefaultSubnetId parameter only, OpsWorks Stacks infers the value of the other parameter. If you specify neither parameter, OpsWorks Stacks sets these parameters to the first valid Availability Zone for the specified region and the corresponding default VPC subnet ID, respectively.  If you specify a nondefault VPC ID, note the following:   It must belong to a VPC in your account that is in the specified region.   You must specify a value for DefaultSubnetId.   For more information about how to use OpsWorks Stacks with a VPC, see Running a Stack in a VPC. For more information about default VPC and EC2 Classic, see Supported Platforms. 
      */
     VpcId?: String;
     /**
@@ -838,7 +843,7 @@ declare namespace OpsWorks {
      */
     Attributes?: StackAttributes;
     /**
-     * The stack AWS Identity and Access Management (IAM) role, which allows AWS OpsWorks Stacks to work with AWS resources on your behalf. You must set this parameter to the Amazon Resource Name (ARN) for an existing IAM role. If you create a stack by using the AWS OpsWorks Stacks console, it creates the role for you. You can obtain an existing stack's IAM ARN programmatically by calling DescribePermissions. For more information about IAM ARNs, see Using Identifiers.  You must set this parameter to a valid service role ARN or the action will fail; there is no default value. You can specify the source stack's service role ARN, if you prefer, but you must do so explicitly. 
+     * The stack Identity and Access Management (IAM) role, which allows OpsWorks Stacks to work with Amazon Web Services resources on your behalf. You must set this parameter to the Amazon Resource Name (ARN) for an existing IAM role. If you create a stack by using the OpsWorkss Stacks console, it creates the role for you. You can obtain an existing stack's IAM ARN programmatically by calling DescribePermissions. For more information about IAM ARNs, see Using Identifiers.  You must set this parameter to a valid service role ARN or the action will fail; there is no default value. You can specify the source stack's service role ARN, if you prefer, but you must do so explicitly. 
      */
     ServiceRoleArn: String;
     /**
@@ -846,11 +851,11 @@ declare namespace OpsWorks {
      */
     DefaultInstanceProfileArn?: String;
     /**
-     * The stack's operating system, which must be set to one of the following.   A supported Linux operating system: An Amazon Linux version, such as Amazon Linux 2017.03, Amazon Linux 2016.09, Amazon Linux 2016.03, Amazon Linux 2015.09, or Amazon Linux 2015.03.   A supported Ubuntu operating system, such as Ubuntu 16.04 LTS, Ubuntu 14.04 LTS, or Ubuntu 12.04 LTS.    CentOS Linux 7     Red Hat Enterprise Linux 7     Microsoft Windows Server 2012 R2 Base, Microsoft Windows Server 2012 R2 with SQL Server Express, Microsoft Windows Server 2012 R2 with SQL Server Standard, or Microsoft Windows Server 2012 R2 with SQL Server Web.   A custom AMI: Custom. You specify the custom AMI you want to use when you create instances. For more information on how to use custom AMIs with OpsWorks, see Using Custom AMIs.   The default option is the parent stack's operating system. For more information on the supported operating systems, see AWS OpsWorks Stacks Operating Systems.  You can specify a different Linux operating system for the cloned stack, but you cannot change from Linux to Windows or Windows to Linux. 
+     * The stack's operating system, which must be set to one of the following.   A supported Linux operating system: An Amazon Linux version, such as Amazon Linux 2, Amazon Linux 2018.03, Amazon Linux 2017.09, Amazon Linux 2017.03, Amazon Linux 2016.09, Amazon Linux 2016.03, Amazon Linux 2015.09, or Amazon Linux 2015.03.   A supported Ubuntu operating system, such as Ubuntu 18.04 LTS, Ubuntu 16.04 LTS, Ubuntu 14.04 LTS, or Ubuntu 12.04 LTS.    CentOS Linux 7     Red Hat Enterprise Linux 7     Microsoft Windows Server 2012 R2 Base, Microsoft Windows Server 2012 R2 with SQL Server Express, Microsoft Windows Server 2012 R2 with SQL Server Standard, or Microsoft Windows Server 2012 R2 with SQL Server Web.   A custom AMI: Custom. You specify the custom AMI you want to use when you create instances. For more information about how to use custom AMIs with OpsWorks, see Using Custom AMIs.   The default option is the parent stack's operating system. Not all operating systems are supported with all versions of Chef. For more information about supported operating systems, see OpsWorks Stacks Operating Systems.  You can specify a different Linux operating system for the cloned stack, but you cannot change from Linux to Windows or Windows to Linux. 
      */
     DefaultOs?: String;
     /**
-     * The stack's host name theme, with spaces are replaced by underscores. The theme is used to generate host names for the stack's instances. By default, HostnameTheme is set to Layer_Dependent, which creates host names by appending integers to the layer's short name. The other themes are:    Baked_Goods     Clouds     Europe_Cities     Fruits     Greek_Deities     Legendary_creatures_from_Japan     Planets_and_Moons     Roman_Deities     Scottish_Islands     US_Cities     Wild_Cats    To obtain a generated host name, call GetHostNameSuggestion, which returns a host name based on the current theme.
+     * The stack's host name theme, with spaces are replaced by underscores. The theme is used to generate host names for the stack's instances. By default, HostnameTheme is set to Layer_Dependent, which creates host names by appending integers to the layer's short name. The other themes are:    Baked_Goods     Clouds     Europe_Cities     Fruits     Greek_Deities_and_Titans     Legendary_creatures_from_Japan     Planets_and_Moons     Roman_Deities     Scottish_Islands     US_Cities     Wild_Cats    To obtain a generated host name, call GetHostNameSuggestion, which returns a host name based on the current theme.
      */
     HostnameTheme?: String;
     /**
@@ -862,7 +867,7 @@ declare namespace OpsWorks {
      */
     DefaultSubnetId?: String;
     /**
-     * A string that contains user-defined, custom JSON. It is used to override the corresponding default stack configuration JSON values. The string should be in the following format:  "{\"key1\": \"value1\", \"key2\": \"value2\",...}"  For more information on custom JSON, see Use Custom JSON to Modify the Stack Configuration Attributes 
+     * A string that contains user-defined, custom JSON. It is used to override the corresponding default stack configuration JSON values. The string should be in the following format:  "{\"key1\": \"value1\", \"key2\": \"value2\",...}"  For more information about custom JSON, see Use Custom JSON to Modify the Stack Configuration Attributes 
      */
     CustomJson?: String;
     /**
@@ -878,12 +883,15 @@ declare namespace OpsWorks {
      */
     UseCustomCookbooks?: Boolean;
     /**
-     * Whether to associate the AWS OpsWorks Stacks built-in security groups with the stack's layers. AWS OpsWorks Stacks provides a standard set of built-in security groups, one for each layer, which are associated with layers by default. With UseOpsworksSecurityGroups you can instead provide your own custom security groups. UseOpsworksSecurityGroups has the following settings:    True - AWS OpsWorks Stacks automatically associates the appropriate built-in security group with each layer (default setting). You can associate additional security groups with a layer after you create it but you cannot delete the built-in security group.   False - AWS OpsWorks Stacks does not associate built-in security groups with layers. You must create appropriate Amazon Elastic Compute Cloud (Amazon EC2) security groups and associate a security group with each layer that you create. However, you can still manually associate a built-in security group with a layer on creation; custom security groups are required only for those layers that need custom settings.   For more information, see Create a New Stack.
+     * Whether to associate the OpsWorks Stacks built-in security groups with the stack's layers. OpsWorks Stacks provides a standard set of security groups, one for each layer, which are associated with layers by default. With UseOpsworksSecurityGroups you can instead provide your own custom security groups. UseOpsworksSecurityGroups has the following settings:    True - OpsWorks Stacks automatically associates the appropriate built-in security group with each layer (default setting). You can associate additional security groups with a layer after you create it but you cannot delete the built-in security group.   False - OpsWorks Stacks does not associate built-in security groups with layers. You must create appropriate Amazon EC2 security groups and associate a security group with each layer that you create. However, you can still manually associate a built-in security group with a layer on creation; custom security groups are required only for those layers that need custom settings.   For more information, see Create a New Stack.
      */
     UseOpsworksSecurityGroups?: Boolean;
+    /**
+     * Contains the information required to retrieve an app or cookbook from a repository. For more information, see Adding Apps or Cookbooks and Recipes.
+     */
     CustomCookbooksSource?: Source;
     /**
-     * A default Amazon EC2 key pair name. The default value is none. If you specify a key pair name, AWS OpsWorks installs the public key on the instance and you can use the private key with an SSH client to log in to the instance. For more information, see  Using SSH to Communicate with an Instance and  Managing SSH Access. You can override this setting by specifying a different key pair, or no key pair, when you  create an instance. 
+     * A default Amazon EC2 key pair name. The default value is none. If you specify a key pair name, OpsWorks installs the public key on the instance and you can use the private key with an SSH client to log in to the instance. For more information, see  Using SSH to Communicate with an Instance and  Managing SSH Access. You can override this setting by specifying a different key pair, or no key pair, when you  create an instance. 
      */
     DefaultSshKeyName?: String;
     /**
@@ -899,7 +907,7 @@ declare namespace OpsWorks {
      */
     DefaultRootDeviceType?: RootDeviceType;
     /**
-     * The default AWS OpsWorks Stacks agent version. You have the following options:   Auto-update - Set this parameter to LATEST. AWS OpsWorks Stacks automatically installs new agent versions on the stack's instances as soon as they are available.   Fixed version - Set this parameter to your preferred agent version. To update the agent version, you must edit the stack configuration and specify a new version. AWS OpsWorks Stacks then automatically installs that version on the stack's instances.   The default setting is LATEST. To specify an agent version, you must use the complete version number, not the abbreviated number shown on the console. For a list of available agent version numbers, call DescribeAgentVersions. AgentVersion cannot be set to Chef 12.2.  You can also specify an agent version when you create or update an instance, which overrides the stack's default setting. 
+     * The default OpsWorks Stacks agent version. You have the following options:   Auto-update - Set this parameter to LATEST. OpsWorks Stacks automatically installs new agent versions on the stack's instances as soon as they are available.   Fixed version - Set this parameter to your preferred agent version. To update the agent version, you must edit the stack configuration and specify a new version. OpsWorks Stacks automatically installs that version on the stack's instances.   The default setting is LATEST. To specify an agent version, you must use the complete version number, not the abbreviated number shown on the console. For a list of available agent version numbers, call DescribeAgentVersions. AgentVersion cannot be set to Chef 12.2.  You can also specify an agent version when you create or update an instance, which overrides the stack's default setting. 
      */
     AgentVersion?: String;
   }
@@ -1034,7 +1042,7 @@ declare namespace OpsWorks {
      */
     DataSources?: DataSources;
     /**
-     * The app type. Each supported type is associated with a particular layer. For example, PHP applications are associated with a PHP layer. AWS OpsWorks Stacks deploys an application to those instances that are members of the corresponding layer. If your app isn't one of the standard types, or you prefer to implement your own Deploy recipes, specify other.
+     * The app type. Each supported type is associated with a particular layer. For example, PHP applications are associated with a PHP layer. OpsWorks Stacks deploys an application to those instances that are members of the corresponding layer. If your app isn't one of the standard types, or you prefer to implement your own Deploy recipes, specify other.
      */
     Type: AppType;
     /**
@@ -1058,7 +1066,7 @@ declare namespace OpsWorks {
      */
     Attributes?: AppAttributes;
     /**
-     * An array of EnvironmentVariable objects that specify environment variables to be associated with the app. After you deploy the app, these variables are defined on the associated app server instance. For more information, see  Environment Variables. There is no specific limit on the number of environment variables. However, the size of the associated data structure - which includes the variables' names, values, and protected flag values - cannot exceed 10 KB (10240 Bytes). This limit should accommodate most if not all use cases. Exceeding it will cause an exception with the message, "Environment: is too large (maximum is 10KB)."  This parameter is supported only by Chef 11.10 stacks. If you have specified one or more environment variables, you cannot modify the stack's Chef version. 
+     * An array of EnvironmentVariable objects that specify environment variables to be associated with the app. After you deploy the app, these variables are defined on the associated app server instance. For more information, see  Environment Variables. There is no specific limit on the number of environment variables. However, the size of the associated data structure - which includes the variables' names, values, and protected flag values - cannot exceed 20 KB. This limit should accommodate most if not all use cases. Exceeding it will cause an exception with the message, "Environment: is too large (maximum is 20KB)."  If you have specified one or more environment variables, you cannot modify the stack's Chef version. 
      */
     Environment?: EnvironmentVariables;
   }
@@ -1094,7 +1102,7 @@ declare namespace OpsWorks {
      */
     Comment?: String;
     /**
-     * A string that contains user-defined, custom JSON. It is used to override the corresponding default stack configuration JSON values. The string should be in the following format:  "{\"key1\": \"value1\", \"key2\": \"value2\",...}"  For more information on custom JSON, see Use Custom JSON to Modify the Stack Configuration Attributes.
+     * A string that contains user-defined, custom JSON. You can use this parameter to override some corresponding default stack configuration JSON values. The string should be in the following format:  "{\"key1\": \"value1\", \"key2\": \"value2\",...}"  For more information about custom JSON, see Use Custom JSON to Modify the Stack Configuration Attributes and Overriding Attributes With Custom JSON.
      */
     CustomJson?: String;
   }
@@ -1122,11 +1130,11 @@ declare namespace OpsWorks {
      */
     AutoScalingType?: AutoScalingType;
     /**
-     * The instance host name.
+     * The instance host name. The following are character limits for instance host names.   Linux-based instances: 63 characters   Windows-based instances: 15 characters  
      */
     Hostname?: String;
     /**
-     * The instance's operating system, which must be set to one of the following.   A supported Linux operating system: An Amazon Linux version, such as Amazon Linux 2017.03, Amazon Linux 2016.09, Amazon Linux 2016.03, Amazon Linux 2015.09, or Amazon Linux 2015.03.   A supported Ubuntu operating system, such as Ubuntu 16.04 LTS, Ubuntu 14.04 LTS, or Ubuntu 12.04 LTS.    CentOS Linux 7     Red Hat Enterprise Linux 7    A supported Windows operating system, such as Microsoft Windows Server 2012 R2 Base, Microsoft Windows Server 2012 R2 with SQL Server Express, Microsoft Windows Server 2012 R2 with SQL Server Standard, or Microsoft Windows Server 2012 R2 with SQL Server Web.   A custom AMI: Custom.   For more information on the supported operating systems, see AWS OpsWorks Stacks Operating Systems. The default option is the current Amazon Linux version. If you set this parameter to Custom, you must use the CreateInstance action's AmiId parameter to specify the custom AMI that you want to use. Block device mappings are not supported if the value is Custom. For more information on the supported operating systems, see Operating SystemsFor more information on how to use custom AMIs with AWS OpsWorks Stacks, see Using Custom AMIs.
+     * The instance's operating system, which must be set to one of the following.   A supported Linux operating system: An Amazon Linux version, such as Amazon Linux 2, Amazon Linux 2018.03, Amazon Linux 2017.09, Amazon Linux 2017.03, Amazon Linux 2016.09, Amazon Linux 2016.03, Amazon Linux 2015.09, or Amazon Linux 2015.03.   A supported Ubuntu operating system, such as Ubuntu 18.04 LTS, Ubuntu 16.04 LTS, Ubuntu 14.04 LTS, or Ubuntu 12.04 LTS.    CentOS Linux 7     Red Hat Enterprise Linux 7    A supported Windows operating system, such as Microsoft Windows Server 2012 R2 Base, Microsoft Windows Server 2012 R2 with SQL Server Express, Microsoft Windows Server 2012 R2 with SQL Server Standard, or Microsoft Windows Server 2012 R2 with SQL Server Web.   A custom AMI: Custom.   Not all operating systems are supported with all versions of Chef. For more information about the supported operating systems, see OpsWorks Stacks Operating Systems. The default option is the current Amazon Linux version. If you set this parameter to Custom, you must use the CreateInstance action's AmiId parameter to specify the custom AMI that you want to use. Block device mappings are not supported if the value is Custom. For more information about how to use custom AMIs with OpsWorks Stacks, see Using Custom AMIs.
      */
     Os?: String;
     /**
@@ -1146,7 +1154,7 @@ declare namespace OpsWorks {
      */
     VirtualizationType?: String;
     /**
-     * The ID of the instance's subnet. If the stack is running in a VPC, you can use this parameter to override the stack's default subnet ID value and direct AWS OpsWorks Stacks to launch the instance in a different subnet.
+     * The ID of the instance's subnet. If the stack is running in a VPC, you can use this parameter to override the stack's default subnet ID value and direct OpsWorks Stacks to launch the instance in a different subnet.
      */
     SubnetId?: String;
     /**
@@ -1170,7 +1178,7 @@ declare namespace OpsWorks {
      */
     EbsOptimized?: Boolean;
     /**
-     * The default AWS OpsWorks Stacks agent version. You have the following options:    INHERIT - Use the stack's default agent version setting.    version_number - Use the specified agent version. This value overrides the stack's default setting. To update the agent version, edit the instance configuration and specify a new version. AWS OpsWorks Stacks then automatically installs that version on the instance.   The default setting is INHERIT. To specify an agent version, you must use the complete version number, not the abbreviated number shown on the console. For a list of available agent version numbers, call DescribeAgentVersions. AgentVersion cannot be set to Chef 12.2.
+     * The default OpsWorks Stacks agent version. You have the following options:    INHERIT - Use the stack's default agent version setting.    version_number - Use the specified agent version. This value overrides the stack's default setting. To update the agent version, edit the instance configuration and specify a new version. OpsWorks Stacks installs that version on the instance.   The default setting is INHERIT. To specify an agent version, you must use the complete version number, not the abbreviated number shown on the console. For a list of available agent version numbers, call DescribeAgentVersions. AgentVersion cannot be set to Chef 12.2.
      */
     AgentVersion?: String;
     /**
@@ -1194,11 +1202,11 @@ declare namespace OpsWorks {
      */
     Type: LayerType;
     /**
-     * The layer name, which is used by the console.
+     * The layer name, which is used by the console. Layer names can be a maximum of 32 characters.
      */
     Name: String;
     /**
-     * For custom layers only, use this parameter to specify the layer's short name, which is used internally by AWS OpsWorks Stacks and by Chef recipes. The short name is also used as the name for the directory where your app files are installed. It can have a maximum of 200 characters, which are limited to the alphanumeric characters, '-', '_', and '.'. The built-in layers' short names are defined by AWS OpsWorks Stacks. For more information, see the Layer Reference.
+     * For custom layers only, use this parameter to specify the layer's short name, which is used internally by OpsWorks Stacks and by Chef recipes. The short name is also used as the name for the directory where your app files are installed. It can have a maximum of 32 characters, which are limited to the alphanumeric characters, '-', '_', and '.'. Built-in layer short names are defined by OpsWorks Stacks. For more information, see the Layer Reference.
      */
     Shortname: String;
     /**
@@ -1214,7 +1222,7 @@ declare namespace OpsWorks {
      */
     CustomInstanceProfileArn?: String;
     /**
-     * A JSON-formatted string containing custom stack configuration and deployment attributes to be installed on the layer's instances. For more information, see  Using Custom JSON. This feature is supported as of version 1.7.42 of the AWS CLI. 
+     * A JSON-formatted string containing custom stack configuration and deployment attributes to be installed on the layer's instances. For more information, see  Using Custom JSON. This feature is supported as of version 1.7.42 of the CLI. 
      */
     CustomJson?: String;
     /**
@@ -1266,15 +1274,15 @@ declare namespace OpsWorks {
   }
   export interface CreateStackRequest {
     /**
-     * The stack name.
+     * The stack name. Stack names can be a maximum of 64 characters.
      */
     Name: String;
     /**
-     * The stack's AWS region, such as "ap-south-1". For more information about Amazon regions, see Regions and Endpoints.
+     * The stack's Amazon Web Services Region, such as ap-south-1. For more information about Amazon Web Services Regions, see Regions and Endpoints.  In the CLI, this API maps to the --stack-region parameter. If the --stack-region parameter and the CLI common parameter --region are set to the same value, the stack uses a regional endpoint. If the --stack-region parameter is not set, but the CLI --region parameter is, this also results in a stack with a regional endpoint. However, if the --region parameter is set to us-east-1, and the --stack-region parameter is set to one of the following, then the stack uses a legacy or classic region: us-west-1, us-west-2, sa-east-1, eu-central-1, eu-west-1, ap-northeast-1, ap-southeast-1, ap-southeast-2. In this case, the actual API endpoint of the stack is in us-east-1. Only the preceding regions are supported as classic regions in the us-east-1 API endpoint. Because it is a best practice to choose the regional endpoint that is closest to where you manage Amazon Web Services, we recommend that you use regional endpoints for new stacks. The CLI common --region parameter always specifies a regional API endpoint; it cannot be used to specify a classic OpsWorks Stacks region. 
      */
     Region: String;
     /**
-     * The ID of the VPC that the stack is to be launched into. The VPC must be in the stack's region. All instances are launched into this VPC. You cannot change the ID later.   If your account supports EC2-Classic, the default value is no VPC.   If your account does not support EC2-Classic, the default value is the default VPC for the specified region.   If the VPC ID corresponds to a default VPC and you have specified either the DefaultAvailabilityZone or the DefaultSubnetId parameter only, AWS OpsWorks Stacks infers the value of the other parameter. If you specify neither parameter, AWS OpsWorks Stacks sets these parameters to the first valid Availability Zone for the specified region and the corresponding default VPC subnet ID, respectively. If you specify a nondefault VPC ID, note the following:   It must belong to a VPC in your account that is in the specified region.   You must specify a value for DefaultSubnetId.   For more information on how to use AWS OpsWorks Stacks with a VPC, see Running a Stack in a VPC. For more information on default VPC and EC2-Classic, see Supported Platforms. 
+     * The ID of the VPC that the stack is to be launched into. The VPC must be in the stack's region. All instances are launched into this VPC. You cannot change the ID later.   If your account supports EC2-Classic, the default value is no VPC.   If your account does not support EC2-Classic, the default value is the default VPC for the specified region.   If the VPC ID corresponds to a default VPC and you have specified either the DefaultAvailabilityZone or the DefaultSubnetId parameter only, OpsWorks Stacks infers the value of the other parameter. If you specify neither parameter, OpsWorks Stacks sets these parameters to the first valid Availability Zone for the specified region and the corresponding default VPC subnet ID, respectively. If you specify a nondefault VPC ID, note the following:   It must belong to a VPC in your account that is in the specified region.   You must specify a value for DefaultSubnetId.   For more information about how to use OpsWorks Stacks with a VPC, see Running a Stack in a VPC. For more information about default VPC and EC2-Classic, see Supported Platforms. 
      */
     VpcId?: String;
     /**
@@ -1282,7 +1290,7 @@ declare namespace OpsWorks {
      */
     Attributes?: StackAttributes;
     /**
-     * The stack's AWS Identity and Access Management (IAM) role, which allows AWS OpsWorks Stacks to work with AWS resources on your behalf. You must set this parameter to the Amazon Resource Name (ARN) for an existing IAM role. For more information about IAM ARNs, see Using Identifiers.
+     * The stack's IAM role, which allows OpsWorks Stacks to work with Amazon Web Services resources on your behalf. You must set this parameter to the Amazon Resource Name (ARN) for an existing IAM role. For more information about IAM ARNs, see Using Identifiers.
      */
     ServiceRoleArn: String;
     /**
@@ -1290,11 +1298,11 @@ declare namespace OpsWorks {
      */
     DefaultInstanceProfileArn: String;
     /**
-     * The stack's default operating system, which is installed on every instance unless you specify a different operating system when you create the instance. You can specify one of the following.   A supported Linux operating system: An Amazon Linux version, such as Amazon Linux 2017.03, Amazon Linux 2016.09, Amazon Linux 2016.03, Amazon Linux 2015.09, or Amazon Linux 2015.03.   A supported Ubuntu operating system, such as Ubuntu 16.04 LTS, Ubuntu 14.04 LTS, or Ubuntu 12.04 LTS.    CentOS Linux 7     Red Hat Enterprise Linux 7    A supported Windows operating system, such as Microsoft Windows Server 2012 R2 Base, Microsoft Windows Server 2012 R2 with SQL Server Express, Microsoft Windows Server 2012 R2 with SQL Server Standard, or Microsoft Windows Server 2012 R2 with SQL Server Web.   A custom AMI: Custom. You specify the custom AMI you want to use when you create instances. For more information, see  Using Custom AMIs.   The default option is the current Amazon Linux version. For more information on the supported operating systems, see AWS OpsWorks Stacks Operating Systems.
+     * The stack's default operating system, which is installed on every instance unless you specify a different operating system when you create the instance. You can specify one of the following.   A supported Linux operating system: An Amazon Linux version, such as Amazon Linux 2, Amazon Linux 2018.03, Amazon Linux 2017.09, Amazon Linux 2017.03, Amazon Linux 2016.09, Amazon Linux 2016.03, Amazon Linux 2015.09, or Amazon Linux 2015.03.   A supported Ubuntu operating system, such as Ubuntu 18.04 LTS, Ubuntu 16.04 LTS, Ubuntu 14.04 LTS, or Ubuntu 12.04 LTS.    CentOS Linux 7     Red Hat Enterprise Linux 7    A supported Windows operating system, such as Microsoft Windows Server 2012 R2 Base, Microsoft Windows Server 2012 R2 with SQL Server Express, Microsoft Windows Server 2012 R2 with SQL Server Standard, or Microsoft Windows Server 2012 R2 with SQL Server Web.   A custom AMI: Custom. You specify the custom AMI you want to use when you create instances. For more information, see  Using Custom AMIs.   The default option is the current Amazon Linux version. Not all operating systems are supported with all versions of Chef. For more information about supported operating systems, see OpsWorks Stacks Operating Systems.
      */
     DefaultOs?: String;
     /**
-     * The stack's host name theme, with spaces replaced by underscores. The theme is used to generate host names for the stack's instances. By default, HostnameTheme is set to Layer_Dependent, which creates host names by appending integers to the layer's short name. The other themes are:    Baked_Goods     Clouds     Europe_Cities     Fruits     Greek_Deities     Legendary_creatures_from_Japan     Planets_and_Moons     Roman_Deities     Scottish_Islands     US_Cities     Wild_Cats    To obtain a generated host name, call GetHostNameSuggestion, which returns a host name based on the current theme.
+     * The stack's host name theme, with spaces replaced by underscores. The theme is used to generate host names for the stack's instances. By default, HostnameTheme is set to Layer_Dependent, which creates host names by appending integers to the layer's short name. The other themes are:    Baked_Goods     Clouds     Europe_Cities     Fruits     Greek_Deities_and_Titans     Legendary_creatures_from_Japan     Planets_and_Moons     Roman_Deities     Scottish_Islands     US_Cities     Wild_Cats    To obtain a generated host name, call GetHostNameSuggestion, which returns a host name based on the current theme.
      */
     HostnameTheme?: String;
     /**
@@ -1306,11 +1314,11 @@ declare namespace OpsWorks {
      */
     DefaultSubnetId?: String;
     /**
-     * A string that contains user-defined, custom JSON. It can be used to override the corresponding default stack configuration attribute values or to pass data to recipes. The string should be in the following format:  "{\"key1\": \"value1\", \"key2\": \"value2\",...}"  For more information on custom JSON, see Use Custom JSON to Modify the Stack Configuration Attributes.
+     * A string that contains user-defined, custom JSON. It can be used to override the corresponding default stack configuration attribute values or to pass data to recipes. The string should be in the following format:  "{\"key1\": \"value1\", \"key2\": \"value2\",...}"  For more information about custom JSON, see Use Custom JSON to Modify the Stack Configuration Attributes.
      */
     CustomJson?: String;
     /**
-     * The configuration manager. When you create a stack we recommend that you use the configuration manager to specify the Chef version: 12, 11.10, or 11.4 for Linux stacks, or 12.2 for Windows stacks. The default value for Linux stacks is currently 11.4.
+     * The configuration manager. When you create a stack we recommend that you use the configuration manager to specify the Chef version: 12, 11.10, or 11.4 for Linux stacks, or 12.2 for Windows stacks. The default value for Linux stacks is currently 12.
      */
     ConfigurationManager?: StackConfigurationManager;
     /**
@@ -1322,12 +1330,15 @@ declare namespace OpsWorks {
      */
     UseCustomCookbooks?: Boolean;
     /**
-     * Whether to associate the AWS OpsWorks Stacks built-in security groups with the stack's layers. AWS OpsWorks Stacks provides a standard set of built-in security groups, one for each layer, which are associated with layers by default. With UseOpsworksSecurityGroups you can instead provide your own custom security groups. UseOpsworksSecurityGroups has the following settings:    True - AWS OpsWorks Stacks automatically associates the appropriate built-in security group with each layer (default setting). You can associate additional security groups with a layer after you create it, but you cannot delete the built-in security group.   False - AWS OpsWorks Stacks does not associate built-in security groups with layers. You must create appropriate EC2 security groups and associate a security group with each layer that you create. However, you can still manually associate a built-in security group with a layer on creation; custom security groups are required only for those layers that need custom settings.   For more information, see Create a New Stack.
+     * Whether to associate the OpsWorks Stacks built-in security groups with the stack's layers. OpsWorks Stacks provides a standard set of built-in security groups, one for each layer, which are associated with layers by default. With UseOpsworksSecurityGroups you can instead provide your own custom security groups. UseOpsworksSecurityGroups has the following settings:    True - OpsWorks Stacks automatically associates the appropriate built-in security group with each layer (default setting). You can associate additional security groups with a layer after you create it, but you cannot delete the built-in security group.   False - OpsWorks Stacks does not associate built-in security groups with layers. You must create appropriate EC2 security groups and associate a security group with each layer that you create. However, you can still manually associate a built-in security group with a layer on creation; custom security groups are required only for those layers that need custom settings.   For more information, see Create a New Stack.
      */
     UseOpsworksSecurityGroups?: Boolean;
+    /**
+     * Contains the information required to retrieve an app or cookbook from a repository. For more information, see Adding Apps or Cookbooks and Recipes.
+     */
     CustomCookbooksSource?: Source;
     /**
-     * A default Amazon EC2 key pair name. The default value is none. If you specify a key pair name, AWS OpsWorks installs the public key on the instance and you can use the private key with an SSH client to log in to the instance. For more information, see  Using SSH to Communicate with an Instance and  Managing SSH Access. You can override this setting by specifying a different key pair, or no key pair, when you  create an instance. 
+     * A default Amazon EC2 key pair name. The default value is none. If you specify a key pair name, OpsWorks installs the public key on the instance and you can use the private key with an SSH client to log in to the instance. For more information, see  Using SSH to Communicate with an Instance and  Managing SSH Access. You can override this setting by specifying a different key pair, or no key pair, when you  create an instance. 
      */
     DefaultSshKeyName?: String;
     /**
@@ -1335,7 +1346,7 @@ declare namespace OpsWorks {
      */
     DefaultRootDeviceType?: RootDeviceType;
     /**
-     * The default AWS OpsWorks Stacks agent version. You have the following options:   Auto-update - Set this parameter to LATEST. AWS OpsWorks Stacks automatically installs new agent versions on the stack's instances as soon as they are available.   Fixed version - Set this parameter to your preferred agent version. To update the agent version, you must edit the stack configuration and specify a new version. AWS OpsWorks Stacks then automatically installs that version on the stack's instances.   The default setting is the most recent release of the agent. To specify an agent version, you must use the complete version number, not the abbreviated number shown on the console. For a list of available agent version numbers, call DescribeAgentVersions. AgentVersion cannot be set to Chef 12.2.  You can also specify an agent version when you create or update an instance, which overrides the stack's default setting. 
+     * The default OpsWorks Stacks agent version. You have the following options:   Auto-update - Set this parameter to LATEST. OpsWorks Stacks automatically installs new agent versions on the stack's instances as soon as they are available.   Fixed version - Set this parameter to your preferred agent version. To update the agent version, you must edit the stack configuration and specify a new version. OpsWorks Stacks installs that version on the stack's instances.   The default setting is the most recent release of the agent. To specify an agent version, you must use the complete version number, not the abbreviated number shown on the console. For a list of available agent version numbers, call DescribeAgentVersions. AgentVersion cannot be set to Chef 12.2.  You can also specify an agent version when you create or update an instance, which overrides the stack's default setting. 
      */
     AgentVersion?: String;
   }
@@ -1351,7 +1362,7 @@ declare namespace OpsWorks {
      */
     IamUserArn: String;
     /**
-     * The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9], '-', and '_'. If the specified name includes other punctuation marks, AWS OpsWorks Stacks removes them. For example, my.name will be changed to myname. If you do not specify an SSH user name, AWS OpsWorks Stacks generates one from the IAM user name. 
+     * The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9], '-', and '_'. If the specified name includes other punctuation marks, OpsWorks Stacks removes them. For example, my.name is changed to myname. If you do not specify an SSH user name, OpsWorks Stacks generates one from the IAM user name. 
      */
     SshUsername?: String;
     /**
@@ -1372,7 +1383,7 @@ declare namespace OpsWorks {
   export type DailyAutoScalingSchedule = {[key: string]: Switch};
   export interface DataSource {
     /**
-     * The data source's type, AutoSelectOpsworksMysqlInstance, OpsworksMysqlInstance, or RdsDbInstance.
+     * The data source's type, AutoSelectOpsworksMysqlInstance, OpsworksMysqlInstance, RdsDbInstance, or None.
      */
     Type?: String;
     /**
@@ -1457,6 +1468,9 @@ declare namespace OpsWorks {
      * A user-defined comment.
      */
     Comment?: String;
+    /**
+     * Used to specify a stack or deployment command.
+     */
     Command?: DeploymentCommand;
     /**
      * The deployment status:   running   successful   failed  
@@ -1473,11 +1487,11 @@ declare namespace OpsWorks {
   }
   export interface DeploymentCommand {
     /**
-     * Specifies the operation. You can specify only one command. For stacks, the following commands are available:    execute_recipes: Execute one or more recipes. To specify the recipes, set an Args parameter named recipes to the list of recipes to be executed. For example, to execute phpapp::appsetup, set Args to {"recipes":["phpapp::appsetup"]}.    install_dependencies: Install the stack's dependencies.    update_custom_cookbooks: Update the stack's custom cookbooks.    update_dependencies: Update the stack's dependencies.    The update_dependencies and install_dependencies commands are supported only for Linux instances. You can run the commands successfully on Windows instances, but they do nothing.  For apps, the following commands are available:    deploy: Deploy an app. Ruby on Rails apps have an optional Args parameter named migrate. Set Args to {"migrate":["true"]} to migrate the database. The default setting is {"migrate":["false"]}.    rollback Roll the app back to the previous version. When you update an app, AWS OpsWorks Stacks stores the previous version, up to a maximum of five versions. You can use this command to roll an app back as many as four versions.    start: Start the app's web or application server.    stop: Stop the app's web or application server.    restart: Restart the app's web or application server.    undeploy: Undeploy the app.  
+     * Specifies the operation. You can specify only one command. For stacks, the following commands are available:    execute_recipes: Execute one or more recipes. To specify the recipes, set an Args parameter named recipes to the list of recipes to be executed. For example, to execute phpapp::appsetup, set Args to {"recipes":["phpapp::appsetup"]}.    install_dependencies: Install the stack's dependencies.    update_custom_cookbooks: Update the stack's custom cookbooks.    update_dependencies: Update the stack's dependencies.    The update_dependencies and install_dependencies commands are supported only for Linux instances. You can run the commands successfully on Windows instances, but they do nothing.  For apps, the following commands are available:    deploy: Deploy an app. Ruby on Rails apps have an optional Args parameter named migrate. Set Args to {"migrate":["true"]} to migrate the database. The default setting is {"migrate":["false"]}.    rollback Roll the app back to the previous version. When you update an app, OpsWorks Stacks stores the previous version, up to a maximum of five versions. You can use this command to roll an app back as many as four versions.    start: Start the app's web or application server.    stop: Stop the app's web or application server.    restart: Restart the app's web or application server.    undeploy: Undeploy the app.  
      */
     Name: DeploymentCommandName;
     /**
-     * The arguments of those commands that take arguments. It should be set to a JSON object with the following format:  {"arg_name1" : ["value1", "value2", ...], "arg_name2" : ["value1", "value2", ...], ...}  The update_dependencies command takes two arguments:    upgrade_os_to - Specifies the desired Amazon Linux version for instances whose OS you want to upgrade, such as Amazon Linux 2016.09. You must also set the allow_reboot argument to true.    allow_reboot - Specifies whether to allow AWS OpsWorks Stacks to reboot the instances if necessary, after installing the updates. This argument can be set to either true or false. The default value is false.   For example, to upgrade an instance to Amazon Linux 2016.09, set Args to the following.   { "upgrade_os_to":["Amazon Linux 2016.09"], "allow_reboot":["true"] }  
+     * The arguments of those commands that take arguments. It should be set to a JSON object with the following format:  {"arg_name1" : ["value1", "value2", ...], "arg_name2" : ["value1", "value2", ...], ...}  The update_dependencies command takes two arguments:    upgrade_os_to - Specifies the Amazon Linux version that you want instances to run, such as Amazon Linux 2. You must also set the allow_reboot argument to true.    allow_reboot - Specifies whether to allow OpsWorks Stacks to reboot the instances if necessary, after installing the updates. This argument can be set to either true or false. The default value is false.   For example, to upgrade an instance to Amazon Linux 2018.03, set Args to the following.   { "upgrade_os_to":["Amazon Linux 2018.03"], "allow_reboot":["true"] }  
      */
     Args?: DeploymentCommandArgs;
   }
@@ -1486,7 +1500,7 @@ declare namespace OpsWorks {
   export type Deployments = Deployment[];
   export interface DeregisterEcsClusterRequest {
     /**
-     * The cluster's ARN.
+     * The cluster's Amazon Resource Number (ARN).
      */
     EcsClusterArn: String;
   }
@@ -1510,7 +1524,7 @@ declare namespace OpsWorks {
   }
   export interface DeregisterVolumeRequest {
     /**
-     * The AWS OpsWorks Stacks volume ID, which is the GUID that AWS OpsWorks Stacks assigned to the instance when you registered the volume with the stack, not the Amazon EC2 volume ID.
+     * The OpsWorks Stacks volume ID, which is the GUID that OpsWorks Stacks assigned to the instance when you registered the volume with the stack, not the Amazon EC2 volume ID.
      */
     VolumeId: String;
   }
@@ -1568,15 +1582,15 @@ declare namespace OpsWorks {
   }
   export interface DescribeDeploymentsRequest {
     /**
-     * The stack ID. If you include this parameter, DescribeDeployments returns a description of the commands associated with the specified stack.
+     * The stack ID. If you include this parameter, the command returns a description of the commands associated with the specified stack.
      */
     StackId?: String;
     /**
-     * The app ID. If you include this parameter, DescribeDeployments returns a description of the commands associated with the specified app.
+     * The app ID. If you include this parameter, the command returns a description of the commands associated with the specified app.
      */
     AppId?: String;
     /**
-     * An array of deployment IDs to be described. If you include this parameter, DescribeDeployments returns a description of the specified deployments. Otherwise, it returns a description of every deployment.
+     * An array of deployment IDs to be described. If you include this parameter, the command returns a description of the specified deployments. Otherwise, it returns a description of every deployment.
      */
     DeploymentIds?: Strings;
   }
@@ -1704,6 +1718,12 @@ declare namespace OpsWorks {
      */
     UserProfile?: SelfUserProfile;
   }
+  export interface DescribeOperatingSystemsResponse {
+    /**
+     * Contains information in response to a DescribeOperatingSystems request.
+     */
+    OperatingSystems?: OperatingSystems;
+  }
   export interface DescribePermissionsRequest {
     /**
      * The user's IAM ARN. This can also be a federated user's ARN. For more information about IAM ARNs, see Using Identifiers.
@@ -1742,7 +1762,7 @@ declare namespace OpsWorks {
   }
   export interface DescribeRdsDbInstancesRequest {
     /**
-     * The stack ID that the instances are registered with. The operation returns descriptions of all registered Amazon RDS instances.
+     * The ID of the stack with which the instances are registered. The operation returns descriptions of all registered Amazon RDS instances.
      */
     StackId: String;
     /**
@@ -1778,13 +1798,13 @@ declare namespace OpsWorks {
   }
   export interface DescribeStackProvisioningParametersRequest {
     /**
-     * The stack ID
+     * The stack ID.
      */
     StackId: String;
   }
   export interface DescribeStackProvisioningParametersResult {
     /**
-     * The AWS OpsWorks Stacks agent installer's URL.
+     * The OpsWorks Stacks agent installer's URL.
      */
     AgentInstallerUrl?: String;
     /**
@@ -1806,7 +1826,7 @@ declare namespace OpsWorks {
   }
   export interface DescribeStacksRequest {
     /**
-     * An array of stack IDs that specify the stacks to be described. If you omit this parameter, DescribeStacks returns a description of every stack.
+     * An array of stack IDs that specify the stacks to be described. If you omit this parameter, and have permissions to get information about all stacks, DescribeStacks returns a description of every stack. If the IAM policy that is attached to an IAM user limits the DescribeStacks action to specific stack ARNs, this parameter is required, and the user must specify a stack ARN that is allowed by the policy. Otherwise, DescribeStacks returns an AccessDenied error.
      */
     StackIds?: Strings;
   }
@@ -1895,7 +1915,7 @@ declare namespace OpsWorks {
      */
     VolumeSize?: Integer;
     /**
-     * The volume type. gp2 for General Purpose (SSD) volumes, io1 for Provisioned IOPS (SSD) volumes, and standard for Magnetic volumes.
+     * The volume type. gp2 for General Purpose (SSD) volumes, io1 for Provisioned IOPS (SSD) volumes, st1 for Throughput Optimized hard disk drives (HDD), sc1 for Cold HDD,and standard for Magnetic volumes. If you specify the io1 volume type, you must also specify a value for the Iops attribute. The maximum ratio of provisioned IOPS to requested volume size (in GiB) is 50:1. Amazon Web Services uses the default volume size (in GiB) specified in the AMI attributes to set IOPS to 50 x (volume size).
      */
     VolumeType?: VolumeType;
     /**
@@ -1928,7 +1948,7 @@ declare namespace OpsWorks {
      */
     Ip?: String;
     /**
-     * The name.
+     * The name, which can be a maximum of 32 characters.
      */
     Name?: String;
     /**
@@ -1936,7 +1956,7 @@ declare namespace OpsWorks {
      */
     Domain?: String;
     /**
-     * The AWS region. For more information, see Regions and Endpoints.
+     * The Amazon Web Services Region. For more information, see Regions and Endpoints.
      */
     Region?: String;
     /**
@@ -1947,11 +1967,11 @@ declare namespace OpsWorks {
   export type ElasticIps = ElasticIp[];
   export interface ElasticLoadBalancer {
     /**
-     * The Elastic Load Balancing instance's name.
+     * The Elastic Load Balancing instance name.
      */
     ElasticLoadBalancerName?: String;
     /**
-     * The instance's AWS region.
+     * The instance's Amazon Web Services Region.
      */
     Region?: String;
     /**
@@ -1959,11 +1979,11 @@ declare namespace OpsWorks {
      */
     DnsName?: String;
     /**
-     * The ID of the stack that the instance is associated with.
+     * The ID of the stack with which the instance is associated.
      */
     StackId?: String;
     /**
-     * The ID of the layer that the instance is attached to.
+     * The ID of the layer to which the instance is attached.
      */
     LayerId?: String;
     /**
@@ -1979,7 +1999,7 @@ declare namespace OpsWorks {
      */
     SubnetIds?: Strings;
     /**
-     * A list of the EC2 instances that the Elastic Load Balancing instance is managing traffic for.
+     * A list of the EC2 instances for which the Elastic Load Balancing instance is managing traffic.
      */
     Ec2InstanceIds?: Strings;
   }
@@ -1994,7 +2014,7 @@ declare namespace OpsWorks {
      */
     Value: String;
     /**
-     * (Optional) Whether the variable's value will be returned by the DescribeApps action. To conceal an environment variable's value, set Secure to true. DescribeApps then returns *****FILTERED***** instead of the actual value. The default value for Secure is false. 
+     * (Optional) Whether the variable's value is returned by the DescribeApps action. To hide an environment variable's value, set Secure to true. DescribeApps returns *****FILTERED***** instead of the actual value. The default value for Secure is false. 
      */
     Secure?: Boolean;
   }
@@ -2017,11 +2037,11 @@ declare namespace OpsWorks {
   }
   export interface GrantAccessRequest {
     /**
-     * The instance's AWS OpsWorks Stacks ID.
+     * The instance's OpsWorks Stacks ID.
      */
     InstanceId: String;
     /**
-     * The length of time (in minutes) that the grant is valid. When the grant expires at the end of this period, the user will no longer be able to use the credentials to log in. If the user is logged in at the time, he or she automatically will be logged out.
+     * The length of time (in minutes) that the grant is valid. When the grant expires at the end of this period, the user will no longer be able to use the credentials to log in. If the user is logged in at the time, they are logged out.
      */
     ValidForInMinutes?: ValidForInMinutes;
   }
@@ -2045,6 +2065,9 @@ declare namespace OpsWorks {
      * The instance architecture: "i386" or "x86_64".
      */
     Architecture?: Architecture;
+    /**
+     * The instance's Amazon Resource Number (ARN).
+     */
     Arn?: String;
     /**
      * For load-based or time-based instances, the type.
@@ -2079,11 +2102,11 @@ declare namespace OpsWorks {
      */
     EcsContainerInstanceArn?: String;
     /**
-     * The instance Elastic IP address .
+     * The instance Elastic IP address.
      */
     ElasticIp?: String;
     /**
-     * The instance host name.
+     * The instance host name. The following are character limits for instance host names.   Linux-based instances: 63 characters   Windows-based instances: 15 characters  
      */
     Hostname?: String;
     /**
@@ -2091,7 +2114,7 @@ declare namespace OpsWorks {
      */
     InfrastructureClass?: String;
     /**
-     * Whether to install operating system and package updates when the instance boots. The default value is true. If this value is set to false, you must then update your instances manually by using CreateDeployment to run the update_dependencies stack command or by manually running yum (Amazon Linux) or apt-get (Ubuntu) on the instances.   We strongly recommend using the default value of true, to ensure that your instances have the latest security updates. 
+     * Whether to install operating system and package updates when the instance boots. The default value is true. If this value is set to false, you must update instances manually by using CreateDeployment to run the update_dependencies stack command or by manually running yum (Amazon Linux) or apt-get (Ubuntu) on the instances.   We strongly recommend using the default value of true to ensure that your instances have the latest security updates. 
      */
     InstallUpdatesOnBoot?: Boolean;
     /**
@@ -2143,7 +2166,7 @@ declare namespace OpsWorks {
      */
     RegisteredBy?: String;
     /**
-     * The instance's reported AWS OpsWorks Stacks agent version.
+     * The instance's reported OpsWorks Stacks agent version.
      */
     ReportedAgentVersion?: String;
     /**
@@ -2264,6 +2287,10 @@ declare namespace OpsWorks {
      */
     StartFailed?: Integer;
     /**
+     * The number of instances with stop_failed status.
+     */
+    StopFailed?: Integer;
+    /**
      * The number of instances with stopped status.
      */
     Stopped?: Integer;
@@ -2286,6 +2313,9 @@ declare namespace OpsWorks {
   }
   export type Integer = number;
   export interface Layer {
+    /**
+     * The Amazon Resource Number (ARN) of a layer.
+     */
     Arn?: String;
     /**
      * The layer stack ID.
@@ -2300,7 +2330,7 @@ declare namespace OpsWorks {
      */
     Type?: LayerType;
     /**
-     * The layer name.
+     * The layer name. Layer names can be a maximum of 32 characters.
      */
     Name?: String;
     /**
@@ -2308,7 +2338,7 @@ declare namespace OpsWorks {
      */
     Shortname?: String;
     /**
-     * The layer attributes. For the HaproxyStatsPassword, MysqlRootPassword, and GangliaPassword attributes, AWS OpsWorks Stacks returns *****FILTERED***** instead of the actual value For an ECS Cluster layer, AWS OpsWorks Stacks the EcsClusterArn attribute is set to the cluster's ARN.
+     * The layer attributes. For the HaproxyStatsPassword, MysqlRootPassword, and GangliaPassword attributes, OpsWorks Stacks returns *****FILTERED***** instead of the actual value For an ECS Cluster layer, OpsWorks Stacks the EcsClusterArn attribute is set to the cluster's ARN.
      */
     Attributes?: LayerAttributes;
     /**
@@ -2351,6 +2381,9 @@ declare namespace OpsWorks {
      * For stacks that are running in a VPC, whether to automatically assign a public IP address to the layer's instances. For more information, see How to Edit a Layer.
      */
     AutoAssignPublicIps?: Boolean;
+    /**
+     * OpsWorks Stacks supports five lifecycle events: setup, configuration, deploy, undeploy, and shutdown. For each layer, OpsWorks Stacks runs a set of standard recipes for each event. You can also provide custom recipes for any or all layers and events. OpsWorks Stacks runs custom event recipes after the standard recipes. LayerCustomRecipes specifies the custom recipes for a particular layer to be run in response to each of the five events. To specify a recipe, use the cookbook's directory name in the repository followed by two colons and the recipe name, which is the recipe's file name without the .rb extension. For example: phpapp2::dbsetup specifies the dbsetup.rb recipe in the repository's phpapp2 folder.
+     */
     DefaultRecipes?: Recipes;
     /**
      * A LayerCustomRecipes object that specifies the layer's custom recipes.
@@ -2417,11 +2450,11 @@ declare namespace OpsWorks {
      */
     Enable?: Boolean;
     /**
-     * An AutoScalingThresholds object that describes the upscaling configuration, which defines how and when AWS OpsWorks Stacks increases the number of instances.
+     * An AutoScalingThresholds object that describes the upscaling configuration, which defines how and when OpsWorks Stacks increases the number of instances.
      */
     UpScaling?: AutoScalingThresholds;
     /**
-     * An AutoScalingThresholds object that describes the downscaling configuration, which defines how and when AWS OpsWorks Stacks reduces the number of instances.
+     * An AutoScalingThresholds object that describes the downscaling configuration, which defines how and when OpsWorks Stacks reduces the number of instances.
      */
     DownScaling?: AutoScalingThresholds;
   }
@@ -2429,6 +2462,48 @@ declare namespace OpsWorks {
   export type MaxResults = number;
   export type Minute = number;
   export type NextToken = string;
+  export interface OperatingSystem {
+    /**
+     * The name of the operating system, such as Amazon Linux 2.
+     */
+    Name?: String;
+    /**
+     * The ID of a supported operating system, such as Amazon Linux 2.
+     */
+    Id?: String;
+    /**
+     * The type of a supported operating system, either Linux or Windows.
+     */
+    Type?: String;
+    /**
+     * Supported configuration manager name and versions for an OpsWorks Stacks operating system.
+     */
+    ConfigurationManagers?: OperatingSystemConfigurationManagers;
+    /**
+     * A short name for the operating system manufacturer.
+     */
+    ReportedName?: String;
+    /**
+     * The version of the operating system, including the release and edition, if applicable.
+     */
+    ReportedVersion?: String;
+    /**
+     * Indicates that an operating system is not supported for new instances.
+     */
+    Supported?: Boolean;
+  }
+  export interface OperatingSystemConfigurationManager {
+    /**
+     * The name of the configuration manager, which is Chef.
+     */
+    Name?: String;
+    /**
+     * The versions of the configuration manager that are supported by an operating system.
+     */
+    Version?: String;
+  }
+  export type OperatingSystemConfigurationManagers = OperatingSystemConfigurationManager[];
+  export type OperatingSystems = OperatingSystem[];
   export type Parameters = {[key: string]: String};
   export interface Permission {
     /**
@@ -2436,7 +2511,7 @@ declare namespace OpsWorks {
      */
     StackId?: String;
     /**
-     * The Amazon Resource Name (ARN) for an AWS Identity and Access Management (IAM) role. For more information about IAM ARNs, see Using Identifiers.
+     * The Amazon Resource Name (ARN) for an Identity and Access Management (IAM) role. For more information about IAM ARNs, see Using Identifiers.
      */
     IamUserArn?: String;
     /**
@@ -2514,7 +2589,7 @@ declare namespace OpsWorks {
      */
     RdsDbInstanceArn?: String;
     /**
-     * The DB instance identifier.
+     * The database instance identifier.
      */
     DbInstanceIdentifier?: String;
     /**
@@ -2522,11 +2597,11 @@ declare namespace OpsWorks {
      */
     DbUser?: String;
     /**
-     * AWS OpsWorks Stacks returns *****FILTERED***** instead of the actual value.
+     * OpsWorks Stacks returns *****FILTERED***** instead of the actual value.
      */
     DbPassword?: String;
     /**
-     * The instance's AWS region.
+     * The instance's Amazon Web Services Region.
      */
     Region?: String;
     /**
@@ -2542,7 +2617,7 @@ declare namespace OpsWorks {
      */
     StackId?: String;
     /**
-     * Set to true if AWS OpsWorks Stacks is unable to discover the Amazon RDS instance. AWS OpsWorks Stacks attempts to discover the instance only once. If this value is set to true, you must deregister the instance, and then register it again.
+     * Set to true if OpsWorks Stacks is unable to discover the Amazon RDS instance. OpsWorks Stacks attempts to discover the instance only once. If this value is set to true, you must deregister the instance, and then register it again.
      */
     MissingOnRds?: Boolean;
   }
@@ -2613,7 +2688,7 @@ declare namespace OpsWorks {
      */
     StackId: String;
     /**
-     * The instance's hostname.
+     * The instance's host name. The following are character limits for instance host names.   Linux-based instances: 63 characters   Windows-based instances: 15 characters  
      */
     Hostname?: String;
     /**
@@ -2639,7 +2714,7 @@ declare namespace OpsWorks {
   }
   export interface RegisterInstanceResult {
     /**
-     * The registered instance's AWS OpsWorks Stacks ID.
+     * The registered instance's OpsWorks Stacks ID.
      */
     InstanceId?: String;
   }
@@ -2748,11 +2823,11 @@ declare namespace OpsWorks {
      */
     Enable?: Boolean;
     /**
-     * An AutoScalingThresholds object with the upscaling threshold configuration. If the load exceeds these thresholds for a specified amount of time, AWS OpsWorks Stacks starts a specified number of instances.
+     * An AutoScalingThresholds object with the upscaling threshold configuration. If the load exceeds these thresholds for a specified amount of time, OpsWorks Stacks starts a specified number of instances.
      */
     UpScaling?: AutoScalingThresholds;
     /**
-     * An AutoScalingThresholds object with the downscaling threshold configuration. If the load falls below these thresholds for a specified amount of time, AWS OpsWorks Stacks stops a specified number of instances.
+     * An AutoScalingThresholds object with the downscaling threshold configuration. If the load falls below these thresholds for a specified amount of time, OpsWorks Stacks stops a specified number of instances.
      */
     DownScaling?: AutoScalingThresholds;
   }
@@ -2774,7 +2849,7 @@ declare namespace OpsWorks {
      */
     AllowSudo?: Boolean;
     /**
-     * The user's permission level, which must be set to one of the following strings. You cannot set your own permissions level.    deny     show     deploy     manage     iam_only    For more information on the permissions associated with these levels, see Managing User Permissions.
+     * The user's permission level, which must be set to one of the following strings. You cannot set your own permissions level.    deny     show     deploy     manage     iam_only    For more information about the permissions associated with these levels, see Managing User Permissions.
      */
     Level?: String;
   }
@@ -2790,7 +2865,7 @@ declare namespace OpsWorks {
   }
   export interface ShutdownEventConfiguration {
     /**
-     * The time, in seconds, that AWS OpsWorks Stacks will wait after triggering a Shutdown event before shutting down an instance.
+     * The time, in seconds, that OpsWorks Stacks waits after triggering a Shutdown event before shutting down an instance.
      */
     ExecutionTimeout?: Integer;
     /**
@@ -2812,15 +2887,15 @@ declare namespace OpsWorks {
      */
     Username?: String;
     /**
-     * When included in a request, the parameter depends on the repository type.   For Amazon S3 bundles, set Password to the appropriate IAM secret access key.   For HTTP bundles and Subversion repositories, set Password to the password.   For more information on how to safely handle IAM credentials, see http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html. In responses, AWS OpsWorks Stacks returns *****FILTERED***** instead of the actual value.
+     * When included in a request, the parameter depends on the repository type.   For Amazon S3 bundles, set Password to the appropriate IAM secret access key.   For HTTP bundles and Subversion repositories, set Password to the password.   For more information on how to safely handle IAM credentials, see https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html. In responses, OpsWorks Stacks returns *****FILTERED***** instead of the actual value.
      */
     Password?: String;
     /**
-     * In requests, the repository's SSH key. In responses, AWS OpsWorks Stacks returns *****FILTERED***** instead of the actual value.
+     * In requests, the repository's SSH key. In responses, OpsWorks Stacks returns *****FILTERED***** instead of the actual value.
      */
     SshKey?: String;
     /**
-     * The application's version. AWS OpsWorks Stacks enables you to easily deploy new versions of an application. One of the simplest approaches is to have branches or revisions in your repository that represent different versions that can potentially be deployed.
+     * The application's version. OpsWorks Stacks enables you to easily deploy new versions of an application. One of the simplest approaches is to have branches or revisions in your repository that represent different versions that can potentially be deployed.
      */
     Revision?: String;
   }
@@ -2845,7 +2920,7 @@ declare namespace OpsWorks {
      */
     StackId?: String;
     /**
-     * The stack name.
+     * The stack name. Stack names can be a maximum of 64 characters.
      */
     Name?: String;
     /**
@@ -2853,7 +2928,7 @@ declare namespace OpsWorks {
      */
     Arn?: String;
     /**
-     * The stack AWS region, such as "ap-northeast-2". For more information about AWS regions, see Regions and Endpoints.
+     * The stack Amazon Web Services Region, such as ap-northeast-2. For more information about Amazon Web Services Regions, see Regions and Endpoints.
      */
     Region?: String;
     /**
@@ -2865,7 +2940,7 @@ declare namespace OpsWorks {
      */
     Attributes?: StackAttributes;
     /**
-     * The stack AWS Identity and Access Management (IAM) role.
+     * The stack Identity and Access Management (IAM) role.
      */
     ServiceRoleArn?: String;
     /**
@@ -2905,9 +2980,12 @@ declare namespace OpsWorks {
      */
     UseCustomCookbooks?: Boolean;
     /**
-     * Whether the stack automatically associates the AWS OpsWorks Stacks built-in security groups with the stack's layers.
+     * Whether the stack automatically associates the OpsWorks Stacks built-in security groups with the stack's layers.
      */
     UseOpsworksSecurityGroups?: Boolean;
+    /**
+     * Contains the information required to retrieve an app or cookbook from a repository. For more information, see Adding Apps or Cookbooks and Recipes.
+     */
     CustomCookbooksSource?: Source;
     /**
      * A default Amazon EC2 key pair for the stack's instances. You can override this value when you create or update an instance.
@@ -2918,7 +2996,7 @@ declare namespace OpsWorks {
      */
     CreatedAt?: DateTime;
     /**
-     * The default root device type. This value is used by default for all instances in the stack, but you can override it when you create an instance. For more information, see Storage for the Root Device.
+     * The default root device type. This value is used by default for all instances in the stack, but you can override it when you create an instance. For more information, see Storage for the Root Device. 
      */
     DefaultRootDeviceType?: RootDeviceType;
     /**
@@ -2930,11 +3008,11 @@ declare namespace OpsWorks {
   export type StackAttributesKeys = "Color"|string;
   export interface StackConfigurationManager {
     /**
-     * The name. This parameter must be set to "Chef".
+     * The name. This parameter must be set to Chef.
      */
     Name?: String;
     /**
-     * The Chef version. This parameter must be set to 12, 11.10, or 11.4 for Linux stacks, and to 12.2 for Windows stacks. The default value for Linux stacks is 11.4.
+     * The Chef version. This parameter must be set to 12, 11.10, or 11.4 for Linux stacks, and to 12.2 for Windows stacks. The default value for Linux stacks is 12.
      */
     Version?: String;
   }
@@ -2982,6 +3060,10 @@ declare namespace OpsWorks {
      * The instance ID.
      */
     InstanceId: String;
+    /**
+     * Specifies whether to force an instance to stop. If the instance's root device type is ebs, or EBS-backed, adding the Force parameter to the StopInstances API call disassociates the OpsWorks Stacks instance from EC2, and forces deletion of only the OpsWorks Stacks instance. You must also delete the formerly-associated instance in EC2 after troubleshooting and replacing the OpsWorks Stacks instance with a new one.
+     */
+    Force?: Boolean;
   }
   export interface StopStackRequest {
     /**
@@ -3016,11 +3098,11 @@ declare namespace OpsWorks {
      */
     Password?: String;
     /**
-     * The length of time (in minutes) that the grant is valid. When the grant expires, at the end of this period, the user will no longer be able to use the credentials to log in. If they are logged in at the time, they will be automatically logged out.
+     * The length of time (in minutes) that the grant is valid. When the grant expires, at the end of this period, the user will no longer be able to use the credentials to log in. If they are logged in at the time, they are automatically logged out.
      */
     ValidForInMinutes?: Integer;
     /**
-     * The instance's AWS OpsWorks Stacks ID.
+     * The instance's OpsWorks Stacks ID.
      */
     InstanceId?: String;
   }
@@ -3099,17 +3181,17 @@ declare namespace OpsWorks {
      */
     Attributes?: AppAttributes;
     /**
-     * An array of EnvironmentVariable objects that specify environment variables to be associated with the app. After you deploy the app, these variables are defined on the associated app server instances.For more information, see  Environment Variables. There is no specific limit on the number of environment variables. However, the size of the associated data structure - which includes the variables' names, values, and protected flag values - cannot exceed 10 KB (10240 Bytes). This limit should accommodate most if not all use cases. Exceeding it will cause an exception with the message, "Environment: is too large (maximum is 10KB)."  This parameter is supported only by Chef 11.10 stacks. If you have specified one or more environment variables, you cannot modify the stack's Chef version. 
+     * An array of EnvironmentVariable objects that specify environment variables to be associated with the app. After you deploy the app, these variables are defined on the associated app server instances.For more information, see  Environment Variables. There is no specific limit on the number of environment variables. However, the size of the associated data structure - which includes the variables' names, values, and protected flag values - cannot exceed 20 KB. This limit should accommodate most if not all use cases. Exceeding it will cause an exception with the message, "Environment: is too large (maximum is 20 KB)."  If you have specified one or more environment variables, you cannot modify the stack's Chef version. 
      */
     Environment?: EnvironmentVariables;
   }
   export interface UpdateElasticIpRequest {
     /**
-     * The address.
+     * The IP address for which you want to update the name.
      */
     ElasticIp: String;
     /**
-     * The new name.
+     * The new name, which can be a maximum of 32 characters.
      */
     Name?: String;
   }
@@ -3131,11 +3213,11 @@ declare namespace OpsWorks {
      */
     AutoScalingType?: AutoScalingType;
     /**
-     * The instance host name.
+     * The instance host name. The following are character limits for instance host names.   Linux-based instances: 63 characters   Windows-based instances: 15 characters  
      */
     Hostname?: String;
     /**
-     * The instance's operating system, which must be set to one of the following. You cannot update an instance that is using a custom AMI.   A supported Linux operating system: An Amazon Linux version, such as Amazon Linux 2017.03, Amazon Linux 2016.09, Amazon Linux 2016.03, Amazon Linux 2015.09, or Amazon Linux 2015.03.   A supported Ubuntu operating system, such as Ubuntu 16.04 LTS, Ubuntu 14.04 LTS, or Ubuntu 12.04 LTS.    CentOS Linux 7     Red Hat Enterprise Linux 7    A supported Windows operating system, such as Microsoft Windows Server 2012 R2 Base, Microsoft Windows Server 2012 R2 with SQL Server Express, Microsoft Windows Server 2012 R2 with SQL Server Standard, or Microsoft Windows Server 2012 R2 with SQL Server Web.   For more information on the supported operating systems, see AWS OpsWorks Stacks Operating Systems. The default option is the current Amazon Linux version. If you set this parameter to Custom, you must use the AmiId parameter to specify the custom AMI that you want to use. For more information on the supported operating systems, see Operating Systems. For more information on how to use custom AMIs with OpsWorks, see Using Custom AMIs.  You can specify a different Linux operating system for the updated stack, but you cannot change from Linux to Windows or Windows to Linux. 
+     * The instance's operating system, which must be set to one of the following. You cannot update an instance that is using a custom AMI.   A supported Linux operating system: An Amazon Linux version, such as Amazon Linux 2, Amazon Linux 2018.03, Amazon Linux 2017.09, Amazon Linux 2017.03, Amazon Linux 2016.09, Amazon Linux 2016.03, Amazon Linux 2015.09, or Amazon Linux 2015.03.   A supported Ubuntu operating system, such as Ubuntu 18.04 LTS, Ubuntu 16.04 LTS, Ubuntu 14.04 LTS, or Ubuntu 12.04 LTS.    CentOS Linux 7     Red Hat Enterprise Linux 7    A supported Windows operating system, such as Microsoft Windows Server 2012 R2 Base, Microsoft Windows Server 2012 R2 with SQL Server Express, Microsoft Windows Server 2012 R2 with SQL Server Standard, or Microsoft Windows Server 2012 R2 with SQL Server Web.   Not all operating systems are supported with all versions of Chef. For more information about supported operating systems, see OpsWorks Stacks Operating Systems. The default option is the current Amazon Linux version. If you set this parameter to Custom, you must use the AmiId parameter to specify the custom AMI that you want to use. For more information about how to use custom AMIs with OpsWorks, see Using Custom AMIs.  You can specify a different Linux operating system for the updated stack, but you cannot change from Linux to Windows or Windows to Linux. 
      */
     Os?: String;
     /**
@@ -3159,7 +3241,7 @@ declare namespace OpsWorks {
      */
     EbsOptimized?: Boolean;
     /**
-     * The default AWS OpsWorks Stacks agent version. You have the following options:    INHERIT - Use the stack's default agent version setting.    version_number - Use the specified agent version. This value overrides the stack's default setting. To update the agent version, you must edit the instance configuration and specify a new version. AWS OpsWorks Stacks then automatically installs that version on the instance.   The default setting is INHERIT. To specify an agent version, you must use the complete version number, not the abbreviated number shown on the console. For a list of available agent version numbers, call DescribeAgentVersions. AgentVersion cannot be set to Chef 12.2.
+     * The default OpsWorks Stacks agent version. You have the following options:    INHERIT - Use the stack's default agent version setting.    version_number - Use the specified agent version. This value overrides the stack's default setting. To update the agent version, you must edit the instance configuration and specify a new version. OpsWorks Stacks installs that version on the instance.   The default setting is INHERIT. To specify an agent version, you must use the complete version number, not the abbreviated number shown on the console. For a list of available agent version numbers, call DescribeAgentVersions. AgentVersion cannot be set to Chef 12.2.
      */
     AgentVersion?: String;
   }
@@ -3169,11 +3251,11 @@ declare namespace OpsWorks {
      */
     LayerId: String;
     /**
-     * The layer name, which is used by the console.
+     * The layer name, which is used by the console. Layer names can be a maximum of 32 characters.
      */
     Name?: String;
     /**
-     * For custom layers only, use this parameter to specify the layer's short name, which is used internally by AWS OpsWorks Stacks and by Chef. The short name is also used as the name for the directory where your app files are installed. It can have a maximum of 200 characters and must be in the following format: /\A[a-z0-9\-\_\.]+\Z/. The built-in layers' short names are defined by AWS OpsWorks Stacks. For more information, see the Layer Reference 
+     * For custom layers only, use this parameter to specify the layer's short name, which is used internally by OpsWorks Stacks and by Chef. The short name is also used as the name for the directory where your app files are installed. It can have a maximum of 32 characters and must be in the following format: /\A[a-z0-9\-\_\.]+\Z/. Built-in layer short names are defined by OpsWorks Stacks. For more information, see the Layer reference in the OpsWorks User Guide. 
      */
     Shortname?: String;
     /**
@@ -3259,7 +3341,7 @@ declare namespace OpsWorks {
      */
     StackId: String;
     /**
-     * The stack's new name.
+     * The stack's new name. Stack names can be a maximum of 64 characters.
      */
     Name?: String;
     /**
@@ -3275,11 +3357,11 @@ declare namespace OpsWorks {
      */
     DefaultInstanceProfileArn?: String;
     /**
-     * The stack's operating system, which must be set to one of the following:   A supported Linux operating system: An Amazon Linux version, such as Amazon Linux 2017.03, Amazon Linux 2016.09, Amazon Linux 2016.03, Amazon Linux 2015.09, or Amazon Linux 2015.03.   A supported Ubuntu operating system, such as Ubuntu 16.04 LTS, Ubuntu 14.04 LTS, or Ubuntu 12.04 LTS.    CentOS Linux 7     Red Hat Enterprise Linux 7    A supported Windows operating system, such as Microsoft Windows Server 2012 R2 Base, Microsoft Windows Server 2012 R2 with SQL Server Express, Microsoft Windows Server 2012 R2 with SQL Server Standard, or Microsoft Windows Server 2012 R2 with SQL Server Web.   A custom AMI: Custom. You specify the custom AMI you want to use when you create instances. For more information on how to use custom AMIs with OpsWorks, see Using Custom AMIs.   The default option is the stack's current operating system. For more information on the supported operating systems, see AWS OpsWorks Stacks Operating Systems.
+     * The stack's operating system, which must be set to one of the following:   A supported Linux operating system: An Amazon Linux version, such as Amazon Linux 2, Amazon Linux 2018.03, Amazon Linux 2017.09, Amazon Linux 2017.03, Amazon Linux 2016.09, Amazon Linux 2016.03, Amazon Linux 2015.09, or Amazon Linux 2015.03.   A supported Ubuntu operating system, such as Ubuntu 18.04 LTS, Ubuntu 16.04 LTS, Ubuntu 14.04 LTS, or Ubuntu 12.04 LTS.    CentOS Linux 7     Red Hat Enterprise Linux 7    A supported Windows operating system, such as Microsoft Windows Server 2012 R2 Base, Microsoft Windows Server 2012 R2 with SQL Server Express, Microsoft Windows Server 2012 R2 with SQL Server Standard, or Microsoft Windows Server 2012 R2 with SQL Server Web.   A custom AMI: Custom. You specify the custom AMI you want to use when you create instances. For more information about how to use custom AMIs with OpsWorks, see Using Custom AMIs.   The default option is the stack's current operating system. Not all operating systems are supported with all versions of Chef. For more information about supported operating systems, see OpsWorks Stacks Operating Systems.
      */
     DefaultOs?: String;
     /**
-     * The stack's new host name theme, with spaces replaced by underscores. The theme is used to generate host names for the stack's instances. By default, HostnameTheme is set to Layer_Dependent, which creates host names by appending integers to the layer's short name. The other themes are:    Baked_Goods     Clouds     Europe_Cities     Fruits     Greek_Deities     Legendary_creatures_from_Japan     Planets_and_Moons     Roman_Deities     Scottish_Islands     US_Cities     Wild_Cats    To obtain a generated host name, call GetHostNameSuggestion, which returns a host name based on the current theme.
+     * The stack's new host name theme, with spaces replaced by underscores. The theme is used to generate host names for the stack's instances. By default, HostnameTheme is set to Layer_Dependent, which creates host names by appending integers to the layer's short name. The other themes are:    Baked_Goods     Clouds     Europe_Cities     Fruits     Greek_Deities_and_Titans     Legendary_creatures_from_Japan     Planets_and_Moons     Roman_Deities     Scottish_Islands     US_Cities     Wild_Cats    To obtain a generated host name, call GetHostNameSuggestion, which returns a host name based on the current theme.
      */
     HostnameTheme?: String;
     /**
@@ -3291,11 +3373,11 @@ declare namespace OpsWorks {
      */
     DefaultSubnetId?: String;
     /**
-     * A string that contains user-defined, custom JSON. It can be used to override the corresponding default stack configuration JSON values or to pass data to recipes. The string should be in the following format:  "{\"key1\": \"value1\", \"key2\": \"value2\",...}"  For more information on custom JSON, see Use Custom JSON to Modify the Stack Configuration Attributes.
+     * A string that contains user-defined, custom JSON. It can be used to override the corresponding default stack configuration JSON values or to pass data to recipes. The string should be in the following format:  "{\"key1\": \"value1\", \"key2\": \"value2\",...}"  For more information about custom JSON, see Use Custom JSON to Modify the Stack Configuration Attributes.
      */
     CustomJson?: String;
     /**
-     * The configuration manager. When you update a stack, we recommend that you use the configuration manager to specify the Chef version: 12, 11.10, or 11.4 for Linux stacks, or 12.2 for Windows stacks. The default value for Linux stacks is currently 11.4.
+     * The configuration manager. When you update a stack, we recommend that you use the configuration manager to specify the Chef version: 12, 11.10, or 11.4 for Linux stacks, or 12.2 for Windows stacks. The default value for Linux stacks is currently 12.
      */
     ConfigurationManager?: StackConfigurationManager;
     /**
@@ -3306,9 +3388,12 @@ declare namespace OpsWorks {
      * Whether the stack uses custom cookbooks.
      */
     UseCustomCookbooks?: Boolean;
+    /**
+     * Contains the information required to retrieve an app or cookbook from a repository. For more information, see Adding Apps or Cookbooks and Recipes.
+     */
     CustomCookbooksSource?: Source;
     /**
-     * A default Amazon EC2 key-pair name. The default value is none. If you specify a key-pair name, AWS OpsWorks Stacks installs the public key on the instance and you can use the private key with an SSH client to log in to the instance. For more information, see  Using SSH to Communicate with an Instance and  Managing SSH Access. You can override this setting by specifying a different key pair, or no key pair, when you  create an instance. 
+     * A default Amazon EC2 key-pair name. The default value is none. If you specify a key-pair name, OpsWorks Stacks installs the public key on the instance and you can use the private key with an SSH client to log in to the instance. For more information, see  Using SSH to Communicate with an Instance and  Managing SSH Access. You can override this setting by specifying a different key pair, or no key pair, when you  create an instance. 
      */
     DefaultSshKeyName?: String;
     /**
@@ -3316,11 +3401,11 @@ declare namespace OpsWorks {
      */
     DefaultRootDeviceType?: RootDeviceType;
     /**
-     * Whether to associate the AWS OpsWorks Stacks built-in security groups with the stack's layers. AWS OpsWorks Stacks provides a standard set of built-in security groups, one for each layer, which are associated with layers by default. UseOpsworksSecurityGroups allows you to provide your own custom security groups instead of using the built-in groups. UseOpsworksSecurityGroups has the following settings:    True - AWS OpsWorks Stacks automatically associates the appropriate built-in security group with each layer (default setting). You can associate additional security groups with a layer after you create it, but you cannot delete the built-in security group.   False - AWS OpsWorks Stacks does not associate built-in security groups with layers. You must create appropriate EC2 security groups and associate a security group with each layer that you create. However, you can still manually associate a built-in security group with a layer on. Custom security groups are required only for those layers that need custom settings.   For more information, see Create a New Stack.
+     * Whether to associate the OpsWorks Stacks built-in security groups with the stack's layers. OpsWorks Stacks provides a standard set of built-in security groups, one for each layer, which are associated with layers by default. UseOpsworksSecurityGroups allows you to provide your own custom security groups instead of using the built-in groups. UseOpsworksSecurityGroups has the following settings:    True - OpsWorks Stacks automatically associates the appropriate built-in security group with each layer (default setting). You can associate additional security groups with a layer after you create it, but you cannot delete the built-in security group.   False - OpsWorks Stacks does not associate built-in security groups with layers. You must create appropriate EC2 security groups and associate a security group with each layer that you create. However, you can still manually associate a built-in security group with a layer on. Custom security groups are required only for those layers that need custom settings.   For more information, see Create a New Stack.
      */
     UseOpsworksSecurityGroups?: Boolean;
     /**
-     * The default AWS OpsWorks Stacks agent version. You have the following options:   Auto-update - Set this parameter to LATEST. AWS OpsWorks Stacks automatically installs new agent versions on the stack's instances as soon as they are available.   Fixed version - Set this parameter to your preferred agent version. To update the agent version, you must edit the stack configuration and specify a new version. AWS OpsWorks Stacks then automatically installs that version on the stack's instances.   The default setting is LATEST. To specify an agent version, you must use the complete version number, not the abbreviated number shown on the console. For a list of available agent version numbers, call DescribeAgentVersions. AgentVersion cannot be set to Chef 12.2.  You can also specify an agent version when you create or update an instance, which overrides the stack's default setting. 
+     * The default OpsWorks Stacks agent version. You have the following options:   Auto-update - Set this parameter to LATEST. OpsWorks Stacks automatically installs new agent versions on the stack's instances as soon as they are available.   Fixed version - Set this parameter to your preferred agent version. To update the agent version, you must edit the stack configuration and specify a new version. OpsWorks Stacks installs that version on the stack's instances.   The default setting is LATEST. To specify an agent version, you must use the complete version number, not the abbreviated number shown on the console. For a list of available agent version numbers, call DescribeAgentVersions. AgentVersion cannot be set to Chef 12.2.  You can also specify an agent version when you create or update an instance, which overrides the stack's default setting. 
      */
     AgentVersion?: String;
   }
@@ -3330,7 +3415,7 @@ declare namespace OpsWorks {
      */
     IamUserArn: String;
     /**
-     * The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9], '-', and '_'. If the specified name includes other punctuation marks, AWS OpsWorks Stacks removes them. For example, my.name will be changed to myname. If you do not specify an SSH user name, AWS OpsWorks Stacks generates one from the IAM user name. 
+     * The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9], '-', and '_'. If the specified name includes other punctuation marks, OpsWorks Stacks removes them. For example, my.name will be changed to myname. If you do not specify an SSH user name, OpsWorks Stacks generates one from the IAM user name. 
      */
     SshUsername?: String;
     /**
@@ -3348,7 +3433,7 @@ declare namespace OpsWorks {
      */
     VolumeId: String;
     /**
-     * The new name.
+     * The new name. Volume names can be a maximum of 128 characters.
      */
     Name?: String;
     /**
@@ -3391,7 +3476,7 @@ declare namespace OpsWorks {
      */
     Ec2VolumeId?: String;
     /**
-     * The volume name.
+     * The volume name. Volume names are a maximum of 128 characters.
      */
     Name?: String;
     /**
@@ -3419,7 +3504,7 @@ declare namespace OpsWorks {
      */
     MountPoint?: String;
     /**
-     * The AWS region. For more information about AWS regions, see Regions and Endpoints.
+     * The Amazon Web Services Region. For more information about Amazon Web Services Regions, see Regions and Endpoints.
      */
     Region?: String;
     /**
@@ -3427,13 +3512,17 @@ declare namespace OpsWorks {
      */
     AvailabilityZone?: String;
     /**
-     * The volume type, standard or PIOPS.
+     * The volume type. For more information, see  Amazon EBS Volume Types.    standard - Magnetic. Magnetic volumes must have a minimum size of 1 GiB and a maximum size of 1024 GiB.    io1 - Provisioned IOPS (SSD). PIOPS volumes must have a minimum size of 4 GiB and a maximum size of 16384 GiB.    gp2 - General Purpose (SSD). General purpose volumes must have a minimum size of 1 GiB and a maximum size of 16384 GiB.    st1 - Throughput Optimized hard disk drive (HDD). Throughput optimized HDD volumes must have a minimum size of 125 GiB and a maximum size of 16384 GiB.    sc1 - Cold HDD. Cold HDD volumes must have a minimum size of 125 GiB and a maximum size of 16384 GiB.  
      */
     VolumeType?: String;
     /**
      * For PIOPS volumes, the IOPS per disk.
      */
     Iops?: Integer;
+    /**
+     * Specifies whether an Amazon EBS volume is encrypted. For more information, see Amazon EBS Encryption.
+     */
+    Encrypted?: Boolean;
   }
   export interface VolumeConfiguration {
     /**
@@ -3453,13 +3542,17 @@ declare namespace OpsWorks {
      */
     Size: Integer;
     /**
-     * The volume type:    standard - Magnetic    io1 - Provisioned IOPS (SSD)    gp2 - General Purpose (SSD)  
+     * The volume type. For more information, see  Amazon EBS Volume Types.    standard - Magnetic. Magnetic volumes must have a minimum size of 1 GiB and a maximum size of 1024 GiB.    io1 - Provisioned IOPS (SSD). PIOPS volumes must have a minimum size of 4 GiB and a maximum size of 16384 GiB.    gp2 - General Purpose (SSD). General purpose volumes must have a minimum size of 1 GiB and a maximum size of 16384 GiB.    st1 - Throughput Optimized hard disk drive (HDD). Throughput optimized HDD volumes must have a minimum size of 125 GiB and a maximum size of 16384 GiB.    sc1 - Cold HDD. Cold HDD volumes must have a minimum size of 125 GiB and a maximum size of 16384 GiB.  
      */
     VolumeType?: String;
     /**
      * For PIOPS volumes, the IOPS per disk.
      */
     Iops?: Integer;
+    /**
+     * Specifies whether an Amazon EBS volume is encrypted. For more information, see Amazon EBS Encryption.
+     */
+    Encrypted?: Boolean;
   }
   export type VolumeConfigurations = VolumeConfiguration[];
   export type VolumeType = "gp2"|"io1"|"standard"|string;

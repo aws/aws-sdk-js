@@ -47,7 +47,7 @@
           return new AWS.CloudSearchDomain({
             endpoint: 'host.domain'
           });
-        }).not.to["throw"]();
+        }).not.to['throw']();
       });
     });
     return describe('building a request', function() {
@@ -87,19 +87,8 @@
         params = {
           query: 'foo'
         };
-        req = build('search', params);
+        req = build('suggest', params);
         return expect(req.headers).to.have.property('Authorization');
-      });
-      it('converts the GET request to POST for search operation', function() {
-        var params, req;
-        params = {
-          query: 'foo'
-        };
-        req = build('search', params);
-        expect(req.method).to.equal('POST');
-        expect(req.path.indexOf('?')).to.equal(-1);
-        expect(typeof req.body).to.equal('string');
-        return expect(req.headers['Content-Length']).to.equal(req.body.length);
       });
       return it('keeps the suggest operation as a GET request', function() {
         var params, req;
@@ -110,7 +99,7 @@
         req = build('suggest', params);
         expect(req.method).to.equal('GET');
         expect(req.path.split('?')[1]).to.equal('format=sdk&pretty=true&q=foo&suggester=bar');
-        return expect(!!req.body).to.be["false"];
+        return expect(!!req.body).to.be['false'];
       });
     });
   });

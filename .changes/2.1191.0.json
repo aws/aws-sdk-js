@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "AugmentedAIRuntime",
+        "description": "Fix bug with parsing ISO-8601 CreationTime in Java SDK in DescribeHumanLoop"
+    },
+    {
+        "type": "feature",
+        "category": "CloudWatch",
+        "description": "Various quota increases related to dimensions and custom metrics"
+    },
+    {
+        "type": "feature",
+        "category": "Location",
+        "description": "Amazon Location Service now allows circular geofences in BatchPutGeofence, PutGeofence, and GetGeofence  APIs."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Amazon SageMaker Automatic Model Tuning now supports specifying multiple alternate EC2 instance types to make tuning jobs more robust when the preferred instance type is not available due to insufficient capacity."
+    }
+]

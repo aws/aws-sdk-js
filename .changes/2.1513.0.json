@@ -1,0 +1,27 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Endpoints",
+        "description": "Use correct FIPS endpoint for EC2 in GovCloud"
+    },
+    {
+        "type": "feature",
+        "category": "Backup",
+        "description": "AWS Backup - Features: Add VaultType to the output of DescribeRecoveryPoint, ListRecoveryPointByBackupVault API and add ResourceType to the input of ListRestoreJobs API"
+    },
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "Releasing Tagging Support for Instance Management APIS"
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Releasing the new cpuManufacturer attribute within the DescribeInstanceTypes API response which notifies our customers with information on who the Manufacturer is for the processor attached to the instance, for example: Intel."
+    },
+    {
+        "type": "feature",
+        "category": "PaymentCryptography",
+        "description": "AWS Payment Cryptography IPEK feature release"
+    }
+]

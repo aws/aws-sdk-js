@@ -1,0 +1,52 @@
+[
+    {
+        "type": "feature",
+        "category": "AppMesh",
+        "description": "This release adds circuit breaking capabilities to your mesh with connection pooling and outlier detection support."
+    },
+    {
+        "type": "feature",
+        "category": "CloudWatchEvents",
+        "description": "With this release, customers can now reprocess past events by storing the events published on event bus in an encrypted archive."
+    },
+    {
+        "type": "feature",
+        "category": "DynamoDB",
+        "description": "This release adds a new ReplicaStatus INACCESSIBLE_ENCRYPTION_CREDENTIALS for the Table description, indicating when a key used to encrypt a regional replica table is not accessible."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Documentation updates for EC2."
+    },
+    {
+        "type": "feature",
+        "category": "ES",
+        "description": "Amazon Elasticsearch Service now provides the ability to define a custom endpoint for your domain and link an SSL certificate from ACM, making it easier to refer to Kibana and the domain endpoint."
+    },
+    {
+        "type": "feature",
+        "category": "EventBridge",
+        "description": "With this release, customers can now reprocess past events by storing the events published on event bus in an encrypted archive."
+    },
+    {
+        "type": "feature",
+        "category": "FraudDetector",
+        "description": "Added support for deleting resources like Variables, ExternalModels, Outcomes, Models, ModelVersions, Labels, EventTypes and EntityTypes. Updated DeleteEvent operation to catch missing exceptions."
+    },
+    {
+        "type": "feature",
+        "category": "Kendra",
+        "description": "Amazon Kendra now supports providing user context in your query requests, Tokens can be JSON or JWT format. This release also introduces support for Confluence cloud datasources."
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "Support Amazon MQ as an Event Source."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "Supports a new parameter to set the max allocated storage in gigabytes for the CreateDBInstanceReadReplica API."
+    }
+]

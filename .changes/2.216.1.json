@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "IAM",
+        "description": "Add support for Longer Role Sessions. Four APIs manage max session duration: GetRole, ListRoles, CreateRole, and the new API UpdateRole. The max session duration integer attribute is measured in seconds."
+    },
+    {
+        "type": "feature",
+        "category": "MTurk",
+        "description": "Added a new attribute \"ActionsGuarded\" to QualificationRequirement: This update allows MTurk Requester customers using the AWS SDK to control which Workers can see and preview their HITs. We now support hiding HITs from unqualified Workers' search results."
+    },
+    {
+        "type": "feature",
+        "category": "STS",
+        "description": "Change utilizes the Max Session Duration attribute introduced for IAM Roles and allows STS customers to request session duration up to the Max Session Duration of 12 hours from AssumeRole based APIs."
+    }
+]

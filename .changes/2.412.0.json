@@ -1,0 +1,22 @@
+[
+    {
+        "type": "bugfix",
+        "category": "ComprehendMedical",
+        "description": "enable cors on ComprehendMedical, update SERVICES.md"
+    },
+    {
+        "type": "feature",
+        "category": "AlexaForBusiness",
+        "description": "This release adds the PutInvitationConfiguration API to configure the user invitation email template with custom attributes, and the GetInvitationConfiguration API to retrieve the configured values."
+    },
+    {
+        "type": "feature",
+        "category": "ApiGatewayV2",
+        "description": "Marking certain properties as explicitly required and fixing an issue with the GetApiMappings operation for ApiMapping resources."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "AWS Systems Manager State Manager now supports associations using documents shared by other AWS accounts."
+    }
+]

@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudFront",
+        "description": "Extend response headers policy to support removing headers from viewer responses"
+    }
+]

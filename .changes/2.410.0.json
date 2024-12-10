@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "AutoScaling",
+        "description": "Added support for passing an empty SpotMaxPrice parameter to remove a value previously set when updating an Amazon EC2 Auto Scaling group."
+    },
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "Added metrics to normalized units."
+    },
+    {
+        "type": "feature",
+        "category": "ELBv2",
+        "description": "This release enables you to use the existing client secret when modifying a rule with an action of type authenticate-oidc."
+    },
+    {
+        "type": "feature",
+        "category": "MediaStore",
+        "description": "This release adds support for access logging, which provides detailed records for the requests that are made to objects in a container."
+    }
+]

@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "MediaConvert",
+        "description": "This release adds support for the following 1) users can specify tags to be attached to queues, presets, and templates during creation of those resources on MediaConvert. 2) users can now view the count of jobs in submitted state and in progressing state on a per queue basis."
+    },
+    {
+        "type": "feature",
+        "category": "ServerlessApplicationRepository",
+        "description": "Added required fields and documentation updates for AWS Serverless Application Repository."
+    }
+]

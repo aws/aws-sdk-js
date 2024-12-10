@@ -1,0 +1,62 @@
+[
+    {
+        "type": "feature",
+        "category": "Amplify",
+        "description": "This release of AWS Amplify Console introduces support for backend environments. Backend environments are containers for AWS deployments. Each environment is a collection of AWS resources."
+    },
+    {
+        "type": "feature",
+        "category": "AppSync",
+        "description": "AppSync: AWS AppSync now supports the ability to add, configure, and maintain caching for your AWS AppSync GraphQL API."
+    },
+    {
+        "type": "feature",
+        "category": "ConfigService",
+        "description": "AWS Config launches Custom Configuration Items. A new feature which allows customers to publish resource configuration for third-party resources, custom, or on-premises servers."
+    },
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "This release adds a new API: StartChatContact. You can use it to programmatically start a chat on the specified Amazon Connect instance. Learn more here: https://docs.aws.amazon.com/connect/latest/APIReference/Welcome.html "
+    },
+    {
+        "type": "feature",
+        "category": "ConnectParticipant",
+        "description": "This release adds 5 new APIs: CreateParticipantConnection, DisconnectParticipant, GetTranscript, SendEvent, and SendMessage. For Amazon Connect chat, you can use them to programmatically perform participant actions on the configured Amazon Connect instance. Learn more here: https://docs.aws.amazon.com/connect-participant/latest/APIReference/Welcome.html"
+    },
+    {
+        "type": "feature",
+        "category": "DynamoDB",
+        "description": "With this release, you can convert an existing Amazon DynamoDB table to a global table by adding replicas in other AWS Regions."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds support for attaching AWS License Manager Configurations to Amazon Machine Image (AMI) using ImportImage API; and adds support for running different instance sizes on EC2 Dedicated Hosts"
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "This release adds support for Glue 1.0 compatible ML Transforms."
+    },
+    {
+        "type": "feature",
+        "category": "LexModelBuildingService",
+        "description": "Amazon Lex now supports Sentiment Analysis"
+    },
+    {
+        "type": "feature",
+        "category": "LexRuntime",
+        "description": "Amazon Lex now supports Sentiment Analysis"
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "The release contains new API and API changes for AWS Systems Manager Explorer product."
+    },
+    {
+        "type": "feature",
+        "category": "TranscribeService",
+        "description": "With this release, Amazon Transcribe now supports transcriptions from audio sources in Hebrew (he-IL), Swiss German (de-CH), Japanese (ja-JP), Turkish (tr-TR), Arabic-Gulf (ar-AE), Malay (ms-MY), Telugu (te-IN)"
+    }
+]

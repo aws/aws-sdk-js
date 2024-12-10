@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "AppMesh",
+        "description": "This release adds support for http header based routing and route prioritization."
+    },
+    {
+        "type": "feature",
+        "category": "Athena",
+        "description": "This release adds support for querying S3 Requester Pays buckets. Users can enable this feature through their Workgroup settings."
+    },
+    {
+        "type": "feature",
+        "category": "CodeCommit",
+        "description": "This release adds an API, BatchGetCommits, that allows retrieval of metadata for multiple commits in an AWS CodeCommit repository."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds an option to use private certificates from AWS Certificate Manager (ACM) to authenticate a Site-to-Site VPN connection's tunnel endpoints and customer gateway device. "
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "GetJobBookmarks API is withdrawn."
+    },
+    {
+        "type": "feature",
+        "category": "StorageGateway",
+        "description": "CreateSnapshotFromVolumeRecoveryPoint API supports new parameter: Tags (to be attached to the created resource)"
+    }
+]

@@ -1,0 +1,3109 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2020-04-30",
+    "endpointPrefix": "resiliencehub",
+    "jsonVersion": "1.1",
+    "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
+    "serviceFullName": "AWS Resilience Hub",
+    "serviceId": "resiliencehub",
+    "signatureVersion": "v4",
+    "signingName": "resiliencehub",
+    "uid": "resiliencehub-2020-04-30",
+    "auth": [
+      "aws.auth#sigv4"
+    ]
+  },
+  "operations": {
+    "AcceptResourceGroupingRecommendations": {
+      "http": {
+        "requestUri": "/accept-resource-grouping-recommendations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "entries"
+        ],
+        "members": {
+          "appArn": {},
+          "entries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "groupingRecommendationId"
+              ],
+              "members": {
+                "groupingRecommendationId": {}
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "failedEntries"
+        ],
+        "members": {
+          "appArn": {},
+          "failedEntries": {
+            "shape": "S7"
+          }
+        }
+      }
+    },
+    "AddDraftAppVersionResourceMappings": {
+      "http": {
+        "requestUri": "/add-draft-app-version-resource-mappings",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "resourceMappings"
+        ],
+        "members": {
+          "appArn": {},
+          "resourceMappings": {
+            "shape": "Sb"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion",
+          "resourceMappings"
+        ],
+        "members": {
+          "appArn": {},
+          "appVersion": {},
+          "resourceMappings": {
+            "shape": "Sb"
+          }
+        }
+      }
+    },
+    "BatchUpdateRecommendationStatus": {
+      "http": {
+        "requestUri": "/batch-update-recommendation-status",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "requestEntries"
+        ],
+        "members": {
+          "appArn": {},
+          "requestEntries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "entryId",
+                "excluded",
+                "item",
+                "referenceId"
+              ],
+              "members": {
+                "entryId": {},
+                "excludeReason": {},
+                "excluded": {
+                  "type": "boolean"
+                },
+                "item": {
+                  "shape": "Sq"
+                },
+                "referenceId": {}
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "failedEntries",
+          "successfulEntries"
+        ],
+        "members": {
+          "appArn": {},
+          "failedEntries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "entryId",
+                "errorMessage"
+              ],
+              "members": {
+                "entryId": {},
+                "errorMessage": {}
+              }
+            }
+          },
+          "successfulEntries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "entryId",
+                "excluded",
+                "item",
+                "referenceId"
+              ],
+              "members": {
+                "entryId": {},
+                "excludeReason": {},
+                "excluded": {
+                  "type": "boolean"
+                },
+                "item": {
+                  "shape": "Sq"
+                },
+                "referenceId": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "CreateApp": {
+      "http": {
+        "requestUri": "/create-app",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name"
+        ],
+        "members": {
+          "assessmentSchedule": {},
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "description": {},
+          "eventSubscriptions": {
+            "shape": "S12"
+          },
+          "name": {},
+          "permissionModel": {
+            "shape": "S15"
+          },
+          "policyArn": {},
+          "tags": {
+            "shape": "S1a"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "app"
+        ],
+        "members": {
+          "app": {
+            "shape": "S1e"
+          }
+        }
+      }
+    },
+    "CreateAppVersionAppComponent": {
+      "http": {
+        "requestUri": "/create-app-version-app-component",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "name",
+          "type"
+        ],
+        "members": {
+          "additionalInfo": {
+            "shape": "S1m"
+          },
+          "appArn": {},
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "id": {},
+          "name": {},
+          "type": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion"
+        ],
+        "members": {
+          "appArn": {},
+          "appComponent": {
+            "shape": "S1r"
+          },
+          "appVersion": {}
+        }
+      }
+    },
+    "CreateAppVersionResource": {
+      "http": {
+        "requestUri": "/create-app-version-resource",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appComponents",
+          "logicalResourceId",
+          "physicalResourceId",
+          "resourceType"
+        ],
+        "members": {
+          "additionalInfo": {
+            "shape": "S1m"
+          },
+          "appArn": {},
+          "appComponents": {
+            "shape": "S1u"
+          },
+          "awsAccountId": {},
+          "awsRegion": {},
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "logicalResourceId": {
+            "shape": "S1v"
+          },
+          "physicalResourceId": {},
+          "resourceName": {},
+          "resourceType": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion"
+        ],
+        "members": {
+          "appArn": {},
+          "appVersion": {},
+          "physicalResource": {
+            "shape": "S1y"
+          }
+        }
+      }
+    },
+    "CreateRecommendationTemplate": {
+      "http": {
+        "requestUri": "/create-recommendation-template",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "assessmentArn",
+          "name"
+        ],
+        "members": {
+          "assessmentArn": {},
+          "bucketName": {},
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "format": {},
+          "name": {},
+          "recommendationIds": {
+            "shape": "S23"
+          },
+          "recommendationTypes": {
+            "shape": "S25"
+          },
+          "tags": {
+            "shape": "S1a"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "recommendationTemplate": {
+            "shape": "S28"
+          }
+        }
+      }
+    },
+    "CreateResiliencyPolicy": {
+      "http": {
+        "requestUri": "/create-resiliency-policy",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "policy",
+          "policyName",
+          "tier"
+        ],
+        "members": {
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "dataLocationConstraint": {},
+          "policy": {
+            "shape": "S2d"
+          },
+          "policyDescription": {},
+          "policyName": {},
+          "tags": {
+            "shape": "S1a"
+          },
+          "tier": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "policy"
+        ],
+        "members": {
+          "policy": {
+            "shape": "S2j"
+          }
+        }
+      }
+    },
+    "DeleteApp": {
+      "http": {
+        "requestUri": "/delete-app",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn"
+        ],
+        "members": {
+          "appArn": {},
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "forceDelete": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appArn"
+        ],
+        "members": {
+          "appArn": {}
+        }
+      }
+    },
+    "DeleteAppAssessment": {
+      "http": {
+        "requestUri": "/delete-app-assessment",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "assessmentArn"
+        ],
+        "members": {
+          "assessmentArn": {},
+          "clientToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "assessmentArn",
+          "assessmentStatus"
+        ],
+        "members": {
+          "assessmentArn": {},
+          "assessmentStatus": {}
+        }
+      }
+    },
+    "DeleteAppInputSource": {
+      "http": {
+        "requestUri": "/delete-app-input-source",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn"
+        ],
+        "members": {
+          "appArn": {},
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "eksSourceClusterNamespace": {
+            "shape": "S2r"
+          },
+          "sourceArn": {},
+          "terraformSource": {
+            "shape": "S2t"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "appArn": {},
+          "appInputSource": {
+            "shape": "S2w"
+          }
+        }
+      }
+    },
+    "DeleteAppVersionAppComponent": {
+      "http": {
+        "requestUri": "/delete-app-version-app-component",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "id"
+        ],
+        "members": {
+          "appArn": {},
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "id": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion"
+        ],
+        "members": {
+          "appArn": {},
+          "appComponent": {
+            "shape": "S1r"
+          },
+          "appVersion": {}
+        }
+      }
+    },
+    "DeleteAppVersionResource": {
+      "http": {
+        "requestUri": "/delete-app-version-resource",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn"
+        ],
+        "members": {
+          "appArn": {},
+          "awsAccountId": {},
+          "awsRegion": {},
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "logicalResourceId": {
+            "shape": "S1v"
+          },
+          "physicalResourceId": {},
+          "resourceName": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion"
+        ],
+        "members": {
+          "appArn": {},
+          "appVersion": {},
+          "physicalResource": {
+            "shape": "S1y"
+          }
+        }
+      }
+    },
+    "DeleteRecommendationTemplate": {
+      "http": {
+        "requestUri": "/delete-recommendation-template",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "recommendationTemplateArn"
+        ],
+        "members": {
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "recommendationTemplateArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "recommendationTemplateArn",
+          "status"
+        ],
+        "members": {
+          "recommendationTemplateArn": {},
+          "status": {}
+        }
+      }
+    },
+    "DeleteResiliencyPolicy": {
+      "http": {
+        "requestUri": "/delete-resiliency-policy",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "policyArn"
+        ],
+        "members": {
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "policyArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "policyArn"
+        ],
+        "members": {
+          "policyArn": {}
+        }
+      }
+    },
+    "DescribeApp": {
+      "http": {
+        "requestUri": "/describe-app",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn"
+        ],
+        "members": {
+          "appArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "app"
+        ],
+        "members": {
+          "app": {
+            "shape": "S1e"
+          }
+        }
+      }
+    },
+    "DescribeAppAssessment": {
+      "http": {
+        "requestUri": "/describe-app-assessment",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "assessmentArn"
+        ],
+        "members": {
+          "assessmentArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "assessment"
+        ],
+        "members": {
+          "assessment": {
+            "shape": "S3a"
+          }
+        }
+      }
+    },
+    "DescribeAppVersion": {
+      "http": {
+        "requestUri": "/describe-app-version",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion"
+        ],
+        "members": {
+          "appArn": {},
+          "appVersion": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion"
+        ],
+        "members": {
+          "additionalInfo": {
+            "shape": "S1m"
+          },
+          "appArn": {},
+          "appVersion": {}
+        }
+      }
+    },
+    "DescribeAppVersionAppComponent": {
+      "http": {
+        "requestUri": "/describe-app-version-app-component",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion",
+          "id"
+        ],
+        "members": {
+          "appArn": {},
+          "appVersion": {},
+          "id": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion"
+        ],
+        "members": {
+          "appArn": {},
+          "appComponent": {
+            "shape": "S1r"
+          },
+          "appVersion": {}
+        }
+      }
+    },
+    "DescribeAppVersionResource": {
+      "http": {
+        "requestUri": "/describe-app-version-resource",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion"
+        ],
+        "members": {
+          "appArn": {},
+          "appVersion": {},
+          "awsAccountId": {},
+          "awsRegion": {},
+          "logicalResourceId": {
+            "shape": "S1v"
+          },
+          "physicalResourceId": {},
+          "resourceName": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion"
+        ],
+        "members": {
+          "appArn": {},
+          "appVersion": {},
+          "physicalResource": {
+            "shape": "S1y"
+          }
+        }
+      }
+    },
+    "DescribeAppVersionResourcesResolutionStatus": {
+      "http": {
+        "requestUri": "/describe-app-version-resources-resolution-status",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion"
+        ],
+        "members": {
+          "appArn": {},
+          "appVersion": {},
+          "resolutionId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion",
+          "resolutionId",
+          "status"
+        ],
+        "members": {
+          "appArn": {},
+          "appVersion": {},
+          "errorMessage": {},
+          "resolutionId": {},
+          "status": {}
+        }
+      }
+    },
+    "DescribeAppVersionTemplate": {
+      "http": {
+        "requestUri": "/describe-app-version-template",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion"
+        ],
+        "members": {
+          "appArn": {},
+          "appVersion": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appTemplateBody",
+          "appVersion"
+        ],
+        "members": {
+          "appArn": {},
+          "appTemplateBody": {},
+          "appVersion": {}
+        }
+      }
+    },
+    "DescribeDraftAppVersionResourcesImportStatus": {
+      "http": {
+        "requestUri": "/describe-draft-app-version-resources-import-status",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn"
+        ],
+        "members": {
+          "appArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion",
+          "status",
+          "statusChangeTime"
+        ],
+        "members": {
+          "appArn": {},
+          "appVersion": {},
+          "errorMessage": {},
+          "status": {},
+          "statusChangeTime": {
+            "type": "timestamp"
+          }
+        }
+      }
+    },
+    "DescribeResiliencyPolicy": {
+      "http": {
+        "requestUri": "/describe-resiliency-policy",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "policyArn"
+        ],
+        "members": {
+          "policyArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "policy"
+        ],
+        "members": {
+          "policy": {
+            "shape": "S2j"
+          }
+        }
+      }
+    },
+    "DescribeResourceGroupingRecommendationTask": {
+      "http": {
+        "requestUri": "/describe-resource-grouping-recommendation-task",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn"
+        ],
+        "members": {
+          "appArn": {},
+          "groupingId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "groupingId",
+          "status"
+        ],
+        "members": {
+          "errorMessage": {},
+          "groupingId": {},
+          "status": {}
+        }
+      }
+    },
+    "ImportResourcesToDraftAppVersion": {
+      "http": {
+        "requestUri": "/import-resources-to-draft-app-version",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn"
+        ],
+        "members": {
+          "appArn": {},
+          "eksSources": {
+            "shape": "S4g"
+          },
+          "importStrategy": {},
+          "sourceArns": {
+            "shape": "S4k"
+          },
+          "terraformSources": {
+            "shape": "S4l"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion",
+          "status"
+        ],
+        "members": {
+          "appArn": {},
+          "appVersion": {},
+          "eksSources": {
+            "shape": "S4g"
+          },
+          "sourceArns": {
+            "shape": "S4k"
+          },
+          "status": {},
+          "terraformSources": {
+            "shape": "S4l"
+          }
+        }
+      }
+    },
+    "ListAlarmRecommendations": {
+      "http": {
+        "requestUri": "/list-alarm-recommendations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "assessmentArn"
+        ],
+        "members": {
+          "assessmentArn": {},
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "alarmRecommendations"
+        ],
+        "members": {
+          "alarmRecommendations": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "name",
+                "recommendationId",
+                "referenceId",
+                "type"
+              ],
+              "members": {
+                "appComponentName": {
+                  "deprecated": true,
+                  "deprecatedMessage": "An alarm recommendation can be attached to multiple Application Components, hence this property will be replaced by the new property 'appComponentNames'."
+                },
+                "appComponentNames": {
+                  "shape": "S1u"
+                },
+                "description": {},
+                "items": {
+                  "shape": "S4u"
+                },
+                "name": {},
+                "prerequisite": {},
+                "recommendationId": {},
+                "recommendationStatus": {},
+                "referenceId": {},
+                "type": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListAppAssessmentComplianceDrifts": {
+      "http": {
+        "requestUri": "/list-app-assessment-compliance-drifts",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "assessmentArn"
+        ],
+        "members": {
+          "assessmentArn": {},
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "complianceDrifts"
+        ],
+        "members": {
+          "complianceDrifts": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "actualReferenceId": {},
+                "actualValue": {
+                  "shape": "S3b"
+                },
+                "appId": {},
+                "appVersion": {},
+                "diffType": {},
+                "driftType": {},
+                "entityId": {},
+                "entityType": {},
+                "expectedReferenceId": {},
+                "expectedValue": {
+                  "shape": "S3b"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListAppAssessmentResourceDrifts": {
+      "http": {
+        "requestUri": "/list-app-assessment-resource-drifts",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "assessmentArn"
+        ],
+        "members": {
+          "assessmentArn": {},
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "resourceDrifts"
+        ],
+        "members": {
+          "nextToken": {},
+          "resourceDrifts": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "appArn": {},
+                "appVersion": {},
+                "diffType": {},
+                "referenceId": {},
+                "resourceIdentifier": {
+                  "type": "structure",
+                  "members": {
+                    "logicalResourceId": {
+                      "shape": "S1v"
+                    },
+                    "resourceType": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListAppAssessments": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/list-app-assessments",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "appArn": {
+            "location": "querystring",
+            "locationName": "appArn"
+          },
+          "assessmentName": {
+            "location": "querystring",
+            "locationName": "assessmentName"
+          },
+          "assessmentStatus": {
+            "location": "querystring",
+            "locationName": "assessmentStatus",
+            "type": "list",
+            "member": {}
+          },
+          "complianceStatus": {
+            "location": "querystring",
+            "locationName": "complianceStatus"
+          },
+          "invoker": {
+            "location": "querystring",
+            "locationName": "invoker"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "reverseOrder": {
+            "location": "querystring",
+            "locationName": "reverseOrder",
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "assessmentSummaries"
+        ],
+        "members": {
+          "assessmentSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "assessmentArn",
+                "assessmentStatus"
+              ],
+              "members": {
+                "appArn": {},
+                "appVersion": {},
+                "assessmentArn": {},
+                "assessmentName": {},
+                "assessmentStatus": {},
+                "complianceStatus": {},
+                "cost": {
+                  "shape": "S3e"
+                },
+                "driftStatus": {},
+                "endTime": {
+                  "type": "timestamp"
+                },
+                "invoker": {},
+                "message": {},
+                "resiliencyScore": {
+                  "type": "double"
+                },
+                "startTime": {
+                  "type": "timestamp"
+                },
+                "versionName": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListAppComponentCompliances": {
+      "http": {
+        "requestUri": "/list-app-component-compliances",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "assessmentArn"
+        ],
+        "members": {
+          "assessmentArn": {},
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "componentCompliances"
+        ],
+        "members": {
+          "componentCompliances": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "appComponentName": {},
+                "compliance": {
+                  "shape": "S3b"
+                },
+                "cost": {
+                  "shape": "S3e"
+                },
+                "message": {},
+                "resiliencyScore": {
+                  "shape": "S3j"
+                },
+                "status": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListAppComponentRecommendations": {
+      "http": {
+        "requestUri": "/list-app-component-recommendations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "assessmentArn"
+        ],
+        "members": {
+          "assessmentArn": {},
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "componentRecommendations"
+        ],
+        "members": {
+          "componentRecommendations": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "appComponentName",
+                "configRecommendations",
+                "recommendationStatus"
+              ],
+              "members": {
+                "appComponentName": {},
+                "configRecommendations": {
+                  "type": "list",
+                  "member": {
+                    "type": "structure",
+                    "required": [
+                      "name",
+                      "optimizationType",
+                      "referenceId"
+                    ],
+                    "members": {
+                      "appComponentName": {},
+                      "compliance": {
+                        "shape": "S3b"
+                      },
+                      "cost": {
+                        "shape": "S3e"
+                      },
+                      "description": {},
+                      "haArchitecture": {},
+                      "name": {},
+                      "optimizationType": {},
+                      "recommendationCompliance": {
+                        "type": "map",
+                        "key": {},
+                        "value": {
+                          "type": "structure",
+                          "required": [
+                            "expectedComplianceStatus"
+                          ],
+                          "members": {
+                            "expectedComplianceStatus": {},
+                            "expectedRpoDescription": {},
+                            "expectedRpoInSecs": {
+                              "type": "integer"
+                            },
+                            "expectedRtoDescription": {},
+                            "expectedRtoInSecs": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      },
+                      "referenceId": {},
+                      "suggestedChanges": {
+                        "type": "list",
+                        "member": {}
+                      }
+                    }
+                  }
+                },
+                "recommendationStatus": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListAppInputSources": {
+      "http": {
+        "requestUri": "/list-app-input-sources",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion"
+        ],
+        "members": {
+          "appArn": {},
+          "appVersion": {},
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appInputSources"
+        ],
+        "members": {
+          "appInputSources": {
+            "type": "list",
+            "member": {
+              "shape": "S2w"
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListAppVersionAppComponents": {
+      "http": {
+        "requestUri": "/list-app-version-app-components",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion"
+        ],
+        "members": {
+          "appArn": {},
+          "appVersion": {},
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion"
+        ],
+        "members": {
+          "appArn": {},
+          "appComponents": {
+            "shape": "S1z"
+          },
+          "appVersion": {},
+          "nextToken": {}
+        }
+      }
+    },
+    "ListAppVersionResourceMappings": {
+      "http": {
+        "requestUri": "/list-app-version-resource-mappings",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion"
+        ],
+        "members": {
+          "appArn": {},
+          "appVersion": {},
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "resourceMappings"
+        ],
+        "members": {
+          "nextToken": {},
+          "resourceMappings": {
+            "shape": "Sb"
+          }
+        }
+      }
+    },
+    "ListAppVersionResources": {
+      "http": {
+        "requestUri": "/list-app-version-resources",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion"
+        ],
+        "members": {
+          "appArn": {},
+          "appVersion": {},
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {},
+          "resolutionId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "physicalResources",
+          "resolutionId"
+        ],
+        "members": {
+          "nextToken": {},
+          "physicalResources": {
+            "type": "list",
+            "member": {
+              "shape": "S1y"
+            }
+          },
+          "resolutionId": {}
+        }
+      }
+    },
+    "ListAppVersions": {
+      "http": {
+        "requestUri": "/list-app-versions",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn"
+        ],
+        "members": {
+          "appArn": {},
+          "endTime": {
+            "type": "timestamp"
+          },
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {},
+          "startTime": {
+            "type": "timestamp"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appVersions"
+        ],
+        "members": {
+          "appVersions": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "appVersion"
+              ],
+              "members": {
+                "appVersion": {},
+                "creationTime": {
+                  "type": "timestamp"
+                },
+                "identifier": {
+                  "type": "long"
+                },
+                "versionName": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListApps": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/list-apps",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "appArn": {
+            "location": "querystring",
+            "locationName": "appArn"
+          },
+          "fromLastAssessmentTime": {
+            "location": "querystring",
+            "locationName": "fromLastAssessmentTime",
+            "type": "timestamp"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "name": {
+            "location": "querystring",
+            "locationName": "name"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "reverseOrder": {
+            "location": "querystring",
+            "locationName": "reverseOrder",
+            "type": "boolean"
+          },
+          "toLastAssessmentTime": {
+            "location": "querystring",
+            "locationName": "toLastAssessmentTime",
+            "type": "timestamp"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appSummaries"
+        ],
+        "members": {
+          "appSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "appArn",
+                "creationTime",
+                "name"
+              ],
+              "members": {
+                "appArn": {},
+                "assessmentSchedule": {},
+                "complianceStatus": {},
+                "creationTime": {
+                  "type": "timestamp"
+                },
+                "description": {},
+                "driftStatus": {},
+                "lastAppComplianceEvaluationTime": {
+                  "type": "timestamp"
+                },
+                "name": {},
+                "resiliencyScore": {
+                  "type": "double"
+                },
+                "rpoInSecs": {
+                  "type": "integer"
+                },
+                "rtoInSecs": {
+                  "type": "integer"
+                },
+                "status": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListRecommendationTemplates": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/list-recommendation-templates",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "assessmentArn": {
+            "location": "querystring",
+            "locationName": "assessmentArn"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "name": {
+            "location": "querystring",
+            "locationName": "name"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "recommendationTemplateArn": {
+            "location": "querystring",
+            "locationName": "recommendationTemplateArn"
+          },
+          "reverseOrder": {
+            "location": "querystring",
+            "locationName": "reverseOrder",
+            "type": "boolean"
+          },
+          "status": {
+            "location": "querystring",
+            "locationName": "status",
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "nextToken": {},
+          "recommendationTemplates": {
+            "type": "list",
+            "member": {
+              "shape": "S28"
+            }
+          }
+        }
+      }
+    },
+    "ListResiliencyPolicies": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/list-resiliency-policies",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "policyName": {
+            "location": "querystring",
+            "locationName": "policyName"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "resiliencyPolicies"
+        ],
+        "members": {
+          "nextToken": {},
+          "resiliencyPolicies": {
+            "shape": "S6j"
+          }
+        }
+      }
+    },
+    "ListResourceGroupingRecommendations": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/list-resource-grouping-recommendations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "appArn": {
+            "location": "querystring",
+            "locationName": "appArn"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "groupingRecommendations"
+        ],
+        "members": {
+          "groupingRecommendations": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "confidenceLevel",
+                "creationTime",
+                "groupingAppComponent",
+                "groupingRecommendationId",
+                "recommendationReasons",
+                "resources",
+                "score",
+                "status"
+              ],
+              "members": {
+                "confidenceLevel": {},
+                "creationTime": {
+                  "type": "timestamp"
+                },
+                "groupingAppComponent": {
+                  "type": "structure",
+                  "required": [
+                    "appComponentId",
+                    "appComponentName",
+                    "appComponentType"
+                  ],
+                  "members": {
+                    "appComponentId": {},
+                    "appComponentName": {},
+                    "appComponentType": {}
+                  }
+                },
+                "groupingRecommendationId": {},
+                "recommendationReasons": {
+                  "shape": "S6q"
+                },
+                "rejectionReason": {},
+                "resources": {
+                  "type": "list",
+                  "member": {
+                    "type": "structure",
+                    "required": [
+                      "logicalResourceId",
+                      "physicalResourceId",
+                      "resourceName",
+                      "resourceType",
+                      "sourceAppComponentIds"
+                    ],
+                    "members": {
+                      "logicalResourceId": {
+                        "shape": "S1v"
+                      },
+                      "physicalResourceId": {
+                        "shape": "Sf"
+                      },
+                      "resourceName": {},
+                      "resourceType": {},
+                      "sourceAppComponentIds": {
+                        "shape": "S6q"
+                      }
+                    }
+                  }
+                },
+                "score": {
+                  "type": "double"
+                },
+                "status": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListSopRecommendations": {
+      "http": {
+        "requestUri": "/list-sop-recommendations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "assessmentArn"
+        ],
+        "members": {
+          "assessmentArn": {},
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "sopRecommendations"
+        ],
+        "members": {
+          "nextToken": {},
+          "sopRecommendations": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "recommendationId",
+                "referenceId",
+                "serviceType"
+              ],
+              "members": {
+                "appComponentName": {},
+                "description": {},
+                "items": {
+                  "shape": "S4u"
+                },
+                "name": {},
+                "prerequisite": {},
+                "recommendationId": {},
+                "recommendationStatus": {},
+                "referenceId": {},
+                "serviceType": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListSuggestedResiliencyPolicies": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/list-suggested-resiliency-policies",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "resiliencyPolicies"
+        ],
+        "members": {
+          "nextToken": {},
+          "resiliencyPolicies": {
+            "shape": "S6j"
+          }
+        }
+      }
+    },
+    "ListTagsForResource": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "tags": {
+            "shape": "S1a"
+          }
+        }
+      }
+    },
+    "ListTestRecommendations": {
+      "http": {
+        "requestUri": "/list-test-recommendations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "assessmentArn"
+        ],
+        "members": {
+          "assessmentArn": {},
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "testRecommendations"
+        ],
+        "members": {
+          "nextToken": {},
+          "testRecommendations": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "referenceId"
+              ],
+              "members": {
+                "appComponentName": {},
+                "dependsOnAlarms": {
+                  "type": "list",
+                  "member": {}
+                },
+                "description": {},
+                "intent": {},
+                "items": {
+                  "shape": "S4u"
+                },
+                "name": {},
+                "prerequisite": {},
+                "recommendationId": {},
+                "recommendationStatus": {},
+                "referenceId": {},
+                "risk": {},
+                "type": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListUnsupportedAppVersionResources": {
+      "http": {
+        "requestUri": "/list-unsupported-app-version-resources",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion"
+        ],
+        "members": {
+          "appArn": {},
+          "appVersion": {},
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {},
+          "resolutionId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "resolutionId",
+          "unsupportedResources"
+        ],
+        "members": {
+          "nextToken": {},
+          "resolutionId": {},
+          "unsupportedResources": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "logicalResourceId",
+                "physicalResourceId",
+                "resourceType"
+              ],
+              "members": {
+                "logicalResourceId": {
+                  "shape": "S1v"
+                },
+                "physicalResourceId": {
+                  "shape": "Sf"
+                },
+                "resourceType": {},
+                "unsupportedResourceStatus": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "PublishAppVersion": {
+      "http": {
+        "requestUri": "/publish-app-version",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn"
+        ],
+        "members": {
+          "appArn": {},
+          "versionName": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appArn"
+        ],
+        "members": {
+          "appArn": {},
+          "appVersion": {},
+          "identifier": {
+            "type": "long"
+          },
+          "versionName": {}
+        }
+      }
+    },
+    "PutDraftAppVersionTemplate": {
+      "http": {
+        "requestUri": "/put-draft-app-version-template",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appTemplateBody"
+        ],
+        "members": {
+          "appArn": {},
+          "appTemplateBody": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "appArn": {},
+          "appVersion": {}
+        }
+      }
+    },
+    "RejectResourceGroupingRecommendations": {
+      "http": {
+        "requestUri": "/reject-resource-grouping-recommendations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "entries"
+        ],
+        "members": {
+          "appArn": {},
+          "entries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "groupingRecommendationId"
+              ],
+              "members": {
+                "groupingRecommendationId": {},
+                "rejectionReason": {}
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "failedEntries"
+        ],
+        "members": {
+          "appArn": {},
+          "failedEntries": {
+            "shape": "S7"
+          }
+        }
+      }
+    },
+    "RemoveDraftAppVersionResourceMappings": {
+      "http": {
+        "requestUri": "/remove-draft-app-version-resource-mappings",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn"
+        ],
+        "members": {
+          "appArn": {},
+          "appRegistryAppNames": {
+            "shape": "S7p"
+          },
+          "eksSourceNames": {
+            "shape": "S6q"
+          },
+          "logicalStackNames": {
+            "shape": "S6q"
+          },
+          "resourceGroupNames": {
+            "shape": "S7p"
+          },
+          "resourceNames": {
+            "shape": "S7p"
+          },
+          "terraformSourceNames": {
+            "shape": "S6q"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "appArn": {},
+          "appVersion": {}
+        }
+      }
+    },
+    "ResolveAppVersionResources": {
+      "http": {
+        "requestUri": "/resolve-app-version-resources",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion"
+        ],
+        "members": {
+          "appArn": {},
+          "appVersion": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion",
+          "resolutionId",
+          "status"
+        ],
+        "members": {
+          "appArn": {},
+          "appVersion": {},
+          "resolutionId": {},
+          "status": {}
+        }
+      }
+    },
+    "StartAppAssessment": {
+      "http": {
+        "requestUri": "/start-app-assessment",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion",
+          "assessmentName"
+        ],
+        "members": {
+          "appArn": {},
+          "appVersion": {},
+          "assessmentName": {},
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "tags": {
+            "shape": "S1a"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "assessment"
+        ],
+        "members": {
+          "assessment": {
+            "shape": "S3a"
+          }
+        }
+      }
+    },
+    "StartResourceGroupingRecommendationTask": {
+      "http": {
+        "requestUri": "/start-resource-grouping-recommendation-task",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn"
+        ],
+        "members": {
+          "appArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "groupingId",
+          "status"
+        ],
+        "members": {
+          "appArn": {},
+          "errorMessage": {},
+          "groupingId": {},
+          "status": {}
+        }
+      }
+    },
+    "TagResource": {
+      "http": {
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tags"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          },
+          "tags": {
+            "shape": "S1a"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UntagResource": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tagKeys"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          },
+          "tagKeys": {
+            "location": "querystring",
+            "locationName": "tagKeys",
+            "type": "list",
+            "member": {},
+            "sensitive": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UpdateApp": {
+      "http": {
+        "requestUri": "/update-app",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn"
+        ],
+        "members": {
+          "appArn": {},
+          "assessmentSchedule": {},
+          "clearResiliencyPolicyArn": {
+            "type": "boolean"
+          },
+          "description": {},
+          "eventSubscriptions": {
+            "shape": "S12"
+          },
+          "permissionModel": {
+            "shape": "S15"
+          },
+          "policyArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "app"
+        ],
+        "members": {
+          "app": {
+            "shape": "S1e"
+          }
+        }
+      }
+    },
+    "UpdateAppVersion": {
+      "http": {
+        "requestUri": "/update-app-version",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn"
+        ],
+        "members": {
+          "additionalInfo": {
+            "shape": "S1m"
+          },
+          "appArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion"
+        ],
+        "members": {
+          "additionalInfo": {
+            "shape": "S1m"
+          },
+          "appArn": {},
+          "appVersion": {}
+        }
+      }
+    },
+    "UpdateAppVersionAppComponent": {
+      "http": {
+        "requestUri": "/update-app-version-app-component",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "id"
+        ],
+        "members": {
+          "additionalInfo": {
+            "shape": "S1m"
+          },
+          "appArn": {},
+          "id": {},
+          "name": {},
+          "type": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion"
+        ],
+        "members": {
+          "appArn": {},
+          "appComponent": {
+            "shape": "S1r"
+          },
+          "appVersion": {}
+        }
+      }
+    },
+    "UpdateAppVersionResource": {
+      "http": {
+        "requestUri": "/update-app-version-resource",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "appArn"
+        ],
+        "members": {
+          "additionalInfo": {
+            "shape": "S1m"
+          },
+          "appArn": {},
+          "appComponents": {
+            "shape": "S1u"
+          },
+          "awsAccountId": {},
+          "awsRegion": {},
+          "excluded": {
+            "type": "boolean"
+          },
+          "logicalResourceId": {
+            "shape": "S1v"
+          },
+          "physicalResourceId": {},
+          "resourceName": {},
+          "resourceType": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "appArn",
+          "appVersion"
+        ],
+        "members": {
+          "appArn": {},
+          "appVersion": {},
+          "physicalResource": {
+            "shape": "S1y"
+          }
+        }
+      }
+    },
+    "UpdateResiliencyPolicy": {
+      "http": {
+        "requestUri": "/update-resiliency-policy",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "policyArn"
+        ],
+        "members": {
+          "dataLocationConstraint": {},
+          "policy": {
+            "shape": "S2d"
+          },
+          "policyArn": {},
+          "policyDescription": {},
+          "policyName": {},
+          "tier": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "policy"
+        ],
+        "members": {
+          "policy": {
+            "shape": "S2j"
+          }
+        }
+      }
+    }
+  },
+  "shapes": {
+    "S7": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "errorMessage",
+          "groupingRecommendationId"
+        ],
+        "members": {
+          "errorMessage": {},
+          "groupingRecommendationId": {}
+        }
+      }
+    },
+    "Sb": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "mappingType",
+          "physicalResourceId"
+        ],
+        "members": {
+          "appRegistryAppName": {},
+          "eksSourceName": {},
+          "logicalStackName": {},
+          "mappingType": {},
+          "physicalResourceId": {
+            "shape": "Sf"
+          },
+          "resourceGroupName": {},
+          "resourceName": {},
+          "terraformSourceName": {}
+        }
+      }
+    },
+    "Sf": {
+      "type": "structure",
+      "required": [
+        "identifier",
+        "type"
+      ],
+      "members": {
+        "awsAccountId": {},
+        "awsRegion": {},
+        "identifier": {},
+        "type": {}
+      }
+    },
+    "Sq": {
+      "type": "structure",
+      "members": {
+        "resourceId": {},
+        "targetAccountId": {},
+        "targetRegion": {}
+      }
+    },
+    "S12": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "eventType",
+          "name"
+        ],
+        "members": {
+          "eventType": {},
+          "name": {},
+          "snsTopicArn": {}
+        }
+      }
+    },
+    "S15": {
+      "type": "structure",
+      "required": [
+        "type"
+      ],
+      "members": {
+        "crossAccountRoleArns": {
+          "type": "list",
+          "member": {}
+        },
+        "invokerRoleName": {},
+        "type": {}
+      }
+    },
+    "S1a": {
+      "type": "map",
+      "key": {},
+      "value": {},
+      "sensitive": true
+    },
+    "S1e": {
+      "type": "structure",
+      "required": [
+        "appArn",
+        "creationTime",
+        "name"
+      ],
+      "members": {
+        "appArn": {},
+        "assessmentSchedule": {},
+        "complianceStatus": {},
+        "creationTime": {
+          "type": "timestamp"
+        },
+        "description": {},
+        "driftStatus": {},
+        "eventSubscriptions": {
+          "shape": "S12"
+        },
+        "lastAppComplianceEvaluationTime": {
+          "type": "timestamp"
+        },
+        "lastDriftEvaluationTime": {
+          "type": "timestamp"
+        },
+        "lastResiliencyScoreEvaluationTime": {
+          "type": "timestamp"
+        },
+        "name": {},
+        "permissionModel": {
+          "shape": "S15"
+        },
+        "policyArn": {},
+        "resiliencyScore": {
+          "type": "double"
+        },
+        "rpoInSecs": {
+          "type": "integer"
+        },
+        "rtoInSecs": {
+          "type": "integer"
+        },
+        "status": {},
+        "tags": {
+          "shape": "S1a"
+        }
+      }
+    },
+    "S1m": {
+      "type": "map",
+      "key": {},
+      "value": {
+        "type": "list",
+        "member": {}
+      }
+    },
+    "S1r": {
+      "type": "structure",
+      "required": [
+        "name",
+        "type"
+      ],
+      "members": {
+        "additionalInfo": {
+          "shape": "S1m"
+        },
+        "id": {},
+        "name": {},
+        "type": {}
+      }
+    },
+    "S1u": {
+      "type": "list",
+      "member": {}
+    },
+    "S1v": {
+      "type": "structure",
+      "required": [
+        "identifier"
+      ],
+      "members": {
+        "eksSourceName": {},
+        "identifier": {},
+        "logicalStackName": {},
+        "resourceGroupName": {},
+        "terraformSourceName": {}
+      }
+    },
+    "S1y": {
+      "type": "structure",
+      "required": [
+        "logicalResourceId",
+        "physicalResourceId",
+        "resourceType"
+      ],
+      "members": {
+        "additionalInfo": {
+          "shape": "S1m"
+        },
+        "appComponents": {
+          "shape": "S1z"
+        },
+        "excluded": {
+          "type": "boolean"
+        },
+        "logicalResourceId": {
+          "shape": "S1v"
+        },
+        "parentResourceName": {},
+        "physicalResourceId": {
+          "shape": "Sf"
+        },
+        "resourceName": {},
+        "resourceType": {},
+        "sourceType": {}
+      }
+    },
+    "S1z": {
+      "type": "list",
+      "member": {
+        "shape": "S1r"
+      }
+    },
+    "S23": {
+      "type": "list",
+      "member": {}
+    },
+    "S25": {
+      "type": "list",
+      "member": {}
+    },
+    "S28": {
+      "type": "structure",
+      "required": [
+        "assessmentArn",
+        "format",
+        "name",
+        "recommendationTemplateArn",
+        "recommendationTypes",
+        "status"
+      ],
+      "members": {
+        "appArn": {},
+        "assessmentArn": {},
+        "endTime": {
+          "type": "timestamp"
+        },
+        "format": {},
+        "message": {},
+        "name": {},
+        "needsReplacements": {
+          "type": "boolean"
+        },
+        "recommendationIds": {
+          "shape": "S23"
+        },
+        "recommendationTemplateArn": {},
+        "recommendationTypes": {
+          "shape": "S25"
+        },
+        "startTime": {
+          "type": "timestamp"
+        },
+        "status": {},
+        "tags": {
+          "shape": "S1a"
+        },
+        "templatesLocation": {
+          "type": "structure",
+          "members": {
+            "bucket": {},
+            "prefix": {}
+          }
+        }
+      }
+    },
+    "S2d": {
+      "type": "map",
+      "key": {},
+      "value": {
+        "type": "structure",
+        "required": [
+          "rpoInSecs",
+          "rtoInSecs"
+        ],
+        "members": {
+          "rpoInSecs": {
+            "type": "integer"
+          },
+          "rtoInSecs": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "S2j": {
+      "type": "structure",
+      "members": {
+        "creationTime": {
+          "type": "timestamp"
+        },
+        "dataLocationConstraint": {},
+        "estimatedCostTier": {},
+        "policy": {
+          "shape": "S2d"
+        },
+        "policyArn": {},
+        "policyDescription": {},
+        "policyName": {},
+        "tags": {
+          "shape": "S1a"
+        },
+        "tier": {}
+      }
+    },
+    "S2r": {
+      "type": "structure",
+      "required": [
+        "eksClusterArn",
+        "namespace"
+      ],
+      "members": {
+        "eksClusterArn": {},
+        "namespace": {}
+      }
+    },
+    "S2t": {
+      "type": "structure",
+      "required": [
+        "s3StateFileUrl"
+      ],
+      "members": {
+        "s3StateFileUrl": {}
+      }
+    },
+    "S2w": {
+      "type": "structure",
+      "required": [
+        "importType"
+      ],
+      "members": {
+        "eksSourceClusterNamespace": {
+          "shape": "S2r"
+        },
+        "importType": {},
+        "resourceCount": {
+          "type": "integer"
+        },
+        "sourceArn": {},
+        "sourceName": {},
+        "terraformSource": {
+          "shape": "S2t"
+        }
+      }
+    },
+    "S3a": {
+      "type": "structure",
+      "required": [
+        "assessmentArn",
+        "assessmentStatus",
+        "invoker"
+      ],
+      "members": {
+        "appArn": {},
+        "appVersion": {},
+        "assessmentArn": {},
+        "assessmentName": {},
+        "assessmentStatus": {},
+        "compliance": {
+          "shape": "S3b"
+        },
+        "complianceStatus": {},
+        "cost": {
+          "shape": "S3e"
+        },
+        "driftStatus": {},
+        "endTime": {
+          "type": "timestamp"
+        },
+        "invoker": {},
+        "message": {},
+        "policy": {
+          "shape": "S2j"
+        },
+        "resiliencyScore": {
+          "shape": "S3j"
+        },
+        "resourceErrorsDetails": {
+          "type": "structure",
+          "members": {
+            "hasMoreErrors": {
+              "type": "boolean"
+            },
+            "resourceErrors": {
+              "type": "list",
+              "member": {
+                "type": "structure",
+                "members": {
+                  "logicalResourceId": {},
+                  "physicalResourceId": {},
+                  "reason": {}
+                }
+              }
+            }
+          }
+        },
+        "startTime": {
+          "type": "timestamp"
+        },
+        "summary": {
+          "type": "structure",
+          "members": {
+            "riskRecommendations": {
+              "type": "list",
+              "member": {
+                "type": "structure",
+                "members": {
+                  "appComponents": {
+                    "shape": "S1u"
+                  },
+                  "recommendation": {},
+                  "risk": {}
+                }
+              }
+            },
+            "summary": {}
+          }
+        },
+        "tags": {
+          "shape": "S1a"
+        },
+        "versionName": {}
+      }
+    },
+    "S3b": {
+      "type": "map",
+      "key": {},
+      "value": {
+        "type": "structure",
+        "required": [
+          "complianceStatus"
+        ],
+        "members": {
+          "achievableRpoInSecs": {
+            "type": "integer"
+          },
+          "achievableRtoInSecs": {
+            "type": "integer"
+          },
+          "complianceStatus": {},
+          "currentRpoInSecs": {
+            "type": "integer"
+          },
+          "currentRtoInSecs": {
+            "type": "integer"
+          },
+          "message": {},
+          "rpoDescription": {},
+          "rpoReferenceId": {},
+          "rtoDescription": {},
+          "rtoReferenceId": {}
+        }
+      }
+    },
+    "S3e": {
+      "type": "structure",
+      "required": [
+        "amount",
+        "currency",
+        "frequency"
+      ],
+      "members": {
+        "amount": {
+          "type": "double"
+        },
+        "currency": {},
+        "frequency": {}
+      }
+    },
+    "S3j": {
+      "type": "structure",
+      "required": [
+        "disruptionScore",
+        "score"
+      ],
+      "members": {
+        "componentScore": {
+          "type": "map",
+          "key": {},
+          "value": {
+            "type": "structure",
+            "members": {
+              "excludedCount": {
+                "type": "long"
+              },
+              "outstandingCount": {
+                "type": "long"
+              },
+              "possibleScore": {
+                "type": "double"
+              },
+              "score": {
+                "type": "double"
+              }
+            }
+          }
+        },
+        "disruptionScore": {
+          "type": "map",
+          "key": {},
+          "value": {
+            "type": "double"
+          }
+        },
+        "score": {
+          "type": "double"
+        }
+      }
+    },
+    "S4g": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "eksClusterArn",
+          "namespaces"
+        ],
+        "members": {
+          "eksClusterArn": {},
+          "namespaces": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      }
+    },
+    "S4k": {
+      "type": "list",
+      "member": {}
+    },
+    "S4l": {
+      "type": "list",
+      "member": {
+        "shape": "S2t"
+      }
+    },
+    "S4u": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "alreadyImplemented": {
+            "type": "boolean"
+          },
+          "excludeReason": {},
+          "excluded": {
+            "type": "boolean"
+          },
+          "resourceId": {},
+          "targetAccountId": {},
+          "targetRegion": {}
+        }
+      }
+    },
+    "S6j": {
+      "type": "list",
+      "member": {
+        "shape": "S2j"
+      }
+    },
+    "S6q": {
+      "type": "list",
+      "member": {}
+    },
+    "S7p": {
+      "type": "list",
+      "member": {}
+    }
+  }
+}

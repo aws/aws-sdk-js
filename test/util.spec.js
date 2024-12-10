@@ -126,7 +126,7 @@
     describe('getDate', function() {
       it('should return current date by default', function() {
         var now, obj;
-        now = {};
+        now = new Date(0);
         obj = AWS.util.isNode() ? global : window;
         helpers.spyOn(obj, 'Date').andCallFake(function() {
           return now;
@@ -170,6 +170,30 @@
         });
       });
     });
+
+    describe('applyClockOffset', function() {
+      it('should apply new clock offset to AWS.config given new service time', function() {
+        var now = new Date().getTime();
+        AWS.config.systemClockOffset = 0;
+        AWS.util.applyClockOffset(now + 30000);
+        var updatedOffset = AWS.config.systemClockOffset;
+        expect(29900 < updatedOffset && 30100 > updatedOffset).to.equal(true);
+      });
+    });
+
+    describe('isClockSkewed', function() {
+      it('should apply new clock offset to AWS.config given new service time', function() {
+        var util = AWS.util;
+        var now = new Date();
+        obj = AWS.util.isNode() ? global : window;
+        helpers.spyOn(obj, 'Date').andCallFake(function() {
+          return now;
+        });
+        expect(util.isClockSkewed(now.getTime() + 300100)).to.equal(true);
+        expect(util.isClockSkewed(now.getTime() + 299900)).to.equal(false);
+      });
+    });
+
     describe('iso8601', function() {
       it('should return date formatted as YYYYMMDDTHHmmssZ', function() {
         var date;
@@ -187,6 +211,7 @@
         return expect(util.iso8601(date)).to.equal('1970-01-01T00:11:00Z');
       });
     });
+
     describe('rfc822', function() {
       it('should return date formatted as YYYYMMDDTHHmmssZ', function() {
         var date;
@@ -238,7 +263,7 @@
         return expect(len(null)).to.equal(0);
       });
       it('handles buffer input', function() {
-        return expect(len(new Buffer('∂ƒ©∆'))).to.equal(10);
+        return expect(len(new AWS.util.buffer.toBuffer('∂ƒ©∆'))).to.equal(10);
       });
       it('handles string input', function() {
         expect(len('')).to.equal(0);
@@ -285,7 +310,7 @@
   });
 
   describe('AWS.util.ini', function() {
-    return describe('parse', function() {
+    describe('parse', function() {
       it('parses an ini file', function() {
         var ini, map;
         ini = '; comment at the beginning of the line\n[section1] ; comment at end of line\ninvalidline\nkey1=value1 ; another comment\n  key2 = value2;value3\n  key3 = value4 # yet another comment\n[emptysection]\n#key1=value1';
@@ -293,25 +318,58 @@
         expect(map.section1.key1).to.equal('value1');
         expect(map.section1.key2).to.equal('value2;value3');
         expect(map.section1.key3).to.equal('value4');
-        return expect(map.emptysection).to.equal(void 0);
+        expect(map.emptysection).to.equal(void 0);
       });
-      return it('ignores leading and trailing white space', function() {
+
+      it('ignores leading and trailing white space', function() {
         var ini, map;
         ini = '[section1] ; comment at end of line\n\r\tkey1=\t\rvalue1\t\r\n\v\f\tkey2=value2\f\v\n\u00a0key3   =  \u00a0value3\u3000\n[emptysection]';
         map = AWS.util.ini.parse(ini);
         expect(map.section1.key1).to.equal('value1');
         expect(map.section1.key2).to.equal('value2');
-        return expect(map.section1.key3).to.equal('value3');
+        expect(map.section1.key3).to.equal('value3');
+      });
+
+      it('throws if the profile name is __proto__', function(done) {
+        var ini, map;
+        ini = '[__proto__]\nkey1=value1';
+        try {
+          AWS.util.ini.parse(ini);
+        } catch (err) {
+          expect(err.message).to.equal('Cannot load profile name \'__proto__\' from shared ini file.');
+          done();
+        }
+      });
+
+      it('throws if the profile name is "profile __proto__"', function(done) {
+        var ini, map;
+        ini = '[profile __proto__]\nkey2=value2';
+        try {
+          AWS.util.ini.parse(ini);
+        } catch (err) {
+          expect(err.message).to.equal('Cannot load profile name \'profile __proto__\' from shared ini file.');
+          done();
+        }
       });
     });
   });
 
   describe('AWS.util.buffer', function() {
+    describe ('alloc', function () {
+      it('should throw if first parameter is not number', function(done) {
+        try {
+          AWS.util.buffer.alloc('foo');
+        } catch (e) {
+          expect(e.message).to.eql('size passed to alloc must be a number.');
+          done();
+        }
+      });
+    });
     return describe('concat', function() {
       return it('concatenates a list of buffers', function() {
         var buffer1, buffer2, buffer3;
-        buffer1 = new Buffer('abcdefg');
-        buffer2 = new Buffer('hijklmn');
+        buffer1 = AWS.util.buffer.toBuffer('abcdefg');
+        buffer2 =  AWS.util.buffer.toBuffer('hijklmn');
         buffer3 = AWS.util.buffer.concat([buffer1, buffer2]);
         expect(buffer3.length).to.equal(14);
         return expect(buffer3.toString()).to.equal('abcdefghijklmn');
@@ -325,7 +383,7 @@
     describe('crc32', function() {
       it('returns the correct CRC32 value for binary data', function() {
         var buffer, i, j, ref;
-        buffer = new Buffer(4433);
+        buffer = AWS.util.buffer.alloc(4433);
         for (i = j = 0, ref = buffer.length; 0 <= ref ? j < ref : j > ref; i = 0 <= ref ? ++j : --j) {
           buffer.writeUInt8(i % 256, i);
         }
@@ -400,7 +458,7 @@
           tr._transform = function(data, encoding, callback) {
             return callback(null, data);
           };
-          tr.push(new AWS.util.Buffer(input));
+          tr.push(AWS.util.buffer.toBuffer(input));
           tr.end();
           return util.sha256(tr, 'hex', function(e, d) {
             expect(d).to.equal(result);
@@ -459,7 +517,7 @@
           tr._transform = function(data, enc, callback) {
             return callback(null, data);
           };
-          tr.push(new AWS.util.Buffer(input));
+          tr.push(AWS.util.buffer.toBuffer(input));
           tr.end();
           return util.md5(tr, 'hex', function(e, d) {
             expect(d).to.equal(result);
@@ -513,7 +571,7 @@
     it('callback should not change "this" scope', function() {
       return new function() {
         var self;
-        this["class"] = 'MyClass';
+        this['class'] = 'MyClass';
         self = this;
         return AWS.util.each.apply(this, [
           [1, 2, 3], function() {
@@ -615,7 +673,7 @@
   });
 
   describe('AWS.util.merge', function() {
-    return it('should merge an object into another and return new object', function() {
+    it('should merge an object into another and return new object', function() {
       var newObj, obj;
       obj = {
         a: 1,
@@ -663,7 +721,7 @@
         e: 5
       });
     });
-    return it('should return the merged object', function() {
+    it('should return the merged object', function() {
       var obj;
       obj = {
         a: 1,
@@ -671,7 +729,7 @@
       };
       return expect(AWS.util.update(obj, {
         c: 3
-      })).to.equal(obj);
+      })).to.eql({a: 1, b: 2, c: 3});
     });
   });
 
@@ -716,7 +774,7 @@
       });
       derived = new Derived(1, 2, 'three');
       expect(derived.other).to.equal(true);
-      return expect(Base.prototype.constructor.calls[0]["arguments"]).to.eql([1, 2, 'three']);
+      return expect(Base.prototype.constructor.calls[0]['arguments']).to.eql([1, 2, 'three']);
     });
   });
 
@@ -845,8 +903,8 @@
         return expect(base64.encode('ёŝ')).to.equal('0ZHFnQ==');
       });
       it('encodes the given buffer', function() {
-        expect(base64.encode(new AWS.util.Buffer('foo'))).to.equal('Zm9v');
-        return expect(base64.encode(new AWS.util.Buffer('ёŝ'))).to.equal('0ZHFnQ==');
+        expect(base64.encode(AWS.util.buffer.toBuffer('foo'))).to.equal('Zm9v');
+        return expect(base64.encode(AWS.util.buffer.toBuffer('ёŝ'))).to.equal('0ZHFnQ==');
       });
       it('throws if a number is supplied', function() {
         var e, err;
@@ -872,8 +930,8 @@
         return expect(base64.decode('0ZHFnQ==').toString()).to.equal('ёŝ');
       });
       it('decodes the given buffer', function() {
-        expect(base64.decode(new AWS.util.Buffer('Zm9v', 'base64')).toString()).to.equal('foo');
-        return expect(base64.decode(new AWS.util.Buffer('0ZHFnQ==', 'base64')).toString()).to.equal('ёŝ');
+        expect(base64.decode(AWS.util.buffer.toBuffer('Zm9v', 'base64')).toString()).to.equal('foo');
+        return expect(base64.decode(AWS.util.buffer.toBuffer('0ZHFnQ==', 'base64')).toString()).to.equal('ёŝ');
       });
       it('throws if a number is supplied', function() {
         var e, err;
@@ -1221,27 +1279,27 @@
     });
     if (AWS.util.isNode()) {
       it('accepts service identifier string as argument', function() {
-        expect(AWS.util.isDualstackAvailable('mock')).to.be["false"];
+        expect(AWS.util.isDualstackAvailable('mock')).to.be['false'];
         metadata.mock.dualstackAvailable = true;
-        return expect(AWS.util.isDualstackAvailable('mock')).to.be["true"];
+        return expect(AWS.util.isDualstackAvailable('mock')).to.be['true'];
       });
       it('accepts service client instance as argument', function() {
         var service;
         service = new helpers.MockService();
-        expect(AWS.util.isDualstackAvailable(service)).to.be["false"];
+        expect(AWS.util.isDualstackAvailable(service)).to.be['false'];
         metadata.mock.dualstackAvailable = true;
-        return expect(AWS.util.isDualstackAvailable(service)).to.be["true"];
+        return expect(AWS.util.isDualstackAvailable(service)).to.be['true'];
       });
       it('accepts service constructor as argument', function() {
-        expect(AWS.util.isDualstackAvailable(helpers.MockService)).to.be["false"];
+        expect(AWS.util.isDualstackAvailable(helpers.MockService)).to.be['false'];
         metadata.mock.dualstackAvailable = true;
-        return expect(AWS.util.isDualstackAvailable(helpers.MockService)).to.be["true"];
+        return expect(AWS.util.isDualstackAvailable(helpers.MockService)).to.be['true'];
       });
     }
     return it('returns false if invalid service is given as argument', function() {
-      expect(AWS.util.isDualstackAvailable(null)).to.be["false"];
-      expect(AWS.util.isDualstackAvailable('invalid')).to.be["false"];
-      return expect(AWS.util.isDualstackAvailable({})).to.be["false"];
+      expect(AWS.util.isDualstackAvailable(null)).to.be['false'];
+      expect(AWS.util.isDualstackAvailable('invalid')).to.be['false'];
+      return expect(AWS.util.isDualstackAvailable({})).to.be['false'];
     });
   });
 
@@ -1273,12 +1331,13 @@
     });
     return it('allows custom backoff function', function() {
       var customBackoff, delay;
-      customBackoff = function(retryCount) {
+      customBackoff = function(retryCount, err) {
+        expect(err).to.exist;
         return 100 * Math.pow(3, retryCount);
       };
       delay = AWS.util.calculateRetryDelay(2, {
         customBackoff: customBackoff
-      });
+      }, new Error('passed through to customBackoff'));
       return expect(delay).to.equal(900);
     });
   });
@@ -1450,9 +1509,7 @@
       app = null;
       httpRequest = null;
       spy = null;
-      options = {
-        maxRetries: 2
-      };
+      options = null;
       httpClient = AWS.HttpClient.getInstance();
       sendRequest = function(cb) {
         return AWS.util.handleRequestWithRetries(httpRequest, options, cb);
@@ -1476,6 +1533,9 @@
       });
       beforeEach(function(done) {
         httpRequest = new AWS.HttpRequest('http://127.0.0.1');
+        options = {
+          maxRetries: 2
+        };
         spy = helpers.spyOn(httpClient, 'handleRequest').andCallThrough();
         return getport(function(port) {
           httpRequest.endpoint.port = port;
@@ -1492,7 +1552,7 @@
           return resp.end();
         };
         return sendRequest(function(err, data) {
-          expect(err).to.be["null"];
+          expect(err).to.be['null'];
           expect(data).to.equal('FOOBAR');
           expect(spy.calls.length).to.equal(1);
           return done();
@@ -1512,7 +1572,7 @@
           return resp.end();
         };
         return sendRequest(function(err, data) {
-          expect(err).to.be["null"];
+          expect(err).to.be['null'];
           expect(data).to.equal('FOOBAR');
           expect(spy.calls.length).to.equal(2);
           return done();
@@ -1528,9 +1588,9 @@
         };
         return sendRequest(function(err, data) {
           expect(data).to.be.undefined;
-          expect(err).to.not.be["null"];
+          expect(err).to.not.be['null'];
           expect(err.code).to.equal('TimeoutError');
-          expect(err.retryable).to.be["true"];
+          expect(err.retryable).to.be['true'];
           expect(spy.calls.length).to.equal(options.maxRetries + 1);
           return done();
         });
@@ -1543,8 +1603,8 @@
         };
         return sendRequest(function(err, data) {
           expect(data).to.be.undefined;
-          expect(err).to.not.be["null"];
-          expect(err.retryable).to.be["true"];
+          expect(err).to.not.be['null'];
+          expect(err.retryable).to.be['true'];
           expect(spy.calls.length).to.equal(options.maxRetries + 1);
           return done();
         });
@@ -1557,8 +1617,8 @@
         };
         return sendRequest(function(err, data) {
           expect(data).to.be.undefined;
-          expect(err).to.not.be["null"];
-          expect(err.retryable).to.be["true"];
+          expect(err).to.not.be['null'];
+          expect(err.retryable).to.be['true'];
           expect(spy.calls.length).to.equal(options.maxRetries + 1);
           return done();
         });
@@ -1571,8 +1631,8 @@
         };
         return sendRequest(function(err, data) {
           expect(data).to.be.undefined;
-          expect(err).to.not.be["null"];
-          expect(err.retryable).to.be["false"];
+          expect(err).to.not.be['null'];
+          expect(err.retryable).to.be['false'];
           expect(spy.calls.length).to.equal(1);
           return done();
         });
@@ -1588,8 +1648,8 @@
         };
         return sendRequest(function(err, data) {
           expect(data).to.be.undefined;
-          expect(err).to.not.be["null"];
-          expect(err.retryable).to.be["true"];
+          expect(err).to.not.be['null'];
+          expect(err.retryable).to.be['true'];
           expect(spy.calls.length).to.equal(options.maxRetries + 1);
           return done();
         });
@@ -1607,12 +1667,144 @@
         options = {};
         return sendRequest(function(err, data) {
           expect(data).to.be.undefined;
-          expect(err).to.not.be["null"];
+          expect(err).to.not.be['null'];
           expect(spy.calls.length).to.equal(1);
+          return done();
+        });
+      });
+      it('does not retry if customBackoff returns negative value', function(done) {
+        helpers.spyOn(AWS.util, 'error').andReturn({
+          retryable: true
+        });
+        options = {
+          maxRetries: 2,
+          retryDelayOptions: {
+            customBackoff: function(retryCount, err) {
+              return -1;
+            },
+          },
+        };
+        app = function(req, resp) {
+          resp.writeHead(400, {});
+          resp.write('FOOBAR');
+          return resp.end();
+        };
+        return sendRequest(function(err, data) {
+          expect(data).to.be.undefined;
+          expect(err).to.not.be['null'];
+          expect(err.retryable).to.be['true'];
+          expect(spy.calls.length).to.not.equal(options.maxRetries + 1);
+          expect(spy.calls.length).to.equal(1);
+          return done();
+        });
+      });
+      it('retries with custom backoff', function(done) {
+        helpers.spyOn(AWS.util, 'error').andReturn({
+          retryable: true
+        });
+        var topLevelScope = null;
+        if (typeof global === 'object') {
+          topLevelScope = global;
+        } else if (typeof self === 'object') {
+          topLevelScope = self;
+        } else {
+          topLevelScope = window;
+        }
+        var setTimeoutSpy = helpers.spyOn(topLevelScope, 'setTimeout').andCallFake(function (cb) {
+          process.nextTick(cb);
+        });
+        options = {
+          maxRetries: 2,
+          retryDelayOptions: {
+            customBackoff: function(retryCount, err) {
+              return 2 * retryCount;
+            },
+          },
+        };
+        app = function(req, resp) {
+          resp.writeHead(400, {});
+          resp.write('FOOBAR');
+          return resp.end();
+        };
+        return sendRequest(function(err, data) {
+          expect(data).to.be.undefined;
+          expect(err).to.not.be['null'];
+          expect(err.retryable).to.be['true'];
+          expect(setTimeoutSpy.calls.length).to.equal(options.maxRetries);
+          expect(setTimeoutSpy.calls[0].arguments[1]).to.equal(0);
+          expect(setTimeoutSpy.calls[1].arguments[1]).to.equal(2);
           return done();
         });
       });
     });
   }
+
+  describe('AWS.utils.ARN', function() {
+    describe('validate', function() {
+      it('should validate whether input is a qualified resource ARN', function() {
+        expect(AWS.util.ARN.validate('arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint')).to.equal(true);
+        expect(AWS.util.ARN.validate('arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint')).to.equal(true);
+        expect(AWS.util.ARN.validate('arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint')).to.equal(true);
+        expect(AWS.util.ARN.validate('arn:aws:sns:us-west-2:123456789012:myTopic')).to.equal(true);
+      });
+    });
+
+    describe('parser', function() {
+      it('should parse valid resource ARNs', function() {
+        expect(AWS.util.ARN.parse('arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint')).to.contain({
+          partition: 'aws',
+          service: 's3',
+          region: 'us-west-2',
+          accountId: '123456789012',
+          resource: 'accesspoint:myendpoint'
+        });
+        expect(AWS.util.ARN.parse('arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint')).to.contain({
+          partition: 'aws',
+          service: 's3',
+          region: 'us-east-1',
+          accountId: '123456789012',
+          resource: 'accesspoint:myendpoint'
+        });
+        expect(AWS.util.ARN.parse('arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint')).to.contain({
+          partition: 'aws-cn',
+          service: 's3',
+          region: 'cn-north-1',
+          accountId: '123456789012',
+          resource: 'accesspoint:myendpoint'
+        });
+        expect(AWS.util.ARN.parse('arn:aws:sns:us-west-2:123456789012:myTopic')).to.contain({
+          partition: 'aws',
+          service: 'sns',
+          region: 'us-west-2',
+          accountId: '123456789012',
+          resource: 'myTopic'
+        });
+      });
+    });
+
+    describe('builder', function() {
+      it('should build valid ARN object to string', function() {
+        expect(AWS.util.ARN.build({
+          service: 's3',
+          region: 'us-east-1',
+          accountId: '123456789012',
+          resource: 'accesspoint:myendpoint'
+        })).to.equal('arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint');
+      });
+
+      it('should throw if required ARN component is missing', function(done) {
+        try {
+          AWS.util.ARN.build({
+            service: 's3',
+            region: 'us-east-1',
+            resource: 'accesspoint:myendpoint'
+          });
+        } catch (e) {
+          expect(e.message).to.equal('Input ARN object is invalid');
+          done();
+        }
+      });
+    });
+  });
 
 }).call(this);

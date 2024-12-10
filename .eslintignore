@@ -1,0 +1,4 @@
+dist/*
+test/browser/**/*
+test/configuration.js
+workspace

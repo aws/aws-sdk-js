@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "Braket",
+        "description": "This release enables Braket Hybrid Jobs with Embedded Simulators to have multiple instances."
+    },
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "This release introduces an API for changing the current agent status of a user in Connect."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds support to query the public key and creation date of EC2 Key Pairs. Additionally, the format (pem or ppk) of a key pair can be specified when creating a new key pair."
+    },
+    {
+        "type": "feature",
+        "category": "NetworkFirewall",
+        "description": "AWS Network Firewall adds support for stateful threat signature AWS managed rule groups."
+    }
+]

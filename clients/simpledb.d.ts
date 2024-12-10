@@ -3,7 +3,7 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
-import {ConfigBase as Config} from '../lib/config';
+import {ConfigBase as Config} from '../lib/config-base';
 interface Blob {}
 declare class SimpleDB extends Service {
   /**
@@ -217,7 +217,6 @@ declare namespace SimpleDB {
     Timestamp?: Integer;
   }
   export type DomainNameList = String[];
-  export type Float = number;
   export interface GetAttributesRequest {
     /**
      * The name of the domain in which to perform the operation.

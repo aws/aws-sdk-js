@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "Add encryption key override to StartBuild API in AWS CodeBuild."
+    },
+    {
+        "type": "feature",
+        "category": "MigrationHub",
+        "description": "ListApplicationStates API provides a list of all application migration states"
+    }
+]

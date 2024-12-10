@@ -1,0 +1,1341 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2020-07-14",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "ivs",
+    "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
+    "serviceAbbreviation": "Amazon IVS",
+    "serviceFullName": "Amazon Interactive Video Service",
+    "serviceId": "ivs",
+    "signatureVersion": "v4",
+    "signingName": "ivs",
+    "uid": "ivs-2020-07-14"
+  },
+  "operations": {
+    "BatchGetChannel": {
+      "http": {
+        "requestUri": "/BatchGetChannel",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "arns"
+        ],
+        "members": {
+          "arns": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "channels": {
+            "type": "list",
+            "member": {
+              "shape": "S6"
+            }
+          },
+          "errors": {
+            "shape": "Sn"
+          }
+        }
+      }
+    },
+    "BatchGetStreamKey": {
+      "http": {
+        "requestUri": "/BatchGetStreamKey",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "arns"
+        ],
+        "members": {
+          "arns": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "streamKeys": {
+            "type": "list",
+            "member": {
+              "shape": "Sx"
+            }
+          },
+          "errors": {
+            "shape": "Sn"
+          }
+        }
+      }
+    },
+    "BatchStartViewerSessionRevocation": {
+      "http": {
+        "requestUri": "/BatchStartViewerSessionRevocation",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "viewerSessions"
+        ],
+        "members": {
+          "viewerSessions": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "channelArn",
+                "viewerId"
+              ],
+              "members": {
+                "channelArn": {},
+                "viewerId": {},
+                "viewerSessionVersionsLessThanOrEqualTo": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "errors": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "channelArn",
+                "viewerId"
+              ],
+              "members": {
+                "channelArn": {},
+                "viewerId": {},
+                "code": {},
+                "message": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "CreateChannel": {
+      "http": {
+        "requestUri": "/CreateChannel",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "name": {},
+          "latencyMode": {},
+          "type": {},
+          "authorized": {
+            "type": "boolean"
+          },
+          "recordingConfigurationArn": {},
+          "tags": {
+            "shape": "Se"
+          },
+          "insecureIngest": {
+            "type": "boolean"
+          },
+          "preset": {},
+          "playbackRestrictionPolicyArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "channel": {
+            "shape": "S6"
+          },
+          "streamKey": {
+            "shape": "Sx"
+          }
+        }
+      }
+    },
+    "CreatePlaybackRestrictionPolicy": {
+      "http": {
+        "requestUri": "/CreatePlaybackRestrictionPolicy",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "allowedCountries": {
+            "shape": "S1b"
+          },
+          "allowedOrigins": {
+            "shape": "S1d"
+          },
+          "enableStrictOriginEnforcement": {
+            "type": "boolean"
+          },
+          "name": {},
+          "tags": {
+            "shape": "Se"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "playbackRestrictionPolicy": {
+            "shape": "S1i"
+          }
+        }
+      }
+    },
+    "CreateRecordingConfiguration": {
+      "http": {
+        "requestUri": "/CreateRecordingConfiguration",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "destinationConfiguration"
+        ],
+        "members": {
+          "name": {},
+          "destinationConfiguration": {
+            "shape": "S1m"
+          },
+          "tags": {
+            "shape": "Se"
+          },
+          "thumbnailConfiguration": {
+            "shape": "S1p"
+          },
+          "recordingReconnectWindowSeconds": {
+            "type": "integer"
+          },
+          "renditionConfiguration": {
+            "shape": "S1w"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "recordingConfiguration": {
+            "shape": "S21"
+          }
+        }
+      }
+    },
+    "CreateStreamKey": {
+      "http": {
+        "requestUri": "/CreateStreamKey",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "channelArn"
+        ],
+        "members": {
+          "channelArn": {},
+          "tags": {
+            "shape": "Se"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "streamKey": {
+            "shape": "Sx"
+          }
+        }
+      }
+    },
+    "DeleteChannel": {
+      "http": {
+        "requestUri": "/DeleteChannel",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "arn"
+        ],
+        "members": {
+          "arn": {}
+        }
+      }
+    },
+    "DeletePlaybackKeyPair": {
+      "http": {
+        "requestUri": "/DeletePlaybackKeyPair",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "arn"
+        ],
+        "members": {
+          "arn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DeletePlaybackRestrictionPolicy": {
+      "http": {
+        "requestUri": "/DeletePlaybackRestrictionPolicy",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "arn"
+        ],
+        "members": {
+          "arn": {}
+        }
+      }
+    },
+    "DeleteRecordingConfiguration": {
+      "http": {
+        "requestUri": "/DeleteRecordingConfiguration",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "arn"
+        ],
+        "members": {
+          "arn": {}
+        }
+      }
+    },
+    "DeleteStreamKey": {
+      "http": {
+        "requestUri": "/DeleteStreamKey",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "arn"
+        ],
+        "members": {
+          "arn": {}
+        }
+      }
+    },
+    "GetChannel": {
+      "http": {
+        "requestUri": "/GetChannel",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "arn"
+        ],
+        "members": {
+          "arn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "channel": {
+            "shape": "S6"
+          }
+        }
+      }
+    },
+    "GetPlaybackKeyPair": {
+      "http": {
+        "requestUri": "/GetPlaybackKeyPair",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "arn"
+        ],
+        "members": {
+          "arn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "keyPair": {
+            "shape": "S2h"
+          }
+        }
+      }
+    },
+    "GetPlaybackRestrictionPolicy": {
+      "http": {
+        "requestUri": "/GetPlaybackRestrictionPolicy",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "arn"
+        ],
+        "members": {
+          "arn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "playbackRestrictionPolicy": {
+            "shape": "S1i"
+          }
+        }
+      }
+    },
+    "GetRecordingConfiguration": {
+      "http": {
+        "requestUri": "/GetRecordingConfiguration",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "arn"
+        ],
+        "members": {
+          "arn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "recordingConfiguration": {
+            "shape": "S21"
+          }
+        }
+      }
+    },
+    "GetStream": {
+      "http": {
+        "requestUri": "/GetStream",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "channelArn"
+        ],
+        "members": {
+          "channelArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "stream": {
+            "type": "structure",
+            "members": {
+              "channelArn": {},
+              "streamId": {},
+              "playbackUrl": {},
+              "startTime": {
+                "shape": "S2s"
+              },
+              "state": {},
+              "health": {},
+              "viewerCount": {
+                "type": "long"
+              }
+            }
+          }
+        }
+      }
+    },
+    "GetStreamKey": {
+      "http": {
+        "requestUri": "/GetStreamKey",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "arn"
+        ],
+        "members": {
+          "arn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "streamKey": {
+            "shape": "Sx"
+          }
+        }
+      }
+    },
+    "GetStreamSession": {
+      "http": {
+        "requestUri": "/GetStreamSession",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "channelArn"
+        ],
+        "members": {
+          "channelArn": {},
+          "streamId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "streamSession": {
+            "type": "structure",
+            "members": {
+              "streamId": {},
+              "startTime": {
+                "shape": "S31"
+              },
+              "endTime": {
+                "shape": "S31"
+              },
+              "channel": {
+                "shape": "S6"
+              },
+              "ingestConfiguration": {
+                "type": "structure",
+                "members": {
+                  "video": {
+                    "type": "structure",
+                    "members": {
+                      "avcProfile": {},
+                      "avcLevel": {},
+                      "codec": {},
+                      "encoder": {},
+                      "targetBitrate": {
+                        "type": "long"
+                      },
+                      "targetFramerate": {
+                        "type": "long"
+                      },
+                      "videoHeight": {
+                        "type": "long"
+                      },
+                      "videoWidth": {
+                        "type": "long"
+                      }
+                    }
+                  },
+                  "audio": {
+                    "type": "structure",
+                    "members": {
+                      "codec": {},
+                      "targetBitrate": {
+                        "type": "long"
+                      },
+                      "sampleRate": {
+                        "type": "long"
+                      },
+                      "channels": {
+                        "type": "long"
+                      }
+                    }
+                  }
+                }
+              },
+              "recordingConfiguration": {
+                "shape": "S21"
+              },
+              "truncatedEvents": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "members": {
+                    "name": {},
+                    "type": {},
+                    "eventTime": {
+                      "shape": "S31"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ImportPlaybackKeyPair": {
+      "http": {
+        "requestUri": "/ImportPlaybackKeyPair",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "publicKeyMaterial"
+        ],
+        "members": {
+          "publicKeyMaterial": {},
+          "name": {},
+          "tags": {
+            "shape": "Se"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "keyPair": {
+            "shape": "S2h"
+          }
+        }
+      }
+    },
+    "ListChannels": {
+      "http": {
+        "requestUri": "/ListChannels",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "filterByName": {},
+          "filterByRecordingConfigurationArn": {},
+          "filterByPlaybackRestrictionPolicyArn": {},
+          "nextToken": {},
+          "maxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "channels"
+        ],
+        "members": {
+          "channels": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "arn": {},
+                "name": {},
+                "latencyMode": {},
+                "authorized": {
+                  "type": "boolean"
+                },
+                "recordingConfigurationArn": {},
+                "tags": {
+                  "shape": "Se"
+                },
+                "insecureIngest": {
+                  "type": "boolean"
+                },
+                "type": {},
+                "preset": {},
+                "playbackRestrictionPolicyArn": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListPlaybackKeyPairs": {
+      "http": {
+        "requestUri": "/ListPlaybackKeyPairs",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "nextToken": {},
+          "maxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "keyPairs"
+        ],
+        "members": {
+          "keyPairs": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "arn": {},
+                "name": {},
+                "tags": {
+                  "shape": "Se"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListPlaybackRestrictionPolicies": {
+      "http": {
+        "requestUri": "/ListPlaybackRestrictionPolicies",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "nextToken": {},
+          "maxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "playbackRestrictionPolicies"
+        ],
+        "members": {
+          "playbackRestrictionPolicies": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "arn",
+                "allowedCountries",
+                "allowedOrigins"
+              ],
+              "members": {
+                "arn": {},
+                "allowedCountries": {
+                  "shape": "S1b"
+                },
+                "allowedOrigins": {
+                  "shape": "S1d"
+                },
+                "enableStrictOriginEnforcement": {
+                  "type": "boolean"
+                },
+                "name": {},
+                "tags": {
+                  "shape": "Se"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListRecordingConfigurations": {
+      "http": {
+        "requestUri": "/ListRecordingConfigurations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "nextToken": {},
+          "maxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "recordingConfigurations"
+        ],
+        "members": {
+          "recordingConfigurations": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "arn",
+                "destinationConfiguration",
+                "state"
+              ],
+              "members": {
+                "arn": {},
+                "name": {},
+                "destinationConfiguration": {
+                  "shape": "S1m"
+                },
+                "state": {},
+                "tags": {
+                  "shape": "Se"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListStreamKeys": {
+      "http": {
+        "requestUri": "/ListStreamKeys",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "channelArn"
+        ],
+        "members": {
+          "channelArn": {},
+          "nextToken": {},
+          "maxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "streamKeys"
+        ],
+        "members": {
+          "streamKeys": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "arn": {},
+                "channelArn": {},
+                "tags": {
+                  "shape": "Se"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListStreamSessions": {
+      "http": {
+        "requestUri": "/ListStreamSessions",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "channelArn"
+        ],
+        "members": {
+          "channelArn": {},
+          "nextToken": {},
+          "maxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "streamSessions"
+        ],
+        "members": {
+          "streamSessions": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "streamId": {},
+                "startTime": {
+                  "shape": "S31"
+                },
+                "endTime": {
+                  "shape": "S31"
+                },
+                "hasErrorEvent": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListStreams": {
+      "http": {
+        "requestUri": "/ListStreams",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "filterBy": {
+            "type": "structure",
+            "members": {
+              "health": {}
+            }
+          },
+          "nextToken": {},
+          "maxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "streams"
+        ],
+        "members": {
+          "streams": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "channelArn": {},
+                "streamId": {},
+                "state": {},
+                "health": {},
+                "viewerCount": {
+                  "type": "long"
+                },
+                "startTime": {
+                  "shape": "S2s"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListTagsForResource": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "tags"
+        ],
+        "members": {
+          "tags": {
+            "shape": "Se"
+          }
+        }
+      }
+    },
+    "PutMetadata": {
+      "http": {
+        "requestUri": "/PutMetadata",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "channelArn",
+          "metadata"
+        ],
+        "members": {
+          "channelArn": {},
+          "metadata": {
+            "type": "string",
+            "sensitive": true
+          }
+        }
+      }
+    },
+    "StartViewerSessionRevocation": {
+      "http": {
+        "requestUri": "/StartViewerSessionRevocation",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "channelArn",
+          "viewerId"
+        ],
+        "members": {
+          "channelArn": {},
+          "viewerId": {},
+          "viewerSessionVersionsLessThanOrEqualTo": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "StopStream": {
+      "http": {
+        "requestUri": "/StopStream",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "channelArn"
+        ],
+        "members": {
+          "channelArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "TagResource": {
+      "http": {
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tags"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          },
+          "tags": {
+            "shape": "Se"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UntagResource": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tagKeys"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          },
+          "tagKeys": {
+            "location": "querystring",
+            "locationName": "tagKeys",
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "UpdateChannel": {
+      "http": {
+        "requestUri": "/UpdateChannel",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "arn"
+        ],
+        "members": {
+          "arn": {},
+          "name": {},
+          "latencyMode": {},
+          "type": {},
+          "authorized": {
+            "type": "boolean"
+          },
+          "recordingConfigurationArn": {},
+          "insecureIngest": {
+            "type": "boolean"
+          },
+          "preset": {},
+          "playbackRestrictionPolicyArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "channel": {
+            "shape": "S6"
+          }
+        }
+      }
+    },
+    "UpdatePlaybackRestrictionPolicy": {
+      "http": {
+        "requestUri": "/UpdatePlaybackRestrictionPolicy",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "arn"
+        ],
+        "members": {
+          "arn": {},
+          "allowedCountries": {
+            "shape": "S1b"
+          },
+          "allowedOrigins": {
+            "shape": "S1d"
+          },
+          "enableStrictOriginEnforcement": {
+            "type": "boolean"
+          },
+          "name": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "playbackRestrictionPolicy": {
+            "shape": "S1i"
+          }
+        }
+      }
+    }
+  },
+  "shapes": {
+    "S6": {
+      "type": "structure",
+      "members": {
+        "arn": {},
+        "name": {},
+        "latencyMode": {},
+        "type": {},
+        "recordingConfigurationArn": {},
+        "ingestEndpoint": {},
+        "playbackUrl": {},
+        "authorized": {
+          "type": "boolean"
+        },
+        "tags": {
+          "shape": "Se"
+        },
+        "insecureIngest": {
+          "type": "boolean"
+        },
+        "preset": {},
+        "srt": {
+          "type": "structure",
+          "members": {
+            "endpoint": {},
+            "passphrase": {
+              "type": "string",
+              "sensitive": true
+            }
+          }
+        },
+        "playbackRestrictionPolicyArn": {}
+      }
+    },
+    "Se": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "Sn": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "arn": {},
+          "code": {},
+          "message": {}
+        }
+      }
+    },
+    "Sx": {
+      "type": "structure",
+      "members": {
+        "arn": {},
+        "value": {
+          "type": "string",
+          "sensitive": true
+        },
+        "channelArn": {},
+        "tags": {
+          "shape": "Se"
+        }
+      }
+    },
+    "S1b": {
+      "type": "list",
+      "member": {}
+    },
+    "S1d": {
+      "type": "list",
+      "member": {}
+    },
+    "S1i": {
+      "type": "structure",
+      "required": [
+        "arn",
+        "allowedCountries",
+        "allowedOrigins"
+      ],
+      "members": {
+        "arn": {},
+        "allowedCountries": {
+          "shape": "S1b"
+        },
+        "allowedOrigins": {
+          "shape": "S1d"
+        },
+        "enableStrictOriginEnforcement": {
+          "type": "boolean"
+        },
+        "name": {},
+        "tags": {
+          "shape": "Se"
+        }
+      }
+    },
+    "S1m": {
+      "type": "structure",
+      "members": {
+        "s3": {
+          "type": "structure",
+          "required": [
+            "bucketName"
+          ],
+          "members": {
+            "bucketName": {}
+          }
+        }
+      }
+    },
+    "S1p": {
+      "type": "structure",
+      "members": {
+        "recordingMode": {},
+        "targetIntervalSeconds": {
+          "type": "long"
+        },
+        "resolution": {},
+        "storage": {
+          "type": "list",
+          "member": {}
+        }
+      }
+    },
+    "S1w": {
+      "type": "structure",
+      "members": {
+        "renditionSelection": {},
+        "renditions": {
+          "type": "list",
+          "member": {}
+        }
+      }
+    },
+    "S21": {
+      "type": "structure",
+      "required": [
+        "arn",
+        "destinationConfiguration",
+        "state"
+      ],
+      "members": {
+        "arn": {},
+        "name": {},
+        "destinationConfiguration": {
+          "shape": "S1m"
+        },
+        "state": {},
+        "tags": {
+          "shape": "Se"
+        },
+        "thumbnailConfiguration": {
+          "shape": "S1p"
+        },
+        "recordingReconnectWindowSeconds": {
+          "type": "integer"
+        },
+        "renditionConfiguration": {
+          "shape": "S1w"
+        }
+      }
+    },
+    "S2h": {
+      "type": "structure",
+      "members": {
+        "arn": {},
+        "name": {},
+        "fingerprint": {},
+        "tags": {
+          "shape": "Se"
+        }
+      }
+    },
+    "S2s": {
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
+    },
+    "S31": {
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
+    }
+  }
+}

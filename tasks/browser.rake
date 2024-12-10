@@ -2,14 +2,14 @@ require 'json'
 
 def write_configuration
   config_cmd = <<-eof
-    node -e 'c=require("./").config.credentials;c.refresh(function() {
-      console.log(c.accessKeyId, c.secretAccessKey, c.sessionToken)
-    });'
+    c=require('./').config.credentials;c.refresh(function() {
+      console.log(c.accessKeyId, c.secretAccessKey, c.sessionToken);
+    });
   eof
   config = {}
   if File.exist?('configuration')
     config = JSON.parse(File.read('configuration'))
-    out = `#{config_cmd}`.split(/\s+/)
+    out = `node -e "#{config_cmd}"`.split(/\s+/)
     config['accessKeyId'] ||= out[0]
     config['secretAccessKey'] ||= out[1]
     config['sessionToken'] ||= out[2] if out[2] && out[2] != "undefined"
@@ -22,6 +22,10 @@ end
 
 def sdk_version
   JSON.parse(File.read('package.json'))['version']
+end
+
+def excluded_files(name)
+  name.start_with?("test/react-native/") || name.start_with?("test/publisher")
 end
 
 namespace :browser do
@@ -50,7 +54,7 @@ namespace :browser do
   end
 
   task :build_all => [:setup_dist_tools, :dist_path] do
-    sh({"MINIFY" => ""}, "#{$BUILDER} all > dist/aws-sdk-all.js")
+    sh({"MINIFY" => "1"}, "#{$BUILDER} all > dist/aws-sdk-all.js")
   end
 
   desc 'Caches assets to the dist-tools build server'
@@ -74,7 +78,7 @@ namespace :browser do
     mkdir_p "test/browser/build"
     cp "dist/aws-sdk-all.js", "test/browser/build/aws-sdk-all.js"
     files = "test/helpers.js ";
-    files += Dir.glob("test/**/*.spec.js").delete_if{|name| name.start_with?("test/react-native/")}.join(" ")
+    files += Dir.glob("test/**/*.spec.js").delete_if{|name| excluded_files(name)}.sort().join(" ")
     sh({"SERVICES" => "all"}, $BROWSERIFY +
        " -i domain #{files} > #{$BROWSERIFY_TEST}")
     rm_f "test/configuration.js"

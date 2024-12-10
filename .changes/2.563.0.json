@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "RoboMaker",
+        "description": "RoboMaker Fleet Management launch a feature to verify your robot is ready to download and install the new robot application using a download condition file, which is a script run on the robot prior to downloading the new deployment. "
+    }
+]

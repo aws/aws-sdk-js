@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "Appflow",
+        "description": "Increased the max length for RefreshToken and AuthCode from 2048 to 4096."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "API changes to AWS Verified Access related to identity providers' information."
+    },
+    {
+        "type": "feature",
+        "category": "MediaConvert",
+        "description": "This release introduces a noise reduction pre-filter, linear interpolation deinterlace mode, video pass-through, updated default job settings, and expanded LC-AAC Stereo audio bitrate ranges."
+    },
+    {
+        "type": "feature",
+        "category": "Rekognition",
+        "description": "Added new status result to Liveness session status."
+    }
+]

@@ -1,0 +1,52 @@
+[
+    {
+        "type": "feature",
+        "category": "ChimeSDKVoice",
+        "description": "Due to changes made by the Amazon Alexa service, GetSipMediaApplicationAlexaSkillConfiguration and PutSipMediaApplicationAlexaSkillConfiguration APIs are no longer available for use. For more information, refer to the Alexa Smart Properties page."
+    },
+    {
+        "type": "feature",
+        "category": "CodeArtifact",
+        "description": "Add support for the Ruby package format."
+    },
+    {
+        "type": "feature",
+        "category": "FMS",
+        "description": "AWS Firewall Manager now supports the network firewall service stream exception policy feature for accounts within your organization."
+    },
+    {
+        "type": "feature",
+        "category": "Omics",
+        "description": "Add support for workflow sharing and dynamic run storage"
+    },
+    {
+        "type": "feature",
+        "category": "OpenSearch",
+        "description": "This release enables customers to create Route53 A and AAAA alias record types to point custom endpoint domain to OpenSearch domain's dualstack search endpoint."
+    },
+    {
+        "type": "feature",
+        "category": "PinpointSMSVoiceV2",
+        "description": "Amazon Pinpoint has added two new features Multimedia services (MMS) and protect configurations. Use the three new MMS APIs to send media messages to a mobile phone which includes image, audio, text, or video files. Use the ten new protect configurations APIs to block messages to specific countries."
+    },
+    {
+        "type": "feature",
+        "category": "QBusiness",
+        "description": "Updates API to latest version."
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "New Q embedding supporting Generative Q&A"
+    },
+    {
+        "type": "feature",
+        "category": "Route53Resolver",
+        "description": "Release of FirewallDomainRedirectionAction parameter on the Route 53 DNS Firewall Rule.  This allows customers to configure a DNS Firewall rule to inspect all the domains in the DNS redirection chain (default) , such as CNAME, ALIAS, DNAME, etc., or just the first domain and trust the rest."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Amazon SageMaker Training now supports the use of attribute-based access control (ABAC) roles for training job execution roles. Amazon SageMaker Inference now supports G6 instance types."
+    }
+]

@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "Comprehend",
+        "description": "Comprehend releases 14 new entity types for DetectPiiEntities and ContainsPiiEntities APIs."
+    }
+]

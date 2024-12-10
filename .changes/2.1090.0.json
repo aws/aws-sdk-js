@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Comprehend",
+        "description": "Amazon Comprehend now supports extracting the sentiment associated with entities such as brands, products and services from text documents."
+    },
+    {
+        "type": "feature",
+        "category": "EC2MetadataCredentials",
+        "description": "Allow EC2MetadataCredentials to extend the existing expiration when EC2 Metadata Service returns expired credentials or failure response."
+    }
+]

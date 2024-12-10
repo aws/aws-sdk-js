@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Schemas",
+        "description": "Added support for schemas of type JSONSchemaDraft4. Added ExportSchema API that converts schemas in AWS Events registry and Discovered schemas from OpenApi3  to JSONSchemaDraft4."
+    },
+    {
+        "type": "feature",
+        "category": "TimestreamQuery",
+        "description": "(New Service) Amazon Timestream is a fast, scalable, fully managed, purpose-built time series database that makes it easy to store and analyze trillions of time series data points per day."
+    },
+    {
+        "type": "feature",
+        "category": "TimestreamWrite",
+        "description": "(New Service) Amazon Timestream is a fast, scalable, fully managed, purpose-built time series database that makes it easy to store and analyze trillions of time series data points per day."
+    }
+]

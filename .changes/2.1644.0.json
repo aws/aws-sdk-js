@@ -1,0 +1,52 @@
+[
+    {
+        "type": "feature",
+        "category": "BedrockRuntime",
+        "description": "This release adds support for using Guardrails with the Converse and ConverseStream APIs."
+    },
+    {
+        "type": "feature",
+        "category": "CloudTrail",
+        "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    },
+    {
+        "type": "feature",
+        "category": "ConfigService",
+        "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    },
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "This release adds support to surface async fargate customer errors from async path to customer through describe-fargate-profile API response."
+    },
+    {
+        "type": "feature",
+        "category": "Lightsail",
+        "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    },
+    {
+        "type": "feature",
+        "category": "Polly",
+        "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    },
+    {
+        "type": "feature",
+        "category": "Rekognition",
+        "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Launched a new feature in SageMaker to provide managed MLflow Tracking Servers for customers to track ML experiments. This release also adds a new capability of attaching additional storage to SageMaker HyperPod cluster instances."
+    },
+    {
+        "type": "feature",
+        "category": "Shield",
+        "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    },
+    {
+        "type": "feature",
+        "category": "Snowball",
+        "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    }
+]

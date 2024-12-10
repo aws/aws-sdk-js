@@ -1,0 +1,423 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2018-05-10",
+    "endpointPrefix": "license-manager-linux-subscriptions",
+    "jsonVersion": "1.1",
+    "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
+    "serviceFullName": "AWS License Manager Linux Subscriptions",
+    "serviceId": "License Manager Linux Subscriptions",
+    "signatureVersion": "v4",
+    "signingName": "license-manager-linux-subscriptions",
+    "uid": "license-manager-linux-subscriptions-2018-05-10",
+    "auth": [
+      "aws.auth#sigv4"
+    ]
+  },
+  "operations": {
+    "DeregisterSubscriptionProvider": {
+      "http": {
+        "requestUri": "/subscription/DeregisterSubscriptionProvider",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "SubscriptionProviderArn"
+        ],
+        "members": {
+          "SubscriptionProviderArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "GetRegisteredSubscriptionProvider": {
+      "http": {
+        "requestUri": "/subscription/GetRegisteredSubscriptionProvider",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "SubscriptionProviderArn"
+        ],
+        "members": {
+          "SubscriptionProviderArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "LastSuccessfulDataRetrievalTime": {},
+          "SecretArn": {},
+          "SubscriptionProviderArn": {},
+          "SubscriptionProviderSource": {},
+          "SubscriptionProviderStatus": {},
+          "SubscriptionProviderStatusMessage": {}
+        }
+      },
+      "idempotent": true
+    },
+    "GetServiceSettings": {
+      "http": {
+        "requestUri": "/subscription/GetServiceSettings",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {}
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "HomeRegions": {
+            "shape": "Sc"
+          },
+          "LinuxSubscriptionsDiscovery": {},
+          "LinuxSubscriptionsDiscoverySettings": {
+            "shape": "Sf"
+          },
+          "Status": {},
+          "StatusMessage": {
+            "shape": "Si"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "ListLinuxSubscriptionInstances": {
+      "http": {
+        "requestUri": "/subscription/ListLinuxSubscriptionInstances",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Filters": {
+            "shape": "Sk"
+          },
+          "MaxResults": {
+            "type": "integer"
+          },
+          "NextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Instances": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "AccountID": {},
+                "AmiId": {},
+                "DualSubscription": {},
+                "InstanceID": {},
+                "InstanceType": {},
+                "LastUpdatedTime": {},
+                "OsVersion": {},
+                "ProductCode": {
+                  "type": "list",
+                  "member": {}
+                },
+                "Region": {},
+                "RegisteredWithSubscriptionProvider": {},
+                "Status": {},
+                "SubscriptionName": {},
+                "SubscriptionProviderCreateTime": {},
+                "SubscriptionProviderUpdateTime": {},
+                "UsageOperation": {}
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      },
+      "idempotent": true
+    },
+    "ListLinuxSubscriptions": {
+      "http": {
+        "requestUri": "/subscription/ListLinuxSubscriptions",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Filters": {
+            "shape": "Sk"
+          },
+          "MaxResults": {
+            "type": "integer"
+          },
+          "NextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NextToken": {},
+          "Subscriptions": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "InstanceCount": {
+                  "type": "long"
+                },
+                "Name": {},
+                "Type": {}
+              }
+            }
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "ListRegisteredSubscriptionProviders": {
+      "http": {
+        "requestUri": "/subscription/ListRegisteredSubscriptionProviders",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "MaxResults": {
+            "type": "integer"
+          },
+          "NextToken": {},
+          "SubscriptionProviderSources": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NextToken": {},
+          "RegisteredSubscriptionProviders": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "LastSuccessfulDataRetrievalTime": {},
+                "SecretArn": {},
+                "SubscriptionProviderArn": {},
+                "SubscriptionProviderSource": {},
+                "SubscriptionProviderStatus": {},
+                "SubscriptionProviderStatusMessage": {}
+              }
+            }
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "ListTagsForResource": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "tags": {
+            "shape": "S17"
+          }
+        }
+      }
+    },
+    "RegisterSubscriptionProvider": {
+      "http": {
+        "requestUri": "/subscription/RegisterSubscriptionProvider",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "SecretArn",
+          "SubscriptionProviderSource"
+        ],
+        "members": {
+          "SecretArn": {},
+          "SubscriptionProviderSource": {},
+          "Tags": {
+            "shape": "S17"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "SubscriptionProviderArn": {},
+          "SubscriptionProviderSource": {},
+          "SubscriptionProviderStatus": {}
+        }
+      },
+      "idempotent": true
+    },
+    "TagResource": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tags"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          },
+          "tags": {
+            "shape": "S17"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "UntagResource": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tagKeys"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          },
+          "tagKeys": {
+            "location": "querystring",
+            "locationName": "tagKeys",
+            "type": "list",
+            "member": {},
+            "sensitive": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "UpdateServiceSettings": {
+      "http": {
+        "requestUri": "/subscription/UpdateServiceSettings",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "LinuxSubscriptionsDiscovery",
+          "LinuxSubscriptionsDiscoverySettings"
+        ],
+        "members": {
+          "AllowUpdate": {
+            "type": "boolean"
+          },
+          "LinuxSubscriptionsDiscovery": {},
+          "LinuxSubscriptionsDiscoverySettings": {
+            "shape": "Sf"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "HomeRegions": {
+            "shape": "Sc"
+          },
+          "LinuxSubscriptionsDiscovery": {},
+          "LinuxSubscriptionsDiscoverySettings": {
+            "shape": "Sf"
+          },
+          "Status": {},
+          "StatusMessage": {
+            "shape": "Si"
+          }
+        }
+      },
+      "idempotent": true
+    }
+  },
+  "shapes": {
+    "Sc": {
+      "type": "list",
+      "member": {}
+    },
+    "Sf": {
+      "type": "structure",
+      "required": [
+        "OrganizationIntegration",
+        "SourceRegions"
+      ],
+      "members": {
+        "OrganizationIntegration": {},
+        "SourceRegions": {
+          "shape": "Sc"
+        }
+      }
+    },
+    "Si": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "Sk": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "Name": {},
+          "Operator": {},
+          "Values": {
+            "shape": "Sc"
+          }
+        }
+      }
+    },
+    "S17": {
+      "type": "map",
+      "key": {},
+      "value": {},
+      "sensitive": true
+    }
+  }
+}

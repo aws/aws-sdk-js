@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "Comprehend",
+        "description": "Amazon Comprehend now supports versioning of custom models, improved training with ONE_DOC_PER_FILE text documents for custom entity recognition, ability to provide specific test sets during training, and live migration to new model endpoints."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This update adds support for downloading configuration templates using new APIs (GetVpnConnectionDeviceTypes and GetVpnConnectionDeviceSampleConfiguration) and Internet Key Exchange version 2 (IKEv2) parameters for many popular CGW devices."
+    },
+    {
+        "type": "feature",
+        "category": "ECR",
+        "description": "This release adds additional support for repository replication"
+    },
+    {
+        "type": "feature",
+        "category": "Iot",
+        "description": "This release adds support for verifying, viewing and filtering AWS IoT Device Defender detect violations with four verification states."
+    },
+    {
+        "type": "feature",
+        "category": "Kafka",
+        "description": "Added StateInfo to ClusterInfo"
+    }
+]

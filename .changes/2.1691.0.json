@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "QApps",
+        "description": "Adds UpdateLibraryItemMetadata api to change status of app for admin verification feature and returns isVerified field in any api returning the app or library item."
+    },
+    {
+        "type": "feature",
+        "category": "Support",
+        "description": "Update maintenance mode message to indicate it has entered maintenance mode"
+    }
+]

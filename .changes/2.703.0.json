@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "MediaTailor",
+        "description": "AWS Elemental MediaTailor SDK now allows configuration of Bumper."
+    },
+    {
+        "type": "feature",
+        "category": "Organizations",
+        "description": "Added a new error message to support the requirement for a Business License on AWS accounts in China to create an organization."
+    }
+]

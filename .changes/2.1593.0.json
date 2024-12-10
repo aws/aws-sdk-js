@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "B2bi",
+        "description": "Adding support for X12 5010 HIPAA EDI version and associated transaction sets."
+    },
+    {
+        "type": "feature",
+        "category": "CleanRooms",
+        "description": "Feature: New schemaStatusDetails field to the existing Schema object that displays a status on Schema API responses to show whether a schema is queryable or not. New BatchGetSchemaAnalysisRule API to retrieve multiple schemaAnalysisRules using a single API call."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Amazon EC2 G6 instances powered by NVIDIA L4 Tensor Core GPUs can be used for a wide range of graphics-intensive and machine learning use cases. Gr6 instances also feature NVIDIA L4 GPUs and can be used for graphics workloads with higher memory requirements."
+    },
+    {
+        "type": "feature",
+        "category": "EMRcontainers",
+        "description": "This release adds support for integration with EKS AccessEntry APIs to enable automatic Cluster Access for EMR on EKS."
+    },
+    {
+        "type": "feature",
+        "category": "IVS",
+        "description": "API update to include an SRT ingest endpoint and passphrase for all channels."
+    },
+    {
+        "type": "feature",
+        "category": "VerifiedPermissions",
+        "description": "Adds GroupConfiguration field to Identity Source API's"
+    }
+]

@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "DataBrew",
+        "description": "Enabled FIPS us-gov-west-1 endpoints in SDK."
+    },
+    {
+        "type": "feature",
+        "category": "Route53",
+        "description": "Amazon Route 53 now supports the Asia Pacific (Melbourne) Region (ap-southeast-4) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region."
+    },
+    {
+        "type": "feature",
+        "category": "SsmSap",
+        "description": "This release provides updates to documentation and support for listing operations performed by AWS Systems Manager for SAP."
+    }
+]

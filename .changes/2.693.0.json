@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "Transfer",
+        "description": "This release updates the API so customers can test use of Source IP to allow, deny or limit access to data in their S3 buckets after integrating their identity provider."
+    }
+]

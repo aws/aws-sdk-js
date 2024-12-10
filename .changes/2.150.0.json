@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "Added new mode for Task Networking in ECS, called awsvpc mode. Mode configuration parameters to be passed in via awsvpcConfiguration. Updated APIs now use/show this new mode - RegisterTaskDefinition, CreateService, UpdateService, RunTask, StartTask."
+    },
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "Remove localhost restriction for ECS credential provider"
+    },
+    {
+        "type": "feature",
+        "category": "Lightsail",
+        "description": "Lightsail now supports attached block storage, which allows you to scale your applications and protect application data with additional SSD-backed storage disks. This feature allows Lightsail customers to attach secure storage disks to their Lightsail instances and manage their attached disks, including creating and deleting disks, attaching and detaching disks from instances, and backing up disks via snapshot."
+    },
+    {
+        "type": "feature",
+        "category": "Route53",
+        "description": "When a Route 53 health check or hosted zone is created by a linked AWS service, the object now includes information about the service that created it. Hosted zones or health checks that are created by a linked service can't be updated or deleted using Route 53."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "EC2 Systems Manager GetInventory API adds support for aggregation."
+    }
+]

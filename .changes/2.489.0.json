@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "This release introduces a new operation called GetUsageForecast, which allows you to programmatically access AWS Cost Explorer's forecasting engine on usage data (running hours, data transfer, etc)."
+    }
+]

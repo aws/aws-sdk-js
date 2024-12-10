@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "ApplicationAutoScaling",
+        "description": "Customers can now use the existing DescribeScalingActivities API to also see the detailed and machine-readable reasons for Application Auto Scaling not scaling their resources and, if needed, take the necessary corrective actions."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "Adding support for QuickSetup Document Type in Systems Manager"
+    }
+]

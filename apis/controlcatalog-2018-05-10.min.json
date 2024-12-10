@@ -1,0 +1,322 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2018-05-10",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "controlcatalog",
+    "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
+    "serviceFullName": "AWS Control Catalog",
+    "serviceId": "ControlCatalog",
+    "signatureVersion": "v4",
+    "signingName": "controlcatalog",
+    "uid": "controlcatalog-2018-05-10"
+  },
+  "operations": {
+    "GetControl": {
+      "http": {
+        "requestUri": "/get-control",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ControlArn"
+        ],
+        "members": {
+          "ControlArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Arn",
+          "Name",
+          "Description",
+          "Behavior",
+          "RegionConfiguration"
+        ],
+        "members": {
+          "Arn": {},
+          "Name": {},
+          "Description": {},
+          "Behavior": {},
+          "RegionConfiguration": {
+            "type": "structure",
+            "required": [
+              "Scope"
+            ],
+            "members": {
+              "Scope": {},
+              "DeployableRegions": {
+                "type": "list",
+                "member": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListCommonControls": {
+      "http": {
+        "requestUri": "/common-controls",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "CommonControlFilter": {
+            "type": "structure",
+            "members": {
+              "Objectives": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "members": {
+                    "Arn": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "CommonControls"
+        ],
+        "members": {
+          "CommonControls": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "Arn",
+                "Name",
+                "Description",
+                "Domain",
+                "Objective",
+                "CreateTime",
+                "LastUpdateTime"
+              ],
+              "members": {
+                "Arn": {},
+                "Name": {},
+                "Description": {},
+                "Domain": {
+                  "shape": "Sl"
+                },
+                "Objective": {
+                  "type": "structure",
+                  "members": {
+                    "Arn": {},
+                    "Name": {}
+                  }
+                },
+                "CreateTime": {
+                  "type": "timestamp"
+                },
+                "LastUpdateTime": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListControls": {
+      "http": {
+        "requestUri": "/list-controls",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Controls"
+        ],
+        "members": {
+          "Controls": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "Arn",
+                "Name",
+                "Description"
+              ],
+              "members": {
+                "Arn": {},
+                "Name": {},
+                "Description": {}
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListDomains": {
+      "http": {
+        "requestUri": "/domains",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Domains"
+        ],
+        "members": {
+          "Domains": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "Arn",
+                "Name",
+                "Description",
+                "CreateTime",
+                "LastUpdateTime"
+              ],
+              "members": {
+                "Arn": {},
+                "Name": {},
+                "Description": {},
+                "CreateTime": {
+                  "type": "timestamp"
+                },
+                "LastUpdateTime": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListObjectives": {
+      "http": {
+        "requestUri": "/objectives",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "ObjectiveFilter": {
+            "type": "structure",
+            "members": {
+              "Domains": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "members": {
+                    "Arn": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Objectives"
+        ],
+        "members": {
+          "Objectives": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "Arn",
+                "Name",
+                "Description",
+                "Domain",
+                "CreateTime",
+                "LastUpdateTime"
+              ],
+              "members": {
+                "Arn": {},
+                "Name": {},
+                "Description": {},
+                "Domain": {
+                  "shape": "Sl"
+                },
+                "CreateTime": {
+                  "type": "timestamp"
+                },
+                "LastUpdateTime": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    }
+  },
+  "shapes": {
+    "Sl": {
+      "type": "structure",
+      "members": {
+        "Arn": {},
+        "Name": {}
+      }
+    }
+  }
+}

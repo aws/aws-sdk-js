@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Comprehend",
+        "description": "Amazon Comprehend now supports multiple entities for custom entity recognition"
+    },
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "This release of Amazon Elastic Container Service (Amazon ECS) introduces support for cluster settings. Cluster settings specify whether CloudWatch Container Insights is enabled or disabled for the cluster."
+    }
+]

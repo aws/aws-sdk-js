@@ -19,6 +19,11 @@ request.on('error', function(err, response) {
 
 });
 request.on('build', function(request) {
+    // test body as string
+    request.httpRequest.body = 'Hello'
+    // test body as buffer
+    request.httpRequest.body = Buffer.from('Hello')
+
     console.log(request.httpRequest.method);
 });
 request.on('complete', function(response) {

@@ -1,32 +1,10 @@
 language: node_js
 node_js:
-#  - "0.8"
   - "0.10"
   - "0.12"
-  - "4.2"
-  - "4.4"
-  - "5"
+  - "4"
   - "6"
-  - "7"
   - "8"
-env:
-  - TEST_SCRIPT=coverage
-
-sudo: false
-
-matrix:
-  include:
-  - node_js: "node"
-    env: TEST_SCRIPT=lint
-  - node_js: "node"
-    env: TEST_SCRIPT=buildertest
-  - node_js: "node"
-    env: TEST_SCRIPT=browsertest
-  - node_js: "node"
-    env: TEST_SCRIPT=react-native-test
-  - node_js: "node"
-    env: TEST_SCRIPT=tstest
-
+  - "10"
 script:
-  - npm run $TEST_SCRIPT
-  - "if [[ $TEST_SCRIPT == 'coverage' ]]; then node ./node_modules/.bin/codecov || exit 0; fi"
+  - npm run coverage

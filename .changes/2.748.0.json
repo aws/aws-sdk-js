@@ -1,0 +1,32 @@
+[
+    {
+        "type": "bugfix",
+        "category": "protocol",
+        "description": "Allow error code extraction from pascal cased Code attribute in the JSON body response"
+    },
+    {
+        "type": "feature",
+        "category": "ApiGatewayV2",
+        "description": "You can now secure HTTP APIs using Lambda authorizers and IAM authorizers. These options enable you to make flexible auth decisions using a Lambda function, or using IAM policies, respectively."
+    },
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "AWS CodeBuild - Support keyword search for test cases in DecribeTestCases API . Allow deletion of reports in the report group, before deletion of report group using the deleteReports flag."
+    },
+    {
+        "type": "feature",
+        "category": "ELBv2",
+        "description": "Adds support for Application Load Balancers on Outposts."
+    },
+    {
+        "type": "feature",
+        "category": "LexModelBuildingService",
+        "description": "Amazon Lex supports en-AU locale"
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "Adds tagging support for QuickSight customization resources.  A user can now specify a list of tags when creating a customization resource and use a customization ARN in QuickSight's tagging APIs."
+    }
+]

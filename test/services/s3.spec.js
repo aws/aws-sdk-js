@@ -1,14 +1,19 @@
 var helpers = require('../helpers'),
   AWS = helpers.AWS,
   Stream = AWS.util.stream,
-  Buffer = AWS.util.Buffer;
+  buffer = AWS.util.buffer;
 
 describe('AWS.S3', function() {
   var s3 = null;
   var request = function(operation, params) {
     return s3.makeRequest(operation, params);
   };
+  var env = process.env;
+  afterEach(function() {
+    process.env = env;
+  });
   beforeEach(function(done) {
+    process.env = {};
     s3 = new AWS.S3({
       region: void 0
     });
@@ -16,42 +21,17 @@ describe('AWS.S3', function() {
     return done();
   });
 
-  describe('dnsCompatibleBucketName', function() {
-    it('must be at least 3 characters', function() {
-      expect(s3.dnsCompatibleBucketName('aa')).to.equal(false);
-    });
-
-    it('must not be longer than 63 characters', function() {
-      var b;
-      b = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
-      expect(s3.dnsCompatibleBucketName(b)).to.equal(false);
-    });
-
-    it('must start with a lower-cased letter or number', function() {
-      expect(s3.dnsCompatibleBucketName('Abc')).to.equal(false);
-      expect(s3.dnsCompatibleBucketName('-bc')).to.equal(false);
-      expect(s3.dnsCompatibleBucketName('abc')).to.equal(true);
-    });
-
-    it('must end with a lower-cased letter or number', function() {
-      expect(s3.dnsCompatibleBucketName('abC')).to.equal(false);
-      expect(s3.dnsCompatibleBucketName('ab-')).to.equal(false);
-      expect(s3.dnsCompatibleBucketName('abc')).to.equal(true);
-    });
-
-    it('may not contain multiple contiguous dots', function() {
-      expect(s3.dnsCompatibleBucketName('abc.123')).to.equal(true);
-      expect(s3.dnsCompatibleBucketName('abc..123')).to.equal(false);
-    });
-
-    it('may only contain letters numbers and dots', function() {
-      expect(s3.dnsCompatibleBucketName('abc123')).to.equal(true);
-      expect(s3.dnsCompatibleBucketName('abc_123')).to.equal(false);
-    });
-
-    it('must not look like an ip address', function() {
-      expect(s3.dnsCompatibleBucketName('1.2.3.4')).to.equal(false);
-      expect(s3.dnsCompatibleBucketName('a.b.c.d')).to.equal(true);
+  describe('writeGetObjectResponse', function() {
+    it('makes the request to object-lambda on writeGetObjectResponse', function() {
+      s3client = new AWS.S3({});
+      s3client.makeRequest = function () {
+        return { httpRequest: { endpoint: {} }};
+      };
+      var req = s3client.writeGetObjectResponse({
+        RequestRoute: 'myroute',
+        RequestToken: 'mytoken',
+      });
+      expect(req.httpRequest.endpoint.host).to.equal('s3-object-lambda.mock-region.amazonaws.com');
     });
   });
 
@@ -61,7 +41,7 @@ describe('AWS.S3', function() {
         return new AWS.S3({
           s3BucketEndpoint: true
         });
-      }).to["throw"](/An endpoint must be provided/);
+      }).to['throw'](/An endpoint must be provided/);
     });
   });
 
@@ -87,25 +67,31 @@ describe('AWS.S3', function() {
       expect(s3.config.region).to.equal('us-east-1');
     });
 
-    it('combines the region with s3 in the endpoint using a - instead of .', function() {
+    it('combines the region with s3 in the endpoint using a .', function() {
       s3 = new AWS.S3({
         region: 'us-west-1'
       });
-      expect(s3.endpoint.hostname).to.equal('s3-us-west-1.amazonaws.com');
+      expect(s3.endpoint.hostname).to.equal('s3.us-west-1.amazonaws.com');
     });
 
     it('sets a region-specific dualstack endpoint when dualstack enabled', function() {
       s3 = new AWS.S3({
         region: 'us-west-1',
-        useDualstack: true
+        useDualstackEndpoint: true
       });
       expect(s3.endpoint.hostname).to.equal('s3.dualstack.us-west-1.amazonaws.com');
 
       s3 = new AWS.S3({
         region: 'us-east-1',
-        useDualstack: true
+        useDualstackEndpoint: true
       });
       expect(s3.endpoint.hostname).to.equal('s3.dualstack.us-east-1.amazonaws.com');
+
+      s3 = new AWS.S3({
+        region: 'cn-north-1',
+        useDualstackEndpoint: true
+      });
+      expect(s3.endpoint.hostname).to.equal('s3.dualstack.cn-north-1.amazonaws.com.cn');
     });
   });
 
@@ -277,6 +263,14 @@ describe('AWS.S3', function() {
     });
 
     describe('will throw an error when', function() {
+      it('using sigv4 and the "Bucket" parameter starts with a forward slash', function(done) {
+        var s3 = new AWS.S3({signatureVersion: 'v4'});
+        s3.createBucket({Bucket: '/foo'}, function(err, data) {
+          expect(err.code).to.eql('InvalidBucket');
+          done();
+        });
+      });
+
       it('using sigv4 and the "Bucket" parameter contains forward slashes and "Key" is not defined', function(done) {
         var s3 = new AWS.S3({signatureVersion: 'v4'});
         s3.createBucket({Bucket: 'foo/bar'}, function(err, data) {
@@ -300,7 +294,7 @@ describe('AWS.S3', function() {
       describe('will return "s3" when', function() {
         it('user does not specify a signatureVersion for a region that supports v2', function(done) {
           s3 = new AWS.S3({
-            region: 'us-east-1'
+            region: 'eu-west-1'
           });
           expect(s3.getSignatureVersion(req)).to.equal('s3');
           done();
@@ -378,6 +372,31 @@ describe('AWS.S3', function() {
           done();
         });
       });
+    });
+  });
+
+  describe('getSigningName', function() {
+    it('returns serviceName from BucketArn if present', function(done) {
+      s3 = new AWS.S3({
+        region: 'us-east-1'
+      });
+      var req = { _parsedArn: { service: 'SERVICE_NAME' } };
+      expect(s3.getSigningName(req)).to.equal(
+        req._parsedArn.service
+      );
+      done();
+    });
+
+    it('returns serviceName from super.signingName if BucketArn not present', function(done) {
+      s3 = new AWS.S3({
+        region: 'us-east-1'
+      });
+      var serviceName = 'SERVICE_NAME';
+      var getSigningName = AWS.Service.prototype.getSigningName;
+      AWS.Service.prototype.getSigningName = function() { return serviceName; };
+      expect(s3.getSigningName()).to.equal(serviceName);
+      AWS.Service.prototype.getSigningName = getSigningName;
+      done();
     });
   });
 
@@ -532,6 +551,34 @@ describe('AWS.S3', function() {
       expect(req.path).to.equal('/bucket');
     });
 
+    it('allows user to use key that is substring of bucket', function() {
+      var req = build('putObject', {
+        Bucket: 'foobar',
+        Key: 'foo'
+      });
+      expect(req.path).to.equal('/foo');
+      expect(req.virtualHostedBucket).to.equal('foobar');
+    });
+
+    it('allows user to use key that matches bucket', function() {
+      var req = build('putObject', {
+        Bucket: 'foobar',
+        Key: 'foobar'
+      });
+      expect(req.path).to.equal('/foobar');
+      expect(req.virtualHostedBucket).to.equal('foobar');
+    });
+
+    it('allows user to use key, with querystring param, that matches bucket', function() {
+      var req = build('headObject', {
+        Bucket: 'foobar',
+        Key: 'foobar',
+        VersionId: 'null'
+      });
+      expect(req.path).to.equal('/foobar?versionId=null');
+      expect(req.virtualHostedBucket).to.equal('foobar');
+    });
+
     it('does not allow non-bucket operations with s3BucketEndpoint set', function() {
       s3 = new AWS.S3({
         endpoint: 'foo.bar',
@@ -554,8 +601,8 @@ describe('AWS.S3', function() {
       req = s3.headBucket(param).build();
       httpRequest = req.httpRequest;
       expect(httpRequest.region).to.equal('us-west-2');
-      expect(httpRequest.endpoint.hostname).to.equal('name.s3-us-west-2.amazonaws.com');
-      expect(httpRequest.headers.Host).to.equal('name.s3-us-west-2.amazonaws.com');
+      expect(httpRequest.endpoint.hostname).to.equal('name.s3.us-west-2.amazonaws.com');
+      expect(httpRequest.headers.Host).to.equal('name.s3.us-west-2.amazonaws.com');
       expect(httpRequest.path).to.equal('/');
     });
 
@@ -572,8 +619,8 @@ describe('AWS.S3', function() {
       req = s3.headBucket(param).build();
       httpRequest = req.httpRequest;
       expect(httpRequest.region).to.equal('us-west-2');
-      expect(httpRequest.endpoint.hostname).to.equal('s3-us-west-2.amazonaws.com');
-      expect(httpRequest.headers.Host).to.equal('s3-us-west-2.amazonaws.com');
+      expect(httpRequest.endpoint.hostname).to.equal('s3.us-west-2.amazonaws.com');
+      expect(httpRequest.headers.Host).to.equal('s3.us-west-2.amazonaws.com');
       expect(httpRequest.path).to.equal('/name');
     });
 
@@ -633,7 +680,7 @@ describe('AWS.S3', function() {
       beforeEach(function() {
         s3 = new AWS.S3({
           useAccelerateEndpoint: true,
-          useDualstack: true
+          useDualstackEndpoint: true
         });
       });
 
@@ -649,7 +696,7 @@ describe('AWS.S3', function() {
         var req;
         s3 = new AWS.S3({
           useAccelerateEndpoint: true,
-          useDualstack: true,
+          useDualstackEndpoint: true,
           s3BucketEndpoint: true,
           endpoint: 'foo.region.amazonaws.com'
         });
@@ -723,7 +770,7 @@ describe('AWS.S3', function() {
           var req = build('putObject', {
             Bucket: 'bucket',
             Key: 'key',
-            Body: new Buffer(1024 * 1024 - 1)
+            Body: buffer.alloc(1024 * 1024 - 1)
           });
           expect(req.headers['Expect']).not.to.exist;
         });
@@ -732,7 +779,7 @@ describe('AWS.S3', function() {
           var req = build('putObject', {
             Bucket: 'bucket',
             Key: 'key',
-            Body: new Buffer(1024 * 1024 + 1)
+            Body: buffer.alloc(1024 * 1024 + 1)
           });
           expect(req.headers['Expect']).to.equal('100-continue');
         });
@@ -763,7 +810,7 @@ describe('AWS.S3', function() {
         var req = build('putObject', {
           Bucket: 'bucket',
           Key: 'key',
-          Body: new Buffer(1024 * 1024 * 5)
+          Body: AWS.util.buffer.alloc(1024 * 1024 * 5)
         });
         expect(req.headers['X-Amz-Content-Sha256']).to.equal('UNSIGNED-PAYLOAD');
       });
@@ -773,7 +820,7 @@ describe('AWS.S3', function() {
           s3DisableBodySigning: true,
           signatureVersion: 'v4'
         });
-        var buf = new Buffer(1024 * 1024 * 5);
+        var buf = AWS.util.buffer.alloc(1024 * 1024 * 5);
         buf.fill(0);
         var req = build('putObject', {
           Bucket: 'bucket',
@@ -792,7 +839,7 @@ describe('AWS.S3', function() {
         var req = build('putObject', {
           Bucket: 'bucket',
           Key: 'key',
-          Body: new Buffer(1024 * 1024 * 5)
+          Body: AWS.util.buffer.alloc(1024 * 1024 * 5)
         });
         expect(req.headers['X-Amz-Content-Sha256']).to.exist;
         expect(req.headers['X-Amz-Content-Sha256']).to.not.equal('UNSIGNED-PAYLOAD');
@@ -807,7 +854,7 @@ describe('AWS.S3', function() {
         var req = build('putObject', {
           Bucket: 'bucket',
           Key: 'key',
-          Body: new Buffer(1024 * 1024 * 5)
+          Body: AWS.util.buffer.alloc(1024 * 1024 * 5)
         });
         expect(req.headers['X-Amz-Content-Sha256']).to.not.exist;
       });
@@ -822,7 +869,7 @@ describe('AWS.S3', function() {
         var req = build('putObject', {
           Bucket: 'bucket',
           Key: 'key',
-          Body: new Buffer(1024 * 1024 * 5)
+          Body: AWS.util.buffer.alloc(1024 * 1024 * 5)
         });
         expect(req.headers['X-Amz-Content-Sha256']).to.exist;
         expect(req.headers['X-Amz-Cotnent-Sha256']).to.not.equal('UNSIGNED-PAYLOAD');
@@ -837,7 +884,7 @@ describe('AWS.S3', function() {
         var req = build('putObject', {
           Bucket: 'bucket',
           Key: 'key',
-          Body: new Buffer(1024 * 1024 * 5)
+          Body: AWS.util.buffer.alloc(1024 * 1024 * 5)
         });
         expect(req.headers['X-Amz-Content-Sha256']).to.not.exist;
       });
@@ -894,7 +941,7 @@ describe('AWS.S3', function() {
         var req = build('putObject', {
           Bucket: 'bucket',
           Key: 'key',
-          Body: new Buffer('body'),
+          Body: AWS.util.buffer.toBuffer('body'),
           ContentType: 'image/png'
         });
         expect(req.headers['Content-Type']).to.equal('image/png');
@@ -996,7 +1043,7 @@ describe('AWS.S3', function() {
           s3 = new AWS.S3({
             sslEnabled: true,
             region: void 0,
-            useDualstack: true
+            useDualstackEndpoint: true
           });
         });
 
@@ -1031,7 +1078,7 @@ describe('AWS.S3', function() {
             sslEnabled: true,
             s3ForcePathStyle: true,
             region: void 0,
-            useDualstack: true
+            useDualstackEndpoint: true
           });
           var req = build('listObjects', {
             Bucket: 'bucket-name'
@@ -1054,7 +1101,7 @@ describe('AWS.S3', function() {
           s3 = new AWS.S3({
             sslEnabled: false,
             region: void 0,
-            useDualstack: true
+            useDualstackEndpoint: true
           });
         });
 
@@ -1135,7 +1182,7 @@ describe('AWS.S3', function() {
           Bucket: 'bucket',
           Key: 'key',
           Body: 'data',
-          SSECustomerKey: new AWS.util.Buffer('098f6bcd4621d373cade4e832627b4f6', 'hex'),
+          SSECustomerKey: AWS.util.buffer.toBuffer('098f6bcd4621d373cade4e832627b4f6', 'hex'),
           SSECustomerAlgorithm: 'AES256'
         });
         req.build();
@@ -1165,7 +1212,7 @@ describe('AWS.S3', function() {
           Key: 'key',
           CopySource: 'bucket/oldkey',
           Body: 'data',
-          CopySourceSSECustomerKey: new AWS.util.Buffer('098f6bcd4621d373cade4e832627b4f6', 'hex'),
+          CopySourceSSECustomerKey: AWS.util.buffer.toBuffer('098f6bcd4621d373cade4e832627b4f6', 'hex'),
           CopySourceSSECustomerAlgorithm: 'AES256'
         });
         req.build();
@@ -1267,7 +1314,7 @@ describe('AWS.S3', function() {
         req = request('operation');
       }
       var resp = new AWS.Response(req);
-      resp.httpResponse.body = new Buffer(body || '');
+      resp.httpResponse.body = AWS.util.buffer.toBuffer(body || '');
       resp.httpResponse.statusCode = statusCode;
       resp.httpResponse.headers = {
         'x-amz-request-id': 'RequestId',
@@ -1309,7 +1356,7 @@ describe('AWS.S3', function() {
       var req = request('operation', {
         Bucket: 'name'
       });
-      var body = "<Error>\n  <Code>InvalidArgument</Code>\n  <Message>Provided param is bad</Message>\n  <Region>eu-west-1</Region>\n</Error>";
+      var body = '<Error>\n  <Code>InvalidArgument</Code>\n  <Message>Provided param is bad</Message>\n  <Region>eu-west-1</Region>\n</Error>';
       var error = extractError(400, body, {}, req);
       expect(error.region).to.equal('eu-west-1');
       expect(s3.bucketRegionCache.name).to.equal('eu-west-1');
@@ -1320,7 +1367,7 @@ describe('AWS.S3', function() {
       var req = request('operation', {
         Bucket: 'name'
       });
-      var body = "<Error>\n  <Code>InvalidArgument</Code>\n  <Message>Provided param is bad</Message>\n  <Region>eu-west-1</Region>\n</Error>";
+      var body = '<Error>\n  <Code>InvalidArgument</Code>\n  <Message>Provided param is bad</Message>\n  <Region>eu-west-1</Region>\n</Error>';
       var headers = {
         'x-amz-bucket-region': 'us-east-1'
       };
@@ -1334,7 +1381,7 @@ describe('AWS.S3', function() {
       var req = request('operation', {
         Bucket: 'name'
       });
-      var body = "<Error>\n  <Code>InvalidArgument</Code>\n  <Message>Provided param is bad</Message>\n</Error>";
+      var body = '<Error>\n  <Code>InvalidArgument</Code>\n  <Message>Provided param is bad</Message>\n</Error>';
       var error = extractError(400, body, {}, req);
       expect(error.region).to.equal('us-west-2');
       expect(s3.bucketRegionCache.name).to.equal('us-west-2');
@@ -1346,7 +1393,7 @@ describe('AWS.S3', function() {
         Bucket: 'name'
       });
       req.httpRequest.region = 'us-west-2';
-      var body = "<Error>\n  <Code>InvalidArgument</Code>\n  <Message>Provided param is bad</Message>\n</Error>";
+      var body = '<Error>\n  <Code>InvalidArgument</Code>\n  <Message>Provided param is bad</Message>\n</Error>';
       var error = extractError(400, body);
       expect(error.region).to.not.exist;
       expect(s3.bucketRegionCache.name).to.equal('us-west-2');
@@ -1361,7 +1408,7 @@ describe('AWS.S3', function() {
       var req = request('operation', {
         Bucket: 'name'
       });
-      var body = "<Error>\n  <Code>PermanentRedirect</Code>\n  <Message>Message</Message>\n</Error>";
+      var body = '<Error>\n  <Code>PermanentRedirect</Code>\n  <Message>Message</Message>\n</Error>';
       var headers = {
         'x-amz-bucket-region': 'us-east-1'
       };
@@ -1382,12 +1429,12 @@ describe('AWS.S3', function() {
         Bucket: 'name'
       };
       var req = request('operation', params);
-      var body = "<Error>\n  <Code>PermanentRedirect</Code>\n  <Message>Message</Message>\n</Error>";
+      var body = '<Error>\n  <Code>PermanentRedirect</Code>\n  <Message>Message</Message>\n</Error>';
       var error = extractError(301, body, {}, req);
       expect(error.region).to.not.exist;
       expect(spy.calls.length).to.equal(1);
-      expect(spy.calls[0]["arguments"][0].Bucket).to.equal('name');
-      expect(spy.calls[0]["arguments"][0].MaxKeys).to.equal(maxKeysParam);
+      expect(spy.calls[0]['arguments'][0].Bucket).to.equal('name');
+      expect(spy.calls[0]['arguments'][0].MaxKeys).to.equal(maxKeysParam);
       expect(regionReq._requestRegionForBucket).to.exist;
     });
 
@@ -1401,7 +1448,7 @@ describe('AWS.S3', function() {
       var req = request('operation', {
         Bucket: 'name'
       });
-      var body = "<Error>\n  <Code>InvalidCode</Code>\n  <Message>Message</Message>\n</Error>";
+      var body = '<Error>\n  <Code>InvalidCode</Code>\n  <Message>Message</Message>\n</Error>';
       var error = extractError(301, body, {}, req);
       expect(error.region).to.not.exist;
       expect(spy.calls.length).to.equal(0);
@@ -1419,11 +1466,11 @@ describe('AWS.S3', function() {
       var req = request('operation', {
         Bucket: 'name'
       });
-      var body = "<Error>\n  <Code>PermanentRedirect</Code>\n  <Message>Message</Message>\n</Error>";
+      var body = '<Error>\n  <Code>PermanentRedirect</Code>\n  <Message>Message</Message>\n</Error>';
       var error = extractError(301, body, {}, req);
       expect(spy.calls.length).to.equal(1);
-      expect(spy.calls[0]["arguments"][0].Bucket).to.equal('name');
-      expect(spy.calls[0]["arguments"][0].MaxKeys).to.equal(maxKeysParam);
+      expect(spy.calls[0]['arguments'][0].Bucket).to.equal('name');
+      expect(spy.calls[0]['arguments'][0].MaxKeys).to.equal(maxKeysParam);
       expect(error.region).to.equal('us-west-2');
     });
 
@@ -1440,7 +1487,7 @@ describe('AWS.S3', function() {
     });
 
     it('uses canned errors only when the body is empty', function() {
-      var body = "<xml>\n  <Code>ErrorCode</Code>\n  <Message>ErrorMessage</Message>\n</xml>";
+      var body = '<xml>\n  <Code>ErrorCode</Code>\n  <Message>ErrorMessage</Message>\n</xml>';
       var error = extractError(403, body);
       expect(error.code).to.equal('ErrorCode');
       expect(error.message).to.equal('ErrorMessage');
@@ -1493,7 +1540,7 @@ describe('AWS.S3', function() {
       var retryable = s3.retryableError(err, req);
       expect(retryable).to.equal(true);
       expect(req.httpRequest.region).to.equal('eu-west-1');
-      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-eu-west-1.amazonaws.com');
+      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3.eu-west-1.amazonaws.com');
     });
 
     it('should retry on error code 301 with updated region and endpoint', function() {
@@ -1509,7 +1556,327 @@ describe('AWS.S3', function() {
       var retryable = s3.retryableError(err, req);
       expect(retryable).to.equal(true);
       expect(req.httpRequest.region).to.equal('eu-west-1');
-      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-eu-west-1.amazonaws.com');
+      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3.eu-west-1.amazonaws.com');
+    });
+
+    describe('cross-region putObject', function() {
+      describe('non-path-style', function() {
+        it('prepends bucket to hostname and includes full object key in path', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          var req = request('putObject', {
+            Bucket: 'test',
+            Key: 'foo/bar*_.~\-%/biz'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('test.s3.eu-west-1.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/foo/bar%2A_.~-%25/biz');
+        });
+
+        it('prepends bucket to hostname and includes full object key in path when bucket matches object prefix', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          var req = request('putObject', {
+            Bucket: 'foo',
+            Key: 'foo/bar*_.~\-%/biz'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('foo.s3.eu-west-1.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/foo/bar%2A_.~-%25/biz');
+        });
+
+        it('prepends bucket to hostname and includes full object key in path when bucket matches object', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          var req = request('putObject', {
+            Bucket: 'foo',
+            Key: 'foo'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('foo.s3.eu-west-1.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/foo');
+        });
+      });
+
+      describe('non-dns-compatible', function() {
+        it('includes bucket and full object key in path', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          var req = request('putObject', {
+            Bucket: 'test.foo',
+            Key: 'foo/bar*_.~\-%/biz'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('s3.eu-west-1.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/test.foo/foo/bar%2A_.~-%25/biz');
+        });
+
+        it('includes bucket and full object key in path when bucket matches object prefix', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          var req = request('putObject', {
+            Bucket: 'foo.bar',
+            Key: 'foo/bar*_.~\-%/biz'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('s3.eu-west-1.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/foo.bar/foo/bar%2A_.~-%25/biz');
+        });
+      });
+
+      describe('path-style', function() {
+        it('includes bucket and full object key in path', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          s3 = new AWS.S3({
+            s3ForcePathStyle: true
+          });
+          var req = request('putObject', {
+            Bucket: 'test',
+            Key: 'foo/bar*_.~\-%/biz'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('s3.eu-west-1.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/test/foo/bar%2A_.~-%25/biz');
+        });
+
+        it('includes bucket and full object key in path when bucket matches object prefix', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          s3 = new AWS.S3({
+            s3ForcePathStyle: true
+          });
+          var req = request('putObject', {
+            Bucket: 'foo',
+            Key: 'foo/bar*_.~\-%/biz'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('s3.eu-west-1.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/foo/foo/bar%2A_.~-%25/biz');
+        });
+      });
+
+      describe('bucket endpoint', function() {
+        it('includes full object key in path', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          s3 = new AWS.S3({
+            endpoint: 'https://fake-custom-url.com',
+            s3BucketEndpoint: true
+          });
+          var req = request('putObject', {
+            Bucket: 'test',
+            Key: 'foo/bar*_.~\-%/biz'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('fake-custom-url.com');
+          expect(req.httpRequest.path).to.equal('/foo/bar%2A_.~-%25/biz');
+        });
+
+        it('includes full object key in path when bucket matches object prefix', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          s3 = new AWS.S3({
+            endpoint: 'https://fake-custom-url.com',
+            s3BucketEndpoint: true
+          });
+          var req = request('putObject', {
+            Bucket: 'foo',
+            Key: 'foo/bar*_.~\-%/biz'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('fake-custom-url.com');
+          expect(req.httpRequest.path).to.equal('/foo/bar%2A_.~-%25/biz');
+        });
+      });
+
+      describe('s3Accelerate', function() {
+        it('includes full object key in path', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          s3 = new AWS.S3({
+            useAccelerateEndpoint: true
+          });
+          var req = request('putObject', {
+            Bucket: 'test',
+            Key: 'foo/bar*_.~\-%/biz'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('test.s3-accelerate.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/foo/bar%2A_.~-%25/biz');
+        });
+
+        it('includes full object key in path when bucket matches object prefix', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          s3 = new AWS.S3({
+            useAccelerateEndpoint: true
+          });
+          var req = request('putObject', {
+            Bucket: 'foo',
+            Key: 'foo/bar*_.~\-%/biz'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('foo.s3-accelerate.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/foo/bar%2A_.~-%25/biz');
+        });
+      });
+
+      describe('dualstack', function() {
+        it('includes full object key in path', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          s3 = new AWS.S3({
+            useDualstackEndpoint: true
+          });
+          var req = request('putObject', {
+            Bucket: 'test',
+            Key: 'foo/bar*_.~\-%/biz'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('test.s3.dualstack.eu-west-1.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/foo/bar%2A_.~-%25/biz');
+        });
+
+        it('includes full object key in path when bucket matches object prefix', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          s3 = new AWS.S3({
+            useDualstackEndpoint: true
+          });
+          var req = request('putObject', {
+            Bucket: 'foo',
+            Key: 'foo/bar*_.~\-%/biz'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('foo.s3.dualstack.eu-west-1.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/foo/bar%2A_.~-%25/biz');
+        });
+      });
+
+      describe('dualstack and s3-accelerate', function() {
+        it('includes full object key in path', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          s3 = new AWS.S3({
+            useAccelerateEndpoint: true,
+            useDualstackEndpoint: true
+          });
+          var req = request('putObject', {
+            Bucket: 'test',
+            Key: 'foo/bar*_.~\-%/biz'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('test.s3-accelerate.dualstack.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/foo/bar%2A_.~-%25/biz');
+        });
+
+        it('includes full object key in path when bucket matches object prefix', function() {
+          var err = {
+            code: 301,
+            statusCode: 301,
+            region: 'eu-west-1'
+          };
+          s3 = new AWS.S3({
+            useAccelerateEndpoint: true,
+            useDualstackEndpoint: true
+          });
+          var req = request('putObject', {
+            Bucket: 'foo',
+            Key: 'foo/bar*_.~\-%/biz'
+          });
+          req.build();
+          var retryable = s3.retryableError(err, req);
+          expect(retryable).to.equal(true);
+          expect(req.httpRequest.region).to.equal('eu-west-1');
+          expect(req.httpRequest.endpoint.hostname).to.equal('foo.s3-accelerate.dualstack.amazonaws.com');
+          expect(req.httpRequest.path).to.equal('/foo/bar%2A_.~-%25/biz');
+        });
+      });
     });
 
     it('should retry with updated region but not endpoint if non-S3 url endpoint is specified', function() {
@@ -1539,7 +1906,7 @@ describe('AWS.S3', function() {
         region: 'eu-west-1'
       };
       s3 = new AWS.S3({
-        endpoint: 'https://name.s3-us-west-2.amazonaws.com',
+        endpoint: 'https://name.s3.us-west-2.amazonaws.com',
         s3BucketEndpoint: true
       });
       var req = request('operation', {
@@ -1549,7 +1916,7 @@ describe('AWS.S3', function() {
       var retryable = s3.retryableError(err, req);
       expect(retryable).to.equal(true);
       expect(req.httpRequest.region).to.equal('eu-west-1');
-      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-eu-west-1.amazonaws.com');
+      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3.eu-west-1.amazonaws.com');
     });
 
     it('should retry with updated region but not endpoint if accelerate endpoint is used', function() {
@@ -1578,7 +1945,7 @@ describe('AWS.S3', function() {
         region: 'eu-west-1'
       };
       s3 = new AWS.S3({
-        useDualstack: true
+        useDualstackEndpoint: true
       });
       var req = request('operation', {
         Bucket: 'name'
@@ -1663,7 +2030,7 @@ describe('AWS.S3', function() {
       s3.bucketRegionCache.name = 'eu-west-1';
       callNetworkingErrorListener(req);
       expect(req.httpRequest.region).to.equal('eu-west-1');
-      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-eu-west-1.amazonaws.com');
+      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3.eu-west-1.amazonaws.com');
       expect(spy.calls.length).to.equal(0);
     });
 
@@ -1677,7 +2044,7 @@ describe('AWS.S3', function() {
       expect(regionReq.httpRequest.region).to.equal('us-east-1');
       expect(regionReq.httpRequest.endpoint.hostname).to.equal('name.s3.amazonaws.com');
       expect(req.httpRequest.region).to.equal('eu-west-1');
-      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-eu-west-1.amazonaws.com');
+      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3.eu-west-1.amazonaws.com');
     });
 
     it('makes async request in us-east-1 if cached region matches current region', function() {
@@ -1691,7 +2058,7 @@ describe('AWS.S3', function() {
       expect(regionReq.httpRequest.region).to.equal('us-east-1');
       expect(regionReq.httpRequest.endpoint.hostname).to.equal('name.s3.amazonaws.com');
       expect(req.httpRequest.region).to.equal('eu-west-1');
-      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-eu-west-1.amazonaws.com');
+      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3.eu-west-1.amazonaws.com');
     });
 
     it('does not update region if path-style bucket is dns-compliant and not in cache', function() {
@@ -1703,7 +2070,7 @@ describe('AWS.S3', function() {
       var req = callNetworkingErrorListener();
       expect(spy.calls.length).to.equal(0);
       expect(req.httpRequest.region).to.equal('us-west-2');
-      expect(req.httpRequest.endpoint.hostname).to.equal('s3-us-west-2.amazonaws.com');
+      expect(req.httpRequest.endpoint.hostname).to.equal('s3.us-west-2.amazonaws.com');
     });
   });
 
@@ -1712,7 +2079,7 @@ describe('AWS.S3', function() {
       var headers = {
         'x-amz-request-id': 'request-id'
       };
-      var body = "<AccessControlPolicy xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n  <AccessControlList>\n    <Grant>\n      <Grantee xsi:type=\"CanonicalUser\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n        <DisplayName>aws-sdk</DisplayName>\n        <ID>id</ID>\n      </Grantee>\n      <Permission>FULL_CONTROL</Permission>\n    </Grant>\n    <Grant>\n      <Grantee xsi:type=\"Group\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n        <URI>uri</URI>\n      </Grantee>\n      <Permission>READ</Permission>\n    </Grant>\n  </AccessControlList>\n  <Owner>\n    <DisplayName>aws-sdk</DisplayName>\n    <ID>id</ID>\n  </Owner>\n</AccessControlPolicy>";
+      var body = '<AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/">\n  <AccessControlList>\n    <Grant>\n      <Grantee xsi:type="CanonicalUser" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">\n        <DisplayName>aws-sdk</DisplayName>\n        <ID>id</ID>\n      </Grantee>\n      <Permission>FULL_CONTROL</Permission>\n    </Grant>\n    <Grant>\n      <Grantee xsi:type="Group" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">\n        <URI>uri</URI>\n      </Grantee>\n      <Permission>READ</Permission>\n    </Grant>\n  </AccessControlList>\n  <Owner>\n    <DisplayName>aws-sdk</DisplayName>\n    <ID>id</ID>\n  </Owner>\n</AccessControlPolicy>';
       helpers.mockHttpResponse(200, headers, body);
       s3.getBucketAcl(function(error, data) {
         expect(error).to.equal(null);
@@ -1746,7 +2113,7 @@ describe('AWS.S3', function() {
 
   describe('putBucketAcl', function() {
     it('correctly builds the ACL XML document', function(done) {
-      var xml = "<AccessControlPolicy xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n  <AccessControlList>\n    <Grant>\n      <Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">\n        <DisplayName>aws-sdk</DisplayName>\n        <ID>id</ID>\n      </Grantee>\n      <Permission>FULL_CONTROL</Permission>\n    </Grant>\n    <Grant>\n      <Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Group\">\n        <URI>uri</URI>\n      </Grantee>\n      <Permission>READ</Permission>\n    </Grant>\n  </AccessControlList>\n  <Owner>\n    <DisplayName>aws-sdk</DisplayName>\n    <ID>id</ID>\n  </Owner>\n</AccessControlPolicy>";
+      var xml = '<AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/">\n  <AccessControlList>\n    <Grant>\n      <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">\n        <DisplayName>aws-sdk</DisplayName>\n        <ID>id</ID>\n      </Grantee>\n      <Permission>FULL_CONTROL</Permission>\n    </Grant>\n    <Grant>\n      <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">\n        <URI>uri</URI>\n      </Grantee>\n      <Permission>READ</Permission>\n    </Grant>\n  </AccessControlList>\n  <Owner>\n    <DisplayName>aws-sdk</DisplayName>\n    <ID>id</ID>\n  </Owner>\n</AccessControlPolicy>';
       helpers.mockHttpResponse(200, {}, '');
       var params = {
         AccessControlPolicy: {
@@ -1785,7 +2152,7 @@ describe('AWS.S3', function() {
         'x-amz-id-2': 'Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg==',
         'x-amz-request-id': '656c76696e6727732072657175657374'
       };
-      var body = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CompleteMultipartUploadResult xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n  <Location>http://Example-Bucket.s3.amazonaws.com/Example-Object</Location>\n  <Bucket>Example-Bucket</Bucket>\n  <Key>Example-Object</Key>\n  <ETag>\"3858f62230ac3c915f300c664312c11f-9\"</ETag>\n</CompleteMultipartUploadResult>";
+      var body = '<?xml version="1.0" encoding="UTF-8"?>\n<CompleteMultipartUploadResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">\n  <Location>http://Example-Bucket.s3.amazonaws.com/Example-Object</Location>\n  <Bucket>Example-Bucket</Bucket>\n  <Key>Example-Object</Key>\n  <ETag>"3858f62230ac3c915f300c664312c11f-9"</ETag>\n</CompleteMultipartUploadResult>';
       helpers.mockHttpResponse(200, headers, body);
       s3.completeMultipartUpload(function(error, data) {
         expect(error).to.equal(null);
@@ -1801,12 +2168,38 @@ describe('AWS.S3', function() {
     });
 
     it('returns an error when the resp is 200 with an error xml document', function(done) {
-      var body = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Error>\n  <Code>InternalError</Code>\n  <Message>We encountered an internal error. Please try again.</Message>\n  <RequestId>656c76696e6727732072657175657374</RequestId>\n  <HostId>Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg==</HostId>\n</Error>";
+      var body = '<?xml version="1.0" encoding="UTF-8"?>\n<Error>\n  <Code>InternalError</Code>\n  <Message>We encountered an internal error. Please try again.</Message>\n  <RequestId>656c76696e6727732072657175657374</RequestId>\n  <HostId>Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg==</HostId>\n</Error>';
       helpers.mockHttpResponse(200, {}, body);
       s3.completeMultipartUpload(function(error, data) {
         expect(error).to.be.instanceOf(Error);
         expect(error.code).to.equal('InternalError');
         expect(error.message).to.equal('We encountered an internal error. Please try again.');
+        expect(error.statusCode).to.equal(200);
+        expect(error.retryable).to.equal(true);
+        expect(data).to.equal(null);
+        done();
+      });
+    });
+
+    it('returns an error when the resp is 200 with incomplete body', function(done) {
+      helpers.mockHttpResponse(200, {}, '<?xml version="1.0" encoding="UTF-8"?>');
+      s3.completeMultipartUpload(function(error, data) {
+        expect(error).to.be.instanceOf(Error);
+        expect(error.code).to.equal('InternalError');
+        expect(error.message).to.equal('S3 aborted request');
+        expect(error.statusCode).to.equal(200);
+        expect(error.retryable).to.equal(true);
+        expect(data).to.equal(null);
+        done();
+      });
+    });
+
+    it('returns an error when the resp is 200 with empty body', function(done) {
+      helpers.mockHttpResponse(200, {}, '');
+      s3.completeMultipartUpload(function(error, data) {
+        expect(error).to.be.instanceOf(Error);
+        expect(error.code).to.equal('InternalError');
+        expect(error.message).to.equal('S3 aborted request');
         expect(error.statusCode).to.equal(200);
         expect(error.retryable).to.equal(true);
         expect(data).to.equal(null);
@@ -1821,7 +2214,7 @@ describe('AWS.S3', function() {
         'x-amz-id-2': 'Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg==',
         'x-amz-request-id': '656c76696e6727732072657175657374'
       };
-      var body = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CopyObjectResult xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n  <Location>http://Example-Bucket.s3.amazonaws.com/Example-Object</Location>\n  <Bucket>Example-Bucket</Bucket>\n  <Key>Example-Object</Key>\n  <ETag>\"3858f62230ac3c915f300c664312c11f-9\"</ETag>\n</CopyObjectResult>";
+      var body = '<?xml version="1.0" encoding="UTF-8"?>\n<CopyObjectResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">\n  <Location>http://Example-Bucket.s3.amazonaws.com/Example-Object</Location>\n  <Bucket>Example-Bucket</Bucket>\n  <Key>Example-Object</Key>\n  <ETag>"3858f62230ac3c915f300c664312c11f-9"</ETag>\n</CopyObjectResult>';
       helpers.mockHttpResponse(200, headers, body);
       s3.copyObject(function(error, data) {
         expect(error).to.equal(null);
@@ -1836,12 +2229,38 @@ describe('AWS.S3', function() {
     });
 
     it('returns an error when the resp is 200 with an error xml document', function(done) {
-      var body = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Error>\n  <Code>InternalError</Code>\n  <Message>We encountered an internal error. Please try again.</Message>\n  <RequestId>656c76696e6727732072657175657374</RequestId>\n  <HostId>Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg==</HostId>\n</Error>";
+      var body = '<?xml version="1.0" encoding="UTF-8"?>\n<Error>\n  <Code>InternalError</Code>\n  <Message>We encountered an internal error. Please try again.</Message>\n  <RequestId>656c76696e6727732072657175657374</RequestId>\n  <HostId>Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg==</HostId>\n</Error>';
       helpers.mockHttpResponse(200, {}, body);
       s3.copyObject(function(error, data) {
         expect(error).to.be.instanceOf(Error);
         expect(error.code).to.equal('InternalError');
         expect(error.message).to.equal('We encountered an internal error. Please try again.');
+        expect(error.statusCode).to.equal(200);
+        expect(error.retryable).to.equal(true);
+        expect(data).to.equal(null);
+        done();
+      });
+    });
+
+    it('returns an error when the resp is 200 with incomplete body', function(done) {
+      helpers.mockHttpResponse(200, {}, '<?xml version="1.0" encoding="UTF-8"?>');
+      s3.copyObject(function(error, data) {
+        expect(error).to.be.instanceOf(Error);
+        expect(error.code).to.equal('InternalError');
+        expect(error.message).to.equal('S3 aborted request');
+        expect(error.statusCode).to.equal(200);
+        expect(error.retryable).to.equal(true);
+        expect(data).to.equal(null);
+        done();
+      });
+    });
+
+    it('returns an error when the resp is 200 with empty body', function(done) {
+      helpers.mockHttpResponse(200, {}, '');
+      s3.copyObject(function(error, data) {
+        expect(error).to.be.instanceOf(Error);
+        expect(error.code).to.equal('InternalError');
+        expect(error.message).to.equal('S3 aborted request');
         expect(error.statusCode).to.equal(200);
         expect(error.retryable).to.equal(true);
         expect(data).to.equal(null);
@@ -1856,7 +2275,7 @@ describe('AWS.S3', function() {
         'x-amz-id-2': 'Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg==',
         'x-amz-request-id': '656c76696e6727732072657175657374'
       };
-      var body = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CopyPartResult xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n  <Location>http://Example-Bucket.s3.amazonaws.com/Example-Object</Location>\n  <Bucket>Example-Bucket</Bucket>\n  <Key>Example-Object</Key>\n  <ETag>\"3858f62230ac3c915f300c664312c11f-9\"</ETag>\n</CopyPartResult>";
+      var body = '<?xml version="1.0" encoding="UTF-8"?>\n<CopyPartResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">\n  <Location>http://Example-Bucket.s3.amazonaws.com/Example-Object</Location>\n  <Bucket>Example-Bucket</Bucket>\n  <Key>Example-Object</Key>\n  <ETag>"3858f62230ac3c915f300c664312c11f-9"</ETag>\n</CopyPartResult>';
       helpers.mockHttpResponse(200, headers, body);
       s3.uploadPartCopy({
         Bucket: 'bucket',
@@ -1875,12 +2294,38 @@ describe('AWS.S3', function() {
     });
 
     it('returns an error when the resp is 200 with an error xml document', function(done) {
-      var body = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Error>\n  <Code>InternalError</Code>\n  <Message>We encountered an internal error. Please try again.</Message>\n  <RequestId>656c76696e6727732072657175657374</RequestId>\n  <HostId>Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg==</HostId>\n</Error>";
+      var body = '<?xml version="1.0" encoding="UTF-8"?>\n<Error>\n  <Code>InternalError</Code>\n  <Message>We encountered an internal error. Please try again.</Message>\n  <RequestId>656c76696e6727732072657175657374</RequestId>\n  <HostId>Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg==</HostId>\n</Error>';
       helpers.mockHttpResponse(200, {}, body);
       s3.uploadPartCopy(function(error, data) {
         expect(error).to.be.instanceOf(Error);
         expect(error.code).to.equal('InternalError');
         expect(error.message).to.equal('We encountered an internal error. Please try again.');
+        expect(error.statusCode).to.equal(200);
+        expect(error.retryable).to.equal(true);
+        expect(data).to.equal(null);
+        done();
+      });
+    });
+
+    it('returns an error when the resp is 200 with incomplete body', function(done) {
+      helpers.mockHttpResponse(200, {}, '<?xml version="1.0" encoding="UTF-8"?>');
+      s3.uploadPartCopy(function(error, data) {
+        expect(error).to.be.instanceOf(Error);
+        expect(error.code).to.equal('InternalError');
+        expect(error.message).to.equal('S3 aborted request');
+        expect(error.statusCode).to.equal(200);
+        expect(error.retryable).to.equal(true);
+        expect(data).to.equal(null);
+        done();
+      });
+    });
+
+    it('returns an error when the resp is 200 with empty body', function(done) {
+      helpers.mockHttpResponse(200, {}, '');
+      s3.uploadPartCopy(function(error, data) {
+        expect(error).to.be.instanceOf(Error);
+        expect(error.code).to.equal('InternalError');
+        expect(error.message).to.equal('S3 aborted request');
         expect(error.statusCode).to.equal(200);
         expect(error.retryable).to.equal(true);
         expect(data).to.equal(null);
@@ -2030,6 +2475,34 @@ describe('AWS.S3', function() {
         done();
       });
     });
+
+    it('appends CreateBucketConfiguration key to copy of params, not original, when endpoint is configured', function(done) {
+      var loc = null;
+      var params = {
+        Bucket: 'name'
+      };
+
+      s3 = new AWS.S3({
+        region: 'eu-west-1',
+        Bucket: 'name',
+        endpoint: 'https://foo.bar.baz:555/prefix'
+      });
+
+      s3.makeRequest = function(op, copiedParams, cb) {
+        expect(copiedParams).to['be'].a('object');
+        loc = copiedParams.CreateBucketConfiguration.LocationConstraint;
+        if (typeof cb === 'function') {
+          return cb();
+        }
+      };
+
+      helpers.mockHttpResponse(200, {}, '');
+      s3.createBucket(params, function() {
+        expect(params.CreateBucketConfiguration).to.not.exist;
+        expect(loc).to.be.a.string;
+        done();
+      });
+    });
   });
 
   describe('deleteBucket', function() {
@@ -2043,19 +2516,6 @@ describe('AWS.S3', function() {
       s3.deleteBucket(params, function() {
         expect(s3.bucketRegionCache.name).to.not.exist;
         done();
-      });
-    });
-  });
-
-  AWS.util.each(AWS.S3.prototype.computableChecksumOperations, function(operation) {
-    describe(operation, function() {
-      it('forces Content-MD5 header parameter', function() {
-        var req = s3[operation]({
-          Bucket: 'bucket',
-          ContentMD5: '000'
-        }).build();
-        var hash = AWS.util.crypto.md5(req.httpRequest.body, 'base64');
-        expect(req.httpRequest.headers['Content-MD5']).to.equal(hash);
       });
     });
   });
@@ -2084,48 +2544,6 @@ describe('AWS.S3', function() {
       }
     };
 
-    it('computes checksums if the operation requires it', function() {
-      willCompute('deleteObjects', {
-        computeChecksums: true
-      });
-      willCompute('putBucketCors', {
-        computeChecksums: true
-      });
-      willCompute('putBucketLifecycle', {
-        computeChecksums: true
-      });
-      willCompute('putBucketLifecycleConfiguration', {
-        computeChecksums: true
-      });
-      willCompute('putBucketTagging', {
-        computeChecksums: true
-      });
-      willCompute('putBucketReplication', {
-        computeChecksums: true
-      });
-    });
-
-    it('computes checksums if computeChecksums is off and operation requires it', function() {
-      willCompute('deleteObjects', {
-        computeChecksums: false
-      });
-      willCompute('putBucketCors', {
-        computeChecksums: false
-      });
-      willCompute('putBucketLifecycle', {
-        computeChecksums: false
-      });
-      willCompute('putBucketLifecycleConfiguration', {
-        computeChecksums: false
-      });
-      willCompute('putBucketTagging', {
-        computeChecksums: false
-      });
-      willCompute('putBucketReplication', {
-        computeChecksums: false
-      });
-    });
-
     it('does not compute checksums if computeChecksums is off', function() {
       willCompute('putObject', {
         computeChecksums: false,
@@ -2142,7 +2560,8 @@ describe('AWS.S3', function() {
 
     it('computes checksums if computeChecksums is on and ContentMD5 is not provided', function() {
       willCompute('putBucketAcl', {
-        computeChecksums: true
+        computeChecksums: true,
+        hash: '1B2M2Y8AsgTpgAmY7PhCfg=='
       });
     });
 
@@ -2212,7 +2631,7 @@ describe('AWS.S3', function() {
           };
           tr.length = 0;
           tr.path = 'path/to/file';
-          tr.push(new Buffer(''));
+          tr.push(buffer.toBuffer(''));
           tr.end();
           return tr;
         });
@@ -2228,8 +2647,8 @@ describe('AWS.S3', function() {
         });
 
         req.send(function(err) {
-          expect(mock.calls[0]["arguments"]).to.eql(['path/to/file']);
-          expect(mock.calls[1]["arguments"]).to.eql(['path/to/file', {}]);
+          expect(mock.calls[0]['arguments']).to.eql(['path/to/file']);
+          expect(mock.calls[1]['arguments']).to.eql(['path/to/file', {}]);
           expect(err).not.to.exist;
           expect(req.httpRequest.headers['X-Amz-Content-Sha256']).to.equal(hash);
           done();
@@ -2256,7 +2675,7 @@ describe('AWS.S3', function() {
               return tr.push(null);
             } else {
               didRead = true;
-              return tr.push(new Buffer('test'));
+              return tr.push(buffer.toBuffer('test'));
             }
           };
           return tr;
@@ -2275,13 +2694,13 @@ describe('AWS.S3', function() {
           Body: stream
         });
         req.send(function(err) {
-          expect(mock.calls[0]["arguments"]).to.eql([
+          expect(mock.calls[0]['arguments']).to.eql([
             'path/to/file', {
               start: 0,
               end: 5
             }
           ]);
-          expect(mock.calls[1]["arguments"]).to.eql([
+          expect(mock.calls[1]['arguments']).to.eql([
             'path/to/file', {
               start: 0,
               end: 5
@@ -2299,16 +2718,27 @@ describe('AWS.S3', function() {
     var date = null;
 
     beforeEach(function(done) {
-      date = AWS.util.date.getDate;
-      AWS.util.date.getDate = function() {
-        return new Date(0);
-      };
+      helpers.spyOn(AWS.S3.prototype, 'getSkewCorrectedDate').andReturn(new Date(0));
       return done();
     });
 
     afterEach(function(done) {
-      AWS.util.date.getDate = date;
       done();
+    });
+
+    it('throws error when supplying a non-number value', function(done) {
+      var expiresString = '60';
+      try {
+        s3.getSignedUrl('getObject', {
+          Bucket: 'bucket',
+          Key: 'key',
+          Expires: expiresString
+        });
+      } catch (e) {
+        expect(e.code).to.eql('InvalidParameterException');
+        expect(e.message).to.eql('The expiration must be a number, received ' + typeof expiresString);
+        done();
+      }
     });
 
     it('gets a signed URL for getObject', function() {
@@ -2524,7 +2954,7 @@ describe('AWS.S3', function() {
           Key: 'key',
           ContentLength: 5
         });
-      }).to["throw"](/ContentLength is not supported in pre-signed URLs/);
+      }).to['throw'](/ContentLength is not supported in pre-signed URLs/);
     });
 
     it('defers the execution of a callback, even when the underlying credentials are synchronous', function(done) {
@@ -2536,9 +2966,117 @@ describe('AWS.S3', function() {
         );
         done();
       });
-
       invocationDeferred = true;
     });
+
+    it('supports access point ARN', function(done) {
+      s3.getSignedUrl('getObject', {
+        Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint/myendpoint',
+        Key: 'key'
+      }, function(err, data) {
+        expect(data).to.equal(
+          'https://myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=R9HjMWdhk69e7%2BwlOpFH1TUkxRY%3D&x-amz-security-token=session'
+        );
+        done();
+      });
+    });
+
+    it('supports outposts ARN', function(done) {
+      s3 = new AWS.S3({ region: 'us-west-2', signatureVersion: 'v4' });
+      helpers.spyOn(AWS.S3.prototype, 'getSkewCorrectedDate').andReturn(new Date('2021-08-27T00:00:00'));
+      s3.getSignedUrl('getObject', {
+        Bucket: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myendpoint',
+        Key: 'obj'
+      }, function(_, data) {
+        expect(data).to.contain('20210827%2Fus-west-2%2Fs3-outposts%2Faws4_request');
+        done();
+      });
+    });
+
+    it('supports outposts ARN from resolved region', function(done) {
+      s3 = new AWS.S3({ region: 'us-west-2', signatureVersion: 'v4' });
+      helpers.spyOn(AWS.S3.prototype, 'getSkewCorrectedDate').andReturn(new Date('2021-08-27T00:00:00'));
+      s3.getSignedUrl('getObject', {
+        Bucket: 'arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myendpoint',
+        Key: 'obj'
+      }, function(_, data) {
+        expect(data).to.contain('20210827%2Fus-east-1%2Fs3-outposts%2Faws4_request');
+        done();
+      });
+    });
+  });
+
+  describe('getSignedUrlPromise', function() {
+    var catchFunction, resolveFunction, err, url, date;
+    err = null;
+    url = null;
+    date = null;
+
+    catchFunction = function(e) {
+      err = e;
+    };
+
+    resolveFunction = function(u) {
+      url = u;
+    };
+
+    beforeEach(function(done) {
+      err = null;
+      url = null;
+      originalDate = s3.getSkewCorrectedDate;
+      s3.getSkewCorrectedDate = function() {
+        return new Date(0);
+      };
+      AWS.config.setPromisesDependency();
+      return done();
+    });
+
+    afterEach(function(done) {
+      s3.getSkewCorrectedDate = originalDate;
+      done();
+    });
+
+    it('exists if Promises are available', function() {
+      if (typeof Promise === 'undefined') {
+        expect(typeof s3.getSignedUrlPromise).to.equal('undefined');
+      } else {
+        expect(typeof s3.getSignedUrlPromise).to.equal('function');
+      }
+    });
+
+    it('returns a promise when called', function() {
+      var P = function() {};
+      AWS.config.setPromisesDependency(P);
+      var operation = s3.getSignedUrlPromise;
+      expect(typeof operation).to.equal('function');
+      var urlPromise = s3.getSignedUrlPromise('getObject', {
+        Bucket: 'bucket',
+        Key: 'key'
+      });
+      expect(urlPromise instanceof P).to.equal(true);
+    });
+
+    if (typeof Promise === 'function') {
+      it('resolves when getSignedUrl is successful', function() {
+        s3.getSignedUrlPromise('getObject', {
+          Bucket: 'bucket',
+          Key: 'key'
+        }).then(resolveFunction).catch(catchFunction).then(function() {
+          expect(url).to.equal('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=4mlYnRmz%2BBFEPrgYz5tXcl9Wc4w%3D&x-amz-security-token=session');
+          expect(err).to.be['null'];
+        });
+      });
+
+      it('rejects when getSignedUrl is unsuccessful', function() {
+        s3.getSignedUrlPromise('invalidOperation', {
+          Bucket: 'bucket',
+          Key: 'key',
+        }).then(resolveFunction).catch(catchFunction).then(function() {
+          expect(url).to.be['null'];
+          expect(err).to.not.be['null'];
+        });
+      });
+    }
   });
 
   describe('createPresignedPost', function() {
@@ -2618,8 +3156,8 @@ describe('AWS.S3', function() {
     });
 
     it('should default to expiration in one hour', function(done) {
-      helpers.spyOn(AWS.util.date, 'getDate').andReturn(new Date(946684800 * 1000));
       s3 = new AWS.S3();
+      helpers.spyOn(s3, 'getSkewCorrectedDate').andReturn(new Date(946684800 * 1000));
       s3.createPresignedPost({
         Bucket: 'bucket'
       }, function(err, data) {
@@ -2630,9 +3168,9 @@ describe('AWS.S3', function() {
     });
 
     it('should allow users to provide a custom expiration', function(done) {
-      helpers.spyOn(AWS.util.date, 'getDate').andReturn(new Date(946684800 * 1000));
       var customTtl = 900;
       s3 = new AWS.S3();
+      helpers.spyOn(s3, 'getSkewCorrectedDate').andReturn(new Date(946684800 * 1000));
       return s3.createPresignedPost({
         Bucket: 'bucket',
         Expires: customTtl
@@ -2658,9 +3196,9 @@ describe('AWS.S3', function() {
           found[conditionKey] = true;
           expect(condition[conditionKey]).to.equal(data.fields[conditionKey]);
         }
-        expect(found['X-Amz-Algorithm']).to.be["true"];
-        expect(found['X-Amz-Date']).to.be["true"];
-        expect(found['X-Amz-Credential']).to.be["true"];
+        expect(found['X-Amz-Algorithm']).to.be['true'];
+        expect(found['X-Amz-Date']).to.be['true'];
+        expect(found['X-Amz-Credential']).to.be['true'];
         done();
       });
     });
@@ -2724,11 +3262,714 @@ describe('AWS.S3', function() {
         foo: 'bar',
         fizz: 1
       });
-      var body = new Buffer(policy);
+      var body = AWS.util.buffer.toBuffer(policy);
       helpers.mockHttpResponse(200, {}, body);
       s3.getBucketPolicy(function(err, data) {
-        expect(Buffer.isBuffer(data.Policy)).to.be["false"];
+        expect(Buffer.isBuffer(data.Policy)).to.be['false'];
         expect(data.Policy).to.eql(policy);
+        done();
+      });
+    });
+  });
+
+  describe('s3UsEast1RegionalEndpoint config', function() {
+    it('should set the config from client', function() {
+      helpers.mockHttpResponse(200, {}, '{}');
+      var values = ['regional', 'RegionaL', 'legacy', 'LegacY'];
+      for (var i = 0; i < values.length; i++) {
+        var s3 = new AWS.S3({s3UsEast1RegionalEndpoint: values[i]});
+        var request = s3.listBuckets().build(function() {});
+        expect(request.service.config.s3UsEast1RegionalEndpoint).to.equal(
+          values[i].toLowerCase()
+        );
+      }
+    });
+
+    it('should throw if the config is set to invalid values', function() {
+      helpers.mockHttpResponse(200, {}, '{}');
+      var values = ['foo', 'bar', 'region'];
+      var errors = [];
+      for (var i = 0; i < values.length; i++) {
+        var s3 = new AWS.S3({s3UsEast1RegionalEndpoint: values[i]});
+        s3.listBuckets().build(function(err) {
+          errors.push(err);
+        });
+      }
+      expect(errors.length).to.equal(values.length);
+      for (var i = 0; i < errors.length; i++) {
+        expect(errors[i].code).to.equal('InvalidConfiguration');
+      }
+    });
+
+    if (AWS.util.isNode()) {
+      describe('should set the config from AWS_S3_US_EAST_1_REGIONAL_ENDPOINT environmental variable', function() {
+        var originalEnv;
+        beforeEach(function() {
+          originalEnv = process.env;
+          process.env = {};
+        });
+        afterEach(function() {
+          process.env = originalEnv;
+        });
+        it('should be used if client config is not set', function() {
+          process.env.AWS_S3_US_EAST_1_REGIONAL_ENDPOINT = 'Regional';
+          var s3 = new AWS.S3();
+          s3.listBuckets().build(function() {});
+          expect(s3.config.s3UsEast1RegionalEndpoint).to.equal('regional');
+          process.env.AWS_S3_US_EAST_1_REGIONAL_ENDPOINT = 'LegacY';
+          s3 = new AWS.S3();
+          s3.listBuckets().build(function() {});
+          expect(s3.config.s3UsEast1RegionalEndpoint).to.equal('legacy');
+        });
+
+        it('should throw if the config is set to invalid values', function() {
+          var values = ['foo', 'bar', 'region'];
+          var errors = [];
+          for (var i = 0; i < values.length; i++) {
+            process.env.AWS_S3_US_EAST_1_REGIONAL_ENDPOINT = values[i];
+            s3 = new AWS.S3();
+            s3.listBuckets().build(function(err) {
+              errors.push(err);
+            });
+          }
+          expect(errors.length).to.equal(values.length);
+          for (var i = 0; i < errors.length; i++) {
+            expect(errors[i].code).to.equal('InvalidEnvironmentalVariable');
+          }
+        });
+      });
+
+      describe('should set config from s3_us_east_1_regional_endpoint config file entry', function() {
+        it('should be used if environmental variable is not set', function() {
+          helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn({
+            default: {
+              s3_us_east_1_regional_endpoint: 'RegionaL'
+            }
+          });
+          var s3 = new AWS.S3();
+          s3.listBuckets().build(function() {});
+          expect(s3.config.s3UsEast1RegionalEndpoint).to.equal('regional');
+          helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn({
+            default: {
+              s3_us_east_1_regional_endpoint: 'LegaCy'
+            }
+          });
+          var s3 = new AWS.S3();
+          s3.listBuckets().build(function() {});
+          expect(s3.config.s3UsEast1RegionalEndpoint).to.equal('legacy');
+        });
+
+        it('should throw if the config is set to invalid values', function() {
+          var values = ['foo', 'bar', 'region'];
+          var errors = [];
+          for (var i = 0; i < values.length; i++) {
+            helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn({
+              default: {
+                s3_us_east_1_regional_endpoint: values[i]
+              }
+            });
+            s3 = new AWS.S3();
+            s3.listBuckets().build(function(err) {
+              errors.push(err);
+            });
+          }
+          expect(errors.length).to.equal(values.length);
+          for (var i = 0; i < errors.length; i++) {
+            expect(errors[i].code).to.equal('InvalidConfiguration');
+          }
+        });
+      });
+
+      describe('should construct regional endpoint correctly', function() {
+        it('according to config settings', function() {
+          var s3 = new AWS.S3({region: 'us-west-2'});
+          var request = s3.listBuckets().build(function() {});
+          expect(request.httpRequest.endpoint.hostname).to.equal('s3.us-west-2.amazonaws.com');
+          s3 = new AWS.S3({region: 'us-east-1'});
+          var request = s3.listBuckets().build(function() {});
+          expect(request.httpRequest.endpoint.hostname).to.equal('s3.amazonaws.com');
+          s3 = new AWS.S3({region: 'us-east-1', s3UsEast1RegionalEndpoint: 'regional'});
+          request = s3.listBuckets().build(function() {});
+          expect(request.httpRequest.endpoint.hostname).to.equal('s3.us-east-1.amazonaws.com');
+        });
+        it('should use global endpoints for when config is set to legacy', function() {
+          s3 = new AWS.S3({region: 'us-east-1', s3UsEast1RegionalEndpoint: 'legacy'});
+          request = s3.listBuckets().build(function() {});
+          expect(request.httpRequest.endpoint.hostname).to.equal('s3.amazonaws.com');
+        });
+        it('should not update endpoint if supplied a custom endpoint', function() {
+          s3 = new AWS.S3({
+            region: 'us-east-1',
+            s3UsEast1RegionalEndpoint: 'regional',
+            endpoint: 's3.amazonaws.com'
+          });
+          request = s3.listBuckets().build(function() {});
+          expect(request.httpRequest.endpoint.hostname).to.equal('s3.amazonaws.com');
+        });
+      });
+    }
+  });
+
+  describe('Access Point', function() {
+    var iniLoader = AWS.util.iniLoader;
+    afterEach(function() {
+      if (AWS.util.isNode()) {
+        iniLoader.clearCachedFiles();
+      }
+    });
+
+    describe('validateArnService', function() {
+      it('should throw if supplied non-s3 ARN', function(done) {
+        s3 = new AWS.S3();
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws:sqs:us-west-2:123456789012:someresource',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.name).to.equal('InvalidARN');
+          expect(err.message).to.equal('expect \'s3\' or \'s3-outposts\' or \'s3-object-lambda\' in ARN service component');
+          done();
+        });
+      });
+    });
+
+    describe('validateArnAccount', function() {
+      it('should throw if supplied empty accountId in ARN', function(done) {
+        s3 = new AWS.S3();
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws:s3:us-west-2::accesspoint:mybucket',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.name).to.equal('InvalidARN');
+          expect(err.message).to.equal('ARN accountID does not match regex "[0-9]{12}"');
+          done();
+        });
+      });
+
+      it('should throw if supplied invalid accountId in ARN', function(done) {
+        s3 = new AWS.S3();
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws:s3:us-west-2:1234567890:accesspoint:mybucket',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.name).to.equal('InvalidARN');
+          expect(err.message).to.equal('ARN accountID does not match regex "[0-9]{12}"');
+          done();
+        });
+      });
+    });
+
+    describe('validateArnRegion', function() {
+      it('should throw if supplied empty region in ARN', function(done) {
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws:s3::123456789012:accesspoint/myendpoint',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.name).to.equal('InvalidARN');
+          expect(err.message).to.contain('ARN region is empty');
+          done();
+        });
+      });
+
+      it('should correctly generate access point endpoint for s3-external-1', function() {
+        var client = new AWS.S3({region: 'us-east-1'});
+        helpers.mockHttpResponse(200, {}, '');
+        var request = client.listObjects({
+          Bucket: 'arn:aws:s3:s3-external-1:123456789012:accesspoint/myendpoint'
+        });
+        var built = request.build(function() {});
+        expect(
+          built.httpRequest.endpoint.hostname
+        ).to.equal('myendpoint-123456789012.s3-accesspoint.s3-external-1.amazonaws.com');
+      });
+
+      it('should correctly generate access point endpoint when useFipsEndpoint=true', function() {
+        var client = new AWS.S3({region: 'us-west-2', useFipsEndpoint: true});
+        helpers.mockHttpResponse(200, {}, '');
+        var request = client.listObjects({
+          Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint/myendpoint'
+        });
+        var built = request.build(function() {});
+        expect(
+          built.httpRequest.endpoint.hostname
+        ).to.equal('myendpoint-123456789012.s3-accesspoint-fips.us-west-2.amazonaws.com');
+      });
+
+      it('should throw when fips region is passed in ARN', function() {
+        var client = new AWS.S3({region: 'us-west-2', useFipsEndpoint: true});
+        helpers.mockHttpResponse(200, {}, '');
+        var request = client.listObjects({
+          Bucket: 'arn:aws:s3:fips-us-west-2:123456789012:accesspoint/myendpoint'
+        });
+        var error;
+        request.build(function(err) {
+          error = err;
+        });
+        expect(error.name).to.equal('InvalidConfiguration');
+        expect(error.message).to.equal('FIPS region not allowed in ARN');
+      });
+
+      it('should use regions from ARN if s3UseArnRegion config is set to false', function(done) {
+        s3 = new AWS.S3({region: 'us-west-2', s3UseArnRegion: false});
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint/myendpoint',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.name).to.equal('InvalidConfiguration');
+          expect(err.message).to.equal('Configured region conflicts with access point region');
+          done();
+        });
+      });
+
+      if (AWS.util.isNode()) {
+        it('should throw if AWS_S3_USE_ARN_REGION env is invalid', function(done) {
+          process.env.AWS_S3_USE_ARN_REGION = 'foo';
+          s3 = new AWS.S3({region: 'us-west-2'});
+          helpers.mockHttpResponse(200, {}, '');
+          var request = s3.getObject({
+            Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint/myendpoint',
+            Key: 'key'
+          });
+          request.send(function(err, data) {
+            expect(err).to.exist;
+            expect(err.name).to.equal('InvalidConfiguration');
+            expect(err.message).to.equal('AWS_S3_USE_ARN_REGION only accepts true or false. Got foo');
+            done();
+          });
+        });
+
+        it('should use regions from ARN if AWS_S3_USE_ARN_REGION env is set', function(done) {
+          process.env.AWS_S3_USE_ARN_REGION = 'false';
+          s3 = new AWS.S3({region: 'us-west-2'});
+          helpers.mockHttpResponse(200, {}, '');
+          var request = s3.getObject({
+            Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint/myendpoint',
+            Key: 'key'
+          });
+          request.send(function(err, data) {
+            expect(err).to.exist;
+            expect(err.name).to.equal('InvalidConfiguration');
+            expect(err.message).to.equal('Configured region conflicts with access point region');
+            done();
+          });
+        });
+
+        it('should throw s3_use_arn_region config is invalid', function(done) {
+          var mock = '[default]\ns3_use_arn_region = foo';
+          process.env.HOME = 'foo';
+          helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+          s3 = new AWS.S3({region: 'us-west-2'});
+          helpers.mockHttpResponse(200, {}, '');
+          var request = s3.getObject({
+            Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint/myendpoint',
+            Key: 'key'
+          });
+          request.send(function(err, data) {
+            expect(err).to.exist;
+            expect(err.name).to.equal('InvalidConfiguration');
+            expect(err.message).to.equal('s3_use_arn_region only accepts true or false. Got foo');
+            done();
+          });
+        });
+
+        it('should use regions from ARN if s3_use_arn_region config is set', function(done) {
+          var mock = '[default]\ns3_use_arn_region = false';
+          process.env.HOME = 'foo';
+          helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+          s3 = new AWS.S3({region: 'us-west-2'});
+          helpers.mockHttpResponse(200, {}, '');
+          var request = s3.getObject({
+            Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint/myendpoint',
+            Key: 'key'
+          });
+          request.send(function(err, data) {
+            expect(err).to.exist;
+            expect(err.name).to.equal('InvalidConfiguration');
+            expect(err.message).to.equal('Configured region conflicts with access point region');
+            done();
+          });
+        });
+      }
+
+      it('should throw if cross region enabled but region from different partition', function(done) {
+        s3 = new AWS.S3({region: 'us-west-2'});
+        var request = s3.getObject({
+          Bucket: 'arn:aws-cn:s3:cn-north-1:123456789012:accesspoint/myendpoint',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.name).to.equal('InvalidConfiguration');
+          expect(err.message).to.equal('Configured region and access point region not in same partition');
+          done();
+        });
+      });
+
+      it('should throw if useAccelerateEndpoint is set to true', function(done) {
+        s3 = new AWS.S3({region: 'us-west-2', useAccelerateEndpoint: true});
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint/myendpoint',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.name).to.equal('InvalidConfiguration');
+          expect(err.message).to.equal('useAccelerateEndpoint config is not supported with access point ARN');
+          done();
+        });
+      });
+
+      it('should throw if useDualstackEndpoint it set to true for outposts Arn', function(done) {
+        s3 = new AWS.S3({region: 'us-west-2', useDualstackEndpoint: true});
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/myendpoint',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.name).to.equal('InvalidConfiguration');
+          expect(err.message).to.equal('Dualstack is not supported with outposts access point ARN');
+          done();
+        });
+      });
+    });
+
+    describe('validateArnResourceType', function() {
+      it('should throw if access point ARN is not for access point resource', function(done) {
+        s3 = new AWS.S3();
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws:s3:us-west-2:123456789012:bucket_name:mybucket',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.name).to.equal('InvalidARN');
+          expect(err.message).to.equal('ARN resource should begin with \'accesspoint/\'');
+          done();
+        });
+      });
+    });
+
+    describe('validateS3AccessPointArn', function() {
+      it('should throw if access point ARN resource format is incorrect', function(done) {
+        s3 = new AWS.S3();
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint:mybucket:blah',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.name).to.equal('InvalidARN');
+          expect(err.message).to.equal('Access Point ARN should have one resource accesspoint/{accesspointName}');
+          done();
+        });
+      });
+
+      it('should throw if bucket name is not dns compatible', function(done) {
+        s3 = new AWS.S3();
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint:my.bucket',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.name).to.equal('InvalidARN');
+          expect(err.message).to.equal('Access point resource in ARN is not DNS compatible. Got my.bucket');
+          done();
+        });
+      });
+    });
+
+    describe('validateOutpostsArn', function() {
+      it('should throw if ARN doesn\'t begin with outpost', function(done) {
+        s3 = new AWS.S3();
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws:s3-outposts:us-west-2:123456789012:bucket_name:mybucket',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.name).to.equal('InvalidARN');
+          expect(err.message).to.equal('ARN resource should begin with \'outpost/\'');
+          done();
+        });
+      });
+
+      it('should throw if outpost ID is not valid RFC 3986 Host', function(done) {
+        s3 = new AWS.S3();
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op.outpostId:accesspoint:mybucket',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.name).to.equal('InvalidARN');
+          expect(err.message).to.equal('Outpost resource in ARN is not DNS compatible. Got op.outpostId');
+          done();
+        });
+      });
+    });
+
+    describe('validateOutpostsAccessPointArn', function() {
+      it('should throw if ARN resource format is incorrect', function(done) {
+        s3 = new AWS.S3();
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:mybucket:blah',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.name).to.equal('InvalidARN');
+          expect(err.message).to.equal(
+            'Outposts ARN should have two resources outpost/{outpostId}/accesspoint/{accesspointName}'
+          );
+          done();
+        });
+      });
+
+      it('should throw if bucket name is not dns compatible', function(done) {
+        s3 = new AWS.S3();
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:my.bucket',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.name).to.equal('InvalidARN');
+          expect(err.message).to.equal('Access point resource in ARN is not DNS compatible. Got my.bucket');
+          done();
+        });
+      });
+    });
+
+    describe('validatePopulateUriFromArn', function() {
+      it('should throw if manually-set endpoint is present', function(done) {
+        s3 = new AWS.S3({region: 'us-west-2', endpoint: 'https://bucket.s3.us-west-2.amazonaws.com'});
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint/myendpoint',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.name).to.equal('InvalidConfiguration');
+          expect(err.message).to.equal('Custom endpoint is not compatible with access point ARN');
+          done();
+        });
+      });
+
+      it('should throw if s3forcePathStyle co-exists with access point ARN', function(done) {
+        s3 = new AWS.S3({s3ForcePathStyle: true});
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint/myendpoint',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.name).to.equal('InvalidConfiguration');
+          expect(err.message).to.equal('Cannot construct path-style endpoint with access point');
+          done();
+        });
+      });
+    });
+
+    [
+      {
+        service: 's3',
+        resource: '',
+        endpoint: 's3-accesspoint'
+      },
+      {
+        service: 's3-outposts',
+        resource: 'outpost/op-01234567890123456/',
+        endpoint: 'op-01234567890123456.s3-outposts'
+      }
+    ].forEach(function(input) {
+
+      var service = input.service;
+      var resource = input.resource;
+      var endpoint = input.endpoint;
+
+      it('should correctly generate access point endpoint', function(done) {
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws:' + service + ':us-west-2:123456789012:' + resource + 'accesspoint/myendpoint',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.not.exist;
+          expect(request.httpRequest.endpoint.hostname).to.equal(
+            'myendpoint-123456789012.' + endpoint + '.us-west-2.amazonaws.com'
+          );
+          expect(request.httpRequest.path).to.equal('/key');
+          done();
+        });
+      });
+
+      it('should correctly generate access point endpoint with no client config', function(done) {
+        helpers.mockHttpResponse(200, {}, '');
+        client = new AWS.S3();
+        var request = client.getObject({
+          Bucket: 'arn:aws:' + service + ':us-west-2:123456789012:' + resource + 'accesspoint/myendpoint',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.not.exist;
+          expect(request.httpRequest.endpoint.hostname).to.equal(
+            'myendpoint-123456789012.' + endpoint + '.us-west-2.amazonaws.com'
+          );
+          expect(request.httpRequest.path).to.equal('/key');
+          done();
+        });
+      });
+
+      it('should correctly generate access point endpoint containing \':\'', function(done) {
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws:' + service + ':us-west-2:123456789012:' + resource.split('/').join(':') + 'accesspoint:myendpoint',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.not.exist;
+          expect(request.httpRequest.endpoint.hostname).to.equal(
+            'myendpoint-123456789012.' + endpoint + '.us-west-2.amazonaws.com'
+          );
+          expect(request.httpRequest.path).to.equal('/key');
+          done();
+        });
+      });
+
+      it('should correctly generate access point endpoint for us-gov partition', function(done) {
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws-us-gov:' + service + ':us-gov-east-1:123456789012:' + resource + 'accesspoint/myendpoint',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(request.httpRequest.endpoint.hostname).to.equal(
+            'myendpoint-123456789012.' + endpoint + '.us-gov-east-1.amazonaws.com'
+          );
+          expect(request.httpRequest.path).to.equal('/key');
+          done();
+        });
+      });
+
+      it('should use endpoint suffix according to endpoint partition(China)', function(done) {
+        s3 = new AWS.S3({region: 'cn-north-1'});
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws-cn:' + service + ':cn-north-1:123456789012:' + resource + 'accesspoint/myendpoint',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.not.exist;
+          expect(request.httpRequest.endpoint.hostname).to.equal(
+            'myendpoint-123456789012.' + endpoint + '.cn-north-1.amazonaws.com.cn'
+          );
+          expect(request.httpRequest.path).to.equal('/key');
+          done();
+        });
+      });
+
+      it('should use regions from ARN by default', function(done) {
+        s3 = new AWS.S3({region: 'us-west-2'});
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.getObject({
+          Bucket: 'arn:aws:' + service + ':us-east-1:123456789012:' + resource + 'accesspoint/myendpoint',
+          Key: 'key'
+        });
+        request.send(function(err, data) {
+          expect(err).to.not.exist;
+          expect(request.httpRequest.endpoint.hostname).to.equal(
+            'myendpoint-123456789012.' + endpoint + '.us-east-1.amazonaws.com'
+          );
+          expect(request.httpRequest.path).to.equal('/key');
+          done();
+        });
+      });
+
+      it('should not apply access point ARN parsing to CreateBucketAPI', function(done) {
+        helpers.mockHttpResponse(200, {}, '');
+        var request = s3.createBucket({
+          Bucket: 'arn:aws:' + service + ':us-east-1:123456789012:' + resource.split('/').join(':') + 'accesspoint:myendpoint'
+        });
+        request.send(function(err, data) {
+          expect(err).to.not.exist;
+          expect(request.httpRequest.endpoint.hostname).to.equal('s3.amazonaws.com');
+          expect(request.httpRequest.path).to.equal(
+            '/arn%3Aaws%3A' + service + '%3Aus-east-1%3A123456789012%3A' + resource.split('/').join('%3A') + 'accesspoint%3Amyendpoint'
+          );
+          done();
+        });
+      });
+    });
+
+    it('should correctly generate dualstack endpoint from access point arn', function(done) {
+      s3 = new AWS.S3({region: 'us-west-2', useDualstackEndpoint: true});
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.getObject({
+        Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint/myendpoint',
+        Key: 'key'
+      });
+      request.send(function(err, data) {
+        expect(err).to.not.exist;
+        expect(request.httpRequest.endpoint.hostname).to.equal('myendpoint-123456789012.s3-accesspoint.dualstack.us-west-2.amazonaws.com');
+        expect(request.httpRequest.path).to.equal('/key');
+        done();
+      });
+    });
+  });
+
+  describe('Dot Segment in URI Label', function() {
+    it('S3PreservesLeadingDotSegmentInUriLabel', function(done) {
+      s3 = new AWS.S3({region: 'us-west-2'});
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.getObject({
+        Bucket: 'bucket',
+        Key: '../key.txt'
+      });
+      request.send(function(err, data) {
+        expect(err).to.not.exist;
+        expect(request.httpRequest.path).to.equal('/../key.txt');
+        done();
+      });
+    });
+
+    it('S3PreservesEmbeddedDotSegmentInUriLabel', function(done) {
+      s3 = new AWS.S3({region: 'us-west-2'});
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.getObject({
+        Bucket: 'bucket',
+        Key: 'foo/../key.txt'
+      });
+      request.send(function(err, data) {
+        expect(err).to.not.exist;
+        expect(request.httpRequest.path).to.equal('/foo/../key.txt');
         done();
       });
     });

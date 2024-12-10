@@ -1,0 +1,27 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Paginator",
+        "description": "still send '{}' in body for requests other than GET"
+    },
+    {
+        "type": "feature",
+        "category": "CloudWatchEvents",
+        "description": "Added 3 new APIs, and one additional parameter to the PutRule API, to support tagging of CloudWatch Events rules."
+    },
+    {
+        "type": "feature",
+        "category": "CognitoIdentityServiceProvider",
+        "description": "This release adds tags and tag-based access control support to Amazon Cognito User Pools."
+    },
+    {
+        "type": "feature",
+        "category": "Iot",
+        "description": "This release adds the GetStatistics API for the AWS IoT Fleet Indexing Service, which allows customers to query for statistics about registered devices that match a search query. This release only supports the count statistics. For more information about this API, see https://docs.aws.amazon.com/iot/latest/apireference/API_GetStatistics.html"
+    },
+    {
+        "type": "feature",
+        "category": "Lightsail",
+        "description": "This release adds the DeleteKnownHostKeys API, which enables Lightsail's browser-based SSH or RDP clients to connect to the instance after a host key mismatch."
+    }
+]

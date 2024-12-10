@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Credentials",
+        "description": "enables use of credentials_process for sourcing credentials from an external process https://docs.aws.amazon.com/cli/latest/topic/config-vars.html#sourcing-credentials-from-external-processes"
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "This new feature will now allow customers to add a customized csv classifier with classifier API. They can specify a custom delimiter, quote symbol and control other behavior they'd like crawlers to have while recognizing csv files"
+    }
+]

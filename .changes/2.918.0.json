@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "DataSync",
+        "description": "Added SecurityDescriptorCopyFlags option that allows for control of which components of SMB security descriptors are copied from source to destination objects."
+    },
+    {
+        "type": "feature",
+        "category": "Location",
+        "description": "Adds support for calculation of routes, resource tagging and customer provided KMS keys."
+    },
+    {
+        "type": "feature",
+        "category": "LookoutMetrics",
+        "description": "Allowing dot(.) character in table name for RDS and Redshift as source connector."
+    }
+]

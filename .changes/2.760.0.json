@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "Amplify",
+        "description": "Allow Oauth Token in CreateApp call to be a maximum of 1000 characters instead of 100"
+    },
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Amazon EKS now supports configuring your cluster's service CIDR during cluster creation."
+    },
+    {
+        "type": "feature",
+        "category": "SavingsPlans",
+        "description": "Introducing Queued SavingsPlans that will enable customers to queue their purchase request of Savings Plans for future dates."
+    },
+    {
+        "type": "feature",
+        "category": "Synthetics",
+        "description": "AWS Synthetics now supports AWS X-Ray Active Tracing feature. RunConfig is now an optional parameter with timeout updated from (60 - 900 seconds) to (3 - 840 seconds)."
+    },
+    {
+        "type": "feature",
+        "category": "Textract",
+        "description": "AWS Textract now supports output results for asynchronous jobs to customer specified s3 bucket."
+    },
+    {
+        "type": "feature",
+        "category": "TranscribeService",
+        "description": "Amazon Transcribe now supports WebM, OGG, AMR and AMR-WB as input formats. You can also specify an output key as a location within your S3 buckets to store the output of your transcription jobs."
+    }
+]

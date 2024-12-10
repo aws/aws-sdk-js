@@ -16,6 +16,14 @@ Feature: Working with Buckets
     When I delete the bucket
     Then the bucket should not exist
 
+  @us-east-1-regional-endpoint
+  Scenario: Support us-east-1 regional endpoint
+    Given I am using the S3 us-east-1 regional endpoint
+    When I create a bucket
+    Then the bucket should exist
+    When I delete the bucket
+    Then the bucket should not exist
+
   @cors
   Scenario: Bucket CORS
     When I create a bucket

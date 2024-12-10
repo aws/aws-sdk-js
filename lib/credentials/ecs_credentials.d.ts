@@ -1,11 +1,11 @@
-import {Credentials} from '../credentials';
-export class ECSCredentials extends Credentials {
-		/**
-		 * Represents credentials received from relative URI specified in the ECS container.
-		 * @param {object} options - Override the default (1s) timeout period.
-		 */
-		constructor(options?: ECSCredentialsOptions);
-	}
+import {RemoteCredentials} from './remote_credentials';
+export class ECSCredentials extends RemoteCredentials {
+        /**
+         * Represents credentials received.
+         * @param {object} options - Override the default (1s) timeout period.
+         */
+        constructor(options?: ECSCredentialsOptions);
+    }
     interface ECSCredentialsOptions {
         httpOptions?: {
             /**

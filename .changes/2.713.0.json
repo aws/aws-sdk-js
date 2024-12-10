@@ -1,0 +1,52 @@
+[
+    {
+        "type": "feature",
+        "category": "AlexaForBusiness",
+        "description": "Added support for registering an AVS device directly to a room using RegisterAVSDevice with a room ARN"
+    },
+    {
+        "type": "feature",
+        "category": "AppMesh",
+        "description": "AppMesh now supports Ingress which allows resources outside a mesh to communicate to resources that are inside the mesh. See https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_gateways.html"
+    },
+    {
+        "type": "feature",
+        "category": "CloudWatchEvents",
+        "description": "Amazon CloudWatch Events/EventBridge adds support for API Gateway as a target."
+    },
+    {
+        "type": "feature",
+        "category": "Comprehend",
+        "description": "AWS Comprehend now supports Real-time Analysis with Custom Entity Recognition. "
+    },
+    {
+        "type": "feature",
+        "category": "EBS",
+        "description": "This release introduces the following set of actions for the EBS direct APIs: 1. StartSnapshot, which creates a new Amazon EBS snapshot. 2. PutSnapshotBlock, which writes a block of data to a snapshot. 3. CompleteSnapshot, which seals and completes a snapshot after blocks of data have been written to it."
+    },
+    {
+        "type": "feature",
+        "category": "EventBridge",
+        "description": "Amazon EventBridge adds support for API Gateway as a target."
+    },
+    {
+        "type": "feature",
+        "category": "SNS",
+        "description": "This release adds support for SMS origination number as an attribute in the MessageAttributes parameter for the SNS Publish API."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "This release adds the DeleteHumanTaskUi API to Amazon Augmented AI"
+    },
+    {
+        "type": "feature",
+        "category": "SecretsManager",
+        "description": "Adds support for filters on the ListSecrets API to allow filtering results by name, tag key, tag value, or description.  Adds support for the BlockPublicPolicy option on the PutResourcePolicy API to block resource policies which grant a wide range of IAM principals access to secrets. Adds support for the ValidateResourcePolicy API to validate resource policies for syntax and prevent lockout error scenarios and wide access to secrets. "
+    },
+    {
+        "type": "feature",
+        "category": "WAFV2",
+        "description": "Added the option to use IP addresses from an HTTP header that you specify, instead of using the web request origin. Available for IP set matching, geo matching, and rate-based rule count aggregation."
+    }
+]

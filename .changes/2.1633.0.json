@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Batch",
+        "description": "This release adds support for the AWS Batch GetJobQueueSnapshot API operation."
+    },
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Adds support for EKS add-ons pod identity associations integration"
+    },
+    {
+        "type": "feature",
+        "category": "IoTTwinMaker",
+        "description": "Support RESET_VALUE UpdateType for PropertyUpdates to reset property value to default or null"
+    }
+]

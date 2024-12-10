@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "Iot",
+        "description": "Added a new Over-the-Air (OTA) Update feature that allows you to use different, or multiple, protocols to transfer an image from the AWS cloud to IoT devices."
+    },
+    {
+        "type": "feature",
+        "category": "KinesisAnalyticsV2",
+        "description": "Kinesis Data Analytics service now supports running Java applications using Flink 1.8."
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "AWS Elemental MediaLive now supports HLS ID3 segment tagging, HLS redundant manifests for CDNs that support different publishing/viewing endpoints, fragmented MP4 (fMP4), and frame capture intervals specified in milliseconds."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "Added support for Cloud Watch Output and Document Version to the Run Command tasks in Maintenance Windows."
+    }
+]

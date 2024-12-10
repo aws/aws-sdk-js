@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "ChimeSDKMediaPipelines",
+        "description": "This release adds support for the Voice Analytics feature for customer-owned KVS streams as part of the Amazon Chime SDK call analytics."
+    },
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "Amazon Connect adds the ability to read, create, update, delete, and list view resources, and adds the ability to read, create, delete, and list view versions."
+    },
+    {
+        "type": "feature",
+        "category": "IdentityStore",
+        "description": "New Identity Store content for China Region launch"
+    }
+]

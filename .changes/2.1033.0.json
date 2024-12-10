@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "AppStream",
+        "description": "Includes APIs for managing resources for Elastic fleets: applications, app blocks, and application-fleet associations."
+    },
+    {
+        "type": "feature",
+        "category": "ApplicationInsights",
+        "description": "Application Insights now supports monitoring for HANA"
+    },
+    {
+        "type": "feature",
+        "category": "CloudFormation",
+        "description": "The StackSets ManagedExecution feature will allow concurrency for non-conflicting StackSet operations and queuing the StackSet operations that conflict at a given time for later execution."
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "Add support for Lambda Function URLs. Customers can use Function URLs to create built-in HTTPS endpoints on their functions."
+    },
+    {
+        "type": "feature",
+        "category": "LexRuntimeV2",
+        "description": "Updates API to latest version."
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "This release adds support for specifying a SCTE-35 PID on input. MediaLive now supports SCTE-35 PID selection on inputs containing one or more active SCTE-35 PIDs."
+    },
+    {
+        "type": "feature",
+        "category": "Redshift",
+        "description": "Added support of default IAM role for CreateCluster, RestoreFromClusterSnapshot and ModifyClusterIamRoles APIs"
+    }
+]

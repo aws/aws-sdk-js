@@ -1,0 +1,37 @@
+[
+    {
+        "type": "bugfix",
+        "category": "BackupStorage",
+        "description": "Deprecate BackupStorage"
+    },
+    {
+        "type": "feature",
+        "category": "AppTest",
+        "description": "AWS Mainframe Modernization Application Testing is an AWS Mainframe Modernization service feature that automates functional equivalence testing for mainframe application modernization and migration to AWS, and regression testing."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Tagging support for Traffic Mirroring FilterRule resource"
+    },
+    {
+        "type": "feature",
+        "category": "OSIS",
+        "description": "SDK changes for self-managed vpc endpoint to OpenSearch ingestion pipelines."
+    },
+    {
+        "type": "feature",
+        "category": "SESV2",
+        "description": "This release adds support for Amazon EventBridge as an email sending events destination."
+    },
+    {
+        "type": "feature",
+        "category": "SecretsManager",
+        "description": "Introducing RotationToken parameter for PutSecretValue API"
+    },
+    {
+        "type": "feature",
+        "category": "SecurityLake",
+        "description": "This release updates request validation regex to account for non-commercial aws partitions."
+    }
+]

@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CUR",
+        "description": "This release add MONTHLY as the new supported TimeUnit for ReportDefinition."
+    },
+    {
+        "type": "feature",
+        "category": "CloudFront",
+        "description": "You can now manage CloudFront's additional, real-time metrics with the CloudFront API."
+    },
+    {
+        "type": "feature",
+        "category": "EMR",
+        "description": "Amazon EMR adds support for ICMP, port -1, in Block Public Access Exceptions and API access for EMR Notebooks execution. You can now non-interactively execute EMR Notebooks and pass input parameters."
+    }
+]

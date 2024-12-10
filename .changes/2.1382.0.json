@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Backup",
+        "description": "Added support for tags on restore."
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "Add support for Asset Bundle, Geospatial Heatmaps."
+    }
+]

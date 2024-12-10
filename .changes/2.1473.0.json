@@ -1,0 +1,87 @@
+[
+    {
+        "type": "feature",
+        "category": "AuditManager",
+        "description": "This release introduces a new limit to the awsAccounts parameter. When you create or update an assessment, there is now a limit of 200 AWS accounts that can be specified in the assessment scope."
+    },
+    {
+        "type": "feature",
+        "category": "AutoScaling",
+        "description": "Update the NotificationMetadata field to only allow visible ascii characters. Add paginators to DescribeInstanceRefreshes, DescribeLoadBalancers, and DescribeLoadBalancerTargetGroups"
+    },
+    {
+        "type": "feature",
+        "category": "ConfigService",
+        "description": "Add enums for resource types supported by Config"
+    },
+    {
+        "type": "feature",
+        "category": "ControlTower",
+        "description": "Added new EnabledControl resource details to ListEnabledControls API and added new GetEnabledControl API."
+    },
+    {
+        "type": "feature",
+        "category": "CustomerProfiles",
+        "description": "Adds sensitive trait to various shapes in Customer Profiles Calculated Attribute API model."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds Ubuntu Pro as a supported platform for On-Demand Capacity Reservations and adds support for setting an Amazon Machine Image (AMI) to disabled state. Disabling the AMI makes it private if it was previously shared, and prevents new EC2 instance launches from it."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Extending version control support to GitLab and Bitbucket from AWSGlue"
+    },
+    {
+        "type": "feature",
+        "category": "IVSRealTime",
+        "description": "Update GetParticipant to return additional metadata."
+    },
+    {
+        "type": "feature",
+        "category": "Inspector2",
+        "description": "Add MacOs ec2 platform support"
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "Adds support for Lambda functions to access Dual-Stack subnets over IPv6, via an opt-in flag in CreateFunction and UpdateFunctionConfiguration APIs"
+    },
+    {
+        "type": "feature",
+        "category": "Location",
+        "description": "This release adds endpoint updates for all AWS Location resource operations."
+    },
+    {
+        "type": "feature",
+        "category": "MachineLearning",
+        "description": "This release marks Password field as sensitive"
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This release adds support for adding a dedicated log volume to open-source RDS instances."
+    },
+    {
+        "type": "feature",
+        "category": "Rekognition",
+        "description": "Amazon Rekognition introduces support for Custom Moderation. This allows the enhancement of accuracy for detect moderation labels operations by creating custom adapters tuned on customer data."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Amazon SageMaker Canvas adds KendraSettings and DirectDeploySettings support for CanvasAppSettings"
+    },
+    {
+        "type": "feature",
+        "category": "Textract",
+        "description": "This release adds 9 new APIs for adapter and adapter version management, 3 new APIs for tagging, and updates AnalyzeDocument and StartDocumentAnalysis API parameters for using adapters."
+    },
+    {
+        "type": "feature",
+        "category": "TranscribeService",
+        "description": "This release is to enable m4a format to customers"
+    }
+]

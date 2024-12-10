@@ -1,0 +1,12 @@
+[
+    {
+        "type": "bugfix",
+        "category": "eks pod identity",
+        "description": "adds support to use eks pod identity"
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Amazon SageMaker Canvas adds GenerativeAiSettings support for CanvasAppSettings."
+    }
+]

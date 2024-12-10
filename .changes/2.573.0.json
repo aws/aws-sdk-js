@@ -1,0 +1,47 @@
+[
+    {
+        "type": "bugfix",
+        "category": "clock skew",
+        "description": "update clock skew duration from 30s to 300s"
+    },
+    {
+        "type": "feature",
+        "category": "Chime",
+        "description": "This release adds support for Chime Room Management APIs"
+    },
+    {
+        "type": "feature",
+        "category": "CognitoIdentityServiceProvider",
+        "description": "This release adds a new option in the User Pool to allow specifying sender's name in the emails sent by Amazon Cognito. This release also adds support to add SES Configuration Set to the emails sent by Amazon Cognito."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "You can now add tags while copying snapshots. Previously, a user had to first copy the snapshot and then add tags to the copied snapshot manually. Moving forward, you can specify the list of tags you wish to be applied to the copied snapshot as a parameter on the Copy Snapshot API. "
+    },
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Introducing Amazon EKS managed node groups, a new feature that lets you easily provision worker nodes for Amazon EKS clusters and keep them up to date using the Amazon EKS management console, CLI, and APIs."
+    },
+    {
+        "type": "feature",
+        "category": "EMR",
+        "description": "Access to the cluster ARN makes it easier for you to author resource-level permissions policies in AWS Identity and Access Management. To simplify the process of obtaining the cluster ARN, Amazon EMR has added a new field containing the cluster ARN to all API responses that include the cluster ID."
+    },
+    {
+        "type": "feature",
+        "category": "GuardDuty",
+        "description": "This release includes new operations related to findings export, including: CreatePublishingDestination, UpdatePublishingDestination, DescribePublishingDestination, DeletePublishingDestination and ListPublishingDestinations."
+    },
+    {
+        "type": "feature",
+        "category": "MediaConvert",
+        "description": "AWS Elemental MediaConvert SDK has added support for DolbyVision encoding, and SCTE35 & ESAM insertion to DASH ISO EMSG."
+    },
+    {
+        "type": "feature",
+        "category": "WorkSpaces",
+        "description": "Added APIs to register your directories with Amazon WorkSpaces and to modify directory details. "
+    }
+]

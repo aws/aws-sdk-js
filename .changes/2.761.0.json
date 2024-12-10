@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "Batch",
+        "description": "Support custom logging, executionRole, secrets, and linuxParameters (initProcessEnabled, maxSwap, swappiness, sharedMemorySize, and tmpfs). Also, add new context keys for awslogs."
+    },
+    {
+        "type": "feature",
+        "category": "ConfigService",
+        "description": "Make the delivery-s3-bucket as an optional parameter for conformance packs and organizational conformance packs"
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release supports returning additional information about local gateway resources, such as the local gateway route table."
+    },
+    {
+        "type": "feature",
+        "category": "FraudDetector",
+        "description": "Increased maximum length of eventVariables values for GetEventPrediction from 256 to 1024."
+    },
+    {
+        "type": "feature",
+        "category": "STS",
+        "description": "Documentation update for AssumeRole error"
+    }
+]

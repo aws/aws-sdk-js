@@ -15,7 +15,7 @@ describe('AWS.IotData', function() {
         it('converts the body to a string', function(done) {
           var client = new AWS.IotData({endpoint: 'localhost'});
           var shadow = JSON.stringify({foo: 'bar', fizz: ['buzz', 'pop']});
-          var body = new Buffer(shadow);
+          var body = AWS.util.buffer.toBuffer(shadow);
           helpers.mockHttpResponse(200, {}, body);
           client[operation]({thingName: 'thing'}, function(err, data) {
             expect(Buffer.isBuffer(data.payload)).to.be.false;

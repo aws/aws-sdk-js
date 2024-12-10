@@ -57,11 +57,11 @@
               shapes: group.shapes
             };
             group.cases.forEach(function(_case, i) {
-              _case.op = "case" + (i + 1);
+              _case.op = 'case' + (i + 1);
               return api.operations[_case.op] = _case.given;
             });
             svc = new AWS.Service({
-              endpoint: 'http://localhost',
+              endpoint: group.clientEndpoint || 'http://localhost',
               apiConfig: api
             });
             return group.cases.forEach(function(_case, i) {
@@ -91,9 +91,28 @@
     expect(util.queryStringParse(reqUrl.query)).to.eql(util.queryStringParse(dataUrl.query));
     if (svc.api.protocol === 'query' || svc.api.protocol === 'ec2') {
       expect(sortQS(req.httpRequest.body)).to.equal(sortQS(data.body));
+    } else if (svc.api.protocol.match(/(rest-json)/)) {
+      if (data.body) {
+        expect(req.httpRequest.headers['Content-Length']).to.equal(req.httpRequest.body.length);
+        expect(req.httpRequest.body.replace(/\s+/g, '')).to.equal(data.body.replace(/\s+/g, ''));
+      }
+      if (data.headers) {
+        Object.keys(data.headers).forEach((key) => {
+          expect(req.httpRequest.headers[key]).to.equal(data.headers[key]);
+        });
+      }
+      if (data.forbidHeaders) {
+        for (k in data.forbidHeaders) {
+          v = data.forbidHeaders[k];
+          expect(req.httpRequest.headers[v]).to.be.undefined;
+        }
+      }
     } else if (svc.api.protocol.match(/(json|xml)/)) {
       if (req.httpRequest.body === '{}') {
         req.httpRequest.body = '';
+      }
+      if (data.body === undefined) {
+        data.body = '';
       }
       expect(req.httpRequest.body.replace(/\s+/g, '')).to.equal(data.body.replace(/\s+/g, ''));
     } else {
@@ -108,20 +127,25 @@
       }
       return results;
     }
+    if (data.host) {
+      expect(req.httpRequest.endpoint.hostname).to.equal(data.host);
+    }
   };
 
   outputCase = function(svc, _case, i, done) {
     var expectedData, k, req, resp, resultData, results, v;
     resp = _case.response;
-    helpers.mockHttpResponse(resp.status_code, resp.headers, resp.body);
+    helpers.mockHttpResponse(resp.status_code, resp.headers || {}, resp.body);
     req = svc[_case.op](_case.params);
     req.send();
     expectedData = formatData(_case.result, svc.api.operations[_case.op].output);
     resultData = formatData(req.response.data, svc.api.operations[_case.op].output);
     results = [];
-    for (k in expectedData) {
-      v = expectedData[k];
-      results.push(expect(resultData[k]).to.eql(v));
+    if (resultData) {
+      for (k in expectedData) {
+        v = expectedData[k];
+        results.push(expect(resultData[k]).to.eql(v));
+      }
     }
     return results;
   };
@@ -183,7 +207,7 @@
     tests('query');
     tests('json');
     tests('rest-json');
-    return tests('rest-xml');
+    tests('rest-xml');
   });
 
 }).call(this);

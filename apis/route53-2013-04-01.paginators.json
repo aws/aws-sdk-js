@@ -1,5 +1,23 @@
 {
   "pagination": {
+    "ListCidrBlocks": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "CidrBlocks"
+    },
+    "ListCidrCollections": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "CidrCollections"
+    },
+    "ListCidrLocations": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "CidrLocations"
+    },
     "ListHealthChecks": {
       "input_token": "Marker",
       "limit_key": "MaxItems",
@@ -13,6 +31,12 @@
       "more_results": "IsTruncated",
       "output_token": "NextMarker",
       "result_key": "HostedZones"
+    },
+    "ListQueryLoggingConfigs": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "QueryLoggingConfigs"
     },
     "ListResourceRecordSets": {
       "input_token": [

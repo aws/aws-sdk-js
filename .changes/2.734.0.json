@@ -1,0 +1,27 @@
+[
+    {
+        "type": "bugfix",
+        "category": "ErrorParser",
+        "description": "fix UnknownEndpoint exception not thrown in Node14(#3393)"
+    },
+    {
+        "type": "feature",
+        "category": "AppStream",
+        "description": "Adds support for the Desktop View feature"
+    },
+    {
+        "type": "feature",
+        "category": "Braket",
+        "description": "Fixing bug in our SDK model where device status and device type had been flipped."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "New C5ad instances featuring AMD's 2nd Generation EPYC processors, offering up to 96 vCPUs, 192 GiB of instance memory, 3.8 TB of NVMe based SSD instance storage, and 20 Gbps in Network bandwidth"
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Amazon SageMaker now supports 1) creating real-time inference endpoints using model container images from Docker registries in customers' VPC 2) AUC(Area under the curve) as AutoPilot objective metric"
+    }
+]

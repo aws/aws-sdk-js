@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Cloud9",
+        "description": "Added DryRun parameter to CreateEnvironmentEC2 API. Added ManagedCredentialsActions parameter to UpdateEnvironment API"
+    },
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "This release is a new feature for Cost Categories: Split charge rules. Split charge rules enable you to allocate shared costs between your cost category values."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds support for EC2 ED25519 key pairs for authentication"
+    }
+]

@@ -13,26 +13,4 @@ module.exports = function() {
     };
     this.request(null, 'createClusterParameterGroup', params, callback, false);
   });
-
-  this.Given(/^the Redshift cluster parameter group name is in the result$/, function(callback) {
-    this.assert.equal(this.data.ClusterParameterGroup.ParameterGroupName, this.parameterGroupName);
-    callback();
-  });
-
-  this.Given(/^I describe Redshift cluster parameter groups$/, function(callback) {
-    this.request(null, 'describeClusterParameterGroups', {}, callback);
-  });
-
-  this.Then(/^the Redshift cluster parameter group should be in the list$/, function(callback) {
-    var name = this.parameterGroupName;
-    this.assert.contains(this.data.ParameterGroups, function(parameterGroup) {
-      return parameterGroup.ParameterGroupName === name;
-    });
-    callback();
-  });
-
-  this.Then(/^I delete the Redshift cluster parameter group$/, function(callback) {
-    var params = {ParameterGroupName: this.parameterGroupName};
-    this.request(null, 'deleteClusterParameterGroup', params, callback);
-  });
 };

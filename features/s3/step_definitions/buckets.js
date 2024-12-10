@@ -10,15 +10,25 @@ module.exports = function() {
     callback();
   });
 
+  this.Given(/^I am using the S3 us-east-1 regional endpoint$/, function(callback) {
+    this.s3 = new this.AWS.S3({region: 'us-east-1', s3UsEast1RegionalEndpoint: 'regional'});
+    callback();
+  });
+
   this.When(/^I create a bucket with the location constraint "([^"]*)"$/, function(location, callback) {
-    this.bucket = this.uniqueName('aws-sdk-js-integration');
+    var bucket = this.bucket = this.uniqueName('aws-sdk-js-integration');
     var params = {
       Bucket: this.bucket,
       CreateBucketConfiguration: {
         LocationConstraint: location
       }
     };
-    this.request('s3', 'createBucket', params, callback);
+    this.request('s3', 'createBucket', params, function(err, data) {
+      if (err) {
+        return callback(err);
+      }
+      this.s3.waitFor('bucketExists', {Bucket: bucket}, callback);
+    });
   });
 
   this.Then(/^the bucket should have a location constraint of "([^"]*)"$/, function(loc, callback) {
@@ -129,8 +139,13 @@ module.exports = function() {
   });
 
   this.When(/^I create a bucket with a DNS compatible name that contains a dot$/, function(callback) {
-    this.bucket = this.uniqueName('aws-sdk-js.integration');
-    this.request('s3', 'createBucket', {Bucket: this.bucket}, callback);
+    var bucket = this.bucket = this.uniqueName('aws-sdk-js.integration');
+    this.request('s3', 'createBucket', {Bucket: this.bucket}, function(err, data) {
+      if (err) {
+        return callback(err);
+      }
+      this.s3.waitFor('bucketExists', {Bucket: bucket}, callback);
+    });
   });
 
   this.Given(/^I force path style requests$/, function(callback) {

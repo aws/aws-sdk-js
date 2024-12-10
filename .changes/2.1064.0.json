@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeGuruReviewer",
+        "description": "Added failure state and adjusted timeout in waiter"
+    },
+    {
+        "type": "feature",
+        "category": "FraudDetector",
+        "description": "Added new APIs for viewing past predictions and obtaining prediction metadata including prediction explanations: ListEventPredictions and GetEventPredictionMetadata"
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "API changes relating to Fail steps in model building pipeline and add PipelineExecutionFailureReason in PipelineExecutionSummary."
+    },
+    {
+        "type": "feature",
+        "category": "SecurityHub",
+        "description": "Adding top level Sample boolean field"
+    }
+]

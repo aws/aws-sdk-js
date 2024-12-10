@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "EMR",
+        "description": "This release provides customers the ability to define a timeout period for procuring capacity during a resize operation for Instance Fleet clusters. Customers can specify this timeout using the ResizeSpecifications parameter supported by RunJobFlow, ModifyInstanceFleet and AddInstanceFleet APIs."
+    },
+    {
+        "type": "feature",
+        "category": "Grafana",
+        "description": "With this release Amazon Managed Grafana now supports inbound Network Access Control that helps you to restrict user access to your Grafana workspaces"
+    }
+]

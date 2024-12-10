@@ -117,11 +117,11 @@
       var extractError;
       extractError = function(body) {
         if (body === void 0) {
-          body = "<Error>\n  <Code>InvalidArgument</Code>\n  <Message>Provided param is bad</Message>\n</Error>";
+          body = '<Error>\n  <Code>InvalidArgument</Code>\n  <Message>Provided param is bad</Message>\n</Error>';
         }
         response.httpResponse.statusCode = 400;
         response.httpResponse.statusMessage = 'Bad Request';
-        response.httpResponse.body = new Buffer(body);
+        response.httpResponse.body = AWS.util.buffer.toBuffer(body);
         return svc.extractError(response);
       };
       it('extracts error from UnknownOperationException', function() {
@@ -146,20 +146,20 @@
       });
       it('returns an empty error when the body cannot be parsed', function() {
         extractError(JSON.stringify({
-          "foo": "bar",
-          "fizz": ["buzz", "pop"]
+          'foo': 'bar',
+          'fizz': ['buzz', 'pop']
         }));
         expect(response.error.code).to.equal(400);
         expect(response.error.message).to.equal('Bad Request');
         return expect(response.data).to.equal(null);
       });
       it('extracts error when inside <Errors>', function() {
-        extractError("<SomeResponse>\n  <Errors>\n    <Error>\n      <Code>code</Code><Message>msg</Message>\n    </Error>\n  </Errors>\n</SomeResponse>");
+        extractError('<SomeResponse>\n  <Errors>\n    <Error>\n      <Code>code</Code><Message>msg</Message>\n    </Error>\n  </Errors>\n</SomeResponse>');
         expect(response.error.code).to.equal('code');
         return expect(response.error.message).to.equal('msg');
       });
       return it('extracts error when <Error> is nested', function() {
-        extractError("<SomeResponse>\n  <Error>\n    <Code>code</Code><Message>msg</Message>\n  </Error>\n</SomeResponse>");
+        extractError('<SomeResponse>\n  <Error>\n    <Code>code</Code><Message>msg</Message>\n  </Error>\n</SomeResponse>');
         expect(response.error.code).to.equal('code');
         return expect(response.error.message).to.equal('msg');
       });
@@ -168,11 +168,11 @@
       var extractData;
       extractData = function(body) {
         response.httpResponse.statusCode = 200;
-        response.httpResponse.body = new Buffer(body);
+        response.httpResponse.body = AWS.util.buffer.toBuffer(body);
         return svc.extractData(response);
       };
       it('parses the response using the operation output rules', function() {
-        extractData("<xml>\n  <Data>\n    <Name>abc</Name>\n    <Count>123</Count>\n  </Data>\n</xml>");
+        extractData('<xml>\n  <Data>\n    <Name>abc</Name>\n    <Count>123</Count>\n  </Data>\n</xml>');
         expect(response.error).to.equal(null);
         return expect(response.data).to.eql({
           Data: {
@@ -183,7 +183,7 @@
       });
       it('performs default xml parsing when output rule is missing', function() {
         delete service.api.operations.operationName.output;
-        extractData("<xml>\n  <data>\n    <name>abc</name>\n    <count>123</count>\n  </data>\n</xml>");
+        extractData('<xml>\n  <data>\n    <name>abc</name>\n    <count>123</count>\n  </data>\n</xml>');
         expect(response.error).to.equal(null);
         return expect(response.data).to.eql({
           data: {
@@ -194,7 +194,7 @@
       });
       it('removes wrapping result element if resultWrapper is set', function() {
         service.api.operations.operationName.output.resultWrapper = 'OperationNameResult';
-        extractData("<xml>\n  <OperationNameResult>\n    <Data>\n      <Name>abc</Name>\n      <Count>12345.5</Count>\n    </Data>\n  </OperationNameResult>\n</xml>");
+        extractData('<xml>\n  <OperationNameResult>\n    <Data>\n      <Name>abc</Name>\n      <Count>12345.5</Count>\n    </Data>\n  </OperationNameResult>\n</xml>');
         expect(response.error).to.equal(null);
         return expect(response.data).to.eql({
           Data: {
@@ -204,7 +204,7 @@
         });
       });
       it('extracts requestId from the response', function() {
-        extractData("<xml>\n  <requestId>12345-abcde</requestId>\n  <Data>\n    <Name>abc</Name>\n    <Count>123</Count>\n  </Data>\n</xml>");
+        extractData('<xml>\n  <requestId>12345-abcde</requestId>\n  <Data>\n    <Name>abc</Name>\n    <Count>123</Count>\n  </Data>\n</xml>');
         expect(response.requestId).to.equal('12345-abcde');
         return expect(response.data).to.eql({
           Data: {
@@ -215,7 +215,7 @@
       });
       it('extracts requestId even if output members are absent', function() {
         delete service.api.operations.operationName.output;
-        extractData("<xml>\n  <requestId>12345-abcde</requestId>\n</xml>");
+        extractData('<xml>\n  <requestId>12345-abcde</requestId>\n</xml>');
         expect(response.requestId).to.equal('12345-abcde');
         return expect(response.data).to.eql({
           requestId: '12345-abcde'
@@ -231,7 +231,7 @@
           }
         }, 'foo');
         service.api.operations.operationName.output.members.RequestId = shape;
-        extractData("<xml>\n  <requestId>12345-abcde</requestId>\n  <foo>foo-bar</foo>\n  <Data>\n    <Name>abc</Name>\n    <Count>123</Count>\n  </Data>\n</xml>");
+        extractData('<xml>\n  <requestId>12345-abcde</requestId>\n  <foo>foo-bar</foo>\n  <Data>\n    <Name>abc</Name>\n    <Count>123</Count>\n  </Data>\n</xml>');
         return expect(response.data).to.eql({
           Data: {
             Name: 'abc',
@@ -250,7 +250,7 @@
           }
         }, 'foo');
         service.api.operations.operationName.output.members.requestId = shape;
-        extractData("<xml>\n  <requestId>12345-abcde</requestId>\n  <foo>foo-bar</foo>\n  <Data>\n    <Name>abc</Name>\n    <Count>123</Count>\n  </Data>\n</xml>");
+        extractData('<xml>\n  <requestId>12345-abcde</requestId>\n  <foo>foo-bar</foo>\n  <Data>\n    <Name>abc</Name>\n    <Count>123</Count>\n  </Data>\n</xml>');
         return expect(response.data).to.eql({
           Data: {
             Name: 'abc',

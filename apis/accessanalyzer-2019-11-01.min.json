@@ -1,0 +1,2256 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2019-11-01",
+    "endpointPrefix": "access-analyzer",
+    "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
+    "serviceFullName": "Access Analyzer",
+    "serviceId": "AccessAnalyzer",
+    "signatureVersion": "v4",
+    "signingName": "access-analyzer",
+    "uid": "accessanalyzer-2019-11-01"
+  },
+  "operations": {
+    "ApplyArchiveRule": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/archive-rule",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "analyzerArn",
+          "ruleName"
+        ],
+        "members": {
+          "analyzerArn": {},
+          "ruleName": {},
+          "clientToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "CancelPolicyGeneration": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/policy/generation/{jobId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "jobId"
+        ],
+        "members": {
+          "jobId": {
+            "location": "uri",
+            "locationName": "jobId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "CheckAccessNotGranted": {
+      "http": {
+        "requestUri": "/policy/check-access-not-granted",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "policyDocument",
+          "access",
+          "policyType"
+        ],
+        "members": {
+          "policyDocument": {
+            "shape": "S9"
+          },
+          "access": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "actions": {
+                  "type": "list",
+                  "member": {}
+                },
+                "resources": {
+                  "type": "list",
+                  "member": {}
+                }
+              }
+            }
+          },
+          "policyType": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "result": {},
+          "message": {},
+          "reasons": {
+            "shape": "Sj"
+          }
+        }
+      }
+    },
+    "CheckNoNewAccess": {
+      "http": {
+        "requestUri": "/policy/check-no-new-access",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "newPolicyDocument",
+          "existingPolicyDocument",
+          "policyType"
+        ],
+        "members": {
+          "newPolicyDocument": {
+            "shape": "S9"
+          },
+          "existingPolicyDocument": {
+            "shape": "S9"
+          },
+          "policyType": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "result": {},
+          "message": {},
+          "reasons": {
+            "shape": "Sj"
+          }
+        }
+      }
+    },
+    "CheckNoPublicAccess": {
+      "http": {
+        "requestUri": "/policy/check-no-public-access",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "policyDocument",
+          "resourceType"
+        ],
+        "members": {
+          "policyDocument": {
+            "shape": "S9"
+          },
+          "resourceType": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "result": {},
+          "message": {},
+          "reasons": {
+            "shape": "Sj"
+          }
+        }
+      }
+    },
+    "CreateAccessPreview": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/access-preview",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "analyzerArn",
+          "configurations"
+        ],
+        "members": {
+          "analyzerArn": {},
+          "configurations": {
+            "shape": "Su"
+          },
+          "clientToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "id"
+        ],
+        "members": {
+          "id": {}
+        }
+      },
+      "idempotent": true
+    },
+    "CreateAnalyzer": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/analyzer",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "analyzerName",
+          "type"
+        ],
+        "members": {
+          "analyzerName": {},
+          "type": {},
+          "archiveRules": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "ruleName",
+                "filter"
+              ],
+              "members": {
+                "ruleName": {},
+                "filter": {
+                  "shape": "S33"
+                }
+              }
+            }
+          },
+          "tags": {
+            "shape": "S36"
+          },
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "configuration": {
+            "shape": "S37"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "arn": {}
+        }
+      },
+      "idempotent": true
+    },
+    "CreateArchiveRule": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/analyzer/{analyzerName}/archive-rule",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "analyzerName",
+          "ruleName",
+          "filter"
+        ],
+        "members": {
+          "analyzerName": {
+            "location": "uri",
+            "locationName": "analyzerName"
+          },
+          "ruleName": {},
+          "filter": {
+            "shape": "S33"
+          },
+          "clientToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "DeleteAnalyzer": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/analyzer/{analyzerName}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "analyzerName"
+        ],
+        "members": {
+          "analyzerName": {
+            "location": "uri",
+            "locationName": "analyzerName"
+          },
+          "clientToken": {
+            "idempotencyToken": true,
+            "location": "querystring",
+            "locationName": "clientToken"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "DeleteArchiveRule": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/analyzer/{analyzerName}/archive-rule/{ruleName}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "analyzerName",
+          "ruleName"
+        ],
+        "members": {
+          "analyzerName": {
+            "location": "uri",
+            "locationName": "analyzerName"
+          },
+          "ruleName": {
+            "location": "uri",
+            "locationName": "ruleName"
+          },
+          "clientToken": {
+            "idempotencyToken": true,
+            "location": "querystring",
+            "locationName": "clientToken"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "GenerateFindingRecommendation": {
+      "http": {
+        "requestUri": "/recommendation/{id}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "analyzerArn",
+          "id"
+        ],
+        "members": {
+          "analyzerArn": {
+            "location": "querystring",
+            "locationName": "analyzerArn"
+          },
+          "id": {
+            "location": "uri",
+            "locationName": "id"
+          }
+        }
+      }
+    },
+    "GetAccessPreview": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/access-preview/{accessPreviewId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "accessPreviewId",
+          "analyzerArn"
+        ],
+        "members": {
+          "accessPreviewId": {
+            "location": "uri",
+            "locationName": "accessPreviewId"
+          },
+          "analyzerArn": {
+            "location": "querystring",
+            "locationName": "analyzerArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "accessPreview"
+        ],
+        "members": {
+          "accessPreview": {
+            "type": "structure",
+            "required": [
+              "id",
+              "analyzerArn",
+              "configurations",
+              "createdAt",
+              "status"
+            ],
+            "members": {
+              "id": {},
+              "analyzerArn": {},
+              "configurations": {
+                "shape": "Su"
+              },
+              "createdAt": {
+                "shape": "S3i"
+              },
+              "status": {},
+              "statusReason": {
+                "shape": "S3k"
+              }
+            }
+          }
+        }
+      }
+    },
+    "GetAnalyzedResource": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/analyzed-resource",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "analyzerArn",
+          "resourceArn"
+        ],
+        "members": {
+          "analyzerArn": {
+            "location": "querystring",
+            "locationName": "analyzerArn"
+          },
+          "resourceArn": {
+            "location": "querystring",
+            "locationName": "resourceArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "resource": {
+            "type": "structure",
+            "required": [
+              "resourceArn",
+              "resourceType",
+              "createdAt",
+              "analyzedAt",
+              "updatedAt",
+              "isPublic",
+              "resourceOwnerAccount"
+            ],
+            "members": {
+              "resourceArn": {},
+              "resourceType": {},
+              "createdAt": {
+                "shape": "S3i"
+              },
+              "analyzedAt": {
+                "shape": "S3i"
+              },
+              "updatedAt": {
+                "shape": "S3i"
+              },
+              "isPublic": {
+                "type": "boolean"
+              },
+              "actions": {
+                "shape": "S3r"
+              },
+              "sharedVia": {
+                "type": "list",
+                "member": {}
+              },
+              "status": {},
+              "resourceOwnerAccount": {},
+              "error": {}
+            }
+          }
+        }
+      }
+    },
+    "GetAnalyzer": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/analyzer/{analyzerName}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "analyzerName"
+        ],
+        "members": {
+          "analyzerName": {
+            "location": "uri",
+            "locationName": "analyzerName"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "analyzer"
+        ],
+        "members": {
+          "analyzer": {
+            "shape": "S3w"
+          }
+        }
+      }
+    },
+    "GetArchiveRule": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/analyzer/{analyzerName}/archive-rule/{ruleName}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "analyzerName",
+          "ruleName"
+        ],
+        "members": {
+          "analyzerName": {
+            "location": "uri",
+            "locationName": "analyzerName"
+          },
+          "ruleName": {
+            "location": "uri",
+            "locationName": "ruleName"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "archiveRule"
+        ],
+        "members": {
+          "archiveRule": {
+            "shape": "S42"
+          }
+        }
+      }
+    },
+    "GetFinding": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/finding/{id}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "analyzerArn",
+          "id"
+        ],
+        "members": {
+          "analyzerArn": {
+            "location": "querystring",
+            "locationName": "analyzerArn"
+          },
+          "id": {
+            "location": "uri",
+            "locationName": "id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "finding": {
+            "type": "structure",
+            "required": [
+              "id",
+              "resourceType",
+              "condition",
+              "createdAt",
+              "analyzedAt",
+              "updatedAt",
+              "status",
+              "resourceOwnerAccount"
+            ],
+            "members": {
+              "id": {},
+              "principal": {
+                "shape": "S47"
+              },
+              "action": {
+                "shape": "S3r"
+              },
+              "resource": {},
+              "isPublic": {
+                "type": "boolean"
+              },
+              "resourceType": {},
+              "condition": {
+                "shape": "S48"
+              },
+              "createdAt": {
+                "shape": "S3i"
+              },
+              "analyzedAt": {
+                "shape": "S3i"
+              },
+              "updatedAt": {
+                "shape": "S3i"
+              },
+              "status": {},
+              "resourceOwnerAccount": {},
+              "error": {},
+              "sources": {
+                "shape": "S49"
+              }
+            }
+          }
+        }
+      }
+    },
+    "GetFindingRecommendation": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/recommendation/{id}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "analyzerArn",
+          "id"
+        ],
+        "members": {
+          "analyzerArn": {
+            "location": "querystring",
+            "locationName": "analyzerArn"
+          },
+          "id": {
+            "location": "uri",
+            "locationName": "id"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "startedAt",
+          "resourceArn",
+          "recommendationType",
+          "status"
+        ],
+        "members": {
+          "startedAt": {
+            "shape": "S3i"
+          },
+          "completedAt": {
+            "shape": "S3i"
+          },
+          "nextToken": {},
+          "error": {
+            "type": "structure",
+            "required": [
+              "code",
+              "message"
+            ],
+            "members": {
+              "code": {},
+              "message": {}
+            }
+          },
+          "resourceArn": {},
+          "recommendedSteps": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "unusedPermissionsRecommendedStep": {
+                  "type": "structure",
+                  "required": [
+                    "recommendedAction"
+                  ],
+                  "members": {
+                    "policyUpdatedAt": {
+                      "shape": "S3i"
+                    },
+                    "recommendedAction": {},
+                    "recommendedPolicy": {},
+                    "existingPolicyId": {}
+                  }
+                }
+              },
+              "union": true
+            }
+          },
+          "recommendationType": {},
+          "status": {}
+        }
+      }
+    },
+    "GetFindingV2": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/findingv2/{id}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "analyzerArn",
+          "id"
+        ],
+        "members": {
+          "analyzerArn": {
+            "location": "querystring",
+            "locationName": "analyzerArn"
+          },
+          "id": {
+            "location": "uri",
+            "locationName": "id"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "analyzedAt",
+          "createdAt",
+          "id",
+          "resourceType",
+          "resourceOwnerAccount",
+          "status",
+          "updatedAt",
+          "findingDetails"
+        ],
+        "members": {
+          "analyzedAt": {
+            "shape": "S3i"
+          },
+          "createdAt": {
+            "shape": "S3i"
+          },
+          "error": {},
+          "id": {},
+          "nextToken": {},
+          "resource": {},
+          "resourceType": {},
+          "resourceOwnerAccount": {},
+          "status": {},
+          "updatedAt": {
+            "shape": "S3i"
+          },
+          "findingDetails": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "externalAccessDetails": {
+                  "type": "structure",
+                  "required": [
+                    "condition"
+                  ],
+                  "members": {
+                    "action": {
+                      "shape": "S3r"
+                    },
+                    "condition": {
+                      "shape": "S48"
+                    },
+                    "isPublic": {
+                      "type": "boolean"
+                    },
+                    "principal": {
+                      "shape": "S47"
+                    },
+                    "sources": {
+                      "shape": "S49"
+                    }
+                  }
+                },
+                "unusedPermissionDetails": {
+                  "type": "structure",
+                  "required": [
+                    "serviceNamespace"
+                  ],
+                  "members": {
+                    "actions": {
+                      "type": "list",
+                      "member": {
+                        "type": "structure",
+                        "required": [
+                          "action"
+                        ],
+                        "members": {
+                          "action": {},
+                          "lastAccessed": {
+                            "shape": "S3i"
+                          }
+                        }
+                      }
+                    },
+                    "serviceNamespace": {},
+                    "lastAccessed": {
+                      "shape": "S3i"
+                    }
+                  }
+                },
+                "unusedIamUserAccessKeyDetails": {
+                  "type": "structure",
+                  "required": [
+                    "accessKeyId"
+                  ],
+                  "members": {
+                    "accessKeyId": {},
+                    "lastAccessed": {
+                      "shape": "S3i"
+                    }
+                  }
+                },
+                "unusedIamRoleDetails": {
+                  "type": "structure",
+                  "members": {
+                    "lastAccessed": {
+                      "shape": "S3i"
+                    }
+                  }
+                },
+                "unusedIamUserPasswordDetails": {
+                  "type": "structure",
+                  "members": {
+                    "lastAccessed": {
+                      "shape": "S3i"
+                    }
+                  }
+                }
+              },
+              "union": true
+            }
+          },
+          "findingType": {}
+        }
+      }
+    },
+    "GetGeneratedPolicy": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/policy/generation/{jobId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "jobId"
+        ],
+        "members": {
+          "jobId": {
+            "location": "uri",
+            "locationName": "jobId"
+          },
+          "includeResourcePlaceholders": {
+            "location": "querystring",
+            "locationName": "includeResourcePlaceholders",
+            "type": "boolean"
+          },
+          "includeServiceLevelTemplate": {
+            "location": "querystring",
+            "locationName": "includeServiceLevelTemplate",
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "jobDetails",
+          "generatedPolicyResult"
+        ],
+        "members": {
+          "jobDetails": {
+            "type": "structure",
+            "required": [
+              "jobId",
+              "status",
+              "startedOn"
+            ],
+            "members": {
+              "jobId": {},
+              "status": {},
+              "startedOn": {
+                "shape": "S3i"
+              },
+              "completedOn": {
+                "shape": "S3i"
+              },
+              "jobError": {
+                "type": "structure",
+                "required": [
+                  "code",
+                  "message"
+                ],
+                "members": {
+                  "code": {},
+                  "message": {}
+                }
+              }
+            }
+          },
+          "generatedPolicyResult": {
+            "type": "structure",
+            "required": [
+              "properties"
+            ],
+            "members": {
+              "properties": {
+                "type": "structure",
+                "required": [
+                  "principalArn"
+                ],
+                "members": {
+                  "isComplete": {
+                    "type": "boolean"
+                  },
+                  "principalArn": {},
+                  "cloudTrailProperties": {
+                    "type": "structure",
+                    "required": [
+                      "trailProperties",
+                      "startTime",
+                      "endTime"
+                    ],
+                    "members": {
+                      "trailProperties": {
+                        "type": "list",
+                        "member": {
+                          "type": "structure",
+                          "required": [
+                            "cloudTrailArn"
+                          ],
+                          "members": {
+                            "cloudTrailArn": {},
+                            "regions": {
+                              "shape": "S5e"
+                            },
+                            "allRegions": {
+                              "type": "boolean"
+                            }
+                          }
+                        }
+                      },
+                      "startTime": {
+                        "shape": "S3i"
+                      },
+                      "endTime": {
+                        "shape": "S3i"
+                      }
+                    }
+                  }
+                }
+              },
+              "generatedPolicies": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "required": [
+                    "policy"
+                  ],
+                  "members": {
+                    "policy": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListAccessPreviewFindings": {
+      "http": {
+        "requestUri": "/access-preview/{accessPreviewId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "accessPreviewId",
+          "analyzerArn"
+        ],
+        "members": {
+          "accessPreviewId": {
+            "location": "uri",
+            "locationName": "accessPreviewId"
+          },
+          "analyzerArn": {},
+          "filter": {
+            "shape": "S33"
+          },
+          "nextToken": {},
+          "maxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "findings"
+        ],
+        "members": {
+          "findings": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "id",
+                "resourceType",
+                "createdAt",
+                "changeType",
+                "status",
+                "resourceOwnerAccount"
+              ],
+              "members": {
+                "id": {},
+                "existingFindingId": {},
+                "existingFindingStatus": {},
+                "principal": {
+                  "shape": "S47"
+                },
+                "action": {
+                  "shape": "S3r"
+                },
+                "condition": {
+                  "shape": "S48"
+                },
+                "resource": {},
+                "isPublic": {
+                  "type": "boolean"
+                },
+                "resourceType": {},
+                "createdAt": {
+                  "shape": "S3i"
+                },
+                "changeType": {},
+                "status": {},
+                "resourceOwnerAccount": {},
+                "error": {},
+                "sources": {
+                  "shape": "S49"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListAccessPreviews": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/access-preview",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "analyzerArn"
+        ],
+        "members": {
+          "analyzerArn": {
+            "location": "querystring",
+            "locationName": "analyzerArn"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "accessPreviews"
+        ],
+        "members": {
+          "accessPreviews": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "id",
+                "analyzerArn",
+                "createdAt",
+                "status"
+              ],
+              "members": {
+                "id": {},
+                "analyzerArn": {},
+                "createdAt": {
+                  "shape": "S3i"
+                },
+                "status": {},
+                "statusReason": {
+                  "shape": "S3k"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListAnalyzedResources": {
+      "http": {
+        "requestUri": "/analyzed-resource",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "analyzerArn"
+        ],
+        "members": {
+          "analyzerArn": {},
+          "resourceType": {},
+          "nextToken": {},
+          "maxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "analyzedResources"
+        ],
+        "members": {
+          "analyzedResources": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "resourceArn",
+                "resourceOwnerAccount",
+                "resourceType"
+              ],
+              "members": {
+                "resourceArn": {},
+                "resourceOwnerAccount": {},
+                "resourceType": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListAnalyzers": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/analyzer",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "type": {
+            "location": "querystring",
+            "locationName": "type"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "analyzers"
+        ],
+        "members": {
+          "analyzers": {
+            "type": "list",
+            "member": {
+              "shape": "S3w"
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListArchiveRules": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/analyzer/{analyzerName}/archive-rule",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "analyzerName"
+        ],
+        "members": {
+          "analyzerName": {
+            "location": "uri",
+            "locationName": "analyzerName"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "archiveRules"
+        ],
+        "members": {
+          "archiveRules": {
+            "type": "list",
+            "member": {
+              "shape": "S42"
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListFindings": {
+      "http": {
+        "requestUri": "/finding",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "analyzerArn"
+        ],
+        "members": {
+          "analyzerArn": {},
+          "filter": {
+            "shape": "S33"
+          },
+          "sort": {
+            "shape": "S62"
+          },
+          "nextToken": {},
+          "maxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "findings"
+        ],
+        "members": {
+          "findings": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "id",
+                "resourceType",
+                "condition",
+                "createdAt",
+                "analyzedAt",
+                "updatedAt",
+                "status",
+                "resourceOwnerAccount"
+              ],
+              "members": {
+                "id": {},
+                "principal": {
+                  "shape": "S47"
+                },
+                "action": {
+                  "shape": "S3r"
+                },
+                "resource": {},
+                "isPublic": {
+                  "type": "boolean"
+                },
+                "resourceType": {},
+                "condition": {
+                  "shape": "S48"
+                },
+                "createdAt": {
+                  "shape": "S3i"
+                },
+                "analyzedAt": {
+                  "shape": "S3i"
+                },
+                "updatedAt": {
+                  "shape": "S3i"
+                },
+                "status": {},
+                "resourceOwnerAccount": {},
+                "error": {},
+                "sources": {
+                  "shape": "S49"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListFindingsV2": {
+      "http": {
+        "requestUri": "/findingv2",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "analyzerArn"
+        ],
+        "members": {
+          "analyzerArn": {},
+          "filter": {
+            "shape": "S33"
+          },
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {},
+          "sort": {
+            "shape": "S62"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "findings"
+        ],
+        "members": {
+          "findings": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "analyzedAt",
+                "createdAt",
+                "id",
+                "resourceType",
+                "resourceOwnerAccount",
+                "status",
+                "updatedAt"
+              ],
+              "members": {
+                "analyzedAt": {
+                  "shape": "S3i"
+                },
+                "createdAt": {
+                  "shape": "S3i"
+                },
+                "error": {},
+                "id": {},
+                "resource": {},
+                "resourceType": {},
+                "resourceOwnerAccount": {},
+                "status": {},
+                "updatedAt": {
+                  "shape": "S3i"
+                },
+                "findingType": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListPolicyGenerations": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/policy/generation",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "principalArn": {
+            "location": "querystring",
+            "locationName": "principalArn"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "policyGenerations"
+        ],
+        "members": {
+          "policyGenerations": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "jobId",
+                "principalArn",
+                "status",
+                "startedOn"
+              ],
+              "members": {
+                "jobId": {},
+                "principalArn": {},
+                "status": {},
+                "startedOn": {
+                  "shape": "S3i"
+                },
+                "completedOn": {
+                  "shape": "S3i"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListTagsForResource": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "tags": {
+            "shape": "S36"
+          }
+        }
+      }
+    },
+    "StartPolicyGeneration": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/policy/generation",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "policyGenerationDetails"
+        ],
+        "members": {
+          "policyGenerationDetails": {
+            "type": "structure",
+            "required": [
+              "principalArn"
+            ],
+            "members": {
+              "principalArn": {}
+            }
+          },
+          "cloudTrailDetails": {
+            "type": "structure",
+            "required": [
+              "trails",
+              "accessRole",
+              "startTime"
+            ],
+            "members": {
+              "trails": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "required": [
+                    "cloudTrailArn"
+                  ],
+                  "members": {
+                    "cloudTrailArn": {},
+                    "regions": {
+                      "shape": "S5e"
+                    },
+                    "allRegions": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              },
+              "accessRole": {},
+              "startTime": {
+                "shape": "S3i"
+              },
+              "endTime": {
+                "shape": "S3i"
+              }
+            }
+          },
+          "clientToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "jobId"
+        ],
+        "members": {
+          "jobId": {}
+        }
+      },
+      "idempotent": true
+    },
+    "StartResourceScan": {
+      "http": {
+        "requestUri": "/resource/scan",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "analyzerArn",
+          "resourceArn"
+        ],
+        "members": {
+          "analyzerArn": {},
+          "resourceArn": {},
+          "resourceOwnerAccount": {}
+        }
+      }
+    },
+    "TagResource": {
+      "http": {
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tags"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          },
+          "tags": {
+            "shape": "S36"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "UntagResource": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tagKeys"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          },
+          "tagKeys": {
+            "location": "querystring",
+            "locationName": "tagKeys",
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "UpdateArchiveRule": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/analyzer/{analyzerName}/archive-rule/{ruleName}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "analyzerName",
+          "ruleName",
+          "filter"
+        ],
+        "members": {
+          "analyzerName": {
+            "location": "uri",
+            "locationName": "analyzerName"
+          },
+          "ruleName": {
+            "location": "uri",
+            "locationName": "ruleName"
+          },
+          "filter": {
+            "shape": "S33"
+          },
+          "clientToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "UpdateFindings": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/finding",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "analyzerArn",
+          "status"
+        ],
+        "members": {
+          "analyzerArn": {},
+          "status": {},
+          "ids": {
+            "type": "list",
+            "member": {}
+          },
+          "resourceArn": {},
+          "clientToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "ValidatePolicy": {
+      "http": {
+        "requestUri": "/policy/validation",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "policyDocument",
+          "policyType"
+        ],
+        "members": {
+          "locale": {},
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "policyDocument": {},
+          "policyType": {},
+          "validatePolicyResourceType": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "findings"
+        ],
+        "members": {
+          "findings": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "findingDetails",
+                "findingType",
+                "issueCode",
+                "learnMoreLink",
+                "locations"
+              ],
+              "members": {
+                "findingDetails": {},
+                "findingType": {},
+                "issueCode": {},
+                "learnMoreLink": {},
+                "locations": {
+                  "type": "list",
+                  "member": {
+                    "type": "structure",
+                    "required": [
+                      "path",
+                      "span"
+                    ],
+                    "members": {
+                      "path": {
+                        "type": "list",
+                        "member": {
+                          "type": "structure",
+                          "members": {
+                            "index": {
+                              "type": "integer"
+                            },
+                            "key": {},
+                            "substring": {
+                              "type": "structure",
+                              "required": [
+                                "start",
+                                "length"
+                              ],
+                              "members": {
+                                "start": {
+                                  "type": "integer"
+                                },
+                                "length": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "value": {}
+                          },
+                          "union": true
+                        }
+                      },
+                      "span": {
+                        "type": "structure",
+                        "required": [
+                          "start",
+                          "end"
+                        ],
+                        "members": {
+                          "start": {
+                            "shape": "S7g"
+                          },
+                          "end": {
+                            "shape": "S7g"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    }
+  },
+  "shapes": {
+    "S9": {
+      "type": "string",
+      "sensitive": true
+    },
+    "Sj": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "description": {},
+          "statementIndex": {
+            "type": "integer"
+          },
+          "statementId": {}
+        }
+      }
+    },
+    "Su": {
+      "type": "map",
+      "key": {},
+      "value": {
+        "type": "structure",
+        "members": {
+          "ebsSnapshot": {
+            "type": "structure",
+            "members": {
+              "userIds": {
+                "type": "list",
+                "member": {}
+              },
+              "groups": {
+                "type": "list",
+                "member": {}
+              },
+              "kmsKeyId": {}
+            }
+          },
+          "ecrRepository": {
+            "type": "structure",
+            "members": {
+              "repositoryPolicy": {}
+            }
+          },
+          "iamRole": {
+            "type": "structure",
+            "members": {
+              "trustPolicy": {}
+            }
+          },
+          "efsFileSystem": {
+            "type": "structure",
+            "members": {
+              "fileSystemPolicy": {}
+            }
+          },
+          "kmsKey": {
+            "type": "structure",
+            "members": {
+              "keyPolicies": {
+                "type": "map",
+                "key": {},
+                "value": {}
+              },
+              "grants": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "required": [
+                    "operations",
+                    "granteePrincipal",
+                    "issuingAccount"
+                  ],
+                  "members": {
+                    "operations": {
+                      "type": "list",
+                      "member": {}
+                    },
+                    "granteePrincipal": {},
+                    "retiringPrincipal": {},
+                    "constraints": {
+                      "type": "structure",
+                      "members": {
+                        "encryptionContextEquals": {
+                          "shape": "S1k"
+                        },
+                        "encryptionContextSubset": {
+                          "shape": "S1k"
+                        }
+                      }
+                    },
+                    "issuingAccount": {}
+                  }
+                }
+              }
+            }
+          },
+          "rdsDbClusterSnapshot": {
+            "type": "structure",
+            "members": {
+              "attributes": {
+                "type": "map",
+                "key": {},
+                "value": {
+                  "type": "structure",
+                  "members": {
+                    "accountIds": {
+                      "type": "list",
+                      "member": {}
+                    }
+                  },
+                  "union": true
+                }
+              },
+              "kmsKeyId": {}
+            }
+          },
+          "rdsDbSnapshot": {
+            "type": "structure",
+            "members": {
+              "attributes": {
+                "type": "map",
+                "key": {},
+                "value": {
+                  "type": "structure",
+                  "members": {
+                    "accountIds": {
+                      "type": "list",
+                      "member": {}
+                    }
+                  },
+                  "union": true
+                }
+              },
+              "kmsKeyId": {}
+            }
+          },
+          "secretsManagerSecret": {
+            "type": "structure",
+            "members": {
+              "kmsKeyId": {},
+              "secretPolicy": {}
+            }
+          },
+          "s3Bucket": {
+            "type": "structure",
+            "members": {
+              "bucketPolicy": {},
+              "bucketAclGrants": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "required": [
+                    "permission",
+                    "grantee"
+                  ],
+                  "members": {
+                    "permission": {},
+                    "grantee": {
+                      "type": "structure",
+                      "members": {
+                        "id": {},
+                        "uri": {}
+                      },
+                      "union": true
+                    }
+                  }
+                }
+              },
+              "bucketPublicAccessBlock": {
+                "shape": "S2d"
+              },
+              "accessPoints": {
+                "type": "map",
+                "key": {},
+                "value": {
+                  "type": "structure",
+                  "members": {
+                    "accessPointPolicy": {},
+                    "publicAccessBlock": {
+                      "shape": "S2d"
+                    },
+                    "networkOrigin": {
+                      "type": "structure",
+                      "members": {
+                        "vpcConfiguration": {
+                          "type": "structure",
+                          "required": [
+                            "vpcId"
+                          ],
+                          "members": {
+                            "vpcId": {}
+                          }
+                        },
+                        "internetConfiguration": {
+                          "type": "structure",
+                          "members": {}
+                        }
+                      },
+                      "union": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "snsTopic": {
+            "type": "structure",
+            "members": {
+              "topicPolicy": {}
+            }
+          },
+          "sqsQueue": {
+            "type": "structure",
+            "members": {
+              "queuePolicy": {}
+            }
+          },
+          "s3ExpressDirectoryBucket": {
+            "type": "structure",
+            "members": {
+              "bucketPolicy": {}
+            }
+          },
+          "dynamodbStream": {
+            "type": "structure",
+            "members": {
+              "streamPolicy": {}
+            }
+          },
+          "dynamodbTable": {
+            "type": "structure",
+            "members": {
+              "tablePolicy": {}
+            }
+          }
+        },
+        "union": true
+      }
+    },
+    "S1k": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "S2d": {
+      "type": "structure",
+      "required": [
+        "ignorePublicAcls",
+        "restrictPublicBuckets"
+      ],
+      "members": {
+        "ignorePublicAcls": {
+          "type": "boolean"
+        },
+        "restrictPublicBuckets": {
+          "type": "boolean"
+        }
+      }
+    },
+    "S33": {
+      "type": "map",
+      "key": {},
+      "value": {
+        "type": "structure",
+        "members": {
+          "eq": {
+            "shape": "S35"
+          },
+          "neq": {
+            "shape": "S35"
+          },
+          "contains": {
+            "shape": "S35"
+          },
+          "exists": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "S35": {
+      "type": "list",
+      "member": {}
+    },
+    "S36": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "S37": {
+      "type": "structure",
+      "members": {
+        "unusedAccess": {
+          "type": "structure",
+          "members": {
+            "unusedAccessAge": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "union": true
+    },
+    "S3i": {
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
+    },
+    "S3k": {
+      "type": "structure",
+      "required": [
+        "code"
+      ],
+      "members": {
+        "code": {}
+      }
+    },
+    "S3r": {
+      "type": "list",
+      "member": {}
+    },
+    "S3w": {
+      "type": "structure",
+      "required": [
+        "arn",
+        "name",
+        "type",
+        "createdAt",
+        "status"
+      ],
+      "members": {
+        "arn": {},
+        "name": {},
+        "type": {},
+        "createdAt": {
+          "shape": "S3i"
+        },
+        "lastResourceAnalyzed": {},
+        "lastResourceAnalyzedAt": {
+          "shape": "S3i"
+        },
+        "tags": {
+          "shape": "S36"
+        },
+        "status": {},
+        "statusReason": {
+          "type": "structure",
+          "required": [
+            "code"
+          ],
+          "members": {
+            "code": {}
+          }
+        },
+        "configuration": {
+          "shape": "S37"
+        }
+      }
+    },
+    "S42": {
+      "type": "structure",
+      "required": [
+        "ruleName",
+        "filter",
+        "createdAt",
+        "updatedAt"
+      ],
+      "members": {
+        "ruleName": {},
+        "filter": {
+          "shape": "S33"
+        },
+        "createdAt": {
+          "shape": "S3i"
+        },
+        "updatedAt": {
+          "shape": "S3i"
+        }
+      }
+    },
+    "S47": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "S48": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "S49": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "type"
+        ],
+        "members": {
+          "type": {},
+          "detail": {
+            "type": "structure",
+            "members": {
+              "accessPointArn": {},
+              "accessPointAccount": {}
+            }
+          }
+        }
+      }
+    },
+    "S5e": {
+      "type": "list",
+      "member": {}
+    },
+    "S62": {
+      "type": "structure",
+      "members": {
+        "attributeName": {},
+        "orderBy": {}
+      }
+    },
+    "S7g": {
+      "type": "structure",
+      "required": [
+        "line",
+        "column",
+        "offset"
+      ],
+      "members": {
+        "line": {
+          "type": "integer"
+        },
+        "column": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

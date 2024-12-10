@@ -1,0 +1,6 @@
+<p class="tag_title"><%= @label ? @label : YARD::Tags::Library.labels[@name] %>:</p>
+<div class="examples">
+<% object.tags(@name).each do |tag| %>
+  <pre class="example code value_tag"><code><%= object.path %> = <%= h(tag.text) %></code></pre>
+<% end %>
+</div>

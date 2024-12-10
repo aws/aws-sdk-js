@@ -28,7 +28,7 @@
     };
     return describe('build', function() {
       it('returns an empty document when there are no params', function() {
-        return expect(build({}, {})).to.equal("{}");
+        return expect(build({}, {})).to.equal('{}');
       });
       describe('structures', function() {
         var rules;
@@ -63,10 +63,24 @@
             Items: null
           })).to.equal('{}');
         });
-        return it('ignores undefined', function() {
+        it('ignores undefined', function() {
           return expect(build(rules, {
             Items: void 0
           })).to.equal('{}');
+        });
+        it('builds document types', function() {
+          var docTypeRules = {
+            type: 'structure',
+            members: {
+              Items: {
+                type: 'structure',
+                document: true
+              }
+            }
+          };
+          expect(build(docTypeRules, {
+            Items: {strKey: 'str', numKey: 1, boolKey: true, nullKey: null}
+          })).to.equal('{"Items":{"strKey":"str","numKey":1,"boolKey":true,"nullKey":null}}');
         });
       });
       describe('lists', function() {
@@ -154,14 +168,14 @@
         now.setMilliseconds(100);
         params = {
           Items: {
-            MyKey: "5",
-            MyOtherKey: "10"
+            MyKey: '5',
+            MyOtherKey: '10'
           }
         };
         str = '{"Items":{"MyKey":5,"MyOtherKey":10}}';
         return expect(build(rules, params)).to.equal(str);
       });
-      it('traslates nested timestamps', function() {
+      it('traslates nested timestamps and ignore the metadata timestampFormat', function() {
         var formatted, now, params, rules;
         rules = {
           type: 'structure',
@@ -183,8 +197,8 @@
             When: now
           }
         };
-        formatted = AWS.util.date.iso8601(now).replace(/\.\d+Z$/, '');
-        return expect(build(rules, params)).to.match(new RegExp('\\{"Build":\\{"When":"' + formatted + '"\\}\\}'));
+        formatted = AWS.util.date.unixTimestamp(now);
+        return expect(build(rules, params)).to.match(new RegExp('\\{"Build":\\{"When":' + formatted + '\\}\\}'));
       });
       it('translates integers formatted as strings', function() {
         var rules;

@@ -12,7 +12,13 @@ module.exports = function(config) {
     port: 19876,
     colors: false,
     logLevel: config.LOG_ERROR,
-    browsers: ['PhantomJS'],
+    browsers: [ 'HeadlessChrome' ],
+    customLaunchers: {
+      HeadlessChrome: {
+          base: 'ChromeHeadless',
+             flags: [ '--no-sandbox', ],
+                  },
+            },
     singleRun: true,
     browserDisconnectTolerance: 3,
     browserNoActivityTimeout: 30000,

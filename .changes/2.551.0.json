@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "IoTAnalytics",
+        "description": "enable cors to make IoTAnalytics available in default browser build"
+    },
+    {
+        "type": "feature",
+        "category": "Kafka",
+        "description": "AWS MSK has added support for adding brokers to a cluster."
+    },
+    {
+        "type": "feature",
+        "category": "MarketplaceCommerceAnalytics",
+        "description": "add 2 more values for the supporting sections - age of past due funds + uncollected funds breakdown"
+    },
+    {
+        "type": "feature",
+        "category": "RoboMaker",
+        "description": "This release adds support for ROS2 Dashing as a beta feature"
+    }
+]

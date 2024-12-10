@@ -1,0 +1,2315 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2018-05-23",
+    "endpointPrefix": "kinesisanalytics",
+    "jsonVersion": "1.1",
+    "protocol": "json",
+    "protocols": [
+      "json"
+    ],
+    "serviceAbbreviation": "Kinesis Analytics V2",
+    "serviceFullName": "Amazon Kinesis Analytics",
+    "serviceId": "Kinesis Analytics V2",
+    "signatureVersion": "v4",
+    "signingName": "kinesisanalytics",
+    "targetPrefix": "KinesisAnalytics_20180523",
+    "uid": "kinesisanalyticsv2-2018-05-23",
+    "auth": [
+      "aws.auth#sigv4"
+    ]
+  },
+  "operations": {
+    "AddApplicationCloudWatchLoggingOption": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName",
+          "CloudWatchLoggingOption"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "CurrentApplicationVersionId": {
+            "type": "long"
+          },
+          "CloudWatchLoggingOption": {
+            "shape": "S4"
+          },
+          "ConditionalToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ApplicationARN": {},
+          "ApplicationVersionId": {
+            "type": "long"
+          },
+          "CloudWatchLoggingOptionDescriptions": {
+            "shape": "S9"
+          },
+          "OperationId": {}
+        }
+      }
+    },
+    "AddApplicationInput": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName",
+          "CurrentApplicationVersionId",
+          "Input"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "CurrentApplicationVersionId": {
+            "type": "long"
+          },
+          "Input": {
+            "shape": "Sf"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ApplicationARN": {},
+          "ApplicationVersionId": {
+            "type": "long"
+          },
+          "InputDescriptions": {
+            "shape": "S13"
+          }
+        }
+      }
+    },
+    "AddApplicationInputProcessingConfiguration": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName",
+          "CurrentApplicationVersionId",
+          "InputId",
+          "InputProcessingConfiguration"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "CurrentApplicationVersionId": {
+            "type": "long"
+          },
+          "InputId": {},
+          "InputProcessingConfiguration": {
+            "shape": "Sh"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ApplicationARN": {},
+          "ApplicationVersionId": {
+            "type": "long"
+          },
+          "InputId": {},
+          "InputProcessingConfigurationDescription": {
+            "shape": "S16"
+          }
+        }
+      }
+    },
+    "AddApplicationOutput": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName",
+          "CurrentApplicationVersionId",
+          "Output"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "CurrentApplicationVersionId": {
+            "type": "long"
+          },
+          "Output": {
+            "shape": "S1f"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ApplicationARN": {},
+          "ApplicationVersionId": {
+            "type": "long"
+          },
+          "OutputDescriptions": {
+            "shape": "S1l"
+          }
+        }
+      }
+    },
+    "AddApplicationReferenceDataSource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName",
+          "CurrentApplicationVersionId",
+          "ReferenceDataSource"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "CurrentApplicationVersionId": {
+            "type": "long"
+          },
+          "ReferenceDataSource": {
+            "shape": "S1r"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ApplicationARN": {},
+          "ApplicationVersionId": {
+            "type": "long"
+          },
+          "ReferenceDataSourceDescriptions": {
+            "shape": "S1x"
+          }
+        }
+      }
+    },
+    "AddApplicationVpcConfiguration": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName",
+          "VpcConfiguration"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "CurrentApplicationVersionId": {
+            "type": "long"
+          },
+          "VpcConfiguration": {
+            "shape": "S21"
+          },
+          "ConditionalToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ApplicationARN": {},
+          "ApplicationVersionId": {
+            "type": "long"
+          },
+          "VpcConfigurationDescription": {
+            "shape": "S27"
+          },
+          "OperationId": {}
+        }
+      }
+    },
+    "CreateApplication": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName",
+          "RuntimeEnvironment",
+          "ServiceExecutionRole"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "ApplicationDescription": {},
+          "RuntimeEnvironment": {},
+          "ServiceExecutionRole": {},
+          "ApplicationConfiguration": {
+            "type": "structure",
+            "members": {
+              "SqlApplicationConfiguration": {
+                "type": "structure",
+                "members": {
+                  "Inputs": {
+                    "type": "list",
+                    "member": {
+                      "shape": "Sf"
+                    }
+                  },
+                  "Outputs": {
+                    "type": "list",
+                    "member": {
+                      "shape": "S1f"
+                    }
+                  },
+                  "ReferenceDataSources": {
+                    "type": "list",
+                    "member": {
+                      "shape": "S1r"
+                    }
+                  }
+                }
+              },
+              "FlinkApplicationConfiguration": {
+                "type": "structure",
+                "members": {
+                  "CheckpointConfiguration": {
+                    "type": "structure",
+                    "required": [
+                      "ConfigurationType"
+                    ],
+                    "members": {
+                      "ConfigurationType": {},
+                      "CheckpointingEnabled": {
+                        "type": "boolean"
+                      },
+                      "CheckpointInterval": {
+                        "type": "long"
+                      },
+                      "MinPauseBetweenCheckpoints": {
+                        "type": "long"
+                      }
+                    }
+                  },
+                  "MonitoringConfiguration": {
+                    "type": "structure",
+                    "required": [
+                      "ConfigurationType"
+                    ],
+                    "members": {
+                      "ConfigurationType": {},
+                      "MetricsLevel": {},
+                      "LogLevel": {}
+                    }
+                  },
+                  "ParallelismConfiguration": {
+                    "type": "structure",
+                    "required": [
+                      "ConfigurationType"
+                    ],
+                    "members": {
+                      "ConfigurationType": {},
+                      "Parallelism": {
+                        "type": "integer"
+                      },
+                      "ParallelismPerKPU": {
+                        "type": "integer"
+                      },
+                      "AutoScalingEnabled": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              },
+              "EnvironmentProperties": {
+                "type": "structure",
+                "required": [
+                  "PropertyGroups"
+                ],
+                "members": {
+                  "PropertyGroups": {
+                    "shape": "S2u"
+                  }
+                }
+              },
+              "ApplicationCodeConfiguration": {
+                "type": "structure",
+                "required": [
+                  "CodeContentType"
+                ],
+                "members": {
+                  "CodeContent": {
+                    "type": "structure",
+                    "members": {
+                      "TextContent": {},
+                      "ZipFileContent": {
+                        "type": "blob"
+                      },
+                      "S3ContentLocation": {
+                        "shape": "S33"
+                      }
+                    }
+                  },
+                  "CodeContentType": {}
+                }
+              },
+              "ApplicationSnapshotConfiguration": {
+                "type": "structure",
+                "required": [
+                  "SnapshotsEnabled"
+                ],
+                "members": {
+                  "SnapshotsEnabled": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "ApplicationSystemRollbackConfiguration": {
+                "type": "structure",
+                "required": [
+                  "RollbackEnabled"
+                ],
+                "members": {
+                  "RollbackEnabled": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "VpcConfigurations": {
+                "type": "list",
+                "member": {
+                  "shape": "S21"
+                }
+              },
+              "ZeppelinApplicationConfiguration": {
+                "type": "structure",
+                "members": {
+                  "MonitoringConfiguration": {
+                    "type": "structure",
+                    "required": [
+                      "LogLevel"
+                    ],
+                    "members": {
+                      "LogLevel": {}
+                    }
+                  },
+                  "CatalogConfiguration": {
+                    "type": "structure",
+                    "required": [
+                      "GlueDataCatalogConfiguration"
+                    ],
+                    "members": {
+                      "GlueDataCatalogConfiguration": {
+                        "type": "structure",
+                        "required": [
+                          "DatabaseARN"
+                        ],
+                        "members": {
+                          "DatabaseARN": {}
+                        }
+                      }
+                    }
+                  },
+                  "DeployAsApplicationConfiguration": {
+                    "type": "structure",
+                    "required": [
+                      "S3ContentLocation"
+                    ],
+                    "members": {
+                      "S3ContentLocation": {
+                        "type": "structure",
+                        "required": [
+                          "BucketARN"
+                        ],
+                        "members": {
+                          "BucketARN": {},
+                          "BasePath": {}
+                        }
+                      }
+                    }
+                  },
+                  "CustomArtifactsConfiguration": {
+                    "shape": "S3h"
+                  }
+                }
+              }
+            }
+          },
+          "CloudWatchLoggingOptions": {
+            "type": "list",
+            "member": {
+              "shape": "S4"
+            }
+          },
+          "Tags": {
+            "shape": "S3p"
+          },
+          "ApplicationMode": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "ApplicationDetail"
+        ],
+        "members": {
+          "ApplicationDetail": {
+            "shape": "S3v"
+          }
+        }
+      }
+    },
+    "CreateApplicationPresignedUrl": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName",
+          "UrlType"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "UrlType": {},
+          "SessionExpirationDurationInSeconds": {
+            "type": "long"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "AuthorizedUrl": {}
+        }
+      }
+    },
+    "CreateApplicationSnapshot": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName",
+          "SnapshotName"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "SnapshotName": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DeleteApplication": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName",
+          "CreateTimestamp"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "CreateTimestamp": {
+            "type": "timestamp"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DeleteApplicationCloudWatchLoggingOption": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName",
+          "CloudWatchLoggingOptionId"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "CurrentApplicationVersionId": {
+            "type": "long"
+          },
+          "CloudWatchLoggingOptionId": {},
+          "ConditionalToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ApplicationARN": {},
+          "ApplicationVersionId": {
+            "type": "long"
+          },
+          "CloudWatchLoggingOptionDescriptions": {
+            "shape": "S9"
+          },
+          "OperationId": {}
+        }
+      }
+    },
+    "DeleteApplicationInputProcessingConfiguration": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName",
+          "CurrentApplicationVersionId",
+          "InputId"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "CurrentApplicationVersionId": {
+            "type": "long"
+          },
+          "InputId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ApplicationARN": {},
+          "ApplicationVersionId": {
+            "type": "long"
+          }
+        }
+      }
+    },
+    "DeleteApplicationOutput": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName",
+          "CurrentApplicationVersionId",
+          "OutputId"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "CurrentApplicationVersionId": {
+            "type": "long"
+          },
+          "OutputId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ApplicationARN": {},
+          "ApplicationVersionId": {
+            "type": "long"
+          }
+        }
+      }
+    },
+    "DeleteApplicationReferenceDataSource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName",
+          "CurrentApplicationVersionId",
+          "ReferenceId"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "CurrentApplicationVersionId": {
+            "type": "long"
+          },
+          "ReferenceId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ApplicationARN": {},
+          "ApplicationVersionId": {
+            "type": "long"
+          }
+        }
+      }
+    },
+    "DeleteApplicationSnapshot": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName",
+          "SnapshotName",
+          "SnapshotCreationTimestamp"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "SnapshotName": {},
+          "SnapshotCreationTimestamp": {
+            "type": "timestamp"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DeleteApplicationVpcConfiguration": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName",
+          "VpcConfigurationId"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "CurrentApplicationVersionId": {
+            "type": "long"
+          },
+          "VpcConfigurationId": {},
+          "ConditionalToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ApplicationARN": {},
+          "ApplicationVersionId": {
+            "type": "long"
+          },
+          "OperationId": {}
+        }
+      }
+    },
+    "DescribeApplication": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "IncludeAdditionalDetails": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "ApplicationDetail"
+        ],
+        "members": {
+          "ApplicationDetail": {
+            "shape": "S3v"
+          }
+        }
+      }
+    },
+    "DescribeApplicationOperation": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName",
+          "OperationId"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "OperationId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ApplicationOperationInfoDetails": {
+            "type": "structure",
+            "required": [
+              "Operation",
+              "StartTime",
+              "EndTime",
+              "OperationStatus"
+            ],
+            "members": {
+              "Operation": {},
+              "StartTime": {
+                "type": "timestamp"
+              },
+              "EndTime": {
+                "type": "timestamp"
+              },
+              "OperationStatus": {},
+              "ApplicationVersionChangeDetails": {
+                "type": "structure",
+                "required": [
+                  "ApplicationVersionUpdatedFrom",
+                  "ApplicationVersionUpdatedTo"
+                ],
+                "members": {
+                  "ApplicationVersionUpdatedFrom": {
+                    "type": "long"
+                  },
+                  "ApplicationVersionUpdatedTo": {
+                    "type": "long"
+                  }
+                }
+              },
+              "OperationFailureDetails": {
+                "type": "structure",
+                "members": {
+                  "RollbackOperationId": {},
+                  "ErrorInfo": {
+                    "type": "structure",
+                    "members": {
+                      "ErrorString": {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "DescribeApplicationSnapshot": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName",
+          "SnapshotName"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "SnapshotName": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "SnapshotDetails"
+        ],
+        "members": {
+          "SnapshotDetails": {
+            "shape": "S5s"
+          }
+        }
+      }
+    },
+    "DescribeApplicationVersion": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName",
+          "ApplicationVersionId"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "ApplicationVersionId": {
+            "type": "long"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ApplicationVersionDetail": {
+            "shape": "S3v"
+          }
+        }
+      }
+    },
+    "DiscoverInputSchema": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ServiceExecutionRole"
+        ],
+        "members": {
+          "ResourceARN": {},
+          "ServiceExecutionRole": {},
+          "InputStartingPositionConfiguration": {
+            "shape": "S1a"
+          },
+          "S3Configuration": {
+            "type": "structure",
+            "required": [
+              "BucketARN",
+              "FileKey"
+            ],
+            "members": {
+              "BucketARN": {},
+              "FileKey": {}
+            }
+          },
+          "InputProcessingConfiguration": {
+            "shape": "Sh"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "InputSchema": {
+            "shape": "Sn"
+          },
+          "ParsedInputRecords": {
+            "type": "list",
+            "member": {
+              "type": "list",
+              "member": {}
+            }
+          },
+          "ProcessedInputRecords": {
+            "type": "list",
+            "member": {}
+          },
+          "RawInputRecords": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      }
+    },
+    "ListApplicationOperations": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "Limit": {
+            "type": "integer"
+          },
+          "NextToken": {},
+          "Operation": {},
+          "OperationStatus": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ApplicationOperationInfoList": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "Operation": {},
+                "OperationId": {},
+                "StartTime": {
+                  "type": "timestamp"
+                },
+                "EndTime": {
+                  "type": "timestamp"
+                },
+                "OperationStatus": {}
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListApplicationSnapshots": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "Limit": {
+            "type": "integer"
+          },
+          "NextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "SnapshotSummaries": {
+            "type": "list",
+            "member": {
+              "shape": "S5s"
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListApplicationVersions": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "Limit": {
+            "type": "integer"
+          },
+          "NextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ApplicationVersionSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "ApplicationVersionId",
+                "ApplicationStatus"
+              ],
+              "members": {
+                "ApplicationVersionId": {
+                  "type": "long"
+                },
+                "ApplicationStatus": {}
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListApplications": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "Limit": {
+            "type": "integer"
+          },
+          "NextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "ApplicationSummaries"
+        ],
+        "members": {
+          "ApplicationSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "ApplicationName",
+                "ApplicationARN",
+                "ApplicationStatus",
+                "ApplicationVersionId",
+                "RuntimeEnvironment"
+              ],
+              "members": {
+                "ApplicationName": {},
+                "ApplicationARN": {},
+                "ApplicationStatus": {},
+                "ApplicationVersionId": {
+                  "type": "long"
+                },
+                "RuntimeEnvironment": {},
+                "ApplicationMode": {}
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListTagsForResource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceARN"
+        ],
+        "members": {
+          "ResourceARN": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Tags": {
+            "shape": "S3p"
+          }
+        }
+      }
+    },
+    "RollbackApplication": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName",
+          "CurrentApplicationVersionId"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "CurrentApplicationVersionId": {
+            "type": "long"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "ApplicationDetail"
+        ],
+        "members": {
+          "ApplicationDetail": {
+            "shape": "S3v"
+          },
+          "OperationId": {}
+        }
+      }
+    },
+    "StartApplication": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "RunConfiguration": {
+            "type": "structure",
+            "members": {
+              "FlinkRunConfiguration": {
+                "shape": "S49"
+              },
+              "SqlRunConfigurations": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "required": [
+                    "InputId",
+                    "InputStartingPositionConfiguration"
+                  ],
+                  "members": {
+                    "InputId": {},
+                    "InputStartingPositionConfiguration": {
+                      "shape": "S1a"
+                    }
+                  }
+                }
+              },
+              "ApplicationRestoreConfiguration": {
+                "shape": "S46"
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "OperationId": {}
+        }
+      }
+    },
+    "StopApplication": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "Force": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "OperationId": {}
+        }
+      }
+    },
+    "TagResource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceARN",
+          "Tags"
+        ],
+        "members": {
+          "ResourceARN": {},
+          "Tags": {
+            "shape": "S3p"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UntagResource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceARN",
+          "TagKeys"
+        ],
+        "members": {
+          "ResourceARN": {},
+          "TagKeys": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UpdateApplication": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "CurrentApplicationVersionId": {
+            "type": "long"
+          },
+          "ApplicationConfigurationUpdate": {
+            "type": "structure",
+            "members": {
+              "SqlApplicationConfigurationUpdate": {
+                "type": "structure",
+                "members": {
+                  "InputUpdates": {
+                    "type": "list",
+                    "member": {
+                      "type": "structure",
+                      "required": [
+                        "InputId"
+                      ],
+                      "members": {
+                        "InputId": {},
+                        "NamePrefixUpdate": {},
+                        "InputProcessingConfigurationUpdate": {
+                          "type": "structure",
+                          "required": [
+                            "InputLambdaProcessorUpdate"
+                          ],
+                          "members": {
+                            "InputLambdaProcessorUpdate": {
+                              "type": "structure",
+                              "required": [
+                                "ResourceARNUpdate"
+                              ],
+                              "members": {
+                                "ResourceARNUpdate": {}
+                              }
+                            }
+                          }
+                        },
+                        "KinesisStreamsInputUpdate": {
+                          "type": "structure",
+                          "required": [
+                            "ResourceARNUpdate"
+                          ],
+                          "members": {
+                            "ResourceARNUpdate": {}
+                          }
+                        },
+                        "KinesisFirehoseInputUpdate": {
+                          "type": "structure",
+                          "required": [
+                            "ResourceARNUpdate"
+                          ],
+                          "members": {
+                            "ResourceARNUpdate": {}
+                          }
+                        },
+                        "InputSchemaUpdate": {
+                          "type": "structure",
+                          "members": {
+                            "RecordFormatUpdate": {
+                              "shape": "So"
+                            },
+                            "RecordEncodingUpdate": {},
+                            "RecordColumnUpdates": {
+                              "shape": "Sx"
+                            }
+                          }
+                        },
+                        "InputParallelismUpdate": {
+                          "type": "structure",
+                          "required": [
+                            "CountUpdate"
+                          ],
+                          "members": {
+                            "CountUpdate": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "OutputUpdates": {
+                    "type": "list",
+                    "member": {
+                      "type": "structure",
+                      "required": [
+                        "OutputId"
+                      ],
+                      "members": {
+                        "OutputId": {},
+                        "NameUpdate": {},
+                        "KinesisStreamsOutputUpdate": {
+                          "type": "structure",
+                          "required": [
+                            "ResourceARNUpdate"
+                          ],
+                          "members": {
+                            "ResourceARNUpdate": {}
+                          }
+                        },
+                        "KinesisFirehoseOutputUpdate": {
+                          "type": "structure",
+                          "required": [
+                            "ResourceARNUpdate"
+                          ],
+                          "members": {
+                            "ResourceARNUpdate": {}
+                          }
+                        },
+                        "LambdaOutputUpdate": {
+                          "type": "structure",
+                          "required": [
+                            "ResourceARNUpdate"
+                          ],
+                          "members": {
+                            "ResourceARNUpdate": {}
+                          }
+                        },
+                        "DestinationSchemaUpdate": {
+                          "shape": "S1j"
+                        }
+                      }
+                    }
+                  },
+                  "ReferenceDataSourceUpdates": {
+                    "type": "list",
+                    "member": {
+                      "type": "structure",
+                      "required": [
+                        "ReferenceId"
+                      ],
+                      "members": {
+                        "ReferenceId": {},
+                        "TableNameUpdate": {},
+                        "S3ReferenceDataSourceUpdate": {
+                          "type": "structure",
+                          "members": {
+                            "BucketARNUpdate": {},
+                            "FileKeyUpdate": {}
+                          }
+                        },
+                        "ReferenceSchemaUpdate": {
+                          "shape": "Sn"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "ApplicationCodeConfigurationUpdate": {
+                "type": "structure",
+                "members": {
+                  "CodeContentTypeUpdate": {},
+                  "CodeContentUpdate": {
+                    "type": "structure",
+                    "members": {
+                      "TextContentUpdate": {},
+                      "ZipFileContentUpdate": {
+                        "type": "blob"
+                      },
+                      "S3ContentLocationUpdate": {
+                        "type": "structure",
+                        "members": {
+                          "BucketARNUpdate": {},
+                          "FileKeyUpdate": {},
+                          "ObjectVersionUpdate": {}
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "FlinkApplicationConfigurationUpdate": {
+                "type": "structure",
+                "members": {
+                  "CheckpointConfigurationUpdate": {
+                    "type": "structure",
+                    "members": {
+                      "ConfigurationTypeUpdate": {},
+                      "CheckpointingEnabledUpdate": {
+                        "type": "boolean"
+                      },
+                      "CheckpointIntervalUpdate": {
+                        "type": "long"
+                      },
+                      "MinPauseBetweenCheckpointsUpdate": {
+                        "type": "long"
+                      }
+                    }
+                  },
+                  "MonitoringConfigurationUpdate": {
+                    "type": "structure",
+                    "members": {
+                      "ConfigurationTypeUpdate": {},
+                      "MetricsLevelUpdate": {},
+                      "LogLevelUpdate": {}
+                    }
+                  },
+                  "ParallelismConfigurationUpdate": {
+                    "type": "structure",
+                    "members": {
+                      "ConfigurationTypeUpdate": {},
+                      "ParallelismUpdate": {
+                        "type": "integer"
+                      },
+                      "ParallelismPerKPUUpdate": {
+                        "type": "integer"
+                      },
+                      "AutoScalingEnabledUpdate": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              },
+              "EnvironmentPropertyUpdates": {
+                "type": "structure",
+                "required": [
+                  "PropertyGroups"
+                ],
+                "members": {
+                  "PropertyGroups": {
+                    "shape": "S2u"
+                  }
+                }
+              },
+              "ApplicationSnapshotConfigurationUpdate": {
+                "type": "structure",
+                "required": [
+                  "SnapshotsEnabledUpdate"
+                ],
+                "members": {
+                  "SnapshotsEnabledUpdate": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "ApplicationSystemRollbackConfigurationUpdate": {
+                "type": "structure",
+                "required": [
+                  "RollbackEnabledUpdate"
+                ],
+                "members": {
+                  "RollbackEnabledUpdate": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "VpcConfigurationUpdates": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "required": [
+                    "VpcConfigurationId"
+                  ],
+                  "members": {
+                    "VpcConfigurationId": {},
+                    "SubnetIdUpdates": {
+                      "shape": "S22"
+                    },
+                    "SecurityGroupIdUpdates": {
+                      "shape": "S24"
+                    }
+                  }
+                }
+              },
+              "ZeppelinApplicationConfigurationUpdate": {
+                "type": "structure",
+                "members": {
+                  "MonitoringConfigurationUpdate": {
+                    "type": "structure",
+                    "required": [
+                      "LogLevelUpdate"
+                    ],
+                    "members": {
+                      "LogLevelUpdate": {}
+                    }
+                  },
+                  "CatalogConfigurationUpdate": {
+                    "type": "structure",
+                    "required": [
+                      "GlueDataCatalogConfigurationUpdate"
+                    ],
+                    "members": {
+                      "GlueDataCatalogConfigurationUpdate": {
+                        "type": "structure",
+                        "required": [
+                          "DatabaseARNUpdate"
+                        ],
+                        "members": {
+                          "DatabaseARNUpdate": {}
+                        }
+                      }
+                    }
+                  },
+                  "DeployAsApplicationConfigurationUpdate": {
+                    "type": "structure",
+                    "members": {
+                      "S3ContentLocationUpdate": {
+                        "type": "structure",
+                        "members": {
+                          "BucketARNUpdate": {},
+                          "BasePathUpdate": {}
+                        }
+                      }
+                    }
+                  },
+                  "CustomArtifactsConfigurationUpdate": {
+                    "shape": "S3h"
+                  }
+                }
+              }
+            }
+          },
+          "ServiceExecutionRoleUpdate": {},
+          "RunConfigurationUpdate": {
+            "type": "structure",
+            "members": {
+              "FlinkRunConfiguration": {
+                "shape": "S49"
+              },
+              "ApplicationRestoreConfiguration": {
+                "shape": "S46"
+              }
+            }
+          },
+          "CloudWatchLoggingOptionUpdates": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "CloudWatchLoggingOptionId"
+              ],
+              "members": {
+                "CloudWatchLoggingOptionId": {},
+                "LogStreamARNUpdate": {}
+              }
+            }
+          },
+          "ConditionalToken": {},
+          "RuntimeEnvironmentUpdate": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "ApplicationDetail"
+        ],
+        "members": {
+          "ApplicationDetail": {
+            "shape": "S3v"
+          },
+          "OperationId": {}
+        }
+      }
+    },
+    "UpdateApplicationMaintenanceConfiguration": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ApplicationName",
+          "ApplicationMaintenanceConfigurationUpdate"
+        ],
+        "members": {
+          "ApplicationName": {},
+          "ApplicationMaintenanceConfigurationUpdate": {
+            "type": "structure",
+            "required": [
+              "ApplicationMaintenanceWindowStartTimeUpdate"
+            ],
+            "members": {
+              "ApplicationMaintenanceWindowStartTimeUpdate": {}
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ApplicationARN": {},
+          "ApplicationMaintenanceConfigurationDescription": {
+            "shape": "S4r"
+          }
+        }
+      }
+    }
+  },
+  "shapes": {
+    "S4": {
+      "type": "structure",
+      "required": [
+        "LogStreamARN"
+      ],
+      "members": {
+        "LogStreamARN": {}
+      }
+    },
+    "S9": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "LogStreamARN"
+        ],
+        "members": {
+          "CloudWatchLoggingOptionId": {},
+          "LogStreamARN": {},
+          "RoleARN": {}
+        }
+      }
+    },
+    "Sf": {
+      "type": "structure",
+      "required": [
+        "NamePrefix",
+        "InputSchema"
+      ],
+      "members": {
+        "NamePrefix": {},
+        "InputProcessingConfiguration": {
+          "shape": "Sh"
+        },
+        "KinesisStreamsInput": {
+          "type": "structure",
+          "required": [
+            "ResourceARN"
+          ],
+          "members": {
+            "ResourceARN": {}
+          }
+        },
+        "KinesisFirehoseInput": {
+          "type": "structure",
+          "required": [
+            "ResourceARN"
+          ],
+          "members": {
+            "ResourceARN": {}
+          }
+        },
+        "InputParallelism": {
+          "shape": "Sl"
+        },
+        "InputSchema": {
+          "shape": "Sn"
+        }
+      }
+    },
+    "Sh": {
+      "type": "structure",
+      "required": [
+        "InputLambdaProcessor"
+      ],
+      "members": {
+        "InputLambdaProcessor": {
+          "type": "structure",
+          "required": [
+            "ResourceARN"
+          ],
+          "members": {
+            "ResourceARN": {}
+          }
+        }
+      }
+    },
+    "Sl": {
+      "type": "structure",
+      "members": {
+        "Count": {
+          "type": "integer"
+        }
+      }
+    },
+    "Sn": {
+      "type": "structure",
+      "required": [
+        "RecordFormat",
+        "RecordColumns"
+      ],
+      "members": {
+        "RecordFormat": {
+          "shape": "So"
+        },
+        "RecordEncoding": {},
+        "RecordColumns": {
+          "shape": "Sx"
+        }
+      }
+    },
+    "So": {
+      "type": "structure",
+      "required": [
+        "RecordFormatType"
+      ],
+      "members": {
+        "RecordFormatType": {},
+        "MappingParameters": {
+          "type": "structure",
+          "members": {
+            "JSONMappingParameters": {
+              "type": "structure",
+              "required": [
+                "RecordRowPath"
+              ],
+              "members": {
+                "RecordRowPath": {}
+              }
+            },
+            "CSVMappingParameters": {
+              "type": "structure",
+              "required": [
+                "RecordRowDelimiter",
+                "RecordColumnDelimiter"
+              ],
+              "members": {
+                "RecordRowDelimiter": {},
+                "RecordColumnDelimiter": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "Sx": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "Name",
+          "SqlType"
+        ],
+        "members": {
+          "Name": {},
+          "Mapping": {},
+          "SqlType": {}
+        }
+      }
+    },
+    "S13": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "InputId": {},
+          "NamePrefix": {},
+          "InAppStreamNames": {
+            "type": "list",
+            "member": {}
+          },
+          "InputProcessingConfigurationDescription": {
+            "shape": "S16"
+          },
+          "KinesisStreamsInputDescription": {
+            "type": "structure",
+            "required": [
+              "ResourceARN"
+            ],
+            "members": {
+              "ResourceARN": {},
+              "RoleARN": {}
+            }
+          },
+          "KinesisFirehoseInputDescription": {
+            "type": "structure",
+            "required": [
+              "ResourceARN"
+            ],
+            "members": {
+              "ResourceARN": {},
+              "RoleARN": {}
+            }
+          },
+          "InputSchema": {
+            "shape": "Sn"
+          },
+          "InputParallelism": {
+            "shape": "Sl"
+          },
+          "InputStartingPositionConfiguration": {
+            "shape": "S1a"
+          }
+        }
+      }
+    },
+    "S16": {
+      "type": "structure",
+      "members": {
+        "InputLambdaProcessorDescription": {
+          "type": "structure",
+          "required": [
+            "ResourceARN"
+          ],
+          "members": {
+            "ResourceARN": {},
+            "RoleARN": {}
+          }
+        }
+      }
+    },
+    "S1a": {
+      "type": "structure",
+      "members": {
+        "InputStartingPosition": {}
+      }
+    },
+    "S1f": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "DestinationSchema"
+      ],
+      "members": {
+        "Name": {},
+        "KinesisStreamsOutput": {
+          "type": "structure",
+          "required": [
+            "ResourceARN"
+          ],
+          "members": {
+            "ResourceARN": {}
+          }
+        },
+        "KinesisFirehoseOutput": {
+          "type": "structure",
+          "required": [
+            "ResourceARN"
+          ],
+          "members": {
+            "ResourceARN": {}
+          }
+        },
+        "LambdaOutput": {
+          "type": "structure",
+          "required": [
+            "ResourceARN"
+          ],
+          "members": {
+            "ResourceARN": {}
+          }
+        },
+        "DestinationSchema": {
+          "shape": "S1j"
+        }
+      }
+    },
+    "S1j": {
+      "type": "structure",
+      "required": [
+        "RecordFormatType"
+      ],
+      "members": {
+        "RecordFormatType": {}
+      }
+    },
+    "S1l": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "OutputId": {},
+          "Name": {},
+          "KinesisStreamsOutputDescription": {
+            "type": "structure",
+            "required": [
+              "ResourceARN"
+            ],
+            "members": {
+              "ResourceARN": {},
+              "RoleARN": {}
+            }
+          },
+          "KinesisFirehoseOutputDescription": {
+            "type": "structure",
+            "required": [
+              "ResourceARN"
+            ],
+            "members": {
+              "ResourceARN": {},
+              "RoleARN": {}
+            }
+          },
+          "LambdaOutputDescription": {
+            "type": "structure",
+            "required": [
+              "ResourceARN"
+            ],
+            "members": {
+              "ResourceARN": {},
+              "RoleARN": {}
+            }
+          },
+          "DestinationSchema": {
+            "shape": "S1j"
+          }
+        }
+      }
+    },
+    "S1r": {
+      "type": "structure",
+      "required": [
+        "TableName",
+        "ReferenceSchema"
+      ],
+      "members": {
+        "TableName": {},
+        "S3ReferenceDataSource": {
+          "type": "structure",
+          "members": {
+            "BucketARN": {},
+            "FileKey": {}
+          }
+        },
+        "ReferenceSchema": {
+          "shape": "Sn"
+        }
+      }
+    },
+    "S1x": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "ReferenceId",
+          "TableName",
+          "S3ReferenceDataSourceDescription"
+        ],
+        "members": {
+          "ReferenceId": {},
+          "TableName": {},
+          "S3ReferenceDataSourceDescription": {
+            "type": "structure",
+            "required": [
+              "BucketARN",
+              "FileKey"
+            ],
+            "members": {
+              "BucketARN": {},
+              "FileKey": {},
+              "ReferenceRoleARN": {}
+            }
+          },
+          "ReferenceSchema": {
+            "shape": "Sn"
+          }
+        }
+      }
+    },
+    "S21": {
+      "type": "structure",
+      "required": [
+        "SubnetIds",
+        "SecurityGroupIds"
+      ],
+      "members": {
+        "SubnetIds": {
+          "shape": "S22"
+        },
+        "SecurityGroupIds": {
+          "shape": "S24"
+        }
+      }
+    },
+    "S22": {
+      "type": "list",
+      "member": {}
+    },
+    "S24": {
+      "type": "list",
+      "member": {}
+    },
+    "S27": {
+      "type": "structure",
+      "required": [
+        "VpcConfigurationId",
+        "VpcId",
+        "SubnetIds",
+        "SecurityGroupIds"
+      ],
+      "members": {
+        "VpcConfigurationId": {},
+        "VpcId": {},
+        "SubnetIds": {
+          "shape": "S22"
+        },
+        "SecurityGroupIds": {
+          "shape": "S24"
+        }
+      }
+    },
+    "S2u": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "PropertyGroupId",
+          "PropertyMap"
+        ],
+        "members": {
+          "PropertyGroupId": {},
+          "PropertyMap": {
+            "type": "map",
+            "key": {},
+            "value": {}
+          }
+        }
+      }
+    },
+    "S33": {
+      "type": "structure",
+      "required": [
+        "BucketARN",
+        "FileKey"
+      ],
+      "members": {
+        "BucketARN": {},
+        "FileKey": {},
+        "ObjectVersion": {}
+      }
+    },
+    "S3h": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "ArtifactType"
+        ],
+        "members": {
+          "ArtifactType": {},
+          "S3ContentLocation": {
+            "shape": "S33"
+          },
+          "MavenReference": {
+            "shape": "S3k"
+          }
+        }
+      }
+    },
+    "S3k": {
+      "type": "structure",
+      "required": [
+        "GroupId",
+        "ArtifactId",
+        "Version"
+      ],
+      "members": {
+        "GroupId": {},
+        "ArtifactId": {},
+        "Version": {}
+      }
+    },
+    "S3p": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "Key"
+        ],
+        "members": {
+          "Key": {},
+          "Value": {}
+        }
+      }
+    },
+    "S3v": {
+      "type": "structure",
+      "required": [
+        "ApplicationARN",
+        "ApplicationName",
+        "RuntimeEnvironment",
+        "ApplicationStatus",
+        "ApplicationVersionId"
+      ],
+      "members": {
+        "ApplicationARN": {},
+        "ApplicationDescription": {},
+        "ApplicationName": {},
+        "RuntimeEnvironment": {},
+        "ServiceExecutionRole": {},
+        "ApplicationStatus": {},
+        "ApplicationVersionId": {
+          "type": "long"
+        },
+        "CreateTimestamp": {
+          "type": "timestamp"
+        },
+        "LastUpdateTimestamp": {
+          "type": "timestamp"
+        },
+        "ApplicationConfigurationDescription": {
+          "type": "structure",
+          "members": {
+            "SqlApplicationConfigurationDescription": {
+              "type": "structure",
+              "members": {
+                "InputDescriptions": {
+                  "shape": "S13"
+                },
+                "OutputDescriptions": {
+                  "shape": "S1l"
+                },
+                "ReferenceDataSourceDescriptions": {
+                  "shape": "S1x"
+                }
+              }
+            },
+            "ApplicationCodeConfigurationDescription": {
+              "type": "structure",
+              "required": [
+                "CodeContentType"
+              ],
+              "members": {
+                "CodeContentType": {},
+                "CodeContentDescription": {
+                  "type": "structure",
+                  "members": {
+                    "TextContent": {},
+                    "CodeMD5": {},
+                    "CodeSize": {
+                      "type": "long"
+                    },
+                    "S3ApplicationCodeLocationDescription": {
+                      "type": "structure",
+                      "required": [
+                        "BucketARN",
+                        "FileKey"
+                      ],
+                      "members": {
+                        "BucketARN": {},
+                        "FileKey": {},
+                        "ObjectVersion": {}
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "RunConfigurationDescription": {
+              "type": "structure",
+              "members": {
+                "ApplicationRestoreConfigurationDescription": {
+                  "shape": "S46"
+                },
+                "FlinkRunConfigurationDescription": {
+                  "shape": "S49"
+                }
+              }
+            },
+            "FlinkApplicationConfigurationDescription": {
+              "type": "structure",
+              "members": {
+                "CheckpointConfigurationDescription": {
+                  "type": "structure",
+                  "members": {
+                    "ConfigurationType": {},
+                    "CheckpointingEnabled": {
+                      "type": "boolean"
+                    },
+                    "CheckpointInterval": {
+                      "type": "long"
+                    },
+                    "MinPauseBetweenCheckpoints": {
+                      "type": "long"
+                    }
+                  }
+                },
+                "MonitoringConfigurationDescription": {
+                  "type": "structure",
+                  "members": {
+                    "ConfigurationType": {},
+                    "MetricsLevel": {},
+                    "LogLevel": {}
+                  }
+                },
+                "ParallelismConfigurationDescription": {
+                  "type": "structure",
+                  "members": {
+                    "ConfigurationType": {},
+                    "Parallelism": {
+                      "type": "integer"
+                    },
+                    "ParallelismPerKPU": {
+                      "type": "integer"
+                    },
+                    "CurrentParallelism": {
+                      "type": "integer"
+                    },
+                    "AutoScalingEnabled": {
+                      "type": "boolean"
+                    }
+                  }
+                },
+                "JobPlanDescription": {}
+              }
+            },
+            "EnvironmentPropertyDescriptions": {
+              "type": "structure",
+              "members": {
+                "PropertyGroupDescriptions": {
+                  "shape": "S2u"
+                }
+              }
+            },
+            "ApplicationSnapshotConfigurationDescription": {
+              "type": "structure",
+              "required": [
+                "SnapshotsEnabled"
+              ],
+              "members": {
+                "SnapshotsEnabled": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "ApplicationSystemRollbackConfigurationDescription": {
+              "type": "structure",
+              "required": [
+                "RollbackEnabled"
+              ],
+              "members": {
+                "RollbackEnabled": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "VpcConfigurationDescriptions": {
+              "type": "list",
+              "member": {
+                "shape": "S27"
+              }
+            },
+            "ZeppelinApplicationConfigurationDescription": {
+              "type": "structure",
+              "required": [
+                "MonitoringConfigurationDescription"
+              ],
+              "members": {
+                "MonitoringConfigurationDescription": {
+                  "type": "structure",
+                  "members": {
+                    "LogLevel": {}
+                  }
+                },
+                "CatalogConfigurationDescription": {
+                  "type": "structure",
+                  "required": [
+                    "GlueDataCatalogConfigurationDescription"
+                  ],
+                  "members": {
+                    "GlueDataCatalogConfigurationDescription": {
+                      "type": "structure",
+                      "required": [
+                        "DatabaseARN"
+                      ],
+                      "members": {
+                        "DatabaseARN": {}
+                      }
+                    }
+                  }
+                },
+                "DeployAsApplicationConfigurationDescription": {
+                  "type": "structure",
+                  "required": [
+                    "S3ContentLocationDescription"
+                  ],
+                  "members": {
+                    "S3ContentLocationDescription": {
+                      "type": "structure",
+                      "required": [
+                        "BucketARN"
+                      ],
+                      "members": {
+                        "BucketARN": {},
+                        "BasePath": {}
+                      }
+                    }
+                  }
+                },
+                "CustomArtifactsConfigurationDescription": {
+                  "type": "list",
+                  "member": {
+                    "type": "structure",
+                    "members": {
+                      "ArtifactType": {},
+                      "S3ContentLocationDescription": {
+                        "shape": "S33"
+                      },
+                      "MavenReferenceDescription": {
+                        "shape": "S3k"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "CloudWatchLoggingOptionDescriptions": {
+          "shape": "S9"
+        },
+        "ApplicationMaintenanceConfigurationDescription": {
+          "shape": "S4r"
+        },
+        "ApplicationVersionUpdatedFrom": {
+          "type": "long"
+        },
+        "ApplicationVersionRolledBackFrom": {
+          "type": "long"
+        },
+        "ApplicationVersionCreateTimestamp": {
+          "type": "timestamp"
+        },
+        "ConditionalToken": {},
+        "ApplicationVersionRolledBackTo": {
+          "type": "long"
+        },
+        "ApplicationMode": {}
+      }
+    },
+    "S46": {
+      "type": "structure",
+      "required": [
+        "ApplicationRestoreType"
+      ],
+      "members": {
+        "ApplicationRestoreType": {},
+        "SnapshotName": {}
+      }
+    },
+    "S49": {
+      "type": "structure",
+      "members": {
+        "AllowNonRestoredState": {
+          "type": "boolean"
+        }
+      }
+    },
+    "S4r": {
+      "type": "structure",
+      "required": [
+        "ApplicationMaintenanceWindowStartTime",
+        "ApplicationMaintenanceWindowEndTime"
+      ],
+      "members": {
+        "ApplicationMaintenanceWindowStartTime": {},
+        "ApplicationMaintenanceWindowEndTime": {}
+      }
+    },
+    "S5s": {
+      "type": "structure",
+      "required": [
+        "SnapshotName",
+        "SnapshotStatus",
+        "ApplicationVersionId"
+      ],
+      "members": {
+        "SnapshotName": {},
+        "SnapshotStatus": {},
+        "ApplicationVersionId": {
+          "type": "long"
+        },
+        "SnapshotCreationTimestamp": {
+          "type": "timestamp"
+        },
+        "RuntimeEnvironment": {}
+      }
+    }
+  }
+}

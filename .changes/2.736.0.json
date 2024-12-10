@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "CognitoIdentityServiceProvider",
+        "description": "Adding the option to use a service linked role to publish events to Pinpoint."
+    },
+    {
+        "type": "feature",
+        "category": "DataSync",
+        "description": "DataSync support for filters as input arguments to the ListTasks and ListLocations API calls."
+    },
+    {
+        "type": "feature",
+        "category": "IdentityStore",
+        "description": "AWS Single Sign-On (SSO) Identity Store service provides an interface to retrieve all of your users and groups. It enables entitlement management per user or group for AWS SSO and other IDPs."
+    },
+    {
+        "type": "feature",
+        "category": "SESV2",
+        "description": "This release includes new APIs to allow customers to add or remove email addresses from their account-level suppression list in bulk."
+    },
+    {
+        "type": "feature",
+        "category": "SecurityHub",
+        "description": "New details for DynamoDB tables, Elastic IP addresses, IAM policies and users, RDS DB clusters and snapshots, and Secrets Manager secrets. Added details for AWS KMS keys and RDS DB instances."
+    }
+]

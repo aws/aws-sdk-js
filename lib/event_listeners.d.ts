@@ -5,7 +5,7 @@ export namespace EventListeners {
     /**
      * The namespace used to register global event listeners for request building and sending.
      */
-    export namespace CORE {
+    export namespace Core {
         /**
          * Removes an event listener from all requests.
          */
