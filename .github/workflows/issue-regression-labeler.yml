@@ -21,12 +21,3 @@ jobs:
           const template = `${process.env.TEMPLATE_BODY}`
           const match = regressionPattern.test(template);
           core.setOutput('is_regression', match);
-    - name: Manage regression label
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        if [ "${{ steps.check_regression.outputs.is_regression }}" == "true" ]; then
-          gh issue edit ${{ github.event.issue.number }} --add-label "potential-regression" -R ${{ github.repository }}
-        else
-          gh issue edit ${{ github.event.issue.number }} --remove-label "potential-regression" -R ${{ github.repository }}
-        fi
