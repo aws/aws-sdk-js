@@ -3909,7 +3909,7 @@
     },
     "ClientRequestId": {
       "type": "string",
-      "pattern": "^[-_a-zA-Z0-9]*${2,64}$"
+      "pattern": "^[-_a-zA-Z0-9]{2,64}$"
     },
     "ConfidenceScore": {
       "type": "float",
