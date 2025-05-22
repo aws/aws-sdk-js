@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "querstring",
+  "description": "Use URLSearchParams instead querystring"
+}
