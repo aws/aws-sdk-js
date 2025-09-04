@@ -2,9 +2,9 @@
 
 [![NPM version](https://img.shields.io/npm/v/aws-sdk.svg)](https://www.npmjs.com/package/aws-sdk)
 
-## 🚫 End-of-support as of **September 8, 2024**
+## 🚫 End-of-support as of **September 8, 2025**
 
-The AWS SDK for JavaScript v2 is [end-of-support][v2-end-of-support] as of **September 8, 2025**.
+The AWS SDK for JavaScript v2 has reached [end-of-support][v2-end-of-support] on **September 8, 2025**.
 It will no longer receive updates or releases. Previously published versions are available on npm at
 [aws-sdk][], and source code remains on GitHub at [aws/aws-sdk-js][].
 
